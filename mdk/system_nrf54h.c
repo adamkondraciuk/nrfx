@@ -97,27 +97,35 @@ void SystemCoreClockUpdate(void)
 
 void SystemInit(void)
 {
-#ifdef __CORTEX_M
-#if !defined(NRF_TRUSTZONE_NONSECURE) && defined(__ARM_FEATURE_CMSE)
+    #ifdef __CORTEX_M
+        #if !defined(NRF_TRUSTZONE_NONSECURE) && defined(__ARM_FEATURE_CMSE)
             #if defined(__FPU_PRESENT) && __FPU_PRESENT
                 /* Allow Non-Secure code to run FPU instructions.
                 * If only the secure code should control FPU power state these registers should be configured accordingly in the secure application code. */
                 SCB->NSACR |= (3UL << 10);
             #endif
-#ifndef NRF_SKIP_SAU_CONFIGURATION
-    configure_default_sau();
-#endif
-#endif
+            #ifndef NRF_SKIP_SAU_CONFIGURATION
+                configure_default_sau();
+            #endif
+        #endif
 
-/* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
- * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit
- * operations are not used in your code. */
-#if (__FPU_USED == 1)
-    SCB->CPACR |= (3UL << 20) | (3UL << 22);
-    __DSB();
-    __ISB();
-#endif
-#endif
+    /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
+     * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit
+     * operations are not used in your code. */
+        #if (__FPU_USED == 1)
+            SCB->CPACR |= (3UL << 20) | (3UL << 22);
+            __DSB();
+            __ISB();
+        #endif
+    #endif
+
+    #if defined(NFCT_PRESENT)
+        #if defined(CONFIG_NFCT_PINS_AS_GPIOS)
+            NRF_NFCT->PADCONFIG = NFCT_PADCONFIG_ENABLE_Disabled << NFCT_PADCONFIG_ENABLE_Pos;
+        #else
+            NRF_NFCT->PADCONFIG = NFCT_PADCONFIG_ENABLE_Enabled << NFCT_PADCONFIG_ENABLE_Pos;
+        #endif
+    #endif
 }
 
 /*lint --flb "Leave library region" */

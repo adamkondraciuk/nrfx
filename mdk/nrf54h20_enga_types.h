@@ -551,6 +551,8 @@ typedef struct {
 
 /* ABB_TRIM_RINGO: RINGO trim values for operation points */
   #define ABB_TRIM_RINGO_MaxCount (4UL)              /*!< Max size of RINGO[4] array.                                          */
+  #define ABB_TRIM_RINGO_MaxIndex (3UL)              /*!< Max index of RINGO[4] array.                                         */
+  #define ABB_TRIM_RINGO_MinIndex (0UL)              /*!< Min index of RINGO[4] array.                                         */
   #define ABB_TRIM_RINGO_ResetValue (0x00000000UL)   /*!< Reset value of RINGO[4] register.                                    */
 
 /* RINGOTARGETVALP @Bits 0..12 : Target performance for VPW biased devices. */
@@ -566,6 +568,8 @@ typedef struct {
 
 /* ABB_TRIM_LOCKRANGE: LOCKRANGE trim values for operation points */
   #define ABB_TRIM_LOCKRANGE_MaxCount (4UL)          /*!< Max size of LOCKRANGE[4] array.                                      */
+  #define ABB_TRIM_LOCKRANGE_MaxIndex (3UL)          /*!< Max index of LOCKRANGE[4] array.                                     */
+  #define ABB_TRIM_LOCKRANGE_MinIndex (0UL)          /*!< Min index of LOCKRANGE[4] array.                                     */
   #define ABB_TRIM_LOCKRANGE_ResetValue (0x00000000UL) /*!< Reset value of LOCKRANGE[4] register.                              */
 
 /* LOCKRANGEHIGHP @Bits 0..7 : Lock range high boundary for VPW biased devices. */
@@ -591,6 +595,8 @@ typedef struct {
 
 /* ABB_TRIM_PVTMONCYCLES: PVTMONCYCLES trim values for operation points */
   #define ABB_TRIM_PVTMONCYCLES_MaxCount (4UL)       /*!< Max size of PVTMONCYCLES[4] array.                                   */
+  #define ABB_TRIM_PVTMONCYCLES_MaxIndex (3UL)       /*!< Max index of PVTMONCYCLES[4] array.                                  */
+  #define ABB_TRIM_PVTMONCYCLES_MinIndex (0UL)       /*!< Min index of PVTMONCYCLES[4] array.                                  */
   #define ABB_TRIM_PVTMONCYCLES_ResetValue (0x00000000UL) /*!< Reset value of PVTMONCYCLES[4] register.                        */
 
 /* VAL @Bits 0..3 : These bits configure the internal monitor */
@@ -3207,6 +3213,8 @@ typedef struct {
 
 /* BELLBOARD_TASKS_TRIGGER: Task TRIGGER[n] */
   #define BELLBOARD_TASKS_TRIGGER_MaxCount (32UL)    /*!< Max size of TASKS_TRIGGER[32] array.                                 */
+  #define BELLBOARD_TASKS_TRIGGER_MaxIndex (31UL)    /*!< Max index of TASKS_TRIGGER[32] array.                                */
+  #define BELLBOARD_TASKS_TRIGGER_MinIndex (0UL)     /*!< Min index of TASKS_TRIGGER[32] array.                                */
   #define BELLBOARD_TASKS_TRIGGER_ResetValue (0x00000000UL) /*!< Reset value of TASKS_TRIGGER[32] register.                    */
 
 /* TASKS_TRIGGER @Bit 0 : Task TRIGGER[n] */
@@ -3220,6 +3228,8 @@ typedef struct {
 
 /* BELLBOARD_EVENTS_TRIGGERED: Event TRIGGERED[n] */
   #define BELLBOARD_EVENTS_TRIGGERED_MaxCount (32UL) /*!< Max size of EVENTS_TRIGGERED[32] array.                              */
+  #define BELLBOARD_EVENTS_TRIGGERED_MaxIndex (31UL) /*!< Max index of EVENTS_TRIGGERED[32] array.                             */
+  #define BELLBOARD_EVENTS_TRIGGERED_MinIndex (0UL)  /*!< Min index of EVENTS_TRIGGERED[32] array.                             */
   #define BELLBOARD_EVENTS_TRIGGERED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_TRIGGERED[32] register.              */
 
 /* EVENTS_TRIGGERED @Bit 0 : Event TRIGGERED[n] */
@@ -13523,6 +13533,8 @@ typedef struct {
 
 /* CACHE_VCACHEOWNER: Cache owners for the virtual cache regions. */
   #define CACHE_VCACHEOWNER_MaxCount (16UL)          /*!< Max size of VCACHEOWNER[16] array.                                   */
+  #define CACHE_VCACHEOWNER_MaxIndex (15UL)          /*!< Max index of VCACHEOWNER[16] array.                                  */
+  #define CACHE_VCACHEOWNER_MinIndex (0UL)           /*!< Min index of VCACHEOWNER[16] array.                                  */
   #define CACHE_VCACHEOWNER_ResetValue (0x00000000UL) /*!< Reset value of VCACHEOWNER[16] register.                            */
 
 /* Num @Bits 0..2 : Owner [n] is mapped to this VCACHE region. */
@@ -13574,11 +13586,15 @@ typedef struct {
   __IOM uint32_t  DATA[2];                           /*!< (@ 0x00000000) Cache data bits for DATA[q] in DU[p] (DataUnit) of
                                                                          SET[n], WAY[o].*/
 } NRF_CACHEDATA_SET_WAY_DU_Type;                     /*!< Size = 8 (0x008)                                                     */
-  #define CACHEDATA_SET_WAY_DU_MaxCount (3UL)        /*!< Max size of DU[4] array.                                             */
+  #define CACHEDATA_SET_WAY_DU_MaxCount (4UL)        /*!< Max size of DU[4] array.                                             */
   #define CACHEDATA_SET_WAY_DU_MinCount (0UL)        /*!< Min size of DU[4] array.                                             */
+  #define CACHEDATA_SET_WAY_DU_MaxIndex (3UL)        /*!< Max index of DU[4] array.                                            */
+  #define CACHEDATA_SET_WAY_DU_MinIndex (0UL)        /*!< Min index of DU[4] array.                                            */
 
 /* CACHEDATA_SET_WAY_DU_DATA: Cache data bits for DATA[q] in DU[p] (DataUnit) of SET[n], WAY[o]. */
   #define CACHEDATA_SET_WAY_DU_DATA_MaxCount (2UL)   /*!< Max size of DATA[2] array.                                           */
+  #define CACHEDATA_SET_WAY_DU_DATA_MaxIndex (1UL)   /*!< Max index of DATA[2] array.                                          */
+  #define CACHEDATA_SET_WAY_DU_DATA_MinIndex (0UL)   /*!< Min index of DATA[2] array.                                          */
   #define CACHEDATA_SET_WAY_DU_DATA_ResetValue (0x00000000UL) /*!< Reset value of DATA[2] register.                            */
 
 /* Data @Bits 0..31 : Data */
@@ -13594,8 +13610,10 @@ typedef struct {
 typedef struct {
   __IOM NRF_CACHEDATA_SET_WAY_DU_Type DU[4];         /*!< (@ 0x00000000) (unspecified)                                         */
 } NRF_CACHEDATA_SET_WAY_Type;                        /*!< Size = 32 (0x020)                                                    */
-  #define CACHEDATA_SET_WAY_MaxCount (1UL)           /*!< Max size of WAY[2] array.                                            */
+  #define CACHEDATA_SET_WAY_MaxCount (2UL)           /*!< Max size of WAY[2] array.                                            */
   #define CACHEDATA_SET_WAY_MinCount (0UL)           /*!< Min size of WAY[2] array.                                            */
+  #define CACHEDATA_SET_WAY_MaxIndex (1UL)           /*!< Max index of WAY[2] array.                                           */
+  #define CACHEDATA_SET_WAY_MinIndex (0UL)           /*!< Min index of WAY[2] array.                                           */
 
 
 /* ================================================== Struct CACHEDATA_SET =================================================== */
@@ -13605,8 +13623,10 @@ typedef struct {
 typedef struct {
   __IOM NRF_CACHEDATA_SET_WAY_Type WAY[2];           /*!< (@ 0x00000000) (unspecified)                                         */
 } NRF_CACHEDATA_SET_Type;                            /*!< Size = 64 (0x040)                                                    */
-  #define CACHEDATA_SET_MaxCount (255UL)             /*!< Max size of SET[256] array.                                          */
+  #define CACHEDATA_SET_MaxCount (256UL)             /*!< Max size of SET[256] array.                                          */
   #define CACHEDATA_SET_MinCount (0UL)               /*!< Min size of SET[256] array.                                          */
+  #define CACHEDATA_SET_MaxIndex (255UL)             /*!< Max index of SET[256] array.                                         */
+  #define CACHEDATA_SET_MinIndex (0UL)               /*!< Min index of SET[256] array.                                         */
 
 /* ==================================================== Struct CACHEDATA ===================================================== */
 /**
@@ -13631,11 +13651,15 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  WAY[2];                            /*!< (@ 0x00000000) Cache information for SET[n], WAY[o].                 */
 } NRF_CACHEINFO_SET_Type;                            /*!< Size = 8 (0x008)                                                     */
-  #define CACHEINFO_SET_MaxCount (255UL)             /*!< Max size of SET[256] array.                                          */
+  #define CACHEINFO_SET_MaxCount (256UL)             /*!< Max size of SET[256] array.                                          */
   #define CACHEINFO_SET_MinCount (0UL)               /*!< Min size of SET[256] array.                                          */
+  #define CACHEINFO_SET_MaxIndex (255UL)             /*!< Max index of SET[256] array.                                         */
+  #define CACHEINFO_SET_MinIndex (0UL)               /*!< Min index of SET[256] array.                                         */
 
 /* CACHEINFO_SET_WAY: Cache information for SET[n], WAY[o]. */
   #define CACHEINFO_SET_WAY_MaxCount (2UL)           /*!< Max size of WAY[2] array.                                            */
+  #define CACHEINFO_SET_WAY_MaxIndex (1UL)           /*!< Max index of WAY[2] array.                                           */
+  #define CACHEINFO_SET_WAY_MinIndex (0UL)           /*!< Min index of WAY[2] array.                                           */
   #define CACHEINFO_SET_WAY_ResetValue (0x00000000UL) /*!< Reset value of WAY[2] register.                                     */
 
 /* TAG @Bits 0..23 : Cache tag. */
@@ -13784,6 +13808,8 @@ typedef struct {
 
 /* CAN_EVENTS_CORE: Event indicating that interrupt n triggered at CAN core */
   #define CAN_EVENTS_CORE_MaxCount (2UL)             /*!< Max size of EVENTS_CORE[2] array.                                    */
+  #define CAN_EVENTS_CORE_MaxIndex (1UL)             /*!< Max index of EVENTS_CORE[2] array.                                   */
+  #define CAN_EVENTS_CORE_MinIndex (0UL)             /*!< Min index of EVENTS_CORE[2] array.                                   */
   #define CAN_EVENTS_CORE_ResetValue (0x00000000UL)  /*!< Reset value of EVENTS_CORE[2] register.                              */
 
 /* EVENTS_CORE @Bit 0 : Event indicating that interrupt n triggered at CAN core */
@@ -14057,6 +14083,8 @@ typedef struct {
 
 /* CCM_KEY_VALUE: 128-bit AES key */
   #define CCM_KEY_VALUE_MaxCount (4UL)               /*!< Max size of VALUE[4] array.                                          */
+  #define CCM_KEY_VALUE_MaxIndex (3UL)               /*!< Max index of VALUE[4] array.                                         */
+  #define CCM_KEY_VALUE_MinIndex (0UL)               /*!< Min index of VALUE[4] array.                                         */
   #define CCM_KEY_VALUE_ResetValue (0x00000000UL)    /*!< Reset value of VALUE[4] register.                                    */
 
 /* VALUE @Bits 0..31 : AES 128-bit key value, bits (32*(i+1))-1 : (32*i) */
@@ -14075,6 +14103,8 @@ typedef struct {
 
 /* CCM_NONCE_VALUE: 13-byte NONCE vector Only the lower 13 bytes are used */
   #define CCM_NONCE_VALUE_MaxCount (4UL)             /*!< Max size of VALUE[4] array.                                          */
+  #define CCM_NONCE_VALUE_MaxIndex (3UL)             /*!< Max index of VALUE[4] array.                                         */
+  #define CCM_NONCE_VALUE_MinIndex (0UL)             /*!< Min index of VALUE[4] array.                                         */
   #define CCM_NONCE_VALUE_ResetValue (0x00000000UL)  /*!< Reset value of VALUE[4] register.                                    */
 
 /* VALUE @Bits 0..31 : NONCE value, bits (32*(n+1))-1 : (32*n) */
@@ -14611,6 +14641,8 @@ typedef struct {
 
 /* CLIC_CLIC_CLICINT: Interrupt control register for IRQ number [n]. */
   #define CLIC_CLIC_CLICINT_MaxCount (480UL)         /*!< Max size of CLICINT[480] array.                                      */
+  #define CLIC_CLIC_CLICINT_MaxIndex (479UL)         /*!< Max index of CLICINT[480] array.                                     */
+  #define CLIC_CLIC_CLICINT_MinIndex (0UL)           /*!< Min index of CLICINT[480] array.                                     */
   #define CLIC_CLIC_CLICINT_ResetValue (0x3FC3FEFEUL) /*!< Reset value of CLICINT[480] register.                               */
 
 /* IP @Bit 0 : Interrupt Pending bit. */
@@ -16209,6 +16241,8 @@ typedef struct {
 
 /* CRACEN_SEED: Seed word [n] for private key generation. */
   #define CRACEN_SEED_MaxCount (12UL)                /*!< Max size of SEED[12] array.                                          */
+  #define CRACEN_SEED_MaxIndex (11UL)                /*!< Max index of SEED[12] array.                                         */
+  #define CRACEN_SEED_MinIndex (0UL)                 /*!< Min index of SEED[12] array.                                         */
   #define CRACEN_SEED_ResetValue (0x00000000UL)      /*!< Reset value of SEED[12] register.                                    */
 
 /* VAL @Bits 0..31 : Seed value */
@@ -16829,6 +16863,8 @@ typedef struct {
 
 /* CRACENCORE_RNGCONTROL_KEY: Key register. */
   #define CRACENCORE_RNGCONTROL_KEY_MaxCount (4UL)   /*!< Max size of KEY[4] array.                                            */
+  #define CRACENCORE_RNGCONTROL_KEY_MaxIndex (3UL)   /*!< Max index of KEY[4] array.                                           */
+  #define CRACENCORE_RNGCONTROL_KEY_MinIndex (0UL)   /*!< Min index of KEY[4] array.                                           */
   #define CRACENCORE_RNGCONTROL_KEY_ResetValue (0x00000000UL) /*!< Reset value of KEY[4] register.                             */
 
 /* KEY @Bits 0..31 : Key register. */
@@ -16933,6 +16969,8 @@ typedef struct {
 
 /* CRACENCORE_RNGCONTROL_DISABLEOSC: Disable oscillator rings #n*32 to #((n+1)*32)-1. */
   #define CRACENCORE_RNGCONTROL_DISABLEOSC_MaxCount (2UL) /*!< Max size of DISABLEOSC[2] array.                                */
+  #define CRACENCORE_RNGCONTROL_DISABLEOSC_MaxIndex (1UL) /*!< Max index of DISABLEOSC[2] array.                               */
+  #define CRACENCORE_RNGCONTROL_DISABLEOSC_MinIndex (0UL) /*!< Min index of DISABLEOSC[2] array.                               */
   #define CRACENCORE_RNGCONTROL_DISABLEOSC_ResetValue (0x00000000UL) /*!< Reset value of DISABLEOSC[2] register.               */
 
 /* DISABLEOSC @Bits 0..31 : Disable oscillator rings #n*32 to #((n+1)*32)-1. */
@@ -17041,6 +17079,8 @@ typedef struct {
 
 /* CRACENCORE_RNGCONTROL_FIFO: FIFO data */
   #define CRACENCORE_RNGCONTROL_FIFO_MaxCount (16UL) /*!< Max size of FIFO[16] array.                                          */
+  #define CRACENCORE_RNGCONTROL_FIFO_MaxIndex (15UL) /*!< Max index of FIFO[16] array.                                         */
+  #define CRACENCORE_RNGCONTROL_FIFO_MinIndex (0UL)  /*!< Min index of FIFO[16] array.                                         */
   #define CRACENCORE_RNGCONTROL_FIFO_ResetValue (0x00000000UL) /*!< Reset value of FIFO[16] register.                          */
 
 /* DATA @Bits 0..31 : FIFO data */
@@ -17879,6 +17919,8 @@ typedef struct {
 
 /* CTI_CTIINEN: CTI Trigger to Channel Enable register */
   #define CTI_CTIINEN_MaxCount (8UL)                 /*!< Max size of CTIINEN[8] array.                                        */
+  #define CTI_CTIINEN_MaxIndex (7UL)                 /*!< Max index of CTIINEN[8] array.                                       */
+  #define CTI_CTIINEN_MinIndex (0UL)                 /*!< Min index of CTIINEN[8] array.                                       */
   #define CTI_CTIINEN_ResetValue (0x00000000UL)      /*!< Reset value of CTIINEN[8] register.                                  */
 
 /* TRIGINEN0 @Bit 0 : Enables a cross trigger event to channel 0 when a ctitrigin input is activated. */
@@ -17920,6 +17962,8 @@ typedef struct {
 
 /* CTI_CTIOUTEN: CTI Channel to Trigger Enable register */
   #define CTI_CTIOUTEN_MaxCount (8UL)                /*!< Max size of CTIOUTEN[8] array.                                       */
+  #define CTI_CTIOUTEN_MaxIndex (7UL)                /*!< Max index of CTIOUTEN[8] array.                                      */
+  #define CTI_CTIOUTEN_MinIndex (0UL)                /*!< Min index of CTIOUTEN[8] array.                                      */
   #define CTI_CTIOUTEN_ResetValue (0x00000000UL)     /*!< Reset value of CTIOUTEN[8] register.                                 */
 
 /* TRIGOUTEN0 @Bit 0 : Enables a cross trigger event to ctitrigout when channel 0 is activated. */
@@ -19582,8 +19626,10 @@ typedef struct {
   __OM  uint32_t  EN;                                /*!< (@ 0x00000000) Enable channel group n                                */
   __OM  uint32_t  DIS;                               /*!< (@ 0x00000004) Disable channel group n                               */
 } NRF_DPPIC_TASKS_CHG_Type;                          /*!< Size = 8 (0x008)                                                     */
-  #define DPPIC_TASKS_CHG_MaxCount (1UL)             /*!< Max size of TASKS_CHG[2] array.                                      */
+  #define DPPIC_TASKS_CHG_MaxCount (2UL)             /*!< Max size of TASKS_CHG[2] array.                                      */
   #define DPPIC_TASKS_CHG_MinCount (0UL)             /*!< Min size of TASKS_CHG[2] array.                                      */
+  #define DPPIC_TASKS_CHG_MaxIndex (1UL)             /*!< Max index of TASKS_CHG[2] array.                                     */
+  #define DPPIC_TASKS_CHG_MinIndex (0UL)             /*!< Min index of TASKS_CHG[2] array.                                     */
 
 /* DPPIC_TASKS_CHG_EN: Enable channel group n */
   #define DPPIC_TASKS_CHG_EN_ResetValue (0x00000000UL) /*!< Reset value of EN register.                                        */
@@ -19616,8 +19662,10 @@ typedef struct {
   __IOM uint32_t  EN;                                /*!< (@ 0x00000000) Subscribe configuration for task CHG[n].EN            */
   __IOM uint32_t  DIS;                               /*!< (@ 0x00000004) Subscribe configuration for task CHG[n].DIS           */
 } NRF_DPPIC_SUBSCRIBE_CHG_Type;                      /*!< Size = 8 (0x008)                                                     */
-  #define DPPIC_SUBSCRIBE_CHG_MaxCount (1UL)         /*!< Max size of SUBSCRIBE_CHG[2] array.                                  */
+  #define DPPIC_SUBSCRIBE_CHG_MaxCount (2UL)         /*!< Max size of SUBSCRIBE_CHG[2] array.                                  */
   #define DPPIC_SUBSCRIBE_CHG_MinCount (0UL)         /*!< Min size of SUBSCRIBE_CHG[2] array.                                  */
+  #define DPPIC_SUBSCRIBE_CHG_MaxIndex (1UL)         /*!< Max index of SUBSCRIBE_CHG[2] array.                                 */
+  #define DPPIC_SUBSCRIBE_CHG_MinIndex (0UL)         /*!< Min index of SUBSCRIBE_CHG[2] array.                                 */
 
 /* DPPIC_SUBSCRIBE_CHG_EN: Subscribe configuration for task CHG[n].EN */
   #define DPPIC_SUBSCRIBE_CHG_EN_ResetValue (0x00000000UL) /*!< Reset value of EN register.                                    */
@@ -20105,6 +20153,8 @@ typedef struct {
                enabled */
 
   #define DPPIC_CHG_MaxCount (2UL)                   /*!< Max size of CHG[2] array.                                            */
+  #define DPPIC_CHG_MaxIndex (1UL)                   /*!< Max index of CHG[2] array.                                           */
+  #define DPPIC_CHG_MinIndex (0UL)                   /*!< Min index of CHG[2] array.                                           */
   #define DPPIC_CHG_ResetValue (0x00000000UL)        /*!< Reset value of CHG[2] register.                                      */
 
 /* CH0 @Bit 0 : Include or exclude channel 0 */
@@ -20918,6 +20968,8 @@ typedef struct {
 
 /* ECB_KEY_VALUE: 128-bit AES key */
   #define ECB_KEY_VALUE_MaxCount (4UL)               /*!< Max size of VALUE[4] array.                                          */
+  #define ECB_KEY_VALUE_MaxIndex (3UL)               /*!< Max index of VALUE[4] array.                                         */
+  #define ECB_KEY_VALUE_MinIndex (0UL)               /*!< Min index of VALUE[4] array.                                         */
   #define ECB_KEY_VALUE_ResetValue (0x00000000UL)    /*!< Reset value of VALUE[4] register.                                    */
 
 /* VALUE @Bits 0..31 : AES 128-bit key value, bits (32*(n+1))-1 : (32*n) */
@@ -21199,6 +21251,8 @@ typedef struct {
 
 /* EGU_TASKS_TRIGGER: Trigger n for triggering the corresponding TRIGGERED[n] event */
   #define EGU_TASKS_TRIGGER_MaxCount (16UL)          /*!< Max size of TASKS_TRIGGER[16] array.                                 */
+  #define EGU_TASKS_TRIGGER_MaxIndex (15UL)          /*!< Max index of TASKS_TRIGGER[16] array.                                */
+  #define EGU_TASKS_TRIGGER_MinIndex (0UL)           /*!< Min index of TASKS_TRIGGER[16] array.                                */
   #define EGU_TASKS_TRIGGER_ResetValue (0x00000000UL) /*!< Reset value of TASKS_TRIGGER[16] register.                          */
 
 /* TASKS_TRIGGER @Bit 0 : Trigger n for triggering the corresponding TRIGGERED[n] event */
@@ -21212,6 +21266,8 @@ typedef struct {
 
 /* EGU_SUBSCRIBE_TRIGGER: Subscribe configuration for task TRIGGER[n] */
   #define EGU_SUBSCRIBE_TRIGGER_MaxCount (16UL)      /*!< Max size of SUBSCRIBE_TRIGGER[16] array.                             */
+  #define EGU_SUBSCRIBE_TRIGGER_MaxIndex (15UL)      /*!< Max index of SUBSCRIBE_TRIGGER[16] array.                            */
+  #define EGU_SUBSCRIBE_TRIGGER_MinIndex (0UL)       /*!< Min index of SUBSCRIBE_TRIGGER[16] array.                            */
   #define EGU_SUBSCRIBE_TRIGGER_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_TRIGGER[16] register.                  */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task TRIGGER[n] will subscribe to */
@@ -21231,6 +21287,8 @@ typedef struct {
 
 /* EGU_EVENTS_TRIGGERED: Event number n generated by triggering the corresponding TRIGGER[n] task */
   #define EGU_EVENTS_TRIGGERED_MaxCount (16UL)       /*!< Max size of EVENTS_TRIGGERED[16] array.                              */
+  #define EGU_EVENTS_TRIGGERED_MaxIndex (15UL)       /*!< Max index of EVENTS_TRIGGERED[16] array.                             */
+  #define EGU_EVENTS_TRIGGERED_MinIndex (0UL)        /*!< Min index of EVENTS_TRIGGERED[16] array.                             */
   #define EGU_EVENTS_TRIGGERED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_TRIGGERED[16] register.                    */
 
 /* EVENTS_TRIGGERED @Bit 0 : Event number n generated by triggering the corresponding TRIGGER[n] task */
@@ -21245,6 +21303,8 @@ typedef struct {
 
 /* EGU_PUBLISH_TRIGGERED: Publish configuration for event TRIGGERED[n] */
   #define EGU_PUBLISH_TRIGGERED_MaxCount (16UL)      /*!< Max size of PUBLISH_TRIGGERED[16] array.                             */
+  #define EGU_PUBLISH_TRIGGERED_MaxIndex (15UL)      /*!< Max index of PUBLISH_TRIGGERED[16] array.                            */
+  #define EGU_PUBLISH_TRIGGERED_MinIndex (0UL)       /*!< Min index of PUBLISH_TRIGGERED[16] array.                            */
   #define EGU_PUBLISH_TRIGGERED_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_TRIGGERED[16] register.                  */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event TRIGGERED[n] will publish to */
@@ -21820,6 +21880,541 @@ typedef struct {
   #define EGU_INTPEND_TRIGGERED15_Max (0x1UL)        /*!< Max enumerator value of TRIGGERED15 field.                           */
   #define EGU_INTPEND_TRIGGERED15_NotPending (0x0UL) /*!< Read: Not pending                                                    */
   #define EGU_INTPEND_TRIGGERED15_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
+
+/* =========================================================================================================================== */
+/* ================                                            ETB                                            ================ */
+/* =========================================================================================================================== */
+
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
+/* ======================================================= Struct ETB ======================================================== */
+/**
+  * @brief Embedded Trace Buffer
+  */
+  typedef struct {                                   /*!< ETB Structure                                                        */
+    __IM uint32_t RESERVED;
+    __IM uint32_t RDP;                               /*!< (@ 0x00000004) ETB RAM Depth Register                                */
+    __IM uint32_t RESERVED1;
+    __IM uint32_t STS;                               /*!< (@ 0x0000000C) ETB Status Register                                   */
+    __IM uint32_t RRD;                               /*!< (@ 0x00000010) ETB RAM Read Data Register                            */
+    __IOM uint32_t RRP;                              /*!< (@ 0x00000014) ETB RAM Read Pointer Register                         */
+    __IOM uint32_t RWP;                              /*!< (@ 0x00000018) ETB RAM Write Pointer Register                        */
+    __IOM uint32_t TRG;                              /*!< (@ 0x0000001C) ETB Trigger Counter Register                          */
+    __IOM uint32_t CTL;                              /*!< (@ 0x00000020) ETB Control Register                                  */
+    __IOM uint32_t RWD;                              /*!< (@ 0x00000024) ETB RAM Write Data Register                           */
+    __IM uint32_t RESERVED2[182];
+    __IM uint32_t FFSR;                              /*!< (@ 0x00000300) ETB Formatter and Flush Status Register               */
+    __IOM uint32_t FFCR;                             /*!< (@ 0x00000304) ETB Formatter and Flush Control Register              */
+    __IM uint32_t RESERVED3[758];
+    __OM uint32_t ITMISCOP0;                         /*!< (@ 0x00000EE0) Integration Test Miscellaneous Output Register 0      */
+    __OM uint32_t ITTRFLINACK;                       /*!< (@ 0x00000EE4) Integration Test Trigger In and Flush In Acknowledge
+                                                                         Register*/
+    __IM uint32_t ITTRFLIN;                          /*!< (@ 0x00000EE8) Integration Test Trigger In and Flush In Register     */
+    __IM uint32_t ITATBDATA0;                        /*!< (@ 0x00000EEC) Integration Test ATB Data Register 0                  */
+    __OM uint32_t ITATBCTR2;                         /*!< (@ 0x00000EF0) Integration Test ATB Control Register 2               */
+    __IM uint32_t ITATBCTR1;                         /*!< (@ 0x00000EF4) Integration Test ATB Control Register 1               */
+    __IM uint32_t ITATBCTR0;                         /*!< (@ 0x00000EF8) Integration Test ATB Control Register 0               */
+    __IM uint32_t RESERVED4;
+    __IOM uint32_t ITCTRL;                           /*!< (@ 0x00000F00) Integration Mode Control Register                     */
+    __IM uint32_t RESERVED5[39];
+    __IOM uint32_t CLAIMSET;                         /*!< (@ 0x00000FA0) Claim Tag Set Register                                */
+    __IOM uint32_t CLAIMCLR;                         /*!< (@ 0x00000FA4) Claim Tag Clear Register                              */
+    __IM uint32_t RESERVED6[2];
+    __OM uint32_t LAR;                               /*!< (@ 0x00000FB0) Lock Access Register                                  */
+    __IM uint32_t LSR;                               /*!< (@ 0x00000FB4) Lock Status Register                                  */
+    __IM uint32_t AUTHSTATUS;                        /*!< (@ 0x00000FB8) Authentication Status Register                        */
+    __IM uint32_t RESERVED7[3];
+    __IM uint32_t DEVID;                             /*!< (@ 0x00000FC8) Device Configuration Register                         */
+    __IM uint32_t DEVTYPE;                           /*!< (@ 0x00000FCC) Device Type Identifier Register                       */
+    __IM uint32_t PERIPHID4;                         /*!< (@ 0x00000FD0) Peripheral ID4 Register                               */
+    __IM uint32_t RESERVED8[3];
+    __IM uint32_t PERIPHID0;                         /*!< (@ 0x00000FE0) Peripheral ID0 Register                               */
+    __IM uint32_t PERIPHID1;                         /*!< (@ 0x00000FE4) Peripheral ID1 Register                               */
+    __IM uint32_t PERIPHID2;                         /*!< (@ 0x00000FE8) Peripheral ID2 Register                               */
+    __IM uint32_t PERIPHID3;                         /*!< (@ 0x00000FEC) Peripheral ID3 Register                               */
+    __IM uint32_t COMPID0;                           /*!< (@ 0x00000FF0) Component ID0 Register                                */
+    __IM uint32_t COMPID1;                           /*!< (@ 0x00000FF4) Component ID1 Register                                */
+    __IM uint32_t COMPID2;                           /*!< (@ 0x00000FF8) Component ID2 Register                                */
+    __IM uint32_t COMPID3;                           /*!< (@ 0x00000FFC) Component ID3 Register                                */
+  } NRF_ETB_Type;                                    /*!< Size = 4096 (0x1000)                                                 */
+
+/* ETB_RDP: ETB RAM Depth Register */
+  #define ETB_RDP_ResetValue (0x00000000UL)          /*!< Reset value of RDP register.                                         */
+
+/* ETB_RAM_DEPTH @Bits 0..31 : Defines the depth, in words, of the trace RAM. */
+  #define ETB_RDP_ETB_RAM_DEPTH_Pos (0UL)            /*!< Position of ETB_RAM_DEPTH field.                                     */
+  #define ETB_RDP_ETB_RAM_DEPTH_Msk (0xFFFFFFFFUL << ETB_RDP_ETB_RAM_DEPTH_Pos) /*!< Bit mask of ETB_RAM_DEPTH field.          */
+
+
+/* ETB_STS: ETB Status Register */
+  #define ETB_STS_ResetValue (0x00000008UL)          /*!< Reset value of STS register.                                         */
+
+/* FULL @Bit 0 : RAM Full. The flag indicates when the RAM write pointer has wrapped around. */
+  #define ETB_STS_FULL_Pos (0UL)                     /*!< Position of FULL field.                                              */
+  #define ETB_STS_FULL_Msk (0x1UL << ETB_STS_FULL_Pos) /*!< Bit mask of FULL field.                                            */
+
+/* TRIGGERED @Bit 1 : The Triggered bit is set when a trigger has been observed. This does not indicate that a trigger has been
+                      embedded in the trace data by the formatter, but is determined by the programming of the Formatter and
+                      Flush Control Register. */
+
+  #define ETB_STS_TRIGGERED_Pos (1UL)                /*!< Position of TRIGGERED field.                                         */
+  #define ETB_STS_TRIGGERED_Msk (0x1UL << ETB_STS_TRIGGERED_Pos) /*!< Bit mask of TRIGGERED field.                             */
+
+/* ACQCOMP @Bit 2 : The acquisition complete flag indicates that capture has been completed when the formatter stops because of
+                    any of the methods defined in the Formatter and Flush Control Register, or TraceCaptEn = 0. This also
+                    results in FtStopped in the Formatter and Flush Status Register going HIGH. */
+
+  #define ETB_STS_ACQCOMP_Pos (2UL)                  /*!< Position of ACQCOMP field.                                           */
+  #define ETB_STS_ACQCOMP_Msk (0x1UL << ETB_STS_ACQCOMP_Pos) /*!< Bit mask of ACQCOMP field.                                   */
+
+/* FTEMPTY @Bit 3 : Formatter pipeline empty. All data stored to RAM. */
+  #define ETB_STS_FTEMPTY_Pos (3UL)                  /*!< Position of FTEMPTY field.                                           */
+  #define ETB_STS_FTEMPTY_Msk (0x1UL << ETB_STS_FTEMPTY_Pos) /*!< Bit mask of FTEMPTY field.                                   */
+
+
+/* ETB_RRD: ETB RAM Read Data Register */
+  #define ETB_RRD_ResetValue (0x00000000UL)          /*!< Reset value of RRD register.                                         */
+
+/* RAM_READ_DATA @Bits 0..31 : Data read from the ETB Trace RAM. */
+  #define ETB_RRD_RAM_READ_DATA_Pos (0UL)            /*!< Position of RAM_READ_DATA field.                                     */
+  #define ETB_RRD_RAM_READ_DATA_Msk (0xFFFFFFFFUL << ETB_RRD_RAM_READ_DATA_Pos) /*!< Bit mask of RAM_READ_DATA field.          */
+
+
+/* ETB_RRP: ETB RAM Read Pointer Register */
+  #define ETB_RRP_ResetValue (0x00000000UL)          /*!< Reset value of RRP register.                                         */
+
+/* RAM_READ_POINTER @Bits 0..9 : Sets the read pointer used to read entries from the Trace RAM over the APB interface. */
+  #define ETB_RRP_RAM_READ_POINTER_Pos (0UL)         /*!< Position of RAM_READ_POINTER field.                                  */
+  #define ETB_RRP_RAM_READ_POINTER_Msk (0x3FFUL << ETB_RRP_RAM_READ_POINTER_Pos) /*!< Bit mask of RAM_READ_POINTER field.      */
+
+
+/* ETB_RWP: ETB RAM Write Pointer Register */
+  #define ETB_RWP_ResetValue (0x00000000UL)          /*!< Reset value of RWP register.                                         */
+
+/* RAM_WRITE_POINTER @Bits 0..9 : Sets the write pointer used to write entries from the CoreSight bus into the Trace RAM. */
+  #define ETB_RWP_RAM_WRITE_POINTER_Pos (0UL)        /*!< Position of RAM_WRITE_POINTER field.                                 */
+  #define ETB_RWP_RAM_WRITE_POINTER_Msk (0x3FFUL << ETB_RWP_RAM_WRITE_POINTER_Pos) /*!< Bit mask of RAM_WRITE_POINTER field.   */
+
+
+/* ETB_TRG: ETB Trigger Counter Register */
+  #define ETB_TRG_ResetValue (0x00000000UL)          /*!< Reset value of TRG register.                                         */
+
+/* TRIGGER_COUNTER @Bits 0..9 : The counter is used as follows:Trace after - The counter is set to a large value, slightly less
+                                than the number of entries in the RAM. Trace before - The counter is set to a small value. Trace
+                                about - The counter is set to half the depth of the Trace RAM. This register must not be written
+                                to when trace capture is enabled (FtStopped=0, TraceCaptEn=1). If a write is attempted, the
+                                register is not updated. A read access is permitted with trace capture enabled. */
+
+  #define ETB_TRG_TRIGGER_COUNTER_Pos (0UL)          /*!< Position of TRIGGER_COUNTER field.                                   */
+  #define ETB_TRG_TRIGGER_COUNTER_Msk (0x3FFUL << ETB_TRG_TRIGGER_COUNTER_Pos) /*!< Bit mask of TRIGGER_COUNTER field.         */
+
+
+/* ETB_CTL: ETB Control Register */
+  #define ETB_CTL_ResetValue (0x00000000UL)          /*!< Reset value of CTL register.                                         */
+
+/* TRACECAPTEN @Bit 0 : ETB Trace Capture Enable. This is the master enable bit forcing FtStopped HIGH when TraceCaptEn is LOW.
+                        When capture is disabled, any remaining data in the ATB formatter is stored to RAM. When all data is
+                        stored the formatter outputs FtStopped. Capture is fully disabled, or complete, when FtStopped goes
+                        HIGH. See ETB Formatter and Flush Status Register, FFSR, 0x300. */
+
+  #define ETB_CTL_TRACECAPTEN_Pos (0UL)              /*!< Position of TRACECAPTEN field.                                       */
+  #define ETB_CTL_TRACECAPTEN_Msk (0x1UL << ETB_CTL_TRACECAPTEN_Pos) /*!< Bit mask of TRACECAPTEN field.                       */
+
+
+/* ETB_RWD: ETB RAM Write Data Register */
+  #define ETB_RWD_ResetValue (0x00000000UL)          /*!< Reset value of RWD register.                                         */
+
+/* RAM_WRITE_DATA @Bits 0..31 : Data written to the ETB Trace RAM. When trace capture is disabled, the contents of this register
+                                are placed into the ETB Trace RAM when this register is written to. Writing to this register
+                                increments the RAM Write Pointer Register. If trace capture is enabled, and this register is
+                                accessed, then a read from this register outputs 0xFFFFFFFF. Reads of this register never
+                                increment the RAM Write Pointer Register. A constant stream of 1s being output corresponds to a
+                                synchronization output from the ETB. If a write access is attempted, the data is not written
+                                into Trace RAM. */
+
+  #define ETB_RWD_RAM_WRITE_DATA_Pos (0UL)           /*!< Position of RAM_WRITE_DATA field.                                    */
+  #define ETB_RWD_RAM_WRITE_DATA_Msk (0xFFFFFFFFUL << ETB_RWD_RAM_WRITE_DATA_Pos) /*!< Bit mask of RAM_WRITE_DATA field.       */
+
+
+/* ETB_FFSR: ETB Formatter and Flush Status Register */
+  #define ETB_FFSR_ResetValue (0x00000002UL)         /*!< Reset value of FFSR register.                                        */
+
+/* FLINPROG @Bit 0 : Flush In Progress. This is an indication of the current state of afvalids. */
+  #define ETB_FFSR_FLINPROG_Pos (0UL)                /*!< Position of FLINPROG field.                                          */
+  #define ETB_FFSR_FLINPROG_Msk (0x1UL << ETB_FFSR_FLINPROG_Pos) /*!< Bit mask of FLINPROG field.                              */
+
+/* FTSTOPPED @Bit 1 : Formatter stopped. The formatter has received a stop request signal and all trace data and post-amble has
+                      been output. Any more trace data on the ATB interface is ignored and atreadys goes HIGH. */
+
+  #define ETB_FFSR_FTSTOPPED_Pos (1UL)               /*!< Position of FTSTOPPED field.                                         */
+  #define ETB_FFSR_FTSTOPPED_Msk (0x1UL << ETB_FFSR_FTSTOPPED_Pos) /*!< Bit mask of FTSTOPPED field.                           */
+
+
+/* ETB_FFCR: ETB Formatter and Flush Control Register */
+  #define ETB_FFCR_ResetValue (0x00000000UL)         /*!< Reset value of FFCR register.                                        */
+
+/* ENFTC @Bit 0 : Do not embed Triggers into the formatted stream. Trace disable cycles and triggers are indicated by TRACECTL,
+                  where fitted. Can only be changed when FtStopped is HIGH. This bit is clear on reset. */
+
+  #define ETB_FFCR_ENFTC_Pos (0UL)                   /*!< Position of ENFTC field.                                             */
+  #define ETB_FFCR_ENFTC_Msk (0x1UL << ETB_FFCR_ENFTC_Pos) /*!< Bit mask of ENFTC field.                                       */
+
+/* ENFCONT @Bit 1 : Continuous mode in the ETB corresponds to normal mode with the embedding of triggers. Can only be changed
+                    when FtStopped is HIGH. This bit is clear on reset. */
+
+  #define ETB_FFCR_ENFCONT_Pos (1UL)                 /*!< Position of ENFCONT field.                                           */
+  #define ETB_FFCR_ENFCONT_Msk (0x1UL << ETB_FFCR_ENFCONT_Pos) /*!< Bit mask of ENFCONT field.                                 */
+
+/* FONFLIN @Bit 4 : Set this bit to enable use of the flushin connection. This is clear on reset. */
+  #define ETB_FFCR_FONFLIN_Pos (4UL)                 /*!< Position of FONFLIN field.                                           */
+  #define ETB_FFCR_FONFLIN_Msk (0x1UL << ETB_FFCR_FONFLIN_Pos) /*!< Bit mask of FONFLIN field.                                 */
+
+/* FONTRIG @Bit 5 : Generate flush using Trigger event. Set this bit to cause a flush of data in the system when a Trigger Event
+                    occurs. This bit is clear on reset. A Trigger Event is defined as when the Trigger counter reaches zero
+                    (where fitted) or, in the case of the trigger counter being zero (or not fitted), when trigin is HIGH. */
+
+  #define ETB_FFCR_FONTRIG_Pos (5UL)                 /*!< Position of FONTRIG field.                                           */
+  #define ETB_FFCR_FONTRIG_Msk (0x1UL << ETB_FFCR_FONTRIG_Pos) /*!< Bit mask of FONTRIG field.                                 */
+
+/* FONMAN @Bit 6 : Setting this bit causes a flush to be generated. This is cleared when this flush has been serviced. This bit
+                   is clear on reset. */
+
+  #define ETB_FFCR_FONMAN_Pos (6UL)                  /*!< Position of FONMAN field.                                            */
+  #define ETB_FFCR_FONMAN_Msk (0x1UL << ETB_FFCR_FONMAN_Pos) /*!< Bit mask of FONMAN field.                                    */
+
+/* TRIGIN @Bit 8 : Indicate a trigger on trigin being asserted. */
+  #define ETB_FFCR_TRIGIN_Pos (8UL)                  /*!< Position of TRIGIN field.                                            */
+  #define ETB_FFCR_TRIGIN_Msk (0x1UL << ETB_FFCR_TRIGIN_Pos) /*!< Bit mask of TRIGIN field.                                    */
+
+/* TRIGEVT @Bit 9 : Indicate a trigger on a Trigger Event. */
+  #define ETB_FFCR_TRIGEVT_Pos (9UL)                 /*!< Position of TRIGEVT field.                                           */
+  #define ETB_FFCR_TRIGEVT_Msk (0x1UL << ETB_FFCR_TRIGEVT_Pos) /*!< Bit mask of TRIGEVT field.                                 */
+
+/* TRIGFL @Bit 10 : Indicates a trigger on Flush completion (afreadys being returned). */
+  #define ETB_FFCR_TRIGFL_Pos (10UL)                 /*!< Position of TRIGFL field.                                            */
+  #define ETB_FFCR_TRIGFL_Msk (0x1UL << ETB_FFCR_TRIGFL_Pos) /*!< Bit mask of TRIGFL field.                                    */
+
+/* STOPFL @Bit 12 : This forces the FIFO to drain off any part-completed packets. Setting this bit enables this function but
+                    this is clear on reset (disabled). */
+
+  #define ETB_FFCR_STOPFL_Pos (12UL)                 /*!< Position of STOPFL field.                                            */
+  #define ETB_FFCR_STOPFL_Msk (0x1UL << ETB_FFCR_STOPFL_Pos) /*!< Bit mask of STOPFL field.                                    */
+
+/* STOPTRIG @Bit 13 : Stop the formatter after a Trigger Event is observed. Reset to disabled (zero). */
+  #define ETB_FFCR_STOPTRIG_Pos (13UL)               /*!< Position of STOPTRIG field.                                          */
+  #define ETB_FFCR_STOPTRIG_Msk (0x1UL << ETB_FFCR_STOPTRIG_Pos) /*!< Bit mask of STOPTRIG field.                              */
+
+
+/* ETB_ITMISCOP0: Integration Test Miscellaneous Output Register 0 */
+  #define ETB_ITMISCOP0_ResetValue (0x00000000UL)    /*!< Reset value of ITMISCOP0 register.                                   */
+
+/* ACQCOMP @Bit 0 : Set the value of acqcomp. */
+  #define ETB_ITMISCOP0_ACQCOMP_Pos (0UL)            /*!< Position of ACQCOMP field.                                           */
+  #define ETB_ITMISCOP0_ACQCOMP_Msk (0x1UL << ETB_ITMISCOP0_ACQCOMP_Pos) /*!< Bit mask of ACQCOMP field.                       */
+
+/* FULL @Bit 1 : Set the value of full output port. */
+  #define ETB_ITMISCOP0_FULL_Pos (1UL)               /*!< Position of FULL field.                                              */
+  #define ETB_ITMISCOP0_FULL_Msk (0x1UL << ETB_ITMISCOP0_FULL_Pos) /*!< Bit mask of FULL field.                                */
+
+
+/* ETB_ITTRFLINACK: Integration Test Trigger In and Flush In Acknowledge Register */
+  #define ETB_ITTRFLINACK_ResetValue (0x00000000UL)  /*!< Reset value of ITTRFLINACK register.                                 */
+
+/* TRIGINACK @Bit 0 : Set the value of triginack. */
+  #define ETB_ITTRFLINACK_TRIGINACK_Pos (0UL)        /*!< Position of TRIGINACK field.                                         */
+  #define ETB_ITTRFLINACK_TRIGINACK_Msk (0x1UL << ETB_ITTRFLINACK_TRIGINACK_Pos) /*!< Bit mask of TRIGINACK field.             */
+
+/* FLUSHINACK @Bit 1 : Set the value of flushinack. */
+  #define ETB_ITTRFLINACK_FLUSHINACK_Pos (1UL)       /*!< Position of FLUSHINACK field.                                        */
+  #define ETB_ITTRFLINACK_FLUSHINACK_Msk (0x1UL << ETB_ITTRFLINACK_FLUSHINACK_Pos) /*!< Bit mask of FLUSHINACK field.          */
+
+
+/* ETB_ITTRFLIN: Integration Test Trigger In and Flush In Register */
+  #define ETB_ITTRFLIN_ResetValue (0x00000000UL)     /*!< Reset value of ITTRFLIN register.                                    */
+
+/* TRIGIN @Bit 0 : Read the value of trigin. */
+  #define ETB_ITTRFLIN_TRIGIN_Pos (0UL)              /*!< Position of TRIGIN field.                                            */
+  #define ETB_ITTRFLIN_TRIGIN_Msk (0x1UL << ETB_ITTRFLIN_TRIGIN_Pos) /*!< Bit mask of TRIGIN field.                            */
+
+/* FLUSHIN @Bit 1 : Read the value of flushin. */
+  #define ETB_ITTRFLIN_FLUSHIN_Pos (1UL)             /*!< Position of FLUSHIN field.                                           */
+  #define ETB_ITTRFLIN_FLUSHIN_Msk (0x1UL << ETB_ITTRFLIN_FLUSHIN_Pos) /*!< Bit mask of FLUSHIN field.                         */
+
+
+/* ETB_ITATBDATA0: Integration Test ATB Data Register 0 */
+  #define ETB_ITATBDATA0_ResetValue (0x00000000UL)   /*!< Reset value of ITATBDATA0 register.                                  */
+
+/* ATDATA_0 @Bit 0 : Read the value of atdatas[0]. */
+  #define ETB_ITATBDATA0_ATDATA_0_Pos (0UL)          /*!< Position of ATDATA_0 field.                                          */
+  #define ETB_ITATBDATA0_ATDATA_0_Msk (0x1UL << ETB_ITATBDATA0_ATDATA_0_Pos) /*!< Bit mask of ATDATA_0 field.                  */
+
+/* ATDATA_7 @Bit 1 : Read the value of atdatas[7]. */
+  #define ETB_ITATBDATA0_ATDATA_7_Pos (1UL)          /*!< Position of ATDATA_7 field.                                          */
+  #define ETB_ITATBDATA0_ATDATA_7_Msk (0x1UL << ETB_ITATBDATA0_ATDATA_7_Pos) /*!< Bit mask of ATDATA_7 field.                  */
+
+/* ATDATA_15 @Bit 2 : Read the value of atdatas[15]. */
+  #define ETB_ITATBDATA0_ATDATA_15_Pos (2UL)         /*!< Position of ATDATA_15 field.                                         */
+  #define ETB_ITATBDATA0_ATDATA_15_Msk (0x1UL << ETB_ITATBDATA0_ATDATA_15_Pos) /*!< Bit mask of ATDATA_15 field.               */
+
+/* ATDATA_23 @Bit 3 : Read the value of atdatas[23]. */
+  #define ETB_ITATBDATA0_ATDATA_23_Pos (3UL)         /*!< Position of ATDATA_23 field.                                         */
+  #define ETB_ITATBDATA0_ATDATA_23_Msk (0x1UL << ETB_ITATBDATA0_ATDATA_23_Pos) /*!< Bit mask of ATDATA_23 field.               */
+
+/* ATDATA_31 @Bit 4 : Read the value of atdatas[31]. */
+  #define ETB_ITATBDATA0_ATDATA_31_Pos (4UL)         /*!< Position of ATDATA_31 field.                                         */
+  #define ETB_ITATBDATA0_ATDATA_31_Msk (0x1UL << ETB_ITATBDATA0_ATDATA_31_Pos) /*!< Bit mask of ATDATA_31 field.               */
+
+
+/* ETB_ITATBCTR2: Integration Test ATB Control Register 2 */
+  #define ETB_ITATBCTR2_ResetValue (0x00000000UL)    /*!< Reset value of ITATBCTR2 register.                                   */
+
+/* ATREADYS @Bit 0 : Set the value of atreadys. */
+  #define ETB_ITATBCTR2_ATREADYS_Pos (0UL)           /*!< Position of ATREADYS field.                                          */
+  #define ETB_ITATBCTR2_ATREADYS_Msk (0x1UL << ETB_ITATBCTR2_ATREADYS_Pos) /*!< Bit mask of ATREADYS field.                    */
+
+/* AFVALIDS @Bit 1 : Set the value of afvalids. */
+  #define ETB_ITATBCTR2_AFVALIDS_Pos (1UL)           /*!< Position of AFVALIDS field.                                          */
+  #define ETB_ITATBCTR2_AFVALIDS_Msk (0x1UL << ETB_ITATBCTR2_AFVALIDS_Pos) /*!< Bit mask of AFVALIDS field.                    */
+
+
+/* ETB_ITATBCTR1: Integration Test ATB Control Register 1 */
+  #define ETB_ITATBCTR1_ResetValue (0x00000000UL)    /*!< Reset value of ITATBCTR1 register.                                   */
+
+/* ATID @Bits 0..6 : Read the value of atids. */
+  #define ETB_ITATBCTR1_ATID_Pos (0UL)               /*!< Position of ATID field.                                              */
+  #define ETB_ITATBCTR1_ATID_Msk (0x7FUL << ETB_ITATBCTR1_ATID_Pos) /*!< Bit mask of ATID field.                               */
+
+
+/* ETB_ITATBCTR0: Integration Test ATB Control Register 0 */
+  #define ETB_ITATBCTR0_ResetValue (0x00000000UL)    /*!< Reset value of ITATBCTR0 register.                                   */
+
+/* ATVALID @Bit 0 : Read the value of atvalids. */
+  #define ETB_ITATBCTR0_ATVALID_Pos (0UL)            /*!< Position of ATVALID field.                                           */
+  #define ETB_ITATBCTR0_ATVALID_Msk (0x1UL << ETB_ITATBCTR0_ATVALID_Pos) /*!< Bit mask of ATVALID field.                       */
+
+/* AFREADY @Bit 1 : Read the value of afreadys. */
+  #define ETB_ITATBCTR0_AFREADY_Pos (1UL)            /*!< Position of AFREADY field.                                           */
+  #define ETB_ITATBCTR0_AFREADY_Msk (0x1UL << ETB_ITATBCTR0_AFREADY_Pos) /*!< Bit mask of AFREADY field.                       */
+
+/* ATBYTES @Bits 8..9 : Read the value of atbytess. */
+  #define ETB_ITATBCTR0_ATBYTES_Pos (8UL)            /*!< Position of ATBYTES field.                                           */
+  #define ETB_ITATBCTR0_ATBYTES_Msk (0x3UL << ETB_ITATBCTR0_ATBYTES_Pos) /*!< Bit mask of ATBYTES field.                       */
+
+
+/* ETB_ITCTRL: Integration Mode Control Register */
+  #define ETB_ITCTRL_ResetValue (0x00000000UL)       /*!< Reset value of ITCTRL register.                                      */
+
+/* INTEGRATION_MODE @Bit 0 : Allows the component to switch from functional mode to integration mode or back. */
+  #define ETB_ITCTRL_INTEGRATION_MODE_Pos (0UL)      /*!< Position of INTEGRATION_MODE field.                                  */
+  #define ETB_ITCTRL_INTEGRATION_MODE_Msk (0x1UL << ETB_ITCTRL_INTEGRATION_MODE_Pos) /*!< Bit mask of INTEGRATION_MODE field.  */
+
+
+/* ETB_CLAIMSET: Claim Tag Set Register */
+  #define ETB_CLAIMSET_ResetValue (0x0000000FUL)     /*!< Reset value of CLAIMSET register.                                    */
+
+/* CLAIMSET @Bits 0..3 : This claim tag bit is implemented */
+  #define ETB_CLAIMSET_CLAIMSET_Pos (0UL)            /*!< Position of CLAIMSET field.                                          */
+  #define ETB_CLAIMSET_CLAIMSET_Msk (0xFUL << ETB_CLAIMSET_CLAIMSET_Pos) /*!< Bit mask of CLAIMSET field.                      */
+
+
+/* ETB_CLAIMCLR: Claim Tag Clear Register */
+  #define ETB_CLAIMCLR_ResetValue (0x00000000UL)     /*!< Reset value of CLAIMCLR register.                                    */
+
+/* CLAIMCLR @Bits 0..3 : The value present reflects the current setting of the Claim Tag. */
+  #define ETB_CLAIMCLR_CLAIMCLR_Pos (0UL)            /*!< Position of CLAIMCLR field.                                          */
+  #define ETB_CLAIMCLR_CLAIMCLR_Msk (0xFUL << ETB_CLAIMCLR_CLAIMCLR_Pos) /*!< Bit mask of CLAIMCLR field.                      */
+
+
+/* ETB_LAR: Lock Access Register */
+  #define ETB_LAR_ResetValue (0x00000000UL)          /*!< Reset value of LAR register.                                         */
+
+/* ACCESS_W @Bits 0..31 : A write of 0xC5ACCE55 enables further write access to this device. A write of any value other than
+                          0xC5ACCE55 will have the affect of removing write access. */
+
+  #define ETB_LAR_ACCESS_W_Pos (0UL)                 /*!< Position of ACCESS_W field.                                          */
+  #define ETB_LAR_ACCESS_W_Msk (0xFFFFFFFFUL << ETB_LAR_ACCESS_W_Pos) /*!< Bit mask of ACCESS_W field.                         */
+
+
+/* ETB_LSR: Lock Status Register */
+  #define ETB_LSR_ResetValue (0x00000003UL)          /*!< Reset value of LSR register.                                         */
+
+/* LOCKEXIST @Bit 0 : Indicates that a lock control mechanism exists for this device. This bit reads as 0 when read from an
+                      external debugger (paddrdbg31 = 1) since external debugger accesses are not subject to Lock Registers. */
+
+  #define ETB_LSR_LOCKEXIST_Pos (0UL)                /*!< Position of LOCKEXIST field.                                         */
+  #define ETB_LSR_LOCKEXIST_Msk (0x1UL << ETB_LSR_LOCKEXIST_Pos) /*!< Bit mask of LOCKEXIST field.                             */
+
+/* LOCKGRANT @Bit 1 : Returns the current status of the Lock. This bit reads as 0 when read from an external debugger
+                      (paddrdbg31 = 1) since external debugger accesses are not subject to Lock Registers. */
+
+  #define ETB_LSR_LOCKGRANT_Pos (1UL)                /*!< Position of LOCKGRANT field.                                         */
+  #define ETB_LSR_LOCKGRANT_Msk (0x1UL << ETB_LSR_LOCKGRANT_Pos) /*!< Bit mask of LOCKGRANT field.                             */
+
+/* LOCKTYPE @Bit 2 : Indicates if the Lock Access Register (0xFB0) is implemented as 8-bit or 32-bit */
+  #define ETB_LSR_LOCKTYPE_Pos (2UL)                 /*!< Position of LOCKTYPE field.                                          */
+  #define ETB_LSR_LOCKTYPE_Msk (0x1UL << ETB_LSR_LOCKTYPE_Pos) /*!< Bit mask of LOCKTYPE field.                                */
+
+
+/* ETB_AUTHSTATUS: Authentication Status Register */
+  #define ETB_AUTHSTATUS_ResetValue (0x00000000UL)   /*!< Reset value of AUTHSTATUS register.                                  */
+
+/* NSID @Bits 0..1 : Indicates the security level for non-secure invasive debug */
+  #define ETB_AUTHSTATUS_NSID_Pos (0UL)              /*!< Position of NSID field.                                              */
+  #define ETB_AUTHSTATUS_NSID_Msk (0x3UL << ETB_AUTHSTATUS_NSID_Pos) /*!< Bit mask of NSID field.                              */
+
+/* NSNID @Bits 2..3 : Indicates the security level for non-secure non-invasive debug */
+  #define ETB_AUTHSTATUS_NSNID_Pos (2UL)             /*!< Position of NSNID field.                                             */
+  #define ETB_AUTHSTATUS_NSNID_Msk (0x3UL << ETB_AUTHSTATUS_NSNID_Pos) /*!< Bit mask of NSNID field.                           */
+
+/* SID @Bits 4..5 : Indicates the security level for secure invasive debug */
+  #define ETB_AUTHSTATUS_SID_Pos (4UL)               /*!< Position of SID field.                                               */
+  #define ETB_AUTHSTATUS_SID_Msk (0x3UL << ETB_AUTHSTATUS_SID_Pos) /*!< Bit mask of SID field.                                 */
+
+/* SNID @Bits 6..7 : Indicates the security level for secure non-invasive debug */
+  #define ETB_AUTHSTATUS_SNID_Pos (6UL)              /*!< Position of SNID field.                                              */
+  #define ETB_AUTHSTATUS_SNID_Msk (0x3UL << ETB_AUTHSTATUS_SNID_Pos) /*!< Bit mask of SNID field.                              */
+
+
+/* ETB_DEVID: Device Configuration Register */
+  #define ETB_DEVID_ResetValue (0x00000000UL)        /*!< Reset value of DEVID register.                                       */
+
+/* EXTMUXNUM @Bits 0..4 : When non-zero this value indicates the type/number of ATB multiplexing present on the input to the
+                          ATB. */
+
+  #define ETB_DEVID_EXTMUXNUM_Pos (0UL)              /*!< Position of EXTMUXNUM field.                                         */
+  #define ETB_DEVID_EXTMUXNUM_Msk (0x1FUL << ETB_DEVID_EXTMUXNUM_Pos) /*!< Bit mask of EXTMUXNUM field.                        */
+
+/* RAMCLK @Bit 5 : This bit returns 0 on reads indicating that the ETB RAM operates synchronously to atclk. */
+  #define ETB_DEVID_RAMCLK_Pos (5UL)                 /*!< Position of RAMCLK field.                                            */
+  #define ETB_DEVID_RAMCLK_Msk (0x1UL << ETB_DEVID_RAMCLK_Pos) /*!< Bit mask of RAMCLK field.                                  */
+
+
+/* ETB_DEVTYPE: Device Type Identifier Register */
+  #define ETB_DEVTYPE_ResetValue (0x00000021UL)      /*!< Reset value of DEVTYPE register.                                     */
+
+/* MAJOR_TYPE @Bits 0..3 : Major classification grouping for this debug/trace component */
+  #define ETB_DEVTYPE_MAJOR_TYPE_Pos (0UL)           /*!< Position of MAJOR_TYPE field.                                        */
+  #define ETB_DEVTYPE_MAJOR_TYPE_Msk (0xFUL << ETB_DEVTYPE_MAJOR_TYPE_Pos) /*!< Bit mask of MAJOR_TYPE field.                  */
+
+/* SUB_TYPE @Bits 4..7 : Sub-classification within the major category */
+  #define ETB_DEVTYPE_SUB_TYPE_Pos (4UL)             /*!< Position of SUB_TYPE field.                                          */
+  #define ETB_DEVTYPE_SUB_TYPE_Msk (0xFUL << ETB_DEVTYPE_SUB_TYPE_Pos) /*!< Bit mask of SUB_TYPE field.                        */
+
+
+/* ETB_PERIPHID4: Peripheral ID4 Register */
+  #define ETB_PERIPHID4_ResetValue (0x00000004UL)    /*!< Reset value of PERIPHID4 register.                                   */
+
+/* DES_2 @Bits 0..3 : JEDEC continuation code indicating the designer of the component (along with the identity code) */
+  #define ETB_PERIPHID4_DES_2_Pos (0UL)              /*!< Position of DES_2 field.                                             */
+  #define ETB_PERIPHID4_DES_2_Msk (0xFUL << ETB_PERIPHID4_DES_2_Pos) /*!< Bit mask of DES_2 field.                             */
+
+/* SIZE @Bits 4..7 : This is a 4-bit value that indicates the total contiguous size of the memory window used by this component
+                     in powers of 2 from the standard 4KB. If a component only requires the standard 4KB then this should read
+                     as 0x0, 4KB only, for 8KB set to 0x1, 16KB == 0x2, 32KB == 0x3, and so on. */
+
+  #define ETB_PERIPHID4_SIZE_Pos (4UL)               /*!< Position of SIZE field.                                              */
+  #define ETB_PERIPHID4_SIZE_Msk (0xFUL << ETB_PERIPHID4_SIZE_Pos) /*!< Bit mask of SIZE field.                                */
+
+
+/* ETB_PERIPHID0: Peripheral ID0 Register */
+  #define ETB_PERIPHID0_ResetValue (0x00000007UL)    /*!< Reset value of PERIPHID0 register.                                   */
+
+/* PART_0 @Bits 0..7 : Bits [7:0] of the component's part number. This is selected by the designer of the component. */
+  #define ETB_PERIPHID0_PART_0_Pos (0UL)             /*!< Position of PART_0 field.                                            */
+  #define ETB_PERIPHID0_PART_0_Msk (0xFFUL << ETB_PERIPHID0_PART_0_Pos) /*!< Bit mask of PART_0 field.                         */
+
+
+/* ETB_PERIPHID1: Peripheral ID1 Register */
+  #define ETB_PERIPHID1_ResetValue (0x000000B9UL)    /*!< Reset value of PERIPHID1 register.                                   */
+
+/* PART_1 @Bits 0..3 : Bits [11:8] of the component's part number. This is selected by the designer of the component. */
+  #define ETB_PERIPHID1_PART_1_Pos (0UL)             /*!< Position of PART_1 field.                                            */
+  #define ETB_PERIPHID1_PART_1_Msk (0xFUL << ETB_PERIPHID1_PART_1_Pos) /*!< Bit mask of PART_1 field.                          */
+
+/* DES_0 @Bits 4..7 : Bits 3:0 of the JEDEC identity code indicating the designer of the component (along with the continuation
+                      code) */
+
+  #define ETB_PERIPHID1_DES_0_Pos (4UL)              /*!< Position of DES_0 field.                                             */
+  #define ETB_PERIPHID1_DES_0_Msk (0xFUL << ETB_PERIPHID1_DES_0_Pos) /*!< Bit mask of DES_0 field.                             */
+
+
+/* ETB_PERIPHID2: Peripheral ID2 Register */
+  #define ETB_PERIPHID2_ResetValue (0x0000004BUL)    /*!< Reset value of PERIPHID2 register.                                   */
+
+/* DES_1 @Bits 0..2 : Bits 6:4 of the JEDEC identity code indicating the designer of the component (along with the continuation
+                      code) */
+
+  #define ETB_PERIPHID2_DES_1_Pos (0UL)              /*!< Position of DES_1 field.                                             */
+  #define ETB_PERIPHID2_DES_1_Msk (0x7UL << ETB_PERIPHID2_DES_1_Pos) /*!< Bit mask of DES_1 field.                             */
+
+/* JEDEC @Bit 3 : Always set. Indicates that a JEDEC assigned value is used */
+  #define ETB_PERIPHID2_JEDEC_Pos (3UL)              /*!< Position of JEDEC field.                                             */
+  #define ETB_PERIPHID2_JEDEC_Msk (0x1UL << ETB_PERIPHID2_JEDEC_Pos) /*!< Bit mask of JEDEC field.                             */
+
+/* REVISION @Bits 4..7 : The Revision field is an incremental value starting at 0x0 for the first design of this component. This
+                         only increases by 1 for both major and minor revisions and is simply used as a look-up to establish the
+                         exact major/minor revision. */
+
+  #define ETB_PERIPHID2_REVISION_Pos (4UL)           /*!< Position of REVISION field.                                          */
+  #define ETB_PERIPHID2_REVISION_Msk (0xFUL << ETB_PERIPHID2_REVISION_Pos) /*!< Bit mask of REVISION field.                    */
+
+
+/* ETB_PERIPHID3: Peripheral ID3 Register */
+  #define ETB_PERIPHID3_ResetValue (0x00000000UL)    /*!< Reset value of PERIPHID3 register.                                   */
+
+/* CMOD @Bits 0..3 : Where the component is reusable IP, this value indicates if the customer has modified the behavior of the
+                     component. In most cases this field is zero. */
+
+  #define ETB_PERIPHID3_CMOD_Pos (0UL)               /*!< Position of CMOD field.                                              */
+  #define ETB_PERIPHID3_CMOD_Msk (0xFUL << ETB_PERIPHID3_CMOD_Pos) /*!< Bit mask of CMOD field.                                */
+
+/* REVAND @Bits 4..7 : This field indicates minor errata fixes specific to this design, for example metal fixes after
+                       implementation. In most cases this field is zero. It is recommended that component designers ensure this
+                       field can be changed by a metal fix if required, for example by driving it from registers that reset to
+                       zero. */
+
+  #define ETB_PERIPHID3_REVAND_Pos (4UL)             /*!< Position of REVAND field.                                            */
+  #define ETB_PERIPHID3_REVAND_Msk (0xFUL << ETB_PERIPHID3_REVAND_Pos) /*!< Bit mask of REVAND field.                          */
+
+
+/* ETB_COMPID0: Component ID0 Register */
+  #define ETB_COMPID0_ResetValue (0x0000000DUL)      /*!< Reset value of COMPID0 register.                                     */
+
+/* PRMBL_0 @Bits 0..7 : Contains bits [7:0] of the component identification */
+  #define ETB_COMPID0_PRMBL_0_Pos (0UL)              /*!< Position of PRMBL_0 field.                                           */
+  #define ETB_COMPID0_PRMBL_0_Msk (0xFFUL << ETB_COMPID0_PRMBL_0_Pos) /*!< Bit mask of PRMBL_0 field.                          */
+
+
+/* ETB_COMPID1: Component ID1 Register */
+  #define ETB_COMPID1_ResetValue (0x00000090UL)      /*!< Reset value of COMPID1 register.                                     */
+
+/* PRMBL_1 @Bits 0..3 : Contains bits [11:8] of the component identification */
+  #define ETB_COMPID1_PRMBL_1_Pos (0UL)              /*!< Position of PRMBL_1 field.                                           */
+  #define ETB_COMPID1_PRMBL_1_Msk (0xFUL << ETB_COMPID1_PRMBL_1_Pos) /*!< Bit mask of PRMBL_1 field.                           */
+
+/* CLASS @Bits 4..7 : Class of the component. E. g. ROM table, CoreSight component etc. Constitutes bits [15:12] of the
+                      component identification. */
+
+  #define ETB_COMPID1_CLASS_Pos (4UL)                /*!< Position of CLASS field.                                             */
+  #define ETB_COMPID1_CLASS_Msk (0xFUL << ETB_COMPID1_CLASS_Pos) /*!< Bit mask of CLASS field.                                 */
+
+
+/* ETB_COMPID2: Component ID2 Register */
+  #define ETB_COMPID2_ResetValue (0x00000005UL)      /*!< Reset value of COMPID2 register.                                     */
+
+/* PRMBL_2 @Bits 0..7 : Contains bits [23:16] of the component identification */
+  #define ETB_COMPID2_PRMBL_2_Pos (0UL)              /*!< Position of PRMBL_2 field.                                           */
+  #define ETB_COMPID2_PRMBL_2_Msk (0xFFUL << ETB_COMPID2_PRMBL_2_Pos) /*!< Bit mask of PRMBL_2 field.                          */
+
+
+/* ETB_COMPID3: Component ID3 Register */
+  #define ETB_COMPID3_ResetValue (0x000000B1UL)      /*!< Reset value of COMPID3 register.                                     */
+
+/* PRMBL_3 @Bits 0..7 : Contains bits [31:24] of the component identification */
+  #define ETB_COMPID3_PRMBL_3_Pos (0UL)              /*!< Position of PRMBL_3 field.                                           */
+  #define ETB_COMPID3_PRMBL_3_Msk (0xFFUL << ETB_COMPID3_PRMBL_3_Pos) /*!< Bit mask of PRMBL_3 field.                          */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -23746,6 +24341,8 @@ typedef struct {
                    event. */
 
   #define ETM_TRCSEQEVR_MaxCount (3UL)               /*!< Max size of TRCSEQEVR[3] array.                                      */
+  #define ETM_TRCSEQEVR_MaxIndex (2UL)               /*!< Max index of TRCSEQEVR[3] array.                                     */
+  #define ETM_TRCSEQEVR_MinIndex (0UL)               /*!< Min index of TRCSEQEVR[3] array.                                     */
   #define ETM_TRCSEQEVR_ResetValue (0x00000000UL)    /*!< Reset value of TRCSEQEVR[3] register.                                */
 
 /* F0 @Bit 0 : Forward field. */
@@ -23958,6 +24555,8 @@ typedef struct {
                      enabled or not idle. */
 
   #define ETM_TRCCNTRLDVR_MaxCount (4UL)             /*!< Max size of TRCCNTRLDVR[4] array.                                    */
+  #define ETM_TRCCNTRLDVR_MaxIndex (3UL)             /*!< Max index of TRCCNTRLDVR[4] array.                                   */
+  #define ETM_TRCCNTRLDVR_MinIndex (0UL)             /*!< Min index of TRCCNTRLDVR[4] array.                                   */
   #define ETM_TRCCNTRLDVR_ResetValue (0x00000000UL)  /*!< Reset value of TRCCNTRLDVR[4] register.                              */
 
 /* VALUE @Bits 0..15 : Contains the reload value for counter n. When a reload event occurs for counter n then the trace unit
@@ -23971,6 +24570,8 @@ typedef struct {
 
 /* ETM_TRCCNTCTLR: Controls the operation of counter n. Might ignore writes when the trace unit is enabled or not idle. */
   #define ETM_TRCCNTCTLR_MaxCount (4UL)              /*!< Max size of TRCCNTCTLR[4] array.                                     */
+  #define ETM_TRCCNTCTLR_MaxIndex (3UL)              /*!< Max index of TRCCNTCTLR[4] array.                                    */
+  #define ETM_TRCCNTCTLR_MinIndex (0UL)              /*!< Min index of TRCCNTCTLR[4] array.                                    */
   #define ETM_TRCCNTCTLR_ResetValue (0x00000000UL)   /*!< Reset value of TRCCNTCTLR[4] register.                               */
 
 /* CNTEVENT @Bits 0..7 : Selects an event, that when it occurs causes counter n to decrement. */
@@ -24012,6 +24613,8 @@ typedef struct {
                   writes when the trace unit is enabled or not idle. */
 
   #define ETM_TRCCNTVR_MaxCount (4UL)                /*!< Max size of TRCCNTVR[4] array.                                       */
+  #define ETM_TRCCNTVR_MaxIndex (3UL)                /*!< Max index of TRCCNTVR[4] array.                                      */
+  #define ETM_TRCCNTVR_MinIndex (0UL)                /*!< Min index of TRCCNTVR[4] array.                                      */
   #define ETM_TRCCNTVR_ResetValue (0x00000000UL)     /*!< Reset value of TRCCNTVR[4] register.                                 */
 
 /* VALUE @Bits 0..15 : Contains the count value of counter n. */
@@ -24027,6 +24630,8 @@ typedef struct {
                    TRCRSCTLRn might return UNKNOWN. */
 
   #define ETM_TRCRSCTLR_MaxCount (30UL)              /*!< Max size of TRCRSCTLR[32] array.                                     */
+  #define ETM_TRCRSCTLR_MaxIndex (31UL)              /*!< Max index of TRCRSCTLR[32] array.                                    */
+  #define ETM_TRCRSCTLR_MinIndex (2UL)               /*!< Min index of TRCRSCTLR[32] array.                                    */
   #define ETM_TRCRSCTLR_ResetValue (0x00000000UL)    /*!< Reset value of TRCRSCTLR[32] register.                               */
 
 /* EN @Bit 0 : Trace unit enable bit */
@@ -24407,6 +25012,794 @@ typedef struct {
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
 /* =========================================================================================================================== */
+/* ================                                            ETR                                            ================ */
+/* =========================================================================================================================== */
+
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
+/* ======================================================= Struct ETR ======================================================== */
+/**
+  * @brief Embedded Trace Router
+  */
+  typedef struct {                                   /*!< ETR Structure                                                        */
+    __IM uint32_t RESERVED;
+    __IOM uint32_t RSZ;                              /*!< (@ 0x00000004) RAM Size register                                     */
+    __IM uint32_t RESERVED1;
+    __IM uint32_t STS;                               /*!< (@ 0x0000000C) Status Register                                       */
+    __IM uint32_t RRD;                               /*!< (@ 0x00000010) RAM Read Data Register                                */
+    __IOM uint32_t RRP;                              /*!< (@ 0x00000014) RAM Read Pointer Register                             */
+    __IOM uint32_t RWP;                              /*!< (@ 0x00000018) RAM Write Pointer Register                            */
+    __IOM uint32_t TRG;                              /*!< (@ 0x0000001C) Trigger Counter Register                              */
+    __IOM uint32_t CTL;                              /*!< (@ 0x00000020) Control Register                                      */
+    __OM uint32_t RWD;                               /*!< (@ 0x00000024) RAM Write Data Register                               */
+    __IOM uint32_t MODE;                             /*!< (@ 0x00000028) Mode Register                                         */
+    __IM uint32_t LBUFLEVEL;                         /*!< (@ 0x0000002C) Latched Buffer Fill Level                             */
+    __IM uint32_t CBUFLEVEL;                         /*!< (@ 0x00000030) Current Buffer Fill Level                             */
+    __IOM uint32_t BUFWM;                            /*!< (@ 0x00000034) Buffer Level Water Mark                               */
+    __IOM uint32_t RRPHI;                            /*!< (@ 0x00000038) RAM Read Pointer High Register                        */
+    __IOM uint32_t RWPHI;                            /*!< (@ 0x0000003C) RAM Write Pointer High Register                       */
+    __IM uint32_t RESERVED2[52];
+    __IOM uint32_t AXICTL;                           /*!< (@ 0x00000110) AXI Control Register                                  */
+    __IM uint32_t RESERVED3;
+    __IOM uint32_t DBALO;                            /*!< (@ 0x00000118) Data Buffer Address Low Register                      */
+    __IOM uint32_t DBAHI;                            /*!< (@ 0x0000011C) Data Buffer Address High Register                     */
+    __IM uint32_t RESERVED4[120];
+    __IM uint32_t FFSR;                              /*!< (@ 0x00000300) Formatter and Flush Status Register                   */
+    __IOM uint32_t FFCR;                             /*!< (@ 0x00000304) Formatter and Flush Control Register                  */
+    __IOM uint32_t PSCR;                             /*!< (@ 0x00000308) Periodic Synchronization Counter Register             */
+    __IM uint32_t RESERVED5[756];
+    __OM uint32_t ITATBMCTR0;                        /*!< (@ 0x00000EDC) Integration Test ATB Master Interface Control 0
+                                                                         Register*/
+    __OM uint32_t ITMISCOP0;                         /*!< (@ 0x00000EE0) Integration Test Miscellaneous Output Register 0      */
+    __IM uint32_t RESERVED6;
+    __IM uint32_t ITTRFLIN;                          /*!< (@ 0x00000EE8) Integration Test Trigger In and Flush In Register     */
+    __IM uint32_t ITATBDATA0;                        /*!< (@ 0x00000EEC) Integration Test ATB Data Register 0                  */
+    __OM uint32_t ITATBCTR2;                         /*!< (@ 0x00000EF0) Integration Test ATB Control 2 Register               */
+    __IM uint32_t ITATBCTR1;                         /*!< (@ 0x00000EF4) Integration Test ATB Control 1 Register               */
+    __IM uint32_t ITATBCTR0;                         /*!< (@ 0x00000EF8) Integration Test ATB Control 0 Register               */
+    __IM uint32_t RESERVED7;
+    __IOM uint32_t ITCTRL;                           /*!< (@ 0x00000F00) Integration Mode Control Register                     */
+    __IM uint32_t RESERVED8[39];
+    __IOM uint32_t CLAIMSET;                         /*!< (@ 0x00000FA0) Claim Tag Set Register                                */
+    __IOM uint32_t CLAIMCLR;                         /*!< (@ 0x00000FA4) Claim Tag Clear Register                              */
+    __IM uint32_t RESERVED9[2];
+    __OM uint32_t LAR;                               /*!< (@ 0x00000FB0) Lock Access Register                                  */
+    __IM uint32_t LSR;                               /*!< (@ 0x00000FB4) Lock Status Register                                  */
+    __IM uint32_t AUTHSTATUS;                        /*!< (@ 0x00000FB8) Authentication Status Register                        */
+    __IM uint32_t RESERVED10[3];
+    __IM uint32_t DEVID;                             /*!< (@ 0x00000FC8) Device Configuration Register                         */
+    __IM uint32_t DEVTYPE;                           /*!< (@ 0x00000FCC) Device Type Identifier Register                       */
+    __IM uint32_t PERIPHID4;                         /*!< (@ 0x00000FD0) Peripheral ID4 Register                               */
+    __IM uint32_t RESERVED11[3];
+    __IM uint32_t PERIPHID0;                         /*!< (@ 0x00000FE0) Peripheral ID0 Register                               */
+    __IM uint32_t PERIPHID1;                         /*!< (@ 0x00000FE4) Peripheral ID1 Register                               */
+    __IM uint32_t PERIPHID2;                         /*!< (@ 0x00000FE8) Peripheral ID2 Register                               */
+    __IM uint32_t PERIPHID3;                         /*!< (@ 0x00000FEC) Peripheral ID3 Register                               */
+    __IM uint32_t COMPID0;                           /*!< (@ 0x00000FF0) Component ID0 Register                                */
+    __IM uint32_t COMPID1;                           /*!< (@ 0x00000FF4) Component ID1 Register                                */
+    __IM uint32_t COMPID2;                           /*!< (@ 0x00000FF8) Component ID2 Register                                */
+    __IM uint32_t COMPID3;                           /*!< (@ 0x00000FFC) Component ID3 Register                                */
+  } NRF_ETR_Type;                                    /*!< Size = 4096 (0x1000)                                                 */
+
+/* ETR_RSZ: RAM Size register */
+  #define ETR_RSZ_ResetValue (0x00000000UL)          /*!< Reset value of RSZ register.                                         */
+
+/* RSZ @Bits 0..30 : Size of the RAM in 32-bit words. */
+  #define ETR_RSZ_RSZ_Pos (0UL)                      /*!< Position of RSZ field.                                               */
+  #define ETR_RSZ_RSZ_Msk (0x7FFFFFFFUL << ETR_RSZ_RSZ_Pos) /*!< Bit mask of RSZ field.                                        */
+
+
+/* ETR_STS: Status Register */
+  #define ETR_STS_ResetValue (0x0000000CUL)          /*!< Reset value of STS register.                                         */
+
+/* FULL @Bit 0 : This bit can be used to help determine how much of the trace buffer contains valid data. */
+  #define ETR_STS_FULL_Pos (0UL)                     /*!< Position of FULL field.                                              */
+  #define ETR_STS_FULL_Msk (0x1UL << ETR_STS_FULL_Pos) /*!< Bit mask of FULL field.                                            */
+
+/* TRIGGERED @Bit 1 : The Triggered bit is set when trace capture is in progress and the TMC has detected a trigger event. */
+  #define ETR_STS_TRIGGERED_Pos (1UL)                /*!< Position of TRIGGERED field.                                         */
+  #define ETR_STS_TRIGGERED_Msk (0x1UL << ETR_STS_TRIGGERED_Pos) /*!< Bit mask of TRIGGERED field.                             */
+
+/* TMCREADY @Bit 2 : TMC ready */
+  #define ETR_STS_TMCREADY_Pos (2UL)                 /*!< Position of TMCREADY field.                                          */
+  #define ETR_STS_TMCREADY_Msk (0x1UL << ETR_STS_TMCREADY_Pos) /*!< Bit mask of TMCREADY field.                                */
+
+/* FTEMPTY @Bit 3 : This bit is set when trace capture has stopped, and all internal pipelines and buffers have drained. */
+  #define ETR_STS_FTEMPTY_Pos (3UL)                  /*!< Position of FTEMPTY field.                                           */
+  #define ETR_STS_FTEMPTY_Msk (0x1UL << ETR_STS_FTEMPTY_Pos) /*!< Bit mask of FTEMPTY field.                                   */
+
+/* EMPTY @Bit 4 : If set, this bit indicates that the TMC does not contain any valid trace data in the trace memory. */
+  #define ETR_STS_EMPTY_Pos (4UL)                    /*!< Position of EMPTY field.                                             */
+  #define ETR_STS_EMPTY_Msk (0x1UL << ETR_STS_EMPTY_Pos) /*!< Bit mask of EMPTY field.                                         */
+
+/* MEMERR @Bit 5 : This bit indicates that an error has occurred on the AXI master interface. */
+  #define ETR_STS_MEMERR_Pos (5UL)                   /*!< Position of MEMERR field.                                            */
+  #define ETR_STS_MEMERR_Msk (0x1UL << ETR_STS_MEMERR_Pos) /*!< Bit mask of MEMERR field.                                      */
+
+
+/* ETR_RRD: RAM Read Data Register */
+  #define ETR_RRD_ResetValue (0x00000000UL)          /*!< Reset value of RRD register.                                         */
+
+/* RRD @Bits 0..31 : Reads return data from Trace RAM */
+  #define ETR_RRD_RRD_Pos (0UL)                      /*!< Position of RRD field.                                               */
+  #define ETR_RRD_RRD_Msk (0xFFFFFFFFUL << ETR_RRD_RRD_Pos) /*!< Bit mask of RRD field.                                        */
+
+
+/* ETR_RRP: RAM Read Pointer Register */
+  #define ETR_RRP_ResetValue (0x00000000UL)          /*!< Reset value of RRP register.                                         */
+
+/* RRP @Bits 0..8 : This value represents the location in trace memory that will be accessed on a subsequent RRD read. */
+  #define ETR_RRP_RRP_Pos (0UL)                      /*!< Position of RRP field.                                               */
+  #define ETR_RRP_RRP_Msk (0x1FFUL << ETR_RRP_RRP_Pos) /*!< Bit mask of RRP field.                                             */
+
+
+/* ETR_RWP: RAM Write Pointer Register */
+  #define ETR_RWP_ResetValue (0x00000000UL)          /*!< Reset value of RWP register.                                         */
+
+/* RWP @Bits 0..31 : This value represents the location in trace memory that will be accessed on a subsequent write to the trace
+                     memory. */
+
+  #define ETR_RWP_RWP_Pos (0UL)                      /*!< Position of RWP field.                                               */
+  #define ETR_RWP_RWP_Msk (0xFFFFFFFFUL << ETR_RWP_RWP_Pos) /*!< Bit mask of RWP field.                                        */
+
+
+/* ETR_TRG: Trigger Counter Register */
+  #define ETR_TRG_ResetValue (0x00000000UL)          /*!< Reset value of TRG register.                                         */
+
+/* TRG @Bits 0..31 : This count represents the number of 32-bit words between a TRIGIN/trigger packet and a trigger event. */
+  #define ETR_TRG_TRG_Pos (0UL)                      /*!< Position of TRG field.                                               */
+  #define ETR_TRG_TRG_Msk (0xFFFFFFFFUL << ETR_TRG_TRG_Pos) /*!< Bit mask of TRG field.                                        */
+
+
+/* ETR_CTL: Control Register */
+  #define ETR_CTL_ResetValue (0x00000000UL)          /*!< Reset value of CTL register.                                         */
+
+/* TRACECAPTEN @Bit 0 : Setting this bit to 1 enables the TMC to capture trace data. */
+  #define ETR_CTL_TRACECAPTEN_Pos (0UL)              /*!< Position of TRACECAPTEN field.                                       */
+  #define ETR_CTL_TRACECAPTEN_Msk (0x1UL << ETR_CTL_TRACECAPTEN_Pos) /*!< Bit mask of TRACECAPTEN field.                       */
+
+
+/* ETR_RWD: RAM Write Data Register */
+  #define ETR_RWD_ResetValue (0x00000000UL)          /*!< Reset value of RWD register.                                         */
+
+/* RWD @Bits 0..31 : Data written to this register is placed in the Trace RAM. */
+  #define ETR_RWD_RWD_Pos (0UL)                      /*!< Position of RWD field.                                               */
+  #define ETR_RWD_RWD_Msk (0xFFFFFFFFUL << ETR_RWD_RWD_Pos) /*!< Bit mask of RWD field.                                        */
+
+
+/* ETR_MODE: Mode Register */
+  #define ETR_MODE_ResetValue (0x00000000UL)         /*!< Reset value of MODE register.                                        */
+
+/* MODE @Bits 0..1 : Selects the operating mode. */
+  #define ETR_MODE_MODE_Pos (0UL)                    /*!< Position of MODE field.                                              */
+  #define ETR_MODE_MODE_Msk (0x3UL << ETR_MODE_MODE_Pos) /*!< Bit mask of MODE field.                                          */
+  #define ETR_MODE_MODE_Min (0x0UL)                  /*!< Min enumerator value of MODE field.                                  */
+  #define ETR_MODE_MODE_Max (0x1UL)                  /*!< Max enumerator value of MODE field.                                  */
+  #define ETR_MODE_MODE_CIRCULARBUF (0x0UL)          /*!< Circular Buffer mode                                                 */
+  #define ETR_MODE_MODE_FIFO (0x1UL)                 /*!< Software FIFO mode                                                   */
+
+
+/* ETR_LBUFLEVEL: Latched Buffer Fill Level */
+  #define ETR_LBUFLEVEL_ResetValue (0x00000000UL)    /*!< Reset value of LBUFLEVEL register.                                   */
+
+/* LBUFLEVEL @Bits 0..30 : Indicates the maximum fill level of the trace memory in 32-bit words since this register was last
+                           read. */
+
+  #define ETR_LBUFLEVEL_LBUFLEVEL_Pos (0UL)          /*!< Position of LBUFLEVEL field.                                         */
+  #define ETR_LBUFLEVEL_LBUFLEVEL_Msk (0x7FFFFFFFUL << ETR_LBUFLEVEL_LBUFLEVEL_Pos) /*!< Bit mask of LBUFLEVEL field.          */
+
+
+/* ETR_CBUFLEVEL: Current Buffer Fill Level */
+  #define ETR_CBUFLEVEL_ResetValue (0x00000000UL)    /*!< Reset value of CBUFLEVEL register.                                   */
+
+/* CBUFLEVEL @Bits 0..7 : Indicates the current fill level of the trace memory in 32-bit words. */
+  #define ETR_CBUFLEVEL_CBUFLEVEL_Pos (0UL)          /*!< Position of CBUFLEVEL field.                                         */
+  #define ETR_CBUFLEVEL_CBUFLEVEL_Msk (0xFFUL << ETR_CBUFLEVEL_CBUFLEVEL_Pos) /*!< Bit mask of CBUFLEVEL field.                */
+
+
+/* ETR_BUFWM: Buffer Level Water Mark */
+  #define ETR_BUFWM_ResetValue (0x00000000UL)        /*!< Reset value of BUFWM register.                                       */
+
+/* BUFWM @Bits 0..6 : Indicates the desired threshold vacancy level in 32-bit words in the trace memory. */
+  #define ETR_BUFWM_BUFWM_Pos (0UL)                  /*!< Position of BUFWM field.                                             */
+  #define ETR_BUFWM_BUFWM_Msk (0x7FUL << ETR_BUFWM_BUFWM_Pos) /*!< Bit mask of BUFWM field.                                    */
+
+
+/* ETR_RRPHI: RAM Read Pointer High Register */
+  #define ETR_RRPHI_ResetValue (0x00000000UL)        /*!< Reset value of RRPHI register.                                       */
+
+/* RRPHI @Bits 0..7 : Bits[39:32] of the read pointer */
+  #define ETR_RRPHI_RRPHI_Pos (0UL)                  /*!< Position of RRPHI field.                                             */
+  #define ETR_RRPHI_RRPHI_Msk (0xFFUL << ETR_RRPHI_RRPHI_Pos) /*!< Bit mask of RRPHI field.                                    */
+
+
+/* ETR_RWPHI: RAM Write Pointer High Register */
+  #define ETR_RWPHI_ResetValue (0x00000000UL)        /*!< Reset value of RWPHI register.                                       */
+
+/* RWPHI @Bits 0..7 : Bits[39:32] of the write pointer */
+  #define ETR_RWPHI_RWPHI_Pos (0UL)                  /*!< Position of RWPHI field.                                             */
+  #define ETR_RWPHI_RWPHI_Msk (0xFFUL << ETR_RWPHI_RWPHI_Pos) /*!< Bit mask of RWPHI field.                                    */
+
+
+/* ETR_AXICTL: AXI Control Register */
+  #define ETR_AXICTL_ResetValue (0x00000000UL)       /*!< Reset value of AXICTL register.                                      */
+
+/* PROTCTRLBIT0 @Bit 0 : This bit controls the value driven on ARPROTM[0]/AWPROTM[0] on the AXI interface when performing AXI
+                         transfers. */
+
+  #define ETR_AXICTL_PROTCTRLBIT0_Pos (0UL)          /*!< Position of PROTCTRLBIT0 field.                                      */
+  #define ETR_AXICTL_PROTCTRLBIT0_Msk (0x1UL << ETR_AXICTL_PROTCTRLBIT0_Pos) /*!< Bit mask of PROTCTRLBIT0 field.              */
+
+/* PROTCTRLBIT1 @Bit 1 : This bit controls the value driven on ARPROTM[1]/AWPROTM[1] on the AXI interface when performing AXI
+                         transfers. */
+
+  #define ETR_AXICTL_PROTCTRLBIT1_Pos (1UL)          /*!< Position of PROTCTRLBIT1 field.                                      */
+  #define ETR_AXICTL_PROTCTRLBIT1_Msk (0x1UL << ETR_AXICTL_PROTCTRLBIT1_Pos) /*!< Bit mask of PROTCTRLBIT1 field.              */
+
+/* CACHECTRLBIT0 @Bit 2 : This bit controls the value driven on the ARCACHEM[0]/AWCACHEM[0] signal on the AXI interface when
+                          performing AXI transfers. */
+
+  #define ETR_AXICTL_CACHECTRLBIT0_Pos (2UL)         /*!< Position of CACHECTRLBIT0 field.                                     */
+  #define ETR_AXICTL_CACHECTRLBIT0_Msk (0x1UL << ETR_AXICTL_CACHECTRLBIT0_Pos) /*!< Bit mask of CACHECTRLBIT0 field.           */
+
+/* CACHECTRLBIT1 @Bit 3 : This bit controls the value driven on the ARCACHEM[1]/AWCACHEM[1] signal on the AXI interface when
+                          performing AXI transfers. */
+
+  #define ETR_AXICTL_CACHECTRLBIT1_Pos (3UL)         /*!< Position of CACHECTRLBIT1 field.                                     */
+  #define ETR_AXICTL_CACHECTRLBIT1_Msk (0x1UL << ETR_AXICTL_CACHECTRLBIT1_Pos) /*!< Bit mask of CACHECTRLBIT1 field.           */
+
+/* CACHECTRLBIT2 @Bit 4 : This bit controls the value driven on the ARCACHEM[2]/AWCACHEM[2] signal on the AXI interface when
+                          performing AXI transfers. */
+
+  #define ETR_AXICTL_CACHECTRLBIT2_Pos (4UL)         /*!< Position of CACHECTRLBIT2 field.                                     */
+  #define ETR_AXICTL_CACHECTRLBIT2_Msk (0x1UL << ETR_AXICTL_CACHECTRLBIT2_Pos) /*!< Bit mask of CACHECTRLBIT2 field.           */
+
+/* CACHECTRLBIT3 @Bit 5 : This bit controls the value driven on the ARCACHEM[3]/AWCACHEM[3] signal on the AXI interface when
+                          performing AXI transfers. */
+
+  #define ETR_AXICTL_CACHECTRLBIT3_Pos (5UL)         /*!< Position of CACHECTRLBIT3 field.                                     */
+  #define ETR_AXICTL_CACHECTRLBIT3_Msk (0x1UL << ETR_AXICTL_CACHECTRLBIT3_Pos) /*!< Bit mask of CACHECTRLBIT3 field.           */
+
+/* SCATTERGATHERMODE @Bit 7 : This bit indicates whether trace memory is accessed as a single buffer in system memory or as a
+                              linked-list based scatter-gather memory. */
+
+  #define ETR_AXICTL_SCATTERGATHERMODE_Pos (7UL)     /*!< Position of SCATTERGATHERMODE field.                                 */
+  #define ETR_AXICTL_SCATTERGATHERMODE_Msk (0x1UL << ETR_AXICTL_SCATTERGATHERMODE_Pos) /*!< Bit mask of SCATTERGATHERMODE
+                                                                            field.*/
+
+/* WRBURSTLEN @Bits 8..11 : This field indicates the maximum number of data transfers that can occur within each burst initiated
+                            by the TMC on the AXI interface. */
+
+  #define ETR_AXICTL_WRBURSTLEN_Pos (8UL)            /*!< Position of WRBURSTLEN field.                                        */
+  #define ETR_AXICTL_WRBURSTLEN_Msk (0xFUL << ETR_AXICTL_WRBURSTLEN_Pos) /*!< Bit mask of WRBURSTLEN field.                    */
+
+
+/* ETR_DBALO: Data Buffer Address Low Register */
+  #define ETR_DBALO_ResetValue (0x00000000UL)        /*!< Reset value of DBALO register.                                       */
+
+/* BUFADDRLO @Bits 0..31 : Holds the lower 32 bits of the 40-bit address used to locate the trace buffer in system memory */
+  #define ETR_DBALO_BUFADDRLO_Pos (0UL)              /*!< Position of BUFADDRLO field.                                         */
+  #define ETR_DBALO_BUFADDRLO_Msk (0xFFFFFFFFUL << ETR_DBALO_BUFADDRLO_Pos) /*!< Bit mask of BUFADDRLO field.                  */
+
+
+/* ETR_DBAHI: Data Buffer Address High Register */
+  #define ETR_DBAHI_ResetValue (0x00000000UL)        /*!< Reset value of DBAHI register.                                       */
+
+/* BUFADDRHI @Bits 0..7 : Holds the upper 8 bits of the 40-bit address used to locate the trace buffer in system memory */
+  #define ETR_DBAHI_BUFADDRHI_Pos (0UL)              /*!< Position of BUFADDRHI field.                                         */
+  #define ETR_DBAHI_BUFADDRHI_Msk (0xFFUL << ETR_DBAHI_BUFADDRHI_Pos) /*!< Bit mask of BUFADDRHI field.                        */
+
+
+/* ETR_FFSR: Formatter and Flush Status Register */
+  #define ETR_FFSR_ResetValue (0x00000002UL)         /*!< Reset value of FFSR register.                                        */
+
+/* FLINPROG @Bit 0 : This bit indicates whether the TMC is currently processing a flush on the ATB slave port. This bit reflects
+                     the status of the AFVALIDS output. The flush initiation is controlled by the flush-control bits in the FFCR
+                     register. */
+
+  #define ETR_FFSR_FLINPROG_Pos (0UL)                /*!< Position of FLINPROG field.                                          */
+  #define ETR_FFSR_FLINPROG_Msk (0x1UL << ETR_FFSR_FLINPROG_Pos) /*!< Bit mask of FLINPROG field.                              */
+
+/* FTSTOPPED @Bit 1 : This bit behaves the same way as the FtEmpty bit in the STS register, 0x00C. */
+  #define ETR_FFSR_FTSTOPPED_Pos (1UL)               /*!< Position of FTSTOPPED field.                                         */
+  #define ETR_FFSR_FTSTOPPED_Msk (0x1UL << ETR_FFSR_FTSTOPPED_Pos) /*!< Bit mask of FTSTOPPED field.                           */
+
+
+/* ETR_FFCR: Formatter and Flush Control Register */
+  #define ETR_FFCR_ResetValue (0x00000000UL)         /*!< Reset value of FFCR register.                                        */
+
+/* ENFT @Bit 0 : If this bit is set, formatting is enabled. */
+  #define ETR_FFCR_ENFT_Pos (0UL)                    /*!< Position of ENFT field.                                              */
+  #define ETR_FFCR_ENFT_Msk (0x1UL << ETR_FFCR_ENFT_Pos) /*!< Bit mask of ENFT field.                                          */
+
+/* ENTI @Bit 1 : Setting this bit enables the insertion of triggers in the formatted trace stream. */
+  #define ETR_FFCR_ENTI_Pos (1UL)                    /*!< Position of ENTI field.                                              */
+  #define ETR_FFCR_ENTI_Msk (0x1UL << ETR_FFCR_ENTI_Pos) /*!< Bit mask of ENTI field.                                          */
+
+/* FONFLIN @Bit 4 : Setting this bit enables the detection of transitions on the FLUSHIN input by the TMC. */
+  #define ETR_FFCR_FONFLIN_Pos (4UL)                 /*!< Position of FONFLIN field.                                           */
+  #define ETR_FFCR_FONFLIN_Msk (0x1UL << ETR_FFCR_FONFLIN_Pos) /*!< Bit mask of FONFLIN field.                                 */
+
+/* FONTRIGEVT @Bit 5 : Setting this bit generates a flush when a Trigger event occurs. */
+  #define ETR_FFCR_FONTRIGEVT_Pos (5UL)              /*!< Position of FONTRIGEVT field.                                        */
+  #define ETR_FFCR_FONTRIGEVT_Msk (0x1UL << ETR_FFCR_FONTRIGEVT_Pos) /*!< Bit mask of FONTRIGEVT field.                        */
+
+/* FLUSHMAN @Bit 6 : Manually generate a flush of the system. */
+  #define ETR_FFCR_FLUSHMAN_Pos (6UL)                /*!< Position of FLUSHMAN field.                                          */
+  #define ETR_FFCR_FLUSHMAN_Msk (0x1UL << ETR_FFCR_FLUSHMAN_Pos) /*!< Bit mask of FLUSHMAN field.                              */
+
+/* TRIGONTRIGIN @Bit 8 : If this bit is set, a trigger is indicated on the trace stream when a rising edge is detected on the
+                         TRIGIN input. */
+
+  #define ETR_FFCR_TRIGONTRIGIN_Pos (8UL)            /*!< Position of TRIGONTRIGIN field.                                      */
+  #define ETR_FFCR_TRIGONTRIGIN_Msk (0x1UL << ETR_FFCR_TRIGONTRIGIN_Pos) /*!< Bit mask of TRIGONTRIGIN field.                  */
+
+/* TRIGONTRIGEVT @Bit 9 : If this bit is set, a trigger is indicated on the output trace stream when a Trigger Event occurs. */
+  #define ETR_FFCR_TRIGONTRIGEVT_Pos (9UL)           /*!< Position of TRIGONTRIGEVT field.                                     */
+  #define ETR_FFCR_TRIGONTRIGEVT_Msk (0x1UL << ETR_FFCR_TRIGONTRIGEVT_Pos) /*!< Bit mask of TRIGONTRIGEVT field.               */
+
+/* TRIGONFL @Bit 10 : If this bit is set, a trigger is indicated on the trace stream on AFREADYS being returned. */
+  #define ETR_FFCR_TRIGONFL_Pos (10UL)               /*!< Position of TRIGONFL field.                                          */
+  #define ETR_FFCR_TRIGONFL_Msk (0x1UL << ETR_FFCR_TRIGONFL_Pos) /*!< Bit mask of TRIGONFL field.                              */
+
+/* STOPONFL @Bit 12 : If this bit is set, the formatter is stopped on completion of a flush operation. */
+  #define ETR_FFCR_STOPONFL_Pos (12UL)               /*!< Position of STOPONFL field.                                          */
+  #define ETR_FFCR_STOPONFL_Msk (0x1UL << ETR_FFCR_STOPONFL_Pos) /*!< Bit mask of STOPONFL field.                              */
+
+/* STOPONTRIGEVT @Bit 13 : If this bit is set, the formatter is stopped when a Trigger Event has been observed. */
+  #define ETR_FFCR_STOPONTRIGEVT_Pos (13UL)          /*!< Position of STOPONTRIGEVT field.                                     */
+  #define ETR_FFCR_STOPONTRIGEVT_Msk (0x1UL << ETR_FFCR_STOPONTRIGEVT_Pos) /*!< Bit mask of STOPONTRIGEVT field.               */
+
+/* DRAINBUFFER @Bit 14 : This bit is used to enable draining of the trace data through the ATB Master interface after the
+                         formatter has stopped. */
+
+  #define ETR_FFCR_DRAINBUFFER_Pos (14UL)            /*!< Position of DRAINBUFFER field.                                       */
+  #define ETR_FFCR_DRAINBUFFER_Msk (0x1UL << ETR_FFCR_DRAINBUFFER_Pos) /*!< Bit mask of DRAINBUFFER field.                     */
+
+
+/* ETR_PSCR: Periodic Synchronization Counter Register */
+  #define ETR_PSCR_ResetValue (0x00000000UL)         /*!< Reset value of PSCR register.                                        */
+
+/* PSCOUNT @Bits 0..4 : The reload value of the Synchronization Counter */
+  #define ETR_PSCR_PSCOUNT_Pos (0UL)                 /*!< Position of PSCOUNT field.                                           */
+  #define ETR_PSCR_PSCOUNT_Msk (0x1FUL << ETR_PSCR_PSCOUNT_Pos) /*!< Bit mask of PSCOUNT field.                                */
+
+
+/* ETR_ITATBMCTR0: Integration Test ATB Master Interface Control 0 Register */
+  #define ETR_ITATBMCTR0_ResetValue (0x00000000UL)   /*!< Reset value of ITATBMCTR0 register.                                  */
+
+/* ATVALIDM @Bit 0 : Set the value of ATVALIDM output */
+  #define ETR_ITATBMCTR0_ATVALIDM_Pos (0UL)          /*!< Position of ATVALIDM field.                                          */
+  #define ETR_ITATBMCTR0_ATVALIDM_Msk (0x1UL << ETR_ITATBMCTR0_ATVALIDM_Pos) /*!< Bit mask of ATVALIDM field.                  */
+
+/* AFREADYM @Bit 1 : Set the value of AFREADYM output */
+  #define ETR_ITATBMCTR0_AFREADYM_Pos (1UL)          /*!< Position of AFREADYM field.                                          */
+  #define ETR_ITATBMCTR0_AFREADYM_Msk (0x1UL << ETR_ITATBMCTR0_AFREADYM_Pos) /*!< Bit mask of AFREADYM field.                  */
+
+/* ATBYTESM @Bits 8..9 : Control the value of ATBYTESM output from TMC. The value written to this field is driven on the
+                         ATBYTESM output of the TMC. */
+
+  #define ETR_ITATBMCTR0_ATBYTESM_Pos (8UL)          /*!< Position of ATBYTESM field.                                          */
+  #define ETR_ITATBMCTR0_ATBYTESM_Msk (0x3UL << ETR_ITATBMCTR0_ATBYTESM_Pos) /*!< Bit mask of ATBYTESM field.                  */
+
+
+/* ETR_ITMISCOP0: Integration Test Miscellaneous Output Register 0 */
+  #define ETR_ITMISCOP0_ResetValue (0x00000000UL)    /*!< Reset value of ITMISCOP0 register.                                   */
+
+/* ACQCOMP @Bit 0 : Set the value of the ACQCOMP output. */
+  #define ETR_ITMISCOP0_ACQCOMP_Pos (0UL)            /*!< Position of ACQCOMP field.                                           */
+  #define ETR_ITMISCOP0_ACQCOMP_Msk (0x1UL << ETR_ITMISCOP0_ACQCOMP_Pos) /*!< Bit mask of ACQCOMP field.                       */
+
+/* FULL @Bit 1 : Set the value of the FULL output. */
+  #define ETR_ITMISCOP0_FULL_Pos (1UL)               /*!< Position of FULL field.                                              */
+  #define ETR_ITMISCOP0_FULL_Msk (0x1UL << ETR_ITMISCOP0_FULL_Pos) /*!< Bit mask of FULL field.                                */
+
+
+/* ETR_ITTRFLIN: Integration Test Trigger In and Flush In Register */
+  #define ETR_ITTRFLIN_ResetValue (0x00000000UL)     /*!< Reset value of ITTRFLIN register.                                    */
+
+/* TRIGIN @Bit 0 : Read the value of the TRIGIN input. */
+  #define ETR_ITTRFLIN_TRIGIN_Pos (0UL)              /*!< Position of TRIGIN field.                                            */
+  #define ETR_ITTRFLIN_TRIGIN_Msk (0x1UL << ETR_ITTRFLIN_TRIGIN_Pos) /*!< Bit mask of TRIGIN field.                            */
+
+/* FLUSHIN @Bit 1 : Read the value of the FLUSHIN input. */
+  #define ETR_ITTRFLIN_FLUSHIN_Pos (1UL)             /*!< Position of FLUSHIN field.                                           */
+  #define ETR_ITTRFLIN_FLUSHIN_Msk (0x1UL << ETR_ITTRFLIN_FLUSHIN_Pos) /*!< Bit mask of FLUSHIN field.                         */
+
+
+/* ETR_ITATBDATA0: Integration Test ATB Data Register 0 */
+  #define ETR_ITATBDATA0_ResetValue (0x00000000UL)   /*!< Reset value of ITATBDATA0 register.                                  */
+
+/* ATDATASBIT0 @Bit 0 : Read the value of ATDATAS[0] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT0_Pos (0UL)       /*!< Position of ATDATASBIT0 field.                                       */
+  #define ETR_ITATBDATA0_ATDATASBIT0_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT0_Pos) /*!< Bit mask of ATDATASBIT0 field.         */
+
+/* ATDATASBIT7 @Bit 1 : Read the value of ATDATAS[7] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT7_Pos (1UL)       /*!< Position of ATDATASBIT7 field.                                       */
+  #define ETR_ITATBDATA0_ATDATASBIT7_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT7_Pos) /*!< Bit mask of ATDATASBIT7 field.         */
+
+/* ATDATASBIT15 @Bit 2 : Read the value of ATDATAS[15] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT15_Pos (2UL)      /*!< Position of ATDATASBIT15 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT15_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT15_Pos) /*!< Bit mask of ATDATASBIT15 field.      */
+
+/* ATDATASBIT23 @Bit 3 : Read the value of ATDATAS[23] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT23_Pos (3UL)      /*!< Position of ATDATASBIT23 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT23_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT23_Pos) /*!< Bit mask of ATDATASBIT23 field.      */
+
+/* ATDATASBIT31 @Bit 4 : Read the value of ATDATAS[31] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT31_Pos (4UL)      /*!< Position of ATDATASBIT31 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT31_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT31_Pos) /*!< Bit mask of ATDATASBIT31 field.      */
+
+/* ATDATASBIT39 @Bit 5 : Read the value of ATDATAS[39] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT39_Pos (5UL)      /*!< Position of ATDATASBIT39 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT39_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT39_Pos) /*!< Bit mask of ATDATASBIT39 field.      */
+
+/* ATDATASBIT47 @Bit 6 : Read the value of ATDATAS[47] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT47_Pos (6UL)      /*!< Position of ATDATASBIT47 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT47_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT47_Pos) /*!< Bit mask of ATDATASBIT47 field.      */
+
+/* ATDATASBIT55 @Bit 7 : Read the value of ATDATAS[55] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT55_Pos (7UL)      /*!< Position of ATDATASBIT55 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT55_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT55_Pos) /*!< Bit mask of ATDATASBIT55 field.      */
+
+/* ATDATASBIT63 @Bit 8 : Read the value of ATDATAS[63] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT63_Pos (8UL)      /*!< Position of ATDATASBIT63 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT63_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT63_Pos) /*!< Bit mask of ATDATASBIT63 field.      */
+
+/* ATDATASBIT71 @Bit 9 : Read the value of ATDATAS[71] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT71_Pos (9UL)      /*!< Position of ATDATASBIT71 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT71_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT71_Pos) /*!< Bit mask of ATDATASBIT71 field.      */
+
+/* ATDATASBIT79 @Bit 10 : Read the value of ATDATAS[79] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT79_Pos (10UL)     /*!< Position of ATDATASBIT79 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT79_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT79_Pos) /*!< Bit mask of ATDATASBIT79 field.      */
+
+/* ATDATASBIT87 @Bit 11 : Read the value of ATDATAS[87] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT87_Pos (11UL)     /*!< Position of ATDATASBIT87 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT87_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT87_Pos) /*!< Bit mask of ATDATASBIT87 field.      */
+
+/* ATDATASBIT95 @Bit 12 : Read the value of ATDATAS[95] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT95_Pos (12UL)     /*!< Position of ATDATASBIT95 field.                                      */
+  #define ETR_ITATBDATA0_ATDATASBIT95_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT95_Pos) /*!< Bit mask of ATDATASBIT95 field.      */
+
+/* ATDATASBIT103 @Bit 13 : Read the value of ATDATAS[103] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT103_Pos (13UL)    /*!< Position of ATDATASBIT103 field.                                     */
+  #define ETR_ITATBDATA0_ATDATASBIT103_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT103_Pos) /*!< Bit mask of ATDATASBIT103 field.   */
+
+/* ATDATASBIT111 @Bit 14 : Read the value of ATDATAS[111] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT111_Pos (14UL)    /*!< Position of ATDATASBIT111 field.                                     */
+  #define ETR_ITATBDATA0_ATDATASBIT111_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT111_Pos) /*!< Bit mask of ATDATASBIT111 field.   */
+
+/* ATDATASBIT119 @Bit 15 : Read the value of ATDATAS[119] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT119_Pos (15UL)    /*!< Position of ATDATASBIT119 field.                                     */
+  #define ETR_ITATBDATA0_ATDATASBIT119_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT119_Pos) /*!< Bit mask of ATDATASBIT119 field.   */
+
+/* ATDATASBIT127 @Bit 16 : Read the value of ATDATAS[127] input to TMC */
+  #define ETR_ITATBDATA0_ATDATASBIT127_Pos (16UL)    /*!< Position of ATDATASBIT127 field.                                     */
+  #define ETR_ITATBDATA0_ATDATASBIT127_Msk (0x1UL << ETR_ITATBDATA0_ATDATASBIT127_Pos) /*!< Bit mask of ATDATASBIT127 field.   */
+
+
+/* ETR_ITATBCTR2: Integration Test ATB Control 2 Register */
+  #define ETR_ITATBCTR2_ResetValue (0x00000000UL)    /*!< Reset value of ITATBCTR2 register.                                   */
+
+/* ATREADYS @Bit 0 : Set the value of ATREADYS output */
+  #define ETR_ITATBCTR2_ATREADYS_Pos (0UL)           /*!< Position of ATREADYS field.                                          */
+  #define ETR_ITATBCTR2_ATREADYS_Msk (0x1UL << ETR_ITATBCTR2_ATREADYS_Pos) /*!< Bit mask of ATREADYS field.                    */
+
+/* AFVALIDS @Bit 1 : Set the value of AFVALIDS output */
+  #define ETR_ITATBCTR2_AFVALIDS_Pos (1UL)           /*!< Position of AFVALIDS field.                                          */
+  #define ETR_ITATBCTR2_AFVALIDS_Msk (0x1UL << ETR_ITATBCTR2_AFVALIDS_Pos) /*!< Bit mask of AFVALIDS field.                    */
+
+/* SYNCREQS @Bit 2 : Set the value of SYNCREQS output */
+  #define ETR_ITATBCTR2_SYNCREQS_Pos (2UL)           /*!< Position of SYNCREQS field.                                          */
+  #define ETR_ITATBCTR2_SYNCREQS_Msk (0x1UL << ETR_ITATBCTR2_SYNCREQS_Pos) /*!< Bit mask of SYNCREQS field.                    */
+
+
+/* ETR_ITATBCTR1: Integration Test ATB Control 1 Register */
+  #define ETR_ITATBCTR1_ResetValue (0x00000000UL)    /*!< Reset value of ITATBCTR1 register.                                   */
+
+/* ATIDS @Bits 0..6 : Read the value of ATIDS input to TMC */
+  #define ETR_ITATBCTR1_ATIDS_Pos (0UL)              /*!< Position of ATIDS field.                                             */
+  #define ETR_ITATBCTR1_ATIDS_Msk (0x7FUL << ETR_ITATBCTR1_ATIDS_Pos) /*!< Bit mask of ATIDS field.                            */
+
+
+/* ETR_ITATBCTR0: Integration Test ATB Control 0 Register */
+  #define ETR_ITATBCTR0_ResetValue (0x00000000UL)    /*!< Reset value of ITATBCTR0 register.                                   */
+
+/* ATVALIDS @Bit 0 : Read the value of ATVALIDS input to TMC */
+  #define ETR_ITATBCTR0_ATVALIDS_Pos (0UL)           /*!< Position of ATVALIDS field.                                          */
+  #define ETR_ITATBCTR0_ATVALIDS_Msk (0x1UL << ETR_ITATBCTR0_ATVALIDS_Pos) /*!< Bit mask of ATVALIDS field.                    */
+
+/* AFREADYS @Bit 1 : Read the value of AFREADYS input to TMC */
+  #define ETR_ITATBCTR0_AFREADYS_Pos (1UL)           /*!< Position of AFREADYS field.                                          */
+  #define ETR_ITATBCTR0_AFREADYS_Msk (0x1UL << ETR_ITATBCTR0_AFREADYS_Pos) /*!< Bit mask of AFREADYS field.                    */
+
+/* ATBYTESS @Bits 8..9 : Read the value of ATBYTESS input to TMC */
+  #define ETR_ITATBCTR0_ATBYTESS_Pos (8UL)           /*!< Position of ATBYTESS field.                                          */
+  #define ETR_ITATBCTR0_ATBYTESS_Msk (0x3UL << ETR_ITATBCTR0_ATBYTESS_Pos) /*!< Bit mask of ATBYTESS field.                    */
+
+
+/* ETR_ITCTRL: Integration Mode Control Register */
+  #define ETR_ITCTRL_ResetValue (0x00000000UL)       /*!< Reset value of ITCTRL register.                                      */
+
+/* INTEGRATION_MODE @Bit 0 : Allows the component to switch from functional mode to integration mode or back. */
+  #define ETR_ITCTRL_INTEGRATION_MODE_Pos (0UL)      /*!< Position of INTEGRATION_MODE field.                                  */
+  #define ETR_ITCTRL_INTEGRATION_MODE_Msk (0x1UL << ETR_ITCTRL_INTEGRATION_MODE_Pos) /*!< Bit mask of INTEGRATION_MODE field.  */
+
+
+/* ETR_CLAIMSET: Claim Tag Set Register */
+  #define ETR_CLAIMSET_ResetValue (0x0000000FUL)     /*!< Reset value of CLAIMSET register.                                    */
+
+/* CLAIMSET @Bits 0..3 : This claim tag bit is implemented */
+  #define ETR_CLAIMSET_CLAIMSET_Pos (0UL)            /*!< Position of CLAIMSET field.                                          */
+  #define ETR_CLAIMSET_CLAIMSET_Msk (0xFUL << ETR_CLAIMSET_CLAIMSET_Pos) /*!< Bit mask of CLAIMSET field.                      */
+
+
+/* ETR_CLAIMCLR: Claim Tag Clear Register */
+  #define ETR_CLAIMCLR_ResetValue (0x00000000UL)     /*!< Reset value of CLAIMCLR register.                                    */
+
+/* CLAIMCLR @Bits 0..3 : The value present reflects the current setting of the Claim Tag. */
+  #define ETR_CLAIMCLR_CLAIMCLR_Pos (0UL)            /*!< Position of CLAIMCLR field.                                          */
+  #define ETR_CLAIMCLR_CLAIMCLR_Msk (0xFUL << ETR_CLAIMCLR_CLAIMCLR_Pos) /*!< Bit mask of CLAIMCLR field.                      */
+
+
+/* ETR_LAR: Lock Access Register */
+  #define ETR_LAR_ResetValue (0x00000000UL)          /*!< Reset value of LAR register.                                         */
+
+/* ACCESS_W @Bits 0..31 : A write of 0xC5ACCE55 enables further write access to this device. A write of any value other than
+                          0xC5ACCE55 will have the affect of removing write access. */
+
+  #define ETR_LAR_ACCESS_W_Pos (0UL)                 /*!< Position of ACCESS_W field.                                          */
+  #define ETR_LAR_ACCESS_W_Msk (0xFFFFFFFFUL << ETR_LAR_ACCESS_W_Pos) /*!< Bit mask of ACCESS_W field.                         */
+
+
+/* ETR_LSR: Lock Status Register */
+  #define ETR_LSR_ResetValue (0x00000003UL)          /*!< Reset value of LSR register.                                         */
+
+/* LOCKEXIST @Bit 0 : Indicates that a lock control mechanism exists for this device. */
+  #define ETR_LSR_LOCKEXIST_Pos (0UL)                /*!< Position of LOCKEXIST field.                                         */
+  #define ETR_LSR_LOCKEXIST_Msk (0x1UL << ETR_LSR_LOCKEXIST_Pos) /*!< Bit mask of LOCKEXIST field.                             */
+
+/* LOCKGRANT @Bit 1 : Returns the current status of the Lock. */
+  #define ETR_LSR_LOCKGRANT_Pos (1UL)                /*!< Position of LOCKGRANT field.                                         */
+  #define ETR_LSR_LOCKGRANT_Msk (0x1UL << ETR_LSR_LOCKGRANT_Pos) /*!< Bit mask of LOCKGRANT field.                             */
+
+/* LOCKTYPE @Bit 2 : Indicates if the Lock Access Register (0xFB0) is implemented as 8-bit or 32-bit */
+  #define ETR_LSR_LOCKTYPE_Pos (2UL)                 /*!< Position of LOCKTYPE field.                                          */
+  #define ETR_LSR_LOCKTYPE_Msk (0x1UL << ETR_LSR_LOCKTYPE_Pos) /*!< Bit mask of LOCKTYPE field.                                */
+  #define ETR_LSR_LOCKTYPE_Min (0x0UL)               /*!< Min enumerator value of LOCKTYPE field.                              */
+  #define ETR_LSR_LOCKTYPE_Max (0x0UL)               /*!< Max enumerator value of LOCKTYPE field.                              */
+  #define ETR_LSR_LOCKTYPE_32BIT (0x0UL)             /*!< This component implements a 32-bit Lock Access Register              */
+
+
+/* ETR_AUTHSTATUS: Authentication Status Register */
+  #define ETR_AUTHSTATUS_ResetValue (0x00000000UL)   /*!< Reset value of AUTHSTATUS register.                                  */
+
+/* NSID @Bits 0..1 : Indicates the security level for non-secure invasive debug */
+  #define ETR_AUTHSTATUS_NSID_Pos (0UL)              /*!< Position of NSID field.                                              */
+  #define ETR_AUTHSTATUS_NSID_Msk (0x3UL << ETR_AUTHSTATUS_NSID_Pos) /*!< Bit mask of NSID field.                              */
+  #define ETR_AUTHSTATUS_NSID_Min (0x2UL)            /*!< Min enumerator value of NSID field.                                  */
+  #define ETR_AUTHSTATUS_NSID_Max (0x3UL)            /*!< Max enumerator value of NSID field.                                  */
+  #define ETR_AUTHSTATUS_NSID_DISABLED (0x2UL)       /*!< Functionality disabled. This return value occurs when DBGEN is LOW.  */
+  #define ETR_AUTHSTATUS_NSID_ENABLED (0x3UL)        /*!< Functionality enabled. This return value occurs when DBGEN is HIGH.  */
+
+/* NSNID @Bits 2..3 : Indicates the security level for non-secure non-invasive debug */
+  #define ETR_AUTHSTATUS_NSNID_Pos (2UL)             /*!< Position of NSNID field.                                             */
+  #define ETR_AUTHSTATUS_NSNID_Msk (0x3UL << ETR_AUTHSTATUS_NSNID_Pos) /*!< Bit mask of NSNID field.                           */
+  #define ETR_AUTHSTATUS_NSNID_Min (0x0UL)           /*!< Min enumerator value of NSNID field.                                 */
+  #define ETR_AUTHSTATUS_NSNID_Max (0x0UL)           /*!< Max enumerator value of NSNID field.                                 */
+  #define ETR_AUTHSTATUS_NSNID_NONE (0x0UL)          /*!< Functionality not implemented or controlled elsewhere.               */
+
+/* SID @Bits 4..5 : Indicates the security level for secure invasive debug */
+  #define ETR_AUTHSTATUS_SID_Pos (4UL)               /*!< Position of SID field.                                               */
+  #define ETR_AUTHSTATUS_SID_Msk (0x3UL << ETR_AUTHSTATUS_SID_Pos) /*!< Bit mask of SID field.                                 */
+  #define ETR_AUTHSTATUS_SID_Min (0x2UL)             /*!< Min enumerator value of SID field.                                   */
+  #define ETR_AUTHSTATUS_SID_Max (0x3UL)             /*!< Max enumerator value of SID field.                                   */
+  #define ETR_AUTHSTATUS_SID_DISABLED (0x2UL)        /*!< Functionality disabled. This return value occurs when DBGEN is LOW or
+                                                          SPIDEN is LOW.*/
+  #define ETR_AUTHSTATUS_SID_ENABLED (0x3UL)         /*!< Functionality enabled. This return value occurs when DBGEN and SPIDEN
+                                                          are HIGH.*/
+
+/* SNID @Bits 6..7 : Indicates the security level for secure non-invasive debug */
+  #define ETR_AUTHSTATUS_SNID_Pos (6UL)              /*!< Position of SNID field.                                              */
+  #define ETR_AUTHSTATUS_SNID_Msk (0x3UL << ETR_AUTHSTATUS_SNID_Pos) /*!< Bit mask of SNID field.                              */
+  #define ETR_AUTHSTATUS_SNID_Min (0x0UL)            /*!< Min enumerator value of SNID field.                                  */
+  #define ETR_AUTHSTATUS_SNID_Max (0x0UL)            /*!< Max enumerator value of SNID field.                                  */
+  #define ETR_AUTHSTATUS_SNID_NONE (0x0UL)           /*!< Functionality not implemented or controlled elsewhere.               */
+
+
+/* ETR_DEVID: Device Configuration Register */
+  #define ETR_DEVID_ResetValue (0x00000300UL)        /*!< Reset value of DEVID register.                                       */
+
+/* ATBINPORTCOUNT @Bits 0..4 : This value indicates the type/number of ATB multiplexing present on the input ATB. */
+  #define ETR_DEVID_ATBINPORTCOUNT_Pos (0UL)         /*!< Position of ATBINPORTCOUNT field.                                    */
+  #define ETR_DEVID_ATBINPORTCOUNT_Msk (0x1FUL << ETR_DEVID_ATBINPORTCOUNT_Pos) /*!< Bit mask of ATBINPORTCOUNT field.         */
+
+/* CLKSCHEME @Bit 5 : This value indicates the TMC RAM clocking scheme used, ie. whether the TMC RAM operates synchronously or
+                      asynchronously to CLK. */
+
+  #define ETR_DEVID_CLKSCHEME_Pos (5UL)              /*!< Position of CLKSCHEME field.                                         */
+  #define ETR_DEVID_CLKSCHEME_Msk (0x1UL << ETR_DEVID_CLKSCHEME_Pos) /*!< Bit mask of CLKSCHEME field.                         */
+  #define ETR_DEVID_CLKSCHEME_Min (0x0UL)            /*!< Min enumerator value of CLKSCHEME field.                             */
+  #define ETR_DEVID_CLKSCHEME_Max (0x0UL)            /*!< Max enumerator value of CLKSCHEME field.                             */
+  #define ETR_DEVID_CLKSCHEME_SYNC (0x0UL)           /*!< The TMC RAM operates synchronously to CLK.                           */
+
+/* CONFIGTYPE @Bits 6..7 : This value indicates TMC configuration type. */
+  #define ETR_DEVID_CONFIGTYPE_Pos (6UL)             /*!< Position of CONFIGTYPE field.                                        */
+  #define ETR_DEVID_CONFIGTYPE_Msk (0x3UL << ETR_DEVID_CONFIGTYPE_Pos) /*!< Bit mask of CONFIGTYPE field.                      */
+  #define ETR_DEVID_CONFIGTYPE_Min (0x0UL)           /*!< Min enumerator value of CONFIGTYPE field.                            */
+  #define ETR_DEVID_CONFIGTYPE_Max (0x2UL)           /*!< Max enumerator value of CONFIGTYPE field.                            */
+  #define ETR_DEVID_CONFIGTYPE_ETB (0x0UL)           /*!< (unspecified)                                                        */
+  #define ETR_DEVID_CONFIGTYPE_ETR (0x1UL)           /*!< (unspecified)                                                        */
+  #define ETR_DEVID_CONFIGTYPE_ETF (0x2UL)           /*!< (unspecified)                                                        */
+
+/* MEMWIDTH @Bits 8..10 : This value indicates the width of the Memory interface databus. */
+  #define ETR_DEVID_MEMWIDTH_Pos (8UL)               /*!< Position of MEMWIDTH field.                                          */
+  #define ETR_DEVID_MEMWIDTH_Msk (0x7UL << ETR_DEVID_MEMWIDTH_Pos) /*!< Bit mask of MEMWIDTH field.                            */
+  #define ETR_DEVID_MEMWIDTH_Min (0x2UL)             /*!< Min enumerator value of MEMWIDTH field.                              */
+  #define ETR_DEVID_MEMWIDTH_Max (0x5UL)             /*!< Max enumerator value of MEMWIDTH field.                              */
+  #define ETR_DEVID_MEMWIDTH_32BIT (0x2UL)           /*!< Memory interface databus is 32 bits wide.                            */
+  #define ETR_DEVID_MEMWIDTH_64BIT (0x3UL)           /*!< Memory interface databus is 64 bits wide.                            */
+  #define ETR_DEVID_MEMWIDTH_128BIT (0x4UL)          /*!< Memory interface databus is 128 bits wide.                           */
+  #define ETR_DEVID_MEMWIDTH_256BIT (0x5UL)          /*!< Memory interface databus is 256 bits wide.                           */
+
+/* WBUF_DEPTH @Bits 11..13 : This value indicates, in powers of two, the number of entries in the Write buffer. Each entry is of
+                             size ATB_DATA_WIDTH. */
+
+  #define ETR_DEVID_WBUF_DEPTH_Pos (11UL)            /*!< Position of WBUF_DEPTH field.                                        */
+  #define ETR_DEVID_WBUF_DEPTH_Msk (0x7UL << ETR_DEVID_WBUF_DEPTH_Pos) /*!< Bit mask of WBUF_DEPTH field.                      */
+  #define ETR_DEVID_WBUF_DEPTH_Min (0x2UL)           /*!< Min enumerator value of WBUF_DEPTH field.                            */
+  #define ETR_DEVID_WBUF_DEPTH_Max (0x5UL)           /*!< Max enumerator value of WBUF_DEPTH field.                            */
+  #define ETR_DEVID_WBUF_DEPTH_4ENTRIES (0x2UL)      /*!< Depth of the Write buffer is 4 entries.                              */
+  #define ETR_DEVID_WBUF_DEPTH_8ENTRIES (0x3UL)      /*!< Depth of the Write buffer is 8 entries.                              */
+  #define ETR_DEVID_WBUF_DEPTH_16ENTRIES (0x4UL)     /*!< Depth of the Write buffer is 16 entries.                             */
+  #define ETR_DEVID_WBUF_DEPTH_32ENTRIES (0x5UL)     /*!< Depth of the Write buffer is 32 entries.                             */
+
+
+/* ETR_DEVTYPE: Device Type Identifier Register */
+  #define ETR_DEVTYPE_ResetValue (0x00000021UL)      /*!< Reset value of DEVTYPE register.                                     */
+
+/* MAJOR_TYPE @Bits 0..3 : Major classification grouping for this debug/trace component */
+  #define ETR_DEVTYPE_MAJOR_TYPE_Pos (0UL)           /*!< Position of MAJOR_TYPE field.                                        */
+  #define ETR_DEVTYPE_MAJOR_TYPE_Msk (0xFUL << ETR_DEVTYPE_MAJOR_TYPE_Pos) /*!< Bit mask of MAJOR_TYPE field.                  */
+  #define ETR_DEVTYPE_MAJOR_TYPE_Min (0x1UL)         /*!< Min enumerator value of MAJOR_TYPE field.                            */
+  #define ETR_DEVTYPE_MAJOR_TYPE_Max (0x1UL)         /*!< Max enumerator value of MAJOR_TYPE field.                            */
+  #define ETR_DEVTYPE_MAJOR_TYPE_SINK (0x1UL)        /*!< This component is a trace sink.                                      */
+
+/* SUB_TYPE @Bits 4..7 : Sub-classification within the major category */
+  #define ETR_DEVTYPE_SUB_TYPE_Pos (4UL)             /*!< Position of SUB_TYPE field.                                          */
+  #define ETR_DEVTYPE_SUB_TYPE_Msk (0xFUL << ETR_DEVTYPE_SUB_TYPE_Pos) /*!< Bit mask of SUB_TYPE field.                        */
+  #define ETR_DEVTYPE_SUB_TYPE_Min (0x2UL)           /*!< Min enumerator value of SUB_TYPE field.                              */
+  #define ETR_DEVTYPE_SUB_TYPE_Max (0x2UL)           /*!< Max enumerator value of SUB_TYPE field.                              */
+  #define ETR_DEVTYPE_SUB_TYPE (0x2UL)               /*!< This component captures the trace data into RAM that can be drained
+                                                          through APB.*/
+
+
+/* ETR_PERIPHID4: Peripheral ID4 Register */
+  #define ETR_PERIPHID4_ResetValue (0x00000004UL)    /*!< Reset value of PERIPHID4 register.                                   */
+
+/* JEP106_CONT @Bits 0..3 : JEDEC continuation code indicating the designer of the component (along with the identity code) */
+  #define ETR_PERIPHID4_JEP106_CONT_Pos (0UL)        /*!< Position of JEP106_CONT field.                                       */
+  #define ETR_PERIPHID4_JEP106_CONT_Msk (0xFUL << ETR_PERIPHID4_JEP106_CONT_Pos) /*!< Bit mask of JEP106_CONT field.           */
+
+/* FOURKB_COUNT @Bits 4..7 : This is a 4-bit value that indicates the total contiguous size of the memory window used by this
+                             component in powers of 2 from the standard 4KB. If a component only requires the standard 4KB then
+                             this should read as 0x0, 4KB only, for 8KB set to 0x1, 16KB == 0x2, 32KB == 0x3, and so on. */
+
+  #define ETR_PERIPHID4_FOURKB_COUNT_Pos (4UL)       /*!< Position of FOURKB_COUNT field.                                      */
+  #define ETR_PERIPHID4_FOURKB_COUNT_Msk (0xFUL << ETR_PERIPHID4_FOURKB_COUNT_Pos) /*!< Bit mask of FOURKB_COUNT field.        */
+
+
+/* ETR_PERIPHID0: Peripheral ID0 Register */
+  #define ETR_PERIPHID0_ResetValue (0x00000061UL)    /*!< Reset value of PERIPHID0 register.                                   */
+
+/* PART_NUMBER_BITS7TO0 @Bits 0..7 : Bits [7:0] of the component's part number. This is selected by the designer of the
+                                     component. */
+
+  #define ETR_PERIPHID0_PART_NUMBER_BITS7TO0_Pos (0UL) /*!< Position of PART_NUMBER_BITS7TO0 field.                            */
+  #define ETR_PERIPHID0_PART_NUMBER_BITS7TO0_Msk (0xFFUL << ETR_PERIPHID0_PART_NUMBER_BITS7TO0_Pos) /*!< Bit mask of
+                                                                            PART_NUMBER_BITS7TO0 field.*/
+
+
+/* ETR_PERIPHID1: Peripheral ID1 Register */
+  #define ETR_PERIPHID1_ResetValue (0x000000B9UL)    /*!< Reset value of PERIPHID1 register.                                   */
+
+/* PART_NUMBER_BITS11TO8 @Bits 0..3 : Bits [11:8] of the component's part number. This is selected by the designer of the
+                                      component. */
+
+  #define ETR_PERIPHID1_PART_NUMBER_BITS11TO8_Pos (0UL) /*!< Position of PART_NUMBER_BITS11TO8 field.                          */
+  #define ETR_PERIPHID1_PART_NUMBER_BITS11TO8_Msk (0xFUL << ETR_PERIPHID1_PART_NUMBER_BITS11TO8_Pos) /*!< Bit mask of
+                                                                            PART_NUMBER_BITS11TO8 field.*/
+
+/* JEP106_BITS3TO0 @Bits 4..7 : Bits 3:0 of the JEDEC identity code indicating the designer of the component (along with the
+                                continuation code) */
+
+  #define ETR_PERIPHID1_JEP106_BITS3TO0_Pos (4UL)    /*!< Position of JEP106_BITS3TO0 field.                                   */
+  #define ETR_PERIPHID1_JEP106_BITS3TO0_Msk (0xFUL << ETR_PERIPHID1_JEP106_BITS3TO0_Pos) /*!< Bit mask of JEP106_BITS3TO0
+                                                                            field.*/
+
+
+/* ETR_PERIPHID2: Peripheral ID2 Register */
+  #define ETR_PERIPHID2_ResetValue (0x0000001BUL)    /*!< Reset value of PERIPHID2 register.                                   */
+
+/* JEP106_BITS6TO4 @Bits 0..2 : Bits 6:4 of the JEDEC identity code indicating the designer of the component (along with the
+                                continuation code) */
+
+  #define ETR_PERIPHID2_JEP106_BITS6TO4_Pos (0UL)    /*!< Position of JEP106_BITS6TO4 field.                                   */
+  #define ETR_PERIPHID2_JEP106_BITS6TO4_Msk (0x7UL << ETR_PERIPHID2_JEP106_BITS6TO4_Pos) /*!< Bit mask of JEP106_BITS6TO4
+                                                                            field.*/
+
+/* JEDEC @Bit 3 : Always set. Indicates that a JEDEC assigned value is used */
+  #define ETR_PERIPHID2_JEDEC_Pos (3UL)              /*!< Position of JEDEC field.                                             */
+  #define ETR_PERIPHID2_JEDEC_Msk (0x1UL << ETR_PERIPHID2_JEDEC_Pos) /*!< Bit mask of JEDEC field.                             */
+
+/* REVISION @Bits 4..7 : The Revision field is an incremental value starting at 0x0 for the first design of this component. This
+                         only increases by 1 for both major and minor revisions and is simply used as a look-up to establish the
+                         exact major/minor revision. */
+
+  #define ETR_PERIPHID2_REVISION_Pos (4UL)           /*!< Position of REVISION field.                                          */
+  #define ETR_PERIPHID2_REVISION_Msk (0xFUL << ETR_PERIPHID2_REVISION_Pos) /*!< Bit mask of REVISION field.                    */
+
+
+/* ETR_PERIPHID3: Peripheral ID3 Register */
+  #define ETR_PERIPHID3_ResetValue (0x00000000UL)    /*!< Reset value of PERIPHID3 register.                                   */
+
+/* CUSTOMER_MODIFIED @Bits 0..3 : Where the component is reusable IP, this value indicates if the customer has modified the
+                                  behavior of the component. In most cases this field is zero. */
+
+  #define ETR_PERIPHID3_CUSTOMER_MODIFIED_Pos (0UL)  /*!< Position of CUSTOMER_MODIFIED field.                                 */
+  #define ETR_PERIPHID3_CUSTOMER_MODIFIED_Msk (0xFUL << ETR_PERIPHID3_CUSTOMER_MODIFIED_Pos) /*!< Bit mask of CUSTOMER_MODIFIED
+                                                                            field.*/
+
+/* REVAND @Bits 4..7 : This field indicates minor errata fixes specific to this design, for example metal fixes after
+                       implementation. In most cases this field is zero. It is recommended that component designers ensure this
+                       field can be changed by a metal fix if required, for example by driving it from registers that reset to
+                       zero. */
+
+  #define ETR_PERIPHID3_REVAND_Pos (4UL)             /*!< Position of REVAND field.                                            */
+  #define ETR_PERIPHID3_REVAND_Msk (0xFUL << ETR_PERIPHID3_REVAND_Pos) /*!< Bit mask of REVAND field.                          */
+
+
+/* ETR_COMPID0: Component ID0 Register */
+  #define ETR_COMPID0_ResetValue (0x0000000DUL)      /*!< Reset value of COMPID0 register.                                     */
+
+/* PREAMBLE @Bits 0..7 : Contains bits [7:0] of the component identification */
+  #define ETR_COMPID0_PREAMBLE_Pos (0UL)             /*!< Position of PREAMBLE field.                                          */
+  #define ETR_COMPID0_PREAMBLE_Msk (0xFFUL << ETR_COMPID0_PREAMBLE_Pos) /*!< Bit mask of PREAMBLE field.                       */
+
+
+/* ETR_COMPID1: Component ID1 Register */
+  #define ETR_COMPID1_ResetValue (0x00000090UL)      /*!< Reset value of COMPID1 register.                                     */
+
+/* PREAMBLE @Bits 0..3 : Contains bits [11:8] of the component identification */
+  #define ETR_COMPID1_PREAMBLE_Pos (0UL)             /*!< Position of PREAMBLE field.                                          */
+  #define ETR_COMPID1_PREAMBLE_Msk (0xFUL << ETR_COMPID1_PREAMBLE_Pos) /*!< Bit mask of PREAMBLE field.                        */
+
+/* CLASS @Bits 4..7 : Class of the component. E.g. ROM table, CoreSight component etc. Constitutes bits [15:12] of the component
+                      identification. */
+
+  #define ETR_COMPID1_CLASS_Pos (4UL)                /*!< Position of CLASS field.                                             */
+  #define ETR_COMPID1_CLASS_Msk (0xFUL << ETR_COMPID1_CLASS_Pos) /*!< Bit mask of CLASS field.                                 */
+
+
+/* ETR_COMPID2: Component ID2 Register */
+  #define ETR_COMPID2_ResetValue (0x00000005UL)      /*!< Reset value of COMPID2 register.                                     */
+
+/* PREAMBLE @Bits 0..7 : Contains bits [23:16] of the component identification */
+  #define ETR_COMPID2_PREAMBLE_Pos (0UL)             /*!< Position of PREAMBLE field.                                          */
+  #define ETR_COMPID2_PREAMBLE_Msk (0xFFUL << ETR_COMPID2_PREAMBLE_Pos) /*!< Bit mask of PREAMBLE field.                       */
+
+
+/* ETR_COMPID3: Component ID3 Register */
+  #define ETR_COMPID3_ResetValue (0x000000B1UL)      /*!< Reset value of COMPID3 register.                                     */
+
+/* PREAMBLE @Bits 0..7 : Contains bits [31:24] of the component identification */
+  #define ETR_COMPID3_PREAMBLE_Pos (0UL)             /*!< Position of PREAMBLE field.                                          */
+  #define ETR_COMPID3_PREAMBLE_Msk (0xFFUL << ETR_COMPID3_PREAMBLE_Pos) /*!< Bit mask of PREAMBLE field.                       */
+
+
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
+
+/* =========================================================================================================================== */
 /* ================                                           EXMEE                                           ================ */
 /* =========================================================================================================================== */
 
@@ -24508,6 +25901,8 @@ typedef struct {
 
 /* EXMEE_TRANSACTION_COUNTER: 64 bit write counter */
   #define EXMEE_TRANSACTION_COUNTER_MaxCount (2UL)   /*!< Max size of COUNTER[2] array.                                        */
+  #define EXMEE_TRANSACTION_COUNTER_MaxIndex (1UL)   /*!< Max index of COUNTER[2] array.                                       */
+  #define EXMEE_TRANSACTION_COUNTER_MinIndex (0UL)   /*!< Min index of COUNTER[2] array.                                       */
   #define EXMEE_TRANSACTION_COUNTER_ResetValue (0x00000000UL) /*!< Reset value of COUNTER[2] register.                         */
 
 /* COUNTER @Bits 0..31 : The n-th word of the 64 bit counter value */
@@ -24518,6 +25913,8 @@ typedef struct {
 
 /* EXMEE_TRANSACTION_PLAINTEXT: 128 bit plaintext register. */
   #define EXMEE_TRANSACTION_PLAINTEXT_MaxCount (4UL) /*!< Max size of PLAINTEXT[4] array.                                      */
+  #define EXMEE_TRANSACTION_PLAINTEXT_MaxIndex (3UL) /*!< Max index of PLAINTEXT[4] array.                                     */
+  #define EXMEE_TRANSACTION_PLAINTEXT_MinIndex (0UL) /*!< Min index of PLAINTEXT[4] array.                                     */
   #define EXMEE_TRANSACTION_PLAINTEXT_ResetValue (0x00000000UL) /*!< Reset value of PLAINTEXT[4] register.                     */
 
 /* WORD @Bits 0..31 : The n-th word of the 128 bit plaintext input */
@@ -24528,6 +25925,8 @@ typedef struct {
 
 /* EXMEE_TRANSACTION_CIPHERTEXT: 128 bit ciphertext register. */
   #define EXMEE_TRANSACTION_CIPHERTEXT_MaxCount (4UL) /*!< Max size of CIPHERTEXT[4] array.                                    */
+  #define EXMEE_TRANSACTION_CIPHERTEXT_MaxIndex (3UL) /*!< Max index of CIPHERTEXT[4] array.                                   */
+  #define EXMEE_TRANSACTION_CIPHERTEXT_MinIndex (0UL) /*!< Min index of CIPHERTEXT[4] array.                                   */
   #define EXMEE_TRANSACTION_CIPHERTEXT_ResetValue (0x00000000UL) /*!< Reset value of CIPHERTEXT[4] register.                   */
 
 /* WORD @Bits 0..31 : The n-th word of the 128 bit ciphertext input */
@@ -24538,6 +25937,8 @@ typedef struct {
 
 /* EXMEE_TRANSACTION_NONCE: 128 bit nonce register. */
   #define EXMEE_TRANSACTION_NONCE_MaxCount (4UL)     /*!< Max size of NONCE[4] array.                                          */
+  #define EXMEE_TRANSACTION_NONCE_MaxIndex (3UL)     /*!< Max index of NONCE[4] array.                                         */
+  #define EXMEE_TRANSACTION_NONCE_MinIndex (0UL)     /*!< Min index of NONCE[4] array.                                         */
   #define EXMEE_TRANSACTION_NONCE_ResetValue (0x00000000UL) /*!< Reset value of NONCE[4] register.                             */
 
 /* WORD @Bits 0..31 : The n-th word of the 128 bit nonce input */
@@ -24560,8 +25961,10 @@ typedef struct {
   __IOM uint32_t  NONCEMODE;                         /*!< (@ 0x0000000C) Nonce mode for encryption region n                    */
   __OM  uint32_t  KEY[4];                            /*!< (@ 0x00000010) 128b key for encryption region n                      */
 } NRF_EXMEE_REGION_Type;                             /*!< Size = 32 (0x020)                                                    */
-  #define EXMEE_REGION_MaxCount (15UL)               /*!< Max size of REGION[16] array.                                        */
+  #define EXMEE_REGION_MaxCount (16UL)               /*!< Max size of REGION[16] array.                                        */
   #define EXMEE_REGION_MinCount (0UL)                /*!< Min size of REGION[16] array.                                        */
+  #define EXMEE_REGION_MaxIndex (15UL)               /*!< Max index of REGION[16] array.                                       */
+  #define EXMEE_REGION_MinIndex (0UL)                /*!< Min index of REGION[16] array.                                       */
 
 /* EXMEE_REGION_START: Start offset relative to memory window for encryption region n */
   #define EXMEE_REGION_START_ResetValue (0x00000000UL) /*!< Reset value of START register.                                     */
@@ -24601,6 +26004,8 @@ typedef struct {
 
 /* EXMEE_REGION_KEY: 128b key for encryption region n */
   #define EXMEE_REGION_KEY_MaxCount (4UL)            /*!< Max size of KEY[4] array.                                            */
+  #define EXMEE_REGION_KEY_MaxIndex (3UL)            /*!< Max index of KEY[4] array.                                           */
+  #define EXMEE_REGION_KEY_MinIndex (0UL)            /*!< Min index of KEY[4] array.                                           */
   #define EXMEE_REGION_KEY_ResetValue (0x00000000UL) /*!< Reset value of KEY[4] register.                                      */
 
 /* WORD @Bits 0..31 : The o-th word of the 128b key */
@@ -26344,6 +27749,8 @@ typedef struct {
 
 /* EXMIF_CORE_SSICADDRESS_DR: The DWC_ssi data register is a 32-bit read/write buffer for the transmit/receive FIFOs. */
   #define EXMIF_CORE_SSICADDRESS_DR_MaxCount (36UL)  /*!< Max size of DR[36] array.                                            */
+  #define EXMIF_CORE_SSICADDRESS_DR_MaxIndex (35UL)  /*!< Max index of DR[36] array.                                           */
+  #define EXMIF_CORE_SSICADDRESS_DR_MinIndex (0UL)   /*!< Min index of DR[36] array.                                           */
   #define EXMIF_CORE_SSICADDRESS_DR_ResetValue (0x00000000UL) /*!< Reset value of DR[36] register.                             */
 
 /* DR @Bits 0..31 : Data Register. */
@@ -27233,6 +28640,8 @@ typedef struct {
 
 /* FICR_BLE_ADDR: 48 bit device address. */
   #define FICR_BLE_ADDR_MaxCount (2UL)               /*!< Max size of ADDR[2] array.                                           */
+  #define FICR_BLE_ADDR_MaxIndex (1UL)               /*!< Max index of ADDR[2] array.                                          */
+  #define FICR_BLE_ADDR_MinIndex (0UL)               /*!< Min index of ADDR[2] array.                                          */
   #define FICR_BLE_ADDR_ResetValue (0xFFFFFFFFUL)    /*!< Reset value of ADDR[2] register.                                     */
 
 /* ADDR @Bits 0..31 : Device address [n]. */
@@ -27242,6 +28651,8 @@ typedef struct {
 
 /* FICR_BLE_ER: Encryption Root. */
   #define FICR_BLE_ER_MaxCount (4UL)                 /*!< Max size of ER[4] array.                                             */
+  #define FICR_BLE_ER_MaxIndex (3UL)                 /*!< Max index of ER[4] array.                                            */
+  #define FICR_BLE_ER_MinIndex (0UL)                 /*!< Min index of ER[4] array.                                            */
   #define FICR_BLE_ER_ResetValue (0xFFFFFFFFUL)      /*!< Reset value of ER[4] register.                                       */
 
 /* ER @Bits 0..31 : Encryption root word [n]. */
@@ -27251,6 +28662,8 @@ typedef struct {
 
 /* FICR_BLE_IR: Identity Root. */
   #define FICR_BLE_IR_MaxCount (4UL)                 /*!< Max size of IR[4] array.                                             */
+  #define FICR_BLE_IR_MaxIndex (3UL)                 /*!< Max index of IR[4] array.                                            */
+  #define FICR_BLE_IR_MinIndex (0UL)                 /*!< Min index of IR[4] array.                                            */
   #define FICR_BLE_IR_ResetValue (0xFFFFFFFFUL)      /*!< Reset value of IR[4] register.                                       */
 
 /* IR @Bits 0..31 : Identity root word [n]. */
@@ -27269,6 +28682,8 @@ typedef struct {
 
 /* FICR_NFC_TAGHEADER: Default header for NFC Tag. */
   #define FICR_NFC_TAGHEADER_MaxCount (4UL)          /*!< Max size of TAGHEADER[4] array.                                      */
+  #define FICR_NFC_TAGHEADER_MaxIndex (3UL)          /*!< Max index of TAGHEADER[4] array.                                     */
+  #define FICR_NFC_TAGHEADER_MinIndex (0UL)          /*!< Min index of TAGHEADER[4] array.                                     */
   #define FICR_NFC_TAGHEADER_ResetValue (0xFFFFFF5FUL) /*!< Reset value of TAGHEADER[4] register.                              */
 
 /* UD0 @Bits 0..7 : Unique identifier byte 0 */
@@ -27425,6 +28840,8 @@ typedef struct {
 
 /* FICR_PRODTEST_CP_LOTNR: Lot number. */
   #define FICR_PRODTEST_CP_LOTNR_MaxCount (2UL)      /*!< Max size of LOTNR[2] array.                                          */
+  #define FICR_PRODTEST_CP_LOTNR_MaxIndex (1UL)      /*!< Max index of LOTNR[2] array.                                         */
+  #define FICR_PRODTEST_CP_LOTNR_MinIndex (0UL)      /*!< Min index of LOTNR[2] array.                                         */
   #define FICR_PRODTEST_CP_LOTNR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LOTNR[2] register.                              */
 
 /* LOTNR @Bits 0..31 : Lot number */
@@ -28785,6 +30202,8 @@ typedef struct {
 
 /* FICR_TRIM_SYSCTRL_HSFLL120_TRIM_COARSE: Trim value for SYSCTRL.HSFLL120.COARSE */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_COARSE_MaxCount (6UL) /*!< Max size of COARSE[6] array.                              */
+  #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_COARSE_MaxIndex (5UL) /*!< Max index of COARSE[6] array.                             */
+  #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[6] array.                             */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_COARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of COARSE[6] register.             */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -28795,6 +30214,8 @@ typedef struct {
 
 /* FICR_TRIM_SYSCTRL_HSFLL120_TRIM_FINE: Trim value for SYSCTRL.HSFLL120.FINE */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_FINE_MaxCount (6UL) /*!< Max size of FINE[6] array.                                  */
+  #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_FINE_MaxIndex (5UL) /*!< Max index of FINE[6] array.                                 */
+  #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[6] array.                                 */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_FINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FINE[6] register.                 */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -28834,6 +30255,8 @@ typedef struct {
 
 /* FICR_TRIM_SYSCTRL_HSFLL121_TRIM_COARSE: Trim value for SYSCTRL.HSFLL121.COARSE */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_COARSE_MaxCount (6UL) /*!< Max size of COARSE[6] array.                              */
+  #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_COARSE_MaxIndex (5UL) /*!< Max index of COARSE[6] array.                             */
+  #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[6] array.                             */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_COARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of COARSE[6] register.             */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -28844,6 +30267,8 @@ typedef struct {
 
 /* FICR_TRIM_SYSCTRL_HSFLL121_TRIM_FINE: Trim value for SYSCTRL.HSFLL121.FINE */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_FINE_MaxCount (6UL) /*!< Max size of FINE[6] array.                                  */
+  #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_FINE_MaxIndex (5UL) /*!< Max index of FINE[6] array.                                 */
+  #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[6] array.                                 */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_FINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FINE[6] register.                 */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -28869,8 +30294,10 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  BITLINE;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.MEMCONF120.REPAIR[n].BITLINE   */
 } NRF_FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_Type;      /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MaxCount (35UL) /*!< Max size of REPAIR[36] array.                               */
+  #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MaxCount (36UL) /*!< Max size of REPAIR[36] array.                               */
   #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MinCount (0UL) /*!< Min size of REPAIR[36] array.                                */
+  #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MaxIndex (35UL) /*!< Max index of REPAIR[36] array.                              */
+  #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MinIndex (0UL) /*!< Min index of REPAIR[36] array.                               */
 
 /* FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_BITLINE: Trim value for SYSCTRL.MEMCONF120.REPAIR[n].BITLINE */
   #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_BITLINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BITLINE register.          */
@@ -28889,8 +30316,10 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.MEMCONF120.TRIM                */
 } NRF_FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_Type;   /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MaxCount (7UL) /*!< Max size of BLOCKTYPE[8] array.                           */
+  #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MaxCount (8UL) /*!< Max size of BLOCKTYPE[8] array.                           */
   #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MinCount (0UL) /*!< Min size of BLOCKTYPE[8] array.                           */
+  #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MaxIndex (7UL) /*!< Max index of BLOCKTYPE[8] array.                          */
+  #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[8] array.                          */
 
 /* FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_TRIM: Trim value for SYSCTRL.MEMCONF120.TRIM */
   #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_TRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM register.             */
@@ -28929,8 +30358,10 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.MEMCONF130.TRIM                */
 } NRF_FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_Type;   /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxCount (1UL) /*!< Max size of BLOCKTYPE[2] array.                           */
+  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxCount (2UL) /*!< Max size of BLOCKTYPE[2] array.                           */
   #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MinCount (0UL) /*!< Min size of BLOCKTYPE[2] array.                           */
+  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxIndex (1UL) /*!< Max index of BLOCKTYPE[2] array.                          */
+  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[2] array.                          */
 
 /* FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_TRIM: Trim value for SYSCTRL.MEMCONF130.TRIM */
   #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_TRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM register.             */
@@ -29019,6 +30450,8 @@ typedef struct {
 
 /* FICR_TRIM_GLOBAL_SAADC_CALGAIN: Trim value for GLOBAL.SAADC.CALGAIN */
   #define FICR_TRIM_GLOBAL_SAADC_CALGAIN_MaxCount (3UL) /*!< Max size of CALGAIN[3] array.                                     */
+  #define FICR_TRIM_GLOBAL_SAADC_CALGAIN_MaxIndex (2UL) /*!< Max index of CALGAIN[3] array.                                    */
+  #define FICR_TRIM_GLOBAL_SAADC_CALGAIN_MinIndex (0UL) /*!< Min index of CALGAIN[3] array.                                    */
   #define FICR_TRIM_GLOBAL_SAADC_CALGAIN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALGAIN[3] register.                    */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29038,6 +30471,8 @@ typedef struct {
 
 /* FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF: Trim value for GLOBAL.SAADC.LINCALCOEFF */
   #define FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF_MaxCount (6UL) /*!< Max size of LINCALCOEFF[6] array.                             */
+  #define FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF_MaxIndex (5UL) /*!< Max index of LINCALCOEFF[6] array.                            */
+  #define FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF_MinIndex (0UL) /*!< Min index of LINCALCOEFF[6] array.                            */
   #define FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LINCALCOEFF[6] register.            */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29165,6 +30600,8 @@ typedef struct {
 
 /* FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P: Trim value for GPIO.Pn.PORTCNF.DRIVECTRL */
   #define FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_MaxCount (2UL) /*!< Max size of P[2] array.                                */
+  #define FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_MaxIndex (1UL) /*!< Max index of P[2] array.                               */
+  #define FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_MinIndex (0UL) /*!< Min index of P[2] array.                               */
   #define FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_ResetValue (0xFFFFFFFFUL) /*!< Reset value of P[2] register.               */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29256,6 +30693,8 @@ typedef struct {
 
 /* FICR_TRIM_APPLICATION_HSFLL_TRIM_COARSE: Trim value for APPLICATION.HSFLL.COARSE */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_COARSE_MaxCount (6UL) /*!< Max size of COARSE[6] array.                             */
+  #define FICR_TRIM_APPLICATION_HSFLL_TRIM_COARSE_MaxIndex (5UL) /*!< Max index of COARSE[6] array.                            */
+  #define FICR_TRIM_APPLICATION_HSFLL_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[6] array.                            */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_COARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of COARSE[6] register.            */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29266,6 +30705,8 @@ typedef struct {
 
 /* FICR_TRIM_APPLICATION_HSFLL_TRIM_FINE: Trim value for APPLICATION.HSFLL.FINE */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_FINE_MaxCount (6UL) /*!< Max size of FINE[6] array.                                 */
+  #define FICR_TRIM_APPLICATION_HSFLL_TRIM_FINE_MaxIndex (5UL) /*!< Max index of FINE[6] array.                                */
+  #define FICR_TRIM_APPLICATION_HSFLL_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[6] array.                                */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_FINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FINE[6] register.                */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29291,8 +30732,10 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for APPLICATION.MEMCONF.TRIM               */
 } NRF_FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_Type;  /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxCount (2UL) /*!< Max size of BLOCKTYPE[3] array.                          */
+  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxCount (3UL) /*!< Max size of BLOCKTYPE[3] array.                          */
   #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MinCount (0UL) /*!< Min size of BLOCKTYPE[3] array.                          */
+  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxIndex (2UL) /*!< Max index of BLOCKTYPE[3] array.                         */
+  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[3] array.                         */
 
 /* FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_TRIM: Trim value for APPLICATION.MEMCONF.TRIM */
   #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_TRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM register.            */
@@ -29344,6 +30787,8 @@ typedef struct {
 
 /* FICR_TRIM_RADIOCORE_HSFLL_TRIM_COARSE: Trim value for RADIOCORE.HSFLL.COARSE */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_COARSE_MaxCount (6UL) /*!< Max size of COARSE[6] array.                               */
+  #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_COARSE_MaxIndex (5UL) /*!< Max index of COARSE[6] array.                              */
+  #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[6] array.                              */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_COARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of COARSE[6] register.              */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29354,6 +30799,8 @@ typedef struct {
 
 /* FICR_TRIM_RADIOCORE_HSFLL_TRIM_FINE: Trim value for RADIOCORE.HSFLL.FINE */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_FINE_MaxCount (6UL) /*!< Max size of FINE[6] array.                                   */
+  #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_FINE_MaxIndex (5UL) /*!< Max index of FINE[6] array.                                  */
+  #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[6] array.                                  */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_FINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FINE[6] register.                  */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29379,8 +30826,10 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for RADIOCORE.MEMCONF.TRIM                 */
 } NRF_FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_Type;    /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxCount (2UL) /*!< Max size of BLOCKTYPE[3] array.                            */
+  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxCount (3UL) /*!< Max size of BLOCKTYPE[3] array.                            */
   #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MinCount (0UL) /*!< Min size of BLOCKTYPE[3] array.                            */
+  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxIndex (2UL) /*!< Max index of BLOCKTYPE[3] array.                           */
+  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[3] array.                           */
 
 /* FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_TRIM: Trim value for RADIOCORE.MEMCONF.TRIM */
   #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_TRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM register.              */
@@ -29490,7 +30939,8 @@ typedef struct {
   __IM  uint32_t  KDTC;                              /*!< (@ 0x0000001C) Trim value for RADIOCORE.RADIO.ESTKDTCVAL             */
   __IM  uint32_t  TXHFGAIN;                          /*!< (@ 0x00000020) Trim value for RADIOCORE.RADIO.TXINTERFACEHFGAIN      */
   __IM  uint32_t  PVTTOFIX;                          /*!< (@ 0x00000024) Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND6   */
-} NRF_FICR_TRIM_RADIOCORE_RADIO_Type;                /*!< Size = 40 (0x028)                                                    */
+  __IM  uint32_t  LOOPGAIN;                          /*!< (@ 0x00000028) Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND5   */
+} NRF_FICR_TRIM_RADIOCORE_RADIO_Type;                /*!< Size = 44 (0x02C)                                                    */
 
 /* FICR_TRIM_RADIOCORE_RADIO_PVTTOT: Trim value for RADIOCORE.RADIO.EXPECTEDPVTTOTRATIO */
   #define FICR_TRIM_RADIOCORE_RADIO_PVTTOT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PVTTOT register.                      */
@@ -29528,6 +30978,15 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
+/* FICR_TRIM_RADIOCORE_RADIO_LOOPGAIN: Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND5 */
+  #define FICR_TRIM_RADIOCORE_RADIO_LOOPGAIN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LOOPGAIN register.                  */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_RADIOCORE_RADIO_LOOPGAIN_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
+  #define FICR_TRIM_RADIOCORE_RADIO_LOOPGAIN_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_RADIO_LOOPGAIN_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
 
 /* =============================================== Struct FICR_TRIM_RADIOCORE ================================================ */
 /**
@@ -29537,7 +30996,7 @@ typedef struct {
   __IOM NRF_FICR_TRIM_RADIOCORE_HSFLL_Type HSFLL;    /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_RADIOCORE_MEMCONF_Type MEMCONF; /*!< (@ 0x00000034) (unspecified)                                        */
   __IOM NRF_FICR_TRIM_RADIOCORE_RADIO_Type RADIO;    /*!< (@ 0x00000040) (unspecified)                                         */
-} NRF_FICR_TRIM_RADIOCORE_Type;                      /*!< Size = 104 (0x068)                                                   */
+} NRF_FICR_TRIM_RADIOCORE_Type;                      /*!< Size = 108 (0x06C)                                                   */
 
 
 /* ============================================== Struct FICR_TRIM_BOOT_VREG1V0 ============================================== */
@@ -29696,6 +31155,8 @@ typedef struct {
 
 /* FICR_TRIM_SECURE_HSFLL_TRIM_COARSE: Trim value for SECURE.HSFLL.COARSE */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_COARSE_MaxCount (6UL) /*!< Max size of COARSE[6] array.                                  */
+  #define FICR_TRIM_SECURE_HSFLL_TRIM_COARSE_MaxIndex (5UL) /*!< Max index of COARSE[6] array.                                 */
+  #define FICR_TRIM_SECURE_HSFLL_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[6] array.                                 */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_COARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of COARSE[6] register.                 */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29706,6 +31167,8 @@ typedef struct {
 
 /* FICR_TRIM_SECURE_HSFLL_TRIM_FINE: Trim value for SECURE.HSFLL.FINE */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_FINE_MaxCount (6UL) /*!< Max size of FINE[6] array.                                      */
+  #define FICR_TRIM_SECURE_HSFLL_TRIM_FINE_MaxIndex (5UL) /*!< Max index of FINE[6] array.                                     */
+  #define FICR_TRIM_SECURE_HSFLL_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[6] array.                                     */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_FINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FINE[6] register.                     */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29745,6 +31208,8 @@ typedef struct {
 
 /* FICR_TRIM_SECURE_HSFLL200_TRIM_COARSE: Trim value for SECURE.HSFLL200.COARSE */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_COARSE_MaxCount (4UL) /*!< Max size of COARSE[4] array.                               */
+  #define FICR_TRIM_SECURE_HSFLL200_TRIM_COARSE_MaxIndex (3UL) /*!< Max index of COARSE[4] array.                              */
+  #define FICR_TRIM_SECURE_HSFLL200_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[4] array.                              */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_COARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of COARSE[4] register.              */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29755,6 +31220,8 @@ typedef struct {
 
 /* FICR_TRIM_SECURE_HSFLL200_TRIM_FINE: Trim value for SECURE.HSFLL200.FINE */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_FINE_MaxCount (4UL) /*!< Max size of FINE[4] array.                                   */
+  #define FICR_TRIM_SECURE_HSFLL200_TRIM_FINE_MaxIndex (3UL) /*!< Max index of FINE[4] array.                                  */
+  #define FICR_TRIM_SECURE_HSFLL200_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[4] array.                                  */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_FINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FINE[4] register.                  */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -29780,8 +31247,10 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for SECURE.MEMCONF.BLOCKTYPE[n].TRIM       */
 } NRF_FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_Type;       /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MaxCount (6UL) /*!< Max size of BLOCKTYPE[7] array.                               */
+  #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MaxCount (7UL) /*!< Max size of BLOCKTYPE[7] array.                               */
   #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MinCount (0UL) /*!< Min size of BLOCKTYPE[7] array.                               */
+  #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MaxIndex (6UL) /*!< Max index of BLOCKTYPE[7] array.                              */
+  #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[7] array.                              */
 
 /* FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_TRIM: Trim value for SECURE.MEMCONF.BLOCKTYPE[n].TRIM */
   #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_TRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM register.                 */
@@ -29850,7 +31319,7 @@ typedef struct {
   __IOM NRF_FICR_TRIM_GLOBAL_Type GLOBAL;            /*!< (@ 0x00000284) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_APPLICATION_Type APPLICATION;  /*!< (@ 0x000002D8) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_RADIOCORE_Type RADIOCORE;      /*!< (@ 0x00000318) (unspecified)                                         */
-  __IM  uint32_t  RESERVED[23];
+  __IM  uint32_t  RESERVED[22];
   __IOM NRF_FICR_TRIM_BOOT_Type BOOT;                /*!< (@ 0x000003DC) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_COMMON_Type COMMON;            /*!< (@ 0x000003F4) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_SECURE_Type SECURE;            /*!< (@ 0x00000400) (unspecified)                                         */
@@ -29876,6 +31345,8 @@ typedef struct {
 
 /* FICR_BOOT_DATA: Compressed address and data pointer. */
   #define FICR_BOOT_DATA_MaxCount (128UL)            /*!< Max size of DATA[128] array.                                         */
+  #define FICR_BOOT_DATA_MaxIndex (127UL)            /*!< Max index of DATA[128] array.                                        */
+  #define FICR_BOOT_DATA_MinIndex (0UL)              /*!< Min index of DATA[128] array.                                        */
   #define FICR_BOOT_DATA_ResetValue (0xFFFFFFFFUL)   /*!< Reset value of DATA[128] register.                                   */
 
 /* REGOFFSET @Bits 0..23 : Address offset to trim register */
@@ -33903,6 +35374,8 @@ typedef struct {
 
 /* GPIO_PIN_CNF: Pin n configuration of GPIO pin */
   #define GPIO_PIN_CNF_MaxCount (32UL)               /*!< Max size of PIN_CNF[32] array.                                       */
+  #define GPIO_PIN_CNF_MaxIndex (31UL)               /*!< Max index of PIN_CNF[32] array.                                      */
+  #define GPIO_PIN_CNF_MinIndex (0UL)                /*!< Min index of PIN_CNF[32] array.                                      */
   #define GPIO_PIN_CNF_ResetValue (0x00000002UL)     /*!< Reset value of PIN_CNF[32] register.                                 */
 
 /* DIR @Bit 0 : Pin direction. Same physical register as DIR register */
@@ -34096,6 +35569,8 @@ typedef struct {
 
 /* GPIOINTERNAL_PCGC_PENALTY: Penalty level for power/clock pair n */
   #define GPIOINTERNAL_PCGC_PENALTY_MaxCount (2UL)   /*!< Max size of PENALTY[2] array.                                        */
+  #define GPIOINTERNAL_PCGC_PENALTY_MaxIndex (1UL)   /*!< Max index of PENALTY[2] array.                                       */
+  #define GPIOINTERNAL_PCGC_PENALTY_MinIndex (0UL)   /*!< Min index of PENALTY[2] array.                                       */
   #define GPIOINTERNAL_PCGC_PENALTY_ResetValue (0x00000000UL) /*!< Reset value of PENALTY[2] register.                         */
 
 /* PENALTY @Bits 0..7 : Penalty level */
@@ -34106,6 +35581,8 @@ typedef struct {
 
 /* GPIOINTERNAL_PCGC_FORCEOVERRIDE: Force override of power/clock pair n */
   #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_MaxCount (2UL) /*!< Max size of FORCEOVERRIDE[2] array.                              */
+  #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_MaxIndex (1UL) /*!< Max index of FORCEOVERRIDE[2] array.                             */
+  #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_MinIndex (0UL) /*!< Min index of FORCEOVERRIDE[2] array.                             */
   #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_ResetValue (0x00000000UL) /*!< Reset value of FORCEOVERRIDE[2] register.             */
 
 /* CLOCKFORCINGPRE @Bits 0..3 : CLOCKFORCINGPRE */
@@ -34214,8 +35691,10 @@ typedef struct {
   __IOM uint32_t  NONSECURE;                         /*!< (@ 0x00000000) Non-secure port event from owner n                    */
   __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Secure port event from owner n                        */
 } NRF_GPIOTE_EVENTS_PORT_Type;                       /*!< Size = 8 (0x008)                                                     */
-  #define GPIOTE_EVENTS_PORT_MaxCount (3UL)          /*!< Max size of EVENTS_PORT[4] array.                                    */
+  #define GPIOTE_EVENTS_PORT_MaxCount (4UL)          /*!< Max size of EVENTS_PORT[4] array.                                    */
   #define GPIOTE_EVENTS_PORT_MinCount (0UL)          /*!< Min size of EVENTS_PORT[4] array.                                    */
+  #define GPIOTE_EVENTS_PORT_MaxIndex (3UL)          /*!< Max index of EVENTS_PORT[4] array.                                   */
+  #define GPIOTE_EVENTS_PORT_MinIndex (0UL)          /*!< Min index of EVENTS_PORT[4] array.                                   */
 
 /* GPIOTE_EVENTS_PORT_NONSECURE: Non-secure port event from owner n */
   #define GPIOTE_EVENTS_PORT_NONSECURE_ResetValue (0x00000000UL) /*!< Reset value of NONSECURE register.                       */
@@ -34251,8 +35730,10 @@ typedef struct {
   __IOM uint32_t  NONSECURE;                         /*!< (@ 0x00000000) Publish configuration for event PORT[n].NONSECURE     */
   __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Publish configuration for event PORT[n].SECURE        */
 } NRF_GPIOTE_PUBLISH_PORT_Type;                      /*!< Size = 8 (0x008)                                                     */
-  #define GPIOTE_PUBLISH_PORT_MaxCount (3UL)         /*!< Max size of PUBLISH_PORT[4] array.                                   */
+  #define GPIOTE_PUBLISH_PORT_MaxCount (4UL)         /*!< Max size of PUBLISH_PORT[4] array.                                   */
   #define GPIOTE_PUBLISH_PORT_MinCount (0UL)         /*!< Min size of PUBLISH_PORT[4] array.                                   */
+  #define GPIOTE_PUBLISH_PORT_MaxIndex (3UL)         /*!< Max index of PUBLISH_PORT[4] array.                                  */
+  #define GPIOTE_PUBLISH_PORT_MinIndex (0UL)         /*!< Min index of PUBLISH_PORT[4] array.                                  */
 
 /* GPIOTE_PUBLISH_PORT_NONSECURE: Publish configuration for event PORT[n].NONSECURE */
   #define GPIOTE_PUBLISH_PORT_NONSECURE_ResetValue (0x00000000UL) /*!< Reset value of NONSECURE register.                      */
@@ -34356,6 +35837,8 @@ typedef struct {
 
 /* GPIOTE_TASKS_OUT: Task for writing to pin specified in CONFIG[n].PSEL. Action on pin is configured in CONFIG[n].POLARITY. */
   #define GPIOTE_TASKS_OUT_MaxCount (8UL)            /*!< Max size of TASKS_OUT[8] array.                                      */
+  #define GPIOTE_TASKS_OUT_MaxIndex (7UL)            /*!< Max index of TASKS_OUT[8] array.                                     */
+  #define GPIOTE_TASKS_OUT_MinIndex (0UL)            /*!< Min index of TASKS_OUT[8] array.                                     */
   #define GPIOTE_TASKS_OUT_ResetValue (0x00000000UL) /*!< Reset value of TASKS_OUT[8] register.                                */
 
 /* TASKS_OUT @Bit 0 : Task for writing to pin specified in CONFIG[n].PSEL. Action on pin is configured in CONFIG[n].POLARITY. */
@@ -34368,6 +35851,8 @@ typedef struct {
 
 /* GPIOTE_TASKS_SET: Task for writing to pin specified in CONFIG[n].PSEL. Action on pin is to set it high. */
   #define GPIOTE_TASKS_SET_MaxCount (8UL)            /*!< Max size of TASKS_SET[8] array.                                      */
+  #define GPIOTE_TASKS_SET_MaxIndex (7UL)            /*!< Max index of TASKS_SET[8] array.                                     */
+  #define GPIOTE_TASKS_SET_MinIndex (0UL)            /*!< Min index of TASKS_SET[8] array.                                     */
   #define GPIOTE_TASKS_SET_ResetValue (0x00000000UL) /*!< Reset value of TASKS_SET[8] register.                                */
 
 /* TASKS_SET @Bit 0 : Task for writing to pin specified in CONFIG[n].PSEL. Action on pin is to set it high. */
@@ -34380,6 +35865,8 @@ typedef struct {
 
 /* GPIOTE_TASKS_CLR: Task for writing to pin specified in CONFIG[n].PSEL. Action on pin is to set it low. */
   #define GPIOTE_TASKS_CLR_MaxCount (8UL)            /*!< Max size of TASKS_CLR[8] array.                                      */
+  #define GPIOTE_TASKS_CLR_MaxIndex (7UL)            /*!< Max index of TASKS_CLR[8] array.                                     */
+  #define GPIOTE_TASKS_CLR_MinIndex (0UL)            /*!< Min index of TASKS_CLR[8] array.                                     */
   #define GPIOTE_TASKS_CLR_ResetValue (0x00000000UL) /*!< Reset value of TASKS_CLR[8] register.                                */
 
 /* TASKS_CLR @Bit 0 : Task for writing to pin specified in CONFIG[n].PSEL. Action on pin is to set it low. */
@@ -34392,6 +35879,8 @@ typedef struct {
 
 /* GPIOTE_SUBSCRIBE_OUT: Subscribe configuration for task OUT[n] */
   #define GPIOTE_SUBSCRIBE_OUT_MaxCount (8UL)        /*!< Max size of SUBSCRIBE_OUT[8] array.                                  */
+  #define GPIOTE_SUBSCRIBE_OUT_MaxIndex (7UL)        /*!< Max index of SUBSCRIBE_OUT[8] array.                                 */
+  #define GPIOTE_SUBSCRIBE_OUT_MinIndex (0UL)        /*!< Min index of SUBSCRIBE_OUT[8] array.                                 */
   #define GPIOTE_SUBSCRIBE_OUT_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_OUT[8] register.                        */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task OUT[n] will subscribe to */
@@ -34411,6 +35900,8 @@ typedef struct {
 
 /* GPIOTE_SUBSCRIBE_SET: Subscribe configuration for task SET[n] */
   #define GPIOTE_SUBSCRIBE_SET_MaxCount (8UL)        /*!< Max size of SUBSCRIBE_SET[8] array.                                  */
+  #define GPIOTE_SUBSCRIBE_SET_MaxIndex (7UL)        /*!< Max index of SUBSCRIBE_SET[8] array.                                 */
+  #define GPIOTE_SUBSCRIBE_SET_MinIndex (0UL)        /*!< Min index of SUBSCRIBE_SET[8] array.                                 */
   #define GPIOTE_SUBSCRIBE_SET_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_SET[8] register.                        */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task SET[n] will subscribe to */
@@ -34430,6 +35921,8 @@ typedef struct {
 
 /* GPIOTE_SUBSCRIBE_CLR: Subscribe configuration for task CLR[n] */
   #define GPIOTE_SUBSCRIBE_CLR_MaxCount (8UL)        /*!< Max size of SUBSCRIBE_CLR[8] array.                                  */
+  #define GPIOTE_SUBSCRIBE_CLR_MaxIndex (7UL)        /*!< Max index of SUBSCRIBE_CLR[8] array.                                 */
+  #define GPIOTE_SUBSCRIBE_CLR_MinIndex (0UL)        /*!< Min index of SUBSCRIBE_CLR[8] array.                                 */
   #define GPIOTE_SUBSCRIBE_CLR_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_CLR[8] register.                        */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task CLR[n] will subscribe to */
@@ -34449,6 +35942,8 @@ typedef struct {
 
 /* GPIOTE_EVENTS_IN: Event from pin specified in CONFIG[n].PSEL */
   #define GPIOTE_EVENTS_IN_MaxCount (8UL)            /*!< Max size of EVENTS_IN[8] array.                                      */
+  #define GPIOTE_EVENTS_IN_MaxIndex (7UL)            /*!< Max index of EVENTS_IN[8] array.                                     */
+  #define GPIOTE_EVENTS_IN_MinIndex (0UL)            /*!< Min index of EVENTS_IN[8] array.                                     */
   #define GPIOTE_EVENTS_IN_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_IN[8] register.                                */
 
 /* EVENTS_IN @Bit 0 : Event from pin specified in CONFIG[n].PSEL */
@@ -34462,6 +35957,8 @@ typedef struct {
 
 /* GPIOTE_PUBLISH_IN: Publish configuration for event IN[n] */
   #define GPIOTE_PUBLISH_IN_MaxCount (8UL)           /*!< Max size of PUBLISH_IN[8] array.                                     */
+  #define GPIOTE_PUBLISH_IN_MaxIndex (7UL)           /*!< Max index of PUBLISH_IN[8] array.                                    */
+  #define GPIOTE_PUBLISH_IN_MinIndex (0UL)           /*!< Min index of PUBLISH_IN[8] array.                                    */
   #define GPIOTE_PUBLISH_IN_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_IN[8] register.                              */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event IN[n] will publish to */
@@ -37547,6 +39044,8 @@ typedef struct {
 
 /* GPIOTE_CONFIG: Configuration for OUT[n], SET[n], and CLR[n] tasks and IN[n] event */
   #define GPIOTE_CONFIG_MaxCount (8UL)               /*!< Max size of CONFIG[8] array.                                         */
+  #define GPIOTE_CONFIG_MaxIndex (7UL)               /*!< Max index of CONFIG[8] array.                                        */
+  #define GPIOTE_CONFIG_MinIndex (0UL)               /*!< Min index of CONFIG[8] array.                                        */
   #define GPIOTE_CONFIG_ResetValue (0x00000000UL)    /*!< Reset value of CONFIG[8] register.                                   */
 
 /* MODE @Bits 0..1 : Mode */
@@ -37600,6 +39099,8 @@ typedef struct {
 
 /* GPIOTE_DEBOUNCE: Debounce mode for GPIOTE channel n */
   #define GPIOTE_DEBOUNCE_MaxCount (8UL)             /*!< Max size of DEBOUNCE[8] array.                                       */
+  #define GPIOTE_DEBOUNCE_MaxIndex (7UL)             /*!< Max index of DEBOUNCE[8] array.                                      */
+  #define GPIOTE_DEBOUNCE_MinIndex (0UL)             /*!< Min index of DEBOUNCE[8] array.                                      */
   #define GPIOTE_DEBOUNCE_ResetValue (0x00000000UL)  /*!< Reset value of DEBOUNCE[8] register.                                 */
 
 /* MODE @Bit 0 : Mode */
@@ -38449,6 +39950,8 @@ typedef struct {
 
 /* GRCCONF_EVENTS_GRCPERIPH0: Event indicating that interrupt triggered for GRC peripheral identifier [n] */
   #define GRCCONF_EVENTS_GRCPERIPH0_MaxCount (32UL)  /*!< Max size of EVENTS_GRCPERIPH0[32] array.                             */
+  #define GRCCONF_EVENTS_GRCPERIPH0_MaxIndex (31UL)  /*!< Max index of EVENTS_GRCPERIPH0[32] array.                            */
+  #define GRCCONF_EVENTS_GRCPERIPH0_MinIndex (0UL)   /*!< Min index of EVENTS_GRCPERIPH0[32] array.                            */
   #define GRCCONF_EVENTS_GRCPERIPH0_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_GRCPERIPH0[32] register.              */
 
 /* EVENTS_GRCPERIPH0 @Bit 0 : Event indicating that interrupt triggered for GRC peripheral identifier [n] */
@@ -38463,6 +39966,8 @@ typedef struct {
 
 /* GRCCONF_EVENTS_GRCPERIPH1: Event indicating that interrupt triggered for GRC peripheral identifier [32 + n] */
   #define GRCCONF_EVENTS_GRCPERIPH1_MaxCount (32UL)  /*!< Max size of EVENTS_GRCPERIPH1[32] array.                             */
+  #define GRCCONF_EVENTS_GRCPERIPH1_MaxIndex (31UL)  /*!< Max index of EVENTS_GRCPERIPH1[32] array.                            */
+  #define GRCCONF_EVENTS_GRCPERIPH1_MinIndex (0UL)   /*!< Min index of EVENTS_GRCPERIPH1[32] array.                            */
   #define GRCCONF_EVENTS_GRCPERIPH1_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_GRCPERIPH1[32] register.              */
 
 /* EVENTS_GRCPERIPH1 @Bit 0 : Event indicating that interrupt triggered for GRC peripheral identifier [32 + n] */
@@ -45957,8 +47462,10 @@ typedef struct {
   __IOM uint32_t  CCADD;                             /*!< (@ 0x00000008) Count to add to CC[n]                                 */
   __IOM uint32_t  CCEN;                              /*!< (@ 0x0000000C) Configure Capture/Compare register CC[n]              */
 } NRF_GRTC_CC_Type;                                  /*!< Size = 16 (0x010)                                                    */
-  #define GRTC_CC_MaxCount (15UL)                    /*!< Max size of CC[16] array.                                            */
+  #define GRTC_CC_MaxCount (16UL)                    /*!< Max size of CC[16] array.                                            */
   #define GRTC_CC_MinCount (0UL)                     /*!< Min size of CC[16] array.                                            */
+  #define GRTC_CC_MaxIndex (15UL)                    /*!< Max index of CC[16] array.                                           */
+  #define GRTC_CC_MinIndex (0UL)                     /*!< Min index of CC[16] array.                                           */
 
 /* GRTC_CC_CCL: The lower 32-bits of Capture/Compare register CC[n] */
   #define GRTC_CC_CCL_ResetValue (0x00000000UL)      /*!< Reset value of CCL register.                                         */
@@ -46121,6 +47628,8 @@ typedef struct {
 
 /* GRTC_TASKS_CAPTURE: Capture the counter value to CC[n] register */
   #define GRTC_TASKS_CAPTURE_MaxCount (16UL)         /*!< Max size of TASKS_CAPTURE[16] array.                                 */
+  #define GRTC_TASKS_CAPTURE_MaxIndex (15UL)         /*!< Max index of TASKS_CAPTURE[16] array.                                */
+  #define GRTC_TASKS_CAPTURE_MinIndex (0UL)          /*!< Min index of TASKS_CAPTURE[16] array.                                */
   #define GRTC_TASKS_CAPTURE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_CAPTURE[16] register.                         */
 
 /* TASKS_CAPTURE @Bit 0 : Capture the counter value to CC[n] register */
@@ -46167,6 +47676,8 @@ typedef struct {
 
 /* GRTC_SUBSCRIBE_CAPTURE: Subscribe configuration for task CAPTURE[n] */
   #define GRTC_SUBSCRIBE_CAPTURE_MaxCount (16UL)     /*!< Max size of SUBSCRIBE_CAPTURE[16] array.                             */
+  #define GRTC_SUBSCRIBE_CAPTURE_MaxIndex (15UL)     /*!< Max index of SUBSCRIBE_CAPTURE[16] array.                            */
+  #define GRTC_SUBSCRIBE_CAPTURE_MinIndex (0UL)      /*!< Min index of SUBSCRIBE_CAPTURE[16] array.                            */
   #define GRTC_SUBSCRIBE_CAPTURE_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_CAPTURE[16] register.                 */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task CAPTURE[n] will subscribe to */
@@ -46186,6 +47697,8 @@ typedef struct {
 
 /* GRTC_EVENTS_COMPARE: Compare event on CC[n] match */
   #define GRTC_EVENTS_COMPARE_MaxCount (16UL)        /*!< Max size of EVENTS_COMPARE[16] array.                                */
+  #define GRTC_EVENTS_COMPARE_MaxIndex (15UL)        /*!< Max index of EVENTS_COMPARE[16] array.                               */
+  #define GRTC_EVENTS_COMPARE_MinIndex (0UL)         /*!< Min index of EVENTS_COMPARE[16] array.                               */
   #define GRTC_EVENTS_COMPARE_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_COMPARE[16] register.                       */
 
 /* EVENTS_COMPARE @Bit 0 : Compare event on CC[n] match */
@@ -46241,6 +47754,8 @@ typedef struct {
 
 /* GRTC_PUBLISH_COMPARE: Publish configuration for event COMPARE[n] */
   #define GRTC_PUBLISH_COMPARE_MaxCount (16UL)       /*!< Max size of PUBLISH_COMPARE[16] array.                               */
+  #define GRTC_PUBLISH_COMPARE_MaxIndex (15UL)       /*!< Max index of PUBLISH_COMPARE[16] array.                              */
+  #define GRTC_PUBLISH_COMPARE_MinIndex (0UL)        /*!< Min index of PUBLISH_COMPARE[16] array.                              */
   #define GRTC_PUBLISH_COMPARE_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_COMPARE[16] register.                     */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event COMPARE[n] will publish to */
@@ -59439,8 +60954,10 @@ typedef struct {
   __IM  uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000004) Address of transaction that generated the last BUSERROR
                                                                          event.*/
 } NRF_I2S_CHANNEL_Type;                              /*!< Size = 8 (0x008)                                                     */
-  #define I2S_CHANNEL_MaxCount (1UL)                 /*!< Max size of CHANNEL[2] array.                                        */
+  #define I2S_CHANNEL_MaxCount (2UL)                 /*!< Max size of CHANNEL[2] array.                                        */
   #define I2S_CHANNEL_MinCount (0UL)                 /*!< Min size of CHANNEL[2] array.                                        */
+  #define I2S_CHANNEL_MaxIndex (1UL)                 /*!< Max index of CHANNEL[2] array.                                       */
+  #define I2S_CHANNEL_MinIndex (0UL)                 /*!< Min index of CHANNEL[2] array.                                       */
 
 /* I2S_CHANNEL_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
   #define I2S_CHANNEL_TERMINATEONBUSERROR_ResetValue (0x00000000UL) /*!< Reset value of TERMINATEONBUSERROR register.          */
@@ -59857,6 +61374,8 @@ typedef struct {
                          AXI error response. */
 
   #define I2S_EVENTS_BUSERROR_MaxCount (2UL)         /*!< Max size of EVENTS_BUSERROR[2] array.                                */
+  #define I2S_EVENTS_BUSERROR_MaxIndex (1UL)         /*!< Max index of EVENTS_BUSERROR[2] array.                               */
+  #define I2S_EVENTS_BUSERROR_MinIndex (0UL)         /*!< Min index of EVENTS_BUSERROR[2] array.                               */
   #define I2S_EVENTS_BUSERROR_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_BUSERROR[2] register.                       */
 
 /* EVENTS_BUSERROR @Bit 0 : This event is generated if an error occurs during the bus transfer. This event is generated on an
@@ -60017,6 +61536,8 @@ typedef struct {
 
 /* I2S_PUBLISH_BUSERROR: Publish configuration for event BUSERROR[n] */
   #define I2S_PUBLISH_BUSERROR_MaxCount (2UL)        /*!< Max size of PUBLISH_BUSERROR[2] array.                               */
+  #define I2S_PUBLISH_BUSERROR_MaxIndex (1UL)        /*!< Max index of PUBLISH_BUSERROR[2] array.                              */
+  #define I2S_PUBLISH_BUSERROR_MinIndex (0UL)        /*!< Min index of PUBLISH_BUSERROR[2] array.                              */
   #define I2S_PUBLISH_BUSERROR_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_BUSERROR[2] register.                     */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event BUSERROR[n] will publish to */
@@ -60662,8 +62183,10 @@ typedef struct {
   __IOM uint32_t  LOC3;                              /*!< (@ 0x00000008) Device Characteristic Table Location-3 of Device [n]  */
   __IOM uint32_t  LOC4;                              /*!< (@ 0x0000000C) Device Characteristic Table Location-4 of Device [n]  */
 } NRF_I3CCORE_CORE_DEVCHARTABLE_Type;                /*!< Size = 16 (0x010)                                                    */
-  #define I3CCORE_CORE_DEVCHARTABLE_MaxCount (9UL)   /*!< Max size of DEVCHARTABLE[10] array.                                  */
+  #define I3CCORE_CORE_DEVCHARTABLE_MaxCount (10UL)  /*!< Max size of DEVCHARTABLE[10] array.                                  */
   #define I3CCORE_CORE_DEVCHARTABLE_MinCount (0UL)   /*!< Min size of DEVCHARTABLE[10] array.                                  */
+  #define I3CCORE_CORE_DEVCHARTABLE_MaxIndex (9UL)   /*!< Max index of DEVCHARTABLE[10] array.                                 */
+  #define I3CCORE_CORE_DEVCHARTABLE_MinIndex (0UL)   /*!< Min index of DEVCHARTABLE[10] array.                                 */
 
 /* I3CCORE_CORE_DEVCHARTABLE_LOC1: Device Characteristic Table Location-1 of Device [n] */
   #define I3CCORE_CORE_DEVCHARTABLE_LOC1_ResetValue (0x00000000UL) /*!< Reset value of LOC1 register.                          */
@@ -62291,6 +63814,8 @@ typedef struct {
 
 /* I3CCORE_CORE_SECDEVCHARTABLE: Secondary Master Device Characteristic Table Location of Device [n] */
   #define I3CCORE_CORE_SECDEVCHARTABLE_MaxCount (32UL) /*!< Max size of SECDEVCHARTABLE[32] array.                             */
+  #define I3CCORE_CORE_SECDEVCHARTABLE_MaxIndex (31UL) /*!< Max index of SECDEVCHARTABLE[32] array.                            */
+  #define I3CCORE_CORE_SECDEVCHARTABLE_MinIndex (0UL) /*!< Min index of SECDEVCHARTABLE[32] array.                             */
   #define I3CCORE_CORE_SECDEVCHARTABLE_ResetValue (0x00000000UL) /*!< Reset value of SECDEVCHARTABLE[32] register.             */
 
 /* DYNAMICADDR @Bits 0..7 : The Dynamic Addr of Device [n] */
@@ -62316,6 +63841,8 @@ typedef struct {
 
 /* I3CCORE_CORE_DEVADDRTABLELOC: Device Address Table of Device [n] */
   #define I3CCORE_CORE_DEVADDRTABLELOC_MaxCount (10UL) /*!< Max size of DEVADDRTABLELOC[10] array.                             */
+  #define I3CCORE_CORE_DEVADDRTABLELOC_MaxIndex (9UL) /*!< Max index of DEVADDRTABLELOC[10] array.                             */
+  #define I3CCORE_CORE_DEVADDRTABLELOC_MinIndex (0UL) /*!< Min index of DEVADDRTABLELOC[10] array.                             */
   #define I3CCORE_CORE_DEVADDRTABLELOC_ResetValue (0x00000000UL) /*!< Reset value of DEVADDRTABLELOC[10] register.             */
 
 /* DEVSTATICADDR @Bits 0..6 : Device Static Address. */
@@ -65836,8 +67363,10 @@ typedef struct {
   __IOM uint32_t  SINK;                              /*!< (@ 0x00000004) The IPCT sink configuration for the channel [n] to
                                                                          another ICPT.*/
 } NRF_IPCMAP_CHANNEL_Type;                           /*!< Size = 8 (0x008)                                                     */
-  #define IPCMAP_CHANNEL_MaxCount (15UL)             /*!< Max size of CHANNEL[16] array.                                       */
+  #define IPCMAP_CHANNEL_MaxCount (16UL)             /*!< Max size of CHANNEL[16] array.                                       */
   #define IPCMAP_CHANNEL_MinCount (0UL)              /*!< Min size of CHANNEL[16] array.                                       */
+  #define IPCMAP_CHANNEL_MaxIndex (15UL)             /*!< Max index of CHANNEL[16] array.                                      */
+  #define IPCMAP_CHANNEL_MinIndex (0UL)              /*!< Min index of CHANNEL[16] array.                                      */
 
 /* IPCMAP_CHANNEL_SOURCE: The IPCT source configuration for the channel [n] from a ICPT. */
   #define IPCMAP_CHANNEL_SOURCE_ResetValue (0x00000000UL) /*!< Reset value of SOURCE register.                                 */
@@ -66087,6 +67616,8 @@ typedef struct {
 
 /* IPCT_TASKS_SEND: Trigger event on IPCT source channel n if there are no active signals present on that channel */
   #define IPCT_TASKS_SEND_MaxCount (16UL)            /*!< Max size of TASKS_SEND[16] array.                                    */
+  #define IPCT_TASKS_SEND_MaxIndex (15UL)            /*!< Max index of TASKS_SEND[16] array.                                   */
+  #define IPCT_TASKS_SEND_MinIndex (0UL)             /*!< Min index of TASKS_SEND[16] array.                                   */
   #define IPCT_TASKS_SEND_ResetValue (0x00000000UL)  /*!< Reset value of TASKS_SEND[16] register.                              */
 
 /* TASKS_SEND @Bit 0 : Trigger event on IPCT source channel n if there are no active signals present on that channel */
@@ -66101,6 +67632,8 @@ typedef struct {
                     flush can happen automatically by configuring the SHORTS register accordingly. */
 
   #define IPCT_TASKS_ACK_MaxCount (16UL)             /*!< Max size of TASKS_ACK[16] array.                                     */
+  #define IPCT_TASKS_ACK_MaxIndex (15UL)             /*!< Max index of TASKS_ACK[16] array.                                    */
+  #define IPCT_TASKS_ACK_MinIndex (0UL)              /*!< Min index of TASKS_ACK[16] array.                                    */
   #define IPCT_TASKS_ACK_ResetValue (0x00000000UL)   /*!< Reset value of TASKS_ACK[16] register.                               */
 
 /* TASKS_ACK @Bit 0 : Flush IPCT sink channel n. Any pending IPCT signal on that channel will re-trigger the RECEIVE[n] event.
@@ -66115,6 +67648,8 @@ typedef struct {
 
 /* IPCT_SUBSCRIBE_SEND: Subscribe configuration for task SEND[n] */
   #define IPCT_SUBSCRIBE_SEND_MaxCount (16UL)        /*!< Max size of SUBSCRIBE_SEND[16] array.                                */
+  #define IPCT_SUBSCRIBE_SEND_MaxIndex (15UL)        /*!< Max index of SUBSCRIBE_SEND[16] array.                               */
+  #define IPCT_SUBSCRIBE_SEND_MinIndex (0UL)         /*!< Min index of SUBSCRIBE_SEND[16] array.                               */
   #define IPCT_SUBSCRIBE_SEND_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_SEND[16] register.                       */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task SEND[n] will subscribe to */
@@ -66134,6 +67669,8 @@ typedef struct {
 
 /* IPCT_SUBSCRIBE_ACK: Subscribe configuration for task ACK[n] */
   #define IPCT_SUBSCRIBE_ACK_MaxCount (16UL)         /*!< Max size of SUBSCRIBE_ACK[16] array.                                 */
+  #define IPCT_SUBSCRIBE_ACK_MaxIndex (15UL)         /*!< Max index of SUBSCRIBE_ACK[16] array.                                */
+  #define IPCT_SUBSCRIBE_ACK_MinIndex (0UL)          /*!< Min index of SUBSCRIBE_ACK[16] array.                                */
   #define IPCT_SUBSCRIBE_ACK_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_ACK[16] register.                         */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task ACK[n] will subscribe to */
@@ -66153,6 +67690,8 @@ typedef struct {
 
 /* IPCT_EVENTS_RECEIVE: Event received on IPCT sink channel n */
   #define IPCT_EVENTS_RECEIVE_MaxCount (16UL)        /*!< Max size of EVENTS_RECEIVE[16] array.                                */
+  #define IPCT_EVENTS_RECEIVE_MaxIndex (15UL)        /*!< Max index of EVENTS_RECEIVE[16] array.                               */
+  #define IPCT_EVENTS_RECEIVE_MinIndex (0UL)         /*!< Min index of EVENTS_RECEIVE[16] array.                               */
   #define IPCT_EVENTS_RECEIVE_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_RECEIVE[16] register.                       */
 
 /* EVENTS_RECEIVE @Bit 0 : Event received on IPCT sink channel n */
@@ -66169,6 +67708,8 @@ typedef struct {
                        can be triggered on that channel. */
 
   #define IPCT_EVENTS_ACKED_MaxCount (16UL)          /*!< Max size of EVENTS_ACKED[16] array.                                  */
+  #define IPCT_EVENTS_ACKED_MaxIndex (15UL)          /*!< Max index of EVENTS_ACKED[16] array.                                 */
+  #define IPCT_EVENTS_ACKED_MinIndex (0UL)           /*!< Min index of EVENTS_ACKED[16] array.                                 */
   #define IPCT_EVENTS_ACKED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ACKED[16] register.                           */
 
 /* EVENTS_ACKED @Bit 0 : Event received when hardware handshake of SEND task for IPCT source channel n is complete and a new
@@ -66184,6 +67725,8 @@ typedef struct {
 
 /* IPCT_PUBLISH_RECEIVE: Publish configuration for event RECEIVE[n] */
   #define IPCT_PUBLISH_RECEIVE_MaxCount (16UL)       /*!< Max size of PUBLISH_RECEIVE[16] array.                               */
+  #define IPCT_PUBLISH_RECEIVE_MaxIndex (15UL)       /*!< Max index of PUBLISH_RECEIVE[16] array.                              */
+  #define IPCT_PUBLISH_RECEIVE_MinIndex (0UL)        /*!< Min index of PUBLISH_RECEIVE[16] array.                              */
   #define IPCT_PUBLISH_RECEIVE_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_RECEIVE[16] register.                     */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event RECEIVE[n] will publish to */
@@ -66203,6 +67746,8 @@ typedef struct {
 
 /* IPCT_PUBLISH_ACKED: Publish configuration for event ACKED[n] */
   #define IPCT_PUBLISH_ACKED_MaxCount (16UL)         /*!< Max size of PUBLISH_ACKED[16] array.                                 */
+  #define IPCT_PUBLISH_ACKED_MaxIndex (15UL)         /*!< Max index of PUBLISH_ACKED[16] array.                                */
+  #define IPCT_PUBLISH_ACKED_MinIndex (0UL)          /*!< Min index of PUBLISH_ACKED[16] array.                                */
   #define IPCT_PUBLISH_ACKED_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_ACKED[16] register.                         */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event ACKED[n] will publish to */
@@ -75200,8 +76745,10 @@ typedef struct {
   __IOM uint32_t  SINK;                              /*!< (@ 0x00000000) The interrupt sink configuration for interrupt [n] to a
                                                                          domain.*/
 } NRF_IRQMAP_IRQ_Type;                               /*!< Size = 4 (0x004)                                                     */
-  #define IRQMAP_IRQ_MaxCount (479UL)                /*!< Max size of IRQ[480] array.                                          */
+  #define IRQMAP_IRQ_MaxCount (480UL)                /*!< Max size of IRQ[480] array.                                          */
   #define IRQMAP_IRQ_MinCount (0UL)                  /*!< Min size of IRQ[480] array.                                          */
+  #define IRQMAP_IRQ_MaxIndex (479UL)                /*!< Max index of IRQ[480] array.                                         */
+  #define IRQMAP_IRQ_MinIndex (0UL)                  /*!< Min index of IRQ[480] array.                                         */
 
 /* IRQMAP_IRQ_SINK: The interrupt sink configuration for interrupt [n] to a domain. */
   #define IRQMAP_IRQ_SINK_ResetValue (0x00000000UL)  /*!< Reset value of SINK register.                                        */
@@ -75322,6 +76869,8 @@ typedef struct {
 
 /* LFRC_CAL_RESULT: Calibration result from CAL=n */
   #define LFRC_CAL_RESULT_MaxCount (2UL)             /*!< Max size of RESULT[2] array.                                         */
+  #define LFRC_CAL_RESULT_MaxIndex (1UL)             /*!< Max index of RESULT[2] array.                                        */
+  #define LFRC_CAL_RESULT_MinIndex (0UL)             /*!< Min index of RESULT[2] array.                                        */
   #define LFRC_CAL_RESULT_ResetValue (0x00000000UL)  /*!< Reset value of RESULT[2] register.                                   */
 
 /* RESULT @Bits 0..31 : The result in 16MHz clock cycles */
@@ -77440,8 +78989,10 @@ typedef struct {
                                                                          triggered for clock [n].*/
   __IOM uint32_t  SRC;                               /*!< (@ 0x00000004) Status indicating clock source for clock [n]          */
 } NRF_LRCCONF_CLKSTAT_Type;                          /*!< Size = 8 (0x008)                                                     */
-  #define LRCCONF_CLKSTAT_MaxCount (7UL)             /*!< Max size of CLKSTAT[8] array.                                        */
+  #define LRCCONF_CLKSTAT_MaxCount (8UL)             /*!< Max size of CLKSTAT[8] array.                                        */
   #define LRCCONF_CLKSTAT_MinCount (0UL)             /*!< Min size of CLKSTAT[8] array.                                        */
+  #define LRCCONF_CLKSTAT_MaxIndex (7UL)             /*!< Max index of CLKSTAT[8] array.                                       */
+  #define LRCCONF_CLKSTAT_MinIndex (0UL)             /*!< Min index of CLKSTAT[8] array.                                       */
 
 /* LRCCONF_CLKSTAT_RUN: Status indicating that TASKS_REQCLKSRC task has been triggered for clock [n]. */
   #define LRCCONF_CLKSTAT_RUN_ResetValue (0x00000000UL) /*!< Reset value of RUN register.                                      */
@@ -77484,8 +79035,10 @@ typedef struct {
   __IOM uint32_t  ALWAYSRUN;                         /*!< (@ 0x00000000) Force the clock [n] and tree running always           */
   __IOM uint32_t  SRC;                               /*!< (@ 0x00000004) Select the clock source for clock [n]                 */
 } NRF_LRCCONF_CLKCTRL_Type;                          /*!< Size = 8 (0x008)                                                     */
-  #define LRCCONF_CLKCTRL_MaxCount (7UL)             /*!< Max size of CLKCTRL[8] array.                                        */
+  #define LRCCONF_CLKCTRL_MaxCount (8UL)             /*!< Max size of CLKCTRL[8] array.                                        */
   #define LRCCONF_CLKCTRL_MinCount (0UL)             /*!< Min size of CLKCTRL[8] array.                                        */
+  #define LRCCONF_CLKCTRL_MaxIndex (7UL)             /*!< Max index of CLKCTRL[8] array.                                       */
+  #define LRCCONF_CLKCTRL_MinIndex (0UL)             /*!< Min index of CLKCTRL[8] array.                                       */
 
 /* LRCCONF_CLKCTRL_ALWAYSRUN: Force the clock [n] and tree running always */
   #define LRCCONF_CLKCTRL_ALWAYSRUN_ResetValue (0x00000000UL) /*!< Reset value of ALWAYSRUN register.                          */
@@ -77545,6 +79098,8 @@ typedef struct {
 
 /* LRCCONF_TASKS_REQCLKSRC: Request the clock source for clock [n] */
   #define LRCCONF_TASKS_REQCLKSRC_MaxCount (8UL)     /*!< Max size of TASKS_REQCLKSRC[8] array.                                */
+  #define LRCCONF_TASKS_REQCLKSRC_MaxIndex (7UL)     /*!< Max index of TASKS_REQCLKSRC[8] array.                               */
+  #define LRCCONF_TASKS_REQCLKSRC_MinIndex (0UL)     /*!< Min index of TASKS_REQCLKSRC[8] array.                               */
   #define LRCCONF_TASKS_REQCLKSRC_ResetValue (0x00000000UL) /*!< Reset value of TASKS_REQCLKSRC[8] register.                   */
 
 /* TASKS_REQCLKSRC @Bit 0 : Request the clock source for clock [n] */
@@ -77558,6 +79113,8 @@ typedef struct {
 
 /* LRCCONF_TASKS_STOPREQCLKSRC: Stop requesting the clock source for clock [n] */
   #define LRCCONF_TASKS_STOPREQCLKSRC_MaxCount (8UL) /*!< Max size of TASKS_STOPREQCLKSRC[8] array.                            */
+  #define LRCCONF_TASKS_STOPREQCLKSRC_MaxIndex (7UL) /*!< Max index of TASKS_STOPREQCLKSRC[8] array.                           */
+  #define LRCCONF_TASKS_STOPREQCLKSRC_MinIndex (0UL) /*!< Min index of TASKS_STOPREQCLKSRC[8] array.                           */
   #define LRCCONF_TASKS_STOPREQCLKSRC_ResetValue (0x00000000UL) /*!< Reset value of TASKS_STOPREQCLKSRC[8] register.           */
 
 /* TASKS_STOPREQCLKSRC @Bit 0 : Stop requesting the clock source for clock [n] */
@@ -77571,6 +79128,8 @@ typedef struct {
 
 /* LRCCONF_EVENTS_CLKSRCSTARTED: Clock source is started for clock [n] */
   #define LRCCONF_EVENTS_CLKSRCSTARTED_MaxCount (8UL) /*!< Max size of EVENTS_CLKSRCSTARTED[8] array.                          */
+  #define LRCCONF_EVENTS_CLKSRCSTARTED_MaxIndex (7UL) /*!< Max index of EVENTS_CLKSRCSTARTED[8] array.                         */
+  #define LRCCONF_EVENTS_CLKSRCSTARTED_MinIndex (0UL) /*!< Min index of EVENTS_CLKSRCSTARTED[8] array.                         */
   #define LRCCONF_EVENTS_CLKSRCSTARTED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_CLKSRCSTARTED[8] register.         */
 
 /* EVENTS_CLKSRCSTARTED @Bit 0 : Clock source is started for clock [n] */
@@ -77899,6 +79458,8 @@ typedef struct {
 
 /* LRCCONF_AX2XWAITSTATES: AX2X bridge waitstates for the domain [n], where n is the Domain ID. */
   #define LRCCONF_AX2XWAITSTATES_MaxCount (16UL)     /*!< Max size of AX2XWAITSTATES[16] array.                                */
+  #define LRCCONF_AX2XWAITSTATES_MaxIndex (15UL)     /*!< Max index of AX2XWAITSTATES[16] array.                               */
+  #define LRCCONF_AX2XWAITSTATES_MinIndex (0UL)      /*!< Min index of AX2XWAITSTATES[16] array.                               */
   #define LRCCONF_AX2XWAITSTATES_ResetValue (0x00000007UL) /*!< Reset value of AX2XWAITSTATES[16] register.                    */
 
 /* WAITSTATES @Bits 0..2 : Number of waitstates */
@@ -81323,8 +82884,10 @@ typedef struct {
   __IOM uint32_t  RET;                               /*!< (@ 0x00000008) RAM retention for RAM [n].                            */
   __IOM uint32_t  RET2;                              /*!< (@ 0x0000000C) RAM retention for the second bank in the RAM block    */
 } NRF_MEMCONF_POWER_Type;                            /*!< Size = 16 (0x010)                                                    */
-  #define MEMCONF_POWER_MaxCount (1UL)               /*!< Max size of POWER[2] array.                                          */
+  #define MEMCONF_POWER_MaxCount (2UL)               /*!< Max size of POWER[2] array.                                          */
   #define MEMCONF_POWER_MinCount (0UL)               /*!< Min size of POWER[2] array.                                          */
+  #define MEMCONF_POWER_MaxIndex (1UL)               /*!< Max index of POWER[2] array.                                         */
+  #define MEMCONF_POWER_MinIndex (0UL)               /*!< Min index of POWER[2] array.                                         */
 
 /* MEMCONF_POWER_CONTROL: RAM/ROM[n] power control register. */
   #define MEMCONF_POWER_CONTROL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CONTROL register.                                */
@@ -82114,8 +83677,10 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  BITLINE;                           /*!< (@ 0x00000000) Repair configuration for RAM blocks.                  */
 } NRF_MEMCONF_REPAIR_Type;                           /*!< Size = 4 (0x004)                                                     */
-  #define MEMCONF_REPAIR_MaxCount (191UL)            /*!< Max size of REPAIR[192] array.                                       */
+  #define MEMCONF_REPAIR_MaxCount (192UL)            /*!< Max size of REPAIR[192] array.                                       */
   #define MEMCONF_REPAIR_MinCount (0UL)              /*!< Min size of REPAIR[192] array.                                       */
+  #define MEMCONF_REPAIR_MaxIndex (191UL)            /*!< Max index of REPAIR[192] array.                                      */
+  #define MEMCONF_REPAIR_MinIndex (0UL)              /*!< Min index of REPAIR[192] array.                                      */
 
 /* MEMCONF_REPAIR_BITLINE: Repair configuration for RAM blocks. */
   #define MEMCONF_REPAIR_BITLINE_ResetValue (0x00000000UL) /*!< Reset value of BITLINE register.                               */
@@ -82141,8 +83706,10 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim configuration for the RAM/ROM block types.       */
 } NRF_MEMCONF_BLOCKTYPE_Type;                        /*!< Size = 4 (0x004)                                                     */
-  #define MEMCONF_BLOCKTYPE_MaxCount (63UL)          /*!< Max size of BLOCKTYPE[64] array.                                     */
+  #define MEMCONF_BLOCKTYPE_MaxCount (64UL)          /*!< Max size of BLOCKTYPE[64] array.                                     */
   #define MEMCONF_BLOCKTYPE_MinCount (0UL)           /*!< Min size of BLOCKTYPE[64] array.                                     */
+  #define MEMCONF_BLOCKTYPE_MaxIndex (63UL)          /*!< Max index of BLOCKTYPE[64] array.                                    */
+  #define MEMCONF_BLOCKTYPE_MinIndex (0UL)           /*!< Min index of BLOCKTYPE[64] array.                                    */
 
 /* MEMCONF_BLOCKTYPE_TRIM: Trim configuration for the RAM/ROM block types. */
   #define MEMCONF_BLOCKTYPE_TRIM_ResetValue (0x00000000UL) /*!< Reset value of TRIM register.                                  */
@@ -82713,669 +84280,6 @@ typedef struct {
 
 
 
-/* =================================================== Struct MPC_RTCHOKE ==================================================== */
-/**
-  * @brief RTCHOKE [MPC_RTCHOKE] Real time choke configuration for AXI master port
-  */
-typedef struct {
-  __IOM uint32_t  WRITEACCESS;                       /*!< (@ 0x00000000) Enable AXI Write Address Channel Real Time Choke for
-                                                                         master port*/
-  __IOM uint32_t  READACCESS;                        /*!< (@ 0x00000004) Enable AXI Read Address Channel Real Time Choke for
-                                                                         master port*/
-  __IM  uint32_t  RESERVED[22];
-  __IOM uint32_t  DELAY[32];                         /*!< (@ 0x00000060) Real Time Choke delay value for slave number n        */
-} NRF_MPC_RTCHOKE_Type;                              /*!< Size = 224 (0x0E0)                                                   */
-
-/* MPC_RTCHOKE_WRITEACCESS: Enable AXI Write Address Channel Real Time Choke for master port */
-  #define MPC_RTCHOKE_WRITEACCESS_ResetValue (0x00000000UL) /*!< Reset value of WRITEACCESS register.                          */
-
-/* ENABLE0 @Bit 0 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Pos (0UL)  /*!< Position of ENABLE0 field.                                           */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE0_Pos) /*!< Bit mask of ENABLE0 field.   */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Min (0x0UL) /*!< Min enumerator value of ENABLE0 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Max (0x1UL) /*!< Max enumerator value of ENABLE0 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 0 Write Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 0 Write Address
-                                                              Channel*/
-
-/* ENABLE1 @Bit 1 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Pos (1UL)  /*!< Position of ENABLE1 field.                                           */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE1_Pos) /*!< Bit mask of ENABLE1 field.   */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Min (0x0UL) /*!< Min enumerator value of ENABLE1 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Max (0x1UL) /*!< Max enumerator value of ENABLE1 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 1 Write Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 1 Write Address
-                                                              Channel*/
-
-/* ENABLE2 @Bit 2 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Pos (2UL)  /*!< Position of ENABLE2 field.                                           */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE2_Pos) /*!< Bit mask of ENABLE2 field.   */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Min (0x0UL) /*!< Min enumerator value of ENABLE2 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Max (0x1UL) /*!< Max enumerator value of ENABLE2 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 2 Write Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 2 Write Address
-                                                              Channel*/
-
-/* ENABLE3 @Bit 3 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Pos (3UL)  /*!< Position of ENABLE3 field.                                           */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE3_Pos) /*!< Bit mask of ENABLE3 field.   */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Min (0x0UL) /*!< Min enumerator value of ENABLE3 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Max (0x1UL) /*!< Max enumerator value of ENABLE3 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 3 Write Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 3 Write Address
-                                                              Channel*/
-
-/* ENABLE4 @Bit 4 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Pos (4UL)  /*!< Position of ENABLE4 field.                                           */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE4_Pos) /*!< Bit mask of ENABLE4 field.   */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Min (0x0UL) /*!< Min enumerator value of ENABLE4 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Max (0x1UL) /*!< Max enumerator value of ENABLE4 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 4 Write Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 4 Write Address
-                                                              Channel*/
-
-/* ENABLE5 @Bit 5 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Pos (5UL)  /*!< Position of ENABLE5 field.                                           */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE5_Pos) /*!< Bit mask of ENABLE5 field.   */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Min (0x0UL) /*!< Min enumerator value of ENABLE5 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Max (0x1UL) /*!< Max enumerator value of ENABLE5 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 5 Write Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 5 Write Address
-                                                              Channel*/
-
-/* ENABLE6 @Bit 6 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Pos (6UL)  /*!< Position of ENABLE6 field.                                           */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE6_Pos) /*!< Bit mask of ENABLE6 field.   */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Min (0x0UL) /*!< Min enumerator value of ENABLE6 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Max (0x1UL) /*!< Max enumerator value of ENABLE6 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 6 Write Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 6 Write Address
-                                                              Channel*/
-
-/* ENABLE7 @Bit 7 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Pos (7UL)  /*!< Position of ENABLE7 field.                                           */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE7_Pos) /*!< Bit mask of ENABLE7 field.   */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Min (0x0UL) /*!< Min enumerator value of ENABLE7 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Max (0x1UL) /*!< Max enumerator value of ENABLE7 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 7 Write Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 7 Write Address
-                                                              Channel*/
-
-/* ENABLE8 @Bit 8 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Pos (8UL)  /*!< Position of ENABLE8 field.                                           */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE8_Pos) /*!< Bit mask of ENABLE8 field.   */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Min (0x0UL) /*!< Min enumerator value of ENABLE8 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Max (0x1UL) /*!< Max enumerator value of ENABLE8 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 8 Write Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 8 Write Address
-                                                              Channel*/
-
-/* ENABLE9 @Bit 9 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Pos (9UL)  /*!< Position of ENABLE9 field.                                           */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE9_Pos) /*!< Bit mask of ENABLE9 field.   */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Min (0x0UL) /*!< Min enumerator value of ENABLE9 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Max (0x1UL) /*!< Max enumerator value of ENABLE9 field.                              */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 9 Write Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 9 Write Address
-                                                              Channel*/
-
-/* ENABLE10 @Bit 10 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Pos (10UL) /*!< Position of ENABLE10 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE10_Pos) /*!< Bit mask of ENABLE10 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Min (0x0UL) /*!< Min enumerator value of ENABLE10 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Max (0x1UL) /*!< Max enumerator value of ENABLE10 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 10 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 10 Write Address
-                                                               Channel*/
-
-/* ENABLE11 @Bit 11 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Pos (11UL) /*!< Position of ENABLE11 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE11_Pos) /*!< Bit mask of ENABLE11 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Min (0x0UL) /*!< Min enumerator value of ENABLE11 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Max (0x1UL) /*!< Max enumerator value of ENABLE11 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 11 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 11 Write Address
-                                                               Channel*/
-
-/* ENABLE12 @Bit 12 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Pos (12UL) /*!< Position of ENABLE12 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE12_Pos) /*!< Bit mask of ENABLE12 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Min (0x0UL) /*!< Min enumerator value of ENABLE12 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Max (0x1UL) /*!< Max enumerator value of ENABLE12 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 12 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 12 Write Address
-                                                               Channel*/
-
-/* ENABLE13 @Bit 13 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Pos (13UL) /*!< Position of ENABLE13 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE13_Pos) /*!< Bit mask of ENABLE13 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Min (0x0UL) /*!< Min enumerator value of ENABLE13 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Max (0x1UL) /*!< Max enumerator value of ENABLE13 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 13 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 13 Write Address
-                                                               Channel*/
-
-/* ENABLE14 @Bit 14 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Pos (14UL) /*!< Position of ENABLE14 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE14_Pos) /*!< Bit mask of ENABLE14 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Min (0x0UL) /*!< Min enumerator value of ENABLE14 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Max (0x1UL) /*!< Max enumerator value of ENABLE14 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 14 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 14 Write Address
-                                                               Channel*/
-
-/* ENABLE15 @Bit 15 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Pos (15UL) /*!< Position of ENABLE15 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE15_Pos) /*!< Bit mask of ENABLE15 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Min (0x0UL) /*!< Min enumerator value of ENABLE15 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Max (0x1UL) /*!< Max enumerator value of ENABLE15 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 15 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 15 Write Address
-                                                               Channel*/
-
-/* ENABLE16 @Bit 16 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Pos (16UL) /*!< Position of ENABLE16 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE16_Pos) /*!< Bit mask of ENABLE16 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Min (0x0UL) /*!< Min enumerator value of ENABLE16 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Max (0x1UL) /*!< Max enumerator value of ENABLE16 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 16 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 16 Write Address
-                                                               Channel*/
-
-/* ENABLE17 @Bit 17 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Pos (17UL) /*!< Position of ENABLE17 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE17_Pos) /*!< Bit mask of ENABLE17 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Min (0x0UL) /*!< Min enumerator value of ENABLE17 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Max (0x1UL) /*!< Max enumerator value of ENABLE17 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 17 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 17 Write Address
-                                                               Channel*/
-
-/* ENABLE18 @Bit 18 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Pos (18UL) /*!< Position of ENABLE18 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE18_Pos) /*!< Bit mask of ENABLE18 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Min (0x0UL) /*!< Min enumerator value of ENABLE18 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Max (0x1UL) /*!< Max enumerator value of ENABLE18 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 18 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 18 Write Address
-                                                               Channel*/
-
-/* ENABLE19 @Bit 19 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Pos (19UL) /*!< Position of ENABLE19 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE19_Pos) /*!< Bit mask of ENABLE19 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Min (0x0UL) /*!< Min enumerator value of ENABLE19 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Max (0x1UL) /*!< Max enumerator value of ENABLE19 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 19 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 19 Write Address
-                                                               Channel*/
-
-/* ENABLE20 @Bit 20 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Pos (20UL) /*!< Position of ENABLE20 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE20_Pos) /*!< Bit mask of ENABLE20 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Min (0x0UL) /*!< Min enumerator value of ENABLE20 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Max (0x1UL) /*!< Max enumerator value of ENABLE20 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 20 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 20 Write Address
-                                                               Channel*/
-
-/* ENABLE21 @Bit 21 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Pos (21UL) /*!< Position of ENABLE21 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE21_Pos) /*!< Bit mask of ENABLE21 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Min (0x0UL) /*!< Min enumerator value of ENABLE21 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Max (0x1UL) /*!< Max enumerator value of ENABLE21 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 21 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 21 Write Address
-                                                               Channel*/
-
-/* ENABLE22 @Bit 22 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Pos (22UL) /*!< Position of ENABLE22 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE22_Pos) /*!< Bit mask of ENABLE22 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Min (0x0UL) /*!< Min enumerator value of ENABLE22 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Max (0x1UL) /*!< Max enumerator value of ENABLE22 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 22 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 22 Write Address
-                                                               Channel*/
-
-/* ENABLE23 @Bit 23 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Pos (23UL) /*!< Position of ENABLE23 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE23_Pos) /*!< Bit mask of ENABLE23 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Min (0x0UL) /*!< Min enumerator value of ENABLE23 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Max (0x1UL) /*!< Max enumerator value of ENABLE23 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 23 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 23 Write Address
-                                                               Channel*/
-
-/* ENABLE24 @Bit 24 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Pos (24UL) /*!< Position of ENABLE24 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE24_Pos) /*!< Bit mask of ENABLE24 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Min (0x0UL) /*!< Min enumerator value of ENABLE24 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Max (0x1UL) /*!< Max enumerator value of ENABLE24 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 24 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 24 Write Address
-                                                               Channel*/
-
-/* ENABLE25 @Bit 25 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Pos (25UL) /*!< Position of ENABLE25 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE25_Pos) /*!< Bit mask of ENABLE25 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Min (0x0UL) /*!< Min enumerator value of ENABLE25 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Max (0x1UL) /*!< Max enumerator value of ENABLE25 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 25 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 25 Write Address
-                                                               Channel*/
-
-/* ENABLE26 @Bit 26 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Pos (26UL) /*!< Position of ENABLE26 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE26_Pos) /*!< Bit mask of ENABLE26 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Min (0x0UL) /*!< Min enumerator value of ENABLE26 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Max (0x1UL) /*!< Max enumerator value of ENABLE26 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 26 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 26 Write Address
-                                                               Channel*/
-
-/* ENABLE27 @Bit 27 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Pos (27UL) /*!< Position of ENABLE27 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE27_Pos) /*!< Bit mask of ENABLE27 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Min (0x0UL) /*!< Min enumerator value of ENABLE27 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Max (0x1UL) /*!< Max enumerator value of ENABLE27 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 27 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 27 Write Address
-                                                               Channel*/
-
-/* ENABLE28 @Bit 28 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Pos (28UL) /*!< Position of ENABLE28 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE28_Pos) /*!< Bit mask of ENABLE28 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Min (0x0UL) /*!< Min enumerator value of ENABLE28 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Max (0x1UL) /*!< Max enumerator value of ENABLE28 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 28 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 28 Write Address
-                                                               Channel*/
-
-/* ENABLE29 @Bit 29 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Pos (29UL) /*!< Position of ENABLE29 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE29_Pos) /*!< Bit mask of ENABLE29 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Min (0x0UL) /*!< Min enumerator value of ENABLE29 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Max (0x1UL) /*!< Max enumerator value of ENABLE29 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 29 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 29 Write Address
-                                                               Channel*/
-
-/* ENABLE30 @Bit 30 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Pos (30UL) /*!< Position of ENABLE30 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE30_Pos) /*!< Bit mask of ENABLE30 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Min (0x0UL) /*!< Min enumerator value of ENABLE30 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Max (0x1UL) /*!< Max enumerator value of ENABLE30 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 30 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 30 Write Address
-                                                               Channel*/
-
-/* ENABLE31 @Bit 31 : Enable Real Time Choke for Write Address Channel */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Pos (31UL) /*!< Position of ENABLE31 field.                                         */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE31_Pos) /*!< Bit mask of ENABLE31 field.*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Min (0x0UL) /*!< Min enumerator value of ENABLE31 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Max (0x1UL) /*!< Max enumerator value of ENABLE31 field.                            */
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 31 Write Address
-                                                                Channel*/
-  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 31 Write Address
-                                                               Channel*/
-
-
-/* MPC_RTCHOKE_READACCESS: Enable AXI Read Address Channel Real Time Choke for master port */
-  #define MPC_RTCHOKE_READACCESS_ResetValue (0x00000000UL) /*!< Reset value of READACCESS register.                            */
-
-/* ENABLE0 @Bit 0 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE0_Pos (0UL)   /*!< Position of ENABLE0 field.                                           */
-  #define MPC_RTCHOKE_READACCESS_ENABLE0_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE0_Pos) /*!< Bit mask of ENABLE0 field.     */
-  #define MPC_RTCHOKE_READACCESS_ENABLE0_Min (0x0UL) /*!< Min enumerator value of ENABLE0 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE0_Max (0x1UL) /*!< Max enumerator value of ENABLE0 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE0_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 0 Read Address
-                                                              Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE0_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 0 Read Address Channel */
-
-/* ENABLE1 @Bit 1 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE1_Pos (1UL)   /*!< Position of ENABLE1 field.                                           */
-  #define MPC_RTCHOKE_READACCESS_ENABLE1_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE1_Pos) /*!< Bit mask of ENABLE1 field.     */
-  #define MPC_RTCHOKE_READACCESS_ENABLE1_Min (0x0UL) /*!< Min enumerator value of ENABLE1 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE1_Max (0x1UL) /*!< Max enumerator value of ENABLE1 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE1_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 1 Read Address
-                                                              Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE1_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 1 Read Address Channel */
-
-/* ENABLE2 @Bit 2 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE2_Pos (2UL)   /*!< Position of ENABLE2 field.                                           */
-  #define MPC_RTCHOKE_READACCESS_ENABLE2_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE2_Pos) /*!< Bit mask of ENABLE2 field.     */
-  #define MPC_RTCHOKE_READACCESS_ENABLE2_Min (0x0UL) /*!< Min enumerator value of ENABLE2 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE2_Max (0x1UL) /*!< Max enumerator value of ENABLE2 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE2_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 2 Read Address
-                                                              Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE2_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 2 Read Address Channel */
-
-/* ENABLE3 @Bit 3 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE3_Pos (3UL)   /*!< Position of ENABLE3 field.                                           */
-  #define MPC_RTCHOKE_READACCESS_ENABLE3_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE3_Pos) /*!< Bit mask of ENABLE3 field.     */
-  #define MPC_RTCHOKE_READACCESS_ENABLE3_Min (0x0UL) /*!< Min enumerator value of ENABLE3 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE3_Max (0x1UL) /*!< Max enumerator value of ENABLE3 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE3_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 3 Read Address
-                                                              Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE3_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 3 Read Address Channel */
-
-/* ENABLE4 @Bit 4 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE4_Pos (4UL)   /*!< Position of ENABLE4 field.                                           */
-  #define MPC_RTCHOKE_READACCESS_ENABLE4_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE4_Pos) /*!< Bit mask of ENABLE4 field.     */
-  #define MPC_RTCHOKE_READACCESS_ENABLE4_Min (0x0UL) /*!< Min enumerator value of ENABLE4 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE4_Max (0x1UL) /*!< Max enumerator value of ENABLE4 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE4_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 4 Read Address
-                                                              Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE4_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 4 Read Address Channel */
-
-/* ENABLE5 @Bit 5 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE5_Pos (5UL)   /*!< Position of ENABLE5 field.                                           */
-  #define MPC_RTCHOKE_READACCESS_ENABLE5_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE5_Pos) /*!< Bit mask of ENABLE5 field.     */
-  #define MPC_RTCHOKE_READACCESS_ENABLE5_Min (0x0UL) /*!< Min enumerator value of ENABLE5 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE5_Max (0x1UL) /*!< Max enumerator value of ENABLE5 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE5_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 5 Read Address
-                                                              Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE5_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 5 Read Address Channel */
-
-/* ENABLE6 @Bit 6 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE6_Pos (6UL)   /*!< Position of ENABLE6 field.                                           */
-  #define MPC_RTCHOKE_READACCESS_ENABLE6_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE6_Pos) /*!< Bit mask of ENABLE6 field.     */
-  #define MPC_RTCHOKE_READACCESS_ENABLE6_Min (0x0UL) /*!< Min enumerator value of ENABLE6 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE6_Max (0x1UL) /*!< Max enumerator value of ENABLE6 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE6_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 6 Read Address
-                                                              Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE6_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 6 Read Address Channel */
-
-/* ENABLE7 @Bit 7 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE7_Pos (7UL)   /*!< Position of ENABLE7 field.                                           */
-  #define MPC_RTCHOKE_READACCESS_ENABLE7_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE7_Pos) /*!< Bit mask of ENABLE7 field.     */
-  #define MPC_RTCHOKE_READACCESS_ENABLE7_Min (0x0UL) /*!< Min enumerator value of ENABLE7 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE7_Max (0x1UL) /*!< Max enumerator value of ENABLE7 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE7_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 7 Read Address
-                                                              Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE7_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 7 Read Address Channel */
-
-/* ENABLE8 @Bit 8 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE8_Pos (8UL)   /*!< Position of ENABLE8 field.                                           */
-  #define MPC_RTCHOKE_READACCESS_ENABLE8_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE8_Pos) /*!< Bit mask of ENABLE8 field.     */
-  #define MPC_RTCHOKE_READACCESS_ENABLE8_Min (0x0UL) /*!< Min enumerator value of ENABLE8 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE8_Max (0x1UL) /*!< Max enumerator value of ENABLE8 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE8_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 8 Read Address
-                                                              Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE8_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 8 Read Address Channel */
-
-/* ENABLE9 @Bit 9 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE9_Pos (9UL)   /*!< Position of ENABLE9 field.                                           */
-  #define MPC_RTCHOKE_READACCESS_ENABLE9_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE9_Pos) /*!< Bit mask of ENABLE9 field.     */
-  #define MPC_RTCHOKE_READACCESS_ENABLE9_Min (0x0UL) /*!< Min enumerator value of ENABLE9 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE9_Max (0x1UL) /*!< Max enumerator value of ENABLE9 field.                               */
-  #define MPC_RTCHOKE_READACCESS_ENABLE9_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 9 Read Address
-                                                              Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE9_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 9 Read Address Channel */
-
-/* ENABLE10 @Bit 10 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE10_Pos (10UL) /*!< Position of ENABLE10 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE10_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE10_Pos) /*!< Bit mask of ENABLE10 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE10_Min (0x0UL) /*!< Min enumerator value of ENABLE10 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE10_Max (0x1UL) /*!< Max enumerator value of ENABLE10 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE10_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 10 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE10_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 10 Read Address
-                                                              Channel*/
-
-/* ENABLE11 @Bit 11 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE11_Pos (11UL) /*!< Position of ENABLE11 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE11_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE11_Pos) /*!< Bit mask of ENABLE11 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE11_Min (0x0UL) /*!< Min enumerator value of ENABLE11 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE11_Max (0x1UL) /*!< Max enumerator value of ENABLE11 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE11_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 11 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE11_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 11 Read Address
-                                                              Channel*/
-
-/* ENABLE12 @Bit 12 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE12_Pos (12UL) /*!< Position of ENABLE12 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE12_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE12_Pos) /*!< Bit mask of ENABLE12 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE12_Min (0x0UL) /*!< Min enumerator value of ENABLE12 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE12_Max (0x1UL) /*!< Max enumerator value of ENABLE12 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE12_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 12 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE12_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 12 Read Address
-                                                              Channel*/
-
-/* ENABLE13 @Bit 13 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE13_Pos (13UL) /*!< Position of ENABLE13 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE13_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE13_Pos) /*!< Bit mask of ENABLE13 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE13_Min (0x0UL) /*!< Min enumerator value of ENABLE13 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE13_Max (0x1UL) /*!< Max enumerator value of ENABLE13 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE13_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 13 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE13_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 13 Read Address
-                                                              Channel*/
-
-/* ENABLE14 @Bit 14 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE14_Pos (14UL) /*!< Position of ENABLE14 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE14_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE14_Pos) /*!< Bit mask of ENABLE14 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE14_Min (0x0UL) /*!< Min enumerator value of ENABLE14 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE14_Max (0x1UL) /*!< Max enumerator value of ENABLE14 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE14_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 14 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE14_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 14 Read Address
-                                                              Channel*/
-
-/* ENABLE15 @Bit 15 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE15_Pos (15UL) /*!< Position of ENABLE15 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE15_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE15_Pos) /*!< Bit mask of ENABLE15 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE15_Min (0x0UL) /*!< Min enumerator value of ENABLE15 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE15_Max (0x1UL) /*!< Max enumerator value of ENABLE15 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE15_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 15 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE15_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 15 Read Address
-                                                              Channel*/
-
-/* ENABLE16 @Bit 16 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE16_Pos (16UL) /*!< Position of ENABLE16 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE16_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE16_Pos) /*!< Bit mask of ENABLE16 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE16_Min (0x0UL) /*!< Min enumerator value of ENABLE16 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE16_Max (0x1UL) /*!< Max enumerator value of ENABLE16 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE16_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 16 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE16_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 16 Read Address
-                                                              Channel*/
-
-/* ENABLE17 @Bit 17 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE17_Pos (17UL) /*!< Position of ENABLE17 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE17_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE17_Pos) /*!< Bit mask of ENABLE17 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE17_Min (0x0UL) /*!< Min enumerator value of ENABLE17 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE17_Max (0x1UL) /*!< Max enumerator value of ENABLE17 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE17_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 17 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE17_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 17 Read Address
-                                                              Channel*/
-
-/* ENABLE18 @Bit 18 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE18_Pos (18UL) /*!< Position of ENABLE18 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE18_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE18_Pos) /*!< Bit mask of ENABLE18 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE18_Min (0x0UL) /*!< Min enumerator value of ENABLE18 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE18_Max (0x1UL) /*!< Max enumerator value of ENABLE18 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE18_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 18 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE18_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 18 Read Address
-                                                              Channel*/
-
-/* ENABLE19 @Bit 19 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE19_Pos (19UL) /*!< Position of ENABLE19 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE19_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE19_Pos) /*!< Bit mask of ENABLE19 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE19_Min (0x0UL) /*!< Min enumerator value of ENABLE19 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE19_Max (0x1UL) /*!< Max enumerator value of ENABLE19 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE19_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 19 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE19_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 19 Read Address
-                                                              Channel*/
-
-/* ENABLE20 @Bit 20 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE20_Pos (20UL) /*!< Position of ENABLE20 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE20_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE20_Pos) /*!< Bit mask of ENABLE20 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE20_Min (0x0UL) /*!< Min enumerator value of ENABLE20 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE20_Max (0x1UL) /*!< Max enumerator value of ENABLE20 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE20_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 20 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE20_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 20 Read Address
-                                                              Channel*/
-
-/* ENABLE21 @Bit 21 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE21_Pos (21UL) /*!< Position of ENABLE21 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE21_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE21_Pos) /*!< Bit mask of ENABLE21 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE21_Min (0x0UL) /*!< Min enumerator value of ENABLE21 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE21_Max (0x1UL) /*!< Max enumerator value of ENABLE21 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE21_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 21 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE21_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 21 Read Address
-                                                              Channel*/
-
-/* ENABLE22 @Bit 22 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE22_Pos (22UL) /*!< Position of ENABLE22 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE22_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE22_Pos) /*!< Bit mask of ENABLE22 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE22_Min (0x0UL) /*!< Min enumerator value of ENABLE22 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE22_Max (0x1UL) /*!< Max enumerator value of ENABLE22 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE22_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 22 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE22_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 22 Read Address
-                                                              Channel*/
-
-/* ENABLE23 @Bit 23 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE23_Pos (23UL) /*!< Position of ENABLE23 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE23_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE23_Pos) /*!< Bit mask of ENABLE23 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE23_Min (0x0UL) /*!< Min enumerator value of ENABLE23 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE23_Max (0x1UL) /*!< Max enumerator value of ENABLE23 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE23_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 23 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE23_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 23 Read Address
-                                                              Channel*/
-
-/* ENABLE24 @Bit 24 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE24_Pos (24UL) /*!< Position of ENABLE24 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE24_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE24_Pos) /*!< Bit mask of ENABLE24 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE24_Min (0x0UL) /*!< Min enumerator value of ENABLE24 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE24_Max (0x1UL) /*!< Max enumerator value of ENABLE24 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE24_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 24 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE24_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 24 Read Address
-                                                              Channel*/
-
-/* ENABLE25 @Bit 25 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE25_Pos (25UL) /*!< Position of ENABLE25 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE25_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE25_Pos) /*!< Bit mask of ENABLE25 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE25_Min (0x0UL) /*!< Min enumerator value of ENABLE25 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE25_Max (0x1UL) /*!< Max enumerator value of ENABLE25 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE25_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 25 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE25_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 25 Read Address
-                                                              Channel*/
-
-/* ENABLE26 @Bit 26 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE26_Pos (26UL) /*!< Position of ENABLE26 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE26_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE26_Pos) /*!< Bit mask of ENABLE26 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE26_Min (0x0UL) /*!< Min enumerator value of ENABLE26 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE26_Max (0x1UL) /*!< Max enumerator value of ENABLE26 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE26_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 26 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE26_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 26 Read Address
-                                                              Channel*/
-
-/* ENABLE27 @Bit 27 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE27_Pos (27UL) /*!< Position of ENABLE27 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE27_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE27_Pos) /*!< Bit mask of ENABLE27 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE27_Min (0x0UL) /*!< Min enumerator value of ENABLE27 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE27_Max (0x1UL) /*!< Max enumerator value of ENABLE27 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE27_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 27 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE27_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 27 Read Address
-                                                              Channel*/
-
-/* ENABLE28 @Bit 28 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE28_Pos (28UL) /*!< Position of ENABLE28 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE28_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE28_Pos) /*!< Bit mask of ENABLE28 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE28_Min (0x0UL) /*!< Min enumerator value of ENABLE28 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE28_Max (0x1UL) /*!< Max enumerator value of ENABLE28 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE28_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 28 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE28_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 28 Read Address
-                                                              Channel*/
-
-/* ENABLE29 @Bit 29 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE29_Pos (29UL) /*!< Position of ENABLE29 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE29_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE29_Pos) /*!< Bit mask of ENABLE29 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE29_Min (0x0UL) /*!< Min enumerator value of ENABLE29 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE29_Max (0x1UL) /*!< Max enumerator value of ENABLE29 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE29_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 29 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE29_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 29 Read Address
-                                                              Channel*/
-
-/* ENABLE30 @Bit 30 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE30_Pos (30UL) /*!< Position of ENABLE30 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE30_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE30_Pos) /*!< Bit mask of ENABLE30 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE30_Min (0x0UL) /*!< Min enumerator value of ENABLE30 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE30_Max (0x1UL) /*!< Max enumerator value of ENABLE30 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE30_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 30 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE30_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 30 Read Address
-                                                              Channel*/
-
-/* ENABLE31 @Bit 31 : Enable Real Time Choke for Read Address Channel */
-  #define MPC_RTCHOKE_READACCESS_ENABLE31_Pos (31UL) /*!< Position of ENABLE31 field.                                          */
-  #define MPC_RTCHOKE_READACCESS_ENABLE31_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE31_Pos) /*!< Bit mask of ENABLE31 field.  */
-  #define MPC_RTCHOKE_READACCESS_ENABLE31_Min (0x0UL) /*!< Min enumerator value of ENABLE31 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE31_Max (0x1UL) /*!< Max enumerator value of ENABLE31 field.                             */
-  #define MPC_RTCHOKE_READACCESS_ENABLE31_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 31 Read Address
-                                                               Channel*/
-  #define MPC_RTCHOKE_READACCESS_ENABLE31_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 31 Read Address
-                                                              Channel*/
-
-
-/* MPC_RTCHOKE_DELAY: Real Time Choke delay value for slave number n */
-  #define MPC_RTCHOKE_DELAY_MaxCount (32UL)          /*!< Max size of DELAY[32] array.                                         */
-  #define MPC_RTCHOKE_DELAY_ResetValue (0x00000000UL) /*!< Reset value of DELAY[32] register.                                  */
-
-/* DELAY @Bits 0..7 : Real Time Choke delay in bus clock cycles. */
-  #define MPC_RTCHOKE_DELAY_DELAY_Pos (0UL)          /*!< Position of DELAY field.                                             */
-  #define MPC_RTCHOKE_DELAY_DELAY_Msk (0xFFUL << MPC_RTCHOKE_DELAY_DELAY_Pos) /*!< Bit mask of DELAY field.                    */
-  #define MPC_RTCHOKE_DELAY_DELAY_Min (0x0UL)        /*!< Min value of DELAY field.                                            */
-  #define MPC_RTCHOKE_DELAY_DELAY_Max (0xFFUL)       /*!< Max size of DELAY field.                                             */
-
-
-
 /* ==================================================== Struct MPC_REGION ==================================================== */
 /**
   * @brief REGION [MPC_REGION] Memory region to slave decoding table
@@ -83387,8 +84291,10 @@ typedef struct {
                                                                          against the STARTADDR*/
   __IOM uint32_t  MASTERPORT;                        /*!< (@ 0x0000000C) Region n local master enable                          */
 } NRF_MPC_REGION_Type;                               /*!< Size = 16 (0x010)                                                    */
-  #define MPC_REGION_MaxCount (31UL)                 /*!< Max size of REGION[32] array.                                        */
+  #define MPC_REGION_MaxCount (32UL)                 /*!< Max size of REGION[32] array.                                        */
   #define MPC_REGION_MinCount (0UL)                  /*!< Min size of REGION[32] array.                                        */
+  #define MPC_REGION_MaxIndex (31UL)                 /*!< Max index of REGION[32] array.                                       */
+  #define MPC_REGION_MinIndex (0UL)                  /*!< Min index of REGION[32] array.                                       */
 
 /* MPC_REGION_CONFIG: Slave region n Configuration register */
   #define MPC_REGION_CONFIG_ResetValue (0x00000000UL) /*!< Reset value of CONFIG register.                                     */
@@ -83738,16 +84644,17 @@ typedef struct {
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) Override region n Configuration register              */
   __IOM uint32_t  STARTADDR;                         /*!< (@ 0x00000004) Override region n Start Address                       */
   __IOM uint32_t  ENDADDR;                           /*!< (@ 0x00000008) Override region n End Address                         */
-  __IOM int32_t   OFFSET;                            /*!< (@ 0x0000000C) Address offset value divided by 2 for override region n
-                                                                         address re-map*/
+  __IM  uint32_t  RESERVED;
   __IOM uint32_t  PERM;                              /*!< (@ 0x00000010) Permission settings for override region n             */
   __IOM uint32_t  PERMMASK;                          /*!< (@ 0x00000014) Masks permission setting fields from register
                                                                          OVERRIDE.PERM*/
   __IOM uint32_t  OWNER;                             /*!< (@ 0x00000018) Owner for override region                             */
   __IOM uint32_t  MASTERPORT;                        /*!< (@ 0x0000001C) Override region n local master enable                 */
 } NRF_MPC_OVERRIDE_Type;                             /*!< Size = 32 (0x020)                                                    */
-  #define MPC_OVERRIDE_MaxCount (39UL)               /*!< Max size of OVERRIDE[40] array.                                      */
+  #define MPC_OVERRIDE_MaxCount (40UL)               /*!< Max size of OVERRIDE[40] array.                                      */
   #define MPC_OVERRIDE_MinCount (0UL)                /*!< Min size of OVERRIDE[40] array.                                      */
+  #define MPC_OVERRIDE_MaxIndex (39UL)               /*!< Max index of OVERRIDE[40] array.                                     */
+  #define MPC_OVERRIDE_MinIndex (0UL)                /*!< Min index of OVERRIDE[40] array.                                     */
 
 /* MPC_OVERRIDE_CONFIG: Override region n Configuration register */
   #define MPC_OVERRIDE_CONFIG_ResetValue (0x00000000UL) /*!< Reset value of CONFIG register.                                   */
@@ -83775,17 +84682,6 @@ typedef struct {
   #define MPC_OVERRIDE_CONFIG_ENABLE_Disabled (0x0UL) /*!< Override region n is not used                                       */
   #define MPC_OVERRIDE_CONFIG_ENABLE_Enabled (0x1UL) /*!< Override region n is used                                            */
 
-/* SECDOMENABLE @Bit 10 : Secure domain access enable for Override region n */
-  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Pos (10UL) /*!< Position of SECDOMENABLE field.                                     */
-  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Msk (0x1UL << MPC_OVERRIDE_CONFIG_SECDOMENABLE_Pos) /*!< Bit mask of SECDOMENABLE
-                                                                            field.*/
-  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Min (0x0UL) /*!< Min enumerator value of SECDOMENABLE field.                        */
-  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Max (0x1UL) /*!< Max enumerator value of SECDOMENABLE field.                        */
-  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Disabled (0x0UL) /*!< Overriding of secure domain permissions is disabled for
-                                                                 override region n*/
-  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Enabled (0x1UL) /*!< Overriding of secure domain permissions is enabled for override
-                                                                region n*/
-
 /* SECUREMASK @Bit 12 : Secure mask enable for Override region n */
   #define MPC_OVERRIDE_CONFIG_SECUREMASK_Pos (12UL)  /*!< Position of SECUREMASK field.                                        */
   #define MPC_OVERRIDE_CONFIG_SECUREMASK_Msk (0x1UL << MPC_OVERRIDE_CONFIG_SECUREMASK_Pos) /*!< Bit mask of SECUREMASK field.  */
@@ -83810,14 +84706,6 @@ typedef struct {
 /* ENDADDR @Bits 0..31 : End address for override region n */
   #define MPC_OVERRIDE_ENDADDR_ENDADDR_Pos (0UL)     /*!< Position of ENDADDR field.                                           */
   #define MPC_OVERRIDE_ENDADDR_ENDADDR_Msk (0xFFFFFFFFUL << MPC_OVERRIDE_ENDADDR_ENDADDR_Pos) /*!< Bit mask of ENDADDR field.  */
-
-
-/* MPC_OVERRIDE_OFFSET: Address offset value divided by 2 for override region n address re-map */
-  #define MPC_OVERRIDE_OFFSET_ResetValue (0x00000000UL) /*!< Reset value of OFFSET register.                                   */
-
-/* OFFSET @Bits 0..31 : Offset value */
-  #define MPC_OVERRIDE_OFFSET_OFFSET_Pos (0UL)       /*!< Position of OFFSET field.                                            */
-  #define MPC_OVERRIDE_OFFSET_OFFSET_Msk (0xFFFFFFFFUL << MPC_OVERRIDE_OFFSET_OFFSET_Pos) /*!< Bit mask of OFFSET field.       */
 
 
 /* MPC_OVERRIDE_PERM: Permission settings for override region n */
@@ -84177,9 +85065,7 @@ typedef struct {
     __IOM NRF_MPC_MEMACCERR_Type MEMACCERR;          /*!< (@ 0x00000400) Memory Access Error status registers                  */
     __IM uint32_t RESERVED3[2];
     __IOM NRF_MPC_GLOBALSLAVE_Type GLOBALSLAVE;      /*!< (@ 0x00000410) Global slave master port connection information       */
-    __IM uint32_t RESERVED4[2];
-    __IOM NRF_MPC_RTCHOKE_Type RTCHOKE;              /*!< (@ 0x00000420) Real time choke configuration for AXI master port     */
-    __IM uint32_t RESERVED5[64];
+    __IM uint32_t RESERVED4[122];
     __IOM NRF_MPC_REGION_Type REGION[32];            /*!< (@ 0x00000600) Memory region to slave decoding table                 */
     __IOM NRF_MPC_OVERRIDE_Type OVERRIDE[40];        /*!< (@ 0x00000800) Special privilege tables                              */
   } NRF_MPC_Type;                                    /*!< Size = 3328 (0xD00)                                                  */
@@ -84861,6 +85747,8 @@ typedef struct {
 
 /* MRAMC_CONFIGNVR_PAGE: Configuration register for NVR page n */
   #define MRAMC_CONFIGNVR_PAGE_MaxCount (4UL)        /*!< Max size of PAGE[4] array.                                           */
+  #define MRAMC_CONFIGNVR_PAGE_MaxIndex (3UL)        /*!< Max index of PAGE[4] array.                                          */
+  #define MRAMC_CONFIGNVR_PAGE_MinIndex (0UL)        /*!< Min index of PAGE[4] array.                                          */
   #define MRAMC_CONFIGNVR_PAGE_ResetValue (0x00000000UL) /*!< Reset value of PAGE[4] register.                                 */
 
 /* WEN @Bits 0..1 : Write enable. */
@@ -85135,6 +86023,8 @@ typedef struct {
 
 /* MRAMC_TESTMODE2_DATA: Data word n to/from MRAM data in/out bus. */
   #define MRAMC_TESTMODE2_DATA_MaxCount (4UL)        /*!< Max size of DATA[4] array.                                           */
+  #define MRAMC_TESTMODE2_DATA_MaxIndex (3UL)        /*!< Max index of DATA[4] array.                                          */
+  #define MRAMC_TESTMODE2_DATA_MinIndex (0UL)        /*!< Min index of DATA[4] array.                                          */
   #define MRAMC_TESTMODE2_DATA_ResetValue (0x00000000UL) /*!< Reset value of DATA[4] register.                                 */
 
 /* TESTDATA @Bits 0..31 : Returns data from the MRAM data out bus on reading. Sets the data to the MRAM data in bus on writing.
@@ -85171,6 +86061,8 @@ typedef struct {
 
 /* MRAMC_TESTMODE2_DATAINC: Same as DATA but post-increments address after the read from the bus. */
   #define MRAMC_TESTMODE2_DATAINC_MaxCount (4UL)     /*!< Max size of DATAINC[4] array.                                        */
+  #define MRAMC_TESTMODE2_DATAINC_MaxIndex (3UL)     /*!< Max index of DATAINC[4] array.                                       */
+  #define MRAMC_TESTMODE2_DATAINC_MinIndex (0UL)     /*!< Min index of DATAINC[4] array.                                       */
   #define MRAMC_TESTMODE2_DATAINC_ResetValue (0x00000000UL) /*!< Reset value of DATAINC[4] register.                           */
 
 /* DATA @Bits 0..31 : Read or write data. */
@@ -85893,6 +86785,8 @@ typedef struct {
 
 /* MUTEX_MUTEX: Mutex register */
   #define MUTEX_MUTEX_MaxCount (32UL)                /*!< Max size of MUTEX[32] array.                                         */
+  #define MUTEX_MUTEX_MaxIndex (31UL)                /*!< Max index of MUTEX[32] array.                                        */
+  #define MUTEX_MUTEX_MinIndex (0UL)                 /*!< Min index of MUTEX[32] array.                                        */
   #define MUTEX_MUTEX_ResetValue (0x00000000UL)      /*!< Reset value of MUTEX[32] register.                                   */
 
 /* MUTEX @Bit 0 : Mutex register n */
@@ -86168,6 +87062,8 @@ typedef struct {
 
 /* MVDMA_TASKS_START: Start operation. */
   #define MVDMA_TASKS_START_MaxCount (8UL)           /*!< Max size of TASKS_START[8] array.                                    */
+  #define MVDMA_TASKS_START_MaxIndex (7UL)           /*!< Max index of TASKS_START[8] array.                                   */
+  #define MVDMA_TASKS_START_MinIndex (0UL)           /*!< Min index of TASKS_START[8] array.                                   */
   #define MVDMA_TASKS_START_ResetValue (0x00000000UL) /*!< Reset value of TASKS_START[8] register.                             */
 
 /* TASKS_START @Bit 0 : Start operation. */
@@ -86216,6 +87112,8 @@ typedef struct {
 
 /* MVDMA_SUBSCRIBE_START: Subscribe configuration for task START[n] */
   #define MVDMA_SUBSCRIBE_START_MaxCount (8UL)       /*!< Max size of SUBSCRIBE_START[8] array.                                */
+  #define MVDMA_SUBSCRIBE_START_MaxIndex (7UL)       /*!< Max index of SUBSCRIBE_START[8] array.                               */
+  #define MVDMA_SUBSCRIBE_START_MinIndex (0UL)       /*!< Min index of SUBSCRIBE_START[8] array.                               */
   #define MVDMA_SUBSCRIBE_START_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_START[8] register.                     */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task START[n] will subscribe to */
@@ -89881,11 +90779,15 @@ typedef struct {
                                                                          [n].*/
   __IOM uint32_t  REVOKE[3];                         /*!< (@ 0x00000020) Revocation status of public key [n].                  */
 } NRF_OICR_USER_PUBKEY_Type;                         /*!< Size = 44 (0x02C)                                                    */
-  #define OICR_USER_PUBKEY_MaxCount (3UL)            /*!< Max size of PUBKEY[4] array.                                         */
+  #define OICR_USER_PUBKEY_MaxCount (4UL)            /*!< Max size of PUBKEY[4] array.                                         */
   #define OICR_USER_PUBKEY_MinCount (0UL)            /*!< Min size of PUBKEY[4] array.                                         */
+  #define OICR_USER_PUBKEY_MaxIndex (3UL)            /*!< Max index of PUBKEY[4] array.                                        */
+  #define OICR_USER_PUBKEY_MinIndex (0UL)            /*!< Min index of PUBKEY[4] array.                                        */
 
 /* OICR_USER_PUBKEY_DIGEST: First 256 bits of SHA2-512 digest for user public key [n]. */
   #define OICR_USER_PUBKEY_DIGEST_MaxCount (8UL)     /*!< Max size of DIGEST[8] array.                                         */
+  #define OICR_USER_PUBKEY_DIGEST_MaxIndex (7UL)     /*!< Max index of DIGEST[8] array.                                        */
+  #define OICR_USER_PUBKEY_DIGEST_MinIndex (0UL)     /*!< Min index of DIGEST[8] array.                                        */
   #define OICR_USER_PUBKEY_DIGEST_ResetValue (0xFFFFFFFFUL) /*!< Reset value of DIGEST[8] register.                            */
 
 /* VALUE @Bits 0..31 : Value for word [o] in the key digest [n]. */
@@ -89895,6 +90797,8 @@ typedef struct {
 
 /* OICR_USER_PUBKEY_REVOKE: Revocation status of public key [n]. */
   #define OICR_USER_PUBKEY_REVOKE_MaxCount (3UL)     /*!< Max size of REVOKE[3] array.                                         */
+  #define OICR_USER_PUBKEY_REVOKE_MaxIndex (2UL)     /*!< Max index of REVOKE[3] array.                                        */
+  #define OICR_USER_PUBKEY_REVOKE_MinIndex (0UL)     /*!< Min index of REVOKE[3] array.                                        */
   #define OICR_USER_PUBKEY_REVOKE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of REVOKE[3] register.                            */
 
 /* STATUS @Bits 0..31 : Revocation status. */
@@ -89916,11 +90820,15 @@ typedef struct {
                                                                          authentication key [n].*/
   __IOM uint32_t  REVOKE[3];                         /*!< (@ 0x00000020) Revocation status of authentication key [n].          */
 } NRF_OICR_USER_AUTHOPKEY_Type;                      /*!< Size = 44 (0x02C)                                                    */
-  #define OICR_USER_AUTHOPKEY_MaxCount (3UL)         /*!< Max size of AUTHOPKEY[4] array.                                      */
+  #define OICR_USER_AUTHOPKEY_MaxCount (4UL)         /*!< Max size of AUTHOPKEY[4] array.                                      */
   #define OICR_USER_AUTHOPKEY_MinCount (0UL)         /*!< Min size of AUTHOPKEY[4] array.                                      */
+  #define OICR_USER_AUTHOPKEY_MaxIndex (3UL)         /*!< Max index of AUTHOPKEY[4] array.                                     */
+  #define OICR_USER_AUTHOPKEY_MinIndex (0UL)         /*!< Min index of AUTHOPKEY[4] array.                                     */
 
 /* OICR_USER_AUTHOPKEY_DIGEST: First 256 bits of SHA2-512 digest for user authentication key [n]. */
   #define OICR_USER_AUTHOPKEY_DIGEST_MaxCount (8UL)  /*!< Max size of DIGEST[8] array.                                         */
+  #define OICR_USER_AUTHOPKEY_DIGEST_MaxIndex (7UL)  /*!< Max index of DIGEST[8] array.                                        */
+  #define OICR_USER_AUTHOPKEY_DIGEST_MinIndex (0UL)  /*!< Min index of DIGEST[8] array.                                        */
   #define OICR_USER_AUTHOPKEY_DIGEST_ResetValue (0xFFFFFFFFUL) /*!< Reset value of DIGEST[8] register.                         */
 
 /* VALUE @Bits 0..31 : Value for word [o] in the key digest [n]. */
@@ -89931,6 +90839,8 @@ typedef struct {
 
 /* OICR_USER_AUTHOPKEY_REVOKE: Revocation status of authentication key [n]. */
   #define OICR_USER_AUTHOPKEY_REVOKE_MaxCount (3UL)  /*!< Max size of REVOKE[3] array.                                         */
+  #define OICR_USER_AUTHOPKEY_REVOKE_MaxIndex (2UL)  /*!< Max index of REVOKE[3] array.                                        */
+  #define OICR_USER_AUTHOPKEY_REVOKE_MinIndex (0UL)  /*!< Min index of REVOKE[3] array.                                        */
   #define OICR_USER_AUTHOPKEY_REVOKE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of REVOKE[3] register.                         */
 
 /* STATUS @Bits 0..31 : Revocation status. */
@@ -89955,6 +90865,8 @@ typedef struct {
 
 /* OICR_USER_DATA: Reserved for user data. */
   #define OICR_USER_DATA_MaxCount (32UL)             /*!< Max size of DATA[32] array.                                          */
+  #define OICR_USER_DATA_MaxIndex (31UL)             /*!< Max index of DATA[32] array.                                         */
+  #define OICR_USER_DATA_MinIndex (0UL)              /*!< Min index of DATA[32] array.                                         */
   #define OICR_USER_DATA_ResetValue (0xFFFFFFFFUL)   /*!< Reset value of DATA[32] register.                                    */
 
 /* DATA @Bits 0..31 : Data */
@@ -89972,11 +90884,15 @@ typedef struct {
                                                                          [n].*/
   __IOM uint32_t  REVOKE[3];                         /*!< (@ 0x00000020) Revocation status of public key [n].                  */
 } NRF_OICR_NORDIC_PUBKEY_Type;                       /*!< Size = 44 (0x02C)                                                    */
-  #define OICR_NORDIC_PUBKEY_MaxCount (3UL)          /*!< Max size of PUBKEY[4] array.                                         */
+  #define OICR_NORDIC_PUBKEY_MaxCount (4UL)          /*!< Max size of PUBKEY[4] array.                                         */
   #define OICR_NORDIC_PUBKEY_MinCount (0UL)          /*!< Min size of PUBKEY[4] array.                                         */
+  #define OICR_NORDIC_PUBKEY_MaxIndex (3UL)          /*!< Max index of PUBKEY[4] array.                                        */
+  #define OICR_NORDIC_PUBKEY_MinIndex (0UL)          /*!< Min index of PUBKEY[4] array.                                        */
 
 /* OICR_NORDIC_PUBKEY_DIGEST: First 256 bits of SHA2-512 digest for Nordic public key [n]. */
   #define OICR_NORDIC_PUBKEY_DIGEST_MaxCount (8UL)   /*!< Max size of DIGEST[8] array.                                         */
+  #define OICR_NORDIC_PUBKEY_DIGEST_MaxIndex (7UL)   /*!< Max index of DIGEST[8] array.                                        */
+  #define OICR_NORDIC_PUBKEY_DIGEST_MinIndex (0UL)   /*!< Min index of DIGEST[8] array.                                        */
   #define OICR_NORDIC_PUBKEY_DIGEST_ResetValue (0xFFFFFFFFUL) /*!< Reset value of DIGEST[8] register.                          */
 
 /* VALUE @Bits 0..31 : Value for word [o] in the key digest [n]. */
@@ -89987,6 +90903,8 @@ typedef struct {
 
 /* OICR_NORDIC_PUBKEY_REVOKE: Revocation status of public key [n]. */
   #define OICR_NORDIC_PUBKEY_REVOKE_MaxCount (3UL)   /*!< Max size of REVOKE[3] array.                                         */
+  #define OICR_NORDIC_PUBKEY_REVOKE_MaxIndex (2UL)   /*!< Max index of REVOKE[3] array.                                        */
+  #define OICR_NORDIC_PUBKEY_REVOKE_MinIndex (0UL)   /*!< Min index of REVOKE[3] array.                                        */
   #define OICR_NORDIC_PUBKEY_REVOKE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of REVOKE[3] register.                          */
 
 /* STATUS @Bits 0..31 : Revocation status. */
@@ -90008,11 +90926,15 @@ typedef struct {
                                                                          authentication key [n].*/
   __IOM uint32_t  REVOKE[3];                         /*!< (@ 0x00000020) Revocation status of authentication key [n].          */
 } NRF_OICR_NORDIC_AUTHOPKEY_Type;                    /*!< Size = 44 (0x02C)                                                    */
-  #define OICR_NORDIC_AUTHOPKEY_MaxCount (3UL)       /*!< Max size of AUTHOPKEY[4] array.                                      */
+  #define OICR_NORDIC_AUTHOPKEY_MaxCount (4UL)       /*!< Max size of AUTHOPKEY[4] array.                                      */
   #define OICR_NORDIC_AUTHOPKEY_MinCount (0UL)       /*!< Min size of AUTHOPKEY[4] array.                                      */
+  #define OICR_NORDIC_AUTHOPKEY_MaxIndex (3UL)       /*!< Max index of AUTHOPKEY[4] array.                                     */
+  #define OICR_NORDIC_AUTHOPKEY_MinIndex (0UL)       /*!< Min index of AUTHOPKEY[4] array.                                     */
 
 /* OICR_NORDIC_AUTHOPKEY_DIGEST: First 256 bits of SHA2-512 digest for Nordic authentication key [n]. */
   #define OICR_NORDIC_AUTHOPKEY_DIGEST_MaxCount (8UL) /*!< Max size of DIGEST[8] array.                                        */
+  #define OICR_NORDIC_AUTHOPKEY_DIGEST_MaxIndex (7UL) /*!< Max index of DIGEST[8] array.                                       */
+  #define OICR_NORDIC_AUTHOPKEY_DIGEST_MinIndex (0UL) /*!< Min index of DIGEST[8] array.                                       */
   #define OICR_NORDIC_AUTHOPKEY_DIGEST_ResetValue (0xFFFFFFFFUL) /*!< Reset value of DIGEST[8] register.                       */
 
 /* VALUE @Bits 0..31 : Value for word [o] in the key digest [n]. */
@@ -90023,6 +90945,8 @@ typedef struct {
 
 /* OICR_NORDIC_AUTHOPKEY_REVOKE: Revocation status of authentication key [n]. */
   #define OICR_NORDIC_AUTHOPKEY_REVOKE_MaxCount (3UL) /*!< Max size of REVOKE[3] array.                                        */
+  #define OICR_NORDIC_AUTHOPKEY_REVOKE_MaxIndex (2UL) /*!< Max index of REVOKE[3] array.                                       */
+  #define OICR_NORDIC_AUTHOPKEY_REVOKE_MinIndex (0UL) /*!< Min index of REVOKE[3] array.                                       */
   #define OICR_NORDIC_AUTHOPKEY_REVOKE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of REVOKE[3] register.                       */
 
 /* STATUS @Bits 0..31 : Revocation status. */
@@ -90052,11 +90976,15 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  VALUE[8];                          /*!< (@ 0x00000000) Value for the CRACEN KEY[n].                          */
 } NRF_OICR_CRACEN_KEY_Type;                          /*!< Size = 32 (0x020)                                                    */
-  #define OICR_CRACEN_KEY_MaxCount (3UL)             /*!< Max size of KEY[4] array.                                            */
+  #define OICR_CRACEN_KEY_MaxCount (4UL)             /*!< Max size of KEY[4] array.                                            */
   #define OICR_CRACEN_KEY_MinCount (0UL)             /*!< Min size of KEY[4] array.                                            */
+  #define OICR_CRACEN_KEY_MaxIndex (3UL)             /*!< Max index of KEY[4] array.                                           */
+  #define OICR_CRACEN_KEY_MinIndex (0UL)             /*!< Min index of KEY[4] array.                                           */
 
 /* OICR_CRACEN_KEY_VALUE: Value for the CRACEN KEY[n]. */
   #define OICR_CRACEN_KEY_VALUE_MaxCount (8UL)       /*!< Max size of VALUE[8] array.                                          */
+  #define OICR_CRACEN_KEY_VALUE_MaxIndex (7UL)       /*!< Max index of VALUE[8] array.                                         */
+  #define OICR_CRACEN_KEY_VALUE_MinIndex (0UL)       /*!< Min index of VALUE[8] array.                                         */
   #define OICR_CRACEN_KEY_VALUE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VALUE[8] register.                               */
 
 /* VALUE @Bits 0..31 : Value for word [o] in the CRACEN.KEY[n]. */
@@ -90084,6 +91012,8 @@ typedef struct {
 
 /* OICR_DEVICE_UUID: 128-bit Universally Unique IDentifier (UUID). */
   #define OICR_DEVICE_UUID_MaxCount (4UL)            /*!< Max size of UUID[4] array.                                           */
+  #define OICR_DEVICE_UUID_MaxIndex (3UL)            /*!< Max index of UUID[4] array.                                          */
+  #define OICR_DEVICE_UUID_MinIndex (0UL)            /*!< Min index of UUID[4] array.                                          */
   #define OICR_DEVICE_UUID_ResetValue (0xFFFFFFFFUL) /*!< Reset value of UUID[4] register.                                     */
 
 /* UUID @Bits 0..31 : Device UUID [n]. */
@@ -90147,6 +91077,8 @@ typedef struct {
 
 /* OICR_INFO_TESTIMPRINT: Production test imprint. */
   #define OICR_INFO_TESTIMPRINT_MaxCount (8UL)       /*!< Max size of TESTIMPRINT[8] array.                                    */
+  #define OICR_INFO_TESTIMPRINT_MaxIndex (7UL)       /*!< Max index of TESTIMPRINT[8] array.                                   */
+  #define OICR_INFO_TESTIMPRINT_MinIndex (0UL)       /*!< Min index of TESTIMPRINT[8] array.                                   */
   #define OICR_INFO_TESTIMPRINT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TESTIMPRINT[8] register.                         */
 
 /* TESTIMPRINT @Bits 0..31 : Production test imprint. */
@@ -90244,8 +91176,10 @@ typedef struct {
                                                                          MRAM[n].*/
   __IM  uint32_t  CONFIG[12];                        /*!< (@ 0x0000001C) MRAM[n] trim configuration.                           */
 } NRF_OICR_MRAM_Type;                                /*!< Size = 76 (0x04C)                                                    */
-  #define OICR_MRAM_MaxCount (1UL)                   /*!< Max size of MRAM[2] array.                                           */
+  #define OICR_MRAM_MaxCount (2UL)                   /*!< Max size of MRAM[2] array.                                           */
   #define OICR_MRAM_MinCount (0UL)                   /*!< Min size of MRAM[2] array.                                           */
+  #define OICR_MRAM_MaxIndex (1UL)                   /*!< Max index of MRAM[2] array.                                          */
+  #define OICR_MRAM_MinIndex (0UL)                   /*!< Min index of MRAM[2] array.                                          */
 
 /* OICR_MRAM_WAITSTATES: Default MRAM[n] waitstates. */
   #define OICR_MRAM_WAITSTATES_ResetValue (0xFFFFFFFFUL) /*!< Reset value of WAITSTATES register.                              */
@@ -90286,6 +91220,8 @@ typedef struct {
 
 /* OICR_MRAM_CONFIG: MRAM[n] trim configuration. */
   #define OICR_MRAM_CONFIG_MaxCount (12UL)           /*!< Max size of CONFIG[12] array.                                        */
+  #define OICR_MRAM_CONFIG_MaxIndex (11UL)           /*!< Max index of CONFIG[12] array.                                       */
+  #define OICR_MRAM_CONFIG_MinIndex (0UL)            /*!< Min index of CONFIG[12] array.                                       */
   #define OICR_MRAM_CONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CONFIG[12] register.                                  */
 
 /* CONFIG @Bits 0..31 : Trim Configuration [o]. */
@@ -90307,6 +91243,8 @@ typedef struct {
 
 /* OICR_FWPATCH_PATCHADDR: Patch address for patch entry point n. */
   #define OICR_FWPATCH_PATCHADDR_MaxCount (256UL)    /*!< Max size of PATCHADDR[256] array.                                    */
+  #define OICR_FWPATCH_PATCHADDR_MaxIndex (255UL)    /*!< Max index of PATCHADDR[256] array.                                   */
+  #define OICR_FWPATCH_PATCHADDR_MinIndex (0UL)      /*!< Min index of PATCHADDR[256] array.                                   */
   #define OICR_FWPATCH_PATCHADDR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PATCHADDR[256] register.                        */
 
 /* ADDR @Bits 0..31 : Address */
@@ -90316,6 +91254,8 @@ typedef struct {
 
 /* OICR_FWPATCH_TRAPADDR: Addresses in the ROM code which will be trapped to the PATCHADDR target. */
   #define OICR_FWPATCH_TRAPADDR_MaxCount (8UL)       /*!< Max size of TRAPADDR[8] array.                                       */
+  #define OICR_FWPATCH_TRAPADDR_MaxIndex (7UL)       /*!< Max index of TRAPADDR[8] array.                                      */
+  #define OICR_FWPATCH_TRAPADDR_MinIndex (0UL)       /*!< Min index of TRAPADDR[8] array.                                      */
   #define OICR_FWPATCH_TRAPADDR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRAPADDR[8] register.                            */
 
 /* VALUE @Bits 0..31 : Value */
@@ -90325,6 +91265,8 @@ typedef struct {
 
 /* OICR_FWPATCH_PATCHCODE: Patch code area. */
   #define OICR_FWPATCH_PATCHCODE_MaxCount (2808UL)   /*!< Max size of PATCHCODE[2808] array.                                   */
+  #define OICR_FWPATCH_PATCHCODE_MaxIndex (2807UL)   /*!< Max index of PATCHCODE[2808] array.                                  */
+  #define OICR_FWPATCH_PATCHCODE_MinIndex (0UL)      /*!< Min index of PATCHCODE[2808] array.                                  */
   #define OICR_FWPATCH_PATCHCODE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PATCHCODE[2808] register.                       */
 
 /* DATA @Bits 0..31 : Data */
@@ -91460,6 +92402,8 @@ typedef struct {
 
 /* PCGCMASTER_SETPWRCONTHRESHOLDBASE: Set power consumption threshold base for power source / regulator n */
   #define PCGCMASTER_SETPWRCONTHRESHOLDBASE_MaxCount (3UL) /*!< Max size of SETPWRCONTHRESHOLDBASE[3] array.                   */
+  #define PCGCMASTER_SETPWRCONTHRESHOLDBASE_MaxIndex (2UL) /*!< Max index of SETPWRCONTHRESHOLDBASE[3] array.                  */
+  #define PCGCMASTER_SETPWRCONTHRESHOLDBASE_MinIndex (0UL) /*!< Min index of SETPWRCONTHRESHOLDBASE[3] array.                  */
   #define PCGCMASTER_SETPWRCONTHRESHOLDBASE_ResetValue (0x00000000UL) /*!< Reset value of SETPWRCONTHRESHOLDBASE[3] register.  */
 
 /* SETPWRCONTHRESHOLDBASE @Bits 0..3 : SETPWRCONTHRESHOLDBASE */
@@ -91470,6 +92414,8 @@ typedef struct {
 
 /* PCGCMASTER_SETPOWERCONSUMPTIONBASE: Set power consumption base for power/clock pair n */
   #define PCGCMASTER_SETPOWERCONSUMPTIONBASE_MaxCount (2UL) /*!< Max size of SETPOWERCONSUMPTIONBASE[2] array.                 */
+  #define PCGCMASTER_SETPOWERCONSUMPTIONBASE_MaxIndex (1UL) /*!< Max index of SETPOWERCONSUMPTIONBASE[2] array.                */
+  #define PCGCMASTER_SETPOWERCONSUMPTIONBASE_MinIndex (0UL) /*!< Min index of SETPOWERCONSUMPTIONBASE[2] array.                */
   #define PCGCMASTER_SETPOWERCONSUMPTIONBASE_ResetValue (0x00000000UL) /*!< Reset value of SETPOWERCONSUMPTIONBASE[2] register.*/
 
 /* POWERREQUIREMENT @Bits 0..3 : POWERREQUIREMENT */
@@ -91509,6 +92455,8 @@ typedef struct {
 
 /* PCGCMASTER_MASTERFORCEREG: Force reg */
   #define PCGCMASTER_MASTERFORCEREG_MaxCount (1UL)   /*!< Max size of MASTERFORCEREG[1] array.                                 */
+  #define PCGCMASTER_MASTERFORCEREG_MaxIndex (0UL)   /*!< Max index of MASTERFORCEREG[1] array.                                */
+  #define PCGCMASTER_MASTERFORCEREG_MinIndex (0UL)   /*!< Min index of MASTERFORCEREG[1] array.                                */
   #define PCGCMASTER_MASTERFORCEREG_ResetValue (0x00000000UL) /*!< Reset value of MASTERFORCEREG[1] register.                  */
 
 /* ENABLEPSWITCHFORCE @Bit 0 : ENABLEPSWITCHFORCE */
@@ -91564,6 +92512,8 @@ typedef struct {
 
 /* PCGCMASTER_CLOCKFORCEREG: Force clock n */
   #define PCGCMASTER_CLOCKFORCEREG_MaxCount (5UL)    /*!< Max size of CLOCKFORCEREG[5] array.                                  */
+  #define PCGCMASTER_CLOCKFORCEREG_MaxIndex (4UL)    /*!< Max index of CLOCKFORCEREG[5] array.                                 */
+  #define PCGCMASTER_CLOCKFORCEREG_MinIndex (0UL)    /*!< Min index of CLOCKFORCEREG[5] array.                                 */
   #define PCGCMASTER_CLOCKFORCEREG_ResetValue (0x00000000UL) /*!< Reset value of CLOCKFORCEREG[5] register.                    */
 
 /* ENABLE @Bit 0 : Enable clock forcing */
@@ -91601,6 +92551,8 @@ typedef struct {
 
 /* PCGCSLAVE_PENALTY: Penalty level for power/clock pair n */
   #define PCGCSLAVE_PENALTY_MaxCount (2UL)           /*!< Max size of PENALTY[2] array.                                        */
+  #define PCGCSLAVE_PENALTY_MaxIndex (1UL)           /*!< Max index of PENALTY[2] array.                                       */
+  #define PCGCSLAVE_PENALTY_MinIndex (0UL)           /*!< Min index of PENALTY[2] array.                                       */
   #define PCGCSLAVE_PENALTY_ResetValue (0x00000000UL) /*!< Reset value of PENALTY[2] register.                                 */
 
 /* PENALTY @Bits 0..7 : Penalty level */
@@ -91610,6 +92562,8 @@ typedef struct {
 
 /* PCGCSLAVE_FORCEOVERRIDE: Force override of power/clock pair n */
   #define PCGCSLAVE_FORCEOVERRIDE_MaxCount (2UL)     /*!< Max size of FORCEOVERRIDE[2] array.                                  */
+  #define PCGCSLAVE_FORCEOVERRIDE_MaxIndex (1UL)     /*!< Max index of FORCEOVERRIDE[2] array.                                 */
+  #define PCGCSLAVE_FORCEOVERRIDE_MinIndex (0UL)     /*!< Min index of FORCEOVERRIDE[2] array.                                 */
   #define PCGCSLAVE_FORCEOVERRIDE_ResetValue (0x00000000UL) /*!< Reset value of FORCEOVERRIDE[2] register.                     */
 
 /* CLOCKFORCINGPRE @Bits 0..3 : CLOCKFORCINGPRE */
@@ -92215,6 +93169,8 @@ typedef struct {
 
 /* PCRM_RAIL_STATUS: Status of the rail n */
   #define PCRM_RAIL_STATUS_MaxCount (16UL)           /*!< Max size of STATUS[16] array.                                        */
+  #define PCRM_RAIL_STATUS_MaxIndex (15UL)           /*!< Max index of STATUS[16] array.                                       */
+  #define PCRM_RAIL_STATUS_MinIndex (0UL)            /*!< Min index of STATUS[16] array.                                       */
   #define PCRM_RAIL_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS[16] register.                                  */
 
 /* VALUE @Bits 0..7 : Estimated value for the rail n */
@@ -92233,6 +93189,8 @@ typedef struct {
 
 /* PCRM_CONFIG_LOAD: Load configuration table for consumer for consumer n */
   #define PCRM_CONFIG_LOAD_MaxCount (32UL)           /*!< Max size of LOAD[32] array.                                          */
+  #define PCRM_CONFIG_LOAD_MaxIndex (31UL)           /*!< Max index of LOAD[32] array.                                         */
+  #define PCRM_CONFIG_LOAD_MinIndex (0UL)            /*!< Min index of LOAD[32] array.                                         */
   #define PCRM_CONFIG_LOAD_ResetValue (0x00000000UL) /*!< Reset value of LOAD[32] register.                                    */
 
 /* VALUE @Bits 0..9 : Threshold value for the load for consumer n */
@@ -92255,6 +93213,8 @@ typedef struct {
 
 /* PCRM_OVERRIDE_REQUEST: Override the request for consumer n */
   #define PCRM_OVERRIDE_REQUEST_MaxCount (32UL)      /*!< Max size of REQUEST[32] array.                                       */
+  #define PCRM_OVERRIDE_REQUEST_MaxIndex (31UL)      /*!< Max index of REQUEST[32] array.                                      */
+  #define PCRM_OVERRIDE_REQUEST_MinIndex (0UL)       /*!< Min index of REQUEST[32] array.                                      */
   #define PCRM_OVERRIDE_REQUEST_ResetValue (0x00000000UL) /*!< Reset value of REQUEST[32] register.                            */
 
 /* VAL @Bit 0 : Override value for the request for consumer n */
@@ -92276,6 +93236,8 @@ typedef struct {
 
 /* PCRM_OVERRIDE_ACK: Override the Ack for the request for consumer n */
   #define PCRM_OVERRIDE_ACK_MaxCount (32UL)          /*!< Max size of ACK[32] array.                                           */
+  #define PCRM_OVERRIDE_ACK_MaxIndex (31UL)          /*!< Max index of ACK[32] array.                                          */
+  #define PCRM_OVERRIDE_ACK_MinIndex (0UL)           /*!< Min index of ACK[32] array.                                          */
   #define PCRM_OVERRIDE_ACK_ResetValue (0x00000000UL) /*!< Reset value of ACK[32] register.                                    */
 
 /* VAL @Bit 0 : Override the Ack value for the request for consumer n */
@@ -92297,6 +93259,8 @@ typedef struct {
 
 /* PCRM_OVERRIDE_CROSSCURRENT: Override the cross current for rail n */
   #define PCRM_OVERRIDE_CROSSCURRENT_MaxCount (16UL) /*!< Max size of CROSSCURRENT[16] array.                                  */
+  #define PCRM_OVERRIDE_CROSSCURRENT_MaxIndex (15UL) /*!< Max index of CROSSCURRENT[16] array.                                 */
+  #define PCRM_OVERRIDE_CROSSCURRENT_MinIndex (0UL)  /*!< Min index of CROSSCURRENT[16] array.                                 */
   #define PCRM_OVERRIDE_CROSSCURRENT_ResetValue (0x00000000UL) /*!< Reset value of CROSSCURRENT[16] register.                  */
 
 /* VAL @Bit 0 : Override value for the cross current for rail n */
@@ -92361,6 +93325,8 @@ typedef struct {
 
 /* PCRM_EVENTS_REQUESTRISING: Request rising for the consumer n */
   #define PCRM_EVENTS_REQUESTRISING_MaxCount (32UL)  /*!< Max size of EVENTS_REQUESTRISING[32] array.                          */
+  #define PCRM_EVENTS_REQUESTRISING_MaxIndex (31UL)  /*!< Max index of EVENTS_REQUESTRISING[32] array.                         */
+  #define PCRM_EVENTS_REQUESTRISING_MinIndex (0UL)   /*!< Min index of EVENTS_REQUESTRISING[32] array.                         */
   #define PCRM_EVENTS_REQUESTRISING_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_REQUESTRISING[32] register.           */
 
 /* EVENTS_REQUESTRISING @Bit 0 : Request rising for the consumer n */
@@ -92375,6 +93341,8 @@ typedef struct {
 
 /* PCRM_EVENTS_REQUESTFALLING: Request falling for the consumer n */
   #define PCRM_EVENTS_REQUESTFALLING_MaxCount (32UL) /*!< Max size of EVENTS_REQUESTFALLING[32] array.                         */
+  #define PCRM_EVENTS_REQUESTFALLING_MaxIndex (31UL) /*!< Max index of EVENTS_REQUESTFALLING[32] array.                        */
+  #define PCRM_EVENTS_REQUESTFALLING_MinIndex (0UL)  /*!< Min index of EVENTS_REQUESTFALLING[32] array.                        */
   #define PCRM_EVENTS_REQUESTFALLING_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_REQUESTFALLING[32] register.         */
 
 /* EVENTS_REQUESTFALLING @Bit 0 : Request falling for the consumer n */
@@ -92391,6 +93359,8 @@ typedef struct {
 
 /* PCRM_EVENTS_LOADCHANGERAIL: Load change on rail n */
   #define PCRM_EVENTS_LOADCHANGERAIL_MaxCount (16UL) /*!< Max size of EVENTS_LOADCHANGERAIL[16] array.                         */
+  #define PCRM_EVENTS_LOADCHANGERAIL_MaxIndex (15UL) /*!< Max index of EVENTS_LOADCHANGERAIL[16] array.                        */
+  #define PCRM_EVENTS_LOADCHANGERAIL_MinIndex (0UL)  /*!< Min index of EVENTS_LOADCHANGERAIL[16] array.                        */
   #define PCRM_EVENTS_LOADCHANGERAIL_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_LOADCHANGERAIL[16] register.         */
 
 /* EVENTS_LOADCHANGERAIL @Bit 0 : Load change on rail n */
@@ -96281,8 +97251,10 @@ typedef struct {
   __IOM uint32_t  OPPOINT;                           /*!< (@ 0x00000004) Select ABB operating point for ABB domain [n]         */
   __IOM uint32_t  FORCELOCK;                         /*!< (@ 0x00000008) Force lock for the ABB at ABB domain [n]              */
 } NRF_POWER_ABB_Type;                                /*!< Size = 12 (0x00C)                                                    */
-  #define POWER_ABB_MaxCount (1UL)                   /*!< Max size of ABB[2] array.                                            */
+  #define POWER_ABB_MaxCount (2UL)                   /*!< Max size of ABB[2] array.                                            */
   #define POWER_ABB_MinCount (0UL)                   /*!< Min size of ABB[2] array.                                            */
+  #define POWER_ABB_MaxIndex (1UL)                   /*!< Max index of ABB[2] array.                                           */
+  #define POWER_ABB_MinIndex (0UL)                   /*!< Min index of ABB[2] array.                                           */
 
 /* POWER_ABB_STATUS: ABB Status for ABB domain [n] */
   #define POWER_ABB_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                                      */
@@ -96412,6 +97384,8 @@ typedef struct {
 
 /* POWER_EVENTS_ABBLOCK: ABB lock for the ABB domain [n] */
   #define POWER_EVENTS_ABBLOCK_MaxCount (2UL)        /*!< Max size of EVENTS_ABBLOCK[2] array.                                 */
+  #define POWER_EVENTS_ABBLOCK_MaxIndex (1UL)        /*!< Max index of EVENTS_ABBLOCK[2] array.                                */
+  #define POWER_EVENTS_ABBLOCK_MinIndex (0UL)        /*!< Min index of EVENTS_ABBLOCK[2] array.                                */
   #define POWER_EVENTS_ABBLOCK_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ABBLOCK[2] register.                       */
 
 /* EVENTS_ABBLOCK @Bit 0 : ABB lock for the ABB domain [n] */
@@ -97183,6 +98157,8 @@ typedef struct {
 
 /* PPIB_TASKS_SEND: This task is unused, but the PPIB provides the SUBSCRIBE task to connect SEND [n] task. */
   #define PPIB_TASKS_SEND_MaxCount (32UL)            /*!< Max size of TASKS_SEND[32] array.                                    */
+  #define PPIB_TASKS_SEND_MaxIndex (31UL)            /*!< Max index of TASKS_SEND[32] array.                                   */
+  #define PPIB_TASKS_SEND_MinIndex (0UL)             /*!< Min index of TASKS_SEND[32] array.                                   */
   #define PPIB_TASKS_SEND_ResetValue (0x00000000UL)  /*!< Reset value of TASKS_SEND[32] register.                              */
 
 /* TASKS_SEND @Bit 0 : This task is unused, but the PPIB provides the SUBSCRIBE task to connect SEND [n] task. */
@@ -97195,6 +98171,8 @@ typedef struct {
 
 /* PPIB_SUBSCRIBE_SEND: Subscribe configuration for task SEND[n] */
   #define PPIB_SUBSCRIBE_SEND_MaxCount (32UL)        /*!< Max size of SUBSCRIBE_SEND[32] array.                                */
+  #define PPIB_SUBSCRIBE_SEND_MaxIndex (31UL)        /*!< Max index of SUBSCRIBE_SEND[32] array.                               */
+  #define PPIB_SUBSCRIBE_SEND_MinIndex (0UL)         /*!< Min index of SUBSCRIBE_SEND[32] array.                               */
   #define PPIB_SUBSCRIBE_SEND_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_SEND[32] register.                       */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task SEND[n] will subscribe to */
@@ -97214,6 +98192,8 @@ typedef struct {
 
 /* PPIB_EVENTS_RECEIVE: This event is unused, but the PPIB provides the PUBLISH event to connect RECEIVE [n] event. */
   #define PPIB_EVENTS_RECEIVE_MaxCount (32UL)        /*!< Max size of EVENTS_RECEIVE[32] array.                                */
+  #define PPIB_EVENTS_RECEIVE_MaxIndex (31UL)        /*!< Max index of EVENTS_RECEIVE[32] array.                               */
+  #define PPIB_EVENTS_RECEIVE_MinIndex (0UL)         /*!< Min index of EVENTS_RECEIVE[32] array.                               */
   #define PPIB_EVENTS_RECEIVE_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_RECEIVE[32] register.                       */
 
 /* EVENTS_RECEIVE @Bit 0 : This event is unused, but the PPIB provides the PUBLISH event to connect RECEIVE [n] event. */
@@ -97228,6 +98208,8 @@ typedef struct {
 
 /* PPIB_PUBLISH_RECEIVE: Publish configuration for event RECEIVE[n] */
   #define PPIB_PUBLISH_RECEIVE_MaxCount (32UL)       /*!< Max size of PUBLISH_RECEIVE[32] array.                               */
+  #define PPIB_PUBLISH_RECEIVE_MaxIndex (31UL)       /*!< Max index of PUBLISH_RECEIVE[32] array.                              */
+  #define PPIB_PUBLISH_RECEIVE_MinIndex (0UL)        /*!< Min index of PUBLISH_RECEIVE[32] array.                              */
   #define PPIB_PUBLISH_RECEIVE_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_RECEIVE[32] register.                     */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event RECEIVE[n] will publish to */
@@ -97269,8 +98251,10 @@ typedef struct {
                                                                          event.*/
   __IM  uint32_t  RESERVED[2];
 } NRF_PWM_SEQ_Type;                                  /*!< Size = 32 (0x020)                                                    */
-  #define PWM_SEQ_MaxCount (1UL)                     /*!< Max size of SEQ[2] array.                                            */
+  #define PWM_SEQ_MaxCount (2UL)                     /*!< Max size of SEQ[2] array.                                            */
   #define PWM_SEQ_MinCount (0UL)                     /*!< Min size of SEQ[2] array.                                            */
+  #define PWM_SEQ_MaxIndex (1UL)                     /*!< Max index of SEQ[2] array.                                           */
+  #define PWM_SEQ_MinIndex (0UL)                     /*!< Min index of SEQ[2] array.                                           */
 
 /* PWM_SEQ_PTR: Beginning address in RAM of this sequence */
   #define PWM_SEQ_PTR_ResetValue (0x00000000UL)      /*!< Reset value of PTR register.                                         */
@@ -97345,6 +98329,8 @@ typedef struct {
 
 /* PWM_PSEL_OUT: Output pin select for PWM channel n */
   #define PWM_PSEL_OUT_MaxCount (4UL)                /*!< Max size of OUT[4] array.                                            */
+  #define PWM_PSEL_OUT_MaxIndex (3UL)                /*!< Max index of OUT[4] array.                                           */
+  #define PWM_PSEL_OUT_MinIndex (0UL)                /*!< Min index of OUT[4] array.                                           */
   #define PWM_PSEL_OUT_ResetValue (0xFFFFFFFFUL)     /*!< Reset value of OUT[4] register.                                      */
 
 /* PIN @Bits 0..4 : Pin number */
@@ -97532,6 +98518,8 @@ typedef struct {
                         glitch-free) abort that sequence at the earliest opportunity and start sequence n. */
 
   #define PWM_TASKS_SEQSTART_MaxCount (2UL)          /*!< Max size of TASKS_SEQSTART[2] array.                                 */
+  #define PWM_TASKS_SEQSTART_MaxIndex (1UL)          /*!< Max index of TASKS_SEQSTART[2] array.                                */
+  #define PWM_TASKS_SEQSTART_MinIndex (0UL)          /*!< Min index of TASKS_SEQSTART[2] array.                                */
   #define PWM_TASKS_SEQSTART_ResetValue (0x00000000UL) /*!< Reset value of TASKS_SEQSTART[2] register.                         */
 
 /* TASKS_SEQSTART @Bit 0 : Loads the first PWM value on all enabled channels from sequence n, and starts playing that sequence
@@ -97613,6 +98601,8 @@ typedef struct {
 
 /* PWM_SUBSCRIBE_SEQSTART: Subscribe configuration for task SEQSTART[n] */
   #define PWM_SUBSCRIBE_SEQSTART_MaxCount (2UL)      /*!< Max size of SUBSCRIBE_SEQSTART[2] array.                             */
+  #define PWM_SUBSCRIBE_SEQSTART_MaxIndex (1UL)      /*!< Max index of SUBSCRIBE_SEQSTART[2] array.                            */
+  #define PWM_SUBSCRIBE_SEQSTART_MinIndex (0UL)      /*!< Min index of SUBSCRIBE_SEQSTART[2] array.                            */
   #define PWM_SUBSCRIBE_SEQSTART_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_SEQSTART[2] register.                 */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task SEQSTART[n] will subscribe to */
@@ -97694,6 +98684,8 @@ typedef struct {
 
 /* PWM_EVENTS_SEQSTARTED: First PWM period started on sequence n */
   #define PWM_EVENTS_SEQSTARTED_MaxCount (2UL)       /*!< Max size of EVENTS_SEQSTARTED[2] array.                              */
+  #define PWM_EVENTS_SEQSTARTED_MaxIndex (1UL)       /*!< Max index of EVENTS_SEQSTARTED[2] array.                             */
+  #define PWM_EVENTS_SEQSTARTED_MinIndex (0UL)       /*!< Min index of EVENTS_SEQSTARTED[2] array.                             */
   #define PWM_EVENTS_SEQSTARTED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_SEQSTARTED[2] register.                   */
 
 /* EVENTS_SEQSTARTED @Bit 0 : First PWM period started on sequence n */
@@ -97708,6 +98700,8 @@ typedef struct {
 
 /* PWM_EVENTS_SEQEND: Emitted at end of every sequence n, when last value from RAM has been applied to wave counter */
   #define PWM_EVENTS_SEQEND_MaxCount (2UL)           /*!< Max size of EVENTS_SEQEND[2] array.                                  */
+  #define PWM_EVENTS_SEQEND_MaxIndex (1UL)           /*!< Max index of EVENTS_SEQEND[2] array.                                 */
+  #define PWM_EVENTS_SEQEND_MinIndex (0UL)           /*!< Min index of EVENTS_SEQEND[2] array.                                 */
   #define PWM_EVENTS_SEQEND_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_SEQEND[2] register.                           */
 
 /* EVENTS_SEQEND @Bit 0 : Emitted at end of every sequence n, when last value from RAM has been applied to wave counter */
@@ -97763,6 +98757,8 @@ typedef struct {
                          the next sequence) */
 
   #define PWM_EVENTS_DMAREADY_MaxCount (2UL)         /*!< Max size of EVENTS_DMAREADY[2] array.                                */
+  #define PWM_EVENTS_DMAREADY_MaxIndex (1UL)         /*!< Max index of EVENTS_DMAREADY[2] array.                               */
+  #define PWM_EVENTS_DMAREADY_MinIndex (0UL)         /*!< Min index of EVENTS_DMAREADY[2] array.                               */
   #define PWM_EVENTS_DMAREADY_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_DMAREADY[2] register.                       */
 
 /* EVENTS_DMAREADY @Bit 0 : Emitted when EasyDMA has retrieved the .PTR and .CNT registers for sequence n (they can be prepared
@@ -97779,6 +98775,8 @@ typedef struct {
 
 /* PWM_EVENTS_DMAEND: Emitted when EasyDMA has completed retrieving the values of sequence n from RAM buffer */
   #define PWM_EVENTS_DMAEND_MaxCount (2UL)           /*!< Max size of EVENTS_DMAEND[2] array.                                  */
+  #define PWM_EVENTS_DMAEND_MaxIndex (1UL)           /*!< Max index of EVENTS_DMAEND[2] array.                                 */
+  #define PWM_EVENTS_DMAEND_MinIndex (0UL)           /*!< Min index of EVENTS_DMAEND[2] array.                                 */
   #define PWM_EVENTS_DMAEND_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_DMAEND[2] register.                           */
 
 /* EVENTS_DMAEND @Bit 0 : Emitted when EasyDMA has completed retrieving the values of sequence n from RAM buffer */
@@ -97795,6 +98793,8 @@ typedef struct {
                          AXI error response. */
 
   #define PWM_EVENTS_BUSERROR_MaxCount (2UL)         /*!< Max size of EVENTS_BUSERROR[2] array.                                */
+  #define PWM_EVENTS_BUSERROR_MaxIndex (1UL)         /*!< Max index of EVENTS_BUSERROR[2] array.                               */
+  #define PWM_EVENTS_BUSERROR_MinIndex (0UL)         /*!< Min index of EVENTS_BUSERROR[2] array.                               */
   #define PWM_EVENTS_BUSERROR_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_BUSERROR[2] register.                       */
 
 /* EVENTS_BUSERROR @Bit 0 : This event is generated if an error occurs during the bus transfer. This event is generated on an
@@ -97847,6 +98847,8 @@ typedef struct {
 
 /* PWM_PUBLISH_SEQSTARTED: Publish configuration for event SEQSTARTED[n] */
   #define PWM_PUBLISH_SEQSTARTED_MaxCount (2UL)      /*!< Max size of PUBLISH_SEQSTARTED[2] array.                             */
+  #define PWM_PUBLISH_SEQSTARTED_MaxIndex (1UL)      /*!< Max index of PUBLISH_SEQSTARTED[2] array.                            */
+  #define PWM_PUBLISH_SEQSTARTED_MinIndex (0UL)      /*!< Min index of PUBLISH_SEQSTARTED[2] array.                            */
   #define PWM_PUBLISH_SEQSTARTED_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_SEQSTARTED[2] register.                 */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event SEQSTARTED[n] will publish to */
@@ -97866,6 +98868,8 @@ typedef struct {
 
 /* PWM_PUBLISH_SEQEND: Publish configuration for event SEQEND[n] */
   #define PWM_PUBLISH_SEQEND_MaxCount (2UL)          /*!< Max size of PUBLISH_SEQEND[2] array.                                 */
+  #define PWM_PUBLISH_SEQEND_MaxIndex (1UL)          /*!< Max index of PUBLISH_SEQEND[2] array.                                */
+  #define PWM_PUBLISH_SEQEND_MinIndex (0UL)          /*!< Min index of PUBLISH_SEQEND[2] array.                                */
   #define PWM_PUBLISH_SEQEND_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_SEQEND[2] register.                         */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event SEQEND[n] will publish to */
@@ -97939,6 +98943,8 @@ typedef struct {
 
 /* PWM_PUBLISH_DMAREADY: Publish configuration for event DMAREADY[n] */
   #define PWM_PUBLISH_DMAREADY_MaxCount (2UL)        /*!< Max size of PUBLISH_DMAREADY[2] array.                               */
+  #define PWM_PUBLISH_DMAREADY_MaxIndex (1UL)        /*!< Max index of PUBLISH_DMAREADY[2] array.                              */
+  #define PWM_PUBLISH_DMAREADY_MinIndex (0UL)        /*!< Min index of PUBLISH_DMAREADY[2] array.                              */
   #define PWM_PUBLISH_DMAREADY_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_DMAREADY[2] register.                     */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event DMAREADY[n] will publish to */
@@ -97958,6 +98964,8 @@ typedef struct {
 
 /* PWM_PUBLISH_DMAEND: Publish configuration for event DMAEND[n] */
   #define PWM_PUBLISH_DMAEND_MaxCount (2UL)          /*!< Max size of PUBLISH_DMAEND[2] array.                                 */
+  #define PWM_PUBLISH_DMAEND_MaxIndex (1UL)          /*!< Max index of PUBLISH_DMAEND[2] array.                                */
+  #define PWM_PUBLISH_DMAEND_MinIndex (0UL)          /*!< Min index of PUBLISH_DMAEND[2] array.                                */
   #define PWM_PUBLISH_DMAEND_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_DMAEND[2] register.                         */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event DMAEND[n] will publish to */
@@ -97977,6 +98985,8 @@ typedef struct {
 
 /* PWM_PUBLISH_BUSERROR: Publish configuration for event BUSERROR[n] */
   #define PWM_PUBLISH_BUSERROR_MaxCount (2UL)        /*!< Max size of PUBLISH_BUSERROR[2] array.                               */
+  #define PWM_PUBLISH_BUSERROR_MaxIndex (1UL)        /*!< Max index of PUBLISH_BUSERROR[2] array.                              */
+  #define PWM_PUBLISH_BUSERROR_MinIndex (0UL)        /*!< Min index of PUBLISH_BUSERROR[2] array.                              */
   #define PWM_PUBLISH_BUSERROR_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_BUSERROR[2] register.                     */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event BUSERROR[n] will publish to */
@@ -99351,6 +100361,8 @@ typedef struct {
 
 /* RADIO_ACQINJ_CNF: Data acquisition capture mode */
   #define RADIO_ACQINJ_CNF_MaxCount (2UL)            /*!< Max size of CNF[2] array.                                            */
+  #define RADIO_ACQINJ_CNF_MaxIndex (1UL)            /*!< Max index of CNF[2] array.                                           */
+  #define RADIO_ACQINJ_CNF_MinIndex (0UL)            /*!< Min index of CNF[2] array.                                           */
   #define RADIO_ACQINJ_CNF_ResetValue (0x00000000UL) /*!< Reset value of CNF[2] register.                                      */
 
 /* ACQMODE @Bits 0..4 : Data acquisition capture mode */
@@ -99411,8 +100423,10 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of 32-bit words transferred in the last
                                                                          transaction*/
 } NRF_RADIO_ACQINJDMA_Type;                          /*!< Size = 16 (0x010)                                                    */
-  #define RADIO_ACQINJDMA_MaxCount (1UL)             /*!< Max size of ACQINJDMA[2] array.                                      */
+  #define RADIO_ACQINJDMA_MaxCount (2UL)             /*!< Max size of ACQINJDMA[2] array.                                      */
   #define RADIO_ACQINJDMA_MinCount (0UL)             /*!< Min size of ACQINJDMA[2] array.                                      */
+  #define RADIO_ACQINJDMA_MaxIndex (1UL)             /*!< Max index of ACQINJDMA[2] array.                                     */
+  #define RADIO_ACQINJDMA_MinIndex (0UL)             /*!< Min index of ACQINJDMA[2] array.                                     */
 
 /* RADIO_ACQINJDMA_ENABLE: Enable or disable data acquisition */
   #define RADIO_ACQINJDMA_ENABLE_ResetValue (0x00000000UL) /*!< Reset value of ENABLE register.                                */
@@ -99682,6 +100696,8 @@ typedef struct {
 
 /* RADIO_INTERCEPT_TASKS: (unspecified) */
   #define RADIO_INTERCEPT_TASKS_MaxCount (2UL)       /*!< Max size of TASKS[2] array.                                          */
+  #define RADIO_INTERCEPT_TASKS_MaxIndex (1UL)       /*!< Max index of TASKS[2] array.                                         */
+  #define RADIO_INTERCEPT_TASKS_MinIndex (0UL)       /*!< Min index of TASKS[2] array.                                         */
   #define RADIO_INTERCEPT_TASKS_ResetValue (0x00000000UL) /*!< Reset value of TASKS[2] register.                               */
 
 /* ONEBITPERTASK @Bits 0..31 : (unspecified) */
@@ -99692,6 +100708,8 @@ typedef struct {
 
 /* RADIO_INTERCEPT_EVENTS: (unspecified) */
   #define RADIO_INTERCEPT_EVENTS_MaxCount (2UL)      /*!< Max size of EVENTS[2] array.                                         */
+  #define RADIO_INTERCEPT_EVENTS_MaxIndex (1UL)      /*!< Max index of EVENTS[2] array.                                        */
+  #define RADIO_INTERCEPT_EVENTS_MinIndex (0UL)      /*!< Min index of EVENTS[2] array.                                        */
   #define RADIO_INTERCEPT_EVENTS_ResetValue (0x00000000UL) /*!< Reset value of EVENTS[2] register.                             */
 
 /* ONEBITPEREVENT @Bits 0..31 : (unspecified) */
@@ -102262,6 +103280,8 @@ typedef struct {
 
 /* RADIO_PSEL_DFEGPIO: Pin select for DFE pin n */
   #define RADIO_PSEL_DFEGPIO_MaxCount (8UL)          /*!< Max size of DFEGPIO[8] array.                                        */
+  #define RADIO_PSEL_DFEGPIO_MaxIndex (7UL)          /*!< Max index of DFEGPIO[8] array.                                       */
+  #define RADIO_PSEL_DFEGPIO_MinIndex (0UL)          /*!< Min index of DFEGPIO[8] array.                                       */
   #define RADIO_PSEL_DFEGPIO_ResetValue (0xFFFFFFFFUL) /*!< Reset value of DFEGPIO[8] register.                                */
 
 /* PIN @Bits 0..4 : Pin number */
@@ -102836,6 +103856,8 @@ typedef struct {
 
 /* RADIO_LBMAC_DAB: Device address base segment n */
   #define RADIO_LBMAC_DAB_MaxCount (8UL)             /*!< Max size of DAB[8] array.                                            */
+  #define RADIO_LBMAC_DAB_MaxIndex (7UL)             /*!< Max index of DAB[8] array.                                           */
+  #define RADIO_LBMAC_DAB_MinIndex (0UL)             /*!< Min index of DAB[8] array.                                           */
   #define RADIO_LBMAC_DAB_ResetValue (0x00000000UL)  /*!< Reset value of DAB[8] register.                                      */
 
 /* DAB @Bits 0..31 : Device address base segment n */
@@ -102845,6 +103867,8 @@ typedef struct {
 
 /* RADIO_LBMAC_DAP: Device address prefix n */
   #define RADIO_LBMAC_DAP_MaxCount (8UL)             /*!< Max size of DAP[8] array.                                            */
+  #define RADIO_LBMAC_DAP_MaxIndex (7UL)             /*!< Max index of DAP[8] array.                                           */
+  #define RADIO_LBMAC_DAP_MinIndex (0UL)             /*!< Min index of DAP[8] array.                                           */
   #define RADIO_LBMAC_DAP_ResetValue (0x00000000UL)  /*!< Reset value of DAP[8] register.                                      */
 
 /* DAP @Bits 0..15 : Device address prefix n */
@@ -103546,6 +104570,8 @@ typedef struct {
 
 /* RADIO_PENALTYREG_PCP: (unspecified) */
   #define RADIO_PENALTYREG_PCP_MaxCount (4UL)        /*!< Max size of PCP[5] array.                                            */
+  #define RADIO_PENALTYREG_PCP_MaxIndex (4UL)        /*!< Max index of PCP[5] array.                                           */
+  #define RADIO_PENALTYREG_PCP_MinIndex (1UL)        /*!< Min index of PCP[5] array.                                           */
   #define RADIO_PENALTYREG_PCP_ResetValue (0xFFFFFFFCUL) /*!< Reset value of PCP[5] register.                                  */
 
 /* VALUE @Bits 0..31 : (unspecified) */
@@ -103564,6 +104590,8 @@ typedef struct {
 
 /* RADIO_FORCEOVERRIDE_PCP: (unspecified) */
   #define RADIO_FORCEOVERRIDE_PCP_MaxCount (5UL)     /*!< Max size of PCP[5] array.                                            */
+  #define RADIO_FORCEOVERRIDE_PCP_MaxIndex (4UL)     /*!< Max index of PCP[5] array.                                           */
+  #define RADIO_FORCEOVERRIDE_PCP_MinIndex (0UL)     /*!< Min index of PCP[5] array.                                           */
   #define RADIO_FORCEOVERRIDE_PCP_ResetValue (0x00000000UL) /*!< Reset value of PCP[5] register.                               */
 
 /* CLOCKFORCING @Bit 1 : (unspecified) */
@@ -113550,6 +114578,8 @@ typedef struct {
 
 /* RADIO_DAB: Device address base segment n */
   #define RADIO_DAB_MaxCount (8UL)                   /*!< Max size of DAB[8] array.                                            */
+  #define RADIO_DAB_MaxIndex (7UL)                   /*!< Max index of DAB[8] array.                                           */
+  #define RADIO_DAB_MinIndex (0UL)                   /*!< Min index of DAB[8] array.                                           */
   #define RADIO_DAB_ResetValue (0x00000000UL)        /*!< Reset value of DAB[8] register.                                      */
 
 /* DAB @Bits 0..31 : Device address base segment n */
@@ -113559,6 +114589,8 @@ typedef struct {
 
 /* RADIO_DAP: Device address prefix n */
   #define RADIO_DAP_MaxCount (8UL)                   /*!< Max size of DAP[8] array.                                            */
+  #define RADIO_DAP_MaxIndex (7UL)                   /*!< Max index of DAP[8] array.                                           */
+  #define RADIO_DAP_MinIndex (0UL)                   /*!< Min index of DAP[8] array.                                           */
   #define RADIO_DAP_ResetValue (0x00000000UL)        /*!< Reset value of DAP[8] register.                                      */
 
 /* DAP @Bits 0..15 : Device address prefix n */
@@ -116168,6 +117200,8 @@ typedef struct {
 
 /* RESETHUB_RESETREAS_DOMAIN: Reset reason for the domain[n], where n is domain id. */
   #define RESETHUB_RESETREAS_DOMAIN_MaxCount (8UL)   /*!< Max size of DOMAIN[8] array.                                         */
+  #define RESETHUB_RESETREAS_DOMAIN_MaxIndex (7UL)   /*!< Max index of DOMAIN[8] array.                                        */
+  #define RESETHUB_RESETREAS_DOMAIN_MinIndex (0UL)   /*!< Min index of DOMAIN[8] array.                                        */
   #define RESETHUB_RESETREAS_DOMAIN_ResetValue (0x00000000UL) /*!< Reset value of DOMAIN[8] register.                          */
 
 /* DOG @Bit 0 : Reset from the local watchdog timer detected */
@@ -116235,6 +117269,8 @@ typedef struct {
 
 /* RESETHUB_TASKS_RESETDOMAIN: Reset the domain [n], where n is domain id. */
   #define RESETHUB_TASKS_RESETDOMAIN_MaxCount (8UL)  /*!< Max size of TASKS_RESETDOMAIN[8] array.                              */
+  #define RESETHUB_TASKS_RESETDOMAIN_MaxIndex (7UL)  /*!< Max index of TASKS_RESETDOMAIN[8] array.                             */
+  #define RESETHUB_TASKS_RESETDOMAIN_MinIndex (0UL)  /*!< Min index of TASKS_RESETDOMAIN[8] array.                             */
   #define RESETHUB_TASKS_RESETDOMAIN_ResetValue (0x00000000UL) /*!< Reset value of TASKS_RESETDOMAIN[8] register.              */
 
 /* TASKS_RESETDOMAIN @Bit 0 : Reset the domain [n], where n is domain id. */
@@ -116248,6 +117284,8 @@ typedef struct {
 
 /* RESETHUB_EVENTS_DOMAINRESET: Domain [n] was reset, where n is domain id. */
   #define RESETHUB_EVENTS_DOMAINRESET_MaxCount (8UL) /*!< Max size of EVENTS_DOMAINRESET[8] array.                             */
+  #define RESETHUB_EVENTS_DOMAINRESET_MaxIndex (7UL) /*!< Max index of EVENTS_DOMAINRESET[8] array.                            */
+  #define RESETHUB_EVENTS_DOMAINRESET_MinIndex (0UL) /*!< Min index of EVENTS_DOMAINRESET[8] array.                            */
   #define RESETHUB_EVENTS_DOMAINRESET_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_DOMAINRESET[8] register.            */
 
 /* EVENTS_DOMAINRESET @Bit 0 : Domain [n] was reset, where n is domain id. */
@@ -116973,6 +118011,8 @@ typedef struct {
 
 /* RICR_LCS_SIGNATURE: Signature to determine the re-entrant device life-cycle state (LCS). */
   #define RICR_LCS_SIGNATURE_MaxCount (4UL)          /*!< Max size of SIGNATURE[4] array.                                      */
+  #define RICR_LCS_SIGNATURE_MaxIndex (3UL)          /*!< Max index of SIGNATURE[4] array.                                     */
+  #define RICR_LCS_SIGNATURE_MinIndex (0UL)          /*!< Min index of SIGNATURE[4] array.                                     */
   #define RICR_LCS_SIGNATURE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of SIGNATURE[4] register.                              */
 
 /* VALUE @Bits 0..31 : Uninitialized when freshly out of factory, esle PUF-derived LCS signature. */
@@ -117147,6 +118187,8 @@ typedef struct {
 
 /* RICR_UROT_SM_TBS_FW_DIGEST: SHA2-512 digest of the firmware. */
   #define RICR_UROT_SM_TBS_FW_DIGEST_MaxCount (16UL) /*!< Max size of DIGEST[16] array.                                        */
+  #define RICR_UROT_SM_TBS_FW_DIGEST_MaxIndex (15UL) /*!< Max index of DIGEST[16] array.                                       */
+  #define RICR_UROT_SM_TBS_FW_DIGEST_MinIndex (0UL)  /*!< Min index of DIGEST[16] array.                                       */
 
 /* VALUE @Bits 0..31 : SHA2-512 Digest value */
   #define RICR_UROT_SM_TBS_FW_DIGEST_VALUE_Pos (0UL) /*!< Position of VALUE field.                                             */
@@ -117159,6 +118201,8 @@ typedef struct {
 
 /* RICR_UROT_SM_TBS_FW_VERSION: 128-bit revision of the firmware; can be left Unprogrammed. */
   #define RICR_UROT_SM_TBS_FW_VERSION_MaxCount (4UL) /*!< Max size of VERSION[4] array.                                        */
+  #define RICR_UROT_SM_TBS_FW_VERSION_MaxIndex (3UL) /*!< Max index of VERSION[4] array.                                       */
+  #define RICR_UROT_SM_TBS_FW_VERSION_MinIndex (0UL) /*!< Min index of VERSION[4] array.                                       */
 
 /* VALUE @Bit 0 : nth word of the version. */
   #define RICR_UROT_SM_TBS_FW_VERSION_VALUE_Pos (0UL) /*!< Position of VALUE field.                                            */
@@ -117242,6 +118286,8 @@ typedef struct {
 
 /* RICR_UROT_SM_TBS_POLICY_RFU: These registers are included when generating signature of the TBS content of SICR. */
   #define RICR_UROT_SM_TBS_POLICY_RFU_MaxCount (29UL) /*!< Max size of RFU[29] array.                                          */
+  #define RICR_UROT_SM_TBS_POLICY_RFU_MaxIndex (28UL) /*!< Max index of RFU[29] array.                                         */
+  #define RICR_UROT_SM_TBS_POLICY_RFU_MinIndex (0UL) /*!< Min index of RFU[29] array.                                          */
 
 /* RFU @Bits 0..31 : (unspecified) */
   #define RICR_UROT_SM_TBS_POLICY_RFU_RFU_Pos (0UL)  /*!< Position of RFU field.                                               */
@@ -117503,6 +118549,8 @@ typedef struct {
 
 /* RICR_UROT_RECOVERY_SM_TBS_FW_DIGEST: SHA2-512 digest of the firmware. */
   #define RICR_UROT_RECOVERY_SM_TBS_FW_DIGEST_MaxCount (16UL) /*!< Max size of DIGEST[16] array.                               */
+  #define RICR_UROT_RECOVERY_SM_TBS_FW_DIGEST_MaxIndex (15UL) /*!< Max index of DIGEST[16] array.                              */
+  #define RICR_UROT_RECOVERY_SM_TBS_FW_DIGEST_MinIndex (0UL) /*!< Min index of DIGEST[16] array.                               */
 
 /* VALUE @Bits 0..31 : SHA2-512 Digest value */
   #define RICR_UROT_RECOVERY_SM_TBS_FW_DIGEST_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
@@ -117516,6 +118564,8 @@ typedef struct {
 
 /* RICR_UROT_RECOVERY_SM_TBS_FW_VERSION: 128-bit revision of the firmware; can be left Unprogrammed. */
   #define RICR_UROT_RECOVERY_SM_TBS_FW_VERSION_MaxCount (4UL) /*!< Max size of VERSION[4] array.                               */
+  #define RICR_UROT_RECOVERY_SM_TBS_FW_VERSION_MaxIndex (3UL) /*!< Max index of VERSION[4] array.                              */
+  #define RICR_UROT_RECOVERY_SM_TBS_FW_VERSION_MinIndex (0UL) /*!< Min index of VERSION[4] array.                              */
 
 /* VALUE @Bit 0 : nth word of the version. */
   #define RICR_UROT_RECOVERY_SM_TBS_FW_VERSION_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
@@ -117600,6 +118650,8 @@ typedef struct {
 
 /* RICR_UROT_RECOVERY_SM_TBS_POLICY_RFU: These registers are included when generating signature of the TBS content of SICR. */
   #define RICR_UROT_RECOVERY_SM_TBS_POLICY_RFU_MaxCount (29UL) /*!< Max size of RFU[29] array.                                 */
+  #define RICR_UROT_RECOVERY_SM_TBS_POLICY_RFU_MaxIndex (28UL) /*!< Max index of RFU[29] array.                                */
+  #define RICR_UROT_RECOVERY_SM_TBS_POLICY_RFU_MinIndex (0UL) /*!< Min index of RFU[29] array.                                 */
 
 /* RFU @Bits 0..31 : (unspecified) */
   #define RICR_UROT_RECOVERY_SM_TBS_POLICY_RFU_RFU_Pos (0UL) /*!< Position of RFU field.                                       */
@@ -117894,6 +118946,8 @@ typedef struct {
 
 /* RTC_TASKS_CAPTURE: Capture RTC counter to CC[n] register */
   #define RTC_TASKS_CAPTURE_MaxCount (8UL)           /*!< Max size of TASKS_CAPTURE[8] array.                                  */
+  #define RTC_TASKS_CAPTURE_MaxIndex (7UL)           /*!< Max index of TASKS_CAPTURE[8] array.                                 */
+  #define RTC_TASKS_CAPTURE_MinIndex (0UL)           /*!< Min index of TASKS_CAPTURE[8] array.                                 */
   #define RTC_TASKS_CAPTURE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_CAPTURE[8] register.                           */
 
 /* TASKS_CAPTURE @Bit 0 : Capture RTC counter to CC[n] register */
@@ -117979,6 +119033,8 @@ typedef struct {
 
 /* RTC_SUBSCRIBE_CAPTURE: Subscribe configuration for task CAPTURE[n] */
   #define RTC_SUBSCRIBE_CAPTURE_MaxCount (8UL)       /*!< Max size of SUBSCRIBE_CAPTURE[8] array.                              */
+  #define RTC_SUBSCRIBE_CAPTURE_MaxIndex (7UL)       /*!< Max index of SUBSCRIBE_CAPTURE[8] array.                             */
+  #define RTC_SUBSCRIBE_CAPTURE_MinIndex (0UL)       /*!< Min index of SUBSCRIBE_CAPTURE[8] array.                             */
   #define RTC_SUBSCRIBE_CAPTURE_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_CAPTURE[8] register.                   */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task CAPTURE[n] will subscribe to */
@@ -118023,6 +119079,8 @@ typedef struct {
 
 /* RTC_EVENTS_COMPARE: Compare event on CC[n] match */
   #define RTC_EVENTS_COMPARE_MaxCount (8UL)          /*!< Max size of EVENTS_COMPARE[8] array.                                 */
+  #define RTC_EVENTS_COMPARE_MaxIndex (7UL)          /*!< Max index of EVENTS_COMPARE[8] array.                                */
+  #define RTC_EVENTS_COMPARE_MinIndex (0UL)          /*!< Min index of EVENTS_COMPARE[8] array.                                */
   #define RTC_EVENTS_COMPARE_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_COMPARE[8] register.                         */
 
 /* EVENTS_COMPARE @Bit 0 : Compare event on CC[n] match */
@@ -118073,6 +119131,8 @@ typedef struct {
 
 /* RTC_PUBLISH_COMPARE: Publish configuration for event COMPARE[n] */
   #define RTC_PUBLISH_COMPARE_MaxCount (8UL)         /*!< Max size of PUBLISH_COMPARE[8] array.                                */
+  #define RTC_PUBLISH_COMPARE_MaxIndex (7UL)         /*!< Max index of PUBLISH_COMPARE[8] array.                               */
+  #define RTC_PUBLISH_COMPARE_MinIndex (0UL)         /*!< Min index of PUBLISH_COMPARE[8] array.                               */
   #define RTC_PUBLISH_COMPARE_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_COMPARE[8] register.                       */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event COMPARE[n] will publish to */
@@ -118720,6 +119780,8 @@ typedef struct {
 
 /* RTC_CC: Compare register n */
   #define RTC_CC_MaxCount (8UL)                      /*!< Max size of CC[8] array.                                             */
+  #define RTC_CC_MaxIndex (7UL)                      /*!< Max index of CC[8] array.                                            */
+  #define RTC_CC_MinIndex (0UL)                      /*!< Min index of CC[8] array.                                            */
   #define RTC_CC_ResetValue (0x00000000UL)           /*!< Reset value of CC[8] register.                                       */
 
 /* COMPARE @Bits 0..23 : Compare value */
@@ -118743,8 +119805,10 @@ typedef struct {
   __IOM uint32_t  LIMITH;                            /*!< (@ 0x00000000) Last results is equal or above CH[n].LIMIT.HIGH       */
   __IOM uint32_t  LIMITL;                            /*!< (@ 0x00000004) Last results is equal or below CH[n].LIMIT.LOW        */
 } NRF_SAADC_EVENTS_CH_Type;                          /*!< Size = 8 (0x008)                                                     */
-  #define SAADC_EVENTS_CH_MaxCount (7UL)             /*!< Max size of EVENTS_CH[8] array.                                      */
+  #define SAADC_EVENTS_CH_MaxCount (8UL)             /*!< Max size of EVENTS_CH[8] array.                                      */
   #define SAADC_EVENTS_CH_MinCount (0UL)             /*!< Min size of EVENTS_CH[8] array.                                      */
+  #define SAADC_EVENTS_CH_MaxIndex (7UL)             /*!< Max index of EVENTS_CH[8] array.                                     */
+  #define SAADC_EVENTS_CH_MinIndex (0UL)             /*!< Min index of EVENTS_CH[8] array.                                     */
 
 /* SAADC_EVENTS_CH_LIMITH: Last results is equal or above CH[n].LIMIT.HIGH */
   #define SAADC_EVENTS_CH_LIMITH_ResetValue (0x00000000UL) /*!< Reset value of LIMITH register.                                */
@@ -118779,8 +119843,10 @@ typedef struct {
   __IOM uint32_t  LIMITH;                            /*!< (@ 0x00000000) Publish configuration for event CH[n].LIMITH          */
   __IOM uint32_t  LIMITL;                            /*!< (@ 0x00000004) Publish configuration for event CH[n].LIMITL          */
 } NRF_SAADC_PUBLISH_CH_Type;                         /*!< Size = 8 (0x008)                                                     */
-  #define SAADC_PUBLISH_CH_MaxCount (7UL)            /*!< Max size of PUBLISH_CH[8] array.                                     */
+  #define SAADC_PUBLISH_CH_MaxCount (8UL)            /*!< Max size of PUBLISH_CH[8] array.                                     */
   #define SAADC_PUBLISH_CH_MinCount (0UL)            /*!< Min size of PUBLISH_CH[8] array.                                     */
+  #define SAADC_PUBLISH_CH_MaxIndex (7UL)            /*!< Max index of PUBLISH_CH[8] array.                                    */
+  #define SAADC_PUBLISH_CH_MinIndex (0UL)            /*!< Min index of PUBLISH_CH[8] array.                                    */
 
 /* SAADC_PUBLISH_CH_LIMITH: Publish configuration for event CH[n].LIMITH */
   #define SAADC_PUBLISH_CH_LIMITH_ResetValue (0x00000000UL) /*!< Reset value of LIMITH register.                               */
@@ -118829,6 +119895,8 @@ typedef struct {
 
 /* SAADC_TRIM_LINCALCOEFF: Linearity calibration coefficient */
   #define SAADC_TRIM_LINCALCOEFF_MaxCount (6UL)      /*!< Max size of LINCALCOEFF[6] array.                                    */
+  #define SAADC_TRIM_LINCALCOEFF_MaxIndex (5UL)      /*!< Max index of LINCALCOEFF[6] array.                                   */
+  #define SAADC_TRIM_LINCALCOEFF_MinIndex (0UL)      /*!< Min index of LINCALCOEFF[6] array.                                   */
   #define SAADC_TRIM_LINCALCOEFF_ResetValue (0x00000000UL) /*!< Reset value of LINCALCOEFF[6] register.                        */
 
 /* VAL @Bits 0..15 : value */
@@ -118849,8 +119917,10 @@ typedef struct {
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000008) Input configuration for CH[n]                         */
   __IOM uint32_t  LIMIT;                             /*!< (@ 0x0000000C) High/low limits for event monitoring a channel        */
 } NRF_SAADC_CH_Type;                                 /*!< Size = 16 (0x010)                                                    */
-  #define SAADC_CH_MaxCount (7UL)                    /*!< Max size of CH[8] array.                                             */
+  #define SAADC_CH_MaxCount (8UL)                    /*!< Max size of CH[8] array.                                             */
   #define SAADC_CH_MinCount (0UL)                    /*!< Min size of CH[8] array.                                             */
+  #define SAADC_CH_MaxIndex (7UL)                    /*!< Max index of CH[8] array.                                            */
+  #define SAADC_CH_MinIndex (0UL)                    /*!< Min index of CH[8] array.                                            */
 
 /* SAADC_CH_PSELP: Input positive pin selection for CH[n] */
   #define SAADC_CH_PSELP_ResetValue (0x00000000UL)   /*!< Reset value of PSELP register.                                       */
@@ -120434,6 +121504,8 @@ typedef struct {
 
 /* SICR_IROT_SYSROM_PATCH: 32-bit revision of utpo n patches. */
   #define SICR_IROT_SYSROM_PATCH_MaxCount (8UL)      /*!< Max size of PATCH[8] array.                                          */
+  #define SICR_IROT_SYSROM_PATCH_MaxIndex (7UL)      /*!< Max index of PATCH[8] array.                                         */
+  #define SICR_IROT_SYSROM_PATCH_MinIndex (0UL)      /*!< Min index of PATCH[8] array.                                         */
 
 /* VERSION @Bits 0..31 : nth patch revision. */
   #define SICR_IROT_SYSROM_PATCH_VERSION_Pos (0UL)   /*!< Position of VERSION field.                                           */
@@ -120463,6 +121535,8 @@ typedef struct {
 
 /* SICR_IROT_SECROM_PATCH: 32-bit revision of utpo n patches. */
   #define SICR_IROT_SECROM_PATCH_MaxCount (16UL)     /*!< Max size of PATCH[16] array.                                         */
+  #define SICR_IROT_SECROM_PATCH_MaxIndex (15UL)     /*!< Max index of PATCH[16] array.                                        */
+  #define SICR_IROT_SECROM_PATCH_MinIndex (0UL)      /*!< Min index of PATCH[16] array.                                        */
 
 /* VERSION @Bits 0..31 : nth patch revision. */
   #define SICR_IROT_SECROM_PATCH_VERSION_Pos (0UL)   /*!< Position of VERSION field.                                           */
@@ -120543,6 +121617,8 @@ typedef struct {
 
 /* SICR_IROT_DEVICEID: 128-bit UUID as Device Id. */
   #define SICR_IROT_DEVICEID_MaxCount (4UL)          /*!< Max size of DEVICEID[4] array.                                       */
+  #define SICR_IROT_DEVICEID_MaxIndex (3UL)          /*!< Max index of DEVICEID[4] array.                                      */
+  #define SICR_IROT_DEVICEID_MinIndex (0UL)          /*!< Min index of DEVICEID[4] array.                                      */
 
 /* UUID @Bit 0 : Device UUID [n]. The DEVICE.UUID[0] contains the least significant bits of the device identifier. */
   #define SICR_IROT_DEVICEID_UUID_Pos (0UL)          /*!< Position of UUID field.                                              */
@@ -120727,6 +121803,8 @@ typedef struct {
 
 /* SICR_UROT_SM_TBS_FW_DIGEST: SHA2-512 digest of the firmware. */
   #define SICR_UROT_SM_TBS_FW_DIGEST_MaxCount (16UL) /*!< Max size of DIGEST[16] array.                                        */
+  #define SICR_UROT_SM_TBS_FW_DIGEST_MaxIndex (15UL) /*!< Max index of DIGEST[16] array.                                       */
+  #define SICR_UROT_SM_TBS_FW_DIGEST_MinIndex (0UL)  /*!< Min index of DIGEST[16] array.                                       */
 
 /* VALUE @Bits 0..31 : SHA2-512 Digest value */
   #define SICR_UROT_SM_TBS_FW_DIGEST_VALUE_Pos (0UL) /*!< Position of VALUE field.                                             */
@@ -120739,6 +121817,8 @@ typedef struct {
 
 /* SICR_UROT_SM_TBS_FW_VERSION: 128-bit revision of the firmware; can be left Unprogrammed. */
   #define SICR_UROT_SM_TBS_FW_VERSION_MaxCount (4UL) /*!< Max size of VERSION[4] array.                                        */
+  #define SICR_UROT_SM_TBS_FW_VERSION_MaxIndex (3UL) /*!< Max index of VERSION[4] array.                                       */
+  #define SICR_UROT_SM_TBS_FW_VERSION_MinIndex (0UL) /*!< Min index of VERSION[4] array.                                       */
 
 /* VALUE @Bit 0 : nth word of the version. */
   #define SICR_UROT_SM_TBS_FW_VERSION_VALUE_Pos (0UL) /*!< Position of VALUE field.                                            */
@@ -120822,6 +121902,8 @@ typedef struct {
 
 /* SICR_UROT_SM_TBS_POLICY_RFU: These registers are included when generating signature of the TBS content of SICR. */
   #define SICR_UROT_SM_TBS_POLICY_RFU_MaxCount (29UL) /*!< Max size of RFU[29] array.                                          */
+  #define SICR_UROT_SM_TBS_POLICY_RFU_MaxIndex (28UL) /*!< Max index of RFU[29] array.                                         */
+  #define SICR_UROT_SM_TBS_POLICY_RFU_MinIndex (0UL) /*!< Min index of RFU[29] array.                                          */
 
 /* RFU @Bits 0..31 : (unspecified) */
   #define SICR_UROT_SM_TBS_POLICY_RFU_RFU_Pos (0UL)  /*!< Position of RFU field.                                               */
@@ -121083,6 +122165,8 @@ typedef struct {
 
 /* SICR_UROT_RECOVERY_SM_TBS_FW_DIGEST: SHA2-512 digest of the firmware. */
   #define SICR_UROT_RECOVERY_SM_TBS_FW_DIGEST_MaxCount (16UL) /*!< Max size of DIGEST[16] array.                               */
+  #define SICR_UROT_RECOVERY_SM_TBS_FW_DIGEST_MaxIndex (15UL) /*!< Max index of DIGEST[16] array.                              */
+  #define SICR_UROT_RECOVERY_SM_TBS_FW_DIGEST_MinIndex (0UL) /*!< Min index of DIGEST[16] array.                               */
 
 /* VALUE @Bits 0..31 : SHA2-512 Digest value */
   #define SICR_UROT_RECOVERY_SM_TBS_FW_DIGEST_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
@@ -121096,6 +122180,8 @@ typedef struct {
 
 /* SICR_UROT_RECOVERY_SM_TBS_FW_VERSION: 128-bit revision of the firmware; can be left Unprogrammed. */
   #define SICR_UROT_RECOVERY_SM_TBS_FW_VERSION_MaxCount (4UL) /*!< Max size of VERSION[4] array.                               */
+  #define SICR_UROT_RECOVERY_SM_TBS_FW_VERSION_MaxIndex (3UL) /*!< Max index of VERSION[4] array.                              */
+  #define SICR_UROT_RECOVERY_SM_TBS_FW_VERSION_MinIndex (0UL) /*!< Min index of VERSION[4] array.                              */
 
 /* VALUE @Bit 0 : nth word of the version. */
   #define SICR_UROT_RECOVERY_SM_TBS_FW_VERSION_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
@@ -121180,6 +122266,8 @@ typedef struct {
 
 /* SICR_UROT_RECOVERY_SM_TBS_POLICY_RFU: These registers are included when generating signature of the TBS content of SICR. */
   #define SICR_UROT_RECOVERY_SM_TBS_POLICY_RFU_MaxCount (29UL) /*!< Max size of RFU[29] array.                                 */
+  #define SICR_UROT_RECOVERY_SM_TBS_POLICY_RFU_MaxIndex (28UL) /*!< Max index of RFU[29] array.                                */
+  #define SICR_UROT_RECOVERY_SM_TBS_POLICY_RFU_MinIndex (0UL) /*!< Min index of RFU[29] array.                                 */
 
 /* RFU @Bits 0..31 : (unspecified) */
   #define SICR_UROT_RECOVERY_SM_TBS_POLICY_RFU_RFU_Pos (0UL) /*!< Position of RFU field.                                       */
@@ -121530,6 +122618,8 @@ typedef struct {
 
 /* SICR_UROT_UPDATE_SM_TBS_FW_DIGEST: SHA2-512 digest of the firmware. */
   #define SICR_UROT_UPDATE_SM_TBS_FW_DIGEST_MaxCount (16UL) /*!< Max size of DIGEST[16] array.                                 */
+  #define SICR_UROT_UPDATE_SM_TBS_FW_DIGEST_MaxIndex (15UL) /*!< Max index of DIGEST[16] array.                                */
+  #define SICR_UROT_UPDATE_SM_TBS_FW_DIGEST_MinIndex (0UL) /*!< Min index of DIGEST[16] array.                                 */
 
 /* VALUE @Bits 0..31 : SHA2-512 Digest value */
   #define SICR_UROT_UPDATE_SM_TBS_FW_DIGEST_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
@@ -121543,6 +122633,8 @@ typedef struct {
 
 /* SICR_UROT_UPDATE_SM_TBS_FW_VERSION: 128-bit revision of the firmware; can be left Unprogrammed. */
   #define SICR_UROT_UPDATE_SM_TBS_FW_VERSION_MaxCount (4UL) /*!< Max size of VERSION[4] array.                                 */
+  #define SICR_UROT_UPDATE_SM_TBS_FW_VERSION_MaxIndex (3UL) /*!< Max index of VERSION[4] array.                                */
+  #define SICR_UROT_UPDATE_SM_TBS_FW_VERSION_MinIndex (0UL) /*!< Min index of VERSION[4] array.                                */
 
 /* VALUE @Bit 0 : nth word of the version. */
   #define SICR_UROT_UPDATE_SM_TBS_FW_VERSION_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
@@ -121627,6 +122719,8 @@ typedef struct {
 
 /* SICR_UROT_UPDATE_SM_TBS_POLICY_RFU: These registers are included when generating signature of the TBS content of SICR. */
   #define SICR_UROT_UPDATE_SM_TBS_POLICY_RFU_MaxCount (29UL) /*!< Max size of RFU[29] array.                                   */
+  #define SICR_UROT_UPDATE_SM_TBS_POLICY_RFU_MaxIndex (28UL) /*!< Max index of RFU[29] array.                                  */
+  #define SICR_UROT_UPDATE_SM_TBS_POLICY_RFU_MinIndex (0UL) /*!< Min index of RFU[29] array.                                   */
 
 /* RFU @Bits 0..31 : (unspecified) */
   #define SICR_UROT_UPDATE_SM_TBS_POLICY_RFU_RFU_Pos (0UL) /*!< Position of RFU field.                                         */
@@ -121821,6 +122915,8 @@ typedef struct {
 
 /* SICR_UROT_CERTIFICATE: Device X.509 certificate. */
   #define SICR_UROT_CERTIFICATE_MaxCount (1024UL)    /*!< Max size of CERTIFICATE[1024] array.                                 */
+  #define SICR_UROT_CERTIFICATE_MaxIndex (1023UL)    /*!< Max index of CERTIFICATE[1024] array.                                */
+  #define SICR_UROT_CERTIFICATE_MinIndex (0UL)       /*!< Min index of CERTIFICATE[1024] array.                                */
 
 /* CERT @Bit 0 : Device certificate. */
   #define SICR_UROT_CERTIFICATE_CERT_Pos (0UL)       /*!< Position of CERT field.                                              */
@@ -125818,8 +126914,10 @@ typedef struct {
   __IOM uint32_t  PERM;                              /*!< (@ 0x00000000) Get and set the applicable access permissions for the
                                                                          peripheral slave index n*/
 } NRF_SPU_PERIPH_Type;                               /*!< Size = 4 (0x004)                                                     */
-  #define SPU_PERIPH_MaxCount (31UL)                 /*!< Max size of PERIPH[32] array.                                        */
+  #define SPU_PERIPH_MaxCount (32UL)                 /*!< Max size of PERIPH[32] array.                                        */
   #define SPU_PERIPH_MinCount (0UL)                  /*!< Min size of PERIPH[32] array.                                        */
+  #define SPU_PERIPH_MaxIndex (31UL)                 /*!< Max index of PERIPH[32] array.                                       */
+  #define SPU_PERIPH_MinIndex (0UL)                  /*!< Min index of PERIPH[32] array.                                       */
 
 /* SPU_PERIPH_PERM: Get and set the applicable access permissions for the peripheral slave index n */
   #define SPU_PERIPH_PERM_ResetValue (0x8000000AUL)  /*!< Reset value of PERM register.                                        */
@@ -125917,6 +127015,8 @@ typedef struct {
 
 /* SPU_FEATURE_IPCT_CH: Configuration of features for channel n of IPCT */
   #define SPU_FEATURE_IPCT_CH_MaxCount (24UL)        /*!< Max size of CH[24] array.                                            */
+  #define SPU_FEATURE_IPCT_CH_MaxIndex (23UL)        /*!< Max index of CH[24] array.                                           */
+  #define SPU_FEATURE_IPCT_CH_MinIndex (0UL)         /*!< Min index of CH[24] array.                                           */
   #define SPU_FEATURE_IPCT_CH_ResetValue (0x00000000UL) /*!< Reset value of CH[24] register.                                   */
 
 /* SECATTR @Bit 4 : SECATTR feature */
@@ -125952,6 +127052,8 @@ typedef struct {
 
 /* SPU_FEATURE_IPCT_INTERRUPT: Configuration of features for interrupt n of IPCT */
   #define SPU_FEATURE_IPCT_INTERRUPT_MaxCount (8UL)  /*!< Max size of INTERRUPT[8] array.                                      */
+  #define SPU_FEATURE_IPCT_INTERRUPT_MaxIndex (7UL)  /*!< Max index of INTERRUPT[8] array.                                     */
+  #define SPU_FEATURE_IPCT_INTERRUPT_MinIndex (0UL)  /*!< Min index of INTERRUPT[8] array.                                     */
   #define SPU_FEATURE_IPCT_INTERRUPT_ResetValue (0x00000000UL) /*!< Reset value of INTERRUPT[8] register.                      */
 
 /* SECATTR @Bit 4 : SECATTR feature */
@@ -125999,6 +127101,8 @@ typedef struct {
 
 /* SPU_FEATURE_DPPIC_CH: Configuration of features for channel n of DPPIC */
   #define SPU_FEATURE_DPPIC_CH_MaxCount (24UL)       /*!< Max size of CH[24] array.                                            */
+  #define SPU_FEATURE_DPPIC_CH_MaxIndex (23UL)       /*!< Max index of CH[24] array.                                           */
+  #define SPU_FEATURE_DPPIC_CH_MinIndex (0UL)        /*!< Min index of CH[24] array.                                           */
   #define SPU_FEATURE_DPPIC_CH_ResetValue (0x00000000UL) /*!< Reset value of CH[24] register.                                  */
 
 /* SECATTR @Bit 4 : SECATTR feature */
@@ -126034,6 +127138,8 @@ typedef struct {
 
 /* SPU_FEATURE_DPPIC_CHG: Configuration of features for channel group n of DPPIC */
   #define SPU_FEATURE_DPPIC_CHG_MaxCount (8UL)       /*!< Max size of CHG[8] array.                                            */
+  #define SPU_FEATURE_DPPIC_CHG_MaxIndex (7UL)       /*!< Max index of CHG[8] array.                                           */
+  #define SPU_FEATURE_DPPIC_CHG_MinIndex (0UL)       /*!< Min index of CHG[8] array.                                           */
   #define SPU_FEATURE_DPPIC_CHG_ResetValue (0x00000000UL) /*!< Reset value of CHG[8] register.                                 */
 
 /* SECATTR @Bit 4 : SECATTR feature */
@@ -126076,11 +127182,15 @@ typedef struct {
   __IOM uint32_t  CH[8];                             /*!< (@ 0x00000000) Configuration of features for channel o of GPIOTE[n]  */
   __IOM uint32_t  INTERRUPT[8];                      /*!< (@ 0x00000020) Configuration of features for interrupt o of GPIOTE[n]*/
 } NRF_SPU_FEATURE_GPIOTE_Type;                       /*!< Size = 64 (0x040)                                                    */
-  #define SPU_FEATURE_GPIOTE_MaxCount (0UL)          /*!< Max size of GPIOTE[1] array.                                         */
+  #define SPU_FEATURE_GPIOTE_MaxCount (1UL)          /*!< Max size of GPIOTE[1] array.                                         */
   #define SPU_FEATURE_GPIOTE_MinCount (0UL)          /*!< Min size of GPIOTE[1] array.                                         */
+  #define SPU_FEATURE_GPIOTE_MaxIndex (0UL)          /*!< Max index of GPIOTE[1] array.                                        */
+  #define SPU_FEATURE_GPIOTE_MinIndex (0UL)          /*!< Min index of GPIOTE[1] array.                                        */
 
 /* SPU_FEATURE_GPIOTE_CH: Configuration of features for channel o of GPIOTE[n] */
   #define SPU_FEATURE_GPIOTE_CH_MaxCount (8UL)       /*!< Max size of CH[8] array.                                             */
+  #define SPU_FEATURE_GPIOTE_CH_MaxIndex (7UL)       /*!< Max index of CH[8] array.                                            */
+  #define SPU_FEATURE_GPIOTE_CH_MinIndex (0UL)       /*!< Min index of CH[8] array.                                            */
   #define SPU_FEATURE_GPIOTE_CH_ResetValue (0x00000000UL) /*!< Reset value of CH[8] register.                                  */
 
 /* SECATTR @Bit 4 : SECATTR feature */
@@ -126116,6 +127226,8 @@ typedef struct {
 
 /* SPU_FEATURE_GPIOTE_INTERRUPT: Configuration of features for interrupt o of GPIOTE[n] */
   #define SPU_FEATURE_GPIOTE_INTERRUPT_MaxCount (8UL) /*!< Max size of INTERRUPT[8] array.                                     */
+  #define SPU_FEATURE_GPIOTE_INTERRUPT_MaxIndex (7UL) /*!< Max index of INTERRUPT[8] array.                                    */
+  #define SPU_FEATURE_GPIOTE_INTERRUPT_MinIndex (0UL) /*!< Min index of INTERRUPT[8] array.                                    */
   #define SPU_FEATURE_GPIOTE_INTERRUPT_ResetValue (0x00000000UL) /*!< Reset value of INTERRUPT[8] register.                    */
 
 /* SECATTR @Bit 4 : SECATTR feature */
@@ -126160,11 +127272,15 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  PIN[32];                           /*!< (@ 0x00000000) Configuration of features for GPIO[n] PIN[o]          */
 } NRF_SPU_FEATURE_GPIO_Type;                         /*!< Size = 128 (0x080)                                                   */
-  #define SPU_FEATURE_GPIO_MaxCount (9UL)            /*!< Max size of GPIO[10] array.                                          */
+  #define SPU_FEATURE_GPIO_MaxCount (10UL)           /*!< Max size of GPIO[10] array.                                          */
   #define SPU_FEATURE_GPIO_MinCount (0UL)            /*!< Min size of GPIO[10] array.                                          */
+  #define SPU_FEATURE_GPIO_MaxIndex (9UL)            /*!< Max index of GPIO[10] array.                                         */
+  #define SPU_FEATURE_GPIO_MinIndex (0UL)            /*!< Min index of GPIO[10] array.                                         */
 
 /* SPU_FEATURE_GPIO_PIN: Configuration of features for GPIO[n] PIN[o] */
   #define SPU_FEATURE_GPIO_PIN_MaxCount (32UL)       /*!< Max size of PIN[32] array.                                           */
+  #define SPU_FEATURE_GPIO_PIN_MaxIndex (31UL)       /*!< Max index of PIN[32] array.                                          */
+  #define SPU_FEATURE_GPIO_PIN_MinIndex (0UL)        /*!< Min index of PIN[32] array.                                          */
   #define SPU_FEATURE_GPIO_PIN_ResetValue (0x00000000UL) /*!< Reset value of PIN[32] register.                                 */
 
 /* SECATTR @Bit 4 : SECATTR feature */
@@ -126213,6 +127329,8 @@ typedef struct {
 
 /* SPU_FEATURE_GRTC_CC: Configuration of features for CC n of GRTC */
   #define SPU_FEATURE_GRTC_CC_MaxCount (24UL)        /*!< Max size of CC[24] array.                                            */
+  #define SPU_FEATURE_GRTC_CC_MaxIndex (23UL)        /*!< Max index of CC[24] array.                                           */
+  #define SPU_FEATURE_GRTC_CC_MinIndex (0UL)         /*!< Min index of CC[24] array.                                           */
   #define SPU_FEATURE_GRTC_CC_ResetValue (0x00000000UL) /*!< Reset value of CC[24] register.                                   */
 
 /* SECATTR @Bit 4 : SECATTR feature */
@@ -126284,6 +127402,8 @@ typedef struct {
 
 /* SPU_FEATURE_GRTC_INTERRUPT: Configuration of features for interrupt n of GRTC */
   #define SPU_FEATURE_GRTC_INTERRUPT_MaxCount (8UL)  /*!< Max size of INTERRUPT[8] array.                                      */
+  #define SPU_FEATURE_GRTC_INTERRUPT_MaxIndex (7UL)  /*!< Max index of INTERRUPT[8] array.                                     */
+  #define SPU_FEATURE_GRTC_INTERRUPT_MinIndex (0UL)  /*!< Min index of INTERRUPT[8] array.                                     */
   #define SPU_FEATURE_GRTC_INTERRUPT_ResetValue (0x00000000UL) /*!< Reset value of INTERRUPT[8] register.                      */
 
 /* SECATTR @Bit 4 : SECATTR feature */
@@ -126328,11 +127448,15 @@ typedef struct {
   __IOM uint32_t  BELL[16];                          /*!< (@ 0x00000000) Configuration of features for bell pair [(o * 2) + 1:o
                                                                          * 2] of domain n*/
 } NRF_SPU_FEATURE_BELLS_DOMAIN_Type;                 /*!< Size = 64 (0x040)                                                    */
-  #define SPU_FEATURE_BELLS_DOMAIN_MaxCount (15UL)   /*!< Max size of DOMAIN[16] array.                                        */
+  #define SPU_FEATURE_BELLS_DOMAIN_MaxCount (16UL)   /*!< Max size of DOMAIN[16] array.                                        */
   #define SPU_FEATURE_BELLS_DOMAIN_MinCount (0UL)    /*!< Min size of DOMAIN[16] array.                                        */
+  #define SPU_FEATURE_BELLS_DOMAIN_MaxIndex (15UL)   /*!< Max index of DOMAIN[16] array.                                       */
+  #define SPU_FEATURE_BELLS_DOMAIN_MinIndex (0UL)    /*!< Min index of DOMAIN[16] array.                                       */
 
 /* SPU_FEATURE_BELLS_DOMAIN_BELL: Configuration of features for bell pair [(o * 2) + 1:o * 2] of domain n */
   #define SPU_FEATURE_BELLS_DOMAIN_BELL_MaxCount (16UL) /*!< Max size of BELL[16] array.                                       */
+  #define SPU_FEATURE_BELLS_DOMAIN_BELL_MaxIndex (15UL) /*!< Max index of BELL[16] array.                                      */
+  #define SPU_FEATURE_BELLS_DOMAIN_BELL_MinIndex (0UL) /*!< Min index of BELL[16] array.                                       */
   #define SPU_FEATURE_BELLS_DOMAIN_BELL_ResetValue (0x00000000UL) /*!< Reset value of BELL[16] register.                       */
 
 /* SECATTR @Bit 4 : SECATTR feature */
@@ -127218,8 +128342,10 @@ typedef struct {
   __IOM uint8_t   SDATA[16777216];                   /*!< (@ 0x01000000) Secure STM output data buffer for domain n. Writes to
                                                                          this region generates trace packets with id n+32.*/
 } NRF_STMDATA_DOMAIN_Type;                           /*!< Size = 33554432 (0x2000000)                                          */
-  #define STMDATA_DOMAIN_MaxCount (15UL)             /*!< Max size of DOMAIN[16] array.                                        */
+  #define STMDATA_DOMAIN_MaxCount (16UL)             /*!< Max size of DOMAIN[16] array.                                        */
   #define STMDATA_DOMAIN_MinCount (0UL)              /*!< Min size of DOMAIN[16] array.                                        */
+  #define STMDATA_DOMAIN_MaxIndex (15UL)             /*!< Max index of DOMAIN[16] array.                                       */
+  #define STMDATA_DOMAIN_MinIndex (0UL)              /*!< Min index of DOMAIN[16] array.                                       */
 
 
 /* ================================================== Struct STMDATA_BUFFER ================================================== */
@@ -127230,8 +128356,10 @@ typedef struct {
   __IOM uint8_t   DATA[16777216];                    /*!< (@ 0x00000000) STM output data buffer n. Writes to this region
                                                                          generates trace packets.*/
 } NRF_STMDATA_BUFFER_Type;                           /*!< Size = 16777216 (0x1000000)                                          */
-  #define STMDATA_BUFFER_MaxCount (15UL)             /*!< Max size of BUFFER[16] array.                                        */
+  #define STMDATA_BUFFER_MaxCount (16UL)             /*!< Max size of BUFFER[16] array.                                        */
   #define STMDATA_BUFFER_MinCount (0UL)              /*!< Min size of BUFFER[16] array.                                        */
+  #define STMDATA_BUFFER_MaxIndex (15UL)             /*!< Max index of BUFFER[16] array.                                       */
+  #define STMDATA_BUFFER_MinIndex (0UL)              /*!< Min index of BUFFER[16] array.                                       */
 
 /* ===================================================== Struct STMDATA ====================================================== */
 /**
@@ -127369,8 +128497,10 @@ typedef struct {
   __IOM uint32_t  CTRL;                              /*!< (@ 0x00000000) Control register for protect feature n.               */
   __IOM uint32_t  STATUS;                            /*!< (@ 0x00000004) Status register for protect feature n.                */
 } NRF_TAMPC_PROTECT_FEATURE_Type;                    /*!< Size = 8 (0x008)                                                     */
-  #define TAMPC_PROTECT_FEATURE_MaxCount (127UL)     /*!< Max size of FEATURE[128] array.                                      */
+  #define TAMPC_PROTECT_FEATURE_MaxCount (128UL)     /*!< Max size of FEATURE[128] array.                                      */
   #define TAMPC_PROTECT_FEATURE_MinCount (0UL)       /*!< Min size of FEATURE[128] array.                                      */
+  #define TAMPC_PROTECT_FEATURE_MaxIndex (127UL)     /*!< Max index of FEATURE[128] array.                                     */
+  #define TAMPC_PROTECT_FEATURE_MinIndex (0UL)       /*!< Min index of FEATURE[128] array.                                     */
 
 /* TAMPC_PROTECT_FEATURE_CTRL: Control register for protect feature n. */
   #define TAMPC_PROTECT_FEATURE_CTRL_ResetValue (0x00000000UL) /*!< Reset value of CTRL register.                              */
@@ -127659,8 +128789,10 @@ typedef struct {
   __IOM NRF_TAMPC_PROTECT_DOMAIN_SPIDEN_Type SPIDEN; /*!< (@ 0x00000010) (unspecified)                                         */
   __IOM NRF_TAMPC_PROTECT_DOMAIN_SPNIDEN_Type SPNIDEN; /*!< (@ 0x00000018) (unspecified)                                       */
 } NRF_TAMPC_PROTECT_DOMAIN_Type;                     /*!< Size = 32 (0x020)                                                    */
-  #define TAMPC_PROTECT_DOMAIN_MaxCount (15UL)       /*!< Max size of DOMAIN[16] array.                                        */
+  #define TAMPC_PROTECT_DOMAIN_MaxCount (16UL)       /*!< Max size of DOMAIN[16] array.                                        */
   #define TAMPC_PROTECT_DOMAIN_MinCount (0UL)        /*!< Min size of DOMAIN[16] array.                                        */
+  #define TAMPC_PROTECT_DOMAIN_MaxIndex (15UL)       /*!< Max index of DOMAIN[16] array.                                       */
+  #define TAMPC_PROTECT_DOMAIN_MinIndex (0UL)        /*!< Min index of DOMAIN[16] array.                                       */
 
 
 /* ============================================== Struct TAMPC_PROTECT_AP_DBGEN ============================================== */
@@ -127784,8 +128916,10 @@ typedef struct {
   __IOM NRF_TAMPC_PROTECT_AP_DBGEN_Type DBGEN;       /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_TAMPC_PROTECT_AP_SPIDEN_Type SPIDEN;     /*!< (@ 0x00000008) (unspecified)                                         */
 } NRF_TAMPC_PROTECT_AP_Type;                         /*!< Size = 16 (0x010)                                                    */
-  #define TAMPC_PROTECT_AP_MaxCount (15UL)           /*!< Max size of AP[16] array.                                            */
+  #define TAMPC_PROTECT_AP_MaxCount (16UL)           /*!< Max size of AP[16] array.                                            */
   #define TAMPC_PROTECT_AP_MinCount (0UL)            /*!< Min size of AP[16] array.                                            */
+  #define TAMPC_PROTECT_AP_MaxIndex (15UL)           /*!< Max index of AP[16] array.                                           */
+  #define TAMPC_PROTECT_AP_MinIndex (0UL)            /*!< Min index of AP[16] array.                                           */
 
 
 /* ========================================= Struct TAMPC_PROTECT_CORESIGHT_DEVICEEN ========================================= */
@@ -129568,6 +130702,8 @@ typedef union {
 
 /* TIMER_TASKS_CAPTURE: Capture Timer value to CC[n] register */
   #define TIMER_TASKS_CAPTURE_MaxCount (8UL)         /*!< Max size of TASKS_CAPTURE[8] array.                                  */
+  #define TIMER_TASKS_CAPTURE_MaxIndex (7UL)         /*!< Max index of TASKS_CAPTURE[8] array.                                 */
+  #define TIMER_TASKS_CAPTURE_MinIndex (0UL)         /*!< Min index of TASKS_CAPTURE[8] array.                                 */
   #define TIMER_TASKS_CAPTURE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_CAPTURE[8] register.                         */
 
 /* TASKS_CAPTURE @Bit 0 : Capture Timer value to CC[n] register */
@@ -129671,6 +130807,8 @@ typedef union {
 
 /* TIMER_SUBSCRIBE_CAPTURE: Subscribe configuration for task CAPTURE[n] */
   #define TIMER_SUBSCRIBE_CAPTURE_MaxCount (8UL)     /*!< Max size of SUBSCRIBE_CAPTURE[8] array.                              */
+  #define TIMER_SUBSCRIBE_CAPTURE_MaxIndex (7UL)     /*!< Max index of SUBSCRIBE_CAPTURE[8] array.                             */
+  #define TIMER_SUBSCRIBE_CAPTURE_MinIndex (0UL)     /*!< Min index of SUBSCRIBE_CAPTURE[8] array.                             */
   #define TIMER_SUBSCRIBE_CAPTURE_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_CAPTURE[8] register.                 */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task CAPTURE[n] will subscribe to */
@@ -129690,6 +130828,8 @@ typedef union {
 
 /* TIMER_EVENTS_COMPARE: Compare event on CC[n] match */
   #define TIMER_EVENTS_COMPARE_MaxCount (8UL)        /*!< Max size of EVENTS_COMPARE[8] array.                                 */
+  #define TIMER_EVENTS_COMPARE_MaxIndex (7UL)        /*!< Max index of EVENTS_COMPARE[8] array.                                */
+  #define TIMER_EVENTS_COMPARE_MinIndex (0UL)        /*!< Min index of EVENTS_COMPARE[8] array.                                */
   #define TIMER_EVENTS_COMPARE_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_COMPARE[8] register.                       */
 
 /* EVENTS_COMPARE @Bit 0 : Compare event on CC[n] match */
@@ -129704,6 +130844,8 @@ typedef union {
 
 /* TIMER_PUBLISH_COMPARE: Publish configuration for event COMPARE[n] */
   #define TIMER_PUBLISH_COMPARE_MaxCount (8UL)       /*!< Max size of PUBLISH_COMPARE[8] array.                                */
+  #define TIMER_PUBLISH_COMPARE_MaxIndex (7UL)       /*!< Max index of PUBLISH_COMPARE[8] array.                               */
+  #define TIMER_PUBLISH_COMPARE_MinIndex (0UL)       /*!< Min index of PUBLISH_COMPARE[8] array.                               */
   #define TIMER_PUBLISH_COMPARE_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_COMPARE[8] register.                     */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event COMPARE[n] will publish to */
@@ -130125,6 +131267,8 @@ typedef union {
 
 /* TIMER_CC: Capture/Compare register n */
   #define TIMER_CC_MaxCount (8UL)                    /*!< Max size of CC[8] array.                                             */
+  #define TIMER_CC_MaxIndex (7UL)                    /*!< Max index of CC[8] array.                                            */
+  #define TIMER_CC_MinIndex (0UL)                    /*!< Min index of CC[8] array.                                            */
   #define TIMER_CC_ResetValue (0x00000000UL)         /*!< Reset value of CC[8] register.                                       */
 
 /* CC @Bits 0..31 : Capture/Compare value */
@@ -130134,6 +131278,8 @@ typedef union {
 
 /* TIMER_ONESHOTEN: Enable one-shot operation for Capture/Compare channel n */
   #define TIMER_ONESHOTEN_MaxCount (8UL)             /*!< Max size of ONESHOTEN[8] array.                                      */
+  #define TIMER_ONESHOTEN_MaxIndex (7UL)             /*!< Max index of ONESHOTEN[8] array.                                     */
+  #define TIMER_ONESHOTEN_MinIndex (0UL)             /*!< Min index of ONESHOTEN[8] array.                                     */
   #define TIMER_ONESHOTEN_ResetValue (0x00000000UL)  /*!< Reset value of ONESHOTEN[8] register.                                */
 
 /* ONESHOTEN @Bit 0 : Enable one-shot operation */
@@ -131817,6 +132963,202 @@ typedef union {
   #define TPIU_DEVTYPE_SUB_Min (0x1UL)               /*!< Min enumerator value of SUB field.                                   */
   #define TPIU_DEVTYPE_SUB_Max (0x1UL)               /*!< Max enumerator value of SUB field.                                   */
   #define TPIU_DEVTYPE_SUB_TracePort (0x1UL)         /*!< Indicates that this component is a trace port component.             */
+
+
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
+
+/* =========================================================================================================================== */
+/* ================                                           TSGEN                                           ================ */
+/* =========================================================================================================================== */
+
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
+/* ====================================================== Struct TSGEN ======================================================= */
+/**
+  * @brief Timestamp generator
+  */
+  typedef struct {                                   /*!< TSGEN Structure                                                      */
+    __IOM uint32_t CNTCR;                            /*!< (@ 0x00000000) Counter Control Register                              */
+    __IM uint32_t CNTSR;                             /*!< (@ 0x00000004) Counter Status Register                               */
+    __IOM uint32_t CNTCVL;                           /*!< (@ 0x00000008) Current Counter Value Lower register                  */
+    __IOM uint32_t CNTCVU;                           /*!< (@ 0x0000000C) Current Counter Value Upper register                  */
+    __IM uint32_t RESERVED[4];
+    __IOM uint32_t CNTFID0;                          /*!< (@ 0x00000020) Base Frequency ID                                     */
+    __IM uint32_t RESERVED1[1003];
+    __IM uint32_t PIDR4;                             /*!< (@ 0x00000FD0) Peripheral ID4 Register                               */
+    __IM uint32_t RESERVED2[3];
+    __IM uint32_t PIDR0;                             /*!< (@ 0x00000FE0) Peripheral ID0 Register                               */
+    __IM uint32_t PIDR1;                             /*!< (@ 0x00000FE4) Peripheral ID1 Register                               */
+    __IM uint32_t PIDR2;                             /*!< (@ 0x00000FE8) Peripheral ID2 Register                               */
+    __IM uint32_t PIDR3;                             /*!< (@ 0x00000FEC) Peripheral ID3 Register                               */
+    __IM uint32_t CIDR0;                             /*!< (@ 0x00000FF0) Component ID0 Register                                */
+    __IM uint32_t CIDR1;                             /*!< (@ 0x00000FF4) Component ID1 Register                                */
+    __IM uint32_t CIDR2;                             /*!< (@ 0x00000FF8) Component ID2 Register                                */
+    __IM uint32_t CIDR3;                             /*!< (@ 0x00000FFC) Component ID3 Register                                */
+  } NRF_TSGEN_Type;                                  /*!< Size = 4096 (0x1000)                                                 */
+
+/* TSGEN_CNTCR: Counter Control Register */
+  #define TSGEN_CNTCR_ResetValue (0x00000000UL)      /*!< Reset value of CNTCR register.                                       */
+
+/* EN @Bit 0 : Counter enable */
+  #define TSGEN_CNTCR_EN_Pos (0UL)                   /*!< Position of EN field.                                                */
+  #define TSGEN_CNTCR_EN_Msk (0x1UL << TSGEN_CNTCR_EN_Pos) /*!< Bit mask of EN field.                                          */
+  #define TSGEN_CNTCR_EN_Min (0x0UL)                 /*!< Min enumerator value of EN field.                                    */
+  #define TSGEN_CNTCR_EN_Max (0x1UL)                 /*!< Max enumerator value of EN field.                                    */
+  #define TSGEN_CNTCR_EN_Disabled (0x0UL)            /*!< (unspecified)                                                        */
+  #define TSGEN_CNTCR_EN_Enabled (0x1UL)             /*!< (unspecified)                                                        */
+
+/* HDBG @Bit 1 : Halt on Debug */
+  #define TSGEN_CNTCR_HDBG_Pos (1UL)                 /*!< Position of HDBG field.                                              */
+  #define TSGEN_CNTCR_HDBG_Msk (0x1UL << TSGEN_CNTCR_HDBG_Pos) /*!< Bit mask of HDBG field.                                    */
+  #define TSGEN_CNTCR_HDBG_Min (0x0UL)               /*!< Min enumerator value of HDBG field.                                  */
+  #define TSGEN_CNTCR_HDBG_Max (0x1UL)               /*!< Max enumerator value of HDBG field.                                  */
+  #define TSGEN_CNTCR_HDBG_Disabled (0x0UL)          /*!< Do not halt on debug, HLTDBG signal into the counter has no effect.  */
+  #define TSGEN_CNTCR_HDBG_Enabled (0x1UL)           /*!< Halt on debug, when HLTDBG is driven HIGH, the count value is held
+                                                          static.*/
+
+
+/* TSGEN_CNTSR: Counter Status Register */
+  #define TSGEN_CNTSR_ResetValue (0x00000000UL)      /*!< Reset value of CNTSR register.                                       */
+
+/* DBGH @Bit 1 : Debug halted */
+  #define TSGEN_CNTSR_DBGH_Pos (1UL)                 /*!< Position of DBGH field.                                              */
+  #define TSGEN_CNTSR_DBGH_Msk (0x1UL << TSGEN_CNTSR_DBGH_Pos) /*!< Bit mask of DBGH field.                                    */
+
+
+/* TSGEN_CNTCVL: Current Counter Value Lower register */
+  #define TSGEN_CNTCVL_ResetValue (0x00000000UL)     /*!< Reset value of CNTCVL register.                                      */
+
+/* CNTCVL_L_32 @Bits 0..31 : Current value of Counter, lower 32 bits */
+  #define TSGEN_CNTCVL_CNTCVL_L_32_Pos (0UL)         /*!< Position of CNTCVL_L_32 field.                                       */
+  #define TSGEN_CNTCVL_CNTCVL_L_32_Msk (0xFFFFFFFFUL << TSGEN_CNTCVL_CNTCVL_L_32_Pos) /*!< Bit mask of CNTCVL_L_32 field.      */
+
+
+/* TSGEN_CNTCVU: Current Counter Value Upper register */
+  #define TSGEN_CNTCVU_ResetValue (0x00000000UL)     /*!< Reset value of CNTCVU register.                                      */
+
+/* CNTCVU_U_32 @Bits 0..31 : Current value of Counter, upper 32 bits */
+  #define TSGEN_CNTCVU_CNTCVU_U_32_Pos (0UL)         /*!< Position of CNTCVU_U_32 field.                                       */
+  #define TSGEN_CNTCVU_CNTCVU_U_32_Msk (0xFFFFFFFFUL << TSGEN_CNTCVU_CNTCVU_U_32_Pos) /*!< Bit mask of CNTCVU_U_32 field.      */
+
+
+/* TSGEN_CNTFID0: Base Frequency ID */
+  #define TSGEN_CNTFID0_ResetValue (0x00000000UL)    /*!< Reset value of CNTFID0 register.                                     */
+
+/* FREQ @Bits 0..31 : Frequency in number of ticks per second (up to 4 GHz) */
+  #define TSGEN_CNTFID0_FREQ_Pos (0UL)               /*!< Position of FREQ field.                                              */
+  #define TSGEN_CNTFID0_FREQ_Msk (0xFFFFFFFFUL << TSGEN_CNTFID0_FREQ_Pos) /*!< Bit mask of FREQ field.                         */
+
+
+/* TSGEN_PIDR4: Peripheral ID4 Register */
+  #define TSGEN_PIDR4_ResetValue (0x00000004UL)      /*!< Reset value of PIDR4 register.                                       */
+
+/* DES_2 @Bits 0..3 : JEDEC continuation code indicating the designer of the component, together with the identity code. */
+  #define TSGEN_PIDR4_DES_2_Pos (0UL)                /*!< Position of DES_2 field.                                             */
+  #define TSGEN_PIDR4_DES_2_Msk (0xFUL << TSGEN_PIDR4_DES_2_Pos) /*!< Bit mask of DES_2 field.                                 */
+
+/* SIZE @Bits 4..7 : This is a 4-bit value that indicates the total contiguous size of the memory window used by this component
+                     in powers of 2 from the standard 4KB. If a component only requires the standard 4KB, this must read as 0x0,
+                     4KB only. For 8KB set to 0x1, for 16KB set to 0x2, for 32KB set to 0x3, and so on. */
+
+  #define TSGEN_PIDR4_SIZE_Pos (4UL)                 /*!< Position of SIZE field.                                              */
+  #define TSGEN_PIDR4_SIZE_Msk (0xFUL << TSGEN_PIDR4_SIZE_Pos) /*!< Bit mask of SIZE field.                                    */
+
+
+/* TSGEN_PIDR0: Peripheral ID0 Register */
+  #define TSGEN_PIDR0_ResetValue (0x00000001UL)      /*!< Reset value of PIDR0 register.                                       */
+
+/* PART_0 @Bits 0..7 : Bits [7:0] of the component part number. This is selected by the designer of the component. */
+  #define TSGEN_PIDR0_PART_0_Pos (0UL)               /*!< Position of PART_0 field.                                            */
+  #define TSGEN_PIDR0_PART_0_Msk (0xFFUL << TSGEN_PIDR0_PART_0_Pos) /*!< Bit mask of PART_0 field.                             */
+
+
+/* TSGEN_PIDR1: Peripheral ID1 Register */
+  #define TSGEN_PIDR1_ResetValue (0x000000B1UL)      /*!< Reset value of PIDR1 register.                                       */
+
+/* PART_1 @Bits 0..3 : Bits [11:8] of the component part number. This is selected by the designer of the component. */
+  #define TSGEN_PIDR1_PART_1_Pos (0UL)               /*!< Position of PART_1 field.                                            */
+  #define TSGEN_PIDR1_PART_1_Msk (0xFUL << TSGEN_PIDR1_PART_1_Pos) /*!< Bit mask of PART_1 field.                              */
+
+/* DES_0 @Bits 4..7 : Bits [3:0] of the JEDEC identity code indicating the designer of the component, together with the
+                      continuation code. */
+
+  #define TSGEN_PIDR1_DES_0_Pos (4UL)                /*!< Position of DES_0 field.                                             */
+  #define TSGEN_PIDR1_DES_0_Msk (0xFUL << TSGEN_PIDR1_DES_0_Pos) /*!< Bit mask of DES_0 field.                                 */
+
+
+/* TSGEN_PIDR2: Peripheral ID2 Register */
+  #define TSGEN_PIDR2_ResetValue (0x0000001BUL)      /*!< Reset value of PIDR2 register.                                       */
+
+/* DES_1 @Bits 0..2 : Bits [6:4] of the JEDEC identity code indicating the designer of the component, together with the
+                      continuation code. */
+
+  #define TSGEN_PIDR2_DES_1_Pos (0UL)                /*!< Position of DES_1 field.                                             */
+  #define TSGEN_PIDR2_DES_1_Msk (0x7UL << TSGEN_PIDR2_DES_1_Pos) /*!< Bit mask of DES_1 field.                                 */
+
+/* JEDEC @Bit 3 : Always set. Indicates that a JEDEC assigned value is used. */
+  #define TSGEN_PIDR2_JEDEC_Pos (3UL)                /*!< Position of JEDEC field.                                             */
+  #define TSGEN_PIDR2_JEDEC_Msk (0x1UL << TSGEN_PIDR2_JEDEC_Pos) /*!< Bit mask of JEDEC field.                                 */
+
+/* REVISION @Bits 4..7 : The Revision field is an incremental value starting at 0x0 for the first design of this component. This
+                         only increases by 1 for both major and minor revisions and is used as a look-up to establish the exact
+                         major and minor revision. */
+
+  #define TSGEN_PIDR2_REVISION_Pos (4UL)             /*!< Position of REVISION field.                                          */
+  #define TSGEN_PIDR2_REVISION_Msk (0xFUL << TSGEN_PIDR2_REVISION_Pos) /*!< Bit mask of REVISION field.                        */
+
+
+/* TSGEN_PIDR3: Peripheral ID3 Register */
+  #define TSGEN_PIDR3_ResetValue (0x00000000UL)      /*!< Reset value of PIDR3 register.                                       */
+
+/* CMOD @Bits 0..3 : Where the component is reusable IP, this value indicates if the customer has modified the behavior of the
+                     component. In most cases this field is zero. */
+
+  #define TSGEN_PIDR3_CMOD_Pos (0UL)                 /*!< Position of CMOD field.                                              */
+  #define TSGEN_PIDR3_CMOD_Msk (0xFUL << TSGEN_PIDR3_CMOD_Pos) /*!< Bit mask of CMOD field.                                    */
+
+/* REVAND @Bits 4..7 : This field indicates minor errata fixes specific to this design, for example metal fixes after
+                       implementation. In most cases this field is zero. It is recommended that component designers ensure this
+                       field can be changed by a metal fix if required, for example by driving it from registers that reset to
+                       zero. */
+
+  #define TSGEN_PIDR3_REVAND_Pos (4UL)               /*!< Position of REVAND field.                                            */
+  #define TSGEN_PIDR3_REVAND_Msk (0xFUL << TSGEN_PIDR3_REVAND_Pos) /*!< Bit mask of REVAND field.                              */
+
+
+/* TSGEN_CIDR0: Component ID0 Register */
+  #define TSGEN_CIDR0_ResetValue (0x0000000DUL)      /*!< Reset value of CIDR0 register.                                       */
+
+/* PRMBL_0 @Bits 0..7 : Contains bits[7:0] of the component identification code. */
+  #define TSGEN_CIDR0_PRMBL_0_Pos (0UL)              /*!< Position of PRMBL_0 field.                                           */
+  #define TSGEN_CIDR0_PRMBL_0_Msk (0xFFUL << TSGEN_CIDR0_PRMBL_0_Pos) /*!< Bit mask of PRMBL_0 field.                          */
+
+
+/* TSGEN_CIDR1: Component ID1 Register */
+  #define TSGEN_CIDR1_ResetValue (0x000000F0UL)      /*!< Reset value of CIDR1 register.                                       */
+
+/* PRMBL_1 @Bits 0..3 : Contains bits[11:8] of the component identification code. */
+  #define TSGEN_CIDR1_PRMBL_1_Pos (0UL)              /*!< Position of PRMBL_1 field.                                           */
+  #define TSGEN_CIDR1_PRMBL_1_Msk (0xFUL << TSGEN_CIDR1_PRMBL_1_Pos) /*!< Bit mask of PRMBL_1 field.                           */
+
+/* CLASS @Bits 4..7 : Class of the component, for example, ROM table or CoreSight component. */
+  #define TSGEN_CIDR1_CLASS_Pos (4UL)                /*!< Position of CLASS field.                                             */
+  #define TSGEN_CIDR1_CLASS_Msk (0xFUL << TSGEN_CIDR1_CLASS_Pos) /*!< Bit mask of CLASS field.                                 */
+
+
+/* TSGEN_CIDR2: Component ID2 Register */
+  #define TSGEN_CIDR2_ResetValue (0x00000005UL)      /*!< Reset value of CIDR2 register.                                       */
+
+/* PRMBL_2 @Bits 0..7 : Contains bits[23:16] of the component identification code. */
+  #define TSGEN_CIDR2_PRMBL_2_Pos (0UL)              /*!< Position of PRMBL_2 field.                                           */
+  #define TSGEN_CIDR2_PRMBL_2_Msk (0xFFUL << TSGEN_CIDR2_PRMBL_2_Pos) /*!< Bit mask of PRMBL_2 field.                          */
+
+
+/* TSGEN_CIDR3: Component ID3 Register */
+  #define TSGEN_CIDR3_ResetValue (0x000000B1UL)      /*!< Reset value of CIDR3 register.                                       */
+
+/* PRMBL_3 @Bits 0..7 : Contains bits[31:24] of the component identification code. */
+  #define TSGEN_CIDR3_PRMBL_3_Pos (0UL)              /*!< Position of PRMBL_3 field.                                           */
+  #define TSGEN_CIDR3_PRMBL_3_Msk (0xFFUL << TSGEN_CIDR3_PRMBL_3_Pos) /*!< Bit mask of PRMBL_3 field.                          */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -134499,6 +135841,8 @@ typedef struct {
 
 /* TWIS_ADDRESS: TWI slave address n */
   #define TWIS_ADDRESS_MaxCount (2UL)                /*!< Max size of ADDRESS[2] array.                                        */
+  #define TWIS_ADDRESS_MaxIndex (1UL)                /*!< Max index of ADDRESS[2] array.                                       */
+  #define TWIS_ADDRESS_MinIndex (0UL)                /*!< Min index of ADDRESS[2] array.                                       */
   #define TWIS_ADDRESS_ResetValue (0x00000000UL)     /*!< Reset value of ADDRESS[2] register.                                  */
 
 /* ADDRESS @Bits 0..6 : TWI slave address */
@@ -136113,8 +137457,10 @@ typedef struct {
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) Memory configuration of the memory region             */
   __IOM uint32_t  SIZE;                              /*!< (@ 0x00000004) Size of the memory region                             */
 } NRF_UICR_MEM_Type;                                 /*!< Size = 8 (0x008)                                                     */
-  #define UICR_MEM_MaxCount (15UL)                   /*!< Max size of MEM[16] array.                                           */
+  #define UICR_MEM_MaxCount (16UL)                   /*!< Max size of MEM[16] array.                                           */
   #define UICR_MEM_MinCount (0UL)                    /*!< Min size of MEM[16] array.                                           */
+  #define UICR_MEM_MaxIndex (15UL)                   /*!< Max index of MEM[16] array.                                          */
+  #define UICR_MEM_MinIndex (0UL)                    /*!< Min index of MEM[16] array.                                          */
 
 /* UICR_MEM_CONFIG: Memory configuration of the memory region */
   #define UICR_MEM_CONFIG_ResetValue (0xFFFFFFFFUL)  /*!< Reset value of CONFIG register.                                      */
@@ -136186,8 +137532,10 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) Peripheral configuration                              */
 } NRF_UICR_PERIPH_Type;                              /*!< Size = 4 (0x004)                                                     */
-  #define UICR_PERIPH_MaxCount (191UL)               /*!< Max size of PERIPH[192] array.                                       */
+  #define UICR_PERIPH_MaxCount (192UL)               /*!< Max size of PERIPH[192] array.                                       */
   #define UICR_PERIPH_MinCount (0UL)                 /*!< Min size of PERIPH[192] array.                                       */
+  #define UICR_PERIPH_MaxIndex (191UL)               /*!< Max index of PERIPH[192] array.                                      */
+  #define UICR_PERIPH_MinIndex (0UL)                 /*!< Min index of PERIPH[192] array.                                      */
 
 /* UICR_PERIPH_CONFIG: Peripheral configuration */
   #define UICR_PERIPH_CONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CONFIG register.                                    */
@@ -136228,8 +137576,10 @@ typedef struct {
   __IOM uint32_t  OWN;                               /*!< (@ 0x00000000) Request ownership of the pins at GPIO port P[n]       */
   __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Request permission for the pins at GPIO port P[n]     */
 } NRF_UICR_GPIO_Type;                                /*!< Size = 8 (0x008)                                                     */
-  #define UICR_GPIO_MaxCount (15UL)                  /*!< Max size of GPIO[16] array.                                          */
+  #define UICR_GPIO_MaxCount (16UL)                  /*!< Max size of GPIO[16] array.                                          */
   #define UICR_GPIO_MinCount (0UL)                   /*!< Min size of GPIO[16] array.                                          */
+  #define UICR_GPIO_MaxIndex (15UL)                  /*!< Max index of GPIO[16] array.                                         */
+  #define UICR_GPIO_MinIndex (0UL)                   /*!< Min index of GPIO[16] array.                                         */
 
 /* UICR_GPIO_OWN: Request ownership of the pins at GPIO port P[n] */
   #define UICR_GPIO_OWN_ResetValue (0xFFFFFFFFUL)    /*!< Reset value of OWN register.                                         */
@@ -137289,8 +138639,10 @@ typedef struct {
 typedef struct {
   __IOM NRF_UICR_GPIOTE_CH_Type CH;                  /*!< (@ 0x00000000) (unspecified)                                         */
 } NRF_UICR_GPIOTE_Type;                              /*!< Size = 8 (0x008)                                                     */
-  #define UICR_GPIOTE_MaxCount (3UL)                 /*!< Max size of GPIOTE[4] array.                                         */
+  #define UICR_GPIOTE_MaxCount (4UL)                 /*!< Max size of GPIOTE[4] array.                                         */
   #define UICR_GPIOTE_MinCount (0UL)                 /*!< Min size of GPIOTE[4] array.                                         */
+  #define UICR_GPIOTE_MaxIndex (3UL)                 /*!< Max index of GPIOTE[4] array.                                        */
+  #define UICR_GPIOTE_MinIndex (0UL)                 /*!< Min index of GPIOTE[4] array.                                        */
 
 
 /* ================================================ Struct UICR_IPCT_LOCAL_CH ================================================ */
@@ -139011,8 +140363,10 @@ typedef struct {
   __IOM NRF_UICR_IPCT_GLOBAL_CH_Type CH;             /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_UICR_IPCT_GLOBAL_INTERRUPT_Type INTERRUPT; /*!< (@ 0x00000008) (unspecified)                                       */
 } NRF_UICR_IPCT_GLOBAL_Type;                         /*!< Size = 16 (0x010)                                                    */
-  #define UICR_IPCT_GLOBAL_MaxCount (1UL)            /*!< Max size of GLOBAL[2] array.                                         */
+  #define UICR_IPCT_GLOBAL_MaxCount (2UL)            /*!< Max size of GLOBAL[2] array.                                         */
   #define UICR_IPCT_GLOBAL_MinCount (0UL)            /*!< Min size of GLOBAL[2] array.                                         */
+  #define UICR_IPCT_GLOBAL_MaxIndex (1UL)            /*!< Max index of GLOBAL[2] array.                                        */
+  #define UICR_IPCT_GLOBAL_MinIndex (0UL)            /*!< Min index of GLOBAL[2] array.                                        */
 
 
 /* ==================================================== Struct UICR_IPCT ===================================================== */
@@ -140134,8 +141488,10 @@ typedef struct {
   __IOM NRF_UICR_DPPI_LOCAL_CH_Type CH;              /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_UICR_DPPI_LOCAL_CHG_Type CHG;            /*!< (@ 0x0000000C) (unspecified)                                         */
 } NRF_UICR_DPPI_LOCAL_Type;                          /*!< Size = 16 (0x010)                                                    */
-  #define UICR_DPPI_LOCAL_MaxCount (1UL)             /*!< Max size of LOCAL[2] array.                                          */
+  #define UICR_DPPI_LOCAL_MaxCount (2UL)             /*!< Max size of LOCAL[2] array.                                          */
   #define UICR_DPPI_LOCAL_MinCount (0UL)             /*!< Min size of LOCAL[2] array.                                          */
+  #define UICR_DPPI_LOCAL_MaxIndex (1UL)             /*!< Max index of LOCAL[2] array.                                         */
+  #define UICR_DPPI_LOCAL_MinIndex (0UL)             /*!< Min index of LOCAL[2] array.                                         */
 
 
 /* ============================================= Struct UICR_DPPI_GLOBAL_CH_LINK ============================================= */
@@ -141781,8 +143137,10 @@ typedef struct {
   __IOM NRF_UICR_DPPI_GLOBAL_CH_Type CH;             /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_UICR_DPPI_GLOBAL_CHG_Type CHG;           /*!< (@ 0x00000010) (unspecified)                                         */
 } NRF_UICR_DPPI_GLOBAL_Type;                         /*!< Size = 24 (0x018)                                                    */
-  #define UICR_DPPI_GLOBAL_MaxCount (11UL)           /*!< Max size of GLOBAL[12] array.                                        */
+  #define UICR_DPPI_GLOBAL_MaxCount (12UL)           /*!< Max size of GLOBAL[12] array.                                        */
   #define UICR_DPPI_GLOBAL_MinCount (0UL)            /*!< Min size of GLOBAL[12] array.                                        */
+  #define UICR_DPPI_GLOBAL_MaxIndex (11UL)           /*!< Max index of GLOBAL[12] array.                                       */
+  #define UICR_DPPI_GLOBAL_MinIndex (0UL)            /*!< Min index of GLOBAL[12] array.                                       */
 
 
 /* ==================================================== Struct UICR_DPPI ===================================================== */
@@ -142086,8 +143444,10 @@ typedef struct {
   __IOM uint32_t  ADDRESS;                           /*!< (@ 0x00000000) Memory start address of mailbox n                     */
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000004) Configuration of mailbox n                            */
 } NRF_UICR_MAILBOX_Type;                             /*!< Size = 8 (0x008)                                                     */
-  #define UICR_MAILBOX_MaxCount (7UL)                /*!< Max size of MAILBOX[8] array.                                        */
+  #define UICR_MAILBOX_MaxCount (8UL)                /*!< Max size of MAILBOX[8] array.                                        */
   #define UICR_MAILBOX_MinCount (0UL)                /*!< Min size of MAILBOX[8] array.                                        */
+  #define UICR_MAILBOX_MaxIndex (7UL)                /*!< Max index of MAILBOX[8] array.                                       */
+  #define UICR_MAILBOX_MinIndex (0UL)                /*!< Min index of MAILBOX[8] array.                                       */
 
 /* UICR_MAILBOX_ADDRESS: Memory start address of mailbox n */
   #define UICR_MAILBOX_ADDRESS_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ADDRESS register.                                 */
@@ -142148,6 +143508,8 @@ typedef struct {
 
 /* UICR_IPCMAP: Request configuration for the channel n of IPCMAP */
   #define UICR_IPCMAP_MaxCount (16UL)                /*!< Max size of IPCMAP[16] array.                                        */
+  #define UICR_IPCMAP_MaxIndex (15UL)                /*!< Max index of IPCMAP[16] array.                                       */
+  #define UICR_IPCMAP_MinIndex (0UL)                 /*!< Min index of IPCMAP[16] array.                                       */
   #define UICR_IPCMAP_ResetValue (0xFFFFFFFFUL)      /*!< Reset value of IPCMAP[16] register.                                  */
 
 /* IPCTCHSINK @Bits 0..7 : IPCT channel number (sink side) */
@@ -142817,8 +144179,10 @@ typedef struct {
   __IOM uint32_t  DMA;                               /*!< (@ 0x00000014) Host Channel n DMA Address Register                   */
   __IM  uint32_t  RESERVED1[2];
 } NRF_USBHSCORE_HC_Type;                             /*!< Size = 32 (0x020)                                                    */
-  #define USBHSCORE_HC_MaxCount (15UL)               /*!< Max size of HC[16] array.                                            */
+  #define USBHSCORE_HC_MaxCount (16UL)               /*!< Max size of HC[16] array.                                            */
   #define USBHSCORE_HC_MinCount (0UL)                /*!< Min size of HC[16] array.                                            */
+  #define USBHSCORE_HC_MaxIndex (15UL)               /*!< Max index of HC[16] array.                                           */
+  #define USBHSCORE_HC_MinIndex (0UL)                /*!< Min index of HC[16] array.                                           */
 
 /* USBHSCORE_HC_CHAR: Host Channel n Characteristics Register */
   #define USBHSCORE_HC_CHAR_ResetValue (0x00000000UL) /*!< Reset value of CHAR register.                                       */
@@ -143148,8 +144512,10 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  DATA[1025];                        /*!< (@ 0x00000000) Data buffer for FIFO n                                */
 } NRF_USBHSCORE_DWCOTGDFIFO_Type;                    /*!< Size = 4100 (0x1004)                                                 */
-  #define USBHSCORE_DWCOTGDFIFO_MaxCount (15UL)      /*!< Max size of DWCOTGDFIFO[16] array.                                   */
+  #define USBHSCORE_DWCOTGDFIFO_MaxCount (16UL)      /*!< Max size of DWCOTGDFIFO[16] array.                                   */
   #define USBHSCORE_DWCOTGDFIFO_MinCount (0UL)       /*!< Min size of DWCOTGDFIFO[16] array.                                   */
+  #define USBHSCORE_DWCOTGDFIFO_MaxIndex (15UL)      /*!< Max index of DWCOTGDFIFO[16] array.                                  */
+  #define USBHSCORE_DWCOTGDFIFO_MinIndex (0UL)       /*!< Min index of DWCOTGDFIFO[16] array.                                  */
 
 
 /* ======================================== Struct USBHSCORE_DWCOTGDFIFODIRECTACCESS ========================================= */
@@ -156647,6 +158013,8 @@ typedef struct {
 
 /* VPR_DEBUGIF_CONFSTRPTR: Configuration String Pointer [n] */
   #define VPR_DEBUGIF_CONFSTRPTR_MaxCount (4UL)      /*!< Max size of CONFSTRPTR[4] array.                                     */
+  #define VPR_DEBUGIF_CONFSTRPTR_MaxIndex (3UL)      /*!< Max index of CONFSTRPTR[4] array.                                    */
+  #define VPR_DEBUGIF_CONFSTRPTR_MinIndex (0UL)      /*!< Min index of CONFSTRPTR[4] array.                                    */
   #define VPR_DEBUGIF_CONFSTRPTR_ResetValue (0x00000000UL) /*!< Reset value of CONFSTRPTR[4] register.                         */
 
 /* ADDR @Bits 0..31 : Address */
@@ -156664,6 +158032,8 @@ typedef struct {
 
 /* VPR_DEBUGIF_PROGBUF: Program Buffer [n] */
   #define VPR_DEBUGIF_PROGBUF_MaxCount (16UL)        /*!< Max size of PROGBUF[16] array.                                       */
+  #define VPR_DEBUGIF_PROGBUF_MaxIndex (15UL)        /*!< Max index of PROGBUF[16] array.                                      */
+  #define VPR_DEBUGIF_PROGBUF_MinIndex (0UL)         /*!< Min index of PROGBUF[16] array.                                      */
   #define VPR_DEBUGIF_PROGBUF_ResetValue (0x00000000UL) /*!< Reset value of PROGBUF[16] register.                              */
 
 /* DATA @Bits 0..31 : Data */
@@ -156929,6 +158299,8 @@ typedef struct {
 
 /* VPR_TASKS_TRIGGER: VPR task [n] register */
   #define VPR_TASKS_TRIGGER_MaxCount (32UL)          /*!< Max size of TASKS_TRIGGER[32] array.                                 */
+  #define VPR_TASKS_TRIGGER_MaxIndex (31UL)          /*!< Max index of TASKS_TRIGGER[32] array.                                */
+  #define VPR_TASKS_TRIGGER_MinIndex (0UL)           /*!< Min index of TASKS_TRIGGER[32] array.                                */
   #define VPR_TASKS_TRIGGER_ResetValue (0x00000000UL) /*!< Reset value of TASKS_TRIGGER[32] register.                          */
 
 /* TASKS_TRIGGER @Bit 0 : VPR task [n] register */
@@ -156942,6 +158314,8 @@ typedef struct {
 
 /* VPR_SUBSCRIBE_TRIGGER: Subscribe configuration for task TASKS_TRIGGER[n] */
   #define VPR_SUBSCRIBE_TRIGGER_MaxCount (32UL)      /*!< Max size of SUBSCRIBE_TRIGGER[32] array.                             */
+  #define VPR_SUBSCRIBE_TRIGGER_MaxIndex (31UL)      /*!< Max index of SUBSCRIBE_TRIGGER[32] array.                            */
+  #define VPR_SUBSCRIBE_TRIGGER_MinIndex (0UL)       /*!< Min index of SUBSCRIBE_TRIGGER[32] array.                            */
   #define VPR_SUBSCRIBE_TRIGGER_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_TRIGGER[32] register.                  */
 
 /* ENABLE @Bit 0 : Subscription enable bit (write only) */
@@ -156959,6 +158333,8 @@ typedef struct {
 
 /* VPR_EVENTS_TRIGGERED: VPR event [n] register */
   #define VPR_EVENTS_TRIGGERED_MaxCount (32UL)       /*!< Max size of EVENTS_TRIGGERED[32] array.                              */
+  #define VPR_EVENTS_TRIGGERED_MaxIndex (31UL)       /*!< Max index of EVENTS_TRIGGERED[32] array.                             */
+  #define VPR_EVENTS_TRIGGERED_MinIndex (0UL)        /*!< Min index of EVENTS_TRIGGERED[32] array.                             */
   #define VPR_EVENTS_TRIGGERED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_TRIGGERED[32] register.                    */
 
 /* EVENTS_TRIGGERED @Bit 0 : VPR event [n] register */
@@ -156973,6 +158349,8 @@ typedef struct {
 
 /* VPR_PUBLISH_TRIGGERED: Publish configuration for event EVENTS_TRIGGERED[n] */
   #define VPR_PUBLISH_TRIGGERED_MaxCount (32UL)      /*!< Max size of PUBLISH_TRIGGERED[32] array.                             */
+  #define VPR_PUBLISH_TRIGGERED_MaxIndex (31UL)      /*!< Max index of PUBLISH_TRIGGERED[32] array.                            */
+  #define VPR_PUBLISH_TRIGGERED_MinIndex (0UL)       /*!< Min index of PUBLISH_TRIGGERED[32] array.                            */
   #define VPR_PUBLISH_TRIGGERED_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_TRIGGERED[32] register.                  */
 
 /* ENABLE @Bit 0 : Publication enable bit (write only) */
@@ -170719,6 +172097,8 @@ typedef struct {
 
 /* WDT_RR: Reload request n */
   #define WDT_RR_MaxCount (8UL)                      /*!< Max size of RR[8] array.                                             */
+  #define WDT_RR_MaxIndex (7UL)                      /*!< Max index of RR[8] array.                                            */
+  #define WDT_RR_MinIndex (0UL)                      /*!< Min index of RR[8] array.                                            */
   #define WDT_RR_ResetValue (0x00000000UL)           /*!< Reset value of RR[8] register.                                       */
 
 /* RR @Bits 0..31 : Reload request register */

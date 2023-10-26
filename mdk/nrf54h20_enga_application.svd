@@ -16941,6 +16941,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                 </fields>
               </register>
+              <register>
+                <name>LOOPGAIN</name>
+                <description>Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND5</description>
+                <addressOffset>0x28</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
             </cluster>
           </cluster>
           <cluster>
@@ -55933,9 +55948,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </peripheral>
     <peripheral>
       <name>GLOBAL_TSGEN_NS</name>
-      <description>GENERIC</description>
+      <description>Timestamp generator</description>
       <baseAddress>0xBF041000</baseAddress>
-      <headerStructName>GENERIC</headerStructName>
+      <headerStructName>TSGEN</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=NS-->
       <addressBlock>
@@ -55943,25 +55958,48 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <groupName>GENERIC</groupName>
+      <groupName>TSGEN</groupName>
       <size>0x20</size>
       <registers>
         <register>
-          <name>TASKS_GENERICTASK</name>
-          <description>Generic event</description>
-          <addressOffset>0x000</addressOffset>
-          <access>write-only</access>
+          <name>CNTCR</name>
+          <description>Counter Control Register</description>
+          <addressOffset>0x0</addressOffset>
+          <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>TASKS_GENERICTASK</name>
-              <description>Generic event</description>
+              <name>EN</name>
+              <description>Counter enable</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
+                  <name>Disabled</name>
+                  <description>Unspecified</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Unspecified</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>HDBG</name>
+              <description>Halt on Debug</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Do not halt on debug, HLTDBG signal into the counter has no effect.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Halt on debug, when HLTDBG is driven HIGH, the count value is held static.</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -55969,192 +56007,233 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>SUBSCRIBE_GENERICTASK</name>
-          <description>Subscribe configuration for task GENERICTASK</description>
-          <addressOffset>0x080</addressOffset>
+          <name>CNTSR</name>
+          <description>Counter Status Register</description>
+          <addressOffset>0x4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DBGH</name>
+              <description>Debug halted</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CNTCVL</name>
+          <description>Current Counter Value Lower register</description>
+          <addressOffset>0x8</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task GENERICTASK will subscribe to</description>
+              <name>CNTCVL_L_32</name>
+              <description>Current value of Counter, lower 32 bits</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CNTCVU</name>
+          <description>Current Counter Value Upper register</description>
+          <addressOffset>0xC</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CNTCVU_U_32</name>
+              <description>Current value of Counter, upper 32 bits</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CNTFID0</name>
+          <description>Base Frequency ID</description>
+          <addressOffset>0x20</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>FREQ</name>
+              <description>Frequency in number of ticks per second (up to 4 GHz)</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PIDR4</name>
+          <description>Peripheral ID4 Register</description>
+          <addressOffset>0xFD0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000004</resetValue>
+          <fields>
+            <field>
+              <name>DES_2</name>
+              <description>JEDEC continuation code indicating the designer of the component, together with the identity code.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>SIZE</name>
+              <description>This is a 4-bit value that indicates the total contiguous size of the memory window used by this component in powers of 2 from the standard 4KB. If a component only requires the standard 4KB, this must read as 0x0, 4KB only. For 8KB set to 0x1, for 16KB set to 0x2, for 32KB set to 0x3, and so on.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PIDR0</name>
+          <description>Peripheral ID0 Register</description>
+          <addressOffset>0xFE0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000001</resetValue>
+          <fields>
+            <field>
+              <name>PART_0</name>
+              <description>Bits [7:0] of the component part number. This is selected by the designer of the component.</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
           </fields>
         </register>
         <register>
-          <name>EVENTS_GENERICEVENT</name>
-          <description>Generic event</description>
-          <addressOffset>0x100</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <name>PIDR1</name>
+          <description>Peripheral ID1 Register</description>
+          <addressOffset>0xFE4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x000000B1</resetValue>
           <fields>
             <field>
-              <name>EVENTS_GENERICEVENT</name>
-              <description>Generic event</description>
+              <name>PART_1</name>
+              <description>Bits [11:8] of the component part number. This is selected by the designer of the component.</description>
               <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>DES_0</name>
+              <description>Bits [3:0] of the JEDEC identity code indicating the designer of the component, together with the continuation code.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
             </field>
           </fields>
         </register>
         <register>
-          <name>PUBLISH_GENERICEVENT</name>
-          <description>Publish configuration for event GENERICEVENT</description>
-          <addressOffset>0x180</addressOffset>
-          <access>read-write</access>
+          <name>PIDR2</name>
+          <description>Peripheral ID2 Register</description>
+          <addressOffset>0xFE8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000001B</resetValue>
+          <fields>
+            <field>
+              <name>DES_1</name>
+              <description>Bits [6:4] of the JEDEC identity code indicating the designer of the component, together with the continuation code.</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>JEDEC</name>
+              <description>Always set. Indicates that a JEDEC assigned value is used.</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>REVISION</name>
+              <description>The Revision field is an incremental value starting at 0x0 for the first design of this component. This only increases by 1 for both major and minor revisions and is used as a look-up to establish the exact major and minor revision.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PIDR3</name>
+          <description>Peripheral ID3 Register</description>
+          <addressOffset>0xFEC</addressOffset>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event GENERICEVENT will publish to</description>
+              <name>CMOD</name>
+              <description>Where the component is reusable IP, this value indicates if the customer has modified the behavior of the component. In most cases this field is zero.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>REVAND</name>
+              <description>This field indicates minor errata fixes specific to this design, for example metal fixes after implementation. In most cases this field is zero. It is recommended that component designers ensure this field can be changed by a metal fix if required, for example by driving it from registers that reset to zero.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CIDR0</name>
+          <description>Component ID0 Register</description>
+          <addressOffset>0xFF0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000D</resetValue>
+          <fields>
+            <field>
+              <name>PRMBL_0</name>
+              <description>Contains bits[7:0] of the component identification code.</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
+          </fields>
+        </register>
+        <register>
+          <name>CIDR1</name>
+          <description>Component ID1 Register</description>
+          <addressOffset>0xFF4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x000000F0</resetValue>
+          <fields>
             <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+              <name>PRMBL_1</name>
+              <description>Contains bits[11:8] of the component identification code.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>CLASS</name>
+              <description>Class of the component, for example, ROM table or CoreSight component.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
             </field>
           </fields>
         </register>
         <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <name>CIDR2</name>
+          <description>Component ID2 Register</description>
+          <addressOffset>0xFF8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000005</resetValue>
           <fields>
             <field>
-              <name>GENERICEVENT</name>
-              <description>Enable or disable interrupt for event GENERICEVENT</description>
+              <name>PRMBL_2</name>
+              <description>Contains bits[23:16] of the component identification code.</description>
               <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+              <msb>7</msb>
             </field>
           </fields>
         </register>
         <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <name>CIDR3</name>
+          <description>Component ID3 Register</description>
+          <addressOffset>0xFFC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x000000B1</resetValue>
           <fields>
             <field>
-              <name>GENERICEVENT</name>
-              <description>Write '1' to enable interrupt for event GENERICEVENT</description>
+              <name>PRMBL_3</name>
+              <description>Contains bits[31:24] of the component identification code.</description>
               <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>GENERICEVENT</name>
-              <description>Write '1' to disable interrupt for event GENERICEVENT</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+              <msb>7</msb>
             </field>
           </fields>
         </register>
@@ -60837,9 +60916,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </peripheral>
     <peripheral>
       <name>GLOBAL_ETB_NS</name>
-      <description>GENERIC</description>
+      <description>Embedded Trace Buffer</description>
       <baseAddress>0xBF044000</baseAddress>
-      <headerStructName>GENERIC</headerStructName>
+      <headerStructName>ETB</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=NS-->
       <addressBlock>
@@ -60847,218 +60926,732 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <groupName>GENERIC</groupName>
+      <groupName>ETB</groupName>
       <size>0x20</size>
       <registers>
         <register>
-          <name>TASKS_GENERICTASK</name>
-          <description>Generic event</description>
-          <addressOffset>0x000</addressOffset>
-          <access>write-only</access>
+          <name>RDP</name>
+          <description>ETB RAM Depth Register</description>
+          <addressOffset>0x4</addressOffset>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>TASKS_GENERICTASK</name>
-              <description>Generic event</description>
+              <name>ETB_RAM_DEPTH</name>
+              <description>Defines the depth, in words, of the trace RAM.</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STS</name>
+          <description>ETB Status Register</description>
+          <addressOffset>0xC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000008</resetValue>
+          <fields>
+            <field>
+              <name>FULL</name>
+              <description>RAM Full. The flag indicates when the RAM write pointer has wrapped around.</description>
               <lsb>0</lsb>
               <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+            </field>
+            <field>
+              <name>TRIGGERED</name>
+              <description>The Triggered bit is set when a trigger has been observed. This does not indicate that a trigger has been embedded in the trace data by the formatter, but is determined by the programming of the Formatter and Flush Control Register.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>ACQCOMP</name>
+              <description>The acquisition complete flag indicates that capture has been completed when the formatter stops because of any of the methods defined in the Formatter and Flush Control Register, or TraceCaptEn = 0. This also results in FtStopped in the Formatter and Flush Status Register going HIGH.</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>FTEMPTY</name>
+              <description>Formatter pipeline empty. All data stored to RAM.</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
             </field>
           </fields>
         </register>
         <register>
-          <name>SUBSCRIBE_GENERICTASK</name>
-          <description>Subscribe configuration for task GENERICTASK</description>
-          <addressOffset>0x080</addressOffset>
-          <access>read-write</access>
+          <name>RRD</name>
+          <description>ETB RAM Read Data Register</description>
+          <addressOffset>0x10</addressOffset>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task GENERICTASK will subscribe to</description>
+              <name>RAM_READ_DATA</name>
+              <description>Data read from the ETB Trace RAM.</description>
               <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
               <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>EVENTS_GENERICEVENT</name>
-          <description>Generic event</description>
-          <addressOffset>0x100</addressOffset>
+          <name>RRP</name>
+          <description>ETB RAM Read Pointer Register</description>
+          <addressOffset>0x14</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>EVENTS_GENERICEVENT</name>
-              <description>Generic event</description>
+              <name>RAM_READ_POINTER</name>
+              <description>Sets the read pointer used to read entries from the Trace RAM over the APB interface.</description>
+              <lsb>0</lsb>
+              <msb>9</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RWP</name>
+          <description>ETB RAM Write Pointer Register</description>
+          <addressOffset>0x18</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>RAM_WRITE_POINTER</name>
+              <description>Sets the write pointer used to write entries from the CoreSight bus into the Trace RAM.</description>
+              <lsb>0</lsb>
+              <msb>9</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TRG</name>
+          <description>ETB Trigger Counter Register</description>
+          <addressOffset>0x1C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TRIGGER_COUNTER</name>
+              <description>The counter is used as follows:Trace after - The counter is set to a large value, slightly less than the number of entries in the RAM. Trace before - The counter is set to a small value. Trace about - The counter is set to half the depth of the Trace RAM. This register must not be written to when trace capture is enabled (FtStopped=0, TraceCaptEn=1). If a write is attempted, the register is not updated. A read access is permitted with trace capture enabled.</description>
+              <lsb>0</lsb>
+              <msb>9</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CTL</name>
+          <description>ETB Control Register</description>
+          <addressOffset>0x20</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TRACECAPTEN</name>
+              <description>ETB Trace Capture Enable. This is the master enable bit forcing FtStopped HIGH when TraceCaptEn is LOW. When capture is disabled, any remaining data in the ATB formatter is stored to RAM. When all data is stored the formatter outputs FtStopped. Capture is fully disabled, or complete, when FtStopped goes HIGH. See ETB Formatter and Flush Status Register, FFSR, 0x300.</description>
               <lsb>0</lsb>
               <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>PUBLISH_GENERICEVENT</name>
-          <description>Publish configuration for event GENERICEVENT</description>
-          <addressOffset>0x180</addressOffset>
+          <name>RWD</name>
+          <description>ETB RAM Write Data Register</description>
+          <addressOffset>0x24</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event GENERICEVENT will publish to</description>
+              <name>RAM_WRITE_DATA</name>
+              <description>Data written to the ETB Trace RAM. When trace capture is disabled, the contents of this register are placed into the ETB Trace RAM when this register is written to. Writing to this register increments the RAM Write Pointer Register. If trace capture is enabled, and this register is accessed, then a read from this register outputs 0xFFFFFFFF. Reads of this register never increment the RAM Write Pointer Register. A constant stream of 1s being output corresponds to a synchronization output from the ETB. If a write access is attempted, the data is not written into Trace RAM.</description>
               <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
               <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
+          <name>FFSR</name>
+          <description>ETB Formatter and Flush Status Register</description>
           <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <access>read-only</access>
+          <resetValue>0x00000002</resetValue>
           <fields>
             <field>
-              <name>GENERICEVENT</name>
-              <description>Enable or disable interrupt for event GENERICEVENT</description>
+              <name>FLINPROG</name>
+              <description>Flush In Progress. This is an indication of the current state of afvalids.</description>
               <lsb>0</lsb>
               <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+            </field>
+            <field>
+              <name>FTSTOPPED</name>
+              <description>Formatter stopped. The formatter has received a stop request signal and all trace data and post-amble has been output. Any more trace data on the ATB interface is ignored and atreadys goes HIGH.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
             </field>
           </fields>
         </register>
         <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
+          <name>FFCR</name>
+          <description>ETB Formatter and Flush Control Register</description>
           <addressOffset>0x304</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>GENERICEVENT</name>
-              <description>Write '1' to enable interrupt for event GENERICEVENT</description>
+              <name>ENFTC</name>
+              <description>Do not embed Triggers into the formatted stream. Trace disable cycles and triggers are indicated by TRACECTL, where fitted. Can only be changed when FtStopped is HIGH. This bit is clear on reset.</description>
               <lsb>0</lsb>
               <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+            </field>
+            <field>
+              <name>ENFCONT</name>
+              <description>Continuous mode in the ETB corresponds to normal mode with the embedding of triggers. Can only be changed when FtStopped is HIGH. This bit is clear on reset.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>FONFLIN</name>
+              <description>Set this bit to enable use of the flushin connection. This is clear on reset.</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>FONTRIG</name>
+              <description>Generate flush using Trigger event. Set this bit to cause a flush of data in the system when a Trigger Event occurs. This bit is clear on reset. A Trigger Event is defined as when the Trigger counter reaches zero (where fitted) or, in the case of the trigger counter being zero (or not fitted), when trigin is HIGH.</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+            </field>
+            <field>
+              <name>FONMAN</name>
+              <description>Setting this bit causes a flush to be generated. This is cleared when this flush has been serviced. This bit is clear on reset.</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+            </field>
+            <field>
+              <name>TRIGIN</name>
+              <description>Indicate a trigger on trigin being asserted.</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+            </field>
+            <field>
+              <name>TRIGEVT</name>
+              <description>Indicate a trigger on a Trigger Event.</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
+            </field>
+            <field>
+              <name>TRIGFL</name>
+              <description>Indicates a trigger on Flush completion (afreadys being returned).</description>
+              <lsb>10</lsb>
+              <msb>10</msb>
+            </field>
+            <field>
+              <name>STOPFL</name>
+              <description>This forces the FIFO to drain off any part-completed packets. Setting this bit enables this function but this is clear on reset (disabled).</description>
+              <lsb>12</lsb>
+              <msb>12</msb>
+            </field>
+            <field>
+              <name>STOPTRIG</name>
+              <description>Stop the formatter after a Trigger Event is observed. Reset to disabled (zero).</description>
+              <lsb>13</lsb>
+              <msb>13</msb>
             </field>
           </fields>
         </register>
         <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
+          <name>ITMISCOP0</name>
+          <description>Integration Test Miscellaneous Output Register 0</description>
+          <addressOffset>0xEE0</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ACQCOMP</name>
+              <description>Set the value of acqcomp.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>FULL</name>
+              <description>Set the value of full output port.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITTRFLINACK</name>
+          <description>Integration Test Trigger In and Flush In Acknowledge Register</description>
+          <addressOffset>0xEE4</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TRIGINACK</name>
+              <description>Set the value of triginack.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>FLUSHINACK</name>
+              <description>Set the value of flushinack.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITTRFLIN</name>
+          <description>Integration Test Trigger In and Flush In Register</description>
+          <addressOffset>0xEE8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TRIGIN</name>
+              <description>Read the value of trigin.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>FLUSHIN</name>
+              <description>Read the value of flushin.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITATBDATA0</name>
+          <description>Integration Test ATB Data Register 0</description>
+          <addressOffset>0xEEC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ATDATA_0</name>
+              <description>Read the value of atdatas[0].</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>ATDATA_7</name>
+              <description>Read the value of atdatas[7].</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>ATDATA_15</name>
+              <description>Read the value of atdatas[15].</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>ATDATA_23</name>
+              <description>Read the value of atdatas[23].</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>ATDATA_31</name>
+              <description>Read the value of atdatas[31].</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITATBCTR2</name>
+          <description>Integration Test ATB Control Register 2</description>
+          <addressOffset>0xEF0</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ATREADYS</name>
+              <description>Set the value of atreadys.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>AFVALIDS</name>
+              <description>Set the value of afvalids.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITATBCTR1</name>
+          <description>Integration Test ATB Control Register 1</description>
+          <addressOffset>0xEF4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ATID</name>
+              <description>Read the value of atids.</description>
+              <lsb>0</lsb>
+              <msb>6</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITATBCTR0</name>
+          <description>Integration Test ATB Control Register 0</description>
+          <addressOffset>0xEF8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ATVALID</name>
+              <description>Read the value of atvalids.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>AFREADY</name>
+              <description>Read the value of afreadys.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>ATBYTES</name>
+              <description>Read the value of atbytess.</description>
+              <lsb>8</lsb>
+              <msb>9</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITCTRL</name>
+          <description>Integration Mode Control Register</description>
+          <addressOffset>0xF00</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>GENERICEVENT</name>
-              <description>Write '1' to disable interrupt for event GENERICEVENT</description>
+              <name>INTEGRATION_MODE</name>
+              <description>Allows the component to switch from functional mode to integration mode or back.</description>
               <lsb>0</lsb>
               <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLAIMSET</name>
+          <description>Claim Tag Set Register</description>
+          <addressOffset>0xFA0</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x0000000F</resetValue>
+          <fields>
+            <field>
+              <name>CLAIMSET</name>
+              <description>This claim tag bit is implemented</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLAIMCLR</name>
+          <description>Claim Tag Clear Register</description>
+          <addressOffset>0xFA4</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CLAIMCLR</name>
+              <description>The value present reflects the current setting of the Claim Tag.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LAR</name>
+          <description>Lock Access Register</description>
+          <addressOffset>0xFB0</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ACCESS_W</name>
+              <description>A write of 0xC5ACCE55 enables further write access to this device. A write of any value other than 0xC5ACCE55 will have the affect of removing write access.</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LSR</name>
+          <description>Lock Status Register</description>
+          <addressOffset>0xFB4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000003</resetValue>
+          <fields>
+            <field>
+              <name>LOCKEXIST</name>
+              <description>Indicates that a lock control mechanism exists for this device. This bit reads as 0 when read from an external debugger (paddrdbg31 = 1) since external debugger accesses are not subject to Lock Registers.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>LOCKGRANT</name>
+              <description>Returns the current status of the Lock. This bit reads as 0 when read from an external debugger (paddrdbg31 = 1) since external debugger accesses are not subject to Lock Registers.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>LOCKTYPE</name>
+              <description>Indicates if the Lock Access Register (0xFB0) is implemented as 8-bit or 32-bit</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AUTHSTATUS</name>
+          <description>Authentication Status Register</description>
+          <addressOffset>0xFB8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>NSID</name>
+              <description>Indicates the security level for non-secure invasive debug</description>
+              <lsb>0</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>NSNID</name>
+              <description>Indicates the security level for non-secure non-invasive debug</description>
+              <lsb>2</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>SID</name>
+              <description>Indicates the security level for secure invasive debug</description>
+              <lsb>4</lsb>
+              <msb>5</msb>
+            </field>
+            <field>
+              <name>SNID</name>
+              <description>Indicates the security level for secure non-invasive debug</description>
+              <lsb>6</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DEVID</name>
+          <description>Device Configuration Register</description>
+          <addressOffset>0xFC8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EXTMUXNUM</name>
+              <description>When non-zero this value indicates the type/number of ATB multiplexing present on the input to the ATB.</description>
+              <lsb>0</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>RAMCLK</name>
+              <description>This bit returns 0 on reads indicating that the ETB RAM operates synchronously to atclk.</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DEVTYPE</name>
+          <description>Device Type Identifier Register</description>
+          <addressOffset>0xFCC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000021</resetValue>
+          <fields>
+            <field>
+              <name>MAJOR_TYPE</name>
+              <description>Major classification grouping for this debug/trace component</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>SUB_TYPE</name>
+              <description>Sub-classification within the major category</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID4</name>
+          <description>Peripheral ID4 Register</description>
+          <addressOffset>0xFD0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000004</resetValue>
+          <fields>
+            <field>
+              <name>DES_2</name>
+              <description>JEDEC continuation code indicating the designer of the component (along with the identity code)</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>SIZE</name>
+              <description>This is a 4-bit value that indicates the total contiguous size of the memory window used by this component in powers of 2 from the standard 4KB. If a component only requires the standard 4KB then this should read as 0x0, 4KB only, for 8KB set to 0x1, 16KB == 0x2, 32KB == 0x3, and so on.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID0</name>
+          <description>Peripheral ID0 Register</description>
+          <addressOffset>0xFE0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000007</resetValue>
+          <fields>
+            <field>
+              <name>PART_0</name>
+              <description>Bits [7:0] of the component's part number. This is selected by the designer of the component.</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID1</name>
+          <description>Peripheral ID1 Register</description>
+          <addressOffset>0xFE4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x000000B9</resetValue>
+          <fields>
+            <field>
+              <name>PART_1</name>
+              <description>Bits [11:8] of the component's part number. This is selected by the designer of the component.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>DES_0</name>
+              <description>Bits 3:0 of the JEDEC identity code indicating the designer of the component (along with the continuation code)</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID2</name>
+          <description>Peripheral ID2 Register</description>
+          <addressOffset>0xFE8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000004B</resetValue>
+          <fields>
+            <field>
+              <name>DES_1</name>
+              <description>Bits 6:4 of the JEDEC identity code indicating the designer of the component (along with the continuation code)</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>JEDEC</name>
+              <description>Always set. Indicates that a JEDEC assigned value is used</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>REVISION</name>
+              <description>The Revision field is an incremental value starting at 0x0 for the first design of this component. This only increases by 1 for both major and minor revisions and is simply used as a look-up to establish the exact major/minor revision.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID3</name>
+          <description>Peripheral ID3 Register</description>
+          <addressOffset>0xFEC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CMOD</name>
+              <description>Where the component is reusable IP, this value indicates if the customer has modified the behavior of the component. In most cases this field is zero.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>REVAND</name>
+              <description>This field indicates minor errata fixes specific to this design, for example metal fixes after implementation. In most cases this field is zero. It is recommended that component designers ensure this field can be changed by a metal fix if required, for example by driving it from registers that reset to zero.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID0</name>
+          <description>Component ID0 Register</description>
+          <addressOffset>0xFF0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000D</resetValue>
+          <fields>
+            <field>
+              <name>PRMBL_0</name>
+              <description>Contains bits [7:0] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID1</name>
+          <description>Component ID1 Register</description>
+          <addressOffset>0xFF4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000090</resetValue>
+          <fields>
+            <field>
+              <name>PRMBL_1</name>
+              <description>Contains bits [11:8] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>CLASS</name>
+              <description>Class of the component. E. g. ROM table, CoreSight component etc. Constitutes bits [15:12] of the component identification.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID2</name>
+          <description>Component ID2 Register</description>
+          <addressOffset>0xFF8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000005</resetValue>
+          <fields>
+            <field>
+              <name>PRMBL_2</name>
+              <description>Contains bits [23:16] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID3</name>
+          <description>Component ID3 Register</description>
+          <addressOffset>0xFFC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x000000B1</resetValue>
+          <fields>
+            <field>
+              <name>PRMBL_3</name>
+              <description>Contains bits [31:24] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
             </field>
           </fields>
         </register>
@@ -61066,9 +61659,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </peripheral>
     <peripheral>
       <name>GLOBAL_ETR_NS</name>
-      <description>GENERIC</description>
+      <description>Embedded Trace Router</description>
       <baseAddress>0xBF045000</baseAddress>
-      <headerStructName>GENERIC</headerStructName>
+      <headerStructName>ETR</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=NS-->
       <addressBlock>
@@ -61076,25 +61669,180 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <groupName>GENERIC</groupName>
+      <groupName>ETR</groupName>
       <size>0x20</size>
       <registers>
         <register>
-          <name>TASKS_GENERICTASK</name>
-          <description>Generic event</description>
-          <addressOffset>0x000</addressOffset>
+          <name>RSZ</name>
+          <description>RAM Size register</description>
+          <addressOffset>0x4</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>RSZ</name>
+              <description>Size of the RAM in 32-bit words.</description>
+              <lsb>0</lsb>
+              <msb>30</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STS</name>
+          <description>Status Register</description>
+          <addressOffset>0xC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000C</resetValue>
+          <fields>
+            <field>
+              <name>FULL</name>
+              <description>This bit can be used to help determine how much of the trace buffer contains valid data.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>TRIGGERED</name>
+              <description>The Triggered bit is set when trace capture is in progress and the TMC has detected a trigger event.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>TMCREADY</name>
+              <description>TMC ready</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>FTEMPTY</name>
+              <description>This bit is set when trace capture has stopped, and all internal pipelines and buffers have drained.</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>EMPTY</name>
+              <description>If set, this bit indicates that the TMC does not contain any valid trace data in the trace memory.</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>MEMERR</name>
+              <description>This bit indicates that an error has occurred on the AXI master interface.</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RRD</name>
+          <description>RAM Read Data Register</description>
+          <addressOffset>0x10</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>RRD</name>
+              <description>Reads return data from Trace RAM</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RRP</name>
+          <description>RAM Read Pointer Register</description>
+          <addressOffset>0x14</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>RRP</name>
+              <description>This value represents the location in trace memory that will be accessed on a subsequent RRD read.</description>
+              <lsb>0</lsb>
+              <msb>8</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RWP</name>
+          <description>RAM Write Pointer Register</description>
+          <addressOffset>0x18</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>RWP</name>
+              <description>This value represents the location in trace memory that will be accessed on a subsequent write to the trace memory.</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TRG</name>
+          <description>Trigger Counter Register</description>
+          <addressOffset>0x1C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TRG</name>
+              <description>This count represents the number of 32-bit words between a TRIGIN/trigger packet and a trigger event.</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CTL</name>
+          <description>Control Register</description>
+          <addressOffset>0x20</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TRACECAPTEN</name>
+              <description>Setting this bit to 1 enables the TMC to capture trace data.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RWD</name>
+          <description>RAM Write Data Register</description>
+          <addressOffset>0x24</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>TASKS_GENERICTASK</name>
-              <description>Generic event</description>
+              <name>RWD</name>
+              <description>Data written to this register is placed in the Trace RAM.</description>
               <lsb>0</lsb>
-              <msb>0</msb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MODE</name>
+          <description>Mode Register</description>
+          <addressOffset>0x28</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>MODE</name>
+              <description>Selects the operating mode.</description>
+              <lsb>0</lsb>
+              <msb>1</msb>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
+                  <name>CIRCULARBUF</name>
+                  <description>Circular Buffer mode</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>FIFO</name>
+                  <description>Software FIFO mode</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -61102,192 +61850,1001 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>SUBSCRIBE_GENERICTASK</name>
-          <description>Subscribe configuration for task GENERICTASK</description>
-          <addressOffset>0x080</addressOffset>
-          <access>read-write</access>
+          <name>LBUFLEVEL</name>
+          <description>Latched Buffer Fill Level</description>
+          <addressOffset>0x2C</addressOffset>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task GENERICTASK will subscribe to</description>
+              <name>LBUFLEVEL</name>
+              <description>Indicates the maximum fill level of the trace memory in 32-bit words since this register was last read.</description>
+              <lsb>0</lsb>
+              <msb>30</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CBUFLEVEL</name>
+          <description>Current Buffer Fill Level</description>
+          <addressOffset>0x30</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CBUFLEVEL</name>
+              <description>Indicates the current fill level of the trace memory in 32-bit words.</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
           </fields>
         </register>
         <register>
-          <name>EVENTS_GENERICEVENT</name>
-          <description>Generic event</description>
-          <addressOffset>0x100</addressOffset>
+          <name>BUFWM</name>
+          <description>Buffer Level Water Mark</description>
+          <addressOffset>0x34</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>EVENTS_GENERICEVENT</name>
-              <description>Generic event</description>
+              <name>BUFWM</name>
+              <description>Indicates the desired threshold vacancy level in 32-bit words in the trace memory.</description>
               <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+              <msb>6</msb>
             </field>
           </fields>
         </register>
         <register>
-          <name>PUBLISH_GENERICEVENT</name>
-          <description>Publish configuration for event GENERICEVENT</description>
-          <addressOffset>0x180</addressOffset>
+          <name>RRPHI</name>
+          <description>RAM Read Pointer High Register</description>
+          <addressOffset>0x38</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event GENERICEVENT will publish to</description>
+              <name>RRPHI</name>
+              <description>Bits[39:32] of the read pointer</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
+          </fields>
+        </register>
+        <register>
+          <name>RWPHI</name>
+          <description>RAM Write Pointer High Register</description>
+          <addressOffset>0x3C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
             <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+              <name>RWPHI</name>
+              <description>Bits[39:32] of the write pointer</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
             </field>
           </fields>
         </register>
         <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
+          <name>AXICTL</name>
+          <description>AXI Control Register</description>
+          <addressOffset>0x110</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PROTCTRLBIT0</name>
+              <description>This bit controls the value driven on ARPROTM[0]/AWPROTM[0] on the AXI interface when performing AXI transfers.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>PROTCTRLBIT1</name>
+              <description>This bit controls the value driven on ARPROTM[1]/AWPROTM[1] on the AXI interface when performing AXI transfers.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>CACHECTRLBIT0</name>
+              <description>This bit controls the value driven on the ARCACHEM[0]/AWCACHEM[0] signal on the AXI interface when performing AXI transfers.</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>CACHECTRLBIT1</name>
+              <description>This bit controls the value driven on the ARCACHEM[1]/AWCACHEM[1] signal on the AXI interface when performing AXI transfers.</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>CACHECTRLBIT2</name>
+              <description>This bit controls the value driven on the ARCACHEM[2]/AWCACHEM[2] signal on the AXI interface when performing AXI transfers.</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>CACHECTRLBIT3</name>
+              <description>This bit controls the value driven on the ARCACHEM[3]/AWCACHEM[3] signal on the AXI interface when performing AXI transfers.</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+            </field>
+            <field>
+              <name>SCATTERGATHERMODE</name>
+              <description>This bit indicates whether trace memory is accessed as a single buffer in system memory or as a linked-list based scatter-gather memory.</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>WRBURSTLEN</name>
+              <description>This field indicates the maximum number of data transfers that can occur within each burst initiated by the TMC on the AXI interface.</description>
+              <lsb>8</lsb>
+              <msb>11</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DBALO</name>
+          <description>Data Buffer Address Low Register</description>
+          <addressOffset>0x118</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BUFADDRLO</name>
+              <description>Holds the lower 32 bits of the 40-bit address used to locate the trace buffer in system memory</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DBAHI</name>
+          <description>Data Buffer Address High Register</description>
+          <addressOffset>0x11C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BUFADDRHI</name>
+              <description>Holds the upper 8 bits of the 40-bit address used to locate the trace buffer in system memory</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FFSR</name>
+          <description>Formatter and Flush Status Register</description>
           <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <access>read-only</access>
+          <resetValue>0x00000002</resetValue>
           <fields>
             <field>
-              <name>GENERICEVENT</name>
-              <description>Enable or disable interrupt for event GENERICEVENT</description>
+              <name>FLINPROG</name>
+              <description>This bit indicates whether the TMC is currently processing a flush on the ATB slave port. This bit reflects the status of the AFVALIDS output. The flush initiation is controlled by the flush-control bits in the FFCR register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
+            </field>
+            <field>
+              <name>FTSTOPPED</name>
+              <description>This bit behaves the same way as the FtEmpty bit in the STS register, 0x00C.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
             </field>
           </fields>
         </register>
         <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
+          <name>FFCR</name>
+          <description>Formatter and Flush Control Register</description>
           <addressOffset>0x304</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>GENERICEVENT</name>
-              <description>Write '1' to enable interrupt for event GENERICEVENT</description>
+              <name>ENFT</name>
+              <description>If this bit is set, formatting is enabled.</description>
               <lsb>0</lsb>
               <msb>0</msb>
+            </field>
+            <field>
+              <name>ENTI</name>
+              <description>Setting this bit enables the insertion of triggers in the formatted trace stream.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>FONFLIN</name>
+              <description>Setting this bit enables the detection of transitions on the FLUSHIN input by the TMC.</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>FONTRIGEVT</name>
+              <description>Setting this bit generates a flush when a Trigger event occurs.</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+            </field>
+            <field>
+              <name>FLUSHMAN</name>
+              <description>Manually generate a flush of the system.</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+            </field>
+            <field>
+              <name>TRIGONTRIGIN</name>
+              <description>If this bit is set, a trigger is indicated on the trace stream when a rising edge is detected on the TRIGIN input.</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+            </field>
+            <field>
+              <name>TRIGONTRIGEVT</name>
+              <description>If this bit is set, a trigger is indicated on the output trace stream when a Trigger Event occurs.</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
+            </field>
+            <field>
+              <name>TRIGONFL</name>
+              <description>If this bit is set, a trigger is indicated on the trace stream on AFREADYS being returned.</description>
+              <lsb>10</lsb>
+              <msb>10</msb>
+            </field>
+            <field>
+              <name>STOPONFL</name>
+              <description>If this bit is set, the formatter is stopped on completion of a flush operation.</description>
+              <lsb>12</lsb>
+              <msb>12</msb>
+            </field>
+            <field>
+              <name>STOPONTRIGEVT</name>
+              <description>If this bit is set, the formatter is stopped when a Trigger Event has been observed.</description>
+              <lsb>13</lsb>
+              <msb>13</msb>
+            </field>
+            <field>
+              <name>DRAINBUFFER</name>
+              <description>This bit is used to enable draining of the trace data through the ATB Master interface after the formatter has stopped.</description>
+              <lsb>14</lsb>
+              <msb>14</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PSCR</name>
+          <description>Periodic Synchronization Counter Register</description>
+          <addressOffset>0x308</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PSCOUNT</name>
+              <description>The reload value of the Synchronization Counter</description>
+              <lsb>0</lsb>
+              <msb>4</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITATBMCTR0</name>
+          <description>Integration Test ATB Master Interface Control 0 Register</description>
+          <addressOffset>0xEDC</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ATVALIDM</name>
+              <description>Set the value of ATVALIDM output</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>AFREADYM</name>
+              <description>Set the value of AFREADYM output</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>ATBYTESM</name>
+              <description>Control the value of ATBYTESM output from TMC. The value written to this field is driven on the ATBYTESM output of the TMC.</description>
+              <lsb>8</lsb>
+              <msb>9</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITMISCOP0</name>
+          <description>Integration Test Miscellaneous Output Register 0</description>
+          <addressOffset>0xEE0</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ACQCOMP</name>
+              <description>Set the value of the ACQCOMP output.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>FULL</name>
+              <description>Set the value of the FULL output.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITTRFLIN</name>
+          <description>Integration Test Trigger In and Flush In Register</description>
+          <addressOffset>0xEE8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TRIGIN</name>
+              <description>Read the value of the TRIGIN input.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>FLUSHIN</name>
+              <description>Read the value of the FLUSHIN input.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITATBDATA0</name>
+          <description>Integration Test ATB Data Register 0</description>
+          <addressOffset>0xEEC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ATDATASBIT0</name>
+              <description>Read the value of ATDATAS[0] input to TMC</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT7</name>
+              <description>Read the value of ATDATAS[7] input to TMC</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT15</name>
+              <description>Read the value of ATDATAS[15] input to TMC</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT23</name>
+              <description>Read the value of ATDATAS[23] input to TMC</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT31</name>
+              <description>Read the value of ATDATAS[31] input to TMC</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT39</name>
+              <description>Read the value of ATDATAS[39] input to TMC</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT47</name>
+              <description>Read the value of ATDATAS[47] input to TMC</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT55</name>
+              <description>Read the value of ATDATAS[55] input to TMC</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT63</name>
+              <description>Read the value of ATDATAS[63] input to TMC</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT71</name>
+              <description>Read the value of ATDATAS[71] input to TMC</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT79</name>
+              <description>Read the value of ATDATAS[79] input to TMC</description>
+              <lsb>10</lsb>
+              <msb>10</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT87</name>
+              <description>Read the value of ATDATAS[87] input to TMC</description>
+              <lsb>11</lsb>
+              <msb>11</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT95</name>
+              <description>Read the value of ATDATAS[95] input to TMC</description>
+              <lsb>12</lsb>
+              <msb>12</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT103</name>
+              <description>Read the value of ATDATAS[103] input to TMC</description>
+              <lsb>13</lsb>
+              <msb>13</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT111</name>
+              <description>Read the value of ATDATAS[111] input to TMC</description>
+              <lsb>14</lsb>
+              <msb>14</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT119</name>
+              <description>Read the value of ATDATAS[119] input to TMC</description>
+              <lsb>15</lsb>
+              <msb>15</msb>
+            </field>
+            <field>
+              <name>ATDATASBIT127</name>
+              <description>Read the value of ATDATAS[127] input to TMC</description>
+              <lsb>16</lsb>
+              <msb>16</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITATBCTR2</name>
+          <description>Integration Test ATB Control 2 Register</description>
+          <addressOffset>0xEF0</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ATREADYS</name>
+              <description>Set the value of ATREADYS output</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>AFVALIDS</name>
+              <description>Set the value of AFVALIDS output</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>SYNCREQS</name>
+              <description>Set the value of SYNCREQS output</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITATBCTR1</name>
+          <description>Integration Test ATB Control 1 Register</description>
+          <addressOffset>0xEF4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ATIDS</name>
+              <description>Read the value of ATIDS input to TMC</description>
+              <lsb>0</lsb>
+              <msb>6</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITATBCTR0</name>
+          <description>Integration Test ATB Control 0 Register</description>
+          <addressOffset>0xEF8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ATVALIDS</name>
+              <description>Read the value of ATVALIDS input to TMC</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>AFREADYS</name>
+              <description>Read the value of AFREADYS input to TMC</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>ATBYTESS</name>
+              <description>Read the value of ATBYTESS input to TMC</description>
+              <lsb>8</lsb>
+              <msb>9</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITCTRL</name>
+          <description>Integration Mode Control Register</description>
+          <addressOffset>0xF00</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTEGRATION_MODE</name>
+              <description>Allows the component to switch from functional mode to integration mode or back.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLAIMSET</name>
+          <description>Claim Tag Set Register</description>
+          <addressOffset>0xFA0</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x0000000F</resetValue>
+          <fields>
+            <field>
+              <name>CLAIMSET</name>
+              <description>This claim tag bit is implemented</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLAIMCLR</name>
+          <description>Claim Tag Clear Register</description>
+          <addressOffset>0xFA4</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CLAIMCLR</name>
+              <description>The value present reflects the current setting of the Claim Tag.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LAR</name>
+          <description>Lock Access Register</description>
+          <addressOffset>0xFB0</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ACCESS_W</name>
+              <description>A write of 0xC5ACCE55 enables further write access to this device. A write of any value other than 0xC5ACCE55 will have the affect of removing write access.</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LSR</name>
+          <description>Lock Status Register</description>
+          <addressOffset>0xFB4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000003</resetValue>
+          <fields>
+            <field>
+              <name>LOCKEXIST</name>
+              <description>Indicates that a lock control mechanism exists for this device.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>LOCKGRANT</name>
+              <description>Returns the current status of the Lock.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>LOCKTYPE</name>
+              <description>Indicates if the Lock Access Register (0xFB0) is implemented as 8-bit or 32-bit</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
               <enumeratedValues>
-                <usage>read</usage>
                 <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
+                  <name>32BIT</name>
+                  <description>This component implements a 32-bit Lock Access Register</description>
                   <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
+          <name>AUTHSTATUS</name>
+          <description>Authentication Status Register</description>
+          <addressOffset>0xFB8</addressOffset>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>GENERICEVENT</name>
-              <description>Write '1' to disable interrupt for event GENERICEVENT</description>
+              <name>NSID</name>
+              <description>Indicates the security level for non-secure invasive debug</description>
               <lsb>0</lsb>
-              <msb>0</msb>
+              <msb>1</msb>
               <enumeratedValues>
-                <usage>read</usage>
                 <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
+                  <name>DISABLED</name>
+                  <description>Functionality disabled. This return value occurs when DBGEN is LOW.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ENABLED</name>
+                  <description>Functionality enabled. This return value occurs when DBGEN is HIGH.</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>NSNID</name>
+              <description>Indicates the security level for non-secure non-invasive debug</description>
+              <lsb>2</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NONE</name>
+                  <description>Functionality not implemented or controlled elsewhere.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>SID</name>
+              <description>Indicates the security level for secure invasive debug</description>
+              <lsb>4</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>DISABLED</name>
+                  <description>Functionality disabled. This return value occurs when DBGEN is LOW or SPIDEN is LOW.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ENABLED</name>
+                  <description>Functionality enabled. This return value occurs when DBGEN and SPIDEN are HIGH.</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>SNID</name>
+              <description>Indicates the security level for secure non-invasive debug</description>
+              <lsb>6</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NONE</name>
+                  <description>Functionality not implemented or controlled elsewhere.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DEVID</name>
+          <description>Device Configuration Register</description>
+          <addressOffset>0xFC8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000300</resetValue>
+          <fields>
+            <field>
+              <name>ATBINPORTCOUNT</name>
+              <description>This value indicates the type/number of ATB multiplexing present on the input ATB.</description>
+              <lsb>0</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>CLKSCHEME</name>
+              <description>This value indicates the TMC RAM clocking scheme used, ie. whether the TMC RAM operates synchronously or asynchronously to CLK.</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>SYNC</name>
+                  <description>The TMC RAM operates synchronously to CLK.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CONFIGTYPE</name>
+              <description>This value indicates TMC configuration type.</description>
+              <lsb>6</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>ETB</name>
+                  <description>Unspecified</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
+                  <name>ETR</name>
+                  <description>Unspecified</description>
                   <value>0x1</value>
                 </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
                 <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
+                  <name>ETF</name>
+                  <description>Unspecified</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>MEMWIDTH</name>
+              <description>This value indicates the width of the Memory interface databus.</description>
+              <lsb>8</lsb>
+              <msb>10</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>32BIT</name>
+                  <description>Memory interface databus is 32 bits wide.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>64BIT</name>
+                  <description>Memory interface databus is 64 bits wide.</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>128BIT</name>
+                  <description>Memory interface databus is 128 bits wide.</description>
+                  <value>0x4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>256BIT</name>
+                  <description>Memory interface databus is 256 bits wide.</description>
+                  <value>0x5</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>WBUF_DEPTH</name>
+              <description>This value indicates, in powers of two, the number of entries in the Write buffer. Each entry is of size ATB_DATA_WIDTH.</description>
+              <lsb>11</lsb>
+              <msb>13</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>4ENTRIES</name>
+                  <description>Depth of the Write buffer is 4 entries.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>8ENTRIES</name>
+                  <description>Depth of the Write buffer is 8 entries.</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>16ENTRIES</name>
+                  <description>Depth of the Write buffer is 16 entries.</description>
+                  <value>0x4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>32ENTRIES</name>
+                  <description>Depth of the Write buffer is 32 entries.</description>
+                  <value>0x5</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DEVTYPE</name>
+          <description>Device Type Identifier Register</description>
+          <addressOffset>0xFCC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000021</resetValue>
+          <fields>
+            <field>
+              <name>MAJOR_TYPE</name>
+              <description>Major classification grouping for this debug/trace component</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>SINK</name>
+                  <description>This component is a trace sink.</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
+            </field>
+            <field>
+              <name>SUB_TYPE</name>
+              <description>Sub-classification within the major category</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <description>This component captures the trace data into RAM that can be drained through APB.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID4</name>
+          <description>Peripheral ID4 Register</description>
+          <addressOffset>0xFD0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000004</resetValue>
+          <fields>
+            <field>
+              <name>JEP106_CONT</name>
+              <description>JEDEC continuation code indicating the designer of the component (along with the identity code)</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>FOURKB_COUNT</name>
+              <description>This is a 4-bit value that indicates the total contiguous size of the memory window used by this component in powers of 2 from the standard 4KB. If a component only requires the standard 4KB then this should read as 0x0, 4KB only, for 8KB set to 0x1, 16KB == 0x2, 32KB == 0x3, and so on.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID0</name>
+          <description>Peripheral ID0 Register</description>
+          <addressOffset>0xFE0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000061</resetValue>
+          <fields>
+            <field>
+              <name>PART_NUMBER_BITS7TO0</name>
+              <description>Bits [7:0] of the component's part number. This is selected by the designer of the component.</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID1</name>
+          <description>Peripheral ID1 Register</description>
+          <addressOffset>0xFE4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x000000B9</resetValue>
+          <fields>
+            <field>
+              <name>PART_NUMBER_BITS11TO8</name>
+              <description>Bits [11:8] of the component's part number. This is selected by the designer of the component.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>JEP106_BITS3TO0</name>
+              <description>Bits 3:0 of the JEDEC identity code indicating the designer of the component (along with the continuation code)</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID2</name>
+          <description>Peripheral ID2 Register</description>
+          <addressOffset>0xFE8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000001B</resetValue>
+          <fields>
+            <field>
+              <name>JEP106_BITS6TO4</name>
+              <description>Bits 6:4 of the JEDEC identity code indicating the designer of the component (along with the continuation code)</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>JEDEC</name>
+              <description>Always set. Indicates that a JEDEC assigned value is used</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>REVISION</name>
+              <description>The Revision field is an incremental value starting at 0x0 for the first design of this component. This only increases by 1 for both major and minor revisions and is simply used as a look-up to establish the exact major/minor revision.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID3</name>
+          <description>Peripheral ID3 Register</description>
+          <addressOffset>0xFEC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CUSTOMER_MODIFIED</name>
+              <description>Where the component is reusable IP, this value indicates if the customer has modified the behavior of the component. In most cases this field is zero.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>REVAND</name>
+              <description>This field indicates minor errata fixes specific to this design, for example metal fixes after implementation. In most cases this field is zero. It is recommended that component designers ensure this field can be changed by a metal fix if required, for example by driving it from registers that reset to zero.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID0</name>
+          <description>Component ID0 Register</description>
+          <addressOffset>0xFF0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000D</resetValue>
+          <fields>
+            <field>
+              <name>PREAMBLE</name>
+              <description>Contains bits [7:0] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID1</name>
+          <description>Component ID1 Register</description>
+          <addressOffset>0xFF4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000090</resetValue>
+          <fields>
+            <field>
+              <name>PREAMBLE</name>
+              <description>Contains bits [11:8] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>CLASS</name>
+              <description>Class of the component. E.g. ROM table, CoreSight component etc. Constitutes bits [15:12] of the component identification.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID2</name>
+          <description>Component ID2 Register</description>
+          <addressOffset>0xFF8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000005</resetValue>
+          <fields>
+            <field>
+              <name>PREAMBLE</name>
+              <description>Contains bits [23:16] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID3</name>
+          <description>Component ID3 Register</description>
+          <addressOffset>0xFFC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x000000B1</resetValue>
+          <fields>
+            <field>
+              <name>PREAMBLE</name>
+              <description>Contains bits [31:24] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
             </field>
           </fields>
         </register>
@@ -73414,1200 +74971,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
         </cluster>
         <cluster>
-          <name>RTCHOKE</name>
-          <description>Real time choke configuration for AXI master port</description>
-          <headerStructName>MPC_RTCHOKE</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x420</addressOffset>
-          <register>
-            <name>WRITEACCESS</name>
-            <description>Enable AXI Write Address Channel Real Time Choke for master port</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>ENABLE_0</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 0 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 0 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_1</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>1</lsb>
-                <msb>1</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 1 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 1 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_2</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>2</lsb>
-                <msb>2</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 2 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 2 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_3</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>3</lsb>
-                <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 3 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 3 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_4</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>4</lsb>
-                <msb>4</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 4 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 4 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_5</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 5 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 5 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_6</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>6</lsb>
-                <msb>6</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 6 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 6 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_7</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>7</lsb>
-                <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 7 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 7 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_8</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>8</lsb>
-                <msb>8</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 8 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 8 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_9</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>9</lsb>
-                <msb>9</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 9 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 9 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_10</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>10</lsb>
-                <msb>10</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 10 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 10 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_11</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>11</lsb>
-                <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 11 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 11 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_12</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>12</lsb>
-                <msb>12</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 12 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 12 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_13</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>13</lsb>
-                <msb>13</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 13 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 13 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_14</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>14</lsb>
-                <msb>14</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 14 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 14 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_15</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>15</lsb>
-                <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 15 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 15 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_16</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>16</lsb>
-                <msb>16</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 16 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 16 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_17</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>17</lsb>
-                <msb>17</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 17 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 17 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_18</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>18</lsb>
-                <msb>18</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 18 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 18 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_19</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>19</lsb>
-                <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 19 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 19 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_20</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>20</lsb>
-                <msb>20</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 20 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 20 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_21</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>21</lsb>
-                <msb>21</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 21 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 21 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_22</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>22</lsb>
-                <msb>22</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 22 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 22 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_23</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>23</lsb>
-                <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 23 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 23 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_24</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>24</lsb>
-                <msb>24</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 24 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 24 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_25</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>25</lsb>
-                <msb>25</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 25 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 25 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_26</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>26</lsb>
-                <msb>26</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 26 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 26 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_27</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>27</lsb>
-                <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 27 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 27 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_28</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>28</lsb>
-                <msb>28</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 28 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 28 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_29</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>29</lsb>
-                <msb>29</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 29 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 29 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_30</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>30</lsb>
-                <msb>30</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 30 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 30 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_31</name>
-                <description>Enable Real Time Choke for Write Address Channel</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 31 Write Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 31 Write Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>READACCESS</name>
-            <description>Enable AXI Read Address Channel Real Time Choke for master port</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>ENABLE_0</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 0 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 0 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_1</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>1</lsb>
-                <msb>1</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 1 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 1 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_2</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>2</lsb>
-                <msb>2</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 2 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 2 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_3</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>3</lsb>
-                <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 3 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 3 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_4</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>4</lsb>
-                <msb>4</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 4 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 4 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_5</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 5 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 5 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_6</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>6</lsb>
-                <msb>6</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 6 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 6 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_7</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>7</lsb>
-                <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 7 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 7 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_8</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>8</lsb>
-                <msb>8</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 8 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 8 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_9</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>9</lsb>
-                <msb>9</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 9 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 9 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_10</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>10</lsb>
-                <msb>10</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 10 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 10 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_11</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>11</lsb>
-                <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 11 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 11 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_12</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>12</lsb>
-                <msb>12</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 12 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 12 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_13</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>13</lsb>
-                <msb>13</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 13 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 13 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_14</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>14</lsb>
-                <msb>14</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 14 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 14 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_15</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>15</lsb>
-                <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 15 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 15 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_16</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>16</lsb>
-                <msb>16</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 16 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 16 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_17</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>17</lsb>
-                <msb>17</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 17 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 17 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_18</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>18</lsb>
-                <msb>18</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 18 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 18 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_19</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>19</lsb>
-                <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 19 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 19 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_20</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>20</lsb>
-                <msb>20</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 20 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 20 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_21</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>21</lsb>
-                <msb>21</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 21 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 21 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_22</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>22</lsb>
-                <msb>22</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 22 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 22 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_23</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>23</lsb>
-                <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 23 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 23 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_24</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>24</lsb>
-                <msb>24</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 24 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 24 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_25</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>25</lsb>
-                <msb>25</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 25 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 25 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_26</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>26</lsb>
-                <msb>26</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 26 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 26 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_27</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>27</lsb>
-                <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 27 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 27 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_28</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>28</lsb>
-                <msb>28</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 28 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 28 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_29</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>29</lsb>
-                <msb>29</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 29 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 29 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_30</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>30</lsb>
-                <msb>30</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 30 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 30 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE_31</name>
-                <description>Enable Real Time Choke for Read Address Channel</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Real Time Choke is disabled for master port 31 Read Address Channel</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Real Time Choke is enabled for master port 31 Read Address Channel</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <dim>0x20</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>DELAY[%s]</name>
-            <description>Description collection: Real Time Choke delay value for slave number n</description>
-            <addressOffset>0x60</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>DELAY</name>
-                <description>Real Time Choke delay in bus clock cycles.</description>
-                <lsb>0</lsb>
-                <msb>7</msb>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <cluster>
           <dim>32</dim>
           <dimIncrement>0x010</dimIncrement>
           <name>REGION[%s]</name>
@@ -75420,24 +75783,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValues>
               </field>
               <field>
-                <name>SECDOMENABLE</name>
-                <description>Secure domain access enable for Override region n</description>
-                <lsb>10</lsb>
-                <msb>10</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Overriding of secure domain permissions is disabled for override region n</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Overriding of secure domain permissions is enabled for override region n</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
                 <name>SECUREMASK</name>
                 <description>Secure mask enable for Override region n</description>
                 <lsb>12</lsb>
@@ -75483,22 +75828,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <field>
                 <name>ENDADDR</name>
                 <description>End address for override region n</description>
-                <lsb>0</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>OFFSET</name>
-            <description>Description cluster: Address offset value divided by 2 for override region n address re-map</description>
-            <addressOffset>0x0C</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <dataType>int32_t</dataType>
-            <fields>
-              <field>
-                <name>OFFSET</name>
-                <description>Offset value</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -117840,8 +118169,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>WEN</name>
-              <description>When the write is enabled, the writes to OTP are allowed, 
-        otherwise the write is ignored. The OTP read is allowed regardless of 
+              <description>When the write is enabled, the writes to OTP are allowed,
+        otherwise the write is ignored. The OTP read is allowed regardless of
         WEN setting.</description>
               <lsb>0</lsb>
               <msb>0</msb>
@@ -117909,7 +118238,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>MASK</name>
-            <description>Mask for overriding of the various voltage supplies while switching 
+            <description>Mask for overriding of the various voltage supplies while switching
       power modes.</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
@@ -118313,7 +118642,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>WAITSTATENUM</name>
-              <description>Register to read the current number of wait states for the OTP read and 
+              <description>Register to read the current number of wait states for the OTP read and
         to set a new value.</description>
               <lsb>0</lsb>
               <msb>6</msb>
@@ -118417,7 +118746,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <addressOffset>0x600</addressOffset>
           <register>
             <name>TESTMODE</name>
-            <description>Register for entering test mode. Refer to the OTP test flow documentation for 
+            <description>Register for entering test mode. Refer to the OTP test flow documentation for
       more details.</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
@@ -118425,7 +118754,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>TESTMODE</name>
-                <description>Register for entering test mode. This register does not return the same value 
+                <description>Register for entering test mode. This register does not return the same value
         as written.</description>
                 <lsb>0</lsb>
                 <msb>15</msb>
@@ -118553,7 +118882,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <register>
               <name>PTR</name>
               <description>Enables the PTR (PTR is the direct signal to the
-                  OTP macro, it enables the test row) for read or write. When 
+                  OTP macro, it enables the test row) for read or write. When
                   enabled, the read and writes goes to test row instead of main
                   OTP memory.</description>
               <addressOffset>0x004</addressOffset>
@@ -118734,13 +119063,13 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <enumeratedValue>
                     <name>Direct</name>
                     <description>The TESTMODE2.EMEMORY.DATA[31:0] register reads the direct value of PDOUT[31:0]
-          of eMemory OTP.</description>
+            of eMemory OTP.</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Latched</name>
-                    <description>The TESTMODE2.EMEMORY.DATA register reads the latched value of PDOUT[31:0] of 
-          eMemory OTP.</description>
+                    <description>The TESTMODE2.EMEMORY.DATA register reads the latched value of PDOUT[31:0] of
+            eMemory OTP.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -118750,7 +119079,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>COUNTERSTART</name>
             <description>Starts the counter. Only applicable when TESTMODE2.COUNTERCONFIG.OPERATIONMODE
-       = Direct.</description>
+         = Direct.</description>
             <addressOffset>0x028</addressOffset>
             <access>write-only</access>
             <resetValue>0x00000000</resetValue>
@@ -118784,8 +119113,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>RELOAD</name>
-                <description>This is the counter reload value, used each time the 
-        decrementing counter is triggered.</description>
+                <description>This is the counter reload value, used each time the
+          decrementing counter is triggered.</description>
                 <lsb>0</lsb>
                 <msb>8</msb>
               </field>

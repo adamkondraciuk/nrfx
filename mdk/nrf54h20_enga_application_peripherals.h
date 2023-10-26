@@ -167,6 +167,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MPC_COUNT 1
 
 #define MPC_EXTEND_CLOCK_REQ 0                       /*!< (unspecified)                                                        */
+#define MPC_RTCHOKE 0                                /*!< (unspecified)                                                        */
 #define MPC_OVERRIDE_GRAN 4                          /*!< The override region granularity is 4 bytes                           */
 
 /*MVDMA performs direct-memory-accesses between memories. Data is transferred according to job descriptor lists. Each transfer has corresponding source and sink descriptor lists with matching data amounts. The lists are in memory and they contain data buffer information, address pointers, buffer sizes and data type attributes.*/
@@ -332,9 +333,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TDDCONF_PRESENT 1
 #define TDDCONF_COUNT 1
 
-/*GENERIC*/
-#define GENERIC_PRESENT 1
-#define GENERIC_COUNT 3
+/*Timestamp generator*/
+#define TSGEN_PRESENT 1
+#define TSGEN_COUNT 1
 
 /*System Trace Macrocell*/
 #define STM_PRESENT 1
@@ -343,6 +344,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*Trace Port Interface Unit*/
 #define TPIU_PRESENT 1
 #define TPIU_COUNT 1
+
+/*Embedded Trace Buffer*/
+#define ETB_PRESENT 1
+#define ETB_COUNT 1
+
+/*Embedded Trace Router*/
+#define ETR_PRESENT 1
+#define ETR_COUNT 1
 
 /*ATB Replicator module*/
 #define ATBREPLICATOR_PRESENT 1
