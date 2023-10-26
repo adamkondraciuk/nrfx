@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   57 
+#define MDK_MINOR_VERSION   59 
 #define MDK_MICRO_VERSION   0 
 
 
@@ -116,6 +116,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined (NRF5340_XXAA)
     #ifndef NRF53_SERIES
         #define NRF53_SERIES
+    #endif
+#endif
+
+/* Define NRF54H_SERIES for common use in nRF54H series devices */
+#if defined (NRF54H20_ENGA_XXAA) || defined (NRF54H20_XXAA)
+    #ifndef NRF54H_SERIES
+        #define NRF54H_SERIES
     #endif
 #endif
 

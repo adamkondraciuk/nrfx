@@ -1,34 +1,41 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA All rights reserved.
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
-SPDX-License-Identifier: BSD-3-Clause
+All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
 
 1. Redistributions of source code must retain the above copyright notice, this
    list of conditions and the following disclaimer.
 
-2. Redistributions in binary form must reproduce the above copyright
-   notice, this list of conditions and the following disclaimer in the
-   documentation and/or other materials provided with the distribution.
+2. Redistributions in binary form, except as embedded into a Nordic
+   Semiconductor ASA integrated circuit in a product or a software update for
+   such product, must reproduce the above copyright notice, this list of
+   conditions and the following disclaimer in the documentation and/or other
+   materials provided with the distribution.
 
 3. Neither the name of Nordic Semiconductor ASA nor the names of its
    contributors may be used to endorse or promote products derived from this
    software without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL NORDIC SEMICONDUCTOR ASA OR CONTRIBUTORS BE
+4. This software, with or without modification, must only be used with a
+   Nordic Semiconductor ASA integrated circuit.
+
+5. Any software provided in binary form under this license must not be reverse
+   engineered, decompiled, modified and/or disassembled.
+
+THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL NORDIC SEMICONDUCTOR ASA OR CONTRIBUTORS BE
 LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
@@ -185,7 +192,7 @@ typedef enum {
 #define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
 #define __SAUREGION_PRESENT            1             /*!< SAU present                                                          */
-#define __NUM_SAUREGIONS               4             /*!< Number of regions                                                    */
+#define __NUM_SAUREGIONS               8             /*!< Number of regions                                                    */
 
 #include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
 #include "system_nrf.h"                              /*!< nrf54h20_secure System Library                                       */
@@ -224,12 +231,12 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_SECURE_ICACHEDATA_S_BASE      0x01F00000UL
+#define NRF_SECURE_ICACHEINFO_S_BASE      0x01F10000UL
 #define NRF_SECURE_SICR_S_BASE            0x0E000000UL
 #define NRF_SECURE_RICR_S_BASE            0x0FFFC000UL
-#define NRF_SECURE_ICACHEDATA_S_BASE      0x11F00000UL
-#define NRF_SECURE_ICACHEINFO_S_BASE      0x11F10000UL
-#define NRF_SECURE_DCACHEDATA_S_BASE      0x31F00000UL
-#define NRF_SECURE_DCACHEINFO_S_BASE      0x31F10000UL
+#define NRF_SECURE_DCACHEDATA_S_BASE      0x21F00000UL
+#define NRF_SECURE_DCACHEINFO_S_BASE      0x21F10000UL
 #define NRF_SECURE_CRACENCORE_NS_BASE     0x41800000UL
 #define NRF_SECURE_CRACENCORE_S_BASE      0x51800000UL
 #define NRF_SECURE_MEMCONF200_NS_BASE     0xBF014000UL
@@ -320,10 +327,10 @@ typedef enum {
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_SECURE_SICR_S                 ((NRF_SICR_Type*)                     NRF_SECURE_SICR_S_BASE)
-#define NRF_SECURE_RICR_S                 ((NRF_RICR_Type*)                     NRF_SECURE_RICR_S_BASE)
 #define NRF_SECURE_ICACHEDATA_S           ((NRF_ICACHEDATA_Type*)               NRF_SECURE_ICACHEDATA_S_BASE)
 #define NRF_SECURE_ICACHEINFO_S           ((NRF_ICACHEINFO_Type*)               NRF_SECURE_ICACHEINFO_S_BASE)
+#define NRF_SECURE_SICR_S                 ((NRF_SICR_Type*)                     NRF_SECURE_SICR_S_BASE)
+#define NRF_SECURE_RICR_S                 ((NRF_RICR_Type*)                     NRF_SECURE_RICR_S_BASE)
 #define NRF_SECURE_DCACHEDATA_S           ((NRF_DCACHEDATA_Type*)               NRF_SECURE_DCACHEDATA_S_BASE)
 #define NRF_SECURE_DCACHEINFO_S           ((NRF_DCACHEINFO_Type*)               NRF_SECURE_DCACHEINFO_S_BASE)
 #define NRF_SECURE_CRACENCORE_NS          ((NRF_CRACENCORE_Type*)               NRF_SECURE_CRACENCORE_NS_BASE)
@@ -452,10 +459,10 @@ typedef enum {
   #define NRF_SECURE_SPU210                       NRF_SECURE_SPU210_NS
   #define NRF_SECURE_CTRLAP                       NRF_SECURE_CTRLAP_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
-  #define NRF_SECURE_SICR                         NRF_SECURE_SICR_S
-  #define NRF_SECURE_RICR                         NRF_SECURE_RICR_S
   #define NRF_SECURE_ICACHEDATA                   NRF_SECURE_ICACHEDATA_S
   #define NRF_SECURE_ICACHEINFO                   NRF_SECURE_ICACHEINFO_S
+  #define NRF_SECURE_SICR                         NRF_SECURE_SICR_S
+  #define NRF_SECURE_RICR                         NRF_SECURE_RICR_S
   #define NRF_SECURE_DCACHEDATA                   NRF_SECURE_DCACHEDATA_S
   #define NRF_SECURE_DCACHEINFO                   NRF_SECURE_DCACHEINFO_S
   #define NRF_SECURE_CRACENCORE                   NRF_SECURE_CRACENCORE_S
@@ -530,10 +537,10 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_SECURE                                    /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
-  #define NRF_SICR                                NRF_SECURE_SICR
-  #define NRF_RICR                                NRF_SECURE_RICR
   #define NRF_ICACHEDATA                          NRF_SECURE_ICACHEDATA
   #define NRF_ICACHEINFO                          NRF_SECURE_ICACHEINFO
+  #define NRF_SICR                                NRF_SECURE_SICR
+  #define NRF_RICR                                NRF_SECURE_RICR
   #define NRF_DCACHEDATA                          NRF_SECURE_DCACHEDATA
   #define NRF_DCACHEINFO                          NRF_SECURE_DCACHEINFO
   #define NRF_CRACENCORE                          NRF_SECURE_CRACENCORE
