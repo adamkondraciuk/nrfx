@@ -126,7 +126,7 @@ typedef enum
 typedef enum
 {
     NRF_OSCRFR_TRIM_OSC_NORMAL = OSCRFR_TRIM_OSC_VAL_Normal,   ///< Normal trim value.
-    NRF_OSCRFR_TRIM_OSC_34     = OSCRFR_TRIM_OSC_VAL_Val34,    ///< The trim value is 35%.
+    NRF_OSCRFR_TRIM_OSC_35     = OSCRFR_TRIM_OSC_VAL_Val35,    ///< The trim value is 35%.
     NRF_OSCRFR_TRIM_OSC_154    = OSCRFR_TRIM_OSC_VAL_Val154,   ///< The trim value is 154%.
     NRF_OSCRFR_TRIM_OSC_670    = OSCRFR_TRIM_OSC_VAL_Val670,   ///< The trim value is 670%.
     NRF_OSCRFR_TRIM_OSC_NEG_54 = OSCRFR_TRIM_OSC_VAL_ValNeg54, ///< The trim value is -54%.

@@ -16,13 +16,18 @@ extern "C" {
  * @brief   Hardware access layer (HAL) for managing the reset hub (RESETHUB) peripheral.
  */
 
+#if defined(RESETHUB_CROSSDOMAINRESET_DOMAIN0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether cross-domain reset is present. */
+#define NRF_RESETHUB_HAS_CROSSDOMAIN 1
+#else
+#define NRF_RESETHUB_HAS_CROSSDOMAIN 0
+#endif
+
 /** @brief RESETHUB tasks. */
 typedef enum
 {
-#if !defined(NRF9230_XXAA)
     NRF_RESETHUB_TASK_RESET_DOMAIN_0  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[0]),  /**< Reset domain 0. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_1  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[1]),  /**< Reset domain 1. */
-#endif
     NRF_RESETHUB_TASK_RESET_DOMAIN_2  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[2]),  /**< Reset domain 2. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_3  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[3]),  /**< Reset domain 3. */
 #if !defined(NRF54H20_XXAA)
@@ -30,9 +35,9 @@ typedef enum
     NRF_RESETHUB_TASK_RESET_DOMAIN_5  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[5]),  /**< Reset domain 5. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_6  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[6]),  /**< Reset domain 6. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_7  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[7]),  /**< Reset domain 7. */
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_TASK_RESET_DOMAIN_8  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[8]),  /**< Reset domain 8. */
-#if !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(NRF7140_XXAA) && !defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_TASK_RESET_DOMAIN_9  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[9]),  /**< Reset domain 9. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_10 = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[10]), /**< Reset domain 10. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_11 = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[11]), /**< Reset domain 11. */
@@ -48,7 +53,7 @@ typedef enum
         offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_DOMAIN_APPLICATION]),             /**< Reset Application domain. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_NETWORK =
         offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_DOMAIN_RADIOCORE]),               /**< Reset Network domain. */
-#if defined(NRF9230_XXAA)
+#if defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_TASK_RESET_DOMAIN_CELLULAR =
         offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_DOMAIN_CELLCORE]),                /**< Reset Cellular domain. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_CELL_DSP =
@@ -63,10 +68,8 @@ typedef enum
 /** @brief RESETHUB events. */
 typedef enum
 {
-#if !defined(NRF9230_XXAA)
     NRF_RESETHUB_EVENT_DOMAIN_RESET_0  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[0]),  /**< Domain 0 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_1  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[1]),  /**< Domain 1 was reset. */
-#endif
     NRF_RESETHUB_EVENT_DOMAIN_RESET_2  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[2]),  /**< Domain 2 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_3  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[3]),  /**< Domain 3 was reset. */
 #if !defined(NRF54H20_XXAA)
@@ -74,9 +77,9 @@ typedef enum
     NRF_RESETHUB_EVENT_DOMAIN_RESET_5  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[5]),  /**< Domain 5 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_6  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[6]),  /**< Domain 6 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_7  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[7]),  /**< Domain 7 was reset. */
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_EVENT_DOMAIN_RESET_8  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[8]),  /**< Domain 8 was reset. */
-#if !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(NRF7140_XXAA) && !defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_EVENT_DOMAIN_RESET_9  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[9]),  /**< Domain 9 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_10 = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[10]), /**< Domain 10 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_11 = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[11]), /**< Domain 11 was reset. */
@@ -91,7 +94,7 @@ typedef enum
         offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_DOMAIN_APPLICATION]),              /**< Application domain was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_NETWORK =
         offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_DOMAIN_RADIOCORE]),                /**< Network domain was reset. */
-#if defined(NRF9230_XXAA)
+#if defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_EVENT_DOMAIN_RESET_CELLULAR =
         offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_DOMAIN_CELLCORE]),                 /**< Cellular domain was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_CELL_DSP =
@@ -106,10 +109,8 @@ typedef enum
 /** @brief RESETHUB interrupt mask. */
 typedef enum
 {
-#if !defined(NRF9230_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_0_MASK  = RESETHUB_INTENSET_DOMAINRESET0_Msk,  /**< Interrupt on event DOMAINRESET[0]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_1_MASK  = RESETHUB_INTENSET_DOMAINRESET1_Msk,  /**< Interrupt on event DOMAINRESET[1]. */
-#endif
     NRF_RESETHUB_INT_DOMAIN_RESET_2_MASK  = RESETHUB_INTENSET_DOMAINRESET2_Msk,  /**< Interrupt on event DOMAINRESET[2]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_3_MASK  = RESETHUB_INTENSET_DOMAINRESET3_Msk,  /**< Interrupt on event DOMAINRESET[3]. */
 #if !defined(NRF54H20_XXAA)
@@ -117,9 +118,9 @@ typedef enum
     NRF_RESETHUB_INT_DOMAIN_RESET_5_MASK  = RESETHUB_INTENSET_DOMAINRESET5_Msk,  /**< Interrupt on event DOMAINRESET[5]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_6_MASK  = RESETHUB_INTENSET_DOMAINRESET6_Msk,  /**< Interrupt on event DOMAINRESET[6]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_7_MASK  = RESETHUB_INTENSET_DOMAINRESET7_Msk,  /**< Interrupt on event DOMAINRESET[7]. */
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_8_MASK  = RESETHUB_INTENSET_DOMAINRESET8_Msk,  /**< Interrupt on event DOMAINRESET[8]. */
-#if !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(NRF7140_XXAA) && !defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_9_MASK  = RESETHUB_INTENSET_DOMAINRESET9_Msk,  /**< Interrupt on event DOMAINRESET[9]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_10_MASK = RESETHUB_INTENSET_DOMAINRESET10_Msk, /**< Interrupt on event DOMAINRESET[10]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_11_MASK = RESETHUB_INTENSET_DOMAINRESET11_Msk, /**< Interrupt on event DOMAINRESET[11]. */
@@ -136,7 +137,7 @@ typedef enum
 #if defined(NRF7140_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_WIFICORE_MASK    = (1UL << NRF_DOMAIN_WIFICORE),    /**< Interrupt on Wificore domain reset. */
 #endif
-#if defined(NRF9230_XXAA)
+#if defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_CELLULAR_MASK    = (1UL << NRF_DOMAIN_CELLCORE),    /**< Interrupt on Cellular domain reset. */
     NRF_RESETHUB_INT_DOMAIN_RESET_CELL_DSP_MASK    = (1UL << NRF_DOMAIN_CELLDSP),     /**< Interrupt on Cellular DSP domain reset. */
     NRF_RESETHUB_INT_DOMAIN_RESET_CELL_RF_MASK     = (1UL << NRF_DOMAIN_CELLRF),      /**< Interrupt on Cellular RF domain reset. */
@@ -147,10 +148,8 @@ typedef enum
 /** @brief Domain mask. */
 typedef enum
 {
-#if !defined(NRF9230_XXAA)
     NRF_RESETHUB_DOMAIN_0_MASK = RESETHUB_RESETMASK_DOMAIN0_Msk,   /**< Domain 0. */
     NRF_RESETHUB_DOMAIN_1_MASK = RESETHUB_RESETMASK_DOMAIN1_Msk,   /**< Domain 1. */
-#endif
     NRF_RESETHUB_DOMAIN_2_MASK = RESETHUB_RESETMASK_DOMAIN2_Msk,   /**< Domain 2. */
     NRF_RESETHUB_DOMAIN_3_MASK = RESETHUB_RESETMASK_DOMAIN3_Msk,   /**< Domain 3. */
 #if !defined(NRF54H20_XXAA)
@@ -158,9 +157,9 @@ typedef enum
     NRF_RESETHUB_DOMAIN_5_MASK = RESETHUB_RESETMASK_DOMAIN5_Msk,   /**< Domain 5. */
     NRF_RESETHUB_DOMAIN_6_MASK = RESETHUB_RESETMASK_DOMAIN6_Msk,   /**< Domain 6. */
     NRF_RESETHUB_DOMAIN_7_MASK = RESETHUB_RESETMASK_DOMAIN7_Msk,   /**< Domain 7. */
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_DOMAIN_8_MASK = RESETHUB_RESETMASK_DOMAIN8_Msk,   /**< Domain 8. */
-#if !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(NRF7140_XXAA) && !defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_DOMAIN_9_MASK = RESETHUB_RESETMASK_DOMAIN9_Msk,   /**< Domain 9. */
     NRF_RESETHUB_DOMAIN_10_MASK = RESETHUB_RESETMASK_DOMAIN10_Msk, /**< Domain 10. */
     NRF_RESETHUB_DOMAIN_11_MASK = RESETHUB_RESETMASK_DOMAIN11_Msk, /**< Domain 11. */
@@ -174,7 +173,7 @@ typedef enum
 
     NRF_RESETHUB_DOMAIN_APPLICATION_MASK = (1UL << NRF_DOMAIN_APPLICATION), /**< Application domain. */
     NRF_RESETHUB_DOMAIN_NETWORK_MASK     = (1UL << NRF_DOMAIN_RADIOCORE),   /**< Network domain. */
-#if defined(NRF9230_XXAA)
+#if defined(NRF9230_ENGA_XXAA)
     NRF_RESETHUB_DOMAIN_CELLULAR_MASK    = (1UL << NRF_DOMAIN_CELLCORE),    /**< Cellular domain. */
     NRF_RESETHUB_DOMAIN_CELL_DSP_MASK    = (1UL << NRF_DOMAIN_CELLDSP),     /**< Cellular DSP domain. */
     NRF_RESETHUB_DOMAIN_CELL_RF_MASK     = (1UL << NRF_DOMAIN_CELLRF),      /**< Cellular RF domain. */
@@ -189,7 +188,9 @@ typedef enum
     NRF_RESETHUB_RESETREAS_LOCAL_DOGNS_MASK  = RESETHUB_RESETREAS_DOMAIN_DOGNS_Msk,       /**< Reset from the local non-secure watchdog. */
     NRF_RESETHUB_RESETREAS_LOCAL_SREQ_MASK   = RESETHUB_RESETREAS_DOMAIN_SREQ_Msk,        /**< Reset from the local soft reset request. */
     NRF_RESETHUB_RESETREAS_LOCAL_LOCKUP_MASK = RESETHUB_RESETREAS_DOMAIN_LOCKUP_Msk,      /**< Reset from local CPU lockup. */
+#if NRF_RESETHUB_HAS_CROSSDOMAIN
     NRF_RESETHUB_RESETREAS_LOCAL_CROSS_MASK  = RESETHUB_RESETREAS_DOMAIN_CROSSDOMAIN_Msk, /**< Reset due to cross domain reset source. */
+#endif
 } nrf_resethub_resetreas_local_mask_t;
 
 /** @brief Global reset reason mask. */
@@ -337,6 +338,7 @@ NRF_STATIC_INLINE uint32_t nrf_resethub_reset_mask_get(NRF_RESETHUB_Type const *
 NRF_STATIC_INLINE void nrf_resethub_reset_mask_set(NRF_RESETHUB_Type *   p_reg,
                                                    uint32_t              mask);
 
+#if NRF_RESETHUB_HAS_CROSSDOMAIN
 /**
  * @brief Function for getting the cross domain reset enable bitmask.
  *
@@ -354,6 +356,7 @@ NRF_STATIC_INLINE uint32_t nrf_resethub_cross_domain_reset_get(NRF_RESETHUB_Type
  */
 NRF_STATIC_INLINE void nrf_resethub_cross_domain_reset_set(NRF_RESETHUB_Type *   p_reg,
                                                            uint32_t              mask);
+#endif
 
 /**
  * @brief Function for getting the general purpose retention register.
@@ -452,6 +455,7 @@ NRF_STATIC_INLINE void nrf_resethub_reset_mask_set(NRF_RESETHUB_Type *   p_reg,
     p_reg->RESETMASK = mask;
 }
 
+#if NRF_RESETHUB_HAS_CROSSDOMAIN
 NRF_STATIC_INLINE uint32_t nrf_resethub_cross_domain_reset_get(NRF_RESETHUB_Type const * p_reg)
 {
     return p_reg->CROSSDOMAINRESET;
@@ -462,6 +466,7 @@ NRF_STATIC_INLINE void nrf_resethub_cross_domain_reset_set(NRF_RESETHUB_Type *  
 {
     p_reg->CROSSDOMAINRESET = mask;
 }
+#endif
 
 NRF_STATIC_INLINE uint8_t nrf_resethub_gpregret_get(NRF_RESETHUB_Type const * p_reg)
 {

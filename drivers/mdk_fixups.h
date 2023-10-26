@@ -6,7 +6,7 @@
 /**************************************************************************************************/
 
 #if defined(NRF54H20_ENGA_XXAA) || defined(NRF54H20_XXAA) || defined(NRF7140_XXAA) \
-    || defined(NRF9230_XXAA)
+    || defined(NRF9230_ENGA_XXAA)
     #define HALTIUM_XXAA 1
 #endif
 
@@ -234,6 +234,7 @@
     /* MDK-2195 MDK removed information about easydma maxcnt from peripherals since if width is 16. */
     #define SAADC_EASYDMA_MAXCNT_SIZE 15
 
+    /* HM-21366 Peripheral capabilities described as _MIN and _MAX instead of single symbol */
     #define TWIM120_EASYDMA_MAXCNT_SIZE 16
     #define TWIM130_EASYDMA_MAXCNT_SIZE 16
     #define TWIM131_EASYDMA_MAXCNT_SIZE 16
@@ -252,6 +253,37 @@
     #define TWIS135_EASYDMA_MAXCNT_SIZE 16
     #define TWIS136_EASYDMA_MAXCNT_SIZE 16
     #define TWIS137_EASYDMA_MAXCNT_SIZE 16
+
+    #define SPIM120_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM121_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM130_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM131_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM132_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM133_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM134_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM135_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM136_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM137_EASYDMA_MAXCNT_SIZE 16
+
+    #define SPIS120_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS130_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS131_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS132_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS133_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS134_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS135_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS136_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS137_EASYDMA_MAXCNT_SIZE 16
+
+    #define UARTE120_EASYDMA_MAXCNT_SIZE 16
+    #define UARTE130_EASYDMA_MAXCNT_SIZE 16
+    #define UARTE131_EASYDMA_MAXCNT_SIZE 16
+    #define UARTE132_EASYDMA_MAXCNT_SIZE 16
+    #define UARTE133_EASYDMA_MAXCNT_SIZE 16
+    #define UARTE134_EASYDMA_MAXCNT_SIZE 16
+    #define UARTE135_EASYDMA_MAXCNT_SIZE 16
+    #define UARTE136_EASYDMA_MAXCNT_SIZE 16
+    #define UARTE137_EASYDMA_MAXCNT_SIZE 16
 
     /* HM-21366 Peripheral capabilities described as _MIN and _MAX instead of single symbol */
     #if defined(DPPIC020_CH_NUM_MAX) && !defined(DPPIC020_CH_NUM)
@@ -297,65 +329,6 @@
     #endif
     #if defined(RTC131_CC_NUM_MAX) && !defined(RTC131_CC_NUM)
         #define RTC131_CC_NUM (RTC131_CC_NUM_MAX + 1UL)
-    #endif
-
-    #if defined(SPIM120_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIM120_EASYDMA_MAXCNT_SIZE)
-        #define SPIM120_EASYDMA_MAXCNT_SIZE (SPIM120_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIM121_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIM121_EASYDMA_MAXCNT_SIZE)
-        #define SPIM121_EASYDMA_MAXCNT_SIZE (SPIM121_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIM130_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIM130_EASYDMA_MAXCNT_SIZE)
-        #define SPIM130_EASYDMA_MAXCNT_SIZE (SPIM130_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIM131_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIM131_EASYDMA_MAXCNT_SIZE)
-        #define SPIM131_EASYDMA_MAXCNT_SIZE (SPIM131_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIM132_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIM132_EASYDMA_MAXCNT_SIZE)
-        #define SPIM132_EASYDMA_MAXCNT_SIZE (SPIM132_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIM133_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIM133_EASYDMA_MAXCNT_SIZE)
-        #define SPIM133_EASYDMA_MAXCNT_SIZE (SPIM133_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIM134_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIM134_EASYDMA_MAXCNT_SIZE)
-        #define SPIM134_EASYDMA_MAXCNT_SIZE (SPIM134_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIM135_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIM135_EASYDMA_MAXCNT_SIZE)
-        #define SPIM135_EASYDMA_MAXCNT_SIZE (SPIM135_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIM136_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIM136_EASYDMA_MAXCNT_SIZE)
-        #define SPIM136_EASYDMA_MAXCNT_SIZE (SPIM136_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIM137_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIM137_EASYDMA_MAXCNT_SIZE)
-        #define SPIM137_EASYDMA_MAXCNT_SIZE (SPIM137_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-
-    #if defined(SPIS120_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIS120_EASYDMA_MAXCNT_SIZE)
-        #define SPIS120_EASYDMA_MAXCNT_SIZE (SPIS120_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIS130_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIS130_EASYDMA_MAXCNT_SIZE)
-        #define SPIS130_EASYDMA_MAXCNT_SIZE (SPIS130_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIS131_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIS131_EASYDMA_MAXCNT_SIZE)
-        #define SPIS131_EASYDMA_MAXCNT_SIZE (SPIS131_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIS132_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIS132_EASYDMA_MAXCNT_SIZE)
-        #define SPIS132_EASYDMA_MAXCNT_SIZE (SPIS132_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIS133_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIS133_EASYDMA_MAXCNT_SIZE)
-        #define SPIS133_EASYDMA_MAXCNT_SIZE (SPIS133_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIS134_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIS134_EASYDMA_MAXCNT_SIZE)
-        #define SPIS134_EASYDMA_MAXCNT_SIZE (SPIS134_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIS135_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIS135_EASYDMA_MAXCNT_SIZE)
-        #define SPIS135_EASYDMA_MAXCNT_SIZE (SPIS135_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIS136_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIS136_EASYDMA_MAXCNT_SIZE)
-        #define SPIS136_EASYDMA_MAXCNT_SIZE (SPIS136_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(SPIS137_EASYDMA_MAXCNT_SIZE_MAX) && !defined(SPIS137_EASYDMA_MAXCNT_SIZE)
-        #define SPIS137_EASYDMA_MAXCNT_SIZE (SPIS137_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
     #endif
 
     #if defined(TIMER020_MAX_SIZE_MAX) && !defined(TIMER020_MAX_SIZE)
@@ -438,34 +411,6 @@
         #define TIMER137_CC_NUM (TIMER137_CC_NUM_MAX + 1UL)
     #endif
 
-    #if defined(UARTE120_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE120_EASYDMA_MAXCNT_SIZE)
-        #define UARTE120_EASYDMA_MAXCNT_SIZE (UARTE120_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(UARTE130_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE130_EASYDMA_MAXCNT_SIZE)
-        #define UARTE130_EASYDMA_MAXCNT_SIZE (UARTE130_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(UARTE131_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE131_EASYDMA_MAXCNT_SIZE)
-        #define UARTE131_EASYDMA_MAXCNT_SIZE (UARTE131_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(UARTE132_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE132_EASYDMA_MAXCNT_SIZE)
-        #define UARTE132_EASYDMA_MAXCNT_SIZE (UARTE132_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(UARTE133_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE133_EASYDMA_MAXCNT_SIZE)
-        #define UARTE133_EASYDMA_MAXCNT_SIZE (UARTE133_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(UARTE134_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE134_EASYDMA_MAXCNT_SIZE)
-        #define UARTE134_EASYDMA_MAXCNT_SIZE (UARTE134_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(UARTE135_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE135_EASYDMA_MAXCNT_SIZE)
-        #define UARTE135_EASYDMA_MAXCNT_SIZE (UARTE135_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(UARTE136_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE136_EASYDMA_MAXCNT_SIZE)
-        #define UARTE136_EASYDMA_MAXCNT_SIZE (UARTE136_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-    #if defined(UARTE137_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE137_EASYDMA_MAXCNT_SIZE)
-        #define UARTE137_EASYDMA_MAXCNT_SIZE (UARTE137_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
-    #endif
-
     #define SPIM120_FEATURE_DCX_PRESENT  0
     #define SPIM121_FEATURE_DCX_PRESENT  0
     #define SPIM130_FEATURE_DCX_PRESENT  0
@@ -523,34 +468,6 @@
     #endif
 
     #define MVDMA_AXI_BUS_WIDTH 8
-
-    /* TODO: NCSDK-10983 */
-    typedef struct {
-        __IOM uint32_t  CPWRUPREQ;
-        __IM  uint32_t  CPWRUPACK;
-        __IM  uint32_t  RESERVED0[958];
-        __IOM uint32_t  ITCTRL;
-        __IM  uint32_t  RESERVED1[43];
-        __IOM uint32_t  LAR;
-        __IOM uint32_t  LSR;
-        __IOM uint32_t  AUTHSTATUS;
-        __IM  uint32_t  RESERVED2[3];
-        __IM  uint32_t  DEVID;
-        __IM  uint32_t  DEVTYPE;
-        __IOM uint32_t  PIDR4;
-        __IM  uint32_t  RESERVED3[3];
-        __IOM uint32_t  PIDR0;
-        __IOM uint32_t  PIDR1;
-        __IOM uint32_t  PIDR2;
-        __IOM uint32_t  PIDR3;
-        __IOM uint32_t  CIDR0;
-        __IOM uint32_t  CIDR1;
-        __IOM uint32_t  CIDR2;
-        __IOM uint32_t  CIDR3;
-    } NRF_GPR_Type;
-
-    #define NRF_GPR_NS_BASE 0xBF050000UL
-    #define NRF_GPR_NS ((NRF_GPR_Type*) NRF_GPR_NS_BASE)
 
     typedef struct {
         __IOM uint32_t  STMSTIMR[32];
@@ -689,33 +606,6 @@
     #endif
 
     typedef struct {
-        __IOM uint32_t  CNTCR;
-        __IM  uint32_t  CNTSR;
-        __IOM uint32_t  CNTCVL;
-        __IOM uint32_t  CNTCVU;
-        __IM  uint32_t  RESERVED0[4];
-        __IOM uint32_t  CNTFID0;
-        __IM  uint32_t  RESERVED1[1003];
-        __IM  uint32_t  PIDR4;
-        __IM  uint32_t  PIDR5;
-        __IM  uint32_t  PIDR6;
-        __IM  uint32_t  PIDR7;
-        __IM  uint32_t  PIDR0;
-        __IM  uint32_t  PIDR1;
-        __IM  uint32_t  PIDR2;
-        __IM  uint32_t  PIDR3;
-        __IM  uint32_t  CIDR0;
-        __IM  uint32_t  CIDR1;
-        __IM  uint32_t  CIDR2;
-        __IM  uint32_t  CIDR3;
-    } NRF_TSGEN_Type;
-
-    #if defined(NRF_TSGEN_NS)
-        #undef NRF_TSGEN_NS
-        #define NRF_TSGEN_NS ((NRF_TSGEN_Type*) NRF_TSGEN_NS_BASE)
-    #endif
-
-    typedef struct {
         __OM  uint32_t G_DMTS[2];
         __OM  uint32_t G_DM[2];
         __OM  uint32_t G_DTS[2];
@@ -783,67 +673,6 @@
     #if defined(NRF_SECURE)
         #define NRF_STMESP NRF_SECURE_STMESP
     #endif
-
-    typedef struct {
-        __IM  uint32_t RESERVED0[1];
-        __IOM uint32_t RSZ;
-        __IM  uint32_t RESERVED1[1];
-        __IOM uint32_t STS;
-        __IOM uint32_t RRD; /* RAM read data */
-        __IOM uint32_t RRP; /* RAM read pointer */
-        __IOM uint32_t RWP; /* RAM write pointer */
-        __IOM uint32_t TRG; /* Trigger counter register */
-        __IOM uint32_t CTL; /* Control register */
-        __IOM uint32_t RWD; /* RAM write data */
-        __IOM uint32_t MODE; /* Mode */
-        __IOM uint32_t LBUFLEVEL;
-        __IOM uint32_t CBUFLEVEL;
-        __IOM uint32_t BUFWM;
-        __IM  uint32_t RESERVED2[54];
-        __IOM uint32_t BUSCTL;
-        __IM  uint32_t RESERVED3[1];
-        __IOM uint32_t DBA;
-        __IM  uint32_t RESERVED4[1];
-        __IOM uint32_t RURP;
-        __IM  uint32_t RESERVED5[119];
-        __IOM uint32_t FFSR;
-        __IOM uint32_t FFCR;
-        __IOM uint32_t PSCR;
-        __IOM uint32_t RESERVED6[733];
-        __IOM uint32_t IRQCR0;
-        __IOM uint32_t RES6b;
-        __IOM uint32_t IRQCR1;
-        __IOM uint32_t IRQCR2;
-        __IOM uint32_t RESERVED7[28];
-        __IOM uint32_t ITCTRL;
-        __IM  uint32_t RESERVED8[39];
-        __IOM uint32_t CLAIMSET;
-        __OM  uint32_t CLAIMCLR;
-        __IM  uint64_t RESERVED9[1];
-        __IOM uint32_t LAR;
-        __IOM uint32_t LSR;
-        __IOM uint32_t AUTHSTATUS;
-        __IM  uint32_t DEVARCH;
-        __IM  uint32_t RESERVED10[1];
-        __IM  uint32_t DEVID1;
-        __IM  uint32_t DEVID;
-        __IM  uint32_t DEVTYPE;
-        __IM  uint32_t PIDR4;
-        __IM  uint32_t PIDR5;
-        __IM  uint32_t PIDR6;
-        __IM  uint32_t PIDR7;
-        __IM  uint32_t PIDR0;
-        __IM  uint32_t PIDR1;
-        __IM  uint32_t PIDR2;
-        __IM  uint32_t PIDR3;
-        __IM  uint32_t CIDR0;
-        __IM  uint32_t CIDR1;
-        __IM  uint32_t CIDR2;
-        __IM  uint32_t CIDR3;
-    } NRF_ETR_Type;
-
-    #undef NRF_ETR_NS
-    #define NRF_ETR_NS ((NRF_ETR_Type*) NRF_ETR_NS_BASE)
 
     #define VREG1V0_DFT_DTB0CONFIG_SELMUX_Spare0 3
 
@@ -958,15 +787,6 @@
     #define VDETVS0V8_DFT_DTB0CONFIG_SELMUX_Spare2 (0x7UL)
 
     #define VDETVS0V8_DFT_DTB1CONFIG_SELMUX_Spare0 (0x0UL)
-
-    /* TODO: HM-21442 */
-    #define OSCRFR_TRIM_OSC_VAL_Val34    OSCRFR_TRIM_OSC_VAL_Val23
-    #define OSCRFR_TRIM_OSC_VAL_Val154   OSCRFR_TRIM_OSC_VAL_Val54
-    #define OSCRFR_TRIM_OSC_VAL_Val670   OSCRFR_TRIM_OSC_VAL_Val98
-    #define OSCRFR_TRIM_OSC_VAL_ValNeg54 OSCRFR_TRIM_OSC_VAL_ValNeg51
-    #define OSCRFR_TRIM_OSC_VAL_ValNeg49 OSCRFR_TRIM_OSC_VAL_ValNeg42
-    #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
-    #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
 
     #if defined(MRAMC_CONFIGNVR_PAGE_LOCK_Pos)
     /* This symbols mapping will be provided with MDK when LiliumFP1 and Halti targets will
@@ -1698,6 +1518,15 @@
     #endif
 
     #define NRF_NFCT_Type NRF_NFCT_Type_fixed
+
+    /* TODO: HM-21442 */
+    #define OSCRFR_TRIM_OSC_VAL_Val35    OSCRFR_TRIM_OSC_VAL_Val23
+    #define OSCRFR_TRIM_OSC_VAL_Val154   OSCRFR_TRIM_OSC_VAL_Val54
+    #define OSCRFR_TRIM_OSC_VAL_Val670   OSCRFR_TRIM_OSC_VAL_Val98
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg54 OSCRFR_TRIM_OSC_VAL_ValNeg51
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg49 OSCRFR_TRIM_OSC_VAL_ValNeg42
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
 
 #endif
 
@@ -2451,6 +2280,130 @@
     #define NRF_GRAPHICS_AUXPLL               NRF_GRAPHICS_AUXPLL_NS
     #define NRF_AUXPLL                        NRF_GRAPHICS_AUXPLL
 
+    typedef struct {
+        __IOM uint32_t  CNTCR;
+        __IM  uint32_t  CNTSR;
+        __IOM uint32_t  CNTCVL;
+        __IOM uint32_t  CNTCVU;
+        __IM  uint32_t  RESERVED0[4];
+        __IOM uint32_t  CNTFID0;
+        __IM  uint32_t  RESERVED1[1003];
+        __IM  uint32_t  PIDR4;
+        __IM  uint32_t  PIDR5;
+        __IM  uint32_t  PIDR6;
+        __IM  uint32_t  PIDR7;
+        __IM  uint32_t  PIDR0;
+        __IM  uint32_t  PIDR1;
+        __IM  uint32_t  PIDR2;
+        __IM  uint32_t  PIDR3;
+        __IM  uint32_t  CIDR0;
+        __IM  uint32_t  CIDR1;
+        __IM  uint32_t  CIDR2;
+        __IM  uint32_t  CIDR3;
+    } NRF_TSGEN_Type;
+
+    #if defined(NRF_TSGEN_NS)
+        #undef NRF_TSGEN_NS
+        #define NRF_TSGEN_NS ((NRF_TSGEN_Type*) NRF_TSGEN_NS_BASE)
+    #endif
+
+    typedef struct {
+        __IM  uint32_t RESERVED0[1];
+        __IOM uint32_t RSZ;
+        __IM  uint32_t RESERVED1[1];
+        __IOM uint32_t STS;
+        __IOM uint32_t RRD; /* RAM read data */
+        __IOM uint32_t RRP; /* RAM read pointer */
+        __IOM uint32_t RWP; /* RAM write pointer */
+        __IOM uint32_t TRG; /* Trigger counter register */
+        __IOM uint32_t CTL; /* Control register */
+        __IOM uint32_t RWD; /* RAM write data */
+        __IOM uint32_t MODE; /* Mode */
+        __IOM uint32_t LBUFLEVEL;
+        __IOM uint32_t CBUFLEVEL;
+        __IOM uint32_t BUFWM;
+        __IM  uint32_t RESERVED2[54];
+        __IOM uint32_t BUSCTL;
+        __IM  uint32_t RESERVED3[1];
+        __IOM uint32_t DBA;
+        __IM  uint32_t RESERVED4[1];
+        __IOM uint32_t RURP;
+        __IM  uint32_t RESERVED5[119];
+        __IOM uint32_t FFSR;
+        __IOM uint32_t FFCR;
+        __IOM uint32_t PSCR;
+        __IOM uint32_t RESERVED6[733];
+        __IOM uint32_t IRQCR0;
+        __IOM uint32_t RES6b;
+        __IOM uint32_t IRQCR1;
+        __IOM uint32_t IRQCR2;
+        __IOM uint32_t RESERVED7[28];
+        __IOM uint32_t ITCTRL;
+        __IM  uint32_t RESERVED8[39];
+        __IOM uint32_t CLAIMSET;
+        __OM  uint32_t CLAIMCLR;
+        __IM  uint64_t RESERVED9[1];
+        __IOM uint32_t LAR;
+        __IOM uint32_t LSR;
+        __IOM uint32_t AUTHSTATUS;
+        __IM  uint32_t DEVARCH;
+        __IM  uint32_t RESERVED10[1];
+        __IM  uint32_t DEVID1;
+        __IM  uint32_t DEVID;
+        __IM  uint32_t DEVTYPE;
+        __IM  uint32_t PIDR4;
+        __IM  uint32_t PIDR5;
+        __IM  uint32_t PIDR6;
+        __IM  uint32_t PIDR7;
+        __IM  uint32_t PIDR0;
+        __IM  uint32_t PIDR1;
+        __IM  uint32_t PIDR2;
+        __IM  uint32_t PIDR3;
+        __IM  uint32_t CIDR0;
+        __IM  uint32_t CIDR1;
+        __IM  uint32_t CIDR2;
+        __IM  uint32_t CIDR3;
+    } NRF_ETR_Type;
+
+    #undef NRF_ETR_NS
+    #define NRF_ETR_NS ((NRF_ETR_Type*) NRF_ETR_NS_BASE)
+
+    typedef struct {
+        __IOM uint32_t  CPWRUPREQ;
+        __IM  uint32_t  CPWRUPACK;
+        __IM  uint32_t  RESERVED0[958];
+        __IOM uint32_t  ITCTRL;
+        __IM  uint32_t  RESERVED1[43];
+        __IOM uint32_t  LAR;
+        __IOM uint32_t  LSR;
+        __IOM uint32_t  AUTHSTATUS;
+        __IM  uint32_t  RESERVED2[3];
+        __IM  uint32_t  DEVID;
+        __IM  uint32_t  DEVTYPE;
+        __IOM uint32_t  PIDR4;
+        __IM  uint32_t  RESERVED3[3];
+        __IOM uint32_t  PIDR0;
+        __IOM uint32_t  PIDR1;
+        __IOM uint32_t  PIDR2;
+        __IOM uint32_t  PIDR3;
+        __IOM uint32_t  CIDR0;
+        __IOM uint32_t  CIDR1;
+        __IOM uint32_t  CIDR2;
+        __IOM uint32_t  CIDR3;
+    } NRF_GPR_Type;
+
+    #define NRF_GPR_NS_BASE 0xBF050000UL
+    #define NRF_GPR_NS ((NRF_GPR_Type*) NRF_GPR_NS_BASE)
+
+    /* TODO: HM-21442 */
+    #define OSCRFR_TRIM_OSC_VAL_Val35    OSCRFR_TRIM_OSC_VAL_Val23
+    #define OSCRFR_TRIM_OSC_VAL_Val154   OSCRFR_TRIM_OSC_VAL_Val54
+    #define OSCRFR_TRIM_OSC_VAL_Val670   OSCRFR_TRIM_OSC_VAL_Val98
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg54 OSCRFR_TRIM_OSC_VAL_ValNeg51
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg49 OSCRFR_TRIM_OSC_VAL_ValNeg42
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
+
 #endif
 
 /**************************************************************************************************/
@@ -2458,10 +2411,10 @@
 /**************************************************************************************************/
 
 /**************************************************************************************************/
-/* Start fixups section for NRF9230_XXAA                                                          */
+/* Start fixups section for NRF9230_ENGA_XXAA                                                          */
 /**************************************************************************************************/
 
-#if defined(NRF9230_XXAA)
+#if defined(NRF9230_ENGA_XXAA)
 
     /* TODO: MDK-2233 and MDK-2234 - wait for MDK team response. */
     #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
@@ -2667,10 +2620,19 @@
         #define DPPIC1_CH_NUM (DPPIC1_CH_NUM_MAX + 1UL)
     #endif
 
+    /* TODO: HM-21442 */
+    #define OSCRFR_TRIM_OSC_VAL_Val35    OSCRFR_TRIM_OSC_VAL_Val23
+    #define OSCRFR_TRIM_OSC_VAL_Val154   OSCRFR_TRIM_OSC_VAL_Val54
+    #define OSCRFR_TRIM_OSC_VAL_Val670   OSCRFR_TRIM_OSC_VAL_Val98
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg54 OSCRFR_TRIM_OSC_VAL_ValNeg51
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg49 OSCRFR_TRIM_OSC_VAL_ValNeg42
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
+
 #endif
 
 /**************************************************************************************************/
-/* End fixups section for NRF9230_XXAA                                                            */
+/* End fixups section for NRF9230_ENGA_XXAA                                                            */
 /**************************************************************************************************/
 
 #endif // MDK_FIXUPS_H__

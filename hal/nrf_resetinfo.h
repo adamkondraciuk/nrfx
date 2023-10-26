@@ -23,6 +23,13 @@ extern "C" {
 #define NRF_RESETINFO_HAS_RESETREAS_STRUCT 0
 #endif
 
+#if defined(RESETINFO_RESETREAS_GLOBAL_SECWDT0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether multiple secure domain watchdog resets are present. */
+#define NRF_RESETINFO_HAS_MULTIPLE_SECWDT 1
+#else
+#define NRF_RESETINFO_HAS_MULTIPLE_SECWDT 0
+#endif
+
 #if defined(RESETINFO_ERROR_STATUS_ERRORSTATUS_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Maximum value of error status. */
 #define NRF_RESETINFO_ERROR_STATUS_MAX RESETINFO_ERROR_STATUS_ERRORSTATUS_Msk
@@ -38,7 +45,12 @@ typedef enum
     NRF_RESETINFO_RESETREAS_GLOBAL_DOG_MASK       = RESETINFO_RESETREAS_GLOBAL_DOG_Msk,       /**< Reset from the SysCtrl watchdog timer. */
     NRF_RESETINFO_RESETREAS_GLOBAL_CTRLAP_MASK    = RESETINFO_RESETREAS_GLOBAL_CTRLAP_Msk,    /**< Reset from CTRL-AP. */
     NRF_RESETINFO_RESETREAS_GLOBAL_SECSREQ_MASK   = RESETINFO_RESETREAS_GLOBAL_SECSREQ_Msk,   /**< Reset due to secure domain system reset request. */
-    NRF_RESETINFO_RESETREAS_GLOBAL_SECWDT_MASK    = RESETINFO_RESETREAS_GLOBAL_SECWDT_Msk,    /**< Reset due to secure domain watchdog timer. */
+#if NRF_RESETINFO_HAS_MULTIPLE_SECWDT
+    NRF_RESETINFO_RESETREAS_GLOBAL_SECWDT0_MASK   = RESETINFO_RESETREAS_GLOBAL_SECWDT0_Msk,   /**< Reset due to secure domain watchdog 0 timer. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_SECWDT1_MASK   = RESETINFO_RESETREAS_GLOBAL_SECWDT1_Msk,   /**< Reset due to secure domain watchdog 1 timer. */
+#else
+    NRF_RESETINFO_RESETREAS_GLOBAL_SECWDT0_MASK   = RESETINFO_RESETREAS_GLOBAL_SECWDT_Msk,    /**< Reset due to secure domain watchdog timer. */
+#endif
     NRF_RESETINFO_RESETREAS_GLOBAL_SECLOCKUP_MASK = RESETINFO_RESETREAS_GLOBAL_SECLOCKUP_Msk, /**< Reset due to secure domain lockup. */
     NRF_RESETINFO_RESETREAS_GLOBAL_SECTAMPER_MASK = RESETINFO_RESETREAS_GLOBAL_SECTAMPER_Msk, /**< Reset due to secure domain tamper detected. */
     NRF_RESETINFO_RESETREAS_GLOBAL_GPIO_MASK      = RESETINFO_RESETREAS_GLOBAL_OFF_Msk,       /**< Reset due to wakeup from System OFF triggered by DETECT signal from GPIO. */

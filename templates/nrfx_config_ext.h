@@ -31,7 +31,7 @@
     #elif defined(NRF_SYSCTRL)
         #include <nrfx_config_nrf54h20_sysctrl.h>
     #endif
-#elif defined(NRF9230_XXAA)
+#elif defined(NRF9230_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
         #include <nrfx_config_nrf9230_application.h>
     #elif defined(NRF_RADIOCORE)

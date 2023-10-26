@@ -146,7 +146,7 @@ extern "C" {
 
 #if defined(NRF54H20_ENGA_XXAA)
     #define NRF_UARTE_CLOCKPIN_RTS_NEEDED_EXT
-#elif defined(NRF54H20_XXAA) || defined(NRF9230_XXAA)
+#elif defined(NRF54H20_XXAA) || defined(NRF9230_ENGA_XXAA)
     #define NRF_UARTE_CLOCKPIN_TXD_NEEDED_EXT
     #define NRF_SPIM_CLOCKPIN_MOSI_NEEDED_EXT
     #define NRF_SPIS_CLOCKPIN_MISO_NEEDED_EXT
@@ -171,14 +171,14 @@ extern "C" {
 /*------------------------------------------------------------------------------------------------*/
 
 #if defined(NRF_GPIOTE130) || defined(NRF_GPIOTE131)
-    #if !defined(NRF_CELLCORE) && !(defined(NRF9230_XXAA) && defined(NRF_SYSCTRL))
+    #if !defined(NRF_CELLCORE) && !(defined(NRF9230_ENGA_XXAA) && defined(NRF_SYSCTRL))
         #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE130_IRQn
     #else
         #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE131_IRQn
     #endif
 #endif
 
-#if defined(NRF_GPIOTE130) && !(defined(NRF9230_XXAA) && defined(NRF_SYSCTRL))
+#if defined(NRF_GPIOTE130) && !(defined(NRF9230_ENGA_XXAA) && defined(NRF_SYSCTRL))
     #define NRF_GPIOTE_INDEX 130
 #elif defined(NRF_GPIOTE131)
     #define NRF_GPIOTE_INDEX 131
