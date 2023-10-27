@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
-#ifndef NRFX_CONFIG_NRF9230_RADIO_H__
-#define NRFX_CONFIG_NRF9230_RADIO_H__
+#ifndef NRFX_CONFIG_NRF9230_ENGA_RADIO_H__
+#define NRFX_CONFIG_NRF9230_ENGA_RADIO_H__
 
 #ifndef NRFX_CONFIG_H__
 #error "This file should not be included directly. Include nrfx_config.h instead."
@@ -2003,4 +2003,4 @@
 #define NRFX_WDT132_ENABLED 0
 #endif
 
-#endif // NRFX_CONFIG_NRF9230_RADIO_H__
+#endif // NRFX_CONFIG_NRF9230_ENGA_RADIO_H__

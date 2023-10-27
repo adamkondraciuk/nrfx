@@ -33,19 +33,19 @@
     #endif
 #elif defined(NRF9230_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
-        #include <nrfx_config_nrf9230_application.h>
+        #include <nrfx_config_nrf9230_enga_application.h>
     #elif defined(NRF_RADIOCORE)
-        #include <nrfx_config_nrf9230_radio.h>
+        #include <nrfx_config_nrf9230_enga_radio.h>
     #elif defined(NRF_CELLCORE)
-        #include <nrfx_config_nrf9230_cellular.h>
+        #include <nrfx_config_nrf9230_enga_cellular.h>
     #elif defined(NRF_SECURE)
-        #include <nrfx_config_nrf9230_secure.h>
+        #include <nrfx_config_nrf9230_enga_secure.h>
     #elif defined(NRF_FLPR)
-        #include <nrfx_config_nrf9230_flpr.h>
+        #include <nrfx_config_nrf9230_enga_flpr.h>
     #elif defined(NRF_PPR)
-        #include <nrfx_config_nrf9230_ppr.h>
+        #include <nrfx_config_nrf9230_enga_ppr.h>
     #elif defined(NRF_SYSCTRL)
-        #include <nrfx_config_nrf9230_sysctrl.h>
+        #include <nrfx_config_nrf9230_enga_sysctrl.h>
     #endif
 #elif defined(NRF7140_XXAA)
     #if defined(NRF_APPLICATION)
