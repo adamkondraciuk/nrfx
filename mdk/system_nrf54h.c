@@ -74,7 +74,7 @@ void SystemCoreClockUpdate(void)
                 /* Start HSFLL frequency measurement */
                 NRF_HSFLL->EVENTS_FREQMDONE = 0ul;
                 NRF_HSFLL->TASKS_FREQMEAS = 1ul;
-                for (volatile int i = 0ul; i < 200ul && NRF_HSFLL->EVENTS_FREQMDONE != 1ul; i++)
+                for (volatile unsigned i = 0ul; i < 200ul && NRF_HSFLL->EVENTS_FREQMDONE != 1ul; i++)
                 {
                     /* Wait until frequency measurement is done */
                 }
