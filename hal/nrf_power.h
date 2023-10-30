@@ -291,6 +291,9 @@ typedef enum
 #if NRF_POWER_HAS_RESETREAS_VBUS
     NRF_POWER_RESETREAS_VBUS_MASK     = POWER_RESETREAS_VBUS_Msk    , /**< Bit mask of VBUS field. */
 #endif
+#if NRF_POWER_HAS_RESETREAS_CTRLAP
+    NRF_POWER_RESETREAS_CTRLAP_MASK   = POWER_RESETREAS_CTRLAP_Msk  , /**< Bit mask of CTRLAP field. */
+#endif
 } nrf_power_resetreas_mask_t;
 #endif // NRF_POWER_HAS_RESETREAS
 
