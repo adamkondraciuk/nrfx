@@ -642,10 +642,14 @@ extern "C" {
         || (p_reg == NRF_TIMER135)                 \
         || (p_reg == NRF_TIMER136)                 \
         || (p_reg == NRF_TIMER137))
-    #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) ( \
-           (p_reg == NRF_TIMER020)                \
-        || (p_reg == NRF_TIMER021)                \
-        || (p_reg == NRF_TIMER022))
+    #if defined(NRF_RADIOCORE)
+        #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) (  \
+               (p_reg == NRF_TIMER020)             \
+            || (p_reg == NRF_TIMER021)             \
+            || (p_reg == NRF_TIMER022))
+    #else
+        #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) false
+    #endif
     #define NRF_TIMER_IS_64MHZ_TIMER(p_reg) false
 
     #if defined(NRF_RADIOCORE)
@@ -673,17 +677,15 @@ extern "C" {
         (NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) ||    \
         NRF_TIMER_BIT_WIDTH_GLOBAL(p_reg, bit_width))
 #elif defined(LUMOS_XXAA)
-    #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) false
-    #define NRF_TIMER_IS_16MHZ_TIMER(p_reg) ( \
-           (p_reg == NRF_TIMER20)                 \
-        || (p_reg == NRF_TIMER21)                 \
-        || (p_reg == NRF_TIMER22)                 \
-        || (p_reg == NRF_TIMER23)                 \
-        || (p_reg == NRF_TIMER24))
     #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) ( \
            (p_reg == NRF_TIMER10))
-    #define NRF_TIMER_IS_64MHZ_TIMER(p_reg) ( \
-            (p_reg == NRF_TIMER00))
+    #if defined(NRF_CPU_FREQ_IS_64MHZ)
+        #define NRF_TIMER_IS_64MHZ_TIMER(p_reg) ( \
+                (p_reg == NRF_TIMER00))
+    #elif defined(NRF_CPU_FREQ_IS_128MHZ)
+        #define NRF_TIMER_IS_128MHZ_TIMER(p_reg) ( \
+                (p_reg == NRF_TIMER00))
+    #endif
 
     #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
            ((p_reg == NRF_TIMER00) && TIMER_BIT_WIDTH_MAX(00, bit_width)) \
