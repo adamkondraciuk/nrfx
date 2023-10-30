@@ -200,11 +200,24 @@ static void uarte_configure(nrfx_uarte_t        const * p_instance,
             .rts_pin = p_config->rts_pin,
             .cts_pin = p_config->cts_pin
         },
-        .baudrate = p_config->baudrate,
         .skip_psel_cfg = NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_SKIP_PSEL_CONFIG) ?
             true : p_config->skip_psel_cfg
     };
     nrfy_config.config = p_config->config;
+
+#if defined(LUMOS_XXAA)
+    uint32_t base_frequency = NRF_UARTE_BASE_FREQUENCY_GET(p_instance->p_reg);
+    if (base_frequency != NRF_UARTE_BASE_FREQUENCY_16MHZ)
+    {
+        uint32_t baudrate_factor = base_frequency / NRF_UARTE_BASE_FREQUENCY_16MHZ;
+        nrfy_config.baudrate =
+            (nrf_uarte_baudrate_t)((uint32_t)p_config->baudrate / baudrate_factor);
+    }
+    else
+#endif
+    {
+        nrfy_config.baudrate = p_config->baudrate;
+    }
 
     nrfy_uarte_periph_configure(p_instance->p_reg, &nrfy_config);
 
