@@ -13586,8 +13586,7 @@ typedef struct {
   __IOM uint32_t  DATA[2];                           /*!< (@ 0x00000000) Cache data bits for DATA[q] in DU[p] (DataUnit) of
                                                                          SET[n], WAY[o].*/
 } NRF_CACHEDATA_SET_WAY_DU_Type;                     /*!< Size = 8 (0x008)                                                     */
-  #define CACHEDATA_SET_WAY_DU_MaxCount (4UL)        /*!< Max size of DU[4] array.                                             */
-  #define CACHEDATA_SET_WAY_DU_MinCount (0UL)        /*!< Min size of DU[4] array.                                             */
+  #define CACHEDATA_SET_WAY_DU_MaxCount (4UL)        /*!< Size of DU[4] array.                                                 */
   #define CACHEDATA_SET_WAY_DU_MaxIndex (3UL)        /*!< Max index of DU[4] array.                                            */
   #define CACHEDATA_SET_WAY_DU_MinIndex (0UL)        /*!< Min index of DU[4] array.                                            */
 
@@ -13610,8 +13609,7 @@ typedef struct {
 typedef struct {
   __IOM NRF_CACHEDATA_SET_WAY_DU_Type DU[4];         /*!< (@ 0x00000000) (unspecified)                                         */
 } NRF_CACHEDATA_SET_WAY_Type;                        /*!< Size = 32 (0x020)                                                    */
-  #define CACHEDATA_SET_WAY_MaxCount (2UL)           /*!< Max size of WAY[2] array.                                            */
-  #define CACHEDATA_SET_WAY_MinCount (0UL)           /*!< Min size of WAY[2] array.                                            */
+  #define CACHEDATA_SET_WAY_MaxCount (2UL)           /*!< Size of WAY[2] array.                                                */
   #define CACHEDATA_SET_WAY_MaxIndex (1UL)           /*!< Max index of WAY[2] array.                                           */
   #define CACHEDATA_SET_WAY_MinIndex (0UL)           /*!< Min index of WAY[2] array.                                           */
 
@@ -13623,8 +13621,7 @@ typedef struct {
 typedef struct {
   __IOM NRF_CACHEDATA_SET_WAY_Type WAY[2];           /*!< (@ 0x00000000) (unspecified)                                         */
 } NRF_CACHEDATA_SET_Type;                            /*!< Size = 64 (0x040)                                                    */
-  #define CACHEDATA_SET_MaxCount (256UL)             /*!< Max size of SET[256] array.                                          */
-  #define CACHEDATA_SET_MinCount (0UL)               /*!< Min size of SET[256] array.                                          */
+  #define CACHEDATA_SET_MaxCount (256UL)             /*!< Size of SET[256] array.                                              */
   #define CACHEDATA_SET_MaxIndex (255UL)             /*!< Max index of SET[256] array.                                         */
   #define CACHEDATA_SET_MinIndex (0UL)               /*!< Min index of SET[256] array.                                         */
 
@@ -13651,8 +13648,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  WAY[2];                            /*!< (@ 0x00000000) Cache information for SET[n], WAY[o].                 */
 } NRF_CACHEINFO_SET_Type;                            /*!< Size = 8 (0x008)                                                     */
-  #define CACHEINFO_SET_MaxCount (256UL)             /*!< Max size of SET[256] array.                                          */
-  #define CACHEINFO_SET_MinCount (0UL)               /*!< Min size of SET[256] array.                                          */
+  #define CACHEINFO_SET_MaxCount (256UL)             /*!< Size of SET[256] array.                                              */
   #define CACHEINFO_SET_MaxIndex (255UL)             /*!< Max index of SET[256] array.                                         */
   #define CACHEINFO_SET_MinIndex (0UL)               /*!< Min index of SET[256] array.                                         */
 
@@ -15779,8 +15775,6 @@ typedef struct {
 
   #define COMP_REFTEMPC_REFTEMPC_Pos (0UL)           /*!< Position of REFTEMPC field.                                          */
   #define COMP_REFTEMPC_REFTEMPC_Msk (0xFUL << COMP_REFTEMPC_REFTEMPC_Pos) /*!< Bit mask of REFTEMPC field.                    */
-  #define COMP_REFTEMPC_REFTEMPC_Min (0xFFFFFFFFUL)  /*!< Min value of REFTEMPC field.                                         */
-  #define COMP_REFTEMPC_REFTEMPC_Max (0xFFFFFFFFUL)  /*!< Max size of REFTEMPC field.                                          */
 
 
 /* COMP_BUFFER: Enable unity gain buffer */
@@ -15927,8 +15921,6 @@ typedef struct {
 /* REFTRIM @Bits 0..4 : Trimming value in 2's complement */
   #define COMP_REFTRIM_REFTRIM_Pos (0UL)             /*!< Position of REFTRIM field.                                           */
   #define COMP_REFTRIM_REFTRIM_Msk (0x1FUL << COMP_REFTRIM_REFTRIM_Pos) /*!< Bit mask of REFTRIM field.                        */
-  #define COMP_REFTRIM_REFTRIM_Min (0xFFFFFFFFUL)    /*!< Min value of REFTRIM field.                                          */
-  #define COMP_REFTRIM_REFTRIM_Max (0xFFFFFFFFUL)    /*!< Max size of REFTRIM field.                                           */
 
 
 /* COMP_ATECOMP: Analog test bus control for comparator */
@@ -19626,8 +19618,7 @@ typedef struct {
   __OM  uint32_t  EN;                                /*!< (@ 0x00000000) Enable channel group n                                */
   __OM  uint32_t  DIS;                               /*!< (@ 0x00000004) Disable channel group n                               */
 } NRF_DPPIC_TASKS_CHG_Type;                          /*!< Size = 8 (0x008)                                                     */
-  #define DPPIC_TASKS_CHG_MaxCount (2UL)             /*!< Max size of TASKS_CHG[2] array.                                      */
-  #define DPPIC_TASKS_CHG_MinCount (0UL)             /*!< Min size of TASKS_CHG[2] array.                                      */
+  #define DPPIC_TASKS_CHG_MaxCount (2UL)             /*!< Size of TASKS_CHG[2] array.                                          */
   #define DPPIC_TASKS_CHG_MaxIndex (1UL)             /*!< Max index of TASKS_CHG[2] array.                                     */
   #define DPPIC_TASKS_CHG_MinIndex (0UL)             /*!< Min index of TASKS_CHG[2] array.                                     */
 
@@ -19662,8 +19653,7 @@ typedef struct {
   __IOM uint32_t  EN;                                /*!< (@ 0x00000000) Subscribe configuration for task CHG[n].EN            */
   __IOM uint32_t  DIS;                               /*!< (@ 0x00000004) Subscribe configuration for task CHG[n].DIS           */
 } NRF_DPPIC_SUBSCRIBE_CHG_Type;                      /*!< Size = 8 (0x008)                                                     */
-  #define DPPIC_SUBSCRIBE_CHG_MaxCount (2UL)         /*!< Max size of SUBSCRIBE_CHG[2] array.                                  */
-  #define DPPIC_SUBSCRIBE_CHG_MinCount (0UL)         /*!< Min size of SUBSCRIBE_CHG[2] array.                                  */
+  #define DPPIC_SUBSCRIBE_CHG_MaxCount (2UL)         /*!< Size of SUBSCRIBE_CHG[2] array.                                      */
   #define DPPIC_SUBSCRIBE_CHG_MaxIndex (1UL)         /*!< Max index of SUBSCRIBE_CHG[2] array.                                 */
   #define DPPIC_SUBSCRIBE_CHG_MinIndex (0UL)         /*!< Min index of SUBSCRIBE_CHG[2] array.                                 */
 
@@ -25961,8 +25951,7 @@ typedef struct {
   __IOM uint32_t  NONCEMODE;                         /*!< (@ 0x0000000C) Nonce mode for encryption region n                    */
   __OM  uint32_t  KEY[4];                            /*!< (@ 0x00000010) 128b key for encryption region n                      */
 } NRF_EXMEE_REGION_Type;                             /*!< Size = 32 (0x020)                                                    */
-  #define EXMEE_REGION_MaxCount (16UL)               /*!< Max size of REGION[16] array.                                        */
-  #define EXMEE_REGION_MinCount (0UL)                /*!< Min size of REGION[16] array.                                        */
+  #define EXMEE_REGION_MaxCount (16UL)               /*!< Size of REGION[16] array.                                            */
   #define EXMEE_REGION_MaxIndex (15UL)               /*!< Max index of REGION[16] array.                                       */
   #define EXMEE_REGION_MinIndex (0UL)                /*!< Min index of REGION[16] array.                                       */
 
@@ -28336,17 +28325,18 @@ typedef struct {
         __IOM NRF_EXMIF_EXTCONF2_Type EXTCONF2;      /*!< (@ 0x00000408) Configuration for external memory device 2.           */
       };
       struct {
-        __IM uint32_t RESERVED5[5];
+      __IM uint32_t RESERVED5[5];
         __IOM uint32_t LOCKEDACCESS;                 /*!< (@ 0x00000414) Enable or disable locked APB access to serial memory
                                                                          controller.*/
         __IOM uint32_t PROGDELAY;                    /*!< (@ 0x00000418) Configures delay of the incoming data strobe.         */
         __IOM uint32_t RESET;                        /*!< (@ 0x0000041C) Reset the external memory.                            */
       };
+      __IM uint32_t RESERVED6[9];
     };
     #if defined(_GNUC_)
       #pragma GCC diagnostic pop
     #endif
-    __IM uint32_t RESERVED6[55];
+    __IM uint32_t RESERVED7[55];
     __IOM NRF_EXMIF_CORE_Type CORE;                  /*!< (@ 0x00000500) (unspecified)                                         */
   } NRF_EXMIF_Type;                                  /*!< Size = 1612 (0x64C)                                                  */
 
@@ -30294,8 +30284,7 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  BITLINE;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.MEMCONF120.REPAIR[n].BITLINE   */
 } NRF_FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_Type;      /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MaxCount (36UL) /*!< Max size of REPAIR[36] array.                               */
-  #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MinCount (0UL) /*!< Min size of REPAIR[36] array.                                */
+  #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MaxCount (36UL) /*!< Size of REPAIR[36] array.                                   */
   #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MaxIndex (35UL) /*!< Max index of REPAIR[36] array.                              */
   #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MinIndex (0UL) /*!< Min index of REPAIR[36] array.                               */
 
@@ -30316,8 +30305,7 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.MEMCONF120.TRIM                */
 } NRF_FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_Type;   /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MaxCount (8UL) /*!< Max size of BLOCKTYPE[8] array.                           */
-  #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MinCount (0UL) /*!< Min size of BLOCKTYPE[8] array.                           */
+  #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MaxCount (8UL) /*!< Size of BLOCKTYPE[8] array.                               */
   #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MaxIndex (7UL) /*!< Max index of BLOCKTYPE[8] array.                          */
   #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[8] array.                          */
 
@@ -30358,8 +30346,7 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.MEMCONF130.TRIM                */
 } NRF_FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_Type;   /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxCount (2UL) /*!< Max size of BLOCKTYPE[2] array.                           */
-  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MinCount (0UL) /*!< Min size of BLOCKTYPE[2] array.                           */
+  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxCount (2UL) /*!< Size of BLOCKTYPE[2] array.                               */
   #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxIndex (1UL) /*!< Max index of BLOCKTYPE[2] array.                          */
   #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[2] array.                          */
 
@@ -30732,8 +30719,7 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for APPLICATION.MEMCONF.TRIM               */
 } NRF_FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_Type;  /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxCount (3UL) /*!< Max size of BLOCKTYPE[3] array.                          */
-  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MinCount (0UL) /*!< Min size of BLOCKTYPE[3] array.                          */
+  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxCount (3UL) /*!< Size of BLOCKTYPE[3] array.                              */
   #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxIndex (2UL) /*!< Max index of BLOCKTYPE[3] array.                         */
   #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[3] array.                         */
 
@@ -30826,8 +30812,7 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for RADIOCORE.MEMCONF.TRIM                 */
 } NRF_FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_Type;    /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxCount (3UL) /*!< Max size of BLOCKTYPE[3] array.                            */
-  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MinCount (0UL) /*!< Min size of BLOCKTYPE[3] array.                            */
+  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxCount (3UL) /*!< Size of BLOCKTYPE[3] array.                                */
   #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxIndex (2UL) /*!< Max index of BLOCKTYPE[3] array.                           */
   #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[3] array.                           */
 
@@ -31247,8 +31232,7 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for SECURE.MEMCONF.BLOCKTYPE[n].TRIM       */
 } NRF_FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_Type;       /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MaxCount (7UL) /*!< Max size of BLOCKTYPE[7] array.                               */
-  #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MinCount (0UL) /*!< Min size of BLOCKTYPE[7] array.                               */
+  #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MaxCount (7UL) /*!< Size of BLOCKTYPE[7] array.                                   */
   #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MaxIndex (6UL) /*!< Max index of BLOCKTYPE[7] array.                              */
   #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[7] array.                              */
 
@@ -35691,8 +35675,7 @@ typedef struct {
   __IOM uint32_t  NONSECURE;                         /*!< (@ 0x00000000) Non-secure port event from owner n                    */
   __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Secure port event from owner n                        */
 } NRF_GPIOTE_EVENTS_PORT_Type;                       /*!< Size = 8 (0x008)                                                     */
-  #define GPIOTE_EVENTS_PORT_MaxCount (4UL)          /*!< Max size of EVENTS_PORT[4] array.                                    */
-  #define GPIOTE_EVENTS_PORT_MinCount (0UL)          /*!< Min size of EVENTS_PORT[4] array.                                    */
+  #define GPIOTE_EVENTS_PORT_MaxCount (4UL)          /*!< Size of EVENTS_PORT[4] array.                                        */
   #define GPIOTE_EVENTS_PORT_MaxIndex (3UL)          /*!< Max index of EVENTS_PORT[4] array.                                   */
   #define GPIOTE_EVENTS_PORT_MinIndex (0UL)          /*!< Min index of EVENTS_PORT[4] array.                                   */
 
@@ -35730,8 +35713,7 @@ typedef struct {
   __IOM uint32_t  NONSECURE;                         /*!< (@ 0x00000000) Publish configuration for event PORT[n].NONSECURE     */
   __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Publish configuration for event PORT[n].SECURE        */
 } NRF_GPIOTE_PUBLISH_PORT_Type;                      /*!< Size = 8 (0x008)                                                     */
-  #define GPIOTE_PUBLISH_PORT_MaxCount (4UL)         /*!< Max size of PUBLISH_PORT[4] array.                                   */
-  #define GPIOTE_PUBLISH_PORT_MinCount (0UL)         /*!< Min size of PUBLISH_PORT[4] array.                                   */
+  #define GPIOTE_PUBLISH_PORT_MaxCount (4UL)         /*!< Size of PUBLISH_PORT[4] array.                                       */
   #define GPIOTE_PUBLISH_PORT_MaxIndex (3UL)         /*!< Max index of PUBLISH_PORT[4] array.                                  */
   #define GPIOTE_PUBLISH_PORT_MinIndex (0UL)         /*!< Min index of PUBLISH_PORT[4] array.                                  */
 
@@ -47462,8 +47444,7 @@ typedef struct {
   __IOM uint32_t  CCADD;                             /*!< (@ 0x00000008) Count to add to CC[n]                                 */
   __IOM uint32_t  CCEN;                              /*!< (@ 0x0000000C) Configure Capture/Compare register CC[n]              */
 } NRF_GRTC_CC_Type;                                  /*!< Size = 16 (0x010)                                                    */
-  #define GRTC_CC_MaxCount (16UL)                    /*!< Max size of CC[16] array.                                            */
-  #define GRTC_CC_MinCount (0UL)                     /*!< Min size of CC[16] array.                                            */
+  #define GRTC_CC_MaxCount (16UL)                    /*!< Size of CC[16] array.                                                */
   #define GRTC_CC_MaxIndex (15UL)                    /*!< Max index of CC[16] array.                                           */
   #define GRTC_CC_MinIndex (0UL)                     /*!< Min index of CC[16] array.                                           */
 
@@ -58738,8 +58719,6 @@ typedef struct {
 /* VAL @Bits 0..4 : Trimming value for Pierce AREG mode */
   #define HFXO_TRIM_AREG_VAL_Pos (0UL)               /*!< Position of VAL field.                                               */
   #define HFXO_TRIM_AREG_VAL_Msk (0x1FUL << HFXO_TRIM_AREG_VAL_Pos) /*!< Bit mask of VAL field.                                */
-  #define HFXO_TRIM_AREG_VAL_Min (0xFFFFFFFFUL)      /*!< Min value of VAL field.                                              */
-  #define HFXO_TRIM_AREG_VAL_Max (0xFFFFFFFFUL)      /*!< Max size of VAL field.                                               */
 
 
 /* HFXO_TRIM_IBIAS: Internal bias generator trim */
@@ -58748,8 +58727,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Internal bias generator trimming value */
   #define HFXO_TRIM_IBIAS_VAL_Pos (0UL)              /*!< Position of VAL field.                                               */
   #define HFXO_TRIM_IBIAS_VAL_Msk (0xFUL << HFXO_TRIM_IBIAS_VAL_Pos) /*!< Bit mask of VAL field.                               */
-  #define HFXO_TRIM_IBIAS_VAL_Min (0xFFFFFFFFUL)     /*!< Min value of VAL field.                                              */
-  #define HFXO_TRIM_IBIAS_VAL_Max (0x0UL)            /*!< Max size of VAL field.                                               */
 
 
 /* HFXO_TRIM_PIXO: PIXO high pulse supply trim */
@@ -58758,8 +58735,6 @@ typedef struct {
 /* VAL @Bits 0..4 : Trimming value */
   #define HFXO_TRIM_PIXO_VAL_Pos (0UL)               /*!< Position of VAL field.                                               */
   #define HFXO_TRIM_PIXO_VAL_Msk (0x1FUL << HFXO_TRIM_PIXO_VAL_Pos) /*!< Bit mask of VAL field.                                */
-  #define HFXO_TRIM_PIXO_VAL_Min (0xFFFFFFFFUL)      /*!< Min value of VAL field.                                              */
-  #define HFXO_TRIM_PIXO_VAL_Max (0xFFFFFFFFUL)      /*!< Max size of VAL field.                                               */
 
 
 /* HFXO_TRIM_PDTHR: Peak detector threshold trimming */
@@ -58768,8 +58743,6 @@ typedef struct {
 /* VAL @Bits 0..4 : Peak detector threshold trimming value */
   #define HFXO_TRIM_PDTHR_VAL_Pos (0UL)              /*!< Position of VAL field.                                               */
   #define HFXO_TRIM_PDTHR_VAL_Msk (0x1FUL << HFXO_TRIM_PDTHR_VAL_Pos) /*!< Bit mask of VAL field.                              */
-  #define HFXO_TRIM_PDTHR_VAL_Min (0xFFFFFFFFUL)     /*!< Min value of VAL field.                                              */
-  #define HFXO_TRIM_PDTHR_VAL_Max (0xFFFFFFFFUL)     /*!< Max size of VAL field.                                               */
 
 
 /* HFXO_TRIM_VREF: Voltage reference trimming */
@@ -58778,8 +58751,6 @@ typedef struct {
 /* VAL @Bits 0..6 : Voltage reference trimming value */
   #define HFXO_TRIM_VREF_VAL_Pos (0UL)               /*!< Position of VAL field.                                               */
   #define HFXO_TRIM_VREF_VAL_Msk (0x7FUL << HFXO_TRIM_VREF_VAL_Pos) /*!< Bit mask of VAL field.                                */
-  #define HFXO_TRIM_VREF_VAL_Min (0xFFFFFFFFUL)      /*!< Min value of VAL field.                                              */
-  #define HFXO_TRIM_VREF_VAL_Max (0x0UL)             /*!< Max size of VAL field.                                               */
 
 
 /* HFXO_TRIM_MULT2: Trimming the duty cycle of the frequency doubler */
@@ -58788,8 +58759,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Duty cycle of the frequency doubler trimming value */
   #define HFXO_TRIM_MULT2_VAL_Pos (0UL)              /*!< Position of VAL field.                                               */
   #define HFXO_TRIM_MULT2_VAL_Msk (0xFUL << HFXO_TRIM_MULT2_VAL_Pos) /*!< Bit mask of VAL field.                               */
-  #define HFXO_TRIM_MULT2_VAL_Min (0xFFFFFFFFUL)     /*!< Min value of VAL field.                                              */
-  #define HFXO_TRIM_MULT2_VAL_Max (0xFFFFFFFFUL)     /*!< Max size of VAL field.                                               */
 
 
 
@@ -59698,8 +59667,6 @@ typedef struct {
 /* VAL0 @Bits 0..3 : Capacitive load value 0 */
   #define HFXO_CLOAD_VAL0_Pos (0UL)                  /*!< Position of VAL0 field.                                              */
   #define HFXO_CLOAD_VAL0_Msk (0xFUL << HFXO_CLOAD_VAL0_Pos) /*!< Bit mask of VAL0 field.                                      */
-  #define HFXO_CLOAD_VAL0_Min (0xFFFFFFFFUL)         /*!< Min value of VAL0 field.                                             */
-  #define HFXO_CLOAD_VAL0_Max (0xFFFFFFFFUL)         /*!< Max size of VAL0 field.                                              */
 
 /* VAL1 @Bit 4 : Capacitive load value 1 */
   #define HFXO_CLOAD_VAL1_Pos (4UL)                  /*!< Position of VAL1 field.                                              */
@@ -59714,8 +59681,6 @@ typedef struct {
 /* VOLT @Bits 0..2 : Voltage amplitude setting for Pierce AREG mode */
   #define HFXO_AMPLITUDECTRL_VOLT_Pos (0UL)          /*!< Position of VOLT field.                                              */
   #define HFXO_AMPLITUDECTRL_VOLT_Msk (0x7UL << HFXO_AMPLITUDECTRL_VOLT_Pos) /*!< Bit mask of VOLT field.                      */
-  #define HFXO_AMPLITUDECTRL_VOLT_Min (0xFFFFFFFFUL) /*!< Min value of VOLT field.                                             */
-  #define HFXO_AMPLITUDECTRL_VOLT_Max (0xFFFFFFFFUL) /*!< Max size of VOLT field.                                              */
 
 
 /* HFXO_PWRUPCTRL: Power up control */
@@ -60954,8 +60919,7 @@ typedef struct {
   __IM  uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000004) Address of transaction that generated the last BUSERROR
                                                                          event.*/
 } NRF_I2S_CHANNEL_Type;                              /*!< Size = 8 (0x008)                                                     */
-  #define I2S_CHANNEL_MaxCount (2UL)                 /*!< Max size of CHANNEL[2] array.                                        */
-  #define I2S_CHANNEL_MinCount (0UL)                 /*!< Min size of CHANNEL[2] array.                                        */
+  #define I2S_CHANNEL_MaxCount (2UL)                 /*!< Size of CHANNEL[2] array.                                            */
   #define I2S_CHANNEL_MaxIndex (1UL)                 /*!< Max index of CHANNEL[2] array.                                       */
   #define I2S_CHANNEL_MinIndex (0UL)                 /*!< Min index of CHANNEL[2] array.                                       */
 
@@ -62183,8 +62147,7 @@ typedef struct {
   __IOM uint32_t  LOC3;                              /*!< (@ 0x00000008) Device Characteristic Table Location-3 of Device [n]  */
   __IOM uint32_t  LOC4;                              /*!< (@ 0x0000000C) Device Characteristic Table Location-4 of Device [n]  */
 } NRF_I3CCORE_CORE_DEVCHARTABLE_Type;                /*!< Size = 16 (0x010)                                                    */
-  #define I3CCORE_CORE_DEVCHARTABLE_MaxCount (10UL)  /*!< Max size of DEVCHARTABLE[10] array.                                  */
-  #define I3CCORE_CORE_DEVCHARTABLE_MinCount (0UL)   /*!< Min size of DEVCHARTABLE[10] array.                                  */
+  #define I3CCORE_CORE_DEVCHARTABLE_MaxCount (10UL)  /*!< Size of DEVCHARTABLE[10] array.                                      */
   #define I3CCORE_CORE_DEVCHARTABLE_MaxIndex (9UL)   /*!< Max index of DEVCHARTABLE[10] array.                                 */
   #define I3CCORE_CORE_DEVCHARTABLE_MinIndex (0UL)   /*!< Min index of DEVCHARTABLE[10] array.                                 */
 
@@ -62338,11 +62301,12 @@ typedef struct {
     __IOM NRF_I3CCORE_CORE_DEVCHARTABLE_Type DEVCHARTABLE[10]; /*!< (@ 0x00000200) (unspecified)                               */
     __IOM uint32_t SECDEVCHARTABLE[32];              /*!< (@ 0x00000200) Secondary Master Device Characteristic Table Location
                                                                          of Device [n]*/
+    __IM uint32_t RESERVED6[40];
   };
   #if defined(_GNUC_)
     #pragma GCC diagnostic pop
   #endif
-  __IM  uint32_t  RESERVED6[8];
+  __IM  uint32_t  RESERVED7[8];
   __IOM uint32_t  DEVADDRTABLELOC[10];               /*!< (@ 0x000002C0) Device Address Table of Device [n]                    */
 } NRF_I3CCORE_CORE_Type;                             /*!< Size = 744 (0x2E8)                                                   */
 
@@ -67363,8 +67327,7 @@ typedef struct {
   __IOM uint32_t  SINK;                              /*!< (@ 0x00000004) The IPCT sink configuration for the channel [n] to
                                                                          another ICPT.*/
 } NRF_IPCMAP_CHANNEL_Type;                           /*!< Size = 8 (0x008)                                                     */
-  #define IPCMAP_CHANNEL_MaxCount (16UL)             /*!< Max size of CHANNEL[16] array.                                       */
-  #define IPCMAP_CHANNEL_MinCount (0UL)              /*!< Min size of CHANNEL[16] array.                                       */
+  #define IPCMAP_CHANNEL_MaxCount (16UL)             /*!< Size of CHANNEL[16] array.                                           */
   #define IPCMAP_CHANNEL_MaxIndex (15UL)             /*!< Max index of CHANNEL[16] array.                                      */
   #define IPCMAP_CHANNEL_MinIndex (0UL)              /*!< Min index of CHANNEL[16] array.                                      */
 
@@ -76745,8 +76708,7 @@ typedef struct {
   __IOM uint32_t  SINK;                              /*!< (@ 0x00000000) The interrupt sink configuration for interrupt [n] to a
                                                                          domain.*/
 } NRF_IRQMAP_IRQ_Type;                               /*!< Size = 4 (0x004)                                                     */
-  #define IRQMAP_IRQ_MaxCount (480UL)                /*!< Max size of IRQ[480] array.                                          */
-  #define IRQMAP_IRQ_MinCount (0UL)                  /*!< Min size of IRQ[480] array.                                          */
+  #define IRQMAP_IRQ_MaxCount (480UL)                /*!< Size of IRQ[480] array.                                              */
   #define IRQMAP_IRQ_MaxIndex (479UL)                /*!< Max index of IRQ[480] array.                                         */
   #define IRQMAP_IRQ_MinIndex (0UL)                  /*!< Min index of IRQ[480] array.                                         */
 
@@ -76892,8 +76854,6 @@ typedef struct {
 /* VAL @Bits 0..5 : TRIM value */
   #define LFRC_CAL_LFRCOSCTRIM_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define LFRC_CAL_LFRCOSCTRIM_VAL_Msk (0x3FUL << LFRC_CAL_LFRCOSCTRIM_VAL_Pos) /*!< Bit mask of VAL field.                    */
-  #define LFRC_CAL_LFRCOSCTRIM_VAL_Min (0xFFFFFFECUL) /*!< Min value of VAL field.                                             */
-  #define LFRC_CAL_LFRCOSCTRIM_VAL_Max (0x9UL)       /*!< Max size of VAL field.                                               */
 
 
 
@@ -76983,8 +76943,6 @@ typedef struct {
 /* VAL @Bits 0..5 : TRIM value */
   #define LFRC_OVERRIDE_TRIM_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
   #define LFRC_OVERRIDE_TRIM_VAL_Msk (0x3FUL << LFRC_OVERRIDE_TRIM_VAL_Pos) /*!< Bit mask of VAL field.                        */
-  #define LFRC_OVERRIDE_TRIM_VAL_Min (0xFFFFFFECUL)  /*!< Min value of VAL field.                                              */
-  #define LFRC_OVERRIDE_TRIM_VAL_Max (0x9UL)         /*!< Max size of VAL field.                                               */
 
 /* EN @Bit 31 : Enable the override */
   #define LFRC_OVERRIDE_TRIM_EN_Pos (31UL)           /*!< Position of EN field.                                                */
@@ -77360,8 +77318,6 @@ typedef struct {
 /* VAL @Bits 0..5 : TRIM value */
   #define LFRC_STATUSTRIM_VAL_Pos (0UL)              /*!< Position of VAL field.                                               */
   #define LFRC_STATUSTRIM_VAL_Msk (0x3FUL << LFRC_STATUSTRIM_VAL_Pos) /*!< Bit mask of VAL field.                              */
-  #define LFRC_STATUSTRIM_VAL_Min (0xFFFFFFECUL)     /*!< Min value of VAL field.                                              */
-  #define LFRC_STATUSTRIM_VAL_Max (0x9UL)            /*!< Max size of VAL field.                                               */
 
 
 /* LFRC_STATUSANA: Status of analog module output signals */
@@ -77427,8 +77383,6 @@ typedef struct {
 /* VAL @Bits 0..4 : Peak detector lower threshold trimming value */
   #define LFXO_TRIM_PDLOWERTHR_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define LFXO_TRIM_PDLOWERTHR_VAL_Msk (0x1FUL << LFXO_TRIM_PDLOWERTHR_VAL_Pos) /*!< Bit mask of VAL field.                    */
-  #define LFXO_TRIM_PDLOWERTHR_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define LFXO_TRIM_PDLOWERTHR_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 /* LFXO_TRIM_PDUPPERTHR: Peak detector upper threshold trim */
@@ -77437,8 +77391,6 @@ typedef struct {
 /* VAL @Bits 0..4 : Peak detector upper threshold trimming value */
   #define LFXO_TRIM_PDUPPERTHR_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define LFXO_TRIM_PDUPPERTHR_VAL_Msk (0x1FUL << LFXO_TRIM_PDUPPERTHR_VAL_Pos) /*!< Bit mask of VAL field.                    */
-  #define LFXO_TRIM_PDUPPERTHR_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define LFXO_TRIM_PDUPPERTHR_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 /* LFXO_TRIM_BIAS: Internal bias generator trim */
@@ -77447,8 +77399,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Internal bias generator trim */
   #define LFXO_TRIM_BIAS_VAL_Pos (0UL)               /*!< Position of VAL field.                                               */
   #define LFXO_TRIM_BIAS_VAL_Msk (0xFUL << LFXO_TRIM_BIAS_VAL_Pos) /*!< Bit mask of VAL field.                                 */
-  #define LFXO_TRIM_BIAS_VAL_Min (0xFFFFFFFFUL)      /*!< Min value of VAL field.                                              */
-  #define LFXO_TRIM_BIAS_VAL_Max (0xFFFFFFFFUL)      /*!< Max size of VAL field.                                               */
 
 
 /* LFXO_TRIM_PIXO: PIXO high pulse supply trim */
@@ -77457,8 +77407,6 @@ typedef struct {
 /* VAL @Bits 0..4 : PIXO high pulse supply trim */
   #define LFXO_TRIM_PIXO_VAL_Pos (0UL)               /*!< Position of VAL field.                                               */
   #define LFXO_TRIM_PIXO_VAL_Msk (0x1FUL << LFXO_TRIM_PIXO_VAL_Pos) /*!< Bit mask of VAL field.                                */
-  #define LFXO_TRIM_PIXO_VAL_Min (0xFFFFFFFFUL)      /*!< Min value of VAL field.                                              */
-  #define LFXO_TRIM_PIXO_VAL_Max (0xFFFFFFFFUL)      /*!< Max size of VAL field.                                               */
 
 
 /* LFXO_TRIM_TRIMBUS: Reserved trim bus */
@@ -78219,8 +78167,6 @@ typedef struct {
 /* VAL0 @Bits 0..3 : Capacitive load value */
   #define LFXO_CLOAD_VAL0_Pos (0UL)                  /*!< Position of VAL0 field.                                              */
   #define LFXO_CLOAD_VAL0_Msk (0xFUL << LFXO_CLOAD_VAL0_Pos) /*!< Bit mask of VAL0 field.                                      */
-  #define LFXO_CLOAD_VAL0_Min (0xFFFFFFFFUL)         /*!< Min value of VAL0 field.                                             */
-  #define LFXO_CLOAD_VAL0_Max (0xFFFFFFFFUL)         /*!< Max size of VAL0 field.                                              */
 
 /* VAL1 @Bit 4 : Capacitive load value */
   #define LFXO_CLOAD_VAL1_Pos (4UL)                  /*!< Position of VAL1 field.                                              */
@@ -78989,8 +78935,7 @@ typedef struct {
                                                                          triggered for clock [n].*/
   __IOM uint32_t  SRC;                               /*!< (@ 0x00000004) Status indicating clock source for clock [n]          */
 } NRF_LRCCONF_CLKSTAT_Type;                          /*!< Size = 8 (0x008)                                                     */
-  #define LRCCONF_CLKSTAT_MaxCount (8UL)             /*!< Max size of CLKSTAT[8] array.                                        */
-  #define LRCCONF_CLKSTAT_MinCount (0UL)             /*!< Min size of CLKSTAT[8] array.                                        */
+  #define LRCCONF_CLKSTAT_MaxCount (8UL)             /*!< Size of CLKSTAT[8] array.                                            */
   #define LRCCONF_CLKSTAT_MaxIndex (7UL)             /*!< Max index of CLKSTAT[8] array.                                       */
   #define LRCCONF_CLKSTAT_MinIndex (0UL)             /*!< Min index of CLKSTAT[8] array.                                       */
 
@@ -79035,8 +78980,7 @@ typedef struct {
   __IOM uint32_t  ALWAYSRUN;                         /*!< (@ 0x00000000) Force the clock [n] and tree running always           */
   __IOM uint32_t  SRC;                               /*!< (@ 0x00000004) Select the clock source for clock [n]                 */
 } NRF_LRCCONF_CLKCTRL_Type;                          /*!< Size = 8 (0x008)                                                     */
-  #define LRCCONF_CLKCTRL_MaxCount (8UL)             /*!< Max size of CLKCTRL[8] array.                                        */
-  #define LRCCONF_CLKCTRL_MinCount (0UL)             /*!< Min size of CLKCTRL[8] array.                                        */
+  #define LRCCONF_CLKCTRL_MaxCount (8UL)             /*!< Size of CLKCTRL[8] array.                                            */
   #define LRCCONF_CLKCTRL_MaxIndex (7UL)             /*!< Max index of CLKCTRL[8] array.                                       */
   #define LRCCONF_CLKCTRL_MinIndex (0UL)             /*!< Min index of CLKCTRL[8] array.                                       */
 
@@ -79531,8 +79475,6 @@ typedef struct {
 /* VAL @Bits 0..4 : IBPSR current and VREF voltage trimming value */
   #define MBIAS_TRIM_MBIASIBPSR_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
   #define MBIAS_TRIM_MBIASIBPSR_VAL_Msk (0x1FUL << MBIAS_TRIM_MBIASIBPSR_VAL_Pos) /*!< Bit mask of VAL field.                  */
-  #define MBIAS_TRIM_MBIASIBPSR_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                            */
-  #define MBIAS_TRIM_MBIASIBPSR_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                             */
 
 
 
@@ -80175,26 +80117,18 @@ typedef struct {
 /* DSJW @Bits 0..3 : Data (Re)Synchronization Jump Width */
   #define MCAN_DBTP_DSJW_Pos (0UL)                   /*!< Position of DSJW field.                                              */
   #define MCAN_DBTP_DSJW_Msk (0xFUL << MCAN_DBTP_DSJW_Pos) /*!< Bit mask of DSJW field.                                        */
-  #define MCAN_DBTP_DSJW_Min (0xFFFFFFFFUL)          /*!< Min value of DSJW field.                                             */
-  #define MCAN_DBTP_DSJW_Max (0xFFFFFFFFUL)          /*!< Max size of DSJW field.                                              */
 
 /* DTSEG2 @Bits 4..7 : Data time segment after sample point */
   #define MCAN_DBTP_DTSEG2_Pos (4UL)                 /*!< Position of DTSEG2 field.                                            */
   #define MCAN_DBTP_DTSEG2_Msk (0xFUL << MCAN_DBTP_DTSEG2_Pos) /*!< Bit mask of DTSEG2 field.                                  */
-  #define MCAN_DBTP_DTSEG2_Min (0xFFFFFFFFUL)        /*!< Min value of DTSEG2 field.                                           */
-  #define MCAN_DBTP_DTSEG2_Max (0xFFFFFFFFUL)        /*!< Max size of DTSEG2 field.                                            */
 
 /* DTSEG1 @Bits 8..12 : Data time segment before sample point */
   #define MCAN_DBTP_DTSEG1_Pos (8UL)                 /*!< Position of DTSEG1 field.                                            */
   #define MCAN_DBTP_DTSEG1_Msk (0x1FUL << MCAN_DBTP_DTSEG1_Pos) /*!< Bit mask of DTSEG1 field.                                 */
-  #define MCAN_DBTP_DTSEG1_Min (0xFFFFFFFFUL)        /*!< Min value of DTSEG1 field.                                           */
-  #define MCAN_DBTP_DTSEG1_Max (0xFFFFFFFFUL)        /*!< Max size of DTSEG1 field.                                            */
 
 /* DBRP @Bits 16..20 : Data Bit Rate Prescaler */
   #define MCAN_DBTP_DBRP_Pos (16UL)                  /*!< Position of DBRP field.                                              */
   #define MCAN_DBTP_DBRP_Msk (0x1FUL << MCAN_DBTP_DBRP_Pos) /*!< Bit mask of DBRP field.                                       */
-  #define MCAN_DBTP_DBRP_Min (0xFFFFFFFFUL)          /*!< Min value of DBRP field.                                             */
-  #define MCAN_DBTP_DBRP_Max (0xFFFFFFFFUL)          /*!< Max size of DBRP field.                                              */
 
 /* TDC @Bit 23 : Transmitter Delay Compensation */
   #define MCAN_DBTP_TDC_Pos (23UL)                   /*!< Position of TDC field.                                               */
@@ -80237,8 +80171,6 @@ typedef struct {
 /* TXBNP @Bits 8..12 : Tx Buffer Number Prepared */
   #define MCAN_TEST_TXBNP_Pos (8UL)                  /*!< Position of TXBNP field.                                             */
   #define MCAN_TEST_TXBNP_Msk (0x1FUL << MCAN_TEST_TXBNP_Pos) /*!< Bit mask of TXBNP field.                                    */
-  #define MCAN_TEST_TXBNP_Min (0xFFFFFFFFUL)         /*!< Min value of TXBNP field.                                            */
-  #define MCAN_TEST_TXBNP_Max (0xFFFFFFFFUL)         /*!< Max size of TXBNP field.                                             */
 
 /* PVAL @Bit 13 : Prepared Valid */
   #define MCAN_TEST_PVAL_Pos (13UL)                  /*!< Position of PVAL field.                                              */
@@ -80251,8 +80183,6 @@ typedef struct {
 /* TXBNS @Bits 16..20 : Tx Buffer Number Started */
   #define MCAN_TEST_TXBNS_Pos (16UL)                 /*!< Position of TXBNS field.                                             */
   #define MCAN_TEST_TXBNS_Msk (0x1FUL << MCAN_TEST_TXBNS_Pos) /*!< Bit mask of TXBNS field.                                    */
-  #define MCAN_TEST_TXBNS_Min (0xFFFFFFFFUL)         /*!< Min value of TXBNS field.                                            */
-  #define MCAN_TEST_TXBNS_Max (0xFFFFFFFFUL)         /*!< Max size of TXBNS field.                                             */
 
 /* SVAL @Bit 21 : Started Valid */
   #define MCAN_TEST_SVAL_Pos (21UL)                  /*!< Position of SVAL field.                                              */
@@ -80417,26 +80347,18 @@ typedef struct {
 /* NTSEG2 @Bits 0..6 : Nominal Time segment after sample point */
   #define MCAN_NBTP_NTSEG2_Pos (0UL)                 /*!< Position of NTSEG2 field.                                            */
   #define MCAN_NBTP_NTSEG2_Msk (0x7FUL << MCAN_NBTP_NTSEG2_Pos) /*!< Bit mask of NTSEG2 field.                                 */
-  #define MCAN_NBTP_NTSEG2_Min (0xFFFFFFFFUL)        /*!< Min value of NTSEG2 field.                                           */
-  #define MCAN_NBTP_NTSEG2_Max (0xFFFFFFFFUL)        /*!< Max size of NTSEG2 field.                                            */
 
 /* NTSEG1 @Bits 8..15 : Nominal Time segment before sample point */
   #define MCAN_NBTP_NTSEG1_Pos (8UL)                 /*!< Position of NTSEG1 field.                                            */
   #define MCAN_NBTP_NTSEG1_Msk (0xFFUL << MCAN_NBTP_NTSEG1_Pos) /*!< Bit mask of NTSEG1 field.                                 */
-  #define MCAN_NBTP_NTSEG1_Min (0xFFFFFFFFUL)        /*!< Min value of NTSEG1 field.                                           */
-  #define MCAN_NBTP_NTSEG1_Max (0xFFFFFFFFUL)        /*!< Max size of NTSEG1 field.                                            */
 
 /* NBRP @Bits 16..24 : Nominal Bit Rate Prescaler */
   #define MCAN_NBTP_NBRP_Pos (16UL)                  /*!< Position of NBRP field.                                              */
   #define MCAN_NBTP_NBRP_Msk (0x1FFUL << MCAN_NBTP_NBRP_Pos) /*!< Bit mask of NBRP field.                                      */
-  #define MCAN_NBTP_NBRP_Min (0xFFFFFFFFUL)          /*!< Min value of NBRP field.                                             */
-  #define MCAN_NBTP_NBRP_Max (0xFFFFFFFFUL)          /*!< Max size of NBRP field.                                              */
 
 /* NSJW @Bits 25..31 : Nominal (Re)Synchronization Jump Width */
   #define MCAN_NBTP_NSJW_Pos (25UL)                  /*!< Position of NSJW field.                                              */
   #define MCAN_NBTP_NSJW_Msk (0x7FUL << MCAN_NBTP_NSJW_Pos) /*!< Bit mask of NSJW field.                                       */
-  #define MCAN_NBTP_NSJW_Min (0xFFFFFFFFUL)          /*!< Min value of NSJW field.                                             */
-  #define MCAN_NBTP_NSJW_Max (0xFFFFFFFFUL)          /*!< Max size of NSJW field.                                              */
 
 
 /* MCAN_TSCC: Timestamp Counter Configuration */
@@ -80455,8 +80377,6 @@ typedef struct {
 /* TCP @Bits 16..19 : Timestamp Counter Prescaler */
   #define MCAN_TSCC_TCP_Pos (16UL)                   /*!< Position of TCP field.                                               */
   #define MCAN_TSCC_TCP_Msk (0xFUL << MCAN_TSCC_TCP_Pos) /*!< Bit mask of TCP field.                                           */
-  #define MCAN_TSCC_TCP_Min (0xFFFFFFFFUL)           /*!< Min value of TCP field.                                              */
-  #define MCAN_TSCC_TCP_Max (0xFFFFFFFFUL)           /*!< Max size of TCP field.                                               */
 
 
 /* MCAN_TSCV: Timestamp Counter Value */
@@ -80636,8 +80556,6 @@ typedef struct {
 /* TDCV @Bits 16..22 : Transmitter Delay Compensation Value */
   #define MCAN_PSR_TDCV_Pos (16UL)                   /*!< Position of TDCV field.                                              */
   #define MCAN_PSR_TDCV_Msk (0x7FUL << MCAN_PSR_TDCV_Pos) /*!< Bit mask of TDCV field.                                         */
-  #define MCAN_PSR_TDCV_Min (0xFFFFFFFFUL)           /*!< Min value of TDCV field.                                             */
-  #define MCAN_PSR_TDCV_Max (0xFFFFFFFFUL)           /*!< Max size of TDCV field.                                              */
 
 
 /* MCAN_TDCR: Transmitter Delay Compensation Register */
@@ -80646,14 +80564,10 @@ typedef struct {
 /* TDCF @Bits 0..6 : Transmitter Delay Compensation Filter Window Length */
   #define MCAN_TDCR_TDCF_Pos (0UL)                   /*!< Position of TDCF field.                                              */
   #define MCAN_TDCR_TDCF_Msk (0x7FUL << MCAN_TDCR_TDCF_Pos) /*!< Bit mask of TDCF field.                                       */
-  #define MCAN_TDCR_TDCF_Min (0xFFFFFFFFUL)          /*!< Min value of TDCF field.                                             */
-  #define MCAN_TDCR_TDCF_Max (0xFFFFFFFFUL)          /*!< Max size of TDCF field.                                              */
 
 /* TDCO @Bits 8..14 : Transmitter Delay Compensation SSP Offset */
   #define MCAN_TDCR_TDCO_Pos (8UL)                   /*!< Position of TDCO field.                                              */
   #define MCAN_TDCR_TDCO_Msk (0x7FUL << MCAN_TDCR_TDCO_Pos) /*!< Bit mask of TDCO field.                                       */
-  #define MCAN_TDCR_TDCO_Min (0xFFFFFFFFUL)          /*!< Min value of TDCO field.                                             */
-  #define MCAN_TDCR_TDCO_Max (0xFFFFFFFFUL)          /*!< Max size of TDCO field.                                              */
 
 
 /* MCAN_IR: Interrupt Register */
@@ -81491,8 +81405,6 @@ typedef struct {
 /* LSS @Bits 16..23 : List Size Standard */
   #define MCAN_SIDFC_LSS_Pos (16UL)                  /*!< Position of LSS field.                                               */
   #define MCAN_SIDFC_LSS_Msk (0xFFUL << MCAN_SIDFC_LSS_Pos) /*!< Bit mask of LSS field.                                        */
-  #define MCAN_SIDFC_LSS_Min (0xFFFFFFFFUL)          /*!< Min value of LSS field.                                              */
-  #define MCAN_SIDFC_LSS_Max (0xFFFFFFFFUL)          /*!< Max size of LSS field.                                               */
 
 
 /* MCAN_XIDFC: Extended ID Filter Configuration */
@@ -81505,8 +81417,6 @@ typedef struct {
 /* LSE @Bits 16..22 : List Size Extended */
   #define MCAN_XIDFC_LSE_Pos (16UL)                  /*!< Position of LSE field.                                               */
   #define MCAN_XIDFC_LSE_Msk (0x7FUL << MCAN_XIDFC_LSE_Pos) /*!< Bit mask of LSE field.                                        */
-  #define MCAN_XIDFC_LSE_Min (0xFFFFFFFFUL)          /*!< Min value of LSE field.                                              */
-  #define MCAN_XIDFC_LSE_Max (0xFFFFFFFFUL)          /*!< Max size of LSE field.                                               */
 
 
 /* MCAN_XIDAM: Extended ID AND Mask */
@@ -81581,14 +81491,10 @@ typedef struct {
 /* F0S @Bits 16..22 : Rx FIFO 0 Size */
   #define MCAN_RXF0C_F0S_Pos (16UL)                  /*!< Position of F0S field.                                               */
   #define MCAN_RXF0C_F0S_Msk (0x7FUL << MCAN_RXF0C_F0S_Pos) /*!< Bit mask of F0S field.                                        */
-  #define MCAN_RXF0C_F0S_Min (0xFFFFFFFFUL)          /*!< Min value of F0S field.                                              */
-  #define MCAN_RXF0C_F0S_Max (0xFFFFFFFFUL)          /*!< Max size of F0S field.                                               */
 
 /* F0WM @Bits 24..30 : Rx FIFO 0 Watermark */
   #define MCAN_RXF0C_F0WM_Pos (24UL)                 /*!< Position of F0WM field.                                              */
   #define MCAN_RXF0C_F0WM_Msk (0x7FUL << MCAN_RXF0C_F0WM_Pos) /*!< Bit mask of F0WM field.                                     */
-  #define MCAN_RXF0C_F0WM_Min (0xFFFFFFFFUL)         /*!< Min value of F0WM field.                                             */
-  #define MCAN_RXF0C_F0WM_Max (0xFFFFFFFFUL)         /*!< Max size of F0WM field.                                              */
 
 /* F0OM @Bit 31 : FIFO 0 Operation Mode */
   #define MCAN_RXF0C_F0OM_Pos (31UL)                 /*!< Position of F0OM field.                                              */
@@ -81658,14 +81564,10 @@ typedef struct {
 /* F1S @Bits 16..22 : Rx FIFO 1 Size */
   #define MCAN_RXF1C_F1S_Pos (16UL)                  /*!< Position of F1S field.                                               */
   #define MCAN_RXF1C_F1S_Msk (0x7FUL << MCAN_RXF1C_F1S_Pos) /*!< Bit mask of F1S field.                                        */
-  #define MCAN_RXF1C_F1S_Min (0xFFFFFFFFUL)          /*!< Min value of F1S field.                                              */
-  #define MCAN_RXF1C_F1S_Max (0xFFFFFFFFUL)          /*!< Max size of F1S field.                                               */
 
 /* F1WM @Bits 24..30 : Rx FIFO 1 Watermark */
   #define MCAN_RXF1C_F1WM_Pos (24UL)                 /*!< Position of F1WM field.                                              */
   #define MCAN_RXF1C_F1WM_Msk (0x7FUL << MCAN_RXF1C_F1WM_Pos) /*!< Bit mask of F1WM field.                                     */
-  #define MCAN_RXF1C_F1WM_Min (0xFFFFFFFFUL)         /*!< Min value of F1WM field.                                             */
-  #define MCAN_RXF1C_F1WM_Max (0xFFFFFFFFUL)         /*!< Max size of F1WM field.                                              */
 
 /* F1OM @Bit 31 : FIFO 1 Operation Mode */
   #define MCAN_RXF1C_F1OM_Pos (31UL)                 /*!< Position of F1OM field.                                              */
@@ -81682,20 +81584,14 @@ typedef struct {
 /* F1FL @Bits 0..6 : Rx FIFO 1 Fill Level */
   #define MCAN_RXF1S_F1FL_Pos (0UL)                  /*!< Position of F1FL field.                                              */
   #define MCAN_RXF1S_F1FL_Msk (0x7FUL << MCAN_RXF1S_F1FL_Pos) /*!< Bit mask of F1FL field.                                     */
-  #define MCAN_RXF1S_F1FL_Min (0xFFFFFFFFUL)         /*!< Min value of F1FL field.                                             */
-  #define MCAN_RXF1S_F1FL_Max (0xFFFFFFFFUL)         /*!< Max size of F1FL field.                                              */
 
 /* F1GI @Bits 8..13 : Rx FIFO 1 Get Index */
   #define MCAN_RXF1S_F1GI_Pos (8UL)                  /*!< Position of F1GI field.                                              */
   #define MCAN_RXF1S_F1GI_Msk (0x3FUL << MCAN_RXF1S_F1GI_Pos) /*!< Bit mask of F1GI field.                                     */
-  #define MCAN_RXF1S_F1GI_Min (0xFFFFFFFFUL)         /*!< Min value of F1GI field.                                             */
-  #define MCAN_RXF1S_F1GI_Max (0xFFFFFFFFUL)         /*!< Max size of F1GI field.                                              */
 
 /* F1PI @Bits 16..21 : Rx FIFO 1 Put Index */
   #define MCAN_RXF1S_F1PI_Pos (16UL)                 /*!< Position of F1PI field.                                              */
   #define MCAN_RXF1S_F1PI_Msk (0x3FUL << MCAN_RXF1S_F1PI_Pos) /*!< Bit mask of F1PI field.                                     */
-  #define MCAN_RXF1S_F1PI_Min (0xFFFFFFFFUL)         /*!< Min value of F1PI field.                                             */
-  #define MCAN_RXF1S_F1PI_Max (0xFFFFFFFFUL)         /*!< Max size of F1PI field.                                              */
 
 /* F1F @Bit 24 : Rx FIFO 1 Full */
   #define MCAN_RXF1S_F1F_Pos (24UL)                  /*!< Position of F1F field.                                               */
@@ -81790,14 +81686,10 @@ typedef struct {
 /* NDTB @Bits 16..21 : Number of Dedicated Transmit Buffers */
   #define MCAN_TXBC_NDTB_Pos (16UL)                  /*!< Position of NDTB field.                                              */
   #define MCAN_TXBC_NDTB_Msk (0x3FUL << MCAN_TXBC_NDTB_Pos) /*!< Bit mask of NDTB field.                                       */
-  #define MCAN_TXBC_NDTB_Min (0xFFFFFFFFUL)          /*!< Min value of NDTB field.                                             */
-  #define MCAN_TXBC_NDTB_Max (0xFFFFFFFFUL)          /*!< Max size of NDTB field.                                              */
 
 /* TFQS @Bits 24..29 : Transmit FIFO/Queue Size */
   #define MCAN_TXBC_TFQS_Pos (24UL)                  /*!< Position of TFQS field.                                              */
   #define MCAN_TXBC_TFQS_Msk (0x3FUL << MCAN_TXBC_TFQS_Pos) /*!< Bit mask of TFQS field.                                       */
-  #define MCAN_TXBC_TFQS_Min (0xFFFFFFFFUL)          /*!< Min value of TFQS field.                                             */
-  #define MCAN_TXBC_TFQS_Max (0xFFFFFFFFUL)          /*!< Max size of TFQS field.                                              */
 
 /* TFQM @Bit 30 : Tx FIFO/Queue Mode */
   #define MCAN_TXBC_TFQM_Pos (30UL)                  /*!< Position of TFQM field.                                              */
@@ -81814,20 +81706,14 @@ typedef struct {
 /* TFFL @Bits 0..5 : Tx FIFO Free Level */
   #define MCAN_TXFQS_TFFL_Pos (0UL)                  /*!< Position of TFFL field.                                              */
   #define MCAN_TXFQS_TFFL_Msk (0x3FUL << MCAN_TXFQS_TFFL_Pos) /*!< Bit mask of TFFL field.                                     */
-  #define MCAN_TXFQS_TFFL_Min (0xFFFFFFFFUL)         /*!< Min value of TFFL field.                                             */
-  #define MCAN_TXFQS_TFFL_Max (0xFFFFFFFFUL)         /*!< Max size of TFFL field.                                              */
 
 /* TFGI @Bits 8..12 : Tx FIFO Get Index */
   #define MCAN_TXFQS_TFGI_Pos (8UL)                  /*!< Position of TFGI field.                                              */
   #define MCAN_TXFQS_TFGI_Msk (0x1FUL << MCAN_TXFQS_TFGI_Pos) /*!< Bit mask of TFGI field.                                     */
-  #define MCAN_TXFQS_TFGI_Min (0xFFFFFFFFUL)         /*!< Min value of TFGI field.                                             */
-  #define MCAN_TXFQS_TFGI_Max (0xFFFFFFFFUL)         /*!< Max size of TFGI field.                                              */
 
 /* TFQPI @Bits 16..20 : Tx FIFO/Queue Put Index */
   #define MCAN_TXFQS_TFQPI_Pos (16UL)                /*!< Position of TFQPI field.                                             */
   #define MCAN_TXFQS_TFQPI_Msk (0x1FUL << MCAN_TXFQS_TFQPI_Pos) /*!< Bit mask of TFQPI field.                                  */
-  #define MCAN_TXFQS_TFQPI_Min (0xFFFFFFFFUL)        /*!< Min value of TFQPI field.                                            */
-  #define MCAN_TXFQS_TFQPI_Max (0xFFFFFFFFUL)        /*!< Max size of TFQPI field.                                             */
 
 /* TFQF @Bit 21 : Tx FIFO/Queue Full */
   #define MCAN_TXFQS_TFQF_Pos (21UL)                 /*!< Position of TFQF field.                                              */
@@ -81950,14 +81836,10 @@ typedef struct {
 /* EFS @Bits 16..21 : Event FIFO Size */
   #define MCAN_TXEFC_EFS_Pos (16UL)                  /*!< Position of EFS field.                                               */
   #define MCAN_TXEFC_EFS_Msk (0x3FUL << MCAN_TXEFC_EFS_Pos) /*!< Bit mask of EFS field.                                        */
-  #define MCAN_TXEFC_EFS_Min (0xFFFFFFFFUL)          /*!< Min value of EFS field.                                              */
-  #define MCAN_TXEFC_EFS_Max (0xFFFFFFFFUL)          /*!< Max size of EFS field.                                               */
 
 /* EFWM @Bits 24..29 : Event FIFO Watermark */
   #define MCAN_TXEFC_EFWM_Pos (24UL)                 /*!< Position of EFWM field.                                              */
   #define MCAN_TXEFC_EFWM_Msk (0x3FUL << MCAN_TXEFC_EFWM_Pos) /*!< Bit mask of EFWM field.                                     */
-  #define MCAN_TXEFC_EFWM_Min (0xFFFFFFFFUL)         /*!< Min value of EFWM field.                                             */
-  #define MCAN_TXEFC_EFWM_Max (0xFFFFFFFFUL)         /*!< Max size of EFWM field.                                              */
 
 
 /* MCAN_TXEFS: Tx Event FIFO Status */
@@ -81966,20 +81848,14 @@ typedef struct {
 /* EFFL @Bits 0..5 : Event FIFO Fill Level */
   #define MCAN_TXEFS_EFFL_Pos (0UL)                  /*!< Position of EFFL field.                                              */
   #define MCAN_TXEFS_EFFL_Msk (0x3FUL << MCAN_TXEFS_EFFL_Pos) /*!< Bit mask of EFFL field.                                     */
-  #define MCAN_TXEFS_EFFL_Min (0xFFFFFFFFUL)         /*!< Min value of EFFL field.                                             */
-  #define MCAN_TXEFS_EFFL_Max (0xFFFFFFFFUL)         /*!< Max size of EFFL field.                                              */
 
 /* EFGI @Bits 8..12 : Event FIFO Get Index */
   #define MCAN_TXEFS_EFGI_Pos (8UL)                  /*!< Position of EFGI field.                                              */
   #define MCAN_TXEFS_EFGI_Msk (0x1FUL << MCAN_TXEFS_EFGI_Pos) /*!< Bit mask of EFGI field.                                     */
-  #define MCAN_TXEFS_EFGI_Min (0xFFFFFFFFUL)         /*!< Min value of EFGI field.                                             */
-  #define MCAN_TXEFS_EFGI_Max (0xFFFFFFFFUL)         /*!< Max size of EFGI field.                                              */
 
 /* EFPI @Bits 16..20 : Event FIFO Put Index */
   #define MCAN_TXEFS_EFPI_Pos (16UL)                 /*!< Position of EFPI field.                                              */
   #define MCAN_TXEFS_EFPI_Msk (0x1FUL << MCAN_TXEFS_EFPI_Pos) /*!< Bit mask of EFPI field.                                     */
-  #define MCAN_TXEFS_EFPI_Min (0xFFFFFFFFUL)         /*!< Min value of EFPI field.                                             */
-  #define MCAN_TXEFS_EFPI_Max (0xFFFFFFFFUL)         /*!< Max size of EFPI field.                                              */
 
 /* EFF @Bit 24 : Event FIFO Full */
   #define MCAN_TXEFS_EFF_Pos (24UL)                  /*!< Position of EFF field.                                               */
@@ -82884,8 +82760,7 @@ typedef struct {
   __IOM uint32_t  RET;                               /*!< (@ 0x00000008) RAM retention for RAM [n].                            */
   __IOM uint32_t  RET2;                              /*!< (@ 0x0000000C) RAM retention for the second bank in the RAM block    */
 } NRF_MEMCONF_POWER_Type;                            /*!< Size = 16 (0x010)                                                    */
-  #define MEMCONF_POWER_MaxCount (2UL)               /*!< Max size of POWER[2] array.                                          */
-  #define MEMCONF_POWER_MinCount (0UL)               /*!< Min size of POWER[2] array.                                          */
+  #define MEMCONF_POWER_MaxCount (2UL)               /*!< Size of POWER[2] array.                                              */
   #define MEMCONF_POWER_MaxIndex (1UL)               /*!< Max index of POWER[2] array.                                         */
   #define MEMCONF_POWER_MinIndex (0UL)               /*!< Min index of POWER[2] array.                                         */
 
@@ -83677,8 +83552,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  BITLINE;                           /*!< (@ 0x00000000) Repair configuration for RAM blocks.                  */
 } NRF_MEMCONF_REPAIR_Type;                           /*!< Size = 4 (0x004)                                                     */
-  #define MEMCONF_REPAIR_MaxCount (192UL)            /*!< Max size of REPAIR[192] array.                                       */
-  #define MEMCONF_REPAIR_MinCount (0UL)              /*!< Min size of REPAIR[192] array.                                       */
+  #define MEMCONF_REPAIR_MaxCount (192UL)            /*!< Size of REPAIR[192] array.                                           */
   #define MEMCONF_REPAIR_MaxIndex (191UL)            /*!< Max index of REPAIR[192] array.                                      */
   #define MEMCONF_REPAIR_MinIndex (0UL)              /*!< Min index of REPAIR[192] array.                                      */
 
@@ -83706,8 +83580,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim configuration for the RAM/ROM block types.       */
 } NRF_MEMCONF_BLOCKTYPE_Type;                        /*!< Size = 4 (0x004)                                                     */
-  #define MEMCONF_BLOCKTYPE_MaxCount (64UL)          /*!< Max size of BLOCKTYPE[64] array.                                     */
-  #define MEMCONF_BLOCKTYPE_MinCount (0UL)           /*!< Min size of BLOCKTYPE[64] array.                                     */
+  #define MEMCONF_BLOCKTYPE_MaxCount (64UL)          /*!< Size of BLOCKTYPE[64] array.                                         */
   #define MEMCONF_BLOCKTYPE_MaxIndex (63UL)          /*!< Max index of BLOCKTYPE[64] array.                                    */
   #define MEMCONF_BLOCKTYPE_MinIndex (0UL)           /*!< Min index of BLOCKTYPE[64] array.                                    */
 
@@ -84291,8 +84164,7 @@ typedef struct {
                                                                          against the STARTADDR*/
   __IOM uint32_t  MASTERPORT;                        /*!< (@ 0x0000000C) Region n local master enable                          */
 } NRF_MPC_REGION_Type;                               /*!< Size = 16 (0x010)                                                    */
-  #define MPC_REGION_MaxCount (32UL)                 /*!< Max size of REGION[32] array.                                        */
-  #define MPC_REGION_MinCount (0UL)                  /*!< Min size of REGION[32] array.                                        */
+  #define MPC_REGION_MaxCount (32UL)                 /*!< Size of REGION[32] array.                                            */
   #define MPC_REGION_MaxIndex (31UL)                 /*!< Max index of REGION[32] array.                                       */
   #define MPC_REGION_MinIndex (0UL)                  /*!< Min index of REGION[32] array.                                       */
 
@@ -84651,8 +84523,7 @@ typedef struct {
   __IOM uint32_t  OWNER;                             /*!< (@ 0x00000018) Owner for override region                             */
   __IOM uint32_t  MASTERPORT;                        /*!< (@ 0x0000001C) Override region n local master enable                 */
 } NRF_MPC_OVERRIDE_Type;                             /*!< Size = 32 (0x020)                                                    */
-  #define MPC_OVERRIDE_MaxCount (40UL)               /*!< Max size of OVERRIDE[40] array.                                      */
-  #define MPC_OVERRIDE_MinCount (0UL)                /*!< Min size of OVERRIDE[40] array.                                      */
+  #define MPC_OVERRIDE_MaxCount (40UL)               /*!< Size of OVERRIDE[40] array.                                          */
   #define MPC_OVERRIDE_MaxIndex (39UL)               /*!< Max index of OVERRIDE[40] array.                                     */
   #define MPC_OVERRIDE_MinIndex (0UL)                /*!< Min index of OVERRIDE[40] array.                                     */
 
@@ -90779,8 +90650,7 @@ typedef struct {
                                                                          [n].*/
   __IOM uint32_t  REVOKE[3];                         /*!< (@ 0x00000020) Revocation status of public key [n].                  */
 } NRF_OICR_USER_PUBKEY_Type;                         /*!< Size = 44 (0x02C)                                                    */
-  #define OICR_USER_PUBKEY_MaxCount (4UL)            /*!< Max size of PUBKEY[4] array.                                         */
-  #define OICR_USER_PUBKEY_MinCount (0UL)            /*!< Min size of PUBKEY[4] array.                                         */
+  #define OICR_USER_PUBKEY_MaxCount (4UL)            /*!< Size of PUBKEY[4] array.                                             */
   #define OICR_USER_PUBKEY_MaxIndex (3UL)            /*!< Max index of PUBKEY[4] array.                                        */
   #define OICR_USER_PUBKEY_MinIndex (0UL)            /*!< Min index of PUBKEY[4] array.                                        */
 
@@ -90820,8 +90690,7 @@ typedef struct {
                                                                          authentication key [n].*/
   __IOM uint32_t  REVOKE[3];                         /*!< (@ 0x00000020) Revocation status of authentication key [n].          */
 } NRF_OICR_USER_AUTHOPKEY_Type;                      /*!< Size = 44 (0x02C)                                                    */
-  #define OICR_USER_AUTHOPKEY_MaxCount (4UL)         /*!< Max size of AUTHOPKEY[4] array.                                      */
-  #define OICR_USER_AUTHOPKEY_MinCount (0UL)         /*!< Min size of AUTHOPKEY[4] array.                                      */
+  #define OICR_USER_AUTHOPKEY_MaxCount (4UL)         /*!< Size of AUTHOPKEY[4] array.                                          */
   #define OICR_USER_AUTHOPKEY_MaxIndex (3UL)         /*!< Max index of AUTHOPKEY[4] array.                                     */
   #define OICR_USER_AUTHOPKEY_MinIndex (0UL)         /*!< Min index of AUTHOPKEY[4] array.                                     */
 
@@ -90884,8 +90753,7 @@ typedef struct {
                                                                          [n].*/
   __IOM uint32_t  REVOKE[3];                         /*!< (@ 0x00000020) Revocation status of public key [n].                  */
 } NRF_OICR_NORDIC_PUBKEY_Type;                       /*!< Size = 44 (0x02C)                                                    */
-  #define OICR_NORDIC_PUBKEY_MaxCount (4UL)          /*!< Max size of PUBKEY[4] array.                                         */
-  #define OICR_NORDIC_PUBKEY_MinCount (0UL)          /*!< Min size of PUBKEY[4] array.                                         */
+  #define OICR_NORDIC_PUBKEY_MaxCount (4UL)          /*!< Size of PUBKEY[4] array.                                             */
   #define OICR_NORDIC_PUBKEY_MaxIndex (3UL)          /*!< Max index of PUBKEY[4] array.                                        */
   #define OICR_NORDIC_PUBKEY_MinIndex (0UL)          /*!< Min index of PUBKEY[4] array.                                        */
 
@@ -90926,8 +90794,7 @@ typedef struct {
                                                                          authentication key [n].*/
   __IOM uint32_t  REVOKE[3];                         /*!< (@ 0x00000020) Revocation status of authentication key [n].          */
 } NRF_OICR_NORDIC_AUTHOPKEY_Type;                    /*!< Size = 44 (0x02C)                                                    */
-  #define OICR_NORDIC_AUTHOPKEY_MaxCount (4UL)       /*!< Max size of AUTHOPKEY[4] array.                                      */
-  #define OICR_NORDIC_AUTHOPKEY_MinCount (0UL)       /*!< Min size of AUTHOPKEY[4] array.                                      */
+  #define OICR_NORDIC_AUTHOPKEY_MaxCount (4UL)       /*!< Size of AUTHOPKEY[4] array.                                          */
   #define OICR_NORDIC_AUTHOPKEY_MaxIndex (3UL)       /*!< Max index of AUTHOPKEY[4] array.                                     */
   #define OICR_NORDIC_AUTHOPKEY_MinIndex (0UL)       /*!< Min index of AUTHOPKEY[4] array.                                     */
 
@@ -90976,8 +90843,7 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  VALUE[8];                          /*!< (@ 0x00000000) Value for the CRACEN KEY[n].                          */
 } NRF_OICR_CRACEN_KEY_Type;                          /*!< Size = 32 (0x020)                                                    */
-  #define OICR_CRACEN_KEY_MaxCount (4UL)             /*!< Max size of KEY[4] array.                                            */
-  #define OICR_CRACEN_KEY_MinCount (0UL)             /*!< Min size of KEY[4] array.                                            */
+  #define OICR_CRACEN_KEY_MaxCount (4UL)             /*!< Size of KEY[4] array.                                                */
   #define OICR_CRACEN_KEY_MaxIndex (3UL)             /*!< Max index of KEY[4] array.                                           */
   #define OICR_CRACEN_KEY_MinIndex (0UL)             /*!< Min index of KEY[4] array.                                           */
 
@@ -91176,8 +91042,7 @@ typedef struct {
                                                                          MRAM[n].*/
   __IM  uint32_t  CONFIG[12];                        /*!< (@ 0x0000001C) MRAM[n] trim configuration.                           */
 } NRF_OICR_MRAM_Type;                                /*!< Size = 76 (0x04C)                                                    */
-  #define OICR_MRAM_MaxCount (2UL)                   /*!< Max size of MRAM[2] array.                                           */
-  #define OICR_MRAM_MinCount (0UL)                   /*!< Min size of MRAM[2] array.                                           */
+  #define OICR_MRAM_MaxCount (2UL)                   /*!< Size of MRAM[2] array.                                               */
   #define OICR_MRAM_MaxIndex (1UL)                   /*!< Max index of MRAM[2] array.                                          */
   #define OICR_MRAM_MinIndex (0UL)                   /*!< Min index of MRAM[2] array.                                          */
 
@@ -91374,8 +91239,6 @@ typedef struct {
 /* VAL @Bits 0..3 : IBPSR current and VREF voltage trimming value */
   #define OSCRFR_TRIM_IBPSR_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
   #define OSCRFR_TRIM_IBPSR_VAL_Msk (0xFUL << OSCRFR_TRIM_IBPSR_VAL_Pos) /*!< Bit mask of VAL field.                           */
-  #define OSCRFR_TRIM_IBPSR_VAL_Min (0xFFFFFFFFUL)   /*!< Min value of VAL field.                                              */
-  #define OSCRFR_TRIM_IBPSR_VAL_Max (0xFFFFFFFFUL)   /*!< Max size of VAL field.                                               */
 
 
 
@@ -97251,8 +97114,7 @@ typedef struct {
   __IOM uint32_t  OPPOINT;                           /*!< (@ 0x00000004) Select ABB operating point for ABB domain [n]         */
   __IOM uint32_t  FORCELOCK;                         /*!< (@ 0x00000008) Force lock for the ABB at ABB domain [n]              */
 } NRF_POWER_ABB_Type;                                /*!< Size = 12 (0x00C)                                                    */
-  #define POWER_ABB_MaxCount (2UL)                   /*!< Max size of ABB[2] array.                                            */
-  #define POWER_ABB_MinCount (0UL)                   /*!< Min size of ABB[2] array.                                            */
+  #define POWER_ABB_MaxCount (2UL)                   /*!< Size of ABB[2] array.                                                */
   #define POWER_ABB_MaxIndex (1UL)                   /*!< Max index of ABB[2] array.                                           */
   #define POWER_ABB_MinIndex (0UL)                   /*!< Min index of ABB[2] array.                                           */
 
@@ -98251,8 +98113,7 @@ typedef struct {
                                                                          event.*/
   __IM  uint32_t  RESERVED[2];
 } NRF_PWM_SEQ_Type;                                  /*!< Size = 32 (0x020)                                                    */
-  #define PWM_SEQ_MaxCount (2UL)                     /*!< Max size of SEQ[2] array.                                            */
-  #define PWM_SEQ_MinCount (0UL)                     /*!< Min size of SEQ[2] array.                                            */
+  #define PWM_SEQ_MaxCount (2UL)                     /*!< Size of SEQ[2] array.                                                */
   #define PWM_SEQ_MaxIndex (1UL)                     /*!< Max index of SEQ[2] array.                                           */
   #define PWM_SEQ_MinIndex (0UL)                     /*!< Min index of SEQ[2] array.                                           */
 
@@ -100254,7 +100115,7 @@ typedef struct {
 /* SAMPLE @Bits 0..31 : Last motion sample */
   #define QDEC_SAMPLE_SAMPLE_Pos (0UL)               /*!< Position of SAMPLE field.                                            */
   #define QDEC_SAMPLE_SAMPLE_Msk (0xFFFFFFFFUL << QDEC_SAMPLE_SAMPLE_Pos) /*!< Bit mask of SAMPLE field.                       */
-  #define QDEC_SAMPLE_SAMPLE_Min (0xFFFFFFFFUL)      /*!< Min value of SAMPLE field.                                           */
+  #define QDEC_SAMPLE_SAMPLE_Min (0xFFFFFFFFFFFFFFFFUL) /*!< Min value of SAMPLE field.                                        */
   #define QDEC_SAMPLE_SAMPLE_Max (0x2UL)             /*!< Max size of SAMPLE field.                                            */
 
 
@@ -100285,7 +100146,7 @@ typedef struct {
 /* ACC @Bits 0..31 : Register accumulating all valid samples (not double transition) read from the SAMPLE register. */
   #define QDEC_ACC_ACC_Pos (0UL)                     /*!< Position of ACC field.                                               */
   #define QDEC_ACC_ACC_Msk (0xFFFFFFFFUL << QDEC_ACC_ACC_Pos) /*!< Bit mask of ACC field.                                      */
-  #define QDEC_ACC_ACC_Min (0xFFFFFC00UL)            /*!< Min value of ACC field.                                              */
+  #define QDEC_ACC_ACC_Min (0xFFFFFFFFFFFFFC00UL)    /*!< Min value of ACC field.                                              */
   #define QDEC_ACC_ACC_Max (0x3FFUL)                 /*!< Max size of ACC field.                                               */
 
 
@@ -100295,7 +100156,7 @@ typedef struct {
 /* ACCREAD @Bits 0..31 : Snapshot of the ACC register. */
   #define QDEC_ACCREAD_ACCREAD_Pos (0UL)             /*!< Position of ACCREAD field.                                           */
   #define QDEC_ACCREAD_ACCREAD_Msk (0xFFFFFFFFUL << QDEC_ACCREAD_ACCREAD_Pos) /*!< Bit mask of ACCREAD field.                  */
-  #define QDEC_ACCREAD_ACCREAD_Min (0xFFFFFC00UL)    /*!< Min value of ACCREAD field.                                          */
+  #define QDEC_ACCREAD_ACCREAD_Min (0xFFFFFFFFFFFFFC00UL) /*!< Min value of ACCREAD field.                                     */
   #define QDEC_ACCREAD_ACCREAD_Max (0x3FFUL)         /*!< Max size of ACCREAD field.                                           */
 
 
@@ -100423,8 +100284,7 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of 32-bit words transferred in the last
                                                                          transaction*/
 } NRF_RADIO_ACQINJDMA_Type;                          /*!< Size = 16 (0x010)                                                    */
-  #define RADIO_ACQINJDMA_MaxCount (2UL)             /*!< Max size of ACQINJDMA[2] array.                                      */
-  #define RADIO_ACQINJDMA_MinCount (0UL)             /*!< Min size of ACQINJDMA[2] array.                                      */
+  #define RADIO_ACQINJDMA_MaxCount (2UL)             /*!< Size of ACQINJDMA[2] array.                                          */
   #define RADIO_ACQINJDMA_MaxIndex (1UL)             /*!< Max index of ACQINJDMA[2] array.                                     */
   #define RADIO_ACQINJDMA_MinIndex (0UL)             /*!< Min index of ACQINJDMA[2] array.                                     */
 
@@ -116164,7 +116024,7 @@ typedef struct {
   #define RADIOACC_DMAB_LISTPTR_ADDRESS_Pos (0UL)    /*!< Position of ADDRESS field.                                           */
   #define RADIOACC_DMAB_LISTPTR_ADDRESS_Msk (0xFFFFFFFFUL << RADIOACC_DMAB_LISTPTR_ADDRESS_Pos) /*!< Bit mask of ADDRESS field.*/
   #define RADIOACC_DMAB_LISTPTR_ADDRESS_Min (0x0UL)  /*!< Min value of ADDRESS field.                                          */
-  #define RADIOACC_DMAB_LISTPTR_ADDRESS_Max (0xFFFFFFF4UL) /*!< Max size of ADDRESS field.                                     */
+  #define RADIOACC_DMAB_LISTPTR_ADDRESS_Max (0xFFFFFFFF4UL) /*!< Max size of ADDRESS field.                                    */
 
 
 /* RADIOACC_DMAB_LISTPARTTHRESH: Threshold value for generating event EVENTS_DMAB.LISTPARTDONE when descriptor list is partially
@@ -119805,8 +119665,7 @@ typedef struct {
   __IOM uint32_t  LIMITH;                            /*!< (@ 0x00000000) Last results is equal or above CH[n].LIMIT.HIGH       */
   __IOM uint32_t  LIMITL;                            /*!< (@ 0x00000004) Last results is equal or below CH[n].LIMIT.LOW        */
 } NRF_SAADC_EVENTS_CH_Type;                          /*!< Size = 8 (0x008)                                                     */
-  #define SAADC_EVENTS_CH_MaxCount (8UL)             /*!< Max size of EVENTS_CH[8] array.                                      */
-  #define SAADC_EVENTS_CH_MinCount (0UL)             /*!< Min size of EVENTS_CH[8] array.                                      */
+  #define SAADC_EVENTS_CH_MaxCount (8UL)             /*!< Size of EVENTS_CH[8] array.                                          */
   #define SAADC_EVENTS_CH_MaxIndex (7UL)             /*!< Max index of EVENTS_CH[8] array.                                     */
   #define SAADC_EVENTS_CH_MinIndex (0UL)             /*!< Min index of EVENTS_CH[8] array.                                     */
 
@@ -119843,8 +119702,7 @@ typedef struct {
   __IOM uint32_t  LIMITH;                            /*!< (@ 0x00000000) Publish configuration for event CH[n].LIMITH          */
   __IOM uint32_t  LIMITL;                            /*!< (@ 0x00000004) Publish configuration for event CH[n].LIMITL          */
 } NRF_SAADC_PUBLISH_CH_Type;                         /*!< Size = 8 (0x008)                                                     */
-  #define SAADC_PUBLISH_CH_MaxCount (8UL)            /*!< Max size of PUBLISH_CH[8] array.                                     */
-  #define SAADC_PUBLISH_CH_MinCount (0UL)            /*!< Min size of PUBLISH_CH[8] array.                                     */
+  #define SAADC_PUBLISH_CH_MaxCount (8UL)            /*!< Size of PUBLISH_CH[8] array.                                         */
   #define SAADC_PUBLISH_CH_MaxIndex (7UL)            /*!< Max index of PUBLISH_CH[8] array.                                    */
   #define SAADC_PUBLISH_CH_MinIndex (0UL)            /*!< Min index of PUBLISH_CH[8] array.                                    */
 
@@ -119917,8 +119775,7 @@ typedef struct {
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000008) Input configuration for CH[n]                         */
   __IOM uint32_t  LIMIT;                             /*!< (@ 0x0000000C) High/low limits for event monitoring a channel        */
 } NRF_SAADC_CH_Type;                                 /*!< Size = 16 (0x010)                                                    */
-  #define SAADC_CH_MaxCount (8UL)                    /*!< Max size of CH[8] array.                                             */
-  #define SAADC_CH_MinCount (0UL)                    /*!< Min size of CH[8] array.                                             */
+  #define SAADC_CH_MaxCount (8UL)                    /*!< Size of CH[8] array.                                                 */
   #define SAADC_CH_MaxIndex (7UL)                    /*!< Max index of CH[8] array.                                            */
   #define SAADC_CH_MinIndex (0UL)                    /*!< Min index of CH[8] array.                                            */
 
@@ -120069,14 +119926,10 @@ typedef struct {
 /* LOW @Bits 0..15 : Low level limit */
   #define SAADC_CH_LIMIT_LOW_Pos (0UL)               /*!< Position of LOW field.                                               */
   #define SAADC_CH_LIMIT_LOW_Msk (0xFFFFUL << SAADC_CH_LIMIT_LOW_Pos) /*!< Bit mask of LOW field.                              */
-  #define SAADC_CH_LIMIT_LOW_Min (0xFFFFFFFFUL)      /*!< Min value of LOW field.                                              */
-  #define SAADC_CH_LIMIT_LOW_Max (0xFFFFFFFFUL)      /*!< Max size of LOW field.                                               */
 
 /* HIGH @Bits 16..31 : High level limit */
   #define SAADC_CH_LIMIT_HIGH_Pos (16UL)             /*!< Position of HIGH field.                                              */
   #define SAADC_CH_LIMIT_HIGH_Msk (0xFFFFUL << SAADC_CH_LIMIT_HIGH_Pos) /*!< Bit mask of HIGH field.                           */
-  #define SAADC_CH_LIMIT_HIGH_Min (0xFFFFFFFFUL)     /*!< Min value of HIGH field.                                             */
-  #define SAADC_CH_LIMIT_HIGH_Max (0xFFFFFFFFUL)     /*!< Max size of HIGH field.                                              */
 
 
 
@@ -121242,8 +121095,6 @@ typedef struct {
 /* REGRESULT @Bits 0..31 : Result of the previous ADC conversion */
   #define SAADC_REGRESULT_REGRESULT_Pos (0UL)        /*!< Position of REGRESULT field.                                         */
   #define SAADC_REGRESULT_REGRESULT_Msk (0xFFFFFFFFUL << SAADC_REGRESULT_REGRESULT_Pos) /*!< Bit mask of REGRESULT field.      */
-  #define SAADC_REGRESULT_REGRESULT_Min (0xFFFFFFFFUL) /*!< Min value of REGRESULT field.                                      */
-  #define SAADC_REGRESULT_REGRESULT_Max (0xFFFFFFFFUL) /*!< Max size of REGRESULT field.                                       */
 
 
 /* SAADC_RESOLUTION: Resolution configuration */
@@ -126914,8 +126765,7 @@ typedef struct {
   __IOM uint32_t  PERM;                              /*!< (@ 0x00000000) Get and set the applicable access permissions for the
                                                                          peripheral slave index n*/
 } NRF_SPU_PERIPH_Type;                               /*!< Size = 4 (0x004)                                                     */
-  #define SPU_PERIPH_MaxCount (32UL)                 /*!< Max size of PERIPH[32] array.                                        */
-  #define SPU_PERIPH_MinCount (0UL)                  /*!< Min size of PERIPH[32] array.                                        */
+  #define SPU_PERIPH_MaxCount (32UL)                 /*!< Size of PERIPH[32] array.                                            */
   #define SPU_PERIPH_MaxIndex (31UL)                 /*!< Max index of PERIPH[32] array.                                       */
   #define SPU_PERIPH_MinIndex (0UL)                  /*!< Min index of PERIPH[32] array.                                       */
 
@@ -127182,8 +127032,7 @@ typedef struct {
   __IOM uint32_t  CH[8];                             /*!< (@ 0x00000000) Configuration of features for channel o of GPIOTE[n]  */
   __IOM uint32_t  INTERRUPT[8];                      /*!< (@ 0x00000020) Configuration of features for interrupt o of GPIOTE[n]*/
 } NRF_SPU_FEATURE_GPIOTE_Type;                       /*!< Size = 64 (0x040)                                                    */
-  #define SPU_FEATURE_GPIOTE_MaxCount (1UL)          /*!< Max size of GPIOTE[1] array.                                         */
-  #define SPU_FEATURE_GPIOTE_MinCount (0UL)          /*!< Min size of GPIOTE[1] array.                                         */
+  #define SPU_FEATURE_GPIOTE_MaxCount (1UL)          /*!< Size of GPIOTE[1] array.                                             */
   #define SPU_FEATURE_GPIOTE_MaxIndex (0UL)          /*!< Max index of GPIOTE[1] array.                                        */
   #define SPU_FEATURE_GPIOTE_MinIndex (0UL)          /*!< Min index of GPIOTE[1] array.                                        */
 
@@ -127272,8 +127121,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  PIN[32];                           /*!< (@ 0x00000000) Configuration of features for GPIO[n] PIN[o]          */
 } NRF_SPU_FEATURE_GPIO_Type;                         /*!< Size = 128 (0x080)                                                   */
-  #define SPU_FEATURE_GPIO_MaxCount (10UL)           /*!< Max size of GPIO[10] array.                                          */
-  #define SPU_FEATURE_GPIO_MinCount (0UL)            /*!< Min size of GPIO[10] array.                                          */
+  #define SPU_FEATURE_GPIO_MaxCount (10UL)           /*!< Size of GPIO[10] array.                                              */
   #define SPU_FEATURE_GPIO_MaxIndex (9UL)            /*!< Max index of GPIO[10] array.                                         */
   #define SPU_FEATURE_GPIO_MinIndex (0UL)            /*!< Min index of GPIO[10] array.                                         */
 
@@ -127320,18 +127168,18 @@ typedef struct {
   * @brief GRTC [SPU_FEATURE_GRTC] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  CC[24];                            /*!< (@ 0x00000000) Configuration of features for CC n of GRTC            */
-  __IM  uint32_t  RESERVED[7];
+  __IOM uint32_t  CC[16];                            /*!< (@ 0x00000000) Configuration of features for CC n of GRTC            */
+  __IM  uint32_t  RESERVED[15];
   __IOM uint32_t  SYSCOUNTER;                        /*!< (@ 0x0000007C) Configuration of features for SYSCOUNTERL/SYSCOUNTERH
                                                                          of GRTC*/
-  __IOM uint32_t  INTERRUPT[8];                      /*!< (@ 0x00000080) Configuration of features for interrupt n of GRTC     */
-} NRF_SPU_FEATURE_GRTC_Type;                         /*!< Size = 160 (0x0A0)                                                   */
+  __IOM uint32_t  INTERRUPT[7];                      /*!< (@ 0x00000080) Configuration of features for interrupt n of GRTC     */
+} NRF_SPU_FEATURE_GRTC_Type;                         /*!< Size = 156 (0x09C)                                                   */
 
 /* SPU_FEATURE_GRTC_CC: Configuration of features for CC n of GRTC */
-  #define SPU_FEATURE_GRTC_CC_MaxCount (24UL)        /*!< Max size of CC[24] array.                                            */
-  #define SPU_FEATURE_GRTC_CC_MaxIndex (23UL)        /*!< Max index of CC[24] array.                                           */
-  #define SPU_FEATURE_GRTC_CC_MinIndex (0UL)         /*!< Min index of CC[24] array.                                           */
-  #define SPU_FEATURE_GRTC_CC_ResetValue (0x00000000UL) /*!< Reset value of CC[24] register.                                   */
+  #define SPU_FEATURE_GRTC_CC_MaxCount (16UL)        /*!< Max size of CC[16] array.                                            */
+  #define SPU_FEATURE_GRTC_CC_MaxIndex (15UL)        /*!< Max index of CC[16] array.                                           */
+  #define SPU_FEATURE_GRTC_CC_MinIndex (0UL)         /*!< Min index of CC[16] array.                                           */
+  #define SPU_FEATURE_GRTC_CC_ResetValue (0x00000000UL) /*!< Reset value of CC[16] register.                                   */
 
 /* SECATTR @Bit 4 : SECATTR feature */
   #define SPU_FEATURE_GRTC_CC_SECATTR_Pos (4UL)      /*!< Position of SECATTR field.                                           */
@@ -127401,10 +127249,10 @@ typedef struct {
 
 
 /* SPU_FEATURE_GRTC_INTERRUPT: Configuration of features for interrupt n of GRTC */
-  #define SPU_FEATURE_GRTC_INTERRUPT_MaxCount (8UL)  /*!< Max size of INTERRUPT[8] array.                                      */
-  #define SPU_FEATURE_GRTC_INTERRUPT_MaxIndex (7UL)  /*!< Max index of INTERRUPT[8] array.                                     */
-  #define SPU_FEATURE_GRTC_INTERRUPT_MinIndex (0UL)  /*!< Min index of INTERRUPT[8] array.                                     */
-  #define SPU_FEATURE_GRTC_INTERRUPT_ResetValue (0x00000000UL) /*!< Reset value of INTERRUPT[8] register.                      */
+  #define SPU_FEATURE_GRTC_INTERRUPT_MaxCount (7UL)  /*!< Max size of INTERRUPT[7] array.                                      */
+  #define SPU_FEATURE_GRTC_INTERRUPT_MaxIndex (6UL)  /*!< Max index of INTERRUPT[7] array.                                     */
+  #define SPU_FEATURE_GRTC_INTERRUPT_MinIndex (0UL)  /*!< Min index of INTERRUPT[7] array.                                     */
+  #define SPU_FEATURE_GRTC_INTERRUPT_ResetValue (0x00000000UL) /*!< Reset value of INTERRUPT[7] register.                      */
 
 /* SECATTR @Bit 4 : SECATTR feature */
   #define SPU_FEATURE_GRTC_INTERRUPT_SECATTR_Pos (4UL) /*!< Position of SECATTR field.                                         */
@@ -127448,8 +127296,7 @@ typedef struct {
   __IOM uint32_t  BELL[16];                          /*!< (@ 0x00000000) Configuration of features for bell pair [(o * 2) + 1:o
                                                                          * 2] of domain n*/
 } NRF_SPU_FEATURE_BELLS_DOMAIN_Type;                 /*!< Size = 64 (0x040)                                                    */
-  #define SPU_FEATURE_BELLS_DOMAIN_MaxCount (16UL)   /*!< Max size of DOMAIN[16] array.                                        */
-  #define SPU_FEATURE_BELLS_DOMAIN_MinCount (0UL)    /*!< Min size of DOMAIN[16] array.                                        */
+  #define SPU_FEATURE_BELLS_DOMAIN_MaxCount (16UL)   /*!< Size of DOMAIN[16] array.                                            */
   #define SPU_FEATURE_BELLS_DOMAIN_MaxIndex (15UL)   /*!< Max index of DOMAIN[16] array.                                       */
   #define SPU_FEATURE_BELLS_DOMAIN_MinIndex (0UL)    /*!< Min index of DOMAIN[16] array.                                       */
 
@@ -127520,12 +127367,14 @@ typedef union {
     union {
       __IOM NRF_SPU_FEATURE_GPIO_Type GPIO[10];      /*!< (@ 0x00000200) (unspecified)                                         */
       __IOM NRF_SPU_FEATURE_GRTC_Type GRTC;          /*!< (@ 0x00000200) (unspecified)                                         */
+      __IM uint32_t RESERVED1[320];
     };
     #if defined(_GNUC_)
       #pragma GCC diagnostic pop
     #endif
   };
   __IOM NRF_SPU_FEATURE_BELLS_Type BELLS;            /*!< (@ 0x00000000) (unspecified)                                         */
+  __IM  uint32_t  RESERVED2[448];
 } NRF_SPU_FEATURE_Type;                              /*!< Size = 1792 (0x700)                                                  */
 
 /* ======================================================= Struct SPU ======================================================== */
@@ -128342,8 +128191,7 @@ typedef struct {
   __IOM uint8_t   SDATA[16777216];                   /*!< (@ 0x01000000) Secure STM output data buffer for domain n. Writes to
                                                                          this region generates trace packets with id n+32.*/
 } NRF_STMDATA_DOMAIN_Type;                           /*!< Size = 33554432 (0x2000000)                                          */
-  #define STMDATA_DOMAIN_MaxCount (16UL)             /*!< Max size of DOMAIN[16] array.                                        */
-  #define STMDATA_DOMAIN_MinCount (0UL)              /*!< Min size of DOMAIN[16] array.                                        */
+  #define STMDATA_DOMAIN_MaxCount (16UL)             /*!< Size of DOMAIN[16] array.                                            */
   #define STMDATA_DOMAIN_MaxIndex (15UL)             /*!< Max index of DOMAIN[16] array.                                       */
   #define STMDATA_DOMAIN_MinIndex (0UL)              /*!< Min index of DOMAIN[16] array.                                       */
 
@@ -128356,8 +128204,7 @@ typedef struct {
   __IOM uint8_t   DATA[16777216];                    /*!< (@ 0x00000000) STM output data buffer n. Writes to this region
                                                                          generates trace packets.*/
 } NRF_STMDATA_BUFFER_Type;                           /*!< Size = 16777216 (0x1000000)                                          */
-  #define STMDATA_BUFFER_MaxCount (16UL)             /*!< Max size of BUFFER[16] array.                                        */
-  #define STMDATA_BUFFER_MinCount (0UL)              /*!< Min size of BUFFER[16] array.                                        */
+  #define STMDATA_BUFFER_MaxCount (16UL)             /*!< Size of BUFFER[16] array.                                            */
   #define STMDATA_BUFFER_MaxIndex (15UL)             /*!< Max index of BUFFER[16] array.                                       */
   #define STMDATA_BUFFER_MinIndex (0UL)              /*!< Min index of BUFFER[16] array.                                       */
 
@@ -128374,6 +128221,7 @@ typedef struct {
       __IOM NRF_STMDATA_DOMAIN_Type DOMAIN[16];      /*!< (@ 0x00000000) (unspecified)                                         */
       __IOM NRF_STMDATA_BUFFER_Type BUFFER[16];      /*!< (@ 0x00000000) Raw buffer access to STM array. Use when DOMAIN array
                                                                          does not apply.*/
+      __IM uint32_t RESERVED;
     };
     #if defined(_GNUC_)
       #pragma GCC diagnostic pop
@@ -128497,8 +128345,7 @@ typedef struct {
   __IOM uint32_t  CTRL;                              /*!< (@ 0x00000000) Control register for protect feature n.               */
   __IOM uint32_t  STATUS;                            /*!< (@ 0x00000004) Status register for protect feature n.                */
 } NRF_TAMPC_PROTECT_FEATURE_Type;                    /*!< Size = 8 (0x008)                                                     */
-  #define TAMPC_PROTECT_FEATURE_MaxCount (128UL)     /*!< Max size of FEATURE[128] array.                                      */
-  #define TAMPC_PROTECT_FEATURE_MinCount (0UL)       /*!< Min size of FEATURE[128] array.                                      */
+  #define TAMPC_PROTECT_FEATURE_MaxCount (128UL)     /*!< Size of FEATURE[128] array.                                          */
   #define TAMPC_PROTECT_FEATURE_MaxIndex (127UL)     /*!< Max index of FEATURE[128] array.                                     */
   #define TAMPC_PROTECT_FEATURE_MinIndex (0UL)       /*!< Min index of FEATURE[128] array.                                     */
 
@@ -128789,8 +128636,7 @@ typedef struct {
   __IOM NRF_TAMPC_PROTECT_DOMAIN_SPIDEN_Type SPIDEN; /*!< (@ 0x00000010) (unspecified)                                         */
   __IOM NRF_TAMPC_PROTECT_DOMAIN_SPNIDEN_Type SPNIDEN; /*!< (@ 0x00000018) (unspecified)                                       */
 } NRF_TAMPC_PROTECT_DOMAIN_Type;                     /*!< Size = 32 (0x020)                                                    */
-  #define TAMPC_PROTECT_DOMAIN_MaxCount (16UL)       /*!< Max size of DOMAIN[16] array.                                        */
-  #define TAMPC_PROTECT_DOMAIN_MinCount (0UL)        /*!< Min size of DOMAIN[16] array.                                        */
+  #define TAMPC_PROTECT_DOMAIN_MaxCount (16UL)       /*!< Size of DOMAIN[16] array.                                            */
   #define TAMPC_PROTECT_DOMAIN_MaxIndex (15UL)       /*!< Max index of DOMAIN[16] array.                                       */
   #define TAMPC_PROTECT_DOMAIN_MinIndex (0UL)        /*!< Min index of DOMAIN[16] array.                                       */
 
@@ -128916,8 +128762,7 @@ typedef struct {
   __IOM NRF_TAMPC_PROTECT_AP_DBGEN_Type DBGEN;       /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_TAMPC_PROTECT_AP_SPIDEN_Type SPIDEN;     /*!< (@ 0x00000008) (unspecified)                                         */
 } NRF_TAMPC_PROTECT_AP_Type;                         /*!< Size = 16 (0x010)                                                    */
-  #define TAMPC_PROTECT_AP_MaxCount (16UL)           /*!< Max size of AP[16] array.                                            */
-  #define TAMPC_PROTECT_AP_MinCount (0UL)            /*!< Min size of AP[16] array.                                            */
+  #define TAMPC_PROTECT_AP_MaxCount (16UL)           /*!< Size of AP[16] array.                                                */
   #define TAMPC_PROTECT_AP_MaxIndex (15UL)           /*!< Max index of AP[16] array.                                           */
   #define TAMPC_PROTECT_AP_MinIndex (0UL)            /*!< Min index of AP[16] array.                                           */
 
@@ -137457,8 +137302,7 @@ typedef struct {
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) Memory configuration of the memory region             */
   __IOM uint32_t  SIZE;                              /*!< (@ 0x00000004) Size of the memory region                             */
 } NRF_UICR_MEM_Type;                                 /*!< Size = 8 (0x008)                                                     */
-  #define UICR_MEM_MaxCount (16UL)                   /*!< Max size of MEM[16] array.                                           */
-  #define UICR_MEM_MinCount (0UL)                    /*!< Min size of MEM[16] array.                                           */
+  #define UICR_MEM_MaxCount (16UL)                   /*!< Size of MEM[16] array.                                               */
   #define UICR_MEM_MaxIndex (15UL)                   /*!< Max index of MEM[16] array.                                          */
   #define UICR_MEM_MinIndex (0UL)                    /*!< Min index of MEM[16] array.                                          */
 
@@ -137532,8 +137376,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) Peripheral configuration                              */
 } NRF_UICR_PERIPH_Type;                              /*!< Size = 4 (0x004)                                                     */
-  #define UICR_PERIPH_MaxCount (192UL)               /*!< Max size of PERIPH[192] array.                                       */
-  #define UICR_PERIPH_MinCount (0UL)                 /*!< Min size of PERIPH[192] array.                                       */
+  #define UICR_PERIPH_MaxCount (192UL)               /*!< Size of PERIPH[192] array.                                           */
   #define UICR_PERIPH_MaxIndex (191UL)               /*!< Max index of PERIPH[192] array.                                      */
   #define UICR_PERIPH_MinIndex (0UL)                 /*!< Min index of PERIPH[192] array.                                      */
 
@@ -137576,8 +137419,7 @@ typedef struct {
   __IOM uint32_t  OWN;                               /*!< (@ 0x00000000) Request ownership of the pins at GPIO port P[n]       */
   __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Request permission for the pins at GPIO port P[n]     */
 } NRF_UICR_GPIO_Type;                                /*!< Size = 8 (0x008)                                                     */
-  #define UICR_GPIO_MaxCount (16UL)                  /*!< Max size of GPIO[16] array.                                          */
-  #define UICR_GPIO_MinCount (0UL)                   /*!< Min size of GPIO[16] array.                                          */
+  #define UICR_GPIO_MaxCount (16UL)                  /*!< Size of GPIO[16] array.                                              */
   #define UICR_GPIO_MaxIndex (15UL)                  /*!< Max index of GPIO[16] array.                                         */
   #define UICR_GPIO_MinIndex (0UL)                   /*!< Min index of GPIO[16] array.                                         */
 
@@ -138639,8 +138481,7 @@ typedef struct {
 typedef struct {
   __IOM NRF_UICR_GPIOTE_CH_Type CH;                  /*!< (@ 0x00000000) (unspecified)                                         */
 } NRF_UICR_GPIOTE_Type;                              /*!< Size = 8 (0x008)                                                     */
-  #define UICR_GPIOTE_MaxCount (4UL)                 /*!< Max size of GPIOTE[4] array.                                         */
-  #define UICR_GPIOTE_MinCount (0UL)                 /*!< Min size of GPIOTE[4] array.                                         */
+  #define UICR_GPIOTE_MaxCount (4UL)                 /*!< Size of GPIOTE[4] array.                                             */
   #define UICR_GPIOTE_MaxIndex (3UL)                 /*!< Max index of GPIOTE[4] array.                                        */
   #define UICR_GPIOTE_MinIndex (0UL)                 /*!< Min index of GPIOTE[4] array.                                        */
 
@@ -140363,8 +140204,7 @@ typedef struct {
   __IOM NRF_UICR_IPCT_GLOBAL_CH_Type CH;             /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_UICR_IPCT_GLOBAL_INTERRUPT_Type INTERRUPT; /*!< (@ 0x00000008) (unspecified)                                       */
 } NRF_UICR_IPCT_GLOBAL_Type;                         /*!< Size = 16 (0x010)                                                    */
-  #define UICR_IPCT_GLOBAL_MaxCount (2UL)            /*!< Max size of GLOBAL[2] array.                                         */
-  #define UICR_IPCT_GLOBAL_MinCount (0UL)            /*!< Min size of GLOBAL[2] array.                                         */
+  #define UICR_IPCT_GLOBAL_MaxCount (2UL)            /*!< Size of GLOBAL[2] array.                                             */
   #define UICR_IPCT_GLOBAL_MaxIndex (1UL)            /*!< Max index of GLOBAL[2] array.                                        */
   #define UICR_IPCT_GLOBAL_MinIndex (0UL)            /*!< Min index of GLOBAL[2] array.                                        */
 
@@ -141488,8 +141328,7 @@ typedef struct {
   __IOM NRF_UICR_DPPI_LOCAL_CH_Type CH;              /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_UICR_DPPI_LOCAL_CHG_Type CHG;            /*!< (@ 0x0000000C) (unspecified)                                         */
 } NRF_UICR_DPPI_LOCAL_Type;                          /*!< Size = 16 (0x010)                                                    */
-  #define UICR_DPPI_LOCAL_MaxCount (2UL)             /*!< Max size of LOCAL[2] array.                                          */
-  #define UICR_DPPI_LOCAL_MinCount (0UL)             /*!< Min size of LOCAL[2] array.                                          */
+  #define UICR_DPPI_LOCAL_MaxCount (2UL)             /*!< Size of LOCAL[2] array.                                              */
   #define UICR_DPPI_LOCAL_MaxIndex (1UL)             /*!< Max index of LOCAL[2] array.                                         */
   #define UICR_DPPI_LOCAL_MinIndex (0UL)             /*!< Min index of LOCAL[2] array.                                         */
 
@@ -143137,8 +142976,7 @@ typedef struct {
   __IOM NRF_UICR_DPPI_GLOBAL_CH_Type CH;             /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_UICR_DPPI_GLOBAL_CHG_Type CHG;           /*!< (@ 0x00000010) (unspecified)                                         */
 } NRF_UICR_DPPI_GLOBAL_Type;                         /*!< Size = 24 (0x018)                                                    */
-  #define UICR_DPPI_GLOBAL_MaxCount (12UL)           /*!< Max size of GLOBAL[12] array.                                        */
-  #define UICR_DPPI_GLOBAL_MinCount (0UL)            /*!< Min size of GLOBAL[12] array.                                        */
+  #define UICR_DPPI_GLOBAL_MaxCount (12UL)           /*!< Size of GLOBAL[12] array.                                            */
   #define UICR_DPPI_GLOBAL_MaxIndex (11UL)           /*!< Max index of GLOBAL[12] array.                                       */
   #define UICR_DPPI_GLOBAL_MinIndex (0UL)            /*!< Min index of GLOBAL[12] array.                                       */
 
@@ -143444,8 +143282,7 @@ typedef struct {
   __IOM uint32_t  ADDRESS;                           /*!< (@ 0x00000000) Memory start address of mailbox n                     */
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000004) Configuration of mailbox n                            */
 } NRF_UICR_MAILBOX_Type;                             /*!< Size = 8 (0x008)                                                     */
-  #define UICR_MAILBOX_MaxCount (8UL)                /*!< Max size of MAILBOX[8] array.                                        */
-  #define UICR_MAILBOX_MinCount (0UL)                /*!< Min size of MAILBOX[8] array.                                        */
+  #define UICR_MAILBOX_MaxCount (8UL)                /*!< Size of MAILBOX[8] array.                                            */
   #define UICR_MAILBOX_MaxIndex (7UL)                /*!< Max index of MAILBOX[8] array.                                       */
   #define UICR_MAILBOX_MinIndex (0UL)                /*!< Min index of MAILBOX[8] array.                                       */
 
@@ -144179,8 +144016,7 @@ typedef struct {
   __IOM uint32_t  DMA;                               /*!< (@ 0x00000014) Host Channel n DMA Address Register                   */
   __IM  uint32_t  RESERVED1[2];
 } NRF_USBHSCORE_HC_Type;                             /*!< Size = 32 (0x020)                                                    */
-  #define USBHSCORE_HC_MaxCount (16UL)               /*!< Max size of HC[16] array.                                            */
-  #define USBHSCORE_HC_MinCount (0UL)                /*!< Min size of HC[16] array.                                            */
+  #define USBHSCORE_HC_MaxCount (16UL)               /*!< Size of HC[16] array.                                                */
   #define USBHSCORE_HC_MaxIndex (15UL)               /*!< Max index of HC[16] array.                                           */
   #define USBHSCORE_HC_MinIndex (0UL)                /*!< Min index of HC[16] array.                                           */
 
@@ -144512,8 +144348,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  DATA[1025];                        /*!< (@ 0x00000000) Data buffer for FIFO n                                */
 } NRF_USBHSCORE_DWCOTGDFIFO_Type;                    /*!< Size = 4100 (0x1004)                                                 */
-  #define USBHSCORE_DWCOTGDFIFO_MaxCount (16UL)      /*!< Max size of DWCOTGDFIFO[16] array.                                   */
-  #define USBHSCORE_DWCOTGDFIFO_MinCount (0UL)       /*!< Min size of DWCOTGDFIFO[16] array.                                   */
+  #define USBHSCORE_DWCOTGDFIFO_MaxCount (16UL)      /*!< Size of DWCOTGDFIFO[16] array.                                       */
   #define USBHSCORE_DWCOTGDFIFO_MaxIndex (15UL)      /*!< Max index of DWCOTGDFIFO[16] array.                                  */
   #define USBHSCORE_DWCOTGDFIFO_MinIndex (0UL)       /*!< Min index of DWCOTGDFIFO[16] array.                                  */
 
@@ -153756,8 +153591,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Threshold voltage value */
   #define VDET1V0_CONFIG_PWRGOODLVL_VAL_Pos (0UL)    /*!< Position of VAL field.                                               */
   #define VDET1V0_CONFIG_PWRGOODLVL_VAL_Msk (0x3FUL << VDET1V0_CONFIG_PWRGOODLVL_VAL_Pos) /*!< Bit mask of VAL field.          */
-  #define VDET1V0_CONFIG_PWRGOODLVL_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                        */
-  #define VDET1V0_CONFIG_PWRGOODLVL_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                         */
 
 
 
@@ -153775,8 +153608,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Threshold voltage trimming value. */
   #define VDET1V0_TRIM_PWRGOOD_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VDET1V0_TRIM_PWRGOOD_VAL_Msk (0xFUL << VDET1V0_TRIM_PWRGOOD_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VDET1V0_TRIM_PWRGOOD_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VDET1V0_TRIM_PWRGOOD_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 
@@ -154337,8 +154168,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Threshold voltage value. */
   #define VDETAO0V8_CONFIG_PWRGOODLVL_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
   #define VDETAO0V8_CONFIG_PWRGOODLVL_VAL_Msk (0x3FUL << VDETAO0V8_CONFIG_PWRGOODLVL_VAL_Pos) /*!< Bit mask of VAL field.      */
-  #define VDETAO0V8_CONFIG_PWRGOODLVL_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                      */
-  #define VDETAO0V8_CONFIG_PWRGOODLVL_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                       */
 
 
 /* VDETAO0V8_CONFIG_BROWNOUTHP: Brown out detector threshold voltage level, HP regulated rail */
@@ -154347,8 +154176,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Threshold voltage value. */
   #define VDETAO0V8_CONFIG_BROWNOUTHP_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
   #define VDETAO0V8_CONFIG_BROWNOUTHP_VAL_Msk (0x3FUL << VDETAO0V8_CONFIG_BROWNOUTHP_VAL_Pos) /*!< Bit mask of VAL field.      */
-  #define VDETAO0V8_CONFIG_BROWNOUTHP_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                      */
-  #define VDETAO0V8_CONFIG_BROWNOUTHP_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                       */
 
 
 /* VDETAO0V8_CONFIG_BROWNOUTLP: Brown out detector threshold voltage level, LP regulated rail */
@@ -154357,8 +154184,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Threshold voltage value. */
   #define VDETAO0V8_CONFIG_BROWNOUTLP_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
   #define VDETAO0V8_CONFIG_BROWNOUTLP_VAL_Msk (0x3FUL << VDETAO0V8_CONFIG_BROWNOUTLP_VAL_Pos) /*!< Bit mask of VAL field.      */
-  #define VDETAO0V8_CONFIG_BROWNOUTLP_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                      */
-  #define VDETAO0V8_CONFIG_BROWNOUTLP_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                       */
 
 
 /* VDETAO0V8_CONFIG_BROWNOUTULV: Brown out detector threshold voltage level, ULV regulated rail */
@@ -154367,8 +154192,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Threshold voltage value. */
   #define VDETAO0V8_CONFIG_BROWNOUTULV_VAL_Pos (0UL) /*!< Position of VAL field.                                               */
   #define VDETAO0V8_CONFIG_BROWNOUTULV_VAL_Msk (0x3FUL << VDETAO0V8_CONFIG_BROWNOUTULV_VAL_Pos) /*!< Bit mask of VAL field.    */
-  #define VDETAO0V8_CONFIG_BROWNOUTULV_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                     */
-  #define VDETAO0V8_CONFIG_BROWNOUTULV_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                      */
 
 
 
@@ -154387,8 +154210,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Threshold voltage deviation value. */
   #define VDETAO0V8_TRIM_BROWNOUT_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
   #define VDETAO0V8_TRIM_BROWNOUT_VAL_Msk (0xFUL << VDETAO0V8_TRIM_BROWNOUT_VAL_Pos) /*!< Bit mask of VAL field.               */
-  #define VDETAO0V8_TRIM_BROWNOUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                          */
-  #define VDETAO0V8_TRIM_BROWNOUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                           */
 
 
 /* VDETAO0V8_TRIM_PWRGOOD: Power good detector trimming */
@@ -154397,8 +154218,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Threshold voltage trimming deviation value. */
   #define VDETAO0V8_TRIM_PWRGOOD_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
   #define VDETAO0V8_TRIM_PWRGOOD_VAL_Msk (0xFUL << VDETAO0V8_TRIM_PWRGOOD_VAL_Pos) /*!< Bit mask of VAL field.                 */
-  #define VDETAO0V8_TRIM_PWRGOOD_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                           */
-  #define VDETAO0V8_TRIM_PWRGOOD_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                            */
 
 
 
@@ -155151,8 +154970,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Threshold voltage value. */
   #define VDETAO1V8_TRIM_BROWNOUTLVLHIGH_VAL_Pos (0UL) /*!< Position of VAL field.                                             */
   #define VDETAO1V8_TRIM_BROWNOUTLVLHIGH_VAL_Msk (0xFUL << VDETAO1V8_TRIM_BROWNOUTLVLHIGH_VAL_Pos) /*!< Bit mask of VAL field. */
-  #define VDETAO1V8_TRIM_BROWNOUTLVLHIGH_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                   */
-  #define VDETAO1V8_TRIM_BROWNOUTLVLHIGH_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                    */
 
 
 /* VDETAO1V8_TRIM_BROWNOUTLVLLOW: Brown out detector low threshold voltage level */
@@ -155161,8 +154978,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Threshold voltage value. */
   #define VDETAO1V8_TRIM_BROWNOUTLVLLOW_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
   #define VDETAO1V8_TRIM_BROWNOUTLVLLOW_VAL_Msk (0xFUL << VDETAO1V8_TRIM_BROWNOUTLVLLOW_VAL_Pos) /*!< Bit mask of VAL field.   */
-  #define VDETAO1V8_TRIM_BROWNOUTLVLLOW_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                    */
-  #define VDETAO1V8_TRIM_BROWNOUTLVLLOW_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                     */
 
 
 
@@ -155807,8 +155622,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Threshold voltage value. */
   #define VDETAO5V0_CONFIG_PWRGOODLVL_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
   #define VDETAO5V0_CONFIG_PWRGOODLVL_VAL_Msk (0x7UL << VDETAO5V0_CONFIG_PWRGOODLVL_VAL_Pos) /*!< Bit mask of VAL field.       */
-  #define VDETAO5V0_CONFIG_PWRGOODLVL_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                      */
-  #define VDETAO5V0_CONFIG_PWRGOODLVL_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                       */
 
 
 
@@ -155826,8 +155639,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Threshold voltage trimming value */
   #define VDETAO5V0_TRIM_PWRGOOD_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
   #define VDETAO5V0_TRIM_PWRGOOD_VAL_Msk (0x7UL << VDETAO5V0_TRIM_PWRGOOD_VAL_Pos) /*!< Bit mask of VAL field.                 */
-  #define VDETAO5V0_TRIM_PWRGOOD_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                           */
-  #define VDETAO5V0_TRIM_PWRGOOD_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                            */
 
 
 
@@ -156697,8 +156508,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Threshold voltage value. */
   #define VDETVS0V8_CONFIG_PWRGOODLVL_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
   #define VDETVS0V8_CONFIG_PWRGOODLVL_VAL_Msk (0x3FUL << VDETVS0V8_CONFIG_PWRGOODLVL_VAL_Pos) /*!< Bit mask of VAL field.      */
-  #define VDETVS0V8_CONFIG_PWRGOODLVL_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                      */
-  #define VDETVS0V8_CONFIG_PWRGOODLVL_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                       */
 
 
 /* VDETVS0V8_CONFIG_BROWNOUTLVL: Brown out detector threshold voltage level */
@@ -156707,8 +156516,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Threshold voltage value. */
   #define VDETVS0V8_CONFIG_BROWNOUTLVL_VAL_Pos (0UL) /*!< Position of VAL field.                                               */
   #define VDETVS0V8_CONFIG_BROWNOUTLVL_VAL_Msk (0x3FUL << VDETVS0V8_CONFIG_BROWNOUTLVL_VAL_Pos) /*!< Bit mask of VAL field.    */
-  #define VDETVS0V8_CONFIG_BROWNOUTLVL_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                     */
-  #define VDETVS0V8_CONFIG_BROWNOUTLVL_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                      */
 
 
 
@@ -156727,8 +156534,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Threshold voltage deviation value. */
   #define VDETVS0V8_TRIM_BROWNOUT_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
   #define VDETVS0V8_TRIM_BROWNOUT_VAL_Msk (0xFUL << VDETVS0V8_TRIM_BROWNOUT_VAL_Pos) /*!< Bit mask of VAL field.               */
-  #define VDETVS0V8_TRIM_BROWNOUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                          */
-  #define VDETVS0V8_TRIM_BROWNOUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                           */
 
 
 /* VDETVS0V8_TRIM_PWRGOOD: Power good detector trimming */
@@ -156737,8 +156542,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Threshold voltage trimming deviation value. */
   #define VDETVS0V8_TRIM_PWRGOOD_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
   #define VDETVS0V8_TRIM_PWRGOOD_VAL_Msk (0xFUL << VDETVS0V8_TRIM_PWRGOOD_VAL_Pos) /*!< Bit mask of VAL field.                 */
-  #define VDETVS0V8_TRIM_PWRGOOD_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                           */
-  #define VDETVS0V8_TRIM_PWRGOOD_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                            */
 
 
 
@@ -157877,7 +157680,7 @@ typedef struct {
 /* DATAADDR @Bits 0..11 : Data Address */
   #define VPR_DEBUGIF_HARTINFO_DATAADDR_Pos (0UL)    /*!< Position of DATAADDR field.                                          */
   #define VPR_DEBUGIF_HARTINFO_DATAADDR_Msk (0xFFFUL << VPR_DEBUGIF_HARTINFO_DATAADDR_Pos) /*!< Bit mask of DATAADDR field.    */
-  #define VPR_DEBUGIF_HARTINFO_DATAADDR_Min (0xFFFFF800UL) /*!< Min value of DATAADDR field.                                   */
+  #define VPR_DEBUGIF_HARTINFO_DATAADDR_Min (0xFFFFFFFFFFFFF800UL) /*!< Min value of DATAADDR field.                           */
   #define VPR_DEBUGIF_HARTINFO_DATAADDR_Max (0x7FFUL) /*!< Max size of DATAADDR field.                                         */
 
 /* DATASIZE @Bits 12..15 : Data Size */
@@ -164742,8 +164545,6 @@ typedef struct {
 /* VAL @Bits 0..6 : Current reference trimming value */
   #define VREG1V0_TRIM_IREF_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
   #define VREG1V0_TRIM_IREF_VAL_Msk (0x7FUL << VREG1V0_TRIM_IREF_VAL_Pos) /*!< Bit mask of VAL field.                          */
-  #define VREG1V0_TRIM_IREF_VAL_Min (0xFFFFFFFFUL)   /*!< Min value of VAL field.                                              */
-  #define VREG1V0_TRIM_IREF_VAL_Max (0xFFFFFFFFUL)   /*!< Max size of VAL field.                                               */
 
 
 /* VREG1V0_TRIM_HIGHPOWER: High power mode output voltage offset trimming */
@@ -164752,8 +164553,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value */
   #define VREG1V0_TRIM_HIGHPOWER_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
   #define VREG1V0_TRIM_HIGHPOWER_VAL_Msk (0xFUL << VREG1V0_TRIM_HIGHPOWER_VAL_Pos) /*!< Bit mask of VAL field.                 */
-  #define VREG1V0_TRIM_HIGHPOWER_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                           */
-  #define VREG1V0_TRIM_HIGHPOWER_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                            */
 
 
 /* VREG1V0_TRIM_LOWPOWER: Low power mode output voltage offset trimming */
@@ -164762,8 +164561,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value. */
   #define VREG1V0_TRIM_LOWPOWER_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
   #define VREG1V0_TRIM_LOWPOWER_VAL_Msk (0xFUL << VREG1V0_TRIM_LOWPOWER_VAL_Pos) /*!< Bit mask of VAL field.                   */
-  #define VREG1V0_TRIM_LOWPOWER_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                            */
-  #define VREG1V0_TRIM_LOWPOWER_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                             */
 
 
 /* VREG1V0_TRIM_ULPR: ULPR mode comparator offset trimming */
@@ -164772,8 +164569,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Comparator offset trimming value. */
   #define VREG1V0_TRIM_ULPR_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
   #define VREG1V0_TRIM_ULPR_VAL_Msk (0x7UL << VREG1V0_TRIM_ULPR_VAL_Pos) /*!< Bit mask of VAL field.                           */
-  #define VREG1V0_TRIM_ULPR_VAL_Min (0xFFFFFFFFUL)   /*!< Min value of VAL field.                                              */
-  #define VREG1V0_TRIM_ULPR_VAL_Max (0xFFFFFFFFUL)   /*!< Max size of VAL field.                                               */
 
 
 
@@ -165514,8 +165309,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Output voltage value */
   #define VREG1V0_VOUTHPNOMINAL_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
   #define VREG1V0_VOUTHPNOMINAL_VAL_Msk (0x3FUL << VREG1V0_VOUTHPNOMINAL_VAL_Pos) /*!< Bit mask of VAL field.                  */
-  #define VREG1V0_VOUTHPNOMINAL_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                            */
-  #define VREG1V0_VOUTHPNOMINAL_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                             */
 
 
 /* VREG1V0_VOUTHPRADIO: Radio high power mode output voltage programming */
@@ -165524,8 +165317,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Output voltage value */
   #define VREG1V0_VOUTHPRADIO_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
   #define VREG1V0_VOUTHPRADIO_VAL_Msk (0x3FUL << VREG1V0_VOUTHPRADIO_VAL_Pos) /*!< Bit mask of VAL field.                      */
-  #define VREG1V0_VOUTHPRADIO_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                              */
-  #define VREG1V0_VOUTHPRADIO_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                               */
 
 
 /* VREG1V0_VOUTHPHELPER: High power helper mode output voltage programming */
@@ -165534,8 +165325,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Output voltage value */
   #define VREG1V0_VOUTHPHELPER_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREG1V0_VOUTHPHELPER_VAL_Msk (0x3FUL << VREG1V0_VOUTHPHELPER_VAL_Pos) /*!< Bit mask of VAL field.                    */
-  #define VREG1V0_VOUTHPHELPER_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREG1V0_VOUTHPHELPER_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 /* VREG1V0_VOUTLPNOMINAL: Nominal low power mode output voltage programming */
@@ -165544,8 +165333,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Output voltage value */
   #define VREG1V0_VOUTLPNOMINAL_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
   #define VREG1V0_VOUTLPNOMINAL_VAL_Msk (0x3FUL << VREG1V0_VOUTLPNOMINAL_VAL_Pos) /*!< Bit mask of VAL field.                  */
-  #define VREG1V0_VOUTLPNOMINAL_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                            */
-  #define VREG1V0_VOUTLPNOMINAL_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                             */
 
 
 /* VREG1V0_VOUTLPRADIO: Radio low power mode output voltage programming */
@@ -165554,8 +165341,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Output voltage value */
   #define VREG1V0_VOUTLPRADIO_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
   #define VREG1V0_VOUTLPRADIO_VAL_Msk (0x3FUL << VREG1V0_VOUTLPRADIO_VAL_Pos) /*!< Bit mask of VAL field.                      */
-  #define VREG1V0_VOUTLPRADIO_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                              */
-  #define VREG1V0_VOUTLPRADIO_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                               */
 
 
 /* VREG1V0_VOUTULV: ULV output voltage programming */
@@ -165564,8 +165349,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Output voltage value */
   #define VREG1V0_VOUTULV_VAL_Pos (0UL)              /*!< Position of VAL field.                                               */
   #define VREG1V0_VOUTULV_VAL_Msk (0x3FUL << VREG1V0_VOUTULV_VAL_Pos) /*!< Bit mask of VAL field.                              */
-  #define VREG1V0_VOUTULV_VAL_Min (0xFFFFFFFFUL)     /*!< Min value of VAL field.                                              */
-  #define VREG1V0_VOUTULV_VAL_Max (0xFFFFFFFFUL)     /*!< Max size of VAL field.                                               */
 
 
 /* VREG1V0_MODE: Voltage regulator mode */
@@ -165588,8 +165371,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Current consumption */
   #define VREG1V0_ITHRESHOLD_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
   #define VREG1V0_ITHRESHOLD_VAL_Msk (0xFUL << VREG1V0_ITHRESHOLD_VAL_Pos) /*!< Bit mask of VAL field.                         */
-  #define VREG1V0_ITHRESHOLD_VAL_Min (0xFFFFFFFFUL)  /*!< Min value of VAL field.                                              */
-  #define VREG1V0_ITHRESHOLD_VAL_Max (0xFFFFFFFFUL)  /*!< Max size of VAL field.                                               */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -165685,8 +165466,6 @@ typedef struct {
 /* VAL @Bits 0..6 : Current reference trimming value */
   #define VREGAO0V8_TRIM_IREF_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
   #define VREGAO0V8_TRIM_IREF_VAL_Msk (0x7FUL << VREGAO0V8_TRIM_IREF_VAL_Pos) /*!< Bit mask of VAL field.                      */
-  #define VREGAO0V8_TRIM_IREF_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                              */
-  #define VREGAO0V8_TRIM_IREF_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                               */
 
 
 /* VREGAO0V8_TRIM_HIGHPOWER: High power mode output voltage offset trimming */
@@ -165695,8 +165474,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value */
   #define VREGAO0V8_TRIM_HIGHPOWER_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
   #define VREGAO0V8_TRIM_HIGHPOWER_VAL_Msk (0xFUL << VREGAO0V8_TRIM_HIGHPOWER_VAL_Pos) /*!< Bit mask of VAL field.             */
-  #define VREGAO0V8_TRIM_HIGHPOWER_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                         */
-  #define VREGAO0V8_TRIM_HIGHPOWER_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                          */
 
 
 /* VREGAO0V8_TRIM_LOWPOWER: Low power mode output voltage offset trimming */
@@ -165705,8 +165482,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value. */
   #define VREGAO0V8_TRIM_LOWPOWER_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
   #define VREGAO0V8_TRIM_LOWPOWER_VAL_Msk (0xFUL << VREGAO0V8_TRIM_LOWPOWER_VAL_Pos) /*!< Bit mask of VAL field.               */
-  #define VREGAO0V8_TRIM_LOWPOWER_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                          */
-  #define VREGAO0V8_TRIM_LOWPOWER_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                           */
 
 
 /* VREGAO0V8_TRIM_ULTRALOWPOWER: Ultra low power mode ripple trimming */
@@ -165729,8 +165504,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value. */
   #define VREGAO0V8_TRIM_BPDET_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREGAO0V8_TRIM_BPDET_VAL_Msk (0xFUL << VREGAO0V8_TRIM_BPDET_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VREGAO0V8_TRIM_BPDET_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREGAO0V8_TRIM_BPDET_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 
@@ -166583,8 +166356,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Output voltage value */
   #define VREGAO0V8_VOUT_VAL_Pos (0UL)               /*!< Position of VAL field.                                               */
   #define VREGAO0V8_VOUT_VAL_Msk (0x7UL << VREGAO0V8_VOUT_VAL_Pos) /*!< Bit mask of VAL field.                                 */
-  #define VREGAO0V8_VOUT_VAL_Min (0xFFFFFFFFUL)      /*!< Min value of VAL field.                                              */
-  #define VREGAO0V8_VOUT_VAL_Max (0xFFFFFFFFUL)      /*!< Max size of VAL field.                                               */
 
 
 /* VREGAO0V8_MODE: Voltage regulator mode */
@@ -166608,8 +166379,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Current consumption */
   #define VREGAO0V8_ITHRESHOLD_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREGAO0V8_ITHRESHOLD_VAL_Msk (0xFUL << VREGAO0V8_ITHRESHOLD_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VREGAO0V8_ITHRESHOLD_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREGAO0V8_ITHRESHOLD_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -166728,8 +166497,6 @@ typedef struct {
 /* VAL @Bits 0..6 : Current reference trimming value */
   #define VREGAO1V8_TRIM_IREF_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
   #define VREGAO1V8_TRIM_IREF_VAL_Msk (0x7FUL << VREGAO1V8_TRIM_IREF_VAL_Pos) /*!< Bit mask of VAL field.                      */
-  #define VREGAO1V8_TRIM_IREF_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                              */
-  #define VREGAO1V8_TRIM_IREF_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                               */
 
 
 /* VREGAO1V8_TRIM_VREF: Reference voltage trim */
@@ -166738,8 +166505,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage trimming value */
   #define VREGAO1V8_TRIM_VREF_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
   #define VREGAO1V8_TRIM_VREF_VAL_Msk (0xFUL << VREGAO1V8_TRIM_VREF_VAL_Pos) /*!< Bit mask of VAL field.                       */
-  #define VREGAO1V8_TRIM_VREF_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                              */
-  #define VREGAO1V8_TRIM_VREF_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                               */
 
 
 /* VREGAO1V8_TRIM_LOWPOWER: Low power mode output comparator trimming */
@@ -166748,8 +166513,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage trimming value. */
   #define VREGAO1V8_TRIM_LOWPOWER_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
   #define VREGAO1V8_TRIM_LOWPOWER_VAL_Msk (0xFUL << VREGAO1V8_TRIM_LOWPOWER_VAL_Pos) /*!< Bit mask of VAL field.               */
-  #define VREGAO1V8_TRIM_LOWPOWER_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                          */
-  #define VREGAO1V8_TRIM_LOWPOWER_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                           */
 
 
 /* VREGAO1V8_TRIM_LOWPOWERDIFF: Low power differential mode output comparator trimming */
@@ -167499,8 +167262,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Output voltage value */
   #define VREGAO1V8_VOUTHPNOMINAL_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
   #define VREGAO1V8_VOUTHPNOMINAL_VAL_Msk (0x7UL << VREGAO1V8_VOUTHPNOMINAL_VAL_Pos) /*!< Bit mask of VAL field.               */
-  #define VREGAO1V8_VOUTHPNOMINAL_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                          */
-  #define VREGAO1V8_VOUTHPNOMINAL_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                           */
 
 
 /* VREGAO1V8_VOUTHPHELPER: High power helper mode output voltage programming */
@@ -167509,8 +167270,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Output voltage value */
   #define VREGAO1V8_VOUTHPHELPER_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
   #define VREGAO1V8_VOUTHPHELPER_VAL_Msk (0x7UL << VREGAO1V8_VOUTHPHELPER_VAL_Pos) /*!< Bit mask of VAL field.                 */
-  #define VREGAO1V8_VOUTHPHELPER_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                           */
-  #define VREGAO1V8_VOUTHPHELPER_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                            */
 
 
 /* VREGAO1V8_VOUTLP: Low power mode output voltage programming */
@@ -167519,8 +167278,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Output voltage value */
   #define VREGAO1V8_VOUTLP_VAL_Pos (0UL)             /*!< Position of VAL field.                                               */
   #define VREGAO1V8_VOUTLP_VAL_Msk (0x7UL << VREGAO1V8_VOUTLP_VAL_Pos) /*!< Bit mask of VAL field.                             */
-  #define VREGAO1V8_VOUTLP_VAL_Min (0xFFFFFFFFUL)    /*!< Min value of VAL field.                                              */
-  #define VREGAO1V8_VOUTLP_VAL_Max (0xFFFFFFFFUL)    /*!< Max size of VAL field.                                               */
 
 
 /* VREGAO1V8_MODE: Voltage regulator mode */
@@ -167544,8 +167301,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Current consumption */
   #define VREGAO1V8_ITHRESHOLD_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREGAO1V8_ITHRESHOLD_VAL_Msk (0xFUL << VREGAO1V8_ITHRESHOLD_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VREGAO1V8_ITHRESHOLD_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREGAO1V8_ITHRESHOLD_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -167828,8 +167583,6 @@ typedef struct {
 /* VAL @Bits 0..4 : Bias trim value */
   #define VREGMAIN_TRIM_BIASIBPSR_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
   #define VREGMAIN_TRIM_BIASIBPSR_VAL_Msk (0x1FUL << VREGMAIN_TRIM_BIASIBPSR_VAL_Pos) /*!< Bit mask of VAL field.              */
-  #define VREGMAIN_TRIM_BIASIBPSR_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                          */
-  #define VREGMAIN_TRIM_BIASIBPSR_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                           */
 
 
 /* VREGMAIN_TRIM_VDDAO1V8HYSTOUTPUT: VDD_AO_1V8 hysteretic (HYST) output voltage trimming */
@@ -167839,8 +167592,6 @@ typedef struct {
   #define VREGMAIN_TRIM_VDDAO1V8HYSTOUTPUT_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
   #define VREGMAIN_TRIM_VDDAO1V8HYSTOUTPUT_VAL_Msk (0xFUL << VREGMAIN_TRIM_VDDAO1V8HYSTOUTPUT_VAL_Pos) /*!< Bit mask of VAL
                                                                             field.*/
-  #define VREGMAIN_TRIM_VDDAO1V8HYSTOUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                 */
-  #define VREGMAIN_TRIM_VDDAO1V8HYSTOUTPUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                  */
 
 
 /* VREGMAIN_TRIM_VDDAO1V8PWMOUTPUT: VDD_AO_1V8 PWM output voltage trimming */
@@ -167850,8 +167601,6 @@ typedef struct {
   #define VREGMAIN_TRIM_VDDAO1V8PWMOUTPUT_VAL_Pos (0UL) /*!< Position of VAL field.                                            */
   #define VREGMAIN_TRIM_VDDAO1V8PWMOUTPUT_VAL_Msk (0xFUL << VREGMAIN_TRIM_VDDAO1V8PWMOUTPUT_VAL_Pos) /*!< Bit mask of VAL
                                                                             field.*/
-  #define VREGMAIN_TRIM_VDDAO1V8PWMOUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                  */
-  #define VREGMAIN_TRIM_VDDAO1V8PWMOUTPUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                   */
 
 
 /* VREGMAIN_TRIM_VDD1V0HYSTOUTPUT: VDD_1V0 hysteretic (HYST) output voltage trimming */
@@ -167860,8 +167609,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Trim value */
   #define VREGMAIN_TRIM_VDD1V0HYSTOUTPUT_VAL_Pos (0UL) /*!< Position of VAL field.                                             */
   #define VREGMAIN_TRIM_VDD1V0HYSTOUTPUT_VAL_Msk (0xFUL << VREGMAIN_TRIM_VDD1V0HYSTOUTPUT_VAL_Pos) /*!< Bit mask of VAL field. */
-  #define VREGMAIN_TRIM_VDD1V0HYSTOUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                   */
-  #define VREGMAIN_TRIM_VDD1V0HYSTOUTPUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                    */
 
 
 /* VREGMAIN_TRIM_VDDVS0V8HYSTOUTPUT: VDD_VS_0V8 hysteretic (HYST) output voltage trimming */
@@ -167871,8 +167618,6 @@ typedef struct {
   #define VREGMAIN_TRIM_VDDVS0V8HYSTOUTPUT_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
   #define VREGMAIN_TRIM_VDDVS0V8HYSTOUTPUT_VAL_Msk (0xFUL << VREGMAIN_TRIM_VDDVS0V8HYSTOUTPUT_VAL_Pos) /*!< Bit mask of VAL
                                                                             field.*/
-  #define VREGMAIN_TRIM_VDDVS0V8HYSTOUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                 */
-  #define VREGMAIN_TRIM_VDDVS0V8HYSTOUTPUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                  */
 
 
 /* VREGMAIN_TRIM_VDDVS0V8PWMOUTPUT: VDD_VS_0V8 PWM output voltage trimming */
@@ -167882,8 +167627,6 @@ typedef struct {
   #define VREGMAIN_TRIM_VDDVS0V8PWMOUTPUT_VAL_Pos (0UL) /*!< Position of VAL field.                                            */
   #define VREGMAIN_TRIM_VDDVS0V8PWMOUTPUT_VAL_Msk (0xFUL << VREGMAIN_TRIM_VDDVS0V8PWMOUTPUT_VAL_Pos) /*!< Bit mask of VAL
                                                                             field.*/
-  #define VREGMAIN_TRIM_VDDVS0V8PWMOUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                  */
-  #define VREGMAIN_TRIM_VDDVS0V8PWMOUTPUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                   */
 
 
 /* VREGMAIN_TRIM_VDD1V0PWMOUTPUT: VDD_1V0 PWM output voltage trimming */
@@ -167892,8 +167635,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage value */
   #define VREGMAIN_TRIM_VDD1V0PWMOUTPUT_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
   #define VREGMAIN_TRIM_VDD1V0PWMOUTPUT_VAL_Msk (0xFUL << VREGMAIN_TRIM_VDD1V0PWMOUTPUT_VAL_Pos) /*!< Bit mask of VAL field.   */
-  #define VREGMAIN_TRIM_VDD1V0PWMOUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                    */
-  #define VREGMAIN_TRIM_VDD1V0PWMOUTPUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                     */
 
 
 /* VREGMAIN_TRIM_ZCROSS: Zero cross detector trimming */
@@ -167902,8 +167643,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Trim value */
   #define VREGMAIN_TRIM_ZCROSS_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREGMAIN_TRIM_ZCROSS_VAL_Msk (0xFUL << VREGMAIN_TRIM_ZCROSS_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VREGMAIN_TRIM_ZCROSS_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREGMAIN_TRIM_ZCROSS_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 /* VREGMAIN_TRIM_HSILIM: HS current limiter trimming */
@@ -167912,8 +167651,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Trim value */
   #define VREGMAIN_TRIM_HSILIM_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREGMAIN_TRIM_HSILIM_VAL_Msk (0x7UL << VREGMAIN_TRIM_HSILIM_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VREGMAIN_TRIM_HSILIM_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREGMAIN_TRIM_HSILIM_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 /* VREGMAIN_TRIM_ICMP: DCDC output current comparator trimming */
@@ -167936,8 +167673,6 @@ typedef struct {
 /* VAL @Bits 0..1 : Trim value */
   #define VREGMAIN_TRIM_VGND_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
   #define VREGMAIN_TRIM_VGND_VAL_Msk (0x3UL << VREGMAIN_TRIM_VGND_VAL_Pos) /*!< Bit mask of VAL field.                         */
-  #define VREGMAIN_TRIM_VGND_VAL_Min (0xFFFFFFFFUL)  /*!< Min value of VAL field.                                              */
-  #define VREGMAIN_TRIM_VGND_VAL_Max (0xFFFFFFFFUL)  /*!< Max size of VAL field.                                               */
 
 
 
@@ -169254,8 +168989,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Voltage value */
   #define VREGMAIN_VDDAO1V8OUTPUT_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
   #define VREGMAIN_VDDAO1V8OUTPUT_VAL_Msk (0x7UL << VREGMAIN_VDDAO1V8OUTPUT_VAL_Pos) /*!< Bit mask of VAL field.               */
-  #define VREGMAIN_VDDAO1V8OUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                          */
-  #define VREGMAIN_VDDAO1V8OUTPUT_VAL_Max (0x1UL)    /*!< Max size of VAL field.                                               */
 
 
 /* VREGMAIN_VDDAO1V8LPOUTPUT: VDD_AO_1V8 Low Power output voltage */
@@ -169264,8 +168997,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Voltage value */
   #define VREGMAIN_VDDAO1V8LPOUTPUT_VAL_Pos (0UL)    /*!< Position of VAL field.                                               */
   #define VREGMAIN_VDDAO1V8LPOUTPUT_VAL_Msk (0x7UL << VREGMAIN_VDDAO1V8LPOUTPUT_VAL_Pos) /*!< Bit mask of VAL field.           */
-  #define VREGMAIN_VDDAO1V8LPOUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                        */
-  #define VREGMAIN_VDDAO1V8LPOUTPUT_VAL_Max (0x1UL)  /*!< Max size of VAL field.                                               */
 
 
 /* VREGMAIN_VDD1V0OUTPUT: VDD_1V0 output voltage */
@@ -169274,8 +169005,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Voltage value */
   #define VREGMAIN_VDD1V0OUTPUT_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
   #define VREGMAIN_VDD1V0OUTPUT_VAL_Msk (0x3FUL << VREGMAIN_VDD1V0OUTPUT_VAL_Pos) /*!< Bit mask of VAL field.                  */
-  #define VREGMAIN_VDD1V0OUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                            */
-  #define VREGMAIN_VDD1V0OUTPUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                             */
 
 
 /* VREGMAIN_VDD1V0OUTPUTRADIO: VDD_1V0 output voltage, radio upscaling */
@@ -169284,8 +169013,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Voltage value */
   #define VREGMAIN_VDD1V0OUTPUTRADIO_VAL_Pos (0UL)   /*!< Position of VAL field.                                               */
   #define VREGMAIN_VDD1V0OUTPUTRADIO_VAL_Msk (0x3FUL << VREGMAIN_VDD1V0OUTPUTRADIO_VAL_Pos) /*!< Bit mask of VAL field.        */
-  #define VREGMAIN_VDD1V0OUTPUTRADIO_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                       */
-  #define VREGMAIN_VDD1V0OUTPUTRADIO_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                        */
 
 
 /* VREGMAIN_VDD1V0LPOUTPUT: VDD_1V0 LP output voltage */
@@ -169294,8 +169021,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Voltage value */
   #define VREGMAIN_VDD1V0LPOUTPUT_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
   #define VREGMAIN_VDD1V0LPOUTPUT_VAL_Msk (0x3FUL << VREGMAIN_VDD1V0LPOUTPUT_VAL_Pos) /*!< Bit mask of VAL field.              */
-  #define VREGMAIN_VDD1V0LPOUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                          */
-  #define VREGMAIN_VDD1V0LPOUTPUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                           */
 
 
 /* VREGMAIN_VDD1V0LPOUTPUTRADIO: VDD_1V0 LP output voltage, radio upscaling */
@@ -169304,8 +169029,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Voltage value */
   #define VREGMAIN_VDD1V0LPOUTPUTRADIO_VAL_Pos (0UL) /*!< Position of VAL field.                                               */
   #define VREGMAIN_VDD1V0LPOUTPUTRADIO_VAL_Msk (0x3FUL << VREGMAIN_VDD1V0LPOUTPUTRADIO_VAL_Pos) /*!< Bit mask of VAL field.    */
-  #define VREGMAIN_VDD1V0LPOUTPUTRADIO_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                     */
-  #define VREGMAIN_VDD1V0LPOUTPUTRADIO_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                      */
 
 
 /* VREGMAIN_VDD1V0ULPOUTPUT: VDD_1V0 ULP output voltage */
@@ -169314,8 +169037,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Voltage value */
   #define VREGMAIN_VDD1V0ULPOUTPUT_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
   #define VREGMAIN_VDD1V0ULPOUTPUT_VAL_Msk (0x3FUL << VREGMAIN_VDD1V0ULPOUTPUT_VAL_Pos) /*!< Bit mask of VAL field.            */
-  #define VREGMAIN_VDD1V0ULPOUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                         */
-  #define VREGMAIN_VDD1V0ULPOUTPUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                          */
 
 
 /* VREGMAIN_VDDVS0V8OUTPUT: VDD_VS_0V8 output voltage */
@@ -169324,8 +169045,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Voltage value */
   #define VREGMAIN_VDDVS0V8OUTPUT_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
   #define VREGMAIN_VDDVS0V8OUTPUT_VAL_Msk (0x3FUL << VREGMAIN_VDDVS0V8OUTPUT_VAL_Pos) /*!< Bit mask of VAL field.              */
-  #define VREGMAIN_VDDVS0V8OUTPUT_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                          */
-  #define VREGMAIN_VDDVS0V8OUTPUT_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                           */
 
 
 /* VREGMAIN_HSILIMPROG: HS current limiter program */
@@ -169394,8 +169113,6 @@ typedef struct {
 /* VAL @Bits 0..4 : Current consumption */
   #define VREGMAIN_ITHRESHOLD_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
   #define VREGMAIN_ITHRESHOLD_VAL_Msk (0x1FUL << VREGMAIN_ITHRESHOLD_VAL_Pos) /*!< Bit mask of VAL field.                      */
-  #define VREGMAIN_ITHRESHOLD_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                              */
-  #define VREGMAIN_ITHRESHOLD_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                               */
 
 
 /* VREGMAIN_ITHRESHOLDPWM: Current threshold for half clock speed in PWM mode */
@@ -169404,8 +169121,6 @@ typedef struct {
 /* VAL @Bits 0..4 : Current consumption */
   #define VREGMAIN_ITHRESHOLDPWM_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
   #define VREGMAIN_ITHRESHOLDPWM_VAL_Msk (0x1FUL << VREGMAIN_ITHRESHOLDPWM_VAL_Pos) /*!< Bit mask of VAL field.                */
-  #define VREGMAIN_ITHRESHOLDPWM_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                           */
-  #define VREGMAIN_ITHRESHOLDPWM_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                            */
 
 
 /* VREGMAIN_ITHRESHOLD0V8LOW: Current threshold LDO toggle at low 0V8 current consumption */
@@ -169414,8 +169129,6 @@ typedef struct {
 /* VAL @Bits 0..4 : Current consumption */
   #define VREGMAIN_ITHRESHOLD0V8LOW_VAL_Pos (0UL)    /*!< Position of VAL field.                                               */
   #define VREGMAIN_ITHRESHOLD0V8LOW_VAL_Msk (0x1FUL << VREGMAIN_ITHRESHOLD0V8LOW_VAL_Pos) /*!< Bit mask of VAL field.          */
-  #define VREGMAIN_ITHRESHOLD0V8LOW_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                        */
-  #define VREGMAIN_ITHRESHOLD0V8LOW_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                         */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -169443,8 +169156,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage reference trimming value */
   #define VREGMRAM_TRIM_VBG_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
   #define VREGMRAM_TRIM_VBG_VAL_Msk (0xFUL << VREGMRAM_TRIM_VBG_VAL_Pos) /*!< Bit mask of VAL field.                           */
-  #define VREGMRAM_TRIM_VBG_VAL_Min (0xFFFFFFFFUL)   /*!< Min value of VAL field.                                              */
-  #define VREGMRAM_TRIM_VBG_VAL_Max (0xFFFFFFFFUL)   /*!< Max size of VAL field.                                               */
 
 
 /* VREGMRAM_TRIM_BIAS: Bias trim */
@@ -169466,8 +169177,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value */
   #define VREGMRAM_TRIM_VPR_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
   #define VREGMRAM_TRIM_VPR_VAL_Msk (0xFUL << VREGMRAM_TRIM_VPR_VAL_Pos) /*!< Bit mask of VAL field.                           */
-  #define VREGMRAM_TRIM_VPR_VAL_Min (0xFFFFFFFFUL)   /*!< Min value of VAL field.                                              */
-  #define VREGMRAM_TRIM_VPR_VAL_Max (0xFFFFFFFFUL)   /*!< Max size of VAL field.                                               */
 
 
 /* VREGMRAM_TRIM_VREF: VREF reference voltage trim for 0.6V VREF */
@@ -169476,8 +169185,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value */
   #define VREGMRAM_TRIM_VREF_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
   #define VREGMRAM_TRIM_VREF_VAL_Msk (0xFUL << VREGMRAM_TRIM_VREF_VAL_Pos) /*!< Bit mask of VAL field.                         */
-  #define VREGMRAM_TRIM_VREF_VAL_Min (0xFFFFFFFFUL)  /*!< Min value of VAL field.                                              */
-  #define VREGMRAM_TRIM_VREF_VAL_Max (0xFFFFFFFFUL)  /*!< Max size of VAL field.                                               */
 
 
 
@@ -170055,8 +169762,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value */
   #define VREGUSB_TRIM_TRIMVDD_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREGUSB_TRIM_TRIMVDD_VAL_Msk (0xFUL << VREGUSB_TRIM_TRIMVDD_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VREGUSB_TRIM_TRIMVDD_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREGUSB_TRIM_TRIMVDD_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 /* VREGUSB_TRIM_TRIMIBP: Trim 10uA IBP bias current */
@@ -170065,8 +169770,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Bias current trimming value */
   #define VREGUSB_TRIM_TRIMIBP_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREGUSB_TRIM_TRIMIBP_VAL_Msk (0xFUL << VREGUSB_TRIM_TRIMIBP_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VREGUSB_TRIM_TRIMIBP_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREGUSB_TRIM_TRIMIBP_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 /* VREGUSB_TRIM_TRIM0V8: Trim USB PHY 0.8V DVDD */
@@ -170075,8 +169778,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value */
   #define VREGUSB_TRIM_TRIM0V8_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREGUSB_TRIM_TRIM0V8_VAL_Msk (0xFUL << VREGUSB_TRIM_TRIM0V8_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VREGUSB_TRIM_TRIM0V8_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREGUSB_TRIM_TRIM0V8_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 /* VREGUSB_TRIM_TRIM3V3: Trim USB PHY 3.3V VDD */
@@ -170085,8 +169786,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value */
   #define VREGUSB_TRIM_TRIM3V3_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREGUSB_TRIM_TRIM3V3_VAL_Msk (0xFUL << VREGUSB_TRIM_TRIM3V3_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VREGUSB_TRIM_TRIM3V3_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREGUSB_TRIM_TRIM3V3_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 
@@ -170806,8 +170505,6 @@ typedef struct {
 /* VAL @Bits 0..6 : Current reference trimming value */
   #define VREGVS0V8_TRIM_IREF_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
   #define VREGVS0V8_TRIM_IREF_VAL_Msk (0x7FUL << VREGVS0V8_TRIM_IREF_VAL_Pos) /*!< Bit mask of VAL field.                      */
-  #define VREGVS0V8_TRIM_IREF_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                              */
-  #define VREGVS0V8_TRIM_IREF_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                               */
 
 
 /* VREGVS0V8_TRIM_HIGHPOWER: High power mode output voltage offset trimming */
@@ -170816,8 +170513,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value */
   #define VREGVS0V8_TRIM_HIGHPOWER_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
   #define VREGVS0V8_TRIM_HIGHPOWER_VAL_Msk (0xFUL << VREGVS0V8_TRIM_HIGHPOWER_VAL_Pos) /*!< Bit mask of VAL field.             */
-  #define VREGVS0V8_TRIM_HIGHPOWER_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                         */
-  #define VREGVS0V8_TRIM_HIGHPOWER_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                          */
 
 
 /* VREGVS0V8_TRIM_LOWPOWER: Low power mode output voltage offset trimming */
@@ -170826,8 +170521,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Voltage offset trimming value. */
   #define VREGVS0V8_TRIM_LOWPOWER_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
   #define VREGVS0V8_TRIM_LOWPOWER_VAL_Msk (0xFUL << VREGVS0V8_TRIM_LOWPOWER_VAL_Pos) /*!< Bit mask of VAL field.               */
-  #define VREGVS0V8_TRIM_LOWPOWER_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                          */
-  #define VREGVS0V8_TRIM_LOWPOWER_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                           */
 
 
 /* VREGVS0V8_TRIM_ULPR: ULPR mode comparator offset trimming */
@@ -170836,8 +170529,6 @@ typedef struct {
 /* VAL @Bits 0..2 : Comparator offset trimming value. */
   #define VREGVS0V8_TRIM_ULPR_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
   #define VREGVS0V8_TRIM_ULPR_VAL_Msk (0x7UL << VREGVS0V8_TRIM_ULPR_VAL_Pos) /*!< Bit mask of VAL field.                       */
-  #define VREGVS0V8_TRIM_ULPR_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                              */
-  #define VREGVS0V8_TRIM_ULPR_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                               */
 
 
 
@@ -171542,8 +171233,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Output voltage value */
   #define VREGVS0V8_VOUTHP_VAL_Pos (0UL)             /*!< Position of VAL field.                                               */
   #define VREGVS0V8_VOUTHP_VAL_Msk (0x3FUL << VREGVS0V8_VOUTHP_VAL_Pos) /*!< Bit mask of VAL field.                            */
-  #define VREGVS0V8_VOUTHP_VAL_Min (0xFFFFFFFFUL)    /*!< Min value of VAL field.                                              */
-  #define VREGVS0V8_VOUTHP_VAL_Max (0xFFFFFFFFUL)    /*!< Max size of VAL field.                                               */
 
 
 /* VREGVS0V8_VOUTLP: Low power mode output voltage programming */
@@ -171552,8 +171241,6 @@ typedef struct {
 /* VAL @Bits 0..5 : Output voltage value */
   #define VREGVS0V8_VOUTLP_VAL_Pos (0UL)             /*!< Position of VAL field.                                               */
   #define VREGVS0V8_VOUTLP_VAL_Msk (0x3FUL << VREGVS0V8_VOUTLP_VAL_Pos) /*!< Bit mask of VAL field.                            */
-  #define VREGVS0V8_VOUTLP_VAL_Min (0xFFFFFFFFUL)    /*!< Min value of VAL field.                                              */
-  #define VREGVS0V8_VOUTLP_VAL_Max (0xFFFFFFFFUL)    /*!< Max size of VAL field.                                               */
 
 
 /* VREGVS0V8_MODE: Voltage regulator mode */
@@ -171576,8 +171263,6 @@ typedef struct {
 /* VAL @Bits 0..3 : Current consumption */
   #define VREGVS0V8_ITHRESHOLD_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VREGVS0V8_ITHRESHOLD_VAL_Msk (0xFUL << VREGVS0V8_ITHRESHOLD_VAL_Pos) /*!< Bit mask of VAL field.                     */
-  #define VREGVS0V8_ITHRESHOLD_VAL_Min (0xFFFFFFFFUL) /*!< Min value of VAL field.                                             */
-  #define VREGVS0V8_ITHRESHOLD_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */

@@ -488,20 +488,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR_PRESENT 1
 #define VPR_COUNT 3
 
-#define VPR120_INIT_PC_RESET_VALUE 0x2f800000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x2F800000                        */
+#define VPR120_INIT_PC_RESET_VALUE 0x2F800000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x2F800000                        */
 #define VPR120_VPR_START_RESET_VALUE 1               /*!< Self-booting (VPR_START_RESET_VALUE): 1                              */
-#define VPR120_RAM_BASE_ADDR 0x2f800000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2F800000                     */
+#define VPR120_RAM_BASE_ADDR 0x2F800000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2F800000                     */
 #define VPR120_RAM_SZ 16                             /*!< VPR RAM size (RAM_SZ): 16 (Value in bytes is computed as 2^(RAM
                                                           size))*/
-#define VPR120_VPRSAVEDCTX_REGNAME nrf_memconf120->power[0].ret /*!< (unspecified)                                             */
+#define VPR120_VPRSAVEDCTX_REGNAME NRF_MEMCONF120->POWER[0].RET /*!< (unspecified)                                             */
 #define VPR120_VPRSAVEDCTX_REGBIT 22                 /*!< (unspecified)                                                        */
 #define VPR120_RETAINED 0                            /*!< Retain registers in Deep Sleep mode: 0                               */
 #define VPR120_VPRSAVEDCTX 1                         /*!< (unspecified)                                                        */
-#define VPR120_VPRSAVEADDR 0x2f800000                /*!< VPR context save address: 0x2F800000                                 */
-#define VPR120_VPRREMAPADDRVTOB 0x2f840000           /*!< VPR remap address: 0x2F840000                                        */
+#define VPR120_VPRSAVEADDR 0x2F800000                /*!< VPR context save address: 0x2F800000                                 */
+#define VPR120_VPRREMAPADDRVTOB 0x2F840000           /*!< VPR remap address: 0x2F840000                                        */
 #define VPR120_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..31                                                   */
 #define VPR120_VEVIF_NTASKS_MAX 31                   /*!< VEVIF tasks: 0..31                                                   */
-#define VPR120_VEVIF_TASKS_MASK 0xfffff0ff           /*!< Mask of supported VEVIF tasks: 0xFFFFF0FF                            */
+#define VPR120_VEVIF_TASKS_MASK 0xFFFFF0FF           /*!< Mask of supported VEVIF tasks: 0xFFFFF0FF                            */
 #define VPR120_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR120_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR120_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
@@ -510,18 +510,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define VPR121_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
 #define VPR121_VPR_START_RESET_VALUE 0               /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
-#define VPR121_RAM_BASE_ADDR 0x2f890000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2F890000                     */
+#define VPR121_RAM_BASE_ADDR 0x2F890000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2F890000                     */
 #define VPR121_RAM_SZ 15                             /*!< VPR RAM size (RAM_SZ): 15 (Value in bytes is computed as 2^(RAM
                                                           size))*/
-#define VPR121_VPRSAVEDCTX_REGNAME nrf_memconf120->power[0].ret /*!< (unspecified)                                             */
+#define VPR121_VPRSAVEDCTX_REGNAME NRF_MEMCONF120->POWER[0].RET /*!< (unspecified)                                             */
 #define VPR121_VPRSAVEDCTX_REGBIT 23                 /*!< (unspecified)                                                        */
 #define VPR121_RETAINED 0                            /*!< Retain registers in Deep Sleep mode: 0                               */
 #define VPR121_VPRSAVEDCTX 1                         /*!< (unspecified)                                                        */
-#define VPR121_VPRSAVEADDR 0x2f800000                /*!< VPR context save address: 0x2F800000                                 */
+#define VPR121_VPRSAVEADDR 0x2F800000                /*!< VPR context save address: 0x2F800000                                 */
 #define VPR121_VPRREMAPADDRVTOB 0x00000000           /*!< VPR remap address: 0x00000000                                        */
 #define VPR121_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..31                                                   */
 #define VPR121_VEVIF_NTASKS_MAX 31                   /*!< VEVIF tasks: 0..31                                                   */
-#define VPR121_VEVIF_TASKS_MASK 0xffff0000           /*!< Mask of supported VEVIF tasks: 0xFFFF0000                            */
+#define VPR121_VEVIF_TASKS_MASK 0xFFFF0000           /*!< Mask of supported VEVIF tasks: 0xFFFF0000                            */
 #define VPR121_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR121_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR121_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
@@ -530,18 +530,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define VPR130_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
 #define VPR130_VPR_START_RESET_VALUE 0               /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
-#define VPR130_RAM_BASE_ADDR 0x2fc00000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2FC00000                     */
+#define VPR130_RAM_BASE_ADDR 0x2FC00000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2FC00000                     */
 #define VPR130_RAM_SZ 15                             /*!< VPR RAM size (RAM_SZ): 15 (Value in bytes is computed as 2^(RAM
                                                           size))*/
-#define VPR130_VPRSAVEDCTX_REGNAME nrf_memconf130->power[0].ret /*!< (unspecified)                                             */
+#define VPR130_VPRSAVEDCTX_REGNAME NRF_MEMCONF130->POWER[0].RET /*!< (unspecified)                                             */
 #define VPR130_VPRSAVEDCTX_REGBIT 5                  /*!< (unspecified)                                                        */
 #define VPR130_RETAINED 0                            /*!< Retain registers in Deep Sleep mode: 0                               */
 #define VPR130_VPRSAVEDCTX 1                         /*!< (unspecified)                                                        */
-#define VPR130_VPRSAVEADDR 0x2f800000                /*!< VPR context save address: 0x2F800000                                 */
+#define VPR130_VPRSAVEADDR 0x2F800000                /*!< VPR context save address: 0x2F800000                                 */
 #define VPR130_VPRREMAPADDRVTOB 0x00000000           /*!< VPR remap address: 0x00000000                                        */
 #define VPR130_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..15                                                   */
 #define VPR130_VEVIF_NTASKS_MAX 15                   /*!< VEVIF tasks: 0..15                                                   */
-#define VPR130_VEVIF_TASKS_MASK 0xfffffff0           /*!< Mask of supported VEVIF tasks: 0xFFFFFFF0                            */
+#define VPR130_VEVIF_TASKS_MASK 0xFFFFFFF0           /*!< Mask of supported VEVIF tasks: 0xFFFFFFF0                            */
 #define VPR130_VEVIF_NDPPI_MIN 8                     /*!< VEVIF DPPI channels: 8..11                                           */
 #define VPR130_VEVIF_NDPPI_MAX 11                    /*!< VEVIF DPPI channels: 8..11                                           */
 #define VPR130_VEVIF_NEVENTS_MIN 12                  /*!< VEVIF events: 12..15                                                 */
@@ -921,7 +921,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P0_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
-#define P0_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P0_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
 #define P0_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P0_PWRCTRL 0                                 /*!< (unspecified)                                                        */
 #define P0_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
@@ -931,7 +931,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P1_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
-#define P1_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P1_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
 #define P1_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P1_PWRCTRL 0                                 /*!< (unspecified)                                                        */
 #define P1_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
@@ -941,7 +941,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P2_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
-#define P2_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P2_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
 #define P2_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P2_PWRCTRL 0                                 /*!< (unspecified)                                                        */
 #define P2_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
@@ -951,7 +951,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P6_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P6_PIN_NUM_MAX 13                            /*!< (unspecified)                                                        */
-#define P6_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P6_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
 #define P6_DRIVECTRL 1                               /*!< (unspecified)                                                        */
 #define P6_PWRCTRL 0                                 /*!< (unspecified)                                                        */
 #define P6_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
@@ -961,7 +961,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P7_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P7_PIN_NUM_MAX 7                             /*!< (unspecified)                                                        */
-#define P7_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P7_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
 #define P7_DRIVECTRL 1                               /*!< (unspecified)                                                        */
 #define P7_PWRCTRL 0                                 /*!< (unspecified)                                                        */
 #define P7_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
@@ -971,7 +971,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P9_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P9_PIN_NUM_MAX 5                             /*!< (unspecified)                                                        */
-#define P9_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P9_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
 #define P9_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P9_PWRCTRL 1                                 /*!< (unspecified)                                                        */
 #define P9_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
