@@ -319,6 +319,16 @@ NRF_STATIC_INLINE void nrf_twis_enable(NRF_TWIS_Type * p_reg);
 NRF_STATIC_INLINE void nrf_twis_disable(NRF_TWIS_Type * p_reg);
 
 /**
+ * @brief Function for checking if the TWIS is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  The TWIS is enabled.
+ * @retval false The TWIS is not enabled.
+ */
+NRF_STATIC_INLINE bool nrf_twis_enable_check(NRF_TWIS_Type const * p_reg);
+
+/**
  * @brief Function for configuring TWIS pins.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -694,6 +704,11 @@ NRF_STATIC_INLINE void nrf_twis_enable(NRF_TWIS_Type * p_reg)
 NRF_STATIC_INLINE void nrf_twis_disable(NRF_TWIS_Type * p_reg)
 {
     p_reg->ENABLE = (TWIS_ENABLE_ENABLE_Disabled << TWIS_ENABLE_ENABLE_Pos);
+}
+
+NRF_STATIC_INLINE bool nrf_twis_enable_check(NRF_TWIS_Type const * p_reg)
+{
+    return (p_reg->ENABLE == (TWIS_ENABLE_ENABLE_Enabled << TWIS_ENABLE_ENABLE_Pos));
 }
 
 NRF_STATIC_INLINE void nrf_twis_pins_set(NRF_TWIS_Type * p_reg, uint32_t scl, uint32_t sda)
