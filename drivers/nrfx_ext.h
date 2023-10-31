@@ -46,6 +46,18 @@ extern "C" {
     #endif
 #endif
 
+#if defined(LUMOS_XXAA)
+    #if defined(NRF_SKIP_CLOCK_CONFIGURATION) || (defined(CONFIG_CPU_FREQ_MHZ) \
+        && (CONFIG_CPU_FREQ_MHZ==64))
+        #define NRF_CPU_FREQ_IS_64MHZ 1UL
+    #elif !defined(CONFIG_CPU_FREQ_MHZ) || (defined(CONFIG_CPU_FREQ_MHZ) \
+        && CONFIG_CPU_FREQ_MHZ==128)
+        #define NRF_CPU_FREQ_IS_128MHZ 1UL
+    #else
+        #error "Invalid MCU frequency"
+    #endif
+#endif
+
 /*------------------------------------------------------------------------------------------------*/
 /* End of Auxiliary Extended section                                                              */
 /*------------------------------------------------------------------------------------------------*/
