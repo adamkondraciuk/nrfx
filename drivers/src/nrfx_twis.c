@@ -539,9 +539,18 @@ nrfx_err_t nrfx_twis_reconfigure(nrfx_twis_t const *        p_instance,
     {
         return NRFX_ERROR_BUSY;
     }
-    nrf_twis_disable(p_instance->p_reg);
-    twis_configure(p_instance, p_config);
-    nrf_twis_enable(p_instance->p_reg);
+
+    if (nrf_twis_enable_check(p_instance->p_reg))
+    {
+        nrf_twis_disable(p_instance->p_reg);
+        twis_configure(p_instance, p_config);
+        nrf_twis_enable(p_instance->p_reg);
+    }
+    else
+    {
+        twis_configure(p_instance, p_config);
+    }
+
     return NRFX_SUCCESS;
 }
 
