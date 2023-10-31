@@ -76,13 +76,6 @@ extern "C" {
 #define NRF_SPIM_HAS_DMA_TASKS_EVENTS 0
 #endif
 
-/**
- * @brief This value can be used as a parameter for the @ref nrf_spim_pins_set
- *        function to specify that a given SPI signal (SCK, MOSI, or MISO)
- *        shall not be connected to a physical pin.
- */
-#define NRF_SPIM_PIN_NOT_CONNECTED  0xFFFFFFFF
-
 /** @brief Macro for checking if the hardware chip select function is available. */
 #if NRFX_FEATURE_PRESENT(SPIM, _FEATURE_HARDWARE_CSN_PRESENT) || defined(__NRFX_DOXYGEN__)
 #define NRF_SPIM_HAS_HW_CSN 1
@@ -130,6 +123,13 @@ extern "C" {
  */
 #define NRF_SPIM_DCX_CNT_ALL_CMD 0xF
 #endif
+
+/**
+ * @brief This value can be used as a parameter for the @ref nrf_spim_pins_set
+ *        function to specify that a given SPI signal (SCK, MOSI, or MISO)
+ *        shall not be connected to a physical pin.
+ */
+#define NRF_SPIM_PIN_NOT_CONNECTED  0xFFFFFFFF
 
 /** @brief Base frequency value 192 MHz for SPIM. */
 #define NRF_SPIM_BASE_FREQUENCY_192MHZ (192000000UL)
