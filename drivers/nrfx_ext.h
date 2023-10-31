@@ -385,28 +385,18 @@ extern "C" {
 /*------------------------------------------------------------------------------------------------*/
 
 #if defined(HALTIUM_XXAA)
-    #define NRF_SPIM_IS_128MHZ_SPIM(p_reg) false
-    #define NRF_SPIM_IS_64MHZ_SPIM(p_reg)  false
-    #define NRF_SPIM_IS_32MHZ_SPIM(p_reg)  false
-    #define NRF_SPIM_IS_16MHZ_SPIM(p_reg)  ( \
-           (p_reg == NRF_SPIM130)            \
-        || (p_reg == NRF_SPIM131)            \
-        || (p_reg == NRF_SPIM132)            \
-        || (p_reg == NRF_SPIM133)            \
-        || (p_reg == NRF_SPIM134)            \
-        || (p_reg == NRF_SPIM135)            \
-        || (p_reg == NRF_SPIM136)            \
-        || (p_reg == NRF_SPIM137))
+    #define NRF_SPIM_IS_320MHZ_SPIM(p_reg) ( \
+           (p_reg == NRF_SPIM120)            \
+        || (p_reg == NRF_SPIM121))
+
 #elif defined(LUMOS_XXAA)
-    #define NRF_SPIM_IS_128MHZ_SPIM(p_reg) false
-    #define NRF_SPIM_IS_64MHZ_SPIM(p_reg)  ( \
-           (p_reg == NRF_SPIM00))
-    #define NRF_SPIM_IS_32MHZ_SPIM(p_reg)  false
-    #define NRF_SPIM_IS_16MHZ_SPIM(p_reg)  ( \
-           (p_reg == NRF_SPIM20)             \
-        || (p_reg == NRF_SPIM21)             \
-        || (p_reg == NRF_SPIM22)             \
-        || (p_reg == NRF_SPIM30))
+    #if defined(NRF_CPU_FREQ_IS_128MHZ)
+        #define NRF_SPIM_IS_128MHZ_SPIM(p_reg) ( \
+                (p_reg == NRF_SPIM00))
+    #elif defined(NRF_CPU_FREQ_IS_64MHZ)
+        #define NRF_SPIM_IS_64MHZ_SPIM(p_reg)  ( \
+                (p_reg == NRF_SPIM00))
+    #endif
 #endif
 
 /*------------------------------------------------------------------------------------------------*/

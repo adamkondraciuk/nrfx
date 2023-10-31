@@ -131,23 +131,26 @@ extern "C" {
  */
 #define NRF_SPIM_PIN_NOT_CONNECTED  0xFFFFFFFF
 
+/** @brief Base frequency value 320 MHz for SPIM. */
+#define NRF_SPIM_BASE_FREQUENCY_320MHZ (NRFX_MHZ_TO_HZ(320UL))
+
 /** @brief Base frequency value 192 MHz for SPIM. */
-#define NRF_SPIM_BASE_FREQUENCY_192MHZ (192000000UL)
+#define NRF_SPIM_BASE_FREQUENCY_192MHZ (NRFX_MHZ_TO_HZ(192UL))
 
 /** @brief Base frequency value 128 MHz for SPIM. */
-#define NRF_SPIM_BASE_FREQUENCY_128MHZ (128000000UL)
+#define NRF_SPIM_BASE_FREQUENCY_128MHZ (NRFX_MHZ_TO_HZ(128UL))
 
 /** @brief Base frequency value 64 MHz for SPIM. */
-#define NRF_SPIM_BASE_FREQUENCY_64MHZ (64000000UL)
+#define NRF_SPIM_BASE_FREQUENCY_64MHZ  (NRFX_MHZ_TO_HZ(64UL))
 
 /** @brief Base frequency value 32 MHz for SPIM. */
-#define NRF_SPIM_BASE_FREQUENCY_32MHZ (32000000UL)
+#define NRF_SPIM_BASE_FREQUENCY_32MHZ  (NRFX_MHZ_TO_HZ(32UL))
 
 /** @brief Base frequency value 16 MHz for SPIM. */
-#define NRF_SPIM_BASE_FREQUENCY_16MHZ (16000000UL)
+#define NRF_SPIM_BASE_FREQUENCY_16MHZ  (NRFX_MHZ_TO_HZ(16UL))
 
 /** @brief Minimal SPIM frequency in Hz. */
-#define NRF_SPIM_MIN_FREQUENCY (125000UL)
+#define NRF_SPIM_MIN_FREQUENCY (NRFX_KHZ_TO_HZ(125UL))
 
 #if NRF_SPIM_HAS_PRESCALER
 /** @brief Maximum value of PRESCALER register. */
@@ -162,6 +165,16 @@ extern "C" {
 #define NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT SPIM_DMA_RX_MATCH_CANDIDATE_MaxCount
 #endif
 
+#if !defined(NRF_SPIM_IS_320MHZ_SPIM)
+/** @brief Macro for checking whether the base frequency for the specified SPIM instance is 320 MHz. */
+#define NRF_SPIM_IS_320MHZ_SPIM(p_reg) false
+#endif
+
+#if !defined(NRF_SPIM_IS_192MHZ_SPIM)
+/** @brief Macro for checking whether the base frequency for the specified SPIM instance is 192 MHz. */
+#define NRF_SPIM_IS_192MHZ_SPIM(p_reg) false
+#endif
+
 #if !defined(NRF_SPIM_IS_128MHZ_SPIM)
 /** @brief Macro for checking whether the base frequency for the specified SPIM instance is 128 MHz. */
 #define NRF_SPIM_IS_128MHZ_SPIM(p_reg) false
@@ -169,26 +182,27 @@ extern "C" {
 
 #if !defined(NRF_SPIM_IS_64MHZ_SPIM)
 /** @brief Macro for checking whether the base frequency for the specified SPIM instance is 64 MHz. */
-#define NRF_SPIM_IS_64MHZ_SPIM(p_reg) false
+#define NRF_SPIM_IS_64MHZ_SPIM(p_reg)  false
 #endif
 
 #if !defined(NRF_SPIM_IS_32MHZ_SPIM)
 /** @brief Macro for checking whether the base frequency for the specified SPIM instance is 32 MHz. */
-#define NRF_SPIM_IS_32MHZ_SPIM(p_reg) false
+#define NRF_SPIM_IS_32MHZ_SPIM(p_reg)  false
 #endif
 
 #if !defined(NRF_SPIM_IS_16MHZ_SPIM)
 /** @brief Macro for checking whether the base frequency for the specified SPIM instance is 16 MHz. */
-#define NRF_SPIM_IS_16MHZ_SPIM(p_reg) true
+#define NRF_SPIM_IS_16MHZ_SPIM(p_reg)  true
 #endif
 
 /** @brief Macro for getting base frequency value in Hz for the specified SPIM instance. */
 #define NRF_SPIM_BASE_FREQUENCY_GET(p_reg)                                 \
-    ((NRF_SPIM_IS_16MHZ_SPIM(p_reg))  ? (NRF_SPIM_BASE_FREQUENCY_16MHZ):   \
-    ((NRF_SPIM_IS_32MHZ_SPIM(p_reg))  ? (NRF_SPIM_BASE_FREQUENCY_32MHZ) :  \
-    ((NRF_SPIM_IS_64MHZ_SPIM(p_reg))  ? (NRF_SPIM_BASE_FREQUENCY_64MHZ) :  \
+    ((NRF_SPIM_IS_320MHZ_SPIM(p_reg)) ? (NRF_SPIM_BASE_FREQUENCY_320MHZ) : \
+    ((NRF_SPIM_IS_192MHZ_SPIM(p_reg)) ? (NRF_SPIM_BASE_FREQUENCY_192MHZ) : \
     ((NRF_SPIM_IS_128MHZ_SPIM(p_reg)) ? (NRF_SPIM_BASE_FREQUENCY_128MHZ) : \
-    (NRF_SPIM_BASE_FREQUENCY_192MHZ)))))
+    ((NRF_SPIM_IS_64MHZ_SPIM(p_reg))  ? (NRF_SPIM_BASE_FREQUENCY_64MHZ) :  \
+    ((NRF_SPIM_IS_32MHZ_SPIM(p_reg))  ? (NRF_SPIM_BASE_FREQUENCY_32MHZ) :  \
+    (NRF_SPIM_BASE_FREQUENCY_16MHZ))))))
 
 #if NRF_SPIM_HAS_PRESCALER
 /**
