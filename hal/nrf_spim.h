@@ -131,6 +131,22 @@ extern "C" {
  */
 #define NRF_SPIM_PIN_NOT_CONNECTED  0xFFFFFFFF
 
+#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
+/** @brief Max number of RX patterns. */
+#define NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT SPIM_DMA_RX_MATCH_CANDIDATE_MaxCount
+#endif
+
+#if NRF_SPIM_HAS_PRESCALER
+/** @brief Maximum value of PRESCALER register. */
+#define NRF_SPIM_PRESCALER_MAX SPIM_PRESCALER_DIVISOR_Max
+
+/** @brief Minimum value of PRESCALER register. */
+#define NRF_SPIM_PRESCALER_MIN SPIM_PRESCALER_DIVISOR_Min
+#endif
+
+/** @brief Minimal SPIM frequency in Hz. */
+#define NRF_SPIM_MIN_FREQUENCY (NRFX_KHZ_TO_HZ(125UL))
+
 /** @brief Base frequency value 320 MHz for SPIM. */
 #define NRF_SPIM_BASE_FREQUENCY_320MHZ (NRFX_MHZ_TO_HZ(320UL))
 
@@ -148,22 +164,6 @@ extern "C" {
 
 /** @brief Base frequency value 16 MHz for SPIM. */
 #define NRF_SPIM_BASE_FREQUENCY_16MHZ  (NRFX_MHZ_TO_HZ(16UL))
-
-/** @brief Minimal SPIM frequency in Hz. */
-#define NRF_SPIM_MIN_FREQUENCY (NRFX_KHZ_TO_HZ(125UL))
-
-#if NRF_SPIM_HAS_PRESCALER
-/** @brief Maximum value of PRESCALER register. */
-#define NRF_SPIM_PRESCALER_MAX SPIM_PRESCALER_DIVISOR_Max
-
-/** @brief Minimum value of PRESCALER register. */
-#define NRF_SPIM_PRESCALER_MIN SPIM_PRESCALER_DIVISOR_Min
-#endif
-
-#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
-/** @brief Max number of RX patterns. */
-#define NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT SPIM_DMA_RX_MATCH_CANDIDATE_MaxCount
-#endif
 
 #if !defined(NRF_SPIM_IS_320MHZ_SPIM)
 /** @brief Macro for checking whether the base frequency for the specified SPIM instance is 320 MHz. */
