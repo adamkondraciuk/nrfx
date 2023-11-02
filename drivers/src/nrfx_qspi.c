@@ -15,7 +15,7 @@
 #define QSPI_STD_CMD_RDSR 0x05
 
 /** @brief Byte used to mask status register and retrieve the write-in-progess bit. */
-#define QSPI_MEM_STATUSREG_WIP_Pos 0x01
+#define QSPI_MEM_STATUSREG_WIP_MASK 0x01
 
 /** @brief Default time used in timeout function. */
 #define QSPI_DEF_WAIT_TIME_US 10
@@ -672,7 +672,7 @@ nrfx_err_t nrfx_qspi_mem_busy_check(void)
         return ret_code;
     }
 
-    if ((status_value & QSPI_MEM_STATUSREG_WIP_Pos) != 0x00)
+    if ((status_value & QSPI_MEM_STATUSREG_WIP_MASK) != 0x00)
     {
         return NRFX_ERROR_BUSY;
     }
