@@ -55,6 +55,11 @@ extern "C" {
  */
 #define NRF_I2S_PIN_NOT_CONNECTED  0xFFFFFFFF
 
+/** @brief I2S SCK pin selection mask. */
+#define NRF_I2S_PSEL_SCK_PIN_MASK  I2S_PSEL_SCK_PIN_Msk
+
+/** @brief I2S SCK port selection mask. */
+#define NRF_I2S_PSEL_SCK_PORT_MASK I2S_PSEL_SCK_PORT_Msk
 
 /** @brief I2S tasks. */
 typedef enum
