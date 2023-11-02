@@ -27,6 +27,9 @@ extern "C" {
  */
 #define NRF_NFCT_MOD_CTRL_PIN_NOT_CONNECTED  0xFFFFFFFF
 
+/** @brief Maximum possible value of NFCT max frame delay. */
+#define NRF_NFCT_FRAME_DELAY_MAX_MAX_VALUE  NFCT_FRAMEDELAYMAX_FRAMEDELAYMAX_Msk
+
 #if defined(NFCT_NFCID1_THIRDLAST_S_Pos) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether NFCID1 register uses new layout. */
 #define NRF_NFCID1_HAS_NEW_LAYOUT 1

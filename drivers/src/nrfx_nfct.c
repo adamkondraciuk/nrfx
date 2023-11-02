@@ -769,7 +769,7 @@ nrfx_err_t nrfx_nfct_parameter_set(nrfx_nfct_param_t const * p_param)
         case NRFX_NFCT_PARAM_ID_FDT:
         {
             uint32_t delay     = p_param->data.fdt;
-            uint32_t delay_thr = NFCT_FRAMEDELAYMAX_FRAMEDELAYMAX_Msk;
+            uint32_t delay_thr = NRF_NFCT_FRAME_DELAY_MAX_MAX_VALUE;
             uint32_t delay_max;
 
             delay_max = (delay > delay_thr) ? delay_thr : delay;
@@ -785,7 +785,7 @@ nrfx_err_t nrfx_nfct_parameter_set(nrfx_nfct_param_t const * p_param)
         case NRFX_NFCT_PARAM_ID_FDT_MIN:
         {
             uint32_t delay = p_param->data.fdt_min;
-            uint32_t delay_thr = NFCT_FRAMEDELAYMAX_FRAMEDELAYMAX_Msk;
+            uint32_t delay_thr = NRF_NFCT_FRAME_DELAY_MAX_MAX_VALUE;
             uint32_t delay_min;
 
             delay_min = (delay > delay_thr) ? delay_thr : delay;
