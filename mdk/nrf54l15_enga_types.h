@@ -9952,7 +9952,7 @@ typedef struct {
   * @brief TRIMCNF [FICR_TRIMCNF] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t * ADDR;                             /*!< (@ 0x00000000) Address of the register which will be written         */
+  __IOM  uint32_t * ADDR;                             /*!< (@ 0x00000000) Address of the register which will be written         */
   __IM  uint32_t  DATA;                              /*!< (@ 0x00000004) Data to be written into the register                  */
 } NRF_FICR_TRIMCNF_Type;                             /*!< Size = 8 (0x008)                                                     */
   #define FICR_TRIMCNF_MaxCount (64UL)               /*!< Size of TRIMCNF[64] array.                                           */
