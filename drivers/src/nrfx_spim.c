@@ -498,6 +498,15 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
         return err_code;
     }
 
+    if (p_config)
+    {
+        err_code = spim_configuration_verify(p_instance, p_config);
+        if (err_code != NRFX_SUCCESS)
+        {
+            return err_code;
+        }
+    }
+
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_SPIM_ENABLED_COUNT] = {
         NRFX_INSTANCE_IRQ_HANDLERS_LIST(SPIM, spim)
@@ -517,11 +526,6 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
 
     if (p_config)
     {
-        err_code = spim_configuration_verify(p_instance, p_config);
-        if (err_code != NRFX_SUCCESS)
-        {
-            return err_code;
-        }
         spim_configure(p_instance, p_config);
     }
 
