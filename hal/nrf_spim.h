@@ -9,6 +9,22 @@
 extern "C" {
 #endif
 
+/*
+ * Macro for generating code blocks that allow extracting
+ * the maximum prescaler value allowed for the specified SPIM instance.
+ */
+#define _NRF_SPIM_PRESCALER_MAX_GET(periph_name, prefix, idx, p_reg)           \
+    (p_reg == NRFX_CONCAT(NRF_, periph_name, prefix, idx)) ?                   \
+        (NRFX_CONCAT(periph_name, prefix, idx, _PRESCALER_DIVISOR_RANGE_MAX)) :
+
+/*
+ * Macro for generating code blocks that allow extracting
+ * the minimum prescaler value allowed for the specified SPIM instance.
+ */
+#define _NRF_SPIM_PRESCALER_MIN_GET(periph_name, prefix, idx, p_reg)           \
+    (p_reg == NRFX_CONCAT(NRF_, periph_name, prefix, idx)) ?                   \
+        (NRFX_CONCAT(periph_name, prefix, idx, _PRESCALER_DIVISOR_RANGE_MIN)) :
+
 /**
  * @defgroup nrf_spim_hal SPIM HAL
  * @{
@@ -136,14 +152,6 @@ extern "C" {
 #define NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT SPIM_DMA_RX_MATCH_CANDIDATE_MaxCount
 #endif
 
-#if NRF_SPIM_HAS_PRESCALER
-/** @brief Maximum value of PRESCALER register. */
-#define NRF_SPIM_PRESCALER_MAX SPIM_PRESCALER_DIVISOR_Max
-
-/** @brief Minimum value of PRESCALER register. */
-#define NRF_SPIM_PRESCALER_MIN SPIM_PRESCALER_DIVISOR_Min
-#endif
-
 /** @brief Minimal SPIM frequency in Hz. */
 #define NRF_SPIM_MIN_FREQUENCY (NRFX_KHZ_TO_HZ(125UL))
 
@@ -206,6 +214,24 @@ extern "C" {
 
 #if NRF_SPIM_HAS_PRESCALER
 /**
+ * @brief Macro for getting the maximum value of PRESCALER register.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+#define NRF_SPIM_PRESCALER_MAX_GET(p_reg)                                   \
+    (NRFX_FOREACH_ENABLED(SPIM, _NRF_SPIM_PRESCALER_MAX_GET, (), (), p_reg) \
+     SPIM_PRESCALER_DIVISOR_Max)
+
+/**
+ * @brief Macro for getting the minimum value of PRESCALER register.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+#define NRF_SPIM_PRESCALER_MIN_GET(p_reg)                                   \
+    (NRFX_FOREACH_ENABLED(SPIM, _NRF_SPIM_PRESCALER_MIN_GET, (), (), p_reg) \
+     SPIM_PRESCALER_DIVISOR_Min)
+
+/**
  * @brief Macro for computing prescaler value for a given SPIM instance and desired frequency.
  *
  * @warning Not every combination of base and desired frequency is supported.
@@ -226,22 +252,22 @@ extern "C" {
  * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] frequency Desired frequency value in Hz.
  */
-#define NRF_SPIM_FREQUENCY_STATIC_CHECK(p_reg, frequency)                                          \
-    NRFX_STATIC_ASSERT(                                                                            \
-    NRFX_COND_CODE_1(NRF_SPIM_HAS_PRESCALER,                                                       \
-        ((NRF_SPIM_BASE_FREQUENCY_GET(p_reg) % (uint32_t)frequency == 0) &&                        \
-        (NRFX_IS_EVEN(NRF_SPIM_PRESCALER_CALCULATE(p_reg, (uint32_t)frequency))) &&                \
-        (NRF_SPIM_PRESCALER_CALCULATE(p_reg, (uint32_t)frequency) >= (NRF_SPIM_PRESCALER_MIN)) &&  \
-        (NRF_SPIM_PRESCALER_CALCULATE(p_reg, (uint32_t)frequency) <= (NRF_SPIM_PRESCALER_MAX)))    \
-        ,                                                                                          \
-        (((uint32_t)frequency == (uint32_t)NRFX_KHZ_TO_HZ(125)) ||                                 \
-         ((uint32_t)frequency == (uint32_t)NRFX_KHZ_TO_HZ(250)) ||                                 \
-         ((uint32_t)frequency == (uint32_t)NRFX_KHZ_TO_HZ(500)) ||                                 \
-         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(1))   ||                                 \
-         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(2))   ||                                 \
-         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(4))   ||                                 \
-         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(8))   ||                                 \
-         (((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(16)) && (NRF_SPIM_HAS_16_MHZ_FREQ)) ||  \
+#define NRF_SPIM_FREQUENCY_STATIC_CHECK(p_reg, frequency)                                                    \
+    NRFX_STATIC_ASSERT(                                                                                      \
+    NRFX_COND_CODE_1(NRF_SPIM_HAS_PRESCALER,                                                                 \
+        ((NRF_SPIM_BASE_FREQUENCY_GET(p_reg) % (uint32_t)frequency == 0) &&                                  \
+        (NRFX_IS_EVEN(NRF_SPIM_PRESCALER_CALCULATE(p_reg, (uint32_t)frequency))) &&                          \
+        (NRF_SPIM_PRESCALER_CALCULATE(p_reg, (uint32_t)frequency) >= (NRF_SPIM_PRESCALER_MIN_GET(p_reg))) && \
+        (NRF_SPIM_PRESCALER_CALCULATE(p_reg, (uint32_t)frequency) <= (NRF_SPIM_PRESCALER_MAX_GET(p_reg))))   \
+        ,                                                                                                    \
+        (((uint32_t)frequency == (uint32_t)NRFX_KHZ_TO_HZ(125)) ||                                           \
+         ((uint32_t)frequency == (uint32_t)NRFX_KHZ_TO_HZ(250)) ||                                           \
+         ((uint32_t)frequency == (uint32_t)NRFX_KHZ_TO_HZ(500)) ||                                           \
+         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(1))   ||                                           \
+         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(2))   ||                                           \
+         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(4))   ||                                           \
+         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(8))   ||                                           \
+         (((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(16)) && (NRF_SPIM_HAS_16_MHZ_FREQ)) ||            \
          (((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(32)) && (NRF_SPIM_HAS_32_MHZ_FREQ)))))
 
 /** @brief SPIM tasks. */
@@ -1083,8 +1109,8 @@ NRF_STATIC_INLINE uint32_t nrf_spim_int_enable_check(NRF_SPIM_Type const * p_reg
 NRF_STATIC_INLINE void nrf_spim_prescaler_set(NRF_SPIM_Type * p_reg,
                                               uint32_t        prescaler)
 {
-    NRFX_ASSERT(prescaler >= NRF_SPIM_PRESCALER_MIN);
-    NRFX_ASSERT(prescaler <= NRF_SPIM_PRESCALER_MAX);
+    NRFX_ASSERT(prescaler >= NRF_SPIM_PRESCALER_MIN_GET(p_reg));
+    NRFX_ASSERT(prescaler <= NRF_SPIM_PRESCALER_MAX_GET(p_reg));
     NRFX_ASSERT(NRFX_IS_EVEN(prescaler));
     p_reg->PRESCALER = prescaler;
 }

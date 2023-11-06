@@ -327,10 +327,10 @@ static bool spim_frequency_valid_check(nrfx_spim_t const * p_instance, uint32_t 
     uint32_t base_frequency = NRFX_SPIM_BASE_FREQUENCY_GET(p_instance);
     uint32_t prescaler = NRF_SPIM_PRESCALER_CALCULATE(p_instance->p_reg, frequency);
 
-    return (base_frequency % frequency == 0) &&
+    return ((base_frequency % frequency) < prescaler) &&
             NRFX_IS_EVEN(prescaler) &&
-            (prescaler <= NRF_SPIM_PRESCALER_MAX) &&
-            (prescaler >= NRF_SPIM_PRESCALER_MIN);
+            (prescaler <= NRF_SPIM_PRESCALER_MAX_GET(p_instance->p_reg)) &&
+            (prescaler >= NRF_SPIM_PRESCALER_MIN_GET(p_instance->p_reg));
 }
 
 static uint32_t spim_prescaler_calculate(nrfx_spim_t const * p_instance, uint32_t frequency)
