@@ -577,6 +577,16 @@ NRF_STATIC_INLINE void nrf_spim_enable(NRF_SPIM_Type * p_reg);
 NRF_STATIC_INLINE void nrf_spim_disable(NRF_SPIM_Type * p_reg);
 
 /**
+ * @brief Function for checking if the SPIM peripheral is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  The SPIM is enabled.
+ * @retval false The SPIM is not enabled.
+ */
+NRF_STATIC_INLINE bool nrf_spim_enable_check(NRF_SPIM_Type const * p_reg);
+
+/**
  * @brief Function for configuring SPIM pins.
  *
  * If a given signal is not needed, pass the @ref NRF_SPIM_PIN_NOT_CONNECTED
@@ -1109,6 +1119,11 @@ NRF_STATIC_INLINE void nrf_spim_enable(NRF_SPIM_Type * p_reg)
 NRF_STATIC_INLINE void nrf_spim_disable(NRF_SPIM_Type * p_reg)
 {
     p_reg->ENABLE = (SPIM_ENABLE_ENABLE_Disabled << SPIM_ENABLE_ENABLE_Pos);
+}
+
+NRF_STATIC_INLINE bool nrf_spim_enable_check(NRF_SPIM_Type const * p_reg)
+{
+    return p_reg->ENABLE == SPIM_ENABLE_ENABLE_Enabled;
 }
 
 NRF_STATIC_INLINE void nrf_spim_pins_set(NRF_SPIM_Type * p_reg,
