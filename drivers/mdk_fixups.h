@@ -1884,10 +1884,14 @@
     #define SAADC_CH_CONFIG_RESP_Pulldown (0x1UL)      /*!< Pull-down to GND                                                     */
     #define SAADC_CH_CONFIG_RESP_Pullup (0x2UL)        /*!< Pull-up to VDD_AO_1V8                                                */
 
-    //  #define SAADC_CH_CONFIG_GAIN_Gain2_3 (0x0UL)       /*!< 2/3                                                                  */
+    /* MLT-7243 */
+    #define SAADC_CH_CONFIG_GAIN_Gain2 (0x0UL)         /*!< 2                                                                    */
     #define SAADC_CH_CONFIG_GAIN_Gain1 (0x1UL)         /*!< 1                                                                    */
-    #define SAADC_CH_CONFIG_GAIN_Gain2 (0x2UL)         /*!< 2                                                                    */
-    #define SAADC_CH_CONFIG_GAIN_Gain4 (0x3UL)         /*!< 4                                                                    */
+    #define SAADC_CH_CONFIG_GAIN_Gain2_3 (0x2UL)       /*!< 2/3                                                                  */
+    #define SAADC_CH_CONFIG_GAIN_Gain1_2 (0x3UL)       /*!< 1/2                                                                  */
+    #define SAADC_CH_CONFIG_GAIN_Gain1_3 (0x5UL)       /*!< 1/3                                                                  */
+    #define SAADC_CH_CONFIG_GAIN_Gain1_4 (0x7UL)       /*!< 1/4                                                                  */
+    
     #define SAADC_CH_CONFIG_RESP_Pos (0UL) /*!< Position of RESP field. */
     #define SAADC_CH_CONFIG_RESP_Msk (0x3UL << SAADC_CH_CONFIG_RESP_Pos) /*!< Bit mask of RESP field.                            */
     #define SAADC_CH_CONFIG_RESN_Pos (4UL)             /*!< Position of RESN field.                                              */

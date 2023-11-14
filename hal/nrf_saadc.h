@@ -204,7 +204,9 @@ typedef enum
 #endif
     NRF_SAADC_GAIN1   = SAADC_CH_CONFIG_GAIN_Gain1,   ///< Gain factor 1.
     NRF_SAADC_GAIN2   = SAADC_CH_CONFIG_GAIN_Gain2,   ///< Gain factor 2.
+#if defined(SAADC_CH_CONFIG_GAIN_Gain4) || defined(__NRFX_DOXYGEN__)
     NRF_SAADC_GAIN4   = SAADC_CH_CONFIG_GAIN_Gain4,   ///< Gain factor 4.
+#endif
 } nrf_saadc_gain_t;
 
 /** @brief Reference selection for the analog-to-digital converter. */
