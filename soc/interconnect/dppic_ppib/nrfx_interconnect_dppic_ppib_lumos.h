@@ -7,30 +7,25 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif  
+#endif
 
-#define NRFX_INTERCONNECT_PPIB_MAP                         \
-{                                                          \
-    {                                                      \
-        .p_ppib1 = NRF_PPIB00_S,                           \
-        .p_ppib2 = NRF_PPIB10_S,                           \
-        .channels_mask = NRF_PPIB00_TO_PPIB10_CHANNEL_MASK \
-    },                                                     \
-    {                                                      \
-        .p_ppib1 = NRF_PPIB11_S,                           \
-        .p_ppib2 = NRF_PPIB21_S,                           \
-        .channels_mask = NRF_PPIB11_TO_PPIB21_CHANNEL_MASK \
-    },                                                     \
-    {                                                      \
-        .p_ppib1 = NRF_PPIB22_S,                           \
-        .p_ppib2 = NRF_PPIB30_S,                           \
-        .channels_mask = NRF_PPIB22_TO_PPIB30_CHANNEL_MASK \
-    },                                                     \
-    {                                                      \
-        .p_ppib1 = NRF_PPIB20_S,                           \
-        .p_ppib2 = NRF_PPIB01_S,                           \
-        .channels_mask = NRF_PPIB20_TO_PPIB01_CHANNEL_MASK \
-    },                                                     \
+#define NRFX_INTERCONNECT_PPIB_TASKS_GET(PPIB_INDEX) \
+    (NRFX_CONCAT(PPIB, PPIB_INDEX, _NTASKSEVENTS_MAX) + 1UL)
+
+#define NRFX_INTERCONNECT_PPIB(FIRST_PPIB_INDEX, SECOND_PPIB_INDEX)                                \
+{                                                                                                  \
+    .p_ppib1 = NRFX_CONCAT(NRF_PPIB, FIRST_PPIB_INDEX),                                            \
+    .p_ppib2 = NRFX_CONCAT(NRF_PPIB, SECOND_PPIB_INDEX),                                           \
+    .channels_mask = NRFX_BIT_MASK(NRFX_MIN(NRFX_INTERCONNECT_PPIB_TASKS_GET(FIRST_PPIB_INDEX),    \
+                                            NRFX_INTERCONNECT_PPIB_TASKS_GET(SECOND_PPIB_INDEX))), \
+}
+
+#define NRFX_INTERCONNECT_PPIB_MAP  \
+{                                   \
+    NRFX_INTERCONNECT_PPIB(00, 10), \
+    NRFX_INTERCONNECT_PPIB(11, 21), \
+    NRFX_INTERCONNECT_PPIB(22, 30), \
+    NRFX_INTERCONNECT_PPIB(20, 01), \
 }
 
 #define NRFX_INTERCONNECT_DPPIC_PPIB_MAP \
