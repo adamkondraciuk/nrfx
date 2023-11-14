@@ -341,6 +341,16 @@ NRF_STATIC_INLINE void nrf_spis_enable(NRF_SPIS_Type * p_reg);
 NRF_STATIC_INLINE void nrf_spis_disable(NRF_SPIS_Type * p_reg);
 
 /**
+ * @brief Function for checking if the SPIS peripheral is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  The SPIS is enabled.
+ * @retval false The SPIS is not enabled.
+ */
+NRF_STATIC_INLINE bool nrf_spis_enable_check(NRF_SPIS_Type const * p_reg);
+
+/**
  * @brief Function for retrieving the SPIS semaphore status.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -745,6 +755,11 @@ NRF_STATIC_INLINE void nrf_spis_enable(NRF_SPIS_Type * p_reg)
 NRF_STATIC_INLINE void nrf_spis_disable(NRF_SPIS_Type * p_reg)
 {
     p_reg->ENABLE = (SPIS_ENABLE_ENABLE_Disabled << SPIS_ENABLE_ENABLE_Pos);
+}
+
+NRF_STATIC_INLINE bool nrf_spis_enable_check(NRF_SPIS_Type const * p_reg)
+{
+    return p_reg->ENABLE == SPIS_ENABLE_ENABLE_Enabled;
 }
 
 NRF_STATIC_INLINE nrf_spis_semstat_t nrf_spis_semaphore_status_get(NRF_SPIS_Type const * p_reg)
