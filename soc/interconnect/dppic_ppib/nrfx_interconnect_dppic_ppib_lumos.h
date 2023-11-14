@@ -75,13 +75,13 @@ extern "C" {
         .apb_index     = NRF_APB_INDEX_MCU,             \
         .dppic         = NRF_DPPIC00,                   \
         .channels_mask = NRFX_BIT_MASK(DPPIC00_CH_NUM), \
-        .apb_size      = 0x20000                        \
+        .apb_size      = 0x40000                        \
     },                                                  \
     {                                                   \
         .apb_index     = NRF_APB_INDEX_RADIO,           \
         .dppic         = NRF_DPPIC10,                   \
         .channels_mask = NRFX_BIT_MASK(DPPIC10_CH_NUM), \
-        .apb_size      = 0x20000                        \
+        .apb_size      = 0x40000                        \
     },                                                  \
     {                                                   \
         .apb_index     = NRF_APB_INDEX_PERI,            \
