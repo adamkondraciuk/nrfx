@@ -190,6 +190,16 @@ NRF_STATIC_INLINE void nrf_cache_enable(NRF_CACHE_Type * p_reg);
 NRF_STATIC_INLINE void nrf_cache_disable(NRF_CACHE_Type * p_reg);
 
 /**
+ * @brief Function for checking if the CACHE peripheral is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  The CACHE is enabled.
+ * @retval false The CACHE is not enabled.
+ */
+NRF_STATIC_INLINE bool nrf_cache_enable_check(NRF_CACHE_Type const * p_reg);
+
+/**
  * @brief Function for invalidating the cache content.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -514,6 +524,11 @@ NRF_STATIC_INLINE void nrf_cache_enable(NRF_CACHE_Type * p_reg)
 NRF_STATIC_INLINE void nrf_cache_disable(NRF_CACHE_Type * p_reg)
 {
     p_reg->ENABLE = CACHE_ENABLE_ENABLE_Disabled;
+}
+
+NRF_STATIC_INLINE bool nrf_cache_enable_check(NRF_CACHE_Type const * p_reg)
+{
+    return p_reg->ENABLE == CACHE_ENABLE_ENABLE_Enabled;
 }
 
 NRF_STATIC_INLINE void nrf_cache_invalidate(NRF_CACHE_Type * p_reg)
