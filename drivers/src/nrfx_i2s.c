@@ -51,7 +51,9 @@ typedef struct
     bool skip_gpio_cfg  : 1;
     bool skip_psel_cfg  : 1;
 
+#if !NRFX_API_VER_AT_LEAST(3, 3, 0)
     uint16_t            buffer_size;
+#endif
     nrfx_i2s_buffers_t  next_buffers;
     nrfx_i2s_buffers_t  current_buffers;
 } nrfx_i2s_cb_t;
@@ -310,7 +312,9 @@ bool nrfx_i2s_init_check(nrfx_i2s_t const * p_instance)
 
 nrfx_err_t nrfx_i2s_start(nrfx_i2s_t const *         p_instance,
                           nrfx_i2s_buffers_t const * p_initial_buffers,
+#if !NRFX_API_VER_AT_LEAST(3, 3, 0)
                           uint16_t                   buffer_size,
+#endif
                           uint8_t                    flags)
 {
     NRFX_ASSERT(p_initial_buffers != NULL);
@@ -322,7 +326,11 @@ nrfx_err_t nrfx_i2s_start(nrfx_i2s_t const *         p_instance,
     NRFX_ASSERT((p_initial_buffers->p_tx_buffer == NULL) ||
                 (nrfx_is_in_ram(p_initial_buffers->p_tx_buffer) &&
                  nrfx_is_word_aligned(p_initial_buffers->p_tx_buffer)));
+#if NRFX_API_VER_AT_LEAST(3, 3, 0)
+    NRFX_ASSERT(p_initial_buffers->buffer_size != 0);
+#else
     NRFX_ASSERT(buffer_size != 0);
+#endif
     (void)(flags);
 
     nrfx_err_t err_code;
@@ -355,7 +363,9 @@ nrfx_err_t nrfx_i2s_start(nrfx_i2s_t const *         p_instance,
     p_cb->rx_ready       = false;
     p_cb->tx_ready       = false;
     p_cb->buffers_needed = false;
+#if !NRFX_API_VER_AT_LEAST(3, 3, 0)
     p_cb->buffer_size    = buffer_size;
+#endif
 
     // Set the provided initial buffers as next, they will become the current
     // ones after the IRQ handler is called for the first time, what will occur
@@ -374,12 +384,17 @@ nrfx_err_t nrfx_i2s_start(nrfx_i2s_t const *         p_instance,
                         (p_cb->use_tx ? NRF_I2S_INT_TXPTRUPD_MASK : 0UL) |
                         NRF_I2S_INT_STOPPED_MASK);
 
+#if NRFX_API_VER_AT_LEAST(3, 3, 0)
+    nrfy_i2s_buffers_set(p_instance->p_reg, &p_cb->next_buffers);
+#else
     const nrfy_i2s_xfer_desc_t xfer = {
-        .p_buffers   = &p_cb->next_buffers,
+        .p_rx_buffer = p_cb->next_buffers.p_rx_buffer,
+        .p_tx_buffer = p_cb->next_buffers.p_tx_buffer,
         .buffer_size = p_cb->buffer_size,
     };
 
     nrfy_i2s_buffers_set(p_instance->p_reg, &xfer);
+#endif
     nrfy_i2s_xfer_start(p_instance->p_reg, NULL);
 
     NRFX_LOG_INFO("Started.");
@@ -400,6 +415,9 @@ nrfx_err_t nrfx_i2s_next_buffers_set(nrfx_i2s_t const *         p_instance,
     NRFX_ASSERT((p_buffers->p_tx_buffer == NULL) ||
                 (nrfx_is_in_ram(p_buffers->p_tx_buffer) &&
                  nrfx_is_word_aligned(p_buffers->p_tx_buffer)));
+#if NRFX_API_VER_AT_LEAST(3, 3, 0)
+    NRFX_ASSERT(p_buffers->buffer_size != 0);
+#endif
 
     if (!p_cb->buffers_needed)
     {
@@ -432,12 +450,17 @@ nrfx_err_t nrfx_i2s_next_buffers_set(nrfx_i2s_t const *         p_instance,
         NRFX_ASSERT(p_buffers->p_rx_buffer != NULL);
     }
 
+#if NRFX_API_VER_AT_LEAST(3, 3, 0)
+    nrfy_i2s_buffers_set(p_instance->p_reg, p_buffers);
+#else
     nrfy_i2s_xfer_desc_t xfer = {
-        .p_buffers   = p_buffers,
+        .p_rx_buffer = p_buffers->p_rx_buffer,
+        .p_tx_buffer = p_buffers->p_tx_buffer,
         .buffer_size = p_cb->buffer_size,
     };
 
     nrfy_i2s_buffers_set(p_instance->p_reg, &xfer);
+#endif
 
     p_cb->next_buffers   = *p_buffers;
     p_cb->buffers_needed = false;
@@ -469,16 +492,24 @@ void nrfx_i2s_stop(nrfx_i2s_t const * p_instance)
 static void irq_handler(NRF_I2S_Type * p_reg, nrfx_i2s_cb_t * p_cb)
 {
     uint32_t event_mask;
+    nrfy_i2s_xfer_desc_t * p_xfer;
+
+#if NRFX_API_VER_AT_LEAST(3, 3, 0)
+    p_xfer = &p_cb->current_buffers;
+#else
     nrfy_i2s_xfer_desc_t xfer = {
-        .p_buffers   = &p_cb->current_buffers,
+        .p_rx_buffer = p_cb->current_buffers.p_rx_buffer,
+        .p_tx_buffer = p_cb->current_buffers.p_tx_buffer,
         .buffer_size = p_cb->buffer_size,
     };
+    p_xfer = &xfer;
+#endif
 
     event_mask = nrfy_i2s_events_process(p_reg,
                                          NRFY_EVENT_TO_INT_BITMASK(NRF_I2S_EVENT_TXPTRUPD) |
                                          NRFY_EVENT_TO_INT_BITMASK(NRF_I2S_EVENT_RXPTRUPD) |
                                          NRFY_EVENT_TO_INT_BITMASK(NRF_I2S_EVENT_STOPPED),
-                                         &xfer);
+                                         p_xfer);
 
     if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_I2S_EVENT_TXPTRUPD))
     {
