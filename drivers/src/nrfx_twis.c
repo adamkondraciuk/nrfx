@@ -800,7 +800,7 @@ bool nrfx_twis_is_busy(nrfx_twis_t const * p_instance)
 {
     twis_control_block_t const * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfx_twis_preprocess_status(p_instance);
     return NRFX_TWIS_SUBSTATE_IDLE != p_cb->substate;
