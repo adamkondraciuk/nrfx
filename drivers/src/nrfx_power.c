@@ -30,6 +30,11 @@ extern void nrfx_clock_irq_handler(void);
  * @{
  */
 
+#if (NRF_POWER_HAS_CONST_LATENCY && NRF_POWER_HAS_LOW_POWER)
+/** This variable is used as a reference counter of @ref nrfx_power_constlat_mode_request calls. */
+static uint8_t m_power_mode_refs = 0;
+#endif
+
 /**
  * This variable is used to check whether common POWER_CLOCK common interrupt
  * should be disabled or not if @ref nrfx_clock tries to disable the interrupt.
@@ -235,6 +240,51 @@ void nrfx_power_sleepevt_uninit(void)
     m_sleepevt_handler = NULL;
 }
 #endif /* NRF_POWER_HAS_SLEEPEVT */
+
+#if (NRF_POWER_HAS_CONST_LATENCY && NRF_POWER_HAS_LOW_POWER)
+nrfx_err_t nrfx_power_constlat_mode_request(void)
+{
+    NRFX_ASSERT(m_power_mode_refs != UINT8_MAX);
+
+    nrfx_err_t err_code = NRFX_ERROR_ALREADY;
+    NRFX_CRITICAL_SECTION_ENTER();
+
+    m_power_mode_refs++;
+
+    if (m_power_mode_refs == 1)
+    {
+        nrf_power_task_trigger(NRF_POWER, NRF_POWER_TASK_CONSTLAT);
+        err_code = NRFX_SUCCESS;
+    }
+    NRFX_CRITICAL_SECTION_EXIT();
+
+    return err_code;
+}
+
+nrfx_err_t nrfx_power_constlat_mode_free(void)
+{
+    NRFX_ASSERT(m_power_mode_refs != 0);
+
+    nrfx_err_t err_code = NRFX_ERROR_BUSY;
+    NRFX_CRITICAL_SECTION_ENTER();
+
+    m_power_mode_refs--;
+
+    if (m_power_mode_refs == 0)
+    {
+        nrf_power_task_trigger(NRF_POWER, NRF_POWER_TASK_LOWPWR);
+        err_code = NRFX_SUCCESS;
+    }
+    NRFX_CRITICAL_SECTION_EXIT();
+
+    return err_code;
+}
+
+nrfx_power_mode_t nrfx_power_mode_get(void)
+{
+    return m_power_mode_refs > 0 ? NRFX_POWER_MODE_CONSTLAT : NRFX_POWER_MODE_LOWPWR;
+}
+#endif
 
 #if NRF_POWER_HAS_USBREG
 void nrfx_power_usbevt_init(nrfx_power_usbevt_config_t const * p_config)
