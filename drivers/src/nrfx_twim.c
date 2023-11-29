@@ -268,6 +268,9 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
         p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
         if (!pins_configure(p_config))
         {
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
+            nrfx_prs_release(p_instance->p_twim);
+#endif
             return NRFX_ERROR_INVALID_PARAM;
         }
 
