@@ -471,6 +471,9 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
     // Handle case when other user (e.g. bootloader) left RX in active state.
     if (!prepare_rx(p_instance->p_reg))
     {
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
+        nrfx_prs_release(p_instance->p_reg);
+#endif
         return NRFX_ERROR_INTERNAL;
     }
 
@@ -478,6 +481,9 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
 
     if (!prepare_tx(p_instance->p_reg, p_config->tx_stop_on_end))
     {
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
+        nrfx_prs_release(p_instance->p_reg);
+#endif
         return NRFX_ERROR_INTERNAL;
     }
 
