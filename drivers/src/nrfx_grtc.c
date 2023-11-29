@@ -736,7 +736,7 @@ nrfx_err_t nrfx_grtc_syscounter_capture(uint8_t channel)
         return err_code;
     }
     channel_used_mark(channel);
-    nrfy_grtc_task_trigger(NRF_GRTC, nrfy_grtc_capture_task_get(channel));
+    nrfy_grtc_task_trigger(NRF_GRTC, nrfy_grtc_sys_counter_capture_task_get(channel));
 
     NRFX_LOG_INFO("GRTC SYSCOUNTER capture for channel %u triggered.", (uint32_t)channel);
     return err_code;

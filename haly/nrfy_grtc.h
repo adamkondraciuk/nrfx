@@ -10,9 +10,6 @@
 extern "C" {
 #endif
 
-/* TODO: [NRFX-2210] Remove and replace definition. */
-#define nrfy_grtc_sys_counter_capture_task_get nrfy_grtc_capture_task_get
-
 NRFY_STATIC_INLINE void __nrfy_internal_grtc_event_enabled_clear(NRF_GRTC_Type *  p_reg,
                                                                  uint32_t         mask,
                                                                  nrf_grtc_event_t event);
@@ -582,8 +579,8 @@ NRFY_STATIC_INLINE void nrfy_grtc_task_trigger(NRF_GRTC_Type * p_reg, nrf_grtc_t
     nrf_barrier_w();
 }
 
-/** @refhal{nrf_grtc_capture_task_get} */
-NRFY_STATIC_INLINE nrf_grtc_task_t nrfy_grtc_capture_task_get(uint8_t cc_channel)
+/** @refhal{nrf_grtc_sys_counter_capture_task_get} */
+NRFY_STATIC_INLINE nrf_grtc_task_t nrfy_grtc_sys_counter_capture_task_get(uint8_t cc_channel)
 {
     return nrf_grtc_sys_counter_capture_task_get(cc_channel);
 }

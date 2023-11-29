@@ -134,10 +134,6 @@ extern "C" {
 #define NRF_GRTC_SYSCOUNTER_ALL_CHANNELS_INT_MASK \
     ((uint32_t)(((1 << NRF_GRTC_SYSCOUNTER_CC_COUNT) - 1) << GRTC_INTEN0_COMPARE0_Pos))
 
-/* TODO: [NRFX-2210] Remove and replace definition. */
-/** @brief Alias for capture task getter. */
-#define nrf_grtc_sys_counter_capture_task_get nrf_grtc_capture_task_get
-
 /** @brief GRTC tasks. */
 typedef enum
 {
@@ -651,7 +647,7 @@ NRF_STATIC_INLINE void nrf_grtc_task_trigger(NRF_GRTC_Type * p_reg, nrf_grtc_tas
  *
  * @return Capture task.
  */
-NRF_STATIC_INLINE nrf_grtc_task_t nrf_grtc_capture_task_get(uint8_t cc_channel);
+NRF_STATIC_INLINE nrf_grtc_task_t nrf_grtc_sys_counter_capture_task_get(uint8_t cc_channel);
 
 /**
  * @brief Function for enabling SYSCOUNTER compare event.
@@ -1170,7 +1166,7 @@ NRF_STATIC_INLINE void nrf_grtc_task_trigger(NRF_GRTC_Type * p_reg, nrf_grtc_tas
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-NRF_STATIC_INLINE nrf_grtc_task_t nrf_grtc_capture_task_get(uint8_t cc_channel)
+NRF_STATIC_INLINE nrf_grtc_task_t nrf_grtc_sys_counter_capture_task_get(uint8_t cc_channel)
 {
     return (nrf_grtc_task_t)NRFX_OFFSETOF(NRF_GRTC_Type, TASKS_CAPTURE[cc_channel]);
 }
