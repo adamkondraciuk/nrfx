@@ -280,6 +280,9 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
 
     if (err_code != NRFX_SUCCESS)
     {
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
+        nrfx_prs_release(p_spis);
+#endif
         err_code = NRFX_ERROR_INTERNAL;
         NRFX_LOG_ERROR("Function: %s, error code: %s.",
                         __func__,
