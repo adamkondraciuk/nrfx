@@ -386,7 +386,9 @@ NRF_STATIC_INLINE uint32_t nrf_vpr_csr_machine_exception_pc_get(void)
 
 NRF_STATIC_INLINE nrf_vpr_csr_trap_cause_t nrf_vpr_csr_machine_trap_cause_code_get(void)
 {
-    return nrf_csr_read(VPRCSR_MCAUSE) & VPRCSR_MCAUSE_EXCEPTIONCODE_Msk;
+    return (nrf_vpr_csr_trap_cause_t)((nrf_csr_read(VPRCSR_MCAUSE)
+            & VPRCSR_MCAUSE_EXCEPTIONCODE_Msk)
+           >> VPRCSR_MCAUSE_EXCEPTIONCODE_Pos);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_machine_trap_interrupt_check(void)
@@ -538,9 +540,9 @@ NRF_STATIC_INLINE void nrf_vpr_csr_sleep_state_set(nrf_vpr_csr_sleep_state_t sta
 
 NRF_STATIC_INLINE nrf_vpr_csr_sleep_state_t nrf_vpr_csr_sleep_state_get(void)
 {
-    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL)
+    return (nrf_vpr_csr_sleep_state_t)((nrf_csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL)
             & VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_SLEEPSTATE_Msk)
-           >> VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_SLEEPSTATE_Pos;
+           >> VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_SLEEPSTATE_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_return_to_sleep_set(bool enable)
@@ -631,9 +633,9 @@ NRF_STATIC_INLINE void nrf_vpr_csr_irq_stacking_set(nrf_vpr_csr_stacking_t mode)
 
 NRF_STATIC_INLINE nrf_vpr_csr_stacking_t nrf_vpr_csr_irq_stacking_get(void)
 {
-    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
+    return (nrf_vpr_csr_stacking_t)((nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
             & VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Msk)
-           >> VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Pos;
+           >> VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_transaction_timeout_exception_set(bool enable)
