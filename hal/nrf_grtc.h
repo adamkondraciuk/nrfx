@@ -37,10 +37,6 @@ extern "C" {
  * @{
  * @ingroup nrf_grtc
  * @brief   Hardware access layer for managing the Global Real Time Counter (GRTC) peripheral.
- *
- * @note The GRTC peripheral includes two counters:
- *         32 kHz real time counter (marked as 'RTCOUNTER') and
- *         1 MHz system counter (marked as 'SYSCOUNTER').
  */
 
 #if NRFX_CHECK(GRTC_PWMREGS) || defined(__NRFX_DOXYGEN__)
@@ -72,7 +68,7 @@ extern "C" {
 #endif
 
 #if !defined(NRF_GRTC_HAS_EXTENDED)
-#if defined(NRF_SYSCTRL) || defined(LUMOS_XXAA) || defined(__NRFX_DOXYGEN__)
+#if defined(LUMOS_XXAA) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether GRTC has has extended functionality. */
 #define NRF_GRTC_HAS_EXTENDED 1
 #else
@@ -124,7 +120,7 @@ extern "C" {
 /** @brief Macro for creating the interrupt bitmask for the specified compare channel. */
 #define NRF_GRTC_CHANNEL_INT_MASK(ch) ((uint32_t)(NRF_GRTC_INT_COMPARE0_MASK) << (ch))
 
-/** @brief Main channel that can be used only by SysCtrl. */
+/** @brief Main channel that can be used only by the owner of GRTC. */
 #define NRF_GRTC_MAIN_CC_CHANNEL 0
 
 /** @brief Bitmask of interrupt enable. */
@@ -137,9 +133,11 @@ extern "C" {
 /** @brief GRTC tasks. */
 typedef enum
 {
+#if NRF_GRTC_HAS_EXTENDED
     NRF_GRTC_TASK_START      = offsetof(NRF_GRTC_Type, TASKS_START),       /**< Start. */
     NRF_GRTC_TASK_STOP       = offsetof(NRF_GRTC_Type, TASKS_STOP),        /**< Stop. */
     NRF_GRTC_TASK_CLEAR      = offsetof(NRF_GRTC_Type, TASKS_CLEAR),       /**< Clear. */
+#endif
 #if NRF_GRTC_HAS_PWM
     NRF_GRTC_TASK_PWM_START  = offsetof(NRF_GRTC_Type, TASKS_PWMSTART),    /**< Start the PWM. */
     NRF_GRTC_TASK_PWM_STOP   = offsetof(NRF_GRTC_Type, TASKS_PWMSTOP),     /**< Stop the PWM. */
@@ -156,12 +154,13 @@ typedef enum
     NRF_GRTC_TASK_CAPTURE_9  = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[9]),  /**< Capture the counter value on channel 9. */
     NRF_GRTC_TASK_CAPTURE_10 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[10]), /**< Capture the counter value on channel 10. */
     NRF_GRTC_TASK_CAPTURE_11 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[11]), /**< Capture the counter value on channel 11. */
-#if !defined(LUMOS_XXAA)
+#if NRF_GRTC_SYSCOUNTER_CC_COUNT > 12
     NRF_GRTC_TASK_CAPTURE_12 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[12]), /**< Capture the counter value on channel 12. */
     NRF_GRTC_TASK_CAPTURE_13 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[13]), /**< Capture the counter value on channel 13. */
     NRF_GRTC_TASK_CAPTURE_14 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[14]), /**< Capture the counter value on channel 14. */
     NRF_GRTC_TASK_CAPTURE_15 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[15]), /**< Capture the counter value on channel 15. */
-#if !(defined(NRF54H20_XXAA) || defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_ENGA_XXAA))
+#endif
+#if NRF_GRTC_SYSCOUNTER_CC_COUNT > 16
     NRF_GRTC_TASK_CAPTURE_16 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[16]), /**< Capture the counter value on channel 16. */
     NRF_GRTC_TASK_CAPTURE_17 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[17]), /**< Capture the counter value on channel 17. */
     NRF_GRTC_TASK_CAPTURE_18 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[18]), /**< Capture the counter value on channel 18. */
@@ -170,8 +169,7 @@ typedef enum
     NRF_GRTC_TASK_CAPTURE_21 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[21]), /**< Capture the counter value on channel 21. */
     NRF_GRTC_TASK_CAPTURE_22 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[22]), /**< Capture the counter value on channel 22. */
     NRF_GRTC_TASK_CAPTURE_23 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[23]), /**< Capture the counter value on channel 23. */
-#endif // !(defined(NRF54H20_XXAA) || defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_ENGA_XXAA))
-#endif // !defined(LUMOS_XXAA)
+#endif
 } nrf_grtc_task_t;
 
 /** @brief GRTC events. */
@@ -190,11 +188,12 @@ typedef enum
     NRF_GRTC_EVENT_COMPARE_10      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[10]),     /**< Compare 10 event. */
     NRF_GRTC_EVENT_COMPARE_11      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[11]),     /**< Compare 11 event. */
     NRF_GRTC_EVENT_COMPARE_12      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[12]),     /**< Compare 12 event. */
-#if !defined(LUMOS_XXAA)
+#if NRF_GRTC_SYSCOUNTER_CC_COUNT > 12
     NRF_GRTC_EVENT_COMPARE_13      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[13]),     /**< Compare 13 event. */
     NRF_GRTC_EVENT_COMPARE_14      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[14]),     /**< Compare 14 event. */
     NRF_GRTC_EVENT_COMPARE_15      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[15]),     /**< Compare 15 event. */
-#if !(defined(NRF54H20_XXAA) || defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_ENGA_XXAA))
+#endif
+#if NRF_GRTC_SYSCOUNTER_CC_COUNT > 16
     NRF_GRTC_EVENT_COMPARE_16      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[16]),     /**< Compare 16 event. */
     NRF_GRTC_EVENT_COMPARE_17      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[17]),     /**< Compare 17 event. */
     NRF_GRTC_EVENT_COMPARE_18      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[18]),     /**< Compare 18 event. */
@@ -203,21 +202,24 @@ typedef enum
     NRF_GRTC_EVENT_COMPARE_21      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[21]),     /**< Compare 21 event. */
     NRF_GRTC_EVENT_COMPARE_22      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[22]),     /**< Compare 22 event. */
     NRF_GRTC_EVENT_COMPARE_23      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[23]),     /**< Compare 23 event. */
-#endif // !(defined(NRF54H20_XXAA) || defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_ENGA_XXAA))
-#endif // !defined(LUMOS_XXAA)
+#endif
+#if NRF_GRTC_HAS_RTCOUNTER
     NRF_GRTC_EVENT_RTCOMPARE       = offsetof(NRF_GRTC_Type, EVENTS_RTCOMPARE),       /**< RTCOUNTER compare event. */
     NRF_GRTC_EVENT_RTCOMPARESYNC   = offsetof(NRF_GRTC_Type, EVENTS_RTCOMPARESYNC),   /**< RTCOUNTER synchronized compare event. */
+#endif
     NRF_GRTC_EVENT_SYSCOUNTERVALID = offsetof(NRF_GRTC_Type, EVENTS_SYSCOUNTERVALID), /**< SYSCOUNTER value valid event. */
 #if NRF_GRTC_HAS_PWM
     NRF_GRTC_EVENT_PWM_PERIOD_END  = offsetof(NRF_GRTC_Type, EVENTS_PWMPERIODEND),    /**< End of PWM period event. */
 #endif // NRF_GRTC_HAS_PWM
 } nrf_grtc_event_t;
 
+#if NRF_GRTC_HAS_RTCOUNTER
 /** @brief Types of GRTC shortcuts. */
 typedef enum
 {
     NRF_GRTC_SHORT_RTCOMPARE_CLEAR_MASK = GRTC_SHORTS_RTCOMPARE_CLEAR_Msk, /**< Shortcut between RTCOMPARE event and CLEAR task. */
 } nrf_grtc_short_mask_t;
+#endif
 
 /** @brief Types of GRTC CC references. */
 typedef enum
@@ -241,12 +243,13 @@ typedef enum
     NRF_GRTC_INT_COMPARE9_MASK        = GRTC_INTENSET0_COMPARE9_Msk,        /**< GRTC interrupt from compare event on channel 9. */
     NRF_GRTC_INT_COMPARE10_MASK       = GRTC_INTENSET0_COMPARE10_Msk,       /**< GRTC interrupt from compare event on channel 10. */
     NRF_GRTC_INT_COMPARE11_MASK       = GRTC_INTENSET0_COMPARE11_Msk,       /**< GRTC interrupt from compare event on channel 11. */
-#if !defined(LUMOS_XXAA)
+#if NRF_GRTC_SYSCOUNTER_CC_COUNT > 12
     NRF_GRTC_INT_COMPARE12_MASK       = GRTC_INTENSET0_COMPARE12_Msk,       /**< GRTC interrupt from compare event on channel 12. */
     NRF_GRTC_INT_COMPARE13_MASK       = GRTC_INTENSET0_COMPARE13_Msk,       /**< GRTC interrupt from compare event on channel 13. */
     NRF_GRTC_INT_COMPARE14_MASK       = GRTC_INTENSET0_COMPARE14_Msk,       /**< GRTC interrupt from compare event on channel 14. */
     NRF_GRTC_INT_COMPARE15_MASK       = GRTC_INTENSET0_COMPARE15_Msk,       /**< GRTC interrupt from compare event on channel 15. */
-#if !(defined(NRF54H20_XXAA) || defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_ENGA_XXAA))
+#endif
+#if NRF_GRTC_SYSCOUNTER_CC_COUNT > 16
     NRF_GRTC_INT_COMPARE16_MASK       = GRTC_INTENSET0_COMPARE16_Msk,       /**< GRTC interrupt from compare event on channel 16. */
     NRF_GRTC_INT_COMPARE17_MASK       = GRTC_INTENSET0_COMPARE17_Msk,       /**< GRTC interrupt from compare event on channel 17. */
     NRF_GRTC_INT_COMPARE18_MASK       = GRTC_INTENSET0_COMPARE18_Msk,       /**< GRTC interrupt from compare event on channel 18. */
@@ -255,10 +258,11 @@ typedef enum
     NRF_GRTC_INT_COMPARE21_MASK       = GRTC_INTENSET0_COMPARE21_Msk,       /**< GRTC interrupt from compare event on channel 21. */
     NRF_GRTC_INT_COMPARE22_MASK       = GRTC_INTENSET0_COMPARE22_Msk,       /**< GRTC interrupt from compare event on channel 22. */
     NRF_GRTC_INT_COMPARE23_MASK       = GRTC_INTENSET0_COMPARE23_Msk,       /**< GRTC interrupt from compare event on channel 23. */
-#endif // NRF54H20_ENGA_XXAA || NRF9230_ENGA_XXAA
-#endif // LUMOS_XXAA
+#endif
+#if NRF_GRTC_HAS_RTCOUNTER
     NRF_GRTC_INT_RTCOMPARE_MASK       = GRTC_INTENSET0_RTCOMPARE_Msk,       /**< GRTC interrupt from RTCOUNTER compare event. */
     NRF_GRTC_INT_RTCOMPARESYNC_MASK   = GRTC_INTENSET0_RTCOMPARESYNC_Msk,   /**< GRTC interrupt from RTCOUNTER synchronized compare event. */
+#endif
     NRF_GRTC_INT_SYSCOUNTERVALID_MASK = GRTC_INTENSET0_SYSCOUNTERVALID_Msk, /**< GRTC interrupt from SYSCOUNTER valid event. */
 } nrf_grtc_int_mask_t;
 
@@ -328,7 +332,7 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_add_set(NRF_GRTC_Type *          
                                                        uint32_t                    value,
                                                        nrf_grtc_cc_add_reference_t reference);
 
-#if NRF_GRTC_HAS_EXTENDED
+#if NRF_GRTC_HAS_RTCOUNTER
 /**
  * @brief Function for setting a compare value for the RTCOUNTER.
  *
@@ -356,7 +360,7 @@ NRF_STATIC_INLINE void nrf_grtc_rt_counter_cc_set(NRF_GRTC_Type * p_reg,
  * @return Value from the capture/compare register in 32 kHz units.
  */
 NRF_STATIC_INLINE uint64_t nrf_grtc_rt_counter_cc_get(NRF_GRTC_Type const * p_reg);
-#endif // NRF_GRTC_HAS_EXTENDED
+#endif // NRF_GRTC_HAS_RTCOUNTER
 
 /**
  * @brief Function for enabling specified interrupts.
@@ -523,7 +527,7 @@ NRF_STATIC_INLINE bool nrf_grtc_event_check(NRF_GRTC_Type const * p_reg, nrf_grt
  */
 NRF_STATIC_INLINE void nrf_grtc_event_clear(NRF_GRTC_Type * p_reg, nrf_grtc_event_t event);
 
-#if NRF_GRTC_HAS_EXTENDED
+#if NRF_GRTC_HAS_RTCOUNTER
 /**
  * @brief Function for returning the lower 32-bits of RTCOUNTER value.
  *
@@ -549,7 +553,7 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_low_get(NRF_GRTC_Type const * p_r
  * @return Higher part of RTCOUNTER value.
  */
 NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_high_get(NRF_GRTC_Type const * p_reg);
-#endif // NRF_GRTC_HAS_EXTENDED
+#endif // NRF_GRTC_HAS_RTCOUNTER
 
 /**
  * @brief Function for returning the lower 32-bits of SYSCOUNTER value.
@@ -746,7 +750,7 @@ NRF_STATIC_INLINE
 bool nrf_grtc_sys_counter_active_state_request_check(NRF_GRTC_Type const * p_reg);
 
 /**
- * @brief Function for getting the domains that requested the SYSCTOUNER to remain active.
+ * @brief Function for getting the domains that requested the SYSCOUNTER to remain active.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Domains mask.
@@ -944,7 +948,7 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_add_set(NRF_GRTC_Type *          
                                (value & NRF_GRTC_SYSCOUNTER_CCADD_MASK);
 }
 
-#if NRF_GRTC_HAS_EXTENDED
+#if NRF_GRTC_HAS_RTCOUNTER
 NRF_STATIC_INLINE void nrf_grtc_rt_counter_cc_set(NRF_GRTC_Type * p_reg,
                                                   uint64_t        cc_value,
                                                   bool            sync)
@@ -970,7 +974,7 @@ NRF_STATIC_INLINE uint64_t nrf_grtc_rt_counter_cc_get(NRF_GRTC_Type const * p_re
 
     return (uint64_t)p_reg->RTCOMPAREL | ((uint64_t)cc_h << 32);
 }
-#endif // NRF_GRTC_HAS_EXTENDED
+#endif // NRF_GRTC_HAS_RTCOUNTER
 
 NRF_STATIC_INLINE void nrf_grtc_int_enable(NRF_GRTC_Type * p_reg, uint32_t mask)
 {
@@ -1025,9 +1029,11 @@ NRF_STATIC_INLINE void nrf_grtc_subscribe_set(NRF_GRTC_Type * p_reg,
                                               nrf_grtc_task_t task,
                                               uint8_t         channel)
 {
+#if NRF_GRTC_HAS_EXTENDED
     NRFX_ASSERT((task != NRF_GRTC_TASK_START) &&
                 (task != NRF_GRTC_TASK_CLEAR) &&
                 (task != NRF_GRTC_TASK_STOP));
+#endif
 
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
             ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
@@ -1036,9 +1042,11 @@ NRF_STATIC_INLINE void nrf_grtc_subscribe_set(NRF_GRTC_Type * p_reg,
 NRF_STATIC_INLINE void nrf_grtc_subscribe_clear(NRF_GRTC_Type * p_reg,
                                                 nrf_grtc_task_t task)
 {
+#if NRF_GRTC_HAS_EXTENDED
     NRFX_ASSERT((task != NRF_GRTC_TASK_START) &&
                 (task != NRF_GRTC_TASK_CLEAR) &&
                 (task != NRF_GRTC_TASK_STOP));
+#endif
 
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
 }
@@ -1047,10 +1055,9 @@ NRF_STATIC_INLINE void nrf_grtc_publish_set(NRF_GRTC_Type *  p_reg,
                                             nrf_grtc_event_t event,
                                             uint8_t          channel)
 {
-    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
-                (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
-#if !NRF_GRTC_HAS_EXTENDED
-    NRFX_ASSERT(event != NRF_GRTC_EVENT_RTCOMPARE);
+    NRFX_ASSERT(event != NRF_GRTC_EVENT_SYSCOUNTERVALID);
+#if NRF_GRTC_HAS_RTCOUNTER
+    NRFX_ASSERT(event != NRF_GRTC_EVENT_RTCOMPARESYNC);
 #endif
 
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80UL)) =
@@ -1060,10 +1067,9 @@ NRF_STATIC_INLINE void nrf_grtc_publish_set(NRF_GRTC_Type *  p_reg,
 NRF_STATIC_INLINE void nrf_grtc_publish_clear(NRF_GRTC_Type *  p_reg,
                                               nrf_grtc_event_t event)
 {
-    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
-                (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
-#if !NRF_GRTC_HAS_EXTENDED
-    NRFX_ASSERT(event != NRF_GRTC_EVENT_RTCOMPARE);
+    NRFX_ASSERT(event != NRF_GRTC_EVENT_SYSCOUNTERVALID);
+#if NRF_GRTC_HAS_RTCOUNTER
+    NRFX_ASSERT(event != NRF_GRTC_EVENT_RTCOMPARESYNC);
 #endif
 
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80UL)) = 0x0UL;
@@ -1071,24 +1077,18 @@ NRF_STATIC_INLINE void nrf_grtc_publish_clear(NRF_GRTC_Type *  p_reg,
 
 NRF_STATIC_INLINE bool nrf_grtc_event_check(NRF_GRTC_Type const * p_reg, nrf_grtc_event_t event)
 {
-#if !NRF_GRTC_HAS_EXTENDED
-    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE) && (event != NRF_GRTC_EVENT_RTCOMPARESYNC));
-#endif
     return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_grtc_event_clear(NRF_GRTC_Type * p_reg, nrf_grtc_event_t event)
 {
-#if !NRF_GRTC_HAS_EXTENDED
-    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE)     &&
-                (event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
-                (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
-#endif
+    NRFX_ASSERT(event != NRF_GRTC_EVENT_SYSCOUNTERVALID);
+
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event)) = 0x0UL;
     nrf_event_readback((uint8_t *)p_reg + (uint32_t)event);
 }
 
-#if NRF_GRTC_HAS_EXTENDED
+#if NRF_GRTC_HAS_RTCOUNTER
 NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_low_get(NRF_GRTC_Type const * p_reg)
 {
     return p_reg->RTCOUNTERL;
@@ -1098,7 +1098,7 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_high_get(NRF_GRTC_Type const * p_
 {
     return p_reg->RTCOUNTERH;
 }
-#endif // NRF_GRTC_HAS_EXTENDED
+#endif // NRF_GRTC_HAS_RTCOUNTER
 
 NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_reg)
 {
@@ -1158,11 +1158,6 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_task_address_get(NRF_GRTC_Type const * p_reg
 
 NRF_STATIC_INLINE void nrf_grtc_task_trigger(NRF_GRTC_Type * p_reg, nrf_grtc_task_t task)
 {
-#if !NRF_GRTC_HAS_EXTENDED
-    NRFX_ASSERT((task != NRF_GRTC_TASK_START) &&
-                (task != NRF_GRTC_TASK_STOP)  &&
-                (task != NRF_GRTC_TASK_CLEAR));
-#endif
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 

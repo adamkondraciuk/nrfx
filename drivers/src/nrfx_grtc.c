@@ -10,11 +10,13 @@
 #define NRFX_LOG_MODULE GRTC
 #include <nrfx_log.h>
 
+#if NRFY_GRTC_HAS_EXTENDED
 #define GRTC_ACTION_TO_STR(action)                                                     \
-    (action == NRFX_GRTC_RTCOUNTER_ACTION_START ? "NRFX_GRTC_RTCOUNTER_ACTION_START" : \
-    (action == NRFX_GRTC_RTCOUNTER_ACTION_STOP  ? "NRFX_GRTC_RTCOUNTER_ACTION_STOP"  : \
-    (action == NRFX_GRTC_RTCOUNTER_ACTION_CLEAR ? "NRFX_GRTC_RTCOUNTER_ACTION_CLEAR" : \
-                                                  "UNKNOWN ACTION")))
+    (action == NRFX_GRTC_ACTION_START ? "NRFX_GRTC_ACTION_START" : \
+    (action == NRFX_GRTC_ACTION_STOP  ? "NRFX_GRTC_ACTION_STOP"  : \
+    (action == NRFX_GRTC_ACTION_CLEAR ? "NRFX_GRTC_ACTION_CLEAR" : \
+                                        "UNKNOWN ACTION")))
+#endif
 
 #define GRTC_CHANNEL_TO_BITMASK(chan)          NRFX_BIT(chan)
 #define GRTC_CHANNEL_MASK_TO_INT_MASK(ch_mask) ((ch_mask) << GRTC_INTEN0_COMPARE0_Pos)
@@ -27,6 +29,7 @@
 #define NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS 0
 #endif
 
+#if NRF_GRTC_HAS_RTCOUNTER
 #define GRTC_NON_SYSCOMPARE_INT_MASK   (NRF_GRTC_INT_RTCOMPARE_MASK     | \
                                         NRF_GRTC_INT_RTCOMPARESYNC_MASK | \
                                         NRF_GRTC_INT_SYSCOUNTERVALID_MASK)
@@ -34,6 +37,9 @@
                                         GRTC_NON_SYSCOMPARE_INT_MASK)
 #define GRTC_RTCOUNTER_CC_HANDLER_IDX  NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS
 #define GRTC_RTCOUNTER_COMPARE_CHANNEL NRF_GRTC_SYSCOUNTER_CC_COUNT
+#else
+#define GRTC_ALL_INT_MASK              (NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK)
+#endif // NRF_GRTC_HAS_RTCOUNTER
 
 #if !(defined(NRF_SECURE) && NRFX_IS_ENABLED(NRFY_GRTC_HAS_EXTENDED))
     #define MAIN_GRTC_CC_CHANNEL NRF_GRTC_MAIN_CC_CHANNEL
@@ -58,10 +64,12 @@ typedef struct
     nrfx_atomic_t                       available_channels;                                    /**< Bitmask of available channels. */
     uint32_t                            used_channels;                                         /**< Bitmask of channels used by the driver. */
     nrfx_grtc_channel_t                 channel_data[NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS + 1]; /**< Channel specific data. */
+#if NRF_GRTC_HAS_RTCOUNTER
     nrfx_grtc_rtcomparesync_handler_t   rtcomparesync_handler;                                 /**< User handler corresponding to rtcomparesync event.*/
     void *                              rtcomparesync_context;                                 /**< User context for rtcomparesync event handler. */
     nrfx_grtc_syscountervalid_handler_t syscountervalid_handler;                               /**< User handler corresponding to syscountervalid event. */
     void *                              syscountervalid_context;                               /**< User context for syscountervalid event handler. */
+#endif
 } nrfx_grtc_cb_t;
 
 static nrfx_grtc_cb_t m_cb =
@@ -93,10 +101,12 @@ static uint32_t used_channels_mask_get(void)
     return NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK & m_cb.used_channels;
 }
 
+#if NRFY_GRTC_HAS_EXTENDED
 static bool is_syscounter_running(void)
 {
     return nrfy_grtc_sys_counter_check(NRF_GRTC);
 }
+#endif
 
 static bool is_channel_used(uint8_t channel)
 {
@@ -123,15 +133,8 @@ static bool is_channel_available(uint8_t channel)
     return (GRTC_CHANNEL_TO_BITMASK(channel) & NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK);
 }
 
-/* TODO: [NRFX-1250]: Currently we are not sure whether local domains are able to read
- *       corresponding event for SYSCOUNTER on used targets so temporarily this function is called
- *       with @p should_be_active equals false. */
-static nrfx_err_t syscounter_check(uint8_t channel, bool should_be_active)
+static nrfx_err_t syscounter_check(uint8_t channel)
 {
-    if (should_be_active && !is_syscounter_running())
-    {
-        return NRFX_ERROR_INTERNAL;
-    }
     if (!is_channel_available(channel))
     {
         return NRFX_ERROR_FORBIDDEN;
@@ -312,91 +315,15 @@ nrfx_err_t nrfx_grtc_init(uint8_t interrupt_priority)
 
     nrfy_grtc_int_init(NRF_GRTC, GRTC_ALL_INT_MASK, interrupt_priority, false);
 
+#if NRFY_GRTC_HAS_EXTENDED
+    nrfy_grtc_prepare(NRF_GRTC, true);
+#endif
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;
-
     NRFX_LOG_INFO("GRTC initialized.");
     return err_code;
 }
 
-#if NRFY_GRTC_HAS_EXTENDED
-nrfx_err_t nrfx_grtc_rtcounter_start(bool busy_wait)
-{
-    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
-    nrfx_err_t err_code = NRFX_SUCCESS;
-
-    if (is_syscounter_running())
-    {
-        err_code = NRFX_ERROR_INTERNAL;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
-    nrfy_grtc_rt_counter_start(NRF_GRTC, busy_wait);
-
-    NRFX_LOG_INFO("GRTC RTCOUNTER started.");
-    return err_code;
-}
-
-nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channel)
-{
-    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
-    NRFX_ASSERT(p_main_cc_channel);
-    NRFX_ASSERT(m_cb.channel_data[0].channel == MAIN_GRTC_CC_CHANNEL);
-    nrfx_err_t    err_code  = NRFX_SUCCESS;
-    nrfx_atomic_t init_mask = GRTC_CHANNEL_TO_BITMASK(MAIN_GRTC_CC_CHANNEL) &
-                              m_cb.available_channels;
-
-    err_code = nrfx_flag32_alloc(&init_mask, &m_cb.channel_data[0].channel);
-    if (err_code != NRFX_SUCCESS)
-    {
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
-
-    *p_main_cc_channel       = MAIN_GRTC_CC_CHANNEL;
-    m_cb.available_channels &= ~GRTC_CHANNEL_TO_BITMASK(MAIN_GRTC_CC_CHANNEL);
-    channel_used_mark(MAIN_GRTC_CC_CHANNEL);
-    NRFX_LOG_INFO("GRTC channel %u allocated.", m_cb.channel_data[0].channel);
-
-    if (is_syscounter_running())
-    {
-        err_code = NRFX_ERROR_ALREADY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
-    nrfy_grtc_sys_counter_start(NRF_GRTC, busy_wait);
-
-    NRFX_LOG_INFO("GRTC SYSCOUNTER started.");
-    return err_code;
-}
-
-nrfx_err_t nrfx_grtc_rtcounter_action_perform(nrfx_grtc_rtcounter_action_t action)
-{
-    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
-    nrfx_err_t err_code = NRFX_SUCCESS;
-
-    if (is_syscounter_running())
-    {
-        err_code = NRFX_ERROR_INTERNAL;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-
-        return err_code;
-    }
-
-    nrf_grtc_task_t task = (nrf_grtc_task_t)action;
-    nrfy_grtc_task_trigger(NRF_GRTC, task);
-
-    NRFX_LOG_INFO("GRTC RTCOUNTER %s action.", GRTC_ACTION_TO_STR(action));
-    return err_code;
-}
-
+#if NRF_GRTC_HAS_RTCOUNTER
 nrfx_err_t nrfx_grtc_rtcounter_cc_disable(void)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -487,6 +414,67 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_
     NRFX_LOG_INFO("GRTC RTCOUNTER compare set to %llu.", val);
     return err_code;
 }
+#endif // NRF_GRTC_HAS_RTCOUNTER
+
+#if NRFY_GRTC_HAS_EXTENDED
+nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channel)
+{
+    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(p_main_cc_channel);
+    NRFX_ASSERT(m_cb.channel_data[0].channel == MAIN_GRTC_CC_CHANNEL);
+    nrfx_err_t    err_code  = NRFX_SUCCESS;
+    nrfx_atomic_t init_mask = GRTC_CHANNEL_TO_BITMASK(MAIN_GRTC_CC_CHANNEL) &
+                              m_cb.available_channels;
+
+    err_code = nrfx_flag32_alloc(&init_mask, &m_cb.channel_data[0].channel);
+    if (err_code != NRFX_SUCCESS)
+    {
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
+    }
+
+    *p_main_cc_channel       = MAIN_GRTC_CC_CHANNEL;
+    m_cb.available_channels &= ~GRTC_CHANNEL_TO_BITMASK(MAIN_GRTC_CC_CHANNEL);
+    channel_used_mark(MAIN_GRTC_CC_CHANNEL);
+    NRFX_LOG_INFO("GRTC channel %u allocated.", m_cb.channel_data[0].channel);
+
+    if (is_syscounter_running())
+    {
+        err_code = NRFX_ERROR_ALREADY;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
+    }
+    nrfy_grtc_sys_counter_start(NRF_GRTC, busy_wait);
+
+    NRFX_LOG_INFO("GRTC SYSCOUNTER started.");
+    return err_code;
+}
+
+nrfx_err_t nrfx_grtc_action_perform(nrfx_grtc_rtcounter_action_t action)
+{
+    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
+    nrfx_err_t err_code = NRFX_SUCCESS;
+
+    if (is_syscounter_running())
+    {
+        err_code = NRFX_ERROR_INTERNAL;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+
+        return err_code;
+    }
+
+    nrf_grtc_task_t task = (nrf_grtc_task_t)action;
+    nrfy_grtc_task_trigger(NRF_GRTC, task);
+
+    NRFX_LOG_INFO("GRTC RTCOUNTER %s action.", GRTC_ACTION_TO_STR(action));
+    return err_code;
+}
 #endif // NRFY_GRTC_HAS_EXTENDED
 
 void nrfx_grtc_uninit(void)
@@ -539,6 +527,7 @@ bool nrfx_grtc_init_check(void)
     return (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 }
 
+#if NRF_GRTC_HAS_RTCOUNTER
 void nrfx_grtc_rtcounter_cc_int_enable(bool sync)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -576,12 +565,13 @@ void nrfx_grtc_syscountervalid_int_disable(void)
     nrfy_grtc_int_disable(NRF_GRTC, NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
     NRFX_LOG_INFO("GRTC SYSCOUNTERVALID interrupt disabled.");
 }
+#endif // NRF_GRTC_HAS_RTCOUNTER
 
 nrfx_err_t nrfx_grtc_syscounter_cc_disable(uint8_t channel)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     uint32_t   int_mask = NRF_GRTC_CHANNEL_INT_MASK(channel);
-    nrfx_err_t err_code = syscounter_check(channel, false);
+    nrfx_err_t err_code = syscounter_check(channel);
     if (err_code != NRFX_SUCCESS)
     {
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -624,7 +614,7 @@ nrfx_err_t nrfx_grtc_syscounter_cc_absolute_set(nrfx_grtc_channel_t * p_chan_dat
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(p_chan_data);
-    nrfx_err_t err_code = syscounter_check(p_chan_data->channel, false);
+    nrfx_err_t err_code = syscounter_check(p_chan_data->channel);
     if (err_code != NRFX_SUCCESS)
     {
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -652,7 +642,7 @@ nrfx_err_t nrfx_grtc_syscounter_cc_relative_set(nrfx_grtc_channel_t *           
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(p_chan_data);
-    nrfx_err_t err_code = syscounter_check(p_chan_data->channel, false);
+    nrfx_err_t err_code = syscounter_check(p_chan_data->channel);
     if (err_code != NRFX_SUCCESS)
     {
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -678,7 +668,7 @@ nrfx_err_t nrfx_grtc_syscounter_cc_relative_set(nrfx_grtc_channel_t *           
 nrfx_err_t nrfx_grtc_syscounter_cc_int_disable(uint8_t channel)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
-    nrfx_err_t err_code = syscounter_check(channel, false);
+    nrfx_err_t err_code = syscounter_check(channel);
     if (err_code != NRFX_SUCCESS)
     {
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -703,7 +693,7 @@ nrfx_err_t nrfx_grtc_syscounter_cc_int_disable(uint8_t channel)
 nrfx_err_t nrfx_grtc_syscounter_cc_int_enable(uint8_t channel)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
-    nrfx_err_t err_code = syscounter_check(channel, false);
+    nrfx_err_t err_code = syscounter_check(channel);
     if (err_code != NRFX_SUCCESS)
     {
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -727,7 +717,7 @@ bool nrfx_grtc_syscounter_cc_int_enable_check(uint8_t channel)
 nrfx_err_t nrfx_grtc_syscounter_capture(uint8_t channel)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
-    nrfx_err_t err_code = syscounter_check(channel, false);
+    nrfx_err_t err_code = syscounter_check(channel);
     if (err_code != NRFX_SUCCESS)
     {
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -746,7 +736,7 @@ nrfx_err_t nrfx_grtc_syscounter_cc_value_read(uint8_t channel, uint64_t * p_val)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(p_val);
-    nrfx_err_t err_code = syscounter_check(channel, false);
+    nrfx_err_t err_code = syscounter_check(channel);
     if (err_code != NRFX_SUCCESS)
     {
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -772,8 +762,10 @@ nrfx_err_t nrfx_grtc_syscounter_cc_value_read(uint8_t channel, uint64_t * p_val)
 static void grtc_irq_handler(void)
 {
     uint32_t evt_to_process = GRTC_CHANNEL_MASK_TO_INT_MASK(allocated_channels_mask_get() &
-                                                            used_channels_mask_get()) |
-                              (GRTC_NON_SYSCOMPARE_INT_MASK & ~NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
+                                                            used_channels_mask_get());
+#if NRF_GRTC_HAS_RTCOUNTER
+    evt_to_process |= (GRTC_NON_SYSCOMPARE_INT_MASK & ~NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
+#endif
     uint32_t         event_mask      = nrfy_grtc_events_process(NRF_GRTC, evt_to_process);
     uint32_t         active_int_mask = nrfy_grtc_int_enable_check(NRF_GRTC, event_mask);
     nrf_grtc_event_t event;
@@ -785,11 +777,6 @@ static void grtc_irq_handler(void)
         event = nrfy_grtc_sys_counter_compare_event_get(channel);
         if (active_int_mask & NRFY_EVENT_TO_INT_BITMASK(event))
         {
-            //TODO: [NRFX-3175] Remove when HM-15402 is fixed.
-            if (NRFX_IS_ENABLED(ISA_RISCV) && channel == 0)
-            {
-                nrfy_grtc_sys_counter_compare_event_disable(NRF_GRTC, channel);
-            }
             NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_COMPARE_%d.", channel);
             if (m_cb.channel_data[i].handler)
             {
@@ -799,7 +786,7 @@ static void grtc_irq_handler(void)
             }
         }
     }
-#if NRFY_GRTC_HAS_EXTENDED
+#if NRF_GRTC_HAS_RTCOUNTER
     if (active_int_mask & NRF_GRTC_INT_RTCOMPARE_MASK)
     {
         NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_RTCOMPARE.");
@@ -820,7 +807,7 @@ static void grtc_irq_handler(void)
             m_cb.rtcomparesync_handler(m_cb.rtcomparesync_context);
         }
     }
-#endif // NRFY_GRTC_HAS_EXTENDED
+
 
     /* The SYSCOUNTERVALID bit is automatically cleared when GRTC goes into sleep state and set
      * when returning from this state. It can't be cleared inside the ISR procedure because we rely
@@ -828,14 +815,13 @@ static void grtc_irq_handler(void)
     if (nrfy_grtc_event_check(NRF_GRTC, NRF_GRTC_EVENT_SYSCOUNTERVALID) &&
         nrfy_grtc_int_enable_check(NRF_GRTC, NRF_GRTC_INT_SYSCOUNTERVALID_MASK))
     {
-        //TODO: [NRFX-3175] Check whether such procedure is valid when HM-15400 is fixed.
-        nrfy_grtc_int_disable(NRF_GRTC, NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
         NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_SYSCOUNTERVALID.");
         if (m_cb.syscountervalid_handler)
         {
             m_cb.syscountervalid_handler(m_cb.syscountervalid_context);
         }
     }
+#endif // NRF_GRTC_HAS_RTCOUNTER
 }
 
 void nrfx_grtc_irq_handler(void)

@@ -186,6 +186,29 @@ extern "C" {
 /*------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------*/
+/* Start of GRTC Extended section                                                                 */
+/*------------------------------------------------------------------------------------------------*/
+
+#if !defined(NRF_GRTC_HAS_EXTENDED)
+    #if defined(HALTIUM_XXAA) && defined(NRF_SYSCTRL)
+        #define NRF_GRTC_HAS_EXTENDED 1
+        #define NRF_GRTC_HAS_RTCOUNTER 1
+    #endif
+#endif // !defined(NRF_GRTC_HAS_EXTENDED)
+
+#if !defined(NRF_GRTC_HAS_RTCOUNTER)
+    #if defined(LUMOS_XXAA)
+        #define NRF_GRTC_HAS_RTCOUNTER 1
+    #else
+        #define NRF_GRTC_HAS_RTCOUNTER 0
+    #endif
+#endif // defined(LUMOS_XXAA)
+
+/*------------------------------------------------------------------------------------------------*/
+/* End of GRTC Extended section                                                                   */
+/*------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------*/
 /* Start of PRS Extended section                                                                  */
 /*------------------------------------------------------------------------------------------------*/
 

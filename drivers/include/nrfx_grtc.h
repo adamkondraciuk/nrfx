@@ -26,6 +26,7 @@ extern "C" {
  */
 typedef void (*nrfx_grtc_cc_handler_t)(int32_t id, uint64_t cc_value, void * p_context);
 
+#if NRF_GRTC_HAS_RTCOUNTER || defined(__NRFX_DOXYGEN__)
 /**
  * @brief GRTC driver instance SYSCOUNTER valid handler type.
  *
@@ -39,6 +40,7 @@ typedef void (*nrfx_grtc_syscountervalid_handler_t)(void * p_context);
  * @param[in] p_context User context.
  */
 typedef void (*nrfx_grtc_rtcomparesync_handler_t)(void * p_context);
+#endif // NRF_GRTC_HAS_RTCOUNTER || defined(__NRFX_DOXYGEN__)
 
 /** @brief GRTC capture/compare channel description structure. */
 typedef struct
@@ -48,20 +50,24 @@ typedef struct
     uint8_t                channel;   /**< Capture/compare channel number. */
 } nrfx_grtc_channel_t;
 
+#if NRF_GRTC_HAS_RTCOUNTER || defined(__NRFX_DOXYGEN__)
 /** @brief GRTC RTCOUNTER handler data structure. */
 typedef struct
 {
     nrfx_grtc_cc_handler_t handler;   /**< User handler. */
     void *                 p_context; /**< User context. */
 } nrfx_grtc_rtcounter_handler_data_t;
+#endif // NRF_GRTC_HAS_RTCOUNTER || defined(__NRFX_DOXYGEN__)
 
+#if NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
 /** @brief GRTC action types. */
 typedef enum
 {
-    NRFX_GRTC_RTCOUNTER_ACTION_START = NRF_GRTC_TASK_START, /**< Start the RTCOUNTER. */
-    NRFX_GRTC_RTCOUNTER_ACTION_STOP  = NRF_GRTC_TASK_STOP,  /**< Stop the RTCOUNTER. */
-    NRFX_GRTC_RTCOUNTER_ACTION_CLEAR = NRF_GRTC_TASK_CLEAR, /**< Clear the RTCOUNTER. */
+    NRFX_GRTC_ACTION_START = NRF_GRTC_TASK_START, /**< Start the RTCOUNTER. */
+    NRFX_GRTC_ACTION_STOP  = NRF_GRTC_TASK_STOP,  /**< Stop the RTCOUNTER. */
+    NRFX_GRTC_ACTION_CLEAR = NRF_GRTC_TASK_CLEAR, /**< Clear the RTCOUNTER. */
 } nrfx_grtc_rtcounter_action_t;
+#endif // NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
 
 /** @brief GRTC compare event relative references. */
 typedef enum
@@ -127,47 +133,7 @@ bool nrfx_grtc_is_channel_used(uint8_t channel);
  */
 nrfx_err_t nrfx_grtc_init(uint8_t interrupt_priority);
 
-#if NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
-/**
- * @brief Function for starting the 32 kHz RTCOUNTER.
- *
- * @param[in] busy_wait True if wait for synchronization operation is to be performed,
- *                      false otherwise.
- *
- * @retval NRFX_SUCCESS        Starting was successful.
- * @retval NRFX_ERROR_INTERNAL The SYSCOUNTER (1 MHz) is running and the operation is not allowed.
- */
-nrfx_err_t nrfx_grtc_rtcounter_start(bool busy_wait);
-
-/**
- * @brief Function for starting the 1 MHz SYSCOUNTER.
- *
- * @note This function automatically allocates and marks as used the special-purpose main
- *       capture/compare channel. It is available only for GRTC manager.
- *
- * @note Use auxiliary structure of type @ref nrfx_grtc_channel_t when working with SYSCOUNTER.
- *
- * @param[in]  busy_wait         True if wait for synchronization operation is to be performed,
- *                               false otherwise.
- * @param[out] p_main_cc_channel Pointer to the main capture/compare channel.
- *
- * @retval NRFX_SUCCESS       Starting was successful.
- * @retval NRFX_ERROR_NO_MEM  No resource available to allocate main channel.
- * @retval NRFX_ERROR_ALREADY The GRTC is already running.
- */
-nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channel);
-
-/**
- * @brief Function for performing an action for RTCOUNTER (32 kHz counter).
- *
- * @param[in] action Action to be performed.
- *
- * @retval NRFX_SUCCESS             Starting was successful.
- * @retval NRFX_ERROR_INTERNAL      The SYSCOUNTER (1 MHz) is running and the operation is
- *                                  not allowed.
- */
-nrfx_err_t nrfx_grtc_rtcounter_action_perform(nrfx_grtc_rtcounter_action_t action);
-
+#if NRF_GRTC_HAS_RTCOUNTER || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for disabling the RTCOUNTER CC channel.
  *
@@ -208,23 +174,6 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_
                                                uint64_t                             val,
                                                bool                                 enable_irq,
                                                bool                                 sync);
-#endif // NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
-
-/**
- * @brief Function for uninitializing the GRTC.
- *
- * @note This function automatically frees all channels used by the driver.
- *       It also marks these channels as unused
-*/
-void nrfx_grtc_uninit(void);
-
-/**
- * @brief Function for checking if the GRTC driver is initialized.
- *
- * @retval true  Driver is already initialized.
- * @retval false Driver is not initialized.
- */
-bool nrfx_grtc_init_check(void);
 
 /**
  * @brief Function for enabling the RTCOUNTER compare interrupt.
@@ -249,8 +198,57 @@ void nrfx_grtc_rtcounter_cc_int_disable(void);
 void nrfx_grtc_syscountervalid_int_enable(nrfx_grtc_syscountervalid_handler_t handler,
                                           void *                              p_context);
 
-/** @brief Function for disabling the SYSCOUNTER valid interrupt. */
+/** @brief Function for disabling the SYSCOUNTERVALID interrupt. */
 void nrfx_grtc_syscountervalid_int_disable(void);
+#endif // NRF_GRTC_HAS_RTCOUNTER || defined(__NRFX_DOXYGEN__)
+
+#if NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for starting the 1 MHz SYSCOUNTER.
+ *
+ * @note This function automatically allocates and marks as used the special-purpose main
+ *       capture/compare channel. It is available only for GRTC manager.
+ *
+ * @note Use auxiliary structure of type @ref nrfx_grtc_channel_t when working with SYSCOUNTER.
+ *
+ * @param[in]  busy_wait         True if wait for synchronization operation is to be performed,
+ *                               false otherwise.
+ * @param[out] p_main_cc_channel Pointer to the main capture/compare channel.
+ *
+ * @retval NRFX_SUCCESS       Starting was successful.
+ * @retval NRFX_ERROR_NO_MEM  No resource available to allocate main channel.
+ * @retval NRFX_ERROR_ALREADY The GRTC is already running.
+ */
+
+nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channel);
+
+/**
+ * @brief Function for performing an action for RTCOUNTER (32 kHz counter).
+ *
+ * @param[in] action Action to be performed.
+ *
+ * @retval NRFX_SUCCESS             Starting was successful.
+ * @retval NRFX_ERROR_INTERNAL      The SYSCOUNTER (1 MHz) is running and the operation is
+ *                                  not allowed.
+ */
+nrfx_err_t nrfx_grtc_action_perform(nrfx_grtc_rtcounter_action_t action);
+#endif // NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
+
+/**
+ * @brief Function for uninitializing the GRTC.
+ *
+ * @note This function automatically frees all channels used by the driver.
+ *       It also marks these channels as unused
+*/
+void nrfx_grtc_uninit(void);
+
+/**
+ * @brief Function for checking if the GRTC driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_grtc_init_check(void);
 
 /**
  * @brief Function for disabling the SYSCOUNTER CC channel.
@@ -438,7 +436,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_compare_address_get(uint8_t channel)
  */
 NRFX_STATIC_INLINE bool nrfx_grtc_sys_counter_cc_enable_check(uint8_t channel);
 
-#if NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
+#if NRF_GRTC_HAS_RTCOUNTER || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for reading the GRTC RTCOUNTER value.
  *
@@ -475,12 +473,12 @@ NRFX_STATIC_INLINE bool nrfx_grtc_sys_counter_cc_enable_check(uint8_t channel)
     return nrfy_grtc_sys_counter_cc_enable_check(NRF_GRTC, channel);
 }
 
-#if NRFY_GRTC_HAS_EXTENDED
+#if NRF_GRTC_HAS_RTCOUNTER
 NRFX_STATIC_INLINE uint64_t nrfx_grtc_rtcounter_get(void)
 {
     return nrfy_grtc_rt_counter_get(NRF_GRTC);
 }
-#endif // NRFY_GRTC_HAS_EXTENDED
+#endif // NRF_GRTC_HAS_RTCOUNTER
 
 #endif // NRFX_DECLARE_ONLY
 
