@@ -12429,6 +12429,36 @@ typedef struct {
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
 /* =========================================================================================================================== */
+/* ================                                      BELLBOARDPUBLIC                                      ================ */
+/* =========================================================================================================================== */
+
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
+/* ================================================= Struct BELLBOARDPUBLIC ================================================== */
+/**
+  * @brief BELLBOARD public registers
+  */
+  typedef struct {                                   /*!< BELLBOARDPUBLIC Structure                                            */
+    __OM uint32_t TASKS_TRIGGER[32];                 /*!< (@ 0x00000000) Task TRIGGER[n]                                       */
+  } NRF_BELLBOARDPUBLIC_Type;                        /*!< Size = 128 (0x080)                                                   */
+
+/* BELLBOARDPUBLIC_TASKS_TRIGGER: Task TRIGGER[n] */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_MaxCount (32UL) /*!< Max size of TASKS_TRIGGER[32] array.                              */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_MaxIndex (31UL) /*!< Max index of TASKS_TRIGGER[32] array.                             */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_MinIndex (0UL) /*!< Min index of TASKS_TRIGGER[32] array.                              */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_ResetValue (0x00000000UL) /*!< Reset value of TASKS_TRIGGER[32] register.              */
+
+/* TASKS_TRIGGER @Bit 0 : Task TRIGGER[n] */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Pos (0UL) /*!< Position of TASKS_TRIGGER field.                          */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Msk (0x1UL << BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Pos) /*!< Bit
+                                                                            mask of TASKS_TRIGGER field.*/
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Min (0x1UL) /*!< Min enumerator value of TASKS_TRIGGER field.            */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Max (0x1UL) /*!< Max enumerator value of TASKS_TRIGGER field.            */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Trigger (0x1UL) /*!< Trigger task                                        */
+
+
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
+
+/* =========================================================================================================================== */
 /* ================                                           BICR                                           ================ */
 /* =========================================================================================================================== */
 
@@ -35521,41 +35551,18 @@ typedef struct {
   * @brief PCGC [GPIOINTERNAL_PCGC] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  TRIGZEROPENALTY;                   /*!< (@ 0x00000000) Trigger zero penalty                                  */
-  __IM  uint32_t  TRIGFULLPENALTY;                   /*!< (@ 0x00000004) Trigger full penalty                                  */
-  __IM  uint32_t  PENALTY[2];                        /*!< (@ 0x00000008) Penalty level for power/clock pair n                  */
-  __IM  uint32_t  FORCEOVERRIDE[2];                  /*!< (@ 0x00000010) Force override of power/clock pair n                  */
-} NRF_GPIOINTERNAL_PCGC_Type;                        /*!< Size = 24 (0x018)                                                    */
-
-/* GPIOINTERNAL_PCGC_TRIGZEROPENALTY: Trigger zero penalty */
-  #define GPIOINTERNAL_PCGC_TRIGZEROPENALTY_ResetValue (0x00000000UL) /*!< Reset value of TRIGZEROPENALTY register.            */
-
-/* TRIGGER @Bit 0 : TRIGGER */
-  #define GPIOINTERNAL_PCGC_TRIGZEROPENALTY_TRIGGER_Pos (0UL) /*!< Position of TRIGGER field.                                  */
-  #define GPIOINTERNAL_PCGC_TRIGZEROPENALTY_TRIGGER_Msk (0x1UL << GPIOINTERNAL_PCGC_TRIGZEROPENALTY_TRIGGER_Pos) /*!< Bit mask
-                                                                            of TRIGGER field.*/
-  #define GPIOINTERNAL_PCGC_TRIGZEROPENALTY_TRIGGER_Min (0x1UL) /*!< Min enumerator value of TRIGGER field.                    */
-  #define GPIOINTERNAL_PCGC_TRIGZEROPENALTY_TRIGGER_Max (0x1UL) /*!< Max enumerator value of TRIGGER field.                    */
-  #define GPIOINTERNAL_PCGC_TRIGZEROPENALTY_TRIGGER_Enable (0x1UL) /*!< Trigger zero penalty                                   */
-
-
-/* GPIOINTERNAL_PCGC_TRIGFULLPENALTY: Trigger full penalty */
-  #define GPIOINTERNAL_PCGC_TRIGFULLPENALTY_ResetValue (0x00000000UL) /*!< Reset value of TRIGFULLPENALTY register.            */
-
-/* TRIGGER @Bit 0 : TRIGGER */
-  #define GPIOINTERNAL_PCGC_TRIGFULLPENALTY_TRIGGER_Pos (0UL) /*!< Position of TRIGGER field.                                  */
-  #define GPIOINTERNAL_PCGC_TRIGFULLPENALTY_TRIGGER_Msk (0x1UL << GPIOINTERNAL_PCGC_TRIGFULLPENALTY_TRIGGER_Pos) /*!< Bit mask
-                                                                            of TRIGGER field.*/
-  #define GPIOINTERNAL_PCGC_TRIGFULLPENALTY_TRIGGER_Min (0x1UL) /*!< Min enumerator value of TRIGGER field.                    */
-  #define GPIOINTERNAL_PCGC_TRIGFULLPENALTY_TRIGGER_Max (0x1UL) /*!< Max enumerator value of TRIGGER field.                    */
-  #define GPIOINTERNAL_PCGC_TRIGFULLPENALTY_TRIGGER_Enable (0x1UL) /*!< Trigger full penalty                                   */
-
+  __IM  uint32_t  TURNOFFAUTOCLOCKSOURCEREQ;         /*!< (@ 0x00000000) No functionality                                      */
+  __IM  uint32_t  RESERVED[7];
+  __IM  uint32_t  PENALTY[5];                        /*!< (@ 0x00000020) Penalty level for power/clock pair n                  */
+  __IM  uint32_t  RESERVED1[3];
+  __IM  uint32_t  FORCEOVERRIDE[5];                  /*!< (@ 0x00000040) Force override of power/clock pair n                  */
+} NRF_GPIOINTERNAL_PCGC_Type;                        /*!< Size = 84 (0x054)                                                    */
 
 /* GPIOINTERNAL_PCGC_PENALTY: Penalty level for power/clock pair n */
-  #define GPIOINTERNAL_PCGC_PENALTY_MaxCount (2UL)   /*!< Max size of PENALTY[2] array.                                        */
-  #define GPIOINTERNAL_PCGC_PENALTY_MaxIndex (1UL)   /*!< Max index of PENALTY[2] array.                                       */
-  #define GPIOINTERNAL_PCGC_PENALTY_MinIndex (0UL)   /*!< Min index of PENALTY[2] array.                                       */
-  #define GPIOINTERNAL_PCGC_PENALTY_ResetValue (0x00000000UL) /*!< Reset value of PENALTY[2] register.                         */
+  #define GPIOINTERNAL_PCGC_PENALTY_MaxCount (5UL)   /*!< Max size of PENALTY[5] array.                                        */
+  #define GPIOINTERNAL_PCGC_PENALTY_MaxIndex (4UL)   /*!< Max index of PENALTY[5] array.                                       */
+  #define GPIOINTERNAL_PCGC_PENALTY_MinIndex (0UL)   /*!< Min index of PENALTY[5] array.                                       */
+  #define GPIOINTERNAL_PCGC_PENALTY_ResetValue (0x00000000UL) /*!< Reset value of PENALTY[5] register.                         */
 
 /* PENALTY @Bits 0..7 : Penalty level */
   #define GPIOINTERNAL_PCGC_PENALTY_PENALTY_Pos (0UL) /*!< Position of PENALTY field.                                          */
@@ -35564,10 +35571,10 @@ typedef struct {
 
 
 /* GPIOINTERNAL_PCGC_FORCEOVERRIDE: Force override of power/clock pair n */
-  #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_MaxCount (2UL) /*!< Max size of FORCEOVERRIDE[2] array.                              */
-  #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_MaxIndex (1UL) /*!< Max index of FORCEOVERRIDE[2] array.                             */
-  #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_MinIndex (0UL) /*!< Min index of FORCEOVERRIDE[2] array.                             */
-  #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_ResetValue (0x00000000UL) /*!< Reset value of FORCEOVERRIDE[2] register.             */
+  #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_MaxCount (5UL) /*!< Max size of FORCEOVERRIDE[5] array.                              */
+  #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_MaxIndex (4UL) /*!< Max index of FORCEOVERRIDE[5] array.                             */
+  #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_MinIndex (0UL) /*!< Min index of FORCEOVERRIDE[5] array.                             */
+  #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_ResetValue (0x00000000UL) /*!< Reset value of FORCEOVERRIDE[5] register.             */
 
 /* CLOCKFORCINGPRE @Bits 0..3 : CLOCKFORCINGPRE */
   #define GPIOINTERNAL_PCGC_FORCEOVERRIDE_CLOCKFORCINGPRE_Pos (0UL) /*!< Position of CLOCKFORCINGPRE field.                    */
@@ -35606,8 +35613,9 @@ typedef struct {
                                                                          this register lower than the reset value can lead to
                                                                          unwanted LATCH set when SENSE and INPUT fields
                                                                          (PIN[n].CNF) are changed simultaneously.*/
-    __IOM NRF_GPIOINTERNAL_PCGC_Type PCGC;           /*!< (@ 0x00000050) (unspecified)                                         */
-  } NRF_GPIOINTERNAL_Type;                           /*!< Size = 104 (0x068)                                                   */
+    __IM uint32_t RESERVED1[68];
+    __IOM NRF_GPIOINTERNAL_PCGC_Type PCGC;           /*!< (@ 0x00000160) (unspecified)                                         */
+  } NRF_GPIOINTERNAL_Type;                           /*!< Size = 436 (0x1B4)                                                   */
 
 /* GPIOINTERNAL_LATCHCLRWAITCNT: Select the number of wait cycles inserted on the bus when a LATCH register is cleared. */
   #define GPIOINTERNAL_LATCHCLRWAITCNT_ResetValue (0x00000002UL) /*!< Reset value of LATCHCLRWAITCNT register.                 */
@@ -59933,7 +59941,9 @@ typedef struct {
 /* HSFLL_CLOCKCTRL_MULT: Multiplication factor */
   #define HSFLL_CLOCKCTRL_MULT_ResetValue (0x00000006UL) /*!< Reset value of MULT register.                                    */
 
-/* VAL @Bits 0..4 : Multiplication factor value. */
+/* VAL @Bits 0..4 : Multiplication factor value. Valid range: 4 to 25. Output frequency is a multiplication of 16 MHz reference
+                    and the multiplication factor. */
+
   #define HSFLL_CLOCKCTRL_MULT_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define HSFLL_CLOCKCTRL_MULT_VAL_Msk (0x1FUL << HSFLL_CLOCKCTRL_MULT_VAL_Pos) /*!< Bit mask of VAL field.                    */
 
@@ -59993,7 +60003,7 @@ typedef struct {
   __IOM uint32_t  PWRUP;                             /*!< (@ 0x00000000) Override the PWRUP signal to the analog module        */
   __IOM uint32_t  SLEEP;                             /*!< (@ 0x00000004) Override the SLEEP signal to the analog module        */
   __IOM uint32_t  RETAIN;                            /*!< (@ 0x00000008) Override the RETAIN signal to the analog module       */
-  __IOM uint32_t  CFG;                               /*!< (@ 0x0000000C) Override the CFG signal to the analog module          */
+  __IM  uint32_t  RESERVED;
   __IOM uint32_t  READY;                             /*!< (@ 0x00000010) Override the READY signal from the analog module      */
   __IOM uint32_t  SETTLED;                           /*!< (@ 0x00000014) Override the SETTLED signal from the analog module    */
 } NRF_HSFLL_OVERRIDE_Type;                           /*!< Size = 24 (0x018)                                                    */
@@ -60044,22 +60054,6 @@ typedef struct {
   #define HSFLL_OVERRIDE_RETAIN_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
   #define HSFLL_OVERRIDE_RETAIN_EN_Disabled (0x0UL)  /*!< Override is disabled                                                 */
   #define HSFLL_OVERRIDE_RETAIN_EN_Enabled (0x1UL)   /*!< Override is enabled                                                  */
-
-
-/* HSFLL_OVERRIDE_CFG: Override the CFG signal to the analog module */
-  #define HSFLL_OVERRIDE_CFG_ResetValue (0x00000000UL) /*!< Reset value of CFG register.                                       */
-
-/* VAL @Bits 0..3 : Override value for the signal */
-  #define HSFLL_OVERRIDE_CFG_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
-  #define HSFLL_OVERRIDE_CFG_VAL_Msk (0xFUL << HSFLL_OVERRIDE_CFG_VAL_Pos) /*!< Bit mask of VAL field.                         */
-
-/* EN @Bit 31 : Enable the override */
-  #define HSFLL_OVERRIDE_CFG_EN_Pos (31UL)           /*!< Position of EN field.                                                */
-  #define HSFLL_OVERRIDE_CFG_EN_Msk (0x1UL << HSFLL_OVERRIDE_CFG_EN_Pos) /*!< Bit mask of EN field.                            */
-  #define HSFLL_OVERRIDE_CFG_EN_Min (0x0UL)          /*!< Min enumerator value of EN field.                                    */
-  #define HSFLL_OVERRIDE_CFG_EN_Max (0x1UL)          /*!< Max enumerator value of EN field.                                    */
-  #define HSFLL_OVERRIDE_CFG_EN_Disabled (0x0UL)     /*!< Override is disabled                                                 */
-  #define HSFLL_OVERRIDE_CFG_EN_Enabled (0x1UL)      /*!< Override is enabled                                                  */
 
 
 /* HSFLL_OVERRIDE_READY: Override the READY signal from the analog module */
@@ -82755,7 +82749,7 @@ typedef struct {
   * @brief POWER [MEMCONF_POWER] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  CONTROL;                           /*!< (@ 0x00000000) RAM/ROM[n] power control register.                    */
+  __IOM uint32_t  CONTROL;                           /*!< (@ 0x00000000) Control memory block power.                           */
   __IM  uint32_t  RESERVED;
   __IOM uint32_t  RET;                               /*!< (@ 0x00000008) RAM retention for RAM [n].                            */
   __IOM uint32_t  RET2;                              /*!< (@ 0x0000000C) RAM retention for the second bank in the RAM block    */
@@ -82764,10 +82758,10 @@ typedef struct {
   #define MEMCONF_POWER_MaxIndex (1UL)               /*!< Max index of POWER[2] array.                                         */
   #define MEMCONF_POWER_MinIndex (0UL)               /*!< Min index of POWER[2] array.                                         */
 
-/* MEMCONF_POWER_CONTROL: RAM/ROM[n] power control register. */
+/* MEMCONF_POWER_CONTROL: Control memory block power. */
   #define MEMCONF_POWER_CONTROL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CONTROL register.                                */
 
-/* MEM0 @Bit 0 : Keep the RAM/ROM block MEM[0] on or off when in System ON mode. */
+/* MEM0 @Bit 0 : Keep the memory block MEM[0] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM0_Pos (0UL)       /*!< Position of MEM0 field.                                              */
   #define MEMCONF_POWER_CONTROL_MEM0_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM0_Pos) /*!< Bit mask of MEM0 field.                */
   #define MEMCONF_POWER_CONTROL_MEM0_Min (0x0UL)     /*!< Min enumerator value of MEM0 field.                                  */
@@ -82775,7 +82769,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM0_Off (0x0UL)     /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM0_On (0x1UL)      /*!< Power up                                                             */
 
-/* MEM1 @Bit 1 : Keep the RAM/ROM block MEM[1] on or off when in System ON mode. */
+/* MEM1 @Bit 1 : Keep the memory block MEM[1] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM1_Pos (1UL)       /*!< Position of MEM1 field.                                              */
   #define MEMCONF_POWER_CONTROL_MEM1_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM1_Pos) /*!< Bit mask of MEM1 field.                */
   #define MEMCONF_POWER_CONTROL_MEM1_Min (0x0UL)     /*!< Min enumerator value of MEM1 field.                                  */
@@ -82783,7 +82777,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM1_Off (0x0UL)     /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM1_On (0x1UL)      /*!< Power up                                                             */
 
-/* MEM2 @Bit 2 : Keep the RAM/ROM block MEM[2] on or off when in System ON mode. */
+/* MEM2 @Bit 2 : Keep the memory block MEM[2] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM2_Pos (2UL)       /*!< Position of MEM2 field.                                              */
   #define MEMCONF_POWER_CONTROL_MEM2_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM2_Pos) /*!< Bit mask of MEM2 field.                */
   #define MEMCONF_POWER_CONTROL_MEM2_Min (0x0UL)     /*!< Min enumerator value of MEM2 field.                                  */
@@ -82791,7 +82785,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM2_Off (0x0UL)     /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM2_On (0x1UL)      /*!< Power up                                                             */
 
-/* MEM3 @Bit 3 : Keep the RAM/ROM block MEM[3] on or off when in System ON mode. */
+/* MEM3 @Bit 3 : Keep the memory block MEM[3] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM3_Pos (3UL)       /*!< Position of MEM3 field.                                              */
   #define MEMCONF_POWER_CONTROL_MEM3_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM3_Pos) /*!< Bit mask of MEM3 field.                */
   #define MEMCONF_POWER_CONTROL_MEM3_Min (0x0UL)     /*!< Min enumerator value of MEM3 field.                                  */
@@ -82799,7 +82793,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM3_Off (0x0UL)     /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM3_On (0x1UL)      /*!< Power up                                                             */
 
-/* MEM4 @Bit 4 : Keep the RAM/ROM block MEM[4] on or off when in System ON mode. */
+/* MEM4 @Bit 4 : Keep the memory block MEM[4] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM4_Pos (4UL)       /*!< Position of MEM4 field.                                              */
   #define MEMCONF_POWER_CONTROL_MEM4_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM4_Pos) /*!< Bit mask of MEM4 field.                */
   #define MEMCONF_POWER_CONTROL_MEM4_Min (0x0UL)     /*!< Min enumerator value of MEM4 field.                                  */
@@ -82807,7 +82801,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM4_Off (0x0UL)     /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM4_On (0x1UL)      /*!< Power up                                                             */
 
-/* MEM5 @Bit 5 : Keep the RAM/ROM block MEM[5] on or off when in System ON mode. */
+/* MEM5 @Bit 5 : Keep the memory block MEM[5] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM5_Pos (5UL)       /*!< Position of MEM5 field.                                              */
   #define MEMCONF_POWER_CONTROL_MEM5_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM5_Pos) /*!< Bit mask of MEM5 field.                */
   #define MEMCONF_POWER_CONTROL_MEM5_Min (0x0UL)     /*!< Min enumerator value of MEM5 field.                                  */
@@ -82815,7 +82809,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM5_Off (0x0UL)     /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM5_On (0x1UL)      /*!< Power up                                                             */
 
-/* MEM6 @Bit 6 : Keep the RAM/ROM block MEM[6] on or off when in System ON mode. */
+/* MEM6 @Bit 6 : Keep the memory block MEM[6] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM6_Pos (6UL)       /*!< Position of MEM6 field.                                              */
   #define MEMCONF_POWER_CONTROL_MEM6_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM6_Pos) /*!< Bit mask of MEM6 field.                */
   #define MEMCONF_POWER_CONTROL_MEM6_Min (0x0UL)     /*!< Min enumerator value of MEM6 field.                                  */
@@ -82823,7 +82817,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM6_Off (0x0UL)     /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM6_On (0x1UL)      /*!< Power up                                                             */
 
-/* MEM7 @Bit 7 : Keep the RAM/ROM block MEM[7] on or off when in System ON mode. */
+/* MEM7 @Bit 7 : Keep the memory block MEM[7] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM7_Pos (7UL)       /*!< Position of MEM7 field.                                              */
   #define MEMCONF_POWER_CONTROL_MEM7_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM7_Pos) /*!< Bit mask of MEM7 field.                */
   #define MEMCONF_POWER_CONTROL_MEM7_Min (0x0UL)     /*!< Min enumerator value of MEM7 field.                                  */
@@ -82831,7 +82825,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM7_Off (0x0UL)     /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM7_On (0x1UL)      /*!< Power up                                                             */
 
-/* MEM8 @Bit 8 : Keep the RAM/ROM block MEM[8] on or off when in System ON mode. */
+/* MEM8 @Bit 8 : Keep the memory block MEM[8] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM8_Pos (8UL)       /*!< Position of MEM8 field.                                              */
   #define MEMCONF_POWER_CONTROL_MEM8_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM8_Pos) /*!< Bit mask of MEM8 field.                */
   #define MEMCONF_POWER_CONTROL_MEM8_Min (0x0UL)     /*!< Min enumerator value of MEM8 field.                                  */
@@ -82839,7 +82833,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM8_Off (0x0UL)     /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM8_On (0x1UL)      /*!< Power up                                                             */
 
-/* MEM9 @Bit 9 : Keep the RAM/ROM block MEM[9] on or off when in System ON mode. */
+/* MEM9 @Bit 9 : Keep the memory block MEM[9] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM9_Pos (9UL)       /*!< Position of MEM9 field.                                              */
   #define MEMCONF_POWER_CONTROL_MEM9_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM9_Pos) /*!< Bit mask of MEM9 field.                */
   #define MEMCONF_POWER_CONTROL_MEM9_Min (0x0UL)     /*!< Min enumerator value of MEM9 field.                                  */
@@ -82847,7 +82841,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM9_Off (0x0UL)     /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM9_On (0x1UL)      /*!< Power up                                                             */
 
-/* MEM10 @Bit 10 : Keep the RAM/ROM block MEM[10] on or off when in System ON mode. */
+/* MEM10 @Bit 10 : Keep the memory block MEM[10] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM10_Pos (10UL)     /*!< Position of MEM10 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM10_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM10_Pos) /*!< Bit mask of MEM10 field.             */
   #define MEMCONF_POWER_CONTROL_MEM10_Min (0x0UL)    /*!< Min enumerator value of MEM10 field.                                 */
@@ -82855,7 +82849,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM10_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM10_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM11 @Bit 11 : Keep the RAM/ROM block MEM[11] on or off when in System ON mode. */
+/* MEM11 @Bit 11 : Keep the memory block MEM[11] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM11_Pos (11UL)     /*!< Position of MEM11 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM11_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM11_Pos) /*!< Bit mask of MEM11 field.             */
   #define MEMCONF_POWER_CONTROL_MEM11_Min (0x0UL)    /*!< Min enumerator value of MEM11 field.                                 */
@@ -82863,7 +82857,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM11_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM11_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM12 @Bit 12 : Keep the RAM/ROM block MEM[12] on or off when in System ON mode. */
+/* MEM12 @Bit 12 : Keep the memory block MEM[12] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM12_Pos (12UL)     /*!< Position of MEM12 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM12_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM12_Pos) /*!< Bit mask of MEM12 field.             */
   #define MEMCONF_POWER_CONTROL_MEM12_Min (0x0UL)    /*!< Min enumerator value of MEM12 field.                                 */
@@ -82871,7 +82865,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM12_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM12_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM13 @Bit 13 : Keep the RAM/ROM block MEM[13] on or off when in System ON mode. */
+/* MEM13 @Bit 13 : Keep the memory block MEM[13] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM13_Pos (13UL)     /*!< Position of MEM13 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM13_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM13_Pos) /*!< Bit mask of MEM13 field.             */
   #define MEMCONF_POWER_CONTROL_MEM13_Min (0x0UL)    /*!< Min enumerator value of MEM13 field.                                 */
@@ -82879,7 +82873,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM13_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM13_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM14 @Bit 14 : Keep the RAM/ROM block MEM[14] on or off when in System ON mode. */
+/* MEM14 @Bit 14 : Keep the memory block MEM[14] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM14_Pos (14UL)     /*!< Position of MEM14 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM14_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM14_Pos) /*!< Bit mask of MEM14 field.             */
   #define MEMCONF_POWER_CONTROL_MEM14_Min (0x0UL)    /*!< Min enumerator value of MEM14 field.                                 */
@@ -82887,7 +82881,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM14_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM14_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM15 @Bit 15 : Keep the RAM/ROM block MEM[15] on or off when in System ON mode. */
+/* MEM15 @Bit 15 : Keep the memory block MEM[15] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM15_Pos (15UL)     /*!< Position of MEM15 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM15_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM15_Pos) /*!< Bit mask of MEM15 field.             */
   #define MEMCONF_POWER_CONTROL_MEM15_Min (0x0UL)    /*!< Min enumerator value of MEM15 field.                                 */
@@ -82895,7 +82889,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM15_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM15_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM16 @Bit 16 : Keep the RAM/ROM block MEM[16] on or off when in System ON mode. */
+/* MEM16 @Bit 16 : Keep the memory block MEM[16] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM16_Pos (16UL)     /*!< Position of MEM16 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM16_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM16_Pos) /*!< Bit mask of MEM16 field.             */
   #define MEMCONF_POWER_CONTROL_MEM16_Min (0x0UL)    /*!< Min enumerator value of MEM16 field.                                 */
@@ -82903,7 +82897,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM16_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM16_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM17 @Bit 17 : Keep the RAM/ROM block MEM[17] on or off when in System ON mode. */
+/* MEM17 @Bit 17 : Keep the memory block MEM[17] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM17_Pos (17UL)     /*!< Position of MEM17 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM17_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM17_Pos) /*!< Bit mask of MEM17 field.             */
   #define MEMCONF_POWER_CONTROL_MEM17_Min (0x0UL)    /*!< Min enumerator value of MEM17 field.                                 */
@@ -82911,7 +82905,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM17_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM17_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM18 @Bit 18 : Keep the RAM/ROM block MEM[18] on or off when in System ON mode. */
+/* MEM18 @Bit 18 : Keep the memory block MEM[18] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM18_Pos (18UL)     /*!< Position of MEM18 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM18_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM18_Pos) /*!< Bit mask of MEM18 field.             */
   #define MEMCONF_POWER_CONTROL_MEM18_Min (0x0UL)    /*!< Min enumerator value of MEM18 field.                                 */
@@ -82919,7 +82913,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM18_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM18_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM19 @Bit 19 : Keep the RAM/ROM block MEM[19] on or off when in System ON mode. */
+/* MEM19 @Bit 19 : Keep the memory block MEM[19] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM19_Pos (19UL)     /*!< Position of MEM19 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM19_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM19_Pos) /*!< Bit mask of MEM19 field.             */
   #define MEMCONF_POWER_CONTROL_MEM19_Min (0x0UL)    /*!< Min enumerator value of MEM19 field.                                 */
@@ -82927,7 +82921,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM19_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM19_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM20 @Bit 20 : Keep the RAM/ROM block MEM[20] on or off when in System ON mode. */
+/* MEM20 @Bit 20 : Keep the memory block MEM[20] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM20_Pos (20UL)     /*!< Position of MEM20 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM20_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM20_Pos) /*!< Bit mask of MEM20 field.             */
   #define MEMCONF_POWER_CONTROL_MEM20_Min (0x0UL)    /*!< Min enumerator value of MEM20 field.                                 */
@@ -82935,7 +82929,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM20_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM20_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM21 @Bit 21 : Keep the RAM/ROM block MEM[21] on or off when in System ON mode. */
+/* MEM21 @Bit 21 : Keep the memory block MEM[21] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM21_Pos (21UL)     /*!< Position of MEM21 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM21_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM21_Pos) /*!< Bit mask of MEM21 field.             */
   #define MEMCONF_POWER_CONTROL_MEM21_Min (0x0UL)    /*!< Min enumerator value of MEM21 field.                                 */
@@ -82943,7 +82937,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM21_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM21_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM22 @Bit 22 : Keep the RAM/ROM block MEM[22] on or off when in System ON mode. */
+/* MEM22 @Bit 22 : Keep the memory block MEM[22] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM22_Pos (22UL)     /*!< Position of MEM22 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM22_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM22_Pos) /*!< Bit mask of MEM22 field.             */
   #define MEMCONF_POWER_CONTROL_MEM22_Min (0x0UL)    /*!< Min enumerator value of MEM22 field.                                 */
@@ -82951,7 +82945,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM22_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM22_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM23 @Bit 23 : Keep the RAM/ROM block MEM[23] on or off when in System ON mode. */
+/* MEM23 @Bit 23 : Keep the memory block MEM[23] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM23_Pos (23UL)     /*!< Position of MEM23 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM23_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM23_Pos) /*!< Bit mask of MEM23 field.             */
   #define MEMCONF_POWER_CONTROL_MEM23_Min (0x0UL)    /*!< Min enumerator value of MEM23 field.                                 */
@@ -82959,7 +82953,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM23_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM23_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM24 @Bit 24 : Keep the RAM/ROM block MEM[24] on or off when in System ON mode. */
+/* MEM24 @Bit 24 : Keep the memory block MEM[24] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM24_Pos (24UL)     /*!< Position of MEM24 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM24_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM24_Pos) /*!< Bit mask of MEM24 field.             */
   #define MEMCONF_POWER_CONTROL_MEM24_Min (0x0UL)    /*!< Min enumerator value of MEM24 field.                                 */
@@ -82967,7 +82961,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM24_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM24_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM25 @Bit 25 : Keep the RAM/ROM block MEM[25] on or off when in System ON mode. */
+/* MEM25 @Bit 25 : Keep the memory block MEM[25] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM25_Pos (25UL)     /*!< Position of MEM25 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM25_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM25_Pos) /*!< Bit mask of MEM25 field.             */
   #define MEMCONF_POWER_CONTROL_MEM25_Min (0x0UL)    /*!< Min enumerator value of MEM25 field.                                 */
@@ -82975,7 +82969,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM25_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM25_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM26 @Bit 26 : Keep the RAM/ROM block MEM[26] on or off when in System ON mode. */
+/* MEM26 @Bit 26 : Keep the memory block MEM[26] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM26_Pos (26UL)     /*!< Position of MEM26 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM26_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM26_Pos) /*!< Bit mask of MEM26 field.             */
   #define MEMCONF_POWER_CONTROL_MEM26_Min (0x0UL)    /*!< Min enumerator value of MEM26 field.                                 */
@@ -82983,7 +82977,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM26_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM26_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM27 @Bit 27 : Keep the RAM/ROM block MEM[27] on or off when in System ON mode. */
+/* MEM27 @Bit 27 : Keep the memory block MEM[27] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM27_Pos (27UL)     /*!< Position of MEM27 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM27_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM27_Pos) /*!< Bit mask of MEM27 field.             */
   #define MEMCONF_POWER_CONTROL_MEM27_Min (0x0UL)    /*!< Min enumerator value of MEM27 field.                                 */
@@ -82991,7 +82985,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM27_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM27_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM28 @Bit 28 : Keep the RAM/ROM block MEM[28] on or off when in System ON mode. */
+/* MEM28 @Bit 28 : Keep the memory block MEM[28] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM28_Pos (28UL)     /*!< Position of MEM28 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM28_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM28_Pos) /*!< Bit mask of MEM28 field.             */
   #define MEMCONF_POWER_CONTROL_MEM28_Min (0x0UL)    /*!< Min enumerator value of MEM28 field.                                 */
@@ -82999,7 +82993,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM28_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM28_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM29 @Bit 29 : Keep the RAM/ROM block MEM[29] on or off when in System ON mode. */
+/* MEM29 @Bit 29 : Keep the memory block MEM[29] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM29_Pos (29UL)     /*!< Position of MEM29 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM29_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM29_Pos) /*!< Bit mask of MEM29 field.             */
   #define MEMCONF_POWER_CONTROL_MEM29_Min (0x0UL)    /*!< Min enumerator value of MEM29 field.                                 */
@@ -83007,7 +83001,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM29_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM29_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM30 @Bit 30 : Keep the RAM/ROM block MEM[30] on or off when in System ON mode. */
+/* MEM30 @Bit 30 : Keep the memory block MEM[30] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM30_Pos (30UL)     /*!< Position of MEM30 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM30_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM30_Pos) /*!< Bit mask of MEM30 field.             */
   #define MEMCONF_POWER_CONTROL_MEM30_Min (0x0UL)    /*!< Min enumerator value of MEM30 field.                                 */
@@ -83015,7 +83009,7 @@ typedef struct {
   #define MEMCONF_POWER_CONTROL_MEM30_Off (0x0UL)    /*!< Power down                                                           */
   #define MEMCONF_POWER_CONTROL_MEM30_On (0x1UL)     /*!< Power up                                                             */
 
-/* MEM31 @Bit 31 : Keep the RAM/ROM block MEM[31] on or off when in System ON mode. */
+/* MEM31 @Bit 31 : Keep the memory block MEM[31] on or off when in System ON mode. */
   #define MEMCONF_POWER_CONTROL_MEM31_Pos (31UL)     /*!< Position of MEM31 field.                                             */
   #define MEMCONF_POWER_CONTROL_MEM31_Msk (0x1UL << MEMCONF_POWER_CONTROL_MEM31_Pos) /*!< Bit mask of MEM31 field.             */
   #define MEMCONF_POWER_CONTROL_MEM31_Min (0x0UL)    /*!< Min enumerator value of MEM31 field.                                 */
@@ -83027,7 +83021,7 @@ typedef struct {
 /* MEMCONF_POWER_RET: RAM retention for RAM [n]. */
   #define MEMCONF_POWER_RET_ResetValue (0x00000000UL) /*!< Reset value of RET register.                                        */
 
-/* MEM0 @Bit 0 : Keep the RAM block MEM[0] retained when in System OFF mode. */
+/* MEM0 @Bit 0 : Keep the RAM block MEM[0] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM0_Pos (0UL)           /*!< Position of MEM0 field.                                              */
   #define MEMCONF_POWER_RET_MEM0_Msk (0x1UL << MEMCONF_POWER_RET_MEM0_Pos) /*!< Bit mask of MEM0 field.                        */
   #define MEMCONF_POWER_RET_MEM0_Min (0x0UL)         /*!< Min enumerator value of MEM0 field.                                  */
@@ -83035,7 +83029,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM0_Off (0x0UL)         /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM0_On (0x1UL)          /*!< Retention on                                                         */
 
-/* MEM1 @Bit 1 : Keep the RAM block MEM[1] retained when in System OFF mode. */
+/* MEM1 @Bit 1 : Keep the RAM block MEM[1] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM1_Pos (1UL)           /*!< Position of MEM1 field.                                              */
   #define MEMCONF_POWER_RET_MEM1_Msk (0x1UL << MEMCONF_POWER_RET_MEM1_Pos) /*!< Bit mask of MEM1 field.                        */
   #define MEMCONF_POWER_RET_MEM1_Min (0x0UL)         /*!< Min enumerator value of MEM1 field.                                  */
@@ -83043,7 +83037,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM1_Off (0x0UL)         /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM1_On (0x1UL)          /*!< Retention on                                                         */
 
-/* MEM2 @Bit 2 : Keep the RAM block MEM[2] retained when in System OFF mode. */
+/* MEM2 @Bit 2 : Keep the RAM block MEM[2] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM2_Pos (2UL)           /*!< Position of MEM2 field.                                              */
   #define MEMCONF_POWER_RET_MEM2_Msk (0x1UL << MEMCONF_POWER_RET_MEM2_Pos) /*!< Bit mask of MEM2 field.                        */
   #define MEMCONF_POWER_RET_MEM2_Min (0x0UL)         /*!< Min enumerator value of MEM2 field.                                  */
@@ -83051,7 +83045,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM2_Off (0x0UL)         /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM2_On (0x1UL)          /*!< Retention on                                                         */
 
-/* MEM3 @Bit 3 : Keep the RAM block MEM[3] retained when in System OFF mode. */
+/* MEM3 @Bit 3 : Keep the RAM block MEM[3] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM3_Pos (3UL)           /*!< Position of MEM3 field.                                              */
   #define MEMCONF_POWER_RET_MEM3_Msk (0x1UL << MEMCONF_POWER_RET_MEM3_Pos) /*!< Bit mask of MEM3 field.                        */
   #define MEMCONF_POWER_RET_MEM3_Min (0x0UL)         /*!< Min enumerator value of MEM3 field.                                  */
@@ -83059,7 +83053,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM3_Off (0x0UL)         /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM3_On (0x1UL)          /*!< Retention on                                                         */
 
-/* MEM4 @Bit 4 : Keep the RAM block MEM[4] retained when in System OFF mode. */
+/* MEM4 @Bit 4 : Keep the RAM block MEM[4] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM4_Pos (4UL)           /*!< Position of MEM4 field.                                              */
   #define MEMCONF_POWER_RET_MEM4_Msk (0x1UL << MEMCONF_POWER_RET_MEM4_Pos) /*!< Bit mask of MEM4 field.                        */
   #define MEMCONF_POWER_RET_MEM4_Min (0x0UL)         /*!< Min enumerator value of MEM4 field.                                  */
@@ -83067,7 +83061,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM4_Off (0x0UL)         /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM4_On (0x1UL)          /*!< Retention on                                                         */
 
-/* MEM5 @Bit 5 : Keep the RAM block MEM[5] retained when in System OFF mode. */
+/* MEM5 @Bit 5 : Keep the RAM block MEM[5] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM5_Pos (5UL)           /*!< Position of MEM5 field.                                              */
   #define MEMCONF_POWER_RET_MEM5_Msk (0x1UL << MEMCONF_POWER_RET_MEM5_Pos) /*!< Bit mask of MEM5 field.                        */
   #define MEMCONF_POWER_RET_MEM5_Min (0x0UL)         /*!< Min enumerator value of MEM5 field.                                  */
@@ -83075,7 +83069,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM5_Off (0x0UL)         /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM5_On (0x1UL)          /*!< Retention on                                                         */
 
-/* MEM6 @Bit 6 : Keep the RAM block MEM[6] retained when in System OFF mode. */
+/* MEM6 @Bit 6 : Keep the RAM block MEM[6] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM6_Pos (6UL)           /*!< Position of MEM6 field.                                              */
   #define MEMCONF_POWER_RET_MEM6_Msk (0x1UL << MEMCONF_POWER_RET_MEM6_Pos) /*!< Bit mask of MEM6 field.                        */
   #define MEMCONF_POWER_RET_MEM6_Min (0x0UL)         /*!< Min enumerator value of MEM6 field.                                  */
@@ -83083,7 +83077,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM6_Off (0x0UL)         /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM6_On (0x1UL)          /*!< Retention on                                                         */
 
-/* MEM7 @Bit 7 : Keep the RAM block MEM[7] retained when in System OFF mode. */
+/* MEM7 @Bit 7 : Keep the RAM block MEM[7] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM7_Pos (7UL)           /*!< Position of MEM7 field.                                              */
   #define MEMCONF_POWER_RET_MEM7_Msk (0x1UL << MEMCONF_POWER_RET_MEM7_Pos) /*!< Bit mask of MEM7 field.                        */
   #define MEMCONF_POWER_RET_MEM7_Min (0x0UL)         /*!< Min enumerator value of MEM7 field.                                  */
@@ -83091,7 +83085,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM7_Off (0x0UL)         /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM7_On (0x1UL)          /*!< Retention on                                                         */
 
-/* MEM8 @Bit 8 : Keep the RAM block MEM[8] retained when in System OFF mode. */
+/* MEM8 @Bit 8 : Keep the RAM block MEM[8] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM8_Pos (8UL)           /*!< Position of MEM8 field.                                              */
   #define MEMCONF_POWER_RET_MEM8_Msk (0x1UL << MEMCONF_POWER_RET_MEM8_Pos) /*!< Bit mask of MEM8 field.                        */
   #define MEMCONF_POWER_RET_MEM8_Min (0x0UL)         /*!< Min enumerator value of MEM8 field.                                  */
@@ -83099,7 +83093,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM8_Off (0x0UL)         /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM8_On (0x1UL)          /*!< Retention on                                                         */
 
-/* MEM9 @Bit 9 : Keep the RAM block MEM[9] retained when in System OFF mode. */
+/* MEM9 @Bit 9 : Keep the RAM block MEM[9] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM9_Pos (9UL)           /*!< Position of MEM9 field.                                              */
   #define MEMCONF_POWER_RET_MEM9_Msk (0x1UL << MEMCONF_POWER_RET_MEM9_Pos) /*!< Bit mask of MEM9 field.                        */
   #define MEMCONF_POWER_RET_MEM9_Min (0x0UL)         /*!< Min enumerator value of MEM9 field.                                  */
@@ -83107,7 +83101,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM9_Off (0x0UL)         /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM9_On (0x1UL)          /*!< Retention on                                                         */
 
-/* MEM10 @Bit 10 : Keep the RAM block MEM[10] retained when in System OFF mode. */
+/* MEM10 @Bit 10 : Keep the RAM block MEM[10] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM10_Pos (10UL)         /*!< Position of MEM10 field.                                             */
   #define MEMCONF_POWER_RET_MEM10_Msk (0x1UL << MEMCONF_POWER_RET_MEM10_Pos) /*!< Bit mask of MEM10 field.                     */
   #define MEMCONF_POWER_RET_MEM10_Min (0x0UL)        /*!< Min enumerator value of MEM10 field.                                 */
@@ -83115,7 +83109,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM10_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM10_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM11 @Bit 11 : Keep the RAM block MEM[11] retained when in System OFF mode. */
+/* MEM11 @Bit 11 : Keep the RAM block MEM[11] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM11_Pos (11UL)         /*!< Position of MEM11 field.                                             */
   #define MEMCONF_POWER_RET_MEM11_Msk (0x1UL << MEMCONF_POWER_RET_MEM11_Pos) /*!< Bit mask of MEM11 field.                     */
   #define MEMCONF_POWER_RET_MEM11_Min (0x0UL)        /*!< Min enumerator value of MEM11 field.                                 */
@@ -83123,7 +83117,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM11_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM11_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM12 @Bit 12 : Keep the RAM block MEM[12] retained when in System OFF mode. */
+/* MEM12 @Bit 12 : Keep the RAM block MEM[12] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM12_Pos (12UL)         /*!< Position of MEM12 field.                                             */
   #define MEMCONF_POWER_RET_MEM12_Msk (0x1UL << MEMCONF_POWER_RET_MEM12_Pos) /*!< Bit mask of MEM12 field.                     */
   #define MEMCONF_POWER_RET_MEM12_Min (0x0UL)        /*!< Min enumerator value of MEM12 field.                                 */
@@ -83131,7 +83125,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM12_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM12_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM13 @Bit 13 : Keep the RAM block MEM[13] retained when in System OFF mode. */
+/* MEM13 @Bit 13 : Keep the RAM block MEM[13] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM13_Pos (13UL)         /*!< Position of MEM13 field.                                             */
   #define MEMCONF_POWER_RET_MEM13_Msk (0x1UL << MEMCONF_POWER_RET_MEM13_Pos) /*!< Bit mask of MEM13 field.                     */
   #define MEMCONF_POWER_RET_MEM13_Min (0x0UL)        /*!< Min enumerator value of MEM13 field.                                 */
@@ -83139,7 +83133,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM13_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM13_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM14 @Bit 14 : Keep the RAM block MEM[14] retained when in System OFF mode. */
+/* MEM14 @Bit 14 : Keep the RAM block MEM[14] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM14_Pos (14UL)         /*!< Position of MEM14 field.                                             */
   #define MEMCONF_POWER_RET_MEM14_Msk (0x1UL << MEMCONF_POWER_RET_MEM14_Pos) /*!< Bit mask of MEM14 field.                     */
   #define MEMCONF_POWER_RET_MEM14_Min (0x0UL)        /*!< Min enumerator value of MEM14 field.                                 */
@@ -83147,7 +83141,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM14_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM14_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM15 @Bit 15 : Keep the RAM block MEM[15] retained when in System OFF mode. */
+/* MEM15 @Bit 15 : Keep the RAM block MEM[15] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM15_Pos (15UL)         /*!< Position of MEM15 field.                                             */
   #define MEMCONF_POWER_RET_MEM15_Msk (0x1UL << MEMCONF_POWER_RET_MEM15_Pos) /*!< Bit mask of MEM15 field.                     */
   #define MEMCONF_POWER_RET_MEM15_Min (0x0UL)        /*!< Min enumerator value of MEM15 field.                                 */
@@ -83155,7 +83149,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM15_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM15_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM16 @Bit 16 : Keep the RAM block MEM[16] retained when in System OFF mode. */
+/* MEM16 @Bit 16 : Keep the RAM block MEM[16] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM16_Pos (16UL)         /*!< Position of MEM16 field.                                             */
   #define MEMCONF_POWER_RET_MEM16_Msk (0x1UL << MEMCONF_POWER_RET_MEM16_Pos) /*!< Bit mask of MEM16 field.                     */
   #define MEMCONF_POWER_RET_MEM16_Min (0x0UL)        /*!< Min enumerator value of MEM16 field.                                 */
@@ -83163,7 +83157,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM16_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM16_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM17 @Bit 17 : Keep the RAM block MEM[17] retained when in System OFF mode. */
+/* MEM17 @Bit 17 : Keep the RAM block MEM[17] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM17_Pos (17UL)         /*!< Position of MEM17 field.                                             */
   #define MEMCONF_POWER_RET_MEM17_Msk (0x1UL << MEMCONF_POWER_RET_MEM17_Pos) /*!< Bit mask of MEM17 field.                     */
   #define MEMCONF_POWER_RET_MEM17_Min (0x0UL)        /*!< Min enumerator value of MEM17 field.                                 */
@@ -83171,7 +83165,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM17_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM17_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM18 @Bit 18 : Keep the RAM block MEM[18] retained when in System OFF mode. */
+/* MEM18 @Bit 18 : Keep the RAM block MEM[18] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM18_Pos (18UL)         /*!< Position of MEM18 field.                                             */
   #define MEMCONF_POWER_RET_MEM18_Msk (0x1UL << MEMCONF_POWER_RET_MEM18_Pos) /*!< Bit mask of MEM18 field.                     */
   #define MEMCONF_POWER_RET_MEM18_Min (0x0UL)        /*!< Min enumerator value of MEM18 field.                                 */
@@ -83179,7 +83173,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM18_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM18_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM19 @Bit 19 : Keep the RAM block MEM[19] retained when in System OFF mode. */
+/* MEM19 @Bit 19 : Keep the RAM block MEM[19] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM19_Pos (19UL)         /*!< Position of MEM19 field.                                             */
   #define MEMCONF_POWER_RET_MEM19_Msk (0x1UL << MEMCONF_POWER_RET_MEM19_Pos) /*!< Bit mask of MEM19 field.                     */
   #define MEMCONF_POWER_RET_MEM19_Min (0x0UL)        /*!< Min enumerator value of MEM19 field.                                 */
@@ -83187,7 +83181,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM19_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM19_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM20 @Bit 20 : Keep the RAM block MEM[20] retained when in System OFF mode. */
+/* MEM20 @Bit 20 : Keep the RAM block MEM[20] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM20_Pos (20UL)         /*!< Position of MEM20 field.                                             */
   #define MEMCONF_POWER_RET_MEM20_Msk (0x1UL << MEMCONF_POWER_RET_MEM20_Pos) /*!< Bit mask of MEM20 field.                     */
   #define MEMCONF_POWER_RET_MEM20_Min (0x0UL)        /*!< Min enumerator value of MEM20 field.                                 */
@@ -83195,7 +83189,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM20_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM20_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM21 @Bit 21 : Keep the RAM block MEM[21] retained when in System OFF mode. */
+/* MEM21 @Bit 21 : Keep the RAM block MEM[21] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM21_Pos (21UL)         /*!< Position of MEM21 field.                                             */
   #define MEMCONF_POWER_RET_MEM21_Msk (0x1UL << MEMCONF_POWER_RET_MEM21_Pos) /*!< Bit mask of MEM21 field.                     */
   #define MEMCONF_POWER_RET_MEM21_Min (0x0UL)        /*!< Min enumerator value of MEM21 field.                                 */
@@ -83203,7 +83197,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM21_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM21_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM22 @Bit 22 : Keep the RAM block MEM[22] retained when in System OFF mode. */
+/* MEM22 @Bit 22 : Keep the RAM block MEM[22] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM22_Pos (22UL)         /*!< Position of MEM22 field.                                             */
   #define MEMCONF_POWER_RET_MEM22_Msk (0x1UL << MEMCONF_POWER_RET_MEM22_Pos) /*!< Bit mask of MEM22 field.                     */
   #define MEMCONF_POWER_RET_MEM22_Min (0x0UL)        /*!< Min enumerator value of MEM22 field.                                 */
@@ -83211,7 +83205,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM22_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM22_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM23 @Bit 23 : Keep the RAM block MEM[23] retained when in System OFF mode. */
+/* MEM23 @Bit 23 : Keep the RAM block MEM[23] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM23_Pos (23UL)         /*!< Position of MEM23 field.                                             */
   #define MEMCONF_POWER_RET_MEM23_Msk (0x1UL << MEMCONF_POWER_RET_MEM23_Pos) /*!< Bit mask of MEM23 field.                     */
   #define MEMCONF_POWER_RET_MEM23_Min (0x0UL)        /*!< Min enumerator value of MEM23 field.                                 */
@@ -83219,7 +83213,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM23_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM23_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM24 @Bit 24 : Keep the RAM block MEM[24] retained when in System OFF mode. */
+/* MEM24 @Bit 24 : Keep the RAM block MEM[24] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM24_Pos (24UL)         /*!< Position of MEM24 field.                                             */
   #define MEMCONF_POWER_RET_MEM24_Msk (0x1UL << MEMCONF_POWER_RET_MEM24_Pos) /*!< Bit mask of MEM24 field.                     */
   #define MEMCONF_POWER_RET_MEM24_Min (0x0UL)        /*!< Min enumerator value of MEM24 field.                                 */
@@ -83227,7 +83221,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM24_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM24_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM25 @Bit 25 : Keep the RAM block MEM[25] retained when in System OFF mode. */
+/* MEM25 @Bit 25 : Keep the RAM block MEM[25] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM25_Pos (25UL)         /*!< Position of MEM25 field.                                             */
   #define MEMCONF_POWER_RET_MEM25_Msk (0x1UL << MEMCONF_POWER_RET_MEM25_Pos) /*!< Bit mask of MEM25 field.                     */
   #define MEMCONF_POWER_RET_MEM25_Min (0x0UL)        /*!< Min enumerator value of MEM25 field.                                 */
@@ -83235,7 +83229,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM25_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM25_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM26 @Bit 26 : Keep the RAM block MEM[26] retained when in System OFF mode. */
+/* MEM26 @Bit 26 : Keep the RAM block MEM[26] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM26_Pos (26UL)         /*!< Position of MEM26 field.                                             */
   #define MEMCONF_POWER_RET_MEM26_Msk (0x1UL << MEMCONF_POWER_RET_MEM26_Pos) /*!< Bit mask of MEM26 field.                     */
   #define MEMCONF_POWER_RET_MEM26_Min (0x0UL)        /*!< Min enumerator value of MEM26 field.                                 */
@@ -83243,7 +83237,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM26_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM26_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM27 @Bit 27 : Keep the RAM block MEM[27] retained when in System OFF mode. */
+/* MEM27 @Bit 27 : Keep the RAM block MEM[27] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM27_Pos (27UL)         /*!< Position of MEM27 field.                                             */
   #define MEMCONF_POWER_RET_MEM27_Msk (0x1UL << MEMCONF_POWER_RET_MEM27_Pos) /*!< Bit mask of MEM27 field.                     */
   #define MEMCONF_POWER_RET_MEM27_Min (0x0UL)        /*!< Min enumerator value of MEM27 field.                                 */
@@ -83251,7 +83245,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM27_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM27_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM28 @Bit 28 : Keep the RAM block MEM[28] retained when in System OFF mode. */
+/* MEM28 @Bit 28 : Keep the RAM block MEM[28] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM28_Pos (28UL)         /*!< Position of MEM28 field.                                             */
   #define MEMCONF_POWER_RET_MEM28_Msk (0x1UL << MEMCONF_POWER_RET_MEM28_Pos) /*!< Bit mask of MEM28 field.                     */
   #define MEMCONF_POWER_RET_MEM28_Min (0x0UL)        /*!< Min enumerator value of MEM28 field.                                 */
@@ -83259,7 +83253,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM28_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM28_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM29 @Bit 29 : Keep the RAM block MEM[29] retained when in System OFF mode. */
+/* MEM29 @Bit 29 : Keep the RAM block MEM[29] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM29_Pos (29UL)         /*!< Position of MEM29 field.                                             */
   #define MEMCONF_POWER_RET_MEM29_Msk (0x1UL << MEMCONF_POWER_RET_MEM29_Pos) /*!< Bit mask of MEM29 field.                     */
   #define MEMCONF_POWER_RET_MEM29_Min (0x0UL)        /*!< Min enumerator value of MEM29 field.                                 */
@@ -83267,7 +83261,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM29_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM29_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM30 @Bit 30 : Keep the RAM block MEM[30] retained when in System OFF mode. */
+/* MEM30 @Bit 30 : Keep the RAM block MEM[30] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM30_Pos (30UL)         /*!< Position of MEM30 field.                                             */
   #define MEMCONF_POWER_RET_MEM30_Msk (0x1UL << MEMCONF_POWER_RET_MEM30_Pos) /*!< Bit mask of MEM30 field.                     */
   #define MEMCONF_POWER_RET_MEM30_Min (0x0UL)        /*!< Min enumerator value of MEM30 field.                                 */
@@ -83275,7 +83269,7 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM30_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET_MEM30_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM31 @Bit 31 : Keep the RAM block MEM[31] retained when in System OFF mode. */
+/* MEM31 @Bit 31 : Keep the RAM block MEM[31] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM31_Pos (31UL)         /*!< Position of MEM31 field.                                             */
   #define MEMCONF_POWER_RET_MEM31_Msk (0x1UL << MEMCONF_POWER_RET_MEM31_Pos) /*!< Bit mask of MEM31 field.                     */
   #define MEMCONF_POWER_RET_MEM31_Min (0x0UL)        /*!< Min enumerator value of MEM31 field.                                 */
@@ -83287,7 +83281,7 @@ typedef struct {
 /* MEMCONF_POWER_RET2: RAM retention for the second bank in the RAM block */
   #define MEMCONF_POWER_RET2_ResetValue (0x00000000UL) /*!< Reset value of RET2 register.                                      */
 
-/* MEM0 @Bit 0 : Keep the second bank in RAM block MEM[0] retained when in System OFF mode. */
+/* MEM0 @Bit 0 : Keep the second bank in RAM block MEM[0] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM0_Pos (0UL)          /*!< Position of MEM0 field.                                              */
   #define MEMCONF_POWER_RET2_MEM0_Msk (0x1UL << MEMCONF_POWER_RET2_MEM0_Pos) /*!< Bit mask of MEM0 field.                      */
   #define MEMCONF_POWER_RET2_MEM0_Min (0x0UL)        /*!< Min enumerator value of MEM0 field.                                  */
@@ -83295,7 +83289,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM0_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM0_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM1 @Bit 1 : Keep the second bank in RAM block MEM[1] retained when in System OFF mode. */
+/* MEM1 @Bit 1 : Keep the second bank in RAM block MEM[1] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM1_Pos (1UL)          /*!< Position of MEM1 field.                                              */
   #define MEMCONF_POWER_RET2_MEM1_Msk (0x1UL << MEMCONF_POWER_RET2_MEM1_Pos) /*!< Bit mask of MEM1 field.                      */
   #define MEMCONF_POWER_RET2_MEM1_Min (0x0UL)        /*!< Min enumerator value of MEM1 field.                                  */
@@ -83303,7 +83297,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM1_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM1_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM2 @Bit 2 : Keep the second bank in RAM block MEM[2] retained when in System OFF mode. */
+/* MEM2 @Bit 2 : Keep the second bank in RAM block MEM[2] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM2_Pos (2UL)          /*!< Position of MEM2 field.                                              */
   #define MEMCONF_POWER_RET2_MEM2_Msk (0x1UL << MEMCONF_POWER_RET2_MEM2_Pos) /*!< Bit mask of MEM2 field.                      */
   #define MEMCONF_POWER_RET2_MEM2_Min (0x0UL)        /*!< Min enumerator value of MEM2 field.                                  */
@@ -83311,7 +83305,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM2_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM2_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM3 @Bit 3 : Keep the second bank in RAM block MEM[3] retained when in System OFF mode. */
+/* MEM3 @Bit 3 : Keep the second bank in RAM block MEM[3] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM3_Pos (3UL)          /*!< Position of MEM3 field.                                              */
   #define MEMCONF_POWER_RET2_MEM3_Msk (0x1UL << MEMCONF_POWER_RET2_MEM3_Pos) /*!< Bit mask of MEM3 field.                      */
   #define MEMCONF_POWER_RET2_MEM3_Min (0x0UL)        /*!< Min enumerator value of MEM3 field.                                  */
@@ -83319,7 +83313,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM3_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM3_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM4 @Bit 4 : Keep the second bank in RAM block MEM[4] retained when in System OFF mode. */
+/* MEM4 @Bit 4 : Keep the second bank in RAM block MEM[4] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM4_Pos (4UL)          /*!< Position of MEM4 field.                                              */
   #define MEMCONF_POWER_RET2_MEM4_Msk (0x1UL << MEMCONF_POWER_RET2_MEM4_Pos) /*!< Bit mask of MEM4 field.                      */
   #define MEMCONF_POWER_RET2_MEM4_Min (0x0UL)        /*!< Min enumerator value of MEM4 field.                                  */
@@ -83327,7 +83321,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM4_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM4_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM5 @Bit 5 : Keep the second bank in RAM block MEM[5] retained when in System OFF mode. */
+/* MEM5 @Bit 5 : Keep the second bank in RAM block MEM[5] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM5_Pos (5UL)          /*!< Position of MEM5 field.                                              */
   #define MEMCONF_POWER_RET2_MEM5_Msk (0x1UL << MEMCONF_POWER_RET2_MEM5_Pos) /*!< Bit mask of MEM5 field.                      */
   #define MEMCONF_POWER_RET2_MEM5_Min (0x0UL)        /*!< Min enumerator value of MEM5 field.                                  */
@@ -83335,7 +83329,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM5_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM5_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM6 @Bit 6 : Keep the second bank in RAM block MEM[6] retained when in System OFF mode. */
+/* MEM6 @Bit 6 : Keep the second bank in RAM block MEM[6] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM6_Pos (6UL)          /*!< Position of MEM6 field.                                              */
   #define MEMCONF_POWER_RET2_MEM6_Msk (0x1UL << MEMCONF_POWER_RET2_MEM6_Pos) /*!< Bit mask of MEM6 field.                      */
   #define MEMCONF_POWER_RET2_MEM6_Min (0x0UL)        /*!< Min enumerator value of MEM6 field.                                  */
@@ -83343,7 +83337,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM6_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM6_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM7 @Bit 7 : Keep the second bank in RAM block MEM[7] retained when in System OFF mode. */
+/* MEM7 @Bit 7 : Keep the second bank in RAM block MEM[7] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM7_Pos (7UL)          /*!< Position of MEM7 field.                                              */
   #define MEMCONF_POWER_RET2_MEM7_Msk (0x1UL << MEMCONF_POWER_RET2_MEM7_Pos) /*!< Bit mask of MEM7 field.                      */
   #define MEMCONF_POWER_RET2_MEM7_Min (0x0UL)        /*!< Min enumerator value of MEM7 field.                                  */
@@ -83351,7 +83345,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM7_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM7_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM8 @Bit 8 : Keep the second bank in RAM block MEM[8] retained when in System OFF mode. */
+/* MEM8 @Bit 8 : Keep the second bank in RAM block MEM[8] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM8_Pos (8UL)          /*!< Position of MEM8 field.                                              */
   #define MEMCONF_POWER_RET2_MEM8_Msk (0x1UL << MEMCONF_POWER_RET2_MEM8_Pos) /*!< Bit mask of MEM8 field.                      */
   #define MEMCONF_POWER_RET2_MEM8_Min (0x0UL)        /*!< Min enumerator value of MEM8 field.                                  */
@@ -83359,7 +83353,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM8_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM8_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM9 @Bit 9 : Keep the second bank in RAM block MEM[9] retained when in System OFF mode. */
+/* MEM9 @Bit 9 : Keep the second bank in RAM block MEM[9] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM9_Pos (9UL)          /*!< Position of MEM9 field.                                              */
   #define MEMCONF_POWER_RET2_MEM9_Msk (0x1UL << MEMCONF_POWER_RET2_MEM9_Pos) /*!< Bit mask of MEM9 field.                      */
   #define MEMCONF_POWER_RET2_MEM9_Min (0x0UL)        /*!< Min enumerator value of MEM9 field.                                  */
@@ -83367,7 +83361,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM9_Off (0x0UL)        /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM9_On (0x1UL)         /*!< Retention on                                                         */
 
-/* MEM10 @Bit 10 : Keep the second bank in RAM block MEM[10] retained when in System OFF mode. */
+/* MEM10 @Bit 10 : Keep the second bank in RAM block MEM[10] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM10_Pos (10UL)        /*!< Position of MEM10 field.                                             */
   #define MEMCONF_POWER_RET2_MEM10_Msk (0x1UL << MEMCONF_POWER_RET2_MEM10_Pos) /*!< Bit mask of MEM10 field.                   */
   #define MEMCONF_POWER_RET2_MEM10_Min (0x0UL)       /*!< Min enumerator value of MEM10 field.                                 */
@@ -83375,7 +83369,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM10_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM10_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM11 @Bit 11 : Keep the second bank in RAM block MEM[11] retained when in System OFF mode. */
+/* MEM11 @Bit 11 : Keep the second bank in RAM block MEM[11] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM11_Pos (11UL)        /*!< Position of MEM11 field.                                             */
   #define MEMCONF_POWER_RET2_MEM11_Msk (0x1UL << MEMCONF_POWER_RET2_MEM11_Pos) /*!< Bit mask of MEM11 field.                   */
   #define MEMCONF_POWER_RET2_MEM11_Min (0x0UL)       /*!< Min enumerator value of MEM11 field.                                 */
@@ -83383,7 +83377,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM11_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM11_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM12 @Bit 12 : Keep the second bank in RAM block MEM[12] retained when in System OFF mode. */
+/* MEM12 @Bit 12 : Keep the second bank in RAM block MEM[12] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM12_Pos (12UL)        /*!< Position of MEM12 field.                                             */
   #define MEMCONF_POWER_RET2_MEM12_Msk (0x1UL << MEMCONF_POWER_RET2_MEM12_Pos) /*!< Bit mask of MEM12 field.                   */
   #define MEMCONF_POWER_RET2_MEM12_Min (0x0UL)       /*!< Min enumerator value of MEM12 field.                                 */
@@ -83391,7 +83385,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM12_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM12_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM13 @Bit 13 : Keep the second bank in RAM block MEM[13] retained when in System OFF mode. */
+/* MEM13 @Bit 13 : Keep the second bank in RAM block MEM[13] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM13_Pos (13UL)        /*!< Position of MEM13 field.                                             */
   #define MEMCONF_POWER_RET2_MEM13_Msk (0x1UL << MEMCONF_POWER_RET2_MEM13_Pos) /*!< Bit mask of MEM13 field.                   */
   #define MEMCONF_POWER_RET2_MEM13_Min (0x0UL)       /*!< Min enumerator value of MEM13 field.                                 */
@@ -83399,7 +83393,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM13_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM13_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM14 @Bit 14 : Keep the second bank in RAM block MEM[14] retained when in System OFF mode. */
+/* MEM14 @Bit 14 : Keep the second bank in RAM block MEM[14] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM14_Pos (14UL)        /*!< Position of MEM14 field.                                             */
   #define MEMCONF_POWER_RET2_MEM14_Msk (0x1UL << MEMCONF_POWER_RET2_MEM14_Pos) /*!< Bit mask of MEM14 field.                   */
   #define MEMCONF_POWER_RET2_MEM14_Min (0x0UL)       /*!< Min enumerator value of MEM14 field.                                 */
@@ -83407,7 +83401,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM14_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM14_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM15 @Bit 15 : Keep the second bank in RAM block MEM[15] retained when in System OFF mode. */
+/* MEM15 @Bit 15 : Keep the second bank in RAM block MEM[15] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM15_Pos (15UL)        /*!< Position of MEM15 field.                                             */
   #define MEMCONF_POWER_RET2_MEM15_Msk (0x1UL << MEMCONF_POWER_RET2_MEM15_Pos) /*!< Bit mask of MEM15 field.                   */
   #define MEMCONF_POWER_RET2_MEM15_Min (0x0UL)       /*!< Min enumerator value of MEM15 field.                                 */
@@ -83415,7 +83409,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM15_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM15_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM16 @Bit 16 : Keep the second bank in RAM block MEM[16] retained when in System OFF mode. */
+/* MEM16 @Bit 16 : Keep the second bank in RAM block MEM[16] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM16_Pos (16UL)        /*!< Position of MEM16 field.                                             */
   #define MEMCONF_POWER_RET2_MEM16_Msk (0x1UL << MEMCONF_POWER_RET2_MEM16_Pos) /*!< Bit mask of MEM16 field.                   */
   #define MEMCONF_POWER_RET2_MEM16_Min (0x0UL)       /*!< Min enumerator value of MEM16 field.                                 */
@@ -83423,7 +83417,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM16_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM16_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM17 @Bit 17 : Keep the second bank in RAM block MEM[17] retained when in System OFF mode. */
+/* MEM17 @Bit 17 : Keep the second bank in RAM block MEM[17] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM17_Pos (17UL)        /*!< Position of MEM17 field.                                             */
   #define MEMCONF_POWER_RET2_MEM17_Msk (0x1UL << MEMCONF_POWER_RET2_MEM17_Pos) /*!< Bit mask of MEM17 field.                   */
   #define MEMCONF_POWER_RET2_MEM17_Min (0x0UL)       /*!< Min enumerator value of MEM17 field.                                 */
@@ -83431,7 +83425,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM17_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM17_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM18 @Bit 18 : Keep the second bank in RAM block MEM[18] retained when in System OFF mode. */
+/* MEM18 @Bit 18 : Keep the second bank in RAM block MEM[18] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM18_Pos (18UL)        /*!< Position of MEM18 field.                                             */
   #define MEMCONF_POWER_RET2_MEM18_Msk (0x1UL << MEMCONF_POWER_RET2_MEM18_Pos) /*!< Bit mask of MEM18 field.                   */
   #define MEMCONF_POWER_RET2_MEM18_Min (0x0UL)       /*!< Min enumerator value of MEM18 field.                                 */
@@ -83439,7 +83433,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM18_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM18_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM19 @Bit 19 : Keep the second bank in RAM block MEM[19] retained when in System OFF mode. */
+/* MEM19 @Bit 19 : Keep the second bank in RAM block MEM[19] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM19_Pos (19UL)        /*!< Position of MEM19 field.                                             */
   #define MEMCONF_POWER_RET2_MEM19_Msk (0x1UL << MEMCONF_POWER_RET2_MEM19_Pos) /*!< Bit mask of MEM19 field.                   */
   #define MEMCONF_POWER_RET2_MEM19_Min (0x0UL)       /*!< Min enumerator value of MEM19 field.                                 */
@@ -83447,7 +83441,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM19_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM19_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM20 @Bit 20 : Keep the second bank in RAM block MEM[20] retained when in System OFF mode. */
+/* MEM20 @Bit 20 : Keep the second bank in RAM block MEM[20] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM20_Pos (20UL)        /*!< Position of MEM20 field.                                             */
   #define MEMCONF_POWER_RET2_MEM20_Msk (0x1UL << MEMCONF_POWER_RET2_MEM20_Pos) /*!< Bit mask of MEM20 field.                   */
   #define MEMCONF_POWER_RET2_MEM20_Min (0x0UL)       /*!< Min enumerator value of MEM20 field.                                 */
@@ -83455,7 +83449,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM20_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM20_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM21 @Bit 21 : Keep the second bank in RAM block MEM[21] retained when in System OFF mode. */
+/* MEM21 @Bit 21 : Keep the second bank in RAM block MEM[21] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM21_Pos (21UL)        /*!< Position of MEM21 field.                                             */
   #define MEMCONF_POWER_RET2_MEM21_Msk (0x1UL << MEMCONF_POWER_RET2_MEM21_Pos) /*!< Bit mask of MEM21 field.                   */
   #define MEMCONF_POWER_RET2_MEM21_Min (0x0UL)       /*!< Min enumerator value of MEM21 field.                                 */
@@ -83463,7 +83457,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM21_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM21_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM22 @Bit 22 : Keep the second bank in RAM block MEM[22] retained when in System OFF mode. */
+/* MEM22 @Bit 22 : Keep the second bank in RAM block MEM[22] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM22_Pos (22UL)        /*!< Position of MEM22 field.                                             */
   #define MEMCONF_POWER_RET2_MEM22_Msk (0x1UL << MEMCONF_POWER_RET2_MEM22_Pos) /*!< Bit mask of MEM22 field.                   */
   #define MEMCONF_POWER_RET2_MEM22_Min (0x0UL)       /*!< Min enumerator value of MEM22 field.                                 */
@@ -83471,7 +83465,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM22_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM22_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM23 @Bit 23 : Keep the second bank in RAM block MEM[23] retained when in System OFF mode. */
+/* MEM23 @Bit 23 : Keep the second bank in RAM block MEM[23] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM23_Pos (23UL)        /*!< Position of MEM23 field.                                             */
   #define MEMCONF_POWER_RET2_MEM23_Msk (0x1UL << MEMCONF_POWER_RET2_MEM23_Pos) /*!< Bit mask of MEM23 field.                   */
   #define MEMCONF_POWER_RET2_MEM23_Min (0x0UL)       /*!< Min enumerator value of MEM23 field.                                 */
@@ -83479,7 +83473,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM23_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM23_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM24 @Bit 24 : Keep the second bank in RAM block MEM[24] retained when in System OFF mode. */
+/* MEM24 @Bit 24 : Keep the second bank in RAM block MEM[24] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM24_Pos (24UL)        /*!< Position of MEM24 field.                                             */
   #define MEMCONF_POWER_RET2_MEM24_Msk (0x1UL << MEMCONF_POWER_RET2_MEM24_Pos) /*!< Bit mask of MEM24 field.                   */
   #define MEMCONF_POWER_RET2_MEM24_Min (0x0UL)       /*!< Min enumerator value of MEM24 field.                                 */
@@ -83487,7 +83481,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM24_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM24_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM25 @Bit 25 : Keep the second bank in RAM block MEM[25] retained when in System OFF mode. */
+/* MEM25 @Bit 25 : Keep the second bank in RAM block MEM[25] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM25_Pos (25UL)        /*!< Position of MEM25 field.                                             */
   #define MEMCONF_POWER_RET2_MEM25_Msk (0x1UL << MEMCONF_POWER_RET2_MEM25_Pos) /*!< Bit mask of MEM25 field.                   */
   #define MEMCONF_POWER_RET2_MEM25_Min (0x0UL)       /*!< Min enumerator value of MEM25 field.                                 */
@@ -83495,7 +83489,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM25_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM25_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM26 @Bit 26 : Keep the second bank in RAM block MEM[26] retained when in System OFF mode. */
+/* MEM26 @Bit 26 : Keep the second bank in RAM block MEM[26] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM26_Pos (26UL)        /*!< Position of MEM26 field.                                             */
   #define MEMCONF_POWER_RET2_MEM26_Msk (0x1UL << MEMCONF_POWER_RET2_MEM26_Pos) /*!< Bit mask of MEM26 field.                   */
   #define MEMCONF_POWER_RET2_MEM26_Min (0x0UL)       /*!< Min enumerator value of MEM26 field.                                 */
@@ -83503,7 +83497,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM26_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM26_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM27 @Bit 27 : Keep the second bank in RAM block MEM[27] retained when in System OFF mode. */
+/* MEM27 @Bit 27 : Keep the second bank in RAM block MEM[27] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM27_Pos (27UL)        /*!< Position of MEM27 field.                                             */
   #define MEMCONF_POWER_RET2_MEM27_Msk (0x1UL << MEMCONF_POWER_RET2_MEM27_Pos) /*!< Bit mask of MEM27 field.                   */
   #define MEMCONF_POWER_RET2_MEM27_Min (0x0UL)       /*!< Min enumerator value of MEM27 field.                                 */
@@ -83511,7 +83505,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM27_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM27_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM28 @Bit 28 : Keep the second bank in RAM block MEM[28] retained when in System OFF mode. */
+/* MEM28 @Bit 28 : Keep the second bank in RAM block MEM[28] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM28_Pos (28UL)        /*!< Position of MEM28 field.                                             */
   #define MEMCONF_POWER_RET2_MEM28_Msk (0x1UL << MEMCONF_POWER_RET2_MEM28_Pos) /*!< Bit mask of MEM28 field.                   */
   #define MEMCONF_POWER_RET2_MEM28_Min (0x0UL)       /*!< Min enumerator value of MEM28 field.                                 */
@@ -83519,7 +83513,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM28_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM28_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM29 @Bit 29 : Keep the second bank in RAM block MEM[29] retained when in System OFF mode. */
+/* MEM29 @Bit 29 : Keep the second bank in RAM block MEM[29] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM29_Pos (29UL)        /*!< Position of MEM29 field.                                             */
   #define MEMCONF_POWER_RET2_MEM29_Msk (0x1UL << MEMCONF_POWER_RET2_MEM29_Pos) /*!< Bit mask of MEM29 field.                   */
   #define MEMCONF_POWER_RET2_MEM29_Min (0x0UL)       /*!< Min enumerator value of MEM29 field.                                 */
@@ -83527,7 +83521,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM29_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM29_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM30 @Bit 30 : Keep the second bank in RAM block MEM[30] retained when in System OFF mode. */
+/* MEM30 @Bit 30 : Keep the second bank in RAM block MEM[30] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM30_Pos (30UL)        /*!< Position of MEM30 field.                                             */
   #define MEMCONF_POWER_RET2_MEM30_Msk (0x1UL << MEMCONF_POWER_RET2_MEM30_Pos) /*!< Bit mask of MEM30 field.                   */
   #define MEMCONF_POWER_RET2_MEM30_Min (0x0UL)       /*!< Min enumerator value of MEM30 field.                                 */
@@ -83535,7 +83529,7 @@ typedef struct {
   #define MEMCONF_POWER_RET2_MEM30_Off (0x0UL)       /*!< Retention off                                                        */
   #define MEMCONF_POWER_RET2_MEM30_On (0x1UL)        /*!< Retention on                                                         */
 
-/* MEM31 @Bit 31 : Keep the second bank in RAM block MEM[31] retained when in System OFF mode. */
+/* MEM31 @Bit 31 : Keep the second bank in RAM block MEM[31] retained when parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET2_MEM31_Pos (31UL)        /*!< Position of MEM31 field.                                             */
   #define MEMCONF_POWER_RET2_MEM31_Msk (0x1UL << MEMCONF_POWER_RET2_MEM31_Pos) /*!< Bit mask of MEM31 field.                   */
   #define MEMCONF_POWER_RET2_MEM31_Min (0x0UL)       /*!< Min enumerator value of MEM31 field.                                 */
@@ -83578,13 +83572,13 @@ typedef struct {
   * @brief BLOCKTYPE [MEMCONF_BLOCKTYPE] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim configuration for the RAM/ROM block types.       */
+  __IOM uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim configuration for the memory block types.        */
 } NRF_MEMCONF_BLOCKTYPE_Type;                        /*!< Size = 4 (0x004)                                                     */
   #define MEMCONF_BLOCKTYPE_MaxCount (64UL)          /*!< Size of BLOCKTYPE[64] array.                                         */
   #define MEMCONF_BLOCKTYPE_MaxIndex (63UL)          /*!< Max index of BLOCKTYPE[64] array.                                    */
   #define MEMCONF_BLOCKTYPE_MinIndex (0UL)           /*!< Min index of BLOCKTYPE[64] array.                                    */
 
-/* MEMCONF_BLOCKTYPE_TRIM: Trim configuration for the RAM/ROM block types. */
+/* MEMCONF_BLOCKTYPE_TRIM: Trim configuration for the memory block types. */
   #define MEMCONF_BLOCKTYPE_TRIM_ResetValue (0x00000000UL) /*!< Reset value of TRIM register.                                  */
 
 /* MEMTRIM0 @Bit 0 : Read/write margin trim. */
@@ -84153,6 +84147,671 @@ typedef struct {
 
 
 
+/* =================================================== Struct MPC_RTCHOKE ==================================================== */
+/**
+  * @brief RTCHOKE [MPC_RTCHOKE] Real time choke configuration for AXI master port
+  */
+typedef struct {
+  __IOM uint32_t  WRITEACCESS;                       /*!< (@ 0x00000000) Enable AXI Write Address Channel Real Time Choke for
+                                                                         master port*/
+  __IOM uint32_t  READACCESS;                        /*!< (@ 0x00000004) Enable AXI Read Address Channel Real Time Choke for
+                                                                         master port*/
+  __IM  uint32_t  RESERVED[22];
+  __IOM uint32_t  DELAY[32];                         /*!< (@ 0x00000060) Real Time Choke delay value for slave number n        */
+} NRF_MPC_RTCHOKE_Type;                              /*!< Size = 224 (0x0E0)                                                   */
+
+/* MPC_RTCHOKE_WRITEACCESS: Enable AXI Write Address Channel Real Time Choke for master port */
+  #define MPC_RTCHOKE_WRITEACCESS_ResetValue (0x00000000UL) /*!< Reset value of WRITEACCESS register.                          */
+
+/* ENABLE0 @Bit 0 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Pos (0UL)  /*!< Position of ENABLE0 field.                                           */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE0_Pos) /*!< Bit mask of ENABLE0 field.   */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Min (0x0UL) /*!< Min enumerator value of ENABLE0 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Max (0x1UL) /*!< Max enumerator value of ENABLE0 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 0 Write Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE0_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 0 Write Address
+                                                              Channel*/
+
+/* ENABLE1 @Bit 1 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Pos (1UL)  /*!< Position of ENABLE1 field.                                           */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE1_Pos) /*!< Bit mask of ENABLE1 field.   */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Min (0x0UL) /*!< Min enumerator value of ENABLE1 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Max (0x1UL) /*!< Max enumerator value of ENABLE1 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 1 Write Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE1_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 1 Write Address
+                                                              Channel*/
+
+/* ENABLE2 @Bit 2 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Pos (2UL)  /*!< Position of ENABLE2 field.                                           */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE2_Pos) /*!< Bit mask of ENABLE2 field.   */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Min (0x0UL) /*!< Min enumerator value of ENABLE2 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Max (0x1UL) /*!< Max enumerator value of ENABLE2 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 2 Write Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE2_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 2 Write Address
+                                                              Channel*/
+
+/* ENABLE3 @Bit 3 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Pos (3UL)  /*!< Position of ENABLE3 field.                                           */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE3_Pos) /*!< Bit mask of ENABLE3 field.   */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Min (0x0UL) /*!< Min enumerator value of ENABLE3 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Max (0x1UL) /*!< Max enumerator value of ENABLE3 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 3 Write Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE3_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 3 Write Address
+                                                              Channel*/
+
+/* ENABLE4 @Bit 4 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Pos (4UL)  /*!< Position of ENABLE4 field.                                           */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE4_Pos) /*!< Bit mask of ENABLE4 field.   */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Min (0x0UL) /*!< Min enumerator value of ENABLE4 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Max (0x1UL) /*!< Max enumerator value of ENABLE4 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 4 Write Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE4_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 4 Write Address
+                                                              Channel*/
+
+/* ENABLE5 @Bit 5 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Pos (5UL)  /*!< Position of ENABLE5 field.                                           */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE5_Pos) /*!< Bit mask of ENABLE5 field.   */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Min (0x0UL) /*!< Min enumerator value of ENABLE5 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Max (0x1UL) /*!< Max enumerator value of ENABLE5 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 5 Write Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE5_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 5 Write Address
+                                                              Channel*/
+
+/* ENABLE6 @Bit 6 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Pos (6UL)  /*!< Position of ENABLE6 field.                                           */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE6_Pos) /*!< Bit mask of ENABLE6 field.   */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Min (0x0UL) /*!< Min enumerator value of ENABLE6 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Max (0x1UL) /*!< Max enumerator value of ENABLE6 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 6 Write Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE6_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 6 Write Address
+                                                              Channel*/
+
+/* ENABLE7 @Bit 7 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Pos (7UL)  /*!< Position of ENABLE7 field.                                           */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE7_Pos) /*!< Bit mask of ENABLE7 field.   */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Min (0x0UL) /*!< Min enumerator value of ENABLE7 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Max (0x1UL) /*!< Max enumerator value of ENABLE7 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 7 Write Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE7_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 7 Write Address
+                                                              Channel*/
+
+/* ENABLE8 @Bit 8 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Pos (8UL)  /*!< Position of ENABLE8 field.                                           */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE8_Pos) /*!< Bit mask of ENABLE8 field.   */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Min (0x0UL) /*!< Min enumerator value of ENABLE8 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Max (0x1UL) /*!< Max enumerator value of ENABLE8 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 8 Write Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE8_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 8 Write Address
+                                                              Channel*/
+
+/* ENABLE9 @Bit 9 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Pos (9UL)  /*!< Position of ENABLE9 field.                                           */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE9_Pos) /*!< Bit mask of ENABLE9 field.   */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Min (0x0UL) /*!< Min enumerator value of ENABLE9 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Max (0x1UL) /*!< Max enumerator value of ENABLE9 field.                              */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 9 Write Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE9_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 9 Write Address
+                                                              Channel*/
+
+/* ENABLE10 @Bit 10 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Pos (10UL) /*!< Position of ENABLE10 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE10_Pos) /*!< Bit mask of ENABLE10 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Min (0x0UL) /*!< Min enumerator value of ENABLE10 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Max (0x1UL) /*!< Max enumerator value of ENABLE10 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 10 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE10_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 10 Write Address
+                                                               Channel*/
+
+/* ENABLE11 @Bit 11 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Pos (11UL) /*!< Position of ENABLE11 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE11_Pos) /*!< Bit mask of ENABLE11 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Min (0x0UL) /*!< Min enumerator value of ENABLE11 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Max (0x1UL) /*!< Max enumerator value of ENABLE11 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 11 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE11_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 11 Write Address
+                                                               Channel*/
+
+/* ENABLE12 @Bit 12 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Pos (12UL) /*!< Position of ENABLE12 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE12_Pos) /*!< Bit mask of ENABLE12 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Min (0x0UL) /*!< Min enumerator value of ENABLE12 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Max (0x1UL) /*!< Max enumerator value of ENABLE12 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 12 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE12_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 12 Write Address
+                                                               Channel*/
+
+/* ENABLE13 @Bit 13 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Pos (13UL) /*!< Position of ENABLE13 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE13_Pos) /*!< Bit mask of ENABLE13 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Min (0x0UL) /*!< Min enumerator value of ENABLE13 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Max (0x1UL) /*!< Max enumerator value of ENABLE13 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 13 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE13_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 13 Write Address
+                                                               Channel*/
+
+/* ENABLE14 @Bit 14 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Pos (14UL) /*!< Position of ENABLE14 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE14_Pos) /*!< Bit mask of ENABLE14 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Min (0x0UL) /*!< Min enumerator value of ENABLE14 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Max (0x1UL) /*!< Max enumerator value of ENABLE14 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 14 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE14_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 14 Write Address
+                                                               Channel*/
+
+/* ENABLE15 @Bit 15 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Pos (15UL) /*!< Position of ENABLE15 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE15_Pos) /*!< Bit mask of ENABLE15 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Min (0x0UL) /*!< Min enumerator value of ENABLE15 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Max (0x1UL) /*!< Max enumerator value of ENABLE15 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 15 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE15_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 15 Write Address
+                                                               Channel*/
+
+/* ENABLE16 @Bit 16 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Pos (16UL) /*!< Position of ENABLE16 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE16_Pos) /*!< Bit mask of ENABLE16 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Min (0x0UL) /*!< Min enumerator value of ENABLE16 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Max (0x1UL) /*!< Max enumerator value of ENABLE16 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 16 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE16_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 16 Write Address
+                                                               Channel*/
+
+/* ENABLE17 @Bit 17 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Pos (17UL) /*!< Position of ENABLE17 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE17_Pos) /*!< Bit mask of ENABLE17 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Min (0x0UL) /*!< Min enumerator value of ENABLE17 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Max (0x1UL) /*!< Max enumerator value of ENABLE17 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 17 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE17_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 17 Write Address
+                                                               Channel*/
+
+/* ENABLE18 @Bit 18 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Pos (18UL) /*!< Position of ENABLE18 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE18_Pos) /*!< Bit mask of ENABLE18 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Min (0x0UL) /*!< Min enumerator value of ENABLE18 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Max (0x1UL) /*!< Max enumerator value of ENABLE18 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 18 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE18_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 18 Write Address
+                                                               Channel*/
+
+/* ENABLE19 @Bit 19 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Pos (19UL) /*!< Position of ENABLE19 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE19_Pos) /*!< Bit mask of ENABLE19 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Min (0x0UL) /*!< Min enumerator value of ENABLE19 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Max (0x1UL) /*!< Max enumerator value of ENABLE19 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 19 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE19_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 19 Write Address
+                                                               Channel*/
+
+/* ENABLE20 @Bit 20 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Pos (20UL) /*!< Position of ENABLE20 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE20_Pos) /*!< Bit mask of ENABLE20 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Min (0x0UL) /*!< Min enumerator value of ENABLE20 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Max (0x1UL) /*!< Max enumerator value of ENABLE20 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 20 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE20_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 20 Write Address
+                                                               Channel*/
+
+/* ENABLE21 @Bit 21 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Pos (21UL) /*!< Position of ENABLE21 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE21_Pos) /*!< Bit mask of ENABLE21 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Min (0x0UL) /*!< Min enumerator value of ENABLE21 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Max (0x1UL) /*!< Max enumerator value of ENABLE21 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 21 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE21_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 21 Write Address
+                                                               Channel*/
+
+/* ENABLE22 @Bit 22 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Pos (22UL) /*!< Position of ENABLE22 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE22_Pos) /*!< Bit mask of ENABLE22 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Min (0x0UL) /*!< Min enumerator value of ENABLE22 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Max (0x1UL) /*!< Max enumerator value of ENABLE22 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 22 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE22_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 22 Write Address
+                                                               Channel*/
+
+/* ENABLE23 @Bit 23 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Pos (23UL) /*!< Position of ENABLE23 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE23_Pos) /*!< Bit mask of ENABLE23 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Min (0x0UL) /*!< Min enumerator value of ENABLE23 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Max (0x1UL) /*!< Max enumerator value of ENABLE23 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 23 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE23_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 23 Write Address
+                                                               Channel*/
+
+/* ENABLE24 @Bit 24 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Pos (24UL) /*!< Position of ENABLE24 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE24_Pos) /*!< Bit mask of ENABLE24 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Min (0x0UL) /*!< Min enumerator value of ENABLE24 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Max (0x1UL) /*!< Max enumerator value of ENABLE24 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 24 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE24_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 24 Write Address
+                                                               Channel*/
+
+/* ENABLE25 @Bit 25 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Pos (25UL) /*!< Position of ENABLE25 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE25_Pos) /*!< Bit mask of ENABLE25 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Min (0x0UL) /*!< Min enumerator value of ENABLE25 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Max (0x1UL) /*!< Max enumerator value of ENABLE25 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 25 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE25_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 25 Write Address
+                                                               Channel*/
+
+/* ENABLE26 @Bit 26 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Pos (26UL) /*!< Position of ENABLE26 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE26_Pos) /*!< Bit mask of ENABLE26 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Min (0x0UL) /*!< Min enumerator value of ENABLE26 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Max (0x1UL) /*!< Max enumerator value of ENABLE26 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 26 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE26_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 26 Write Address
+                                                               Channel*/
+
+/* ENABLE27 @Bit 27 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Pos (27UL) /*!< Position of ENABLE27 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE27_Pos) /*!< Bit mask of ENABLE27 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Min (0x0UL) /*!< Min enumerator value of ENABLE27 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Max (0x1UL) /*!< Max enumerator value of ENABLE27 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 27 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE27_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 27 Write Address
+                                                               Channel*/
+
+/* ENABLE28 @Bit 28 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Pos (28UL) /*!< Position of ENABLE28 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE28_Pos) /*!< Bit mask of ENABLE28 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Min (0x0UL) /*!< Min enumerator value of ENABLE28 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Max (0x1UL) /*!< Max enumerator value of ENABLE28 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 28 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE28_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 28 Write Address
+                                                               Channel*/
+
+/* ENABLE29 @Bit 29 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Pos (29UL) /*!< Position of ENABLE29 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE29_Pos) /*!< Bit mask of ENABLE29 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Min (0x0UL) /*!< Min enumerator value of ENABLE29 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Max (0x1UL) /*!< Max enumerator value of ENABLE29 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 29 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE29_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 29 Write Address
+                                                               Channel*/
+
+/* ENABLE30 @Bit 30 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Pos (30UL) /*!< Position of ENABLE30 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE30_Pos) /*!< Bit mask of ENABLE30 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Min (0x0UL) /*!< Min enumerator value of ENABLE30 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Max (0x1UL) /*!< Max enumerator value of ENABLE30 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 30 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE30_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 30 Write Address
+                                                               Channel*/
+
+/* ENABLE31 @Bit 31 : Enable Real Time Choke for Write Address Channel */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Pos (31UL) /*!< Position of ENABLE31 field.                                         */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Msk (0x1UL << MPC_RTCHOKE_WRITEACCESS_ENABLE31_Pos) /*!< Bit mask of ENABLE31 field.*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Min (0x0UL) /*!< Min enumerator value of ENABLE31 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Max (0x1UL) /*!< Max enumerator value of ENABLE31 field.                            */
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 31 Write Address
+                                                                Channel*/
+  #define MPC_RTCHOKE_WRITEACCESS_ENABLE31_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 31 Write Address
+                                                               Channel*/
+
+
+/* MPC_RTCHOKE_READACCESS: Enable AXI Read Address Channel Real Time Choke for master port */
+  #define MPC_RTCHOKE_READACCESS_ResetValue (0x00000000UL) /*!< Reset value of READACCESS register.                            */
+
+/* ENABLE0 @Bit 0 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE0_Pos (0UL)   /*!< Position of ENABLE0 field.                                           */
+  #define MPC_RTCHOKE_READACCESS_ENABLE0_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE0_Pos) /*!< Bit mask of ENABLE0 field.     */
+  #define MPC_RTCHOKE_READACCESS_ENABLE0_Min (0x0UL) /*!< Min enumerator value of ENABLE0 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE0_Max (0x1UL) /*!< Max enumerator value of ENABLE0 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE0_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 0 Read Address
+                                                              Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE0_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 0 Read Address Channel */
+
+/* ENABLE1 @Bit 1 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE1_Pos (1UL)   /*!< Position of ENABLE1 field.                                           */
+  #define MPC_RTCHOKE_READACCESS_ENABLE1_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE1_Pos) /*!< Bit mask of ENABLE1 field.     */
+  #define MPC_RTCHOKE_READACCESS_ENABLE1_Min (0x0UL) /*!< Min enumerator value of ENABLE1 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE1_Max (0x1UL) /*!< Max enumerator value of ENABLE1 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE1_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 1 Read Address
+                                                              Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE1_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 1 Read Address Channel */
+
+/* ENABLE2 @Bit 2 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE2_Pos (2UL)   /*!< Position of ENABLE2 field.                                           */
+  #define MPC_RTCHOKE_READACCESS_ENABLE2_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE2_Pos) /*!< Bit mask of ENABLE2 field.     */
+  #define MPC_RTCHOKE_READACCESS_ENABLE2_Min (0x0UL) /*!< Min enumerator value of ENABLE2 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE2_Max (0x1UL) /*!< Max enumerator value of ENABLE2 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE2_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 2 Read Address
+                                                              Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE2_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 2 Read Address Channel */
+
+/* ENABLE3 @Bit 3 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE3_Pos (3UL)   /*!< Position of ENABLE3 field.                                           */
+  #define MPC_RTCHOKE_READACCESS_ENABLE3_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE3_Pos) /*!< Bit mask of ENABLE3 field.     */
+  #define MPC_RTCHOKE_READACCESS_ENABLE3_Min (0x0UL) /*!< Min enumerator value of ENABLE3 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE3_Max (0x1UL) /*!< Max enumerator value of ENABLE3 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE3_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 3 Read Address
+                                                              Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE3_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 3 Read Address Channel */
+
+/* ENABLE4 @Bit 4 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE4_Pos (4UL)   /*!< Position of ENABLE4 field.                                           */
+  #define MPC_RTCHOKE_READACCESS_ENABLE4_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE4_Pos) /*!< Bit mask of ENABLE4 field.     */
+  #define MPC_RTCHOKE_READACCESS_ENABLE4_Min (0x0UL) /*!< Min enumerator value of ENABLE4 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE4_Max (0x1UL) /*!< Max enumerator value of ENABLE4 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE4_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 4 Read Address
+                                                              Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE4_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 4 Read Address Channel */
+
+/* ENABLE5 @Bit 5 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE5_Pos (5UL)   /*!< Position of ENABLE5 field.                                           */
+  #define MPC_RTCHOKE_READACCESS_ENABLE5_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE5_Pos) /*!< Bit mask of ENABLE5 field.     */
+  #define MPC_RTCHOKE_READACCESS_ENABLE5_Min (0x0UL) /*!< Min enumerator value of ENABLE5 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE5_Max (0x1UL) /*!< Max enumerator value of ENABLE5 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE5_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 5 Read Address
+                                                              Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE5_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 5 Read Address Channel */
+
+/* ENABLE6 @Bit 6 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE6_Pos (6UL)   /*!< Position of ENABLE6 field.                                           */
+  #define MPC_RTCHOKE_READACCESS_ENABLE6_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE6_Pos) /*!< Bit mask of ENABLE6 field.     */
+  #define MPC_RTCHOKE_READACCESS_ENABLE6_Min (0x0UL) /*!< Min enumerator value of ENABLE6 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE6_Max (0x1UL) /*!< Max enumerator value of ENABLE6 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE6_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 6 Read Address
+                                                              Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE6_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 6 Read Address Channel */
+
+/* ENABLE7 @Bit 7 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE7_Pos (7UL)   /*!< Position of ENABLE7 field.                                           */
+  #define MPC_RTCHOKE_READACCESS_ENABLE7_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE7_Pos) /*!< Bit mask of ENABLE7 field.     */
+  #define MPC_RTCHOKE_READACCESS_ENABLE7_Min (0x0UL) /*!< Min enumerator value of ENABLE7 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE7_Max (0x1UL) /*!< Max enumerator value of ENABLE7 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE7_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 7 Read Address
+                                                              Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE7_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 7 Read Address Channel */
+
+/* ENABLE8 @Bit 8 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE8_Pos (8UL)   /*!< Position of ENABLE8 field.                                           */
+  #define MPC_RTCHOKE_READACCESS_ENABLE8_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE8_Pos) /*!< Bit mask of ENABLE8 field.     */
+  #define MPC_RTCHOKE_READACCESS_ENABLE8_Min (0x0UL) /*!< Min enumerator value of ENABLE8 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE8_Max (0x1UL) /*!< Max enumerator value of ENABLE8 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE8_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 8 Read Address
+                                                              Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE8_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 8 Read Address Channel */
+
+/* ENABLE9 @Bit 9 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE9_Pos (9UL)   /*!< Position of ENABLE9 field.                                           */
+  #define MPC_RTCHOKE_READACCESS_ENABLE9_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE9_Pos) /*!< Bit mask of ENABLE9 field.     */
+  #define MPC_RTCHOKE_READACCESS_ENABLE9_Min (0x0UL) /*!< Min enumerator value of ENABLE9 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE9_Max (0x1UL) /*!< Max enumerator value of ENABLE9 field.                               */
+  #define MPC_RTCHOKE_READACCESS_ENABLE9_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 9 Read Address
+                                                              Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE9_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 9 Read Address Channel */
+
+/* ENABLE10 @Bit 10 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE10_Pos (10UL) /*!< Position of ENABLE10 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE10_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE10_Pos) /*!< Bit mask of ENABLE10 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE10_Min (0x0UL) /*!< Min enumerator value of ENABLE10 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE10_Max (0x1UL) /*!< Max enumerator value of ENABLE10 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE10_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 10 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE10_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 10 Read Address
+                                                              Channel*/
+
+/* ENABLE11 @Bit 11 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE11_Pos (11UL) /*!< Position of ENABLE11 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE11_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE11_Pos) /*!< Bit mask of ENABLE11 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE11_Min (0x0UL) /*!< Min enumerator value of ENABLE11 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE11_Max (0x1UL) /*!< Max enumerator value of ENABLE11 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE11_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 11 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE11_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 11 Read Address
+                                                              Channel*/
+
+/* ENABLE12 @Bit 12 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE12_Pos (12UL) /*!< Position of ENABLE12 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE12_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE12_Pos) /*!< Bit mask of ENABLE12 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE12_Min (0x0UL) /*!< Min enumerator value of ENABLE12 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE12_Max (0x1UL) /*!< Max enumerator value of ENABLE12 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE12_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 12 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE12_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 12 Read Address
+                                                              Channel*/
+
+/* ENABLE13 @Bit 13 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE13_Pos (13UL) /*!< Position of ENABLE13 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE13_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE13_Pos) /*!< Bit mask of ENABLE13 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE13_Min (0x0UL) /*!< Min enumerator value of ENABLE13 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE13_Max (0x1UL) /*!< Max enumerator value of ENABLE13 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE13_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 13 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE13_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 13 Read Address
+                                                              Channel*/
+
+/* ENABLE14 @Bit 14 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE14_Pos (14UL) /*!< Position of ENABLE14 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE14_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE14_Pos) /*!< Bit mask of ENABLE14 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE14_Min (0x0UL) /*!< Min enumerator value of ENABLE14 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE14_Max (0x1UL) /*!< Max enumerator value of ENABLE14 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE14_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 14 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE14_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 14 Read Address
+                                                              Channel*/
+
+/* ENABLE15 @Bit 15 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE15_Pos (15UL) /*!< Position of ENABLE15 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE15_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE15_Pos) /*!< Bit mask of ENABLE15 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE15_Min (0x0UL) /*!< Min enumerator value of ENABLE15 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE15_Max (0x1UL) /*!< Max enumerator value of ENABLE15 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE15_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 15 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE15_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 15 Read Address
+                                                              Channel*/
+
+/* ENABLE16 @Bit 16 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE16_Pos (16UL) /*!< Position of ENABLE16 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE16_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE16_Pos) /*!< Bit mask of ENABLE16 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE16_Min (0x0UL) /*!< Min enumerator value of ENABLE16 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE16_Max (0x1UL) /*!< Max enumerator value of ENABLE16 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE16_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 16 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE16_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 16 Read Address
+                                                              Channel*/
+
+/* ENABLE17 @Bit 17 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE17_Pos (17UL) /*!< Position of ENABLE17 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE17_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE17_Pos) /*!< Bit mask of ENABLE17 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE17_Min (0x0UL) /*!< Min enumerator value of ENABLE17 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE17_Max (0x1UL) /*!< Max enumerator value of ENABLE17 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE17_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 17 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE17_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 17 Read Address
+                                                              Channel*/
+
+/* ENABLE18 @Bit 18 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE18_Pos (18UL) /*!< Position of ENABLE18 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE18_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE18_Pos) /*!< Bit mask of ENABLE18 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE18_Min (0x0UL) /*!< Min enumerator value of ENABLE18 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE18_Max (0x1UL) /*!< Max enumerator value of ENABLE18 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE18_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 18 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE18_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 18 Read Address
+                                                              Channel*/
+
+/* ENABLE19 @Bit 19 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE19_Pos (19UL) /*!< Position of ENABLE19 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE19_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE19_Pos) /*!< Bit mask of ENABLE19 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE19_Min (0x0UL) /*!< Min enumerator value of ENABLE19 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE19_Max (0x1UL) /*!< Max enumerator value of ENABLE19 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE19_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 19 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE19_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 19 Read Address
+                                                              Channel*/
+
+/* ENABLE20 @Bit 20 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE20_Pos (20UL) /*!< Position of ENABLE20 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE20_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE20_Pos) /*!< Bit mask of ENABLE20 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE20_Min (0x0UL) /*!< Min enumerator value of ENABLE20 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE20_Max (0x1UL) /*!< Max enumerator value of ENABLE20 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE20_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 20 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE20_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 20 Read Address
+                                                              Channel*/
+
+/* ENABLE21 @Bit 21 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE21_Pos (21UL) /*!< Position of ENABLE21 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE21_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE21_Pos) /*!< Bit mask of ENABLE21 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE21_Min (0x0UL) /*!< Min enumerator value of ENABLE21 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE21_Max (0x1UL) /*!< Max enumerator value of ENABLE21 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE21_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 21 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE21_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 21 Read Address
+                                                              Channel*/
+
+/* ENABLE22 @Bit 22 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE22_Pos (22UL) /*!< Position of ENABLE22 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE22_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE22_Pos) /*!< Bit mask of ENABLE22 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE22_Min (0x0UL) /*!< Min enumerator value of ENABLE22 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE22_Max (0x1UL) /*!< Max enumerator value of ENABLE22 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE22_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 22 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE22_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 22 Read Address
+                                                              Channel*/
+
+/* ENABLE23 @Bit 23 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE23_Pos (23UL) /*!< Position of ENABLE23 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE23_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE23_Pos) /*!< Bit mask of ENABLE23 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE23_Min (0x0UL) /*!< Min enumerator value of ENABLE23 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE23_Max (0x1UL) /*!< Max enumerator value of ENABLE23 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE23_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 23 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE23_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 23 Read Address
+                                                              Channel*/
+
+/* ENABLE24 @Bit 24 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE24_Pos (24UL) /*!< Position of ENABLE24 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE24_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE24_Pos) /*!< Bit mask of ENABLE24 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE24_Min (0x0UL) /*!< Min enumerator value of ENABLE24 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE24_Max (0x1UL) /*!< Max enumerator value of ENABLE24 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE24_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 24 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE24_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 24 Read Address
+                                                              Channel*/
+
+/* ENABLE25 @Bit 25 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE25_Pos (25UL) /*!< Position of ENABLE25 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE25_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE25_Pos) /*!< Bit mask of ENABLE25 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE25_Min (0x0UL) /*!< Min enumerator value of ENABLE25 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE25_Max (0x1UL) /*!< Max enumerator value of ENABLE25 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE25_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 25 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE25_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 25 Read Address
+                                                              Channel*/
+
+/* ENABLE26 @Bit 26 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE26_Pos (26UL) /*!< Position of ENABLE26 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE26_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE26_Pos) /*!< Bit mask of ENABLE26 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE26_Min (0x0UL) /*!< Min enumerator value of ENABLE26 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE26_Max (0x1UL) /*!< Max enumerator value of ENABLE26 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE26_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 26 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE26_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 26 Read Address
+                                                              Channel*/
+
+/* ENABLE27 @Bit 27 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE27_Pos (27UL) /*!< Position of ENABLE27 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE27_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE27_Pos) /*!< Bit mask of ENABLE27 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE27_Min (0x0UL) /*!< Min enumerator value of ENABLE27 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE27_Max (0x1UL) /*!< Max enumerator value of ENABLE27 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE27_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 27 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE27_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 27 Read Address
+                                                              Channel*/
+
+/* ENABLE28 @Bit 28 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE28_Pos (28UL) /*!< Position of ENABLE28 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE28_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE28_Pos) /*!< Bit mask of ENABLE28 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE28_Min (0x0UL) /*!< Min enumerator value of ENABLE28 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE28_Max (0x1UL) /*!< Max enumerator value of ENABLE28 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE28_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 28 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE28_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 28 Read Address
+                                                              Channel*/
+
+/* ENABLE29 @Bit 29 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE29_Pos (29UL) /*!< Position of ENABLE29 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE29_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE29_Pos) /*!< Bit mask of ENABLE29 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE29_Min (0x0UL) /*!< Min enumerator value of ENABLE29 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE29_Max (0x1UL) /*!< Max enumerator value of ENABLE29 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE29_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 29 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE29_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 29 Read Address
+                                                              Channel*/
+
+/* ENABLE30 @Bit 30 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE30_Pos (30UL) /*!< Position of ENABLE30 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE30_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE30_Pos) /*!< Bit mask of ENABLE30 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE30_Min (0x0UL) /*!< Min enumerator value of ENABLE30 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE30_Max (0x1UL) /*!< Max enumerator value of ENABLE30 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE30_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 30 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE30_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 30 Read Address
+                                                              Channel*/
+
+/* ENABLE31 @Bit 31 : Enable Real Time Choke for Read Address Channel */
+  #define MPC_RTCHOKE_READACCESS_ENABLE31_Pos (31UL) /*!< Position of ENABLE31 field.                                          */
+  #define MPC_RTCHOKE_READACCESS_ENABLE31_Msk (0x1UL << MPC_RTCHOKE_READACCESS_ENABLE31_Pos) /*!< Bit mask of ENABLE31 field.  */
+  #define MPC_RTCHOKE_READACCESS_ENABLE31_Min (0x0UL) /*!< Min enumerator value of ENABLE31 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE31_Max (0x1UL) /*!< Max enumerator value of ENABLE31 field.                             */
+  #define MPC_RTCHOKE_READACCESS_ENABLE31_Disable (0x0UL) /*!< Real Time Choke is disabled for master port 31 Read Address
+                                                               Channel*/
+  #define MPC_RTCHOKE_READACCESS_ENABLE31_Enable (0x1UL) /*!< Real Time Choke is enabled for master port 31 Read Address
+                                                              Channel*/
+
+
+/* MPC_RTCHOKE_DELAY: Real Time Choke delay value for slave number n */
+  #define MPC_RTCHOKE_DELAY_MaxCount (32UL)          /*!< Max size of DELAY[32] array.                                         */
+  #define MPC_RTCHOKE_DELAY_MaxIndex (31UL)          /*!< Max index of DELAY[32] array.                                        */
+  #define MPC_RTCHOKE_DELAY_MinIndex (0UL)           /*!< Min index of DELAY[32] array.                                        */
+  #define MPC_RTCHOKE_DELAY_ResetValue (0x00000000UL) /*!< Reset value of DELAY[32] register.                                  */
+
+/* DELAY @Bits 0..7 : Real Time Choke delay in bus clock cycles. */
+  #define MPC_RTCHOKE_DELAY_DELAY_Pos (0UL)          /*!< Position of DELAY field.                                             */
+  #define MPC_RTCHOKE_DELAY_DELAY_Msk (0xFFUL << MPC_RTCHOKE_DELAY_DELAY_Pos) /*!< Bit mask of DELAY field.                    */
+  #define MPC_RTCHOKE_DELAY_DELAY_Min (0x0UL)        /*!< Min value of DELAY field.                                            */
+  #define MPC_RTCHOKE_DELAY_DELAY_Max (0xFFUL)       /*!< Max size of DELAY field.                                             */
+
+
+
 /* ==================================================== Struct MPC_REGION ==================================================== */
 /**
   * @brief REGION [MPC_REGION] Memory region to slave decoding table
@@ -84516,7 +85175,8 @@ typedef struct {
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) Override region n Configuration register              */
   __IOM uint32_t  STARTADDR;                         /*!< (@ 0x00000004) Override region n Start Address                       */
   __IOM uint32_t  ENDADDR;                           /*!< (@ 0x00000008) Override region n End Address                         */
-  __IM  uint32_t  RESERVED;
+  __IOM int32_t   OFFSET;                            /*!< (@ 0x0000000C) Address offset value divided by 2 for override region n
+                                                                         address re-map*/
   __IOM uint32_t  PERM;                              /*!< (@ 0x00000010) Permission settings for override region n             */
   __IOM uint32_t  PERMMASK;                          /*!< (@ 0x00000014) Masks permission setting fields from register
                                                                          OVERRIDE.PERM*/
@@ -84553,6 +85213,17 @@ typedef struct {
   #define MPC_OVERRIDE_CONFIG_ENABLE_Disabled (0x0UL) /*!< Override region n is not used                                       */
   #define MPC_OVERRIDE_CONFIG_ENABLE_Enabled (0x1UL) /*!< Override region n is used                                            */
 
+/* SECDOMENABLE @Bit 10 : Secure domain access enable for Override region n */
+  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Pos (10UL) /*!< Position of SECDOMENABLE field.                                     */
+  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Msk (0x1UL << MPC_OVERRIDE_CONFIG_SECDOMENABLE_Pos) /*!< Bit mask of SECDOMENABLE
+                                                                            field.*/
+  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Min (0x0UL) /*!< Min enumerator value of SECDOMENABLE field.                        */
+  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Max (0x1UL) /*!< Max enumerator value of SECDOMENABLE field.                        */
+  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Disabled (0x0UL) /*!< Overriding of secure domain permissions is disabled for
+                                                                 override region n*/
+  #define MPC_OVERRIDE_CONFIG_SECDOMENABLE_Enabled (0x1UL) /*!< Overriding of secure domain permissions is enabled for override
+                                                                region n*/
+
 /* SECUREMASK @Bit 12 : Secure mask enable for Override region n */
   #define MPC_OVERRIDE_CONFIG_SECUREMASK_Pos (12UL)  /*!< Position of SECUREMASK field.                                        */
   #define MPC_OVERRIDE_CONFIG_SECUREMASK_Msk (0x1UL << MPC_OVERRIDE_CONFIG_SECUREMASK_Pos) /*!< Bit mask of SECUREMASK field.  */
@@ -84577,6 +85248,14 @@ typedef struct {
 /* ENDADDR @Bits 0..31 : End address for override region n */
   #define MPC_OVERRIDE_ENDADDR_ENDADDR_Pos (0UL)     /*!< Position of ENDADDR field.                                           */
   #define MPC_OVERRIDE_ENDADDR_ENDADDR_Msk (0xFFFFFFFFUL << MPC_OVERRIDE_ENDADDR_ENDADDR_Pos) /*!< Bit mask of ENDADDR field.  */
+
+
+/* MPC_OVERRIDE_OFFSET: Address offset value divided by 2 for override region n address re-map */
+  #define MPC_OVERRIDE_OFFSET_ResetValue (0x00000000UL) /*!< Reset value of OFFSET register.                                   */
+
+/* OFFSET @Bits 0..31 : Offset value */
+  #define MPC_OVERRIDE_OFFSET_OFFSET_Pos (0UL)       /*!< Position of OFFSET field.                                            */
+  #define MPC_OVERRIDE_OFFSET_OFFSET_Msk (0xFFFFFFFFUL << MPC_OVERRIDE_OFFSET_OFFSET_Pos) /*!< Bit mask of OFFSET field.       */
 
 
 /* MPC_OVERRIDE_PERM: Permission settings for override region n */
@@ -84936,7 +85615,9 @@ typedef struct {
     __IOM NRF_MPC_MEMACCERR_Type MEMACCERR;          /*!< (@ 0x00000400) Memory Access Error status registers                  */
     __IM uint32_t RESERVED3[2];
     __IOM NRF_MPC_GLOBALSLAVE_Type GLOBALSLAVE;      /*!< (@ 0x00000410) Global slave master port connection information       */
-    __IM uint32_t RESERVED4[122];
+    __IM uint32_t RESERVED4[2];
+    __IOM NRF_MPC_RTCHOKE_Type RTCHOKE;              /*!< (@ 0x00000420) Real time choke configuration for AXI master port     */
+    __IM uint32_t RESERVED5[64];
     __IOM NRF_MPC_REGION_Type REGION[32];            /*!< (@ 0x00000600) Memory region to slave decoding table                 */
     __IOM NRF_MPC_OVERRIDE_Type OVERRIDE[40];        /*!< (@ 0x00000800) Special privilege tables                              */
   } NRF_MPC_Type;                                    /*!< Size = 3328 (0xD00)                                                  */
@@ -118721,7 +119402,7 @@ typedef struct {
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start RTC counter                                     */
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop RTC counter                                      */
     __OM uint32_t TASKS_CLEAR;                       /*!< (@ 0x00000008) Clear RTC counter                                     */
-    __OM uint32_t TASKS_TRIGOVRFLW;                  /*!< (@ 0x0000000C) Set counter to 0xFFFFF0                               */
+    __OM uint32_t TASKS_TRIGOVRFLW;                  /*!< (@ 0x0000000C) Set counter to: maximum value - 0xF                   */
     __IM uint32_t RESERVED[12];
     __OM uint32_t TASKS_CAPTURE[8];                  /*!< (@ 0x00000040) Capture RTC counter to CC[n] register                 */
     __IM uint32_t RESERVED1[8];
@@ -118792,10 +119473,10 @@ typedef struct {
   #define RTC_TASKS_CLEAR_TASKS_CLEAR_Trigger (0x1UL) /*!< Trigger task                                                        */
 
 
-/* RTC_TASKS_TRIGOVRFLW: Set counter to 0xFFFFF0 */
+/* RTC_TASKS_TRIGOVRFLW: Set counter to: maximum value - 0xF */
   #define RTC_TASKS_TRIGOVRFLW_ResetValue (0x00000000UL) /*!< Reset value of TASKS_TRIGOVRFLW register.                        */
 
-/* TASKS_TRIGOVRFLW @Bit 0 : Set counter to 0xFFFFF0 */
+/* TASKS_TRIGOVRFLW @Bit 0 : Set counter to: maximum value - 0xF */
   #define RTC_TASKS_TRIGOVRFLW_TASKS_TRIGOVRFLW_Pos (0UL) /*!< Position of TASKS_TRIGOVRFLW field.                             */
   #define RTC_TASKS_TRIGOVRFLW_TASKS_TRIGOVRFLW_Msk (0x1UL << RTC_TASKS_TRIGOVRFLW_TASKS_TRIGOVRFLW_Pos) /*!< Bit mask of
                                                                             TASKS_TRIGOVRFLW field.*/
@@ -135885,21 +136566,21 @@ typedef struct {
 /* UARTE_RXD_MAXCNT: Maximum number of bytes in receive buffer */
   #define UARTE_RXD_MAXCNT_ResetValue (0x00000000UL) /*!< Reset value of MAXCNT register.                                      */
 
-/* MAXCNT @Bits 0..7 : Maximum number of bytes in receive buffer */
+/* MAXCNT @Bits 0..14 : Maximum number of bytes in receive buffer */
   #define UARTE_RXD_MAXCNT_MAXCNT_Pos (0UL)          /*!< Position of MAXCNT field.                                            */
-  #define UARTE_RXD_MAXCNT_MAXCNT_Msk (0xFFUL << UARTE_RXD_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.                   */
+  #define UARTE_RXD_MAXCNT_MAXCNT_Msk (0x7FFFUL << UARTE_RXD_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.                 */
   #define UARTE_RXD_MAXCNT_MAXCNT_Min (0x1UL)        /*!< Min value of MAXCNT field.                                           */
-  #define UARTE_RXD_MAXCNT_MAXCNT_Max (0xFFUL)       /*!< Max size of MAXCNT field.                                            */
+  #define UARTE_RXD_MAXCNT_MAXCNT_Max (0x7FFFUL)     /*!< Max size of MAXCNT field.                                            */
 
 
 /* UARTE_RXD_AMOUNT: Number of bytes transferred in the last transaction */
   #define UARTE_RXD_AMOUNT_ResetValue (0x00000000UL) /*!< Reset value of AMOUNT register.                                      */
 
-/* AMOUNT @Bits 0..7 : Number of bytes transferred in the last transaction */
+/* AMOUNT @Bits 0..14 : Number of bytes transferred in the last transaction */
   #define UARTE_RXD_AMOUNT_AMOUNT_Pos (0UL)          /*!< Position of AMOUNT field.                                            */
-  #define UARTE_RXD_AMOUNT_AMOUNT_Msk (0xFFUL << UARTE_RXD_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.                   */
+  #define UARTE_RXD_AMOUNT_AMOUNT_Msk (0x7FFFUL << UARTE_RXD_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.                 */
   #define UARTE_RXD_AMOUNT_AMOUNT_Min (0x1UL)        /*!< Min value of AMOUNT field.                                           */
-  #define UARTE_RXD_AMOUNT_AMOUNT_Max (0xFFUL)       /*!< Max size of AMOUNT field.                                            */
+  #define UARTE_RXD_AMOUNT_AMOUNT_Max (0x7FFFUL)     /*!< Max size of AMOUNT field.                                            */
 
 
 
@@ -135924,21 +136605,21 @@ typedef struct {
 /* UARTE_TXD_MAXCNT: Maximum number of bytes in transmit buffer */
   #define UARTE_TXD_MAXCNT_ResetValue (0x00000000UL) /*!< Reset value of MAXCNT register.                                      */
 
-/* MAXCNT @Bits 0..7 : Maximum number of bytes in transmit buffer */
+/* MAXCNT @Bits 0..14 : Maximum number of bytes in transmit buffer */
   #define UARTE_TXD_MAXCNT_MAXCNT_Pos (0UL)          /*!< Position of MAXCNT field.                                            */
-  #define UARTE_TXD_MAXCNT_MAXCNT_Msk (0xFFUL << UARTE_TXD_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.                   */
+  #define UARTE_TXD_MAXCNT_MAXCNT_Msk (0x7FFFUL << UARTE_TXD_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.                 */
   #define UARTE_TXD_MAXCNT_MAXCNT_Min (0x1UL)        /*!< Min value of MAXCNT field.                                           */
-  #define UARTE_TXD_MAXCNT_MAXCNT_Max (0xFFUL)       /*!< Max size of MAXCNT field.                                            */
+  #define UARTE_TXD_MAXCNT_MAXCNT_Max (0x7FFFUL)     /*!< Max size of MAXCNT field.                                            */
 
 
 /* UARTE_TXD_AMOUNT: Number of bytes transferred in the last transaction */
   #define UARTE_TXD_AMOUNT_ResetValue (0x00000000UL) /*!< Reset value of AMOUNT register.                                      */
 
-/* AMOUNT @Bits 0..7 : Number of bytes transferred in the last transaction */
+/* AMOUNT @Bits 0..14 : Number of bytes transferred in the last transaction */
   #define UARTE_TXD_AMOUNT_AMOUNT_Pos (0UL)          /*!< Position of AMOUNT field.                                            */
-  #define UARTE_TXD_AMOUNT_AMOUNT_Msk (0xFFUL << UARTE_TXD_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.                   */
+  #define UARTE_TXD_AMOUNT_AMOUNT_Msk (0x7FFFUL << UARTE_TXD_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.                 */
   #define UARTE_TXD_AMOUNT_AMOUNT_Min (0x1UL)        /*!< Min value of AMOUNT field.                                           */
-  #define UARTE_TXD_AMOUNT_AMOUNT_Max (0xFFUL)       /*!< Max size of AMOUNT field.                                            */
+  #define UARTE_TXD_AMOUNT_AMOUNT_Max (0x7FFFUL)     /*!< Max size of AMOUNT field.                                            */
 
 
 
@@ -137411,539 +138092,6 @@ typedef struct {
 
 
 
-/* ==================================================== Struct UICR_GPIO ===================================================== */
-/**
-  * @brief GPIO [UICR_GPIO] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  OWN;                               /*!< (@ 0x00000000) Request ownership of the pins at GPIO port P[n]       */
-  __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Request permission for the pins at GPIO port P[n]     */
-} NRF_UICR_GPIO_Type;                                /*!< Size = 8 (0x008)                                                     */
-  #define UICR_GPIO_MaxCount (16UL)                  /*!< Size of GPIO[16] array.                                              */
-  #define UICR_GPIO_MaxIndex (15UL)                  /*!< Max index of GPIO[16] array.                                         */
-  #define UICR_GPIO_MinIndex (0UL)                   /*!< Min index of GPIO[16] array.                                         */
-
-/* UICR_GPIO_OWN: Request ownership of the pins at GPIO port P[n] */
-  #define UICR_GPIO_OWN_ResetValue (0xFFFFFFFFUL)    /*!< Reset value of OWN register.                                         */
-
-/* PIN0 @Bit 0 : Pin number */
-  #define UICR_GPIO_OWN_PIN0_Pos (0UL)               /*!< Position of PIN0 field.                                              */
-  #define UICR_GPIO_OWN_PIN0_Msk (0x1UL << UICR_GPIO_OWN_PIN0_Pos) /*!< Bit mask of PIN0 field.                                */
-  #define UICR_GPIO_OWN_PIN0_Min (0x0UL)             /*!< Min enumerator value of PIN0 field.                                  */
-  #define UICR_GPIO_OWN_PIN0_Max (0x1UL)             /*!< Max enumerator value of PIN0 field.                                  */
-  #define UICR_GPIO_OWN_PIN0_NotOwn (0x1UL)          /*!< Do not own the pin 0                                                 */
-  #define UICR_GPIO_OWN_PIN0_Own (0x0UL)             /*!< Own the pin 0                                                        */
-
-/* PIN1 @Bit 1 : Pin number */
-  #define UICR_GPIO_OWN_PIN1_Pos (1UL)               /*!< Position of PIN1 field.                                              */
-  #define UICR_GPIO_OWN_PIN1_Msk (0x1UL << UICR_GPIO_OWN_PIN1_Pos) /*!< Bit mask of PIN1 field.                                */
-  #define UICR_GPIO_OWN_PIN1_Min (0x0UL)             /*!< Min enumerator value of PIN1 field.                                  */
-  #define UICR_GPIO_OWN_PIN1_Max (0x1UL)             /*!< Max enumerator value of PIN1 field.                                  */
-  #define UICR_GPIO_OWN_PIN1_NotOwn (0x1UL)          /*!< Do not own the pin 1                                                 */
-  #define UICR_GPIO_OWN_PIN1_Own (0x0UL)             /*!< Own the pin 1                                                        */
-
-/* PIN2 @Bit 2 : Pin number */
-  #define UICR_GPIO_OWN_PIN2_Pos (2UL)               /*!< Position of PIN2 field.                                              */
-  #define UICR_GPIO_OWN_PIN2_Msk (0x1UL << UICR_GPIO_OWN_PIN2_Pos) /*!< Bit mask of PIN2 field.                                */
-  #define UICR_GPIO_OWN_PIN2_Min (0x0UL)             /*!< Min enumerator value of PIN2 field.                                  */
-  #define UICR_GPIO_OWN_PIN2_Max (0x1UL)             /*!< Max enumerator value of PIN2 field.                                  */
-  #define UICR_GPIO_OWN_PIN2_NotOwn (0x1UL)          /*!< Do not own the pin 2                                                 */
-  #define UICR_GPIO_OWN_PIN2_Own (0x0UL)             /*!< Own the pin 2                                                        */
-
-/* PIN3 @Bit 3 : Pin number */
-  #define UICR_GPIO_OWN_PIN3_Pos (3UL)               /*!< Position of PIN3 field.                                              */
-  #define UICR_GPIO_OWN_PIN3_Msk (0x1UL << UICR_GPIO_OWN_PIN3_Pos) /*!< Bit mask of PIN3 field.                                */
-  #define UICR_GPIO_OWN_PIN3_Min (0x0UL)             /*!< Min enumerator value of PIN3 field.                                  */
-  #define UICR_GPIO_OWN_PIN3_Max (0x1UL)             /*!< Max enumerator value of PIN3 field.                                  */
-  #define UICR_GPIO_OWN_PIN3_NotOwn (0x1UL)          /*!< Do not own the pin 3                                                 */
-  #define UICR_GPIO_OWN_PIN3_Own (0x0UL)             /*!< Own the pin 3                                                        */
-
-/* PIN4 @Bit 4 : Pin number */
-  #define UICR_GPIO_OWN_PIN4_Pos (4UL)               /*!< Position of PIN4 field.                                              */
-  #define UICR_GPIO_OWN_PIN4_Msk (0x1UL << UICR_GPIO_OWN_PIN4_Pos) /*!< Bit mask of PIN4 field.                                */
-  #define UICR_GPIO_OWN_PIN4_Min (0x0UL)             /*!< Min enumerator value of PIN4 field.                                  */
-  #define UICR_GPIO_OWN_PIN4_Max (0x1UL)             /*!< Max enumerator value of PIN4 field.                                  */
-  #define UICR_GPIO_OWN_PIN4_NotOwn (0x1UL)          /*!< Do not own the pin 4                                                 */
-  #define UICR_GPIO_OWN_PIN4_Own (0x0UL)             /*!< Own the pin 4                                                        */
-
-/* PIN5 @Bit 5 : Pin number */
-  #define UICR_GPIO_OWN_PIN5_Pos (5UL)               /*!< Position of PIN5 field.                                              */
-  #define UICR_GPIO_OWN_PIN5_Msk (0x1UL << UICR_GPIO_OWN_PIN5_Pos) /*!< Bit mask of PIN5 field.                                */
-  #define UICR_GPIO_OWN_PIN5_Min (0x0UL)             /*!< Min enumerator value of PIN5 field.                                  */
-  #define UICR_GPIO_OWN_PIN5_Max (0x1UL)             /*!< Max enumerator value of PIN5 field.                                  */
-  #define UICR_GPIO_OWN_PIN5_NotOwn (0x1UL)          /*!< Do not own the pin 5                                                 */
-  #define UICR_GPIO_OWN_PIN5_Own (0x0UL)             /*!< Own the pin 5                                                        */
-
-/* PIN6 @Bit 6 : Pin number */
-  #define UICR_GPIO_OWN_PIN6_Pos (6UL)               /*!< Position of PIN6 field.                                              */
-  #define UICR_GPIO_OWN_PIN6_Msk (0x1UL << UICR_GPIO_OWN_PIN6_Pos) /*!< Bit mask of PIN6 field.                                */
-  #define UICR_GPIO_OWN_PIN6_Min (0x0UL)             /*!< Min enumerator value of PIN6 field.                                  */
-  #define UICR_GPIO_OWN_PIN6_Max (0x1UL)             /*!< Max enumerator value of PIN6 field.                                  */
-  #define UICR_GPIO_OWN_PIN6_NotOwn (0x1UL)          /*!< Do not own the pin 6                                                 */
-  #define UICR_GPIO_OWN_PIN6_Own (0x0UL)             /*!< Own the pin 6                                                        */
-
-/* PIN7 @Bit 7 : Pin number */
-  #define UICR_GPIO_OWN_PIN7_Pos (7UL)               /*!< Position of PIN7 field.                                              */
-  #define UICR_GPIO_OWN_PIN7_Msk (0x1UL << UICR_GPIO_OWN_PIN7_Pos) /*!< Bit mask of PIN7 field.                                */
-  #define UICR_GPIO_OWN_PIN7_Min (0x0UL)             /*!< Min enumerator value of PIN7 field.                                  */
-  #define UICR_GPIO_OWN_PIN7_Max (0x1UL)             /*!< Max enumerator value of PIN7 field.                                  */
-  #define UICR_GPIO_OWN_PIN7_NotOwn (0x1UL)          /*!< Do not own the pin 7                                                 */
-  #define UICR_GPIO_OWN_PIN7_Own (0x0UL)             /*!< Own the pin 7                                                        */
-
-/* PIN8 @Bit 8 : Pin number */
-  #define UICR_GPIO_OWN_PIN8_Pos (8UL)               /*!< Position of PIN8 field.                                              */
-  #define UICR_GPIO_OWN_PIN8_Msk (0x1UL << UICR_GPIO_OWN_PIN8_Pos) /*!< Bit mask of PIN8 field.                                */
-  #define UICR_GPIO_OWN_PIN8_Min (0x0UL)             /*!< Min enumerator value of PIN8 field.                                  */
-  #define UICR_GPIO_OWN_PIN8_Max (0x1UL)             /*!< Max enumerator value of PIN8 field.                                  */
-  #define UICR_GPIO_OWN_PIN8_NotOwn (0x1UL)          /*!< Do not own the pin 8                                                 */
-  #define UICR_GPIO_OWN_PIN8_Own (0x0UL)             /*!< Own the pin 8                                                        */
-
-/* PIN9 @Bit 9 : Pin number */
-  #define UICR_GPIO_OWN_PIN9_Pos (9UL)               /*!< Position of PIN9 field.                                              */
-  #define UICR_GPIO_OWN_PIN9_Msk (0x1UL << UICR_GPIO_OWN_PIN9_Pos) /*!< Bit mask of PIN9 field.                                */
-  #define UICR_GPIO_OWN_PIN9_Min (0x0UL)             /*!< Min enumerator value of PIN9 field.                                  */
-  #define UICR_GPIO_OWN_PIN9_Max (0x1UL)             /*!< Max enumerator value of PIN9 field.                                  */
-  #define UICR_GPIO_OWN_PIN9_NotOwn (0x1UL)          /*!< Do not own the pin 9                                                 */
-  #define UICR_GPIO_OWN_PIN9_Own (0x0UL)             /*!< Own the pin 9                                                        */
-
-/* PIN10 @Bit 10 : Pin number */
-  #define UICR_GPIO_OWN_PIN10_Pos (10UL)             /*!< Position of PIN10 field.                                             */
-  #define UICR_GPIO_OWN_PIN10_Msk (0x1UL << UICR_GPIO_OWN_PIN10_Pos) /*!< Bit mask of PIN10 field.                             */
-  #define UICR_GPIO_OWN_PIN10_Min (0x0UL)            /*!< Min enumerator value of PIN10 field.                                 */
-  #define UICR_GPIO_OWN_PIN10_Max (0x1UL)            /*!< Max enumerator value of PIN10 field.                                 */
-  #define UICR_GPIO_OWN_PIN10_NotOwn (0x1UL)         /*!< Do not own the pin 10                                                */
-  #define UICR_GPIO_OWN_PIN10_Own (0x0UL)            /*!< Own the pin 10                                                       */
-
-/* PIN11 @Bit 11 : Pin number */
-  #define UICR_GPIO_OWN_PIN11_Pos (11UL)             /*!< Position of PIN11 field.                                             */
-  #define UICR_GPIO_OWN_PIN11_Msk (0x1UL << UICR_GPIO_OWN_PIN11_Pos) /*!< Bit mask of PIN11 field.                             */
-  #define UICR_GPIO_OWN_PIN11_Min (0x0UL)            /*!< Min enumerator value of PIN11 field.                                 */
-  #define UICR_GPIO_OWN_PIN11_Max (0x1UL)            /*!< Max enumerator value of PIN11 field.                                 */
-  #define UICR_GPIO_OWN_PIN11_NotOwn (0x1UL)         /*!< Do not own the pin 11                                                */
-  #define UICR_GPIO_OWN_PIN11_Own (0x0UL)            /*!< Own the pin 11                                                       */
-
-/* PIN12 @Bit 12 : Pin number */
-  #define UICR_GPIO_OWN_PIN12_Pos (12UL)             /*!< Position of PIN12 field.                                             */
-  #define UICR_GPIO_OWN_PIN12_Msk (0x1UL << UICR_GPIO_OWN_PIN12_Pos) /*!< Bit mask of PIN12 field.                             */
-  #define UICR_GPIO_OWN_PIN12_Min (0x0UL)            /*!< Min enumerator value of PIN12 field.                                 */
-  #define UICR_GPIO_OWN_PIN12_Max (0x1UL)            /*!< Max enumerator value of PIN12 field.                                 */
-  #define UICR_GPIO_OWN_PIN12_NotOwn (0x1UL)         /*!< Do not own the pin 12                                                */
-  #define UICR_GPIO_OWN_PIN12_Own (0x0UL)            /*!< Own the pin 12                                                       */
-
-/* PIN13 @Bit 13 : Pin number */
-  #define UICR_GPIO_OWN_PIN13_Pos (13UL)             /*!< Position of PIN13 field.                                             */
-  #define UICR_GPIO_OWN_PIN13_Msk (0x1UL << UICR_GPIO_OWN_PIN13_Pos) /*!< Bit mask of PIN13 field.                             */
-  #define UICR_GPIO_OWN_PIN13_Min (0x0UL)            /*!< Min enumerator value of PIN13 field.                                 */
-  #define UICR_GPIO_OWN_PIN13_Max (0x1UL)            /*!< Max enumerator value of PIN13 field.                                 */
-  #define UICR_GPIO_OWN_PIN13_NotOwn (0x1UL)         /*!< Do not own the pin 13                                                */
-  #define UICR_GPIO_OWN_PIN13_Own (0x0UL)            /*!< Own the pin 13                                                       */
-
-/* PIN14 @Bit 14 : Pin number */
-  #define UICR_GPIO_OWN_PIN14_Pos (14UL)             /*!< Position of PIN14 field.                                             */
-  #define UICR_GPIO_OWN_PIN14_Msk (0x1UL << UICR_GPIO_OWN_PIN14_Pos) /*!< Bit mask of PIN14 field.                             */
-  #define UICR_GPIO_OWN_PIN14_Min (0x0UL)            /*!< Min enumerator value of PIN14 field.                                 */
-  #define UICR_GPIO_OWN_PIN14_Max (0x1UL)            /*!< Max enumerator value of PIN14 field.                                 */
-  #define UICR_GPIO_OWN_PIN14_NotOwn (0x1UL)         /*!< Do not own the pin 14                                                */
-  #define UICR_GPIO_OWN_PIN14_Own (0x0UL)            /*!< Own the pin 14                                                       */
-
-/* PIN15 @Bit 15 : Pin number */
-  #define UICR_GPIO_OWN_PIN15_Pos (15UL)             /*!< Position of PIN15 field.                                             */
-  #define UICR_GPIO_OWN_PIN15_Msk (0x1UL << UICR_GPIO_OWN_PIN15_Pos) /*!< Bit mask of PIN15 field.                             */
-  #define UICR_GPIO_OWN_PIN15_Min (0x0UL)            /*!< Min enumerator value of PIN15 field.                                 */
-  #define UICR_GPIO_OWN_PIN15_Max (0x1UL)            /*!< Max enumerator value of PIN15 field.                                 */
-  #define UICR_GPIO_OWN_PIN15_NotOwn (0x1UL)         /*!< Do not own the pin 15                                                */
-  #define UICR_GPIO_OWN_PIN15_Own (0x0UL)            /*!< Own the pin 15                                                       */
-
-/* PIN16 @Bit 16 : Pin number */
-  #define UICR_GPIO_OWN_PIN16_Pos (16UL)             /*!< Position of PIN16 field.                                             */
-  #define UICR_GPIO_OWN_PIN16_Msk (0x1UL << UICR_GPIO_OWN_PIN16_Pos) /*!< Bit mask of PIN16 field.                             */
-  #define UICR_GPIO_OWN_PIN16_Min (0x0UL)            /*!< Min enumerator value of PIN16 field.                                 */
-  #define UICR_GPIO_OWN_PIN16_Max (0x1UL)            /*!< Max enumerator value of PIN16 field.                                 */
-  #define UICR_GPIO_OWN_PIN16_NotOwn (0x1UL)         /*!< Do not own the pin 16                                                */
-  #define UICR_GPIO_OWN_PIN16_Own (0x0UL)            /*!< Own the pin 16                                                       */
-
-/* PIN17 @Bit 17 : Pin number */
-  #define UICR_GPIO_OWN_PIN17_Pos (17UL)             /*!< Position of PIN17 field.                                             */
-  #define UICR_GPIO_OWN_PIN17_Msk (0x1UL << UICR_GPIO_OWN_PIN17_Pos) /*!< Bit mask of PIN17 field.                             */
-  #define UICR_GPIO_OWN_PIN17_Min (0x0UL)            /*!< Min enumerator value of PIN17 field.                                 */
-  #define UICR_GPIO_OWN_PIN17_Max (0x1UL)            /*!< Max enumerator value of PIN17 field.                                 */
-  #define UICR_GPIO_OWN_PIN17_NotOwn (0x1UL)         /*!< Do not own the pin 17                                                */
-  #define UICR_GPIO_OWN_PIN17_Own (0x0UL)            /*!< Own the pin 17                                                       */
-
-/* PIN18 @Bit 18 : Pin number */
-  #define UICR_GPIO_OWN_PIN18_Pos (18UL)             /*!< Position of PIN18 field.                                             */
-  #define UICR_GPIO_OWN_PIN18_Msk (0x1UL << UICR_GPIO_OWN_PIN18_Pos) /*!< Bit mask of PIN18 field.                             */
-  #define UICR_GPIO_OWN_PIN18_Min (0x0UL)            /*!< Min enumerator value of PIN18 field.                                 */
-  #define UICR_GPIO_OWN_PIN18_Max (0x1UL)            /*!< Max enumerator value of PIN18 field.                                 */
-  #define UICR_GPIO_OWN_PIN18_NotOwn (0x1UL)         /*!< Do not own the pin 18                                                */
-  #define UICR_GPIO_OWN_PIN18_Own (0x0UL)            /*!< Own the pin 18                                                       */
-
-/* PIN19 @Bit 19 : Pin number */
-  #define UICR_GPIO_OWN_PIN19_Pos (19UL)             /*!< Position of PIN19 field.                                             */
-  #define UICR_GPIO_OWN_PIN19_Msk (0x1UL << UICR_GPIO_OWN_PIN19_Pos) /*!< Bit mask of PIN19 field.                             */
-  #define UICR_GPIO_OWN_PIN19_Min (0x0UL)            /*!< Min enumerator value of PIN19 field.                                 */
-  #define UICR_GPIO_OWN_PIN19_Max (0x1UL)            /*!< Max enumerator value of PIN19 field.                                 */
-  #define UICR_GPIO_OWN_PIN19_NotOwn (0x1UL)         /*!< Do not own the pin 19                                                */
-  #define UICR_GPIO_OWN_PIN19_Own (0x0UL)            /*!< Own the pin 19                                                       */
-
-/* PIN20 @Bit 20 : Pin number */
-  #define UICR_GPIO_OWN_PIN20_Pos (20UL)             /*!< Position of PIN20 field.                                             */
-  #define UICR_GPIO_OWN_PIN20_Msk (0x1UL << UICR_GPIO_OWN_PIN20_Pos) /*!< Bit mask of PIN20 field.                             */
-  #define UICR_GPIO_OWN_PIN20_Min (0x0UL)            /*!< Min enumerator value of PIN20 field.                                 */
-  #define UICR_GPIO_OWN_PIN20_Max (0x1UL)            /*!< Max enumerator value of PIN20 field.                                 */
-  #define UICR_GPIO_OWN_PIN20_NotOwn (0x1UL)         /*!< Do not own the pin 20                                                */
-  #define UICR_GPIO_OWN_PIN20_Own (0x0UL)            /*!< Own the pin 20                                                       */
-
-/* PIN21 @Bit 21 : Pin number */
-  #define UICR_GPIO_OWN_PIN21_Pos (21UL)             /*!< Position of PIN21 field.                                             */
-  #define UICR_GPIO_OWN_PIN21_Msk (0x1UL << UICR_GPIO_OWN_PIN21_Pos) /*!< Bit mask of PIN21 field.                             */
-  #define UICR_GPIO_OWN_PIN21_Min (0x0UL)            /*!< Min enumerator value of PIN21 field.                                 */
-  #define UICR_GPIO_OWN_PIN21_Max (0x1UL)            /*!< Max enumerator value of PIN21 field.                                 */
-  #define UICR_GPIO_OWN_PIN21_NotOwn (0x1UL)         /*!< Do not own the pin 21                                                */
-  #define UICR_GPIO_OWN_PIN21_Own (0x0UL)            /*!< Own the pin 21                                                       */
-
-/* PIN22 @Bit 22 : Pin number */
-  #define UICR_GPIO_OWN_PIN22_Pos (22UL)             /*!< Position of PIN22 field.                                             */
-  #define UICR_GPIO_OWN_PIN22_Msk (0x1UL << UICR_GPIO_OWN_PIN22_Pos) /*!< Bit mask of PIN22 field.                             */
-  #define UICR_GPIO_OWN_PIN22_Min (0x0UL)            /*!< Min enumerator value of PIN22 field.                                 */
-  #define UICR_GPIO_OWN_PIN22_Max (0x1UL)            /*!< Max enumerator value of PIN22 field.                                 */
-  #define UICR_GPIO_OWN_PIN22_NotOwn (0x1UL)         /*!< Do not own the pin 22                                                */
-  #define UICR_GPIO_OWN_PIN22_Own (0x0UL)            /*!< Own the pin 22                                                       */
-
-/* PIN23 @Bit 23 : Pin number */
-  #define UICR_GPIO_OWN_PIN23_Pos (23UL)             /*!< Position of PIN23 field.                                             */
-  #define UICR_GPIO_OWN_PIN23_Msk (0x1UL << UICR_GPIO_OWN_PIN23_Pos) /*!< Bit mask of PIN23 field.                             */
-  #define UICR_GPIO_OWN_PIN23_Min (0x0UL)            /*!< Min enumerator value of PIN23 field.                                 */
-  #define UICR_GPIO_OWN_PIN23_Max (0x1UL)            /*!< Max enumerator value of PIN23 field.                                 */
-  #define UICR_GPIO_OWN_PIN23_NotOwn (0x1UL)         /*!< Do not own the pin 23                                                */
-  #define UICR_GPIO_OWN_PIN23_Own (0x0UL)            /*!< Own the pin 23                                                       */
-
-/* PIN24 @Bit 24 : Pin number */
-  #define UICR_GPIO_OWN_PIN24_Pos (24UL)             /*!< Position of PIN24 field.                                             */
-  #define UICR_GPIO_OWN_PIN24_Msk (0x1UL << UICR_GPIO_OWN_PIN24_Pos) /*!< Bit mask of PIN24 field.                             */
-  #define UICR_GPIO_OWN_PIN24_Min (0x0UL)            /*!< Min enumerator value of PIN24 field.                                 */
-  #define UICR_GPIO_OWN_PIN24_Max (0x1UL)            /*!< Max enumerator value of PIN24 field.                                 */
-  #define UICR_GPIO_OWN_PIN24_NotOwn (0x1UL)         /*!< Do not own the pin 24                                                */
-  #define UICR_GPIO_OWN_PIN24_Own (0x0UL)            /*!< Own the pin 24                                                       */
-
-/* PIN25 @Bit 25 : Pin number */
-  #define UICR_GPIO_OWN_PIN25_Pos (25UL)             /*!< Position of PIN25 field.                                             */
-  #define UICR_GPIO_OWN_PIN25_Msk (0x1UL << UICR_GPIO_OWN_PIN25_Pos) /*!< Bit mask of PIN25 field.                             */
-  #define UICR_GPIO_OWN_PIN25_Min (0x0UL)            /*!< Min enumerator value of PIN25 field.                                 */
-  #define UICR_GPIO_OWN_PIN25_Max (0x1UL)            /*!< Max enumerator value of PIN25 field.                                 */
-  #define UICR_GPIO_OWN_PIN25_NotOwn (0x1UL)         /*!< Do not own the pin 25                                                */
-  #define UICR_GPIO_OWN_PIN25_Own (0x0UL)            /*!< Own the pin 25                                                       */
-
-/* PIN26 @Bit 26 : Pin number */
-  #define UICR_GPIO_OWN_PIN26_Pos (26UL)             /*!< Position of PIN26 field.                                             */
-  #define UICR_GPIO_OWN_PIN26_Msk (0x1UL << UICR_GPIO_OWN_PIN26_Pos) /*!< Bit mask of PIN26 field.                             */
-  #define UICR_GPIO_OWN_PIN26_Min (0x0UL)            /*!< Min enumerator value of PIN26 field.                                 */
-  #define UICR_GPIO_OWN_PIN26_Max (0x1UL)            /*!< Max enumerator value of PIN26 field.                                 */
-  #define UICR_GPIO_OWN_PIN26_NotOwn (0x1UL)         /*!< Do not own the pin 26                                                */
-  #define UICR_GPIO_OWN_PIN26_Own (0x0UL)            /*!< Own the pin 26                                                       */
-
-/* PIN27 @Bit 27 : Pin number */
-  #define UICR_GPIO_OWN_PIN27_Pos (27UL)             /*!< Position of PIN27 field.                                             */
-  #define UICR_GPIO_OWN_PIN27_Msk (0x1UL << UICR_GPIO_OWN_PIN27_Pos) /*!< Bit mask of PIN27 field.                             */
-  #define UICR_GPIO_OWN_PIN27_Min (0x0UL)            /*!< Min enumerator value of PIN27 field.                                 */
-  #define UICR_GPIO_OWN_PIN27_Max (0x1UL)            /*!< Max enumerator value of PIN27 field.                                 */
-  #define UICR_GPIO_OWN_PIN27_NotOwn (0x1UL)         /*!< Do not own the pin 27                                                */
-  #define UICR_GPIO_OWN_PIN27_Own (0x0UL)            /*!< Own the pin 27                                                       */
-
-/* PIN28 @Bit 28 : Pin number */
-  #define UICR_GPIO_OWN_PIN28_Pos (28UL)             /*!< Position of PIN28 field.                                             */
-  #define UICR_GPIO_OWN_PIN28_Msk (0x1UL << UICR_GPIO_OWN_PIN28_Pos) /*!< Bit mask of PIN28 field.                             */
-  #define UICR_GPIO_OWN_PIN28_Min (0x0UL)            /*!< Min enumerator value of PIN28 field.                                 */
-  #define UICR_GPIO_OWN_PIN28_Max (0x1UL)            /*!< Max enumerator value of PIN28 field.                                 */
-  #define UICR_GPIO_OWN_PIN28_NotOwn (0x1UL)         /*!< Do not own the pin 28                                                */
-  #define UICR_GPIO_OWN_PIN28_Own (0x0UL)            /*!< Own the pin 28                                                       */
-
-/* PIN29 @Bit 29 : Pin number */
-  #define UICR_GPIO_OWN_PIN29_Pos (29UL)             /*!< Position of PIN29 field.                                             */
-  #define UICR_GPIO_OWN_PIN29_Msk (0x1UL << UICR_GPIO_OWN_PIN29_Pos) /*!< Bit mask of PIN29 field.                             */
-  #define UICR_GPIO_OWN_PIN29_Min (0x0UL)            /*!< Min enumerator value of PIN29 field.                                 */
-  #define UICR_GPIO_OWN_PIN29_Max (0x1UL)            /*!< Max enumerator value of PIN29 field.                                 */
-  #define UICR_GPIO_OWN_PIN29_NotOwn (0x1UL)         /*!< Do not own the pin 29                                                */
-  #define UICR_GPIO_OWN_PIN29_Own (0x0UL)            /*!< Own the pin 29                                                       */
-
-/* PIN30 @Bit 30 : Pin number */
-  #define UICR_GPIO_OWN_PIN30_Pos (30UL)             /*!< Position of PIN30 field.                                             */
-  #define UICR_GPIO_OWN_PIN30_Msk (0x1UL << UICR_GPIO_OWN_PIN30_Pos) /*!< Bit mask of PIN30 field.                             */
-  #define UICR_GPIO_OWN_PIN30_Min (0x0UL)            /*!< Min enumerator value of PIN30 field.                                 */
-  #define UICR_GPIO_OWN_PIN30_Max (0x1UL)            /*!< Max enumerator value of PIN30 field.                                 */
-  #define UICR_GPIO_OWN_PIN30_NotOwn (0x1UL)         /*!< Do not own the pin 30                                                */
-  #define UICR_GPIO_OWN_PIN30_Own (0x0UL)            /*!< Own the pin 30                                                       */
-
-/* PIN31 @Bit 31 : Pin number */
-  #define UICR_GPIO_OWN_PIN31_Pos (31UL)             /*!< Position of PIN31 field.                                             */
-  #define UICR_GPIO_OWN_PIN31_Msk (0x1UL << UICR_GPIO_OWN_PIN31_Pos) /*!< Bit mask of PIN31 field.                             */
-  #define UICR_GPIO_OWN_PIN31_Min (0x0UL)            /*!< Min enumerator value of PIN31 field.                                 */
-  #define UICR_GPIO_OWN_PIN31_Max (0x1UL)            /*!< Max enumerator value of PIN31 field.                                 */
-  #define UICR_GPIO_OWN_PIN31_NotOwn (0x1UL)         /*!< Do not own the pin 31                                                */
-  #define UICR_GPIO_OWN_PIN31_Own (0x0UL)            /*!< Own the pin 31                                                       */
-
-
-/* UICR_GPIO_SECURE: Request permission for the pins at GPIO port P[n] */
-  #define UICR_GPIO_SECURE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of SECURE register.                                      */
-
-/* PIN0 @Bit 0 : Pin number */
-  #define UICR_GPIO_SECURE_PIN0_Pos (0UL)            /*!< Position of PIN0 field.                                              */
-  #define UICR_GPIO_SECURE_PIN0_Msk (0x1UL << UICR_GPIO_SECURE_PIN0_Pos) /*!< Bit mask of PIN0 field.                          */
-  #define UICR_GPIO_SECURE_PIN0_Min (0x0UL)          /*!< Min enumerator value of PIN0 field.                                  */
-  #define UICR_GPIO_SECURE_PIN0_Max (0x1UL)          /*!< Max enumerator value of PIN0 field.                                  */
-  #define UICR_GPIO_SECURE_PIN0_Secure (0x1UL)       /*!< The pin 0 is secure                                                  */
-  #define UICR_GPIO_SECURE_PIN0_NonSecure (0x0UL)    /*!< The pin 0 is non-secure                                              */
-
-/* PIN1 @Bit 1 : Pin number */
-  #define UICR_GPIO_SECURE_PIN1_Pos (1UL)            /*!< Position of PIN1 field.                                              */
-  #define UICR_GPIO_SECURE_PIN1_Msk (0x1UL << UICR_GPIO_SECURE_PIN1_Pos) /*!< Bit mask of PIN1 field.                          */
-  #define UICR_GPIO_SECURE_PIN1_Min (0x0UL)          /*!< Min enumerator value of PIN1 field.                                  */
-  #define UICR_GPIO_SECURE_PIN1_Max (0x1UL)          /*!< Max enumerator value of PIN1 field.                                  */
-  #define UICR_GPIO_SECURE_PIN1_Secure (0x1UL)       /*!< The pin 1 is secure                                                  */
-  #define UICR_GPIO_SECURE_PIN1_NonSecure (0x0UL)    /*!< The pin 1 is non-secure                                              */
-
-/* PIN2 @Bit 2 : Pin number */
-  #define UICR_GPIO_SECURE_PIN2_Pos (2UL)            /*!< Position of PIN2 field.                                              */
-  #define UICR_GPIO_SECURE_PIN2_Msk (0x1UL << UICR_GPIO_SECURE_PIN2_Pos) /*!< Bit mask of PIN2 field.                          */
-  #define UICR_GPIO_SECURE_PIN2_Min (0x0UL)          /*!< Min enumerator value of PIN2 field.                                  */
-  #define UICR_GPIO_SECURE_PIN2_Max (0x1UL)          /*!< Max enumerator value of PIN2 field.                                  */
-  #define UICR_GPIO_SECURE_PIN2_Secure (0x1UL)       /*!< The pin 2 is secure                                                  */
-  #define UICR_GPIO_SECURE_PIN2_NonSecure (0x0UL)    /*!< The pin 2 is non-secure                                              */
-
-/* PIN3 @Bit 3 : Pin number */
-  #define UICR_GPIO_SECURE_PIN3_Pos (3UL)            /*!< Position of PIN3 field.                                              */
-  #define UICR_GPIO_SECURE_PIN3_Msk (0x1UL << UICR_GPIO_SECURE_PIN3_Pos) /*!< Bit mask of PIN3 field.                          */
-  #define UICR_GPIO_SECURE_PIN3_Min (0x0UL)          /*!< Min enumerator value of PIN3 field.                                  */
-  #define UICR_GPIO_SECURE_PIN3_Max (0x1UL)          /*!< Max enumerator value of PIN3 field.                                  */
-  #define UICR_GPIO_SECURE_PIN3_Secure (0x1UL)       /*!< The pin 3 is secure                                                  */
-  #define UICR_GPIO_SECURE_PIN3_NonSecure (0x0UL)    /*!< The pin 3 is non-secure                                              */
-
-/* PIN4 @Bit 4 : Pin number */
-  #define UICR_GPIO_SECURE_PIN4_Pos (4UL)            /*!< Position of PIN4 field.                                              */
-  #define UICR_GPIO_SECURE_PIN4_Msk (0x1UL << UICR_GPIO_SECURE_PIN4_Pos) /*!< Bit mask of PIN4 field.                          */
-  #define UICR_GPIO_SECURE_PIN4_Min (0x0UL)          /*!< Min enumerator value of PIN4 field.                                  */
-  #define UICR_GPIO_SECURE_PIN4_Max (0x1UL)          /*!< Max enumerator value of PIN4 field.                                  */
-  #define UICR_GPIO_SECURE_PIN4_Secure (0x1UL)       /*!< The pin 4 is secure                                                  */
-  #define UICR_GPIO_SECURE_PIN4_NonSecure (0x0UL)    /*!< The pin 4 is non-secure                                              */
-
-/* PIN5 @Bit 5 : Pin number */
-  #define UICR_GPIO_SECURE_PIN5_Pos (5UL)            /*!< Position of PIN5 field.                                              */
-  #define UICR_GPIO_SECURE_PIN5_Msk (0x1UL << UICR_GPIO_SECURE_PIN5_Pos) /*!< Bit mask of PIN5 field.                          */
-  #define UICR_GPIO_SECURE_PIN5_Min (0x0UL)          /*!< Min enumerator value of PIN5 field.                                  */
-  #define UICR_GPIO_SECURE_PIN5_Max (0x1UL)          /*!< Max enumerator value of PIN5 field.                                  */
-  #define UICR_GPIO_SECURE_PIN5_Secure (0x1UL)       /*!< The pin 5 is secure                                                  */
-  #define UICR_GPIO_SECURE_PIN5_NonSecure (0x0UL)    /*!< The pin 5 is non-secure                                              */
-
-/* PIN6 @Bit 6 : Pin number */
-  #define UICR_GPIO_SECURE_PIN6_Pos (6UL)            /*!< Position of PIN6 field.                                              */
-  #define UICR_GPIO_SECURE_PIN6_Msk (0x1UL << UICR_GPIO_SECURE_PIN6_Pos) /*!< Bit mask of PIN6 field.                          */
-  #define UICR_GPIO_SECURE_PIN6_Min (0x0UL)          /*!< Min enumerator value of PIN6 field.                                  */
-  #define UICR_GPIO_SECURE_PIN6_Max (0x1UL)          /*!< Max enumerator value of PIN6 field.                                  */
-  #define UICR_GPIO_SECURE_PIN6_Secure (0x1UL)       /*!< The pin 6 is secure                                                  */
-  #define UICR_GPIO_SECURE_PIN6_NonSecure (0x0UL)    /*!< The pin 6 is non-secure                                              */
-
-/* PIN7 @Bit 7 : Pin number */
-  #define UICR_GPIO_SECURE_PIN7_Pos (7UL)            /*!< Position of PIN7 field.                                              */
-  #define UICR_GPIO_SECURE_PIN7_Msk (0x1UL << UICR_GPIO_SECURE_PIN7_Pos) /*!< Bit mask of PIN7 field.                          */
-  #define UICR_GPIO_SECURE_PIN7_Min (0x0UL)          /*!< Min enumerator value of PIN7 field.                                  */
-  #define UICR_GPIO_SECURE_PIN7_Max (0x1UL)          /*!< Max enumerator value of PIN7 field.                                  */
-  #define UICR_GPIO_SECURE_PIN7_Secure (0x1UL)       /*!< The pin 7 is secure                                                  */
-  #define UICR_GPIO_SECURE_PIN7_NonSecure (0x0UL)    /*!< The pin 7 is non-secure                                              */
-
-/* PIN8 @Bit 8 : Pin number */
-  #define UICR_GPIO_SECURE_PIN8_Pos (8UL)            /*!< Position of PIN8 field.                                              */
-  #define UICR_GPIO_SECURE_PIN8_Msk (0x1UL << UICR_GPIO_SECURE_PIN8_Pos) /*!< Bit mask of PIN8 field.                          */
-  #define UICR_GPIO_SECURE_PIN8_Min (0x0UL)          /*!< Min enumerator value of PIN8 field.                                  */
-  #define UICR_GPIO_SECURE_PIN8_Max (0x1UL)          /*!< Max enumerator value of PIN8 field.                                  */
-  #define UICR_GPIO_SECURE_PIN8_Secure (0x1UL)       /*!< The pin 8 is secure                                                  */
-  #define UICR_GPIO_SECURE_PIN8_NonSecure (0x0UL)    /*!< The pin 8 is non-secure                                              */
-
-/* PIN9 @Bit 9 : Pin number */
-  #define UICR_GPIO_SECURE_PIN9_Pos (9UL)            /*!< Position of PIN9 field.                                              */
-  #define UICR_GPIO_SECURE_PIN9_Msk (0x1UL << UICR_GPIO_SECURE_PIN9_Pos) /*!< Bit mask of PIN9 field.                          */
-  #define UICR_GPIO_SECURE_PIN9_Min (0x0UL)          /*!< Min enumerator value of PIN9 field.                                  */
-  #define UICR_GPIO_SECURE_PIN9_Max (0x1UL)          /*!< Max enumerator value of PIN9 field.                                  */
-  #define UICR_GPIO_SECURE_PIN9_Secure (0x1UL)       /*!< The pin 9 is secure                                                  */
-  #define UICR_GPIO_SECURE_PIN9_NonSecure (0x0UL)    /*!< The pin 9 is non-secure                                              */
-
-/* PIN10 @Bit 10 : Pin number */
-  #define UICR_GPIO_SECURE_PIN10_Pos (10UL)          /*!< Position of PIN10 field.                                             */
-  #define UICR_GPIO_SECURE_PIN10_Msk (0x1UL << UICR_GPIO_SECURE_PIN10_Pos) /*!< Bit mask of PIN10 field.                       */
-  #define UICR_GPIO_SECURE_PIN10_Min (0x0UL)         /*!< Min enumerator value of PIN10 field.                                 */
-  #define UICR_GPIO_SECURE_PIN10_Max (0x1UL)         /*!< Max enumerator value of PIN10 field.                                 */
-  #define UICR_GPIO_SECURE_PIN10_Secure (0x1UL)      /*!< The pin 10 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN10_NonSecure (0x0UL)   /*!< The pin 10 is non-secure                                             */
-
-/* PIN11 @Bit 11 : Pin number */
-  #define UICR_GPIO_SECURE_PIN11_Pos (11UL)          /*!< Position of PIN11 field.                                             */
-  #define UICR_GPIO_SECURE_PIN11_Msk (0x1UL << UICR_GPIO_SECURE_PIN11_Pos) /*!< Bit mask of PIN11 field.                       */
-  #define UICR_GPIO_SECURE_PIN11_Min (0x0UL)         /*!< Min enumerator value of PIN11 field.                                 */
-  #define UICR_GPIO_SECURE_PIN11_Max (0x1UL)         /*!< Max enumerator value of PIN11 field.                                 */
-  #define UICR_GPIO_SECURE_PIN11_Secure (0x1UL)      /*!< The pin 11 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN11_NonSecure (0x0UL)   /*!< The pin 11 is non-secure                                             */
-
-/* PIN12 @Bit 12 : Pin number */
-  #define UICR_GPIO_SECURE_PIN12_Pos (12UL)          /*!< Position of PIN12 field.                                             */
-  #define UICR_GPIO_SECURE_PIN12_Msk (0x1UL << UICR_GPIO_SECURE_PIN12_Pos) /*!< Bit mask of PIN12 field.                       */
-  #define UICR_GPIO_SECURE_PIN12_Min (0x0UL)         /*!< Min enumerator value of PIN12 field.                                 */
-  #define UICR_GPIO_SECURE_PIN12_Max (0x1UL)         /*!< Max enumerator value of PIN12 field.                                 */
-  #define UICR_GPIO_SECURE_PIN12_Secure (0x1UL)      /*!< The pin 12 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN12_NonSecure (0x0UL)   /*!< The pin 12 is non-secure                                             */
-
-/* PIN13 @Bit 13 : Pin number */
-  #define UICR_GPIO_SECURE_PIN13_Pos (13UL)          /*!< Position of PIN13 field.                                             */
-  #define UICR_GPIO_SECURE_PIN13_Msk (0x1UL << UICR_GPIO_SECURE_PIN13_Pos) /*!< Bit mask of PIN13 field.                       */
-  #define UICR_GPIO_SECURE_PIN13_Min (0x0UL)         /*!< Min enumerator value of PIN13 field.                                 */
-  #define UICR_GPIO_SECURE_PIN13_Max (0x1UL)         /*!< Max enumerator value of PIN13 field.                                 */
-  #define UICR_GPIO_SECURE_PIN13_Secure (0x1UL)      /*!< The pin 13 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN13_NonSecure (0x0UL)   /*!< The pin 13 is non-secure                                             */
-
-/* PIN14 @Bit 14 : Pin number */
-  #define UICR_GPIO_SECURE_PIN14_Pos (14UL)          /*!< Position of PIN14 field.                                             */
-  #define UICR_GPIO_SECURE_PIN14_Msk (0x1UL << UICR_GPIO_SECURE_PIN14_Pos) /*!< Bit mask of PIN14 field.                       */
-  #define UICR_GPIO_SECURE_PIN14_Min (0x0UL)         /*!< Min enumerator value of PIN14 field.                                 */
-  #define UICR_GPIO_SECURE_PIN14_Max (0x1UL)         /*!< Max enumerator value of PIN14 field.                                 */
-  #define UICR_GPIO_SECURE_PIN14_Secure (0x1UL)      /*!< The pin 14 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN14_NonSecure (0x0UL)   /*!< The pin 14 is non-secure                                             */
-
-/* PIN15 @Bit 15 : Pin number */
-  #define UICR_GPIO_SECURE_PIN15_Pos (15UL)          /*!< Position of PIN15 field.                                             */
-  #define UICR_GPIO_SECURE_PIN15_Msk (0x1UL << UICR_GPIO_SECURE_PIN15_Pos) /*!< Bit mask of PIN15 field.                       */
-  #define UICR_GPIO_SECURE_PIN15_Min (0x0UL)         /*!< Min enumerator value of PIN15 field.                                 */
-  #define UICR_GPIO_SECURE_PIN15_Max (0x1UL)         /*!< Max enumerator value of PIN15 field.                                 */
-  #define UICR_GPIO_SECURE_PIN15_Secure (0x1UL)      /*!< The pin 15 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN15_NonSecure (0x0UL)   /*!< The pin 15 is non-secure                                             */
-
-/* PIN16 @Bit 16 : Pin number */
-  #define UICR_GPIO_SECURE_PIN16_Pos (16UL)          /*!< Position of PIN16 field.                                             */
-  #define UICR_GPIO_SECURE_PIN16_Msk (0x1UL << UICR_GPIO_SECURE_PIN16_Pos) /*!< Bit mask of PIN16 field.                       */
-  #define UICR_GPIO_SECURE_PIN16_Min (0x0UL)         /*!< Min enumerator value of PIN16 field.                                 */
-  #define UICR_GPIO_SECURE_PIN16_Max (0x1UL)         /*!< Max enumerator value of PIN16 field.                                 */
-  #define UICR_GPIO_SECURE_PIN16_Secure (0x1UL)      /*!< The pin 16 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN16_NonSecure (0x0UL)   /*!< The pin 16 is non-secure                                             */
-
-/* PIN17 @Bit 17 : Pin number */
-  #define UICR_GPIO_SECURE_PIN17_Pos (17UL)          /*!< Position of PIN17 field.                                             */
-  #define UICR_GPIO_SECURE_PIN17_Msk (0x1UL << UICR_GPIO_SECURE_PIN17_Pos) /*!< Bit mask of PIN17 field.                       */
-  #define UICR_GPIO_SECURE_PIN17_Min (0x0UL)         /*!< Min enumerator value of PIN17 field.                                 */
-  #define UICR_GPIO_SECURE_PIN17_Max (0x1UL)         /*!< Max enumerator value of PIN17 field.                                 */
-  #define UICR_GPIO_SECURE_PIN17_Secure (0x1UL)      /*!< The pin 17 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN17_NonSecure (0x0UL)   /*!< The pin 17 is non-secure                                             */
-
-/* PIN18 @Bit 18 : Pin number */
-  #define UICR_GPIO_SECURE_PIN18_Pos (18UL)          /*!< Position of PIN18 field.                                             */
-  #define UICR_GPIO_SECURE_PIN18_Msk (0x1UL << UICR_GPIO_SECURE_PIN18_Pos) /*!< Bit mask of PIN18 field.                       */
-  #define UICR_GPIO_SECURE_PIN18_Min (0x0UL)         /*!< Min enumerator value of PIN18 field.                                 */
-  #define UICR_GPIO_SECURE_PIN18_Max (0x1UL)         /*!< Max enumerator value of PIN18 field.                                 */
-  #define UICR_GPIO_SECURE_PIN18_Secure (0x1UL)      /*!< The pin 18 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN18_NonSecure (0x0UL)   /*!< The pin 18 is non-secure                                             */
-
-/* PIN19 @Bit 19 : Pin number */
-  #define UICR_GPIO_SECURE_PIN19_Pos (19UL)          /*!< Position of PIN19 field.                                             */
-  #define UICR_GPIO_SECURE_PIN19_Msk (0x1UL << UICR_GPIO_SECURE_PIN19_Pos) /*!< Bit mask of PIN19 field.                       */
-  #define UICR_GPIO_SECURE_PIN19_Min (0x0UL)         /*!< Min enumerator value of PIN19 field.                                 */
-  #define UICR_GPIO_SECURE_PIN19_Max (0x1UL)         /*!< Max enumerator value of PIN19 field.                                 */
-  #define UICR_GPIO_SECURE_PIN19_Secure (0x1UL)      /*!< The pin 19 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN19_NonSecure (0x0UL)   /*!< The pin 19 is non-secure                                             */
-
-/* PIN20 @Bit 20 : Pin number */
-  #define UICR_GPIO_SECURE_PIN20_Pos (20UL)          /*!< Position of PIN20 field.                                             */
-  #define UICR_GPIO_SECURE_PIN20_Msk (0x1UL << UICR_GPIO_SECURE_PIN20_Pos) /*!< Bit mask of PIN20 field.                       */
-  #define UICR_GPIO_SECURE_PIN20_Min (0x0UL)         /*!< Min enumerator value of PIN20 field.                                 */
-  #define UICR_GPIO_SECURE_PIN20_Max (0x1UL)         /*!< Max enumerator value of PIN20 field.                                 */
-  #define UICR_GPIO_SECURE_PIN20_Secure (0x1UL)      /*!< The pin 20 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN20_NonSecure (0x0UL)   /*!< The pin 20 is non-secure                                             */
-
-/* PIN21 @Bit 21 : Pin number */
-  #define UICR_GPIO_SECURE_PIN21_Pos (21UL)          /*!< Position of PIN21 field.                                             */
-  #define UICR_GPIO_SECURE_PIN21_Msk (0x1UL << UICR_GPIO_SECURE_PIN21_Pos) /*!< Bit mask of PIN21 field.                       */
-  #define UICR_GPIO_SECURE_PIN21_Min (0x0UL)         /*!< Min enumerator value of PIN21 field.                                 */
-  #define UICR_GPIO_SECURE_PIN21_Max (0x1UL)         /*!< Max enumerator value of PIN21 field.                                 */
-  #define UICR_GPIO_SECURE_PIN21_Secure (0x1UL)      /*!< The pin 21 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN21_NonSecure (0x0UL)   /*!< The pin 21 is non-secure                                             */
-
-/* PIN22 @Bit 22 : Pin number */
-  #define UICR_GPIO_SECURE_PIN22_Pos (22UL)          /*!< Position of PIN22 field.                                             */
-  #define UICR_GPIO_SECURE_PIN22_Msk (0x1UL << UICR_GPIO_SECURE_PIN22_Pos) /*!< Bit mask of PIN22 field.                       */
-  #define UICR_GPIO_SECURE_PIN22_Min (0x0UL)         /*!< Min enumerator value of PIN22 field.                                 */
-  #define UICR_GPIO_SECURE_PIN22_Max (0x1UL)         /*!< Max enumerator value of PIN22 field.                                 */
-  #define UICR_GPIO_SECURE_PIN22_Secure (0x1UL)      /*!< The pin 22 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN22_NonSecure (0x0UL)   /*!< The pin 22 is non-secure                                             */
-
-/* PIN23 @Bit 23 : Pin number */
-  #define UICR_GPIO_SECURE_PIN23_Pos (23UL)          /*!< Position of PIN23 field.                                             */
-  #define UICR_GPIO_SECURE_PIN23_Msk (0x1UL << UICR_GPIO_SECURE_PIN23_Pos) /*!< Bit mask of PIN23 field.                       */
-  #define UICR_GPIO_SECURE_PIN23_Min (0x0UL)         /*!< Min enumerator value of PIN23 field.                                 */
-  #define UICR_GPIO_SECURE_PIN23_Max (0x1UL)         /*!< Max enumerator value of PIN23 field.                                 */
-  #define UICR_GPIO_SECURE_PIN23_Secure (0x1UL)      /*!< The pin 23 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN23_NonSecure (0x0UL)   /*!< The pin 23 is non-secure                                             */
-
-/* PIN24 @Bit 24 : Pin number */
-  #define UICR_GPIO_SECURE_PIN24_Pos (24UL)          /*!< Position of PIN24 field.                                             */
-  #define UICR_GPIO_SECURE_PIN24_Msk (0x1UL << UICR_GPIO_SECURE_PIN24_Pos) /*!< Bit mask of PIN24 field.                       */
-  #define UICR_GPIO_SECURE_PIN24_Min (0x0UL)         /*!< Min enumerator value of PIN24 field.                                 */
-  #define UICR_GPIO_SECURE_PIN24_Max (0x1UL)         /*!< Max enumerator value of PIN24 field.                                 */
-  #define UICR_GPIO_SECURE_PIN24_Secure (0x1UL)      /*!< The pin 24 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN24_NonSecure (0x0UL)   /*!< The pin 24 is non-secure                                             */
-
-/* PIN25 @Bit 25 : Pin number */
-  #define UICR_GPIO_SECURE_PIN25_Pos (25UL)          /*!< Position of PIN25 field.                                             */
-  #define UICR_GPIO_SECURE_PIN25_Msk (0x1UL << UICR_GPIO_SECURE_PIN25_Pos) /*!< Bit mask of PIN25 field.                       */
-  #define UICR_GPIO_SECURE_PIN25_Min (0x0UL)         /*!< Min enumerator value of PIN25 field.                                 */
-  #define UICR_GPIO_SECURE_PIN25_Max (0x1UL)         /*!< Max enumerator value of PIN25 field.                                 */
-  #define UICR_GPIO_SECURE_PIN25_Secure (0x1UL)      /*!< The pin 25 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN25_NonSecure (0x0UL)   /*!< The pin 25 is non-secure                                             */
-
-/* PIN26 @Bit 26 : Pin number */
-  #define UICR_GPIO_SECURE_PIN26_Pos (26UL)          /*!< Position of PIN26 field.                                             */
-  #define UICR_GPIO_SECURE_PIN26_Msk (0x1UL << UICR_GPIO_SECURE_PIN26_Pos) /*!< Bit mask of PIN26 field.                       */
-  #define UICR_GPIO_SECURE_PIN26_Min (0x0UL)         /*!< Min enumerator value of PIN26 field.                                 */
-  #define UICR_GPIO_SECURE_PIN26_Max (0x1UL)         /*!< Max enumerator value of PIN26 field.                                 */
-  #define UICR_GPIO_SECURE_PIN26_Secure (0x1UL)      /*!< The pin 26 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN26_NonSecure (0x0UL)   /*!< The pin 26 is non-secure                                             */
-
-/* PIN27 @Bit 27 : Pin number */
-  #define UICR_GPIO_SECURE_PIN27_Pos (27UL)          /*!< Position of PIN27 field.                                             */
-  #define UICR_GPIO_SECURE_PIN27_Msk (0x1UL << UICR_GPIO_SECURE_PIN27_Pos) /*!< Bit mask of PIN27 field.                       */
-  #define UICR_GPIO_SECURE_PIN27_Min (0x0UL)         /*!< Min enumerator value of PIN27 field.                                 */
-  #define UICR_GPIO_SECURE_PIN27_Max (0x1UL)         /*!< Max enumerator value of PIN27 field.                                 */
-  #define UICR_GPIO_SECURE_PIN27_Secure (0x1UL)      /*!< The pin 27 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN27_NonSecure (0x0UL)   /*!< The pin 27 is non-secure                                             */
-
-/* PIN28 @Bit 28 : Pin number */
-  #define UICR_GPIO_SECURE_PIN28_Pos (28UL)          /*!< Position of PIN28 field.                                             */
-  #define UICR_GPIO_SECURE_PIN28_Msk (0x1UL << UICR_GPIO_SECURE_PIN28_Pos) /*!< Bit mask of PIN28 field.                       */
-  #define UICR_GPIO_SECURE_PIN28_Min (0x0UL)         /*!< Min enumerator value of PIN28 field.                                 */
-  #define UICR_GPIO_SECURE_PIN28_Max (0x1UL)         /*!< Max enumerator value of PIN28 field.                                 */
-  #define UICR_GPIO_SECURE_PIN28_Secure (0x1UL)      /*!< The pin 28 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN28_NonSecure (0x0UL)   /*!< The pin 28 is non-secure                                             */
-
-/* PIN29 @Bit 29 : Pin number */
-  #define UICR_GPIO_SECURE_PIN29_Pos (29UL)          /*!< Position of PIN29 field.                                             */
-  #define UICR_GPIO_SECURE_PIN29_Msk (0x1UL << UICR_GPIO_SECURE_PIN29_Pos) /*!< Bit mask of PIN29 field.                       */
-  #define UICR_GPIO_SECURE_PIN29_Min (0x0UL)         /*!< Min enumerator value of PIN29 field.                                 */
-  #define UICR_GPIO_SECURE_PIN29_Max (0x1UL)         /*!< Max enumerator value of PIN29 field.                                 */
-  #define UICR_GPIO_SECURE_PIN29_Secure (0x1UL)      /*!< The pin 29 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN29_NonSecure (0x0UL)   /*!< The pin 29 is non-secure                                             */
-
-/* PIN30 @Bit 30 : Pin number */
-  #define UICR_GPIO_SECURE_PIN30_Pos (30UL)          /*!< Position of PIN30 field.                                             */
-  #define UICR_GPIO_SECURE_PIN30_Msk (0x1UL << UICR_GPIO_SECURE_PIN30_Pos) /*!< Bit mask of PIN30 field.                       */
-  #define UICR_GPIO_SECURE_PIN30_Min (0x0UL)         /*!< Min enumerator value of PIN30 field.                                 */
-  #define UICR_GPIO_SECURE_PIN30_Max (0x1UL)         /*!< Max enumerator value of PIN30 field.                                 */
-  #define UICR_GPIO_SECURE_PIN30_Secure (0x1UL)      /*!< The pin 30 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN30_NonSecure (0x0UL)   /*!< The pin 30 is non-secure                                             */
-
-/* PIN31 @Bit 31 : Pin number */
-  #define UICR_GPIO_SECURE_PIN31_Pos (31UL)          /*!< Position of PIN31 field.                                             */
-  #define UICR_GPIO_SECURE_PIN31_Msk (0x1UL << UICR_GPIO_SECURE_PIN31_Pos) /*!< Bit mask of PIN31 field.                       */
-  #define UICR_GPIO_SECURE_PIN31_Min (0x0UL)         /*!< Min enumerator value of PIN31 field.                                 */
-  #define UICR_GPIO_SECURE_PIN31_Max (0x1UL)         /*!< Max enumerator value of PIN31 field.                                 */
-  #define UICR_GPIO_SECURE_PIN31_Secure (0x1UL)      /*!< The pin 31 is secure                                                 */
-  #define UICR_GPIO_SECURE_PIN31_NonSecure (0x0UL)   /*!< The pin 31 is non-secure                                             */
-
-
-
 /* ================================================== Struct UICR_GPIOTE_CH ================================================== */
 /**
   * @brief CH [UICR_GPIOTE_CH] (unspecified)
@@ -138479,11 +138627,21 @@ typedef struct {
   * @brief GPIOTE [UICR_GPIOTE] (unspecified)
   */
 typedef struct {
-  __IOM NRF_UICR_GPIOTE_CH_Type CH;                  /*!< (@ 0x00000000) (unspecified)                                         */
-} NRF_UICR_GPIOTE_Type;                              /*!< Size = 8 (0x008)                                                     */
+  __IOM uint32_t  INSTANCE;                          /*!< (@ 0x00000000) Address of the GPIOTE instance associated with
+                                                                         GPIOTE[n]*/
+  __IOM NRF_UICR_GPIOTE_CH_Type CH;                  /*!< (@ 0x00000004) (unspecified)                                         */
+} NRF_UICR_GPIOTE_Type;                              /*!< Size = 12 (0x00C)                                                    */
   #define UICR_GPIOTE_MaxCount (4UL)                 /*!< Size of GPIOTE[4] array.                                             */
   #define UICR_GPIOTE_MaxIndex (3UL)                 /*!< Max index of GPIOTE[4] array.                                        */
   #define UICR_GPIOTE_MinIndex (0UL)                 /*!< Min index of GPIOTE[4] array.                                        */
+
+/* UICR_GPIOTE_INSTANCE: Address of the GPIOTE instance associated with GPIOTE[n] */
+  #define UICR_GPIOTE_INSTANCE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of INSTANCE register.                                */
+
+/* ADDRESS @Bits 0..31 : Instance address */
+  #define UICR_GPIOTE_INSTANCE_ADDRESS_Pos (0UL)     /*!< Position of ADDRESS field.                                           */
+  #define UICR_GPIOTE_INSTANCE_ADDRESS_Msk (0xFFFFFFFFUL << UICR_GPIOTE_INSTANCE_ADDRESS_Pos) /*!< Bit mask of ADDRESS field.  */
+
 
 
 /* ================================================ Struct UICR_IPCT_LOCAL_CH ================================================ */
@@ -140201,12 +140359,23 @@ typedef struct {
   * @brief GLOBAL [UICR_IPCT_GLOBAL] (unspecified)
   */
 typedef struct {
-  __IOM NRF_UICR_IPCT_GLOBAL_CH_Type CH;             /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_UICR_IPCT_GLOBAL_INTERRUPT_Type INTERRUPT; /*!< (@ 0x00000008) (unspecified)                                       */
-} NRF_UICR_IPCT_GLOBAL_Type;                         /*!< Size = 16 (0x010)                                                    */
+  __IOM uint32_t  INSTANCE;                          /*!< (@ 0x00000000) Address of the IPCT instance associated with
+                                                                         IPCT[n].GLOBAL*/
+  __IOM NRF_UICR_IPCT_GLOBAL_CH_Type CH;             /*!< (@ 0x00000004) (unspecified)                                         */
+  __IOM NRF_UICR_IPCT_GLOBAL_INTERRUPT_Type INTERRUPT; /*!< (@ 0x0000000C) (unspecified)                                       */
+} NRF_UICR_IPCT_GLOBAL_Type;                         /*!< Size = 20 (0x014)                                                    */
   #define UICR_IPCT_GLOBAL_MaxCount (2UL)            /*!< Size of GLOBAL[2] array.                                             */
   #define UICR_IPCT_GLOBAL_MaxIndex (1UL)            /*!< Max index of GLOBAL[2] array.                                        */
   #define UICR_IPCT_GLOBAL_MinIndex (0UL)            /*!< Min index of GLOBAL[2] array.                                        */
+
+/* UICR_IPCT_GLOBAL_INSTANCE: Address of the IPCT instance associated with IPCT[n].GLOBAL */
+  #define UICR_IPCT_GLOBAL_INSTANCE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of INSTANCE register.                           */
+
+/* ADDRESS @Bits 0..31 : Instance address */
+  #define UICR_IPCT_GLOBAL_INSTANCE_ADDRESS_Pos (0UL) /*!< Position of ADDRESS field.                                          */
+  #define UICR_IPCT_GLOBAL_INSTANCE_ADDRESS_Msk (0xFFFFFFFFUL << UICR_IPCT_GLOBAL_INSTANCE_ADDRESS_Pos) /*!< Bit mask of ADDRESS
+                                                                            field.*/
+
 
 
 /* ==================================================== Struct UICR_IPCT ===================================================== */
@@ -140216,7 +140385,7 @@ typedef struct {
 typedef struct {
   __IOM NRF_UICR_IPCT_LOCAL_Type LOCAL;              /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_UICR_IPCT_GLOBAL_Type GLOBAL[2];         /*!< (@ 0x00000008) (unspecified)                                         */
-} NRF_UICR_IPCT_Type;                                /*!< Size = 40 (0x028)                                                    */
+} NRF_UICR_IPCT_Type;                                /*!< Size = 48 (0x030)                                                    */
 
 
 /* ============================================= Struct UICR_DPPI_LOCAL_CH_LINK ============================================== */
@@ -140224,558 +140393,530 @@ typedef struct {
   * @brief LINK [UICR_DPPI_LOCAL_CH_LINK] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  SOURCE;                            /*!< (@ 0x00000000) Request linking the channels of DPPI[n] in the local
-                                                                         domain as source Source channels send PPI events to the
-                                                                         other side of the link*/
-  __IOM uint32_t  SINK;                              /*!< (@ 0x00000004) Request linking the channels of DPPI[n] in the local
-                                                                         domain as sink Sink channels receive PPI events from
-                                                                         the other side of the link*/
+  __IOM uint32_t  DIR;                               /*!< (@ 0x00000000) Request linking the channels of DPPI[n] in local domain
+                                                                         as source or sink*/
+  __IOM uint32_t  EN;                                /*!< (@ 0x00000004) Request linking of the channels of DPPI[n] in the local
+                                                                         domain*/
 } NRF_UICR_DPPI_LOCAL_CH_LINK_Type;                  /*!< Size = 8 (0x008)                                                     */
 
-/* UICR_DPPI_LOCAL_CH_LINK_SOURCE: Request linking the channels of DPPI[n] in the local domain as source Source channels send
-                                    PPI events to the other side of the link */
-
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of SOURCE register.                        */
-
-/* CH0 @Bit 0 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH0_Pos (0UL) /*!< Position of CH0 field.                                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH0_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH0_Pos) /*!< Bit mask of CH0 field. */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH0_Min (0x0UL) /*!< Min enumerator value of CH0 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH0_Max (0x1UL) /*!< Max enumerator value of CH0 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH0_NotLinked (0x1UL) /*!< The channel 0 is not linked as source                      */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH0_Linked (0x0UL) /*!< The channel 0 is linked as source                             */
-
-/* CH1 @Bit 1 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH1_Pos (1UL) /*!< Position of CH1 field.                                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH1_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH1_Pos) /*!< Bit mask of CH1 field. */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH1_Min (0x0UL) /*!< Min enumerator value of CH1 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH1_Max (0x1UL) /*!< Max enumerator value of CH1 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH1_NotLinked (0x1UL) /*!< The channel 1 is not linked as source                      */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH1_Linked (0x0UL) /*!< The channel 1 is linked as source                             */
-
-/* CH2 @Bit 2 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH2_Pos (2UL) /*!< Position of CH2 field.                                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH2_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH2_Pos) /*!< Bit mask of CH2 field. */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH2_Min (0x0UL) /*!< Min enumerator value of CH2 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH2_Max (0x1UL) /*!< Max enumerator value of CH2 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH2_NotLinked (0x1UL) /*!< The channel 2 is not linked as source                      */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH2_Linked (0x0UL) /*!< The channel 2 is linked as source                             */
-
-/* CH3 @Bit 3 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH3_Pos (3UL) /*!< Position of CH3 field.                                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH3_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH3_Pos) /*!< Bit mask of CH3 field. */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH3_Min (0x0UL) /*!< Min enumerator value of CH3 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH3_Max (0x1UL) /*!< Max enumerator value of CH3 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH3_NotLinked (0x1UL) /*!< The channel 3 is not linked as source                      */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH3_Linked (0x0UL) /*!< The channel 3 is linked as source                             */
-
-/* CH4 @Bit 4 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH4_Pos (4UL) /*!< Position of CH4 field.                                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH4_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH4_Pos) /*!< Bit mask of CH4 field. */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH4_Min (0x0UL) /*!< Min enumerator value of CH4 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH4_Max (0x1UL) /*!< Max enumerator value of CH4 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH4_NotLinked (0x1UL) /*!< The channel 4 is not linked as source                      */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH4_Linked (0x0UL) /*!< The channel 4 is linked as source                             */
-
-/* CH5 @Bit 5 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH5_Pos (5UL) /*!< Position of CH5 field.                                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH5_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH5_Pos) /*!< Bit mask of CH5 field. */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH5_Min (0x0UL) /*!< Min enumerator value of CH5 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH5_Max (0x1UL) /*!< Max enumerator value of CH5 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH5_NotLinked (0x1UL) /*!< The channel 5 is not linked as source                      */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH5_Linked (0x0UL) /*!< The channel 5 is linked as source                             */
-
-/* CH6 @Bit 6 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH6_Pos (6UL) /*!< Position of CH6 field.                                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH6_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH6_Pos) /*!< Bit mask of CH6 field. */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH6_Min (0x0UL) /*!< Min enumerator value of CH6 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH6_Max (0x1UL) /*!< Max enumerator value of CH6 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH6_NotLinked (0x1UL) /*!< The channel 6 is not linked as source                      */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH6_Linked (0x0UL) /*!< The channel 6 is linked as source                             */
-
-/* CH7 @Bit 7 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH7_Pos (7UL) /*!< Position of CH7 field.                                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH7_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH7_Pos) /*!< Bit mask of CH7 field. */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH7_Min (0x0UL) /*!< Min enumerator value of CH7 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH7_Max (0x1UL) /*!< Max enumerator value of CH7 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH7_NotLinked (0x1UL) /*!< The channel 7 is not linked as source                      */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH7_Linked (0x0UL) /*!< The channel 7 is linked as source                             */
-
-/* CH8 @Bit 8 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH8_Pos (8UL) /*!< Position of CH8 field.                                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH8_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH8_Pos) /*!< Bit mask of CH8 field. */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH8_Min (0x0UL) /*!< Min enumerator value of CH8 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH8_Max (0x1UL) /*!< Max enumerator value of CH8 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH8_NotLinked (0x1UL) /*!< The channel 8 is not linked as source                      */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH8_Linked (0x0UL) /*!< The channel 8 is linked as source                             */
-
-/* CH9 @Bit 9 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH9_Pos (9UL) /*!< Position of CH9 field.                                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH9_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH9_Pos) /*!< Bit mask of CH9 field. */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH9_Min (0x0UL) /*!< Min enumerator value of CH9 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH9_Max (0x1UL) /*!< Max enumerator value of CH9 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH9_NotLinked (0x1UL) /*!< The channel 9 is not linked as source                      */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH9_Linked (0x0UL) /*!< The channel 9 is linked as source                             */
-
-/* CH10 @Bit 10 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH10_Pos (10UL) /*!< Position of CH10 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH10_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH10_Pos) /*!< Bit mask of CH10
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH10_Min (0x0UL) /*!< Min enumerator value of CH10 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH10_Max (0x1UL) /*!< Max enumerator value of CH10 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH10_NotLinked (0x1UL) /*!< The channel 10 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH10_Linked (0x0UL) /*!< The channel 10 is linked as source                           */
-
-/* CH11 @Bit 11 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH11_Pos (11UL) /*!< Position of CH11 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH11_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH11_Pos) /*!< Bit mask of CH11
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH11_Min (0x0UL) /*!< Min enumerator value of CH11 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH11_Max (0x1UL) /*!< Max enumerator value of CH11 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH11_NotLinked (0x1UL) /*!< The channel 11 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH11_Linked (0x0UL) /*!< The channel 11 is linked as source                           */
-
-/* CH12 @Bit 12 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH12_Pos (12UL) /*!< Position of CH12 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH12_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH12_Pos) /*!< Bit mask of CH12
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH12_Min (0x0UL) /*!< Min enumerator value of CH12 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH12_Max (0x1UL) /*!< Max enumerator value of CH12 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH12_NotLinked (0x1UL) /*!< The channel 12 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH12_Linked (0x0UL) /*!< The channel 12 is linked as source                           */
-
-/* CH13 @Bit 13 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH13_Pos (13UL) /*!< Position of CH13 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH13_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH13_Pos) /*!< Bit mask of CH13
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH13_Min (0x0UL) /*!< Min enumerator value of CH13 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH13_Max (0x1UL) /*!< Max enumerator value of CH13 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH13_NotLinked (0x1UL) /*!< The channel 13 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH13_Linked (0x0UL) /*!< The channel 13 is linked as source                           */
-
-/* CH14 @Bit 14 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH14_Pos (14UL) /*!< Position of CH14 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH14_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH14_Pos) /*!< Bit mask of CH14
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH14_Min (0x0UL) /*!< Min enumerator value of CH14 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH14_Max (0x1UL) /*!< Max enumerator value of CH14 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH14_NotLinked (0x1UL) /*!< The channel 14 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH14_Linked (0x0UL) /*!< The channel 14 is linked as source                           */
-
-/* CH15 @Bit 15 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH15_Pos (15UL) /*!< Position of CH15 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH15_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH15_Pos) /*!< Bit mask of CH15
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH15_Min (0x0UL) /*!< Min enumerator value of CH15 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH15_Max (0x1UL) /*!< Max enumerator value of CH15 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH15_NotLinked (0x1UL) /*!< The channel 15 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH15_Linked (0x0UL) /*!< The channel 15 is linked as source                           */
-
-/* CH16 @Bit 16 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH16_Pos (16UL) /*!< Position of CH16 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH16_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH16_Pos) /*!< Bit mask of CH16
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH16_Min (0x0UL) /*!< Min enumerator value of CH16 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH16_Max (0x1UL) /*!< Max enumerator value of CH16 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH16_NotLinked (0x1UL) /*!< The channel 16 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH16_Linked (0x0UL) /*!< The channel 16 is linked as source                           */
-
-/* CH17 @Bit 17 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH17_Pos (17UL) /*!< Position of CH17 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH17_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH17_Pos) /*!< Bit mask of CH17
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH17_Min (0x0UL) /*!< Min enumerator value of CH17 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH17_Max (0x1UL) /*!< Max enumerator value of CH17 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH17_NotLinked (0x1UL) /*!< The channel 17 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH17_Linked (0x0UL) /*!< The channel 17 is linked as source                           */
-
-/* CH18 @Bit 18 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH18_Pos (18UL) /*!< Position of CH18 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH18_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH18_Pos) /*!< Bit mask of CH18
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH18_Min (0x0UL) /*!< Min enumerator value of CH18 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH18_Max (0x1UL) /*!< Max enumerator value of CH18 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH18_NotLinked (0x1UL) /*!< The channel 18 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH18_Linked (0x0UL) /*!< The channel 18 is linked as source                           */
-
-/* CH19 @Bit 19 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH19_Pos (19UL) /*!< Position of CH19 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH19_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH19_Pos) /*!< Bit mask of CH19
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH19_Min (0x0UL) /*!< Min enumerator value of CH19 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH19_Max (0x1UL) /*!< Max enumerator value of CH19 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH19_NotLinked (0x1UL) /*!< The channel 19 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH19_Linked (0x0UL) /*!< The channel 19 is linked as source                           */
-
-/* CH20 @Bit 20 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH20_Pos (20UL) /*!< Position of CH20 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH20_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH20_Pos) /*!< Bit mask of CH20
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH20_Min (0x0UL) /*!< Min enumerator value of CH20 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH20_Max (0x1UL) /*!< Max enumerator value of CH20 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH20_NotLinked (0x1UL) /*!< The channel 20 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH20_Linked (0x0UL) /*!< The channel 20 is linked as source                           */
-
-/* CH21 @Bit 21 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH21_Pos (21UL) /*!< Position of CH21 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH21_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH21_Pos) /*!< Bit mask of CH21
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH21_Min (0x0UL) /*!< Min enumerator value of CH21 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH21_Max (0x1UL) /*!< Max enumerator value of CH21 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH21_NotLinked (0x1UL) /*!< The channel 21 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH21_Linked (0x0UL) /*!< The channel 21 is linked as source                           */
-
-/* CH22 @Bit 22 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH22_Pos (22UL) /*!< Position of CH22 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH22_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH22_Pos) /*!< Bit mask of CH22
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH22_Min (0x0UL) /*!< Min enumerator value of CH22 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH22_Max (0x1UL) /*!< Max enumerator value of CH22 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH22_NotLinked (0x1UL) /*!< The channel 22 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH22_Linked (0x0UL) /*!< The channel 22 is linked as source                           */
-
-/* CH23 @Bit 23 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH23_Pos (23UL) /*!< Position of CH23 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH23_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH23_Pos) /*!< Bit mask of CH23
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH23_Min (0x0UL) /*!< Min enumerator value of CH23 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH23_Max (0x1UL) /*!< Max enumerator value of CH23 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH23_NotLinked (0x1UL) /*!< The channel 23 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH23_Linked (0x0UL) /*!< The channel 23 is linked as source                           */
-
-/* CH24 @Bit 24 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH24_Pos (24UL) /*!< Position of CH24 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH24_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH24_Pos) /*!< Bit mask of CH24
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH24_Min (0x0UL) /*!< Min enumerator value of CH24 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH24_Max (0x1UL) /*!< Max enumerator value of CH24 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH24_NotLinked (0x1UL) /*!< The channel 24 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH24_Linked (0x0UL) /*!< The channel 24 is linked as source                           */
-
-/* CH25 @Bit 25 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH25_Pos (25UL) /*!< Position of CH25 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH25_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH25_Pos) /*!< Bit mask of CH25
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH25_Min (0x0UL) /*!< Min enumerator value of CH25 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH25_Max (0x1UL) /*!< Max enumerator value of CH25 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH25_NotLinked (0x1UL) /*!< The channel 25 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH25_Linked (0x0UL) /*!< The channel 25 is linked as source                           */
-
-/* CH26 @Bit 26 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH26_Pos (26UL) /*!< Position of CH26 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH26_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH26_Pos) /*!< Bit mask of CH26
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH26_Min (0x0UL) /*!< Min enumerator value of CH26 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH26_Max (0x1UL) /*!< Max enumerator value of CH26 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH26_NotLinked (0x1UL) /*!< The channel 26 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH26_Linked (0x0UL) /*!< The channel 26 is linked as source                           */
-
-/* CH27 @Bit 27 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH27_Pos (27UL) /*!< Position of CH27 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH27_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH27_Pos) /*!< Bit mask of CH27
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH27_Min (0x0UL) /*!< Min enumerator value of CH27 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH27_Max (0x1UL) /*!< Max enumerator value of CH27 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH27_NotLinked (0x1UL) /*!< The channel 27 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH27_Linked (0x0UL) /*!< The channel 27 is linked as source                           */
-
-/* CH28 @Bit 28 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH28_Pos (28UL) /*!< Position of CH28 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH28_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH28_Pos) /*!< Bit mask of CH28
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH28_Min (0x0UL) /*!< Min enumerator value of CH28 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH28_Max (0x1UL) /*!< Max enumerator value of CH28 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH28_NotLinked (0x1UL) /*!< The channel 28 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH28_Linked (0x0UL) /*!< The channel 28 is linked as source                           */
-
-/* CH29 @Bit 29 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH29_Pos (29UL) /*!< Position of CH29 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH29_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH29_Pos) /*!< Bit mask of CH29
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH29_Min (0x0UL) /*!< Min enumerator value of CH29 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH29_Max (0x1UL) /*!< Max enumerator value of CH29 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH29_NotLinked (0x1UL) /*!< The channel 29 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH29_Linked (0x0UL) /*!< The channel 29 is linked as source                           */
-
-/* CH30 @Bit 30 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH30_Pos (30UL) /*!< Position of CH30 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH30_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH30_Pos) /*!< Bit mask of CH30
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH30_Min (0x0UL) /*!< Min enumerator value of CH30 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH30_Max (0x1UL) /*!< Max enumerator value of CH30 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH30_NotLinked (0x1UL) /*!< The channel 30 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH30_Linked (0x0UL) /*!< The channel 30 is linked as source                           */
-
-/* CH31 @Bit 31 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH31_Pos (31UL) /*!< Position of CH31 field.                                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH31_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH31_Pos) /*!< Bit mask of CH31
-                                                                            field.*/
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH31_Min (0x0UL) /*!< Min enumerator value of CH31 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH31_Max (0x1UL) /*!< Max enumerator value of CH31 field.                             */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH31_NotLinked (0x1UL) /*!< The channel 31 is not linked as source                    */
-  #define UICR_DPPI_LOCAL_CH_LINK_SOURCE_CH31_Linked (0x0UL) /*!< The channel 31 is linked as source                           */
-
-
-/* UICR_DPPI_LOCAL_CH_LINK_SINK: Request linking the channels of DPPI[n] in the local domain as sink Sink channels receive PPI
-                                  events from the other side of the link */
-
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_ResetValue (0xFFFFFFFFUL) /*!< Reset value of SINK register.                            */
-
-/* CH0 @Bit 0 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH0_Pos (0UL) /*!< Position of CH0 field.                                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH0_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH0_Pos) /*!< Bit mask of CH0 field.     */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH0_Min (0x0UL) /*!< Min enumerator value of CH0 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH0_Max (0x1UL) /*!< Max enumerator value of CH0 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH0_NotLinked (0x1UL) /*!< The channel 0 is not linked as sink                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH0_Linked (0x0UL) /*!< The channel 0 is linked as sink                                 */
-
-/* CH1 @Bit 1 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH1_Pos (1UL) /*!< Position of CH1 field.                                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH1_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH1_Pos) /*!< Bit mask of CH1 field.     */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH1_Min (0x0UL) /*!< Min enumerator value of CH1 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH1_Max (0x1UL) /*!< Max enumerator value of CH1 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH1_NotLinked (0x1UL) /*!< The channel 1 is not linked as sink                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH1_Linked (0x0UL) /*!< The channel 1 is linked as sink                                 */
-
-/* CH2 @Bit 2 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH2_Pos (2UL) /*!< Position of CH2 field.                                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH2_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH2_Pos) /*!< Bit mask of CH2 field.     */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH2_Min (0x0UL) /*!< Min enumerator value of CH2 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH2_Max (0x1UL) /*!< Max enumerator value of CH2 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH2_NotLinked (0x1UL) /*!< The channel 2 is not linked as sink                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH2_Linked (0x0UL) /*!< The channel 2 is linked as sink                                 */
-
-/* CH3 @Bit 3 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH3_Pos (3UL) /*!< Position of CH3 field.                                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH3_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH3_Pos) /*!< Bit mask of CH3 field.     */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH3_Min (0x0UL) /*!< Min enumerator value of CH3 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH3_Max (0x1UL) /*!< Max enumerator value of CH3 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH3_NotLinked (0x1UL) /*!< The channel 3 is not linked as sink                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH3_Linked (0x0UL) /*!< The channel 3 is linked as sink                                 */
-
-/* CH4 @Bit 4 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH4_Pos (4UL) /*!< Position of CH4 field.                                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH4_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH4_Pos) /*!< Bit mask of CH4 field.     */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH4_Min (0x0UL) /*!< Min enumerator value of CH4 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH4_Max (0x1UL) /*!< Max enumerator value of CH4 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH4_NotLinked (0x1UL) /*!< The channel 4 is not linked as sink                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH4_Linked (0x0UL) /*!< The channel 4 is linked as sink                                 */
-
-/* CH5 @Bit 5 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH5_Pos (5UL) /*!< Position of CH5 field.                                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH5_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH5_Pos) /*!< Bit mask of CH5 field.     */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH5_Min (0x0UL) /*!< Min enumerator value of CH5 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH5_Max (0x1UL) /*!< Max enumerator value of CH5 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH5_NotLinked (0x1UL) /*!< The channel 5 is not linked as sink                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH5_Linked (0x0UL) /*!< The channel 5 is linked as sink                                 */
-
-/* CH6 @Bit 6 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH6_Pos (6UL) /*!< Position of CH6 field.                                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH6_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH6_Pos) /*!< Bit mask of CH6 field.     */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH6_Min (0x0UL) /*!< Min enumerator value of CH6 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH6_Max (0x1UL) /*!< Max enumerator value of CH6 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH6_NotLinked (0x1UL) /*!< The channel 6 is not linked as sink                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH6_Linked (0x0UL) /*!< The channel 6 is linked as sink                                 */
-
-/* CH7 @Bit 7 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH7_Pos (7UL) /*!< Position of CH7 field.                                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH7_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH7_Pos) /*!< Bit mask of CH7 field.     */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH7_Min (0x0UL) /*!< Min enumerator value of CH7 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH7_Max (0x1UL) /*!< Max enumerator value of CH7 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH7_NotLinked (0x1UL) /*!< The channel 7 is not linked as sink                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH7_Linked (0x0UL) /*!< The channel 7 is linked as sink                                 */
-
-/* CH8 @Bit 8 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH8_Pos (8UL) /*!< Position of CH8 field.                                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH8_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH8_Pos) /*!< Bit mask of CH8 field.     */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH8_Min (0x0UL) /*!< Min enumerator value of CH8 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH8_Max (0x1UL) /*!< Max enumerator value of CH8 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH8_NotLinked (0x1UL) /*!< The channel 8 is not linked as sink                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH8_Linked (0x0UL) /*!< The channel 8 is linked as sink                                 */
-
-/* CH9 @Bit 9 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH9_Pos (9UL) /*!< Position of CH9 field.                                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH9_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH9_Pos) /*!< Bit mask of CH9 field.     */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH9_Min (0x0UL) /*!< Min enumerator value of CH9 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH9_Max (0x1UL) /*!< Max enumerator value of CH9 field.                                 */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH9_NotLinked (0x1UL) /*!< The channel 9 is not linked as sink                          */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH9_Linked (0x0UL) /*!< The channel 9 is linked as sink                                 */
-
-/* CH10 @Bit 10 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH10_Pos (10UL) /*!< Position of CH10 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH10_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH10_Pos) /*!< Bit mask of CH10 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH10_Min (0x0UL) /*!< Min enumerator value of CH10 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH10_Max (0x1UL) /*!< Max enumerator value of CH10 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH10_NotLinked (0x1UL) /*!< The channel 10 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH10_Linked (0x0UL) /*!< The channel 10 is linked as sink                               */
-
-/* CH11 @Bit 11 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH11_Pos (11UL) /*!< Position of CH11 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH11_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH11_Pos) /*!< Bit mask of CH11 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH11_Min (0x0UL) /*!< Min enumerator value of CH11 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH11_Max (0x1UL) /*!< Max enumerator value of CH11 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH11_NotLinked (0x1UL) /*!< The channel 11 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH11_Linked (0x0UL) /*!< The channel 11 is linked as sink                               */
-
-/* CH12 @Bit 12 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH12_Pos (12UL) /*!< Position of CH12 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH12_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH12_Pos) /*!< Bit mask of CH12 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH12_Min (0x0UL) /*!< Min enumerator value of CH12 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH12_Max (0x1UL) /*!< Max enumerator value of CH12 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH12_NotLinked (0x1UL) /*!< The channel 12 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH12_Linked (0x0UL) /*!< The channel 12 is linked as sink                               */
-
-/* CH13 @Bit 13 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH13_Pos (13UL) /*!< Position of CH13 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH13_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH13_Pos) /*!< Bit mask of CH13 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH13_Min (0x0UL) /*!< Min enumerator value of CH13 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH13_Max (0x1UL) /*!< Max enumerator value of CH13 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH13_NotLinked (0x1UL) /*!< The channel 13 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH13_Linked (0x0UL) /*!< The channel 13 is linked as sink                               */
-
-/* CH14 @Bit 14 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH14_Pos (14UL) /*!< Position of CH14 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH14_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH14_Pos) /*!< Bit mask of CH14 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH14_Min (0x0UL) /*!< Min enumerator value of CH14 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH14_Max (0x1UL) /*!< Max enumerator value of CH14 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH14_NotLinked (0x1UL) /*!< The channel 14 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH14_Linked (0x0UL) /*!< The channel 14 is linked as sink                               */
-
-/* CH15 @Bit 15 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH15_Pos (15UL) /*!< Position of CH15 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH15_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH15_Pos) /*!< Bit mask of CH15 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH15_Min (0x0UL) /*!< Min enumerator value of CH15 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH15_Max (0x1UL) /*!< Max enumerator value of CH15 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH15_NotLinked (0x1UL) /*!< The channel 15 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH15_Linked (0x0UL) /*!< The channel 15 is linked as sink                               */
-
-/* CH16 @Bit 16 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH16_Pos (16UL) /*!< Position of CH16 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH16_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH16_Pos) /*!< Bit mask of CH16 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH16_Min (0x0UL) /*!< Min enumerator value of CH16 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH16_Max (0x1UL) /*!< Max enumerator value of CH16 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH16_NotLinked (0x1UL) /*!< The channel 16 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH16_Linked (0x0UL) /*!< The channel 16 is linked as sink                               */
-
-/* CH17 @Bit 17 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH17_Pos (17UL) /*!< Position of CH17 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH17_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH17_Pos) /*!< Bit mask of CH17 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH17_Min (0x0UL) /*!< Min enumerator value of CH17 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH17_Max (0x1UL) /*!< Max enumerator value of CH17 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH17_NotLinked (0x1UL) /*!< The channel 17 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH17_Linked (0x0UL) /*!< The channel 17 is linked as sink                               */
-
-/* CH18 @Bit 18 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH18_Pos (18UL) /*!< Position of CH18 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH18_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH18_Pos) /*!< Bit mask of CH18 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH18_Min (0x0UL) /*!< Min enumerator value of CH18 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH18_Max (0x1UL) /*!< Max enumerator value of CH18 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH18_NotLinked (0x1UL) /*!< The channel 18 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH18_Linked (0x0UL) /*!< The channel 18 is linked as sink                               */
-
-/* CH19 @Bit 19 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH19_Pos (19UL) /*!< Position of CH19 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH19_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH19_Pos) /*!< Bit mask of CH19 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH19_Min (0x0UL) /*!< Min enumerator value of CH19 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH19_Max (0x1UL) /*!< Max enumerator value of CH19 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH19_NotLinked (0x1UL) /*!< The channel 19 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH19_Linked (0x0UL) /*!< The channel 19 is linked as sink                               */
-
-/* CH20 @Bit 20 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH20_Pos (20UL) /*!< Position of CH20 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH20_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH20_Pos) /*!< Bit mask of CH20 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH20_Min (0x0UL) /*!< Min enumerator value of CH20 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH20_Max (0x1UL) /*!< Max enumerator value of CH20 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH20_NotLinked (0x1UL) /*!< The channel 20 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH20_Linked (0x0UL) /*!< The channel 20 is linked as sink                               */
-
-/* CH21 @Bit 21 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH21_Pos (21UL) /*!< Position of CH21 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH21_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH21_Pos) /*!< Bit mask of CH21 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH21_Min (0x0UL) /*!< Min enumerator value of CH21 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH21_Max (0x1UL) /*!< Max enumerator value of CH21 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH21_NotLinked (0x1UL) /*!< The channel 21 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH21_Linked (0x0UL) /*!< The channel 21 is linked as sink                               */
-
-/* CH22 @Bit 22 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH22_Pos (22UL) /*!< Position of CH22 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH22_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH22_Pos) /*!< Bit mask of CH22 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH22_Min (0x0UL) /*!< Min enumerator value of CH22 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH22_Max (0x1UL) /*!< Max enumerator value of CH22 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH22_NotLinked (0x1UL) /*!< The channel 22 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH22_Linked (0x0UL) /*!< The channel 22 is linked as sink                               */
-
-/* CH23 @Bit 23 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH23_Pos (23UL) /*!< Position of CH23 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH23_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH23_Pos) /*!< Bit mask of CH23 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH23_Min (0x0UL) /*!< Min enumerator value of CH23 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH23_Max (0x1UL) /*!< Max enumerator value of CH23 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH23_NotLinked (0x1UL) /*!< The channel 23 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH23_Linked (0x0UL) /*!< The channel 23 is linked as sink                               */
-
-/* CH24 @Bit 24 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH24_Pos (24UL) /*!< Position of CH24 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH24_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH24_Pos) /*!< Bit mask of CH24 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH24_Min (0x0UL) /*!< Min enumerator value of CH24 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH24_Max (0x1UL) /*!< Max enumerator value of CH24 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH24_NotLinked (0x1UL) /*!< The channel 24 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH24_Linked (0x0UL) /*!< The channel 24 is linked as sink                               */
-
-/* CH25 @Bit 25 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH25_Pos (25UL) /*!< Position of CH25 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH25_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH25_Pos) /*!< Bit mask of CH25 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH25_Min (0x0UL) /*!< Min enumerator value of CH25 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH25_Max (0x1UL) /*!< Max enumerator value of CH25 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH25_NotLinked (0x1UL) /*!< The channel 25 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH25_Linked (0x0UL) /*!< The channel 25 is linked as sink                               */
-
-/* CH26 @Bit 26 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH26_Pos (26UL) /*!< Position of CH26 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH26_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH26_Pos) /*!< Bit mask of CH26 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH26_Min (0x0UL) /*!< Min enumerator value of CH26 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH26_Max (0x1UL) /*!< Max enumerator value of CH26 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH26_NotLinked (0x1UL) /*!< The channel 26 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH26_Linked (0x0UL) /*!< The channel 26 is linked as sink                               */
-
-/* CH27 @Bit 27 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH27_Pos (27UL) /*!< Position of CH27 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH27_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH27_Pos) /*!< Bit mask of CH27 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH27_Min (0x0UL) /*!< Min enumerator value of CH27 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH27_Max (0x1UL) /*!< Max enumerator value of CH27 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH27_NotLinked (0x1UL) /*!< The channel 27 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH27_Linked (0x0UL) /*!< The channel 27 is linked as sink                               */
-
-/* CH28 @Bit 28 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH28_Pos (28UL) /*!< Position of CH28 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH28_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH28_Pos) /*!< Bit mask of CH28 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH28_Min (0x0UL) /*!< Min enumerator value of CH28 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH28_Max (0x1UL) /*!< Max enumerator value of CH28 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH28_NotLinked (0x1UL) /*!< The channel 28 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH28_Linked (0x0UL) /*!< The channel 28 is linked as sink                               */
-
-/* CH29 @Bit 29 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH29_Pos (29UL) /*!< Position of CH29 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH29_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH29_Pos) /*!< Bit mask of CH29 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH29_Min (0x0UL) /*!< Min enumerator value of CH29 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH29_Max (0x1UL) /*!< Max enumerator value of CH29 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH29_NotLinked (0x1UL) /*!< The channel 29 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH29_Linked (0x0UL) /*!< The channel 29 is linked as sink                               */
-
-/* CH30 @Bit 30 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH30_Pos (30UL) /*!< Position of CH30 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH30_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH30_Pos) /*!< Bit mask of CH30 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH30_Min (0x0UL) /*!< Min enumerator value of CH30 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH30_Max (0x1UL) /*!< Max enumerator value of CH30 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH30_NotLinked (0x1UL) /*!< The channel 30 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH30_Linked (0x0UL) /*!< The channel 30 is linked as sink                               */
-
-/* CH31 @Bit 31 : Link property */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH31_Pos (31UL) /*!< Position of CH31 field.                                            */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH31_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_SINK_CH31_Pos) /*!< Bit mask of CH31 field.  */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH31_Min (0x0UL) /*!< Min enumerator value of CH31 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH31_Max (0x1UL) /*!< Max enumerator value of CH31 field.                               */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH31_NotLinked (0x1UL) /*!< The channel 31 is not linked as sink                        */
-  #define UICR_DPPI_LOCAL_CH_LINK_SINK_CH31_Linked (0x0UL) /*!< The channel 31 is linked as sink                               */
+/* UICR_DPPI_LOCAL_CH_LINK_DIR: Request linking the channels of DPPI[n] in local domain as source or sink */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of DIR register.                              */
+
+/* CH0 @Bit 0 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH0_Pos (0UL)  /*!< Position of CH0 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH0_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH0_Pos) /*!< Bit mask of CH0 field.       */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH0_Min (0x0UL) /*!< Min enumerator value of CH0 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH0_Max (0x1UL) /*!< Max enumerator value of CH0 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH0_Source (0x1UL) /*!< The channel 0 is linked as source                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH0_Sink (0x0UL) /*!< The channel 0 is linked as sink                                    */
+
+/* CH1 @Bit 1 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH1_Pos (1UL)  /*!< Position of CH1 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH1_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH1_Pos) /*!< Bit mask of CH1 field.       */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH1_Min (0x0UL) /*!< Min enumerator value of CH1 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH1_Max (0x1UL) /*!< Max enumerator value of CH1 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH1_Source (0x1UL) /*!< The channel 1 is linked as source                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH1_Sink (0x0UL) /*!< The channel 1 is linked as sink                                    */
+
+/* CH2 @Bit 2 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH2_Pos (2UL)  /*!< Position of CH2 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH2_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH2_Pos) /*!< Bit mask of CH2 field.       */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH2_Min (0x0UL) /*!< Min enumerator value of CH2 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH2_Max (0x1UL) /*!< Max enumerator value of CH2 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH2_Source (0x1UL) /*!< The channel 2 is linked as source                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH2_Sink (0x0UL) /*!< The channel 2 is linked as sink                                    */
+
+/* CH3 @Bit 3 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH3_Pos (3UL)  /*!< Position of CH3 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH3_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH3_Pos) /*!< Bit mask of CH3 field.       */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH3_Min (0x0UL) /*!< Min enumerator value of CH3 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH3_Max (0x1UL) /*!< Max enumerator value of CH3 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH3_Source (0x1UL) /*!< The channel 3 is linked as source                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH3_Sink (0x0UL) /*!< The channel 3 is linked as sink                                    */
+
+/* CH4 @Bit 4 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH4_Pos (4UL)  /*!< Position of CH4 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH4_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH4_Pos) /*!< Bit mask of CH4 field.       */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH4_Min (0x0UL) /*!< Min enumerator value of CH4 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH4_Max (0x1UL) /*!< Max enumerator value of CH4 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH4_Source (0x1UL) /*!< The channel 4 is linked as source                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH4_Sink (0x0UL) /*!< The channel 4 is linked as sink                                    */
+
+/* CH5 @Bit 5 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH5_Pos (5UL)  /*!< Position of CH5 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH5_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH5_Pos) /*!< Bit mask of CH5 field.       */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH5_Min (0x0UL) /*!< Min enumerator value of CH5 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH5_Max (0x1UL) /*!< Max enumerator value of CH5 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH5_Source (0x1UL) /*!< The channel 5 is linked as source                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH5_Sink (0x0UL) /*!< The channel 5 is linked as sink                                    */
+
+/* CH6 @Bit 6 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH6_Pos (6UL)  /*!< Position of CH6 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH6_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH6_Pos) /*!< Bit mask of CH6 field.       */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH6_Min (0x0UL) /*!< Min enumerator value of CH6 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH6_Max (0x1UL) /*!< Max enumerator value of CH6 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH6_Source (0x1UL) /*!< The channel 6 is linked as source                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH6_Sink (0x0UL) /*!< The channel 6 is linked as sink                                    */
+
+/* CH7 @Bit 7 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH7_Pos (7UL)  /*!< Position of CH7 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH7_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH7_Pos) /*!< Bit mask of CH7 field.       */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH7_Min (0x0UL) /*!< Min enumerator value of CH7 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH7_Max (0x1UL) /*!< Max enumerator value of CH7 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH7_Source (0x1UL) /*!< The channel 7 is linked as source                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH7_Sink (0x0UL) /*!< The channel 7 is linked as sink                                    */
+
+/* CH8 @Bit 8 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH8_Pos (8UL)  /*!< Position of CH8 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH8_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH8_Pos) /*!< Bit mask of CH8 field.       */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH8_Min (0x0UL) /*!< Min enumerator value of CH8 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH8_Max (0x1UL) /*!< Max enumerator value of CH8 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH8_Source (0x1UL) /*!< The channel 8 is linked as source                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH8_Sink (0x0UL) /*!< The channel 8 is linked as sink                                    */
+
+/* CH9 @Bit 9 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH9_Pos (9UL)  /*!< Position of CH9 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH9_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH9_Pos) /*!< Bit mask of CH9 field.       */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH9_Min (0x0UL) /*!< Min enumerator value of CH9 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH9_Max (0x1UL) /*!< Max enumerator value of CH9 field.                                  */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH9_Source (0x1UL) /*!< The channel 9 is linked as source                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH9_Sink (0x0UL) /*!< The channel 9 is linked as sink                                    */
+
+/* CH10 @Bit 10 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH10_Pos (10UL) /*!< Position of CH10 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH10_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH10_Pos) /*!< Bit mask of CH10 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH10_Min (0x0UL) /*!< Min enumerator value of CH10 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH10_Max (0x1UL) /*!< Max enumerator value of CH10 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH10_Source (0x1UL) /*!< The channel 10 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH10_Sink (0x0UL) /*!< The channel 10 is linked as sink                                  */
+
+/* CH11 @Bit 11 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH11_Pos (11UL) /*!< Position of CH11 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH11_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH11_Pos) /*!< Bit mask of CH11 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH11_Min (0x0UL) /*!< Min enumerator value of CH11 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH11_Max (0x1UL) /*!< Max enumerator value of CH11 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH11_Source (0x1UL) /*!< The channel 11 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH11_Sink (0x0UL) /*!< The channel 11 is linked as sink                                  */
+
+/* CH12 @Bit 12 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH12_Pos (12UL) /*!< Position of CH12 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH12_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH12_Pos) /*!< Bit mask of CH12 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH12_Min (0x0UL) /*!< Min enumerator value of CH12 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH12_Max (0x1UL) /*!< Max enumerator value of CH12 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH12_Source (0x1UL) /*!< The channel 12 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH12_Sink (0x0UL) /*!< The channel 12 is linked as sink                                  */
+
+/* CH13 @Bit 13 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH13_Pos (13UL) /*!< Position of CH13 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH13_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH13_Pos) /*!< Bit mask of CH13 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH13_Min (0x0UL) /*!< Min enumerator value of CH13 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH13_Max (0x1UL) /*!< Max enumerator value of CH13 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH13_Source (0x1UL) /*!< The channel 13 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH13_Sink (0x0UL) /*!< The channel 13 is linked as sink                                  */
+
+/* CH14 @Bit 14 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH14_Pos (14UL) /*!< Position of CH14 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH14_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH14_Pos) /*!< Bit mask of CH14 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH14_Min (0x0UL) /*!< Min enumerator value of CH14 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH14_Max (0x1UL) /*!< Max enumerator value of CH14 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH14_Source (0x1UL) /*!< The channel 14 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH14_Sink (0x0UL) /*!< The channel 14 is linked as sink                                  */
+
+/* CH15 @Bit 15 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH15_Pos (15UL) /*!< Position of CH15 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH15_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH15_Pos) /*!< Bit mask of CH15 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH15_Min (0x0UL) /*!< Min enumerator value of CH15 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH15_Max (0x1UL) /*!< Max enumerator value of CH15 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH15_Source (0x1UL) /*!< The channel 15 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH15_Sink (0x0UL) /*!< The channel 15 is linked as sink                                  */
+
+/* CH16 @Bit 16 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH16_Pos (16UL) /*!< Position of CH16 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH16_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH16_Pos) /*!< Bit mask of CH16 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH16_Min (0x0UL) /*!< Min enumerator value of CH16 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH16_Max (0x1UL) /*!< Max enumerator value of CH16 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH16_Source (0x1UL) /*!< The channel 16 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH16_Sink (0x0UL) /*!< The channel 16 is linked as sink                                  */
+
+/* CH17 @Bit 17 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH17_Pos (17UL) /*!< Position of CH17 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH17_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH17_Pos) /*!< Bit mask of CH17 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH17_Min (0x0UL) /*!< Min enumerator value of CH17 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH17_Max (0x1UL) /*!< Max enumerator value of CH17 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH17_Source (0x1UL) /*!< The channel 17 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH17_Sink (0x0UL) /*!< The channel 17 is linked as sink                                  */
+
+/* CH18 @Bit 18 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH18_Pos (18UL) /*!< Position of CH18 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH18_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH18_Pos) /*!< Bit mask of CH18 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH18_Min (0x0UL) /*!< Min enumerator value of CH18 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH18_Max (0x1UL) /*!< Max enumerator value of CH18 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH18_Source (0x1UL) /*!< The channel 18 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH18_Sink (0x0UL) /*!< The channel 18 is linked as sink                                  */
+
+/* CH19 @Bit 19 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH19_Pos (19UL) /*!< Position of CH19 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH19_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH19_Pos) /*!< Bit mask of CH19 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH19_Min (0x0UL) /*!< Min enumerator value of CH19 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH19_Max (0x1UL) /*!< Max enumerator value of CH19 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH19_Source (0x1UL) /*!< The channel 19 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH19_Sink (0x0UL) /*!< The channel 19 is linked as sink                                  */
+
+/* CH20 @Bit 20 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH20_Pos (20UL) /*!< Position of CH20 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH20_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH20_Pos) /*!< Bit mask of CH20 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH20_Min (0x0UL) /*!< Min enumerator value of CH20 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH20_Max (0x1UL) /*!< Max enumerator value of CH20 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH20_Source (0x1UL) /*!< The channel 20 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH20_Sink (0x0UL) /*!< The channel 20 is linked as sink                                  */
+
+/* CH21 @Bit 21 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH21_Pos (21UL) /*!< Position of CH21 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH21_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH21_Pos) /*!< Bit mask of CH21 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH21_Min (0x0UL) /*!< Min enumerator value of CH21 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH21_Max (0x1UL) /*!< Max enumerator value of CH21 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH21_Source (0x1UL) /*!< The channel 21 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH21_Sink (0x0UL) /*!< The channel 21 is linked as sink                                  */
+
+/* CH22 @Bit 22 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH22_Pos (22UL) /*!< Position of CH22 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH22_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH22_Pos) /*!< Bit mask of CH22 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH22_Min (0x0UL) /*!< Min enumerator value of CH22 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH22_Max (0x1UL) /*!< Max enumerator value of CH22 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH22_Source (0x1UL) /*!< The channel 22 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH22_Sink (0x0UL) /*!< The channel 22 is linked as sink                                  */
+
+/* CH23 @Bit 23 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH23_Pos (23UL) /*!< Position of CH23 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH23_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH23_Pos) /*!< Bit mask of CH23 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH23_Min (0x0UL) /*!< Min enumerator value of CH23 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH23_Max (0x1UL) /*!< Max enumerator value of CH23 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH23_Source (0x1UL) /*!< The channel 23 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH23_Sink (0x0UL) /*!< The channel 23 is linked as sink                                  */
+
+/* CH24 @Bit 24 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH24_Pos (24UL) /*!< Position of CH24 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH24_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH24_Pos) /*!< Bit mask of CH24 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH24_Min (0x0UL) /*!< Min enumerator value of CH24 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH24_Max (0x1UL) /*!< Max enumerator value of CH24 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH24_Source (0x1UL) /*!< The channel 24 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH24_Sink (0x0UL) /*!< The channel 24 is linked as sink                                  */
+
+/* CH25 @Bit 25 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH25_Pos (25UL) /*!< Position of CH25 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH25_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH25_Pos) /*!< Bit mask of CH25 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH25_Min (0x0UL) /*!< Min enumerator value of CH25 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH25_Max (0x1UL) /*!< Max enumerator value of CH25 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH25_Source (0x1UL) /*!< The channel 25 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH25_Sink (0x0UL) /*!< The channel 25 is linked as sink                                  */
+
+/* CH26 @Bit 26 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH26_Pos (26UL) /*!< Position of CH26 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH26_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH26_Pos) /*!< Bit mask of CH26 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH26_Min (0x0UL) /*!< Min enumerator value of CH26 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH26_Max (0x1UL) /*!< Max enumerator value of CH26 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH26_Source (0x1UL) /*!< The channel 26 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH26_Sink (0x0UL) /*!< The channel 26 is linked as sink                                  */
+
+/* CH27 @Bit 27 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH27_Pos (27UL) /*!< Position of CH27 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH27_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH27_Pos) /*!< Bit mask of CH27 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH27_Min (0x0UL) /*!< Min enumerator value of CH27 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH27_Max (0x1UL) /*!< Max enumerator value of CH27 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH27_Source (0x1UL) /*!< The channel 27 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH27_Sink (0x0UL) /*!< The channel 27 is linked as sink                                  */
+
+/* CH28 @Bit 28 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH28_Pos (28UL) /*!< Position of CH28 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH28_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH28_Pos) /*!< Bit mask of CH28 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH28_Min (0x0UL) /*!< Min enumerator value of CH28 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH28_Max (0x1UL) /*!< Max enumerator value of CH28 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH28_Source (0x1UL) /*!< The channel 28 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH28_Sink (0x0UL) /*!< The channel 28 is linked as sink                                  */
+
+/* CH29 @Bit 29 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH29_Pos (29UL) /*!< Position of CH29 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH29_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH29_Pos) /*!< Bit mask of CH29 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH29_Min (0x0UL) /*!< Min enumerator value of CH29 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH29_Max (0x1UL) /*!< Max enumerator value of CH29 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH29_Source (0x1UL) /*!< The channel 29 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH29_Sink (0x0UL) /*!< The channel 29 is linked as sink                                  */
+
+/* CH30 @Bit 30 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH30_Pos (30UL) /*!< Position of CH30 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH30_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH30_Pos) /*!< Bit mask of CH30 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH30_Min (0x0UL) /*!< Min enumerator value of CH30 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH30_Max (0x1UL) /*!< Max enumerator value of CH30 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH30_Source (0x1UL) /*!< The channel 30 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH30_Sink (0x0UL) /*!< The channel 30 is linked as sink                                  */
+
+/* CH31 @Bit 31 : Link direction */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH31_Pos (31UL) /*!< Position of CH31 field.                                             */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH31_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_DIR_CH31_Pos) /*!< Bit mask of CH31 field.    */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH31_Min (0x0UL) /*!< Min enumerator value of CH31 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH31_Max (0x1UL) /*!< Max enumerator value of CH31 field.                                */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH31_Source (0x1UL) /*!< The channel 31 is linked as source                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_DIR_CH31_Sink (0x0UL) /*!< The channel 31 is linked as sink                                  */
+
+
+/* UICR_DPPI_LOCAL_CH_LINK_EN: Request linking of the channels of DPPI[n] in the local domain */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of EN register.                                */
+
+/* CH0 @Bit 0 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH0_Pos (0UL)   /*!< Position of CH0 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH0_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH0_Pos) /*!< Bit mask of CH0 field.         */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH0_Min (0x0UL) /*!< Min enumerator value of CH0 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH0_Max (0x1UL) /*!< Max enumerator value of CH0 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH0_Disabled (0x1UL) /*!< The channel 0 is disabled                                       */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH0_Enabled (0x0UL) /*!< The channel 0 is enabled                                         */
+
+/* CH1 @Bit 1 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH1_Pos (1UL)   /*!< Position of CH1 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH1_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH1_Pos) /*!< Bit mask of CH1 field.         */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH1_Min (0x0UL) /*!< Min enumerator value of CH1 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH1_Max (0x1UL) /*!< Max enumerator value of CH1 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH1_Disabled (0x1UL) /*!< The channel 1 is disabled                                       */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH1_Enabled (0x0UL) /*!< The channel 1 is enabled                                         */
+
+/* CH2 @Bit 2 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH2_Pos (2UL)   /*!< Position of CH2 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH2_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH2_Pos) /*!< Bit mask of CH2 field.         */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH2_Min (0x0UL) /*!< Min enumerator value of CH2 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH2_Max (0x1UL) /*!< Max enumerator value of CH2 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH2_Disabled (0x1UL) /*!< The channel 2 is disabled                                       */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH2_Enabled (0x0UL) /*!< The channel 2 is enabled                                         */
+
+/* CH3 @Bit 3 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH3_Pos (3UL)   /*!< Position of CH3 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH3_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH3_Pos) /*!< Bit mask of CH3 field.         */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH3_Min (0x0UL) /*!< Min enumerator value of CH3 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH3_Max (0x1UL) /*!< Max enumerator value of CH3 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH3_Disabled (0x1UL) /*!< The channel 3 is disabled                                       */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH3_Enabled (0x0UL) /*!< The channel 3 is enabled                                         */
+
+/* CH4 @Bit 4 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH4_Pos (4UL)   /*!< Position of CH4 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH4_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH4_Pos) /*!< Bit mask of CH4 field.         */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH4_Min (0x0UL) /*!< Min enumerator value of CH4 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH4_Max (0x1UL) /*!< Max enumerator value of CH4 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH4_Disabled (0x1UL) /*!< The channel 4 is disabled                                       */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH4_Enabled (0x0UL) /*!< The channel 4 is enabled                                         */
+
+/* CH5 @Bit 5 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH5_Pos (5UL)   /*!< Position of CH5 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH5_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH5_Pos) /*!< Bit mask of CH5 field.         */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH5_Min (0x0UL) /*!< Min enumerator value of CH5 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH5_Max (0x1UL) /*!< Max enumerator value of CH5 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH5_Disabled (0x1UL) /*!< The channel 5 is disabled                                       */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH5_Enabled (0x0UL) /*!< The channel 5 is enabled                                         */
+
+/* CH6 @Bit 6 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH6_Pos (6UL)   /*!< Position of CH6 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH6_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH6_Pos) /*!< Bit mask of CH6 field.         */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH6_Min (0x0UL) /*!< Min enumerator value of CH6 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH6_Max (0x1UL) /*!< Max enumerator value of CH6 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH6_Disabled (0x1UL) /*!< The channel 6 is disabled                                       */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH6_Enabled (0x0UL) /*!< The channel 6 is enabled                                         */
+
+/* CH7 @Bit 7 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH7_Pos (7UL)   /*!< Position of CH7 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH7_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH7_Pos) /*!< Bit mask of CH7 field.         */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH7_Min (0x0UL) /*!< Min enumerator value of CH7 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH7_Max (0x1UL) /*!< Max enumerator value of CH7 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH7_Disabled (0x1UL) /*!< The channel 7 is disabled                                       */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH7_Enabled (0x0UL) /*!< The channel 7 is enabled                                         */
+
+/* CH8 @Bit 8 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH8_Pos (8UL)   /*!< Position of CH8 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH8_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH8_Pos) /*!< Bit mask of CH8 field.         */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH8_Min (0x0UL) /*!< Min enumerator value of CH8 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH8_Max (0x1UL) /*!< Max enumerator value of CH8 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH8_Disabled (0x1UL) /*!< The channel 8 is disabled                                       */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH8_Enabled (0x0UL) /*!< The channel 8 is enabled                                         */
+
+/* CH9 @Bit 9 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH9_Pos (9UL)   /*!< Position of CH9 field.                                               */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH9_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH9_Pos) /*!< Bit mask of CH9 field.         */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH9_Min (0x0UL) /*!< Min enumerator value of CH9 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH9_Max (0x1UL) /*!< Max enumerator value of CH9 field.                                   */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH9_Disabled (0x1UL) /*!< The channel 9 is disabled                                       */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH9_Enabled (0x0UL) /*!< The channel 9 is enabled                                         */
+
+/* CH10 @Bit 10 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH10_Pos (10UL) /*!< Position of CH10 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH10_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH10_Pos) /*!< Bit mask of CH10 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH10_Min (0x0UL) /*!< Min enumerator value of CH10 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH10_Max (0x1UL) /*!< Max enumerator value of CH10 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH10_Disabled (0x1UL) /*!< The channel 10 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH10_Enabled (0x0UL) /*!< The channel 10 is enabled                                       */
+
+/* CH11 @Bit 11 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH11_Pos (11UL) /*!< Position of CH11 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH11_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH11_Pos) /*!< Bit mask of CH11 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH11_Min (0x0UL) /*!< Min enumerator value of CH11 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH11_Max (0x1UL) /*!< Max enumerator value of CH11 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH11_Disabled (0x1UL) /*!< The channel 11 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH11_Enabled (0x0UL) /*!< The channel 11 is enabled                                       */
+
+/* CH12 @Bit 12 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH12_Pos (12UL) /*!< Position of CH12 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH12_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH12_Pos) /*!< Bit mask of CH12 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH12_Min (0x0UL) /*!< Min enumerator value of CH12 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH12_Max (0x1UL) /*!< Max enumerator value of CH12 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH12_Disabled (0x1UL) /*!< The channel 12 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH12_Enabled (0x0UL) /*!< The channel 12 is enabled                                       */
+
+/* CH13 @Bit 13 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH13_Pos (13UL) /*!< Position of CH13 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH13_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH13_Pos) /*!< Bit mask of CH13 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH13_Min (0x0UL) /*!< Min enumerator value of CH13 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH13_Max (0x1UL) /*!< Max enumerator value of CH13 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH13_Disabled (0x1UL) /*!< The channel 13 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH13_Enabled (0x0UL) /*!< The channel 13 is enabled                                       */
+
+/* CH14 @Bit 14 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH14_Pos (14UL) /*!< Position of CH14 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH14_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH14_Pos) /*!< Bit mask of CH14 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH14_Min (0x0UL) /*!< Min enumerator value of CH14 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH14_Max (0x1UL) /*!< Max enumerator value of CH14 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH14_Disabled (0x1UL) /*!< The channel 14 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH14_Enabled (0x0UL) /*!< The channel 14 is enabled                                       */
+
+/* CH15 @Bit 15 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH15_Pos (15UL) /*!< Position of CH15 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH15_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH15_Pos) /*!< Bit mask of CH15 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH15_Min (0x0UL) /*!< Min enumerator value of CH15 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH15_Max (0x1UL) /*!< Max enumerator value of CH15 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH15_Disabled (0x1UL) /*!< The channel 15 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH15_Enabled (0x0UL) /*!< The channel 15 is enabled                                       */
+
+/* CH16 @Bit 16 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH16_Pos (16UL) /*!< Position of CH16 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH16_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH16_Pos) /*!< Bit mask of CH16 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH16_Min (0x0UL) /*!< Min enumerator value of CH16 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH16_Max (0x1UL) /*!< Max enumerator value of CH16 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH16_Disabled (0x1UL) /*!< The channel 16 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH16_Enabled (0x0UL) /*!< The channel 16 is enabled                                       */
+
+/* CH17 @Bit 17 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH17_Pos (17UL) /*!< Position of CH17 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH17_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH17_Pos) /*!< Bit mask of CH17 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH17_Min (0x0UL) /*!< Min enumerator value of CH17 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH17_Max (0x1UL) /*!< Max enumerator value of CH17 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH17_Disabled (0x1UL) /*!< The channel 17 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH17_Enabled (0x0UL) /*!< The channel 17 is enabled                                       */
+
+/* CH18 @Bit 18 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH18_Pos (18UL) /*!< Position of CH18 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH18_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH18_Pos) /*!< Bit mask of CH18 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH18_Min (0x0UL) /*!< Min enumerator value of CH18 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH18_Max (0x1UL) /*!< Max enumerator value of CH18 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH18_Disabled (0x1UL) /*!< The channel 18 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH18_Enabled (0x0UL) /*!< The channel 18 is enabled                                       */
+
+/* CH19 @Bit 19 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH19_Pos (19UL) /*!< Position of CH19 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH19_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH19_Pos) /*!< Bit mask of CH19 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH19_Min (0x0UL) /*!< Min enumerator value of CH19 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH19_Max (0x1UL) /*!< Max enumerator value of CH19 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH19_Disabled (0x1UL) /*!< The channel 19 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH19_Enabled (0x0UL) /*!< The channel 19 is enabled                                       */
+
+/* CH20 @Bit 20 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH20_Pos (20UL) /*!< Position of CH20 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH20_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH20_Pos) /*!< Bit mask of CH20 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH20_Min (0x0UL) /*!< Min enumerator value of CH20 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH20_Max (0x1UL) /*!< Max enumerator value of CH20 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH20_Disabled (0x1UL) /*!< The channel 20 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH20_Enabled (0x0UL) /*!< The channel 20 is enabled                                       */
+
+/* CH21 @Bit 21 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH21_Pos (21UL) /*!< Position of CH21 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH21_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH21_Pos) /*!< Bit mask of CH21 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH21_Min (0x0UL) /*!< Min enumerator value of CH21 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH21_Max (0x1UL) /*!< Max enumerator value of CH21 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH21_Disabled (0x1UL) /*!< The channel 21 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH21_Enabled (0x0UL) /*!< The channel 21 is enabled                                       */
+
+/* CH22 @Bit 22 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH22_Pos (22UL) /*!< Position of CH22 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH22_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH22_Pos) /*!< Bit mask of CH22 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH22_Min (0x0UL) /*!< Min enumerator value of CH22 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH22_Max (0x1UL) /*!< Max enumerator value of CH22 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH22_Disabled (0x1UL) /*!< The channel 22 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH22_Enabled (0x0UL) /*!< The channel 22 is enabled                                       */
+
+/* CH23 @Bit 23 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH23_Pos (23UL) /*!< Position of CH23 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH23_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH23_Pos) /*!< Bit mask of CH23 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH23_Min (0x0UL) /*!< Min enumerator value of CH23 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH23_Max (0x1UL) /*!< Max enumerator value of CH23 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH23_Disabled (0x1UL) /*!< The channel 23 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH23_Enabled (0x0UL) /*!< The channel 23 is enabled                                       */
+
+/* CH24 @Bit 24 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH24_Pos (24UL) /*!< Position of CH24 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH24_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH24_Pos) /*!< Bit mask of CH24 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH24_Min (0x0UL) /*!< Min enumerator value of CH24 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH24_Max (0x1UL) /*!< Max enumerator value of CH24 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH24_Disabled (0x1UL) /*!< The channel 24 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH24_Enabled (0x0UL) /*!< The channel 24 is enabled                                       */
+
+/* CH25 @Bit 25 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH25_Pos (25UL) /*!< Position of CH25 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH25_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH25_Pos) /*!< Bit mask of CH25 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH25_Min (0x0UL) /*!< Min enumerator value of CH25 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH25_Max (0x1UL) /*!< Max enumerator value of CH25 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH25_Disabled (0x1UL) /*!< The channel 25 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH25_Enabled (0x0UL) /*!< The channel 25 is enabled                                       */
+
+/* CH26 @Bit 26 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH26_Pos (26UL) /*!< Position of CH26 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH26_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH26_Pos) /*!< Bit mask of CH26 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH26_Min (0x0UL) /*!< Min enumerator value of CH26 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH26_Max (0x1UL) /*!< Max enumerator value of CH26 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH26_Disabled (0x1UL) /*!< The channel 26 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH26_Enabled (0x0UL) /*!< The channel 26 is enabled                                       */
+
+/* CH27 @Bit 27 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH27_Pos (27UL) /*!< Position of CH27 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH27_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH27_Pos) /*!< Bit mask of CH27 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH27_Min (0x0UL) /*!< Min enumerator value of CH27 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH27_Max (0x1UL) /*!< Max enumerator value of CH27 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH27_Disabled (0x1UL) /*!< The channel 27 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH27_Enabled (0x0UL) /*!< The channel 27 is enabled                                       */
+
+/* CH28 @Bit 28 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH28_Pos (28UL) /*!< Position of CH28 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH28_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH28_Pos) /*!< Bit mask of CH28 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH28_Min (0x0UL) /*!< Min enumerator value of CH28 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH28_Max (0x1UL) /*!< Max enumerator value of CH28 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH28_Disabled (0x1UL) /*!< The channel 28 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH28_Enabled (0x0UL) /*!< The channel 28 is enabled                                       */
+
+/* CH29 @Bit 29 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH29_Pos (29UL) /*!< Position of CH29 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH29_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH29_Pos) /*!< Bit mask of CH29 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH29_Min (0x0UL) /*!< Min enumerator value of CH29 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH29_Max (0x1UL) /*!< Max enumerator value of CH29 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH29_Disabled (0x1UL) /*!< The channel 29 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH29_Enabled (0x0UL) /*!< The channel 29 is enabled                                       */
+
+/* CH30 @Bit 30 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH30_Pos (30UL) /*!< Position of CH30 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH30_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH30_Pos) /*!< Bit mask of CH30 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH30_Min (0x0UL) /*!< Min enumerator value of CH30 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH30_Max (0x1UL) /*!< Max enumerator value of CH30 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH30_Disabled (0x1UL) /*!< The channel 30 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH30_Enabled (0x0UL) /*!< The channel 30 is enabled                                       */
+
+/* CH31 @Bit 31 : Link enable */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH31_Pos (31UL) /*!< Position of CH31 field.                                              */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH31_Msk (0x1UL << UICR_DPPI_LOCAL_CH_LINK_EN_CH31_Pos) /*!< Bit mask of CH31 field.      */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH31_Min (0x0UL) /*!< Min enumerator value of CH31 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH31_Max (0x1UL) /*!< Max enumerator value of CH31 field.                                 */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH31_Disabled (0x1UL) /*!< The channel 31 is disabled                                     */
+  #define UICR_DPPI_LOCAL_CH_LINK_EN_CH31_Enabled (0x0UL) /*!< The channel 31 is enabled                                       */
 
 
 
@@ -141325,12 +141466,23 @@ typedef struct {
   * @brief LOCAL [UICR_DPPI_LOCAL] (unspecified)
   */
 typedef struct {
-  __IOM NRF_UICR_DPPI_LOCAL_CH_Type CH;              /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_UICR_DPPI_LOCAL_CHG_Type CHG;            /*!< (@ 0x0000000C) (unspecified)                                         */
-} NRF_UICR_DPPI_LOCAL_Type;                          /*!< Size = 16 (0x010)                                                    */
+  __IOM uint32_t  INSTANCE;                          /*!< (@ 0x00000000) Address of the DPPI instance associated with
+                                                                         DPPI[n].LOCAL*/
+  __IOM NRF_UICR_DPPI_LOCAL_CH_Type CH;              /*!< (@ 0x00000004) (unspecified)                                         */
+  __IOM NRF_UICR_DPPI_LOCAL_CHG_Type CHG;            /*!< (@ 0x00000010) (unspecified)                                         */
+} NRF_UICR_DPPI_LOCAL_Type;                          /*!< Size = 20 (0x014)                                                    */
   #define UICR_DPPI_LOCAL_MaxCount (2UL)             /*!< Size of LOCAL[2] array.                                              */
   #define UICR_DPPI_LOCAL_MaxIndex (1UL)             /*!< Max index of LOCAL[2] array.                                         */
   #define UICR_DPPI_LOCAL_MinIndex (0UL)             /*!< Min index of LOCAL[2] array.                                         */
+
+/* UICR_DPPI_LOCAL_INSTANCE: Address of the DPPI instance associated with DPPI[n].LOCAL */
+  #define UICR_DPPI_LOCAL_INSTANCE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of INSTANCE register.                            */
+
+/* ADDRESS @Bits 0..31 : Instance address */
+  #define UICR_DPPI_LOCAL_INSTANCE_ADDRESS_Pos (0UL) /*!< Position of ADDRESS field.                                           */
+  #define UICR_DPPI_LOCAL_INSTANCE_ADDRESS_Msk (0xFFFFFFFFUL << UICR_DPPI_LOCAL_INSTANCE_ADDRESS_Pos) /*!< Bit mask of ADDRESS
+                                                                            field.*/
+
 
 
 /* ============================================= Struct UICR_DPPI_GLOBAL_CH_LINK ============================================= */
@@ -141338,568 +141490,530 @@ typedef struct {
   * @brief LINK [UICR_DPPI_GLOBAL_CH_LINK] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  SOURCE;                            /*!< (@ 0x00000000) Request linking the channels of DPPI[n] in Global
-                                                                         domain as source Source channels send PPI events to the
-                                                                         other side of the link*/
-  __IOM uint32_t  SINK;                              /*!< (@ 0x00000004) Request linking the channels of DPPI[n] in Global
-                                                                         domain as sink Sink channels receive PPI events from
-                                                                         the other side of the link*/
+  __IOM uint32_t  DIR;                               /*!< (@ 0x00000000) Request linking the channels of DPPI[n] in Global
+                                                                         domain as source or sink*/
+  __IOM uint32_t  EN;                                /*!< (@ 0x00000004) Request linking of the channels of DPPI[n] in the
+                                                                         Global domain*/
 } NRF_UICR_DPPI_GLOBAL_CH_LINK_Type;                 /*!< Size = 8 (0x008)                                                     */
 
-/* UICR_DPPI_GLOBAL_CH_LINK_SOURCE: Request linking the channels of DPPI[n] in Global domain as source Source channels send PPI
-                                     events to the other side of the link */
-
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of SOURCE register.                       */
-
-/* CH0 @Bit 0 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH0_Pos (0UL) /*!< Position of CH0 field.                                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH0_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH0_Pos) /*!< Bit mask of CH0
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH0_Min (0x0UL) /*!< Min enumerator value of CH0 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH0_Max (0x1UL) /*!< Max enumerator value of CH0 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH0_NotLinked (0x1UL) /*!< The channel 0 is not linked as source                     */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH0_Linked (0x0UL) /*!< The channel 0 is linked as source                            */
-
-/* CH1 @Bit 1 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH1_Pos (1UL) /*!< Position of CH1 field.                                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH1_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH1_Pos) /*!< Bit mask of CH1
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH1_Min (0x0UL) /*!< Min enumerator value of CH1 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH1_Max (0x1UL) /*!< Max enumerator value of CH1 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH1_NotLinked (0x1UL) /*!< The channel 1 is not linked as source                     */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH1_Linked (0x0UL) /*!< The channel 1 is linked as source                            */
-
-/* CH2 @Bit 2 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH2_Pos (2UL) /*!< Position of CH2 field.                                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH2_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH2_Pos) /*!< Bit mask of CH2
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH2_Min (0x0UL) /*!< Min enumerator value of CH2 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH2_Max (0x1UL) /*!< Max enumerator value of CH2 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH2_NotLinked (0x1UL) /*!< The channel 2 is not linked as source                     */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH2_Linked (0x0UL) /*!< The channel 2 is linked as source                            */
-
-/* CH3 @Bit 3 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH3_Pos (3UL) /*!< Position of CH3 field.                                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH3_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH3_Pos) /*!< Bit mask of CH3
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH3_Min (0x0UL) /*!< Min enumerator value of CH3 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH3_Max (0x1UL) /*!< Max enumerator value of CH3 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH3_NotLinked (0x1UL) /*!< The channel 3 is not linked as source                     */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH3_Linked (0x0UL) /*!< The channel 3 is linked as source                            */
-
-/* CH4 @Bit 4 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH4_Pos (4UL) /*!< Position of CH4 field.                                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH4_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH4_Pos) /*!< Bit mask of CH4
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH4_Min (0x0UL) /*!< Min enumerator value of CH4 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH4_Max (0x1UL) /*!< Max enumerator value of CH4 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH4_NotLinked (0x1UL) /*!< The channel 4 is not linked as source                     */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH4_Linked (0x0UL) /*!< The channel 4 is linked as source                            */
-
-/* CH5 @Bit 5 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH5_Pos (5UL) /*!< Position of CH5 field.                                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH5_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH5_Pos) /*!< Bit mask of CH5
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH5_Min (0x0UL) /*!< Min enumerator value of CH5 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH5_Max (0x1UL) /*!< Max enumerator value of CH5 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH5_NotLinked (0x1UL) /*!< The channel 5 is not linked as source                     */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH5_Linked (0x0UL) /*!< The channel 5 is linked as source                            */
-
-/* CH6 @Bit 6 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH6_Pos (6UL) /*!< Position of CH6 field.                                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH6_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH6_Pos) /*!< Bit mask of CH6
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH6_Min (0x0UL) /*!< Min enumerator value of CH6 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH6_Max (0x1UL) /*!< Max enumerator value of CH6 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH6_NotLinked (0x1UL) /*!< The channel 6 is not linked as source                     */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH6_Linked (0x0UL) /*!< The channel 6 is linked as source                            */
-
-/* CH7 @Bit 7 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH7_Pos (7UL) /*!< Position of CH7 field.                                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH7_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH7_Pos) /*!< Bit mask of CH7
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH7_Min (0x0UL) /*!< Min enumerator value of CH7 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH7_Max (0x1UL) /*!< Max enumerator value of CH7 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH7_NotLinked (0x1UL) /*!< The channel 7 is not linked as source                     */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH7_Linked (0x0UL) /*!< The channel 7 is linked as source                            */
-
-/* CH8 @Bit 8 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH8_Pos (8UL) /*!< Position of CH8 field.                                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH8_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH8_Pos) /*!< Bit mask of CH8
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH8_Min (0x0UL) /*!< Min enumerator value of CH8 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH8_Max (0x1UL) /*!< Max enumerator value of CH8 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH8_NotLinked (0x1UL) /*!< The channel 8 is not linked as source                     */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH8_Linked (0x0UL) /*!< The channel 8 is linked as source                            */
-
-/* CH9 @Bit 9 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH9_Pos (9UL) /*!< Position of CH9 field.                                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH9_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH9_Pos) /*!< Bit mask of CH9
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH9_Min (0x0UL) /*!< Min enumerator value of CH9 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH9_Max (0x1UL) /*!< Max enumerator value of CH9 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH9_NotLinked (0x1UL) /*!< The channel 9 is not linked as source                     */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH9_Linked (0x0UL) /*!< The channel 9 is linked as source                            */
-
-/* CH10 @Bit 10 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH10_Pos (10UL) /*!< Position of CH10 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH10_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH10_Pos) /*!< Bit mask of CH10
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH10_Min (0x0UL) /*!< Min enumerator value of CH10 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH10_Max (0x1UL) /*!< Max enumerator value of CH10 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH10_NotLinked (0x1UL) /*!< The channel 10 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH10_Linked (0x0UL) /*!< The channel 10 is linked as source                          */
-
-/* CH11 @Bit 11 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH11_Pos (11UL) /*!< Position of CH11 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH11_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH11_Pos) /*!< Bit mask of CH11
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH11_Min (0x0UL) /*!< Min enumerator value of CH11 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH11_Max (0x1UL) /*!< Max enumerator value of CH11 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH11_NotLinked (0x1UL) /*!< The channel 11 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH11_Linked (0x0UL) /*!< The channel 11 is linked as source                          */
-
-/* CH12 @Bit 12 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH12_Pos (12UL) /*!< Position of CH12 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH12_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH12_Pos) /*!< Bit mask of CH12
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH12_Min (0x0UL) /*!< Min enumerator value of CH12 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH12_Max (0x1UL) /*!< Max enumerator value of CH12 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH12_NotLinked (0x1UL) /*!< The channel 12 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH12_Linked (0x0UL) /*!< The channel 12 is linked as source                          */
-
-/* CH13 @Bit 13 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH13_Pos (13UL) /*!< Position of CH13 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH13_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH13_Pos) /*!< Bit mask of CH13
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH13_Min (0x0UL) /*!< Min enumerator value of CH13 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH13_Max (0x1UL) /*!< Max enumerator value of CH13 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH13_NotLinked (0x1UL) /*!< The channel 13 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH13_Linked (0x0UL) /*!< The channel 13 is linked as source                          */
-
-/* CH14 @Bit 14 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH14_Pos (14UL) /*!< Position of CH14 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH14_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH14_Pos) /*!< Bit mask of CH14
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH14_Min (0x0UL) /*!< Min enumerator value of CH14 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH14_Max (0x1UL) /*!< Max enumerator value of CH14 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH14_NotLinked (0x1UL) /*!< The channel 14 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH14_Linked (0x0UL) /*!< The channel 14 is linked as source                          */
-
-/* CH15 @Bit 15 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH15_Pos (15UL) /*!< Position of CH15 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH15_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH15_Pos) /*!< Bit mask of CH15
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH15_Min (0x0UL) /*!< Min enumerator value of CH15 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH15_Max (0x1UL) /*!< Max enumerator value of CH15 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH15_NotLinked (0x1UL) /*!< The channel 15 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH15_Linked (0x0UL) /*!< The channel 15 is linked as source                          */
-
-/* CH16 @Bit 16 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH16_Pos (16UL) /*!< Position of CH16 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH16_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH16_Pos) /*!< Bit mask of CH16
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH16_Min (0x0UL) /*!< Min enumerator value of CH16 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH16_Max (0x1UL) /*!< Max enumerator value of CH16 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH16_NotLinked (0x1UL) /*!< The channel 16 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH16_Linked (0x0UL) /*!< The channel 16 is linked as source                          */
-
-/* CH17 @Bit 17 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH17_Pos (17UL) /*!< Position of CH17 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH17_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH17_Pos) /*!< Bit mask of CH17
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH17_Min (0x0UL) /*!< Min enumerator value of CH17 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH17_Max (0x1UL) /*!< Max enumerator value of CH17 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH17_NotLinked (0x1UL) /*!< The channel 17 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH17_Linked (0x0UL) /*!< The channel 17 is linked as source                          */
-
-/* CH18 @Bit 18 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH18_Pos (18UL) /*!< Position of CH18 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH18_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH18_Pos) /*!< Bit mask of CH18
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH18_Min (0x0UL) /*!< Min enumerator value of CH18 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH18_Max (0x1UL) /*!< Max enumerator value of CH18 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH18_NotLinked (0x1UL) /*!< The channel 18 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH18_Linked (0x0UL) /*!< The channel 18 is linked as source                          */
-
-/* CH19 @Bit 19 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH19_Pos (19UL) /*!< Position of CH19 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH19_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH19_Pos) /*!< Bit mask of CH19
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH19_Min (0x0UL) /*!< Min enumerator value of CH19 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH19_Max (0x1UL) /*!< Max enumerator value of CH19 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH19_NotLinked (0x1UL) /*!< The channel 19 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH19_Linked (0x0UL) /*!< The channel 19 is linked as source                          */
-
-/* CH20 @Bit 20 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH20_Pos (20UL) /*!< Position of CH20 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH20_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH20_Pos) /*!< Bit mask of CH20
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH20_Min (0x0UL) /*!< Min enumerator value of CH20 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH20_Max (0x1UL) /*!< Max enumerator value of CH20 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH20_NotLinked (0x1UL) /*!< The channel 20 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH20_Linked (0x0UL) /*!< The channel 20 is linked as source                          */
-
-/* CH21 @Bit 21 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH21_Pos (21UL) /*!< Position of CH21 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH21_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH21_Pos) /*!< Bit mask of CH21
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH21_Min (0x0UL) /*!< Min enumerator value of CH21 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH21_Max (0x1UL) /*!< Max enumerator value of CH21 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH21_NotLinked (0x1UL) /*!< The channel 21 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH21_Linked (0x0UL) /*!< The channel 21 is linked as source                          */
-
-/* CH22 @Bit 22 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH22_Pos (22UL) /*!< Position of CH22 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH22_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH22_Pos) /*!< Bit mask of CH22
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH22_Min (0x0UL) /*!< Min enumerator value of CH22 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH22_Max (0x1UL) /*!< Max enumerator value of CH22 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH22_NotLinked (0x1UL) /*!< The channel 22 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH22_Linked (0x0UL) /*!< The channel 22 is linked as source                          */
-
-/* CH23 @Bit 23 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH23_Pos (23UL) /*!< Position of CH23 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH23_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH23_Pos) /*!< Bit mask of CH23
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH23_Min (0x0UL) /*!< Min enumerator value of CH23 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH23_Max (0x1UL) /*!< Max enumerator value of CH23 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH23_NotLinked (0x1UL) /*!< The channel 23 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH23_Linked (0x0UL) /*!< The channel 23 is linked as source                          */
-
-/* CH24 @Bit 24 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH24_Pos (24UL) /*!< Position of CH24 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH24_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH24_Pos) /*!< Bit mask of CH24
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH24_Min (0x0UL) /*!< Min enumerator value of CH24 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH24_Max (0x1UL) /*!< Max enumerator value of CH24 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH24_NotLinked (0x1UL) /*!< The channel 24 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH24_Linked (0x0UL) /*!< The channel 24 is linked as source                          */
-
-/* CH25 @Bit 25 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH25_Pos (25UL) /*!< Position of CH25 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH25_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH25_Pos) /*!< Bit mask of CH25
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH25_Min (0x0UL) /*!< Min enumerator value of CH25 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH25_Max (0x1UL) /*!< Max enumerator value of CH25 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH25_NotLinked (0x1UL) /*!< The channel 25 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH25_Linked (0x0UL) /*!< The channel 25 is linked as source                          */
-
-/* CH26 @Bit 26 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH26_Pos (26UL) /*!< Position of CH26 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH26_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH26_Pos) /*!< Bit mask of CH26
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH26_Min (0x0UL) /*!< Min enumerator value of CH26 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH26_Max (0x1UL) /*!< Max enumerator value of CH26 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH26_NotLinked (0x1UL) /*!< The channel 26 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH26_Linked (0x0UL) /*!< The channel 26 is linked as source                          */
-
-/* CH27 @Bit 27 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH27_Pos (27UL) /*!< Position of CH27 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH27_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH27_Pos) /*!< Bit mask of CH27
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH27_Min (0x0UL) /*!< Min enumerator value of CH27 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH27_Max (0x1UL) /*!< Max enumerator value of CH27 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH27_NotLinked (0x1UL) /*!< The channel 27 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH27_Linked (0x0UL) /*!< The channel 27 is linked as source                          */
-
-/* CH28 @Bit 28 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH28_Pos (28UL) /*!< Position of CH28 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH28_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH28_Pos) /*!< Bit mask of CH28
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH28_Min (0x0UL) /*!< Min enumerator value of CH28 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH28_Max (0x1UL) /*!< Max enumerator value of CH28 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH28_NotLinked (0x1UL) /*!< The channel 28 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH28_Linked (0x0UL) /*!< The channel 28 is linked as source                          */
-
-/* CH29 @Bit 29 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH29_Pos (29UL) /*!< Position of CH29 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH29_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH29_Pos) /*!< Bit mask of CH29
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH29_Min (0x0UL) /*!< Min enumerator value of CH29 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH29_Max (0x1UL) /*!< Max enumerator value of CH29 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH29_NotLinked (0x1UL) /*!< The channel 29 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH29_Linked (0x0UL) /*!< The channel 29 is linked as source                          */
-
-/* CH30 @Bit 30 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH30_Pos (30UL) /*!< Position of CH30 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH30_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH30_Pos) /*!< Bit mask of CH30
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH30_Min (0x0UL) /*!< Min enumerator value of CH30 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH30_Max (0x1UL) /*!< Max enumerator value of CH30 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH30_NotLinked (0x1UL) /*!< The channel 30 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH30_Linked (0x0UL) /*!< The channel 30 is linked as source                          */
-
-/* CH31 @Bit 31 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH31_Pos (31UL) /*!< Position of CH31 field.                                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH31_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH31_Pos) /*!< Bit mask of CH31
-                                                                            field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH31_Min (0x0UL) /*!< Min enumerator value of CH31 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH31_Max (0x1UL) /*!< Max enumerator value of CH31 field.                            */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH31_NotLinked (0x1UL) /*!< The channel 31 is not linked as source                   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SOURCE_CH31_Linked (0x0UL) /*!< The channel 31 is linked as source                          */
-
-
-/* UICR_DPPI_GLOBAL_CH_LINK_SINK: Request linking the channels of DPPI[n] in Global domain as sink Sink channels receive PPI
-                                   events from the other side of the link */
-
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_ResetValue (0xFFFFFFFFUL) /*!< Reset value of SINK register.                           */
-
-/* CH0 @Bit 0 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH0_Pos (0UL) /*!< Position of CH0 field.                                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH0_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH0_Pos) /*!< Bit mask of CH0 field.   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH0_Min (0x0UL) /*!< Min enumerator value of CH0 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH0_Max (0x1UL) /*!< Max enumerator value of CH0 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH0_NotLinked (0x1UL) /*!< The channel 0 is not linked as sink                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH0_Linked (0x0UL) /*!< The channel 0 is linked as sink                                */
-
-/* CH1 @Bit 1 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH1_Pos (1UL) /*!< Position of CH1 field.                                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH1_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH1_Pos) /*!< Bit mask of CH1 field.   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH1_Min (0x0UL) /*!< Min enumerator value of CH1 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH1_Max (0x1UL) /*!< Max enumerator value of CH1 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH1_NotLinked (0x1UL) /*!< The channel 1 is not linked as sink                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH1_Linked (0x0UL) /*!< The channel 1 is linked as sink                                */
-
-/* CH2 @Bit 2 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH2_Pos (2UL) /*!< Position of CH2 field.                                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH2_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH2_Pos) /*!< Bit mask of CH2 field.   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH2_Min (0x0UL) /*!< Min enumerator value of CH2 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH2_Max (0x1UL) /*!< Max enumerator value of CH2 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH2_NotLinked (0x1UL) /*!< The channel 2 is not linked as sink                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH2_Linked (0x0UL) /*!< The channel 2 is linked as sink                                */
-
-/* CH3 @Bit 3 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH3_Pos (3UL) /*!< Position of CH3 field.                                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH3_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH3_Pos) /*!< Bit mask of CH3 field.   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH3_Min (0x0UL) /*!< Min enumerator value of CH3 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH3_Max (0x1UL) /*!< Max enumerator value of CH3 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH3_NotLinked (0x1UL) /*!< The channel 3 is not linked as sink                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH3_Linked (0x0UL) /*!< The channel 3 is linked as sink                                */
-
-/* CH4 @Bit 4 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH4_Pos (4UL) /*!< Position of CH4 field.                                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH4_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH4_Pos) /*!< Bit mask of CH4 field.   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH4_Min (0x0UL) /*!< Min enumerator value of CH4 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH4_Max (0x1UL) /*!< Max enumerator value of CH4 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH4_NotLinked (0x1UL) /*!< The channel 4 is not linked as sink                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH4_Linked (0x0UL) /*!< The channel 4 is linked as sink                                */
-
-/* CH5 @Bit 5 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH5_Pos (5UL) /*!< Position of CH5 field.                                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH5_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH5_Pos) /*!< Bit mask of CH5 field.   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH5_Min (0x0UL) /*!< Min enumerator value of CH5 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH5_Max (0x1UL) /*!< Max enumerator value of CH5 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH5_NotLinked (0x1UL) /*!< The channel 5 is not linked as sink                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH5_Linked (0x0UL) /*!< The channel 5 is linked as sink                                */
-
-/* CH6 @Bit 6 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH6_Pos (6UL) /*!< Position of CH6 field.                                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH6_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH6_Pos) /*!< Bit mask of CH6 field.   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH6_Min (0x0UL) /*!< Min enumerator value of CH6 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH6_Max (0x1UL) /*!< Max enumerator value of CH6 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH6_NotLinked (0x1UL) /*!< The channel 6 is not linked as sink                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH6_Linked (0x0UL) /*!< The channel 6 is linked as sink                                */
-
-/* CH7 @Bit 7 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH7_Pos (7UL) /*!< Position of CH7 field.                                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH7_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH7_Pos) /*!< Bit mask of CH7 field.   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH7_Min (0x0UL) /*!< Min enumerator value of CH7 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH7_Max (0x1UL) /*!< Max enumerator value of CH7 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH7_NotLinked (0x1UL) /*!< The channel 7 is not linked as sink                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH7_Linked (0x0UL) /*!< The channel 7 is linked as sink                                */
-
-/* CH8 @Bit 8 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH8_Pos (8UL) /*!< Position of CH8 field.                                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH8_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH8_Pos) /*!< Bit mask of CH8 field.   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH8_Min (0x0UL) /*!< Min enumerator value of CH8 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH8_Max (0x1UL) /*!< Max enumerator value of CH8 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH8_NotLinked (0x1UL) /*!< The channel 8 is not linked as sink                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH8_Linked (0x0UL) /*!< The channel 8 is linked as sink                                */
-
-/* CH9 @Bit 9 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH9_Pos (9UL) /*!< Position of CH9 field.                                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH9_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH9_Pos) /*!< Bit mask of CH9 field.   */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH9_Min (0x0UL) /*!< Min enumerator value of CH9 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH9_Max (0x1UL) /*!< Max enumerator value of CH9 field.                                */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH9_NotLinked (0x1UL) /*!< The channel 9 is not linked as sink                         */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH9_Linked (0x0UL) /*!< The channel 9 is linked as sink                                */
-
-/* CH10 @Bit 10 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH10_Pos (10UL) /*!< Position of CH10 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH10_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH10_Pos) /*!< Bit mask of CH10 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH10_Min (0x0UL) /*!< Min enumerator value of CH10 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH10_Max (0x1UL) /*!< Max enumerator value of CH10 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH10_NotLinked (0x1UL) /*!< The channel 10 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH10_Linked (0x0UL) /*!< The channel 10 is linked as sink                              */
-
-/* CH11 @Bit 11 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH11_Pos (11UL) /*!< Position of CH11 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH11_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH11_Pos) /*!< Bit mask of CH11 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH11_Min (0x0UL) /*!< Min enumerator value of CH11 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH11_Max (0x1UL) /*!< Max enumerator value of CH11 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH11_NotLinked (0x1UL) /*!< The channel 11 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH11_Linked (0x0UL) /*!< The channel 11 is linked as sink                              */
-
-/* CH12 @Bit 12 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH12_Pos (12UL) /*!< Position of CH12 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH12_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH12_Pos) /*!< Bit mask of CH12 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH12_Min (0x0UL) /*!< Min enumerator value of CH12 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH12_Max (0x1UL) /*!< Max enumerator value of CH12 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH12_NotLinked (0x1UL) /*!< The channel 12 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH12_Linked (0x0UL) /*!< The channel 12 is linked as sink                              */
-
-/* CH13 @Bit 13 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH13_Pos (13UL) /*!< Position of CH13 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH13_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH13_Pos) /*!< Bit mask of CH13 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH13_Min (0x0UL) /*!< Min enumerator value of CH13 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH13_Max (0x1UL) /*!< Max enumerator value of CH13 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH13_NotLinked (0x1UL) /*!< The channel 13 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH13_Linked (0x0UL) /*!< The channel 13 is linked as sink                              */
-
-/* CH14 @Bit 14 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH14_Pos (14UL) /*!< Position of CH14 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH14_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH14_Pos) /*!< Bit mask of CH14 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH14_Min (0x0UL) /*!< Min enumerator value of CH14 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH14_Max (0x1UL) /*!< Max enumerator value of CH14 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH14_NotLinked (0x1UL) /*!< The channel 14 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH14_Linked (0x0UL) /*!< The channel 14 is linked as sink                              */
-
-/* CH15 @Bit 15 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH15_Pos (15UL) /*!< Position of CH15 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH15_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH15_Pos) /*!< Bit mask of CH15 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH15_Min (0x0UL) /*!< Min enumerator value of CH15 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH15_Max (0x1UL) /*!< Max enumerator value of CH15 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH15_NotLinked (0x1UL) /*!< The channel 15 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH15_Linked (0x0UL) /*!< The channel 15 is linked as sink                              */
-
-/* CH16 @Bit 16 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH16_Pos (16UL) /*!< Position of CH16 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH16_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH16_Pos) /*!< Bit mask of CH16 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH16_Min (0x0UL) /*!< Min enumerator value of CH16 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH16_Max (0x1UL) /*!< Max enumerator value of CH16 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH16_NotLinked (0x1UL) /*!< The channel 16 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH16_Linked (0x0UL) /*!< The channel 16 is linked as sink                              */
-
-/* CH17 @Bit 17 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH17_Pos (17UL) /*!< Position of CH17 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH17_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH17_Pos) /*!< Bit mask of CH17 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH17_Min (0x0UL) /*!< Min enumerator value of CH17 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH17_Max (0x1UL) /*!< Max enumerator value of CH17 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH17_NotLinked (0x1UL) /*!< The channel 17 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH17_Linked (0x0UL) /*!< The channel 17 is linked as sink                              */
-
-/* CH18 @Bit 18 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH18_Pos (18UL) /*!< Position of CH18 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH18_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH18_Pos) /*!< Bit mask of CH18 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH18_Min (0x0UL) /*!< Min enumerator value of CH18 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH18_Max (0x1UL) /*!< Max enumerator value of CH18 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH18_NotLinked (0x1UL) /*!< The channel 18 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH18_Linked (0x0UL) /*!< The channel 18 is linked as sink                              */
-
-/* CH19 @Bit 19 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH19_Pos (19UL) /*!< Position of CH19 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH19_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH19_Pos) /*!< Bit mask of CH19 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH19_Min (0x0UL) /*!< Min enumerator value of CH19 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH19_Max (0x1UL) /*!< Max enumerator value of CH19 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH19_NotLinked (0x1UL) /*!< The channel 19 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH19_Linked (0x0UL) /*!< The channel 19 is linked as sink                              */
-
-/* CH20 @Bit 20 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH20_Pos (20UL) /*!< Position of CH20 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH20_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH20_Pos) /*!< Bit mask of CH20 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH20_Min (0x0UL) /*!< Min enumerator value of CH20 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH20_Max (0x1UL) /*!< Max enumerator value of CH20 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH20_NotLinked (0x1UL) /*!< The channel 20 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH20_Linked (0x0UL) /*!< The channel 20 is linked as sink                              */
-
-/* CH21 @Bit 21 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH21_Pos (21UL) /*!< Position of CH21 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH21_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH21_Pos) /*!< Bit mask of CH21 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH21_Min (0x0UL) /*!< Min enumerator value of CH21 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH21_Max (0x1UL) /*!< Max enumerator value of CH21 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH21_NotLinked (0x1UL) /*!< The channel 21 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH21_Linked (0x0UL) /*!< The channel 21 is linked as sink                              */
-
-/* CH22 @Bit 22 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH22_Pos (22UL) /*!< Position of CH22 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH22_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH22_Pos) /*!< Bit mask of CH22 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH22_Min (0x0UL) /*!< Min enumerator value of CH22 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH22_Max (0x1UL) /*!< Max enumerator value of CH22 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH22_NotLinked (0x1UL) /*!< The channel 22 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH22_Linked (0x0UL) /*!< The channel 22 is linked as sink                              */
-
-/* CH23 @Bit 23 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH23_Pos (23UL) /*!< Position of CH23 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH23_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH23_Pos) /*!< Bit mask of CH23 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH23_Min (0x0UL) /*!< Min enumerator value of CH23 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH23_Max (0x1UL) /*!< Max enumerator value of CH23 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH23_NotLinked (0x1UL) /*!< The channel 23 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH23_Linked (0x0UL) /*!< The channel 23 is linked as sink                              */
-
-/* CH24 @Bit 24 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH24_Pos (24UL) /*!< Position of CH24 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH24_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH24_Pos) /*!< Bit mask of CH24 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH24_Min (0x0UL) /*!< Min enumerator value of CH24 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH24_Max (0x1UL) /*!< Max enumerator value of CH24 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH24_NotLinked (0x1UL) /*!< The channel 24 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH24_Linked (0x0UL) /*!< The channel 24 is linked as sink                              */
-
-/* CH25 @Bit 25 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH25_Pos (25UL) /*!< Position of CH25 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH25_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH25_Pos) /*!< Bit mask of CH25 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH25_Min (0x0UL) /*!< Min enumerator value of CH25 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH25_Max (0x1UL) /*!< Max enumerator value of CH25 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH25_NotLinked (0x1UL) /*!< The channel 25 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH25_Linked (0x0UL) /*!< The channel 25 is linked as sink                              */
-
-/* CH26 @Bit 26 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH26_Pos (26UL) /*!< Position of CH26 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH26_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH26_Pos) /*!< Bit mask of CH26 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH26_Min (0x0UL) /*!< Min enumerator value of CH26 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH26_Max (0x1UL) /*!< Max enumerator value of CH26 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH26_NotLinked (0x1UL) /*!< The channel 26 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH26_Linked (0x0UL) /*!< The channel 26 is linked as sink                              */
-
-/* CH27 @Bit 27 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH27_Pos (27UL) /*!< Position of CH27 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH27_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH27_Pos) /*!< Bit mask of CH27 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH27_Min (0x0UL) /*!< Min enumerator value of CH27 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH27_Max (0x1UL) /*!< Max enumerator value of CH27 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH27_NotLinked (0x1UL) /*!< The channel 27 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH27_Linked (0x0UL) /*!< The channel 27 is linked as sink                              */
-
-/* CH28 @Bit 28 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH28_Pos (28UL) /*!< Position of CH28 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH28_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH28_Pos) /*!< Bit mask of CH28 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH28_Min (0x0UL) /*!< Min enumerator value of CH28 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH28_Max (0x1UL) /*!< Max enumerator value of CH28 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH28_NotLinked (0x1UL) /*!< The channel 28 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH28_Linked (0x0UL) /*!< The channel 28 is linked as sink                              */
-
-/* CH29 @Bit 29 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH29_Pos (29UL) /*!< Position of CH29 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH29_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH29_Pos) /*!< Bit mask of CH29 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH29_Min (0x0UL) /*!< Min enumerator value of CH29 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH29_Max (0x1UL) /*!< Max enumerator value of CH29 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH29_NotLinked (0x1UL) /*!< The channel 29 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH29_Linked (0x0UL) /*!< The channel 29 is linked as sink                              */
-
-/* CH30 @Bit 30 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH30_Pos (30UL) /*!< Position of CH30 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH30_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH30_Pos) /*!< Bit mask of CH30 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH30_Min (0x0UL) /*!< Min enumerator value of CH30 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH30_Max (0x1UL) /*!< Max enumerator value of CH30 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH30_NotLinked (0x1UL) /*!< The channel 30 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH30_Linked (0x0UL) /*!< The channel 30 is linked as sink                              */
-
-/* CH31 @Bit 31 : Link property */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH31_Pos (31UL) /*!< Position of CH31 field.                                           */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH31_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_SINK_CH31_Pos) /*!< Bit mask of CH31 field.*/
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH31_Min (0x0UL) /*!< Min enumerator value of CH31 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH31_Max (0x1UL) /*!< Max enumerator value of CH31 field.                              */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH31_NotLinked (0x1UL) /*!< The channel 31 is not linked as sink                       */
-  #define UICR_DPPI_GLOBAL_CH_LINK_SINK_CH31_Linked (0x0UL) /*!< The channel 31 is linked as sink                              */
+/* UICR_DPPI_GLOBAL_CH_LINK_DIR: Request linking the channels of DPPI[n] in Global domain as source or sink */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of DIR register.                             */
+
+/* CH0 @Bit 0 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Pos (0UL) /*!< Position of CH0 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Pos) /*!< Bit mask of CH0 field.     */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Min (0x0UL) /*!< Min enumerator value of CH0 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Max (0x1UL) /*!< Max enumerator value of CH0 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Source (0x1UL) /*!< The channel 0 is linked as source                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Sink (0x0UL) /*!< The channel 0 is linked as sink                                   */
+
+/* CH1 @Bit 1 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH1_Pos (1UL) /*!< Position of CH1 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH1_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH1_Pos) /*!< Bit mask of CH1 field.     */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH1_Min (0x0UL) /*!< Min enumerator value of CH1 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH1_Max (0x1UL) /*!< Max enumerator value of CH1 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH1_Source (0x1UL) /*!< The channel 1 is linked as source                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH1_Sink (0x0UL) /*!< The channel 1 is linked as sink                                   */
+
+/* CH2 @Bit 2 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH2_Pos (2UL) /*!< Position of CH2 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH2_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH2_Pos) /*!< Bit mask of CH2 field.     */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH2_Min (0x0UL) /*!< Min enumerator value of CH2 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH2_Max (0x1UL) /*!< Max enumerator value of CH2 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH2_Source (0x1UL) /*!< The channel 2 is linked as source                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH2_Sink (0x0UL) /*!< The channel 2 is linked as sink                                   */
+
+/* CH3 @Bit 3 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH3_Pos (3UL) /*!< Position of CH3 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH3_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH3_Pos) /*!< Bit mask of CH3 field.     */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH3_Min (0x0UL) /*!< Min enumerator value of CH3 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH3_Max (0x1UL) /*!< Max enumerator value of CH3 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH3_Source (0x1UL) /*!< The channel 3 is linked as source                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH3_Sink (0x0UL) /*!< The channel 3 is linked as sink                                   */
+
+/* CH4 @Bit 4 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH4_Pos (4UL) /*!< Position of CH4 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH4_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH4_Pos) /*!< Bit mask of CH4 field.     */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH4_Min (0x0UL) /*!< Min enumerator value of CH4 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH4_Max (0x1UL) /*!< Max enumerator value of CH4 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH4_Source (0x1UL) /*!< The channel 4 is linked as source                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH4_Sink (0x0UL) /*!< The channel 4 is linked as sink                                   */
+
+/* CH5 @Bit 5 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH5_Pos (5UL) /*!< Position of CH5 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH5_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH5_Pos) /*!< Bit mask of CH5 field.     */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH5_Min (0x0UL) /*!< Min enumerator value of CH5 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH5_Max (0x1UL) /*!< Max enumerator value of CH5 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH5_Source (0x1UL) /*!< The channel 5 is linked as source                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH5_Sink (0x0UL) /*!< The channel 5 is linked as sink                                   */
+
+/* CH6 @Bit 6 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH6_Pos (6UL) /*!< Position of CH6 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH6_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH6_Pos) /*!< Bit mask of CH6 field.     */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH6_Min (0x0UL) /*!< Min enumerator value of CH6 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH6_Max (0x1UL) /*!< Max enumerator value of CH6 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH6_Source (0x1UL) /*!< The channel 6 is linked as source                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH6_Sink (0x0UL) /*!< The channel 6 is linked as sink                                   */
+
+/* CH7 @Bit 7 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH7_Pos (7UL) /*!< Position of CH7 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH7_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH7_Pos) /*!< Bit mask of CH7 field.     */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH7_Min (0x0UL) /*!< Min enumerator value of CH7 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH7_Max (0x1UL) /*!< Max enumerator value of CH7 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH7_Source (0x1UL) /*!< The channel 7 is linked as source                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH7_Sink (0x0UL) /*!< The channel 7 is linked as sink                                   */
+
+/* CH8 @Bit 8 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH8_Pos (8UL) /*!< Position of CH8 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH8_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH8_Pos) /*!< Bit mask of CH8 field.     */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH8_Min (0x0UL) /*!< Min enumerator value of CH8 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH8_Max (0x1UL) /*!< Max enumerator value of CH8 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH8_Source (0x1UL) /*!< The channel 8 is linked as source                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH8_Sink (0x0UL) /*!< The channel 8 is linked as sink                                   */
+
+/* CH9 @Bit 9 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH9_Pos (9UL) /*!< Position of CH9 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH9_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH9_Pos) /*!< Bit mask of CH9 field.     */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH9_Min (0x0UL) /*!< Min enumerator value of CH9 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH9_Max (0x1UL) /*!< Max enumerator value of CH9 field.                                 */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH9_Source (0x1UL) /*!< The channel 9 is linked as source                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH9_Sink (0x0UL) /*!< The channel 9 is linked as sink                                   */
+
+/* CH10 @Bit 10 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH10_Pos (10UL) /*!< Position of CH10 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH10_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH10_Pos) /*!< Bit mask of CH10 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH10_Min (0x0UL) /*!< Min enumerator value of CH10 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH10_Max (0x1UL) /*!< Max enumerator value of CH10 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH10_Source (0x1UL) /*!< The channel 10 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH10_Sink (0x0UL) /*!< The channel 10 is linked as sink                                 */
+
+/* CH11 @Bit 11 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH11_Pos (11UL) /*!< Position of CH11 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH11_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH11_Pos) /*!< Bit mask of CH11 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH11_Min (0x0UL) /*!< Min enumerator value of CH11 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH11_Max (0x1UL) /*!< Max enumerator value of CH11 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH11_Source (0x1UL) /*!< The channel 11 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH11_Sink (0x0UL) /*!< The channel 11 is linked as sink                                 */
+
+/* CH12 @Bit 12 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH12_Pos (12UL) /*!< Position of CH12 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH12_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH12_Pos) /*!< Bit mask of CH12 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH12_Min (0x0UL) /*!< Min enumerator value of CH12 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH12_Max (0x1UL) /*!< Max enumerator value of CH12 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH12_Source (0x1UL) /*!< The channel 12 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH12_Sink (0x0UL) /*!< The channel 12 is linked as sink                                 */
+
+/* CH13 @Bit 13 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH13_Pos (13UL) /*!< Position of CH13 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH13_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH13_Pos) /*!< Bit mask of CH13 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH13_Min (0x0UL) /*!< Min enumerator value of CH13 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH13_Max (0x1UL) /*!< Max enumerator value of CH13 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH13_Source (0x1UL) /*!< The channel 13 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH13_Sink (0x0UL) /*!< The channel 13 is linked as sink                                 */
+
+/* CH14 @Bit 14 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH14_Pos (14UL) /*!< Position of CH14 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH14_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH14_Pos) /*!< Bit mask of CH14 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH14_Min (0x0UL) /*!< Min enumerator value of CH14 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH14_Max (0x1UL) /*!< Max enumerator value of CH14 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH14_Source (0x1UL) /*!< The channel 14 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH14_Sink (0x0UL) /*!< The channel 14 is linked as sink                                 */
+
+/* CH15 @Bit 15 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH15_Pos (15UL) /*!< Position of CH15 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH15_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH15_Pos) /*!< Bit mask of CH15 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH15_Min (0x0UL) /*!< Min enumerator value of CH15 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH15_Max (0x1UL) /*!< Max enumerator value of CH15 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH15_Source (0x1UL) /*!< The channel 15 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH15_Sink (0x0UL) /*!< The channel 15 is linked as sink                                 */
+
+/* CH16 @Bit 16 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH16_Pos (16UL) /*!< Position of CH16 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH16_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH16_Pos) /*!< Bit mask of CH16 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH16_Min (0x0UL) /*!< Min enumerator value of CH16 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH16_Max (0x1UL) /*!< Max enumerator value of CH16 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH16_Source (0x1UL) /*!< The channel 16 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH16_Sink (0x0UL) /*!< The channel 16 is linked as sink                                 */
+
+/* CH17 @Bit 17 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH17_Pos (17UL) /*!< Position of CH17 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH17_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH17_Pos) /*!< Bit mask of CH17 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH17_Min (0x0UL) /*!< Min enumerator value of CH17 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH17_Max (0x1UL) /*!< Max enumerator value of CH17 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH17_Source (0x1UL) /*!< The channel 17 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH17_Sink (0x0UL) /*!< The channel 17 is linked as sink                                 */
+
+/* CH18 @Bit 18 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH18_Pos (18UL) /*!< Position of CH18 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH18_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH18_Pos) /*!< Bit mask of CH18 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH18_Min (0x0UL) /*!< Min enumerator value of CH18 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH18_Max (0x1UL) /*!< Max enumerator value of CH18 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH18_Source (0x1UL) /*!< The channel 18 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH18_Sink (0x0UL) /*!< The channel 18 is linked as sink                                 */
+
+/* CH19 @Bit 19 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH19_Pos (19UL) /*!< Position of CH19 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH19_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH19_Pos) /*!< Bit mask of CH19 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH19_Min (0x0UL) /*!< Min enumerator value of CH19 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH19_Max (0x1UL) /*!< Max enumerator value of CH19 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH19_Source (0x1UL) /*!< The channel 19 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH19_Sink (0x0UL) /*!< The channel 19 is linked as sink                                 */
+
+/* CH20 @Bit 20 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH20_Pos (20UL) /*!< Position of CH20 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH20_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH20_Pos) /*!< Bit mask of CH20 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH20_Min (0x0UL) /*!< Min enumerator value of CH20 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH20_Max (0x1UL) /*!< Max enumerator value of CH20 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH20_Source (0x1UL) /*!< The channel 20 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH20_Sink (0x0UL) /*!< The channel 20 is linked as sink                                 */
+
+/* CH21 @Bit 21 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH21_Pos (21UL) /*!< Position of CH21 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH21_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH21_Pos) /*!< Bit mask of CH21 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH21_Min (0x0UL) /*!< Min enumerator value of CH21 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH21_Max (0x1UL) /*!< Max enumerator value of CH21 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH21_Source (0x1UL) /*!< The channel 21 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH21_Sink (0x0UL) /*!< The channel 21 is linked as sink                                 */
+
+/* CH22 @Bit 22 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH22_Pos (22UL) /*!< Position of CH22 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH22_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH22_Pos) /*!< Bit mask of CH22 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH22_Min (0x0UL) /*!< Min enumerator value of CH22 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH22_Max (0x1UL) /*!< Max enumerator value of CH22 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH22_Source (0x1UL) /*!< The channel 22 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH22_Sink (0x0UL) /*!< The channel 22 is linked as sink                                 */
+
+/* CH23 @Bit 23 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH23_Pos (23UL) /*!< Position of CH23 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH23_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH23_Pos) /*!< Bit mask of CH23 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH23_Min (0x0UL) /*!< Min enumerator value of CH23 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH23_Max (0x1UL) /*!< Max enumerator value of CH23 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH23_Source (0x1UL) /*!< The channel 23 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH23_Sink (0x0UL) /*!< The channel 23 is linked as sink                                 */
+
+/* CH24 @Bit 24 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH24_Pos (24UL) /*!< Position of CH24 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH24_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH24_Pos) /*!< Bit mask of CH24 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH24_Min (0x0UL) /*!< Min enumerator value of CH24 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH24_Max (0x1UL) /*!< Max enumerator value of CH24 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH24_Source (0x1UL) /*!< The channel 24 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH24_Sink (0x0UL) /*!< The channel 24 is linked as sink                                 */
+
+/* CH25 @Bit 25 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH25_Pos (25UL) /*!< Position of CH25 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH25_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH25_Pos) /*!< Bit mask of CH25 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH25_Min (0x0UL) /*!< Min enumerator value of CH25 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH25_Max (0x1UL) /*!< Max enumerator value of CH25 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH25_Source (0x1UL) /*!< The channel 25 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH25_Sink (0x0UL) /*!< The channel 25 is linked as sink                                 */
+
+/* CH26 @Bit 26 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH26_Pos (26UL) /*!< Position of CH26 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH26_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH26_Pos) /*!< Bit mask of CH26 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH26_Min (0x0UL) /*!< Min enumerator value of CH26 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH26_Max (0x1UL) /*!< Max enumerator value of CH26 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH26_Source (0x1UL) /*!< The channel 26 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH26_Sink (0x0UL) /*!< The channel 26 is linked as sink                                 */
+
+/* CH27 @Bit 27 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH27_Pos (27UL) /*!< Position of CH27 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH27_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH27_Pos) /*!< Bit mask of CH27 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH27_Min (0x0UL) /*!< Min enumerator value of CH27 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH27_Max (0x1UL) /*!< Max enumerator value of CH27 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH27_Source (0x1UL) /*!< The channel 27 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH27_Sink (0x0UL) /*!< The channel 27 is linked as sink                                 */
+
+/* CH28 @Bit 28 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH28_Pos (28UL) /*!< Position of CH28 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH28_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH28_Pos) /*!< Bit mask of CH28 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH28_Min (0x0UL) /*!< Min enumerator value of CH28 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH28_Max (0x1UL) /*!< Max enumerator value of CH28 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH28_Source (0x1UL) /*!< The channel 28 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH28_Sink (0x0UL) /*!< The channel 28 is linked as sink                                 */
+
+/* CH29 @Bit 29 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH29_Pos (29UL) /*!< Position of CH29 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH29_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH29_Pos) /*!< Bit mask of CH29 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH29_Min (0x0UL) /*!< Min enumerator value of CH29 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH29_Max (0x1UL) /*!< Max enumerator value of CH29 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH29_Source (0x1UL) /*!< The channel 29 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH29_Sink (0x0UL) /*!< The channel 29 is linked as sink                                 */
+
+/* CH30 @Bit 30 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH30_Pos (30UL) /*!< Position of CH30 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH30_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH30_Pos) /*!< Bit mask of CH30 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH30_Min (0x0UL) /*!< Min enumerator value of CH30 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH30_Max (0x1UL) /*!< Max enumerator value of CH30 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH30_Source (0x1UL) /*!< The channel 30 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH30_Sink (0x0UL) /*!< The channel 30 is linked as sink                                 */
+
+/* CH31 @Bit 31 : Link direction */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH31_Pos (31UL) /*!< Position of CH31 field.                                            */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH31_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_DIR_CH31_Pos) /*!< Bit mask of CH31 field.  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH31_Min (0x0UL) /*!< Min enumerator value of CH31 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH31_Max (0x1UL) /*!< Max enumerator value of CH31 field.                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH31_Source (0x1UL) /*!< The channel 31 is linked as source                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_DIR_CH31_Sink (0x0UL) /*!< The channel 31 is linked as sink                                 */
+
+
+/* UICR_DPPI_GLOBAL_CH_LINK_EN: Request linking of the channels of DPPI[n] in the Global domain */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of EN register.                               */
+
+/* CH0 @Bit 0 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Pos (0UL)  /*!< Position of CH0 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Pos) /*!< Bit mask of CH0 field.       */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Min (0x0UL) /*!< Min enumerator value of CH0 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Max (0x1UL) /*!< Max enumerator value of CH0 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Disabled (0x1UL) /*!< The channel 0 is disabled                                      */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Enabled (0x0UL) /*!< The channel 0 is enabled                                        */
+
+/* CH1 @Bit 1 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH1_Pos (1UL)  /*!< Position of CH1 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH1_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH1_Pos) /*!< Bit mask of CH1 field.       */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH1_Min (0x0UL) /*!< Min enumerator value of CH1 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH1_Max (0x1UL) /*!< Max enumerator value of CH1 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH1_Disabled (0x1UL) /*!< The channel 1 is disabled                                      */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH1_Enabled (0x0UL) /*!< The channel 1 is enabled                                        */
+
+/* CH2 @Bit 2 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH2_Pos (2UL)  /*!< Position of CH2 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH2_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH2_Pos) /*!< Bit mask of CH2 field.       */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH2_Min (0x0UL) /*!< Min enumerator value of CH2 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH2_Max (0x1UL) /*!< Max enumerator value of CH2 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH2_Disabled (0x1UL) /*!< The channel 2 is disabled                                      */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH2_Enabled (0x0UL) /*!< The channel 2 is enabled                                        */
+
+/* CH3 @Bit 3 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH3_Pos (3UL)  /*!< Position of CH3 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH3_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH3_Pos) /*!< Bit mask of CH3 field.       */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH3_Min (0x0UL) /*!< Min enumerator value of CH3 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH3_Max (0x1UL) /*!< Max enumerator value of CH3 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH3_Disabled (0x1UL) /*!< The channel 3 is disabled                                      */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH3_Enabled (0x0UL) /*!< The channel 3 is enabled                                        */
+
+/* CH4 @Bit 4 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH4_Pos (4UL)  /*!< Position of CH4 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH4_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH4_Pos) /*!< Bit mask of CH4 field.       */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH4_Min (0x0UL) /*!< Min enumerator value of CH4 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH4_Max (0x1UL) /*!< Max enumerator value of CH4 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH4_Disabled (0x1UL) /*!< The channel 4 is disabled                                      */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH4_Enabled (0x0UL) /*!< The channel 4 is enabled                                        */
+
+/* CH5 @Bit 5 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH5_Pos (5UL)  /*!< Position of CH5 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH5_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH5_Pos) /*!< Bit mask of CH5 field.       */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH5_Min (0x0UL) /*!< Min enumerator value of CH5 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH5_Max (0x1UL) /*!< Max enumerator value of CH5 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH5_Disabled (0x1UL) /*!< The channel 5 is disabled                                      */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH5_Enabled (0x0UL) /*!< The channel 5 is enabled                                        */
+
+/* CH6 @Bit 6 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH6_Pos (6UL)  /*!< Position of CH6 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH6_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH6_Pos) /*!< Bit mask of CH6 field.       */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH6_Min (0x0UL) /*!< Min enumerator value of CH6 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH6_Max (0x1UL) /*!< Max enumerator value of CH6 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH6_Disabled (0x1UL) /*!< The channel 6 is disabled                                      */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH6_Enabled (0x0UL) /*!< The channel 6 is enabled                                        */
+
+/* CH7 @Bit 7 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH7_Pos (7UL)  /*!< Position of CH7 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH7_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH7_Pos) /*!< Bit mask of CH7 field.       */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH7_Min (0x0UL) /*!< Min enumerator value of CH7 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH7_Max (0x1UL) /*!< Max enumerator value of CH7 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH7_Disabled (0x1UL) /*!< The channel 7 is disabled                                      */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH7_Enabled (0x0UL) /*!< The channel 7 is enabled                                        */
+
+/* CH8 @Bit 8 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH8_Pos (8UL)  /*!< Position of CH8 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH8_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH8_Pos) /*!< Bit mask of CH8 field.       */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH8_Min (0x0UL) /*!< Min enumerator value of CH8 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH8_Max (0x1UL) /*!< Max enumerator value of CH8 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH8_Disabled (0x1UL) /*!< The channel 8 is disabled                                      */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH8_Enabled (0x0UL) /*!< The channel 8 is enabled                                        */
+
+/* CH9 @Bit 9 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH9_Pos (9UL)  /*!< Position of CH9 field.                                               */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH9_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH9_Pos) /*!< Bit mask of CH9 field.       */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH9_Min (0x0UL) /*!< Min enumerator value of CH9 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH9_Max (0x1UL) /*!< Max enumerator value of CH9 field.                                  */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH9_Disabled (0x1UL) /*!< The channel 9 is disabled                                      */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH9_Enabled (0x0UL) /*!< The channel 9 is enabled                                        */
+
+/* CH10 @Bit 10 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH10_Pos (10UL) /*!< Position of CH10 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH10_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH10_Pos) /*!< Bit mask of CH10 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH10_Min (0x0UL) /*!< Min enumerator value of CH10 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH10_Max (0x1UL) /*!< Max enumerator value of CH10 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH10_Disabled (0x1UL) /*!< The channel 10 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH10_Enabled (0x0UL) /*!< The channel 10 is enabled                                      */
+
+/* CH11 @Bit 11 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH11_Pos (11UL) /*!< Position of CH11 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH11_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH11_Pos) /*!< Bit mask of CH11 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH11_Min (0x0UL) /*!< Min enumerator value of CH11 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH11_Max (0x1UL) /*!< Max enumerator value of CH11 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH11_Disabled (0x1UL) /*!< The channel 11 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH11_Enabled (0x0UL) /*!< The channel 11 is enabled                                      */
+
+/* CH12 @Bit 12 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH12_Pos (12UL) /*!< Position of CH12 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH12_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH12_Pos) /*!< Bit mask of CH12 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH12_Min (0x0UL) /*!< Min enumerator value of CH12 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH12_Max (0x1UL) /*!< Max enumerator value of CH12 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH12_Disabled (0x1UL) /*!< The channel 12 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH12_Enabled (0x0UL) /*!< The channel 12 is enabled                                      */
+
+/* CH13 @Bit 13 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH13_Pos (13UL) /*!< Position of CH13 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH13_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH13_Pos) /*!< Bit mask of CH13 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH13_Min (0x0UL) /*!< Min enumerator value of CH13 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH13_Max (0x1UL) /*!< Max enumerator value of CH13 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH13_Disabled (0x1UL) /*!< The channel 13 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH13_Enabled (0x0UL) /*!< The channel 13 is enabled                                      */
+
+/* CH14 @Bit 14 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH14_Pos (14UL) /*!< Position of CH14 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH14_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH14_Pos) /*!< Bit mask of CH14 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH14_Min (0x0UL) /*!< Min enumerator value of CH14 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH14_Max (0x1UL) /*!< Max enumerator value of CH14 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH14_Disabled (0x1UL) /*!< The channel 14 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH14_Enabled (0x0UL) /*!< The channel 14 is enabled                                      */
+
+/* CH15 @Bit 15 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH15_Pos (15UL) /*!< Position of CH15 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH15_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH15_Pos) /*!< Bit mask of CH15 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH15_Min (0x0UL) /*!< Min enumerator value of CH15 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH15_Max (0x1UL) /*!< Max enumerator value of CH15 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH15_Disabled (0x1UL) /*!< The channel 15 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH15_Enabled (0x0UL) /*!< The channel 15 is enabled                                      */
+
+/* CH16 @Bit 16 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH16_Pos (16UL) /*!< Position of CH16 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH16_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH16_Pos) /*!< Bit mask of CH16 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH16_Min (0x0UL) /*!< Min enumerator value of CH16 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH16_Max (0x1UL) /*!< Max enumerator value of CH16 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH16_Disabled (0x1UL) /*!< The channel 16 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH16_Enabled (0x0UL) /*!< The channel 16 is enabled                                      */
+
+/* CH17 @Bit 17 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH17_Pos (17UL) /*!< Position of CH17 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH17_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH17_Pos) /*!< Bit mask of CH17 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH17_Min (0x0UL) /*!< Min enumerator value of CH17 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH17_Max (0x1UL) /*!< Max enumerator value of CH17 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH17_Disabled (0x1UL) /*!< The channel 17 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH17_Enabled (0x0UL) /*!< The channel 17 is enabled                                      */
+
+/* CH18 @Bit 18 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH18_Pos (18UL) /*!< Position of CH18 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH18_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH18_Pos) /*!< Bit mask of CH18 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH18_Min (0x0UL) /*!< Min enumerator value of CH18 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH18_Max (0x1UL) /*!< Max enumerator value of CH18 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH18_Disabled (0x1UL) /*!< The channel 18 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH18_Enabled (0x0UL) /*!< The channel 18 is enabled                                      */
+
+/* CH19 @Bit 19 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH19_Pos (19UL) /*!< Position of CH19 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH19_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH19_Pos) /*!< Bit mask of CH19 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH19_Min (0x0UL) /*!< Min enumerator value of CH19 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH19_Max (0x1UL) /*!< Max enumerator value of CH19 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH19_Disabled (0x1UL) /*!< The channel 19 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH19_Enabled (0x0UL) /*!< The channel 19 is enabled                                      */
+
+/* CH20 @Bit 20 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH20_Pos (20UL) /*!< Position of CH20 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH20_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH20_Pos) /*!< Bit mask of CH20 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH20_Min (0x0UL) /*!< Min enumerator value of CH20 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH20_Max (0x1UL) /*!< Max enumerator value of CH20 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH20_Disabled (0x1UL) /*!< The channel 20 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH20_Enabled (0x0UL) /*!< The channel 20 is enabled                                      */
+
+/* CH21 @Bit 21 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH21_Pos (21UL) /*!< Position of CH21 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH21_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH21_Pos) /*!< Bit mask of CH21 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH21_Min (0x0UL) /*!< Min enumerator value of CH21 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH21_Max (0x1UL) /*!< Max enumerator value of CH21 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH21_Disabled (0x1UL) /*!< The channel 21 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH21_Enabled (0x0UL) /*!< The channel 21 is enabled                                      */
+
+/* CH22 @Bit 22 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH22_Pos (22UL) /*!< Position of CH22 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH22_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH22_Pos) /*!< Bit mask of CH22 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH22_Min (0x0UL) /*!< Min enumerator value of CH22 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH22_Max (0x1UL) /*!< Max enumerator value of CH22 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH22_Disabled (0x1UL) /*!< The channel 22 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH22_Enabled (0x0UL) /*!< The channel 22 is enabled                                      */
+
+/* CH23 @Bit 23 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH23_Pos (23UL) /*!< Position of CH23 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH23_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH23_Pos) /*!< Bit mask of CH23 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH23_Min (0x0UL) /*!< Min enumerator value of CH23 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH23_Max (0x1UL) /*!< Max enumerator value of CH23 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH23_Disabled (0x1UL) /*!< The channel 23 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH23_Enabled (0x0UL) /*!< The channel 23 is enabled                                      */
+
+/* CH24 @Bit 24 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH24_Pos (24UL) /*!< Position of CH24 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH24_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH24_Pos) /*!< Bit mask of CH24 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH24_Min (0x0UL) /*!< Min enumerator value of CH24 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH24_Max (0x1UL) /*!< Max enumerator value of CH24 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH24_Disabled (0x1UL) /*!< The channel 24 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH24_Enabled (0x0UL) /*!< The channel 24 is enabled                                      */
+
+/* CH25 @Bit 25 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH25_Pos (25UL) /*!< Position of CH25 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH25_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH25_Pos) /*!< Bit mask of CH25 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH25_Min (0x0UL) /*!< Min enumerator value of CH25 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH25_Max (0x1UL) /*!< Max enumerator value of CH25 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH25_Disabled (0x1UL) /*!< The channel 25 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH25_Enabled (0x0UL) /*!< The channel 25 is enabled                                      */
+
+/* CH26 @Bit 26 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH26_Pos (26UL) /*!< Position of CH26 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH26_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH26_Pos) /*!< Bit mask of CH26 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH26_Min (0x0UL) /*!< Min enumerator value of CH26 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH26_Max (0x1UL) /*!< Max enumerator value of CH26 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH26_Disabled (0x1UL) /*!< The channel 26 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH26_Enabled (0x0UL) /*!< The channel 26 is enabled                                      */
+
+/* CH27 @Bit 27 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH27_Pos (27UL) /*!< Position of CH27 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH27_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH27_Pos) /*!< Bit mask of CH27 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH27_Min (0x0UL) /*!< Min enumerator value of CH27 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH27_Max (0x1UL) /*!< Max enumerator value of CH27 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH27_Disabled (0x1UL) /*!< The channel 27 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH27_Enabled (0x0UL) /*!< The channel 27 is enabled                                      */
+
+/* CH28 @Bit 28 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH28_Pos (28UL) /*!< Position of CH28 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH28_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH28_Pos) /*!< Bit mask of CH28 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH28_Min (0x0UL) /*!< Min enumerator value of CH28 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH28_Max (0x1UL) /*!< Max enumerator value of CH28 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH28_Disabled (0x1UL) /*!< The channel 28 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH28_Enabled (0x0UL) /*!< The channel 28 is enabled                                      */
+
+/* CH29 @Bit 29 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH29_Pos (29UL) /*!< Position of CH29 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH29_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH29_Pos) /*!< Bit mask of CH29 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH29_Min (0x0UL) /*!< Min enumerator value of CH29 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH29_Max (0x1UL) /*!< Max enumerator value of CH29 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH29_Disabled (0x1UL) /*!< The channel 29 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH29_Enabled (0x0UL) /*!< The channel 29 is enabled                                      */
+
+/* CH30 @Bit 30 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH30_Pos (30UL) /*!< Position of CH30 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH30_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH30_Pos) /*!< Bit mask of CH30 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH30_Min (0x0UL) /*!< Min enumerator value of CH30 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH30_Max (0x1UL) /*!< Max enumerator value of CH30 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH30_Disabled (0x1UL) /*!< The channel 30 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH30_Enabled (0x0UL) /*!< The channel 30 is enabled                                      */
+
+/* CH31 @Bit 31 : Link enable */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH31_Pos (31UL) /*!< Position of CH31 field.                                             */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH31_Msk (0x1UL << UICR_DPPI_GLOBAL_CH_LINK_EN_CH31_Pos) /*!< Bit mask of CH31 field.    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH31_Min (0x0UL) /*!< Min enumerator value of CH31 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH31_Max (0x1UL) /*!< Max enumerator value of CH31 field.                                */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH31_Disabled (0x1UL) /*!< The channel 31 is disabled                                    */
+  #define UICR_DPPI_GLOBAL_CH_LINK_EN_CH31_Enabled (0x0UL) /*!< The channel 31 is enabled                                      */
 
 
 
@@ -141908,14 +142022,14 @@ typedef struct {
   * @brief CH [UICR_DPPI_GLOBAL_CH] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  OWN;                               /*!< (@ 0x00000000) >Request ownership of the channels of DPPI[n] in Global
-                                                                         Domai*/
+  __IOM uint32_t  OWN;                               /*!< (@ 0x00000000) Request ownership of the channels of DPPI[n] in Global
+                                                                         Domain*/
   __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Request permission for the channels of DPPI[n] in
                                                                          Global domain*/
   __IOM NRF_UICR_DPPI_GLOBAL_CH_LINK_Type LINK;      /*!< (@ 0x00000008) (unspecified)                                         */
 } NRF_UICR_DPPI_GLOBAL_CH_Type;                      /*!< Size = 16 (0x010)                                                    */
 
-/* UICR_DPPI_GLOBAL_CH_OWN: >Request ownership of the channels of DPPI[n] in Global Domai */
+/* UICR_DPPI_GLOBAL_CH_OWN: Request ownership of the channels of DPPI[n] in Global Domain */
   #define UICR_DPPI_GLOBAL_CH_OWN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of OWN register.                                  */
 
 /* CH0 @Bit 0 : Channel number */
@@ -142973,12 +143087,23 @@ typedef struct {
   * @brief GLOBAL [UICR_DPPI_GLOBAL] (unspecified)
   */
 typedef struct {
-  __IOM NRF_UICR_DPPI_GLOBAL_CH_Type CH;             /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_UICR_DPPI_GLOBAL_CHG_Type CHG;           /*!< (@ 0x00000010) (unspecified)                                         */
-} NRF_UICR_DPPI_GLOBAL_Type;                         /*!< Size = 24 (0x018)                                                    */
+  __IOM uint32_t  INSTANCE;                          /*!< (@ 0x00000000) Address of the DPPI instance associated with
+                                                                         DPPI[n].GLOBAL*/
+  __IOM NRF_UICR_DPPI_GLOBAL_CH_Type CH;             /*!< (@ 0x00000004) (unspecified)                                         */
+  __IOM NRF_UICR_DPPI_GLOBAL_CHG_Type CHG;           /*!< (@ 0x00000014) (unspecified)                                         */
+} NRF_UICR_DPPI_GLOBAL_Type;                         /*!< Size = 28 (0x01C)                                                    */
   #define UICR_DPPI_GLOBAL_MaxCount (12UL)           /*!< Size of GLOBAL[12] array.                                            */
   #define UICR_DPPI_GLOBAL_MaxIndex (11UL)           /*!< Max index of GLOBAL[12] array.                                       */
   #define UICR_DPPI_GLOBAL_MinIndex (0UL)            /*!< Min index of GLOBAL[12] array.                                       */
+
+/* UICR_DPPI_GLOBAL_INSTANCE: Address of the DPPI instance associated with DPPI[n].GLOBAL */
+  #define UICR_DPPI_GLOBAL_INSTANCE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of INSTANCE register.                           */
+
+/* ADDRESS @Bits 0..31 : Instance address */
+  #define UICR_DPPI_GLOBAL_INSTANCE_ADDRESS_Pos (0UL) /*!< Position of ADDRESS field.                                          */
+  #define UICR_DPPI_GLOBAL_INSTANCE_ADDRESS_Msk (0xFFFFFFFFUL << UICR_DPPI_GLOBAL_INSTANCE_ADDRESS_Pos) /*!< Bit mask of ADDRESS
+                                                                            field.*/
+
 
 
 /* ==================================================== Struct UICR_DPPI ===================================================== */
@@ -142987,8 +143112,8 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_UICR_DPPI_LOCAL_Type LOCAL[2];           /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_UICR_DPPI_GLOBAL_Type GLOBAL[12];        /*!< (@ 0x00000020) (unspecified)                                         */
-} NRF_UICR_DPPI_Type;                                /*!< Size = 320 (0x140)                                                   */
+  __IOM NRF_UICR_DPPI_GLOBAL_Type GLOBAL[12];        /*!< (@ 0x00000028) (unspecified)                                         */
+} NRF_UICR_DPPI_Type;                                /*!< Size = 376 (0x178)                                                   */
 
 
 /* =================================================== Struct UICR_GRTC_CC =================================================== */
@@ -142996,11 +143121,11 @@ typedef struct {
   * @brief CC [UICR_GRTC_CC] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  OWN;                               /*!< (@ 0x00000000) Request ownership of the CCs of GRTC                  */
+  __IOM uint32_t  OWN;                               /*!< (@ 0x00000000) Request ownership of the CCs of GRTCGRTC              */
   __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Request permission for the CCs of GRTC                */
 } NRF_UICR_GRTC_CC_Type;                             /*!< Size = 8 (0x008)                                                     */
 
-/* UICR_GRTC_CC_OWN: Request ownership of the CCs of GRTC */
+/* UICR_GRTC_CC_OWN: Request ownership of the CCs of GRTCGRTC */
   #define UICR_GRTC_CC_OWN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of OWN register.                                         */
 
 /* CC0 @Bit 0 : Capture/compare register number */
@@ -143316,6 +143441,367 @@ typedef struct {
   #define UICR_MAILBOX_CONFIG_SIZE_Msk (0xFFFFUL << UICR_MAILBOX_CONFIG_SIZE_Pos) /*!< Bit mask of SIZE field.                 */
 
 
+
+/* ================================================ Struct UICR_TRACE_ETBSINK ================================================ */
+/**
+  * @brief ETBSINK [UICR_TRACE_ETBSINK] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  SOURCES;                           /*!< (@ 0x00000000) (unspecified)                                         */
+} NRF_UICR_TRACE_ETBSINK_Type;                       /*!< Size = 4 (0x004)                                                     */
+
+/* UICR_TRACE_ETBSINK_SOURCES: (unspecified) */
+  #define UICR_TRACE_ETBSINK_SOURCES_ResetValue (0xFFFFFFFFUL) /*!< Reset value of SOURCES register.                           */
+
+/* STMMAINCORE @Bit 0 : STM trace from the domain main CPU */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMMAINCORE_Pos (0UL) /*!< Position of STMMAINCORE field.                                 */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMMAINCORE_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_STMMAINCORE_Pos) /*!< Bit mask of
+                                                                            STMMAINCORE field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_STMMAINCORE_Min (0x0UL) /*!< Min enumerator value of STMMAINCORE field.                   */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMMAINCORE_Max (0x1UL) /*!< Max enumerator value of STMMAINCORE field.                   */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMMAINCORE_NotRequested (0x1UL) /*!< Not Requested                                       */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMMAINCORE_Requested (0x0UL) /*!< Requested                                              */
+
+/* ETMMAINCORE @Bit 1 : ETM trace from the domain main CPU */
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMMAINCORE_Pos (1UL) /*!< Position of ETMMAINCORE field.                                 */
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMMAINCORE_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_ETMMAINCORE_Pos) /*!< Bit mask of
+                                                                            ETMMAINCORE field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMMAINCORE_Min (0x0UL) /*!< Min enumerator value of ETMMAINCORE field.                   */
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMMAINCORE_Max (0x1UL) /*!< Max enumerator value of ETMMAINCORE field.                   */
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMMAINCORE_NotRequested (0x1UL) /*!< Not Requested                                       */
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMMAINCORE_Requested (0x0UL) /*!< Requested                                              */
+
+/* STMHWEVENTS @Bit 2 : STM HW events trace */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMHWEVENTS_Pos (2UL) /*!< Position of STMHWEVENTS field.                                 */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMHWEVENTS_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_STMHWEVENTS_Pos) /*!< Bit mask of
+                                                                            STMHWEVENTS field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_STMHWEVENTS_Min (0x0UL) /*!< Min enumerator value of STMHWEVENTS field.                   */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMHWEVENTS_Max (0x1UL) /*!< Max enumerator value of STMHWEVENTS field.                   */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMHWEVENTS_NotRequested (0x1UL) /*!< Not Requested                                       */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMHWEVENTS_Requested (0x0UL) /*!< Requested                                              */
+
+/* STMPPR @Bit 3 : STM trace from PPR CPU */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMPPR_Pos (3UL) /*!< Position of STMPPR field.                                           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMPPR_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_STMPPR_Pos) /*!< Bit mask of STMPPR field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_STMPPR_Min (0x0UL) /*!< Min enumerator value of STMPPR field.                             */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMPPR_Max (0x1UL) /*!< Max enumerator value of STMPPR field.                             */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMPPR_NotRequested (0x1UL) /*!< Not Requested                                            */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMPPR_Requested (0x0UL) /*!< Requested                                                   */
+
+/* STMFLPR @Bit 4 : STM trace from FLPR CPU */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMFLPR_Pos (4UL) /*!< Position of STMFLPR field.                                         */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMFLPR_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_STMFLPR_Pos) /*!< Bit mask of STMFLPR
+                                                                            field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_STMFLPR_Min (0x0UL) /*!< Min enumerator value of STMFLPR field.                           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMFLPR_Max (0x1UL) /*!< Max enumerator value of STMFLPR field.                           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMFLPR_NotRequested (0x1UL) /*!< Not Requested                                           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMFLPR_Requested (0x0UL) /*!< Requested                                                  */
+
+/* STMBBPR @Bit 5 : STM trace from BBPR CPU */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMBBPR_Pos (5UL) /*!< Position of STMBBPR field.                                         */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMBBPR_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_STMBBPR_Pos) /*!< Bit mask of STMBBPR
+                                                                            field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_STMBBPR_Min (0x0UL) /*!< Min enumerator value of STMBBPR field.                           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMBBPR_Max (0x1UL) /*!< Max enumerator value of STMBBPR field.                           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMBBPR_NotRequested (0x1UL) /*!< Not Requested                                           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMBBPR_Requested (0x0UL) /*!< Requested                                                  */
+
+/* STMCELLDSP @Bit 6 : STM trace from Cellular DSP */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSP_Pos (6UL) /*!< Position of STMCELLDSP field.                                   */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSP_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_STMCELLDSP_Pos) /*!< Bit mask of
+                                                                            STMCELLDSP field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSP_Min (0x0UL) /*!< Min enumerator value of STMCELLDSP field.                     */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSP_Max (0x1UL) /*!< Max enumerator value of STMCELLDSP field.                     */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSP_NotRequested (0x1UL) /*!< Not Requested                                        */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSP_Requested (0x0UL) /*!< Requested                                               */
+
+/* STMCELLDSPLOCAL @Bit 7 : STM trace from Cellular DSP local STM */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSPLOCAL_Pos (7UL) /*!< Position of STMCELLDSPLOCAL field.                         */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSPLOCAL_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_STMCELLDSPLOCAL_Pos) /*!< Bit mask
+                                                                            of STMCELLDSPLOCAL field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSPLOCAL_Min (0x0UL) /*!< Min enumerator value of STMCELLDSPLOCAL field.           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSPLOCAL_Max (0x1UL) /*!< Max enumerator value of STMCELLDSPLOCAL field.           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSPLOCAL_NotRequested (0x1UL) /*!< Not Requested                                   */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLDSPLOCAL_Requested (0x0UL) /*!< Requested                                          */
+
+/* ETMCELLDSP @Bit 8 : ETM trace from Cellular DSP */
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMCELLDSP_Pos (8UL) /*!< Position of ETMCELLDSP field.                                   */
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMCELLDSP_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_ETMCELLDSP_Pos) /*!< Bit mask of
+                                                                            ETMCELLDSP field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMCELLDSP_Min (0x0UL) /*!< Min enumerator value of ETMCELLDSP field.                     */
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMCELLDSP_Max (0x1UL) /*!< Max enumerator value of ETMCELLDSP field.                     */
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMCELLDSP_NotRequested (0x1UL) /*!< Not Requested                                        */
+  #define UICR_TRACE_ETBSINK_SOURCES_ETMCELLDSP_Requested (0x0UL) /*!< Requested                                               */
+
+/* STMCELLRF @Bit 9 : STM trace from Cellular RF CPU */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLRF_Pos (9UL) /*!< Position of STMCELLRF field.                                     */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLRF_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_STMCELLRF_Pos) /*!< Bit mask of
+                                                                            STMCELLRF field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLRF_Min (0x0UL) /*!< Min enumerator value of STMCELLRF field.                       */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLRF_Max (0x1UL) /*!< Max enumerator value of STMCELLRF field.                       */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLRF_NotRequested (0x1UL) /*!< Not Requested                                         */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMCELLRF_Requested (0x0UL) /*!< Requested                                                */
+
+/* STMISIM @Bit 10 : STM trace from iSIM secure core */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMISIM_Pos (10UL) /*!< Position of STMISIM field.                                        */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMISIM_Msk (0x1UL << UICR_TRACE_ETBSINK_SOURCES_STMISIM_Pos) /*!< Bit mask of STMISIM
+                                                                            field.*/
+  #define UICR_TRACE_ETBSINK_SOURCES_STMISIM_Min (0x0UL) /*!< Min enumerator value of STMISIM field.                           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMISIM_Max (0x1UL) /*!< Max enumerator value of STMISIM field.                           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMISIM_NotRequested (0x1UL) /*!< Not Requested                                           */
+  #define UICR_TRACE_ETBSINK_SOURCES_STMISIM_Requested (0x0UL) /*!< Requested                                                  */
+
+
+
+/* =============================================== Struct UICR_TRACE_TPIUSINK ================================================ */
+/**
+  * @brief TPIUSINK [UICR_TRACE_TPIUSINK] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  SOURCES;                           /*!< (@ 0x00000000) (unspecified)                                         */
+} NRF_UICR_TRACE_TPIUSINK_Type;                      /*!< Size = 4 (0x004)                                                     */
+
+/* UICR_TRACE_TPIUSINK_SOURCES: (unspecified) */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ResetValue (0xFFFFFFFFUL) /*!< Reset value of SOURCES register.                          */
+
+/* STMMAINCORE @Bit 0 : STM trace from the domain main CPU */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMMAINCORE_Pos (0UL) /*!< Position of STMMAINCORE field.                                */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMMAINCORE_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_STMMAINCORE_Pos) /*!< Bit mask of
+                                                                            STMMAINCORE field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMMAINCORE_Min (0x0UL) /*!< Min enumerator value of STMMAINCORE field.                  */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMMAINCORE_Max (0x1UL) /*!< Max enumerator value of STMMAINCORE field.                  */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMMAINCORE_NotRequested (0x1UL) /*!< Not Requested                                      */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMMAINCORE_Requested (0x0UL) /*!< Requested                                             */
+
+/* ETMMAINCORE @Bit 1 : ETM trace from the domain main CPU */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMMAINCORE_Pos (1UL) /*!< Position of ETMMAINCORE field.                                */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMMAINCORE_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_ETMMAINCORE_Pos) /*!< Bit mask of
+                                                                            ETMMAINCORE field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMMAINCORE_Min (0x0UL) /*!< Min enumerator value of ETMMAINCORE field.                  */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMMAINCORE_Max (0x1UL) /*!< Max enumerator value of ETMMAINCORE field.                  */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMMAINCORE_NotRequested (0x1UL) /*!< Not Requested                                      */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMMAINCORE_Requested (0x0UL) /*!< Requested                                             */
+
+/* STMHWEVENTS @Bit 2 : STM HW events trace */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMHWEVENTS_Pos (2UL) /*!< Position of STMHWEVENTS field.                                */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMHWEVENTS_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_STMHWEVENTS_Pos) /*!< Bit mask of
+                                                                            STMHWEVENTS field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMHWEVENTS_Min (0x0UL) /*!< Min enumerator value of STMHWEVENTS field.                  */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMHWEVENTS_Max (0x1UL) /*!< Max enumerator value of STMHWEVENTS field.                  */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMHWEVENTS_NotRequested (0x1UL) /*!< Not Requested                                      */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMHWEVENTS_Requested (0x0UL) /*!< Requested                                             */
+
+/* STMPPR @Bit 3 : STM trace from PPR CPU */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMPPR_Pos (3UL) /*!< Position of STMPPR field.                                          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMPPR_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_STMPPR_Pos) /*!< Bit mask of STMPPR
+                                                                            field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMPPR_Min (0x0UL) /*!< Min enumerator value of STMPPR field.                            */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMPPR_Max (0x1UL) /*!< Max enumerator value of STMPPR field.                            */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMPPR_NotRequested (0x1UL) /*!< Not Requested                                           */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMPPR_Requested (0x0UL) /*!< Requested                                                  */
+
+/* STMFLPR @Bit 4 : STM trace from FLPR CPU */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMFLPR_Pos (4UL) /*!< Position of STMFLPR field.                                        */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMFLPR_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_STMFLPR_Pos) /*!< Bit mask of STMFLPR
+                                                                            field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMFLPR_Min (0x0UL) /*!< Min enumerator value of STMFLPR field.                          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMFLPR_Max (0x1UL) /*!< Max enumerator value of STMFLPR field.                          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMFLPR_NotRequested (0x1UL) /*!< Not Requested                                          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMFLPR_Requested (0x0UL) /*!< Requested                                                 */
+
+/* STMBBPR @Bit 5 : STM trace from BBPR CPU */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMBBPR_Pos (5UL) /*!< Position of STMBBPR field.                                        */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMBBPR_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_STMBBPR_Pos) /*!< Bit mask of STMBBPR
+                                                                            field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMBBPR_Min (0x0UL) /*!< Min enumerator value of STMBBPR field.                          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMBBPR_Max (0x1UL) /*!< Max enumerator value of STMBBPR field.                          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMBBPR_NotRequested (0x1UL) /*!< Not Requested                                          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMBBPR_Requested (0x0UL) /*!< Requested                                                 */
+
+/* STMCELLDSP @Bit 6 : STM trace from Cellular DSP */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSP_Pos (6UL) /*!< Position of STMCELLDSP field.                                  */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSP_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSP_Pos) /*!< Bit mask of
+                                                                            STMCELLDSP field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSP_Min (0x0UL) /*!< Min enumerator value of STMCELLDSP field.                    */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSP_Max (0x1UL) /*!< Max enumerator value of STMCELLDSP field.                    */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSP_NotRequested (0x1UL) /*!< Not Requested                                       */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSP_Requested (0x0UL) /*!< Requested                                              */
+
+/* STMCELLDSPLOCAL @Bit 7 : STM trace from Cellular DSP local STM */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSPLOCAL_Pos (7UL) /*!< Position of STMCELLDSPLOCAL field.                        */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSPLOCAL_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSPLOCAL_Pos) /*!< Bit
+                                                                            mask of STMCELLDSPLOCAL field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSPLOCAL_Min (0x0UL) /*!< Min enumerator value of STMCELLDSPLOCAL field.          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSPLOCAL_Max (0x1UL) /*!< Max enumerator value of STMCELLDSPLOCAL field.          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSPLOCAL_NotRequested (0x1UL) /*!< Not Requested                                  */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLDSPLOCAL_Requested (0x0UL) /*!< Requested                                         */
+
+/* ETMCELLDSP @Bit 8 : ETM trace from Cellular DSP */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMCELLDSP_Pos (8UL) /*!< Position of ETMCELLDSP field.                                  */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMCELLDSP_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_ETMCELLDSP_Pos) /*!< Bit mask of
+                                                                            ETMCELLDSP field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMCELLDSP_Min (0x0UL) /*!< Min enumerator value of ETMCELLDSP field.                    */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMCELLDSP_Max (0x1UL) /*!< Max enumerator value of ETMCELLDSP field.                    */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMCELLDSP_NotRequested (0x1UL) /*!< Not Requested                                       */
+  #define UICR_TRACE_TPIUSINK_SOURCES_ETMCELLDSP_Requested (0x0UL) /*!< Requested                                              */
+
+/* STMCELLRF @Bit 9 : STM trace from Cellular RF CPU */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLRF_Pos (9UL) /*!< Position of STMCELLRF field.                                    */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLRF_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_STMCELLRF_Pos) /*!< Bit mask of
+                                                                            STMCELLRF field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLRF_Min (0x0UL) /*!< Min enumerator value of STMCELLRF field.                      */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLRF_Max (0x1UL) /*!< Max enumerator value of STMCELLRF field.                      */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLRF_NotRequested (0x1UL) /*!< Not Requested                                        */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMCELLRF_Requested (0x0UL) /*!< Requested                                               */
+
+/* STMISIM @Bit 10 : STM trace from iSIM secure core */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMISIM_Pos (10UL) /*!< Position of STMISIM field.                                       */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMISIM_Msk (0x1UL << UICR_TRACE_TPIUSINK_SOURCES_STMISIM_Pos) /*!< Bit mask of STMISIM
+                                                                            field.*/
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMISIM_Min (0x0UL) /*!< Min enumerator value of STMISIM field.                          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMISIM_Max (0x1UL) /*!< Max enumerator value of STMISIM field.                          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMISIM_NotRequested (0x1UL) /*!< Not Requested                                          */
+  #define UICR_TRACE_TPIUSINK_SOURCES_STMISIM_Requested (0x0UL) /*!< Requested                                                 */
+
+
+
+/* ================================================ Struct UICR_TRACE_ETRSINK ================================================ */
+/**
+  * @brief ETRSINK [UICR_TRACE_ETRSINK] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  SOURCES;                           /*!< (@ 0x00000000) (unspecified)                                         */
+} NRF_UICR_TRACE_ETRSINK_Type;                       /*!< Size = 4 (0x004)                                                     */
+
+/* UICR_TRACE_ETRSINK_SOURCES: (unspecified) */
+  #define UICR_TRACE_ETRSINK_SOURCES_ResetValue (0xFFFFFFFFUL) /*!< Reset value of SOURCES register.                           */
+
+/* STMMAINCORE @Bit 0 : STM trace from the domain main CPU */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMMAINCORE_Pos (0UL) /*!< Position of STMMAINCORE field.                                 */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMMAINCORE_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_STMMAINCORE_Pos) /*!< Bit mask of
+                                                                            STMMAINCORE field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_STMMAINCORE_Min (0x0UL) /*!< Min enumerator value of STMMAINCORE field.                   */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMMAINCORE_Max (0x1UL) /*!< Max enumerator value of STMMAINCORE field.                   */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMMAINCORE_NotRequested (0x1UL) /*!< Not Requested                                       */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMMAINCORE_Requested (0x0UL) /*!< Requested                                              */
+
+/* ETMMAINCORE @Bit 1 : ETM trace from the domain main CPU */
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMMAINCORE_Pos (1UL) /*!< Position of ETMMAINCORE field.                                 */
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMMAINCORE_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_ETMMAINCORE_Pos) /*!< Bit mask of
+                                                                            ETMMAINCORE field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMMAINCORE_Min (0x0UL) /*!< Min enumerator value of ETMMAINCORE field.                   */
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMMAINCORE_Max (0x1UL) /*!< Max enumerator value of ETMMAINCORE field.                   */
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMMAINCORE_NotRequested (0x1UL) /*!< Not Requested                                       */
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMMAINCORE_Requested (0x0UL) /*!< Requested                                              */
+
+/* STMHWEVENTS @Bit 2 : STM HW events trace */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMHWEVENTS_Pos (2UL) /*!< Position of STMHWEVENTS field.                                 */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMHWEVENTS_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_STMHWEVENTS_Pos) /*!< Bit mask of
+                                                                            STMHWEVENTS field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_STMHWEVENTS_Min (0x0UL) /*!< Min enumerator value of STMHWEVENTS field.                   */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMHWEVENTS_Max (0x1UL) /*!< Max enumerator value of STMHWEVENTS field.                   */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMHWEVENTS_NotRequested (0x1UL) /*!< Not Requested                                       */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMHWEVENTS_Requested (0x0UL) /*!< Requested                                              */
+
+/* STMPPR @Bit 3 : STM trace from PPR CPU */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMPPR_Pos (3UL) /*!< Position of STMPPR field.                                           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMPPR_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_STMPPR_Pos) /*!< Bit mask of STMPPR field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_STMPPR_Min (0x0UL) /*!< Min enumerator value of STMPPR field.                             */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMPPR_Max (0x1UL) /*!< Max enumerator value of STMPPR field.                             */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMPPR_NotRequested (0x1UL) /*!< Not Requested                                            */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMPPR_Requested (0x0UL) /*!< Requested                                                   */
+
+/* STMFLPR @Bit 4 : STM trace from FLPR CPU */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMFLPR_Pos (4UL) /*!< Position of STMFLPR field.                                         */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMFLPR_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_STMFLPR_Pos) /*!< Bit mask of STMFLPR
+                                                                            field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_STMFLPR_Min (0x0UL) /*!< Min enumerator value of STMFLPR field.                           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMFLPR_Max (0x1UL) /*!< Max enumerator value of STMFLPR field.                           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMFLPR_NotRequested (0x1UL) /*!< Not Requested                                           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMFLPR_Requested (0x0UL) /*!< Requested                                                  */
+
+/* STMBBPR @Bit 5 : STM trace from BBPR CPU */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMBBPR_Pos (5UL) /*!< Position of STMBBPR field.                                         */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMBBPR_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_STMBBPR_Pos) /*!< Bit mask of STMBBPR
+                                                                            field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_STMBBPR_Min (0x0UL) /*!< Min enumerator value of STMBBPR field.                           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMBBPR_Max (0x1UL) /*!< Max enumerator value of STMBBPR field.                           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMBBPR_NotRequested (0x1UL) /*!< Not Requested                                           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMBBPR_Requested (0x0UL) /*!< Requested                                                  */
+
+/* STMCELLDSP @Bit 6 : STM trace from Cellular DSP */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSP_Pos (6UL) /*!< Position of STMCELLDSP field.                                   */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSP_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_STMCELLDSP_Pos) /*!< Bit mask of
+                                                                            STMCELLDSP field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSP_Min (0x0UL) /*!< Min enumerator value of STMCELLDSP field.                     */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSP_Max (0x1UL) /*!< Max enumerator value of STMCELLDSP field.                     */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSP_NotRequested (0x1UL) /*!< Not Requested                                        */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSP_Requested (0x0UL) /*!< Requested                                               */
+
+/* STMCELLDSPLOCAL @Bit 7 : STM trace from Cellular DSP local STM */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSPLOCAL_Pos (7UL) /*!< Position of STMCELLDSPLOCAL field.                         */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSPLOCAL_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_STMCELLDSPLOCAL_Pos) /*!< Bit mask
+                                                                            of STMCELLDSPLOCAL field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSPLOCAL_Min (0x0UL) /*!< Min enumerator value of STMCELLDSPLOCAL field.           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSPLOCAL_Max (0x1UL) /*!< Max enumerator value of STMCELLDSPLOCAL field.           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSPLOCAL_NotRequested (0x1UL) /*!< Not Requested                                   */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLDSPLOCAL_Requested (0x0UL) /*!< Requested                                          */
+
+/* ETMCELLDSP @Bit 8 : ETM trace from Cellular DSP */
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMCELLDSP_Pos (8UL) /*!< Position of ETMCELLDSP field.                                   */
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMCELLDSP_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_ETMCELLDSP_Pos) /*!< Bit mask of
+                                                                            ETMCELLDSP field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMCELLDSP_Min (0x0UL) /*!< Min enumerator value of ETMCELLDSP field.                     */
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMCELLDSP_Max (0x1UL) /*!< Max enumerator value of ETMCELLDSP field.                     */
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMCELLDSP_NotRequested (0x1UL) /*!< Not Requested                                        */
+  #define UICR_TRACE_ETRSINK_SOURCES_ETMCELLDSP_Requested (0x0UL) /*!< Requested                                               */
+
+/* STMCELLRF @Bit 9 : STM trace from Cellular RF CPU */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLRF_Pos (9UL) /*!< Position of STMCELLRF field.                                     */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLRF_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_STMCELLRF_Pos) /*!< Bit mask of
+                                                                            STMCELLRF field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLRF_Min (0x0UL) /*!< Min enumerator value of STMCELLRF field.                       */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLRF_Max (0x1UL) /*!< Max enumerator value of STMCELLRF field.                       */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLRF_NotRequested (0x1UL) /*!< Not Requested                                         */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMCELLRF_Requested (0x0UL) /*!< Requested                                                */
+
+/* STMISIM @Bit 10 : STM trace from iSIM secure core */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMISIM_Pos (10UL) /*!< Position of STMISIM field.                                        */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMISIM_Msk (0x1UL << UICR_TRACE_ETRSINK_SOURCES_STMISIM_Pos) /*!< Bit mask of STMISIM
+                                                                            field.*/
+  #define UICR_TRACE_ETRSINK_SOURCES_STMISIM_Min (0x0UL) /*!< Min enumerator value of STMISIM field.                           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMISIM_Max (0x1UL) /*!< Max enumerator value of STMISIM field.                           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMISIM_NotRequested (0x1UL) /*!< Not Requested                                           */
+  #define UICR_TRACE_ETRSINK_SOURCES_STMISIM_Requested (0x0UL) /*!< Requested                                                  */
+
+
+
+/* ==================================================== Struct UICR_TRACE ==================================================== */
+/**
+  * @brief TRACE [UICR_TRACE] (unspecified)
+  */
+typedef struct {
+  __IOM NRF_UICR_TRACE_ETBSINK_Type ETBSINK;         /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM NRF_UICR_TRACE_TPIUSINK_Type TPIUSINK;       /*!< (@ 0x00000004) (unspecified)                                         */
+  __IOM NRF_UICR_TRACE_ETRSINK_Type ETRSINK;         /*!< (@ 0x00000008) (unspecified)                                         */
+  __IOM uint32_t  PORTCONFIG;                        /*!< (@ 0x0000000C) Trace port speed configuration                        */
+} NRF_UICR_TRACE_Type;                               /*!< Size = 16 (0x010)                                                    */
+
+/* UICR_TRACE_PORTCONFIG: Trace port speed configuration */
+  #define UICR_TRACE_PORTCONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PORTCONFIG register.                             */
+
+/* PORTCONFIG @Bits 0..1 : (unspecified) */
+  #define UICR_TRACE_PORTCONFIG_PORTCONFIG_Pos (0UL) /*!< Position of PORTCONFIG field.                                        */
+  #define UICR_TRACE_PORTCONFIG_PORTCONFIG_Msk (0x3UL << UICR_TRACE_PORTCONFIG_PORTCONFIG_Pos) /*!< Bit mask of PORTCONFIG
+                                                                            field.*/
+  #define UICR_TRACE_PORTCONFIG_PORTCONFIG_Min (0x0UL) /*!< Min enumerator value of PORTCONFIG field.                          */
+  #define UICR_TRACE_PORTCONFIG_PORTCONFIG_Max (0x3UL) /*!< Max enumerator value of PORTCONFIG field.                          */
+  #define UICR_TRACE_PORTCONFIG_PORTCONFIG_FullSpeed (0x3UL) /*!< Full speed                                                   */
+  #define UICR_TRACE_PORTCONFIG_PORTCONFIG_HalfSpeed (0x2UL) /*!< Half speed                                                   */
+  #define UICR_TRACE_PORTCONFIG_PORTCONFIG_QuarterSpeed (0x1UL) /*!< One quarter speed                                         */
+  #define UICR_TRACE_PORTCONFIG_PORTCONFIG_EightSpeed (0x0UL) /*!< One eigth speed                                             */
+
+
 /* ======================================================= Struct UICR ======================================================= */
 /**
   * @brief User information configuration registers
@@ -143324,22 +143810,23 @@ typedef struct {
     __IOM NRF_UICR_MEM_Type MEM[16];                 /*!< (@ 0x00000000) (unspecified)                                         */
     __IM uint32_t RESERVED[32];
     __IOM NRF_UICR_PERIPH_Type PERIPH[192];          /*!< (@ 0x00000100) (unspecified)                                         */
-    __IOM NRF_UICR_GPIO_Type GPIO[16];               /*!< (@ 0x00000400) (unspecified)                                         */
+    __IM uint32_t RESERVED1[32];
     __IOM NRF_UICR_GPIOTE_Type GPIOTE[4];            /*!< (@ 0x00000480) (unspecified)                                         */
-    __IOM NRF_UICR_IPCT_Type IPCT;                   /*!< (@ 0x000004A0) (unspecified)                                         */
-    __IOM NRF_UICR_DPPI_Type DPPI;                   /*!< (@ 0x000004C8) (unspecified)                                         */
-    __IM uint32_t RESERVED1[2];
-    __IOM NRF_UICR_GRTC_Type GRTC;                   /*!< (@ 0x00000610) (unspecified)                                         */
+    __IOM NRF_UICR_IPCT_Type IPCT;                   /*!< (@ 0x000004B0) (unspecified)                                         */
+    __IOM NRF_UICR_DPPI_Type DPPI;                   /*!< (@ 0x000004E0) (unspecified)                                         */
     __IM uint32_t RESERVED2[2];
-    __IOM uint32_t IPCMAP[16];                       /*!< (@ 0x00000620) Request configuration for the channel n of IPCMAP     */
-    __IM uint32_t RESERVED3[40];
-    __IOM NRF_UICR_MAILBOX_Type MAILBOX[8];          /*!< (@ 0x00000700) (unspecified)                                         */
+    __IOM NRF_UICR_GRTC_Type GRTC;                   /*!< (@ 0x00000660) (unspecified)                                         */
+    __IM uint32_t RESERVED3[6];
+    __IOM uint32_t IPCMAP[16];                       /*!< (@ 0x00000680) Request configuration for the channel n of IPCMAP     */
     __IM uint32_t RESERVED4[16];
+    __IOM NRF_UICR_MAILBOX_Type MAILBOX[8];          /*!< (@ 0x00000700) (unspecified)                                         */
+    __IOM NRF_UICR_TRACE_Type TRACE;                 /*!< (@ 0x00000740) (unspecified)                                         */
+    __IM uint32_t RESERVED5[12];
     __IOM uint32_t INITSVTOR;                        /*!< (@ 0x00000780) Initial value of the secure VTOR (Vector Table Offset
                                                                          Register) after CPU reset.*/
     __IOM uint32_t INITNSVTOR;                       /*!< (@ 0x00000784) Initial value of the non-secure VTOR (Vector Table
                                                                          Offset Register).*/
-    __IM uint32_t RESERVED5[29];
+    __IM uint32_t RESERVED6[29];
     __IOM uint32_t PTREXTUICR;                       /*!< (@ 0x000007FC) Pointer to extended UICR.                             */
   } NRF_UICR_Type;                                   /*!< Size = 2048 (0x800)                                                  */
 
@@ -159639,8 +160126,8 @@ typedef struct {
   #define VPRCSR_MINTTHRESH (0x00000347ul)
   #define VPRCSR_MINTTHRESH_ResetValue (0x00000000UL) /*!< Reset value of MINTTHRESH register.                                 */
 
-/* TH @Bits 0..7 : M-Mode Interrupt-level Threshold */
-  #define VPRCSR_MINTTHRESH_TH_Pos (0UL)             /*!< Position of TH field.                                                */
+/* TH @Bits 24..31 : M-Mode Interrupt-level Threshold */
+  #define VPRCSR_MINTTHRESH_TH_Pos (24UL)            /*!< Position of TH field.                                                */
   #define VPRCSR_MINTTHRESH_TH_Msk (0xFFUL << VPRCSR_MINTTHRESH_TH_Pos) /*!< Bit mask of TH field.                             */
   #define VPRCSR_MINTTHRESH_TH_Min (0x0UL)           /*!< Min enumerator value of TH field.                                    */
   #define VPRCSR_MINTTHRESH_TH_Max (0xFFUL)          /*!< Max enumerator value of TH field.                                    */
@@ -159935,7 +160422,7 @@ typedef struct {
   * @brief MARCHID [VPRCSR_MARCHID] Machine Architecture ID
   */
   #define VPRCSR_MARCHID (0x00000F12ul)
-  #define VPRCSR_MARCHID_ResetValue (0x80000000UL)   /*!< Reset value of MARCHID register.                                     */
+  #define VPRCSR_MARCHID_ResetValue (0x800000AEUL)   /*!< Reset value of MARCHID register.                                     */
 
 /* MULDIV @Bits 0..1 : Indicates the MULDIV parameter option */
   #define VPRCSR_MARCHID_MULDIV_Pos (0UL)            /*!< Position of MULDIV field.                                            */
@@ -160204,7 +160691,7 @@ typedef struct {
   * @brief EXTPARAMS [VPRCSR_NORDIC_EXTPARAMS] Reads values of external configuration parameters
   */
   #define VPRCSR_NORDIC_EXTPARAMS (0x000007C4ul)
-  #define VPRCSR_NORDIC_EXTPARAMS_ResetValue (0x00000000UL) /*!< Reset value of EXTPARAMS register.                            */
+  #define VPRCSR_NORDIC_EXTPARAMS_ResetValue (0x00000016UL) /*!< Reset value of EXTPARAMS register.                            */
 
 /* MULDIV @Bits 0..1 : value of MULDIV */
   #define VPRCSR_NORDIC_EXTPARAMS_MULDIV_Pos (0UL)   /*!< Position of MULDIV field.                                            */
@@ -164446,6 +164933,36 @@ typedef struct {
 
 
 
+
+/* =========================================================================================================================== */
+/* ================                                         VPRPUBLIC                                         ================ */
+/* =========================================================================================================================== */
+
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
+/* ==================================================== Struct VPRPUBLIC ===================================================== */
+/**
+  * @brief VPR peripheral registers
+  */
+  typedef struct {                                   /*!< VPRPUBLIC Structure                                                  */
+    __OM uint32_t TASKS_TRIGGER[32];                 /*!< (@ 0x00000000) VPR task [n] register                                 */
+  } NRF_VPRPUBLIC_Type;                              /*!< Size = 128 (0x080)                                                   */
+
+/* VPRPUBLIC_TASKS_TRIGGER: VPR task [n] register */
+  #define VPRPUBLIC_TASKS_TRIGGER_MaxCount (32UL)    /*!< Max size of TASKS_TRIGGER[32] array.                                 */
+  #define VPRPUBLIC_TASKS_TRIGGER_MaxIndex (31UL)    /*!< Max index of TASKS_TRIGGER[32] array.                                */
+  #define VPRPUBLIC_TASKS_TRIGGER_MinIndex (0UL)     /*!< Min index of TASKS_TRIGGER[32] array.                                */
+  #define VPRPUBLIC_TASKS_TRIGGER_ResetValue (0x00000000UL) /*!< Reset value of TASKS_TRIGGER[32] register.                    */
+
+/* TASKS_TRIGGER @Bit 0 : VPR task [n] register */
+  #define VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Pos (0UL) /*!< Position of TASKS_TRIGGER field.                                */
+  #define VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Msk (0x1UL << VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Pos) /*!< Bit mask of
+                                                                            TASKS_TRIGGER field.*/
+  #define VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Min (0x1UL) /*!< Min enumerator value of TASKS_TRIGGER field.                  */
+  #define VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Max (0x1UL) /*!< Max enumerator value of TASKS_TRIGGER field.                  */
+  #define VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Trigger (0x1UL) /*!< Trigger task                                              */
+
+
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
 /* =========================================================================================================================== */
 /* ================                                          VREG1V0                                          ================ */

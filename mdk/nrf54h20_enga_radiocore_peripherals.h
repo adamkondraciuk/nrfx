@@ -51,6 +51,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UICR_PRESENT 1
 #define UICR_COUNT 1
 
+#define UICR_FEATEN_RADIO_ON 1                       /*!< (unspecified)                                                        */
+#define UICR_FEATEN_WIFI_ON 0                        /*!< (unspecified)                                                        */
+#define UICR_FEATEN_LTE_ON 1                         /*!< (unspecified)                                                        */
+
 /*CACHEDATA*/
 #define CACHEDATA_PRESENT 1
 #define CACHEDATA_COUNT 2
@@ -122,8 +126,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MPC_COUNT 1
 
 #define MPC_EXTEND_CLOCK_REQ 0                       /*!< (unspecified)                                                        */
-#define MPC_RTCHOKE 0                                /*!< (unspecified)                                                        */
-#define MPC_OVERRIDE_GRAN 4                          /*!< The override region granularity is 4 bytes                           */
+#define MPC_RTCHOKE 1                                /*!< (unspecified)                                                        */
+#define MPC_OVERRIDE_GRAN 4096                       /*!< The override region granularity is 4096 bytes                        */
 
 /*MVDMA performs direct-memory-accesses between memories. Data is transferred according to job descriptor lists. Each transfer has corresponding source and sink descriptor lists with matching data amounts. The lists are in memory and they contain data buffer information, address pointers, buffer sizes and data type attributes.*/
 
@@ -157,6 +161,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define HSFLL_COUNT 1
 
 #define HSFLL_DITHER_32B 0                           /*!< (unspecified)                                                        */
+#define HSFLL_CLOCKCTRL_MULT_RESET 6                 /*!< Reset value of register CLOCKCTRL.MULT: clockctrl_mult_reset         */
 
 /*LRCCONF*/
 #define LRCCONF_PRESENT 1
@@ -168,15 +173,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define LRCCONF000_LRCREQHFXO 0                      /*!< (unspecified)                                                        */
 #define LRCCONF000_NCLK_MIN 0                        /*!< (unspecified)                                                        */
 #define LRCCONF000_NCLK_MAX 0                        /*!< (unspecified)                                                        */
+#define LRCCONF000_NCLK_SIZE 1                       /*!< (unspecified)                                                        */
 #define LRCCONF000_CLKCTRL 1                         /*!< (unspecified)                                                        */
 #define LRCCONF000_NACTPD_MIN 0                      /*!< (unspecified)                                                        */
 #define LRCCONF000_NACTPD_MAX 7                      /*!< (unspecified)                                                        */
+#define LRCCONF000_NACTPD_SIZE 8                     /*!< (unspecified)                                                        */
 #define LRCCONF000_PDACT 0                           /*!< (unspecified)                                                        */
 #define LRCCONF000_NPD_MIN 0                         /*!< (unspecified)                                                        */
 #define LRCCONF000_NPD_MAX 7                         /*!< (unspecified)                                                        */
+#define LRCCONF000_NPD_SIZE 8                        /*!< (unspecified)                                                        */
 #define LRCCONF000_OTHERON 0                         /*!< (unspecified)                                                        */
 #define LRCCONF000_NDOMAINS_MIN 0                    /*!< (unspecified)                                                        */
 #define LRCCONF000_NDOMAINS_MAX 15                   /*!< (unspecified)                                                        */
+#define LRCCONF000_NDOMAINS_SIZE 16                  /*!< (unspecified)                                                        */
 #define LRCCONF000_AX2XWAITSTATES 0                  /*!< (unspecified)                                                        */
 #define LRCCONF000_POWERON_MAIN_RESET 0              /*!< Reset value of register POWERON.MAIN: 0                              */
 #define LRCCONF000_POWERON_ACT_RESET 0               /*!< Reset value of register POWERON.ACT: 0                               */
@@ -189,15 +198,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define LRCCONF010_LRCREQHFXO 0                      /*!< (unspecified)                                                        */
 #define LRCCONF010_NCLK_MIN 0                        /*!< (unspecified)                                                        */
 #define LRCCONF010_NCLK_MAX 7                        /*!< (unspecified)                                                        */
+#define LRCCONF010_NCLK_SIZE 8                       /*!< (unspecified)                                                        */
 #define LRCCONF010_CLKCTRL 0                         /*!< (unspecified)                                                        */
 #define LRCCONF010_NACTPD_MIN 0                      /*!< (unspecified)                                                        */
 #define LRCCONF010_NACTPD_MAX 1                      /*!< (unspecified)                                                        */
+#define LRCCONF010_NACTPD_SIZE 2                     /*!< (unspecified)                                                        */
 #define LRCCONF010_PDACT 1                           /*!< (unspecified)                                                        */
 #define LRCCONF010_NPD_MIN 0                         /*!< (unspecified)                                                        */
 #define LRCCONF010_NPD_MAX 7                         /*!< (unspecified)                                                        */
+#define LRCCONF010_NPD_SIZE 8                        /*!< (unspecified)                                                        */
 #define LRCCONF010_OTHERON 0                         /*!< (unspecified)                                                        */
 #define LRCCONF010_NDOMAINS_MIN 0                    /*!< (unspecified)                                                        */
 #define LRCCONF010_NDOMAINS_MAX 15                   /*!< (unspecified)                                                        */
+#define LRCCONF010_NDOMAINS_SIZE 16                  /*!< (unspecified)                                                        */
 #define LRCCONF010_AX2XWAITSTATES 0                  /*!< (unspecified)                                                        */
 #define LRCCONF010_POWERON_MAIN_RESET 1              /*!< Reset value of register POWERON.MAIN: 1                              */
 #define LRCCONF010_POWERON_ACT_RESET 0               /*!< Reset value of register POWERON.ACT: 0                               */
@@ -210,15 +223,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define LRCCONF020_LRCREQHFXO 0                      /*!< (unspecified)                                                        */
 #define LRCCONF020_NCLK_MIN 0                        /*!< (unspecified)                                                        */
 #define LRCCONF020_NCLK_MAX 7                        /*!< (unspecified)                                                        */
+#define LRCCONF020_NCLK_SIZE 8                       /*!< (unspecified)                                                        */
 #define LRCCONF020_CLKCTRL 0                         /*!< (unspecified)                                                        */
 #define LRCCONF020_NACTPD_MIN 0                      /*!< (unspecified)                                                        */
 #define LRCCONF020_NACTPD_MAX 7                      /*!< (unspecified)                                                        */
+#define LRCCONF020_NACTPD_SIZE 8                     /*!< (unspecified)                                                        */
 #define LRCCONF020_PDACT 0                           /*!< (unspecified)                                                        */
 #define LRCCONF020_NPD_MIN 0                         /*!< (unspecified)                                                        */
 #define LRCCONF020_NPD_MAX 7                         /*!< (unspecified)                                                        */
+#define LRCCONF020_NPD_SIZE 8                        /*!< (unspecified)                                                        */
 #define LRCCONF020_OTHERON 0                         /*!< (unspecified)                                                        */
 #define LRCCONF020_NDOMAINS_MIN 0                    /*!< (unspecified)                                                        */
 #define LRCCONF020_NDOMAINS_MAX 15                   /*!< (unspecified)                                                        */
+#define LRCCONF020_NDOMAINS_SIZE 16                  /*!< (unspecified)                                                        */
 #define LRCCONF020_AX2XWAITSTATES 0                  /*!< (unspecified)                                                        */
 #define LRCCONF020_POWERON_MAIN_RESET 0              /*!< Reset value of register POWERON.MAIN: 0                              */
 #define LRCCONF020_POWERON_ACT_RESET 0               /*!< Reset value of register POWERON.ACT: 0                               */
@@ -265,8 +282,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define MEMCONF_RETTRIM 1                            /*!< (unspecified)                                                        */
 #define MEMCONF_REPAIR 0                             /*!< (unspecified)                                                        */
+#define MEMCONF_REPAIR_INTERNAL_DOC 0                /*!< (unspecified)                                                        */
 #define MEMCONF_POWER 1                              /*!< (unspecified)                                                        */
 #define MEMCONF_RET2 1                               /*!< (unspecified)                                                        */
+#define MEMCONF_RETAIN_PUBLIC_DOC 1                  /*!< (unspecified)                                                        */
+#define MEMCONF_RETAIN_INTERNAL_DOC 0                /*!< (unspecified)                                                        */
+#define MEMCONF_TRIM_INTERNAL_DOC 0                  /*!< (unspecified)                                                        */
 
 /*Watchdog Timer*/
 #define WDT_PRESENT 1
@@ -289,62 +310,82 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define DPPIC020_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
 #define DPPIC020_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define DPPIC020_CH_NUM_MAX 15                       /*!< (unspecified)                                                        */
+#define DPPIC020_CH_NUM_SIZE 16                      /*!< (unspecified)                                                        */
 #define DPPIC020_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
 #define DPPIC020_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
+#define DPPIC020_GROUP_NUM_SIZE 2                    /*!< (unspecified)                                                        */
 
 #define DPPIC030_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
 #define DPPIC030_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define DPPIC030_CH_NUM_MAX 8                        /*!< (unspecified)                                                        */
+#define DPPIC030_CH_NUM_SIZE 9                       /*!< (unspecified)                                                        */
 #define DPPIC030_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
 #define DPPIC030_GROUP_NUM_MAX 0                     /*!< (unspecified)                                                        */
+#define DPPIC030_GROUP_NUM_SIZE 1                    /*!< (unspecified)                                                        */
 
 #define DPPIC120_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
 #define DPPIC120_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define DPPIC120_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC120_CH_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define DPPIC120_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
 #define DPPIC120_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
+#define DPPIC120_GROUP_NUM_SIZE 2                    /*!< (unspecified)                                                        */
 
 #define DPPIC130_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
 #define DPPIC130_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define DPPIC130_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC130_CH_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define DPPIC130_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
 #define DPPIC130_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
+#define DPPIC130_GROUP_NUM_SIZE 2                    /*!< (unspecified)                                                        */
 
 #define DPPIC131_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
 #define DPPIC131_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define DPPIC131_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC131_CH_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define DPPIC131_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
 #define DPPIC131_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
+#define DPPIC131_GROUP_NUM_SIZE 2                    /*!< (unspecified)                                                        */
 
 #define DPPIC132_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
 #define DPPIC132_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define DPPIC132_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC132_CH_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define DPPIC132_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
 #define DPPIC132_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
+#define DPPIC132_GROUP_NUM_SIZE 2                    /*!< (unspecified)                                                        */
 
 #define DPPIC133_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
 #define DPPIC133_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define DPPIC133_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC133_CH_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define DPPIC133_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
 #define DPPIC133_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
+#define DPPIC133_GROUP_NUM_SIZE 2                    /*!< (unspecified)                                                        */
 
 #define DPPIC134_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
 #define DPPIC134_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define DPPIC134_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC134_CH_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define DPPIC134_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
 #define DPPIC134_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
+#define DPPIC134_GROUP_NUM_SIZE 2                    /*!< (unspecified)                                                        */
 
 #define DPPIC135_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
 #define DPPIC135_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define DPPIC135_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC135_CH_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define DPPIC135_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
 #define DPPIC135_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
+#define DPPIC135_GROUP_NUM_SIZE 2                    /*!< (unspecified)                                                        */
 
 #define DPPIC136_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
 #define DPPIC136_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define DPPIC136_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC136_CH_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define DPPIC136_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
 #define DPPIC136_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
+#define DPPIC136_GROUP_NUM_SIZE 2                    /*!< (unspecified)                                                        */
 
 /*PPIB APB registers*/
 #define PPIB_PRESENT 1
@@ -357,6 +398,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define EGU020_PEND 0                                /*!< (unspecified)                                                        */
 #define EGU020_CH_NUM_MIN 0                          /*!< (unspecified)                                                        */
 #define EGU020_CH_NUM_MAX 15                         /*!< (unspecified)                                                        */
+#define EGU020_CH_NUM_SIZE 16                        /*!< (unspecified)                                                        */
 
 /*Accelerated Address Resolver*/
 #define AAR_PRESENT 1
@@ -380,72 +422,122 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define TIMER020_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER020_CC_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define TIMER020_CC_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define TIMER020_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER020_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER020_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER021_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER021_CC_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define TIMER021_CC_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define TIMER021_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER021_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER021_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER022_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER022_CC_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define TIMER022_CC_NUM_SIZE 8                       /*!< (unspecified)                                                        */
 #define TIMER022_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER022_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER022_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER120_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER120_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER120_CC_NUM_SIZE 6                       /*!< (unspecified)                                                        */
 #define TIMER120_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER120_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER120_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER121_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER121_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER121_CC_NUM_SIZE 6                       /*!< (unspecified)                                                        */
 #define TIMER121_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER121_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER121_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER130_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER130_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER130_CC_NUM_SIZE 6                       /*!< (unspecified)                                                        */
 #define TIMER130_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER130_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER130_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER131_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER131_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER131_CC_NUM_SIZE 6                       /*!< (unspecified)                                                        */
 #define TIMER131_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER131_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER131_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER132_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER132_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER132_CC_NUM_SIZE 6                       /*!< (unspecified)                                                        */
 #define TIMER132_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER132_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER132_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER133_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER133_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER133_CC_NUM_SIZE 6                       /*!< (unspecified)                                                        */
 #define TIMER133_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER133_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER133_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER134_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER134_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER134_CC_NUM_SIZE 6                       /*!< (unspecified)                                                        */
 #define TIMER134_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER134_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER134_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER135_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER135_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER135_CC_NUM_SIZE 6                       /*!< (unspecified)                                                        */
 #define TIMER135_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER135_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER135_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER136_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER136_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER136_CC_NUM_SIZE 6                       /*!< (unspecified)                                                        */
 #define TIMER136_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER136_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER136_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 #define TIMER137_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER137_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER137_CC_NUM_SIZE 6                       /*!< (unspecified)                                                        */
 #define TIMER137_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
 #define TIMER137_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
+#define TIMER137_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 
 /*Real-time counter*/
 #define RTC_PRESENT 1
 #define RTC_COUNT 3
+
+#define RTC_CC_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define RTC_CC_NUM_MAX 7                             /*!< (unspecified)                                                        */
+#define RTC_CC_NUM_SIZE 8                            /*!< (unspecified)                                                        */
+#define RTC_BIT_WIDTH_MIN 0                          /*!< (unspecified)                                                        */
+#define RTC_BIT_WIDTH_MAX 23                         /*!< (unspecified)                                                        */
+#define RTC_BIT_WIDTH_SIZE 24                        /*!< (unspecified)                                                        */
+#define RTC_LFCLK_ENABLE 0                           /*!< (unspecified)                                                        */
+
+#define RTC130_CC_NUM_MIN 0                          /*!< (unspecified)                                                        */
+#define RTC130_CC_NUM_MAX 3                          /*!< (unspecified)                                                        */
+#define RTC130_CC_NUM_SIZE 4                         /*!< (unspecified)                                                        */
+#define RTC130_BIT_WIDTH_MIN 0                       /*!< (unspecified)                                                        */
+#define RTC130_BIT_WIDTH_MAX 23                      /*!< (unspecified)                                                        */
+#define RTC130_BIT_WIDTH_SIZE 24                     /*!< (unspecified)                                                        */
+#define RTC130_LFCLK_ENABLE 0                        /*!< (unspecified)                                                        */
+
+#define RTC131_CC_NUM_MIN 0                          /*!< (unspecified)                                                        */
+#define RTC131_CC_NUM_MAX 3                          /*!< (unspecified)                                                        */
+#define RTC131_CC_NUM_SIZE 4                         /*!< (unspecified)                                                        */
+#define RTC131_BIT_WIDTH_MIN 0                       /*!< (unspecified)                                                        */
+#define RTC131_BIT_WIDTH_MAX 23                      /*!< (unspecified)                                                        */
+#define RTC131_BIT_WIDTH_SIZE 24                     /*!< (unspecified)                                                        */
+#define RTC131_LFCLK_ENABLE 0                        /*!< (unspecified)                                                        */
 
 /*2.4 GHz radio*/
 #define RADIO_PRESENT 1
@@ -473,11 +565,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR_VPRREMAPADDRVTOB 0x00000000              /*!< VPR remap address: 0x00000000                                        */
 #define VPR_VEVIF_NTASKS_MIN 0                       /*!< VEVIF tasks: 0..15                                                   */
 #define VPR_VEVIF_NTASKS_MAX 15                      /*!< VEVIF tasks: 0..15                                                   */
+#define VPR_VEVIF_NTASKS_SIZE 16                     /*!< VEVIF tasks: 0..15                                                   */
 #define VPR_VEVIF_TASKS_MASK 0x0000FF00              /*!< Mask of supported VEVIF tasks: 0x0000FF00                            */
 #define VPR_VEVIF_NDPPI_MIN 8                        /*!< VEVIF DPPI channels: 8..10                                           */
 #define VPR_VEVIF_NDPPI_MAX 10                       /*!< VEVIF DPPI channels: 8..10                                           */
+#define VPR_VEVIF_NDPPI_SIZE 11                      /*!< VEVIF DPPI channels: 8..10                                           */
 #define VPR_VEVIF_NEVENTS_MIN 12                     /*!< VEVIF events: 12..15                                                 */
 #define VPR_VEVIF_NEVENTS_MAX 15                     /*!< VEVIF events: 12..15                                                 */
+#define VPR_VEVIF_NEVENTS_SIZE 16                    /*!< VEVIF events: 12..15                                                 */
 #define VPR_DEBUGGER_OFFSET 1024                     /*!< Debugger interface register offset: 0x53034400                       */
 
 #define VPR120_INIT_PC_RESET_VALUE 0x2F800000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x2F800000                        */
@@ -493,11 +588,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR120_VPRREMAPADDRVTOB 0x2F840000           /*!< VPR remap address: 0x2F840000                                        */
 #define VPR120_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..31                                                   */
 #define VPR120_VEVIF_NTASKS_MAX 31                   /*!< VEVIF tasks: 0..31                                                   */
+#define VPR120_VEVIF_NTASKS_SIZE 32                  /*!< VEVIF tasks: 0..31                                                   */
 #define VPR120_VEVIF_TASKS_MASK 0xFFFFF0FF           /*!< Mask of supported VEVIF tasks: 0xFFFFF0FF                            */
 #define VPR120_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR120_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR120_VEVIF_NDPPI_SIZE 28                   /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR120_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
 #define VPR120_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 28..31                                                 */
+#define VPR120_VEVIF_NEVENTS_SIZE 32                 /*!< VEVIF events: 28..31                                                 */
 #define VPR120_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F8C8400                       */
 
 #define VPR121_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
@@ -513,11 +611,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR121_VPRREMAPADDRVTOB 0x00000000           /*!< VPR remap address: 0x00000000                                        */
 #define VPR121_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..31                                                   */
 #define VPR121_VEVIF_NTASKS_MAX 31                   /*!< VEVIF tasks: 0..31                                                   */
+#define VPR121_VEVIF_NTASKS_SIZE 32                  /*!< VEVIF tasks: 0..31                                                   */
 #define VPR121_VEVIF_TASKS_MASK 0xFFFF0000           /*!< Mask of supported VEVIF tasks: 0xFFFF0000                            */
 #define VPR121_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR121_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR121_VEVIF_NDPPI_SIZE 28                   /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR121_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
 #define VPR121_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 28..31                                                 */
+#define VPR121_VEVIF_NEVENTS_SIZE 32                 /*!< VEVIF events: 28..31                                                 */
 #define VPR121_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F8D4400                       */
 
 #define VPR130_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
@@ -533,11 +634,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR130_VPRREMAPADDRVTOB 0x00000000           /*!< VPR remap address: 0x00000000                                        */
 #define VPR130_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..15                                                   */
 #define VPR130_VEVIF_NTASKS_MAX 15                   /*!< VEVIF tasks: 0..15                                                   */
+#define VPR130_VEVIF_NTASKS_SIZE 16                  /*!< VEVIF tasks: 0..15                                                   */
 #define VPR130_VEVIF_TASKS_MASK 0xFFFFFFF0           /*!< Mask of supported VEVIF tasks: 0xFFFFFFF0                            */
 #define VPR130_VEVIF_NDPPI_MIN 8                     /*!< VEVIF DPPI channels: 8..11                                           */
 #define VPR130_VEVIF_NDPPI_MAX 11                    /*!< VEVIF DPPI channels: 8..11                                           */
+#define VPR130_VEVIF_NDPPI_SIZE 12                   /*!< VEVIF DPPI channels: 8..11                                           */
 #define VPR130_VEVIF_NEVENTS_MIN 12                  /*!< VEVIF events: 12..15                                                 */
 #define VPR130_VEVIF_NEVENTS_MAX 15                  /*!< VEVIF events: 12..15                                                 */
+#define VPR130_VEVIF_NEVENTS_SIZE 16                 /*!< VEVIF events: 12..15                                                 */
 #define VPR130_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F908400                       */
 
 /*IPCT APB registers*/
@@ -614,10 +718,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define GPIOTE130_GPIOTE_NCHANNELS_MIN 0             /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE130_GPIOTE_NCHANNELS_MAX 7             /*!< Number of GPIOTE channels: 0..7                                      */
+#define GPIOTE130_GPIOTE_NCHANNELS_SIZE 8            /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE130_GPIOTE_NPORTEVENTS_MIN 0           /*!< Number of GPIOTE port events: 0..3                                   */
 #define GPIOTE130_GPIOTE_NPORTEVENTS_MAX 3           /*!< Number of GPIOTE port events: 0..3                                   */
+#define GPIOTE130_GPIOTE_NPORTEVENTS_SIZE 4          /*!< Number of GPIOTE port events: 0..3                                   */
 #define GPIOTE130_GPIOTE_NINTERRUPTS_MIN 0           /*!< Number of GPIOTE interrupts: 0..1                                    */
 #define GPIOTE130_GPIOTE_NINTERRUPTS_MAX 1           /*!< Number of GPIOTE interrupts: 0..1                                    */
+#define GPIOTE130_GPIOTE_NINTERRUPTS_SIZE 2          /*!< Number of GPIOTE interrupts: 0..1                                    */
 
 /*Global Real-time counter*/
 #define GRTC_PRESENT 1
@@ -627,14 +734,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                                                           0..14*/
 #define GRTC_MSBWIDTH_MAX 14                         /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
                                                           0..14*/
+#define GRTC_MSBWIDTH_SIZE 15                        /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
+                                                          0..14*/
 #define GRTC_NCC_MIN 0                               /*!< Number of compare/capture registers : 0..15                          */
 #define GRTC_NCC_MAX 15                              /*!< Number of compare/capture registers : 0..15                          */
+#define GRTC_NCC_SIZE 16                             /*!< Number of compare/capture registers : 0..15                          */
 #define GRTC_NTIMEOUT_MIN 0                          /*!< Width of the TIMEOUT register : 0..15                                */
 #define GRTC_NTIMEOUT_MAX 15                         /*!< Width of the TIMEOUT register : 0..15                                */
+#define GRTC_NTIMEOUT_SIZE 16                        /*!< Width of the TIMEOUT register : 0..15                                */
 #define GRTC_NDOMAIN_MIN 0                           /*!< Number of domains at the KEEPRUNNING register: 0..15                 */
 #define GRTC_NDOMAIN_MAX 15                          /*!< Number of domains at the KEEPRUNNING register: 0..15                 */
+#define GRTC_NDOMAIN_SIZE 16                         /*!< Number of domains at the KEEPRUNNING register: 0..15                 */
 #define GRTC_GRTC_NINTERRUPTS_MIN 0                  /*!< Number of GRTC interrupts : 0..1                                     */
 #define GRTC_GRTC_NINTERRUPTS_MAX 1                  /*!< Number of GRTC interrupts : 0..1                                     */
+#define GRTC_GRTC_NINTERRUPTS_SIZE 2                 /*!< Number of GRTC interrupts : 0..1                                     */
 #define GRTC_PWMREGS 0                               /*!< (unspecified)                                                        */
 #define GRTC_CLKOUTREG 0                             /*!< (unspecified)                                                        */
 
@@ -656,23 +769,30 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MRAMC110_NMAINMEMORYSIZE 1                   /*!< MRAM main memory size: 1 MB                                          */
 #define MRAMC110_NNVRPAGES_MIN 0                     /*!< Number of MRAM NVR pages: 0..3                                       */
 #define MRAMC110_NNVRPAGES_MAX 3                     /*!< Number of MRAM NVR pages: 0..3                                       */
+#define MRAMC110_NNVRPAGES_SIZE 4                    /*!< Number of MRAM NVR pages: 0..3                                       */
 #define MRAMC110_NSIZEMRAMWORDS_MIN 1                /*!< Register ERASE.SIZE.SIZE range: 1..65536                             */
 #define MRAMC110_NSIZEMRAMWORDS_MAX 65536            /*!< Register ERASE.SIZE.SIZE range: 1..65536                             */
+#define MRAMC110_NSIZEMRAMWORDS_SIZE 65537           /*!< Register ERASE.SIZE.SIZE range: 1..65536                             */
 #define MRAMC110_MARMDATAWIDTHWORDS_MIN 0            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
 #define MRAMC110_MARMDATAWIDTHWORDS_MAX 3            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
+#define MRAMC110_MARMDATAWIDTHWORDS_SIZE 4           /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
 #define MRAMC110_NVRPAGEUPPER 0                      /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELOWER 0                      /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGEENABLENORMALWRITE 1          /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELRSIZEBITS_MIN 24            /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELRSIZEBITS_MAX 27            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZEBITS_SIZE 28           /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELRSIZERESET 15               /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELRSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELRSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZEVALUE_SIZE 16          /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELWSIZEBITS_MIN 28            /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELWSIZEBITS_MAX 31            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZEBITS_SIZE 32           /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELWSIZERESET 15               /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELWSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
 #define MRAMC110_NVRPAGELWSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZEVALUE_SIZE 16          /*!< (unspecified)                                                        */
 
 #define MRAMC111_NMRAMWORDSIZE 128                   /*!< (unspecified)                                                        */
 #define MRAMC111_NMRAMPAGESIZE 4                     /*!< (unspecified)                                                        */
@@ -680,23 +800,30 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MRAMC111_NMAINMEMORYSIZE 1                   /*!< MRAM main memory size: 1 MB                                          */
 #define MRAMC111_NNVRPAGES_MIN 0                     /*!< Number of MRAM NVR pages: 0..3                                       */
 #define MRAMC111_NNVRPAGES_MAX 3                     /*!< Number of MRAM NVR pages: 0..3                                       */
+#define MRAMC111_NNVRPAGES_SIZE 4                    /*!< Number of MRAM NVR pages: 0..3                                       */
 #define MRAMC111_NSIZEMRAMWORDS_MIN 1                /*!< Register ERASE.SIZE.SIZE range: 1..65536                             */
 #define MRAMC111_NSIZEMRAMWORDS_MAX 65536            /*!< Register ERASE.SIZE.SIZE range: 1..65536                             */
+#define MRAMC111_NSIZEMRAMWORDS_SIZE 65537           /*!< Register ERASE.SIZE.SIZE range: 1..65536                             */
 #define MRAMC111_MARMDATAWIDTHWORDS_MIN 0            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
 #define MRAMC111_MARMDATAWIDTHWORDS_MAX 3            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
+#define MRAMC111_MARMDATAWIDTHWORDS_SIZE 4           /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
 #define MRAMC111_NVRPAGEUPPER 0                      /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELOWER 0                      /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGEENABLENORMALWRITE 1          /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELRSIZEBITS_MIN 24            /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELRSIZEBITS_MAX 27            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZEBITS_SIZE 28           /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELRSIZERESET 15               /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELRSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELRSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZEVALUE_SIZE 16          /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELWSIZEBITS_MIN 28            /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELWSIZEBITS_MAX 31            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZEBITS_SIZE 32           /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELWSIZERESET 15               /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELWSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
 #define MRAMC111_NVRPAGELWSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZEVALUE_SIZE 16          /*!< (unspecified)                                                        */
 
 /*External Memory Interface*/
 #define EXMIF_PRESENT 1
@@ -718,6 +845,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define OTPC_REGION_EXTENSION 0                      /*!< (unspecified)                                                        */
 #define OTPC_NREGIONS_MIN 0                          /*!< (unspecified)                                                        */
 #define OTPC_NREGIONS_MAX 5                          /*!< (unspecified)                                                        */
+#define OTPC_NREGIONS_SIZE 6                         /*!< (unspecified)                                                        */
 #define OTPC_REGION0ADDR 797179904                   /*!< Region 0 address : 797179904, size: 1024 Bytes                       */
 #define OTPC_REGION0SIZE 1024                        /*!< (unspecified)                                                        */
 #define OTPC_REGION1ADDR 797180928                   /*!< Region 1 address : 797180928, size: 15360 Bytes                      */
@@ -843,7 +971,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE_COUNT 9
 
 #define UARTE120_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
-#define UARTE120_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMA_MAXCNT_SIZE_SIZE 15         /*!< (unspecified)                                                        */
 #define UARTE120_EASYDMA5 0                          /*!< (unspecified)                                                        */
 #define UARTE120_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
 #define UARTE120_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
@@ -851,7 +980,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE120_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
 #define UARTE130_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
-#define UARTE130_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMA_MAXCNT_SIZE_SIZE 15         /*!< (unspecified)                                                        */
 #define UARTE130_EASYDMA5 0                          /*!< (unspecified)                                                        */
 #define UARTE130_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
 #define UARTE130_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
@@ -859,7 +989,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE130_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
 #define UARTE131_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
-#define UARTE131_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMA_MAXCNT_SIZE_SIZE 15         /*!< (unspecified)                                                        */
 #define UARTE131_EASYDMA5 0                          /*!< (unspecified)                                                        */
 #define UARTE131_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
 #define UARTE131_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
@@ -867,7 +998,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE131_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
 #define UARTE132_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
-#define UARTE132_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMA_MAXCNT_SIZE_SIZE 15         /*!< (unspecified)                                                        */
 #define UARTE132_EASYDMA5 0                          /*!< (unspecified)                                                        */
 #define UARTE132_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
 #define UARTE132_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
@@ -875,7 +1007,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE132_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
 #define UARTE133_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
-#define UARTE133_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMA_MAXCNT_SIZE_SIZE 15         /*!< (unspecified)                                                        */
 #define UARTE133_EASYDMA5 0                          /*!< (unspecified)                                                        */
 #define UARTE133_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
 #define UARTE133_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
@@ -883,7 +1016,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE133_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
 #define UARTE134_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
-#define UARTE134_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMA_MAXCNT_SIZE_SIZE 15         /*!< (unspecified)                                                        */
 #define UARTE134_EASYDMA5 0                          /*!< (unspecified)                                                        */
 #define UARTE134_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
 #define UARTE134_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
@@ -891,7 +1025,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE134_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
 #define UARTE135_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
-#define UARTE135_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMA_MAXCNT_SIZE_SIZE 15         /*!< (unspecified)                                                        */
 #define UARTE135_EASYDMA5 0                          /*!< (unspecified)                                                        */
 #define UARTE135_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
 #define UARTE135_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
@@ -899,7 +1034,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE135_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
 #define UARTE136_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
-#define UARTE136_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMA_MAXCNT_SIZE_SIZE 15         /*!< (unspecified)                                                        */
 #define UARTE136_EASYDMA5 0                          /*!< (unspecified)                                                        */
 #define UARTE136_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
 #define UARTE136_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
@@ -907,7 +1043,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE136_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
 #define UARTE137_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
-#define UARTE137_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMA_MAXCNT_SIZE_SIZE 15         /*!< (unspecified)                                                        */
 #define UARTE137_EASYDMA5 0                          /*!< (unspecified)                                                        */
 #define UARTE137_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
 #define UARTE137_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
@@ -992,69 +1129,118 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GPIO_PRESENT 1
 #define GPIO_COUNT 6
 
+#define P0_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P0_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
-#define P0_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
+#define P0_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
+#define P0_FEATURE_PINS_PRESENT 0x00000FFFUL         /*!< (unspecified)                                                        */
 #define P0_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P0_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P0_PWRCTRL 0                                 /*!< (unspecified)                                                        */
 #define P0_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
 #define P0_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
 #define P0_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
 #define P0_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P0_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
+#define P0_CLOCKPIN 1                                /*!< (unspecified)                                                        */
+#define P0_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
+#define P1_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P1_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
-#define P1_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
+#define P1_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
+#define P1_FEATURE_PINS_PRESENT 0x00000FFFUL         /*!< (unspecified)                                                        */
 #define P1_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P1_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P1_PWRCTRL 0                                 /*!< (unspecified)                                                        */
 #define P1_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
 #define P1_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
 #define P1_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
 #define P1_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P1_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
+#define P1_CLOCKPIN 1                                /*!< (unspecified)                                                        */
+#define P1_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
+#define P2_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P2_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
-#define P2_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
+#define P2_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
+#define P2_FEATURE_PINS_PRESENT 0x00000FFFUL         /*!< (unspecified)                                                        */
 #define P2_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P2_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P2_PWRCTRL 0                                 /*!< (unspecified)                                                        */
 #define P2_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
 #define P2_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
 #define P2_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
 #define P2_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P2_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
+#define P2_CLOCKPIN 1                                /*!< (unspecified)                                                        */
+#define P2_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
+#define P6_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P6_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
 #define P6_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P6_PIN_NUM_MAX 13                            /*!< (unspecified)                                                        */
-#define P6_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
+#define P6_PIN_NUM_SIZE 14                           /*!< (unspecified)                                                        */
+#define P6_FEATURE_PINS_PRESENT 0x00003FFFUL         /*!< (unspecified)                                                        */
 #define P6_DRIVECTRL 1                               /*!< (unspecified)                                                        */
+#define P6_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P6_PWRCTRL 0                                 /*!< (unspecified)                                                        */
 #define P6_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
 #define P6_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
 #define P6_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
 #define P6_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P6_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
+#define P6_CLOCKPIN 1                                /*!< (unspecified)                                                        */
+#define P6_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
+#define P7_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P7_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
 #define P7_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P7_PIN_NUM_MAX 7                             /*!< (unspecified)                                                        */
-#define P7_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
+#define P7_PIN_NUM_SIZE 8                            /*!< (unspecified)                                                        */
+#define P7_FEATURE_PINS_PRESENT 0x000000FFUL         /*!< (unspecified)                                                        */
 #define P7_DRIVECTRL 1                               /*!< (unspecified)                                                        */
+#define P7_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P7_PWRCTRL 0                                 /*!< (unspecified)                                                        */
 #define P7_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
 #define P7_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
 #define P7_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
 #define P7_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P7_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
+#define P7_CLOCKPIN 1                                /*!< (unspecified)                                                        */
+#define P7_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
+#define P9_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P9_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
 #define P9_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P9_PIN_NUM_MAX 5                             /*!< (unspecified)                                                        */
-#define P9_PINS_PRESENT 0xFFFFFFFFUL                 /*!< (unspecified)                                                        */
+#define P9_PIN_NUM_SIZE 6                            /*!< (unspecified)                                                        */
+#define P9_FEATURE_PINS_PRESENT 0x0000003FUL         /*!< (unspecified)                                                        */
 #define P9_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P9_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P9_PWRCTRL 1                                 /*!< (unspecified)                                                        */
 #define P9_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
 #define P9_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
 #define P9_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
 #define P9_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P9_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
+#define P9_CLOCKPIN 1                                /*!< (unspecified)                                                        */
+#define P9_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
 /*GPIO Internal*/
 #define GPIOINTERNAL_PRESENT 1
 #define GPIOINTERNAL_COUNT 1
+
+#define GPIOINTERNAL_TURNOFFAUTOCLOCKSOURCEREQ 1     /*!< (unspecified)                                                        */
+#define GPIOINTERNAL_POWERFORCINGPRE 1               /*!< (unspecified)                                                        */
+#define GPIOINTERNAL_DOFORCEPOWERPRE 1               /*!< (unspecified)                                                        */
+#define GPIOINTERNAL_PENALTYBITS_MIN 0               /*!< (unspecified)                                                        */
+#define GPIOINTERNAL_PENALTYBITS_MAX 7               /*!< (unspecified)                                                        */
+#define GPIOINTERNAL_PENALTYBITS_SIZE 8              /*!< (unspecified)                                                        */
 
 /*Reset hub*/
 #define RESETHUB_PRESENT 1
@@ -1097,11 +1283,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define I2S130_EASYDMATEMP 1                         /*!< (unspecified)                                                        */
 #define I2S130_EASYDMA_MAXCNT_SIZE_MIN 0             /*!< (unspecified)                                                        */
 #define I2S130_EASYDMA_MAXCNT_SIZE_MAX 13            /*!< (unspecified)                                                        */
+#define I2S130_EASYDMA_MAXCNT_SIZE_SIZE 14           /*!< (unspecified)                                                        */
 
 #define I2S131_EASYDMA5 0                            /*!< (unspecified)                                                        */
 #define I2S131_EASYDMATEMP 1                         /*!< (unspecified)                                                        */
 #define I2S131_EASYDMA_MAXCNT_SIZE_MIN 0             /*!< (unspecified)                                                        */
 #define I2S131_EASYDMA_MAXCNT_SIZE_MAX 13            /*!< (unspecified)                                                        */
+#define I2S131_EASYDMA_MAXCNT_SIZE_SIZE 14           /*!< (unspecified)                                                        */
 
 /*Pulse Density Modulation (Digital Microphone) Interface*/
 #define PDM_PRESENT 1

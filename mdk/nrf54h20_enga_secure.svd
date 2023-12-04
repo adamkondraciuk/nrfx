@@ -48414,7 +48414,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <addressOffset>0x500</addressOffset>
           <register>
             <name>CONTROL</name>
-            <description>Description cluster: RAM/ROM[n] power control register.</description>
+            <description>Description cluster: Control memory block power.</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -48422,7 +48422,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>MEM0</name>
-                <description>Keep the RAM/ROM block MEM[0] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[0] on or off when in System ON mode.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -48440,7 +48440,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM1</name>
-                <description>Keep the RAM/ROM block MEM[1] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[1] on or off when in System ON mode.</description>
                 <lsb>1</lsb>
                 <msb>1</msb>
                 <enumeratedValues>
@@ -48458,7 +48458,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM2</name>
-                <description>Keep the RAM/ROM block MEM[2] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[2] on or off when in System ON mode.</description>
                 <lsb>2</lsb>
                 <msb>2</msb>
                 <enumeratedValues>
@@ -48476,7 +48476,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM3</name>
-                <description>Keep the RAM/ROM block MEM[3] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[3] on or off when in System ON mode.</description>
                 <lsb>3</lsb>
                 <msb>3</msb>
                 <enumeratedValues>
@@ -48494,7 +48494,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM4</name>
-                <description>Keep the RAM/ROM block MEM[4] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[4] on or off when in System ON mode.</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
                 <enumeratedValues>
@@ -48512,7 +48512,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM5</name>
-                <description>Keep the RAM/ROM block MEM[5] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[5] on or off when in System ON mode.</description>
                 <lsb>5</lsb>
                 <msb>5</msb>
                 <enumeratedValues>
@@ -48530,7 +48530,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM6</name>
-                <description>Keep the RAM/ROM block MEM[6] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[6] on or off when in System ON mode.</description>
                 <lsb>6</lsb>
                 <msb>6</msb>
                 <enumeratedValues>
@@ -48548,7 +48548,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM7</name>
-                <description>Keep the RAM/ROM block MEM[7] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[7] on or off when in System ON mode.</description>
                 <lsb>7</lsb>
                 <msb>7</msb>
                 <enumeratedValues>
@@ -48566,7 +48566,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM8</name>
-                <description>Keep the RAM/ROM block MEM[8] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[8] on or off when in System ON mode.</description>
                 <lsb>8</lsb>
                 <msb>8</msb>
                 <enumeratedValues>
@@ -48584,7 +48584,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM9</name>
-                <description>Keep the RAM/ROM block MEM[9] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[9] on or off when in System ON mode.</description>
                 <lsb>9</lsb>
                 <msb>9</msb>
                 <enumeratedValues>
@@ -48602,7 +48602,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM10</name>
-                <description>Keep the RAM/ROM block MEM[10] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[10] on or off when in System ON mode.</description>
                 <lsb>10</lsb>
                 <msb>10</msb>
                 <enumeratedValues>
@@ -48620,7 +48620,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM11</name>
-                <description>Keep the RAM/ROM block MEM[11] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[11] on or off when in System ON mode.</description>
                 <lsb>11</lsb>
                 <msb>11</msb>
                 <enumeratedValues>
@@ -48638,7 +48638,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM12</name>
-                <description>Keep the RAM/ROM block MEM[12] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[12] on or off when in System ON mode.</description>
                 <lsb>12</lsb>
                 <msb>12</msb>
                 <enumeratedValues>
@@ -48656,7 +48656,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM13</name>
-                <description>Keep the RAM/ROM block MEM[13] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[13] on or off when in System ON mode.</description>
                 <lsb>13</lsb>
                 <msb>13</msb>
                 <enumeratedValues>
@@ -48674,7 +48674,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM14</name>
-                <description>Keep the RAM/ROM block MEM[14] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[14] on or off when in System ON mode.</description>
                 <lsb>14</lsb>
                 <msb>14</msb>
                 <enumeratedValues>
@@ -48692,7 +48692,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM15</name>
-                <description>Keep the RAM/ROM block MEM[15] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[15] on or off when in System ON mode.</description>
                 <lsb>15</lsb>
                 <msb>15</msb>
                 <enumeratedValues>
@@ -48710,7 +48710,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM16</name>
-                <description>Keep the RAM/ROM block MEM[16] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[16] on or off when in System ON mode.</description>
                 <lsb>16</lsb>
                 <msb>16</msb>
                 <enumeratedValues>
@@ -48728,7 +48728,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM17</name>
-                <description>Keep the RAM/ROM block MEM[17] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[17] on or off when in System ON mode.</description>
                 <lsb>17</lsb>
                 <msb>17</msb>
                 <enumeratedValues>
@@ -48746,7 +48746,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM18</name>
-                <description>Keep the RAM/ROM block MEM[18] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[18] on or off when in System ON mode.</description>
                 <lsb>18</lsb>
                 <msb>18</msb>
                 <enumeratedValues>
@@ -48764,7 +48764,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM19</name>
-                <description>Keep the RAM/ROM block MEM[19] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[19] on or off when in System ON mode.</description>
                 <lsb>19</lsb>
                 <msb>19</msb>
                 <enumeratedValues>
@@ -48782,7 +48782,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM20</name>
-                <description>Keep the RAM/ROM block MEM[20] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[20] on or off when in System ON mode.</description>
                 <lsb>20</lsb>
                 <msb>20</msb>
                 <enumeratedValues>
@@ -48800,7 +48800,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM21</name>
-                <description>Keep the RAM/ROM block MEM[21] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[21] on or off when in System ON mode.</description>
                 <lsb>21</lsb>
                 <msb>21</msb>
                 <enumeratedValues>
@@ -48818,7 +48818,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM22</name>
-                <description>Keep the RAM/ROM block MEM[22] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[22] on or off when in System ON mode.</description>
                 <lsb>22</lsb>
                 <msb>22</msb>
                 <enumeratedValues>
@@ -48836,7 +48836,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM23</name>
-                <description>Keep the RAM/ROM block MEM[23] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[23] on or off when in System ON mode.</description>
                 <lsb>23</lsb>
                 <msb>23</msb>
                 <enumeratedValues>
@@ -48854,7 +48854,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM24</name>
-                <description>Keep the RAM/ROM block MEM[24] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[24] on or off when in System ON mode.</description>
                 <lsb>24</lsb>
                 <msb>24</msb>
                 <enumeratedValues>
@@ -48872,7 +48872,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM25</name>
-                <description>Keep the RAM/ROM block MEM[25] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[25] on or off when in System ON mode.</description>
                 <lsb>25</lsb>
                 <msb>25</msb>
                 <enumeratedValues>
@@ -48890,7 +48890,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM26</name>
-                <description>Keep the RAM/ROM block MEM[26] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[26] on or off when in System ON mode.</description>
                 <lsb>26</lsb>
                 <msb>26</msb>
                 <enumeratedValues>
@@ -48908,7 +48908,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM27</name>
-                <description>Keep the RAM/ROM block MEM[27] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[27] on or off when in System ON mode.</description>
                 <lsb>27</lsb>
                 <msb>27</msb>
                 <enumeratedValues>
@@ -48926,7 +48926,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM28</name>
-                <description>Keep the RAM/ROM block MEM[28] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[28] on or off when in System ON mode.</description>
                 <lsb>28</lsb>
                 <msb>28</msb>
                 <enumeratedValues>
@@ -48944,7 +48944,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM29</name>
-                <description>Keep the RAM/ROM block MEM[29] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[29] on or off when in System ON mode.</description>
                 <lsb>29</lsb>
                 <msb>29</msb>
                 <enumeratedValues>
@@ -48962,7 +48962,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM30</name>
-                <description>Keep the RAM/ROM block MEM[30] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[30] on or off when in System ON mode.</description>
                 <lsb>30</lsb>
                 <msb>30</msb>
                 <enumeratedValues>
@@ -48980,7 +48980,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM31</name>
-                <description>Keep the RAM/ROM block MEM[31] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[31] on or off when in System ON mode.</description>
                 <lsb>31</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
@@ -49008,7 +49008,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>MEM0</name>
-                <description>Keep the RAM block MEM[0] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[0] retained when the parent power domain of the RAM is off.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -49026,7 +49026,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM1</name>
-                <description>Keep the RAM block MEM[1] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[1] retained when the parent power domain of the RAM is off.</description>
                 <lsb>1</lsb>
                 <msb>1</msb>
                 <enumeratedValues>
@@ -49044,7 +49044,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM2</name>
-                <description>Keep the RAM block MEM[2] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[2] retained when the parent power domain of the RAM is off.</description>
                 <lsb>2</lsb>
                 <msb>2</msb>
                 <enumeratedValues>
@@ -49062,7 +49062,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM3</name>
-                <description>Keep the RAM block MEM[3] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[3] retained when the parent power domain of the RAM is off.</description>
                 <lsb>3</lsb>
                 <msb>3</msb>
                 <enumeratedValues>
@@ -49080,7 +49080,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM4</name>
-                <description>Keep the RAM block MEM[4] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[4] retained when the parent power domain of the RAM is off.</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
                 <enumeratedValues>
@@ -49098,7 +49098,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM5</name>
-                <description>Keep the RAM block MEM[5] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[5] retained when the parent power domain of the RAM is off.</description>
                 <lsb>5</lsb>
                 <msb>5</msb>
                 <enumeratedValues>
@@ -49116,7 +49116,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM6</name>
-                <description>Keep the RAM block MEM[6] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[6] retained when the parent power domain of the RAM is off.</description>
                 <lsb>6</lsb>
                 <msb>6</msb>
                 <enumeratedValues>
@@ -49134,7 +49134,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM7</name>
-                <description>Keep the RAM block MEM[7] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[7] retained when the parent power domain of the RAM is off.</description>
                 <lsb>7</lsb>
                 <msb>7</msb>
                 <enumeratedValues>
@@ -49152,7 +49152,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM8</name>
-                <description>Keep the RAM block MEM[8] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[8] retained when the parent power domain of the RAM is off.</description>
                 <lsb>8</lsb>
                 <msb>8</msb>
                 <enumeratedValues>
@@ -49170,7 +49170,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM9</name>
-                <description>Keep the RAM block MEM[9] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[9] retained when the parent power domain of the RAM is off.</description>
                 <lsb>9</lsb>
                 <msb>9</msb>
                 <enumeratedValues>
@@ -49188,7 +49188,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM10</name>
-                <description>Keep the RAM block MEM[10] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[10] retained when the parent power domain of the RAM is off.</description>
                 <lsb>10</lsb>
                 <msb>10</msb>
                 <enumeratedValues>
@@ -49206,7 +49206,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM11</name>
-                <description>Keep the RAM block MEM[11] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[11] retained when the parent power domain of the RAM is off.</description>
                 <lsb>11</lsb>
                 <msb>11</msb>
                 <enumeratedValues>
@@ -49224,7 +49224,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM12</name>
-                <description>Keep the RAM block MEM[12] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[12] retained when the parent power domain of the RAM is off.</description>
                 <lsb>12</lsb>
                 <msb>12</msb>
                 <enumeratedValues>
@@ -49242,7 +49242,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM13</name>
-                <description>Keep the RAM block MEM[13] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[13] retained when the parent power domain of the RAM is off.</description>
                 <lsb>13</lsb>
                 <msb>13</msb>
                 <enumeratedValues>
@@ -49260,7 +49260,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM14</name>
-                <description>Keep the RAM block MEM[14] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[14] retained when the parent power domain of the RAM is off.</description>
                 <lsb>14</lsb>
                 <msb>14</msb>
                 <enumeratedValues>
@@ -49278,7 +49278,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM15</name>
-                <description>Keep the RAM block MEM[15] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[15] retained when the parent power domain of the RAM is off.</description>
                 <lsb>15</lsb>
                 <msb>15</msb>
                 <enumeratedValues>
@@ -49296,7 +49296,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM16</name>
-                <description>Keep the RAM block MEM[16] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[16] retained when the parent power domain of the RAM is off.</description>
                 <lsb>16</lsb>
                 <msb>16</msb>
                 <enumeratedValues>
@@ -49314,7 +49314,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM17</name>
-                <description>Keep the RAM block MEM[17] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[17] retained when the parent power domain of the RAM is off.</description>
                 <lsb>17</lsb>
                 <msb>17</msb>
                 <enumeratedValues>
@@ -49332,7 +49332,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM18</name>
-                <description>Keep the RAM block MEM[18] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[18] retained when the parent power domain of the RAM is off.</description>
                 <lsb>18</lsb>
                 <msb>18</msb>
                 <enumeratedValues>
@@ -49350,7 +49350,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM19</name>
-                <description>Keep the RAM block MEM[19] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[19] retained when the parent power domain of the RAM is off.</description>
                 <lsb>19</lsb>
                 <msb>19</msb>
                 <enumeratedValues>
@@ -49368,7 +49368,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM20</name>
-                <description>Keep the RAM block MEM[20] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[20] retained when the parent power domain of the RAM is off.</description>
                 <lsb>20</lsb>
                 <msb>20</msb>
                 <enumeratedValues>
@@ -49386,7 +49386,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM21</name>
-                <description>Keep the RAM block MEM[21] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[21] retained when the parent power domain of the RAM is off.</description>
                 <lsb>21</lsb>
                 <msb>21</msb>
                 <enumeratedValues>
@@ -49404,7 +49404,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM22</name>
-                <description>Keep the RAM block MEM[22] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[22] retained when the parent power domain of the RAM is off.</description>
                 <lsb>22</lsb>
                 <msb>22</msb>
                 <enumeratedValues>
@@ -49422,7 +49422,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM23</name>
-                <description>Keep the RAM block MEM[23] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[23] retained when the parent power domain of the RAM is off.</description>
                 <lsb>23</lsb>
                 <msb>23</msb>
                 <enumeratedValues>
@@ -49440,7 +49440,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM24</name>
-                <description>Keep the RAM block MEM[24] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[24] retained when the parent power domain of the RAM is off.</description>
                 <lsb>24</lsb>
                 <msb>24</msb>
                 <enumeratedValues>
@@ -49458,7 +49458,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM25</name>
-                <description>Keep the RAM block MEM[25] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[25] retained when the parent power domain of the RAM is off.</description>
                 <lsb>25</lsb>
                 <msb>25</msb>
                 <enumeratedValues>
@@ -49476,7 +49476,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM26</name>
-                <description>Keep the RAM block MEM[26] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[26] retained when the parent power domain of the RAM is off.</description>
                 <lsb>26</lsb>
                 <msb>26</msb>
                 <enumeratedValues>
@@ -49494,7 +49494,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM27</name>
-                <description>Keep the RAM block MEM[27] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[27] retained when the parent power domain of the RAM is off.</description>
                 <lsb>27</lsb>
                 <msb>27</msb>
                 <enumeratedValues>
@@ -49512,7 +49512,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM28</name>
-                <description>Keep the RAM block MEM[28] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[28] retained when the parent power domain of the RAM is off.</description>
                 <lsb>28</lsb>
                 <msb>28</msb>
                 <enumeratedValues>
@@ -49530,7 +49530,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM29</name>
-                <description>Keep the RAM block MEM[29] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[29] retained when the parent power domain of the RAM is off.</description>
                 <lsb>29</lsb>
                 <msb>29</msb>
                 <enumeratedValues>
@@ -49548,7 +49548,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM30</name>
-                <description>Keep the RAM block MEM[30] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[30] retained when the parent power domain of the RAM is off.</description>
                 <lsb>30</lsb>
                 <msb>30</msb>
                 <enumeratedValues>
@@ -49566,7 +49566,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM31</name>
-                <description>Keep the RAM block MEM[31] retained when in System OFF mode.</description>
+                <description>Keep the RAM block MEM[31] retained when the parent power domain of the RAM is off.</description>
                 <lsb>31</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
@@ -49594,7 +49594,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>MEM0</name>
-                <description>Keep the second bank in RAM block MEM[0] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[0] retained when parent power domain of the RAM is off.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -49612,7 +49612,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM1</name>
-                <description>Keep the second bank in RAM block MEM[1] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[1] retained when parent power domain of the RAM is off.</description>
                 <lsb>1</lsb>
                 <msb>1</msb>
                 <enumeratedValues>
@@ -49630,7 +49630,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM2</name>
-                <description>Keep the second bank in RAM block MEM[2] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[2] retained when parent power domain of the RAM is off.</description>
                 <lsb>2</lsb>
                 <msb>2</msb>
                 <enumeratedValues>
@@ -49648,7 +49648,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM3</name>
-                <description>Keep the second bank in RAM block MEM[3] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[3] retained when parent power domain of the RAM is off.</description>
                 <lsb>3</lsb>
                 <msb>3</msb>
                 <enumeratedValues>
@@ -49666,7 +49666,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM4</name>
-                <description>Keep the second bank in RAM block MEM[4] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[4] retained when parent power domain of the RAM is off.</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
                 <enumeratedValues>
@@ -49684,7 +49684,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM5</name>
-                <description>Keep the second bank in RAM block MEM[5] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[5] retained when parent power domain of the RAM is off.</description>
                 <lsb>5</lsb>
                 <msb>5</msb>
                 <enumeratedValues>
@@ -49702,7 +49702,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM6</name>
-                <description>Keep the second bank in RAM block MEM[6] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[6] retained when parent power domain of the RAM is off.</description>
                 <lsb>6</lsb>
                 <msb>6</msb>
                 <enumeratedValues>
@@ -49720,7 +49720,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM7</name>
-                <description>Keep the second bank in RAM block MEM[7] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[7] retained when parent power domain of the RAM is off.</description>
                 <lsb>7</lsb>
                 <msb>7</msb>
                 <enumeratedValues>
@@ -49738,7 +49738,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM8</name>
-                <description>Keep the second bank in RAM block MEM[8] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[8] retained when parent power domain of the RAM is off.</description>
                 <lsb>8</lsb>
                 <msb>8</msb>
                 <enumeratedValues>
@@ -49756,7 +49756,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM9</name>
-                <description>Keep the second bank in RAM block MEM[9] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[9] retained when parent power domain of the RAM is off.</description>
                 <lsb>9</lsb>
                 <msb>9</msb>
                 <enumeratedValues>
@@ -49774,7 +49774,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM10</name>
-                <description>Keep the second bank in RAM block MEM[10] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[10] retained when parent power domain of the RAM is off.</description>
                 <lsb>10</lsb>
                 <msb>10</msb>
                 <enumeratedValues>
@@ -49792,7 +49792,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM11</name>
-                <description>Keep the second bank in RAM block MEM[11] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[11] retained when parent power domain of the RAM is off.</description>
                 <lsb>11</lsb>
                 <msb>11</msb>
                 <enumeratedValues>
@@ -49810,7 +49810,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM12</name>
-                <description>Keep the second bank in RAM block MEM[12] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[12] retained when parent power domain of the RAM is off.</description>
                 <lsb>12</lsb>
                 <msb>12</msb>
                 <enumeratedValues>
@@ -49828,7 +49828,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM13</name>
-                <description>Keep the second bank in RAM block MEM[13] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[13] retained when parent power domain of the RAM is off.</description>
                 <lsb>13</lsb>
                 <msb>13</msb>
                 <enumeratedValues>
@@ -49846,7 +49846,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM14</name>
-                <description>Keep the second bank in RAM block MEM[14] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[14] retained when parent power domain of the RAM is off.</description>
                 <lsb>14</lsb>
                 <msb>14</msb>
                 <enumeratedValues>
@@ -49864,7 +49864,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM15</name>
-                <description>Keep the second bank in RAM block MEM[15] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[15] retained when parent power domain of the RAM is off.</description>
                 <lsb>15</lsb>
                 <msb>15</msb>
                 <enumeratedValues>
@@ -49882,7 +49882,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM16</name>
-                <description>Keep the second bank in RAM block MEM[16] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[16] retained when parent power domain of the RAM is off.</description>
                 <lsb>16</lsb>
                 <msb>16</msb>
                 <enumeratedValues>
@@ -49900,7 +49900,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM17</name>
-                <description>Keep the second bank in RAM block MEM[17] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[17] retained when parent power domain of the RAM is off.</description>
                 <lsb>17</lsb>
                 <msb>17</msb>
                 <enumeratedValues>
@@ -49918,7 +49918,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM18</name>
-                <description>Keep the second bank in RAM block MEM[18] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[18] retained when parent power domain of the RAM is off.</description>
                 <lsb>18</lsb>
                 <msb>18</msb>
                 <enumeratedValues>
@@ -49936,7 +49936,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM19</name>
-                <description>Keep the second bank in RAM block MEM[19] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[19] retained when parent power domain of the RAM is off.</description>
                 <lsb>19</lsb>
                 <msb>19</msb>
                 <enumeratedValues>
@@ -49954,7 +49954,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM20</name>
-                <description>Keep the second bank in RAM block MEM[20] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[20] retained when parent power domain of the RAM is off.</description>
                 <lsb>20</lsb>
                 <msb>20</msb>
                 <enumeratedValues>
@@ -49972,7 +49972,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM21</name>
-                <description>Keep the second bank in RAM block MEM[21] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[21] retained when parent power domain of the RAM is off.</description>
                 <lsb>21</lsb>
                 <msb>21</msb>
                 <enumeratedValues>
@@ -49990,7 +49990,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM22</name>
-                <description>Keep the second bank in RAM block MEM[22] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[22] retained when parent power domain of the RAM is off.</description>
                 <lsb>22</lsb>
                 <msb>22</msb>
                 <enumeratedValues>
@@ -50008,7 +50008,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM23</name>
-                <description>Keep the second bank in RAM block MEM[23] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[23] retained when parent power domain of the RAM is off.</description>
                 <lsb>23</lsb>
                 <msb>23</msb>
                 <enumeratedValues>
@@ -50026,7 +50026,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM24</name>
-                <description>Keep the second bank in RAM block MEM[24] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[24] retained when parent power domain of the RAM is off.</description>
                 <lsb>24</lsb>
                 <msb>24</msb>
                 <enumeratedValues>
@@ -50044,7 +50044,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM25</name>
-                <description>Keep the second bank in RAM block MEM[25] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[25] retained when parent power domain of the RAM is off.</description>
                 <lsb>25</lsb>
                 <msb>25</msb>
                 <enumeratedValues>
@@ -50062,7 +50062,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM26</name>
-                <description>Keep the second bank in RAM block MEM[26] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[26] retained when parent power domain of the RAM is off.</description>
                 <lsb>26</lsb>
                 <msb>26</msb>
                 <enumeratedValues>
@@ -50080,7 +50080,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM27</name>
-                <description>Keep the second bank in RAM block MEM[27] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[27] retained when parent power domain of the RAM is off.</description>
                 <lsb>27</lsb>
                 <msb>27</msb>
                 <enumeratedValues>
@@ -50098,7 +50098,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM28</name>
-                <description>Keep the second bank in RAM block MEM[28] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[28] retained when parent power domain of the RAM is off.</description>
                 <lsb>28</lsb>
                 <msb>28</msb>
                 <enumeratedValues>
@@ -50116,7 +50116,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM29</name>
-                <description>Keep the second bank in RAM block MEM[29] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[29] retained when parent power domain of the RAM is off.</description>
                 <lsb>29</lsb>
                 <msb>29</msb>
                 <enumeratedValues>
@@ -50134,7 +50134,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM30</name>
-                <description>Keep the second bank in RAM block MEM[30] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[30] retained when parent power domain of the RAM is off.</description>
                 <lsb>30</lsb>
                 <msb>30</msb>
                 <enumeratedValues>
@@ -50152,7 +50152,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MEM31</name>
-                <description>Keep the second bank in RAM block MEM[31] retained when in System OFF mode.</description>
+                <description>Keep the second bank in RAM block MEM[31] retained when parent power domain of the RAM is off.</description>
                 <lsb>31</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
@@ -50224,7 +50224,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <addressOffset>0x900</addressOffset>
           <register>
             <name>TRIM</name>
-            <description>Description cluster: Trim configuration for the RAM/ROM block types.</description>
+            <description>Description cluster: Trim configuration for the memory block types.</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -69803,6 +69803,1203 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
         </cluster>
         <cluster>
+          <name>RTCHOKE</name>
+          <description>Real time choke configuration for AXI master port</description>
+          <headerStructName>MPC_RTCHOKE</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x420</addressOffset>
+          <register>
+            <name>WRITEACCESS</name>
+            <description>Enable AXI Write Address Channel Real Time Choke for master port</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ENABLE_0</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 0 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 0 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_1</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 1 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 1 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_2</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 2 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 2 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_3</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 3 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 3 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_4</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 4 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 4 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_5</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 5 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 5 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_6</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>6</lsb>
+                <msb>6</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 6 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 6 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_7</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>7</lsb>
+                <msb>7</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 7 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 7 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_8</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>8</lsb>
+                <msb>8</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 8 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 8 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_9</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>9</lsb>
+                <msb>9</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 9 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 9 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_10</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>10</lsb>
+                <msb>10</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 10 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 10 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_11</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>11</lsb>
+                <msb>11</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 11 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 11 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_12</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>12</lsb>
+                <msb>12</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 12 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 12 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_13</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>13</lsb>
+                <msb>13</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 13 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 13 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_14</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>14</lsb>
+                <msb>14</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 14 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 14 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_15</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>15</lsb>
+                <msb>15</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 15 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 15 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_16</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>16</lsb>
+                <msb>16</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 16 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 16 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_17</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>17</lsb>
+                <msb>17</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 17 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 17 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_18</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>18</lsb>
+                <msb>18</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 18 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 18 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_19</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>19</lsb>
+                <msb>19</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 19 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 19 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_20</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>20</lsb>
+                <msb>20</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 20 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 20 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_21</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>21</lsb>
+                <msb>21</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 21 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 21 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_22</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>22</lsb>
+                <msb>22</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 22 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 22 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_23</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>23</lsb>
+                <msb>23</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 23 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 23 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_24</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>24</lsb>
+                <msb>24</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 24 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 24 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_25</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>25</lsb>
+                <msb>25</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 25 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 25 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_26</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>26</lsb>
+                <msb>26</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 26 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 26 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_27</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>27</lsb>
+                <msb>27</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 27 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 27 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_28</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>28</lsb>
+                <msb>28</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 28 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 28 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_29</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>29</lsb>
+                <msb>29</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 29 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 29 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_30</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>30</lsb>
+                <msb>30</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 30 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 30 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_31</name>
+                <description>Enable Real Time Choke for Write Address Channel</description>
+                <lsb>31</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 31 Write Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 31 Write Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>READACCESS</name>
+            <description>Enable AXI Read Address Channel Real Time Choke for master port</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ENABLE_0</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 0 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 0 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_1</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 1 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 1 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_2</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 2 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 2 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_3</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 3 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 3 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_4</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 4 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 4 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_5</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 5 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 5 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_6</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>6</lsb>
+                <msb>6</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 6 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 6 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_7</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>7</lsb>
+                <msb>7</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 7 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 7 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_8</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>8</lsb>
+                <msb>8</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 8 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 8 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_9</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>9</lsb>
+                <msb>9</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 9 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 9 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_10</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>10</lsb>
+                <msb>10</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 10 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 10 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_11</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>11</lsb>
+                <msb>11</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 11 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 11 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_12</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>12</lsb>
+                <msb>12</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 12 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 12 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_13</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>13</lsb>
+                <msb>13</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 13 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 13 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_14</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>14</lsb>
+                <msb>14</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 14 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 14 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_15</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>15</lsb>
+                <msb>15</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 15 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 15 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_16</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>16</lsb>
+                <msb>16</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 16 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 16 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_17</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>17</lsb>
+                <msb>17</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 17 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 17 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_18</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>18</lsb>
+                <msb>18</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 18 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 18 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_19</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>19</lsb>
+                <msb>19</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 19 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 19 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_20</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>20</lsb>
+                <msb>20</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 20 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 20 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_21</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>21</lsb>
+                <msb>21</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 21 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 21 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_22</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>22</lsb>
+                <msb>22</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 22 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 22 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_23</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>23</lsb>
+                <msb>23</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 23 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 23 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_24</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>24</lsb>
+                <msb>24</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 24 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 24 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_25</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>25</lsb>
+                <msb>25</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 25 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 25 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_26</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>26</lsb>
+                <msb>26</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 26 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 26 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_27</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>27</lsb>
+                <msb>27</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 27 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 27 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_28</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>28</lsb>
+                <msb>28</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 28 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 28 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_29</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>29</lsb>
+                <msb>29</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 29 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 29 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_30</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>30</lsb>
+                <msb>30</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 30 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 30 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>ENABLE_31</name>
+                <description>Enable Real Time Choke for Read Address Channel</description>
+                <lsb>31</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Real Time Choke is disabled for master port 31 Read Address Channel</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Real Time Choke is enabled for master port 31 Read Address Channel</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <dim>0x20</dim>
+            <dimIncrement>0x4</dimIncrement>
+            <name>DELAY[%s]</name>
+            <description>Description collection: Real Time Choke delay value for slave number n</description>
+            <addressOffset>0x60</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>DELAY</name>
+                <description>Real Time Choke delay in bus clock cycles.</description>
+                <lsb>0</lsb>
+                <msb>7</msb>
+              </field>
+            </fields>
+          </register>
+        </cluster>
+        <cluster>
           <dim>32</dim>
           <dimIncrement>0x010</dimIncrement>
           <name>REGION[%s]</name>
@@ -70620,6 +71817,24 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValues>
               </field>
               <field>
+                <name>SECDOMENABLE</name>
+                <description>Secure domain access enable for Override region n</description>
+                <lsb>10</lsb>
+                <msb>10</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>Overriding of secure domain permissions is disabled for override region n</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enabled</name>
+                    <description>Overriding of secure domain permissions is enabled for override region n</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
                 <name>SECUREMASK</name>
                 <description>Secure mask enable for Override region n</description>
                 <lsb>12</lsb>
@@ -70667,6 +71882,23 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <field>
                 <name>ENDADDR</name>
                 <description>End address for override region n</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>OFFSET</name>
+            <description>Description cluster: Address offset value divided by 2 for override region n address re-map</description>
+            <addressOffset>0x0C</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <dataType>int32_t</dataType>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>OFFSET</name>
+                <description>Offset value</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -74705,7 +75937,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>VAL</name>
-                <description>Multiplication factor value.</description>
+                <description>Multiplication factor value. Valid range: 4 to 25. Output frequency is a multiplication of 16 MHz reference and the multiplication factor.</description>
                 <lsb>0</lsb>
                 <msb>4</msb>
               </field>
@@ -74929,40 +76161,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <description>Override value for the signal</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
-              </field>
-              <field>
-                <name>EN</name>
-                <description>Enable the override</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Override is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Override is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>CFG</name>
-            <description>Override the CFG signal to the analog module</description>
-            <addressOffset>0x00C</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>VAL</name>
-                <description>Override value for the signal</description>
-                <lsb>0</lsb>
-                <msb>3</msb>
               </field>
               <field>
                 <name>EN</name>
@@ -134454,7 +135652,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in receive buffer</description>
                 <lsb>0</lsb>
-                <msb>7</msb>
+                <msb>14</msb>
               </field>
             </fields>
           </register>
@@ -134470,7 +135668,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>AMOUNT</name>
                 <description>Number of bytes transferred in the last transaction</description>
                 <lsb>0</lsb>
-                <msb>7</msb>
+                <msb>14</msb>
               </field>
             </fields>
           </register>
@@ -134509,7 +135707,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in transmit buffer</description>
                 <lsb>0</lsb>
-                <msb>7</msb>
+                <msb>14</msb>
               </field>
             </fields>
           </register>
@@ -134525,7 +135723,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>AMOUNT</name>
                 <description>Number of bytes transferred in the last transaction</description>
                 <lsb>0</lsb>
-                <msb>7</msb>
+                <msb>14</msb>
               </field>
             </fields>
           </register>
@@ -137141,7 +138339,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>TASKS_TRIGOVRFLW</name>
-          <description>Set counter to 0xFFFFF0</description>
+          <description>Set counter to: maximum value - 0xF</description>
           <addressOffset>0x00C</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -137149,7 +138347,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>TASKS_TRIGOVRFLW</name>
-              <description>Set counter to 0xFFFFF0</description>
+              <description>Set counter to: maximum value - 0xF</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -146192,61 +147390,22 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Unspecified</description>
           <headerStructName>GLOBAL_GPIOINTERNAL_PCGC</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x050</addressOffset>
+          <addressOffset>0x160</addressOffset>
           <register>
-            <name>TRIGZEROPENALTY</name>
-            <description>Trigger zero penalty</description>
+            <name>TURNOFFAUTOCLOCKSOURCEREQ</name>
+            <description>No functionality</description>
             <addressOffset>0x000</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
             <!--Security securemapping=S-->
-            <fields>
-              <field>
-                <name>TRIGGER</name>
-                <description>TRIGGER</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Trigger zero penalty</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
           </register>
           <register>
-            <name>TRIGFULLPENALTY</name>
-            <description>Trigger full penalty</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <!--Security securemapping=S-->
-            <fields>
-              <field>
-                <name>TRIGGER</name>
-                <description>TRIGGER</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Trigger full penalty</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <dim>0x2</dim>
+            <dim>0x5</dim>
             <dimIncrement>0x4</dimIncrement>
             <name>PENALTY[%s]</name>
             <description>Description collection: Penalty level for power/clock pair n</description>
-            <addressOffset>0x008</addressOffset>
+            <addressOffset>0x20</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -146261,11 +147420,11 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </fields>
           </register>
           <register>
-            <dim>0x2</dim>
+            <dim>0x5</dim>
             <dimIncrement>0x4</dimIncrement>
             <name>FORCEOVERRIDE[%s]</name>
             <description>Description collection: Force override of power/clock pair n</description>
-            <addressOffset>0x010</addressOffset>
+            <addressOffset>0x40</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>

@@ -44,8 +44,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   59 
-#define MDK_MICRO_VERSION   0 
+#define MDK_MINOR_VERSION   60 
+#define MDK_MICRO_VERSION   2 
 
 
 /* Define coprocessor domains */
@@ -123,6 +123,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined (NRF54H20_ENGA_XXAA) || defined (NRF54H20_XXAA)
     #ifndef NRF54H_SERIES
         #define NRF54H_SERIES
+    #endif
+    #ifndef HALTIUM_XXAA
+        #define HALTIUM_XXAA
     #endif
 #endif
 
