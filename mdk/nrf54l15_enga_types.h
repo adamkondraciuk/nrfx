@@ -39,8 +39,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L15_TYPES_H
-#define NRF54L15_TYPES_H
+#ifndef NRF54L15_ENGA_TYPES_H
+#define NRF54L15_ENGA_TYPES_H
 
 #ifdef __cplusplus
     extern "C" {
@@ -2463,7 +2463,8 @@ typedef struct {
   typedef struct {                                   /*!< COMP Structure                                                       */
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start comparator                                      */
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop comparator                                       */
-    __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000008) Sample comparator value                               */
+    __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000008) Sample comparator value. This task requires that COMP
+                                                                         has been started by the START Task.*/
     __IM uint32_t RESERVED[29];
     __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
     __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
@@ -2529,10 +2530,10 @@ typedef struct {
   #define COMP_TASKS_STOP_TASKS_STOP_Trigger (0x1UL) /*!< Trigger task                                                         */
 
 
-/* COMP_TASKS_SAMPLE: Sample comparator value */
+/* COMP_TASKS_SAMPLE: Sample comparator value. This task requires that COMP has been started by the START Task. */
   #define COMP_TASKS_SAMPLE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_SAMPLE register.                               */
 
-/* TASKS_SAMPLE @Bit 0 : Sample comparator value */
+/* TASKS_SAMPLE @Bit 0 : Sample comparator value. This task requires that COMP has been started by the START Task. */
   #define COMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos (0UL)   /*!< Position of TASKS_SAMPLE field.                                      */
   #define COMP_TASKS_SAMPLE_TASKS_SAMPLE_Msk (0x1UL << COMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos) /*!< Bit mask of TASKS_SAMPLE field.*/
   #define COMP_TASKS_SAMPLE_TASKS_SAMPLE_Min (0x1UL) /*!< Min enumerator value of TASKS_SAMPLE field.                          */
@@ -2966,12 +2967,12 @@ typedef struct {
   #define COMP_REFSEL_REFSEL_Msk (0x7UL << COMP_REFSEL_REFSEL_Pos) /*!< Bit mask of REFSEL field.                              */
   #define COMP_REFSEL_REFSEL_Min (0x0UL)             /*!< Min enumerator value of REFSEL field.                                */
   #define COMP_REFSEL_REFSEL_Max (0x7UL)             /*!< Max enumerator value of REFSEL field.                                */
-  #define COMP_REFSEL_REFSEL_Int1V2 (0x0UL)          /*!< VREF = internal 1.2 V reference (AVDD_AO_1V8 >= 1.7 V)               */
+  #define COMP_REFSEL_REFSEL_Int1V2 (0x0UL)          /*!< VREF = internal 1.2 V reference                                      */
   #define COMP_REFSEL_REFSEL_Int1V8 (0x1UL)          /*!< VREF = internal 1.8 V reference (VDD >= VREF + 0.2 V)                */
   #define COMP_REFSEL_REFSEL_Int2V4 (0x2UL)          /*!< VREF = internal 2.4 V reference (VDD >= VREF + 0.2 V)                */
-  #define COMP_REFSEL_REFSEL_AVDDAO1V8 (0x4UL)       /*!< VREF = AVDD_AO_1V8                                                   */
+  #define COMP_REFSEL_REFSEL_VDD (0x4UL)             /*!< VREF = VDD                                                           */
   #define COMP_REFSEL_REFSEL_ARef (0x5UL)            /*!< VREF = AREF                                                          */
-  #define COMP_REFSEL_REFSEL_Diff (0x7UL)            /*!< VREF=Differential mode (power down built-in reference and disconnect
+  #define COMP_REFSEL_REFSEL_Diff (0x7UL)            /*!< VREF = Differential mode (power down built-in reference and disconnect
                                                           resistor ladder)*/
 
 
@@ -2995,8 +2996,6 @@ typedef struct {
 
   #define COMP_REFTEMPC_REFTEMPC_Pos (0UL)           /*!< Position of REFTEMPC field.                                          */
   #define COMP_REFTEMPC_REFTEMPC_Msk (0xFUL << COMP_REFTEMPC_REFTEMPC_Pos) /*!< Bit mask of REFTEMPC field.                    */
-  #define COMP_REFTEMPC_REFTEMPC_Min (0xFFFFFFFFUL)  /*!< Min value of REFTEMPC field.                                         */
-  #define COMP_REFTEMPC_REFTEMPC_Max (0xFFFFFFFFUL)  /*!< Max size of REFTEMPC field.                                          */
 
 
 /* COMP_BUFFER: Enable unity gain buffer */
@@ -3080,8 +3079,6 @@ typedef struct {
 /* REFTRIM @Bits 0..4 : Trimming value */
   #define COMP_REFTRIM_REFTRIM_Pos (0UL)             /*!< Position of REFTRIM field.                                           */
   #define COMP_REFTRIM_REFTRIM_Msk (0x1FUL << COMP_REFTRIM_REFTRIM_Pos) /*!< Bit mask of REFTRIM field.                        */
-  #define COMP_REFTRIM_REFTRIM_Min (0xFFFFFFFFUL)    /*!< Min value of REFTRIM field.                                          */
-  #define COMP_REFTRIM_REFTRIM_Max (0xFFFFFFFFUL)    /*!< Max size of REFTRIM field.                                           */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -3456,7 +3453,7 @@ typedef struct {
       #pragma GCC diagnostic pop
     #endif
     __OM uint32_t SEED[12];                          /*!< (@ 0x00000408) Seed word [n] for symmetric and asymmetric key
-                                                                         generation.*/
+                                                                         generation. This register is only writable from KMU.*/
   } NRF_CRACEN_Type;                                 /*!< Size = 1080 (0x438)                                                  */
 
 /* CRACEN_EVENTS_CRYPTOMASTER: Event indicating that interrupt triggered at Cryptomaster */
@@ -3667,7 +3664,7 @@ typedef struct {
   #define CRACEN_SEEDRAMLOCK_ENABLE_Enabled (0x1UL)  /*!< Lock enabled.                                                        */
 
 
-/* CRACEN_SEED: Seed word [n] for symmetric and asymmetric key generation. */
+/* CRACEN_SEED: Seed word [n] for symmetric and asymmetric key generation. This register is only writable from KMU. */
   #define CRACEN_SEED_MaxCount (12UL)                /*!< Max size of SEED[12] array.                                          */
   #define CRACEN_SEED_MaxIndex (11UL)                /*!< Max index of SEED[12] array.                                         */
   #define CRACEN_SEED_MinIndex (0UL)                 /*!< Min index of SEED[12] array.                                         */
@@ -5167,7 +5164,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  LOCK;                              /*!< (@ 0x00000000) This register locks the ERASEPROTECT.DISABLE register
                                                                          from being written until next reset.*/
-  __IOM uint32_t  DISABLE;                           /*!< (@ 0x00000004) This register disables the ERASEPROTECT register and
+  __OM  uint32_t  DISABLE;                           /*!< (@ 0x00000004) This register disables the ERASEPROTECT register and
                                                                          performs an ERASEALL operation.*/
 } NRF_CTRLAPPERI_ERASEPROTECT_Type;                  /*!< Size = 8 (0x008)                                                     */
 
@@ -6375,6 +6372,45 @@ typedef struct {
   #define ECB_OUT_PTR_PTR_Msk (0xFFFFFFFFUL << ECB_OUT_PTR_PTR_Pos) /*!< Bit mask of PTR field.                                */
 
 
+
+/* ===================================================== Struct ECB_CSAA ===================================================== */
+/**
+  * @brief CSAA [ECB_CSAA] Channel sounding access address scoring algorithm
+  */
+typedef struct {
+  __IM  uint32_t  INITIATOR;                         /*!< (@ 0x00000000) Selected initiator for Channel Sounding Access Address*/
+  __IM  uint32_t  REFLECTOR;                         /*!< (@ 0x00000004) Selected initiator for Channel Sounding Access Address*/
+  __IOM uint32_t  MODE;                              /*!< (@ 0x00000008) Operation modes                                       */
+} NRF_ECB_CSAA_Type;                                 /*!< Size = 12 (0x00C)                                                    */
+
+/* ECB_CSAA_INITIATOR: Selected initiator for Channel Sounding Access Address */
+  #define ECB_CSAA_INITIATOR_ResetValue (0x00000000UL) /*!< Reset value of INITIATOR register.                                 */
+
+/* PN @Bits 0..31 : (unspecified) */
+  #define ECB_CSAA_INITIATOR_PN_Pos (0UL)            /*!< Position of PN field.                                                */
+  #define ECB_CSAA_INITIATOR_PN_Msk (0xFFFFFFFFUL << ECB_CSAA_INITIATOR_PN_Pos) /*!< Bit mask of PN field.                     */
+
+
+/* ECB_CSAA_REFLECTOR: Selected initiator for Channel Sounding Access Address */
+  #define ECB_CSAA_REFLECTOR_ResetValue (0x00000000UL) /*!< Reset value of REFLECTOR register.                                 */
+
+/* PN @Bits 0..31 : (unspecified) */
+  #define ECB_CSAA_REFLECTOR_PN_Pos (0UL)            /*!< Position of PN field.                                                */
+  #define ECB_CSAA_REFLECTOR_PN_Msk (0xFFFFFFFFUL << ECB_CSAA_REFLECTOR_PN_Pos) /*!< Bit mask of PN field.                     */
+
+
+/* ECB_CSAA_MODE: Operation modes */
+  #define ECB_CSAA_MODE_ResetValue (0x00000000UL)    /*!< Reset value of MODE register.                                        */
+
+/* BITREVERSE @Bit 0 : Reverse the endianness on bit level for the ECB output, INITIATOR, and REFLECTOR registers */
+  #define ECB_CSAA_MODE_BITREVERSE_Pos (0UL)         /*!< Position of BITREVERSE field.                                        */
+  #define ECB_CSAA_MODE_BITREVERSE_Msk (0x1UL << ECB_CSAA_MODE_BITREVERSE_Pos) /*!< Bit mask of BITREVERSE field.              */
+  #define ECB_CSAA_MODE_BITREVERSE_Min (0x0UL)       /*!< Min enumerator value of BITREVERSE field.                            */
+  #define ECB_CSAA_MODE_BITREVERSE_Max (0x1UL)       /*!< Max enumerator value of BITREVERSE field.                            */
+  #define ECB_CSAA_MODE_BITREVERSE_Default (0x0UL)   /*!< Default endianness                                                   */
+  #define ECB_CSAA_MODE_BITREVERSE_Reversed (0x1UL)  /*!< Reversed endianness                                                  */
+
+
 /* ======================================================= Struct ECB ======================================================== */
 /**
   * @brief AES ECB Mode Encryption
@@ -6401,7 +6437,8 @@ typedef struct {
     __IOM NRF_ECB_IN_Type IN;                        /*!< (@ 0x00000530) IN EasyDMA channel                                    */
     __IM uint32_t RESERVED6;
     __IOM NRF_ECB_OUT_Type OUT;                      /*!< (@ 0x00000538) OUT EasyDMA channel                                   */
-  } NRF_ECB_Type;                                    /*!< Size = 1340 (0x53C)                                                  */
+    __IOM NRF_ECB_CSAA_Type CSAA;                    /*!< (@ 0x0000053C) Channel sounding access address scoring algorithm     */
+  } NRF_ECB_Type;                                    /*!< Size = 1352 (0x548)                                                  */
 
 /* ECB_TASKS_START: Start ECB block encrypt */
   #define ECB_TASKS_START_ResetValue (0x00000000UL)  /*!< Reset value of TASKS_START register.                                 */
@@ -9698,7 +9735,7 @@ typedef struct {
   * @brief CHIPCONF [FICR_CHIPCONF] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t * ADDR;                             /*!< (@ 0x00000000) Address of the APB register which will be written     */
+  __IM  uint32_t  ADDR;                              /*!< (@ 0x00000000) Address of the APB register which will be written     */
   __IM  uint32_t  DATA;                              /*!< (@ 0x00000004) Data to be written into the APB register              */
 } NRF_FICR_CHIPCONF_Type;                            /*!< Size = 8 (0x008)                                                     */
   #define FICR_CHIPCONF_MaxCount (32UL)              /*!< Size of CHIPCONF[32] array.                                          */
@@ -9844,8 +9881,9 @@ typedef struct {
 /* PART @Bits 0..31 : Part code */
   #define FICR_INFO_PART_PART_Pos (0UL)              /*!< Position of PART field.                                              */
   #define FICR_INFO_PART_PART_Msk (0xFFFFFFFFUL << FICR_INFO_PART_PART_Pos) /*!< Bit mask of PART field.                       */
-  #define FICR_INFO_PART_PART_Min (0xFFFFFFFFUL)     /*!< Min enumerator value of PART field.                                  */
+  #define FICR_INFO_PART_PART_Min (0x54B15UL)        /*!< Min enumerator value of PART field.                                  */
   #define FICR_INFO_PART_PART_Max (0xFFFFFFFFUL)     /*!< Max enumerator value of PART field.                                  */
+  #define FICR_INFO_PART_PART_N54L15 (0x00054B15UL)  /*!< nRF54L15                                                             */
   #define FICR_INFO_PART_PART_Unspecified (0xFFFFFFFFUL) /*!< Unspecified                                                      */
 
 
@@ -9947,12 +9985,183 @@ typedef struct {
 
 
 
+/* ================================================= Struct FICR_PROTEST_CP ================================================== */
+/**
+  * @brief CP [FICR_PROTEST_CP] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  LOTNR[2];                          /*!< (@ 0x00000000) Lot number.                                           */
+  __IM  uint32_t  WAFERXY;                           /*!< (@ 0x00000008) Wafer number and die X,Y coordinate.                  */
+  __IM  uint32_t  PROGVERSION1;                      /*!< (@ 0x0000000C) CP1 test program version.                             */
+  __IM  uint32_t  PROGVERSION2;                      /*!< (@ 0x00000010) CP2 test program version.                             */
+  __IM  uint32_t  PASSID1;                           /*!< (@ 0x00000014) CP1 pass ID.                                          */
+  __IM  uint32_t  PASSID2;                           /*!< (@ 0x00000018) CP2 pass ID.                                          */
+  __IM  uint32_t  TIMESTAMP1;                        /*!< (@ 0x0000001C) Timestamp for when CP1 starts or ends
+                                                                         (YYYYMMDDTHHMMSS)*/
+  __IM  uint32_t  TIMESTAMP2;                        /*!< (@ 0x00000020) Timestamp for when CP2 starts or ends
+                                                                         (YYYYMMDDTHHMMSS)*/
+} NRF_FICR_PROTEST_CP_Type;                          /*!< Size = 36 (0x024)                                                    */
+
+/* FICR_PROTEST_CP_LOTNR: Lot number. */
+  #define FICR_PROTEST_CP_LOTNR_MaxCount (2UL)       /*!< Max size of LOTNR[2] array.                                          */
+  #define FICR_PROTEST_CP_LOTNR_MaxIndex (1UL)       /*!< Max index of LOTNR[2] array.                                         */
+  #define FICR_PROTEST_CP_LOTNR_MinIndex (0UL)       /*!< Min index of LOTNR[2] array.                                         */
+  #define FICR_PROTEST_CP_LOTNR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LOTNR[2] register.                               */
+
+/* LOTNR @Bits 0..31 : Lot number */
+  #define FICR_PROTEST_CP_LOTNR_LOTNR_Pos (0UL)      /*!< Position of LOTNR field.                                             */
+  #define FICR_PROTEST_CP_LOTNR_LOTNR_Msk (0xFFFFFFFFUL << FICR_PROTEST_CP_LOTNR_LOTNR_Pos) /*!< Bit mask of LOTNR field.      */
+
+
+/* FICR_PROTEST_CP_WAFERXY: Wafer number and die X,Y coordinate. */
+  #define FICR_PROTEST_CP_WAFERXY_ResetValue (0xFFFFFFFFUL) /*!< Reset value of WAFERXY register.                              */
+
+/* YCOORD @Bits 0..11 : Die y coordinate */
+  #define FICR_PROTEST_CP_WAFERXY_YCOORD_Pos (0UL)   /*!< Position of YCOORD field.                                            */
+  #define FICR_PROTEST_CP_WAFERXY_YCOORD_Msk (0xFFFUL << FICR_PROTEST_CP_WAFERXY_YCOORD_Pos) /*!< Bit mask of YCOORD field.    */
+
+/* XCOORD @Bits 12..23 : Die x coordinate */
+  #define FICR_PROTEST_CP_WAFERXY_XCOORD_Pos (12UL)  /*!< Position of XCOORD field.                                            */
+  #define FICR_PROTEST_CP_WAFERXY_XCOORD_Msk (0xFFFUL << FICR_PROTEST_CP_WAFERXY_XCOORD_Pos) /*!< Bit mask of XCOORD field.    */
+
+/* WAFER @Bits 24..31 : Wafer number */
+  #define FICR_PROTEST_CP_WAFERXY_WAFER_Pos (24UL)   /*!< Position of WAFER field.                                             */
+  #define FICR_PROTEST_CP_WAFERXY_WAFER_Msk (0xFFUL << FICR_PROTEST_CP_WAFERXY_WAFER_Pos) /*!< Bit mask of WAFER field.        */
+
+
+/* FICR_PROTEST_CP_PROGVERSION1: CP1 test program version. */
+  #define FICR_PROTEST_CP_PROGVERSION1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PROGVERSION1 register.                    */
+
+/* VAL @Bits 0..31 : CP1 test program version */
+  #define FICR_PROTEST_CP_PROGVERSION1_VAL_Pos (0UL) /*!< Position of VAL field.                                               */
+  #define FICR_PROTEST_CP_PROGVERSION1_VAL_Msk (0xFFFFFFFFUL << FICR_PROTEST_CP_PROGVERSION1_VAL_Pos) /*!< Bit mask of VAL
+                                                                            field.*/
+
+
+/* FICR_PROTEST_CP_PROGVERSION2: CP2 test program version. */
+  #define FICR_PROTEST_CP_PROGVERSION2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PROGVERSION2 register.                    */
+
+/* VAL @Bits 0..31 : CP2 test program version */
+  #define FICR_PROTEST_CP_PROGVERSION2_VAL_Pos (0UL) /*!< Position of VAL field.                                               */
+  #define FICR_PROTEST_CP_PROGVERSION2_VAL_Msk (0xFFFFFFFFUL << FICR_PROTEST_CP_PROGVERSION2_VAL_Pos) /*!< Bit mask of VAL
+                                                                            field.*/
+
+
+/* FICR_PROTEST_CP_PASSID1: CP1 pass ID. */
+  #define FICR_PROTEST_CP_PASSID1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PASSID1 register.                              */
+
+/* VAL @Bits 0..31 : CP1 pass ID. */
+  #define FICR_PROTEST_CP_PASSID1_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
+  #define FICR_PROTEST_CP_PASSID1_VAL_Msk (0xFFFFFFFFUL << FICR_PROTEST_CP_PASSID1_VAL_Pos) /*!< Bit mask of VAL field.        */
+
+
+/* FICR_PROTEST_CP_PASSID2: CP2 pass ID. */
+  #define FICR_PROTEST_CP_PASSID2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PASSID2 register.                              */
+
+/* VAL @Bits 0..31 : CP2 pass ID. */
+  #define FICR_PROTEST_CP_PASSID2_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
+  #define FICR_PROTEST_CP_PASSID2_VAL_Msk (0xFFFFFFFFUL << FICR_PROTEST_CP_PASSID2_VAL_Pos) /*!< Bit mask of VAL field.        */
+
+
+/* FICR_PROTEST_CP_TIMESTAMP1: Timestamp for when CP1 starts or ends (YYYYMMDDTHHMMSS) */
+  #define FICR_PROTEST_CP_TIMESTAMP1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TIMESTAMP1 register.                        */
+
+/* VAL @Bits 0..31 : CP1 timestamp */
+  #define FICR_PROTEST_CP_TIMESTAMP1_VAL_Pos (0UL)   /*!< Position of VAL field.                                               */
+  #define FICR_PROTEST_CP_TIMESTAMP1_VAL_Msk (0xFFFFFFFFUL << FICR_PROTEST_CP_TIMESTAMP1_VAL_Pos) /*!< Bit mask of VAL field.  */
+
+
+/* FICR_PROTEST_CP_TIMESTAMP2: Timestamp for when CP2 starts or ends (YYYYMMDDTHHMMSS) */
+  #define FICR_PROTEST_CP_TIMESTAMP2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TIMESTAMP2 register.                        */
+
+/* VAL @Bits 0..31 : CP2 timestamp */
+  #define FICR_PROTEST_CP_TIMESTAMP2_VAL_Pos (0UL)   /*!< Position of VAL field.                                               */
+  #define FICR_PROTEST_CP_TIMESTAMP2_VAL_Msk (0xFFFFFFFFUL << FICR_PROTEST_CP_TIMESTAMP2_VAL_Pos) /*!< Bit mask of VAL field.  */
+
+
+
+/* ================================================= Struct FICR_PROTEST_FT ================================================== */
+/**
+  * @brief FT [FICR_PROTEST_FT] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  PROGVERSION1;                      /*!< (@ 0x00000000) FT1 test program version.                             */
+  __IM  uint32_t  PROGVERSION2;                      /*!< (@ 0x00000004) FT2/EQA test program version.                         */
+  __IM  uint32_t  PASSID1;                           /*!< (@ 0x00000008) FT1 pass ID.                                          */
+  __IM  uint32_t  PASSID2;                           /*!< (@ 0x0000000C) FT2/EQA pass ID.                                      */
+  __IM  uint32_t  TIMESTAMP1;                        /*!< (@ 0x00000010) Timestamp for when FT1 starts or ends
+                                                                         (YYYYMMDDTHHMMSS)*/
+  __IM  uint32_t  TIMESTAMP2;                        /*!< (@ 0x00000014) Timestamp for when FT2/EQA starts or ends
+                                                                         (YYYYMMDDTHHMMSS)*/
+} NRF_FICR_PROTEST_FT_Type;                          /*!< Size = 24 (0x018)                                                    */
+
+/* FICR_PROTEST_FT_PROGVERSION1: FT1 test program version. */
+  #define FICR_PROTEST_FT_PROGVERSION1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PROGVERSION1 register.                    */
+
+/* PROGVERSION1 @Bits 0..31 : FT1 test program version */
+  #define FICR_PROTEST_FT_PROGVERSION1_PROGVERSION1_Pos (0UL) /*!< Position of PROGVERSION1 field.                             */
+  #define FICR_PROTEST_FT_PROGVERSION1_PROGVERSION1_Msk (0xFFFFFFFFUL << FICR_PROTEST_FT_PROGVERSION1_PROGVERSION1_Pos) /*!< Bit
+                                                                            mask of PROGVERSION1 field.*/
+
+
+/* FICR_PROTEST_FT_PROGVERSION2: FT2/EQA test program version. */
+  #define FICR_PROTEST_FT_PROGVERSION2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PROGVERSION2 register.                    */
+
+/* PROGVERSION2 @Bits 0..31 : FT2/EQA test program version */
+  #define FICR_PROTEST_FT_PROGVERSION2_PROGVERSION2_Pos (0UL) /*!< Position of PROGVERSION2 field.                             */
+  #define FICR_PROTEST_FT_PROGVERSION2_PROGVERSION2_Msk (0xFFFFFFFFUL << FICR_PROTEST_FT_PROGVERSION2_PROGVERSION2_Pos) /*!< Bit
+                                                                            mask of PROGVERSION2 field.*/
+
+
+/* FICR_PROTEST_FT_PASSID1: FT1 pass ID. */
+  #define FICR_PROTEST_FT_PASSID1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PASSID1 register.                              */
+
+/* VAL @Bits 0..31 : FT1 pass ID. */
+  #define FICR_PROTEST_FT_PASSID1_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
+  #define FICR_PROTEST_FT_PASSID1_VAL_Msk (0xFFFFFFFFUL << FICR_PROTEST_FT_PASSID1_VAL_Pos) /*!< Bit mask of VAL field.        */
+
+
+/* FICR_PROTEST_FT_PASSID2: FT2/EQA pass ID. */
+  #define FICR_PROTEST_FT_PASSID2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PASSID2 register.                              */
+
+/* VAL @Bits 0..31 : FT2/EQA pass ID. */
+  #define FICR_PROTEST_FT_PASSID2_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
+  #define FICR_PROTEST_FT_PASSID2_VAL_Msk (0xFFFFFFFFUL << FICR_PROTEST_FT_PASSID2_VAL_Pos) /*!< Bit mask of VAL field.        */
+
+
+/* FICR_PROTEST_FT_TIMESTAMP1: Timestamp for when FT1 starts or ends (YYYYMMDDTHHMMSS) */
+  #define FICR_PROTEST_FT_TIMESTAMP1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TIMESTAMP1 register.                        */
+
+/* VAL @Bits 0..31 : FT1 timestamp */
+  #define FICR_PROTEST_FT_TIMESTAMP1_VAL_Pos (0UL)   /*!< Position of VAL field.                                               */
+  #define FICR_PROTEST_FT_TIMESTAMP1_VAL_Msk (0xFFFFFFFFUL << FICR_PROTEST_FT_TIMESTAMP1_VAL_Pos) /*!< Bit mask of VAL field.  */
+
+
+/* FICR_PROTEST_FT_TIMESTAMP2: Timestamp for when FT2/EQA starts or ends (YYYYMMDDTHHMMSS) */
+  #define FICR_PROTEST_FT_TIMESTAMP2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TIMESTAMP2 register.                        */
+
+/* VAL @Bits 0..31 : FT2/EQA timestamp */
+  #define FICR_PROTEST_FT_TIMESTAMP2_VAL_Pos (0UL)   /*!< Position of VAL field.                                               */
+  #define FICR_PROTEST_FT_TIMESTAMP2_VAL_Msk (0xFFFFFFFFUL << FICR_PROTEST_FT_TIMESTAMP2_VAL_Pos) /*!< Bit mask of VAL field.  */
+
+
+
+/* =================================================== Struct FICR_PROTEST =================================================== */
+/**
+  * @brief PROTEST [FICR_PROTEST] Production test information
+  */
+typedef struct {
+  __IOM NRF_FICR_PROTEST_CP_Type CP;                 /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM NRF_FICR_PROTEST_FT_Type FT;                 /*!< (@ 0x00000024) (unspecified)                                         */
+} NRF_FICR_PROTEST_Type;                             /*!< Size = 60 (0x03C)                                                    */
+
+
 /* =================================================== Struct FICR_TRIMCNF =================================================== */
 /**
   * @brief TRIMCNF [FICR_TRIMCNF] (unspecified)
   */
 typedef struct {
-  __IOM  uint32_t * ADDR;                             /*!< (@ 0x00000000) Address of the register which will be written         */
+  __IM  uint32_t  ADDR;                              /*!< (@ 0x00000000) Address of the register which will be written         */
   __IM  uint32_t  DATA;                              /*!< (@ 0x00000004) Data to be written into the register                  */
 } NRF_FICR_TRIMCNF_Type;                             /*!< Size = 8 (0x008)                                                     */
   #define FICR_TRIMCNF_MaxCount (64UL)               /*!< Size of TRIMCNF[64] array.                                           */
@@ -10104,10 +10313,12 @@ typedef struct {
     __IM uint32_t IR[4];                             /*!< (@ 0x00000390) Common identity root key, word n                      */
     __IM uint32_t DEVICEADDRTYPE;                    /*!< (@ 0x000003A0) Device address type                                   */
     __IM uint32_t DEVICEADDR[2];                     /*!< (@ 0x000003A4) Device address n                                      */
-    __IM uint32_t RESERVED5[21];
+    __IM uint32_t RESERVED5;
+    __IOM NRF_FICR_PROTEST_Type PROTEST;             /*!< (@ 0x000003B0) Production test information                           */
+    __IM uint32_t RESERVED6[5];
     __IOM NRF_FICR_TRIMCNF_Type TRIMCNF[64];         /*!< (@ 0x00000400) (unspecified)                                         */
     __IOM NRF_FICR_NFC_Type NFC;                     /*!< (@ 0x00000600) (unspecified)                                         */
-    __IM uint32_t RESERVED6[4];
+    __IM uint32_t RESERVED7[4];
     __IM uint32_t XOSC32MTRIM;                       /*!< (@ 0x00000620) XOSC32M capacitor selection trim values               */
     __IM uint32_t XOSC32KTRIM;                       /*!< (@ 0x00000624) XOSC32K capacitor selection trim values               */
   } NRF_FICR_Type;                                   /*!< Size = 1576 (0x628)                                                  */
@@ -13814,7 +14025,7 @@ typedef struct {
     #pragma GCC diagnostic ignored "-Wpedantic"
   #endif
   union {
-    __IOM uint32_t CCADD;                            /*!< (@ 0x00000008) Count to add to CC[n]                                 */
+    __IOM uint32_t CCADD;                            /*!< (@ 0x00000008) Count to add to CC[n] when this register is written.  */
   };
   #if defined(_GNUC_)
     #pragma GCC diagnostic pop
@@ -13841,7 +14052,7 @@ typedef struct {
   #define GRTC_CC_CCH_CCH_Msk (0xFFFFFUL << GRTC_CC_CCH_CCH_Pos) /*!< Bit mask of CCH field.                                   */
 
 
-/* GRTC_CC_CCADD: Count to add to CC[n] */
+/* GRTC_CC_CCADD: Count to add to CC[n] when this register is written. */
   #define GRTC_CC_CCADD_ResetValue (0x00000000UL)    /*!< Reset value of CCADD register.                                       */
 
 /* VALUE @Bits 0..30 : Count to add to CC[n] */
@@ -17121,9 +17332,9 @@ typedef struct {
   #define I2S_PSEL_MCK_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
   #define I2S_PSEL_MCK_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..9 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define I2S_PSEL_MCK_PORT_Pos (5UL)                /*!< Position of PORT field.                                              */
-  #define I2S_PSEL_MCK_PORT_Msk (0x1FUL << I2S_PSEL_MCK_PORT_Pos) /*!< Bit mask of PORT field.                                 */
+  #define I2S_PSEL_MCK_PORT_Msk (0x7UL << I2S_PSEL_MCK_PORT_Pos) /*!< Bit mask of PORT field.                                  */
   #define I2S_PSEL_MCK_PORT_Min (0x1UL)              /*!< Min value of PORT field.                                             */
   #define I2S_PSEL_MCK_PORT_Max (0x1UL)              /*!< Max size of PORT field.                                              */
 
@@ -17145,9 +17356,9 @@ typedef struct {
   #define I2S_PSEL_SCK_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
   #define I2S_PSEL_SCK_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..9 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define I2S_PSEL_SCK_PORT_Pos (5UL)                /*!< Position of PORT field.                                              */
-  #define I2S_PSEL_SCK_PORT_Msk (0x1FUL << I2S_PSEL_SCK_PORT_Pos) /*!< Bit mask of PORT field.                                 */
+  #define I2S_PSEL_SCK_PORT_Msk (0x7UL << I2S_PSEL_SCK_PORT_Pos) /*!< Bit mask of PORT field.                                  */
   #define I2S_PSEL_SCK_PORT_Min (0x1UL)              /*!< Min value of PORT field.                                             */
   #define I2S_PSEL_SCK_PORT_Max (0x1UL)              /*!< Max size of PORT field.                                              */
 
@@ -17169,9 +17380,9 @@ typedef struct {
   #define I2S_PSEL_LRCK_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define I2S_PSEL_LRCK_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..9 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define I2S_PSEL_LRCK_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define I2S_PSEL_LRCK_PORT_Msk (0x1FUL << I2S_PSEL_LRCK_PORT_Pos) /*!< Bit mask of PORT field.                               */
+  #define I2S_PSEL_LRCK_PORT_Msk (0x7UL << I2S_PSEL_LRCK_PORT_Pos) /*!< Bit mask of PORT field.                                */
   #define I2S_PSEL_LRCK_PORT_Min (0x1UL)             /*!< Min value of PORT field.                                             */
   #define I2S_PSEL_LRCK_PORT_Max (0x1UL)             /*!< Max size of PORT field.                                              */
 
@@ -17193,9 +17404,9 @@ typedef struct {
   #define I2S_PSEL_SDIN_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define I2S_PSEL_SDIN_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..9 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define I2S_PSEL_SDIN_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define I2S_PSEL_SDIN_PORT_Msk (0x1FUL << I2S_PSEL_SDIN_PORT_Pos) /*!< Bit mask of PORT field.                               */
+  #define I2S_PSEL_SDIN_PORT_Msk (0x7UL << I2S_PSEL_SDIN_PORT_Pos) /*!< Bit mask of PORT field.                                */
   #define I2S_PSEL_SDIN_PORT_Min (0x1UL)             /*!< Min value of PORT field.                                             */
   #define I2S_PSEL_SDIN_PORT_Max (0x1UL)             /*!< Max size of PORT field.                                              */
 
@@ -17217,9 +17428,9 @@ typedef struct {
   #define I2S_PSEL_SDOUT_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
   #define I2S_PSEL_SDOUT_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..9 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define I2S_PSEL_SDOUT_PORT_Pos (5UL)              /*!< Position of PORT field.                                              */
-  #define I2S_PSEL_SDOUT_PORT_Msk (0x1FUL << I2S_PSEL_SDOUT_PORT_Pos) /*!< Bit mask of PORT field.                             */
+  #define I2S_PSEL_SDOUT_PORT_Msk (0x7UL << I2S_PSEL_SDOUT_PORT_Pos) /*!< Bit mask of PORT field.                              */
   #define I2S_PSEL_SDOUT_PORT_Min (0x1UL)            /*!< Min value of PORT field.                                             */
   #define I2S_PSEL_SDOUT_PORT_Max (0x1UL)            /*!< Max size of PORT field.                                              */
 
@@ -18468,7 +18679,8 @@ typedef struct {
   typedef struct {                                   /*!< LPCOMP Structure                                                     */
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start comparator                                      */
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop comparator                                       */
-    __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000008) Sample comparator value                               */
+    __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000008) Sample comparator value. This task requires that LPCOMP
+                                                                         has been started by the START task.*/
     __IM uint32_t RESERVED[29];
     __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
     __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
@@ -18529,10 +18741,10 @@ typedef struct {
   #define LPCOMP_TASKS_STOP_TASKS_STOP_Trigger (0x1UL) /*!< Trigger task                                                       */
 
 
-/* LPCOMP_TASKS_SAMPLE: Sample comparator value */
+/* LPCOMP_TASKS_SAMPLE: Sample comparator value. This task requires that LPCOMP has been started by the START task. */
   #define LPCOMP_TASKS_SAMPLE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_SAMPLE register.                             */
 
-/* TASKS_SAMPLE @Bit 0 : Sample comparator value */
+/* TASKS_SAMPLE @Bit 0 : Sample comparator value. This task requires that LPCOMP has been started by the START task. */
   #define LPCOMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos (0UL) /*!< Position of TASKS_SAMPLE field.                                      */
   #define LPCOMP_TASKS_SAMPLE_TASKS_SAMPLE_Msk (0x1UL << LPCOMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos) /*!< Bit mask of TASKS_SAMPLE
                                                                             field.*/
@@ -19029,7 +19241,8 @@ typedef struct {
   __IOM uint32_t  CONTROL;                           /*!< (@ 0x00000000) RAM/ROM[n] power control register.                    */
   __IM  uint32_t  RESERVED;
   __IOM uint32_t  RET;                               /*!< (@ 0x00000008) RAM retention for RAM [n].                            */
-} NRF_MEMCONF_POWER_Type;                            /*!< Size = 12 (0x00C)                                                    */
+  __IOM uint32_t  RET2;                              /*!< (@ 0x0000000C) RAM retention for the second bank in the RAM block    */
+} NRF_MEMCONF_POWER_Type;                            /*!< Size = 16 (0x010)                                                    */
   #define MEMCONF_POWER_MaxCount (2UL)               /*!< Size of POWER[2] array.                                              */
   #define MEMCONF_POWER_MaxIndex (1UL)               /*!< Max index of POWER[2] array.                                         */
   #define MEMCONF_POWER_MinIndex (0UL)               /*!< Min index of POWER[2] array.                                         */
@@ -19554,6 +19767,266 @@ typedef struct {
   #define MEMCONF_POWER_RET_MEM31_On (0x1UL)         /*!< Retention on                                                         */
 
 
+/* MEMCONF_POWER_RET2: RAM retention for the second bank in the RAM block */
+  #define MEMCONF_POWER_RET2_ResetValue (0x00000000UL) /*!< Reset value of RET2 register.                                      */
+
+/* MEM0 @Bit 0 : Keep the second bank in RAM block MEM[0] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM0_Pos (0UL)          /*!< Position of MEM0 field.                                              */
+  #define MEMCONF_POWER_RET2_MEM0_Msk (0x1UL << MEMCONF_POWER_RET2_MEM0_Pos) /*!< Bit mask of MEM0 field.                      */
+  #define MEMCONF_POWER_RET2_MEM0_Min (0x0UL)        /*!< Min enumerator value of MEM0 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM0_Max (0x1UL)        /*!< Max enumerator value of MEM0 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM0_Off (0x0UL)        /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM0_On (0x1UL)         /*!< Retention on                                                         */
+
+/* MEM1 @Bit 1 : Keep the second bank in RAM block MEM[1] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM1_Pos (1UL)          /*!< Position of MEM1 field.                                              */
+  #define MEMCONF_POWER_RET2_MEM1_Msk (0x1UL << MEMCONF_POWER_RET2_MEM1_Pos) /*!< Bit mask of MEM1 field.                      */
+  #define MEMCONF_POWER_RET2_MEM1_Min (0x0UL)        /*!< Min enumerator value of MEM1 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM1_Max (0x1UL)        /*!< Max enumerator value of MEM1 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM1_Off (0x0UL)        /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM1_On (0x1UL)         /*!< Retention on                                                         */
+
+/* MEM2 @Bit 2 : Keep the second bank in RAM block MEM[2] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM2_Pos (2UL)          /*!< Position of MEM2 field.                                              */
+  #define MEMCONF_POWER_RET2_MEM2_Msk (0x1UL << MEMCONF_POWER_RET2_MEM2_Pos) /*!< Bit mask of MEM2 field.                      */
+  #define MEMCONF_POWER_RET2_MEM2_Min (0x0UL)        /*!< Min enumerator value of MEM2 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM2_Max (0x1UL)        /*!< Max enumerator value of MEM2 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM2_Off (0x0UL)        /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM2_On (0x1UL)         /*!< Retention on                                                         */
+
+/* MEM3 @Bit 3 : Keep the second bank in RAM block MEM[3] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM3_Pos (3UL)          /*!< Position of MEM3 field.                                              */
+  #define MEMCONF_POWER_RET2_MEM3_Msk (0x1UL << MEMCONF_POWER_RET2_MEM3_Pos) /*!< Bit mask of MEM3 field.                      */
+  #define MEMCONF_POWER_RET2_MEM3_Min (0x0UL)        /*!< Min enumerator value of MEM3 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM3_Max (0x1UL)        /*!< Max enumerator value of MEM3 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM3_Off (0x0UL)        /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM3_On (0x1UL)         /*!< Retention on                                                         */
+
+/* MEM4 @Bit 4 : Keep the second bank in RAM block MEM[4] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM4_Pos (4UL)          /*!< Position of MEM4 field.                                              */
+  #define MEMCONF_POWER_RET2_MEM4_Msk (0x1UL << MEMCONF_POWER_RET2_MEM4_Pos) /*!< Bit mask of MEM4 field.                      */
+  #define MEMCONF_POWER_RET2_MEM4_Min (0x0UL)        /*!< Min enumerator value of MEM4 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM4_Max (0x1UL)        /*!< Max enumerator value of MEM4 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM4_Off (0x0UL)        /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM4_On (0x1UL)         /*!< Retention on                                                         */
+
+/* MEM5 @Bit 5 : Keep the second bank in RAM block MEM[5] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM5_Pos (5UL)          /*!< Position of MEM5 field.                                              */
+  #define MEMCONF_POWER_RET2_MEM5_Msk (0x1UL << MEMCONF_POWER_RET2_MEM5_Pos) /*!< Bit mask of MEM5 field.                      */
+  #define MEMCONF_POWER_RET2_MEM5_Min (0x0UL)        /*!< Min enumerator value of MEM5 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM5_Max (0x1UL)        /*!< Max enumerator value of MEM5 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM5_Off (0x0UL)        /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM5_On (0x1UL)         /*!< Retention on                                                         */
+
+/* MEM6 @Bit 6 : Keep the second bank in RAM block MEM[6] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM6_Pos (6UL)          /*!< Position of MEM6 field.                                              */
+  #define MEMCONF_POWER_RET2_MEM6_Msk (0x1UL << MEMCONF_POWER_RET2_MEM6_Pos) /*!< Bit mask of MEM6 field.                      */
+  #define MEMCONF_POWER_RET2_MEM6_Min (0x0UL)        /*!< Min enumerator value of MEM6 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM6_Max (0x1UL)        /*!< Max enumerator value of MEM6 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM6_Off (0x0UL)        /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM6_On (0x1UL)         /*!< Retention on                                                         */
+
+/* MEM7 @Bit 7 : Keep the second bank in RAM block MEM[7] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM7_Pos (7UL)          /*!< Position of MEM7 field.                                              */
+  #define MEMCONF_POWER_RET2_MEM7_Msk (0x1UL << MEMCONF_POWER_RET2_MEM7_Pos) /*!< Bit mask of MEM7 field.                      */
+  #define MEMCONF_POWER_RET2_MEM7_Min (0x0UL)        /*!< Min enumerator value of MEM7 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM7_Max (0x1UL)        /*!< Max enumerator value of MEM7 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM7_Off (0x0UL)        /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM7_On (0x1UL)         /*!< Retention on                                                         */
+
+/* MEM8 @Bit 8 : Keep the second bank in RAM block MEM[8] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM8_Pos (8UL)          /*!< Position of MEM8 field.                                              */
+  #define MEMCONF_POWER_RET2_MEM8_Msk (0x1UL << MEMCONF_POWER_RET2_MEM8_Pos) /*!< Bit mask of MEM8 field.                      */
+  #define MEMCONF_POWER_RET2_MEM8_Min (0x0UL)        /*!< Min enumerator value of MEM8 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM8_Max (0x1UL)        /*!< Max enumerator value of MEM8 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM8_Off (0x0UL)        /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM8_On (0x1UL)         /*!< Retention on                                                         */
+
+/* MEM9 @Bit 9 : Keep the second bank in RAM block MEM[9] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM9_Pos (9UL)          /*!< Position of MEM9 field.                                              */
+  #define MEMCONF_POWER_RET2_MEM9_Msk (0x1UL << MEMCONF_POWER_RET2_MEM9_Pos) /*!< Bit mask of MEM9 field.                      */
+  #define MEMCONF_POWER_RET2_MEM9_Min (0x0UL)        /*!< Min enumerator value of MEM9 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM9_Max (0x1UL)        /*!< Max enumerator value of MEM9 field.                                  */
+  #define MEMCONF_POWER_RET2_MEM9_Off (0x0UL)        /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM9_On (0x1UL)         /*!< Retention on                                                         */
+
+/* MEM10 @Bit 10 : Keep the second bank in RAM block MEM[10] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM10_Pos (10UL)        /*!< Position of MEM10 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM10_Msk (0x1UL << MEMCONF_POWER_RET2_MEM10_Pos) /*!< Bit mask of MEM10 field.                   */
+  #define MEMCONF_POWER_RET2_MEM10_Min (0x0UL)       /*!< Min enumerator value of MEM10 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM10_Max (0x1UL)       /*!< Max enumerator value of MEM10 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM10_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM10_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM11 @Bit 11 : Keep the second bank in RAM block MEM[11] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM11_Pos (11UL)        /*!< Position of MEM11 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM11_Msk (0x1UL << MEMCONF_POWER_RET2_MEM11_Pos) /*!< Bit mask of MEM11 field.                   */
+  #define MEMCONF_POWER_RET2_MEM11_Min (0x0UL)       /*!< Min enumerator value of MEM11 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM11_Max (0x1UL)       /*!< Max enumerator value of MEM11 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM11_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM11_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM12 @Bit 12 : Keep the second bank in RAM block MEM[12] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM12_Pos (12UL)        /*!< Position of MEM12 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM12_Msk (0x1UL << MEMCONF_POWER_RET2_MEM12_Pos) /*!< Bit mask of MEM12 field.                   */
+  #define MEMCONF_POWER_RET2_MEM12_Min (0x0UL)       /*!< Min enumerator value of MEM12 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM12_Max (0x1UL)       /*!< Max enumerator value of MEM12 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM12_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM12_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM13 @Bit 13 : Keep the second bank in RAM block MEM[13] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM13_Pos (13UL)        /*!< Position of MEM13 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM13_Msk (0x1UL << MEMCONF_POWER_RET2_MEM13_Pos) /*!< Bit mask of MEM13 field.                   */
+  #define MEMCONF_POWER_RET2_MEM13_Min (0x0UL)       /*!< Min enumerator value of MEM13 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM13_Max (0x1UL)       /*!< Max enumerator value of MEM13 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM13_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM13_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM14 @Bit 14 : Keep the second bank in RAM block MEM[14] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM14_Pos (14UL)        /*!< Position of MEM14 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM14_Msk (0x1UL << MEMCONF_POWER_RET2_MEM14_Pos) /*!< Bit mask of MEM14 field.                   */
+  #define MEMCONF_POWER_RET2_MEM14_Min (0x0UL)       /*!< Min enumerator value of MEM14 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM14_Max (0x1UL)       /*!< Max enumerator value of MEM14 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM14_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM14_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM15 @Bit 15 : Keep the second bank in RAM block MEM[15] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM15_Pos (15UL)        /*!< Position of MEM15 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM15_Msk (0x1UL << MEMCONF_POWER_RET2_MEM15_Pos) /*!< Bit mask of MEM15 field.                   */
+  #define MEMCONF_POWER_RET2_MEM15_Min (0x0UL)       /*!< Min enumerator value of MEM15 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM15_Max (0x1UL)       /*!< Max enumerator value of MEM15 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM15_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM15_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM16 @Bit 16 : Keep the second bank in RAM block MEM[16] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM16_Pos (16UL)        /*!< Position of MEM16 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM16_Msk (0x1UL << MEMCONF_POWER_RET2_MEM16_Pos) /*!< Bit mask of MEM16 field.                   */
+  #define MEMCONF_POWER_RET2_MEM16_Min (0x0UL)       /*!< Min enumerator value of MEM16 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM16_Max (0x1UL)       /*!< Max enumerator value of MEM16 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM16_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM16_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM17 @Bit 17 : Keep the second bank in RAM block MEM[17] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM17_Pos (17UL)        /*!< Position of MEM17 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM17_Msk (0x1UL << MEMCONF_POWER_RET2_MEM17_Pos) /*!< Bit mask of MEM17 field.                   */
+  #define MEMCONF_POWER_RET2_MEM17_Min (0x0UL)       /*!< Min enumerator value of MEM17 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM17_Max (0x1UL)       /*!< Max enumerator value of MEM17 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM17_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM17_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM18 @Bit 18 : Keep the second bank in RAM block MEM[18] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM18_Pos (18UL)        /*!< Position of MEM18 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM18_Msk (0x1UL << MEMCONF_POWER_RET2_MEM18_Pos) /*!< Bit mask of MEM18 field.                   */
+  #define MEMCONF_POWER_RET2_MEM18_Min (0x0UL)       /*!< Min enumerator value of MEM18 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM18_Max (0x1UL)       /*!< Max enumerator value of MEM18 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM18_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM18_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM19 @Bit 19 : Keep the second bank in RAM block MEM[19] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM19_Pos (19UL)        /*!< Position of MEM19 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM19_Msk (0x1UL << MEMCONF_POWER_RET2_MEM19_Pos) /*!< Bit mask of MEM19 field.                   */
+  #define MEMCONF_POWER_RET2_MEM19_Min (0x0UL)       /*!< Min enumerator value of MEM19 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM19_Max (0x1UL)       /*!< Max enumerator value of MEM19 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM19_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM19_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM20 @Bit 20 : Keep the second bank in RAM block MEM[20] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM20_Pos (20UL)        /*!< Position of MEM20 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM20_Msk (0x1UL << MEMCONF_POWER_RET2_MEM20_Pos) /*!< Bit mask of MEM20 field.                   */
+  #define MEMCONF_POWER_RET2_MEM20_Min (0x0UL)       /*!< Min enumerator value of MEM20 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM20_Max (0x1UL)       /*!< Max enumerator value of MEM20 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM20_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM20_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM21 @Bit 21 : Keep the second bank in RAM block MEM[21] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM21_Pos (21UL)        /*!< Position of MEM21 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM21_Msk (0x1UL << MEMCONF_POWER_RET2_MEM21_Pos) /*!< Bit mask of MEM21 field.                   */
+  #define MEMCONF_POWER_RET2_MEM21_Min (0x0UL)       /*!< Min enumerator value of MEM21 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM21_Max (0x1UL)       /*!< Max enumerator value of MEM21 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM21_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM21_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM22 @Bit 22 : Keep the second bank in RAM block MEM[22] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM22_Pos (22UL)        /*!< Position of MEM22 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM22_Msk (0x1UL << MEMCONF_POWER_RET2_MEM22_Pos) /*!< Bit mask of MEM22 field.                   */
+  #define MEMCONF_POWER_RET2_MEM22_Min (0x0UL)       /*!< Min enumerator value of MEM22 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM22_Max (0x1UL)       /*!< Max enumerator value of MEM22 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM22_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM22_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM23 @Bit 23 : Keep the second bank in RAM block MEM[23] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM23_Pos (23UL)        /*!< Position of MEM23 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM23_Msk (0x1UL << MEMCONF_POWER_RET2_MEM23_Pos) /*!< Bit mask of MEM23 field.                   */
+  #define MEMCONF_POWER_RET2_MEM23_Min (0x0UL)       /*!< Min enumerator value of MEM23 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM23_Max (0x1UL)       /*!< Max enumerator value of MEM23 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM23_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM23_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM24 @Bit 24 : Keep the second bank in RAM block MEM[24] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM24_Pos (24UL)        /*!< Position of MEM24 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM24_Msk (0x1UL << MEMCONF_POWER_RET2_MEM24_Pos) /*!< Bit mask of MEM24 field.                   */
+  #define MEMCONF_POWER_RET2_MEM24_Min (0x0UL)       /*!< Min enumerator value of MEM24 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM24_Max (0x1UL)       /*!< Max enumerator value of MEM24 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM24_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM24_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM25 @Bit 25 : Keep the second bank in RAM block MEM[25] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM25_Pos (25UL)        /*!< Position of MEM25 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM25_Msk (0x1UL << MEMCONF_POWER_RET2_MEM25_Pos) /*!< Bit mask of MEM25 field.                   */
+  #define MEMCONF_POWER_RET2_MEM25_Min (0x0UL)       /*!< Min enumerator value of MEM25 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM25_Max (0x1UL)       /*!< Max enumerator value of MEM25 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM25_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM25_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM26 @Bit 26 : Keep the second bank in RAM block MEM[26] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM26_Pos (26UL)        /*!< Position of MEM26 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM26_Msk (0x1UL << MEMCONF_POWER_RET2_MEM26_Pos) /*!< Bit mask of MEM26 field.                   */
+  #define MEMCONF_POWER_RET2_MEM26_Min (0x0UL)       /*!< Min enumerator value of MEM26 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM26_Max (0x1UL)       /*!< Max enumerator value of MEM26 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM26_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM26_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM27 @Bit 27 : Keep the second bank in RAM block MEM[27] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM27_Pos (27UL)        /*!< Position of MEM27 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM27_Msk (0x1UL << MEMCONF_POWER_RET2_MEM27_Pos) /*!< Bit mask of MEM27 field.                   */
+  #define MEMCONF_POWER_RET2_MEM27_Min (0x0UL)       /*!< Min enumerator value of MEM27 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM27_Max (0x1UL)       /*!< Max enumerator value of MEM27 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM27_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM27_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM28 @Bit 28 : Keep the second bank in RAM block MEM[28] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM28_Pos (28UL)        /*!< Position of MEM28 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM28_Msk (0x1UL << MEMCONF_POWER_RET2_MEM28_Pos) /*!< Bit mask of MEM28 field.                   */
+  #define MEMCONF_POWER_RET2_MEM28_Min (0x0UL)       /*!< Min enumerator value of MEM28 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM28_Max (0x1UL)       /*!< Max enumerator value of MEM28 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM28_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM28_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM29 @Bit 29 : Keep the second bank in RAM block MEM[29] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM29_Pos (29UL)        /*!< Position of MEM29 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM29_Msk (0x1UL << MEMCONF_POWER_RET2_MEM29_Pos) /*!< Bit mask of MEM29 field.                   */
+  #define MEMCONF_POWER_RET2_MEM29_Min (0x0UL)       /*!< Min enumerator value of MEM29 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM29_Max (0x1UL)       /*!< Max enumerator value of MEM29 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM29_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM29_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM30 @Bit 30 : Keep the second bank in RAM block MEM[30] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM30_Pos (30UL)        /*!< Position of MEM30 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM30_Msk (0x1UL << MEMCONF_POWER_RET2_MEM30_Pos) /*!< Bit mask of MEM30 field.                   */
+  #define MEMCONF_POWER_RET2_MEM30_Min (0x0UL)       /*!< Min enumerator value of MEM30 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM30_Max (0x1UL)       /*!< Max enumerator value of MEM30 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM30_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM30_On (0x1UL)        /*!< Retention on                                                         */
+
+/* MEM31 @Bit 31 : Keep the second bank in RAM block MEM[31] retained when in System OFF mode. */
+  #define MEMCONF_POWER_RET2_MEM31_Pos (31UL)        /*!< Position of MEM31 field.                                             */
+  #define MEMCONF_POWER_RET2_MEM31_Msk (0x1UL << MEMCONF_POWER_RET2_MEM31_Pos) /*!< Bit mask of MEM31 field.                   */
+  #define MEMCONF_POWER_RET2_MEM31_Min (0x0UL)       /*!< Min enumerator value of MEM31 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM31_Max (0x1UL)       /*!< Max enumerator value of MEM31 field.                                 */
+  #define MEMCONF_POWER_RET2_MEM31_Off (0x0UL)       /*!< Retention off                                                        */
+  #define MEMCONF_POWER_RET2_MEM31_On (0x1UL)        /*!< Retention on                                                         */
+
+
 
 /* ================================================ Struct MEMCONF_BLOCKTYPE ================================================= */
 /**
@@ -19727,7 +20200,7 @@ typedef struct {
   typedef struct {                                   /*!< MEMCONF Structure                                                    */
     __IM uint32_t RESERVED[320];
     __IOM NRF_MEMCONF_POWER_Type POWER[2];           /*!< (@ 0x00000500) (unspecified)                                         */
-    __IM uint32_t RESERVED1[250];
+    __IM uint32_t RESERVED1[248];
     __IOM NRF_MEMCONF_BLOCKTYPE_Type BLOCKTYPE[64];  /*!< (@ 0x00000900) (unspecified)                                         */
   } NRF_MEMCONF_Type;                                /*!< Size = 2560 (0xA00)                                                  */
 
@@ -26369,10 +26842,7 @@ typedef struct {
 typedef struct {
   __OM  uint32_t  START;                             /*!< (@ 0x00000000) Starts operation using easyDMA to load the values. See
                                                                          peripheral description for operation using easyDMA.*/
-  __OM  uint32_t  STOP;                              /*!< (@ 0x00000004) Stops operation using easyDMA. This does not trigger an
-                                                                         END event. After a STOP task, the easyDMA (channel)
-                                                                         will also enter its lowest required power level.*/
-} NRF_PWM_TASKS_DMA_SEQ_Type;                        /*!< Size = 8 (0x008)                                                     */
+} NRF_PWM_TASKS_DMA_SEQ_Type;                        /*!< Size = 4 (0x004)                                                     */
   #define PWM_TASKS_DMA_SEQ_MaxCount (2UL)           /*!< Size of SEQ[2] array.                                                */
   #define PWM_TASKS_DMA_SEQ_MaxIndex (1UL)           /*!< Max index of SEQ[2] array.                                           */
   #define PWM_TASKS_DMA_SEQ_MinIndex (0UL)           /*!< Min index of SEQ[2] array.                                           */
@@ -26390,21 +26860,6 @@ typedef struct {
   #define PWM_TASKS_DMA_SEQ_START_START_Trigger (0x1UL) /*!< Trigger task                                                      */
 
 
-/* PWM_TASKS_DMA_SEQ_STOP: Stops operation using easyDMA. This does not trigger an END event. After a STOP task, the easyDMA
-                            (channel) will also enter its lowest required power level. */
-
-  #define PWM_TASKS_DMA_SEQ_STOP_ResetValue (0x00000000UL) /*!< Reset value of STOP register.                                  */
-
-/* STOP @Bit 0 : Stops operation using easyDMA. This does not trigger an END event. After a STOP task, the easyDMA (channel)
-                 will also enter its lowest required power level. */
-
-  #define PWM_TASKS_DMA_SEQ_STOP_STOP_Pos (0UL)      /*!< Position of STOP field.                                              */
-  #define PWM_TASKS_DMA_SEQ_STOP_STOP_Msk (0x1UL << PWM_TASKS_DMA_SEQ_STOP_STOP_Pos) /*!< Bit mask of STOP field.              */
-  #define PWM_TASKS_DMA_SEQ_STOP_STOP_Min (0x1UL)    /*!< Min enumerator value of STOP field.                                  */
-  #define PWM_TASKS_DMA_SEQ_STOP_STOP_Max (0x1UL)    /*!< Max enumerator value of STOP field.                                  */
-  #define PWM_TASKS_DMA_SEQ_STOP_STOP_Trigger (0x1UL) /*!< Trigger task                                                        */
-
-
 
 /* ================================================== Struct PWM_TASKS_DMA =================================================== */
 /**
@@ -26412,7 +26867,7 @@ typedef struct {
   */
 typedef struct {
   __OM  NRF_PWM_TASKS_DMA_SEQ_Type SEQ[2];           /*!< (@ 0x00000000) Peripheral tasks.                                     */
-} NRF_PWM_TASKS_DMA_Type;                            /*!< Size = 16 (0x010)                                                    */
+} NRF_PWM_TASKS_DMA_Type;                            /*!< Size = 8 (0x008)                                                     */
 
 
 /* ============================================== Struct PWM_SUBSCRIBE_DMA_SEQ =============================================== */
@@ -26421,8 +26876,7 @@ typedef struct {
   */
 typedef struct {
   __IOM uint32_t  START;                             /*!< (@ 0x00000000) Subscribe configuration for task START                */
-  __IOM uint32_t  STOP;                              /*!< (@ 0x00000004) Subscribe configuration for task STOP                 */
-} NRF_PWM_SUBSCRIBE_DMA_SEQ_Type;                    /*!< Size = 8 (0x008)                                                     */
+} NRF_PWM_SUBSCRIBE_DMA_SEQ_Type;                    /*!< Size = 4 (0x004)                                                     */
   #define PWM_SUBSCRIBE_DMA_SEQ_MaxCount (2UL)       /*!< Size of SEQ[2] array.                                                */
   #define PWM_SUBSCRIBE_DMA_SEQ_MaxIndex (1UL)       /*!< Max index of SEQ[2] array.                                           */
   #define PWM_SUBSCRIBE_DMA_SEQ_MinIndex (0UL)       /*!< Min index of SEQ[2] array.                                           */
@@ -26445,24 +26899,6 @@ typedef struct {
   #define PWM_SUBSCRIBE_DMA_SEQ_START_EN_Enabled (0x1UL) /*!< Enable subscription                                              */
 
 
-/* PWM_SUBSCRIBE_DMA_SEQ_STOP: Subscribe configuration for task STOP */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_ResetValue (0x00000000UL) /*!< Reset value of STOP register.                              */
-
-/* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_CHIDX_Msk (0xFFUL << PWM_SUBSCRIBE_DMA_SEQ_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
-
-/* EN @Bit 31 : (unspecified) */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_EN_Pos (31UL)   /*!< Position of EN field.                                                */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_EN_Msk (0x1UL << PWM_SUBSCRIBE_DMA_SEQ_STOP_EN_Pos) /*!< Bit mask of EN field.            */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_EN_Min (0x0UL)  /*!< Min enumerator value of EN field.                                    */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_EN_Max (0x1UL)  /*!< Max enumerator value of EN field.                                    */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_EN_Disabled (0x0UL) /*!< Disable subscription                                             */
-  #define PWM_SUBSCRIBE_DMA_SEQ_STOP_EN_Enabled (0x1UL) /*!< Enable subscription                                               */
-
-
 
 /* ================================================ Struct PWM_SUBSCRIBE_DMA ================================================= */
 /**
@@ -26470,7 +26906,7 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_PWM_SUBSCRIBE_DMA_SEQ_Type SEQ[2];       /*!< (@ 0x00000000) Subscribe configuration for tasks                     */
-} NRF_PWM_SUBSCRIBE_DMA_Type;                        /*!< Size = 16 (0x010)                                                    */
+} NRF_PWM_SUBSCRIBE_DMA_Type;                        /*!< Size = 8 (0x008)                                                     */
 
 
 /* ================================================ Struct PWM_EVENTS_DMA_SEQ ================================================ */
@@ -26678,9 +27114,9 @@ typedef struct {
   #define PWM_PSEL_OUT_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
   #define PWM_PSEL_OUT_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..9 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define PWM_PSEL_OUT_PORT_Pos (5UL)                /*!< Position of PORT field.                                              */
-  #define PWM_PSEL_OUT_PORT_Msk (0x1FUL << PWM_PSEL_OUT_PORT_Pos) /*!< Bit mask of PORT field.                                 */
+  #define PWM_PSEL_OUT_PORT_Msk (0x7UL << PWM_PSEL_OUT_PORT_Pos) /*!< Bit mask of PORT field.                                  */
   #define PWM_PSEL_OUT_PORT_Min (0x1UL)              /*!< Min value of PORT field.                                             */
   #define PWM_PSEL_OUT_PORT_Max (0x1UL)              /*!< Max size of PORT field.                                              */
 
@@ -26706,10 +27142,11 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
                                                                          updated after the END event. Also updated after each
                                                                          MATCH event.*/
-  __IM  uint32_t  RESERVED[3];
+  __IM  uint32_t  CURRENTAMOUNT;                     /*!< (@ 0x00000010) Number of bytes transferred in the current transaction*/
+  __IM  uint32_t  RESERVED[2];
   __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/
-  __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
+  __IM  uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
                                                                          event.*/
 } NRF_PWM_DMA_SEQ_Type;                              /*!< Size = 36 (0x024)                                                    */
   #define PWM_DMA_SEQ_MaxCount (2UL)                 /*!< Size of SEQ[2] array.                                                */
@@ -26758,6 +27195,19 @@ typedef struct {
   #define PWM_DMA_SEQ_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
+/* PWM_DMA_SEQ_CURRENTAMOUNT: Number of bytes transferred in the current transaction */
+  #define PWM_DMA_SEQ_CURRENTAMOUNT_ResetValue (0x00000000UL) /*!< Reset value of CURRENTAMOUNT register.                      */
+
+/* AMOUNT @Bits 0..15 : Number of bytes transferred in the current transaction. Continuously updated. Updated when data leaves
+                        the internal FIFO and is transferred to the destination. */
+
+  #define PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Pos (0UL) /*!< Position of AMOUNT field.                                            */
+  #define PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Msk (0xFFFFUL << PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT
+                                                                            field.*/
+  #define PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Min (0x1UL) /*!< Min value of AMOUNT field.                                         */
+  #define PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Max (0xFFFFUL) /*!< Max size of AMOUNT field.                                       */
+
+
 /* PWM_DMA_SEQ_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
   #define PWM_DMA_SEQ_TERMINATEONBUSERROR_ResetValue (0x00000000UL) /*!< Reset value of TERMINATEONBUSERROR register.          */
 
@@ -26804,13 +27254,13 @@ typedef struct {
     __OM uint32_t TASKS_SEQABORT;                    /*!< (@ 0x0000000C) (Gracefully) aborts the playback of the current
                                                                          sequence or the current end delay*/
     __OM NRF_PWM_TASKS_DMA_Type TASKS_DMA;           /*!< (@ 0x00000010) Peripheral tasks.                                     */
-    __IM uint32_t RESERVED[24];
+    __IM uint32_t RESERVED[26];
     __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
     __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
     __IOM uint32_t SUBSCRIBE_NEXTSTEP;               /*!< (@ 0x00000088) Subscribe configuration for task NEXTSTEP             */
     __IOM uint32_t SUBSCRIBE_SEQABORT;               /*!< (@ 0x0000008C) Subscribe configuration for task SEQABORT             */
     __IOM NRF_PWM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA;  /*!< (@ 0x00000090) Subscribe configuration for tasks                     */
-    __IM uint32_t RESERVED1[24];
+    __IM uint32_t RESERVED1[26];
     __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000100) Response to START task, emitted when the PWM pulse
                                                                          generation starts*/
     __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000104) Response to STOP task, emitted when PWM pulses are no
@@ -26824,7 +27274,9 @@ typedef struct {
     __IOM uint32_t EVENTS_RAMUNDERFLOW;              /*!< (@ 0x00000120) Emitted when retrieving from RAM does not complete in
                                                                          time for the PWM module*/
     __IOM NRF_PWM_EVENTS_DMA_Type EVENTS_DMA;        /*!< (@ 0x00000124) Peripheral events.                                    */
-    __IM uint32_t RESERVED2[17];
+    __IOM uint32_t EVENTS_COMPAREMATCH[4];           /*!< (@ 0x0000013C) This event is generated when the compare matches for
+                                                                         the compare channel [n].*/
+    __IM uint32_t RESERVED2[13];
     __IOM uint32_t PUBLISH_STARTED;                  /*!< (@ 0x00000180) Publish configuration for event STARTED               */
     __IOM uint32_t PUBLISH_STOPPED;                  /*!< (@ 0x00000184) Publish configuration for event STOPPED               */
     __IOM uint32_t PUBLISH_SEQSTARTED[2];            /*!< (@ 0x00000188) Publish configuration for event SEQSTARTED[n]         */
@@ -26833,7 +27285,8 @@ typedef struct {
     __IOM uint32_t PUBLISH_LOOPSDONE;                /*!< (@ 0x0000019C) Publish configuration for event LOOPSDONE             */
     __IOM uint32_t PUBLISH_RAMUNDERFLOW;             /*!< (@ 0x000001A0) Publish configuration for event RAMUNDERFLOW          */
     __IOM NRF_PWM_PUBLISH_DMA_Type PUBLISH_DMA;      /*!< (@ 0x000001A4) Publish configuration for events                      */
-    __IM uint32_t RESERVED3[17];
+    __IOM uint32_t PUBLISH_COMPAREMATCH[4];          /*!< (@ 0x000001BC) Publish configuration for event COMPAREMATCH[n]       */
+    __IM uint32_t RESERVED3[13];
     __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
     __IM uint32_t RESERVED4[63];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
@@ -26847,7 +27300,9 @@ typedef struct {
     __IOM uint32_t PRESCALER;                        /*!< (@ 0x0000050C) Configuration for PWM_CLK                             */
     __IOM uint32_t DECODER;                          /*!< (@ 0x00000510) Configuration of the decoder                          */
     __IOM uint32_t LOOP;                             /*!< (@ 0x00000514) Number of playbacks of a loop                         */
-    __IM uint32_t RESERVED6[2];
+    __IOM uint32_t IDLEOUT;                          /*!< (@ 0x00000518) Configure the output value on the PWM channel during
+                                                                         idle*/
+    __IM uint32_t RESERVED6;
     __IOM NRF_PWM_SEQ_Type SEQ[2];                   /*!< (@ 0x00000520) (unspecified)                                         */
     __IOM NRF_PWM_PSEL_Type PSEL;                    /*!< (@ 0x00000560) (unspecified)                                         */
     __IM uint32_t RESERVED7[100];
@@ -27075,6 +27530,22 @@ typedef struct {
   #define PWM_EVENTS_RAMUNDERFLOW_EVENTS_RAMUNDERFLOW_Generated (0x1UL) /*!< Event generated                                   */
 
 
+/* PWM_EVENTS_COMPAREMATCH: This event is generated when the compare matches for the compare channel [n]. */
+  #define PWM_EVENTS_COMPAREMATCH_MaxCount (4UL)     /*!< Max size of EVENTS_COMPAREMATCH[4] array.                            */
+  #define PWM_EVENTS_COMPAREMATCH_MaxIndex (3UL)     /*!< Max index of EVENTS_COMPAREMATCH[4] array.                           */
+  #define PWM_EVENTS_COMPAREMATCH_MinIndex (0UL)     /*!< Min index of EVENTS_COMPAREMATCH[4] array.                           */
+  #define PWM_EVENTS_COMPAREMATCH_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_COMPAREMATCH[4] register.               */
+
+/* EVENTS_COMPAREMATCH @Bit 0 : This event is generated when the compare matches for the compare channel [n]. */
+  #define PWM_EVENTS_COMPAREMATCH_EVENTS_COMPAREMATCH_Pos (0UL) /*!< Position of EVENTS_COMPAREMATCH field.                    */
+  #define PWM_EVENTS_COMPAREMATCH_EVENTS_COMPAREMATCH_Msk (0x1UL << PWM_EVENTS_COMPAREMATCH_EVENTS_COMPAREMATCH_Pos) /*!< Bit
+                                                                            mask of EVENTS_COMPAREMATCH field.*/
+  #define PWM_EVENTS_COMPAREMATCH_EVENTS_COMPAREMATCH_Min (0x0UL) /*!< Min enumerator value of EVENTS_COMPAREMATCH field.      */
+  #define PWM_EVENTS_COMPAREMATCH_EVENTS_COMPAREMATCH_Max (0x1UL) /*!< Max enumerator value of EVENTS_COMPAREMATCH field.      */
+  #define PWM_EVENTS_COMPAREMATCH_EVENTS_COMPAREMATCH_NotGenerated (0x0UL) /*!< Event not generated                            */
+  #define PWM_EVENTS_COMPAREMATCH_EVENTS_COMPAREMATCH_Generated (0x1UL) /*!< Event generated                                   */
+
+
 /* PWM_PUBLISH_STARTED: Publish configuration for event STARTED */
   #define PWM_PUBLISH_STARTED_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_STARTED register.                          */
 
@@ -27205,6 +27676,27 @@ typedef struct {
   #define PWM_PUBLISH_RAMUNDERFLOW_EN_Max (0x1UL)    /*!< Max enumerator value of EN field.                                    */
   #define PWM_PUBLISH_RAMUNDERFLOW_EN_Disabled (0x0UL) /*!< Disable publishing                                                 */
   #define PWM_PUBLISH_RAMUNDERFLOW_EN_Enabled (0x1UL) /*!< Enable publishing                                                   */
+
+
+/* PWM_PUBLISH_COMPAREMATCH: Publish configuration for event COMPAREMATCH[n] */
+  #define PWM_PUBLISH_COMPAREMATCH_MaxCount (4UL)    /*!< Max size of PUBLISH_COMPAREMATCH[4] array.                           */
+  #define PWM_PUBLISH_COMPAREMATCH_MaxIndex (3UL)    /*!< Max index of PUBLISH_COMPAREMATCH[4] array.                          */
+  #define PWM_PUBLISH_COMPAREMATCH_MinIndex (0UL)    /*!< Min index of PUBLISH_COMPAREMATCH[4] array.                          */
+  #define PWM_PUBLISH_COMPAREMATCH_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_COMPAREMATCH[4] register.             */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event COMPAREMATCH[n] will publish to */
+  #define PWM_PUBLISH_COMPAREMATCH_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
+  #define PWM_PUBLISH_COMPAREMATCH_CHIDX_Msk (0xFFUL << PWM_PUBLISH_COMPAREMATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
+  #define PWM_PUBLISH_COMPAREMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define PWM_PUBLISH_COMPAREMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
+
+/* EN @Bit 31 : (unspecified) */
+  #define PWM_PUBLISH_COMPAREMATCH_EN_Pos (31UL)     /*!< Position of EN field.                                                */
+  #define PWM_PUBLISH_COMPAREMATCH_EN_Msk (0x1UL << PWM_PUBLISH_COMPAREMATCH_EN_Pos) /*!< Bit mask of EN field.                */
+  #define PWM_PUBLISH_COMPAREMATCH_EN_Min (0x0UL)    /*!< Min enumerator value of EN field.                                    */
+  #define PWM_PUBLISH_COMPAREMATCH_EN_Max (0x1UL)    /*!< Max enumerator value of EN field.                                    */
+  #define PWM_PUBLISH_COMPAREMATCH_EN_Disabled (0x0UL) /*!< Disable publishing                                                 */
+  #define PWM_PUBLISH_COMPAREMATCH_EN_Enabled (0x1UL) /*!< Enable publishing                                                   */
 
 
 /* PWM_SHORTS: Shortcuts between local events and tasks */
@@ -27385,6 +27877,38 @@ typedef struct {
   #define PWM_INTEN_DMASEQ1BUSERROR_Disabled (0x0UL) /*!< Disable                                                              */
   #define PWM_INTEN_DMASEQ1BUSERROR_Enabled (0x1UL)  /*!< Enable                                                               */
 
+/* COMPAREMATCH0 @Bit 15 : Enable or disable interrupt for event COMPAREMATCH[0] */
+  #define PWM_INTEN_COMPAREMATCH0_Pos (15UL)         /*!< Position of COMPAREMATCH0 field.                                     */
+  #define PWM_INTEN_COMPAREMATCH0_Msk (0x1UL << PWM_INTEN_COMPAREMATCH0_Pos) /*!< Bit mask of COMPAREMATCH0 field.             */
+  #define PWM_INTEN_COMPAREMATCH0_Min (0x0UL)        /*!< Min enumerator value of COMPAREMATCH0 field.                         */
+  #define PWM_INTEN_COMPAREMATCH0_Max (0x1UL)        /*!< Max enumerator value of COMPAREMATCH0 field.                         */
+  #define PWM_INTEN_COMPAREMATCH0_Disabled (0x0UL)   /*!< Disable                                                              */
+  #define PWM_INTEN_COMPAREMATCH0_Enabled (0x1UL)    /*!< Enable                                                               */
+
+/* COMPAREMATCH1 @Bit 16 : Enable or disable interrupt for event COMPAREMATCH[1] */
+  #define PWM_INTEN_COMPAREMATCH1_Pos (16UL)         /*!< Position of COMPAREMATCH1 field.                                     */
+  #define PWM_INTEN_COMPAREMATCH1_Msk (0x1UL << PWM_INTEN_COMPAREMATCH1_Pos) /*!< Bit mask of COMPAREMATCH1 field.             */
+  #define PWM_INTEN_COMPAREMATCH1_Min (0x0UL)        /*!< Min enumerator value of COMPAREMATCH1 field.                         */
+  #define PWM_INTEN_COMPAREMATCH1_Max (0x1UL)        /*!< Max enumerator value of COMPAREMATCH1 field.                         */
+  #define PWM_INTEN_COMPAREMATCH1_Disabled (0x0UL)   /*!< Disable                                                              */
+  #define PWM_INTEN_COMPAREMATCH1_Enabled (0x1UL)    /*!< Enable                                                               */
+
+/* COMPAREMATCH2 @Bit 17 : Enable or disable interrupt for event COMPAREMATCH[2] */
+  #define PWM_INTEN_COMPAREMATCH2_Pos (17UL)         /*!< Position of COMPAREMATCH2 field.                                     */
+  #define PWM_INTEN_COMPAREMATCH2_Msk (0x1UL << PWM_INTEN_COMPAREMATCH2_Pos) /*!< Bit mask of COMPAREMATCH2 field.             */
+  #define PWM_INTEN_COMPAREMATCH2_Min (0x0UL)        /*!< Min enumerator value of COMPAREMATCH2 field.                         */
+  #define PWM_INTEN_COMPAREMATCH2_Max (0x1UL)        /*!< Max enumerator value of COMPAREMATCH2 field.                         */
+  #define PWM_INTEN_COMPAREMATCH2_Disabled (0x0UL)   /*!< Disable                                                              */
+  #define PWM_INTEN_COMPAREMATCH2_Enabled (0x1UL)    /*!< Enable                                                               */
+
+/* COMPAREMATCH3 @Bit 18 : Enable or disable interrupt for event COMPAREMATCH[3] */
+  #define PWM_INTEN_COMPAREMATCH3_Pos (18UL)         /*!< Position of COMPAREMATCH3 field.                                     */
+  #define PWM_INTEN_COMPAREMATCH3_Msk (0x1UL << PWM_INTEN_COMPAREMATCH3_Pos) /*!< Bit mask of COMPAREMATCH3 field.             */
+  #define PWM_INTEN_COMPAREMATCH3_Min (0x0UL)        /*!< Min enumerator value of COMPAREMATCH3 field.                         */
+  #define PWM_INTEN_COMPAREMATCH3_Max (0x1UL)        /*!< Max enumerator value of COMPAREMATCH3 field.                         */
+  #define PWM_INTEN_COMPAREMATCH3_Disabled (0x0UL)   /*!< Disable                                                              */
+  #define PWM_INTEN_COMPAREMATCH3_Enabled (0x1UL)    /*!< Enable                                                               */
+
 
 /* PWM_INTENSET: Enable interrupt */
   #define PWM_INTENSET_ResetValue (0x00000000UL)     /*!< Reset value of INTENSET register.                                    */
@@ -27523,6 +28047,42 @@ typedef struct {
   #define PWM_INTENSET_DMASEQ1BUSERROR_Set (0x1UL)   /*!< Enable                                                               */
   #define PWM_INTENSET_DMASEQ1BUSERROR_Disabled (0x0UL) /*!< Read: Disabled                                                    */
   #define PWM_INTENSET_DMASEQ1BUSERROR_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+/* COMPAREMATCH0 @Bit 15 : Write '1' to enable interrupt for event COMPAREMATCH[0] */
+  #define PWM_INTENSET_COMPAREMATCH0_Pos (15UL)      /*!< Position of COMPAREMATCH0 field.                                     */
+  #define PWM_INTENSET_COMPAREMATCH0_Msk (0x1UL << PWM_INTENSET_COMPAREMATCH0_Pos) /*!< Bit mask of COMPAREMATCH0 field.       */
+  #define PWM_INTENSET_COMPAREMATCH0_Min (0x0UL)     /*!< Min enumerator value of COMPAREMATCH0 field.                         */
+  #define PWM_INTENSET_COMPAREMATCH0_Max (0x1UL)     /*!< Max enumerator value of COMPAREMATCH0 field.                         */
+  #define PWM_INTENSET_COMPAREMATCH0_Set (0x1UL)     /*!< Enable                                                               */
+  #define PWM_INTENSET_COMPAREMATCH0_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define PWM_INTENSET_COMPAREMATCH0_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* COMPAREMATCH1 @Bit 16 : Write '1' to enable interrupt for event COMPAREMATCH[1] */
+  #define PWM_INTENSET_COMPAREMATCH1_Pos (16UL)      /*!< Position of COMPAREMATCH1 field.                                     */
+  #define PWM_INTENSET_COMPAREMATCH1_Msk (0x1UL << PWM_INTENSET_COMPAREMATCH1_Pos) /*!< Bit mask of COMPAREMATCH1 field.       */
+  #define PWM_INTENSET_COMPAREMATCH1_Min (0x0UL)     /*!< Min enumerator value of COMPAREMATCH1 field.                         */
+  #define PWM_INTENSET_COMPAREMATCH1_Max (0x1UL)     /*!< Max enumerator value of COMPAREMATCH1 field.                         */
+  #define PWM_INTENSET_COMPAREMATCH1_Set (0x1UL)     /*!< Enable                                                               */
+  #define PWM_INTENSET_COMPAREMATCH1_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define PWM_INTENSET_COMPAREMATCH1_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* COMPAREMATCH2 @Bit 17 : Write '1' to enable interrupt for event COMPAREMATCH[2] */
+  #define PWM_INTENSET_COMPAREMATCH2_Pos (17UL)      /*!< Position of COMPAREMATCH2 field.                                     */
+  #define PWM_INTENSET_COMPAREMATCH2_Msk (0x1UL << PWM_INTENSET_COMPAREMATCH2_Pos) /*!< Bit mask of COMPAREMATCH2 field.       */
+  #define PWM_INTENSET_COMPAREMATCH2_Min (0x0UL)     /*!< Min enumerator value of COMPAREMATCH2 field.                         */
+  #define PWM_INTENSET_COMPAREMATCH2_Max (0x1UL)     /*!< Max enumerator value of COMPAREMATCH2 field.                         */
+  #define PWM_INTENSET_COMPAREMATCH2_Set (0x1UL)     /*!< Enable                                                               */
+  #define PWM_INTENSET_COMPAREMATCH2_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define PWM_INTENSET_COMPAREMATCH2_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* COMPAREMATCH3 @Bit 18 : Write '1' to enable interrupt for event COMPAREMATCH[3] */
+  #define PWM_INTENSET_COMPAREMATCH3_Pos (18UL)      /*!< Position of COMPAREMATCH3 field.                                     */
+  #define PWM_INTENSET_COMPAREMATCH3_Msk (0x1UL << PWM_INTENSET_COMPAREMATCH3_Pos) /*!< Bit mask of COMPAREMATCH3 field.       */
+  #define PWM_INTENSET_COMPAREMATCH3_Min (0x0UL)     /*!< Min enumerator value of COMPAREMATCH3 field.                         */
+  #define PWM_INTENSET_COMPAREMATCH3_Max (0x1UL)     /*!< Max enumerator value of COMPAREMATCH3 field.                         */
+  #define PWM_INTENSET_COMPAREMATCH3_Set (0x1UL)     /*!< Enable                                                               */
+  #define PWM_INTENSET_COMPAREMATCH3_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define PWM_INTENSET_COMPAREMATCH3_Enabled (0x1UL) /*!< Read: Enabled                                                        */
 
 
 /* PWM_INTENCLR: Disable interrupt */
@@ -27663,6 +28223,42 @@ typedef struct {
   #define PWM_INTENCLR_DMASEQ1BUSERROR_Disabled (0x0UL) /*!< Read: Disabled                                                    */
   #define PWM_INTENCLR_DMASEQ1BUSERROR_Enabled (0x1UL) /*!< Read: Enabled                                                      */
 
+/* COMPAREMATCH0 @Bit 15 : Write '1' to disable interrupt for event COMPAREMATCH[0] */
+  #define PWM_INTENCLR_COMPAREMATCH0_Pos (15UL)      /*!< Position of COMPAREMATCH0 field.                                     */
+  #define PWM_INTENCLR_COMPAREMATCH0_Msk (0x1UL << PWM_INTENCLR_COMPAREMATCH0_Pos) /*!< Bit mask of COMPAREMATCH0 field.       */
+  #define PWM_INTENCLR_COMPAREMATCH0_Min (0x0UL)     /*!< Min enumerator value of COMPAREMATCH0 field.                         */
+  #define PWM_INTENCLR_COMPAREMATCH0_Max (0x1UL)     /*!< Max enumerator value of COMPAREMATCH0 field.                         */
+  #define PWM_INTENCLR_COMPAREMATCH0_Clear (0x1UL)   /*!< Disable                                                              */
+  #define PWM_INTENCLR_COMPAREMATCH0_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define PWM_INTENCLR_COMPAREMATCH0_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* COMPAREMATCH1 @Bit 16 : Write '1' to disable interrupt for event COMPAREMATCH[1] */
+  #define PWM_INTENCLR_COMPAREMATCH1_Pos (16UL)      /*!< Position of COMPAREMATCH1 field.                                     */
+  #define PWM_INTENCLR_COMPAREMATCH1_Msk (0x1UL << PWM_INTENCLR_COMPAREMATCH1_Pos) /*!< Bit mask of COMPAREMATCH1 field.       */
+  #define PWM_INTENCLR_COMPAREMATCH1_Min (0x0UL)     /*!< Min enumerator value of COMPAREMATCH1 field.                         */
+  #define PWM_INTENCLR_COMPAREMATCH1_Max (0x1UL)     /*!< Max enumerator value of COMPAREMATCH1 field.                         */
+  #define PWM_INTENCLR_COMPAREMATCH1_Clear (0x1UL)   /*!< Disable                                                              */
+  #define PWM_INTENCLR_COMPAREMATCH1_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define PWM_INTENCLR_COMPAREMATCH1_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* COMPAREMATCH2 @Bit 17 : Write '1' to disable interrupt for event COMPAREMATCH[2] */
+  #define PWM_INTENCLR_COMPAREMATCH2_Pos (17UL)      /*!< Position of COMPAREMATCH2 field.                                     */
+  #define PWM_INTENCLR_COMPAREMATCH2_Msk (0x1UL << PWM_INTENCLR_COMPAREMATCH2_Pos) /*!< Bit mask of COMPAREMATCH2 field.       */
+  #define PWM_INTENCLR_COMPAREMATCH2_Min (0x0UL)     /*!< Min enumerator value of COMPAREMATCH2 field.                         */
+  #define PWM_INTENCLR_COMPAREMATCH2_Max (0x1UL)     /*!< Max enumerator value of COMPAREMATCH2 field.                         */
+  #define PWM_INTENCLR_COMPAREMATCH2_Clear (0x1UL)   /*!< Disable                                                              */
+  #define PWM_INTENCLR_COMPAREMATCH2_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define PWM_INTENCLR_COMPAREMATCH2_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* COMPAREMATCH3 @Bit 18 : Write '1' to disable interrupt for event COMPAREMATCH[3] */
+  #define PWM_INTENCLR_COMPAREMATCH3_Pos (18UL)      /*!< Position of COMPAREMATCH3 field.                                     */
+  #define PWM_INTENCLR_COMPAREMATCH3_Msk (0x1UL << PWM_INTENCLR_COMPAREMATCH3_Pos) /*!< Bit mask of COMPAREMATCH3 field.       */
+  #define PWM_INTENCLR_COMPAREMATCH3_Min (0x0UL)     /*!< Min enumerator value of COMPAREMATCH3 field.                         */
+  #define PWM_INTENCLR_COMPAREMATCH3_Max (0x1UL)     /*!< Max enumerator value of COMPAREMATCH3 field.                         */
+  #define PWM_INTENCLR_COMPAREMATCH3_Clear (0x1UL)   /*!< Disable                                                              */
+  #define PWM_INTENCLR_COMPAREMATCH3_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define PWM_INTENCLR_COMPAREMATCH3_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
 
 /* PWM_INTPEND: Pending interrupts */
   #define PWM_INTPEND_ResetValue (0x00000000UL)      /*!< Reset value of INTPEND register.                                     */
@@ -27787,6 +28383,38 @@ typedef struct {
   #define PWM_INTPEND_DMASEQ1BUSERROR_NotPending (0x0UL) /*!< Read: Not pending                                                */
   #define PWM_INTPEND_DMASEQ1BUSERROR_Pending (0x1UL) /*!< Read: Pending                                                       */
 
+/* COMPAREMATCH0 @Bit 15 : Read pending status of interrupt for event COMPAREMATCH[0] */
+  #define PWM_INTPEND_COMPAREMATCH0_Pos (15UL)       /*!< Position of COMPAREMATCH0 field.                                     */
+  #define PWM_INTPEND_COMPAREMATCH0_Msk (0x1UL << PWM_INTPEND_COMPAREMATCH0_Pos) /*!< Bit mask of COMPAREMATCH0 field.         */
+  #define PWM_INTPEND_COMPAREMATCH0_Min (0x0UL)      /*!< Min enumerator value of COMPAREMATCH0 field.                         */
+  #define PWM_INTPEND_COMPAREMATCH0_Max (0x1UL)      /*!< Max enumerator value of COMPAREMATCH0 field.                         */
+  #define PWM_INTPEND_COMPAREMATCH0_NotPending (0x0UL) /*!< Read: Not pending                                                  */
+  #define PWM_INTPEND_COMPAREMATCH0_Pending (0x1UL)  /*!< Read: Pending                                                        */
+
+/* COMPAREMATCH1 @Bit 16 : Read pending status of interrupt for event COMPAREMATCH[1] */
+  #define PWM_INTPEND_COMPAREMATCH1_Pos (16UL)       /*!< Position of COMPAREMATCH1 field.                                     */
+  #define PWM_INTPEND_COMPAREMATCH1_Msk (0x1UL << PWM_INTPEND_COMPAREMATCH1_Pos) /*!< Bit mask of COMPAREMATCH1 field.         */
+  #define PWM_INTPEND_COMPAREMATCH1_Min (0x0UL)      /*!< Min enumerator value of COMPAREMATCH1 field.                         */
+  #define PWM_INTPEND_COMPAREMATCH1_Max (0x1UL)      /*!< Max enumerator value of COMPAREMATCH1 field.                         */
+  #define PWM_INTPEND_COMPAREMATCH1_NotPending (0x0UL) /*!< Read: Not pending                                                  */
+  #define PWM_INTPEND_COMPAREMATCH1_Pending (0x1UL)  /*!< Read: Pending                                                        */
+
+/* COMPAREMATCH2 @Bit 17 : Read pending status of interrupt for event COMPAREMATCH[2] */
+  #define PWM_INTPEND_COMPAREMATCH2_Pos (17UL)       /*!< Position of COMPAREMATCH2 field.                                     */
+  #define PWM_INTPEND_COMPAREMATCH2_Msk (0x1UL << PWM_INTPEND_COMPAREMATCH2_Pos) /*!< Bit mask of COMPAREMATCH2 field.         */
+  #define PWM_INTPEND_COMPAREMATCH2_Min (0x0UL)      /*!< Min enumerator value of COMPAREMATCH2 field.                         */
+  #define PWM_INTPEND_COMPAREMATCH2_Max (0x1UL)      /*!< Max enumerator value of COMPAREMATCH2 field.                         */
+  #define PWM_INTPEND_COMPAREMATCH2_NotPending (0x0UL) /*!< Read: Not pending                                                  */
+  #define PWM_INTPEND_COMPAREMATCH2_Pending (0x1UL)  /*!< Read: Pending                                                        */
+
+/* COMPAREMATCH3 @Bit 18 : Read pending status of interrupt for event COMPAREMATCH[3] */
+  #define PWM_INTPEND_COMPAREMATCH3_Pos (18UL)       /*!< Position of COMPAREMATCH3 field.                                     */
+  #define PWM_INTPEND_COMPAREMATCH3_Msk (0x1UL << PWM_INTPEND_COMPAREMATCH3_Pos) /*!< Bit mask of COMPAREMATCH3 field.         */
+  #define PWM_INTPEND_COMPAREMATCH3_Min (0x0UL)      /*!< Min enumerator value of COMPAREMATCH3 field.                         */
+  #define PWM_INTPEND_COMPAREMATCH3_Max (0x1UL)      /*!< Max enumerator value of COMPAREMATCH3 field.                         */
+  #define PWM_INTPEND_COMPAREMATCH3_NotPending (0x0UL) /*!< Read: Not pending                                                  */
+  #define PWM_INTPEND_COMPAREMATCH3_Pending (0x1UL)  /*!< Read: Pending                                                        */
+
 
 /* PWM_ENABLE: PWM module enable register */
   #define PWM_ENABLE_ResetValue (0x00000000UL)       /*!< Reset value of ENABLE register.                                      */
@@ -27877,6 +28505,26 @@ typedef struct {
   #define PWM_LOOP_CNT_Disabled (0x0000UL)           /*!< Looping disabled (stop at the end of the sequence)                   */
 
 
+/* PWM_IDLEOUT: Configure the output value on the PWM channel during idle */
+  #define PWM_IDLEOUT_ResetValue (0x00000000UL)      /*!< Reset value of IDLEOUT register.                                     */
+
+/* VAL0 @Bit 0 : Idle output value for PWM channel [0] */
+  #define PWM_IDLEOUT_VAL0_Pos (0UL)                 /*!< Position of VAL0 field.                                              */
+  #define PWM_IDLEOUT_VAL0_Msk (0x1UL << PWM_IDLEOUT_VAL0_Pos) /*!< Bit mask of VAL0 field.                                    */
+
+/* VAL1 @Bit 1 : Idle output value for PWM channel [1] */
+  #define PWM_IDLEOUT_VAL1_Pos (1UL)                 /*!< Position of VAL1 field.                                              */
+  #define PWM_IDLEOUT_VAL1_Msk (0x1UL << PWM_IDLEOUT_VAL1_Pos) /*!< Bit mask of VAL1 field.                                    */
+
+/* VAL2 @Bit 2 : Idle output value for PWM channel [2] */
+  #define PWM_IDLEOUT_VAL2_Pos (2UL)                 /*!< Position of VAL2 field.                                              */
+  #define PWM_IDLEOUT_VAL2_Msk (0x1UL << PWM_IDLEOUT_VAL2_Pos) /*!< Bit mask of VAL2 field.                                    */
+
+/* VAL3 @Bit 3 : Idle output value for PWM channel [3] */
+  #define PWM_IDLEOUT_VAL3_Pos (3UL)                 /*!< Position of VAL3 field.                                              */
+  #define PWM_IDLEOUT_VAL3_Msk (0x1UL << PWM_IDLEOUT_VAL3_Pos) /*!< Bit mask of VAL3 field.                                    */
+
+
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
 /* =========================================================================================================================== */
@@ -27904,11 +28552,11 @@ typedef struct {
   #define QDEC_PSEL_LED_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define QDEC_PSEL_LED_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define QDEC_PSEL_LED_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define QDEC_PSEL_LED_PORT_Msk (0xFUL << QDEC_PSEL_LED_PORT_Pos) /*!< Bit mask of PORT field.                                */
-  #define QDEC_PSEL_LED_PORT_Min (0x0UL)             /*!< Min value of PORT field.                                             */
-  #define QDEC_PSEL_LED_PORT_Max (0xFUL)             /*!< Max size of PORT field.                                              */
+  #define QDEC_PSEL_LED_PORT_Msk (0x7UL << QDEC_PSEL_LED_PORT_Pos) /*!< Bit mask of PORT field.                                */
+  #define QDEC_PSEL_LED_PORT_Min (0x1UL)             /*!< Min value of PORT field.                                             */
+  #define QDEC_PSEL_LED_PORT_Max (0x1UL)             /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define QDEC_PSEL_LED_CONNECT_Pos (31UL)           /*!< Position of CONNECT field.                                           */
@@ -27928,11 +28576,11 @@ typedef struct {
   #define QDEC_PSEL_A_PIN_Min (0x0UL)                /*!< Min value of PIN field.                                              */
   #define QDEC_PSEL_A_PIN_Max (0x1FUL)               /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define QDEC_PSEL_A_PORT_Pos (5UL)                 /*!< Position of PORT field.                                              */
-  #define QDEC_PSEL_A_PORT_Msk (0xFUL << QDEC_PSEL_A_PORT_Pos) /*!< Bit mask of PORT field.                                    */
-  #define QDEC_PSEL_A_PORT_Min (0x0UL)               /*!< Min value of PORT field.                                             */
-  #define QDEC_PSEL_A_PORT_Max (0xFUL)               /*!< Max size of PORT field.                                              */
+  #define QDEC_PSEL_A_PORT_Msk (0x7UL << QDEC_PSEL_A_PORT_Pos) /*!< Bit mask of PORT field.                                    */
+  #define QDEC_PSEL_A_PORT_Min (0x1UL)               /*!< Min value of PORT field.                                             */
+  #define QDEC_PSEL_A_PORT_Max (0x1UL)               /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define QDEC_PSEL_A_CONNECT_Pos (31UL)             /*!< Position of CONNECT field.                                           */
@@ -27952,11 +28600,11 @@ typedef struct {
   #define QDEC_PSEL_B_PIN_Min (0x0UL)                /*!< Min value of PIN field.                                              */
   #define QDEC_PSEL_B_PIN_Max (0x1FUL)               /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define QDEC_PSEL_B_PORT_Pos (5UL)                 /*!< Position of PORT field.                                              */
-  #define QDEC_PSEL_B_PORT_Msk (0xFUL << QDEC_PSEL_B_PORT_Pos) /*!< Bit mask of PORT field.                                    */
-  #define QDEC_PSEL_B_PORT_Min (0x0UL)               /*!< Min value of PORT field.                                             */
-  #define QDEC_PSEL_B_PORT_Max (0xFUL)               /*!< Max size of PORT field.                                              */
+  #define QDEC_PSEL_B_PORT_Msk (0x7UL << QDEC_PSEL_B_PORT_Pos) /*!< Bit mask of PORT field.                                    */
+  #define QDEC_PSEL_B_PORT_Min (0x1UL)               /*!< Min value of PORT field.                                             */
+  #define QDEC_PSEL_B_PORT_Max (0x1UL)               /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define QDEC_PSEL_B_CONNECT_Pos (31UL)             /*!< Position of CONNECT field.                                           */
@@ -28581,7 +29229,7 @@ typedef struct {
 /* SAMPLE @Bits 0..31 : Last motion sample */
   #define QDEC_SAMPLE_SAMPLE_Pos (0UL)               /*!< Position of SAMPLE field.                                            */
   #define QDEC_SAMPLE_SAMPLE_Msk (0xFFFFFFFFUL << QDEC_SAMPLE_SAMPLE_Pos) /*!< Bit mask of SAMPLE field.                       */
-  #define QDEC_SAMPLE_SAMPLE_Min (0xFFFFFFFFUL)      /*!< Min value of SAMPLE field.                                           */
+  #define QDEC_SAMPLE_SAMPLE_Min (0xFFFFFFFFFFFFFFFFUL) /*!< Min value of SAMPLE field.                                        */
   #define QDEC_SAMPLE_SAMPLE_Max (0x2UL)             /*!< Max size of SAMPLE field.                                            */
 
 
@@ -28612,7 +29260,7 @@ typedef struct {
 /* ACC @Bits 0..31 : Register accumulating all valid samples (not double transition) read from the SAMPLE register. */
   #define QDEC_ACC_ACC_Pos (0UL)                     /*!< Position of ACC field.                                               */
   #define QDEC_ACC_ACC_Msk (0xFFFFFFFFUL << QDEC_ACC_ACC_Pos) /*!< Bit mask of ACC field.                                      */
-  #define QDEC_ACC_ACC_Min (0xFFFFFC00UL)            /*!< Min value of ACC field.                                              */
+  #define QDEC_ACC_ACC_Min (0xFFFFFFFFFFFFFC00UL)    /*!< Min value of ACC field.                                              */
   #define QDEC_ACC_ACC_Max (0x3FFUL)                 /*!< Max size of ACC field.                                               */
 
 
@@ -28622,7 +29270,7 @@ typedef struct {
 /* ACCREAD @Bits 0..31 : Snapshot of the ACC register. */
   #define QDEC_ACCREAD_ACCREAD_Pos (0UL)             /*!< Position of ACCREAD field.                                           */
   #define QDEC_ACCREAD_ACCREAD_Msk (0xFFFFFFFFUL << QDEC_ACCREAD_ACCREAD_Pos) /*!< Bit mask of ACCREAD field.                  */
-  #define QDEC_ACCREAD_ACCREAD_Min (0xFFFFFC00UL)    /*!< Min value of ACCREAD field.                                          */
+  #define QDEC_ACCREAD_ACCREAD_Min (0xFFFFFFFFFFFFFC00UL) /*!< Min value of ACCREAD field.                                     */
   #define QDEC_ACCREAD_ACCREAD_Max (0x3FFUL)         /*!< Max size of ACCREAD field.                                           */
 
 
@@ -29260,7 +29908,7 @@ typedef struct {
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2CM_Msk (0xFUL << RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2CM_Pos) /*!< Bit mask of
                                                                             SPHYNXFSDIV2CM field.*/
 
-/* SPHYNXFSDIV2CTRL @Bits 19..21 : Spare, not used */
+/* SPHYNXFSDIV2CTRL @Bits 19..21 : 1: increase current from 4uA to 8uA for common-mode generation */
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2CTRL_Pos (19UL) /*!< Position of SPHYNXFSDIV2CTRL field.                         */
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2CTRL_Msk (0x7UL << RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2CTRL_Pos) /*!< Bit mask of
                                                                             SPHYNXFSDIV2CTRL field.*/
@@ -29289,9 +29937,9 @@ typedef struct {
   #define RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSREFIPPTRIM_Msk (0xFUL << RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSREFIPPTRIM_Pos) /*!< Bit mask
                                                                             of SPHYNXFSREFIPPTRIM field.*/
 
-/* SPHYNXFSREFVTTRIM @Bits 5..6 : For voltage tuning of reference */
+/* SPHYNXFSREFVTTRIM @Bits 5..8 : For voltage tuning of reference */
   #define RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSREFVTTRIM_Pos (5UL) /*!< Position of SPHYNXFSREFVTTRIM field.                        */
-  #define RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSREFVTTRIM_Msk (0x3UL << RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSREFVTTRIM_Pos) /*!< Bit mask
+  #define RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSREFVTTRIM_Msk (0xFUL << RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSREFVTTRIM_Pos) /*!< Bit mask
                                                                             of SPHYNXFSREFVTTRIM field.*/
 
 /* SPHYNXFSDIV2ISW @Bits 14..17 : [2:0] Adjust voltage for back bias of injection switch; [3] Spare */
@@ -38936,9 +39584,11 @@ typedef struct {
 /* RADIO_DATAWHITEIV: Data whitening initial value */
   #define RADIO_DATAWHITEIV_ResetValue (0x00000040UL) /*!< Reset value of DATAWHITEIV register.                                */
 
-/* DATAWHITEIV @Bits 0..5 : (unspecified) */
+/* DATAWHITEIV @Bits 0..6 : Data whitening initial value. Bit 6 is hardwired to '1', writing '0' to it has no effect, and it
+                            will always be read back and used by the device as '1'. */
+
   #define RADIO_DATAWHITEIV_DATAWHITEIV_Pos (0UL)    /*!< Position of DATAWHITEIV field.                                       */
-  #define RADIO_DATAWHITEIV_DATAWHITEIV_Msk (0x3FUL << RADIO_DATAWHITEIV_DATAWHITEIV_Pos) /*!< Bit mask of DATAWHITEIV field.  */
+  #define RADIO_DATAWHITEIV_DATAWHITEIV_Msk (0x7FUL << RADIO_DATAWHITEIV_DATAWHITEIV_Pos) /*!< Bit mask of DATAWHITEIV field.  */
 
 
 /* RADIO_GAINOUT: Gain readout (LNA_OUT_SPI for nrf52/53) */
@@ -39027,9 +39677,13 @@ typedef struct {
 /* RADIO_TIMING: Timing */
   #define RADIO_TIMING_ResetValue (0x00000001UL)     /*!< Reset value of TIMING register.                                      */
 
-/* RU @Bit 0 : 0: Legacy ramp-up time, compatible with 180nm radio. 1: Default fast ramp-up. */
+/* RU @Bit 0 : Ramp-up time */
   #define RADIO_TIMING_RU_Pos (0UL)                  /*!< Position of RU field.                                                */
   #define RADIO_TIMING_RU_Msk (0x1UL << RADIO_TIMING_RU_Pos) /*!< Bit mask of RU field.                                        */
+  #define RADIO_TIMING_RU_Min (0x0UL)                /*!< Min enumerator value of RU field.                                    */
+  #define RADIO_TIMING_RU_Max (0x1UL)                /*!< Max enumerator value of RU field.                                    */
+  #define RADIO_TIMING_RU_Legacy (0x0UL)             /*!< Legacy ramp-up time                                                  */
+  #define RADIO_TIMING_RU_Fast (0x1UL)               /*!< Fast ramp-up (default)                                               */
 
 
 /* RADIO_FREQUENCY: Frequency */
@@ -42590,15 +43244,15 @@ typedef struct {
   #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Msk (0xFFUL << REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Pos) /*!< Bit
                                                                             mask of VAL field.*/
   #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                      */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Max (0x5UL) /*!< Max enumerator value of VAL field.                      */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit0 (0x00UL) /*!< Enable resistive feedback for DC/DC converter (PFM
-                                                                         mode)*/
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit1 (0x01UL) /*!< Turn off P_DCC_LP (PWM mode)                          */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit2 (0x02UL) /*!< Prevent comparator from turning off high side driver
-                                                                         (PFM mode)*/
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit3 (0x03UL) /*!< Force BUCK_ICMP_0V9 to 0 (PFM mode)                   */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit4 (0x04UL) /*!< Force low side driver on                              */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit5 (0x05UL) /*!< Force high side driver on                             */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Max (0x6UL) /*!< Max enumerator value of VAL field.                      */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit0 (0x00UL) /*!< Force P_DCC on if BUCK is in PWM mode. Do not use.    */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit1 (0x01UL) /*!< Force resistive feedback in BUCK_PFM.                 */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit2 (0x02UL) /*!< Enable comparator in BUCK_PFM to turn off high-side
+                                                                         driver.*/
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit3 (0x03UL) /*!< Force PWM_ICMP low.                                   */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit4 (0x04UL) /*!< Force PFM_ICMP low.                                   */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit5 (0x05UL) /*!< Disable LDO current limiter in all helper modes.      */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit6 (0x06UL) /*!< Disable fast discharge in ELV-exit.                   */
 
 
 /* REGULATORS_VREGMAIN_CONFIG_VREGENLOAD: Enable test load for P_LR0V9 pad */
@@ -43330,20 +43984,20 @@ typedef struct {
 /* THRESHOLD @Bits 1..4 : Power-fail comparator threshold setting */
   #define REGULATORS_POFCON_THRESHOLD_Pos (1UL)      /*!< Position of THRESHOLD field.                                         */
   #define REGULATORS_POFCON_THRESHOLD_Msk (0xFUL << REGULATORS_POFCON_THRESHOLD_Pos) /*!< Bit mask of THRESHOLD field.         */
-  #define REGULATORS_POFCON_THRESHOLD_Min (0x4UL)    /*!< Min enumerator value of THRESHOLD field.                             */
-  #define REGULATORS_POFCON_THRESHOLD_Max (0xFUL)    /*!< Max enumerator value of THRESHOLD field.                             */
-  #define REGULATORS_POFCON_THRESHOLD_V17 (0x4UL)    /*!< Set threshold to 1.7 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V18 (0x5UL)    /*!< Set threshold to 1.8 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V19 (0x6UL)    /*!< Set threshold to 1.9 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V20 (0x7UL)    /*!< Set threshold to 2.0 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V21 (0x8UL)    /*!< Set threshold to 2.1 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V22 (0x9UL)    /*!< Set threshold to 2.2 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V23 (0xAUL)    /*!< Set threshold to 2.3 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V24 (0xBUL)    /*!< Set threshold to 2.4 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V25 (0xCUL)    /*!< Set threshold to 2.5 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V26 (0xDUL)    /*!< Set threshold to 2.6 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V27 (0xEUL)    /*!< Set threshold to 2.7 V                                               */
-  #define REGULATORS_POFCON_THRESHOLD_V28 (0xFUL)    /*!< Set threshold to 2.8 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_Min (0x0UL)    /*!< Min enumerator value of THRESHOLD field.                             */
+  #define REGULATORS_POFCON_THRESHOLD_Max (0xBUL)    /*!< Max enumerator value of THRESHOLD field.                             */
+  #define REGULATORS_POFCON_THRESHOLD_V17 (0x0UL)    /*!< Set threshold to 1.7 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V18 (0x1UL)    /*!< Set threshold to 1.8 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V19 (0x2UL)    /*!< Set threshold to 1.9 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V20 (0x3UL)    /*!< Set threshold to 2.0 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V21 (0x4UL)    /*!< Set threshold to 2.1 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V22 (0x5UL)    /*!< Set threshold to 2.2 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V23 (0x6UL)    /*!< Set threshold to 2.3 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V24 (0x7UL)    /*!< Set threshold to 2.4 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V25 (0x8UL)    /*!< Set threshold to 2.5 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V26 (0x9UL)    /*!< Set threshold to 2.6 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V27 (0xAUL)    /*!< Set threshold to 2.7 V                                               */
+  #define REGULATORS_POFCON_THRESHOLD_V28 (0xBUL)    /*!< Set threshold to 2.8 V                                               */
 
 /* HYSTDIS @Bit 6 : Bypass power-fail comparator hysteresis */
   #define REGULATORS_POFCON_HYSTDIS_Pos (6UL)        /*!< Position of HYSTDIS field.                                           */
@@ -45900,11 +46554,15 @@ typedef struct {
   #define SAADC_CH_CONFIG_GAIN_Pos (8UL)             /*!< Position of GAIN field.                                              */
   #define SAADC_CH_CONFIG_GAIN_Msk (0x7UL << SAADC_CH_CONFIG_GAIN_Pos) /*!< Bit mask of GAIN field.                            */
   #define SAADC_CH_CONFIG_GAIN_Min (0x0UL)           /*!< Min enumerator value of GAIN field.                                  */
-  #define SAADC_CH_CONFIG_GAIN_Max (0x3UL)           /*!< Max enumerator value of GAIN field.                                  */
-  #define SAADC_CH_CONFIG_GAIN_Gain2_1 (0x0UL)       /*!< 2/3                                                                  */
-  #define SAADC_CH_CONFIG_GAIN_Gain2_2 (0x1UL)       /*!< 1                                                                    */
-  #define SAADC_CH_CONFIG_GAIN_Gain2_3 (0x2UL)       /*!< 2                                                                    */
-  #define SAADC_CH_CONFIG_GAIN_Gain2_4 (0x3UL)       /*!< 4                                                                    */
+  #define SAADC_CH_CONFIG_GAIN_Max (0x7UL)           /*!< Max enumerator value of GAIN field.                                  */
+  #define SAADC_CH_CONFIG_GAIN_Gain2 (0x0UL)         /*!< 2                                                                    */
+  #define SAADC_CH_CONFIG_GAIN_Gain1 (0x1UL)         /*!< 1                                                                    */
+  #define SAADC_CH_CONFIG_GAIN_Gain2_3 (0x2UL)       /*!< 2/3                                                                  */
+  #define SAADC_CH_CONFIG_GAIN_Gain2_4 (0x3UL)       /*!< 2/4                                                                  */
+  #define SAADC_CH_CONFIG_GAIN_Gain2_5 (0x4UL)       /*!< 2/5                                                                  */
+  #define SAADC_CH_CONFIG_GAIN_Gain2_6 (0x5UL)       /*!< 2/6                                                                  */
+  #define SAADC_CH_CONFIG_GAIN_Gain2_7 (0x6UL)       /*!< 2/7                                                                  */
+  #define SAADC_CH_CONFIG_GAIN_Gain2_8 (0x7UL)       /*!< 2/8                                                                  */
 
 /* BURST @Bit 11 : Enable burst mode */
   #define SAADC_CH_CONFIG_BURST_Pos (11UL)           /*!< Position of BURST field.                                             */
@@ -45953,14 +46611,10 @@ typedef struct {
 /* LOW @Bits 0..15 : Low level limit */
   #define SAADC_CH_LIMIT_LOW_Pos (0UL)               /*!< Position of LOW field.                                               */
   #define SAADC_CH_LIMIT_LOW_Msk (0xFFFFUL << SAADC_CH_LIMIT_LOW_Pos) /*!< Bit mask of LOW field.                              */
-  #define SAADC_CH_LIMIT_LOW_Min (0xFFFFFFFFUL)      /*!< Min value of LOW field.                                              */
-  #define SAADC_CH_LIMIT_LOW_Max (0xFFFFFFFFUL)      /*!< Max size of LOW field.                                               */
 
 /* HIGH @Bits 16..31 : High level limit */
   #define SAADC_CH_LIMIT_HIGH_Pos (16UL)             /*!< Position of HIGH field.                                              */
   #define SAADC_CH_LIMIT_HIGH_Msk (0xFFFFUL << SAADC_CH_LIMIT_HIGH_Pos) /*!< Bit mask of HIGH field.                           */
-  #define SAADC_CH_LIMIT_HIGH_Min (0xFFFFFFFFUL)     /*!< Min value of HIGH field.                                             */
-  #define SAADC_CH_LIMIT_HIGH_Max (0xFFFFFFFFUL)     /*!< Max size of HIGH field.                                              */
 
 
 
@@ -46192,7 +46846,9 @@ typedef struct {
   typedef struct {                                   /*!< SAADC Structure                                                      */
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start the ADC and prepare the result buffer in RAM    */
     __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000004) Take one ADC sample, if scan is enabled all channels
-                                                                         are sampled*/
+                                                                         are sampled. This task requires that SAADC has started,
+                                                                         i.e. EVENTS_STARTED was set and EVENTS_STOPPED was
+                                                                         not.*/
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000008) Stop the ADC and terminate any on-going conversion    */
     __OM uint32_t TASKS_CALIBRATEOFFSET;             /*!< (@ 0x0000000C) Starts offset auto-calibration Noise shaping should be
                                                                          disabled*/
@@ -46282,10 +46938,14 @@ typedef struct {
   #define SAADC_TASKS_START_TASKS_START_Trigger (0x1UL) /*!< Trigger task                                                      */
 
 
-/* SAADC_TASKS_SAMPLE: Take one ADC sample, if scan is enabled all channels are sampled */
+/* SAADC_TASKS_SAMPLE: Take one ADC sample, if scan is enabled all channels are sampled. This task requires that SAADC has
+                        started, i.e. EVENTS_STARTED was set and EVENTS_STOPPED was not. */
+
   #define SAADC_TASKS_SAMPLE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_SAMPLE register.                              */
 
-/* TASKS_SAMPLE @Bit 0 : Take one ADC sample, if scan is enabled all channels are sampled */
+/* TASKS_SAMPLE @Bit 0 : Take one ADC sample, if scan is enabled all channels are sampled. This task requires that SAADC has
+                         started, i.e. EVENTS_STARTED was set and EVENTS_STOPPED was not. */
+
   #define SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Pos (0UL)  /*!< Position of TASKS_SAMPLE field.                                      */
   #define SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Msk (0x1UL << SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Pos) /*!< Bit mask of TASKS_SAMPLE
                                                                             field.*/
@@ -47364,8 +48024,6 @@ typedef struct {
 /* REGRESULT @Bits 0..31 : Result of the previous ADC conversion */
   #define SAADC_REGRESULT_REGRESULT_Pos (0UL)        /*!< Position of REGRESULT field.                                         */
   #define SAADC_REGRESULT_REGRESULT_Msk (0xFFFFFFFFUL << SAADC_REGRESULT_REGRESULT_Pos) /*!< Bit mask of REGRESULT field.      */
-  #define SAADC_REGRESULT_REGRESULT_Min (0xFFFFFFFFUL) /*!< Min value of REGRESULT field.                                      */
-  #define SAADC_REGRESULT_REGRESULT_Max (0xFFFFFFFFUL) /*!< Max size of REGRESULT field.                                       */
 
 
 /* SAADC_RESOLUTION: Resolution configuration */
@@ -47555,10 +48213,13 @@ typedef struct {
   #define SAADC_NOISESHAPE_NOISESHAPE_Min (0x0UL)    /*!< Min enumerator value of NOISESHAPE field.                            */
   #define SAADC_NOISESHAPE_NOISESHAPE_Max (0x3UL)    /*!< Max enumerator value of NOISESHAPE field.                            */
   #define SAADC_NOISESHAPE_NOISESHAPE_Disable (0x0UL) /*!< Disable noiseshaping. Oversampling based on accumulate and average. */
-  #define SAADC_NOISESHAPE_NOISESHAPE_Audio (0x1UL)  /*!< Noiseshaping and decimating. Larger passband. See design description
-                                                          for more information*/
-  #define SAADC_NOISESHAPE_NOISESHAPE_Accuracy (0x2UL) /*!< Noiseshaping and decimating. Smaller passband. See design
-                                                            description for more information*/
+  #define SAADC_NOISESHAPE_NOISESHAPE_Audio (0x1UL)  /*!< Noiseshaping and decimating. Larger passband. Provides a 50kS/s cut
+                                                          off frequency, 8x the oversampling ratio. See design description for
+                                                          more information*/
+  #define SAADC_NOISESHAPE_NOISESHAPE_Accuracy (0x2UL) /*!< Noiseshaping and decimating. Smaller passband. Recommended
+                                                            resolution setting is 14 bits. Provides 1 5kS/s cut off frequency,
+                                                            32x the oversampling ratio. See design description for more
+                                                            information*/
   #define SAADC_NOISESHAPE_NOISESHAPE_Stage1 (0x3UL) /*!< Result from common 1st stage filter. For debugging only              */
 
 
@@ -48350,19 +49011,9 @@ typedef struct {
   __IOM uint32_t  SCK;                               /*!< (@ 0x00000000) Pin select for SCK                                    */
   __IOM uint32_t  MOSI;                              /*!< (@ 0x00000004) Pin select for MOSI signal                            */
   __IOM uint32_t  MISO;                              /*!< (@ 0x00000008) Pin select for MISO signal                            */
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
-  #endif
-  union {
-    struct {
-      __IOM uint32_t DCX;                            /*!< (@ 0x0000000C) Pin select for DCX signal                             */
-    };
-  };
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic pop
-  #endif
-} NRF_SPIM_PSEL_Type;                                /*!< Size = 16 (0x010)                                                    */
+  __IOM uint32_t  DCX;                               /*!< (@ 0x0000000C) Pin select for DCX signal                             */
+  __IOM uint32_t  CSN;                               /*!< (@ 0x00000010) Pin select for CSN                                    */
+} NRF_SPIM_PSEL_Type;                                /*!< Size = 20 (0x014)                                                    */
 
 /* SPIM_PSEL_SCK: Pin select for SCK */
   #define SPIM_PSEL_SCK_ResetValue (0xFFFFFFFFUL)    /*!< Reset value of SCK register.                                         */
@@ -48373,11 +49024,11 @@ typedef struct {
   #define SPIM_PSEL_SCK_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define SPIM_PSEL_SCK_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define SPIM_PSEL_SCK_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define SPIM_PSEL_SCK_PORT_Msk (0xFUL << SPIM_PSEL_SCK_PORT_Pos) /*!< Bit mask of PORT field.                                */
+  #define SPIM_PSEL_SCK_PORT_Msk (0x7UL << SPIM_PSEL_SCK_PORT_Pos) /*!< Bit mask of PORT field.                                */
   #define SPIM_PSEL_SCK_PORT_Min (0x0UL)             /*!< Min value of PORT field.                                             */
-  #define SPIM_PSEL_SCK_PORT_Max (0xFUL)             /*!< Max size of PORT field.                                              */
+  #define SPIM_PSEL_SCK_PORT_Max (0x2UL)             /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define SPIM_PSEL_SCK_CONNECT_Pos (31UL)           /*!< Position of CONNECT field.                                           */
@@ -48397,11 +49048,11 @@ typedef struct {
   #define SPIM_PSEL_MOSI_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
   #define SPIM_PSEL_MOSI_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define SPIM_PSEL_MOSI_PORT_Pos (5UL)              /*!< Position of PORT field.                                              */
-  #define SPIM_PSEL_MOSI_PORT_Msk (0xFUL << SPIM_PSEL_MOSI_PORT_Pos) /*!< Bit mask of PORT field.                              */
+  #define SPIM_PSEL_MOSI_PORT_Msk (0x7UL << SPIM_PSEL_MOSI_PORT_Pos) /*!< Bit mask of PORT field.                              */
   #define SPIM_PSEL_MOSI_PORT_Min (0x0UL)            /*!< Min value of PORT field.                                             */
-  #define SPIM_PSEL_MOSI_PORT_Max (0xFUL)            /*!< Max size of PORT field.                                              */
+  #define SPIM_PSEL_MOSI_PORT_Max (0x2UL)            /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define SPIM_PSEL_MOSI_CONNECT_Pos (31UL)          /*!< Position of CONNECT field.                                           */
@@ -48421,11 +49072,11 @@ typedef struct {
   #define SPIM_PSEL_MISO_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
   #define SPIM_PSEL_MISO_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define SPIM_PSEL_MISO_PORT_Pos (5UL)              /*!< Position of PORT field.                                              */
-  #define SPIM_PSEL_MISO_PORT_Msk (0xFUL << SPIM_PSEL_MISO_PORT_Pos) /*!< Bit mask of PORT field.                              */
+  #define SPIM_PSEL_MISO_PORT_Msk (0x7UL << SPIM_PSEL_MISO_PORT_Pos) /*!< Bit mask of PORT field.                              */
   #define SPIM_PSEL_MISO_PORT_Min (0x0UL)            /*!< Min value of PORT field.                                             */
-  #define SPIM_PSEL_MISO_PORT_Max (0xFUL)            /*!< Max size of PORT field.                                              */
+  #define SPIM_PSEL_MISO_PORT_Max (0x2UL)            /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define SPIM_PSEL_MISO_CONNECT_Pos (31UL)          /*!< Position of CONNECT field.                                           */
@@ -48445,11 +49096,11 @@ typedef struct {
   #define SPIM_PSEL_DCX_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define SPIM_PSEL_DCX_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define SPIM_PSEL_DCX_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define SPIM_PSEL_DCX_PORT_Msk (0xFUL << SPIM_PSEL_DCX_PORT_Pos) /*!< Bit mask of PORT field.                                */
+  #define SPIM_PSEL_DCX_PORT_Msk (0x7UL << SPIM_PSEL_DCX_PORT_Pos) /*!< Bit mask of PORT field.                                */
   #define SPIM_PSEL_DCX_PORT_Min (0x0UL)             /*!< Min value of PORT field.                                             */
-  #define SPIM_PSEL_DCX_PORT_Max (0xFUL)             /*!< Max size of PORT field.                                              */
+  #define SPIM_PSEL_DCX_PORT_Max (0x2UL)             /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define SPIM_PSEL_DCX_CONNECT_Pos (31UL)           /*!< Position of CONNECT field.                                           */
@@ -48458,6 +49109,30 @@ typedef struct {
   #define SPIM_PSEL_DCX_CONNECT_Max (0x1UL)          /*!< Max enumerator value of CONNECT field.                               */
   #define SPIM_PSEL_DCX_CONNECT_Disconnected (0x1UL) /*!< Disconnect                                                           */
   #define SPIM_PSEL_DCX_CONNECT_Connected (0x0UL)    /*!< Connect                                                              */
+
+
+/* SPIM_PSEL_CSN: Pin select for CSN */
+  #define SPIM_PSEL_CSN_ResetValue (0xFFFFFFFFUL)    /*!< Reset value of CSN register.                                         */
+
+/* PIN @Bits 0..4 : Pin number */
+  #define SPIM_PSEL_CSN_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
+  #define SPIM_PSEL_CSN_PIN_Msk (0x1FUL << SPIM_PSEL_CSN_PIN_Pos) /*!< Bit mask of PIN field.                                  */
+  #define SPIM_PSEL_CSN_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define SPIM_PSEL_CSN_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
+
+/* PORT @Bits 5..7 : Port number */
+  #define SPIM_PSEL_CSN_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
+  #define SPIM_PSEL_CSN_PORT_Msk (0x7UL << SPIM_PSEL_CSN_PORT_Pos) /*!< Bit mask of PORT field.                                */
+  #define SPIM_PSEL_CSN_PORT_Min (0x0UL)             /*!< Min value of PORT field.                                             */
+  #define SPIM_PSEL_CSN_PORT_Max (0x2UL)             /*!< Max size of PORT field.                                              */
+
+/* CONNECT @Bit 31 : Connection */
+  #define SPIM_PSEL_CSN_CONNECT_Pos (31UL)           /*!< Position of CONNECT field.                                           */
+  #define SPIM_PSEL_CSN_CONNECT_Msk (0x1UL << SPIM_PSEL_CSN_CONNECT_Pos) /*!< Bit mask of CONNECT field.                       */
+  #define SPIM_PSEL_CSN_CONNECT_Min (0x0UL)          /*!< Min enumerator value of CONNECT field.                               */
+  #define SPIM_PSEL_CSN_CONNECT_Max (0x1UL)          /*!< Max enumerator value of CONNECT field.                               */
+  #define SPIM_PSEL_CSN_CONNECT_Disconnected (0x1UL) /*!< Disconnect                                                           */
+  #define SPIM_PSEL_CSN_CONNECT_Connected (0x0UL)    /*!< Connect                                                              */
 
 
 
@@ -48813,13 +49488,14 @@ typedef struct {
     __IM uint32_t RESERVED15[21];
     __IOM NRF_SPIM_IFTIMING_Type IFTIMING;           /*!< (@ 0x000005AC) (unspecified)                                         */
     __IOM uint32_t DCXCNT;                           /*!< (@ 0x000005B4) DCX configuration                                     */
-    __IM uint32_t RESERVED16[2];
+    __IOM uint32_t CSNPOL;                           /*!< (@ 0x000005B8) Polarity of CSN output                                */
+    __IM uint32_t RESERVED16;
     __IOM uint32_t ORC;                              /*!< (@ 0x000005C0) Byte transmitted after TXD.MAXCNT bytes have been
                                                                          transmitted in the case when RXD.MAXCNT is greater than
                                                                          TXD.MAXCNT*/
     __IM uint32_t RESERVED17[15];
     __IOM NRF_SPIM_PSEL_Type PSEL;                   /*!< (@ 0x00000600) (unspecified)                                         */
-    __IM uint32_t RESERVED18[60];
+    __IM uint32_t RESERVED18[59];
     __IOM NRF_SPIM_DMA_Type DMA;                     /*!< (@ 0x00000700) (unspecified)                                         */
   } NRF_SPIM_Type;                                   /*!< Size = 1884 (0x75C)                                                  */
 
@@ -49599,6 +50275,18 @@ typedef struct {
   #define SPIM_DCXCNT_DCXCNT_Max (0xFUL)             /*!< Max size of DCXCNT field.                                            */
 
 
+/* SPIM_CSNPOL: Polarity of CSN output */
+  #define SPIM_CSNPOL_ResetValue (0x00000000UL)      /*!< Reset value of CSNPOL register.                                      */
+
+/* CSNPOL0 @Bit 0 : Polarity of CSN output */
+  #define SPIM_CSNPOL_CSNPOL0_Pos (0UL)              /*!< Position of CSNPOL0 field.                                           */
+  #define SPIM_CSNPOL_CSNPOL0_Msk (0x1UL << SPIM_CSNPOL_CSNPOL0_Pos) /*!< Bit mask of CSNPOL0 field.                           */
+  #define SPIM_CSNPOL_CSNPOL0_Min (0x0UL)            /*!< Min enumerator value of CSNPOL0 field.                               */
+  #define SPIM_CSNPOL_CSNPOL0_Max (0x1UL)            /*!< Max enumerator value of CSNPOL0 field.                               */
+  #define SPIM_CSNPOL_CSNPOL0_LOW (0x0UL)            /*!< Active low (idle state high)                                         */
+  #define SPIM_CSNPOL_CSNPOL0_HIGH (0x1UL)           /*!< Active high (idle state low)                                         */
+
+
 /* SPIM_ORC: Byte transmitted after TXD.MAXCNT bytes have been transmitted in the case when RXD.MAXCNT is greater than
               TXD.MAXCNT */
 
@@ -50064,11 +50752,11 @@ typedef struct {
   #define SPIS_PSEL_SCK_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define SPIS_PSEL_SCK_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define SPIS_PSEL_SCK_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define SPIS_PSEL_SCK_PORT_Msk (0xFUL << SPIS_PSEL_SCK_PORT_Pos) /*!< Bit mask of PORT field.                                */
+  #define SPIS_PSEL_SCK_PORT_Msk (0x7UL << SPIS_PSEL_SCK_PORT_Pos) /*!< Bit mask of PORT field.                                */
   #define SPIS_PSEL_SCK_PORT_Min (0x0UL)             /*!< Min value of PORT field.                                             */
-  #define SPIS_PSEL_SCK_PORT_Max (0xFUL)             /*!< Max size of PORT field.                                              */
+  #define SPIS_PSEL_SCK_PORT_Max (0x2UL)             /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define SPIS_PSEL_SCK_CONNECT_Pos (31UL)           /*!< Position of CONNECT field.                                           */
@@ -50088,11 +50776,11 @@ typedef struct {
   #define SPIS_PSEL_MISO_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
   #define SPIS_PSEL_MISO_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define SPIS_PSEL_MISO_PORT_Pos (5UL)              /*!< Position of PORT field.                                              */
-  #define SPIS_PSEL_MISO_PORT_Msk (0xFUL << SPIS_PSEL_MISO_PORT_Pos) /*!< Bit mask of PORT field.                              */
+  #define SPIS_PSEL_MISO_PORT_Msk (0x7UL << SPIS_PSEL_MISO_PORT_Pos) /*!< Bit mask of PORT field.                              */
   #define SPIS_PSEL_MISO_PORT_Min (0x0UL)            /*!< Min value of PORT field.                                             */
-  #define SPIS_PSEL_MISO_PORT_Max (0xFUL)            /*!< Max size of PORT field.                                              */
+  #define SPIS_PSEL_MISO_PORT_Max (0x2UL)            /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define SPIS_PSEL_MISO_CONNECT_Pos (31UL)          /*!< Position of CONNECT field.                                           */
@@ -50112,11 +50800,11 @@ typedef struct {
   #define SPIS_PSEL_MOSI_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
   #define SPIS_PSEL_MOSI_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define SPIS_PSEL_MOSI_PORT_Pos (5UL)              /*!< Position of PORT field.                                              */
-  #define SPIS_PSEL_MOSI_PORT_Msk (0xFUL << SPIS_PSEL_MOSI_PORT_Pos) /*!< Bit mask of PORT field.                              */
+  #define SPIS_PSEL_MOSI_PORT_Msk (0x7UL << SPIS_PSEL_MOSI_PORT_Pos) /*!< Bit mask of PORT field.                              */
   #define SPIS_PSEL_MOSI_PORT_Min (0x0UL)            /*!< Min value of PORT field.                                             */
-  #define SPIS_PSEL_MOSI_PORT_Max (0xFUL)            /*!< Max size of PORT field.                                              */
+  #define SPIS_PSEL_MOSI_PORT_Max (0x2UL)            /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define SPIS_PSEL_MOSI_CONNECT_Pos (31UL)          /*!< Position of CONNECT field.                                           */
@@ -50136,11 +50824,11 @@ typedef struct {
   #define SPIS_PSEL_CSN_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define SPIS_PSEL_CSN_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define SPIS_PSEL_CSN_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define SPIS_PSEL_CSN_PORT_Msk (0xFUL << SPIS_PSEL_CSN_PORT_Pos) /*!< Bit mask of PORT field.                                */
+  #define SPIS_PSEL_CSN_PORT_Msk (0x7UL << SPIS_PSEL_CSN_PORT_Pos) /*!< Bit mask of PORT field.                                */
   #define SPIS_PSEL_CSN_PORT_Min (0x0UL)             /*!< Min value of PORT field.                                             */
-  #define SPIS_PSEL_CSN_PORT_Max (0xFUL)             /*!< Max size of PORT field.                                              */
+  #define SPIS_PSEL_CSN_PORT_Max (0x2UL)             /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define SPIS_PSEL_CSN_CONNECT_Pos (31UL)           /*!< Position of CONNECT field.                                           */
@@ -51895,9 +52583,15 @@ typedef struct {
   typedef struct {                                   /*!< SREGS Structure                                                      */
     __IM uint32_t RESERVED[320];
     __IOM uint32_t REG[2];                           /*!< (@ 0x00000500) Spare register n                                      */
-    __IM uint32_t RESERVED1[62];
+    __IM uint32_t RESERVED1[30];
+    __IOM uint32_t TESTREG;                          /*!< (@ 0x00000580) Test special register                                 */
+    __IOM uint32_t POSTEDWRITES;                     /*!< (@ 0x00000584) Enable or disable posted writes functionality for
+                                                                         specific AXI/AHB bus masters*/
+    __IM uint32_t RESERVED2[30];
     __IOM uint32_t MAINREG[1];                       /*!< (@ 0x00000600) Spare register n in PD_MAIN                           */
-    __IM uint32_t RESERVED2[63];
+    __IM uint32_t RESERVED3[31];
+    __IOM uint32_t PDSELECT;                         /*!< (@ 0x00000680) Power domain status selection                         */
+    __IM uint32_t RESERVED4[31];
     __IOM uint32_t AOREG[1];                         /*!< (@ 0x00000700) Spare register n in PD_AO                             */
   } NRF_SREGS_Type;                                  /*!< Size = 1796 (0x704)                                                  */
 
@@ -51912,6 +52606,34 @@ typedef struct {
   #define SREGS_REG_VALUE_Msk (0xFFFFFFFFUL << SREGS_REG_VALUE_Pos) /*!< Bit mask of VALUE field.                              */
 
 
+/* SREGS_TESTREG: Test special register */
+  #define SREGS_TESTREG_ResetValue (0x00000000UL)    /*!< Reset value of TESTREG register.                                     */
+
+/* TESTFIELD @Bits 0..3 : (unspecified) */
+  #define SREGS_TESTREG_TESTFIELD_Pos (0UL)          /*!< Position of TESTFIELD field.                                         */
+  #define SREGS_TESTREG_TESTFIELD_Msk (0xFUL << SREGS_TESTREG_TESTFIELD_Pos) /*!< Bit mask of TESTFIELD field.                 */
+
+
+/* SREGS_POSTEDWRITES: Enable or disable posted writes functionality for specific AXI/AHB bus masters */
+  #define SREGS_POSTEDWRITES_ResetValue (0x00000000UL) /*!< Reset value of POSTEDWRITES register.                              */
+
+/* ACQINJDMA0 @Bit 0 : Disable or enable posted writes for Radio ACQINJDMA0 */
+  #define SREGS_POSTEDWRITES_ACQINJDMA0_Pos (0UL)    /*!< Position of ACQINJDMA0 field.                                        */
+  #define SREGS_POSTEDWRITES_ACQINJDMA0_Msk (0x1UL << SREGS_POSTEDWRITES_ACQINJDMA0_Pos) /*!< Bit mask of ACQINJDMA0 field.    */
+  #define SREGS_POSTEDWRITES_ACQINJDMA0_Min (0x0UL)  /*!< Min enumerator value of ACQINJDMA0 field.                            */
+  #define SREGS_POSTEDWRITES_ACQINJDMA0_Max (0x1UL)  /*!< Max enumerator value of ACQINJDMA0 field.                            */
+  #define SREGS_POSTEDWRITES_ACQINJDMA0_Disabled (0x0UL) /*!< Disable posted writes                                            */
+  #define SREGS_POSTEDWRITES_ACQINJDMA0_Enabled (0x1UL) /*!< Enable posted writes                                              */
+
+/* ACQINJDMA1 @Bit 1 : Disable or enable posted writes for Radio ACQINJDMA1 */
+  #define SREGS_POSTEDWRITES_ACQINJDMA1_Pos (1UL)    /*!< Position of ACQINJDMA1 field.                                        */
+  #define SREGS_POSTEDWRITES_ACQINJDMA1_Msk (0x1UL << SREGS_POSTEDWRITES_ACQINJDMA1_Pos) /*!< Bit mask of ACQINJDMA1 field.    */
+  #define SREGS_POSTEDWRITES_ACQINJDMA1_Min (0x0UL)  /*!< Min enumerator value of ACQINJDMA1 field.                            */
+  #define SREGS_POSTEDWRITES_ACQINJDMA1_Max (0x1UL)  /*!< Max enumerator value of ACQINJDMA1 field.                            */
+  #define SREGS_POSTEDWRITES_ACQINJDMA1_Disabled (0x0UL) /*!< Disable posted writes                                            */
+  #define SREGS_POSTEDWRITES_ACQINJDMA1_Enabled (0x1UL) /*!< Enable posted writes                                              */
+
+
 /* SREGS_MAINREG: Spare register n in PD_MAIN */
   #define SREGS_MAINREG_MaxCount (1UL)               /*!< Max size of MAINREG[1] array.                                        */
   #define SREGS_MAINREG_MaxIndex (0UL)               /*!< Max index of MAINREG[1] array.                                       */
@@ -51921,6 +52643,36 @@ typedef struct {
 /* VALUE @Bits 0..7 : (unspecified) */
   #define SREGS_MAINREG_VALUE_Pos (0UL)              /*!< Position of VALUE field.                                             */
   #define SREGS_MAINREG_VALUE_Msk (0xFFUL << SREGS_MAINREG_VALUE_Pos) /*!< Bit mask of VALUE field.                            */
+
+
+/* SREGS_PDSELECT: Power domain status selection */
+  #define SREGS_PDSELECT_ResetValue (0x00000000UL)   /*!< Reset value of PDSELECT register.                                    */
+
+/* PIN0 @Bits 0..2 : Mapping for pin P0.03 */
+  #define SREGS_PDSELECT_PIN0_Pos (0UL)              /*!< Position of PIN0 field.                                              */
+  #define SREGS_PDSELECT_PIN0_Msk (0x7UL << SREGS_PDSELECT_PIN0_Pos) /*!< Bit mask of PIN0 field.                              */
+  #define SREGS_PDSELECT_PIN0_Min (0x0UL)            /*!< Min enumerator value of PIN0 field.                                  */
+  #define SREGS_PDSELECT_PIN0_Max (0x6UL)            /*!< Max enumerator value of PIN0 field.                                  */
+  #define SREGS_PDSELECT_PIN0_Disable (0x0UL)        /*!< Disable (pin is used as regular pin)                                 */
+  #define SREGS_PDSELECT_PIN0_PdMain (0x1UL)         /*!< Shows if PD_MAIN is on                                               */
+  #define SREGS_PDSELECT_PIN0_PdLp (0x2UL)           /*!< Shows if PD_LP is on                                                 */
+  #define SREGS_PDSELECT_PIN0_PdPeri (0x3UL)         /*!< Shows if PD_M (also called PD_PERI) is on                            */
+  #define SREGS_PDSELECT_PIN0_PdMcu (0x4UL)          /*!< Shows if PD_MCU is on                                                */
+  #define SREGS_PDSELECT_PIN0_PdRadio (0x5UL)        /*!< Shows if PD_RADIO is on                                              */
+  #define SREGS_PDSELECT_PIN0_PdCracen (0x6UL)       /*!< Shows if PD_AUX (also called PD_CRACEN) is on                        */
+
+/* PIN1 @Bits 4..6 : Mapping for pin P0.04 */
+  #define SREGS_PDSELECT_PIN1_Pos (4UL)              /*!< Position of PIN1 field.                                              */
+  #define SREGS_PDSELECT_PIN1_Msk (0x7UL << SREGS_PDSELECT_PIN1_Pos) /*!< Bit mask of PIN1 field.                              */
+  #define SREGS_PDSELECT_PIN1_Min (0x0UL)            /*!< Min enumerator value of PIN1 field.                                  */
+  #define SREGS_PDSELECT_PIN1_Max (0x6UL)            /*!< Max enumerator value of PIN1 field.                                  */
+  #define SREGS_PDSELECT_PIN1_Disable (0x0UL)        /*!< Disable (pin is used as regular pin)                                 */
+  #define SREGS_PDSELECT_PIN1_PdMain (0x1UL)         /*!< Shows if PD_MAIN is on                                               */
+  #define SREGS_PDSELECT_PIN1_PdLp (0x2UL)           /*!< Shows if PD_LP is on                                                 */
+  #define SREGS_PDSELECT_PIN1_PdPeri (0x3UL)         /*!< Shows if PD_M (also called PD_PERI) is on                            */
+  #define SREGS_PDSELECT_PIN1_PdMcu (0x4UL)          /*!< Shows if PD_MCU is on                                                */
+  #define SREGS_PDSELECT_PIN1_PdRadio (0x5UL)        /*!< Shows if PD_RADIO is on                                              */
+  #define SREGS_PDSELECT_PIN1_PdCracen (0x6UL)       /*!< Shows if PD_AUX (also called PD_CRACEN) is on                        */
 
 
 /* SREGS_AOREG: Spare register n in PD_AO */
@@ -52443,9 +53195,9 @@ typedef struct {
   __IOM NRF_TAMPC_PROTECT_DOMAIN_SPIDEN_Type SPIDEN; /*!< (@ 0x00000010) (unspecified)                                         */
   __IOM NRF_TAMPC_PROTECT_DOMAIN_SPNIDEN_Type SPNIDEN; /*!< (@ 0x00000018) (unspecified)                                       */
 } NRF_TAMPC_PROTECT_DOMAIN_Type;                     /*!< Size = 32 (0x020)                                                    */
-  #define TAMPC_PROTECT_DOMAIN_MaxCount (16UL)       /*!< Size of DOMAIN[16] array.                                            */
-  #define TAMPC_PROTECT_DOMAIN_MaxIndex (15UL)       /*!< Max index of DOMAIN[16] array.                                       */
-  #define TAMPC_PROTECT_DOMAIN_MinIndex (0UL)        /*!< Min index of DOMAIN[16] array.                                       */
+  #define TAMPC_PROTECT_DOMAIN_MaxCount (1UL)        /*!< Size of DOMAIN[1] array.                                             */
+  #define TAMPC_PROTECT_DOMAIN_MaxIndex (0UL)        /*!< Max index of DOMAIN[1] array.                                        */
+  #define TAMPC_PROTECT_DOMAIN_MinIndex (0UL)        /*!< Min index of DOMAIN[1] array.                                        */
 
 
 /* ============================================== Struct TAMPC_PROTECT_AP_DBGEN ============================================== */
@@ -52603,402 +53355,9 @@ typedef struct {
   __IOM NRF_TAMPC_PROTECT_AP_DBGEN_Type DBGEN;       /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_TAMPC_PROTECT_AP_SPIDEN_Type SPIDEN;     /*!< (@ 0x00000008) (unspecified)                                         */
 } NRF_TAMPC_PROTECT_AP_Type;                         /*!< Size = 16 (0x010)                                                    */
-  #define TAMPC_PROTECT_AP_MaxCount (16UL)           /*!< Size of AP[16] array.                                                */
-  #define TAMPC_PROTECT_AP_MaxIndex (15UL)           /*!< Max index of AP[16] array.                                           */
-  #define TAMPC_PROTECT_AP_MinIndex (0UL)            /*!< Min index of AP[16] array.                                           */
-
-
-/* ========================================= Struct TAMPC_PROTECT_CORESIGHT_DEVICEEN ========================================= */
-/**
-  * @brief DEVICEEN [TAMPC_PROTECT_CORESIGHT_DEVICEEN] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CTRL;                              /*!< (@ 0x00000000) Controls the access port to the trace and debug domain,
-                                                                         part of CoreSight configuration registers.*/
-  __IOM uint32_t  STATUS;                            /*!< (@ 0x00000004) Status register for the trace and debug domain access
-                                                                         port.*/
-} NRF_TAMPC_PROTECT_CORESIGHT_DEVICEEN_Type;         /*!< Size = 8 (0x008)                                                     */
-
-/* TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL: Controls the access port to the trace and debug domain, part of CoreSight
-                                           configuration registers. */
-
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_ResetValue (0x00000010UL) /*!< Reset value of CTRL register.                   */
-
-/* VALUE @Bit 0 : Set value of deviceen signal. */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                  */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Min (0x0UL) /*!< Min enumerator value of VALUE field.                    */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Max (0x1UL) /*!< Max enumerator value of VALUE field.                    */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Low (0x0UL) /*!< Signal is logic 0.                                      */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_High (0x1UL) /*!< Signal is logic 1.                                     */
-
-/* LOCK @Bit 1 : Lock this register to prevent changes to the VALUE field until next reset. */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Pos (1UL) /*!< Position of LOCK field.                                    */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Pos) /*!< Bit mask
-                                                                            of LOCK field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                      */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                      */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                      */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                        */
-
-/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                          */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Pos)
-                                                                            /*!< Bit mask of FAULTTEST field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Min (0x0UL) /*!< Min enumerator value of FAULTTEST field.            */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Max (0x1UL) /*!< Max enumerator value of FAULTTEST field.            */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_NoOperation (0x0UL) /*!< No operation.                               */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault.                                  */
-
-/* WRITEPROTECTION @Bits 4..7 : The write protection must be cleared to allow updates to the VALUE field. */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Pos (4UL) /*!< Position of WRITEPROTECTION field.              */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Msk (0xFUL << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Pos)
-                                                                            /*!< Bit mask of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Min (0x0UL) /*!< Min enumerator value of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Max (0xFUL) /*!< Max enumerator value of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Disabled (0x0UL) /*!< Read: Write protection is disabled.      */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Enabled (0x1UL) /*!< Read: Write protection is enabled.        */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Clear (0xFUL) /*!< Write: Value to clear write protection.     */
-
-/* KEY @Bits 16..31 : Required write key for upper 16 bits. Must be included in all register write operations. */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_KEY_Pos (16UL) /*!< Position of KEY field.                                     */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_KEY_Msk (0xFFFFUL << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_KEY_Pos) /*!< Bit
-                                                                            mask of KEY field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_KEY_Min (0x50FAUL) /*!< Min enumerator value of KEY field.                     */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_KEY_Max (0x50FAUL) /*!< Max enumerator value of KEY field.                     */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_KEY_KEY (0x50FAUL) /*!< Write key value.                                       */
-
-
-/* TAMPC_PROTECT_CORESIGHT_DEVICEEN_STATUS: Status register for the trace and debug domain access port. */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.               */
-
-/* ERROR @Bit 0 : Error detection status. */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_STATUS_ERROR_Pos (0UL) /*!< Position of ERROR field.                                */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_STATUS_ERROR_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DEVICEEN_STATUS_ERROR_Pos) /*!<
-                                                                            Bit mask of ERROR field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_STATUS_ERROR_Min (0x0UL) /*!< Min enumerator value of ERROR field.                  */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_STATUS_ERROR_Max (0x1UL) /*!< Max enumerator value of ERROR field.                  */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_STATUS_ERROR_NoError (0x0UL) /*!< No error detected.                                */
-  #define TAMPC_PROTECT_CORESIGHT_DEVICEEN_STATUS_ERROR_Error (0x1UL) /*!< Error detected.                                     */
-
-
-
-/* ========================================== Struct TAMPC_PROTECT_CORESIGHT_DBGEN =========================================== */
-/**
-  * @brief DBGEN [TAMPC_PROTECT_CORESIGHT_DBGEN] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CTRL;                              /*!< (@ 0x00000000) Control register for invasive (halting) debug enable
-                                                                         for the Coresight domain.*/
-  __IOM uint32_t  STATUS;                            /*!< (@ 0x00000004) Status register for invasive (halting) debug enable for
-                                                                         Coresight domain.*/
-} NRF_TAMPC_PROTECT_CORESIGHT_DBGEN_Type;            /*!< Size = 8 (0x008)                                                     */
-
-/* TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL: Control register for invasive (halting) debug enable for the Coresight domain. */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_ResetValue (0x00000010UL) /*!< Reset value of CTRL register.                      */
-
-/* VALUE @Bit 0 : Set value of dbgen signal. */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Pos) /*!< Bit mask of
-                                                                            VALUE field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Min (0x0UL) /*!< Min enumerator value of VALUE field.                       */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Max (0x1UL) /*!< Max enumerator value of VALUE field.                       */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Low (0x0UL) /*!< Signal is logic 0.                                         */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_High (0x1UL) /*!< Signal is logic 1.                                        */
-
-/* LOCK @Bit 1 : Lock this register to prevent changes to the VALUE field until next reset. */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Pos (1UL) /*!< Position of LOCK field.                                       */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Pos) /*!< Bit mask of
-                                                                            LOCK field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                         */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                         */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                         */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                           */
-
-/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                             */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Pos) /*!< Bit
-                                                                            mask of FAULTTEST field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Min (0x0UL) /*!< Min enumerator value of FAULTTEST field.               */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Max (0x1UL) /*!< Max enumerator value of FAULTTEST field.               */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_NoOperation (0x0UL) /*!< No operation.                                  */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault.                                     */
-
-/* WRITEPROTECTION @Bits 4..7 : The write protection must be cleared to allow updates to the VALUE field. */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Pos (4UL) /*!< Position of WRITEPROTECTION field.                 */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Msk (0xFUL << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Pos)
-                                                                            /*!< Bit mask of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Min (0x0UL) /*!< Min enumerator value of WRITEPROTECTION field.   */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Max (0xFUL) /*!< Max enumerator value of WRITEPROTECTION field.   */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Disabled (0x0UL) /*!< Read: Write protection is disabled.         */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Enabled (0x1UL) /*!< Read: Write protection is enabled.           */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Clear (0xFUL) /*!< Write: Value to clear write protection.        */
-
-/* KEY @Bits 16..31 : Required write key for upper 16 bits. Must be included in all register write operations. */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_KEY_Pos (16UL) /*!< Position of KEY field.                                        */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_KEY_Msk (0xFFFFUL << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_KEY_Pos) /*!< Bit mask of
-                                                                            KEY field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_KEY_Min (0x50FAUL) /*!< Min enumerator value of KEY field.                        */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_KEY_Max (0x50FAUL) /*!< Max enumerator value of KEY field.                        */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_KEY_KEY (0x50FAUL) /*!< Write key value.                                          */
-
-
-/* TAMPC_PROTECT_CORESIGHT_DBGEN_STATUS: Status register for invasive (halting) debug enable for Coresight domain. */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                  */
-
-/* ERROR @Bit 0 : Error detection status. */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_STATUS_ERROR_Pos (0UL) /*!< Position of ERROR field.                                   */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_STATUS_ERROR_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DBGEN_STATUS_ERROR_Pos) /*!< Bit mask
-                                                                            of ERROR field.*/
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_STATUS_ERROR_Min (0x0UL) /*!< Min enumerator value of ERROR field.                     */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_STATUS_ERROR_Max (0x1UL) /*!< Max enumerator value of ERROR field.                     */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_STATUS_ERROR_NoError (0x0UL) /*!< No error detected.                                   */
-  #define TAMPC_PROTECT_CORESIGHT_DBGEN_STATUS_ERROR_Error (0x1UL) /*!< Error detected.                                        */
-
-
-
-/* ========================================== Struct TAMPC_PROTECT_CORESIGHT_NIDEN =========================================== */
-/**
-  * @brief NIDEN [TAMPC_PROTECT_CORESIGHT_NIDEN] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CTRL;                              /*!< (@ 0x00000000) Control register for non-invasive debug enable for the
-                                                                         Coresight domain.*/
-  __IOM uint32_t  STATUS;                            /*!< (@ 0x00000004) Status register for non-invasive debug enable for
-                                                                         Coresight domain.*/
-} NRF_TAMPC_PROTECT_CORESIGHT_NIDEN_Type;            /*!< Size = 8 (0x008)                                                     */
-
-/* TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL: Control register for non-invasive debug enable for the Coresight domain. */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_ResetValue (0x00000010UL) /*!< Reset value of CTRL register.                      */
-
-/* VALUE @Bit 0 : Set value of niden signal. */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Pos) /*!< Bit mask of
-                                                                            VALUE field.*/
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Min (0x0UL) /*!< Min enumerator value of VALUE field.                       */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Max (0x1UL) /*!< Max enumerator value of VALUE field.                       */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Low (0x0UL) /*!< Signal is logic 0.                                         */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_High (0x1UL) /*!< Signal is logic 1.                                        */
-
-/* LOCK @Bit 1 : Lock this register to prevent changes to the VALUE field until next reset. */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Pos (1UL) /*!< Position of LOCK field.                                       */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Pos) /*!< Bit mask of
-                                                                            LOCK field.*/
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                         */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                         */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                         */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                           */
-
-/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                             */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Pos) /*!< Bit
-                                                                            mask of FAULTTEST field.*/
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Min (0x0UL) /*!< Min enumerator value of FAULTTEST field.               */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Max (0x1UL) /*!< Max enumerator value of FAULTTEST field.               */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_NoOperation (0x0UL) /*!< No operation.                                  */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault.                                     */
-
-/* WRITEPROTECTION @Bits 4..7 : The write protection must be cleared to allow updates to the VALUE field. */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Pos (4UL) /*!< Position of WRITEPROTECTION field.                 */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Msk (0xFUL << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Pos)
-                                                                            /*!< Bit mask of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Min (0x0UL) /*!< Min enumerator value of WRITEPROTECTION field.   */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Max (0xFUL) /*!< Max enumerator value of WRITEPROTECTION field.   */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Disabled (0x0UL) /*!< Read: Write protection is disabled.         */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Enabled (0x1UL) /*!< Read: Write protection is enabled.           */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Clear (0xFUL) /*!< Write: Value to clear write protection.        */
-
-/* KEY @Bits 16..31 : Required write key for upper 16 bits. Must be included in all register write operations. */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_KEY_Pos (16UL) /*!< Position of KEY field.                                        */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_KEY_Msk (0xFFFFUL << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_KEY_Pos) /*!< Bit mask of
-                                                                            KEY field.*/
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_KEY_Min (0x50FAUL) /*!< Min enumerator value of KEY field.                        */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_KEY_Max (0x50FAUL) /*!< Max enumerator value of KEY field.                        */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_KEY_KEY (0x50FAUL) /*!< Write key value.                                          */
-
-
-/* TAMPC_PROTECT_CORESIGHT_NIDEN_STATUS: Status register for non-invasive debug enable for Coresight domain. */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                  */
-
-/* ERROR @Bit 0 : Error detection status. */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_STATUS_ERROR_Pos (0UL) /*!< Position of ERROR field.                                   */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_STATUS_ERROR_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_NIDEN_STATUS_ERROR_Pos) /*!< Bit mask
-                                                                            of ERROR field.*/
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_STATUS_ERROR_Min (0x0UL) /*!< Min enumerator value of ERROR field.                     */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_STATUS_ERROR_Max (0x1UL) /*!< Max enumerator value of ERROR field.                     */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_STATUS_ERROR_NoError (0x0UL) /*!< No error detected.                                   */
-  #define TAMPC_PROTECT_CORESIGHT_NIDEN_STATUS_ERROR_Error (0x1UL) /*!< Error detected.                                        */
-
-
-
-/* ========================================== Struct TAMPC_PROTECT_CORESIGHT_SPIDEN ========================================== */
-/**
-  * @brief SPIDEN [TAMPC_PROTECT_CORESIGHT_SPIDEN] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CTRL;                              /*!< (@ 0x00000000) Control register for secure priviliged invasive
-                                                                         (halting) debug enable for the Coresight domain.*/
-  __IOM uint32_t  STATUS;                            /*!< (@ 0x00000004) Status register for secure priviliged invasive
-                                                                         (halting) debug enable for Coresight domain.*/
-} NRF_TAMPC_PROTECT_CORESIGHT_SPIDEN_Type;           /*!< Size = 8 (0x008)                                                     */
-
-/* TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL: Control register for secure priviliged invasive (halting) debug enable for the Coresight
-                                         domain. */
-
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_ResetValue (0x00000010UL) /*!< Reset value of CTRL register.                     */
-
-/* VALUE @Bit 0 : Set value of spiden signal. */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Pos) /*!< Bit mask
-                                                                            of VALUE field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Min (0x0UL) /*!< Min enumerator value of VALUE field.                      */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Max (0x1UL) /*!< Max enumerator value of VALUE field.                      */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Low (0x0UL) /*!< Signal is logic 0.                                        */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_High (0x1UL) /*!< Signal is logic 1.                                       */
-
-/* LOCK @Bit 1 : Lock this register to prevent changes to the VALUE field until next reset. */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Pos (1UL) /*!< Position of LOCK field.                                      */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Pos) /*!< Bit mask of
-                                                                            LOCK field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                        */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                        */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                        */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                          */
-
-/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                            */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Pos) /*!<
-                                                                            Bit mask of FAULTTEST field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Min (0x0UL) /*!< Min enumerator value of FAULTTEST field.              */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Max (0x1UL) /*!< Max enumerator value of FAULTTEST field.              */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_NoOperation (0x0UL) /*!< No operation.                                 */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault.                                    */
-
-/* WRITEPROTECTION @Bits 4..7 : The write protection must be cleared to allow updates to the VALUE field. */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Pos (4UL) /*!< Position of WRITEPROTECTION field.                */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Msk (0xFUL << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Pos)
-                                                                            /*!< Bit mask of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Min (0x0UL) /*!< Min enumerator value of WRITEPROTECTION field.  */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Max (0xFUL) /*!< Max enumerator value of WRITEPROTECTION field.  */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Disabled (0x0UL) /*!< Read: Write protection is disabled.        */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Enabled (0x1UL) /*!< Read: Write protection is enabled.          */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Clear (0xFUL) /*!< Write: Value to clear write protection.       */
-
-/* KEY @Bits 16..31 : Required write key for upper 16 bits. Must be included in all register write operations. */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_KEY_Pos (16UL) /*!< Position of KEY field.                                       */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_KEY_Msk (0xFFFFUL << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_KEY_Pos) /*!< Bit mask of
-                                                                            KEY field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_KEY_Min (0x50FAUL) /*!< Min enumerator value of KEY field.                       */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_KEY_Max (0x50FAUL) /*!< Max enumerator value of KEY field.                       */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_KEY_KEY (0x50FAUL) /*!< Write key value.                                         */
-
-
-/* TAMPC_PROTECT_CORESIGHT_SPIDEN_STATUS: Status register for secure priviliged invasive (halting) debug enable for Coresight
-                                           domain. */
-
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                 */
-
-/* ERROR @Bit 0 : Error detection status. */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_STATUS_ERROR_Pos (0UL) /*!< Position of ERROR field.                                  */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_STATUS_ERROR_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPIDEN_STATUS_ERROR_Pos) /*!< Bit
-                                                                            mask of ERROR field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_STATUS_ERROR_Min (0x0UL) /*!< Min enumerator value of ERROR field.                    */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_STATUS_ERROR_Max (0x1UL) /*!< Max enumerator value of ERROR field.                    */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_STATUS_ERROR_NoError (0x0UL) /*!< No error detected.                                  */
-  #define TAMPC_PROTECT_CORESIGHT_SPIDEN_STATUS_ERROR_Error (0x1UL) /*!< Error detected.                                       */
-
-
-
-/* ========================================= Struct TAMPC_PROTECT_CORESIGHT_SPNIDEN ========================================== */
-/**
-  * @brief SPNIDEN [TAMPC_PROTECT_CORESIGHT_SPNIDEN] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CTRL;                              /*!< (@ 0x00000000) Control register for secure priviliged non-invasive
-                                                                         debug enable for the Coresight domain.*/
-  __IOM uint32_t  STATUS;                            /*!< (@ 0x00000004) Status register for secure priviliged non-invasive
-                                                                         debug enable for Coresight domain.*/
-} NRF_TAMPC_PROTECT_CORESIGHT_SPNIDEN_Type;          /*!< Size = 8 (0x008)                                                     */
-
-/* TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL: Control register for secure priviliged non-invasive debug enable for the Coresight
-                                          domain. */
-
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_ResetValue (0x00000010UL) /*!< Reset value of CTRL register.                    */
-
-/* VALUE @Bit 0 : Set value of spniden signal. */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Pos) /*!< Bit mask
-                                                                            of VALUE field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Min (0x0UL) /*!< Min enumerator value of VALUE field.                     */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Max (0x1UL) /*!< Max enumerator value of VALUE field.                     */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Low (0x0UL) /*!< Signal is logic 0.                                       */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_High (0x1UL) /*!< Signal is logic 1.                                      */
-
-/* LOCK @Bit 1 : Lock this register to prevent changes to the VALUE field until next reset. */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Pos (1UL) /*!< Position of LOCK field.                                     */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Pos) /*!< Bit mask
-                                                                            of LOCK field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                       */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                       */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                       */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                         */
-
-/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                           */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Pos) /*!<
-                                                                            Bit mask of FAULTTEST field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Min (0x0UL) /*!< Min enumerator value of FAULTTEST field.             */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Max (0x1UL) /*!< Max enumerator value of FAULTTEST field.             */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_NoOperation (0x0UL) /*!< No operation.                                */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault.                                   */
-
-/* WRITEPROTECTION @Bits 4..7 : The write protection must be cleared to allow updates to the VALUE field. */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Pos (4UL) /*!< Position of WRITEPROTECTION field.               */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Msk (0xFUL << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Pos)
-                                                                            /*!< Bit mask of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Min (0x0UL) /*!< Min enumerator value of WRITEPROTECTION field. */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Max (0xFUL) /*!< Max enumerator value of WRITEPROTECTION field. */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Disabled (0x0UL) /*!< Read: Write protection is disabled.       */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Enabled (0x1UL) /*!< Read: Write protection is enabled.         */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Clear (0xFUL) /*!< Write: Value to clear write protection.      */
-
-/* KEY @Bits 16..31 : Required write key for upper 16 bits. Must be included in all register write operations. */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_KEY_Pos (16UL) /*!< Position of KEY field.                                      */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_KEY_Msk (0xFFFFUL << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_KEY_Pos) /*!< Bit mask
-                                                                            of KEY field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_KEY_Min (0x50FAUL) /*!< Min enumerator value of KEY field.                      */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_KEY_Max (0x50FAUL) /*!< Max enumerator value of KEY field.                      */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_KEY_KEY (0x50FAUL) /*!< Write key value.                                        */
-
-
-/* TAMPC_PROTECT_CORESIGHT_SPNIDEN_STATUS: Status register for secure priviliged non-invasive debug enable for Coresight domain.
-                                            */
-
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                */
-
-/* ERROR @Bit 0 : Error detection status. */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_STATUS_ERROR_Pos (0UL) /*!< Position of ERROR field.                                 */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_STATUS_ERROR_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPNIDEN_STATUS_ERROR_Pos) /*!< Bit
-                                                                            mask of ERROR field.*/
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_STATUS_ERROR_Min (0x0UL) /*!< Min enumerator value of ERROR field.                   */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_STATUS_ERROR_Max (0x1UL) /*!< Max enumerator value of ERROR field.                   */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_STATUS_ERROR_NoError (0x0UL) /*!< No error detected.                                 */
-  #define TAMPC_PROTECT_CORESIGHT_SPNIDEN_STATUS_ERROR_Error (0x1UL) /*!< Error detected.                                      */
-
-
-
-/* ============================================= Struct TAMPC_PROTECT_CORESIGHT ============================================== */
-/**
-  * @brief CORESIGHT [TAMPC_PROTECT_CORESIGHT] (unspecified)
-  */
-typedef struct {
-  __IOM NRF_TAMPC_PROTECT_CORESIGHT_DEVICEEN_Type DEVICEEN; /*!< (@ 0x00000000) (unspecified)                                  */
-  __IOM NRF_TAMPC_PROTECT_CORESIGHT_DBGEN_Type DBGEN; /*!< (@ 0x00000008) (unspecified)                                        */
-  __IOM NRF_TAMPC_PROTECT_CORESIGHT_NIDEN_Type NIDEN; /*!< (@ 0x00000010) (unspecified)                                        */
-  __IOM NRF_TAMPC_PROTECT_CORESIGHT_SPIDEN_Type SPIDEN; /*!< (@ 0x00000018) (unspecified)                                      */
-  __IOM NRF_TAMPC_PROTECT_CORESIGHT_SPNIDEN_Type SPNIDEN; /*!< (@ 0x00000020) (unspecified)                                    */
-} NRF_TAMPC_PROTECT_CORESIGHT_Type;                  /*!< Size = 40 (0x028)                                                    */
+  #define TAMPC_PROTECT_AP_MaxCount (1UL)            /*!< Size of AP[1] array.                                                 */
+  #define TAMPC_PROTECT_AP_MaxIndex (0UL)            /*!< Max index of AP[1] array.                                            */
+  #define TAMPC_PROTECT_AP_MinIndex (0UL)            /*!< Min index of AP[1] array.                                            */
 
 
 /* ======================================== Struct TAMPC_PROTECT_CRACEN_AESDISABLECM ========================================= */
@@ -53235,163 +53594,6 @@ typedef struct {
   __IOM NRF_TAMPC_PROTECT_CRACEN_SM4DISABLECM_Type SM4DISABLECM; /*!< (@ 0x00000008) (unspecified)                             */
   __IOM NRF_TAMPC_PROTECT_CRACEN_PKDISABLECM_Type PKDISABLECM; /*!< (@ 0x00000010) (unspecified)                               */
 } NRF_TAMPC_PROTECT_CRACEN_Type;                     /*!< Size = 24 (0x018)                                                    */
-
-
-/* ========================================= Struct TAMPC_PROTECT_WARMBOOT_UNRETIDLE ========================================= */
-/**
-  * @brief UNRETIDLE [TAMPC_PROTECT_WARMBOOT_UNRETIDLE] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CTRL;                              /*!< (@ 0x00000000) Control register to enable warm boot from unretained
-                                                                         idle mode.*/
-  __IOM uint32_t  STATUS;                            /*!< (@ 0x00000004) Status register for the warm boot unretained idle
-                                                                         signal.*/
-} NRF_TAMPC_PROTECT_WARMBOOT_UNRETIDLE_Type;         /*!< Size = 8 (0x008)                                                     */
-
-/* TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL: Control register to enable warm boot from unretained idle mode. */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_ResetValue (0x00000010UL) /*!< Reset value of CTRL register.                   */
-
-/* VALUE @Bit 0 : Set value of warm boot unretained idle signal. */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                  */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_VALUE_Msk (0x1UL << TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_VALUE_Min (0x0UL) /*!< Min enumerator value of VALUE field.                    */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_VALUE_Max (0x1UL) /*!< Max enumerator value of VALUE field.                    */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_VALUE_Low (0x0UL) /*!< Signal is logic 0.                                      */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_VALUE_High (0x1UL) /*!< Signal is logic 1.                                     */
-
-/* LOCK @Bit 1 : Lock this register to prevent changes to the VALUE field until next reset. */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_LOCK_Pos (1UL) /*!< Position of LOCK field.                                    */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_LOCK_Msk (0x1UL << TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_LOCK_Pos) /*!< Bit mask
-                                                                            of LOCK field.*/
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                      */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                      */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                      */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                        */
-
-/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                          */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_FAULTTEST_Pos)
-                                                                            /*!< Bit mask of FAULTTEST field.*/
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_FAULTTEST_Min (0x0UL) /*!< Min enumerator value of FAULTTEST field.            */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_FAULTTEST_Max (0x1UL) /*!< Max enumerator value of FAULTTEST field.            */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_FAULTTEST_NoOperation (0x0UL) /*!< No operation.                               */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault.                                  */
-
-/* WRITEPROTECTION @Bits 4..7 : The write protection must be cleared to allow updates to the VALUE field. */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_WRITEPROTECTION_Pos (4UL) /*!< Position of WRITEPROTECTION field.              */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_WRITEPROTECTION_Msk (0xFUL << TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_WRITEPROTECTION_Pos)
-                                                                            /*!< Bit mask of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_WRITEPROTECTION_Min (0x0UL) /*!< Min enumerator value of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_WRITEPROTECTION_Max (0xFUL) /*!< Max enumerator value of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_WRITEPROTECTION_Disabled (0x0UL) /*!< Read: Write protection is disabled.      */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_WRITEPROTECTION_Enabled (0x1UL) /*!< Read: Write protection is enabled.        */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_WRITEPROTECTION_Clear (0xFUL) /*!< Write: Value to clear write protection.     */
-
-/* KEY @Bits 16..31 : Required write key for upper 16 bits. Must be included in all register write operations. */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_KEY_Pos (16UL) /*!< Position of KEY field.                                     */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_KEY_Msk (0xFFFFUL << TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_KEY_Pos) /*!< Bit
-                                                                            mask of KEY field.*/
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_KEY_Min (0x50FAUL) /*!< Min enumerator value of KEY field.                     */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_KEY_Max (0x50FAUL) /*!< Max enumerator value of KEY field.                     */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_CTRL_KEY_KEY (0x50FAUL) /*!< Write key value.                                       */
-
-
-/* TAMPC_PROTECT_WARMBOOT_UNRETIDLE_STATUS: Status register for the warm boot unretained idle signal. */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.               */
-
-/* ERROR @Bit 0 : Error detection status. */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_STATUS_ERROR_Pos (0UL) /*!< Position of ERROR field.                                */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_STATUS_ERROR_Msk (0x1UL << TAMPC_PROTECT_WARMBOOT_UNRETIDLE_STATUS_ERROR_Pos) /*!<
-                                                                            Bit mask of ERROR field.*/
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_STATUS_ERROR_Min (0x0UL) /*!< Min enumerator value of ERROR field.                  */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_STATUS_ERROR_Max (0x1UL) /*!< Max enumerator value of ERROR field.                  */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_STATUS_ERROR_NoError (0x0UL) /*!< No error detected.                                */
-  #define TAMPC_PROTECT_WARMBOOT_UNRETIDLE_STATUS_ERROR_Error (0x1UL) /*!< Error detected.                                     */
-
-
-
-/* ========================================= Struct TAMPC_PROTECT_WARMBOOT_SYSTEMOFF ========================================= */
-/**
-  * @brief SYSTEMOFF [TAMPC_PROTECT_WARMBOOT_SYSTEMOFF] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CTRL;                              /*!< (@ 0x00000000) Control register to enable warm boot from system off
-                                                                         mode.*/
-  __IOM uint32_t  STATUS;                            /*!< (@ 0x00000004) Status register for the warm boot system off signal.  */
-} NRF_TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_Type;         /*!< Size = 8 (0x008)                                                     */
-
-/* TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL: Control register to enable warm boot from system off mode. */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_ResetValue (0x00000010UL) /*!< Reset value of CTRL register.                   */
-
-/* VALUE @Bit 0 : Set value of the warm boot system off signal. */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                  */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_VALUE_Msk (0x1UL << TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_VALUE_Min (0x0UL) /*!< Min enumerator value of VALUE field.                    */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_VALUE_Max (0x1UL) /*!< Max enumerator value of VALUE field.                    */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_VALUE_Low (0x0UL) /*!< Signal is logic 0.                                      */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_VALUE_High (0x1UL) /*!< Signal is logic 1.                                     */
-
-/* LOCK @Bit 1 : Lock this register to prevent changes to the VALUE field until next reset. */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_LOCK_Pos (1UL) /*!< Position of LOCK field.                                    */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_LOCK_Msk (0x1UL << TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_LOCK_Pos) /*!< Bit mask
-                                                                            of LOCK field.*/
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                      */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                      */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                      */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                        */
-
-/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                          */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_FAULTTEST_Pos)
-                                                                            /*!< Bit mask of FAULTTEST field.*/
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_FAULTTEST_Min (0x0UL) /*!< Min enumerator value of FAULTTEST field.            */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_FAULTTEST_Max (0x1UL) /*!< Max enumerator value of FAULTTEST field.            */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_FAULTTEST_NoOperation (0x0UL) /*!< No operation.                               */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault.                                  */
-
-/* WRITEPROTECTION @Bits 4..7 : The write protection must be cleared to allow updates to the VALUE field. */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_WRITEPROTECTION_Pos (4UL) /*!< Position of WRITEPROTECTION field.              */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_WRITEPROTECTION_Msk (0xFUL << TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_WRITEPROTECTION_Pos)
-                                                                            /*!< Bit mask of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_WRITEPROTECTION_Min (0x0UL) /*!< Min enumerator value of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_WRITEPROTECTION_Max (0xFUL) /*!< Max enumerator value of WRITEPROTECTION field.*/
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_WRITEPROTECTION_Disabled (0x0UL) /*!< Read: Write protection is disabled.      */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_WRITEPROTECTION_Enabled (0x1UL) /*!< Read: Write protection is enabled.        */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_WRITEPROTECTION_Clear (0xFUL) /*!< Write: Value to clear write protection.     */
-
-/* KEY @Bits 16..31 : Required write key for upper 16 bits. Must be included in all register write operations. */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_KEY_Pos (16UL) /*!< Position of KEY field.                                     */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_KEY_Msk (0xFFFFUL << TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_KEY_Pos) /*!< Bit
-                                                                            mask of KEY field.*/
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_KEY_Min (0x50FAUL) /*!< Min enumerator value of KEY field.                     */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_KEY_Max (0x50FAUL) /*!< Max enumerator value of KEY field.                     */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_KEY_KEY (0x50FAUL) /*!< Write key value.                                       */
-
-
-/* TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_STATUS: Status register for the warm boot system off signal. */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.               */
-
-/* ERROR @Bit 0 : Error detection status. */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_STATUS_ERROR_Pos (0UL) /*!< Position of ERROR field.                                */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_STATUS_ERROR_Msk (0x1UL << TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_STATUS_ERROR_Pos) /*!<
-                                                                            Bit mask of ERROR field.*/
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_STATUS_ERROR_Min (0x0UL) /*!< Min enumerator value of ERROR field.                  */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_STATUS_ERROR_Max (0x1UL) /*!< Max enumerator value of ERROR field.                  */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_STATUS_ERROR_NoError (0x0UL) /*!< No error detected.                                */
-  #define TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_STATUS_ERROR_Error (0x1UL) /*!< Error detected.                                     */
-
-
-
-/* ============================================== Struct TAMPC_PROTECT_WARMBOOT ============================================== */
-/**
-  * @brief WARMBOOT [TAMPC_PROTECT_WARMBOOT] (unspecified)
-  */
-typedef struct {
-  __IOM NRF_TAMPC_PROTECT_WARMBOOT_UNRETIDLE_Type UNRETIDLE; /*!< (@ 0x00000000) (unspecified)                                 */
-  __IOM NRF_TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_Type SYSTEMOFF; /*!< (@ 0x00000008) (unspecified)                                 */
-} NRF_TAMPC_PROTECT_WARMBOOT_Type;                   /*!< Size = 16 (0x010)                                                    */
 
 
 /* ============================================= Struct TAMPC_PROTECT_DFT_ENABLE ============================================= */
@@ -54194,13 +54396,11 @@ typedef struct {
   */
 typedef union {
   struct {
-    __IOM NRF_TAMPC_PROTECT_DOMAIN_Type DOMAIN[16];  /*!< (@ 0x00000000) (unspecified)                                         */
-    __IOM NRF_TAMPC_PROTECT_AP_Type AP[16];          /*!< (@ 0x00000200) (unspecified)                                         */
-    __IOM NRF_TAMPC_PROTECT_CORESIGHT_Type CORESIGHT; /*!< (@ 0x00000300) (unspecified)                                        */
-    __IM uint32_t RESERVED[2];
+    __IOM NRF_TAMPC_PROTECT_DOMAIN_Type DOMAIN[1];   /*!< (@ 0x00000000) (unspecified)                                         */
+    __IOM NRF_TAMPC_PROTECT_AP_Type AP[1];           /*!< (@ 0x00000020) (unspecified)                                         */
+    __IM uint32_t RESERVED[192];
     __IOM NRF_TAMPC_PROTECT_CRACEN_Type CRACEN;      /*!< (@ 0x00000330) (unspecified)                                         */
-    __IM uint32_t RESERVED1[40];
-    __IOM NRF_TAMPC_PROTECT_WARMBOOT_Type WARMBOOT;  /*!< (@ 0x000003E8) (unspecified)                                         */
+    __IM uint32_t RESERVED1[44];
     __IOM NRF_TAMPC_PROTECT_DFT_Type DFT;            /*!< (@ 0x000003F8) (unspecified)                                         */
     __IOM NRF_TAMPC_PROTECT_ACTIVESHIELD_Type ACTIVESHIELD; /*!< (@ 0x00000400) Enable active shield detector.                 */
     __IOM NRF_TAMPC_PROTECT_TAMPERSWITCH_Type TAMPERSWITCH; /*!< (@ 0x00000408) Enable tamper switch detector.                 */
@@ -54441,60 +54641,6 @@ typedef union {
 /* =========================================================================================================================== */
 
 #if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
-
-/* ================================================== Struct TEMP_OVERRIDE =================================================== */
-/**
-  * @brief OVERRIDE [TEMP_OVERRIDE] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  PWR;                               /*!< (@ 0x00000000) ANA power up override                                 */
-} NRF_TEMP_OVERRIDE_Type;                            /*!< Size = 4 (0x004)                                                     */
-
-/* TEMP_OVERRIDE_PWR: ANA power up override */
-  #define TEMP_OVERRIDE_PWR_ResetValue (0x00000000UL) /*!< Reset value of PWR register.                                        */
-
-/* VAL @Bit 0 : Override value for the signal */
-  #define TEMP_OVERRIDE_PWR_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
-  #define TEMP_OVERRIDE_PWR_VAL_Msk (0x1UL << TEMP_OVERRIDE_PWR_VAL_Pos) /*!< Bit mask of VAL field.                           */
-
-/* EN @Bit 31 : Enable the override */
-  #define TEMP_OVERRIDE_PWR_EN_Pos (31UL)            /*!< Position of EN field.                                                */
-  #define TEMP_OVERRIDE_PWR_EN_Msk (0x1UL << TEMP_OVERRIDE_PWR_EN_Pos) /*!< Bit mask of EN field.                              */
-  #define TEMP_OVERRIDE_PWR_EN_Min (0x0UL)           /*!< Min enumerator value of EN field.                                    */
-  #define TEMP_OVERRIDE_PWR_EN_Max (0x1UL)           /*!< Max enumerator value of EN field.                                    */
-  #define TEMP_OVERRIDE_PWR_EN_Disabled (0x0UL)      /*!< Override is disabled                                                 */
-  #define TEMP_OVERRIDE_PWR_EN_Enabled (0x1UL)       /*!< Override is enabled                                                  */
-
-
-
-/* ===================================================== Struct TEMP_DFT ===================================================== */
-/**
-  * @brief DFT [TEMP_DFT] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  ATBCONFIG;                         /*!< (@ 0x00000000) Analog Test Bus 0-1 (ATB0-1) configuration            */
-} NRF_TEMP_DFT_Type;                                 /*!< Size = 4 (0x004)                                                     */
-
-/* TEMP_DFT_ATBCONFIG: Analog Test Bus 0-1 (ATB0-1) configuration */
-  #define TEMP_DFT_ATBCONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATBCONFIG register.                                 */
-
-/* SELMUX @Bit 0 : Select multiplexer for ATB */
-  #define TEMP_DFT_ATBCONFIG_SELMUX_Pos (0UL)        /*!< Position of SELMUX field.                                            */
-  #define TEMP_DFT_ATBCONFIG_SELMUX_Msk (0x1UL << TEMP_DFT_ATBCONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.                */
-  #define TEMP_DFT_ATBCONFIG_SELMUX_Min (0x0UL)      /*!< Min enumerator value of SELMUX field.                                */
-  #define TEMP_DFT_ATBCONFIG_SELMUX_Max (0x1UL)      /*!< Max enumerator value of SELMUX field.                                */
-  #define TEMP_DFT_ATBCONFIG_SELMUX_CONFIG0 (0x0UL)  /*!< Configuration 0 selected                                             */
-  #define TEMP_DFT_ATBCONFIG_SELMUX_CONFIG1 (0x1UL)  /*!< Configuration 1 selected                                             */
-
-/* ENABLEATB @Bit 28 : Enable the analog test bus 0-1 (ATB0-1) */
-  #define TEMP_DFT_ATBCONFIG_ENABLEATB_Pos (28UL)    /*!< Position of ENABLEATB field.                                         */
-  #define TEMP_DFT_ATBCONFIG_ENABLEATB_Msk (0x1UL << TEMP_DFT_ATBCONFIG_ENABLEATB_Pos) /*!< Bit mask of ENABLEATB field.       */
-  #define TEMP_DFT_ATBCONFIG_ENABLEATB_Min (0x0UL)   /*!< Min enumerator value of ENABLEATB field.                             */
-  #define TEMP_DFT_ATBCONFIG_ENABLEATB_Max (0x1UL)   /*!< Max enumerator value of ENABLEATB field.                             */
-  #define TEMP_DFT_ATBCONFIG_ENABLEATB_Disabled (0x0UL) /*!< Analog test bus is disabled                                       */
-  #define TEMP_DFT_ATBCONFIG_ENABLEATB_Enabled (0x1UL) /*!< Analog test bus is enabled                                         */
-
-
 /* ======================================================= Struct TEMP ======================================================= */
 /**
   * @brief Temperature Sensor
@@ -54522,8 +54668,7 @@ typedef struct {
                                                                          temperature without calibration and linearization*/
     __IM uint32_t DATA;                              /*!< (@ 0x00000510) Data after dec and calib                              */
     __IOM uint32_t CALIB;                            /*!< (@ 0x00000514) Calibration value.                                    */
-    __IOM NRF_TEMP_OVERRIDE_Type OVERRIDE;           /*!< (@ 0x00000518) (unspecified)                                         */
-    __IM uint32_t RESERVED5;
+    __IM uint32_t RESERVED5[2];
     __IOM uint32_t A0;                               /*!< (@ 0x00000520) Slope of 1st piece wise linear function               */
     __IOM uint32_t A1;                               /*!< (@ 0x00000524) Slope of 2nd piece wise linear function               */
     __IOM uint32_t A2;                               /*!< (@ 0x00000528) Slope of 3rd piece wise linear function               */
@@ -54546,9 +54691,7 @@ typedef struct {
     __IOM uint32_t T3;                               /*!< (@ 0x0000056C) End point of 4th piece wise linear function           */
     __IOM uint32_t T4;                               /*!< (@ 0x00000570) End point of 5th piece wise linear function           */
     __IOM uint32_t T5;                               /*!< (@ 0x00000574) End point of 6th piece wise linear function           */
-    __IM uint32_t RESERVED8[34];
-    __IOM NRF_TEMP_DFT_Type DFT;                     /*!< (@ 0x00000600) (unspecified)                                         */
-  } NRF_TEMP_Type;                                   /*!< Size = 1540 (0x604)                                                  */
+  } NRF_TEMP_Type;                                   /*!< Size = 1400 (0x578)                                                  */
 
 /* TEMP_TASKS_START: Start temperature measurement */
   #define TEMP_TASKS_START_ResetValue (0x00000000UL) /*!< Reset value of TASKS_START register.                                 */
@@ -54718,9 +54861,9 @@ typedef struct {
 /* TEMP_TEMPRAW: Counted oscillator pulses which is equivalent to temperature without calibration and linearization */
   #define TEMP_TEMPRAW_ResetValue (0x00000000UL)     /*!< Reset value of TEMPRAW register.                                     */
 
-/* TEMP @Bits 0..11 : Temperature in degC (0.25deg steps) */
-  #define TEMP_TEMPRAW_TEMP_Pos (0UL)                /*!< Position of TEMP field.                                              */
-  #define TEMP_TEMPRAW_TEMP_Msk (0xFFFUL << TEMP_TEMPRAW_TEMP_Pos) /*!< Bit mask of TEMP field.                                */
+/* TEMPRAW @Bits 0..11 : Counted OSC pulses in defined counting period */
+  #define TEMP_TEMPRAW_TEMPRAW_Pos (0UL)             /*!< Position of TEMPRAW field.                                           */
+  #define TEMP_TEMPRAW_TEMPRAW_Msk (0xFFFUL << TEMP_TEMPRAW_TEMPRAW_Pos) /*!< Bit mask of TEMPRAW field.                       */
 
 
 /* TEMP_DATA: Data after dec and calib */
@@ -58624,11 +58767,11 @@ typedef struct {
   #define TWIM_PSEL_SCL_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define TWIM_PSEL_SCL_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define TWIM_PSEL_SCL_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define TWIM_PSEL_SCL_PORT_Msk (0xFUL << TWIM_PSEL_SCL_PORT_Pos) /*!< Bit mask of PORT field.                                */
+  #define TWIM_PSEL_SCL_PORT_Msk (0x7UL << TWIM_PSEL_SCL_PORT_Pos) /*!< Bit mask of PORT field.                                */
   #define TWIM_PSEL_SCL_PORT_Min (0x0UL)             /*!< Min value of PORT field.                                             */
-  #define TWIM_PSEL_SCL_PORT_Max (0xFUL)             /*!< Max size of PORT field.                                              */
+  #define TWIM_PSEL_SCL_PORT_Max (0x1UL)             /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define TWIM_PSEL_SCL_CONNECT_Pos (31UL)           /*!< Position of CONNECT field.                                           */
@@ -58648,11 +58791,11 @@ typedef struct {
   #define TWIM_PSEL_SDA_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define TWIM_PSEL_SDA_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define TWIM_PSEL_SDA_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define TWIM_PSEL_SDA_PORT_Msk (0xFUL << TWIM_PSEL_SDA_PORT_Pos) /*!< Bit mask of PORT field.                                */
+  #define TWIM_PSEL_SDA_PORT_Msk (0x7UL << TWIM_PSEL_SDA_PORT_Pos) /*!< Bit mask of PORT field.                                */
   #define TWIM_PSEL_SDA_PORT_Min (0x0UL)             /*!< Min value of PORT field.                                             */
-  #define TWIM_PSEL_SDA_PORT_Max (0xFUL)             /*!< Max size of PORT field.                                              */
+  #define TWIM_PSEL_SDA_PORT_Max (0x1UL)             /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define TWIM_PSEL_SDA_CONNECT_Pos (31UL)           /*!< Position of CONNECT field.                                           */
@@ -59285,13 +59428,14 @@ typedef struct {
 /* TWIM_SHORTS: Shortcuts between local events and tasks */
   #define TWIM_SHORTS_ResetValue (0x00000000UL)      /*!< Reset value of SHORTS register.                                      */
 
-/* LASTTX_STARTRX @Bit 7 : Shortcut between event LASTTX and task STARTRX */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Pos (7UL)       /*!< Position of LASTTX_STARTRX field.                                    */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Msk (0x1UL << TWIM_SHORTS_LASTTX_STARTRX_Pos) /*!< Bit mask of LASTTX_STARTRX field.      */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Min (0x0UL)     /*!< Min enumerator value of LASTTX_STARTRX field.                        */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Max (0x1UL)     /*!< Max enumerator value of LASTTX_STARTRX field.                        */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Disabled (0x0UL) /*!< Disable shortcut                                                    */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Enabled (0x1UL) /*!< Enable shortcut                                                      */
+/* LASTTX_DMA_RX_START @Bit 7 : Shortcut between event LASTTX and task DMA.RX.START */
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Pos (7UL)  /*!< Position of LASTTX_DMA_RX_START field.                               */
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Msk (0x1UL << TWIM_SHORTS_LASTTX_DMA_RX_START_Pos) /*!< Bit mask of
+                                                                            LASTTX_DMA_RX_START field.*/
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Min (0x0UL) /*!< Min enumerator value of LASTTX_DMA_RX_START field.                  */
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Max (0x1UL) /*!< Max enumerator value of LASTTX_DMA_RX_START field.                  */
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Disabled (0x0UL) /*!< Disable shortcut                                               */
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Enabled (0x1UL) /*!< Enable shortcut                                                 */
 
 /* LASTTX_SUSPEND @Bit 8 : Shortcut between event LASTTX and task SUSPEND */
   #define TWIM_SHORTS_LASTTX_SUSPEND_Pos (8UL)       /*!< Position of LASTTX_SUSPEND field.                                    */
@@ -59309,13 +59453,14 @@ typedef struct {
   #define TWIM_SHORTS_LASTTX_STOP_Disabled (0x0UL)   /*!< Disable shortcut                                                     */
   #define TWIM_SHORTS_LASTTX_STOP_Enabled (0x1UL)    /*!< Enable shortcut                                                      */
 
-/* LASTRX_STARTTX @Bit 10 : Shortcut between event LASTRX and task STARTTX */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Pos (10UL)      /*!< Position of LASTRX_STARTTX field.                                    */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Msk (0x1UL << TWIM_SHORTS_LASTRX_STARTTX_Pos) /*!< Bit mask of LASTRX_STARTTX field.      */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Min (0x0UL)     /*!< Min enumerator value of LASTRX_STARTTX field.                        */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Max (0x1UL)     /*!< Max enumerator value of LASTRX_STARTTX field.                        */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Disabled (0x0UL) /*!< Disable shortcut                                                    */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Enabled (0x1UL) /*!< Enable shortcut                                                      */
+/* LASTRX_DMA_TX_START @Bit 10 : Shortcut between event LASTRX and task DMA.TX.START */
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Pos (10UL) /*!< Position of LASTRX_DMA_TX_START field.                               */
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Msk (0x1UL << TWIM_SHORTS_LASTRX_DMA_TX_START_Pos) /*!< Bit mask of
+                                                                            LASTRX_DMA_TX_START field.*/
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Min (0x0UL) /*!< Min enumerator value of LASTRX_DMA_TX_START field.                  */
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Max (0x1UL) /*!< Max enumerator value of LASTRX_DMA_TX_START field.                  */
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Disabled (0x0UL) /*!< Disable shortcut                                               */
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Enabled (0x1UL) /*!< Enable shortcut                                                 */
 
 /* LASTRX_SUSPEND @Bit 11 : Shortcut between event LASTRX and task SUSPEND */
   #define TWIM_SHORTS_LASTRX_SUSPEND_Pos (11UL)      /*!< Position of LASTRX_SUSPEND field.                                    */
@@ -59325,16 +59470,8 @@ typedef struct {
   #define TWIM_SHORTS_LASTRX_SUSPEND_Disabled (0x0UL) /*!< Disable shortcut                                                    */
   #define TWIM_SHORTS_LASTRX_SUSPEND_Enabled (0x1UL) /*!< Enable shortcut                                                      */
 
-/* LASTRX_STOP @Bit 12 : Shortcut between event LASTRX and task STOP */
-  #define TWIM_SHORTS_LASTRX_STOP_Pos (12UL)         /*!< Position of LASTRX_STOP field.                                       */
-  #define TWIM_SHORTS_LASTRX_STOP_Msk (0x1UL << TWIM_SHORTS_LASTRX_STOP_Pos) /*!< Bit mask of LASTRX_STOP field.               */
-  #define TWIM_SHORTS_LASTRX_STOP_Min (0x0UL)        /*!< Min enumerator value of LASTRX_STOP field.                           */
-  #define TWIM_SHORTS_LASTRX_STOP_Max (0x1UL)        /*!< Max enumerator value of LASTRX_STOP field.                           */
-  #define TWIM_SHORTS_LASTRX_STOP_Disabled (0x0UL)   /*!< Disable shortcut                                                     */
-  #define TWIM_SHORTS_LASTRX_STOP_Enabled (0x1UL)    /*!< Enable shortcut                                                      */
-
-/* DMA_RX_BUSERROR_STOP @Bit 19 : Shortcut between event DMA.RX.BUSERROR and task STOP */
-  #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Pos (19UL) /*!< Position of DMA_RX_BUSERROR_STOP field.                             */
+/* DMA_RX_BUSERROR_STOP @Bit 18 : Shortcut between event DMA.RX.BUSERROR and task STOP */
+  #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Pos (18UL) /*!< Position of DMA_RX_BUSERROR_STOP field.                             */
   #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Msk (0x1UL << TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Pos) /*!< Bit mask of
                                                                             DMA_RX_BUSERROR_STOP field.*/
   #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_RX_BUSERROR_STOP field.                */
@@ -59342,8 +59479,8 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Disabled (0x0UL) /*!< Disable shortcut                                              */
   #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                */
 
-/* DMA_TX_BUSERROR_STOP @Bit 20 : Shortcut between event DMA.TX.BUSERROR and task STOP */
-  #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Pos (20UL) /*!< Position of DMA_TX_BUSERROR_STOP field.                             */
+/* DMA_TX_BUSERROR_STOP @Bit 19 : Shortcut between event DMA.TX.BUSERROR and task STOP */
+  #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Pos (19UL) /*!< Position of DMA_TX_BUSERROR_STOP field.                             */
   #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Msk (0x1UL << TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Pos) /*!< Bit mask of
                                                                             DMA_TX_BUSERROR_STOP field.*/
   #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_TX_BUSERROR_STOP field.                */
@@ -59351,10 +59488,10 @@ typedef struct {
   #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Disabled (0x0UL) /*!< Disable shortcut                                              */
   #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                */
 
-/* DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1 @Bit 21 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[1] Allows
+/* DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1 @Bit 20 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[1] Allows
                                                daisy-chaining match events. */
 
-  #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Pos (21UL) /*!< Position of DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1 field.   */
+  #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Pos (20UL) /*!< Position of DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1 field.   */
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1
                                                                             field.*/
@@ -59365,10 +59502,10 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Disabled (0x0UL) /*!< Disable shortcut                                 */
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Enabled (0x1UL) /*!< Enable shortcut                                   */
 
-/* DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2 @Bit 22 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[2] Allows
+/* DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2 @Bit 21 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[2] Allows
                                                daisy-chaining match events. */
 
-  #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Pos (22UL) /*!< Position of DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2 field.   */
+  #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Pos (21UL) /*!< Position of DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2 field.   */
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2
                                                                             field.*/
@@ -59379,10 +59516,10 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Disabled (0x0UL) /*!< Disable shortcut                                 */
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Enabled (0x1UL) /*!< Enable shortcut                                   */
 
-/* DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3 @Bit 23 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[3] Allows
+/* DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3 @Bit 22 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[3] Allows
                                                daisy-chaining match events. */
 
-  #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos (23UL) /*!< Position of DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3 field.   */
+  #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos (22UL) /*!< Position of DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3 field.   */
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3
                                                                             field.*/
@@ -59393,10 +59530,10 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Disabled (0x0UL) /*!< Disable shortcut                                 */
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Enabled (0x1UL) /*!< Enable shortcut                                   */
 
-/* DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0 @Bit 24 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[0] Allows
+/* DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0 @Bit 23 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[0] Allows
                                                daisy-chaining match events. */
 
-  #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos (24UL) /*!< Position of DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0 field.   */
+  #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos (23UL) /*!< Position of DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0 field.   */
   #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0
                                                                             field.*/
@@ -59407,8 +59544,8 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Disabled (0x0UL) /*!< Disable shortcut                                 */
   #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Enabled (0x1UL) /*!< Enable shortcut                                   */
 
-/* DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0 @Bit 25 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
-  #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Pos (25UL) /*!< Position of DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0 field. */
+/* DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0 @Bit 24 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
+  #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Pos (24UL) /*!< Position of DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0 field. */
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0
                                                                             field.*/
@@ -59419,8 +59556,8 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Disabled (0x0UL) /*!< Disable shortcut                                */
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Enabled (0x1UL) /*!< Enable shortcut                                  */
 
-/* DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1 @Bit 26 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
-  #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Pos (26UL) /*!< Position of DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1 field. */
+/* DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1 @Bit 25 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
+  #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Pos (25UL) /*!< Position of DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1 field. */
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1
                                                                             field.*/
@@ -59431,8 +59568,8 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Disabled (0x0UL) /*!< Disable shortcut                                */
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Enabled (0x1UL) /*!< Enable shortcut                                  */
 
-/* DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2 @Bit 27 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
-  #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Pos (27UL) /*!< Position of DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2 field. */
+/* DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2 @Bit 26 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
+  #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Pos (26UL) /*!< Position of DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2 field. */
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2
                                                                             field.*/
@@ -59443,8 +59580,8 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Disabled (0x0UL) /*!< Disable shortcut                                */
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Enabled (0x1UL) /*!< Enable shortcut                                  */
 
-/* DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3 @Bit 28 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
-  #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3_Pos (28UL) /*!< Position of DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3 field. */
+/* DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3 @Bit 27 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
+  #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3_Pos (27UL) /*!< Position of DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3 field. */
   #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3
                                                                             field.*/
@@ -60414,11 +60551,11 @@ typedef struct {
   #define TWIS_PSEL_SCL_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define TWIS_PSEL_SCL_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define TWIS_PSEL_SCL_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define TWIS_PSEL_SCL_PORT_Msk (0xFUL << TWIS_PSEL_SCL_PORT_Pos) /*!< Bit mask of PORT field.                                */
+  #define TWIS_PSEL_SCL_PORT_Msk (0x7UL << TWIS_PSEL_SCL_PORT_Pos) /*!< Bit mask of PORT field.                                */
   #define TWIS_PSEL_SCL_PORT_Min (0x0UL)             /*!< Min value of PORT field.                                             */
-  #define TWIS_PSEL_SCL_PORT_Max (0xFUL)             /*!< Max size of PORT field.                                              */
+  #define TWIS_PSEL_SCL_PORT_Max (0x1UL)             /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define TWIS_PSEL_SCL_CONNECT_Pos (31UL)           /*!< Position of CONNECT field.                                           */
@@ -60438,11 +60575,11 @@ typedef struct {
   #define TWIS_PSEL_SDA_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
   #define TWIS_PSEL_SDA_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define TWIS_PSEL_SDA_PORT_Pos (5UL)               /*!< Position of PORT field.                                              */
-  #define TWIS_PSEL_SDA_PORT_Msk (0xFUL << TWIS_PSEL_SDA_PORT_Pos) /*!< Bit mask of PORT field.                                */
+  #define TWIS_PSEL_SDA_PORT_Msk (0x7UL << TWIS_PSEL_SDA_PORT_Pos) /*!< Bit mask of PORT field.                                */
   #define TWIS_PSEL_SDA_PORT_Min (0x0UL)             /*!< Min value of PORT field.                                             */
-  #define TWIS_PSEL_SDA_PORT_Max (0xFUL)             /*!< Max size of PORT field.                                              */
+  #define TWIS_PSEL_SDA_PORT_Max (0x1UL)             /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define TWIS_PSEL_SDA_CONNECT_Pos (31UL)           /*!< Position of CONNECT field.                                           */
@@ -62647,11 +62784,11 @@ typedef struct {
   #define UARTE_PSEL_TXD_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
   #define UARTE_PSEL_TXD_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define UARTE_PSEL_TXD_PORT_Pos (5UL)              /*!< Position of PORT field.                                              */
-  #define UARTE_PSEL_TXD_PORT_Msk (0xFUL << UARTE_PSEL_TXD_PORT_Pos) /*!< Bit mask of PORT field.                              */
+  #define UARTE_PSEL_TXD_PORT_Msk (0x7UL << UARTE_PSEL_TXD_PORT_Pos) /*!< Bit mask of PORT field.                              */
   #define UARTE_PSEL_TXD_PORT_Min (0x0UL)            /*!< Min value of PORT field.                                             */
-  #define UARTE_PSEL_TXD_PORT_Max (0xFUL)            /*!< Max size of PORT field.                                              */
+  #define UARTE_PSEL_TXD_PORT_Max (0x2UL)            /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define UARTE_PSEL_TXD_CONNECT_Pos (31UL)          /*!< Position of CONNECT field.                                           */
@@ -62671,11 +62808,11 @@ typedef struct {
   #define UARTE_PSEL_CTS_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
   #define UARTE_PSEL_CTS_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define UARTE_PSEL_CTS_PORT_Pos (5UL)              /*!< Position of PORT field.                                              */
-  #define UARTE_PSEL_CTS_PORT_Msk (0xFUL << UARTE_PSEL_CTS_PORT_Pos) /*!< Bit mask of PORT field.                              */
+  #define UARTE_PSEL_CTS_PORT_Msk (0x7UL << UARTE_PSEL_CTS_PORT_Pos) /*!< Bit mask of PORT field.                              */
   #define UARTE_PSEL_CTS_PORT_Min (0x0UL)            /*!< Min value of PORT field.                                             */
-  #define UARTE_PSEL_CTS_PORT_Max (0xFUL)            /*!< Max size of PORT field.                                              */
+  #define UARTE_PSEL_CTS_PORT_Max (0x2UL)            /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define UARTE_PSEL_CTS_CONNECT_Pos (31UL)          /*!< Position of CONNECT field.                                           */
@@ -62695,11 +62832,11 @@ typedef struct {
   #define UARTE_PSEL_RXD_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
   #define UARTE_PSEL_RXD_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define UARTE_PSEL_RXD_PORT_Pos (5UL)              /*!< Position of PORT field.                                              */
-  #define UARTE_PSEL_RXD_PORT_Msk (0xFUL << UARTE_PSEL_RXD_PORT_Pos) /*!< Bit mask of PORT field.                              */
+  #define UARTE_PSEL_RXD_PORT_Msk (0x7UL << UARTE_PSEL_RXD_PORT_Pos) /*!< Bit mask of PORT field.                              */
   #define UARTE_PSEL_RXD_PORT_Min (0x0UL)            /*!< Min value of PORT field.                                             */
-  #define UARTE_PSEL_RXD_PORT_Max (0xFUL)            /*!< Max size of PORT field.                                              */
+  #define UARTE_PSEL_RXD_PORT_Max (0x2UL)            /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define UARTE_PSEL_RXD_CONNECT_Pos (31UL)          /*!< Position of CONNECT field.                                           */
@@ -62719,11 +62856,11 @@ typedef struct {
   #define UARTE_PSEL_RTS_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
   #define UARTE_PSEL_RTS_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
-/* PORT @Bits 5..8 : Port number */
+/* PORT @Bits 5..7 : Port number */
   #define UARTE_PSEL_RTS_PORT_Pos (5UL)              /*!< Position of PORT field.                                              */
-  #define UARTE_PSEL_RTS_PORT_Msk (0xFUL << UARTE_PSEL_RTS_PORT_Pos) /*!< Bit mask of PORT field.                              */
+  #define UARTE_PSEL_RTS_PORT_Msk (0x7UL << UARTE_PSEL_RTS_PORT_Pos) /*!< Bit mask of PORT field.                              */
   #define UARTE_PSEL_RTS_PORT_Min (0x0UL)            /*!< Min value of PORT field.                                             */
-  #define UARTE_PSEL_RTS_PORT_Max (0xFUL)            /*!< Max size of PORT field.                                              */
+  #define UARTE_PSEL_RTS_PORT_Max (0x2UL)            /*!< Max size of PORT field.                                              */
 
 /* CONNECT @Bit 31 : Connection */
   #define UARTE_PSEL_RTS_CONNECT_Pos (31UL)          /*!< Position of CONNECT field.                                           */
@@ -63459,63 +63596,68 @@ typedef struct {
 /* UARTE_SHORTS: Shortcuts between local events and tasks */
   #define UARTE_SHORTS_ResetValue (0x00000000UL)     /*!< Reset value of SHORTS register.                                      */
 
-/* CTS_STARTRX @Bit 3 : Shortcut between event CTS and task STARTRX */
-  #define UARTE_SHORTS_CTS_STARTRX_Pos (3UL)         /*!< Position of CTS_STARTRX field.                                       */
-  #define UARTE_SHORTS_CTS_STARTRX_Msk (0x1UL << UARTE_SHORTS_CTS_STARTRX_Pos) /*!< Bit mask of CTS_STARTRX field.             */
-  #define UARTE_SHORTS_CTS_STARTRX_Min (0x0UL)       /*!< Min enumerator value of CTS_STARTRX field.                           */
-  #define UARTE_SHORTS_CTS_STARTRX_Max (0x1UL)       /*!< Max enumerator value of CTS_STARTRX field.                           */
-  #define UARTE_SHORTS_CTS_STARTRX_Disabled (0x0UL)  /*!< Disable shortcut                                                     */
-  #define UARTE_SHORTS_CTS_STARTRX_Enabled (0x1UL)   /*!< Enable shortcut                                                      */
+/* CTS_DMA_RX_START @Bit 3 : Shortcut between event CTS and task DMA.RX.START */
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Pos (3UL)    /*!< Position of CTS_DMA_RX_START field.                                  */
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Msk (0x1UL << UARTE_SHORTS_CTS_DMA_RX_START_Pos) /*!< Bit mask of CTS_DMA_RX_START
+                                                                            field.*/
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Min (0x0UL)  /*!< Min enumerator value of CTS_DMA_RX_START field.                      */
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Max (0x1UL)  /*!< Max enumerator value of CTS_DMA_RX_START field.                      */
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Disabled (0x0UL) /*!< Disable shortcut                                                 */
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Enabled (0x1UL) /*!< Enable shortcut                                                   */
 
-/* NCTS_STOPRX @Bit 4 : Shortcut between event NCTS and task STOPRX */
-  #define UARTE_SHORTS_NCTS_STOPRX_Pos (4UL)         /*!< Position of NCTS_STOPRX field.                                       */
-  #define UARTE_SHORTS_NCTS_STOPRX_Msk (0x1UL << UARTE_SHORTS_NCTS_STOPRX_Pos) /*!< Bit mask of NCTS_STOPRX field.             */
-  #define UARTE_SHORTS_NCTS_STOPRX_Min (0x0UL)       /*!< Min enumerator value of NCTS_STOPRX field.                           */
-  #define UARTE_SHORTS_NCTS_STOPRX_Max (0x1UL)       /*!< Max enumerator value of NCTS_STOPRX field.                           */
-  #define UARTE_SHORTS_NCTS_STOPRX_Disabled (0x0UL)  /*!< Disable shortcut                                                     */
-  #define UARTE_SHORTS_NCTS_STOPRX_Enabled (0x1UL)   /*!< Enable shortcut                                                      */
+/* NCTS_DMA_RX_STOP @Bit 4 : Shortcut between event NCTS and task DMA.RX.STOP */
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Pos (4UL)    /*!< Position of NCTS_DMA_RX_STOP field.                                  */
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Msk (0x1UL << UARTE_SHORTS_NCTS_DMA_RX_STOP_Pos) /*!< Bit mask of NCTS_DMA_RX_STOP
+                                                                            field.*/
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Min (0x0UL)  /*!< Min enumerator value of NCTS_DMA_RX_STOP field.                      */
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Max (0x1UL)  /*!< Max enumerator value of NCTS_DMA_RX_STOP field.                      */
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Disabled (0x0UL) /*!< Disable shortcut                                                 */
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                   */
 
-/* ENDRX_STARTRX @Bit 5 : Shortcut between event ENDRX and task STARTRX */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Pos (5UL)       /*!< Position of ENDRX_STARTRX field.                                     */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Msk (0x1UL << UARTE_SHORTS_ENDRX_STARTRX_Pos) /*!< Bit mask of ENDRX_STARTRX field.       */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Min (0x0UL)     /*!< Min enumerator value of ENDRX_STARTRX field.                         */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Max (0x1UL)     /*!< Max enumerator value of ENDRX_STARTRX field.                         */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Disabled (0x0UL) /*!< Disable shortcut                                                    */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Enabled (0x1UL) /*!< Enable shortcut                                                      */
+/* DMA_RX_END_DMA_RX_START @Bit 5 : Shortcut between event DMA.RX.END and task DMA.RX.START */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Pos (5UL) /*!< Position of DMA_RX_END_DMA_RX_START field.                       */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Msk (0x1UL << UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Pos) /*!< Bit mask of
+                                                                            DMA_RX_END_DMA_RX_START field.*/
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Min (0x0UL) /*!< Min enumerator value of DMA_RX_END_DMA_RX_START field.         */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Max (0x1UL) /*!< Max enumerator value of DMA_RX_END_DMA_RX_START field.         */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Disabled (0x0UL) /*!< Disable shortcut                                          */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Enabled (0x1UL) /*!< Enable shortcut                                            */
 
-/* ENDRX_STOPRX @Bit 6 : Shortcut between event ENDRX and task STOPRX */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Pos (6UL)        /*!< Position of ENDRX_STOPRX field.                                      */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Msk (0x1UL << UARTE_SHORTS_ENDRX_STOPRX_Pos) /*!< Bit mask of ENDRX_STOPRX field.          */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Min (0x0UL)      /*!< Min enumerator value of ENDRX_STOPRX field.                          */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Max (0x1UL)      /*!< Max enumerator value of ENDRX_STOPRX field.                          */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Disabled (0x0UL) /*!< Disable shortcut                                                     */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Enabled (0x1UL)  /*!< Enable shortcut                                                      */
+/* DMA_RX_END_DMA_RX_STOP @Bit 6 : Shortcut between event DMA.RX.END and task DMA.RX.STOP */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Pos (6UL) /*!< Position of DMA_RX_END_DMA_RX_STOP field.                         */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Msk (0x1UL << UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Pos) /*!< Bit mask of
+                                                                            DMA_RX_END_DMA_RX_STOP field.*/
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_RX_END_DMA_RX_STOP field.           */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Max (0x1UL) /*!< Max enumerator value of DMA_RX_END_DMA_RX_STOP field.           */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Disabled (0x0UL) /*!< Disable shortcut                                           */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Enabled (0x1UL) /*!< Enable shortcut                                             */
 
-/* ENDTX_STOPTX @Bit 18 : Shortcut between event ENDTX and task STOPTX */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Pos (18UL)       /*!< Position of ENDTX_STOPTX field.                                      */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Msk (0x1UL << UARTE_SHORTS_ENDTX_STOPTX_Pos) /*!< Bit mask of ENDTX_STOPTX field.          */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Min (0x0UL)      /*!< Min enumerator value of ENDTX_STOPTX field.                          */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Max (0x1UL)      /*!< Max enumerator value of ENDTX_STOPTX field.                          */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Disabled (0x0UL) /*!< Disable shortcut                                                     */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Enabled (0x1UL)  /*!< Enable shortcut                                                      */
+/* DMA_TX_END_DMA_TX_STOP @Bit 18 : Shortcut between event DMA.TX.END and task DMA.TX.STOP */
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Pos (18UL) /*!< Position of DMA_TX_END_DMA_TX_STOP field.                        */
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Msk (0x1UL << UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Pos) /*!< Bit mask of
+                                                                            DMA_TX_END_DMA_TX_STOP field.*/
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_TX_END_DMA_TX_STOP field.           */
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Max (0x1UL) /*!< Max enumerator value of DMA_TX_END_DMA_TX_STOP field.           */
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Disabled (0x0UL) /*!< Disable shortcut                                           */
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Enabled (0x1UL) /*!< Enable shortcut                                             */
 
-/* DMA_RX_BUSERROR_STOPRX @Bit 19 : Shortcut between event DMA.RX.BUSERROR and task STOPRX */
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Pos (19UL) /*!< Position of DMA_RX_BUSERROR_STOPRX field.                        */
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Msk (0x1UL << UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Pos) /*!< Bit mask of
-                                                                            DMA_RX_BUSERROR_STOPRX field.*/
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Min (0x0UL) /*!< Min enumerator value of DMA_RX_BUSERROR_STOPRX field.           */
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Max (0x1UL) /*!< Max enumerator value of DMA_RX_BUSERROR_STOPRX field.           */
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Disabled (0x0UL) /*!< Disable shortcut                                           */
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Enabled (0x1UL) /*!< Enable shortcut                                             */
+/* DMA_RX_BUSERROR_DMA_RX_STOP @Bit 19 : Shortcut between event DMA.RX.BUSERROR and task DMA.RX.STOP */
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Pos (19UL) /*!< Position of DMA_RX_BUSERROR_DMA_RX_STOP field.              */
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Msk (0x1UL << UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Pos) /*!< Bit mask of
+                                                                            DMA_RX_BUSERROR_DMA_RX_STOP field.*/
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_RX_BUSERROR_DMA_RX_STOP field. */
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Max (0x1UL) /*!< Max enumerator value of DMA_RX_BUSERROR_DMA_RX_STOP field. */
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Disabled (0x0UL) /*!< Disable shortcut                                      */
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Enabled (0x1UL) /*!< Enable shortcut                                        */
 
-/* DMA_TX_BUSERROR_STOPTX @Bit 20 : Shortcut between event DMA.TX.BUSERROR and task STOPTX */
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Pos (20UL) /*!< Position of DMA_TX_BUSERROR_STOPTX field.                        */
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Msk (0x1UL << UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Pos) /*!< Bit mask of
-                                                                            DMA_TX_BUSERROR_STOPTX field.*/
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Min (0x0UL) /*!< Min enumerator value of DMA_TX_BUSERROR_STOPTX field.           */
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Max (0x1UL) /*!< Max enumerator value of DMA_TX_BUSERROR_STOPTX field.           */
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Disabled (0x0UL) /*!< Disable shortcut                                           */
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Enabled (0x1UL) /*!< Enable shortcut                                             */
+/* DMA_TX_BUSERROR_DMA_TX_STOP @Bit 20 : Shortcut between event DMA.TX.BUSERROR and task DMA.TX.STOP */
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Pos (20UL) /*!< Position of DMA_TX_BUSERROR_DMA_TX_STOP field.              */
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Msk (0x1UL << UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Pos) /*!< Bit mask of
+                                                                            DMA_TX_BUSERROR_DMA_TX_STOP field.*/
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_TX_BUSERROR_DMA_TX_STOP field. */
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Max (0x1UL) /*!< Max enumerator value of DMA_TX_BUSERROR_DMA_TX_STOP field. */
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Disabled (0x0UL) /*!< Disable shortcut                                      */
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Enabled (0x1UL) /*!< Enable shortcut                                        */
 
 /* DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1 @Bit 21 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[1] Allows
                                                daisy-chaining match events. */
@@ -64569,6 +64711,35 @@ typedef struct {
 
 
 
+/* =================================================== Struct UICR_USERCNF =================================================== */
+/**
+  * @brief USERCNF [UICR_USERCNF] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t * ADDR;                             /*!< (@ 0x00000000) Address of the APB register which will be written     */
+  __IOM uint32_t  DATA;                              /*!< (@ 0x00000004) Data                                                  */
+} NRF_UICR_USERCNF_Type;                             /*!< Size = 8 (0x008)                                                     */
+  #define UICR_USERCNF_MaxCount (32UL)               /*!< Size of USERCNF[32] array.                                           */
+  #define UICR_USERCNF_MaxIndex (31UL)               /*!< Max index of USERCNF[32] array.                                      */
+  #define UICR_USERCNF_MinIndex (0UL)                /*!< Min index of USERCNF[32] array.                                      */
+
+/* UICR_USERCNF_ADDR: Address of the APB register which will be written */
+  #define UICR_USERCNF_ADDR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ADDR register.                                       */
+
+/* Address @Bits 0..31 : Address */
+  #define UICR_USERCNF_ADDR_Address_Pos (0UL)        /*!< Position of Address field.                                           */
+  #define UICR_USERCNF_ADDR_Address_Msk (0xFFFFFFFFUL << UICR_USERCNF_ADDR_Address_Pos) /*!< Bit mask of Address field.        */
+
+
+/* UICR_USERCNF_DATA: Data */
+  #define UICR_USERCNF_DATA_ResetValue (0xFFFFFFFFUL) /*!< Reset value of DATA register.                                       */
+
+/* Data @Bits 0..31 : Data to be written into the APB register */
+  #define UICR_USERCNF_DATA_Data_Pos (0UL)           /*!< Position of Data field.                                              */
+  #define UICR_USERCNF_DATA_Data_Msk (0xFFFFFFFFUL << UICR_USERCNF_DATA_Data_Pos) /*!< Bit mask of Data field.                 */
+
+
+
 /* =============================================== Struct UICR_USER_ROT_PUBKEY =============================================== */
 /**
   * @brief PUBKEY [UICR_USER_ROT_PUBKEY] (unspecified)
@@ -64684,7 +64855,8 @@ typedef struct {
     __IOM NRF_UICR_ERASEPROTECT_Type ERASEPROTECT[1]; /*!< (@ 0x00000060) Erase Protection Registers                           */
     __IOM uint32_t BOOTCONF;                         /*!< (@ 0x00000080) Immutable boot region configuration.                  */
     __IOM uint32_t BOOTCONFKEY;                      /*!< (@ 0x00000084) Static key for BOOTCONF anti-tamper protection        */
-    __IM uint32_t RESERVED[94];
+    __IM uint32_t RESERVED[30];
+    __IOM NRF_UICR_USERCNF_Type USERCNF[32];         /*!< (@ 0x00000100) (unspecified)                                         */
     __IOM NRF_UICR_USER_Type USER;                   /*!< (@ 0x00000200) (unspecified)                                         */
     __IM uint32_t RESERVED1[104];
     __IOM uint32_t OTP[320];                         /*!< (@ 0x00000500) One time programmable memory                          */
@@ -64714,8 +64886,8 @@ typedef struct {
   #define UICR_BOOTCONF_EXECUTE_Msk (0x1UL << UICR_BOOTCONF_EXECUTE_Pos) /*!< Bit mask of EXECUTE field.                       */
   #define UICR_BOOTCONF_EXECUTE_Min (0x0UL)          /*!< Min enumerator value of EXECUTE field.                               */
   #define UICR_BOOTCONF_EXECUTE_Max (0x1UL)          /*!< Max enumerator value of EXECUTE field.                               */
-  #define UICR_BOOTCONF_EXECUTE_NotAllowed (0x0UL)   /*!< Executing code from the region is allowed                            */
-  #define UICR_BOOTCONF_EXECUTE_Allowed (0x1UL)      /*!< Executing code from the region is not allowed                        */
+  #define UICR_BOOTCONF_EXECUTE_NotAllowed (0x0UL)   /*!< Executing code from the region is not allowed                        */
+  #define UICR_BOOTCONF_EXECUTE_Allowed (0x1UL)      /*!< Executing code from the region is allowed                            */
 
 /* SECURE @Bit 3 : Secure access */
   #define UICR_BOOTCONF_SECURE_Pos (3UL)             /*!< Position of SECURE field.                                            */
@@ -64733,6 +64905,14 @@ typedef struct {
   #define UICR_BOOTCONF_OWNER_NONE (0x0UL)           /*!< Ownership is not enforced                                            */
   #define UICR_BOOTCONF_OWNER_APP (0x1UL)            /*!< Application core (all but KMU)                                       */
   #define UICR_BOOTCONF_OWNER_KMU (0x2UL)            /*!< Key management unit (KMU)                                            */
+
+/* WRITEONCE @Bit 12 : Write-once */
+  #define UICR_BOOTCONF_WRITEONCE_Pos (12UL)         /*!< Position of WRITEONCE field.                                         */
+  #define UICR_BOOTCONF_WRITEONCE_Msk (0x1UL << UICR_BOOTCONF_WRITEONCE_Pos) /*!< Bit mask of WRITEONCE field.                 */
+  #define UICR_BOOTCONF_WRITEONCE_Min (0x0UL)        /*!< Min enumerator value of WRITEONCE field.                             */
+  #define UICR_BOOTCONF_WRITEONCE_Max (0x1UL)        /*!< Max enumerator value of WRITEONCE field.                             */
+  #define UICR_BOOTCONF_WRITEONCE_Disabled (0x0UL)   /*!< Write-once disabled                                                  */
+  #define UICR_BOOTCONF_WRITEONCE_Enabled (0x1UL)    /*!< Write-once enabled                                                   */
 
 /* LOCK @Bit 13 : Enable lock of configuration register */
   #define UICR_BOOTCONF_LOCK_Pos (13UL)              /*!< Position of LOCK field.                                              */
@@ -65090,7 +65270,7 @@ typedef struct {
 /* DATAADDR @Bits 0..11 : Data Address */
   #define VPR_DEBUGIF_HARTINFO_DATAADDR_Pos (0UL)    /*!< Position of DATAADDR field.                                          */
   #define VPR_DEBUGIF_HARTINFO_DATAADDR_Msk (0xFFFUL << VPR_DEBUGIF_HARTINFO_DATAADDR_Pos) /*!< Bit mask of DATAADDR field.    */
-  #define VPR_DEBUGIF_HARTINFO_DATAADDR_Min (0xFFFFF800UL) /*!< Min value of DATAADDR field.                                   */
+  #define VPR_DEBUGIF_HARTINFO_DATAADDR_Min (0xFFFFFFFFFFFFF800UL) /*!< Min value of DATAADDR field.                           */
   #define VPR_DEBUGIF_HARTINFO_DATAADDR_Max (0x7FFUL) /*!< Max size of DATAADDR field.                                         */
 
 /* DATASIZE @Bits 12..15 : Data Size */
@@ -67345,7 +67525,7 @@ typedef struct {
   * @brief MARCHID [VPRCSR_MARCHID] Machine Architecture ID
   */
   #define VPRCSR_MARCHID (0x00000F12ul)
-  #define VPRCSR_MARCHID_ResetValue (0x80000000UL)   /*!< Reset value of MARCHID register.                                     */
+  #define VPRCSR_MARCHID_ResetValue (0x800000AEUL)   /*!< Reset value of MARCHID register.                                     */
 
 /* MULDIV @Bits 0..1 : Indicates the MULDIV parameter option */
   #define VPRCSR_MARCHID_MULDIV_Pos (0UL)            /*!< Position of MULDIV field.                                            */
@@ -67623,7 +67803,7 @@ typedef struct {
   * @brief EXTPARAMS [VPRCSR_NORDIC_EXTPARAMS] Reads values of external configuration parameters
   */
   #define VPRCSR_NORDIC_EXTPARAMS (0x000007C4ul)
-  #define VPRCSR_NORDIC_EXTPARAMS_ResetValue (0x00000000UL) /*!< Reset value of EXTPARAMS register.                            */
+  #define VPRCSR_NORDIC_EXTPARAMS_ResetValue (0x00000016UL) /*!< Reset value of EXTPARAMS register.                            */
 
 /* MULDIV @Bits 0..1 : value of MULDIV */
   #define VPRCSR_NORDIC_EXTPARAMS_MULDIV_Pos (0UL)   /*!< Position of MULDIV field.                                            */
@@ -67745,7 +67925,7 @@ typedef struct {
   #define VPRCSR_NORDIC_CACHE_CFG (0x000007C9ul)
   #define VPRCSR_NORDIC_CACHE_CFG_ResetValue (0x00000000UL) /*!< Reset value of CFG register.                                  */
 
-/* CACHESIZE @Bits 0..3 : Cache size is (1 << CACHESIZE) KB */
+/* CACHESIZE @Bits 0..3 : Cache size is 2^CACHESIZE or (1 << CACHESIZE) KB, with a maximum size of 32KB (CACHESIZE = 5) */
   #define VPRCSR_NORDIC_CACHE_CFG_CACHESIZE_Pos (0UL) /*!< Position of CACHESIZE field.                                        */
   #define VPRCSR_NORDIC_CACHE_CFG_CACHESIZE_Msk (0xFUL << VPRCSR_NORDIC_CACHE_CFG_CACHESIZE_Pos) /*!< Bit mask of CACHESIZE
                                                                             field.*/
@@ -67758,28 +67938,14 @@ typedef struct {
                                                                             CACHELINESIZE field.*/
   #define VPRCSR_NORDIC_CACHE_CFG_CACHELINESIZE_Min (0x0UL) /*!< Min enumerator value of CACHELINESIZE field.                  */
   #define VPRCSR_NORDIC_CACHE_CFG_CACHELINESIZE_Max (0x1UL) /*!< Max enumerator value of CACHELINESIZE field.                  */
-  #define VPRCSR_NORDIC_CACHE_CFG_CACHELINESIZE_CachelineSize32B (0x0UL) /*!< Cache line size is 32 bytes                      */
-  #define VPRCSR_NORDIC_CACHE_CFG_CACHELINESIZE_CachelineSize64B (0x1UL) /*!< Cache line size is 64 bytes                      */
-
-
-/**
-  * @brief DATABASEADDR [VPRCSR_NORDIC_CACHE_DATABASEADDR] Cache data base address
-  */
-  #define VPRCSR_NORDIC_CACHE_DATABASEADDR (0x000007CAul)
-  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_ResetValue (0x00000000UL) /*!< Reset value of DATABASEADDR register.                */
-
-/* VAL @Bits 0..31 : Cache data base address value */
-  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
-  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Msk (0xFFFFFFFFUL << VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Pos) /*!< Bit mask of
-                                                                            VAL field.*/
-  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Min (0x0UL) /*!< Min value of VAL field.                                        */
-  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Max (0xFFFFFFFCUL) /*!< Max size of VAL field.                                  */
+  #define VPRCSR_NORDIC_CACHE_CFG_CACHELINESIZE_CachelineSize32B (0x0UL) /*!< Cache line size is 32 bytes (4 data units)       */
+  #define VPRCSR_NORDIC_CACHE_CFG_CACHELINESIZE_CachelineSize64B (0x1UL) /*!< Cache line size is 64 bytes (8 data units)       */
 
 
 /**
   * @brief DATATAGADDR [VPRCSR_NORDIC_CACHE_DATATAGADDR] Cache tag base address
   */
-  #define VPRCSR_NORDIC_CACHE_DATATAGADDR (0x000007CBul)
+  #define VPRCSR_NORDIC_CACHE_DATATAGADDR (0x000007CAul)
   #define VPRCSR_NORDIC_CACHE_DATATAGADDR_ResetValue (0x00000000UL) /*!< Reset value of DATATAGADDR register.                  */
 
 /* VAL @Bits 0..31 : Cache tag base address value */
@@ -67788,6 +67954,20 @@ typedef struct {
                                                                             field.*/
   #define VPRCSR_NORDIC_CACHE_DATATAGADDR_VAL_Min (0x0UL) /*!< Min value of VAL field.                                         */
   #define VPRCSR_NORDIC_CACHE_DATATAGADDR_VAL_Max (0xFFFFFFFCUL) /*!< Max size of VAL field.                                   */
+
+
+/**
+  * @brief DATABASEADDR [VPRCSR_NORDIC_CACHE_DATABASEADDR] Cache data base address
+  */
+  #define VPRCSR_NORDIC_CACHE_DATABASEADDR (0x000007CBul)
+  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_ResetValue (0x00000000UL) /*!< Reset value of DATABASEADDR register.                */
+
+/* VAL @Bits 0..31 : Cache data base address value */
+  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
+  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Msk (0xFFFFFFFFUL << VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Pos) /*!< Bit mask of
+                                                                            VAL field.*/
+  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Min (0x0UL) /*!< Min value of VAL field.                                        */
+  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Max (0xFFFFFFFCUL) /*!< Max size of VAL field.                                  */
 
 
 /**
@@ -70592,7 +70772,7 @@ typedef struct {
 
 
 /**
-  * @brief SHIFTCNTB [VPRCSR_NORDIC_SHIFTCNTB] Buffered SHIFTCNT register
+  * @brief SHIFTCNTB [VPRCSR_NORDIC_SHIFTCNTB] Buffered SHIFTCNTOUT register
   */
   #define VPRCSR_NORDIC_SHIFTCNTB (0x00000BCFul)
   #define VPRCSR_NORDIC_SHIFTCNTB_ResetValue (0x00000000UL) /*!< Reset value of SHIFTCNTB register.                            */
@@ -72778,5 +72958,5 @@ typedef struct {
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L15_TYPES_H */
+#endif /* NRF54L15_ENGA_TYPES_H */
 

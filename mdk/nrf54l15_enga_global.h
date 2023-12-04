@@ -39,8 +39,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L15_GLOBAL_H
-#define NRF54L15_GLOBAL_H
+#ifndef NRF54L15_ENGA_GLOBAL_H
+#define NRF54L15_ENGA_GLOBAL_H
 
 #ifdef __cplusplus
     extern "C" {
@@ -82,7 +82,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_UICR_S_BASE                   0x00FFD000UL
 #define NRF_SICR_S_BASE                   0x00FFE000UL
 #define NRF_CRACENCORE_S_BASE             0x51800000UL
-#define NRF_SPU00_NS_BASE                 0x50040000UL
 #define NRF_SPU00_S_BASE                  0x50040000UL
 #define NRF_MPC00_S_BASE                  0x50041000UL
 #define NRF_DPPIC00_NS_BASE               0x40042000UL
@@ -98,7 +97,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_CCM00_S_BASE                  0x50046000UL
 #define NRF_ECB00_NS_BASE                 0x40047000UL
 #define NRF_ECB00_S_BASE                  0x50047000UL
-#define NRF_CRACEN_NS_BASE                0x50048000UL
 #define NRF_CRACEN_S_BASE                 0x50048000UL
 #define NRF_SPI00_NS_BASE                 0x4004A000UL
 #define NRF_SPIM00_NS_BASE                0x4004A000UL
@@ -112,7 +110,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_RRAMC_S_BASE                  0x5004B000UL
 #define NRF_VPR00_NS_BASE                 0x4004C000UL
 #define NRF_VPR00_S_BASE                  0x5004C000UL
+#define NRF_GPIOHSPADCTRL_NS_BASE         0x40050400UL
 #define NRF_P2_NS_BASE                    0x40050400UL
+#define NRF_GPIOHSPADCTRL_S_BASE          0x50050400UL
 #define NRF_P2_S_BASE                     0x50050400UL
 #define NRF_GPIOINTERNALP2_NS_BASE        0x40051E00UL
 #define NRF_GPIOINTERNALP2_S_BASE         0x50051E00UL
@@ -125,7 +125,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SREGS00_NS_BASE               0x40056000UL
 #define NRF_SREGS00_S_BASE                0x50056000UL
 #define NRF_SUPPORT00_S_BASE              0x5005F000UL
-#define NRF_SPU10_NS_BASE                 0x50080000UL
 #define NRF_SPU10_S_BASE                  0x50080000UL
 #define NRF_DPPIC10_NS_BASE               0x40082000UL
 #define NRF_DPPIC10_S_BASE                0x50082000UL
@@ -150,7 +149,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SREGS10_NS_BASE               0x4008C000UL
 #define NRF_SREGS10_S_BASE                0x5008C000UL
 #define NRF_SUPPORT10_S_BASE              0x5009E000UL
-#define NRF_SPU20_NS_BASE                 0x500C0000UL
 #define NRF_SPU20_S_BASE                  0x500C0000UL
 #define NRF_DPPIC20_NS_BASE               0x400C2000UL
 #define NRF_DPPIC20_S_BASE                0x500C2000UL
@@ -240,7 +238,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SREGS20_NS_BASE               0x400E6000UL
 #define NRF_SREGS20_S_BASE                0x500E6000UL
 #define NRF_SUPPORT20_S_BASE              0x500FF000UL
-#define NRF_SPU30_NS_BASE                 0x50100000UL
 #define NRF_SPU30_S_BASE                  0x50100000UL
 #define NRF_DPPIC30_NS_BASE               0x40102000UL
 #define NRF_DPPIC30_S_BASE                0x50102000UL
@@ -297,7 +294,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_UICR_S                        ((NRF_UICR_Type*)                     NRF_UICR_S_BASE)
 #define NRF_SICR_S                        ((NRF_SICR_Type*)                     NRF_SICR_S_BASE)
 #define NRF_CRACENCORE_S                  ((NRF_CRACENCORE_Type*)               NRF_CRACENCORE_S_BASE)
-#define NRF_SPU00_NS                      ((NRF_SPU_Type*)                      NRF_SPU00_NS_BASE)
 #define NRF_SPU00_S                       ((NRF_SPU_Type*)                      NRF_SPU00_S_BASE)
 #define NRF_MPC00_S                       ((NRF_MPC_Type*)                      NRF_MPC00_S_BASE)
 #define NRF_DPPIC00_NS                    ((NRF_DPPIC_Type*)                    NRF_DPPIC00_NS_BASE)
@@ -313,7 +309,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_CCM00_S                       ((NRF_CCM_Type*)                      NRF_CCM00_S_BASE)
 #define NRF_ECB00_NS                      ((NRF_ECB_Type*)                      NRF_ECB00_NS_BASE)
 #define NRF_ECB00_S                       ((NRF_ECB_Type*)                      NRF_ECB00_S_BASE)
-#define NRF_CRACEN_NS                     ((NRF_CRACEN_Type*)                   NRF_CRACEN_NS_BASE)
 #define NRF_CRACEN_S                      ((NRF_CRACEN_Type*)                   NRF_CRACEN_S_BASE)
 #define NRF_SPI00_NS                      ((NRF_SPI_Type*)                      NRF_SPI00_NS_BASE)
 #define NRF_SPIM00_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM00_NS_BASE)
@@ -327,7 +322,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_RRAMC_S                       ((NRF_RRAMC_Type*)                    NRF_RRAMC_S_BASE)
 #define NRF_VPR00_NS                      ((NRF_VPR_Type*)                      NRF_VPR00_NS_BASE)
 #define NRF_VPR00_S                       ((NRF_VPR_Type*)                      NRF_VPR00_S_BASE)
+#define NRF_GPIOHSPADCTRL_NS              ((NRF_GPIOHSPADCTRL_Type*)            NRF_GPIOHSPADCTRL_NS_BASE)
 #define NRF_P2_NS                         ((NRF_GPIO_Type*)                     NRF_P2_NS_BASE)
+#define NRF_GPIOHSPADCTRL_S               ((NRF_GPIOHSPADCTRL_Type*)            NRF_GPIOHSPADCTRL_S_BASE)
 #define NRF_P2_S                          ((NRF_GPIO_Type*)                     NRF_P2_S_BASE)
 #define NRF_GPIOINTERNALP2_NS             ((NRF_GPIOINTERNAL_Type*)             NRF_GPIOINTERNALP2_NS_BASE)
 #define NRF_GPIOINTERNALP2_S              ((NRF_GPIOINTERNAL_Type*)             NRF_GPIOINTERNALP2_S_BASE)
@@ -340,7 +337,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SREGS00_NS                    ((NRF_SREGS_Type*)                    NRF_SREGS00_NS_BASE)
 #define NRF_SREGS00_S                     ((NRF_SREGS_Type*)                    NRF_SREGS00_S_BASE)
 #define NRF_SUPPORT00_S                   ((NRF_PCGCSLAVE_Type*)                NRF_SUPPORT00_S_BASE)
-#define NRF_SPU10_NS                      ((NRF_SPU_Type*)                      NRF_SPU10_NS_BASE)
 #define NRF_SPU10_S                       ((NRF_SPU_Type*)                      NRF_SPU10_S_BASE)
 #define NRF_DPPIC10_NS                    ((NRF_DPPIC_Type*)                    NRF_DPPIC10_NS_BASE)
 #define NRF_DPPIC10_S                     ((NRF_DPPIC_Type*)                    NRF_DPPIC10_S_BASE)
@@ -365,7 +361,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SREGS10_NS                    ((NRF_SREGS_Type*)                    NRF_SREGS10_NS_BASE)
 #define NRF_SREGS10_S                     ((NRF_SREGS_Type*)                    NRF_SREGS10_S_BASE)
 #define NRF_SUPPORT10_S                   ((NRF_PCGCSLAVE_Type*)                NRF_SUPPORT10_S_BASE)
-#define NRF_SPU20_NS                      ((NRF_SPU_Type*)                      NRF_SPU20_NS_BASE)
 #define NRF_SPU20_S                       ((NRF_SPU_Type*)                      NRF_SPU20_S_BASE)
 #define NRF_DPPIC20_NS                    ((NRF_DPPIC_Type*)                    NRF_DPPIC20_NS_BASE)
 #define NRF_DPPIC20_S                     ((NRF_DPPIC_Type*)                    NRF_DPPIC20_S_BASE)
@@ -455,7 +450,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SREGS20_NS                    ((NRF_SREGS_Type*)                    NRF_SREGS20_NS_BASE)
 #define NRF_SREGS20_S                     ((NRF_SREGS_Type*)                    NRF_SREGS20_S_BASE)
 #define NRF_SUPPORT20_S                   ((NRF_PCGCSLAVE_Type*)                NRF_SUPPORT20_S_BASE)
-#define NRF_SPU30_NS                      ((NRF_SPU_Type*)                      NRF_SPU30_NS_BASE)
 #define NRF_SPU30_S                       ((NRF_SPU_Type*)                      NRF_SPU30_S_BASE)
 #define NRF_DPPIC30_NS                    ((NRF_DPPIC_Type*)                    NRF_DPPIC30_NS_BASE)
 #define NRF_DPPIC30_S                     ((NRF_DPPIC_Type*)                    NRF_DPPIC30_S_BASE)
@@ -510,26 +504,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_FICR                                NRF_FICR_NS
-  #define NRF_SPU00                               NRF_SPU00_NS
   #define NRF_DPPIC00                             NRF_DPPIC00_NS
   #define NRF_PPIB00                              NRF_PPIB00_NS
   #define NRF_PPIB01                              NRF_PPIB01_NS
   #define NRF_AAR00                               NRF_AAR00_NS
   #define NRF_CCM00                               NRF_CCM00_NS
   #define NRF_ECB00                               NRF_ECB00_NS
-  #define NRF_CRACEN                              NRF_CRACEN_NS
   #define NRF_SPI00                               NRF_SPI00_NS
   #define NRF_SPIM00                              NRF_SPIM00_NS
   #define NRF_SPIS00                              NRF_SPIS00_NS
   #define NRF_UARTE00                             NRF_UARTE00_NS
   #define NRF_VPR00                               NRF_VPR00_NS
+  #define NRF_GPIOHSPADCTRL                       NRF_GPIOHSPADCTRL_NS
   #define NRF_P2                                  NRF_P2_NS
   #define NRF_GPIOINTERNALP2                      NRF_GPIOINTERNALP2_NS
   #define NRF_CTRLAP                              NRF_CTRLAP_NS
   #define NRF_TAD                                 NRF_TAD_NS
   #define NRF_TIMER00                             NRF_TIMER00_NS
   #define NRF_SREGS00                             NRF_SREGS00_NS
-  #define NRF_SPU10                               NRF_SPU10_NS
   #define NRF_DPPIC10                             NRF_DPPIC10_NS
   #define NRF_PPIB10                              NRF_PPIB10_NS
   #define NRF_PPIB11                              NRF_PPIB11_NS
@@ -541,7 +533,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_ECB10                               NRF_ECB10_NS
   #define NRF_RADIO                               NRF_RADIO_NS
   #define NRF_SREGS10                             NRF_SREGS10_NS
-  #define NRF_SPU20                               NRF_SPU20_NS
   #define NRF_DPPIC20                             NRF_DPPIC20_NS
   #define NRF_PPIB20                              NRF_PPIB20_NS
   #define NRF_PPIB21                              NRF_PPIB21_NS
@@ -585,7 +576,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_QDEC21                              NRF_QDEC21_NS
   #define NRF_GRTC                                NRF_GRTC_NS
   #define NRF_SREGS20                             NRF_SREGS20_NS
-  #define NRF_SPU30                               NRF_SPU30_NS
   #define NRF_DPPIC30                             NRF_DPPIC30_NS
   #define NRF_PPIB30                              NRF_PPIB30_NS
   #define NRF_SPI30                               NRF_SPI30_NS
@@ -629,6 +619,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_GLITCHDET                           NRF_GLITCHDET_S
   #define NRF_RRAMC                               NRF_RRAMC_S
   #define NRF_VPR00                               NRF_VPR00_S
+  #define NRF_GPIOHSPADCTRL                       NRF_GPIOHSPADCTRL_S
   #define NRF_P2                                  NRF_P2_S
   #define NRF_GPIOINTERNALP2                      NRF_GPIOINTERNALP2_S
   #define NRF_CTRLAP                              NRF_CTRLAP_S
@@ -745,5 +736,5 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L15_GLOBAL_H */
+#endif /* NRF54L15_ENGA_GLOBAL_H */
 

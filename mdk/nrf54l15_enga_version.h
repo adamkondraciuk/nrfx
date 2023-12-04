@@ -39,8 +39,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L15_VERSION_H
-#define NRF54L15_VERSION_H
+#ifndef NRF54L15_ENGA_VERSION_H
+#define NRF54L15_ENGA_VERSION_H
 
 #ifdef __cplusplus
     extern "C" {
@@ -48,14 +48,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
-#define MDK_SOURCE_VERSION_MINOR 5a                  /*!< Minor version of product specification.                              */
+#define MDK_SOURCE_VERSION_MINOR 5b                  /*!< Minor version of product specification.                              */
 #define MDK_SOURCE_VERSION_MICRO                     /*!< Micro version of product specification.                              */
 
-#define MDK_SOURCE_HASH Moonlight_OPS_v0.5A.2-6-g0c2caea /*!< Git hash of product specification source.                        */
+#define MDK_SOURCE_HASH Moonlight_OPS_v0.5B-140-ge7cd31a /*!< Git hash of product specification source.                        */
 
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L15_VERSION_H */
+#endif /* NRF54L15_ENGA_VERSION_H */
 

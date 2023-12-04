@@ -129,6 +129,17 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 #endif
 
+/* Define NRF54L_SERIES for common use in nRF54L series devices */
+#if defined (NRF54L15_ENGA_XXAA) || defined (NRF54L15_XXAA)
+    #ifndef NRF54L_SERIES
+        #define NRF54L_SERIES
+    #endif
+    #ifndef LUMOS_XXAA
+        #define LUMOS_XXAA
+    #endif
+#endif
+
+
 #if defined (NRF7140_XXAA)
     #ifndef NRF71_SERIES
         #define NRF71_SERIES

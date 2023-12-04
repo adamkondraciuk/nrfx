@@ -39,8 +39,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L15_APPLICATION_H
-#define NRF54L15_APPLICATION_H
+#ifndef NRF54L15_ENGA_APPLICATION_H
+#define NRF54L15_ENGA_APPLICATION_H
 
 #ifdef __cplusplus
     extern "C" {
@@ -149,7 +149,7 @@ typedef enum {
 #define __NUM_SAUREGIONS               4             /*!< Number of regions                                                    */
 
 #include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
-#include "system_nrf.h"                              /*!< nrf54l15_application System Library                                  */
+#include "system_nrf.h"                              /*!< nrf54l15_enga_application System Library                             */
 
 #endif                                               /*!< NRF_APPLICATION                                                      */
 
@@ -270,5 +270,5 @@ typedef enum {
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L15_APPLICATION_H */
+#endif /* NRF54L15_ENGA_APPLICATION_H */
 

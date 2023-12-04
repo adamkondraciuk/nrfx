@@ -88,7 +88,7 @@ void SystemInit(void)
             /* Trimming of the device. Copy all the trimming values from FICR into the target addresses. Trim
                until one ADDR is not initialized. */
             uint32_t index = 0ul;
-            for (index = 0ul; index < 64ul && (uint32_t)NRF_FICR_NS->TRIMCNF[index].ADDR != 0xFFFFFFFFul && (uint32_t)NRF_FICR_NS->TRIMCNF[index].ADDR != 0x00000000ul; index++) {
+            for (index = 0ul; index < FICR_TRIMCNF_MaxCount && NRF_FICR_NS->TRIMCNF[index].ADDR != 0xFFFFFFFFul && NRF_FICR_NS->TRIMCNF[index].ADDR != 0x00000000ul; index++) {
             #if defined ( __ICCARM__ )
                 /* IAR will complain about the order of volatile pointer accesses. */
                 #pragma diag_suppress=Pa082
@@ -169,6 +169,11 @@ void SystemInit(void)
             // Set trace port speed to 64 MHz
             NRF_TAD_S->TRACEPORTSPEED = TAD_TRACEPORTSPEED_TRACEPORTSPEED_64MHz;
 
+        #endif
+
+        #if !defined (NRF_SKIP_GLITCHDETECTOR_DISABLE)
+            /* Disable glitch detector */
+            NRF_GLITCHDET_S->GLITCHDETECTOR.CONFIG = (GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Disable << GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Pos);
         #endif
     #endif
 }
