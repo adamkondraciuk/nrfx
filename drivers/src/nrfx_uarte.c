@@ -1273,6 +1273,20 @@ static size_t get_cache_buf_len(nrfx_uarte_rx_cache_t * p_cache)
     return len;
 }
 
+static uint32_t uarte_int_lock(NRF_UARTE_Type * p_uarte)
+{
+    uint32_t int_enabled = nrfy_uarte_int_enable_check(p_uarte, UINT32_MAX);
+
+    nrfy_uarte_int_disable(p_uarte, int_enabled);
+
+    return int_enabled;
+}
+
+static void uarte_int_unlock(NRF_UARTE_Type * p_uarte, uint32_t int_mask)
+{
+    nrfy_uarte_int_enable(p_uarte, int_mask);
+}
+
 nrfx_err_t nrfx_uarte_rx_buffer_set(nrfx_uarte_t const * p_instance,
                                     uint8_t *            p_data,
                                     size_t               length)
@@ -1434,11 +1448,17 @@ static nrfx_err_t rx_abort(NRF_UARTE_Type *        p_uarte,
 {
     uint32_t flag;
     bool endrx_startrx = nrfy_uarte_shorts_get(p_uarte, NRF_UARTE_SHORT_ENDRX_STARTRX) != 0;
+    uint32_t int_enabled;
 
-    if (!(p_cb->flags & UARTE_FLAG_RX_ENABLED))
+    // We need to ensure that operation is not interrupted by the UARTE interrupt since we
+    // are changing state flags. Otherwise interrupt may be executed with RX_ABORTED flag set
+    // but before STOPRX task is triggered which may lead to unexpected behavior.
+    if (!((p_cb->flags & (UARTE_FLAG_RX_ENABLED | UARTE_FLAG_RX_ABORTED)) == UARTE_FLAG_RX_ENABLED))
     {
         return NRFX_ERROR_INVALID_STATE;
     }
+
+    int_enabled = uarte_int_lock(p_uarte);
 
     if (disable_all || !endrx_startrx)
     {
@@ -1457,11 +1477,14 @@ static nrfx_err_t rx_abort(NRF_UARTE_Type *        p_uarte,
         nrfy_uarte_int_disable(p_uarte, rx_int_mask);
         nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPRX);
         wait_for_rx_completion(p_uarte, p_cb);
+        int_enabled &= ~rx_int_mask;
     }
     else
     {
         nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPRX);
     }
+
+    uarte_int_unlock(p_uarte, int_enabled);
 
     return NRFX_SUCCESS;
 }
@@ -1693,6 +1716,7 @@ static bool endrx_irq_handler(NRF_UARTE_Type *        p_uarte,
         if (p_cb->flags & UARTE_FLAG_RX_STOP_ON_END)
         {
             nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPRX);
+	    p_cb->flags |= UARTE_FLAG_RX_ABORTED;
         }
     }
     else if (!(p_cb->flags & UARTE_FLAG_RX_CONT && rxstarted))
