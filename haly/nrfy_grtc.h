@@ -75,6 +75,13 @@ NRFY_STATIC_INLINE uint64_t __nrfy_internal_grtc_rt_counter_read(NRF_GRTC_Type c
 #define NRFY_GRTC_HAS_CLKSEL 0
 #endif
 
+#if NRF_GRTC_HAS_SYSCOUNTER_ARRAY || defined(__NRFX_DOXYGEN__)
+/** @brief Mask to determine whether the SYSCOUNTER value is reliable. */
+#define NRFY_GRTC_SYSCOUNTER_RETRY_MASK ((uint64_t)(GRTC_SYSCOUNTERH_OVERFLOW_Msk + GRTC_SYSCOUNTERH_BUSY_Msk) << 32)
+#else
+#define NRFY_GRTC_SYSCOUNTER_RETRY_MASK ((uint64_t)GRTC_SYSCOUNTERH_OVERFLOW_Msk << 32)
+#endif
+
 /**
  * @brief Function for initializing the specified GRTC interrupts.
  *
@@ -241,15 +248,12 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_start(NRF_GRTC_Type * p_reg, bool 
  */
 NRFY_STATIC_INLINE uint64_t nrfy_grtc_sys_counter_get(NRF_GRTC_Type const * p_reg)
 {
-    uint32_t counter_l, counter_h;
+    uint64_t counter;
 
     do {
-        counter_l = nrf_grtc_sys_counter_low_get(p_reg);
-        nrf_barrier_r();
-        counter_h = nrf_grtc_sys_counter_high_get(p_reg);
-        nrf_barrier_r();
-    } while (counter_h & NRF_GRTC_SYSCOUNTERH_OVERFLOW_MASK);
-    return (uint64_t)counter_l | ((uint64_t)counter_h << 32);
+        counter = nrf_grtc_sys_counter_get(p_reg);
+    } while (counter & NRFY_GRTC_SYSCOUNTER_RETRY_MASK);
+    return counter;
 }
 
 /**

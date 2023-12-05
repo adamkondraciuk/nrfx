@@ -612,6 +612,15 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_
 NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_high_get(NRF_GRTC_Type const * p_reg);
 
 /**
+ * @brief Function for returning the 64-bit SYSCOUNTER value.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return SYSCOUNTER value.
+ */
+NRF_STATIC_INLINE uint64_t nrf_grtc_sys_counter_get(NRF_GRTC_Type const * p_reg);
+
+/**
  * @brief Function for checking whether the lower 32-bits of SYSCOUNTER overflowed after
  *        last execution of @ref nrf_grtc_sys_counter_low_get.
  *
@@ -1143,6 +1152,15 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_high_get(NRF_GRTC_Type const * p
     return p_reg->GRTC_SYSCOUNTER.SYSCOUNTERH;
 #else
     return p_reg->SYSCOUNTERH;
+#endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+}
+
+NRF_STATIC_INLINE uint64_t nrf_grtc_sys_counter_get(NRF_GRTC_Type const * p_reg)
+{
+#if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+    return *((const uint64_t volatile *)&p_reg->GRTC_SYSCOUNTER.SYSCOUNTERL);
+#else
+    return *((const uint64_t volatile *)&p_reg->SYSCOUNTERL);
 #endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 }
 
