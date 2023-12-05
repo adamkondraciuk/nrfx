@@ -1299,14 +1299,10 @@ nrfx_err_t nrfx_uarte_rx_buffer_set(nrfx_uarte_t const * p_instance,
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRF_UARTE_Type * p_uarte = p_instance->p_reg;
     bool cont = false;
-    bool int_enabled;
+    uint32_t int_enabled;
     nrfx_err_t err = NRFX_SUCCESS;
 
-    int_enabled = nrfy_uarte_int_enable_check(p_uarte, rx_int_mask) != 0;
-    if (int_enabled)
-    {
-        nrfy_uarte_int_disable(p_uarte, rx_int_mask);
-    }
+    int_enabled = uarte_int_lock(p_uarte);
 
     if (!nrf_dma_accessible_check(p_uarte, p_data))
     {
@@ -1366,10 +1362,7 @@ nrfx_err_t nrfx_uarte_rx_buffer_set(nrfx_uarte_t const * p_instance,
         err = rx_buffer_set(p_uarte, p_cb, p_data, length);
     }
 
-    if (int_enabled)
-    {
-        nrfy_uarte_int_enable(p_uarte, rx_int_mask);
-    }
+    uarte_int_unlock(p_uarte, int_enabled);
 
     return err;
 }
