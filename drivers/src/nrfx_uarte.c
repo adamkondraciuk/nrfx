@@ -94,6 +94,9 @@
 
 // Flag indicates that RX was aborted.
 #define UARTE_FLAG_RX_ABORTED              UARTE_FLAG(RX, 6)
+//
+// Flag indicates that there are new bytes from flushed buffer copied to the user buffer.
+#define UARTE_FLAG_RX_FROM_FLUSH           UARTE_FLAG(RX, 7)
 
 // Flag is set if instance was configured to control PSEL pins during the initialization.
 #define UARTE_FLAG_PSEL_UNINIT             UARTE_FLAG(MISC, 0)
@@ -1132,6 +1135,14 @@ static bool rx_flushed_handler(NRF_UARTE_Type * p_uarte, uarte_control_block_t *
         memcpy(p_cb->rx.curr.p_buffer, p_cb->rx.flush.p_buffer, p_cb->rx.flush.length);
         p_cb->rx.off = p_cb->rx.flush.length;
         p_cb->rx.flush.length = 0;
+        if (nrfy_uarte_int_enable_check(p_uarte, NRF_UARTE_INT_RXDRDY_MASK))
+        {
+                user_handler(p_cb, NRFX_UARTE_EVT_RX_BYTE);
+        }
+        else
+        {
+            NRFX_ATOMIC_FETCH_OR(&p_cb->flags, UARTE_FLAG_RX_FROM_FLUSH);
+        }
     }
 
     return true;
@@ -1594,7 +1605,11 @@ uint32_t nrfx_uarte_errorsrc_get(nrfx_uarte_t const * p_instance)
 
 bool nrfx_uarte_rx_new_data_check(nrfx_uarte_t const * p_instance)
 {
-    if (nrfy_uarte_event_check(p_instance->p_reg, NRF_UARTE_EVENT_RXDRDY))
+    uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+    bool flushed_data = (NRFX_ATOMIC_FETCH_AND(&p_cb->flags, ~UARTE_FLAG_RX_FROM_FLUSH) &
+                        UARTE_FLAG_RX_FROM_FLUSH) != 0;
+
+    if (nrfy_uarte_event_check(p_instance->p_reg, NRF_UARTE_EVENT_RXDRDY) || flushed_data)
     {
         nrfy_uarte_event_clear(p_instance->p_reg, NRF_UARTE_EVENT_RXDRDY);
         return true;
