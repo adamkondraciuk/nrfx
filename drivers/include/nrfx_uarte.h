@@ -118,16 +118,19 @@ enum {
  * connection between ENDTX and STARTTX events, then two transfers are linked together and
  * bytes are transfer without any gap allowing to utilize the maximum bandwidth.
  *
- * When the flag is set, it indicates that the user setup ENDTX-STARTTX (D)PPI connection and
+ * When the flag is set, it indicates that the user may setup ENDTX-STARTTX (D)PPI connection and
  * wants to perform linked transfers. It is the user responsibility to disable the (D)PPI connection
- * when the last transfer is started. It is also their responsibility to use this flag when there is
- * already one ongoing transfer - otherwise, an error is returned.
+ * when the last transfer is started. If user does not setup ENDTX-STARTTX (D)PPI connection then
+ * transfer is restarted from the context of ENDTX event handling which is earlier than context
+ * of the @ref NRFX_UARTE_EVT_TX_DONE. Flag has not impact if used while there is no ongoing
+ * transfer.
  *
  * For example, if a sequence consists of three transfers, then the first @ref nrfx_uarte_tx
- * is called without the flag and the following two transfers must have the flag set. The second
- * @ref nrfx_uarte_tx may be called immediately after the first one and the third one after
- * the first @ref NRFX_UARTE_EVT_TX_DONE event. After the second @ref NRFX_UARTE_EVT_TX_DONE
- * event is received, (D)PPI connection must be disabled.
+ * can be called without or without the flag and the following two transfers must have the flag
+ * set. The second @ref nrfx_uarte_tx may be called immediately after the first one and the third
+ * one after the first @ref NRFX_UARTE_EVT_TX_DONE event. After the second
+ * @ref NRFX_UARTE_EVT_TX_DONE event is received, (D)PPI connection must be disabled (if it was
+ * used).
  *
  * When (D)PPI connection is used, then it is critical that (D)PPI connection is disabled on time,
  * before the last transfer is completed. Otherwise, the transfer will be repeated, and unwanted data
@@ -139,12 +142,6 @@ enum {
  * When linked transfers are used, then blocking transfers (see @ref NRFX_UARTE_TX_BLOCKING and
  * @ref NRFX_UARTE_TX_EARLY_RETURN) cannot be performed. An error is returned when the flag is set
  * and the @ref nrfx_uarte_tx is called during ongoing blocking transfer.
- *
- * When this flag is used then driver instance must not use ENDTX-STOPTX (D)PPI connection.
- *
- * When linked transfers are used then blocking transfers (see @ref NRFX_UARTE_TX_BLOCKING and
- * @ref NRFX_UARTE_TX_EARLY_RETURN) cannot be performed. Error is returned when @ref nrfx_uarte_tx
- * is called with this flag set while there is on-going blocking transfer.
  */
 #define NRFX_UARTE_TX_LINK         NRFX_BIT(2)
 

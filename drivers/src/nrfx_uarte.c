@@ -910,6 +910,7 @@ nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
                     nrfy_uarte_shorts_disable(p_uarte, NRF_UARTE_SHORT_ENDTX_STOPTX);
                 }
 #endif
+                nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_TXSTARTED);
                 nrfy_uarte_tx_buffer_set(p_uarte, p_data, length);
                 err_code = NRFX_SUCCESS;
             }
@@ -1842,9 +1843,15 @@ static void endtx_irq_handler(NRF_UARTE_Type * p_uarte, uarte_control_block_t * 
     {
         uint8_t const * p_buf = p_cb->tx.curr.p_buffer;
         uint32_t len = p_cb->tx.curr.length;
-        bool aborted;
+        bool aborted = p_cb->flags & UARTE_FLAG_TX_ABORTED;
 
         nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_ENDTX);
+        // If we have no PPI connection then start the transfer ASAP.
+        if (!nrfy_uarte_event_check(p_uarte, NRF_UARTE_EVENT_TXSTARTED) && !aborted)
+        {
+            nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STARTTX);
+        }
+
 #if NRF_UARTE_HAS_ENDTX_STOPTX_SHORT
         nrfy_uarte_shorts_enable(p_uarte, NRF_UARTE_SHORT_ENDTX_STOPTX);
 #endif
