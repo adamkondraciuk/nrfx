@@ -243,7 +243,8 @@ NRF_STATIC_INLINE bool nrf_spu_event_check(NRF_SPU_Type const * p_reg,
  * @brief Function for enabling specified interrupts.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Interrupts to be enabled.
+ * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_spu_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_spu_int_enable(NRF_SPU_Type * p_reg,
                                           uint32_t       mask);
@@ -252,7 +253,8 @@ NRF_STATIC_INLINE void nrf_spu_int_enable(NRF_SPU_Type * p_reg,
  * @brief Function for disabling specified interrupts.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Interrupts to be disabled.
+ * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_spu_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_spu_int_disable(NRF_SPU_Type * p_reg,
                                            uint32_t       mask);
@@ -262,6 +264,7 @@ NRF_STATIC_INLINE void nrf_spu_int_disable(NRF_SPU_Type * p_reg,
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_spu_int_mask_t values for bit masking.
  *
  * @return Mask of enabled interrupts.
  */

@@ -187,9 +187,13 @@ NRF_STATIC_INLINE uint32_t nrf_vdetpof5v0_int_enable_check(NRF_VDETPOF5V0_Type c
 /**
  * @brief Function for retrieving the state of pending interrupts.
  *
+ * @note States of pending interrupt are saved as a bitmask.
+ *       One set at particular position means that interrupt for event is pending.
+ *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Mask of pending interrupts.
+ * @return Bitmask with information about pending interrupts.
+ *         Use @ref nrf_vdetpof5v0_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE uint32_t nrf_vdetpof5v0_int_pending_get(NRF_VDETPOF5V0_Type const * p_reg);
 

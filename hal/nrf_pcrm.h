@@ -307,8 +307,8 @@ NRF_STATIC_INLINE uint32_t nrf_pcrm_int_enable_check(NRF_PCRM_Type const * p_reg
 /**
  * @brief Function for getting the state of pending interrupts.
  *
- * States of pending interrupt are saved as a bitmask.
- * One set at particular position means that interrupt for event is pending.
+ * @note States of pending interrupt are saved as a bitmask.
+ *       One set at particular position means that interrupt for event is pending.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] group Interrupt group to be checked.

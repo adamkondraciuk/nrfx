@@ -218,6 +218,7 @@ NRF_STATIC_INLINE nrf_vpr_event_t nrf_vpr_triggered_event_get(uint8_t index);
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_vpr_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_vpr_int_enable(NRF_VPR_Type * p_reg, uint32_t mask);
 
@@ -226,6 +227,7 @@ NRF_STATIC_INLINE void nrf_vpr_int_enable(NRF_VPR_Type * p_reg, uint32_t mask);
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_vpr_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_vpr_int_disable(NRF_VPR_Type * p_reg, uint32_t mask);
 
@@ -234,6 +236,7 @@ NRF_STATIC_INLINE void nrf_vpr_int_disable(NRF_VPR_Type * p_reg, uint32_t mask);
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_vpr_int_mask_t values for bit masking.
  *
  * @return Mask of enabled interrupts.
  */

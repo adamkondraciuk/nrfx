@@ -118,6 +118,7 @@ NRF_STATIC_INLINE bool nrf_lfclockmux_event_check(NRF_LFCLOCKMUX_Type const * p_
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_lfclockmux_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_lfclockmux_int_enable(NRF_LFCLOCKMUX_Type * p_reg, uint32_t mask);
 
@@ -126,6 +127,7 @@ NRF_STATIC_INLINE void nrf_lfclockmux_int_enable(NRF_LFCLOCKMUX_Type * p_reg, ui
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_lfclockmux_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_lfclockmux_int_disable(NRF_LFCLOCKMUX_Type * p_reg, uint32_t mask);
 
@@ -134,6 +136,7 @@ NRF_STATIC_INLINE void nrf_lfclockmux_int_disable(NRF_LFCLOCKMUX_Type * p_reg, u
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_lfclockmux_int_mask_t values for bit masking.
  *
  * @return Mask of enabled interrupts.
  */
@@ -143,12 +146,13 @@ NRF_STATIC_INLINE uint32_t nrf_lfclockmux_int_enable_check(NRF_LFCLOCKMUX_Type c
 /**
  * @brief Function for retrieving the state of pending interrupts.
  *
- * States of pending interrupt are saved as a bitmask.
- * One set at particular position means that interrupt for event is pending.
+ * @note States of pending interrupt are saved as a bitmask.
+ *       One set at particular position means that interrupt for event is pending.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Bitmask with information about pending interrupts.
+ *         Use @ref nrf_lfclockmux_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE uint32_t nrf_lfclockmux_int_pending_get(NRF_LFCLOCKMUX_Type const * p_reg);
 

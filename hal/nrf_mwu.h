@@ -104,6 +104,7 @@ NRF_STATIC_INLINE uint32_t nrf_mwu_event_address_get(NRF_MWU_Type const * p_reg,
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_mwu_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_mwu_int_enable(NRF_MWU_Type * p_reg, uint32_t mask);
 
@@ -112,6 +113,7 @@ NRF_STATIC_INLINE void nrf_mwu_int_enable(NRF_MWU_Type * p_reg, uint32_t mask);
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_mwu_int_mask_t values for bit masking.
  *
  * @return Mask of enabled interrupts.
  */
@@ -122,6 +124,7 @@ NRF_STATIC_INLINE uint32_t nrf_mwu_int_enable_check(NRF_MWU_Type const * p_reg, 
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_mwu_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_mwu_int_disable(NRF_MWU_Type * p_reg, uint32_t mask);
 

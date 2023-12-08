@@ -215,6 +215,7 @@ NRF_STATIC_INLINE bool nrf_grcconf_event_check(NRF_GRCCONF_Type const * p_reg,
  * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] group_idx Index of interrupt group to be enabled.
  * @param[in] mask      Mask of interrupts to be enabled.
+ *                      Use @ref nrf_grcconf_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_grcconf_int_enable(NRF_GRCCONF_Type * p_reg,
                                               uint8_t            group_idx,
@@ -226,6 +227,7 @@ NRF_STATIC_INLINE void nrf_grcconf_int_enable(NRF_GRCCONF_Type * p_reg,
  * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] group_idx Index of interrupt group to be disabled.
  * @param[in] mask      Mask of interrupts to be disabled.
+ *                      Use @ref nrf_grcconf_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_grcconf_int_disable(NRF_GRCCONF_Type * p_reg,
                                                uint8_t            group_idx,
@@ -237,6 +239,7 @@ NRF_STATIC_INLINE void nrf_grcconf_int_disable(NRF_GRCCONF_Type * p_reg,
  * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] group_idx Index of interrupt group to be checked.
  * @param[in] mask      Mask of interrupts to be checked.
+ *                      Use @ref nrf_grcconf_int_mask_t values for bit masking.
  *
  * @return Mask of enabled interrupts.
  */
@@ -254,6 +257,7 @@ NRF_STATIC_INLINE uint32_t nrf_grcconf_int_enable_check(NRF_GRCCONF_Type const *
  * @param[in] group_idx Index of interrupt group to be checked.
  *
  * @return Bitmask with information about pending interrupts.
+ *         Use @ref nrf_grcconf_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE uint32_t nrf_grcconf_int_pending_get(NRF_GRCCONF_Type const * p_reg,
                                                        uint8_t                  group_idx);

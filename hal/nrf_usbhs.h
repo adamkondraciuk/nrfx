@@ -36,37 +36,37 @@ typedef enum
 } nrf_usbhs_int_mask_t;
 
 /**
- * @brief A function for activating the specified USBHS task.
+ * @brief Function for activating the specified USBHS task.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
- * @param[in] task  A task to be activated.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task to be activated.
  */
 NRF_STATIC_INLINE void nrf_usbhs_task_trigger(NRF_USBHS_Type * p_reg, nrf_usbhs_task_t task);
 
 /**
- * @brief A function for returning the address of the specified USBHS task register.
+ * @brief Function for returning the address of the specified USBHS task register.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  The specified task.
  *
- * @return A task address.
+ * @return Task address.
  */
 NRF_STATIC_INLINE uint32_t nrf_usbhs_task_address_get(NRF_USBHS_Type const * p_reg,
                                                       nrf_usbhs_task_t       task);
 
 /**
- * @brief A function for clearing the specified event.
+ * @brief Function for clearing the specified event.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
- * @param[in] event An event to be cleared.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event Event to be cleared.
  */
 NRF_STATIC_INLINE void nrf_usbhs_event_clear(NRF_USBHS_Type * p_reg, nrf_usbhs_event_t event);
 
 /**
- * @brief A function for retrieving the state of the USBHS event.
+ * @brief Function for retrieving the state of the USBHS event.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
- * @param[in] event An event to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event Event to be checked.
  *
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
@@ -74,10 +74,10 @@ NRF_STATIC_INLINE void nrf_usbhs_event_clear(NRF_USBHS_Type * p_reg, nrf_usbhs_e
 NRF_STATIC_INLINE bool nrf_usbhs_event_check(NRF_USBHS_Type const * p_reg, nrf_usbhs_event_t event);
 
 /**
- * @brief A function for getting and clearing the state of the specified event.
+ * @brief Function for getting and clearing the state of the specified event.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
- * @param[in] event An event to be cleared.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event Event to be cleared.
  *
  * @retval true  The event was set.
  * @retval false The event was not set.
@@ -85,61 +85,64 @@ NRF_STATIC_INLINE bool nrf_usbhs_event_check(NRF_USBHS_Type const * p_reg, nrf_u
 NRF_STATIC_INLINE bool nrf_usbhs_event_get_and_clear(NRF_USBHS_Type * p_reg, nrf_usbhs_event_t event);
 
 /**
- * @brief A function for returning the address of the specified USBHS event register.
+ * @brief Function for returning the address of the specified USBHS event register.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event The specified event.
  *
- * @return An address of the event specified as a function parameter.
+ * @return Address of the event specified as a function parameter.
  */
 NRF_STATIC_INLINE uint32_t nrf_usbhs_event_address_get(NRF_USBHS_Type const * p_reg,
                                                        nrf_usbhs_event_t      event);
 /**
- * @brief A function for enabling the selected interrupts.
+ * @brief Function for enabling the selected interrupts.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
- * @param[in] mask  A mask of interrupts to be enabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_usbhs_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_usbhs_int_enable(NRF_USBHS_Type * p_reg, uint32_t mask);
 
 /**
- * @brief A function for checking if the specified interrupts are enabled.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
- * @param[in] mask  A mask of interrupts to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_usbhs_int_mask_t values for bit masking.
  *
- * @return A mask of enabled interrupts.
+ * @return Mask of enabled interrupts.
  */
 NRF_STATIC_INLINE uint32_t nrf_usbhs_int_enable_check(NRF_USBHS_Type const * p_reg, uint32_t mask);
 
 /**
- * @brief A function for retrieving the information about the enabled interrupts.
+ * @brief Function for retrieving the information about the enabled interrupts.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return The flags of the enabled interrupts.
  */
 NRF_STATIC_INLINE uint32_t nrf_usbhs_int_enable_get(NRF_USBHS_Type const * p_reg);
 
 /**
- * @brief A function for disabling the selected interrupts.
+ * @brief Function for disabling the selected interrupts.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
- * @param[in] mask  A mask of interrupts to be disabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_usbhs_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_usbhs_int_disable(NRF_USBHS_Type * p_reg, uint32_t mask);
 
 /**
- * @brief A function for enabling the USBHS.
+ * @brief Function for enabling the USBHS.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_usbhs_enable(NRF_USBHS_Type * p_reg);
 
 /**
- * @brief A function for disabling the USBHS.
+ * @brief Function for disabling the USBHS.
  *
- * @param[in] p_reg A pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_usbhs_disable(NRF_USBHS_Type * p_reg);
 

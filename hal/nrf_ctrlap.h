@@ -48,7 +48,7 @@ typedef enum
 /**
  * @brief Function for clearing the specified CTRLAP event.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to clear.
  */
 NRF_STATIC_INLINE void nrf_ctrlap_event_clear(NRF_CTRLAPPERI_Type * p_reg,
@@ -69,7 +69,7 @@ NRF_STATIC_INLINE bool nrf_ctrlap_event_check(NRF_CTRLAPPERI_Type const * p_reg,
 /**
  * @brief Function for getting the address of the specified CTRLAP event register.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Requested event.
  *
  * @retval Address of the specified event register.
@@ -80,16 +80,18 @@ NRF_STATIC_INLINE uint32_t nrf_ctrlap_event_address_get(NRF_CTRLAPPERI_Type cons
 /**
  * @brief Function for enabling the specified interrupts.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
- * @param[in] mask  Interrupts to be enabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_ctrlap_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_ctrlap_int_enable(NRF_CTRLAPPERI_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for disabling the specified interrupts.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
- * @param[in] mask  Interrupts to be disabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_ctrlap_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_ctrlap_int_disable(NRF_CTRLAPPERI_Type * p_reg, uint32_t mask);
 
@@ -98,6 +100,7 @@ NRF_STATIC_INLINE void nrf_ctrlap_int_disable(NRF_CTRLAPPERI_Type * p_reg, uint3
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_ctrlap_int_mask_t values for bit masking.
  *
  * @retval Mask of enabled interrupts.
  */
@@ -107,12 +110,13 @@ NRF_STATIC_INLINE uint32_t nrf_ctrlap_int_enable_check(NRF_CTRLAPPERI_Type const
 /**
  * @brief Function for retrieving the state of pending interrupts.
  *
- * States of pending interrupt are saved as a bitmask.
- * One set at particular position means that interrupt for event is pending.
+ * @note States of pending interrupt are saved as a bitmask.
+ *       One set at particular position means that interrupt for event is pending.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @retval Bitmask with information about pending interrupts.
+ *         Use @ref nrf_ctrlap_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE uint32_t nrf_ctrlap_int_pending_get(NRF_CTRLAPPERI_Type const * p_reg);
 

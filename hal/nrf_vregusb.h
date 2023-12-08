@@ -146,7 +146,8 @@ NRF_STATIC_INLINE uint32_t nrf_vregusb_event_address_get(NRF_VREGUSB_Type const 
  * @brief Function for enabling specified interrupts.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupts to be enabled. Use @ref nrf_vregusb_int_mask_t values for bit masking.
+ * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_vregusb_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_vregusb_int_enable(NRF_VREGUSB_Type * p_reg, uint32_t mask);
 
@@ -154,7 +155,8 @@ NRF_STATIC_INLINE void nrf_vregusb_int_enable(NRF_VREGUSB_Type * p_reg, uint32_t
  * @brief Function for disabling specified interrupts.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupts to be disabled. Use @ref nrf_vregusb_int_mask_t values for bit masking.
+ * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_vregusb_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_vregusb_int_disable(NRF_VREGUSB_Type * p_reg, uint32_t mask);
 
@@ -162,7 +164,8 @@ NRF_STATIC_INLINE void nrf_vregusb_int_disable(NRF_VREGUSB_Type * p_reg, uint32_
  * @brief Function for checking if the specified interrupts are enabled.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupts to be checked. Use @ref nrf_vregusb_int_mask_t values for bit masking.
+ * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_vregusb_int_mask_t values for bit masking.
  *
  * @return Mask of enabled interrupts.
  */
@@ -177,7 +180,8 @@ NRF_STATIC_INLINE uint32_t nrf_vregusb_int_enable_check(NRF_VREGUSB_Type const *
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Bitmask with information about pending interrupts. Use @ref nrf_vregusb_int_mask_t values for bit masking.
+ * @return Bitmask with information about pending interrupts.
+ *         Use @ref nrf_vregusb_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE uint32_t nrf_vregusb_int_pending_get(NRF_VREGUSB_Type const * p_reg);
 

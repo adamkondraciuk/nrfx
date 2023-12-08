@@ -513,9 +513,31 @@ NRF_STATIC_INLINE uint32_t nrf_spim_shorts_get(NRF_SPIM_Type const * p_reg);
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_spim_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_spim_int_enable(NRF_SPIM_Type * p_reg,
                                            uint32_t        mask);
+
+/**
+ * @brief Function for disabling the specified interrupts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_spim_int_mask_t values for bit masking.
+ */
+NRF_STATIC_INLINE void nrf_spim_int_disable(NRF_SPIM_Type * p_reg,
+                                            uint32_t        mask);
+
+/**
+ * @brief Function for checking if the specified interrupts are enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_spim_int_mask_t values for bit masking.
+ *
+ * @return Mask of enabled interrupts.
+ */
+NRF_STATIC_INLINE uint32_t nrf_spim_int_enable_check(NRF_SPIM_Type const * p_reg, uint32_t mask);
 
 #if NRF_SPIM_HAS_PRESCALER
 /**
@@ -536,25 +558,6 @@ NRF_STATIC_INLINE void nrf_spim_prescaler_set(NRF_SPIM_Type * p_reg,
  */
 NRF_STATIC_INLINE uint32_t nrf_spim_prescaler_get(NRF_SPIM_Type const * p_reg);
 #endif
-
-/**
- * @brief Function for disabling the specified interrupts.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupts to be disabled.
- */
-NRF_STATIC_INLINE void nrf_spim_int_disable(NRF_SPIM_Type * p_reg,
-                                            uint32_t        mask);
-
-/**
- * @brief Function for checking if the specified interrupts are enabled.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupts to be checked.
- *
- * @return Mask of enabled interrupts.
- */
-NRF_STATIC_INLINE uint32_t nrf_spim_int_enable_check(NRF_SPIM_Type const * p_reg, uint32_t mask);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**

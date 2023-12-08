@@ -126,7 +126,8 @@ NRF_STATIC_INLINE uint32_t nrf_rramc_event_address_get(NRF_RRAMC_Type const * p_
  * @brief Function for enabling the specified interrupts.
  *
  * @param[in] p_reg Pointer to the peripheral register structure.
- * @param[in] mask  Interrupts to be enabled.
+ * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_rramc_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_rramc_int_enable(NRF_RRAMC_Type * p_reg, uint32_t mask);
 
@@ -135,6 +136,7 @@ NRF_STATIC_INLINE void nrf_rramc_int_enable(NRF_RRAMC_Type * p_reg, uint32_t mas
  *
  * @param[in] p_reg Pointer to the peripheral register structure.
  * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_rramc_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_rramc_int_disable(NRF_RRAMC_Type * p_reg, uint32_t mask);
 
@@ -143,6 +145,7 @@ NRF_STATIC_INLINE void nrf_rramc_int_disable(NRF_RRAMC_Type * p_reg, uint32_t ma
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_rramc_int_mask_t values for bit masking.
  *
  * @return Mask of enabled interrupts.
  */
@@ -151,12 +154,13 @@ NRF_STATIC_INLINE uint32_t nrf_rramc_int_enable_check(NRF_RRAMC_Type const * p_r
 /**
  * @brief Function for getting the state of pending interrupts.
  *
- * States of pending interrupt are saved as a bitmask.
- * One set at particular position means that interrupt for event is pending.
+ * @note States of pending interrupt are saved as a bitmask.
+ *       One set at particular position means that interrupt for event is pending.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Bitmask with information about pending interrupts.
+ *                  Use @ref nrf_rramc_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE uint32_t nrf_rramc_int_pending_get(NRF_RRAMC_Type const * p_reg);
 

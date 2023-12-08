@@ -245,6 +245,7 @@ NRF_STATIC_INLINE void nrf_lpcomp_shorts_set(NRF_LPCOMP_Type * p_reg, uint32_t m
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_lpcomp_int_mask_t values for bit masking.
  *
  * @sa nrf_lpcomp_int_disable
  * @sa nrf_lpcomp_int_enable_check
@@ -256,6 +257,7 @@ NRF_STATIC_INLINE void nrf_lpcomp_int_enable(NRF_LPCOMP_Type * p_reg, uint32_t m
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_lpcomp_int_mask_t values for bit masking.
  *
  * @sa nrf_lpcomp_int_enable
  * @sa nrf_lpcomp_int_enable_check
@@ -267,6 +269,7 @@ NRF_STATIC_INLINE void nrf_lpcomp_int_disable(NRF_LPCOMP_Type * p_reg, uint32_t 
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_lpcomp_int_mask_t values for bit masking.
  *
  * @return Mask of enabled interrupts.
  */

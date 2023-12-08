@@ -344,6 +344,7 @@ NRF_STATIC_INLINE uint64_t nrf_grtc_rt_counter_cc_get(NRF_GRTC_Type const * p_re
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_grtc_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_grtc_int_enable(NRF_GRTC_Type * p_reg, uint32_t mask);
 
@@ -352,6 +353,7 @@ NRF_STATIC_INLINE void nrf_grtc_int_enable(NRF_GRTC_Type * p_reg, uint32_t mask)
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_grtc_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_grtc_int_disable(NRF_GRTC_Type * p_reg, uint32_t mask);
 
@@ -360,10 +362,24 @@ NRF_STATIC_INLINE void nrf_grtc_int_disable(NRF_GRTC_Type * p_reg, uint32_t mask
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_grtc_int_mask_t values for bit masking.
  *
  * @return Mask of enabled interrupts.
  */
 NRF_STATIC_INLINE uint32_t nrf_grtc_int_enable_check(NRF_GRTC_Type const * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for retrieving the state of pending interrupts.
+ *
+ * @note States of pending interrupt are saved as a bitmask.
+ *       One set at particular position means that interrupt for event is pending.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Bitmask with information about pending interrupts.
+ *         Use @ref nrf_grtc_int_mask_t values for bit masking.
+ */
+NRF_STATIC_INLINE uint32_t nrf_grtc_int_pending_get(NRF_GRTC_Type const * p_reg);
 
 #if NRF_GRTC_HAS_PWM
 /**
@@ -386,18 +402,6 @@ NRF_STATIC_INLINE void nrf_grtc_event_enable(NRF_GRTC_Type * p_reg, uint32_t mas
  */
 NRF_STATIC_INLINE void nrf_grtc_event_disable(NRF_GRTC_Type * p_reg, uint32_t mask);
 #endif // NRF_GRTC_HAS_PWM
-
-/**
- * @brief Function for retrieving the state of pending interrupts.
- *
- * @note States of pending interrupt are saved as a bitmask.
- *       One set at particular position means that interrupt for event is pending.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- *
- * @return Bitmask with information about pending interrupts.
- */
-NRF_STATIC_INLINE uint32_t nrf_grtc_int_pending_get(NRF_GRTC_Type const * p_reg);
 
 #if NRF_GRTC_HAS_EXTENDED
 /**

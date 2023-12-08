@@ -70,6 +70,7 @@ NRF_STATIC_INLINE uint32_t nrf_dispc_event_address_get(NRF_DISPC_Type const * p_
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_dispc_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_dispc_int_enable(NRF_DISPC_Type * p_reg, uint32_t mask);
 
@@ -78,6 +79,7 @@ NRF_STATIC_INLINE void nrf_dispc_int_enable(NRF_DISPC_Type * p_reg, uint32_t mas
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_dispc_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_dispc_int_disable(NRF_DISPC_Type * p_reg, uint32_t mask);
 
@@ -86,6 +88,7 @@ NRF_STATIC_INLINE void nrf_dispc_int_disable(NRF_DISPC_Type * p_reg, uint32_t ma
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_dispc_int_mask_t values for bit masking.
  *
  * @return true  requested interrupts are enabled.
  * @return false requested interrupts are disabled.

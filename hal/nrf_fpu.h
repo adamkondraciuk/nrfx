@@ -27,8 +27,6 @@ typedef enum
     NRF_FPU_EVENT_DENORMALINPUT    = offsetof(NRF_FPU_Type, EVENTS_DENORMALINPUT),    /**< An FPUIDC exception triggered by a denormal floating-point input has occurred in the FPU. */
 } nrf_fpu_event_t;
 
-
-
 /** @brief FPU interrupts. */
 typedef enum
 {
@@ -66,6 +64,7 @@ NRF_STATIC_INLINE bool nrf_fpu_event_check(NRF_FPU_Type const * p_reg,
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be enabled.
+ *                  Use @ref nrf_fpu_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_fpu_int_enable(NRF_FPU_Type * p_reg, uint32_t mask);
 
@@ -74,6 +73,7 @@ NRF_STATIC_INLINE void nrf_fpu_int_enable(NRF_FPU_Type * p_reg, uint32_t mask);
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be disabled.
+ *                  Use @ref nrf_fpu_int_mask_t values for bit masking.
  */
 NRF_STATIC_INLINE void nrf_fpu_int_disable(NRF_FPU_Type * p_reg, uint32_t mask);
 
@@ -82,6 +82,7 @@ NRF_STATIC_INLINE void nrf_fpu_int_disable(NRF_FPU_Type * p_reg, uint32_t mask);
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
+ *                  Use @ref nrf_fpu_int_mask_t values for bit masking.
  *
  * @return Mask of enabled interrupts.
  */
