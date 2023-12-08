@@ -459,14 +459,19 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
         }
     }
 
+#if NRF_UARTE_HAS_ENDTX_STOPTX_SHORT
+    uint32_t tx_int_mask = 0;
+
+    nrfy_uarte_shorts_enable(p_instance->p_reg, NRF_UARTE_SHORT_ENDTX_STOPTX);
+#else
+    uint32_t tx_int_mask = (!event_handler || p_config->tx_stop_on_end) ?
+                               0 : NRF_UARTE_INT_ENDTX_MASK;
 
     if (p_config->tx_stop_on_end)
     {
         p_cb->flags |= UARTE_FLAG_TX_STOP_ON_END;
-#if NRF_UARTE_HAS_ENDTX_STOPTX_SHORT
-        nrfy_uarte_shorts_enable(p_instance->p_reg, NRF_UARTE_SHORT_ENDTX_STOPTX);
-#endif
     }
+#endif
 
     p_cb->handler = event_handler;
     p_cb->state   = NRFX_DRV_STATE_INITIALIZED;
@@ -490,8 +495,6 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
         return NRFX_ERROR_INTERNAL;
     }
 
-    uint32_t tx_int_mask = (!event_handler || p_config->tx_stop_on_end) ?
-                               0 : NRF_UARTE_INT_ENDTX_MASK;
     uint32_t int_mask = tx_int_mask | ((event_handler) ? rx_int_mask : 0);
 
     nrfy_uarte_int_enable(p_instance->p_reg, int_mask);
@@ -547,6 +550,10 @@ void nrfx_uarte_uninit(nrfx_uarte_t const * p_instance)
                            NRF_UARTE_INT_RXSTARTED_MASK  |
                            NRF_UARTE_INT_TXSTOPPED_MASK);
     nrfy_uarte_int_uninit(p_uarte);
+
+#if NRF_UARTE_HAS_ENDTX_STOPTX_SHORT
+    nrfy_uarte_shorts_disable(p_uarte, NRF_UARTE_SHORT_ENDTX_STOPTX);
+#endif
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(p_uarte);
@@ -905,10 +912,8 @@ nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
             if (res)
             {
 #if NRF_UARTE_HAS_ENDTX_STOPTX_SHORT
-                if (p_cb->flags & UARTE_FLAG_TX_STOP_ON_END)
-                {
-                    nrfy_uarte_shorts_disable(p_uarte, NRF_UARTE_SHORT_ENDTX_STOPTX);
-                }
+                nrfy_uarte_int_enable(p_instance->p_reg, NRF_UARTE_INT_ENDTX_MASK);
+                nrfy_uarte_shorts_disable(p_uarte, NRF_UARTE_SHORT_ENDTX_STOPTX);
 #endif
                 nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_TXSTARTED);
                 nrfy_uarte_tx_buffer_set(p_uarte, p_data, length);
@@ -1853,6 +1858,7 @@ static void endtx_irq_handler(NRF_UARTE_Type * p_uarte, uarte_control_block_t * 
         }
 
 #if NRF_UARTE_HAS_ENDTX_STOPTX_SHORT
+        nrfy_uarte_int_disable(p_uarte, NRF_UARTE_INT_ENDTX_MASK);
         nrfy_uarte_shorts_enable(p_uarte, NRF_UARTE_SHORT_ENDTX_STOPTX);
 #endif
         NRFX_CRITICAL_SECTION_ENTER();
