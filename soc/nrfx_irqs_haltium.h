@@ -250,7 +250,13 @@ extern "C" {
 
 // GIPCT8_IRQn
 
-// GPIOTE0_IRQn
+// GPIOTE130_0_IRQn
+// GPIOTE130_1_IRQn
+#define nrfx_gpiote_130_irq_handler GPIOTE130_IRQHandler
+
+// GPIOTE131_0_IRQn
+// GPIOTE131_1_IRQn
+#define nrfx_gpiote_131_irq_handler GPIOTE131_IRQHandler
 
 // GSPU7_IRQn
 

@@ -2017,7 +2017,7 @@ NRF_STATIC_INLINE uint8_t nrf_radio_modecnf0_dtx_get(NRF_RADIO_Type const * p_re
 NRF_STATIC_INLINE void nrf_radio_fast_ramp_up_enable_set(NRF_RADIO_Type * p_reg, bool enable)
 {
 #if defined(RADIO_TIMING_RU_Msk)
-    p_reg->TIMING = (enable ? RADIO_TIMING_RU_Fast : RADIO_TIMING_RU_Default) <<
+    p_reg->TIMING = (enable ? RADIO_TIMING_RU_Fast : RADIO_TIMING_RU_Legacy) <<
                     RADIO_TIMING_RU_Pos;
 #elif defined(RADIO_MODECNF0_RU_Msk)
     p_reg->MODECNF0 = ((p_reg->MODECNF0 & (~RADIO_MODECNF0_RU_Msk)) |

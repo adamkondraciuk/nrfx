@@ -15,7 +15,8 @@ extern "C" {
 
 #define GPIO_PORT_NUM(periph_name, prefix, i, _)    i,
 #define GPIO_REG(periph_name, prefix, i, _)         NRFX_CONCAT(NRF_, periph_name, prefix, i),
-#define GPIO_NUM_OF_PINS(periph_name, prefix, i, _) NRFX_CONCAT(periph_name, prefix, i, _PIN_NUM)
+#define GPIO_NUM_OF_PINS(periph_name, prefix, i, _) \
+    NRFX_CONCAT(periph_name, prefix, i, _PIN_NUM)
 
 #define GPIO_PORT_NUM_LIST {NRFX_FOREACH_PRESENT(P, GPIO_PORT_NUM, (), (), _)}
 #define GPIO_REG_LIST      {NRFX_FOREACH_PRESENT(P, GPIO_REG, (), (), _)}

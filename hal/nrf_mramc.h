@@ -1282,7 +1282,7 @@ NRF_STATIC_INLINE void nrf_mramc_config_nvr_set(NRF_MRAMC_Type *               p
                                   ((uint32_t)p_data->lrsize  << MRAMC_CONFIGNVR_PAGE_LRSIZE_Pos) |
                                   ((uint32_t)p_data->lwsize  << MRAMC_CONFIGNVR_PAGE_LWSIZE_Pos) |
 #endif
-                                  ((uint32_t)p_data->lock << MRAMC_CONFIGNVR_PAGE_Lock_Pos);
+                                  ((uint32_t)p_data->lock << MRAMC_CONFIGNVR_PAGE_LOCK_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_mramc_config_nvr_get(NRF_MRAMC_Type const *   p_reg,
@@ -1295,7 +1295,7 @@ NRF_STATIC_INLINE void nrf_mramc_config_nvr_get(NRF_MRAMC_Type const *   p_reg,
                     (p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_WEN_Msk);
     p_data->een  = (nrf_mramc_mode_erase_t)
                     (p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_EEN_Msk);
-    p_data->lock = (bool)(p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_Lock_Msk);
+    p_data->lock = (bool)(p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_LOCK_Msk);
 
 #if NRF_MRAMC_HAS_CONFIGNVR_PAGE_UPPER_PROTECT
     p_data->uren = (bool)(p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_UREN_Msk);

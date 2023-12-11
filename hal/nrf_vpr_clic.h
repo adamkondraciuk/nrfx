@@ -22,9 +22,7 @@ extern "C" {
 /** @brief Interrupt privilege modes available. */
 typedef enum
 {
-    NRF_VPR_CLIC_MODE_M   = CLIC_CLIC_CLICCFG_NMBITS_ModeM,   /**< All interrupts are M-mode only. */
-    NRF_VPR_CLIC_MODE_MU  = CLIC_CLIC_CLICCFG_NMBITS_ModeMU,  /**< Interrupts can be M-mode or U-mode. */
-    NRF_VPR_CLIC_MODE_MSU = CLIC_CLIC_CLICCFG_NMBITS_ModeMSU, /**< Interrupts can be M/S/U-mode. */
+    NRF_VPR_CLIC_MODE_M   = CLIC_CLIC_CLICCFG_NMBITS_ModeM, /**< All interrupts are M-mode only. */
 } nrf_vpr_clic_mode_t;
 
 #if defined(NRF54H20_ENGA_XXAA) || defined(__NRFX_DOXYGEN__)
@@ -253,7 +251,7 @@ NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_CLIC_Type *         p_r
 {
     NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
 #if !defined(NRF54H20_ENGA_XXAA)
-    NRFX_ASSERT(priority < NRF_VPR_CLIC_PRIO_COUNT);
+    NRFX_ASSERT(priority < VPR_CLIC_PRIO_COUNT);
 #endif
 
     p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~CLIC_CLIC_CLICINT_PRIORITY_Msk)

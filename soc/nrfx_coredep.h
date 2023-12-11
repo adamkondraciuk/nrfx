@@ -26,6 +26,8 @@
  */
 #define NRFX_COREDEP_DELAY_US_LOOP_CYCLES
 
+#elif defined(NRFX_DELAY_CPU_FREQ_MHZ) && defined(NRFX_DELAY_DWT_PRESENT)
+    /* Do nothing. */
 #elif defined(NRF51)
     #define NRFX_DELAY_CPU_FREQ_MHZ 16
     #define NRFX_DELAY_DWT_PRESENT  0
@@ -44,7 +46,13 @@
 #elif defined(NRF5340_XXAA_NETWORK)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
-#elif !defined(NRFX_DELAY_CPU_FREQ_MHZ) || !defined(NRFX_DELAY_DWT_PRESENT)
+#elif defined(NRF54H20_ENGA_XXAA)
+    #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
+    #define NRFX_DELAY_DWT_PRESENT  0
+#elif defined(NRF54L15_ENGA_XXAA)
+    #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
+    #define NRFX_DELAY_DWT_PRESENT  1
+#else
     #error "Unknown device"
 #endif
 

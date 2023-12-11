@@ -1200,7 +1200,7 @@ NRF_STATIC_INLINE void nrf_spim_csn_configure(NRF_SPIM_Type *    p_reg,
                                               nrf_spim_csn_pol_t polarity,
                                               uint32_t           duration)
 {
-#if defined(SPIM_CSNPOL_CSNPOL0_LOW)
+#if defined(SPIM_CSNPOL_CSNPOL0_LOW) && defined(SPIM_PSEL_CSN_MaxCount)
     p_reg->PSEL.CSN[0] = pin;
 #else
     p_reg->PSEL.CSN = pin;
@@ -1211,7 +1211,7 @@ NRF_STATIC_INLINE void nrf_spim_csn_configure(NRF_SPIM_Type *    p_reg,
 
 NRF_STATIC_INLINE uint32_t nrf_spim_csn_pin_get(NRF_SPIM_Type const * p_reg)
 {
-#if defined(SPIM_CSNPOL_CSNPOL0_LOW)
+#if defined(SPIM_CSNPOL_CSNPOL0_LOW) && defined(SPIM_PSEL_CSN_MaxCount)
     return p_reg->PSEL.CSN[0];
 #else
     return p_reg->PSEL.CSN;

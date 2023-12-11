@@ -447,7 +447,7 @@ nrfx_err_t nrfx_saadc_buffer_set(nrf_saadc_value_t * p_buffer, uint16_t size)
     }
 
     if ((size % m_cb.channels_activated_count != 0) ||
-        (size >= (1 << SAADC_EASYDMA_MAXCNT_SIZE))  ||
+        (size > SAADC_RESULT_MAXCNT_MAXCNT_Msk)  ||
         (!size))
     {
         return NRFX_ERROR_INVALID_LENGTH;

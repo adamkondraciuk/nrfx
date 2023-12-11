@@ -13,39 +13,6 @@ extern "C" {
 /* Start of Auxiliary Extended section                                                            */
 /*------------------------------------------------------------------------------------------------*/
 
-#if defined(HALTIUM_XXAA) || defined(LUMOS_XXAA)
-    typedef NRF_OWNERID_Type     nrf_owner_t;
-#endif
-#if defined(HALTIUM_XXAA)
-    typedef NRF_DOMAINID_Type    nrf_domain_t;
-    typedef NRF_PROCESSORID_Type nrf_processor_t;
-
-    #define NRF_DMA_ACCESS_EXT                                                \
-        if (nrf_address_bus_get((uint32_t)p_reg, 0x10000) == 0x8E)            \
-        {                                                                     \
-            /* Bitwise operation to unify secure/non-secure memory address */ \
-            uint32_t addr = (uint32_t)p_object & 0xEFFFFFFFu;                 \
-                                                                              \
-            /* When peripheral instance is high-speed check whether */        \
-            /* p_object is placed in GRAM2x or GRAM0x */                      \
-            bool gram0x = (addr >= 0x2F000000u) && (addr < 0x2F038000);       \
-            bool gram2x = (addr >= 0x2F880000u) && (addr < 0x2F886200);       \
-            return gram0x || gram2x;                                          \
-        }                                                                     \
-        else                                                                  \
-        {                                                                     \
-            /* When peripheral instance is low-speed check whether */         \
-            /* p_object is placed in GRAM3x */                                \
-            return ((((uint32_t)p_object) & 0xEFFF8000u) == 0x2FC00000u);     \
-        }
-#endif
-
-#if defined(HALTIUM_XXAA) || defined(LUMOS_XXAA)
-    #if !defined(DMA_BUFFER_UNIFIED_BYTE_ACCESS)
-        #define DMA_BUFFER_UNIFIED_BYTE_ACCESS 1
-    #endif
-#endif
-
 #if defined(LUMOS_XXAA)
     #if defined(NRF_SKIP_CLOCK_CONFIGURATION) || (defined(NRF_CONFIG_CPU_FREQ_MHZ) \
         && (NRF_CONFIG_CPU_FREQ_MHZ==64))
@@ -182,28 +149,26 @@ extern "C" {
 /* Start of GPIOTE Extended section                                                               */
 /*------------------------------------------------------------------------------------------------*/
 
-#if defined(NRF_GPIOTE130) || defined(NRF_GPIOTE131)
-    #if !defined(NRF_CELLCORE) && !(defined(NRF9230_ENGA_XXAA) && defined(NRF_SYSCTRL))
-        #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE130_IRQn
+#if defined(NRF_GPIOTE131)
+    #if (defined(ISA_ARM) && defined(NRF_TRUSTZONE_NONSECURE)) || defined(ISA_RISCV)
+        #define GPIOTE131_IRQn       GPIOTE131_0_IRQn
+        #define GPIOTE131_IRQHandler GPIOTE131_0_IRQHandler
     #else
-        #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE131_IRQn
+        #define GPIOTE131_IRQn       GPIOTE131_1_IRQn
+        #define GPIOTE131_IRQHandler GPIOTE131_1_IRQHandler
     #endif
 #endif
 
-#if defined(NRF_GPIOTE130) && !(defined(NRF9230_ENGA_XXAA) && defined(NRF_SYSCTRL))
-    #define NRF_GPIOTE_INDEX 130
-#elif defined(NRF_GPIOTE131)
+#if defined(NRF_GPIOTE131) && \
+    (defined(NRF_CELLCORE) || (defined(NRF9230_ENGA_XXAA) && defined(NRF_SYSCTRL)))
+    #define NRF_GPIOTE_IRQn_EXT GPIOTE131_IRQn
     #define NRF_GPIOTE_INDEX 131
-#elif defined(NRF_GPIOTE20)
-    #define NRF_GPIOTE_INDEX 20
 #endif
 
 #if defined(GPIOTE_INTEN0_IN0_Msk)
-    #if defined(NRF_SECURE) || defined(LUMOS_XXAA)
+    #if defined(NRF_SECURE)
         #define NRF_GPIOTE_PORT_ID 0
-    #elif defined(NRF_APPLICATION) || defined(NRF_PPR)
-        #define NRF_GPIOTE_PORT_ID 1
-    #elif defined(NRF_RADIOCORE) || defined(NRF_CELLCORE)
+    #elif defined(NRF_CELLCORE)
         #define NRF_GPIOTE_PORT_ID 2
     #elif defined(NRF_SYSCTRL)
         #define NRF_GPIOTE_PORT_ID 3
@@ -225,6 +190,25 @@ extern "C" {
 
 /*------------------------------------------------------------------------------------------------*/
 /* End of GPPI Extended section                                                                   */
+/*------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------*/
+/* Start of GRTC Extended section                                                                 */
+/*------------------------------------------------------------------------------------------------*/
+
+#if defined(HALTIUM_XXAA)
+    #if (defined(NRF_SECURE) && defined(NRF_TRUSTZONE_NONSECURE)) || \
+        (defined(NRF_SYSCTRL)) || (defined(NRF_FLPR))
+    #define GRTC_IRQn       GRTC_0_IRQn
+    #define GRTC_IRQHandler GRTC_0_IRQHandler
+    #elif (defined(NRF_SECURE) && !defined(NRF_TRUSTZONE_NONSECURE))
+    #define GRTC_IRQn       GRTC_1_IRQn
+    #define GRTC_IRQHandler GRTC_1_IRQHandler
+    #endif
+#endif
+
+/*------------------------------------------------------------------------------------------------*/
+/* End of GRTC Extended section                                                                   */
 /*------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------*/

@@ -9,6 +9,11 @@
 extern "C" {
 #endif
 
+#if !defined(NRF_RTC0) && defined(NRF_RTC)
+#define NRF_RTC0    NRF_RTC
+#define RTC0_CC_NUM RTC_CC_NUM
+#endif
+
 /**
  * @defgroup nrf_rtc_hal RTC HAL
  * @{

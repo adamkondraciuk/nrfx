@@ -24,7 +24,7 @@ static nrfx_err_t dppic_channel_get(nrfx_interconnect_dppic_t * p_dppic,
                                     uint8_t                     virtual_channel,
                                     uint8_t *                   p_dppic_channel)
 {
-    for (uint8_t i = 0; i < DPPI_CHANNEL_MAX_COUNT; i++)
+    for (uint8_t i = 0; i < NRF_DPPI_CH_NUM_MAX; i++)
     {
         if (p_dppic->allocate_flag[i] == virtual_channel)
         {
@@ -119,7 +119,7 @@ static void init(void)
     for (uint8_t i = 0; i < NRFX_INTERCONNECT_DPPIC_COUNT; i++)
     {
         nrfx_interconnect_dppic_t * dppic = nrfx_interconnect_dppic_at_index_get(i);
-        for (uint8_t j = 0; j < DPPI_CHANNEL_MAX_COUNT; j++)
+        for (uint8_t j = 0; j < NRF_DPPI_CH_NUM_MAX; j++)
         {
             dppic_virtual_channel_set(dppic, j, NRFX_GPPI_CHANNEL_INVALID);
         }

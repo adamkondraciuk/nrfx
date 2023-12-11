@@ -67,7 +67,7 @@ extern "C" {
 #define NRF_CACHE_HAS_TASK_SAVE_RESTORE 0
 #endif
 
-#if defined(CACHE_STATUS_READY_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(CACHE_STATUS_READY_Msk) || defined(CACHE_STATUS_BUSY_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether status check is supported. */
 #define NRF_CACHE_HAS_STATUS 1
 #else
@@ -842,8 +842,13 @@ NRF_STATIC_INLINE uint32_t nrf_cache_task_address_get(NRF_CACHE_Type const * p_r
 #if NRF_CACHE_HAS_STATUS
 NRF_STATIC_INLINE bool nrf_cache_busy_check(NRF_CACHE_Type const * p_reg)
 {
+#if defined(CACHE_STATUS_READY_Msk)
     return (p_reg->STATUS & CACHE_STATUS_READY_Msk) ==
         (CACHE_STATUS_READY_Busy << CACHE_STATUS_READY_Pos);
+#else
+    return (p_reg->STATUS & CACHE_STATUS_BUSY_Msk) ==
+        (CACHE_STATUS_BUSY_Busy << CACHE_STATUS_BUSY_Pos);
+#endif
 }
 #endif
 

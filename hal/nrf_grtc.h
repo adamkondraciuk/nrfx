@@ -9,6 +9,29 @@
 extern "C" {
 #endif
 
+#if defined(LUMOS_XXAA)
+#if defined(NRF_APPLICATION) && defined(NRF_TRUSTZONE_NONSECURE)
+#define GRTC_IRQn       GRTC_1_IRQn
+#define GRTC_IRQHandler GRTC_1_IRQHandler
+#elif defined(NRF_APPLICATION) && !defined(NRF_TRUSTZONE_NONSECURE)
+#define GRTC_IRQn       GRTC_2_IRQn
+#define GRTC_IRQHandler GRTC_2_IRQHandler
+#elif defined(NRF_FLPR)
+#define GRTC_IRQn       GRTC_0_IRQn
+#define GRTC_IRQHandler GRTC_0_IRQHandler
+#endif
+#endif
+
+#if defined(HALTIUM_XXAA)
+#if (defined(ISA_ARM) && defined(NRF_TRUSTZONE_NONSECURE)) || defined(ISA_RISCV)
+#define GRTC_IRQn       GRTC_0_IRQn
+#define GRTC_IRQHandler GRTC_0_IRQHandler
+#else
+#define GRTC_IRQn       GRTC_1_IRQn
+#define GRTC_IRQHandler GRTC_1_IRQHandler
+#endif
+#endif
+
 /**
  * @defgroup nrf_grtc_hal GRTC HAL
  * @{
@@ -58,7 +81,7 @@ extern "C" {
 #endif // !defined(NRF_GRTC_HAS_EXTENDED)
 
 /** @brief Symbol indicating actual domain index. */
-#define NRF_GRTC_DOMAIN_INDEX NRF_GRTC_IRQ_GROUP
+#define NRF_GRTC_DOMAIN_INDEX GRTC_IRQ_GROUP
 
 /** @brief Symbol indicating actual SYSCOUNTER index. */
 #if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
@@ -66,13 +89,13 @@ extern "C" {
 #endif
 
 /** @brief Interrupts INTEN register definition. */
-#define GRTC_INTEN        NRFX_CONCAT_2(INTEN, NRF_GRTC_IRQ_GROUP)
+#define GRTC_INTEN        NRFX_CONCAT_2(INTEN, GRTC_IRQ_GROUP)
 /** @brief Interrupts INTENSET register definition. */
-#define GRTC_INTENSET     NRFX_CONCAT_2(INTENSET, NRF_GRTC_IRQ_GROUP)
+#define GRTC_INTENSET     NRFX_CONCAT_2(INTENSET, GRTC_IRQ_GROUP)
 /** @brief Interrupts INTENCLR register definition. */
-#define GRTC_INTENCLR     NRFX_CONCAT_2(INTENCLR, NRF_GRTC_IRQ_GROUP)
+#define GRTC_INTENCLR     NRFX_CONCAT_2(INTENCLR, GRTC_IRQ_GROUP)
 /** @brief Interrupts INTPEND register definition. */
-#define GRTC_INTPEND      NRFX_CONCAT_2(INTPEND, NRF_GRTC_IRQ_GROUP)
+#define GRTC_INTPEND      NRFX_CONCAT_2(INTPEND, GRTC_IRQ_GROUP)
 
 /** @brief Main SYSCOUNTER frequency in Hz. */
 #define NRF_GRTC_SYSCOUNTER_MAIN_FREQUENCY_HZ 1000000UL
@@ -105,7 +128,7 @@ extern "C" {
 #define NRF_GRTC_MAIN_CC_CHANNEL 0
 
 /** @brief Bitmask of interrupt enable. */
-#define NRF_GRTC_INTEN_MASK GRTC_INTEN_Msk
+#define NRF_GRTC_INTEN_MASK NRFX_BIT_MASK(GRTC_CC_MaxCount)
 
 /** @brief Mask for all channels represented by CC channels. */
 #define NRF_GRTC_SYSCOUNTER_ALL_CHANNELS_INT_MASK \

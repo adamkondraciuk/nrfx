@@ -60,6 +60,19 @@ extern "C" {
 #define NRF_TAMPC_HAS_DETECTORS_ENABLE 0
 #endif
 
+#if defined(TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_High) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the configuration of Coresight debugger signals protection is present. */
+#define NRF_TAMPC_HAS_CORESIGHT 1
+#else
+#define NRF_TAMPC_HAS_CORESIGHT 0
+#endif
+
+#if defined(TAMPC_PROTECT_WARMBOOT_SYSTEMOFF_CTRL_VALUE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the configuration of warm boot protection is present. */
+#define NRF_TAMPC_HAS_WARMBOOT 1
+#else
+#define NRF_TAMPC_HAS_WARMBOOT 0
+#endif
 
 /** @brief TAMPC events. */
 typedef enum
@@ -388,6 +401,7 @@ NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_lock_get(NRF_TAMPC_Type const * p_reg,
                                                   nrf_tampc_debug_type_t type,
                                                   nrf_domain_t           domain);
 
+#if NRF_TAMPC_HAS_CORESIGHT
 /**
  * @brief Function for setting signal value of the Coresight register for given debug type.
  *
@@ -456,7 +470,9 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_fault_set(NRF_TAMPC_Type *      
  */
 NRF_STATIC_INLINE bool nrf_tampc_coresight_ctrl_fault_get(NRF_TAMPC_Type const * p_reg,
                                                           nrf_tampc_debug_type_t type);
+#endif // NRF_TAMPC_HAS_CORESIGHT
 
+#if NRF_TAMPC_HAS_WARMBOOT
 /**
  * @brief Function for setting signal value of the warm boot register for given warm boot mode.
  *
@@ -546,6 +562,7 @@ NRF_STATIC_INLINE bool nrf_tampc_warmboot_status_check(NRF_TAMPC_Type const *   
  */
 NRF_STATIC_INLINE void nrf_tampc_warmboot_status_clear(NRF_TAMPC_Type *          p_reg,
                                                        nrf_tampc_warmboot_mode_t mode);
+#endif // NRF_TAMPC_HAS_WARMBOOT
 
 #if NRF_TAMPC_HAS_EXTENDED_PROTECTORS
 /**
@@ -1082,6 +1099,7 @@ NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_lock_get(NRF_TAMPC_Type const * p_reg,
     }
 }
 
+#if NRF_TAMPC_HAS_CORESIGHT
 NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_value_set(NRF_TAMPC_Type *       p_reg,
                                                           nrf_tampc_debug_type_t type,
                                                           bool                   enable)
@@ -1417,7 +1435,9 @@ NRF_STATIC_INLINE bool nrf_tampc_coresight_ctrl_fault_get(NRF_TAMPC_Type const *
             return false;
     }
 }
+#endif // NRF_TAMPC_HAS_CORESIGHT
 
+#if NRF_TAMPC_HAS_WARMBOOT
 NRF_STATIC_INLINE void nrf_tampc_warmboot_ctrl_value_set(NRF_TAMPC_Type *          p_reg,
                                                          nrf_tampc_warmboot_mode_t mode,
                                                          bool                      enable)
@@ -1630,6 +1650,7 @@ NRF_STATIC_INLINE void nrf_tampc_warmboot_status_clear(NRF_TAMPC_Type *         
             NRFX_ASSERT(0);
     }
 }
+#endif // NRF_TAMPC_HAS_WARMBOOT
 
 #if NRF_TAMPC_HAS_EXTENDED_PROTECTORS
 NRF_STATIC_INLINE void nrf_tampc_protector_ctrl_value_set(NRF_TAMPC_Type *    p_reg,

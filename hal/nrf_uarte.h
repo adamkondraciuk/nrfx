@@ -42,7 +42,15 @@ extern "C" {
 #define NRF_UARTE_HAS_DMA_TASKS_EVENTS 0
 #endif
 
-#if defined(UARTE_SHORTS_ENDTX_STOPTX_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether UARTE DMA shortcuts are present. */
+#define NRF_UARTE_HAS_DMA_SHORTS 1
+#else
+#define NRF_UARTE_HAS_DMA_SHORTS 0
+#endif
+
+#if defined(UARTE_SHORTS_ENDTX_STOPTX_Msk) || defined(UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Msk) || \
+    defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether UARTE ENDTX_STOPTX shortcut is present. */
 #define NRF_UARTE_HAS_ENDTX_STOPTX_SHORT 1
 #else
@@ -119,10 +127,16 @@ typedef enum
 /** @brief Types of UARTE shortcuts. */
 typedef enum
 {
-    NRF_UARTE_SHORT_ENDRX_STARTRX = UARTE_SHORTS_ENDRX_STARTRX_Msk, ///< Shortcut between ENDRX event and STARTRX task.
-    NRF_UARTE_SHORT_ENDRX_STOPRX  = UARTE_SHORTS_ENDRX_STOPRX_Msk,  ///< Shortcut between ENDRX event and STOPRX task.
+#if NRF_UARTE_HAS_DMA_SHORTS
+    NRF_UARTE_SHORT_ENDRX_STARTRX = UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Msk, ///< Shortcut between ENDRX event and STARTRX task.
+    NRF_UARTE_SHORT_ENDRX_STOPRX  = UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Msk,  ///< Shortcut between ENDRX event and STOPRX task.
+    NRF_UARTE_SHORT_ENDTX_STOPTX  = UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Msk   ///< Shortcut between ENDTX event and STOPTX task.
+#else
+    NRF_UARTE_SHORT_ENDRX_STARTRX = UARTE_SHORTS_ENDRX_STARTRX_Msk,           ///< Shortcut between ENDRX event and STARTRX task.
+    NRF_UARTE_SHORT_ENDRX_STOPRX  = UARTE_SHORTS_ENDRX_STOPRX_Msk,            ///< Shortcut between ENDRX event and STOPRX task.
 #if NRF_UARTE_HAS_ENDTX_STOPTX_SHORT
-    NRF_UARTE_SHORT_ENDTX_STOPTX  = UARTE_SHORTS_ENDTX_STOPTX_Msk   ///< Shortcut between ENDTX event and STOPTX task.
+    NRF_UARTE_SHORT_ENDTX_STOPTX  = UARTE_SHORTS_ENDTX_STOPTX_Msk             ///< Shortcut between ENDTX event and STOPTX task.
+#endif
 #endif
 } nrf_uarte_short_t;
 
