@@ -295,16 +295,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(EXCLUDE_HEADER)
         #include "nrf54h20.h"
     #endif
-    #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
-    #endif
 
 #elif defined (NRF54H20_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf54h20_enga.h"
-    #endif
-    #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
     #endif
 
 #elif defined (NRF54L15_ENGA_XXAA)
@@ -338,16 +332,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(EXCLUDE_HEADER)
         #include "nrf9230_enga.h"
     #endif
-    #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
-    #endif
 
 #elif defined (NRF7140_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf7140.h"
-    #endif
-    #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
     #endif
 #else
     #error "Device must be defined. See nrf.h."
