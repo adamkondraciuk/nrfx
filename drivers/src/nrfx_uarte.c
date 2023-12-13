@@ -843,8 +843,24 @@ nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
         return NRFX_ERROR_INVALID_LENGTH;
     }
 
+    if (!p_cb->handler && (flags == 0))
+    {
+        if (p_cb->tx.curr.length == 0)
+        {
+            p_cb->tx.curr.length = length;
+        }
+        else
+        {
+            return NRFX_ERROR_BUSY;
+        }
+
+        err_code = blocking_tx(p_instance, p_data, length, 0);
+        p_cb->tx.curr.length = 0;
+        return err_code;
+    }
+
     // Handle case when transfer is blocking.
-    if (!p_cb->handler || (flags & (NRFX_UARTE_TX_EARLY_RETURN | NRFX_UARTE_TX_BLOCKING)))
+    if (flags & (NRFX_UARTE_TX_EARLY_RETURN | NRFX_UARTE_TX_BLOCKING))
     {
         return blocking_tx(p_instance, p_data, length, flags);
     }
@@ -963,15 +979,16 @@ nrfx_err_t nrfx_uarte_tx_abort(nrfx_uarte_t const * p_instance, bool sync)
 {
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRF_UARTE_Type * p_uarte = p_instance->p_reg;
-    uint32_t mask;
+    uint32_t int_mask;
+
+    int_mask = uarte_int_lock(p_uarte);
+    if (p_cb->tx.curr.length == 0)
+    {
+        uarte_int_unlock(p_uarte, int_mask);
+        return NRFX_ERROR_INVALID_STATE;
+    }
 
     NRFX_ATOMIC_FETCH_OR(&p_cb->flags, UARTE_FLAG_TX_ABORTED);
-
-    if (sync)
-    {
-        mask = nrfy_uarte_int_enable_check(p_uarte, NRF_UARTE_INT_ENDTX_MASK);
-        nrfy_uarte_int_disable(p_uarte, NRF_UARTE_INT_TXSTOPPED_MASK | NRF_UARTE_INT_ENDTX_MASK);
-    }
 
     nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPTX);
 
@@ -979,9 +996,10 @@ nrfx_err_t nrfx_uarte_tx_abort(nrfx_uarte_t const * p_instance, bool sync)
     {
         block_on_tx(p_uarte, p_cb);
         nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_ENDTX);
-        nrfy_uarte_int_enable(p_uarte, mask);
         p_cb->tx.curr.length = 0;
     }
+
+    uarte_int_unlock(p_uarte, int_mask);
 
     NRFX_LOG_INFO("TX transaction aborted.");
 
