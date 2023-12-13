@@ -36,7 +36,7 @@ extern "C" {
     #define NRFX_WDT_IRQ_CONFIG
 #endif
 
-#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+#if NRFX_API_VER_AT_LEAST(3, 2, 0) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief WDT event handler function type.
  *
@@ -112,7 +112,7 @@ typedef struct
     NRFX_WDT_IRQ_CONFIG                                     \
 }
 
-#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+#if NRFX_API_VER_AT_LEAST(3, 2, 0) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for initializing the WDT driver instance.
  *
