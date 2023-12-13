@@ -322,6 +322,20 @@ static void apply_workaround_for_enable_anomaly(nrfx_uarte_t const * p_instance)
 #endif // defined(NRF53_SERIES) || defined(NRF91_SERIES)
 }
 
+static uint32_t uarte_int_lock(NRF_UARTE_Type * p_uarte)
+{
+    uint32_t int_enabled = nrfy_uarte_int_enable_check(p_uarte, UINT32_MAX);
+
+    nrfy_uarte_int_disable(p_uarte, int_enabled);
+
+    return int_enabled;
+}
+
+static void uarte_int_unlock(NRF_UARTE_Type * p_uarte, uint32_t int_mask)
+{
+    nrfy_uarte_int_enable(p_uarte, int_mask);
+}
+
 /* Function returns true if new transfer can be started. Since TXSTOPPED
  * (and ENDTX) is cleared before triggering new transfer, TX is ready for new
  * transfer if any event is set.
@@ -1288,20 +1302,6 @@ static size_t get_cache_buf_len(nrfx_uarte_rx_cache_t * p_cache)
     p_cache->started += len;
 
     return len;
-}
-
-static uint32_t uarte_int_lock(NRF_UARTE_Type * p_uarte)
-{
-    uint32_t int_enabled = nrfy_uarte_int_enable_check(p_uarte, UINT32_MAX);
-
-    nrfy_uarte_int_disable(p_uarte, int_enabled);
-
-    return int_enabled;
-}
-
-static void uarte_int_unlock(NRF_UARTE_Type * p_uarte, uint32_t int_mask)
-{
-    nrfy_uarte_int_enable(p_uarte, int_mask);
 }
 
 nrfx_err_t nrfx_uarte_rx_buffer_set(nrfx_uarte_t const * p_instance,
