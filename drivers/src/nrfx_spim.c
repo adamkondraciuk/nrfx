@@ -422,9 +422,9 @@ static void spim_configure(nrfx_spim_t const *        p_instance,
     configure_pins(p_instance, p_config);
 
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
-    bool ext_support = NRFX_BIT(p_instance->drv_inst_idx) & hw_csn_support_mask;
+    bool hw_csn_support = NRFX_BIT(p_instance->drv_inst_idx) & hw_csn_support_mask;
     bool hw_csn = p_config->use_hw_ss;
-    if (ext_support && hw_csn)
+    if (hw_csn_support && hw_csn)
     {
         p_cb->ss_pin = NRF_SPIM_PIN_NOT_CONNECTED;
     }
@@ -463,7 +463,6 @@ static void spim_configure(nrfx_spim_t const *        p_instance,
             .csn_duration = p_config->ss_duration,
             .rx_delay     = p_config->rx_delay
         },
-        .ext_enable = ext_support && (hw_csn || (p_config->dcx_pin != NRF_SPIM_PIN_NOT_CONNECTED)),
 #endif // NRFX_SPIM_EXTENDED_ENABLED
         .skip_psel_cfg = p_config->skip_psel_cfg
     };
