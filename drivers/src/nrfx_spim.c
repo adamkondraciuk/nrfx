@@ -456,12 +456,20 @@ static void spim_configure(nrfx_spim_t const *        p_instance,
         {
             .pins =
             {
+#if NRFY_SPIM_HAS_DCX
                 .dcx_pin = p_config->dcx_pin,
-                .csn_pin = p_config->use_hw_ss ? p_config->ss_pin : NRF_SPIM_PIN_NOT_CONNECTED
+#endif
+#if NRFY_SPIM_HAS_HW_CSN
+                .csn_pin = p_config->use_hw_ss ? p_config->ss_pin : NRF_SPIM_PIN_NOT_CONNECTED,
+#endif
             },
+#if NRFY_SPIM_HAS_HW_CSN
             .csn_pol      = p_config->ss_active_high ? NRF_SPIM_CSN_POL_HIGH : NRF_SPIM_CSN_POL_LOW,
             .csn_duration = p_config->ss_duration,
+#endif
+#if NRFY_SPIM_HAS_RXDELAY
             .rx_delay     = p_config->rx_delay
+#endif
         },
 #endif // NRFX_SPIM_EXTENDED_ENABLED
         .skip_psel_cfg = p_config->skip_psel_cfg
@@ -600,8 +608,12 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
         {
             nrfy_spim_ext_pins_t ext_pins;
             nrfy_spim_ext_pins_get(p_instance->p_reg, &ext_pins);
+#if NRFY_SPIM_HAS_DCX
             spim_pin_uninit(ext_pins.dcx_pin);
+#endif
+#if NRFY_SPIM_HAS_HW_CSN
             spim_pin_uninit(ext_pins.csn_pin);
+#endif
         }
 #endif
     }

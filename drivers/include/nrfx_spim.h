@@ -133,7 +133,6 @@ typedef struct
     NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED, (.rx_delay = 0x02,), ())                        \
     NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED, (.dcx_pin = NRF_SPIM_PIN_NOT_CONNECTED,), ())   \
 }
-
 /**
  * @brief Macro for checking whether specified frequency can be achieved for a given SPIM instance.
  *
