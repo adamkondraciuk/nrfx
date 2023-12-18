@@ -1748,11 +1748,19 @@ static bool endrx_irq_handler(NRF_UARTE_Type *        p_uarte,
         if (p_cb->flags & UARTE_FLAG_RX_STOP_ON_END)
         {
             nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPRX);
-	    p_cb->flags |= UARTE_FLAG_RX_ABORTED;
+            p_cb->flags |= UARTE_FLAG_RX_ABORTED;
         }
     }
-    else if (!(p_cb->flags & UARTE_FLAG_RX_CONT && rxstarted))
+    else if (!((p_cb->flags & UARTE_FLAG_RX_CONT) &&
+                (rxstarted || nrfy_uarte_event_check(p_uarte, NRF_UARTE_EVENT_RXSTARTED))))
     {
+        // If continuous transfer is set then we expect that new RX is already started by short.
+        // However it is possible that buffer was provided after ENDRX occurred. It can be checked
+        // by examining RXSTARTED event. If it did not occur that indicates that second buffer did
+        // not started but was set. It must be started manually. Usually RXSTARTED occurs almost
+        // immediately after ENDRX (if short is set) so rxstarted variable check seems to be enough
+        // but there are cases when RXSTARTED may be slightly delayed so if it is not set we
+        // need to check HW register to make sure that it did not occur.
         nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STARTRX);
         if (nrfy_uarte_event_check(p_uarte, NRF_UARTE_EVENT_RXTO))
         {
