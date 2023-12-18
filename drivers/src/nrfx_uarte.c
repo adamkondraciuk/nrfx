@@ -1173,7 +1173,7 @@ static bool rx_flushed_handler(NRF_UARTE_Type * p_uarte, uarte_control_block_t *
         memcpy(p_cb->rx.curr.p_buffer, p_cb->rx.flush.p_buffer, p_cb->rx.flush.length);
         p_cb->rx.off = p_cb->rx.flush.length;
         p_cb->rx.flush.length = 0;
-        if (nrfy_uarte_int_enable_check(p_uarte, NRF_UARTE_INT_RXDRDY_MASK))
+        if (nrfy_uarte_int_enable_check(p_uarte, NRF_UARTE_INT_RXDRDY_MASK) && p_cb->handler)
         {
                 user_handler(p_cb, NRFX_UARTE_EVT_RX_BYTE);
         }
