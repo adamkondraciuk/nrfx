@@ -764,6 +764,16 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_set(NRF_GRTC_Type * p_reg, bool enab
  * @param[in] enable True if the automatic mode is to be enabled, false otherwise.
  */
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_auto_mode_set(NRF_GRTC_Type * p_reg, bool enable);
+
+/**
+ * @brief Function for checking whether the SYSCOUNTER has automatic mode enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return True  Automatic mode is enabled.
+ * @return False Automatic mode is disabled.
+ */
+NRF_STATIC_INLINE bool nrf_grtc_sys_counter_auto_mode_check(NRF_GRTC_Type * p_reg);
 #endif // NRF_GRTC_HAS_EXTENDED
 
 /**
@@ -1273,6 +1283,11 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_auto_mode_set(NRF_GRTC_Type * p_reg,
     p_reg->MODE = ((p_reg->MODE & ~GRTC_MODE_AUTOEN_Msk) |
                   ((enable ? GRTC_MODE_AUTOEN_CpuActive :
                   GRTC_MODE_AUTOEN_Default) << GRTC_MODE_AUTOEN_Pos));
+}
+
+NRF_STATIC_INLINE bool nrf_grtc_sys_counter_auto_mode_check(NRF_GRTC_Type * p_reg)
+{
+    return (p_reg->MODE & GRTC_MODE_AUTOEN_Msk) == GRTC_MODE_AUTOEN_CpuActive;
 }
 
 #endif // NRF_GRTC_HAS_EXTENDED
