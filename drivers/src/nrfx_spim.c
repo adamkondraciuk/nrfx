@@ -238,12 +238,12 @@ static void configure_pins(nrfx_spim_t const *        p_instance,
     //   buffer must always be connected for the SPI to work.
     uint32_t sck_val = (p_config->mode <= NRF_SPIM_MODE_1) ? 0 : 1;
     pin_init(p_config->sck_pin, NRF_GPIO_PIN_DIR_OUTPUT, NRF_GPIO_PIN_NOPULL, pin_drive, sck_val);
-#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_SPIM_CLOCKPIN_SCK_NEEDED_EXT)
+#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_SPIM_CLOCKPIN_SCK_NEEDED)
     nrfy_gpio_pin_clock_set(p_config->sck_pin, true);
 #endif
     // - MOSI (optional) - output with initial value 0
     pin_init(p_config->mosi_pin, NRF_GPIO_PIN_DIR_OUTPUT, NRF_GPIO_PIN_NOPULL, pin_drive, 0);
-#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_SPIM_CLOCKPIN_MOSI_NEEDED_EXT)
+#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_SPIM_CLOCKPIN_MOSI_NEEDED)
     nrfy_gpio_pin_clock_set(p_config->mosi_pin, true);
 #endif
     // - MISO (optional) - input

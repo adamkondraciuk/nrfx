@@ -9,6 +9,10 @@
 extern "C" {
 #endif
 
+#if defined(HALTIUM_XXAA)
+#define NRF_TWIS_CLOCKPIN_SCL_NEEDED
+#endif
+
 /**
  * @defgroup nrf_twis_hal TWIS HAL
  * @{

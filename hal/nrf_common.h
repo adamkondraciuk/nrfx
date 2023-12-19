@@ -76,6 +76,18 @@ extern "C" {
 #define DMA_BUFFER_UNIFIED_BYTE_ACCESS 1
 #endif
 
+#if defined(LUMOS_XXAA)
+#if defined(NRF_SKIP_CLOCK_CONFIGURATION) || \
+    (defined(NRF_CONFIG_CPU_FREQ_MHZ) && (NRF_CONFIG_CPU_FREQ_MHZ == 64))
+#define NRF_CPU_FREQ_IS_64MHZ 1
+#elif !defined(NRF_CONFIG_CPU_FREQ_MHZ) || \
+    (defined(NRF_CONFIG_CPU_FREQ_MHZ) && (NRF_CONFIG_CPU_FREQ_MHZ == 128))
+#define NRF_CPU_FREQ_IS_128MHZ 1
+#else
+#error "Invalid MCU frequency"
+#endif
+#endif
+
 /** @brief Macro for extracting relative pin number from the absolute pin number. */
 #define NRF_PIN_NUMBER_TO_PIN(pin) ((pin) & 0x1F)
 

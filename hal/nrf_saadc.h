@@ -91,8 +91,10 @@ extern "C" {
 #define NRF_SAADC_LIN_CAL_MAX SAADC_TRIM_LINCALCOEFF_VAL_Max
 #endif
 
-#if !defined(NRF_SAADC_8BIT_SAMPLE_WIDTH) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF54H20_ENGA_XXAA) || defined(NRF54L15_ENGA_XXAA) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol specifying width of the 8-bit sample in bits. */
+#define NRF_SAADC_8BIT_SAMPLE_WIDTH 8
+#else
 #define NRF_SAADC_8BIT_SAMPLE_WIDTH 16
 #endif
 

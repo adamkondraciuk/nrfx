@@ -9,6 +9,10 @@
 extern "C" {
 #endif
 
+#if defined(NRF54H20_ENGA_XXAA)
+#define NRF_UARTE_CLOCKPIN_RTS_NEEDED
+#endif
+
 #define NRF_UARTE_PSEL_DISCONNECTED 0xFFFFFFFF
 
 /**
@@ -66,12 +70,18 @@ extern "C" {
 
 #if !defined(NRF_UARTE_IS_128MHZ_UARTE)
 /** @brief Macro for checking whether the base frequency for the specified UARTE is 128 MHz. */
-#define NRF_UARTE_IS_128MHZ_UARTE(p_reg) false
+#define NRF_UARTE_IS_128MHZ_UARTE(p_reg)                                                     \
+    (NRFX_COND_CODE_1(NRFX_IS_ENABLED(NRF_CPU_FREQ_IS_128MHZ),                               \
+        (NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(UARTE00), (p_reg == NRF_UARTE00), (false))), \
+        (false)))
 #endif
 
 #if !defined(NRF_UARTE_IS_64MHZ_UARTE)
 /** @brief Macro for checking whether the base frequency for the specified UARTE is 64 MHz. */
-#define NRF_UARTE_IS_64MHZ_UARTE(p_reg) false
+#define NRF_UARTE_IS_64MHZ_UARTE(p_reg)                                                      \
+    (NRFX_COND_CODE_1(NRFX_IS_ENABLED(NRF_CPU_FREQ_IS_64MHZ),                                \
+        (NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(UARTE00), (p_reg == NRF_UARTE00), (false))), \
+        (false)))
 #endif
 
 /**
