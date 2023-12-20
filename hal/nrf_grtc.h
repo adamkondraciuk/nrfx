@@ -61,15 +61,22 @@ extern "C" {
 #endif
 
 #if defined(GRTC_SYSCOUNTER_SYSCOUNTERL_VALUE_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Symbol indicating whether GRTC has has multiple SYSCOUNTER registers. */
+/** @brief Symbol indicating whether GRTC has multiple SYSCOUNTER registers. */
 #define NRF_GRTC_HAS_SYSCOUNTER_ARRAY 1
 #else
 #define NRF_GRTC_HAS_SYSCOUNTER_ARRAY 0
 #endif
 
+#if defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether GRTC has RTCOUNTER. */
+#define NRF_GRTC_HAS_RTCOUNTER 1
+#elif !defined(NRF_GRTC_HAS_RTCOUNTER)
+#define NRF_GRTC_HAS_RTCOUNTER 0
+#endif
+
 #if !defined(NRF_GRTC_HAS_EXTENDED)
 #if defined(LUMOS_XXAA) || defined(__NRFX_DOXYGEN__)
-/** @brief Symbol indicating whether GRTC has has extended functionality. */
+/** @brief Symbol indicating whether GRTC has extended functionality. */
 #define NRF_GRTC_HAS_EXTENDED 1
 #else
 #define NRF_GRTC_HAS_EXTENDED 0
@@ -107,6 +114,13 @@ extern "C" {
 
 /** @brief Bitmask of the higher 32-bits of capture/compare register for the RTCOUNTER. */
 #define NRF_GRTC_RTCOUNTER_CCH_MASK GRTC_RTCOMPAREH_VALUE_Msk
+
+#if defined(GRTC_SYSCOUNTERH_OVERFLOW_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Bitmask of the OVERFLOW bit. */
+#define NRF_GRTC_SYSCOUNTERH_OVERFLOW_MASK GRTC_SYSCOUNTERH_OVERFLOW_Msk
+#else
+#define NRF_GRTC_SYSCOUNTERH_OVERFLOW_MASK GRTC_SYSCOUNTER_SYSCOUNTERH_OVERFLOW_Msk
+#endif
 
 /** @brief Maximum value of TIMEOUT register content. */
 #define NRF_GRTC_TIMEOUT_MAX_VALUE (GRTC_TIMEOUT_VALUE_Msk >> GRTC_TIMEOUT_VALUE_Pos)
@@ -1228,15 +1242,29 @@ NRF_STATIC_INLINE bool nrf_grtc_sys_counter_check(NRF_GRTC_Type const * p_reg)
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_state_request_set(NRF_GRTC_Type * p_reg,
                                                                      bool            enable)
 {
-    p_reg->KEEPRUNNING = ((p_reg->KEEPRUNNING & ~(GRTC_KEEPRUNNING_DOMAIN0_Active  << NRF_GRTC_DOMAIN_INDEX)) |
-                         ((enable ? GRTC_KEEPRUNNING_DOMAIN0_Active :
-                         GRTC_KEEPRUNNING_DOMAIN0_NotActive) << NRF_GRTC_DOMAIN_INDEX));
+#if defined(GRTC_KEEPRUNNING_DOMAIN0_Msk)
+    p_reg->KEEPRUNNING = ((p_reg->KEEPRUNNING &
+                          ~(GRTC_KEEPRUNNING_DOMAIN0_Active  << NRF_GRTC_DOMAIN_INDEX)) |
+                          ((enable ? GRTC_KEEPRUNNING_DOMAIN0_Active :
+                           GRTC_KEEPRUNNING_DOMAIN0_NotActive) << NRF_GRTC_DOMAIN_INDEX));
+#else
+    p_reg->KEEPRUNNING = ((p_reg->KEEPRUNNING &
+                          ~(GRTC_KEEPRUNNING_REQUEST0_Active  << NRF_GRTC_DOMAIN_INDEX)) |
+                          ((enable ? GRTC_KEEPRUNNING_REQUEST0_Active :
+                           GRTC_KEEPRUNNING_REQUEST0_NotActive) << NRF_GRTC_DOMAIN_INDEX));
+#endif
 }
 
 NRF_STATIC_INLINE
 bool nrf_grtc_sys_counter_active_state_request_check(NRF_GRTC_Type const * p_reg)
 {
-    return (p_reg->KEEPRUNNING & (GRTC_KEEPRUNNING_DOMAIN0_Active << NRF_GRTC_DOMAIN_INDEX)) ? true : false;
+#if defined(GRTC_KEEPRUNNING_DOMAIN0_Msk)
+    return (p_reg->KEEPRUNNING &
+            (GRTC_KEEPRUNNING_DOMAIN0_Active << NRF_GRTC_DOMAIN_INDEX)) ? true : false;
+#else
+    return (p_reg->KEEPRUNNING &
+            (GRTC_KEEPRUNNING_REQUEST0_Active << NRF_GRTC_DOMAIN_INDEX)) ? true : false;
+#endif
 }
 
 NRF_STATIC_INLINE

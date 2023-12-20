@@ -30,6 +30,13 @@ extern "C" {
 #define NRF_MEMCONF_HAS_REPAIR 0
 #endif
 
+#if defined(MEMCONF_BLOCKTYPE_TRIM_MEMTRIM0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the trim configuration is present. */
+#define NRF_MEMCONF_HAS_TRIM 1
+#else
+#define NRF_MEMCONF_HAS_TRIM 0
+#endif
+
 /** @brief Symbol specifying maximum number of available power blocks. */
 #define NRF_MEMCONF_POWERBLOCK_COUNT MEMCONF_POWER_MaxCount
 
@@ -221,6 +228,7 @@ NRF_STATIC_INLINE uint32_t nrf_memconf_bitline_address_get(NRF_MEMCONF_Type cons
                                                            uint8_t                  bitline);
 #endif
 
+#if NRF_MEMCONF_HAS_TRIM
 /**
  * @brief Function for setting memory trim value.
  *
@@ -264,6 +272,7 @@ NRF_STATIC_INLINE void nrf_memconf_rettrim_set(NRF_MEMCONF_Type * p_reg,
  */
 NRF_STATIC_INLINE uint16_t nrf_memconf_rettrim_get(NRF_MEMCONF_Type const * p_reg,
                                                    uint8_t                  trim_id);
+#endif
 
 #ifndef NRF_DECLARE_ONLY
 NRF_STATIC_INLINE void nrf_memconf_ramblock_control_enable_set(NRF_MEMCONF_Type * p_reg,
@@ -412,6 +421,7 @@ NRF_STATIC_INLINE uint32_t nrf_memconf_bitline_address_get(NRF_MEMCONF_Type cons
 }
 #endif
 
+#if NRF_MEMCONF_HAS_TRIM
 NRF_STATIC_INLINE void nrf_memconf_memtrim_set(NRF_MEMCONF_Type * p_reg,
                                                uint8_t            trim_id,
                                                uint16_t           trim_val)
@@ -441,6 +451,7 @@ NRF_STATIC_INLINE uint16_t nrf_memconf_rettrim_get(NRF_MEMCONF_Type const * p_re
     return (uint16_t)((p_reg->BLOCKTYPE[trim_id].TRIM & NRF_MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM_MASK)
                       >> MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM0_Pos);
 }
+#endif
 
 #endif // NRF_DECLARE_ONLY
 

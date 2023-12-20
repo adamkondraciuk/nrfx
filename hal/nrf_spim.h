@@ -1597,7 +1597,7 @@ NRF_STATIC_INLINE bool nrf_spim_rx_terminate_on_bus_error_check(NRF_SPIM_Type co
 {
     return ((p_reg->DMA.RX.TERMINATEONBUSERROR & SPIM_DMA_RX_TERMINATEONBUSERROR_ENABLE_Msk)
             >> SPIM_DMA_RX_TERMINATEONBUSERROR_ENABLE_Pos) ==
-            SPIM_DMA_RX_ENABLE_ENABLE_Enabled;
+            SPIM_DMA_RX_TERMINATEONBUSERROR_ENABLE_Enabled;
 }
 
 NRF_STATIC_INLINE void nrf_spim_tx_terminate_on_bus_error_enable(NRF_SPIM_Type * p_reg)
@@ -1614,7 +1614,7 @@ NRF_STATIC_INLINE bool nrf_spim_tx_terminate_on_bus_error_check(NRF_SPIM_Type co
 {
     return ((p_reg->DMA.TX.TERMINATEONBUSERROR & SPIM_DMA_TX_TERMINATEONBUSERROR_ENABLE_Msk)
             >> SPIM_DMA_TX_TERMINATEONBUSERROR_ENABLE_Pos) ==
-            SPIM_DMA_TX_ENABLE_ENABLE_Enabled;
+            SPIM_DMA_TX_TERMINATEONBUSERROR_ENABLE_Enabled;
 }
 #endif // NRF_SPIM_HAS_DMA_REG
 

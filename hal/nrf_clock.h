@@ -234,7 +234,7 @@ typedef enum
 #if defined(CLOCK_HFCLKSTAT_SRC_Xtal) || defined(__NRFX_DOXYGEN__)
     NRF_CLOCK_HFCLK_HIGH_ACCURACY = CLOCK_HFCLKSTAT_SRC_Xtal,  /**< External 16 MHz/32 MHz crystal oscillator. */
 #elif NRF_CLOCK_HAS_XO
-    NRF_CLOCK_HFCLK_HIGH_ACCURACY = CLOCK_XO_STAT_SRC_HFXO,    /**< External 32 MHz crystal oscillator. */
+    NRF_CLOCK_HFCLK_HIGH_ACCURACY,                             /**< External 32 MHz crystal oscillator. */
 #else
     NRF_CLOCK_HFCLK_HIGH_ACCURACY = CLOCK_HFCLKSTAT_SRC_HFXO,  /**< External 32 MHz crystal oscillator. */
 #endif
