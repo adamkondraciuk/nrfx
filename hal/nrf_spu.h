@@ -30,6 +30,13 @@ extern "C" {
 #define NRF_SPU_HAS_MEMORY 0
 #endif
 
+#if defined(SPU_PERIPH_PERM_BLOCK_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether block feature is present. */
+#define NRF_SPU_HAS_BLOCK 1
+#else
+#define NRF_SPU_HAS_BLOCK 0
+#endif
+
 #if defined(SPU_FEATURE_BELLS_DOMAIN_MaxCount) || defined(SPU_FEATURE_BELLS_PROCESSOR_MaxCount) \
     || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether SPU has registers related to BELLS. */
@@ -544,6 +551,7 @@ NRF_STATIC_INLINE void nrf_spu_periph_perm_dmasec_set(NRF_SPU_Type * p_reg,
                                                       uint8_t        index,
                                                       bool           enable);
 
+#if NRF_SPU_HAS_BLOCK
 /**
  * @brief Function for getting the status of the peripheral access lock of the specified slave.
  *
@@ -569,6 +577,7 @@ NRF_STATIC_INLINE bool nrf_spu_periph_perm_block_get(NRF_SPU_Type const * p_reg,
  */
 NRF_STATIC_INLINE void nrf_spu_periph_perm_block_enable(NRF_SPU_Type * p_reg,
                                                         uint8_t        index);
+#endif
 
 /**
  * @brief Function for getting the status of the peripheral management lock of the specified slave.
@@ -707,6 +716,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_lock_enable(NRF_SPU_Type *    p_reg,
                                                    uint8_t           index,
                                                    uint8_t           subindex);
 
+#if NRF_SPU_HAS_BLOCK
 /**
  * @brief Function for getting status of the access lock of the specified feature.
  *
@@ -740,6 +750,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
                                                     nrf_spu_feature_t feature,
                                                     uint8_t           index,
                                                     uint8_t           subindex);
+#endif
 
 /**
  * @brief Function for getting the feature owner ID of the specified feature.
@@ -973,6 +984,7 @@ NRF_STATIC_INLINE bool nrf_spu_periph_perm_lock_get(NRF_SPU_Type const * p_reg,
            SPU_PERIPH_PERM_LOCK_Pos;
 }
 
+#if NRF_SPU_HAS_BLOCK
 NRF_STATIC_INLINE bool nrf_spu_periph_perm_block_get(NRF_SPU_Type const * p_reg,
                                                      uint8_t              index)
 {
@@ -980,6 +992,7 @@ NRF_STATIC_INLINE bool nrf_spu_periph_perm_block_get(NRF_SPU_Type const * p_reg,
     return (p_reg->PERIPH[index].PERM & SPU_PERIPH_PERM_BLOCK_Msk) >>
            SPU_PERIPH_PERM_BLOCK_Pos;
 }
+#endif
 
 NRF_STATIC_INLINE bool nrf_spu_periph_perm_dmasec_get(NRF_SPU_Type const * p_reg,
                                                       uint8_t              index)
@@ -1006,6 +1019,7 @@ NRF_STATIC_INLINE void nrf_spu_periph_perm_lock_enable(NRF_SPU_Type * p_reg,
                                     SPU_PERIPH_PERM_LOCK_Pos));
 }
 
+#if NRF_SPU_HAS_BLOCK
 NRF_STATIC_INLINE void nrf_spu_periph_perm_block_enable(NRF_SPU_Type * p_reg,
                                                         uint8_t        index)
 {
@@ -1014,6 +1028,7 @@ NRF_STATIC_INLINE void nrf_spu_periph_perm_block_enable(NRF_SPU_Type * p_reg,
                                  | (SPU_PERIPH_PERM_BLOCK_Blocked <<
                                     SPU_PERIPH_PERM_BLOCK_Pos));
 }
+#endif
 
 NRF_STATIC_INLINE void nrf_spu_periph_perm_dmasec_set(NRF_SPU_Type * p_reg,
                                                       uint8_t        index,
@@ -1343,6 +1358,7 @@ NRF_STATIC_INLINE bool nrf_spu_feature_lock_get(NRF_SPU_Type const * p_reg,
     }
 }
 
+#if NRF_SPU_HAS_BLOCK
 NRF_STATIC_INLINE bool nrf_spu_feature_block_get(NRF_SPU_Type const * p_reg,
                                                  nrf_spu_feature_t    feature,
                                                  uint8_t              index,
@@ -1475,6 +1491,7 @@ NRF_STATIC_INLINE bool nrf_spu_feature_block_get(NRF_SPU_Type const * p_reg,
             return false;
     }
 }
+#endif // NRF_SPU_HAS_BLOCK
 
 NRF_STATIC_INLINE nrf_owner_t nrf_spu_feature_ownerid_get(NRF_SPU_Type const * p_reg,
                                                           nrf_spu_feature_t    feature,
@@ -2020,6 +2037,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_lock_enable(NRF_SPU_Type *    p_reg,
     }
 }
 
+#if NRF_SPU_HAS_BLOCK
 NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
                                                     nrf_spu_feature_t feature,
                                                     uint8_t           index,
@@ -2206,6 +2224,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
             break;
     }
 }
+#endif // NRF_SPU_HAS_BLOCK
 
 NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
                                                    nrf_spu_feature_t feature,

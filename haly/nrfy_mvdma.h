@@ -45,6 +45,13 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_mvdma_sink_job_count_get(NRF_MVDMA_T
 #define NRFY_MVDMA_HAS_NEW_VER 0
 #endif
 
+#if NRF_MVDMA_HAS_AXIMODE || defined(__NRFX_DOXYGEN__)
+/** @refhal{NRF_MVDMA_HAS_AXIMODE} */
+#define NRFY_MVDMA_HAS_AXIMODE 1
+#else
+#define NRFY_MVDMA_HAS_AXIMODE 0
+#endif
+
 /** @brief Structure describing list execution request for the MVDMA.*/
 struct nrfy_mvdma_list_request_t
 {
@@ -452,6 +459,7 @@ NRFY_STATIC_INLINE void nrfy_mvdma_mode_set(NRF_MVDMA_Type * p_reg,
     nrf_barrier_w();
 }
 
+#if NRFY_MVDMA_HAS_AXIMODE
 /** @refhal{nrf_mvdma_aximode_set} */
 NRFY_STATIC_INLINE void nrfy_mvdma_aximode_set(NRF_MVDMA_Type *    p_reg,
                                                nrf_mvdma_aximode_t aximode)
@@ -459,6 +467,7 @@ NRFY_STATIC_INLINE void nrfy_mvdma_aximode_set(NRF_MVDMA_Type *    p_reg,
     nrf_mvdma_aximode_set(p_reg, aximode);
     nrf_barrier_w();
 }
+#endif
 
 /** @refhal{nrf_mvdma_source_list_ptr_set} */
 NRFY_STATIC_INLINE void nrfy_mvdma_source_list_ptr_set(NRF_MVDMA_Type *       p_reg,

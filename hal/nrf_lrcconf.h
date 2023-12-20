@@ -80,26 +80,6 @@ typedef enum
     NRF_LRCCONF_POWER_DOMAIN_7 = LRCCONF_POWERON_ACTIVE7_Msk, /**< Mask for power domain 7. */
 } nrf_lrcconf_power_domain_mask_t;
 
-/** @brief Request other power domain on mask.*/
-typedef enum {
-    NRF_LRCCONF_OTHERON_ENABLE_0  = LRCCONF_OTHERON_ENABLE0_Msk,  /**< Mask for request to keep power domain 0 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_1  = LRCCONF_OTHERON_ENABLE1_Msk,  /**< Mask for request to keep power domain 1 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_2  = LRCCONF_OTHERON_ENABLE2_Msk,  /**< Mask for request to keep power domain 2 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_3  = LRCCONF_OTHERON_ENABLE3_Msk,  /**< Mask for request to keep power domain 3 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_4  = LRCCONF_OTHERON_ENABLE4_Msk,  /**< Mask for request to keep power domain 4 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_5  = LRCCONF_OTHERON_ENABLE5_Msk,  /**< Mask for request to keep power domain 5 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_6  = LRCCONF_OTHERON_ENABLE6_Msk,  /**< Mask for request to keep power domain 6 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_7  = LRCCONF_OTHERON_ENABLE7_Msk,  /**< Mask for request to keep power domain 7 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_8  = LRCCONF_OTHERON_ENABLE8_Msk,  /**< Mask for request to keep power domain 8 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_9  = LRCCONF_OTHERON_ENABLE9_Msk,  /**< Mask for request to keep power domain 9 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_10 = LRCCONF_OTHERON_ENABLE10_Msk, /**< Mask for request to keep power domain 10 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_11 = LRCCONF_OTHERON_ENABLE11_Msk, /**< Mask for request to keep power domain 11 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_12 = LRCCONF_OTHERON_ENABLE12_Msk, /**< Mask for request to keep power domain 12 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_13 = LRCCONF_OTHERON_ENABLE13_Msk, /**< Mask for request to keep power domain 13 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_14 = LRCCONF_OTHERON_ENABLE14_Msk, /**< Mask for request to keep power domain 14 on. */
-    NRF_LRCCONF_OTHERON_ENABLE_15 = LRCCONF_OTHERON_ENABLE15_Msk, /**< Mask for request to keep power domain 15 on. */
-} nrf_lrcconf_otheron_mask_t;
-
 /**
  * @brief Function for starting a task.
  *
@@ -200,17 +180,6 @@ nrf_lrcconf_power_domain_mask_t nrf_lrcconf_power_domain_on_get(uint8_t index);
  */
 NRF_STATIC_INLINE bool nrf_lrcconf_clock_run_status_check(NRF_LRCCONF_Type const * p_reg,
                                                           uint8_t                  clock);
-/**
- * @brief Function for checking bypass for the specified clock.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] clock Clock index.
- *
- * @retval true  Bypass is enabled.
- * @retval false Bypass is disabled.
- */
-NRF_STATIC_INLINE bool nrf_lrcconf_clock_bypass_check(NRF_LRCCONF_Type const * p_reg,
-                                                      uint8_t                  clock);
 
 /**
  * @brief Function for retrieving the source of the specified clock.
@@ -256,17 +225,6 @@ NRF_STATIC_INLINE bool nrf_lrcconf_clock_always_run_check(NRF_LRCCONF_Type const
 NRF_STATIC_INLINE void nrf_lrcconf_clock_source_set(NRF_LRCCONF_Type *    p_reg,
                                                     uint8_t               clock,
                                                     nrf_lrcconf_clk_src_t source);
-
-/**
- * @brief Function for enabling or disabling bypass for the specified clock.
- *
- * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] clock  Clock index.
- * @param[in] enable True if bypass is to be enabled, false otherwise.
- */
-NRF_STATIC_INLINE void nrf_lrcconf_clock_bypass_set(NRF_LRCCONF_Type * p_reg,
-                                                    uint8_t            clock,
-                                                    bool               enable);
 
 /**
  * @brief Function for checking the status of constant latency.
@@ -328,33 +286,6 @@ void nrf_lrcconf_retain_set(NRF_LRCCONF_Type *              p_reg,
 NRF_STATIC_INLINE
 bool nrf_lrcconf_retain_check(NRF_LRCCONF_Type const *        p_reg,
                               nrf_lrcconf_power_domain_mask_t domain);
-
-/**
- * @brief Function for setting the power domain in other functional domain to remain on.
- *
- * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
- * @param[in] domain_mask Mask of power domains to remain on.
- * @param[in] alwayson    True if forcing the power domain to remain on is to be enabled,
- *                        false otherwise.
- */
-NRF_STATIC_INLINE
-void nrf_lrcconf_other_domain_poweron_force_set(NRF_LRCCONF_Type *         p_reg,
-                                                nrf_lrcconf_otheron_mask_t domain_mask,
-                                                bool                       alwayson);
-
-/**
- * @brief Function for checking if the power domain in other functional domain is configured
- *        to remain on.
- *
- * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] domain Power domain to be checked.
- *
- * @retval true  The domain is configured to remain on.
- * @retval false The domain is not configured to remain on.
- */
-NRF_STATIC_INLINE
-bool nrf_lrcconf_other_domain_poweron_force_check(NRF_LRCCONF_Type const *   p_reg,
-                                                  nrf_lrcconf_otheron_mask_t domain);
 
 /**
  * @brief Function for setting the waitstates for the AXI bridge connection.
@@ -434,13 +365,6 @@ nrf_lrcconf_power_domain_mask_t nrf_lrcconf_power_domain_on_get(uint8_t index)
     return (nrf_lrcconf_power_domain_mask_t)(LRCCONF_POWERON_ACTIVE0_Msk << index);
 }
 
-NRF_STATIC_INLINE bool nrf_lrcconf_clock_bypass_check(NRF_LRCCONF_Type const * p_reg,
-                                                      uint8_t                  clock)
-{
-    NRFX_ASSERT(clock < NRF_LRCCONF_CLK_COUNT);
-    return p_reg->CLKSTAT[clock].SRC & LRCCONF_CLKSTAT_SRC_BYPASS_Msk;
-}
-
 NRF_STATIC_INLINE bool nrf_lrcconf_clock_run_status_check(NRF_LRCCONF_Type const * p_reg,
                                                           uint8_t                  clock)
 {
@@ -483,16 +407,6 @@ NRF_STATIC_INLINE void nrf_lrcconf_clock_source_set(NRF_LRCCONF_Type *    p_reg,
                   ((source << LRCCONF_CLKCTRL_SRC_SRC_Pos) & LRCCONF_CLKCTRL_SRC_SRC_Msk));
 }
 
-NRF_STATIC_INLINE void nrf_lrcconf_clock_bypass_set(NRF_LRCCONF_Type * p_reg,
-                                                    uint8_t            clock,
-                                                    bool               enable)
-{
-    NRFX_ASSERT(clock < NRF_LRCCONF_CLK_COUNT);
-    p_reg->CLKCTRL[clock].SRC = ((p_reg->CLKCTRL[clock].SRC & ~LRCCONF_CLKCTRL_SRC_BYPASS_Msk) |
-                  ((enable ? LRCCONF_CLKCTRL_SRC_BYPASS_Enable :
-                             LRCCONF_CLKCTRL_SRC_BYPASS_Disable) << LRCCONF_CLKCTRL_SRC_BYPASS_Pos));
-}
-
 NRF_STATIC_INLINE bool nrf_lrcconf_constlatstat_check(NRF_LRCCONF_Type const * p_reg)
 {
     return p_reg->CONSTLATSTAT & LRCCONF_CONSTLATSTAT_STATUS_Msk;
@@ -526,21 +440,6 @@ bool nrf_lrcconf_retain_check(NRF_LRCCONF_Type const *        p_reg,
                               nrf_lrcconf_power_domain_mask_t domain)
 {
     return p_reg->RETAIN & domain;
-}
-
-NRF_STATIC_INLINE
-void nrf_lrcconf_other_domain_poweron_force_set(NRF_LRCCONF_Type *         p_reg,
-                                                nrf_lrcconf_otheron_mask_t domain_mask,
-                                                bool                       alwayson)
-{
-    p_reg->OTHERON = ((p_reg->OTHERON & ~domain_mask) | (alwayson ? domain_mask : 0));
-}
-
-NRF_STATIC_INLINE
-bool nrf_lrcconf_other_domain_poweron_force_check(NRF_LRCCONF_Type const *   p_reg,
-                                                  nrf_lrcconf_otheron_mask_t domain)
-{
-    return p_reg->OTHERON & domain;
 }
 
 NRF_STATIC_INLINE void nrf_lrcconf_axi_waitstates_set(NRF_LRCCONF_Type * p_reg,

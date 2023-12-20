@@ -59,15 +59,6 @@ typedef enum
     NRF_VPR_CSR_SLEEP_STATE_HIBERNATE  = VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_SLEEPSTATE_HIBERNATE, ///< During sleep, clock is turned off. All the registers are saved automatically. Restart by a reset.
 } nrf_vpr_csr_sleep_state_t;
 
-/** @brief Stacking modes. */
-typedef enum
-{
-    NRF_VPR_CSR_STACKING_AUTO_1F0_FAST = VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_AUTOSTACK1F0,      ///< Automatic stacking, interrupt handlers as functions that return to address 0x1F0, which in turn contains MRET instruction.
-    NRF_VPR_CSR_STACKING_AUTO_ANY_FAST = VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_AUTOSTACKNO1F0,    ///< Automatic stacking, interrupt handlers do not return to address 0x1F0.
-    NRF_VPR_CSR_STACKING_AUTO_1F0_SLOW = VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_AUTOSTACK1F0NOFIT, ///< Automatic stacking, interrupt handlers as functions that return to address 0x1F0. Fast interrupt transition disabled.
-    NRF_VPR_CSR_STACKING_LEGACY        = VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_NOAUTOSTACK,       ///< Legacy RISC-V interrupt handling. Automatic stacking and fast interrupt transition disabled.
-} nrf_vpr_csr_stacking_t;
-
 /** @brief Function for enabling the interrupts in machine mode. */
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupts_enable(void);
 
@@ -199,36 +190,6 @@ NRF_STATIC_INLINE void nrf_vpr_csr_rtperiph_enable_set(bool enable);
 NRF_STATIC_INLINE bool nrf_vpr_csr_rtperiph_enable_check(void);
 
 /**
- * @brief Function for setting the external clock to remain running.
- *
- * @param[in] enable True if forcing the external clock is to be enabled, false otherwise.
- */
-NRF_STATIC_INLINE void nrf_vpr_csr_force_ext_clock_set(bool enable);
-
-/**
- * @brief Function for checking whether the external clock is to remain running.
- *
- * @retval true  External clock is configured to remain on.
- * @retval false External clock is not configured to remain on.
- */
-NRF_STATIC_INLINE bool nrf_vpr_csr_force_ext_clock_check(void);
-
-/**
- * @brief Function for setting the RAM clock to remain running.
- *
- * @param[in] enable True if forcing RAM clock is to be enabled, false otherwise.
- */
-NRF_STATIC_INLINE void nrf_vpr_csr_force_ram_clock_set(bool enable);
-
-/**
- * @brief Function for checking whether the RAM clock is to remain running.
- *
- * @retval true  RAM clock is configured to remain on.
- * @retval false RAM clock is not configured to remain on.
- */
-NRF_STATIC_INLINE bool nrf_vpr_csr_force_ram_clock_check(void);
-
-/**
  * @brief Function for enabling or disabling the generation of IRQ at position CNT_IRQ_POSITION.
  *
  * @param[in] enable True if generation of IRQ at position CNT_IRQ_POSITION is to be enabled, false otherwise.
@@ -319,36 +280,6 @@ NRF_STATIC_INLINE void nrf_vpr_csr_unrecoverable_return_set(bool enable);
  * @retval false Unrecoverable return is disabled.
  */
 NRF_STATIC_INLINE bool nrf_vpr_csr_unrecoverable_return_check(void);
-
-/**
- * @brief Function for setting the IRQ stacking mode.
- *
- * @param[in] mode IRQ stacking mode to be used.
- */
-NRF_STATIC_INLINE void nrf_vpr_csr_irq_stacking_set(nrf_vpr_csr_stacking_t mode);
-
-/**
- * @brief Function for getting the IRQ stacking mode.
- *
- * @return IRQ stacking mode.
- */
-NRF_STATIC_INLINE nrf_vpr_csr_stacking_t nrf_vpr_csr_irq_stacking_get(void);
-
-/**
- * @brief Function for enabling or disabling the transaction timeout check.
- *
- * @param[in] enable True if exception is to be raised if a transaction takes more than 512 cycles,
- *                   false otherwise.
- */
-NRF_STATIC_INLINE void nrf_vpr_csr_transaction_timeout_exception_set(bool enable);
-
-/**
- * @brief Function for checking whether the transaction timeout check is enabled.
- *
- * @retval true  Transaction timeout check is enabled.
- * @retval false Transaction timeout check is disabled.
- */
-NRF_STATIC_INLINE bool nrf_vpr_csr_transaction_timeout_exception_check(void);
 
 #ifndef NRF_DECLARE_ONLY
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupts_enable(void)
@@ -474,42 +405,6 @@ NRF_STATIC_INLINE bool nrf_vpr_csr_rtperiph_enable_check(void)
            >> VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Pos;
 }
 
-NRF_STATIC_INLINE void nrf_vpr_csr_force_ext_clock_set(bool enable)
-{
-    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
-    reg = (reg & ~VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Msk) | NRF_VPR_CSR_NORDIC_KEY_MASK;
-
-    reg |= ((enable ? VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Enabled :
-                      VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Disabled)
-            << VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Pos) | NRF_VPR_CSR_NORDIC_KEY_MASK;
-
-    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, reg);
-}
-
-NRF_STATIC_INLINE bool nrf_vpr_csr_force_ext_clock_check(void)
-{
-    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Msk)
-           >> VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Pos;
-}
-
-NRF_STATIC_INLINE void nrf_vpr_csr_force_ram_clock_set(bool enable)
-{
-    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
-    reg = (reg & ~VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Msk) | NRF_VPR_CSR_NORDIC_KEY_MASK;
-
-    reg |= ((enable ? VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Enabled :
-                      VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Disabled)
-            << VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Pos) | NRF_VPR_CSR_NORDIC_KEY_MASK;
-
-    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, reg);
-}
-
-NRF_STATIC_INLINE bool nrf_vpr_csr_force_ram_clock_check(void)
-{
-    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Msk)
-           >> VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Pos;
-}
-
 NRF_STATIC_INLINE void nrf_vpr_csr_cnt_irq_enable_set(bool enable)
 {
     uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
@@ -618,42 +513,6 @@ NRF_STATIC_INLINE bool nrf_vpr_csr_unrecoverable_return_check(void)
              & VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_UNRECOVRETURN_Msk)
             >> VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_UNRECOVRETURN_Pos
             == VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_UNRECOVRETURN_Enabled);
-}
-
-NRF_STATIC_INLINE void nrf_vpr_csr_irq_stacking_set(nrf_vpr_csr_stacking_t mode)
-{
-    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE);
-    reg = (reg & ~VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Msk) |
-             NRF_VPR_CSR_NORDIC_KEY_MASK;
-
-    reg |= (mode << VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Pos);
-    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE, reg);
-}
-
-NRF_STATIC_INLINE nrf_vpr_csr_stacking_t nrf_vpr_csr_irq_stacking_get(void)
-{
-    return (nrf_vpr_csr_stacking_t)((nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
-            & VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Msk)
-           >> VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Pos);
-}
-
-NRF_STATIC_INLINE void nrf_vpr_csr_transaction_timeout_exception_set(bool enable)
-{
-    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE);
-    reg = (reg & ~VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Msk) | NRF_VPR_CSR_NORDIC_KEY_MASK;
-
-    reg |= (enable ? VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Enabled :
-                     VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Disabled)
-           << VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Pos;
-    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE, reg);
-}
-
-NRF_STATIC_INLINE bool nrf_vpr_csr_transaction_timeout_exception_check(void)
-{
-    return ((nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
-             & VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Msk)
-            >> VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Pos
-            == VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Enabled);
 }
 
 #endif // NRF_DECLARE_ONLY

@@ -15,7 +15,7 @@ extern "C" {
  * @defgroup nrf_ramc_hal RAMC RAM Controller HAL
  * @{
  * @ingroup nrf_ramc
- * @brief   Hardware access layer for managing the Random Access Memory Controller (RAMC) 
+ * @brief   Hardware access layer for managing the Random Access Memory Controller (RAMC)
  *          peripheral.
  */
 
@@ -57,24 +57,6 @@ NRF_STATIC_INLINE uint32_t nrf_ramc_event_address_get(NRF_RAMC_Type const * p_re
                                                       nrf_ramc_event_t      event);
 
 /**
- * @brief Function for returning the address of the last fixable error detected by the ECC.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- *
- * @return Address of the last fixable error.
- */
-NRF_STATIC_INLINE uint32_t nrf_ramc_fix_address_get(NRF_RAMC_Type const * p_reg);
-
-/**
- * @brief Function for returning the address of the last non-fixable error detected by the ECC.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- *
- * @return Address of the last non-fixable error.
- */
-NRF_STATIC_INLINE uint32_t nrf_ramc_non_fix_address_get(NRF_RAMC_Type const * p_reg);
-
-/**
  * @brief Function for setting number of waitstates for a read from the RAM.
  *
  * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
@@ -86,20 +68,20 @@ NRF_STATIC_INLINE void nrf_ramc_waitstates_set(NRF_RAMC_Type * p_reg, uint8_t wa
  * @brief Function for getting number of waitstates for a read from the RAM.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * 
+ *
  * @return Number of waitstates.
  */
 NRF_STATIC_INLINE uint8_t nrf_ramc_waitstates_get(NRF_RAMC_Type const * p_reg);
 
 /**
  * @brief Function for setting base address for secure access area.
- * 
- * @note When the SECENABLE is enabled, any non-secure accesses to the address within 
+ *
+ * @note When the SECENABLE is enabled, any non-secure accesses to the address within
  *       the RAM which are above or equal to the base address generates an error.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] addr  Base address. Writes to the bits [11:0] are ignored and are read as zero. 
- *                  Similarly, the MSB size depends on the size of the RAM, writes to those 
+ * @param[in] addr  Base address. Writes to the bits [11:0] are ignored and are read as zero.
+ *                  Similarly, the MSB size depends on the size of the RAM, writes to those
  *                  MSB above the size are ignored and are read as zero.
  */
 NRF_STATIC_INLINE void nrf_ramc_secbase_set(NRF_RAMC_Type * p_reg, uint32_t addr);
@@ -108,7 +90,7 @@ NRF_STATIC_INLINE void nrf_ramc_secbase_set(NRF_RAMC_Type * p_reg, uint32_t addr
  * @brief Function for getting base address for secure access area.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * 
+ *
  * @return Base address.
  */
 NRF_STATIC_INLINE uint32_t nrf_ramc_secbase_get(NRF_RAMC_Type const * p_reg);
@@ -125,7 +107,7 @@ NRF_STATIC_INLINE void nrf_ramc_secenable_set(NRF_RAMC_Type * p_reg, bool enable
  * @brief Function for checking secure access restrictions.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * 
+ *
  * @retval true  Secure access restrictions are enabled.
  * @retval false Secure access restrictions are disabled.
  */
@@ -148,16 +130,6 @@ NRF_STATIC_INLINE uint32_t nrf_ramc_event_address_get(NRF_RAMC_Type const * p_re
                                                       nrf_ramc_event_t      event)
 {
     return nrf_task_event_address_get(p_reg, event);
-}
-
-NRF_STATIC_INLINE uint32_t nrf_ramc_fix_address_get(NRF_RAMC_Type const * p_reg)
-{
-    return p_reg->FIXADDR;
-}
-
-NRF_STATIC_INLINE uint32_t nrf_ramc_non_fix_address_get(NRF_RAMC_Type const * p_reg)
-{
-    return p_reg->NONFIXADDR;
 }
 
 NRF_STATIC_INLINE void nrf_ramc_waitstates_set(NRF_RAMC_Type * p_reg, uint8_t waitstates)

@@ -30,6 +30,13 @@ extern "C" {
 #define NRF_RESETINFO_HAS_MULTIPLE_SECWDT 0
 #endif
 
+#if defined(RESETINFO_MASKLOCKUP_MASK_Mask) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether CPU lockup signal masking is present. */
+#define NRF_RESETINFO_HAS_MASKLOCKUP 1
+#else
+#define NRF_RESETINFO_HAS_MASKLOCKUP 0
+#endif
+
 #if defined(RESETINFO_ERROR_STATUS_ERRORSTATUS_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Maximum value of error status. */
 #define NRF_RESETINFO_ERROR_STATUS_MAX RESETINFO_ERROR_STATUS_ERRORSTATUS_Msk
@@ -163,6 +170,7 @@ NRF_STATIC_INLINE void nrf_resetinfo_restore_valid_set(NRF_RESETINFO_Type * p_re
  */
 NRF_STATIC_INLINE bool nrf_resetinfo_restore_valid_check(NRF_RESETINFO_Type const * p_reg);
 
+#if NRF_RESETINFO_HAS_MASKLOCKUP
 /**
  * @brief Function for setting the flag indicating if CPU lockup signal is to be masked.
  *
@@ -186,6 +194,7 @@ NRF_STATIC_INLINE void nrf_resetinfo_mask_lockup_set(NRF_RESETINFO_Type * p_reg,
  * @retval false CPU lockup signal is not to be masked.
  */
 NRF_STATIC_INLINE bool nrf_resetinfo_mask_lockup_check(NRF_RESETINFO_Type const * p_reg);
+#endif
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -262,6 +271,8 @@ NRF_STATIC_INLINE bool nrf_resetinfo_restore_valid_check(NRF_RESETINFO_Type cons
             >> RESETINFO_RESTOREVALID_RESTOREVALID_Pos)
            == RESETINFO_RESTOREVALID_RESTOREVALID_Present;
 }
+
+#if NRF_RESETINFO_HAS_MASKLOCKUP
 NRF_STATIC_INLINE void nrf_resetinfo_mask_lockup_set(NRF_RESETINFO_Type * p_reg, bool enable)
 {
     p_reg->MASKLOCKUP = (enable ? RESETINFO_MASKLOCKUP_MASK_Mask :
@@ -275,6 +286,7 @@ NRF_STATIC_INLINE bool nrf_resetinfo_mask_lockup_check(NRF_RESETINFO_Type const 
             >> RESETINFO_MASKLOCKUP_MASK_Pos)
            == RESETINFO_MASKLOCKUP_MASK_Mask;
 }
+#endif
 
 #endif // NRF_DECLARE_ONLY
 

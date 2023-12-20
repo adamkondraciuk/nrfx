@@ -35,8 +35,6 @@ typedef enum
 {
     NRF_HSFLL_TASK_START       = offsetof(NRF_HSFLL_Type, TASKS_START),      ///< Start the HSFLL.
     NRF_HSFLL_TASK_STOP        = offsetof(NRF_HSFLL_Type, TASKS_STOP),       ///< Stop the HSFLL.
-    NRF_HSFLL_TASK_SLEEP       = offsetof(NRF_HSFLL_Type, TASKS_SLEEP),      ///< Request the HSFLL into sleep mode.
-    NRF_HSFLL_TASK_WAKEUP      = offsetof(NRF_HSFLL_Type, TASKS_WAKEUP),     ///< Wakeup the HSFLL from sleep mode.
     NRF_HSFLL_TASK_FREQ_MEAS   = offsetof(NRF_HSFLL_Type, TASKS_FREQMEAS),   ///< Start frequency measurement in software-controlled mode.
     NRF_HSFLL_TASK_FREQ_CHANGE = offsetof(NRF_HSFLL_Type, TASKS_FREQCHANGE), ///< Trigger frequency change.
 } nrf_hsfll_task_t;
@@ -46,7 +44,6 @@ typedef enum
 {
     NRF_HSFLL_EVENT_STARTED      = offsetof(NRF_HSFLL_Type, EVENTS_STARTED),     ///< HSFLL started.
     NRF_HSFLL_EVENT_STOPPED      = offsetof(NRF_HSFLL_Type, EVENTS_STOPPED),     ///< HSFLL stopped.
-    NRF_HSFLL_EVENT_WOKEUP       = offsetof(NRF_HSFLL_Type, EVENTS_WOKEUP),      ///< HSFLL woke up.
     NRF_HSFLL_EVENT_FREQM_DONE   = offsetof(NRF_HSFLL_Type, EVENTS_FREQMDONE),   ///< HSFLL frequency measurement done.
     NRF_HSFLL_EVENT_FREQ_CHANGED = offsetof(NRF_HSFLL_Type, EVENTS_FREQCHANGED), ///< HSFLL frequency change done.
 } nrf_hsfll_event_t;
@@ -67,13 +64,6 @@ typedef struct
     bool                    accuracy; ///< Clock accurracy is within 2%.
     bool                    locked;   ///< HSFLL locked to reference clock.
 } nrf_hsfll_status_clk_t;
-
-/** @brief HSFLL status of analog module output signals. */
-typedef struct
-{
-    bool ready;   ///< Current value of READY signal from the analog module. True if '1', false if '0'.
-    bool settled; ///< Current value of SETTLED signal from the analog module. True if '1', false if '0'.
-} nrf_hsfll_statusana_t;
 
 /** @brief HSFLL frequency measurements errors. */
 typedef struct
@@ -183,16 +173,6 @@ NRF_STATIC_INLINE bool nrf_hsfll_event_check(NRF_HSFLL_Type const * p_reg,
  */
 NRF_STATIC_INLINE void nrf_hsfll_status_clk_get(NRF_HSFLL_Type const *   p_reg,
                                                 nrf_hsfll_status_clk_t * p_status);
-
-/**
- * @brief Function for getting the status of HSFLL analog module output signals.
- *
- * @param[in]  p_reg    Pointer to the structure of registers of the peripheral.
- * @param[out] p_status Pointer to the structure to be filled with the HSFLL status of analog
- *                      module output signals.
- */
-NRF_STATIC_INLINE void nrf_hsfll_statusana_get(NRF_HSFLL_Type const *  p_reg,
-                                               nrf_hsfll_statusana_t * p_status);
 
 /**
  * @brief Function for checking whether the HSFLL frequency measurement is completed.
@@ -398,16 +378,6 @@ NRF_STATIC_INLINE void nrf_hsfll_status_clk_get(NRF_HSFLL_Type const *   p_reg,
     p_status->locked = ((reg & HSFLL_CLOCKSTATUS_LOCKED_Msk)
                         >> HSFLL_CLOCKSTATUS_LOCKED_Pos) ==
                        HSFLL_CLOCKSTATUS_LOCKED_Locked;
-}
-
-NRF_STATIC_INLINE void nrf_hsfll_statusana_get(NRF_HSFLL_Type const *  p_reg,
-                                               nrf_hsfll_statusana_t * p_status)
-{
-    NRFX_ASSERT(p_status);
-    p_status->ready = (p_reg->STATUSANA & HSFLL_STATUSANA_READY_Msk)
-                      >> HSFLL_STATUSANA_READY_Pos;
-    p_status->settled = (p_reg->STATUSANA & HSFLL_STATUSANA_SETTLED_Msk)
-                        >> HSFLL_STATUSANA_SETTLED_Pos;
 }
 
 NRF_STATIC_INLINE bool nrf_hsfll_freqm_done_check(NRF_HSFLL_Type const * p_reg)

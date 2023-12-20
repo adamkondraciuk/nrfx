@@ -106,7 +106,7 @@ extern "C" {
 #define NRF_GPIOTE_SECURE_SUFFIX
 #endif
 
-#if defined(GPIOTE_INTEN0_IN0_Msk)
+#if defined(GPIOTE_INTENSET0_IN0_Msk)
 #if defined(LUMOS_XXAA)
 #define NRF_GPIOTE_PORT_ID 0
 #elif defined(NRF_APPLICATION) || defined(NRF_PPR)

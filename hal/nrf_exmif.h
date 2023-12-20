@@ -29,24 +29,6 @@ typedef enum
     NRF_EXMIF_TASK_STOP  = offsetof(NRF_EXMIF_Type, TASKS_STOP)   ///< Stop EXMIF peripheral power and clocks.
 } nrf_exmif_task_t;
 
-/** @brief EXMIF incoming data strobe delay settings. */
-typedef enum
-{
-    NRF_EXMIF_DELAY_NONE = EXMIF_PROGDELAY_DELAY_NoDelay, ///< No delay.
-    NRF_EXMIF_DELAY_1    = EXMIF_PROGDELAY_DELAY_Delay1,  ///< 1 delay element.
-    NRF_EXMIF_DELAY_2    = EXMIF_PROGDELAY_DELAY_Delay2,  ///< 2 delay elements.
-    NRF_EXMIF_DELAY_3    = EXMIF_PROGDELAY_DELAY_Delay3,  ///< 3 delay elements.
-    NRF_EXMIF_DELAY_4    = EXMIF_PROGDELAY_DELAY_Delay4,  ///< 4 delay elements.
-    NRF_EXMIF_DELAY_5    = EXMIF_PROGDELAY_DELAY_Delay5,  ///< 5 delay elements.
-    NRF_EXMIF_DELAY_6    = EXMIF_PROGDELAY_DELAY_Delay6,  ///< 6 delay elements.
-    NRF_EXMIF_DELAY_7    = EXMIF_PROGDELAY_DELAY_Delay7,  ///< 7 delay elements.
-    NRF_EXMIF_DELAY_8    = EXMIF_PROGDELAY_DELAY_Delay8,  ///< 8 delay elements.
-    NRF_EXMIF_DELAY_9    = EXMIF_PROGDELAY_DELAY_Delay9,  ///< 9 delay elements.
-    NRF_EXMIF_DELAY_10   = EXMIF_PROGDELAY_DELAY_Delay10, ///< 10 delay elements.
-    NRF_EXMIF_DELAY_11   = EXMIF_PROGDELAY_DELAY_Delay11, ///< 11 delay elements.
-    NRF_EXMIF_DELAY_12   = EXMIF_PROGDELAY_DELAY_Delay12, ///< 12 delay elements.
-} nrf_exmif_delay_t;
-
 /**
  * @brief Structure for configuration of mapping of the memory device to the EXMIF peripheral.
  *
@@ -97,15 +79,6 @@ NRF_STATIC_INLINE void nrf_exmif_reset_set(NRF_EXMIF_Type * p_reg,
  */
 NRF_STATIC_INLINE void nrf_exmif_locked_access_set(NRF_EXMIF_Type * p_reg,
                                                    bool             enable);
-
-/**
- * @brief Function for configuring EXMIF delay for incoming strobe.
- *
- * @param[in] p_reg        Pointer to the structure of registers of the peripheral.
- * @param[in] strobe_delay Incoming strobe delay value.
- */
-NRF_STATIC_INLINE void nrf_exmif_strobe_delay_set(NRF_EXMIF_Type *  p_reg,
-                                                  nrf_exmif_delay_t strobe_delay);
 
 /**
  * @brief Function for configuring mapping of the memory device to EXMIF peripheral.
@@ -163,12 +136,6 @@ NRF_STATIC_INLINE void nrf_exmif_locked_access_set(NRF_EXMIF_Type * p_reg,
     p_reg->LOCKEDACCESS =
         (enable ? (EXMIF_LOCKEDACCESS_ENABLE_Enabled << EXMIF_LOCKEDACCESS_ENABLE_Pos) :
                   (EXMIF_LOCKEDACCESS_ENABLE_Disabled << EXMIF_LOCKEDACCESS_ENABLE_Pos));
-}
-
-NRF_STATIC_INLINE void nrf_exmif_strobe_delay_set(NRF_EXMIF_Type *  p_reg,
-                                                  nrf_exmif_delay_t strobe_delay)
-{
-    p_reg->PROGDELAY = ((uint32_t)strobe_delay << EXMIF_PROGDELAY_DELAY_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_exmif_device_config(NRF_EXMIF_Type *           p_reg,
