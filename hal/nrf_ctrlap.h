@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_CTRLAP_H__
 #define NRF_CTRLAP_H__

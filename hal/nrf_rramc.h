@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_RRAMC_H__
 #define NRF_RRAMC_H__

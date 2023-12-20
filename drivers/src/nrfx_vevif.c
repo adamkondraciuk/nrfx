@@ -52,7 +52,6 @@ nrfx_err_t nrfx_vevif_init(nrf_vpr_clic_priority_t    interrupt_priority,
     m_cb.p_context = p_context;
     m_cb.state     = NRFX_DRV_STATE_INITIALIZED;
 
-    /* @todo This should be done in startup */
     nrf_vpr_csr_machine_interrupts_enable();
 
     nrf_vpr_csr_rtperiph_enable_set(true);

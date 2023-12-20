@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2021>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_PPIB_H__
 #define NRF_PPIB_H__

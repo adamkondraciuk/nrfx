@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2020>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_IPCT_H__
 #define NRF_IPCT_H__
@@ -63,8 +63,6 @@ typedef enum
     NRF_IPCT_TASK_ACK_13  = offsetof(NRF_IPCT_Type, TASKS_ACK[13]),  /**< Acknowledge the RECEIVE[13] task. */
     NRF_IPCT_TASK_ACK_14  = offsetof(NRF_IPCT_Type, TASKS_ACK[14]),  /**< Acknowledge the RECEIVE[14] task. */
     NRF_IPCT_TASK_ACK_15  = offsetof(NRF_IPCT_Type, TASKS_ACK[15]),  /**< Acknowledge the RECEIVE[15] task. */
-#else
-    /* TODO: [NRFX-3158] Align to FP1 */
 #endif
 } nrf_ipct_task_t;
 
@@ -104,15 +102,13 @@ typedef enum
     NRF_IPCT_EVENT_ACKED_13   = offsetof(NRF_IPCT_Type, EVENTS_ACKED[13]),   /**< Acknowledged event for the SEND[13] task. */
     NRF_IPCT_EVENT_ACKED_14   = offsetof(NRF_IPCT_Type, EVENTS_ACKED[14]),   /**< Acknowledged event for the SEND[14] task. */
     NRF_IPCT_EVENT_ACKED_15   = offsetof(NRF_IPCT_Type, EVENTS_ACKED[15]),   /**< Acknowledged event for the SEND[15] task. */
-#else
-    /* TODO: [NRFX-3158] Algin to FP1 */
 #endif
 } nrf_ipct_event_t;
 
+#if NRF_IPCT_HAS_ACK
 /** @brief IPCT shortcuts. */
 typedef enum
 {
-#if NRF_IPCT_HAS_ACK
     NRF_IPCT_SHORT_RECEIVE0_ACK0_MASK   = IPCT_SHORTS_RECEIVE0_ACK0_Msk,   /**< Shortcut between event RECEIVE[0] and task ACK[0]. */
     NRF_IPCT_SHORT_RECEIVE1_ACK1_MASK   = IPCT_SHORTS_RECEIVE1_ACK1_Msk,   /**< Shortcut between event RECEIVE[1] and task ACK[1]. */
     NRF_IPCT_SHORT_RECEIVE2_ACK2_MASK   = IPCT_SHORTS_RECEIVE2_ACK2_Msk,   /**< Shortcut between event RECEIVE[2] and task ACK[2]. */
@@ -145,10 +141,8 @@ typedef enum
                                           NRF_IPCT_SHORT_RECEIVE13_ACK13_MASK |
                                           NRF_IPCT_SHORT_RECEIVE14_ACK14_MASK |
                                           NRF_IPCT_SHORT_RECEIVE15_ACK15_MASK, /**< All IPCT shortcuts. */
-#else
-    TODO = 0, /* TODO: [NRFX-3158] Align to FP1 */
-#endif
 } nrf_ipct_short_mask_t;
+#endif
 
 /** @brief IPCT interrupts. */
 typedef enum
@@ -604,7 +598,6 @@ NRF_STATIC_INLINE nrf_ipct_task_t nrf_ipct_ack_task_get(uint8_t index)
     return (nrf_ipct_task_t)(NRFX_OFFSETOF(NRF_IPCT_Type, TASKS_ACK[index]));
 #else
     (void)index;
-    /* TODO: [NRFX-3158] Align to FP1 */
     return (nrf_ipct_task_t)0;
 #endif
 }
@@ -620,7 +613,6 @@ NRF_STATIC_INLINE nrf_ipct_event_t nrf_ipct_acked_event_get(uint8_t index)
     return (nrf_ipct_event_t)(NRFX_OFFSETOF(NRF_IPCT_Type, EVENTS_ACKED[index]));
 #else
     (void)index;
-    /* TODO: [NRFX-3158] Align to FP1 */
     return (nrf_ipct_event_t)0;
 #endif
 }

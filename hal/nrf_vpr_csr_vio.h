@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_VPR_CSR_VIO_H__
 #define NRF_VPR_CSR_VIO_H__
@@ -17,7 +17,6 @@ extern "C" {
  *          and Status Registers for VPR IO (VPR CSR VIO).
  */
 
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_ENGA_XXAA) && !defined(NRF7140_XXAA)
 /** @brief Shift sizes for output. */
 typedef enum
 {
@@ -35,6 +34,7 @@ typedef struct
     nrf_vpr_csr_vio_out_shift_t shift_size;   ///< Shift size.
 } nrf_vpr_csr_vio_mode_out_t;
 
+#if !defined(NRF54H20_ENGA_XXAA)
 /** @brief Input modes. */
 typedef enum
 {
@@ -100,7 +100,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_buffered_toggle_set(uint16_t mask);
  */
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_get(void);
 
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_ENGA_XXAA) && !defined(NRF7140_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
 /**
  * @brief Function for getting the input mode.
  *
@@ -206,7 +206,6 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_out_combined_toggle_set(uint32_t mask);
  */
 NRF_STATIC_INLINE bool nrf_vpr_csr_vio_out_combined_dirty_check(void);
 
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_ENGA_XXAA) && !defined(NRF7140_XXAA)
 /**
  * @brief Function for getting the configuration of output mode.
  *
@@ -220,7 +219,6 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_get(nrf_vpr_csr_vio_mode_out_t *
  * @param[in] p_mode Pointer to the structure with output mode to be set.
  */
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_set(nrf_vpr_csr_vio_mode_out_t const * p_mode);
-#endif
 
 /**
  * @brief Function for getting the combined pin directions mask and output values.
@@ -327,7 +325,7 @@ NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_get(void)
     return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_IN);
 }
 
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_ENGA_XXAA) && !defined(NRF7140_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
 NRF_STATIC_INLINE nrf_vpr_csr_vio_mode_in_t nrf_vpr_csr_vio_mode_in_get(void)
 {
     return nrf_csr_read(VPRCSR_NORDIC_INMODE);
@@ -401,7 +399,6 @@ NRF_STATIC_INLINE bool nrf_vpr_csr_vio_out_combined_dirty_check(void)
             >> VPRCSR_NORDIC_OUTBDS_DIRTYBIT_Pos) == VPRCSR_NORDIC_OUTBDS_DIRTYBIT_DIRTY;
 }
 
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_ENGA_XXAA) && !defined(NRF7140_XXAA)
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_get(nrf_vpr_csr_vio_mode_out_t * p_mode)
 {
     uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_OUTMODE);
@@ -423,7 +420,6 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_set(nrf_vpr_csr_vio_mode_out_t c
 
     nrf_csr_write(VPRCSR_NORDIC_OUTMODE, reg);
 }
-#endif
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vio_dirout_get(void)
 {

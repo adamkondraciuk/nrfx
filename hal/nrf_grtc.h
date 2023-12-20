@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2021>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_GRTC_H
 #define NRF_GRTC_H

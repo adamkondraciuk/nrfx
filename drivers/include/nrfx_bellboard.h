@@ -17,17 +17,6 @@ extern "C" {
  * @brief   BELLBOARD peripheral driver.
  */
 
-/** @brief Bellboard Domains. */
-typedef enum
-{
-    NRFX_BELLBOARD_DOMAIN_APPLICATION,
-    NRFX_BELLBOARD_DOMAIN_CELLCORE,    /* TODO: [NRFX-3164] Internal */
-    NRFX_BELLBOARD_DOMAIN_CELLDSP,     /* TODO: [NRFX-3164] Internal */
-    NRFX_BELLBOARD_DOMAIN_CELLRF,      /* TODO: [NRFX-3164] Internal */
-    NRFX_BELLBOARD_DOMAIN_RADIOCORE,
-    NRFX_BELLBOARD_DOMAIN_SECURE,      /* TODO: [NRFX-3164] Hidden */
-} nrfx_bellboard_domain_t;
-
 /** @brief Structure for the BELLBOARD driver instance. */
 typedef struct
 {

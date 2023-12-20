@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2020>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_STM_H__
 #define NRF_STM_H__
@@ -16,7 +16,7 @@ extern "C" {
  * @brief   Hardware access layer for managing the System Trace Macrocell (STM) peripheral.
  */
 
-/** 
+/**
  * @brief STM features.
  *
  * @warning Registers marked with (1) signal negative situation (disabled, not supported) using
@@ -58,8 +58,6 @@ typedef enum {
     NRF_STM_FEATURE_NSNID,          /**< Security for non-secure non-invasive debug enable. RO */
     NRF_STM_FEATURE_SID,            /**< Security for secure invasive debug. RO */
     NRF_STM_FEATURE_SNID,           /**< Security for secure non-invasive debug. RO */
-    /* 
-     */
 } nrf_stm_feature_t;
 
 /** @brief STM outputs. */
@@ -137,7 +135,7 @@ typedef enum {
 
 /** @brief Lock Access Register implementation modes. */
 typedef enum {
-    //NRF_STM_LSR_TYPE_8  = STM_LSR_TYPE_Bits8, /**< 8-bit Lock Access Register implemented. TODO: uncomment after MDK fix */
+    NRF_STM_LSR_TYPE_8  = STM_LSR_TYPE_Bits8,   /**< 8-bit Lock Access Register implemented. */
     NRF_STM_LSR_TYPE_32 = STM_LSR_TYPE_Bits32,  /**< 32-bit Lock Access Register implemented. */
 } nrf_stm_lsr_type_t;
 
@@ -457,17 +455,13 @@ NRF_STATIC_INLINE bool nrf_stm_feature_check(NRF_STM_Type const * p_reg,
         case NRF_STM_FEATURE_LC_LOCKED:
             return (p_reg->LSR & STM_LSR_LOCKED_Msk);
         case NRF_STM_FEATURE_NSID:
-            return ((p_reg->AUTHSTATUS & STM_AUTHSTATUS_NSID_Msk)
-                    >> STM_AUTHSTATUS_NSID_Pos) == 0x3UL; //TODO: [NRFX-3167] remove 0x3 after MDK fix
+            return (p_reg->AUTHSTATUS & STM_AUTHSTATUS_NSID_Msk);
         case NRF_STM_FEATURE_NSNID:
-            return ((p_reg->AUTHSTATUS & STM_AUTHSTATUS_NSNID_Msk)
-                    >> STM_AUTHSTATUS_NSNID_Pos) == 0x3UL; //TODO: [NRFX-3167] remove 0x3 after MDK fix
+            return (p_reg->AUTHSTATUS & STM_AUTHSTATUS_NSNID_Msk);
         case NRF_STM_FEATURE_SID:
-            return ((p_reg->AUTHSTATUS & STM_AUTHSTATUS_SID_Msk)
-                    >> STM_AUTHSTATUS_SID_Pos) == 0x3UL; //TODO: [NRFX-3167] remove 0x3 after MDK fix
+            return (p_reg->AUTHSTATUS & STM_AUTHSTATUS_SID_Msk);
         case NRF_STM_FEATURE_SNID:
-            return ((p_reg->AUTHSTATUS & STM_AUTHSTATUS_SNID_Msk)
-                    >> STM_AUTHSTATUS_SNID_Pos) == 0x3UL; //TODO: [NRFX-3167] remove 0x3 after MDK fix
+            return (p_reg->AUTHSTATUS & STM_AUTHSTATUS_SNID_Msk);
         default:
             NRFX_ASSERT(0);
             return false;

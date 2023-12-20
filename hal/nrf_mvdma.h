@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2020>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_MVDMA_H__
 #define NRF_MVDMA_H__

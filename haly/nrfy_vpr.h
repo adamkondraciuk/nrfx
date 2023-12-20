@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2021>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRFY_VPR_H__
 #define NRFY_VPR_H__

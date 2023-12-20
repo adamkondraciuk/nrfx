@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2021>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_LRCCONF_H__
 #define NRF_LRCCONF_H__
@@ -430,8 +430,6 @@ NRF_STATIC_INLINE nrf_lrcconf_event_t nrf_lrcconf_clkstarted_event_get(uint8_t i
 NRF_STATIC_INLINE
 nrf_lrcconf_power_domain_mask_t nrf_lrcconf_power_domain_on_get(uint8_t index)
 {
-    /* TODO: When MDK adds a define for number of domains, replace magic numbers
-     *       in assertions below. */
     NRFX_ASSERT(index < 8);
     return (nrf_lrcconf_power_domain_mask_t)(LRCCONF_POWERON_ACTIVE0_Msk << index);
 }

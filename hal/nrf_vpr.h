@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2021>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_VPR_H__
 #define NRF_VPR_H__
@@ -143,7 +143,6 @@ typedef enum
 {
     NRF_VPR_DMCONTROL_DMACTIVE, /** Debug module active. */
     NRF_VPR_DMCONTROL_NDMRESET, /** Negative system reset signal. */
-    /* TODO: [NRFX-3169] Add support for other values. */
 } nrf_vpr_dmcontrol_t;
 
 /**

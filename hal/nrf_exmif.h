@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2020>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_EXMIF_H__
 #define NRF_EXMIF_H__

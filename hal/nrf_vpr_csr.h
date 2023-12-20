@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRF_VPR_CSR_H__
 #define NRF_VPR_CSR_H__
@@ -18,7 +18,6 @@ extern "C" {
  */
 
 /** @brief Nordic key for CSR writes. */
-/* @todo Assert all NORDICKEY values and offsets are equal */
 #define NRF_VPR_CSR_NORDIC_KEY_MASK \
     (VPRCSR_NORDIC_VPRNORDICCTRL_NORDICKEY_Enabled << VPRCSR_NORDIC_VPRNORDICCTRL_NORDICKEY_Pos)
 
