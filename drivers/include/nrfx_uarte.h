@@ -116,20 +116,20 @@ enum {
  * UARTE DMA registers are buffered which means that once transfer is started, registers with
  * transfer details (pointer and length) can be overwritten. If that is combined with the (D)PPI
  * connection between ENDTX and STARTTX events, then two transfers are linked together and
- * bytes are transfer without any gap allowing to utilize the maximum bandwidth.
+ * bytes are transferred without any gap allowing to utilize the maximum bandwidth.
  *
- * When the flag is set, it indicates that the user may setup ENDTX-STARTTX (D)PPI connection and
- * wants to perform linked transfers. It is the user responsibility to disable the (D)PPI connection
- * when the last transfer is started. If user does not setup ENDTX-STARTTX (D)PPI connection then
- * transfer is restarted from the context of ENDTX event handling which is earlier than context
- * of the @ref NRFX_UARTE_EVT_TX_DONE. Flag has not impact if used while there is no ongoing
+ * When the flag is set, it indicates that the user can set up an ENDTX-STARTTX (D)PPI connection and
+ * wants to perform linked transfers. It is the user's responsibility to disable the (D)PPI connection
+ * when the last transfer is started. If the user does not set up an ENDTX-STARTTX (D)PPI connection, then
+ * the transfer is restarted from the context of ENDTX event handling which is earlier than context
+ * of the @ref NRFX_UARTE_EVT_TX_DONE. The flag has no impact if used while there is no ongoing
  * transfer.
  *
  * For example, if a sequence consists of three transfers, then the first @ref nrfx_uarte_tx
- * can be called without or without the flag and the following two transfers must have the flag
- * set. The second @ref nrfx_uarte_tx may be called immediately after the first one and the third
+ * can be called with or without the flag and the following two transfers must have the flag
+ * set. The second @ref nrfx_uarte_tx can be called immediately after the first one and the third
  * one after the first @ref NRFX_UARTE_EVT_TX_DONE event. After the second
- * @ref NRFX_UARTE_EVT_TX_DONE event is received, (D)PPI connection must be disabled (if it was
+ * @ref NRFX_UARTE_EVT_TX_DONE event is received, the (D)PPI connection must be disabled (if it was
  * used).
  *
  * When (D)PPI connection is used, then it is critical that (D)PPI connection is disabled on time,

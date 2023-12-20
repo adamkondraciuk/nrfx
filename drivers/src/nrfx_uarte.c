@@ -1757,7 +1757,7 @@ static bool endrx_irq_handler(NRF_UARTE_Type *        p_uarte,
         // If continuous transfer is set then we expect that new RX is already started by short.
         // However it is possible that buffer was provided after ENDRX occurred. It can be checked
         // by examining RXSTARTED event. If it did not occur that indicates that second buffer did
-        // not started but was set. It must be started manually. Usually RXSTARTED occurs almost
+        // not start but was set. It must be started manually. Usually RXSTARTED occurs almost
         // immediately after ENDRX (if short is set) so rxstarted variable check seems to be enough
         // but there are cases when RXSTARTED may be slightly delayed so if it is not set we
         // need to check HW register to make sure that it did not occur.
