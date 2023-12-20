@@ -4,16 +4,8 @@
 #define NRFX_CONFIG_EXT_H__
 
 #if defined(NRF54H20_ENGA_XXAA)
-    #if defined(NRF_APPLICATION)
-        #include <nrfx_config_nrf54h20_enga_application.h>
-    #elif defined(NRF_RADIOCORE)
-        #include <nrfx_config_nrf54h20_enga_radio.h>
-    #elif defined(NRF_SECURE)
+    #if defined(NRF_SECURE)
         #include <nrfx_config_nrf54h20_enga_secure.h>
-    #elif defined(NRF_FLPR)
-        #include <nrfx_config_nrf54h20_enga_flpr.h>
-    #elif defined(NRF_PPR)
-        #include <nrfx_config_nrf54h20_enga_ppr.h>
     #elif defined(NRF_SYSCTRL)
         #include <nrfx_config_nrf54h20_enga_sysctrl.h>
     #endif
@@ -64,10 +56,6 @@
         #include <nrfx_config_nrf7140_lmac.h>
     #elif defined(NRF_UMAC)
         #include <nrfx_config_nrf7140_umac.h>
-    #endif
-#elif defined(NRF54L15_ENGA_XXAA)
-    #if defined(NRF_APPLICATION)
-        #include <nrfx_config_nrf54l15_application.h>
     #endif
 #else
     #error "Unknown device."
