@@ -20,7 +20,6 @@ extern "C" {
 typedef enum
 {
     NRF_USBHS_TASK_START = offsetof(NRF_USBHS_Type, TASKS_START), ///< Start the USB peripheral.
-    NRF_USBHS_TASK_STOP  = offsetof(NRF_USBHS_Type, TASKS_STOP),  ///< Stop the USB peripheral.
 } nrf_usbhs_task_t;
 
 /** @brief USBHS events. */
@@ -208,12 +207,14 @@ NRF_STATIC_INLINE void nrf_usbhs_int_disable(NRF_USBHS_Type * p_reg, uint32_t ma
 
 NRF_STATIC_INLINE void nrf_usbhs_enable(NRF_USBHS_Type * p_reg)
 {
-    p_reg->ENABLE = USBHS_ENABLE_PHY_Enabled << USBHS_ENABLE_PHY_Pos;
+    p_reg->ENABLE = (USBHS_ENABLE_PHY_Enabled << USBHS_ENABLE_PHY_Pos) |
+                    (USBHS_ENABLE_CORE_Enabled << USBHS_ENABLE_CORE_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_usbhs_disable(NRF_USBHS_Type * p_reg)
 {
-    p_reg->ENABLE = USBHS_ENABLE_CORE_Disabled << USBHS_ENABLE_PHY_Pos;
+    p_reg->ENABLE = (USBHS_ENABLE_PHY_Disabled << USBHS_ENABLE_PHY_Pos) |
+                    (USBHS_ENABLE_CORE_Disabled << USBHS_ENABLE_CORE_Pos);
 }
 
 #endif /* NRF_DECLARE_ONLY */
