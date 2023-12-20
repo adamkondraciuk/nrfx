@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2021>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRFX_IDS_H__
 #define NRFX_IDS_H__
@@ -50,11 +50,11 @@ enum {
     NRFX_IDS0_INST_IDX,
 #endif
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_RISCV) && !defined(NRF_SYSTEMC_TEMPORARY_RISCV)
+#if defined(ISA_RISCV)
 #if NRFX_CHECK(NRFX_VEVIF_ENABLED)
     NRFX_IDS0_INST_IDX,
 #endif
-#elif defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
+#elif defined(ISA_ARM)
 #if NRFX_CHECK(NRFX_BELLBOARD0_ENABLED)
     NRFX_IDS0_INST_IDX,
 #endif
@@ -87,15 +87,15 @@ enum {
 /** @brief IDS domains. */
 typedef enum
 {
-    NRFX_IDS_DOMAIN_SEC     = NRF_PROCESSOR_SECURE,      ///< Secure domain. */
-    NRFX_IDS_DOMAIN_APP     = NRF_PROCESSOR_APPLICATION, ///< Application domain. */
-    NRFX_IDS_DOMAIN_NET     = NRF_PROCESSOR_RADIOCORE,   ///< Network domain. */
-#if defined(NRF_CELLCORE_BELLBOARD)
-    NRFX_IDS_DOMAIN_CELL    = NRF_PROCESSOR_CELLCORE,    ///< Cellular domain. */
+    NRFX_IDS_DOMAIN_SEC  = 1,                         ///< Reserved. */
+    NRFX_IDS_DOMAIN_APP  = NRF_PROCESSOR_APPLICATION, ///< Application domain. */
+    NRFX_IDS_DOMAIN_NET  = NRF_PROCESSOR_RADIOCORE,   ///< Network domain. */
+    NRFX_IDS_DOMAIN_SYSC = 12,                        ///< Reserved. */
+    NRFX_IDS_DOMAIN_PPR  = NRF_PROCESSOR_PPR,         ///< Peripheral Processor */
+    NRFX_IDS_DOMAIN_FLPR = NRF_PROCESSOR_FLPR,        ///< Fast Lightweight Processor */
+#if defined(NRFX_IDS_DOMAIN_ENUM_EXT)
+    NRFX_IDS_DOMAIN_ENUM_EXT
 #endif
-    NRFX_IDS_DOMAIN_SYSCTRL = NRF_PROCESSOR_SYSCTRL,     ///< System Controller domain. */
-    NRFX_IDS_DOMAIN_PPR     = NRF_PROCESSOR_PPR,         ///< Peripheral Processor */
-    NRFX_IDS_DOMAIN_FLPR    = NRF_PROCESSOR_FLPR,        ///< Fast Lightweight Processor */
 } nrfx_ids_domain_t;
 #elif defined(NRF5340_XXAA)
 typedef enum
@@ -116,7 +116,7 @@ typedef enum
 #if defined(NRF5340_XXAA) || defined(NRF9160_XXAA)
 #define NRFX_IDS_EVENTS_TRIGGERED_COUNT IPC_CONF_NUM
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
+#if defined(ISA_ARM)
 #define NRFX_IDS_EVENTS_TRIGGERED_COUNT NRF_BELLBOARD_EVENTS_TRIGGERED_COUNT
 #else /* ISA_RISCV */
 #define NRFX_IDS_EVENTS_TRIGGERED_COUNT NRF_VPR_EVENTS_TRIGGERED_COUNT
@@ -152,7 +152,7 @@ __STATIC_INLINE nrfx_err_t nrfx_ids_init(nrfx_ids_t const *       p_instance,
     }
     return err_code;
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
+#if defined(ISA_ARM)
     (void)p_config;
     return nrfx_bellboard_init((nrfx_bellboard_t const *)p_instance,
                                interrupt_priority,
@@ -179,7 +179,7 @@ __STATIC_INLINE void nrfx_ids_uninit(nrfx_ids_t const * p_instance)
     (void)p_instance;
     nrfx_ipc_uninit();
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
+#if defined(ISA_ARM)
     nrfx_bellboard_uninit((nrfx_bellboard_t const *)p_instance);
 #else /* ISA_RISCV */
     (void)p_instance;
@@ -200,7 +200,7 @@ __STATIC_INLINE void nrfx_ids_int_enable(nrfx_ids_t const * p_instance, uint32_t
     (void)p_instance;
     nrfx_ipc_receive_event_group_enable(mask);
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
+#if defined(ISA_ARM)
     nrfx_bellboard_int_enable((nrfx_bellboard_t const *)p_instance, mask);
 #else /* ISA_RISCV */
     (void)p_instance;
@@ -221,7 +221,7 @@ __STATIC_INLINE void nrfx_ids_int_disable(nrfx_ids_t const * p_instance, uint32_
     (void)p_instance;
     nrfx_ipc_receive_event_group_disable(mask);
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
+#if defined(ISA_ARM)
     nrfx_bellboard_int_disable((nrfx_bellboard_t const *)p_instance, mask);
 #else /* ISA_RISCV */
     (void)p_instance;
@@ -261,17 +261,11 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
             break;
 
         case NRFX_IDS_DOMAIN_SEC:
-            p_bell = NRF_SECURE_BELLBOARD;
+            p_bell = (NRF_BELLBOARD_Type *)NRF_SECDOMBELLBOARD;
             break;
 
-#if defined(NRF_CELLCORE_BELLBOARD)
-        case NRFX_IDS_DOMAIN_CELL:
-            p_bell = NRF_CELLCORE_BELLBOARD;
-            break;
-#endif
-
-        case NRFX_IDS_DOMAIN_SYSCTRL:
-            p_vpr = NRF_VPR120;
+        case NRFX_IDS_DOMAIN_SYSC:
+            p_vpr = (NRF_VPR_Type *)NRF_VPR120;
             break;
 
         case NRFX_IDS_DOMAIN_FLPR:
@@ -281,6 +275,10 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
         case NRFX_IDS_DOMAIN_PPR:
             p_vpr = NRF_VPR130;
             break;
+
+#if defined(NRFX_IDS_DOMAIN_EXT)
+        NRFX_IDS_DOMAIN_EXT
+#endif
 
         default:
             NRFX_ASSERT(0);
@@ -305,7 +303,7 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
 #define nrfx_ids_0_irq_handler nrfx_ipc_irq_handler
 #endif
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_RISCV) && !defined(NRF_SYSTEMC_TEMPORARY_RISCV)
+#if defined(ISA_RISCV)
 #if NRFX_CHECK(NRFX_VEVIF_ENABLED)
 #define nrfx_ids_0_irq_handler nrfx_vevif_0_irq_handler
 #define nrfx_ids_1_irq_handler nrfx_vevif_1_irq_handler
@@ -340,7 +338,7 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
 #define nrfx_ids_30_irq_handler nrfx_vevif_30_irq_handler
 #define nrfx_ids_31_irq_handler nrfx_vevif_31_irq_handler
 #endif
-#elif defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
+#elif defined(ISA_ARM)
 #if NRFX_CHECK(NRFX_BELLBOARD0_ENABLED)
 #define nrfx_ids_0_irq_handler nrfx_bellboard_0_irq_handler
 #endif
