@@ -379,6 +379,10 @@ nrfx_err_t nrfx_i2s_start(nrfx_i2s_t const *         p_instance,
 
     p_cb->state = NRFX_DRV_STATE_POWERED_ON;
 
+    /* Clear spurious RXPTRUPD and TXPTRUPD events (see nRF52 anomaly 55). */
+    nrfy_i2s_event_clear(p_instance->p_reg, NRF_I2S_EVENT_RXPTRUPD);
+    nrfy_i2s_event_clear(p_instance->p_reg, NRF_I2S_EVENT_TXPTRUPD);
+
     nrfy_i2s_int_enable(p_instance->p_reg,
                         (p_cb->use_rx ? NRF_I2S_INT_RXPTRUPD_MASK : 0UL) |
                         (p_cb->use_tx ? NRF_I2S_INT_TXPTRUPD_MASK : 0UL) |
