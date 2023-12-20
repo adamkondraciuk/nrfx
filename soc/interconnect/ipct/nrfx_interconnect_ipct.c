@@ -9,22 +9,14 @@
 
 #if defined(NRF_RADIOCORE)
     #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_radiocore.h>
-#elif defined(NRF_SECURE)
-    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_secure.h>
 #elif defined(NRF_APPLICATION)
     #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_application.h>
-#elif defined(NRF_CELLCORE)
-    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_cellcore.h>
-#elif defined(NRF_SYSCTRL)
-    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_sysctrl.h>
 #elif defined(NRF_PPR)
     #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_ppr.h>
 #elif defined(NRF_FLPR)
     #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_flpr.h>
-#elif defined(NRF_LMAC)
-    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_lmac.h>
-#elif defined(NRF_UMAC)
-    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_umac.h>
+#else
+    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_ext.h>
 #endif
 
 NRFX_INTERCONNECT_IPCT_GLOBAL_DEFINE;

@@ -15,8 +15,11 @@
 /** @brief Invalid channel number. */
 #define NRFX_GPPI_CHANNEL_INVALID UINT8_MAX
 
-// TODO: Add switch to 1 for Moonlight FP1.
+#if defined(NRF54L15_ENGA_XXAA)
 #define NRFX_GPPI_PPIB_HAS_DYNAMIC_CONFIG 0
+#else
+#error "Unsupported device."
+#endif
 
 static nrfx_atomic_t m_virtual_channels = NRFX_GPPI_PROG_APP_CHANNELS_MASK;
 

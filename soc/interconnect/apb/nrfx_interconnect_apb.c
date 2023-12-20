@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 #include <nrfx.h>
 
 #if defined(HALTIUM_XXAA)
@@ -8,22 +8,14 @@
 
 #if defined(NRF_RADIOCORE)
     #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_radiocore.h>
-#elif defined(NRF_SECURE)
-    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_secure.h>
 #elif defined(NRF_APPLICATION)
     #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_application.h>
-#elif defined(NRF_CELLCORE)
-    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_cellcore.h>
-#elif defined(NRF_SYSCTRL)
-    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_sysctrl.h>
 #elif defined(NRF_PPR)
     #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_ppr.h>
 #elif defined(NRF_FLPR)
     #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_flpr.h>
-#elif defined(NRF_LMAC)
-    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_lmac.h>
-#elif defined(NRF_UMAC)
-    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_umac.h>
+#else
+    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_ext.h>
 #endif
 
 NRFX_INTERCONNECT_APB_GLOBAL_DPPI_DEFINE;

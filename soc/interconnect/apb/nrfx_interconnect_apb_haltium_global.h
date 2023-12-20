@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRFX_INTERCONNECT_APB_HALTIUM_GLOBAL_H__
 #define NRFX_INTERCONNECT_APB_HALTIUM_GLOBAL_H__
@@ -77,21 +77,19 @@ extern "C" {
     }, \
     ), ())
 
-/* TODO: Use `NRFX_FOREACH_ENABLED` macro here as well when it will be possible to
-         retrieve `size` parameter by instance number. There is also need to use `p_ppib` field
-         only by local domains and SecDom thus we can eventualy move it out from here.
-         However we would still need such parameter then. Ticket: NRFX-3226. */
-#define NRFX_INTERCONNECT_APB_GLOBAL_BUSES_PROP                                     \
-{                                                                                   \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(120, NRF_SYSCTRL_PPIB121, 0x10000) /* APB22 */ \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(130, NULL, 0x20000)                /* APB32 */ \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(131, NRF_SYSCTRL_PPIB132, 0x10000) /* APB38 */ \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(132, NRF_SYSCTRL_PPIB133, 0x10000) /* APB39 */ \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(133, NRF_SYSCTRL_PPIB134, 0x10000) /* APB3A */ \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(134, NRF_SYSCTRL_PPIB135, 0x10000) /* APB3B */ \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(135, NRF_SYSCTRL_PPIB136, 0x10000) /* APB3C */ \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(136, NRF_SYSCTRL_PPIB137, 0x10000) /* APB3D */ \
+#if !defined(NRFX_INTERCONNECT_APB_GLOBAL_BUSES_PROP)
+#define NRFX_INTERCONNECT_APB_GLOBAL_BUSES_PROP                      \
+{                                                                    \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(120, NULL, 0x10000) /* APB22 */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(130, NULL, 0x20000) /* APB32 */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(131, NULL, 0x10000) /* APB38 */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(132, NULL, 0x10000) /* APB39 */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(133, NULL, 0x10000) /* APB3A */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(134, NULL, 0x10000) /* APB3B */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(135, NULL, 0x10000) /* APB3C */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(136, NULL, 0x10000) /* APB3D */ \
 }
+#endif
 
 #ifdef __cplusplus
 }

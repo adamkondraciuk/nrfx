@@ -472,8 +472,6 @@ void nrfx_gppi_task_endpoint_clear(uint8_t channel, uint32_t tep)
 void nrfx_gppi_fork_endpoint_setup(uint8_t channel, uint32_t fork_tep)
 {
     NRFX_ASSERT(fork_tep);
-    // TODO: error code should be returned instead (NRFX-2761).
-    // As we can only add single endpoint to existing connection
     NRFX_ASSERT(nrfx_flag32_is_allocated(m_virtual_channels, channel));
     nrfx_interconnect_apb_t const * p_apb = nrfx_interconnect_apb_get(fork_tep);
     nrfx_gppi_channels_path_t * p_path = &channels_path[channel];
@@ -487,7 +485,6 @@ void nrfx_gppi_fork_endpoint_setup(uint8_t channel, uint32_t fork_tep)
         if (!is_main_connection_needed(p_path->p_src_apb, p_path->p_dst_apb) ||
             p_apb != nrfx_interconnect_apb_main_get())
             {
-                // TODO: error code should be returned instead (NRFX-2761).
                 NRFX_ASSERT(false);
             }
     }
@@ -497,8 +494,6 @@ void nrfx_gppi_fork_endpoint_setup(uint8_t channel, uint32_t fork_tep)
 void nrfx_gppi_fork_endpoint_clear(uint8_t channel, uint32_t fork_tep)
 {
     NRFX_ASSERT(fork_tep);
-    // TODO: error code should be returned instead (NRFX-2761).
-    // As we can only add single endpoint to existing connection
     NRFX_ASSERT(nrfx_flag32_is_allocated(m_virtual_channels, channel));
     nrfx_interconnect_apb_t const * p_apb = nrfx_interconnect_apb_get(fork_tep);
     nrfx_gppi_channels_path_t * p_path = &channels_path[channel];
@@ -510,7 +505,6 @@ void nrfx_gppi_fork_endpoint_clear(uint8_t channel, uint32_t fork_tep)
         if (!is_main_connection_needed(p_path->p_src_apb, p_path->p_dst_apb) ||
             p_apb != nrfx_interconnect_apb_main_get())
             {
-                // TODO: error code should be returned instead (NRFX-2761).
                 NRFX_ASSERT(false);
             }
     }

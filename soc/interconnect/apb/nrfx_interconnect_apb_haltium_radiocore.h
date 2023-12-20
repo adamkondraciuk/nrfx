@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRFX_INTERCONNECT_APB_HALTIUM_RADIOCORE_H__
 #define NRFX_INTERCONNECT_APB_HALTIUM_RADIOCORE_H__
@@ -25,10 +25,12 @@ NRFX_DPPI_CHANNELS_ENTRY(020);                  \
 NRFX_DPPI_CHANNELS_ENTRY(030);
 #endif // NRFX_INTERCONNECT_APB_LOCAL_DPPI_DEFINE
 
-#define NRFX_INTERCONNECT_APB_LOCAL_BUSES_PROP                             \
-{                                                                          \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(020, NRF_PPIB020, 0x10000) /* APB2 */ \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(030, NRF_PPIB030, 0x10000) /* APB3 */ \
+#define NRFX_INTERCONNECT_APB_LOCAL_BUSES_PROP                                                     \
+{                                                                                                  \
+    NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(DPPIC020),                                              \
+                     (NRFX_INTERCONNECT_APB_PROP_ENTRY(020, NRF_PPIB020, 0x10000)), ()) /* APB2 */ \
+    NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(DPPIC030),                                              \
+                     (NRFX_INTERCONNECT_APB_PROP_ENTRY(030, NRF_PPIB030, 0x10000)), ()) /* APB3 */ \
 }
 
 #ifdef __cplusplus
