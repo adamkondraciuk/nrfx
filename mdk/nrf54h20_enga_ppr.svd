@@ -92320,7 +92320,7 @@ A write outputs the value to atbytesm.</description>
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in receive buffer</description>
                 <lsb>0</lsb>
-                <msb>14</msb>
+                <msb>7</msb>
               </field>
             </fields>
           </register>
@@ -92336,7 +92336,7 @@ A write outputs the value to atbytesm.</description>
                 <name>AMOUNT</name>
                 <description>Number of bytes transferred in the last transaction</description>
                 <lsb>0</lsb>
-                <msb>14</msb>
+                <msb>7</msb>
               </field>
             </fields>
           </register>
@@ -92375,7 +92375,7 @@ A write outputs the value to atbytesm.</description>
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in transmit buffer</description>
                 <lsb>0</lsb>
-                <msb>14</msb>
+                <msb>7</msb>
               </field>
             </fields>
           </register>
@@ -92391,7 +92391,7 @@ A write outputs the value to atbytesm.</description>
                 <name>AMOUNT</name>
                 <description>Number of bytes transferred in the last transaction</description>
                 <lsb>0</lsb>
-                <msb>14</msb>
+                <msb>7</msb>
               </field>
             </fields>
           </register>
@@ -94844,7 +94844,7 @@ A write outputs the value to atbytesm.</description>
         </register>
         <register>
           <name>TASKS_TRIGOVRFLW</name>
-          <description>Set counter to: maximum value - 0xF</description>
+          <description>Set counter to 0xFFFFF0</description>
           <addressOffset>0x00C</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -94852,7 +94852,7 @@ A write outputs the value to atbytesm.</description>
           <fields>
             <field>
               <name>TASKS_TRIGOVRFLW</name>
-              <description>Set counter to: maximum value - 0xF</description>
+              <description>Set counter to 0xFFFFF0</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -104979,22 +104979,61 @@ A write outputs the value to atbytesm.</description>
           <description>Unspecified</description>
           <headerStructName>GLOBAL_GPIOINTERNAL_PCGC</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x160</addressOffset>
+          <addressOffset>0x050</addressOffset>
           <register>
-            <name>TURNOFFAUTOCLOCKSOURCEREQ</name>
-            <description>No functionality</description>
+            <name>TRIGZEROPENALTY</name>
+            <description>Trigger zero penalty</description>
             <addressOffset>0x000</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
             <!--Security securemapping=S-->
+            <fields>
+              <field>
+                <name>TRIGGER</name>
+                <description>TRIGGER</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Trigger zero penalty</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
           </register>
           <register>
-            <dim>0x5</dim>
+            <name>TRIGFULLPENALTY</name>
+            <description>Trigger full penalty</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-only</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <!--Security securemapping=S-->
+            <fields>
+              <field>
+                <name>TRIGGER</name>
+                <description>TRIGGER</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Trigger full penalty</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <dim>0x2</dim>
             <dimIncrement>0x4</dimIncrement>
             <name>PENALTY[%s]</name>
             <description>Description collection: Penalty level for power/clock pair n</description>
-            <addressOffset>0x20</addressOffset>
+            <addressOffset>0x008</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -105009,11 +105048,11 @@ A write outputs the value to atbytesm.</description>
             </fields>
           </register>
           <register>
-            <dim>0x5</dim>
+            <dim>0x2</dim>
             <dimIncrement>0x4</dimIncrement>
             <name>FORCEOVERRIDE[%s]</name>
             <description>Description collection: Force override of power/clock pair n</description>
-            <addressOffset>0x40</addressOffset>
+            <addressOffset>0x010</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
