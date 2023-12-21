@@ -209,9 +209,9 @@ NRF_STATIC_INLINE bool nrf_dma_accessible_check(void const * p_reg, void const *
 {
 #if defined(HALTIUM_XXAA)
     if (nrf_address_bus_get((uint32_t)p_reg, 0x10000) == 0x8E)
-    {\
+    {
         /* Bitwise operation to unify secure/non-secure memory address */
-        uint32_t addr = (uint32_t)p_object & 0xEFFFFFFFu;\
+        uint32_t addr = (uint32_t)p_object & 0xEFFFFFFFu;
 
         /* When peripheral instance is high-speed check whether */
         /* p_object is placed in GRAM2x or GRAM0x */

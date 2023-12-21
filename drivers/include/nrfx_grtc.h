@@ -158,9 +158,6 @@ void nrfx_grtc_rtcomparesync_int_disable(void);
 /**
  * @brief Function for setting the absolute compare value for the RTCOUNTER.
  *
- * @note Currently it is not posiible to use RTCOMPARE/RTCOMPARESYNC interrupts due to issue
- *       in SPU unit (HM-15400).
- *
  * @param[in] handler_data Pointer to the handler data instance structure.
  * @param[in] val          Absolute value to be set in the compare register.
  * @param[in] enable_irq   True if interrupt is to be enabled, false otherwise.
@@ -188,9 +185,6 @@ void nrfx_grtc_rtcounter_cc_int_disable(void);
 
 /**
  * @brief Function for enabling the SYSCOUNTER valid interrupt.
- *
- * @note Currently it is not posiible to use SYSCOUNTERVALID interrupts due to issue
- *       in SPU unit (HM-15400).
  *
  * @param[in] handler   Handler provided by the user. May be NULL.
  * @param[in] p_context User context.
@@ -227,9 +221,8 @@ nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channe
  *
  * @param[in] action Action to be performed.
  *
- * @retval NRFX_SUCCESS             Starting was successful.
- * @retval NRFX_ERROR_INTERNAL      The SYSCOUNTER (1 MHz) is running and the operation is
- *                                  not allowed.
+ * @retval NRFX_SUCCESS        Starting was successful.
+ * @retval NRFX_ERROR_INTERNAL The SYSCOUNTER (1 MHz) is running and the operation is not allowed.
  */
 nrfx_err_t nrfx_grtc_action_perform(nrfx_grtc_action_t action);
 #endif // NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
