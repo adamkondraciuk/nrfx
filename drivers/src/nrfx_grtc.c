@@ -553,7 +553,6 @@ void nrfx_grtc_syscountervalid_int_enable(nrfx_grtc_syscountervalid_handler_t ha
 
     m_cb.syscountervalid_handler = handler;
     m_cb.syscountervalid_context = p_context;
-    nrfy_grtc_event_clear(NRF_GRTC, NRF_GRTC_EVENT_SYSCOUNTERVALID);
     nrfy_grtc_int_enable(NRF_GRTC, NRFY_EVENT_TO_INT_BITMASK(NRF_GRTC_EVENT_SYSCOUNTERVALID));
     NRFX_LOG_INFO("GRTC SYSCOUNTERVALID interrupt enabled.");
 }
