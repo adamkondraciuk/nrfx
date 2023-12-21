@@ -152,27 +152,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     #define LPCOMP_REFSEL_RESOLUTION 16
 
-    #if defined(DPPIC_PRESENT)
-        #if !defined(DPPI_PRESENT)
-            #define DPPI_PRESENT
-        #endif
-        #define DPPI_GROUP_NUM 2
-        #if defined(NRF_RADIOCORE)
-            #define DPPI020_CH_NUM 16
-            #define DPPI020_GROUP_NUM 0
-            #define DPPI030_CH_NUM 9
-            #define DPPI030_GROUP_NUM 1
-        #endif
-    #endif // defined(DPPIC_PRESENT)
+    #if !defined(DPPI_PRESENT)
+        #define DPPI_PRESENT
+    #endif
+    #define DPPI_GROUP_NUM 2
+    #if defined(NRF_RADIOCORE)
+        #define DPPI020_CH_NUM 16
+        #define DPPI020_GROUP_NUM 0
+        #define DPPI030_CH_NUM 9
+        #define DPPI030_GROUP_NUM 1
+    #endif
 
-    #if defined(IPCT_PRESENT)
-        #define GLOBAL_IPCT_CH_NUM 8
-        #if defined(NRF_RADIOCORE)
-            #define LOCAL_IPCT_NUM 8
-        #elif defined(NRF_APPLICATION)
-            #define LOCAL_IPCT_NUM 4
-        #endif
-    #endif // defined(IPCT_PRESENT)
+    #define GLOBAL_IPCT_CH_NUM 8
+    #if defined(NRF_RADIOCORE)
+        #define LOCAL_IPCT_NUM 8
+    #elif defined(NRF_APPLICATION)
+        #define LOCAL_IPCT_NUM 4
+    #endif
 
     #if defined(NRF_PPR) || defined(NRF_FLPR)
         #define MVDMA_JOBLISTCOUNT 4
