@@ -63,10 +63,10 @@ typedef struct
 /** @brief GRTC action types. */
 typedef enum
 {
-    NRFX_GRTC_ACTION_START = NRF_GRTC_TASK_START, /**< Start the RTCOUNTER. */
-    NRFX_GRTC_ACTION_STOP  = NRF_GRTC_TASK_STOP,  /**< Stop the RTCOUNTER. */
-    NRFX_GRTC_ACTION_CLEAR = NRF_GRTC_TASK_CLEAR, /**< Clear the RTCOUNTER. */
-} nrfx_grtc_rtcounter_action_t;
+    NRFX_GRTC_ACTION_START = NRF_GRTC_TASK_START, /**< Start the GRTC. */
+    NRFX_GRTC_ACTION_STOP  = NRF_GRTC_TASK_STOP,  /**< Stop the GRTC. */
+    NRFX_GRTC_ACTION_CLEAR = NRF_GRTC_TASK_CLEAR, /**< Clear the GRTC. */
+} nrfx_grtc_action_t;
 #endif // NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
 
 /** @brief GRTC compare event relative references. */
@@ -223,7 +223,7 @@ void nrfx_grtc_syscountervalid_int_disable(void);
 nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channel);
 
 /**
- * @brief Function for performing an action for RTCOUNTER (32 kHz counter).
+ * @brief Function for performing an action for the GRTC.
  *
  * @param[in] action Action to be performed.
  *
@@ -231,7 +231,7 @@ nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channe
  * @retval NRFX_ERROR_INTERNAL      The SYSCOUNTER (1 MHz) is running and the operation is
  *                                  not allowed.
  */
-nrfx_err_t nrfx_grtc_action_perform(nrfx_grtc_rtcounter_action_t action);
+nrfx_err_t nrfx_grtc_action_perform(nrfx_grtc_action_t action);
 #endif // NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
 
 /**

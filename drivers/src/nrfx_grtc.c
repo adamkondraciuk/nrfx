@@ -454,7 +454,7 @@ nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channe
     return err_code;
 }
 
-nrfx_err_t nrfx_grtc_action_perform(nrfx_grtc_rtcounter_action_t action)
+nrfx_err_t nrfx_grtc_action_perform(nrfx_grtc_action_t action)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     nrfx_err_t err_code = NRFX_SUCCESS;
@@ -472,7 +472,7 @@ nrfx_err_t nrfx_grtc_action_perform(nrfx_grtc_rtcounter_action_t action)
     nrf_grtc_task_t task = (nrf_grtc_task_t)action;
     nrfy_grtc_task_trigger(NRF_GRTC, task);
 
-    NRFX_LOG_INFO("GRTC RTCOUNTER %s action.", GRTC_ACTION_TO_STR(action));
+    NRFX_LOG_INFO("GRTC %s action.", GRTC_ACTION_TO_STR(action));
     return err_code;
 }
 #endif // NRFY_GRTC_HAS_EXTENDED
@@ -807,7 +807,6 @@ static void grtc_irq_handler(void)
             m_cb.rtcomparesync_handler(m_cb.rtcomparesync_context);
         }
     }
-
 
     /* The SYSCOUNTERVALID bit is automatically cleared when GRTC goes into sleep state and set
      * when returning from this state. It can't be cleared inside the ISR procedure because we rely
