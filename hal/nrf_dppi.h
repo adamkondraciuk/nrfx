@@ -56,9 +56,11 @@ extern "C" {
  *                          register is to be set.
  * @param[in] dppi_chan     DPPIC channel number.
  */
+#if !defined(NRF_DPPI_ENDPOINT_SETUP)
 #define NRF_DPPI_ENDPOINT_SETUP(task_or_event, dppi_chan)                                        \
         (*((volatile uint32_t *)(task_or_event + NRF_SUBSCRIBE_PUBLISH_OFFSET(task_or_event))) = \
             ((uint32_t)dppi_chan | NRF_SUBSCRIBE_PUBLISH_ENABLE))
+#endif
 
 /**
  * @brief Macro for clearing publish/subscribe register corresponding to specified event/task.
@@ -66,8 +68,10 @@ extern "C" {
  * @param[in] task_or_event Address of the event or task for which publish/subscribe
  *                          register is to be cleared.
  */
+#if !defined(NRF_DPPI_ENDPOINT_CLEAR)
 #define NRF_DPPI_ENDPOINT_CLEAR(task_or_event) \
         (*((volatile uint32_t *)(task_or_event + NRF_SUBSCRIBE_PUBLISH_OFFSET(task_or_event))) = 0)
+#endif
 
 /** @brief DPPI channel groups. */
 typedef enum

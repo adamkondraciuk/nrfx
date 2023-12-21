@@ -166,7 +166,7 @@ void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
     void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void);
 
 /* Macro for getting the fourth argument from the set of input arguments. */
-#define __NRFX_GET_ARG4(arg1, arg2, arg3, arg4...) arg4
+#define __NRFX_GET_ARG4(arg1, arg2, arg3, arg4, ...) arg4
 #define _NRFX_GET_ARG4(...) __NRFX_GET_ARG4(__VA_ARGS__)
 
 /* Macro for getting the third argument from the set of input arguments. */
