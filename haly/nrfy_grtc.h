@@ -181,7 +181,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_prepare(NRF_GRTC_Type * p_reg, bool busy_wait)
         {}
 #else
         // Wait 3 32k cycles.
-        nrfx_coredep_delay_us(93);
+        NRFX_DELAY_US(93);
 #endif // NRFY_GRTC_HAS_RTCOUNTER
     }
 }
