@@ -939,75 +939,6 @@
     #define RTC130_CC_NUM (RTC130_CC_NUM_MAX + 1UL)
     #define RTC131_CC_NUM (RTC131_CC_NUM_MAX + 1UL)
 
-    #if defined(P0_PIN_NUM)
-        #undef P0_PIN_NUM
-    #endif
-    #define P0_PIN_NUM (P0_PIN_NUM_MAX - P0_PIN_NUM_MIN + 1)
-
-    #if defined(P1_PIN_NUM)
-        #undef P1_PIN_NUM
-    #endif
-    #define P1_PIN_NUM (P1_PIN_NUM_MAX - P1_PIN_NUM_MIN + 1)
-
-    #if defined(P2_PIN_NUM)
-        #undef P2_PIN_NUM
-    #endif
-    #define P2_PIN_NUM (P2_PIN_NUM_MAX - P2_PIN_NUM_MIN + 1)
-
-    #if defined(P6_PIN_NUM)
-        #undef P6_PIN_NUM
-    #endif
-    #define P6_PIN_NUM (P6_PIN_NUM_MAX - P6_PIN_NUM_MIN + 1)
-
-    #if defined(P7_PIN_NUM)
-        #undef P7_PIN_NUM
-    #endif
-    #define P7_PIN_NUM (P7_PIN_NUM_MAX - P7_PIN_NUM_MIN + 1)
-
-    #if defined(P9_PIN_NUM)
-        #undef P9_PIN_NUM
-    #endif
-    #define P9_PIN_NUM (P9_PIN_NUM_MAX - P9_PIN_NUM_MIN + 1)
-
-    /* TODO: MDK-2220 */
-
-    #if defined(P0_PINS_PRESENT)
-        #undef P0_PINS_PRESENT
-    #endif
-    #define P0_PINS_PRESENT 0xFFFUL
-
-    #if defined(P1_PINS_PRESENT)
-        #undef P1_PINS_PRESENT
-    #endif
-    #define P1_PINS_PRESENT 0xFFFUL
-
-    #if defined(P2_PINS_PRESENT)
-        #undef P2_PINS_PRESENT
-    #endif
-    #define P2_PINS_PRESENT 0xFFFUL
-
-    #if defined(P6_PINS_PRESENT)
-        #undef P6_PINS_PRESENT
-    #endif
-    #define P6_PINS_PRESENT 0x3FFFUL
-
-    #if defined(P7_PINS_PRESENT)
-        #undef P7_PINS_PRESENT
-    #endif
-    #define P7_PINS_PRESENT 0xFFUL
-
-    #if defined(P9_PINS_PRESENT)
-        #undef P9_PINS_PRESENT
-    #endif
-    #define P9_PINS_PRESENT 0x3FUL
-
-    #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
-    #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
-    #define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
-    #define P6_FEATURE_PINS_PRESENT P6_PINS_PRESENT
-    #define P7_FEATURE_PINS_PRESENT P7_PINS_PRESENT
-    #define P9_FEATURE_PINS_PRESENT P9_PINS_PRESENT
-
     #if defined(P0_PIN_NUM_MAX) && !defined(P0_PIN_NUM)
         #define P0_PIN_NUM (P0_PIN_NUM_MAX + 1UL)
     #endif
@@ -1147,6 +1078,13 @@
     #define TIMER137_CC_NUM (TIMER137_CC_NUM_MAX + 1UL)
 
     #define RTC_CC_NUM (RTC_CC_NUM_MAX + 1UL)
+
+    #define TWIM_SHORTS_LASTRX_STOP_Pos (12UL)
+    #define TWIM_SHORTS_LASTRX_STOP_Msk (0x1UL << TWIM_SHORTS_LASTRX_STOP_Pos)
+    #define TWIM_SHORTS_LASTRX_STOP_Min (0x0UL)
+    #define TWIM_SHORTS_LASTRX_STOP_Max (0x1UL)
+    #define TWIM_SHORTS_LASTRX_STOP_Disabled (0x0UL)
+    #define TWIM_SHORTS_LASTRX_STOP_Enabled (0x1UL)
 #endif
 
 /**************************************************************************************************/
