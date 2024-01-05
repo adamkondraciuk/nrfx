@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [3.4.0]
+### Added
+- Added support for changing the sub-power mode in the POWER driver.
+
 ## [3.3.0] - 2023-12-21
 ### Added
 - Added support for nRF54H20 Eng A and nRF54L15 Eng A.
