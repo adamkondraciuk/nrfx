@@ -7849,6 +7849,36 @@ typedef struct {
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
 /* =========================================================================================================================== */
+/* ================                                      BELLBOARDPUBLIC                                      ================ */
+/* =========================================================================================================================== */
+
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
+/* ================================================= Struct BELLBOARDPUBLIC ================================================== */
+/**
+  * @brief BELLBOARD public registers
+  */
+  typedef struct {                                   /*!< BELLBOARDPUBLIC Structure                                            */
+    __OM uint32_t TASKS_TRIGGER[32];                 /*!< (@ 0x00000000) Task TRIGGER[n]                                       */
+  } NRF_BELLBOARDPUBLIC_Type;                        /*!< Size = 128 (0x080)                                                   */
+
+/* BELLBOARDPUBLIC_TASKS_TRIGGER: Task TRIGGER[n] */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_MaxCount (32UL) /*!< Max size of TASKS_TRIGGER[32] array.                              */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_MaxIndex (31UL) /*!< Max index of TASKS_TRIGGER[32] array.                             */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_MinIndex (0UL) /*!< Min index of TASKS_TRIGGER[32] array.                              */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_ResetValue (0x00000000UL) /*!< Reset value of TASKS_TRIGGER[32] register.              */
+
+/* TASKS_TRIGGER @Bit 0 : Task TRIGGER[n] */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Pos (0UL) /*!< Position of TASKS_TRIGGER field.                          */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Msk (0x1UL << BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Pos) /*!< Bit
+                                                                            mask of TASKS_TRIGGER field.*/
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Min (0x1UL) /*!< Min enumerator value of TASKS_TRIGGER field.            */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Max (0x1UL) /*!< Max enumerator value of TASKS_TRIGGER field.            */
+  #define BELLBOARDPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Trigger (0x1UL) /*!< Trigger task                                        */
+
+
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
+
+/* =========================================================================================================================== */
 /* ================                                           BICR                                           ================ */
 /* =========================================================================================================================== */
 
@@ -11093,7 +11123,8 @@ typedef struct {
   typedef struct {                                   /*!< COMP Structure                                                       */
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start comparator                                      */
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop comparator                                       */
-    __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000008) Sample comparator value                               */
+    __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000008) Sample comparator value. This task requires that COMP
+                                                                         has been started by the START Task.*/
     __IM uint32_t RESERVED[29];
     __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
     __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
@@ -11161,10 +11192,10 @@ typedef struct {
   #define COMP_TASKS_STOP_TASKS_STOP_Trigger (0x1UL) /*!< Trigger task                                                         */
 
 
-/* COMP_TASKS_SAMPLE: Sample comparator value */
+/* COMP_TASKS_SAMPLE: Sample comparator value. This task requires that COMP has been started by the START Task. */
   #define COMP_TASKS_SAMPLE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_SAMPLE register.                               */
 
-/* TASKS_SAMPLE @Bit 0 : Sample comparator value */
+/* TASKS_SAMPLE @Bit 0 : Sample comparator value. This task requires that COMP has been started by the START Task. */
   #define COMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos (0UL)   /*!< Position of TASKS_SAMPLE field.                                      */
   #define COMP_TASKS_SAMPLE_TASKS_SAMPLE_Msk (0x1UL << COMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos) /*!< Bit mask of TASKS_SAMPLE field.*/
   #define COMP_TASKS_SAMPLE_TASKS_SAMPLE_Min (0x1UL) /*!< Min enumerator value of TASKS_SAMPLE field.                          */
@@ -11598,12 +11629,12 @@ typedef struct {
   #define COMP_REFSEL_REFSEL_Msk (0x7UL << COMP_REFSEL_REFSEL_Pos) /*!< Bit mask of REFSEL field.                              */
   #define COMP_REFSEL_REFSEL_Min (0x0UL)             /*!< Min enumerator value of REFSEL field.                                */
   #define COMP_REFSEL_REFSEL_Max (0x7UL)             /*!< Max enumerator value of REFSEL field.                                */
-  #define COMP_REFSEL_REFSEL_Int1V2 (0x0UL)          /*!< VREF = internal 1.2 V reference (AVDD_AO_1V8 >= 1.7 V)               */
+  #define COMP_REFSEL_REFSEL_Int1V2 (0x0UL)          /*!< VREF = internal 1.2 V reference                                      */
   #define COMP_REFSEL_REFSEL_Int1V8 (0x1UL)          /*!< VREF = internal 1.8 V reference (VDD >= VREF + 0.2 V)                */
   #define COMP_REFSEL_REFSEL_Int2V4 (0x2UL)          /*!< VREF = internal 2.4 V reference (VDD >= VREF + 0.2 V)                */
-  #define COMP_REFSEL_REFSEL_AVDDAO1V8 (0x4UL)       /*!< VREF = AVDD_AO_1V8                                                   */
+  #define COMP_REFSEL_REFSEL_AVDDAO1V8 (0x4UL)       /*!< VREF = internal 1.8 V reference                                      */
   #define COMP_REFSEL_REFSEL_ARef (0x5UL)            /*!< VREF = AREF                                                          */
-  #define COMP_REFSEL_REFSEL_Diff (0x7UL)            /*!< VREF=Differential mode (power down built-in reference and disconnect
+  #define COMP_REFSEL_REFSEL_Diff (0x7UL)            /*!< VREF = Differential mode (power down built-in reference and disconnect
                                                           resistor ladder)*/
 
 
@@ -11644,7 +11675,7 @@ typedef struct {
 /* COMP_RETAIN: Retain signal */
   #define COMP_RETAIN_ResetValue (0x00000000UL)      /*!< Reset value of RETAIN register.                                      */
 
-/* RETAIN @Bit 0 : Retain signal */
+/* RETAIN @Bit 0 : Retain signal, shared for both COMP and LPCOMP */
   #define COMP_RETAIN_RETAIN_Pos (0UL)               /*!< Position of RETAIN field.                                            */
   #define COMP_RETAIN_RETAIN_Msk (0x1UL << COMP_RETAIN_RETAIN_Pos) /*!< Bit mask of RETAIN field.                              */
   #define COMP_RETAIN_RETAIN_Min (0x0UL)             /*!< Min enumerator value of RETAIN field.                                */
@@ -25358,13 +25389,13 @@ typedef struct {
   * @brief CONFIG [FICR_TRIM_SYSCTRL_FLL16M_CONFIG] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  CFGCKSW16M;                        /*!< (@ 0x00000000) Trim value for SYSCTRL.FLL16M.CFGCKSW16M              */
+  __IM  uint32_t  CFGCKSW16M;                        /*!< (@ 0x00000000) Config value for SYSCTRL.FLL16M.CONFIG.CFGCKSW16M     */
 } NRF_FICR_TRIM_SYSCTRL_FLL16M_CONFIG_Type;          /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M: Trim value for SYSCTRL.FLL16M.CFGCKSW16M */
+/* FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M: Config value for SYSCTRL.FLL16M.CONFIG.CFGCKSW16M */
   #define FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CFGCKSW16M register.        */
 
-/* VALUE @Bits 0..31 : Trim value */
+/* VALUE @Bits 0..31 : Config value */
   #define FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M_VALUE_Pos (0UL) /*!< Position of VALUE field.                             */
   #define FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M_VALUE_Pos)
                                                                             /*!< Bit mask of VALUE field.*/
@@ -25376,14 +25407,14 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_FLL16M_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  RCOARSE;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.FLL16M.RCOARSE                 */
-  __IM  uint32_t  RFINE;                             /*!< (@ 0x00000004) Trim value for SYSCTRL.FLL16M.RFINE                   */
-  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000008) Trim value for SYSCTRL.FLL16M.VSUP                    */
-  __IM  uint32_t  CKSW16MTRIM;                       /*!< (@ 0x0000000C) Trim value for SYSCTRL.FLL16M.CKSW16MTRIM             */
-  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000010) Trim value for SYSCTRL.FLL16M.TCOEF                   */
+  __IM  uint32_t  RCOARSE;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.FLL16M.TRIM.RCOARSE            */
+  __IM  uint32_t  RFINE;                             /*!< (@ 0x00000004) Trim value for SYSCTRL.FLL16M.TRIM.RFINE              */
+  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000008) Trim value for SYSCTRL.FLL16M.TRIM.VSUP               */
+  __IM  uint32_t  CKSW16MTRIM;                       /*!< (@ 0x0000000C) Trim value for SYSCTRL.FLL16M.TRIM.CKSW16MTRIM        */
+  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000010) Trim value for SYSCTRL.FLL16M.TRIM.TCOEF              */
 } NRF_FICR_TRIM_SYSCTRL_FLL16M_TRIM_Type;            /*!< Size = 20 (0x014)                                                    */
 
-/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_RCOARSE: Trim value for SYSCTRL.FLL16M.RCOARSE */
+/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_RCOARSE: Trim value for SYSCTRL.FLL16M.TRIM.RCOARSE */
   #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_RCOARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCOARSE register.                */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25392,7 +25423,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_RFINE: Trim value for SYSCTRL.FLL16M.RFINE */
+/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_RFINE: Trim value for SYSCTRL.FLL16M.TRIM.RFINE */
   #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_RFINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RFINE register.                    */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25401,7 +25432,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_VSUP: Trim value for SYSCTRL.FLL16M.VSUP */
+/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_VSUP: Trim value for SYSCTRL.FLL16M.TRIM.VSUP */
   #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_VSUP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VSUP register.                      */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25410,7 +25441,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_CKSW16MTRIM: Trim value for SYSCTRL.FLL16M.CKSW16MTRIM */
+/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_CKSW16MTRIM: Trim value for SYSCTRL.FLL16M.TRIM.CKSW16MTRIM */
   #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_CKSW16MTRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CKSW16MTRIM register.        */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25419,7 +25450,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_TCOEF: Trim value for SYSCTRL.FLL16M.TCOEF */
+/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_TCOEF: Trim value for SYSCTRL.FLL16M.TRIM.TCOEF */
   #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_TCOEF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TCOEF register.                    */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25444,10 +25475,10 @@ typedef struct {
   * @brief CAL [FICR_TRIM_SYSCTRL_LFRC_CAL] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  LFRCOSCTRIM;                       /*!< (@ 0x00000000) Trim value for SYSCTRL.LFRC.LFRCOSCTRIM               */
+  __IM  uint32_t  LFRCOSCTRIM;                       /*!< (@ 0x00000000) Trim value for SYSCTRL.LFRC.CAL.LFRCOSCTRIM           */
 } NRF_FICR_TRIM_SYSCTRL_LFRC_CAL_Type;               /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_SYSCTRL_LFRC_CAL_LFRCOSCTRIM: Trim value for SYSCTRL.LFRC.LFRCOSCTRIM */
+/* FICR_TRIM_SYSCTRL_LFRC_CAL_LFRCOSCTRIM: Trim value for SYSCTRL.LFRC.CAL.LFRCOSCTRIM */
   #define FICR_TRIM_SYSCTRL_LFRC_CAL_LFRCOSCTRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LFRCOSCTRIM register.           */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25471,14 +25502,14 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_LFXO_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  PDLOWERTHR;                        /*!< (@ 0x00000000) Trim value for SYSCTRL.LFXO.PDLOWERTHR                */
-  __IM  uint32_t  PDUPPERTHR;                        /*!< (@ 0x00000004) Trim value for SYSCTRL.LFXO.PDUPPERTHR                */
-  __IM  uint32_t  BIAS;                              /*!< (@ 0x00000008) Trim value for SYSCTRL.LFXO.BIAS                      */
-  __IM  uint32_t  PIXO;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.LFXO.PIXO                      */
-  __IM  uint32_t  TRIMBUS;                           /*!< (@ 0x00000010) Trim value for SYSCTRL.LFXO.TRIMBUS                   */
+  __IM  uint32_t  PDLOWERTHR;                        /*!< (@ 0x00000000) Trim value for SYSCTRL.LFXO.TRIM.PDLOWERTHR           */
+  __IM  uint32_t  PDUPPERTHR;                        /*!< (@ 0x00000004) Trim value for SYSCTRL.LFXO.TRIM.PDUPPERTHR           */
+  __IM  uint32_t  BIAS;                              /*!< (@ 0x00000008) Trim value for SYSCTRL.LFXO.TRIM.BIAS                 */
+  __IM  uint32_t  PIXO;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.LFXO.TRIM.PIXO                 */
+  __IM  uint32_t  TRIMBUS;                           /*!< (@ 0x00000010) Trim value for SYSCTRL.LFXO.TRIM.TRIMBUS              */
 } NRF_FICR_TRIM_SYSCTRL_LFXO_TRIM_Type;              /*!< Size = 20 (0x014)                                                    */
 
-/* FICR_TRIM_SYSCTRL_LFXO_TRIM_PDLOWERTHR: Trim value for SYSCTRL.LFXO.PDLOWERTHR */
+/* FICR_TRIM_SYSCTRL_LFXO_TRIM_PDLOWERTHR: Trim value for SYSCTRL.LFXO.TRIM.PDLOWERTHR */
   #define FICR_TRIM_SYSCTRL_LFXO_TRIM_PDLOWERTHR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PDLOWERTHR register.            */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25487,7 +25518,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_LFXO_TRIM_PDUPPERTHR: Trim value for SYSCTRL.LFXO.PDUPPERTHR */
+/* FICR_TRIM_SYSCTRL_LFXO_TRIM_PDUPPERTHR: Trim value for SYSCTRL.LFXO.TRIM.PDUPPERTHR */
   #define FICR_TRIM_SYSCTRL_LFXO_TRIM_PDUPPERTHR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PDUPPERTHR register.            */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25496,7 +25527,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_LFXO_TRIM_BIAS: Trim value for SYSCTRL.LFXO.BIAS */
+/* FICR_TRIM_SYSCTRL_LFXO_TRIM_BIAS: Trim value for SYSCTRL.LFXO.TRIM.BIAS */
   #define FICR_TRIM_SYSCTRL_LFXO_TRIM_BIAS_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BIAS register.                        */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25505,7 +25536,7 @@ typedef struct {
                                                                             of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_LFXO_TRIM_PIXO: Trim value for SYSCTRL.LFXO.PIXO */
+/* FICR_TRIM_SYSCTRL_LFXO_TRIM_PIXO: Trim value for SYSCTRL.LFXO.TRIM.PIXO */
   #define FICR_TRIM_SYSCTRL_LFXO_TRIM_PIXO_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PIXO register.                        */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25514,7 +25545,7 @@ typedef struct {
                                                                             of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_LFXO_TRIM_TRIMBUS: Trim value for SYSCTRL.LFXO.TRIMBUS */
+/* FICR_TRIM_SYSCTRL_LFXO_TRIM_TRIMBUS: Trim value for SYSCTRL.LFXO.TRIM.TRIMBUS */
   #define FICR_TRIM_SYSCTRL_LFXO_TRIM_TRIMBUS_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIMBUS register.                  */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25538,13 +25569,13 @@ typedef struct {
   * @brief LFLPRC [FICR_TRIM_SYSCTRL_LFLPRC] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.LFLPRC.VSUP                    */
-  __IM  uint32_t  RCOARSE;                           /*!< (@ 0x00000004) Trim value for SYSCTRL.LFLPRC.RCOARSE                 */
-  __IM  uint32_t  RFINE;                             /*!< (@ 0x00000008) Trim value for SYSCTRL.LFLPRC.RFINE                   */
-  __IM  uint32_t  PWMFINE;                           /*!< (@ 0x0000000C) Trim value for SYSCTRL.LFLPRC.PWMFINE                 */
+  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.LFLPRC.TRIM.VSUP               */
+  __IM  uint32_t  RCOARSE;                           /*!< (@ 0x00000004) Trim value for SYSCTRL.LFLPRC.TRIM.RCOARSE            */
+  __IM  uint32_t  RFINE;                             /*!< (@ 0x00000008) Trim value for SYSCTRL.LFLPRC.TRIM.RFINE              */
+  __IM  uint32_t  PWMFINE;                           /*!< (@ 0x0000000C) Trim value for SYSCTRL.LFLPRC.TRIM.PWMFINE            */
 } NRF_FICR_TRIM_SYSCTRL_LFLPRC_Type;                 /*!< Size = 16 (0x010)                                                    */
 
-/* FICR_TRIM_SYSCTRL_LFLPRC_VSUP: Trim value for SYSCTRL.LFLPRC.VSUP */
+/* FICR_TRIM_SYSCTRL_LFLPRC_VSUP: Trim value for SYSCTRL.LFLPRC.TRIM.VSUP */
   #define FICR_TRIM_SYSCTRL_LFLPRC_VSUP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VSUP register.                           */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25553,7 +25584,7 @@ typedef struct {
                                                                             VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_LFLPRC_RCOARSE: Trim value for SYSCTRL.LFLPRC.RCOARSE */
+/* FICR_TRIM_SYSCTRL_LFLPRC_RCOARSE: Trim value for SYSCTRL.LFLPRC.TRIM.RCOARSE */
   #define FICR_TRIM_SYSCTRL_LFLPRC_RCOARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCOARSE register.                     */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25562,7 +25593,7 @@ typedef struct {
                                                                             of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_LFLPRC_RFINE: Trim value for SYSCTRL.LFLPRC.RFINE */
+/* FICR_TRIM_SYSCTRL_LFLPRC_RFINE: Trim value for SYSCTRL.LFLPRC.TRIM.RFINE */
   #define FICR_TRIM_SYSCTRL_LFLPRC_RFINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RFINE register.                         */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25571,7 +25602,7 @@ typedef struct {
                                                                             VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_LFLPRC_PWMFINE: Trim value for SYSCTRL.LFLPRC.PWMFINE */
+/* FICR_TRIM_SYSCTRL_LFLPRC_PWMFINE: Trim value for SYSCTRL.LFLPRC.TRIM.PWMFINE */
   #define FICR_TRIM_SYSCTRL_LFLPRC_PWMFINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PWMFINE register.                     */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25586,10 +25617,10 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VDETPOF5V0_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  POFWARN;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.VDETPOF5V0.POFWARN             */
+  __IM  uint32_t  POFWARN;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.VDETPOF5V0.TRIM.POFWARN        */
 } NRF_FICR_TRIM_SYSCTRL_VDETPOF5V0_TRIM_Type;        /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_SYSCTRL_VDETPOF5V0_TRIM_POFWARN: Trim value for SYSCTRL.VDETPOF5V0.POFWARN */
+/* FICR_TRIM_SYSCTRL_VDETPOF5V0_TRIM_POFWARN: Trim value for SYSCTRL.VDETPOF5V0.TRIM.POFWARN */
   #define FICR_TRIM_SYSCTRL_VDETPOF5V0_TRIM_POFWARN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of POFWARN register.            */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25613,15 +25644,15 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_HFXO_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  AREG;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.HFXO.AREG                      */
-  __IM  uint32_t  IBIAS;                             /*!< (@ 0x00000004) Trim value for SYSCTRL.HFXO.IBIAS                     */
-  __IM  uint32_t  PIXO;                              /*!< (@ 0x00000008) Trim value for SYSCTRL.HFXO.PIXO                      */
-  __IM  uint32_t  PDTHR;                             /*!< (@ 0x0000000C) Trim value for SYSCTRL.HFXO.PDTHR                     */
-  __IM  uint32_t  VREF;                              /*!< (@ 0x00000010) Trim value for SYSCTRL.HFXO.VREF                      */
-  __IM  uint32_t  MULT2;                             /*!< (@ 0x00000014) Trim value for SYSCTRL.HFXO.MULT2                     */
+  __IM  uint32_t  AREG;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.HFXO.TRIM.AREG                 */
+  __IM  uint32_t  IBIAS;                             /*!< (@ 0x00000004) Trim value for SYSCTRL.HFXO.TRIM.IBIAS                */
+  __IM  uint32_t  PIXO;                              /*!< (@ 0x00000008) Trim value for SYSCTRL.HFXO.TRIM.PIXO                 */
+  __IM  uint32_t  PDTHR;                             /*!< (@ 0x0000000C) Trim value for SYSCTRL.HFXO.TRIM.PDTHR                */
+  __IM  uint32_t  VREF;                              /*!< (@ 0x00000010) Trim value for SYSCTRL.HFXO.TRIM.VREF                 */
+  __IM  uint32_t  MULT2;                             /*!< (@ 0x00000014) Trim value for SYSCTRL.HFXO.TRIM.MULT2                */
 } NRF_FICR_TRIM_SYSCTRL_HFXO_TRIM_Type;              /*!< Size = 24 (0x018)                                                    */
 
-/* FICR_TRIM_SYSCTRL_HFXO_TRIM_AREG: Trim value for SYSCTRL.HFXO.AREG */
+/* FICR_TRIM_SYSCTRL_HFXO_TRIM_AREG: Trim value for SYSCTRL.HFXO.TRIM.AREG */
   #define FICR_TRIM_SYSCTRL_HFXO_TRIM_AREG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of AREG register.                        */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25630,7 +25661,7 @@ typedef struct {
                                                                             of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HFXO_TRIM_IBIAS: Trim value for SYSCTRL.HFXO.IBIAS */
+/* FICR_TRIM_SYSCTRL_HFXO_TRIM_IBIAS: Trim value for SYSCTRL.HFXO.TRIM.IBIAS */
   #define FICR_TRIM_SYSCTRL_HFXO_TRIM_IBIAS_ResetValue (0xFFFFFFFFUL) /*!< Reset value of IBIAS register.                      */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25639,7 +25670,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HFXO_TRIM_PIXO: Trim value for SYSCTRL.HFXO.PIXO */
+/* FICR_TRIM_SYSCTRL_HFXO_TRIM_PIXO: Trim value for SYSCTRL.HFXO.TRIM.PIXO */
   #define FICR_TRIM_SYSCTRL_HFXO_TRIM_PIXO_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PIXO register.                        */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25648,7 +25679,7 @@ typedef struct {
                                                                             of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HFXO_TRIM_PDTHR: Trim value for SYSCTRL.HFXO.PDTHR */
+/* FICR_TRIM_SYSCTRL_HFXO_TRIM_PDTHR: Trim value for SYSCTRL.HFXO.TRIM.PDTHR */
   #define FICR_TRIM_SYSCTRL_HFXO_TRIM_PDTHR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PDTHR register.                      */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25657,7 +25688,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HFXO_TRIM_VREF: Trim value for SYSCTRL.HFXO.VREF */
+/* FICR_TRIM_SYSCTRL_HFXO_TRIM_VREF: Trim value for SYSCTRL.HFXO.TRIM.VREF */
   #define FICR_TRIM_SYSCTRL_HFXO_TRIM_VREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VREF register.                        */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25666,7 +25697,7 @@ typedef struct {
                                                                             of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HFXO_TRIM_MULT2: Trim value for SYSCTRL.HFXO.MULT2 */
+/* FICR_TRIM_SYSCTRL_HFXO_TRIM_MULT2: Trim value for SYSCTRL.HFXO.TRIM.MULT2 */
   #define FICR_TRIM_SYSCTRL_HFXO_TRIM_MULT2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of MULT2 register.                      */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25682,23 +25713,23 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_SYSCTRL_HFXO_TRIM_Type TRIM;   /*!< (@ 0x00000000) (unspecified)                                         */
-  __IM  uint32_t  CLOAD;                             /*!< (@ 0x00000018) Trim value for SYSCTRL.HFXO.CLOAD                     */
-  __IM  uint32_t  AMPLITUDECTRL;                     /*!< (@ 0x0000001C) Trim value for SYSCTRL.HFXO.AMPLITUDECTRL (AREG_VOLT) */
+  __IM  uint32_t  CLOAD;                             /*!< (@ 0x00000018) Config value for SYSCTRL.HFXO.CLOAD                   */
+  __IM  uint32_t  AMPLITUDECTRL;                     /*!< (@ 0x0000001C) Config value for SYSCTRL.HFXO.AMPLITUDECTRL           */
 } NRF_FICR_TRIM_SYSCTRL_HFXO_Type;                   /*!< Size = 32 (0x020)                                                    */
 
-/* FICR_TRIM_SYSCTRL_HFXO_CLOAD: Trim value for SYSCTRL.HFXO.CLOAD */
+/* FICR_TRIM_SYSCTRL_HFXO_CLOAD: Config value for SYSCTRL.HFXO.CLOAD */
   #define FICR_TRIM_SYSCTRL_HFXO_CLOAD_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CLOAD register.                           */
 
-/* VALUE @Bits 0..31 : Trim value */
+/* VALUE @Bits 0..31 : Config value */
   #define FICR_TRIM_SYSCTRL_HFXO_CLOAD_VALUE_Pos (0UL) /*!< Position of VALUE field.                                           */
   #define FICR_TRIM_SYSCTRL_HFXO_CLOAD_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_HFXO_CLOAD_VALUE_Pos) /*!< Bit mask of VALUE
                                                                             field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL: Trim value for SYSCTRL.HFXO.AMPLITUDECTRL (AREG_VOLT) */
+/* FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL: Config value for SYSCTRL.HFXO.AMPLITUDECTRL */
   #define FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of AMPLITUDECTRL register.           */
 
-/* VALUE @Bits 0..31 : Trim value */
+/* VALUE @Bits 0..31 : Config value */
   #define FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
   #define FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL_VALUE_Pos) /*!<
                                                                             Bit mask of VALUE field.*/
@@ -25710,10 +25741,10 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_AUDIOPLL_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  CTUNE;                             /*!< (@ 0x00000000) Trim value for SYSCTRL.AUDIOPLL.CTUNE                 */
+  __IM  uint32_t  CTUNE;                             /*!< (@ 0x00000000) Trim value for SYSCTRL.AUDIOPLL.TRIM.CTUNE            */
 } NRF_FICR_TRIM_SYSCTRL_AUDIOPLL_TRIM_Type;          /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_SYSCTRL_AUDIOPLL_TRIM_CTUNE: Trim value for SYSCTRL.AUDIOPLL.CTUNE */
+/* FICR_TRIM_SYSCTRL_AUDIOPLL_TRIM_CTUNE: Trim value for SYSCTRL.AUDIOPLL.TRIM.CTUNE */
   #define FICR_TRIM_SYSCTRL_AUDIOPLL_TRIM_CTUNE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CTUNE register.                  */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25764,10 +25795,10 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_USBHSPLL_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  CTUNE;                             /*!< (@ 0x00000000) Trim value for SYSCTRL.USBHSPLL.CTUNE                 */
+  __IM  uint32_t  CTUNE;                             /*!< (@ 0x00000000) Trim value for SYSCTRL.USBHSPLL.TRIM.CTUNE            */
 } NRF_FICR_TRIM_SYSCTRL_USBHSPLL_TRIM_Type;          /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_SYSCTRL_USBHSPLL_TRIM_CTUNE: Trim value for SYSCTRL.USBHSPLL.CTUNE */
+/* FICR_TRIM_SYSCTRL_USBHSPLL_TRIM_CTUNE: Trim value for SYSCTRL.USBHSPLL.TRIM.CTUNE */
   #define FICR_TRIM_SYSCTRL_USBHSPLL_TRIM_CTUNE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CTUNE register.                  */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25791,10 +25822,10 @@ typedef struct {
   * @brief CONFIG [FICR_TRIM_SYSCTRL_MBIAS_CONFIG] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  CFG;                               /*!< (@ 0x00000000) Trim value for SYSCTRL.MBIAS.CFG                      */
+  __IM  uint32_t  CFG;                               /*!< (@ 0x00000000) Config value for SYSCTRL.MBIAS.CONFIG.CFG             */
 } NRF_FICR_TRIM_SYSCTRL_MBIAS_CONFIG_Type;           /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_SYSCTRL_MBIAS_CONFIG_CFG: Trim value for SYSCTRL.MBIAS.CFG */
+/* FICR_TRIM_SYSCTRL_MBIAS_CONFIG_CFG: Config value for SYSCTRL.MBIAS.CONFIG.CFG */
   #define FICR_TRIM_SYSCTRL_MBIAS_CONFIG_CFG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CFG register.                       */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25809,11 +25840,11 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_MBIAS_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  MBIASIBPP;                         /*!< (@ 0x00000000) Trim value for SYSCTRL.MBIAS.MBIASIBPP                */
-  __IM  uint32_t  MBIASIBPSR;                        /*!< (@ 0x00000004) Trim value for SYSCTRL.MBIAS.MBIASIBPSR               */
+  __IM  uint32_t  MBIASIBPP;                         /*!< (@ 0x00000000) Trim value for SYSCTRL.MBIAS.TRIM.MBIASIBPP           */
+  __IM  uint32_t  MBIASIBPSR;                        /*!< (@ 0x00000004) Trim value for SYSCTRL.MBIAS.TRIM.MBIASIBPSR          */
 } NRF_FICR_TRIM_SYSCTRL_MBIAS_TRIM_Type;             /*!< Size = 8 (0x008)                                                     */
 
-/* FICR_TRIM_SYSCTRL_MBIAS_TRIM_MBIASIBPP: Trim value for SYSCTRL.MBIAS.MBIASIBPP */
+/* FICR_TRIM_SYSCTRL_MBIAS_TRIM_MBIASIBPP: Trim value for SYSCTRL.MBIAS.TRIM.MBIASIBPP */
   #define FICR_TRIM_SYSCTRL_MBIAS_TRIM_MBIASIBPP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of MBIASIBPP register.             */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25822,7 +25853,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_MBIAS_TRIM_MBIASIBPSR: Trim value for SYSCTRL.MBIAS.MBIASIBPSR */
+/* FICR_TRIM_SYSCTRL_MBIAS_TRIM_MBIASIBPSR: Trim value for SYSCTRL.MBIAS.TRIM.MBIASIBPSR */
   #define FICR_TRIM_SYSCTRL_MBIAS_TRIM_MBIASIBPSR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of MBIASIBPSR register.           */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25847,11 +25878,11 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_OSCRFR_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  OSC;                               /*!< (@ 0x00000000) Trim value for SYSCTRL.OSCRFR.OSC                     */
-  __IM  uint32_t  IBPSR;                             /*!< (@ 0x00000004) Trim value for SYSCTRL.OSCRFR.IBPSR                   */
+  __IM  uint32_t  OSC;                               /*!< (@ 0x00000000) Trim value for SYSCTRL.OSCRFR.TRIM.OSC                */
+  __IM  uint32_t  IBPSR;                             /*!< (@ 0x00000004) Trim value for SYSCTRL.OSCRFR.TRIM.IBPSR              */
 } NRF_FICR_TRIM_SYSCTRL_OSCRFR_TRIM_Type;            /*!< Size = 8 (0x008)                                                     */
 
-/* FICR_TRIM_SYSCTRL_OSCRFR_TRIM_OSC: Trim value for SYSCTRL.OSCRFR.OSC */
+/* FICR_TRIM_SYSCTRL_OSCRFR_TRIM_OSC: Trim value for SYSCTRL.OSCRFR.TRIM.OSC */
   #define FICR_TRIM_SYSCTRL_OSCRFR_TRIM_OSC_ResetValue (0xFFFFFFFFUL) /*!< Reset value of OSC register.                        */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25860,7 +25891,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_OSCRFR_TRIM_IBPSR: Trim value for SYSCTRL.OSCRFR.IBPSR */
+/* FICR_TRIM_SYSCTRL_OSCRFR_TRIM_IBPSR: Trim value for SYSCTRL.OSCRFR.TRIM.IBPSR */
   #define FICR_TRIM_SYSCTRL_OSCRFR_TRIM_IBPSR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of IBPSR register.                    */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25884,13 +25915,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VREG1V0_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  IREF;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.VREG1V0.IREF                   */
-  __IM  uint32_t  HIGHPOWER;                         /*!< (@ 0x00000004) Trim value for SYSCTRL.VREG1V0.HIGHPOWER              */
-  __IM  uint32_t  LOWPOWER;                          /*!< (@ 0x00000008) Trim value for SYSCTRL.VREG1V0.LOWPOWER               */
-  __IM  uint32_t  ULPR;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREG1V0.ULPR                   */
+  __IM  uint32_t  IREF;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.VREG1V0.TRIM.IREF              */
+  __IM  uint32_t  HIGHPOWER;                         /*!< (@ 0x00000004) Trim value for SYSCTRL.VREG1V0.TRIM.HIGHPOWER         */
+  __IM  uint32_t  LOWPOWER;                          /*!< (@ 0x00000008) Trim value for SYSCTRL.VREG1V0.TRIM.LOWPOWER          */
+  __IM  uint32_t  ULPR;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREG1V0.TRIM.ULPR              */
 } NRF_FICR_TRIM_SYSCTRL_VREG1V0_TRIM_Type;           /*!< Size = 16 (0x010)                                                    */
 
-/* FICR_TRIM_SYSCTRL_VREG1V0_TRIM_IREF: Trim value for SYSCTRL.VREG1V0.IREF */
+/* FICR_TRIM_SYSCTRL_VREG1V0_TRIM_IREF: Trim value for SYSCTRL.VREG1V0.TRIM.IREF */
   #define FICR_TRIM_SYSCTRL_VREG1V0_TRIM_IREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of IREF register.                     */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25899,7 +25930,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREG1V0_TRIM_HIGHPOWER: Trim value for SYSCTRL.VREG1V0.HIGHPOWER */
+/* FICR_TRIM_SYSCTRL_VREG1V0_TRIM_HIGHPOWER: Trim value for SYSCTRL.VREG1V0.TRIM.HIGHPOWER */
   #define FICR_TRIM_SYSCTRL_VREG1V0_TRIM_HIGHPOWER_ResetValue (0xFFFFFFFFUL) /*!< Reset value of HIGHPOWER register.           */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25908,7 +25939,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREG1V0_TRIM_LOWPOWER: Trim value for SYSCTRL.VREG1V0.LOWPOWER */
+/* FICR_TRIM_SYSCTRL_VREG1V0_TRIM_LOWPOWER: Trim value for SYSCTRL.VREG1V0.TRIM.LOWPOWER */
   #define FICR_TRIM_SYSCTRL_VREG1V0_TRIM_LOWPOWER_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LOWPOWER register.             */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25917,7 +25948,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREG1V0_TRIM_ULPR: Trim value for SYSCTRL.VREG1V0.ULPR */
+/* FICR_TRIM_SYSCTRL_VREG1V0_TRIM_ULPR: Trim value for SYSCTRL.VREG1V0.TRIM.ULPR */
   #define FICR_TRIM_SYSCTRL_VREG1V0_TRIM_ULPR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ULPR register.                     */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25939,7 +25970,7 @@ typedef struct {
 /* FICR_TRIM_SYSCTRL_VREG1V0_VOUTHPNOMINAL: Config value for SYSCTRL.VREG1V0.VOUTHPNOMINAL */
   #define FICR_TRIM_SYSCTRL_VREG1V0_VOUTHPNOMINAL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VOUTHPNOMINAL register.        */
 
-/* VALUE @Bits 0..31 : Trim value */
+/* VALUE @Bits 0..31 : Config value */
   #define FICR_TRIM_SYSCTRL_VREG1V0_VOUTHPNOMINAL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                */
   #define FICR_TRIM_SYSCTRL_VREG1V0_VOUTHPNOMINAL_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_VREG1V0_VOUTHPNOMINAL_VALUE_Pos)
                                                                             /*!< Bit mask of VALUE field.*/
@@ -25951,14 +25982,14 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  IREF;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGAO0V8.IREF                 */
-  __IM  uint32_t  HIGHPOWER;                         /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGAO0V8.HIGHPOWER            */
-  __IM  uint32_t  LOWPOWER;                          /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGAO0V8.LOWPOWER             */
-  __IM  uint32_t  ULTRALOWPOWER;                     /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGAO0V8.ULTRALOWPOWER        */
-  __IM  uint32_t  BPDET;                             /*!< (@ 0x00000010) Trim value for SYSCTRL.VREGAO0V8.BPDET                */
+  __IM  uint32_t  IREF;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGAO0V8.TRIM.IREF            */
+  __IM  uint32_t  HIGHPOWER;                         /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGAO0V8.TRIM.HIGHPOWER       */
+  __IM  uint32_t  LOWPOWER;                          /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGAO0V8.TRIM.LOWPOWER        */
+  __IM  uint32_t  ULTRALOWPOWER;                     /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGAO0V8.TRIM.ULTRALOWPOWER   */
+  __IM  uint32_t  BPDET;                             /*!< (@ 0x00000010) Trim value for SYSCTRL.VREGAO0V8.TRIM.BPDET           */
 } NRF_FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_Type;         /*!< Size = 20 (0x014)                                                    */
 
-/* FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_IREF: Trim value for SYSCTRL.VREGAO0V8.IREF */
+/* FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_IREF: Trim value for SYSCTRL.VREGAO0V8.TRIM.IREF */
   #define FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_IREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of IREF register.                   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25967,7 +25998,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_HIGHPOWER: Trim value for SYSCTRL.VREGAO0V8.HIGHPOWER */
+/* FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_HIGHPOWER: Trim value for SYSCTRL.VREGAO0V8.TRIM.HIGHPOWER */
   #define FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_HIGHPOWER_ResetValue (0xFFFFFFFFUL) /*!< Reset value of HIGHPOWER register.         */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25976,7 +26007,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_LOWPOWER: Trim value for SYSCTRL.VREGAO0V8.LOWPOWER */
+/* FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_LOWPOWER: Trim value for SYSCTRL.VREGAO0V8.TRIM.LOWPOWER */
   #define FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_LOWPOWER_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LOWPOWER register.           */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25985,7 +26016,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_ULTRALOWPOWER: Trim value for SYSCTRL.VREGAO0V8.ULTRALOWPOWER */
+/* FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_ULTRALOWPOWER: Trim value for SYSCTRL.VREGAO0V8.TRIM.ULTRALOWPOWER */
   #define FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_ULTRALOWPOWER_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ULTRALOWPOWER register. */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -25994,7 +26025,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_BPDET: Trim value for SYSCTRL.VREGAO0V8.BPDET */
+/* FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_BPDET: Trim value for SYSCTRL.VREGAO0V8.TRIM.BPDET */
   #define FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM_BPDET_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BPDET register.                 */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26018,13 +26049,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  IREF;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGAO1V8.IREF                 */
-  __IM  uint32_t  VREF;                              /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGAO1V8.VREF                 */
-  __IM  uint32_t  LOWPOWER;                          /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGAO1V8.LOWPOWER             */
-  __IM  uint32_t  LOWPOWERDIFF;                      /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGAO1V8.LOWPOWERDIFF         */
+  __IM  uint32_t  IREF;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGAO1V8.TRIM.IREF            */
+  __IM  uint32_t  VREF;                              /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGAO1V8.TRIM.VREF            */
+  __IM  uint32_t  LOWPOWER;                          /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGAO1V8.TRIM.LOWPOWER        */
+  __IM  uint32_t  LOWPOWERDIFF;                      /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGAO1V8.TRIM.LOWPOWERDIFF    */
 } NRF_FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_Type;         /*!< Size = 16 (0x010)                                                    */
 
-/* FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_IREF: Trim value for SYSCTRL.VREGAO1V8.IREF */
+/* FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_IREF: Trim value for SYSCTRL.VREGAO1V8.TRIM.IREF */
   #define FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_IREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of IREF register.                   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26033,7 +26064,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_VREF: Trim value for SYSCTRL.VREGAO1V8.VREF */
+/* FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_VREF: Trim value for SYSCTRL.VREGAO1V8.TRIM.VREF */
   #define FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_VREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VREF register.                   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26042,7 +26073,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_LOWPOWER: Trim value for SYSCTRL.VREGAO1V8.LOWPOWER */
+/* FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_LOWPOWER: Trim value for SYSCTRL.VREGAO1V8.TRIM.LOWPOWER */
   #define FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_LOWPOWER_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LOWPOWER register.           */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26051,7 +26082,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_LOWPOWERDIFF: Trim value for SYSCTRL.VREGAO1V8.LOWPOWERDIFF */
+/* FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_LOWPOWERDIFF: Trim value for SYSCTRL.VREGAO1V8.TRIM.LOWPOWERDIFF */
   #define FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM_LOWPOWERDIFF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LOWPOWERDIFF register.   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26075,21 +26106,23 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VREGMAIN_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  BIASIBPP;                          /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGMAIN.BIASIBPP              */
-  __IM  uint32_t  BIASIBPSR;                         /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGMAIN.BIASIBPSR             */
-  __IM  uint32_t  VDDAO1V8HYSTOUTPUT;                /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGMAIN.VDDAO1V8HYSTOUTPUT    */
-  __IM  uint32_t  VDDAO1V8PWMOUTPUT;                 /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGMAIN.VDDAO1V8PWMOUTPUT     */
-  __IM  uint32_t  VDD1V0HYSTOUTPUT;                  /*!< (@ 0x00000010) Trim value for SYSCTRL.VREGMAIN.VDD1V0HYSTOUTPUT      */
-  __IM  uint32_t  VDDVS0V8HYSTOUTPUT;                /*!< (@ 0x00000014) Trim value for SYSCTRL.VREGMAIN.VDDVS0V8HYSTOUTPUT    */
-  __IM  uint32_t  VDDVS0V8PWMOUTPUT;                 /*!< (@ 0x00000018) Trim value for SYSCTRL.VREGMAIN.VDDVS0V8PWMOUTPUT     */
-  __IM  uint32_t  VDD1V0PWMOUTPUT;                   /*!< (@ 0x0000001C) Trim value for SYSCTRL.VREGMAIN.VDD1V0PWMOUTPUT       */
-  __IM  uint32_t  ZCROSS;                            /*!< (@ 0x00000020) Trim value for SYSCTRL.VREGMAIN.ZCROSS                */
-  __IM  uint32_t  HSILIM;                            /*!< (@ 0x00000024) Trim value for SYSCTRL.VREGMAIN.HSILIM                */
-  __IM  uint32_t  ICMP;                              /*!< (@ 0x00000028) Trim value for SYSCTRL.VREGMAIN.ICMP                  */
-  __IM  uint32_t  VGND;                              /*!< (@ 0x0000002C) Trim value for SYSCTRL.VREGMAIN.VGND                  */
+  __IM  uint32_t  BIASIBPP;                          /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGMAIN.TRIM.BIASIBPP         */
+  __IM  uint32_t  BIASIBPSR;                         /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGMAIN.TRIM.BIASIBPSR        */
+  __IM  uint32_t  VDDAO1V8HYSTOUTPUT;                /*!< (@ 0x00000008) Trim value for
+                                                                         SYSCTRL.VREGMAIN.TRIM.VDDAO1V8HYSTOUTPUT*/
+  __IM  uint32_t  VDDAO1V8PWMOUTPUT;                 /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGMAIN.TRIM.VDDAO1V8PWMOUTPUT*/
+  __IM  uint32_t  VDD1V0HYSTOUTPUT;                  /*!< (@ 0x00000010) Trim value for SYSCTRL.VREGMAIN.TRIM.VDD1V0HYSTOUTPUT */
+  __IM  uint32_t  VDDVS0V8HYSTOUTPUT;                /*!< (@ 0x00000014) Trim value for
+                                                                         SYSCTRL.VREGMAIN.TRIM.VDDVS0V8HYSTOUTPUT*/
+  __IM  uint32_t  VDDVS0V8PWMOUTPUT;                 /*!< (@ 0x00000018) Trim value for SYSCTRL.VREGMAIN.TRIM.VDDVS0V8PWMOUTPUT*/
+  __IM  uint32_t  VDD1V0PWMOUTPUT;                   /*!< (@ 0x0000001C) Trim value for SYSCTRL.VREGMAIN.TRIM.VDD1V0PWMOUTPUT  */
+  __IM  uint32_t  ZCROSS;                            /*!< (@ 0x00000020) Trim value for SYSCTRL.VREGMAIN.TRIM.ZCROSS           */
+  __IM  uint32_t  HSILIM;                            /*!< (@ 0x00000024) Trim value for SYSCTRL.VREGMAIN.TRIM.HSILIM           */
+  __IM  uint32_t  ICMP;                              /*!< (@ 0x00000028) Trim value for SYSCTRL.VREGMAIN.TRIM.ICMP             */
+  __IM  uint32_t  VGND;                              /*!< (@ 0x0000002C) Trim value for SYSCTRL.VREGMAIN.TRIM.VGND             */
 } NRF_FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_Type;          /*!< Size = 48 (0x030)                                                    */
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_BIASIBPP: Trim value for SYSCTRL.VREGMAIN.BIASIBPP */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_BIASIBPP: Trim value for SYSCTRL.VREGMAIN.TRIM.BIASIBPP */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_BIASIBPP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BIASIBPP register.            */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26098,7 +26131,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_BIASIBPSR: Trim value for SYSCTRL.VREGMAIN.BIASIBPSR */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_BIASIBPSR: Trim value for SYSCTRL.VREGMAIN.TRIM.BIASIBPSR */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_BIASIBPSR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BIASIBPSR register.          */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26107,7 +26140,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDAO1V8HYSTOUTPUT: Trim value for SYSCTRL.VREGMAIN.VDDAO1V8HYSTOUTPUT */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDAO1V8HYSTOUTPUT: Trim value for SYSCTRL.VREGMAIN.TRIM.VDDAO1V8HYSTOUTPUT */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDAO1V8HYSTOUTPUT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VDDAO1V8HYSTOUTPUT
                                                                             register.*/
 
@@ -26117,7 +26150,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDAO1V8PWMOUTPUT: Trim value for SYSCTRL.VREGMAIN.VDDAO1V8PWMOUTPUT */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDAO1V8PWMOUTPUT: Trim value for SYSCTRL.VREGMAIN.TRIM.VDDAO1V8PWMOUTPUT */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDAO1V8PWMOUTPUT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VDDAO1V8PWMOUTPUT
                                                                             register.*/
 
@@ -26127,7 +26160,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDD1V0HYSTOUTPUT: Trim value for SYSCTRL.VREGMAIN.VDD1V0HYSTOUTPUT */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDD1V0HYSTOUTPUT: Trim value for SYSCTRL.VREGMAIN.TRIM.VDD1V0HYSTOUTPUT */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDD1V0HYSTOUTPUT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VDD1V0HYSTOUTPUT
                                                                             register.*/
 
@@ -26137,7 +26170,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDVS0V8HYSTOUTPUT: Trim value for SYSCTRL.VREGMAIN.VDDVS0V8HYSTOUTPUT */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDVS0V8HYSTOUTPUT: Trim value for SYSCTRL.VREGMAIN.TRIM.VDDVS0V8HYSTOUTPUT */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDVS0V8HYSTOUTPUT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VDDVS0V8HYSTOUTPUT
                                                                             register.*/
 
@@ -26147,7 +26180,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDVS0V8PWMOUTPUT: Trim value for SYSCTRL.VREGMAIN.VDDVS0V8PWMOUTPUT */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDVS0V8PWMOUTPUT: Trim value for SYSCTRL.VREGMAIN.TRIM.VDDVS0V8PWMOUTPUT */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDDVS0V8PWMOUTPUT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VDDVS0V8PWMOUTPUT
                                                                             register.*/
 
@@ -26157,7 +26190,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDD1V0PWMOUTPUT: Trim value for SYSCTRL.VREGMAIN.VDD1V0PWMOUTPUT */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDD1V0PWMOUTPUT: Trim value for SYSCTRL.VREGMAIN.TRIM.VDD1V0PWMOUTPUT */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VDD1V0PWMOUTPUT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VDD1V0PWMOUTPUT
                                                                             register.*/
 
@@ -26167,7 +26200,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_ZCROSS: Trim value for SYSCTRL.VREGMAIN.ZCROSS */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_ZCROSS: Trim value for SYSCTRL.VREGMAIN.TRIM.ZCROSS */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_ZCROSS_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ZCROSS register.                */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26176,7 +26209,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_HSILIM: Trim value for SYSCTRL.VREGMAIN.HSILIM */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_HSILIM: Trim value for SYSCTRL.VREGMAIN.TRIM.HSILIM */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_HSILIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of HSILIM register.                */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26185,7 +26218,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_ICMP: Trim value for SYSCTRL.VREGMAIN.ICMP */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_ICMP: Trim value for SYSCTRL.VREGMAIN.TRIM.ICMP */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_ICMP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ICMP register.                    */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26194,7 +26227,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VGND: Trim value for SYSCTRL.VREGMAIN.VGND */
+/* FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VGND: Trim value for SYSCTRL.VREGMAIN.TRIM.VGND */
   #define FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_VGND_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VGND register.                    */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26204,13 +26237,42 @@ typedef struct {
 
 
 
+/* ======================================== Struct FICR_TRIM_SYSCTRL_VREGMAIN_CONFIG ========================================= */
+/**
+  * @brief CONFIG [FICR_TRIM_SYSCTRL_VREGMAIN_CONFIG] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  CFGCH1;                            /*!< (@ 0x00000000) Config value for SYSCTRL.VREGMAIN.CONFIG.CFGCH1       */
+} NRF_FICR_TRIM_SYSCTRL_VREGMAIN_CONFIG_Type;        /*!< Size = 4 (0x004)                                                     */
+
+/* FICR_TRIM_SYSCTRL_VREGMAIN_CONFIG_CFGCH1: Config value for SYSCTRL.VREGMAIN.CONFIG.CFGCH1 */
+  #define FICR_TRIM_SYSCTRL_VREGMAIN_CONFIG_CFGCH1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CFGCH1 register.              */
+
+/* VALUE @Bits 0..31 : Config value */
+  #define FICR_TRIM_SYSCTRL_VREGMAIN_CONFIG_CFGCH1_VALUE_Pos (0UL) /*!< Position of VALUE field.                               */
+  #define FICR_TRIM_SYSCTRL_VREGMAIN_CONFIG_CFGCH1_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_VREGMAIN_CONFIG_CFGCH1_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+
 /* ============================================ Struct FICR_TRIM_SYSCTRL_VREGMAIN ============================================ */
 /**
   * @brief VREGMAIN [FICR_TRIM_SYSCTRL_VREGMAIN] (unspecified)
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_SYSCTRL_VREGMAIN_TRIM_Type TRIM; /*!< (@ 0x00000000) (unspecified)                                       */
-} NRF_FICR_TRIM_SYSCTRL_VREGMAIN_Type;               /*!< Size = 48 (0x030)                                                    */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMAIN_CONFIG_Type CONFIG; /*!< (@ 0x00000030) (unspecified)                                   */
+  __IM  uint32_t  MODE;                              /*!< (@ 0x00000034) Config value for SYSCTRL.VREGMAIN.MODE                */
+} NRF_FICR_TRIM_SYSCTRL_VREGMAIN_Type;               /*!< Size = 56 (0x038)                                                    */
+
+/* FICR_TRIM_SYSCTRL_VREGMAIN_MODE: Config value for SYSCTRL.VREGMAIN.MODE */
+  #define FICR_TRIM_SYSCTRL_VREGMAIN_MODE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of MODE register.                         */
+
+/* VALUE @Bits 0..31 : Config value */
+  #define FICR_TRIM_SYSCTRL_VREGMAIN_MODE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                        */
+  #define FICR_TRIM_SYSCTRL_VREGMAIN_MODE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_VREGMAIN_MODE_VALUE_Pos) /*!< Bit mask of
+                                                                            VALUE field.*/
+
 
 
 /* ======================================== Struct FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM ======================================== */
@@ -26218,13 +26280,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VBG;                               /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGMRAM130.VBG                */
-  __IM  uint32_t  BIAS;                              /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGMRAM130.BIAS               */
-  __IM  uint32_t  VPR;                               /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGMRAM130.VPR                */
-  __IM  uint32_t  VREF;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGMRAM130.VREF               */
+  __IM  uint32_t  VBG;                               /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGMRAM130.TRIM.VBG           */
+  __IM  uint32_t  BIAS;                              /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGMRAM130.TRIM.BIAS          */
+  __IM  uint32_t  VPR;                               /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGMRAM130.TRIM.VPR           */
+  __IM  uint32_t  VREF;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGMRAM130.TRIM.VREF          */
 } NRF_FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_Type;       /*!< Size = 16 (0x010)                                                    */
 
-/* FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_VBG: Trim value for SYSCTRL.VREGMRAM130.VBG */
+/* FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_VBG: Trim value for SYSCTRL.VREGMRAM130.TRIM.VBG */
   #define FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_VBG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VBG register.                   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26233,7 +26295,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_BIAS: Trim value for SYSCTRL.VREGMRAM130.BIAS */
+/* FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_BIAS: Trim value for SYSCTRL.VREGMRAM130.TRIM.BIAS */
   #define FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_BIAS_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BIAS register.                 */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26242,7 +26304,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_VPR: Trim value for SYSCTRL.VREGMRAM130.VPR */
+/* FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_VPR: Trim value for SYSCTRL.VREGMRAM130.TRIM.VPR */
   #define FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_VPR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VPR register.                   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26251,7 +26313,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_VREF: Trim value for SYSCTRL.VREGMRAM130.VREF */
+/* FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_VREF: Trim value for SYSCTRL.VREGMRAM130.TRIM.VREF */
   #define FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM_VREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VREF register.                 */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26275,13 +26337,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VBG;                               /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGMRAM131.VBG                */
-  __IM  uint32_t  BIAS;                              /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGMRAM131.BIAS               */
-  __IM  uint32_t  VPR;                               /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGMRAM131.VPR                */
-  __IM  uint32_t  VREF;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGMRAM131.VREF               */
+  __IM  uint32_t  VBG;                               /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGMRAM131.TRIM.VBG           */
+  __IM  uint32_t  BIAS;                              /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGMRAM131.TRIM.BIAS          */
+  __IM  uint32_t  VPR;                               /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGMRAM131.TRIM.VPR           */
+  __IM  uint32_t  VREF;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGMRAM131.TRIM.VREF          */
 } NRF_FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_Type;       /*!< Size = 16 (0x010)                                                    */
 
-/* FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_VBG: Trim value for SYSCTRL.VREGMRAM131.VBG */
+/* FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_VBG: Trim value for SYSCTRL.VREGMRAM131.TRIM.VBG */
   #define FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_VBG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VBG register.                   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26290,7 +26352,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_BIAS: Trim value for SYSCTRL.VREGMRAM131.BIAS */
+/* FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_BIAS: Trim value for SYSCTRL.VREGMRAM131.TRIM.BIAS */
   #define FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_BIAS_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BIAS register.                 */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26299,7 +26361,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_VPR: Trim value for SYSCTRL.VREGMRAM131.VPR */
+/* FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_VPR: Trim value for SYSCTRL.VREGMRAM131.TRIM.VPR */
   #define FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_VPR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VPR register.                   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26308,7 +26370,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_VREF: Trim value for SYSCTRL.VREGMRAM131.VREF */
+/* FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_VREF: Trim value for SYSCTRL.VREGMRAM131.TRIM.VREF */
   #define FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM_VREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VREF register.                 */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26332,13 +26394,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  IREF;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGVS0V8.IREF                 */
-  __IM  uint32_t  HIGHPOWER;                         /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGVS0V8.HIGHPOWER            */
-  __IM  uint32_t  LOWPOWER;                          /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGVS0V8.LOWPOWER             */
-  __IM  uint32_t  ULPR;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGVS0V8.ULPR                 */
+  __IM  uint32_t  IREF;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGVS0V8.TRIM.IREF            */
+  __IM  uint32_t  HIGHPOWER;                         /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGVS0V8.TRIM.HIGHPOWER       */
+  __IM  uint32_t  LOWPOWER;                          /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGVS0V8.TRIM.LOWPOWER        */
+  __IM  uint32_t  ULPR;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGVS0V8.TRIM.ULPR            */
 } NRF_FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_Type;         /*!< Size = 16 (0x010)                                                    */
 
-/* FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_IREF: Trim value for SYSCTRL.VREGVS0V8.IREF */
+/* FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_IREF: Trim value for SYSCTRL.VREGVS0V8.TRIM.IREF */
   #define FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_IREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of IREF register.                   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26347,7 +26409,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_HIGHPOWER: Trim value for SYSCTRL.VREGVS0V8.HIGHPOWER */
+/* FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_HIGHPOWER: Trim value for SYSCTRL.VREGVS0V8.TRIM.HIGHPOWER */
   #define FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_HIGHPOWER_ResetValue (0xFFFFFFFFUL) /*!< Reset value of HIGHPOWER register.         */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26356,7 +26418,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_LOWPOWER: Trim value for SYSCTRL.VREGVS0V8.LOWPOWER */
+/* FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_LOWPOWER: Trim value for SYSCTRL.VREGVS0V8.TRIM.LOWPOWER */
   #define FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_LOWPOWER_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LOWPOWER register.           */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26365,7 +26427,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_ULPR: Trim value for SYSCTRL.VREGVS0V8.ULPR */
+/* FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_ULPR: Trim value for SYSCTRL.VREGVS0V8.TRIM.ULPR */
   #define FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM_ULPR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ULPR register.                   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26389,13 +26451,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VREGUSB_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  TRIMVDD;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGUSB.TRIMVDD                */
-  __IM  uint32_t  TRIMIBP;                           /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGUSB.TRIMIBP                */
-  __IM  uint32_t  TRIM0V8;                           /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGUSB.TRIM0V8                */
-  __IM  uint32_t  TRIM3V3;                           /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGUSB.TRIM3V3                */
+  __IM  uint32_t  TRIMVDD;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.VREGUSB.TRIM.TRIMVDD           */
+  __IM  uint32_t  TRIMIBP;                           /*!< (@ 0x00000004) Trim value for SYSCTRL.VREGUSB.TRIM.TRIMIBP           */
+  __IM  uint32_t  TRIM0V8;                           /*!< (@ 0x00000008) Trim value for SYSCTRL.VREGUSB.TRIM.TRIM0V8           */
+  __IM  uint32_t  TRIM3V3;                           /*!< (@ 0x0000000C) Trim value for SYSCTRL.VREGUSB.TRIM.TRIM3V3           */
 } NRF_FICR_TRIM_SYSCTRL_VREGUSB_TRIM_Type;           /*!< Size = 16 (0x010)                                                    */
 
-/* FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIMVDD: Trim value for SYSCTRL.VREGUSB.TRIMVDD */
+/* FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIMVDD: Trim value for SYSCTRL.VREGUSB.TRIM.TRIMVDD */
   #define FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIMVDD_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIMVDD register.               */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26404,7 +26466,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIMIBP: Trim value for SYSCTRL.VREGUSB.TRIMIBP */
+/* FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIMIBP: Trim value for SYSCTRL.VREGUSB.TRIM.TRIMIBP */
   #define FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIMIBP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIMIBP register.               */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26413,7 +26475,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIM0V8: Trim value for SYSCTRL.VREGUSB.TRIM0V8 */
+/* FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIM0V8: Trim value for SYSCTRL.VREGUSB.TRIM.TRIM0V8 */
   #define FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIM0V8_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM0V8 register.               */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26422,7 +26484,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIM3V3: Trim value for SYSCTRL.VREGUSB.TRIM3V3 */
+/* FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIM3V3: Trim value for SYSCTRL.VREGUSB.TRIM.TRIM3V3 */
   #define FICR_TRIM_SYSCTRL_VREGUSB_TRIM_TRIM3V3_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM3V3 register.               */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26446,11 +26508,11 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VDETAO0V8_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  BROWNOUT;                          /*!< (@ 0x00000000) Trim value for SYSCTRL.VDETAO0V8.BROWNOUT             */
-  __IM  uint32_t  PWRGOOD;                           /*!< (@ 0x00000004) Trim value for SYSCTRL.VDETAO0V8.PWRGOOD              */
+  __IM  uint32_t  BROWNOUT;                          /*!< (@ 0x00000000) Trim value for SYSCTRL.VDETAO0V8.TRIM.BROWNOUT        */
+  __IM  uint32_t  PWRGOOD;                           /*!< (@ 0x00000004) Trim value for SYSCTRL.VDETAO0V8.TRIM.PWRGOOD         */
 } NRF_FICR_TRIM_SYSCTRL_VDETAO0V8_TRIM_Type;         /*!< Size = 8 (0x008)                                                     */
 
-/* FICR_TRIM_SYSCTRL_VDETAO0V8_TRIM_BROWNOUT: Trim value for SYSCTRL.VDETAO0V8.BROWNOUT */
+/* FICR_TRIM_SYSCTRL_VDETAO0V8_TRIM_BROWNOUT: Trim value for SYSCTRL.VDETAO0V8.TRIM.BROWNOUT */
   #define FICR_TRIM_SYSCTRL_VDETAO0V8_TRIM_BROWNOUT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BROWNOUT register.           */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26459,7 +26521,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VDETAO0V8_TRIM_PWRGOOD: Trim value for SYSCTRL.VDETAO0V8.PWRGOOD */
+/* FICR_TRIM_SYSCTRL_VDETAO0V8_TRIM_PWRGOOD: Trim value for SYSCTRL.VDETAO0V8.TRIM.PWRGOOD */
   #define FICR_TRIM_SYSCTRL_VDETAO0V8_TRIM_PWRGOOD_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PWRGOOD register.             */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26480,7 +26542,7 @@ typedef struct {
 /* FICR_TRIM_SYSCTRL_VDETAO0V8_CONFIG_BROWNOUTHP: Config value for SYSCTRL.VDETAO0V8.CONFIG.BROWNOUTHP */
   #define FICR_TRIM_SYSCTRL_VDETAO0V8_CONFIG_BROWNOUTHP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BROWNOUTHP register.     */
 
-/* VALUE @Bits 0..31 : Trim value */
+/* VALUE @Bits 0..31 : Config value */
   #define FICR_TRIM_SYSCTRL_VDETAO0V8_CONFIG_BROWNOUTHP_VALUE_Pos (0UL) /*!< Position of VALUE field.                          */
   #define FICR_TRIM_SYSCTRL_VDETAO0V8_CONFIG_BROWNOUTHP_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_VDETAO0V8_CONFIG_BROWNOUTHP_VALUE_Pos)
                                                                             /*!< Bit mask of VALUE field.*/
@@ -26502,11 +26564,11 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VDETAO1V8_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  BROWNOUTLVLHIGH;                   /*!< (@ 0x00000000) Trim value for SYSCTRL.VDETAO1V8.BROWNOUTLVLHIGH      */
-  __IM  uint32_t  BROWNOUTLVLLOW;                    /*!< (@ 0x00000004) Trim value for SYSCTRL.VDETAO1V8.BROWNOUTLVLLOW       */
+  __IM  uint32_t  BROWNOUTLVLHIGH;                   /*!< (@ 0x00000000) Trim value for SYSCTRL.VDETAO1V8.TRIM.BROWNOUTLVLHIGH */
+  __IM  uint32_t  BROWNOUTLVLLOW;                    /*!< (@ 0x00000004) Trim value for SYSCTRL.VDETAO1V8.TRIM.BROWNOUTLVLLOW  */
 } NRF_FICR_TRIM_SYSCTRL_VDETAO1V8_TRIM_Type;         /*!< Size = 8 (0x008)                                                     */
 
-/* FICR_TRIM_SYSCTRL_VDETAO1V8_TRIM_BROWNOUTLVLHIGH: Trim value for SYSCTRL.VDETAO1V8.BROWNOUTLVLHIGH */
+/* FICR_TRIM_SYSCTRL_VDETAO1V8_TRIM_BROWNOUTLVLHIGH: Trim value for SYSCTRL.VDETAO1V8.TRIM.BROWNOUTLVLHIGH */
   #define FICR_TRIM_SYSCTRL_VDETAO1V8_TRIM_BROWNOUTLVLHIGH_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BROWNOUTLVLHIGH
                                                                             register.*/
 
@@ -26516,7 +26578,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VDETAO1V8_TRIM_BROWNOUTLVLLOW: Trim value for SYSCTRL.VDETAO1V8.BROWNOUTLVLLOW */
+/* FICR_TRIM_SYSCTRL_VDETAO1V8_TRIM_BROWNOUTLVLLOW: Trim value for SYSCTRL.VDETAO1V8.TRIM.BROWNOUTLVLLOW */
   #define FICR_TRIM_SYSCTRL_VDETAO1V8_TRIM_BROWNOUTLVLLOW_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BROWNOUTLVLLOW
                                                                             register.*/
 
@@ -26541,11 +26603,11 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VDETVS0V8_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  BROWNOUT;                          /*!< (@ 0x00000000) Trim value for SYSCTRL.VDETVS0V8.BROWNOUT             */
-  __IM  uint32_t  PWRGOOD;                           /*!< (@ 0x00000004) Trim value for SYSCTRL.VDETVS0V8.PWRGOOD              */
+  __IM  uint32_t  BROWNOUT;                          /*!< (@ 0x00000000) Trim value for SYSCTRL.VDETVS0V8.TRIM.BROWNOUT        */
+  __IM  uint32_t  PWRGOOD;                           /*!< (@ 0x00000004) Trim value for SYSCTRL.VDETVS0V8.TRIM.PWRGOOD         */
 } NRF_FICR_TRIM_SYSCTRL_VDETVS0V8_TRIM_Type;         /*!< Size = 8 (0x008)                                                     */
 
-/* FICR_TRIM_SYSCTRL_VDETVS0V8_TRIM_BROWNOUT: Trim value for SYSCTRL.VDETVS0V8.BROWNOUT */
+/* FICR_TRIM_SYSCTRL_VDETVS0V8_TRIM_BROWNOUT: Trim value for SYSCTRL.VDETVS0V8.TRIM.BROWNOUT */
   #define FICR_TRIM_SYSCTRL_VDETVS0V8_TRIM_BROWNOUT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of BROWNOUT register.           */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26554,7 +26616,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_VDETVS0V8_TRIM_PWRGOOD: Trim value for SYSCTRL.VDETVS0V8.PWRGOOD */
+/* FICR_TRIM_SYSCTRL_VDETVS0V8_TRIM_PWRGOOD: Trim value for SYSCTRL.VDETVS0V8.TRIM.PWRGOOD */
   #define FICR_TRIM_SYSCTRL_VDETVS0V8_TRIM_PWRGOOD_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PWRGOOD register.             */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26578,10 +26640,10 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VDETAO5V0_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  PWRGOOD;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.VDETAO5V0.PWRGOOD              */
+  __IM  uint32_t  PWRGOOD;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.VDETAO5V0.TRIM.PWRGOOD         */
 } NRF_FICR_TRIM_SYSCTRL_VDETAO5V0_TRIM_Type;         /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_SYSCTRL_VDETAO5V0_TRIM_PWRGOOD: Trim value for SYSCTRL.VDETAO5V0.PWRGOOD */
+/* FICR_TRIM_SYSCTRL_VDETAO5V0_TRIM_PWRGOOD: Trim value for SYSCTRL.VDETAO5V0.TRIM.PWRGOOD */
   #define FICR_TRIM_SYSCTRL_VDETAO5V0_TRIM_PWRGOOD_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PWRGOOD register.             */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26605,10 +26667,10 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_VDET1V0_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  PWRGOOD;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.VDET1V0.PWRGOOD                */
+  __IM  uint32_t  PWRGOOD;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.VDET1V0.TRIM.PWRGOOD           */
 } NRF_FICR_TRIM_SYSCTRL_VDET1V0_TRIM_Type;           /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_SYSCTRL_VDET1V0_TRIM_PWRGOOD: Trim value for SYSCTRL.VDET1V0.PWRGOOD */
+/* FICR_TRIM_SYSCTRL_VDET1V0_TRIM_PWRGOOD: Trim value for SYSCTRL.VDET1V0.TRIM.PWRGOOD */
   #define FICR_TRIM_SYSCTRL_VDET1V0_TRIM_PWRGOOD_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PWRGOOD register.               */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26632,13 +26694,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_HSFLL120_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.HSFLL120.VSUP                  */
-  __IM  uint32_t  COARSE[6];                         /*!< (@ 0x00000004) Trim value for SYSCTRL.HSFLL120.COARSE                */
-  __IM  uint32_t  FINE[6];                           /*!< (@ 0x0000001C) Trim value for SYSCTRL.HSFLL120.FINE                  */
-  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000034) Trim value for SYSCTRL.HSFLL120.TCOEF                 */
+  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.HSFLL120.TRIM.VSUP             */
+  __IM  uint32_t  COARSE[6];                         /*!< (@ 0x00000004) Trim value for SYSCTRL.HSFLL120.TRIM.COARSE           */
+  __IM  uint32_t  FINE[6];                           /*!< (@ 0x0000001C) Trim value for SYSCTRL.HSFLL120.TRIM.FINE             */
+  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000034) Trim value for SYSCTRL.HSFLL120.TRIM.TCOEF            */
 } NRF_FICR_TRIM_SYSCTRL_HSFLL120_TRIM_Type;          /*!< Size = 56 (0x038)                                                    */
 
-/* FICR_TRIM_SYSCTRL_HSFLL120_TRIM_VSUP: Trim value for SYSCTRL.HSFLL120.VSUP */
+/* FICR_TRIM_SYSCTRL_HSFLL120_TRIM_VSUP: Trim value for SYSCTRL.HSFLL120.TRIM.VSUP */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_VSUP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VSUP register.                    */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26647,7 +26709,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HSFLL120_TRIM_COARSE: Trim value for SYSCTRL.HSFLL120.COARSE */
+/* FICR_TRIM_SYSCTRL_HSFLL120_TRIM_COARSE: Trim value for SYSCTRL.HSFLL120.TRIM.COARSE */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_COARSE_MaxCount (6UL) /*!< Max size of COARSE[6] array.                              */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_COARSE_MaxIndex (5UL) /*!< Max index of COARSE[6] array.                             */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[6] array.                             */
@@ -26659,7 +26721,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HSFLL120_TRIM_FINE: Trim value for SYSCTRL.HSFLL120.FINE */
+/* FICR_TRIM_SYSCTRL_HSFLL120_TRIM_FINE: Trim value for SYSCTRL.HSFLL120.TRIM.FINE */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_FINE_MaxCount (6UL) /*!< Max size of FINE[6] array.                                  */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_FINE_MaxIndex (5UL) /*!< Max index of FINE[6] array.                                 */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[6] array.                                 */
@@ -26671,7 +26733,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HSFLL120_TRIM_TCOEF: Trim value for SYSCTRL.HSFLL120.TCOEF */
+/* FICR_TRIM_SYSCTRL_HSFLL120_TRIM_TCOEF: Trim value for SYSCTRL.HSFLL120.TRIM.TCOEF */
   #define FICR_TRIM_SYSCTRL_HSFLL120_TRIM_TCOEF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TCOEF register.                  */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26695,13 +26757,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SYSCTRL_HSFLL121_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.HSFLL121.VSUP                  */
-  __IM  uint32_t  COARSE[6];                         /*!< (@ 0x00000004) Trim value for SYSCTRL.HSFLL121.COARSE                */
-  __IM  uint32_t  FINE[6];                           /*!< (@ 0x0000001C) Trim value for SYSCTRL.HSFLL121.FINE                  */
-  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000034) Trim value for SYSCTRL.HSFLL121.TCOEF                 */
+  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.HSFLL121.TRIM.VSUP             */
+  __IM  uint32_t  COARSE[6];                         /*!< (@ 0x00000004) Trim value for SYSCTRL.HSFLL121.TRIM.COARSE           */
+  __IM  uint32_t  FINE[6];                           /*!< (@ 0x0000001C) Trim value for SYSCTRL.HSFLL121.TRIM.FINE             */
+  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000034) Trim value for SYSCTRL.HSFLL121.TRIM.TCOEF            */
 } NRF_FICR_TRIM_SYSCTRL_HSFLL121_TRIM_Type;          /*!< Size = 56 (0x038)                                                    */
 
-/* FICR_TRIM_SYSCTRL_HSFLL121_TRIM_VSUP: Trim value for SYSCTRL.HSFLL121.VSUP */
+/* FICR_TRIM_SYSCTRL_HSFLL121_TRIM_VSUP: Trim value for SYSCTRL.HSFLL121.TRIM.VSUP */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_VSUP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VSUP register.                    */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26710,7 +26772,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HSFLL121_TRIM_COARSE: Trim value for SYSCTRL.HSFLL121.COARSE */
+/* FICR_TRIM_SYSCTRL_HSFLL121_TRIM_COARSE: Trim value for SYSCTRL.HSFLL121.TRIM.COARSE */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_COARSE_MaxCount (6UL) /*!< Max size of COARSE[6] array.                              */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_COARSE_MaxIndex (5UL) /*!< Max index of COARSE[6] array.                             */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[6] array.                             */
@@ -26722,7 +26784,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HSFLL121_TRIM_FINE: Trim value for SYSCTRL.HSFLL121.FINE */
+/* FICR_TRIM_SYSCTRL_HSFLL121_TRIM_FINE: Trim value for SYSCTRL.HSFLL121.TRIM.FINE */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_FINE_MaxCount (6UL) /*!< Max size of FINE[6] array.                                  */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_FINE_MaxIndex (5UL) /*!< Max index of FINE[6] array.                                 */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[6] array.                                 */
@@ -26734,7 +26796,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SYSCTRL_HSFLL121_TRIM_TCOEF: Trim value for SYSCTRL.HSFLL121.TCOEF */
+/* FICR_TRIM_SYSCTRL_HSFLL121_TRIM_TCOEF: Trim value for SYSCTRL.HSFLL121.TRIM.TCOEF */
   #define FICR_TRIM_SYSCTRL_HSFLL121_TRIM_TCOEF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TCOEF register.                  */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -26812,9 +26874,9 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.MEMCONF130.BLOCKTYPE[n].TRIM   */
 } NRF_FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_Type;   /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxCount (2UL) /*!< Size of BLOCKTYPE[2] array.                               */
-  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxIndex (1UL) /*!< Max index of BLOCKTYPE[2] array.                          */
-  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[2] array.                          */
+  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxCount (3UL) /*!< Size of BLOCKTYPE[3] array.                               */
+  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxIndex (2UL) /*!< Max index of BLOCKTYPE[3] array.                          */
+  #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[3] array.                          */
 
 /* FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_TRIM: Trim value for SYSCTRL.MEMCONF130.BLOCKTYPE[n].TRIM */
   #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_TRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM register.             */
@@ -26831,8 +26893,8 @@ typedef struct {
   * @brief MEMCONF130 [FICR_TRIM_SYSCTRL_MEMCONF130] (unspecified)
   */
 typedef struct {
-  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_Type BLOCKTYPE[2]; /*!< (@ 0x00000000) (unspecified)                        */
-} NRF_FICR_TRIM_SYSCTRL_MEMCONF130_Type;             /*!< Size = 8 (0x008)                                                     */
+  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_Type BLOCKTYPE[3]; /*!< (@ 0x00000000) (unspecified)                        */
+} NRF_FICR_TRIM_SYSCTRL_MEMCONF130_Type;             /*!< Size = 12 (0x00C)                                                    */
 
 
 /* ================================================ Struct FICR_TRIM_SYSCTRL ================================================= */
@@ -26857,20 +26919,21 @@ typedef struct {
   __IOM NRF_FICR_TRIM_SYSCTRL_VREGAO0V8_Type VREGAO0V8; /*!< (@ 0x000000A8) (unspecified)                                      */
   __IOM NRF_FICR_TRIM_SYSCTRL_VREGAO1V8_Type VREGAO1V8; /*!< (@ 0x000000BC) (unspecified)                                      */
   __IOM NRF_FICR_TRIM_SYSCTRL_VREGMAIN_Type VREGMAIN; /*!< (@ 0x000000CC) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM130_Type VREGMRAM130; /*!< (@ 0x000000FC) (unspecified)                                  */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM131_Type VREGMRAM131; /*!< (@ 0x0000010C) (unspecified)                                  */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGVS0V8_Type VREGVS0V8; /*!< (@ 0x0000011C) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGUSB_Type VREGUSB;  /*!< (@ 0x0000012C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO0V8_Type VDETAO0V8; /*!< (@ 0x0000013C) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO1V8_Type VDETAO1V8; /*!< (@ 0x00000148) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETVS0V8_Type VDETVS0V8; /*!< (@ 0x00000150) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO5V0_Type VDETAO5V0; /*!< (@ 0x00000158) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDET1V0_Type VDET1V0;  /*!< (@ 0x0000015C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL120_Type HSFLL120; /*!< (@ 0x00000160) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL121_Type HSFLL121; /*!< (@ 0x00000198) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF120_Type MEMCONF120; /*!< (@ 0x000001D0) (unspecified)                                    */
-  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF130_Type MEMCONF130; /*!< (@ 0x0000023C) (unspecified)                                    */
-} NRF_FICR_TRIM_SYSCTRL_Type;                        /*!< Size = 580 (0x244)                                                   */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM130_Type VREGMRAM130; /*!< (@ 0x00000104) (unspecified)                                  */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM131_Type VREGMRAM131; /*!< (@ 0x00000114) (unspecified)                                  */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGVS0V8_Type VREGVS0V8; /*!< (@ 0x00000124) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGUSB_Type VREGUSB;  /*!< (@ 0x00000134) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO0V8_Type VDETAO0V8; /*!< (@ 0x00000144) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO1V8_Type VDETAO1V8; /*!< (@ 0x00000150) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETVS0V8_Type VDETVS0V8; /*!< (@ 0x00000158) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO5V0_Type VDETAO5V0; /*!< (@ 0x00000160) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDET1V0_Type VDET1V0;  /*!< (@ 0x00000164) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL120_Type HSFLL120; /*!< (@ 0x00000168) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL121_Type HSFLL121; /*!< (@ 0x000001A0) (unspecified)                                        */
+  __IM  uint32_t  RESERVED2[14];
+  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF120_Type MEMCONF120; /*!< (@ 0x00000210) (unspecified)                                    */
+  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF130_Type MEMCONF130; /*!< (@ 0x0000027C) (unspecified)                                    */
+} NRF_FICR_TRIM_SYSCTRL_Type;                        /*!< Size = 648 (0x288)                                                   */
 
 
 /* ============================================== Struct FICR_TRIM_GLOBAL_SAADC ============================================== */
@@ -26878,45 +26941,33 @@ typedef struct {
   * @brief SAADC [FICR_TRIM_GLOBAL_SAADC] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  CALVREF;                           /*!< (@ 0x00000000) Trim value for GLOBAL.SAADC.CALVREF                   */
-  __IM  uint32_t  CALGAIN[3];                        /*!< (@ 0x00000004) Trim value for GLOBAL.SAADC.CALGAIN                   */
-  __IM  uint32_t  CALOFFSET;                         /*!< (@ 0x00000010) Trim value for GLOBAL.SAADC.CALOFFSET                 */
-  __IM  uint32_t  LINCALCOEFF[6];                    /*!< (@ 0x00000014) Trim value for GLOBAL.SAADC.LINCALCOEFF               */
-  __IM  uint32_t  CALIREF;                           /*!< (@ 0x0000002C) Trim value for GLOBAL.SAADC.CALIREF                   */
-  __IM  uint32_t  CALVREFTC;                         /*!< (@ 0x00000030) Trim value for GLOBAL.SAADC.CALVREFTC                 */
-} NRF_FICR_TRIM_GLOBAL_SAADC_Type;                   /*!< Size = 52 (0x034)                                                    */
+  __IM  uint32_t  CAL[3];                            /*!< (@ 0x00000000) Trim value for GLOBAL.SAADC.CAL                       */
+  __IM  uint32_t  CALREF;                            /*!< (@ 0x0000000C) Trim value for GLOBAL.SAADC.CALREF                    */
+  __IM  uint32_t  LINCALCOEFF[6];                    /*!< (@ 0x00000010) Trim value for GLOBAL.SAADC.TRIM.LINCALCOEFF          */
+} NRF_FICR_TRIM_GLOBAL_SAADC_Type;                   /*!< Size = 40 (0x028)                                                    */
 
-/* FICR_TRIM_GLOBAL_SAADC_CALVREF: Trim value for GLOBAL.SAADC.CALVREF */
-  #define FICR_TRIM_GLOBAL_SAADC_CALVREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALVREF register.                       */
+/* FICR_TRIM_GLOBAL_SAADC_CAL: Trim value for GLOBAL.SAADC.CAL */
+  #define FICR_TRIM_GLOBAL_SAADC_CAL_MaxCount (3UL)  /*!< Max size of CAL[3] array.                                            */
+  #define FICR_TRIM_GLOBAL_SAADC_CAL_MaxIndex (2UL)  /*!< Max index of CAL[3] array.                                           */
+  #define FICR_TRIM_GLOBAL_SAADC_CAL_MinIndex (0UL)  /*!< Min index of CAL[3] array.                                           */
+  #define FICR_TRIM_GLOBAL_SAADC_CAL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CAL[3] register.                            */
 
 /* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_SAADC_CALVREF_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
-  #define FICR_TRIM_GLOBAL_SAADC_CALVREF_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_SAADC_CALVREF_VALUE_Pos) /*!< Bit mask of
+  #define FICR_TRIM_GLOBAL_SAADC_CAL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                             */
+  #define FICR_TRIM_GLOBAL_SAADC_CAL_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_SAADC_CAL_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/
+
+
+/* FICR_TRIM_GLOBAL_SAADC_CALREF: Trim value for GLOBAL.SAADC.CALREF */
+  #define FICR_TRIM_GLOBAL_SAADC_CALREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALREF register.                         */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_GLOBAL_SAADC_CALREF_VALUE_Pos (0UL) /*!< Position of VALUE field.                                          */
+  #define FICR_TRIM_GLOBAL_SAADC_CALREF_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_SAADC_CALREF_VALUE_Pos) /*!< Bit mask of
                                                                             VALUE field.*/
 
 
-/* FICR_TRIM_GLOBAL_SAADC_CALGAIN: Trim value for GLOBAL.SAADC.CALGAIN */
-  #define FICR_TRIM_GLOBAL_SAADC_CALGAIN_MaxCount (3UL) /*!< Max size of CALGAIN[3] array.                                     */
-  #define FICR_TRIM_GLOBAL_SAADC_CALGAIN_MaxIndex (2UL) /*!< Max index of CALGAIN[3] array.                                    */
-  #define FICR_TRIM_GLOBAL_SAADC_CALGAIN_MinIndex (0UL) /*!< Min index of CALGAIN[3] array.                                    */
-  #define FICR_TRIM_GLOBAL_SAADC_CALGAIN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALGAIN[3] register.                    */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_SAADC_CALGAIN_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
-  #define FICR_TRIM_GLOBAL_SAADC_CALGAIN_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_SAADC_CALGAIN_VALUE_Pos) /*!< Bit mask of
-                                                                            VALUE field.*/
-
-
-/* FICR_TRIM_GLOBAL_SAADC_CALOFFSET: Trim value for GLOBAL.SAADC.CALOFFSET */
-  #define FICR_TRIM_GLOBAL_SAADC_CALOFFSET_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALOFFSET register.                   */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_SAADC_CALOFFSET_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
-  #define FICR_TRIM_GLOBAL_SAADC_CALOFFSET_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_SAADC_CALOFFSET_VALUE_Pos) /*!< Bit mask
-                                                                            of VALUE field.*/
-
-
-/* FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF: Trim value for GLOBAL.SAADC.LINCALCOEFF */
+/* FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF: Trim value for GLOBAL.SAADC.TRIM.LINCALCOEFF */
   #define FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF_MaxCount (6UL) /*!< Max size of LINCALCOEFF[6] array.                             */
   #define FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF_MaxIndex (5UL) /*!< Max index of LINCALCOEFF[6] array.                            */
   #define FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF_MinIndex (0UL) /*!< Min index of LINCALCOEFF[6] array.                            */
@@ -26926,24 +26977,6 @@ typedef struct {
   #define FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
   #define FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_SAADC_LINCALCOEFF_VALUE_Pos) /*!< Bit
                                                                             mask of VALUE field.*/
-
-
-/* FICR_TRIM_GLOBAL_SAADC_CALIREF: Trim value for GLOBAL.SAADC.CALIREF */
-  #define FICR_TRIM_GLOBAL_SAADC_CALIREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALIREF register.                       */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_SAADC_CALIREF_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
-  #define FICR_TRIM_GLOBAL_SAADC_CALIREF_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_SAADC_CALIREF_VALUE_Pos) /*!< Bit mask of
-                                                                            VALUE field.*/
-
-
-/* FICR_TRIM_GLOBAL_SAADC_CALVREFTC: Trim value for GLOBAL.SAADC.CALVREFTC */
-  #define FICR_TRIM_GLOBAL_SAADC_CALVREFTC_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALVREFTC register.                   */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_SAADC_CALVREFTC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
-  #define FICR_TRIM_GLOBAL_SAADC_CALVREFTC_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_SAADC_CALVREFTC_VALUE_Pos) /*!< Bit mask
-                                                                            of VALUE field.*/
 
 
 
@@ -26988,10 +27021,10 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_GLOBAL_CANPLL_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  CTUNE;                             /*!< (@ 0x00000000) Trim value for GLOBAL.CANPLL.CTUNE                    */
+  __IM  uint32_t  CTUNE;                             /*!< (@ 0x00000000) Trim value for GLOBAL.CANPLL.TRIM.CTUNE               */
 } NRF_FICR_TRIM_GLOBAL_CANPLL_TRIM_Type;             /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_GLOBAL_CANPLL_TRIM_CTUNE: Trim value for GLOBAL.CANPLL.CTUNE */
+/* FICR_TRIM_GLOBAL_CANPLL_TRIM_CTUNE: Trim value for GLOBAL.CANPLL.TRIM.CTUNE */
   #define FICR_TRIM_GLOBAL_CANPLL_TRIM_CTUNE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CTUNE register.                     */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27037,52 +27070,13 @@ typedef struct {
 } NRF_FICR_TRIM_GLOBAL_CANPLLPM_Type;                /*!< Size = 4 (0x004)                                                     */
 
 
-/* ===================================== Struct FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL ====================================== */
-/**
-  * @brief DRIVECTRL [FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL] (unspecified)
-  */
-typedef struct {
-  __IM  uint32_t  P[2];                              /*!< (@ 0x00000000) Trim value for GPIO.Pn.PORTCNF.DRIVECTRL              */
-} NRF_FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_Type;  /*!< Size = 8 (0x008)                                                     */
-
-/* FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P: Trim value for GPIO.Pn.PORTCNF.DRIVECTRL */
-  #define FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_MaxCount (2UL) /*!< Max size of P[2] array.                                */
-  #define FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_MaxIndex (1UL) /*!< Max index of P[2] array.                               */
-  #define FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_MinIndex (0UL) /*!< Min index of P[2] array.                               */
-  #define FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_ResetValue (0xFFFFFFFFUL) /*!< Reset value of P[2] register.               */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_VALUE_Pos (0UL) /*!< Position of VALUE field.                              */
-  #define FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_P_VALUE_Pos)
-                                                                            /*!< Bit mask of VALUE field.*/
-
-
-
-/* ========================================== Struct FICR_TRIM_GLOBAL_GPIO_PORTCNF =========================================== */
-/**
-  * @brief PORTCNF [FICR_TRIM_GLOBAL_GPIO_PORTCNF] (unspecified)
-  */
-typedef struct {
-  __IOM NRF_FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL_Type DRIVECTRL; /*!< (@ 0x00000000) (unspecified)                          */
-} NRF_FICR_TRIM_GLOBAL_GPIO_PORTCNF_Type;            /*!< Size = 8 (0x008)                                                     */
-
-
-/* ============================================== Struct FICR_TRIM_GLOBAL_GPIO =============================================== */
-/**
-  * @brief GPIO [FICR_TRIM_GLOBAL_GPIO] (unspecified)
-  */
-typedef struct {
-  __IOM NRF_FICR_TRIM_GLOBAL_GPIO_PORTCNF_Type PORTCNF; /*!< (@ 0x00000000) (unspecified)                                      */
-} NRF_FICR_TRIM_GLOBAL_GPIO_Type;                    /*!< Size = 8 (0x008)                                                     */
-
-
 /* ============================================== Struct FICR_TRIM_GLOBAL_COMP =============================================== */
 /**
   * @brief COMP [FICR_TRIM_GLOBAL_COMP] (unspecified)
   */
 typedef struct {
   __IM  uint32_t  REFTRIM;                           /*!< (@ 0x00000000) Trim value for GLOBAL.COMP.REFTRIM                    */
-  __IM  uint32_t  RCALTRIM;                          /*!< (@ 0x00000004) Trim value used during production test                */
+  __IM  uint32_t  RCALTRIM;                          /*!< (@ 0x00000004) Trim value for GLOBAL.COMP.DFT.RCALTRIM               */
 } NRF_FICR_TRIM_GLOBAL_COMP_Type;                    /*!< Size = 8 (0x008)                                                     */
 
 /* FICR_TRIM_GLOBAL_COMP_REFTRIM: Trim value for GLOBAL.COMP.REFTRIM */
@@ -27094,7 +27088,7 @@ typedef struct {
                                                                             VALUE field.*/
 
 
-/* FICR_TRIM_GLOBAL_COMP_RCALTRIM: Trim value used during production test */
+/* FICR_TRIM_GLOBAL_COMP_RCALTRIM: Trim value for GLOBAL.COMP.DFT.RCALTRIM */
   #define FICR_TRIM_GLOBAL_COMP_RCALTRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCALTRIM register.                      */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27110,13 +27104,12 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_GLOBAL_SAADC_Type SAADC;       /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_TEMP_Type TEMP;         /*!< (@ 0x00000034) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_NFCT_Type NFCT;         /*!< (@ 0x00000038) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_CANPLL_Type CANPLL;     /*!< (@ 0x0000003C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_CANPLLPM_Type CANPLLPM; /*!< (@ 0x00000040) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_GPIO_Type GPIO;         /*!< (@ 0x00000044) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_COMP_Type COMP;         /*!< (@ 0x0000004C) (unspecified)                                         */
-} NRF_FICR_TRIM_GLOBAL_Type;                         /*!< Size = 84 (0x054)                                                    */
+  __IOM NRF_FICR_TRIM_GLOBAL_TEMP_Type TEMP;         /*!< (@ 0x00000028) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_NFCT_Type NFCT;         /*!< (@ 0x0000002C) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_CANPLL_Type CANPLL;     /*!< (@ 0x00000030) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_CANPLLPM_Type CANPLLPM; /*!< (@ 0x00000034) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_COMP_Type COMP;         /*!< (@ 0x00000038) (unspecified)                                         */
+} NRF_FICR_TRIM_GLOBAL_Type;                         /*!< Size = 64 (0x040)                                                    */
 
 
 /* ========================================= Struct FICR_TRIM_APPLICATION_HSFLL_TRIM ========================================= */
@@ -27124,12 +27117,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_APPLICATION_HSFLL_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for APPLICATION.HSFLL.VSUP                 */
-  __IM  uint32_t  COARSE[6];                         /*!< (@ 0x00000004) Trim value for APPLICATION.HSFLL.COARSE               */
-  __IM  uint32_t  FINE[6];                           /*!< (@ 0x0000001C) Trim value for APPLICATION.HSFLL.FINE                 */
-} NRF_FICR_TRIM_APPLICATION_HSFLL_TRIM_Type;         /*!< Size = 52 (0x034)                                                    */
+  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for APPLICATION.HSFLL.TRIM.VSUP            */
+  __IM  uint32_t  COARSE[6];                         /*!< (@ 0x00000004) Trim value for APPLICATION.HSFLL.TRIM.COARSE          */
+  __IM  uint32_t  FINE[6];                           /*!< (@ 0x0000001C) Trim value for APPLICATION.HSFLL.TRIM.FINE            */
+  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000034) Trim value for APPLICATION.HSFLL.TRIM.TCOEF           */
+} NRF_FICR_TRIM_APPLICATION_HSFLL_TRIM_Type;         /*!< Size = 56 (0x038)                                                    */
 
-/* FICR_TRIM_APPLICATION_HSFLL_TRIM_VSUP: Trim value for APPLICATION.HSFLL.VSUP */
+/* FICR_TRIM_APPLICATION_HSFLL_TRIM_VSUP: Trim value for APPLICATION.HSFLL.TRIM.VSUP */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_VSUP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VSUP register.                   */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27138,7 +27132,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_APPLICATION_HSFLL_TRIM_COARSE: Trim value for APPLICATION.HSFLL.COARSE */
+/* FICR_TRIM_APPLICATION_HSFLL_TRIM_COARSE: Trim value for APPLICATION.HSFLL.TRIM.COARSE */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_COARSE_MaxCount (6UL) /*!< Max size of COARSE[6] array.                             */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_COARSE_MaxIndex (5UL) /*!< Max index of COARSE[6] array.                            */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[6] array.                            */
@@ -27150,7 +27144,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_APPLICATION_HSFLL_TRIM_FINE: Trim value for APPLICATION.HSFLL.FINE */
+/* FICR_TRIM_APPLICATION_HSFLL_TRIM_FINE: Trim value for APPLICATION.HSFLL.TRIM.FINE */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_FINE_MaxCount (6UL) /*!< Max size of FINE[6] array.                                 */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_FINE_MaxIndex (5UL) /*!< Max index of FINE[6] array.                                */
   #define FICR_TRIM_APPLICATION_HSFLL_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[6] array.                                */
@@ -27162,6 +27156,15 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
+/* FICR_TRIM_APPLICATION_HSFLL_TRIM_TCOEF: Trim value for APPLICATION.HSFLL.TRIM.TCOEF */
+  #define FICR_TRIM_APPLICATION_HSFLL_TRIM_TCOEF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TCOEF register.                 */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_APPLICATION_HSFLL_TRIM_TCOEF_VALUE_Pos (0UL) /*!< Position of VALUE field.                                 */
+  #define FICR_TRIM_APPLICATION_HSFLL_TRIM_TCOEF_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_APPLICATION_HSFLL_TRIM_TCOEF_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
 
 /* =========================================== Struct FICR_TRIM_APPLICATION_HSFLL ============================================ */
 /**
@@ -27169,7 +27172,7 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_APPLICATION_HSFLL_TRIM_Type TRIM; /*!< (@ 0x00000000) (unspecified)                                      */
-} NRF_FICR_TRIM_APPLICATION_HSFLL_Type;              /*!< Size = 52 (0x034)                                                    */
+} NRF_FICR_TRIM_APPLICATION_HSFLL_Type;              /*!< Size = 56 (0x038)                                                    */
 
 
 /* ===================================== Struct FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE ====================================== */
@@ -27179,9 +27182,9 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for APPLICATION.MEMCONF.BLOCKTYPE[n].TRIM  */
 } NRF_FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_Type;  /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxCount (3UL) /*!< Size of BLOCKTYPE[3] array.                              */
-  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxIndex (2UL) /*!< Max index of BLOCKTYPE[3] array.                         */
-  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[3] array.                         */
+  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxCount (4UL) /*!< Size of BLOCKTYPE[4] array.                              */
+  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxIndex (3UL) /*!< Max index of BLOCKTYPE[4] array.                         */
+  #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[4] array.                         */
 
 /* FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_TRIM: Trim value for APPLICATION.MEMCONF.BLOCKTYPE[n].TRIM */
   #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_TRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM register.            */
@@ -27198,8 +27201,8 @@ typedef struct {
   * @brief MEMCONF [FICR_TRIM_APPLICATION_MEMCONF] (unspecified)
   */
 typedef struct {
-  __IOM NRF_FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_Type BLOCKTYPE[3]; /*!< (@ 0x00000000) (unspecified)                       */
-} NRF_FICR_TRIM_APPLICATION_MEMCONF_Type;            /*!< Size = 12 (0x00C)                                                    */
+  __IOM NRF_FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_Type BLOCKTYPE[4]; /*!< (@ 0x00000000) (unspecified)                       */
+} NRF_FICR_TRIM_APPLICATION_MEMCONF_Type;            /*!< Size = 16 (0x010)                                                    */
 
 
 /* ============================================== Struct FICR_TRIM_APPLICATION =============================================== */
@@ -27208,8 +27211,8 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_APPLICATION_HSFLL_Type HSFLL;  /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_APPLICATION_MEMCONF_Type MEMCONF; /*!< (@ 0x00000034) (unspecified)                                      */
-} NRF_FICR_TRIM_APPLICATION_Type;                    /*!< Size = 64 (0x040)                                                    */
+  __IOM NRF_FICR_TRIM_APPLICATION_MEMCONF_Type MEMCONF; /*!< (@ 0x00000038) (unspecified)                                      */
+} NRF_FICR_TRIM_APPLICATION_Type;                    /*!< Size = 72 (0x048)                                                    */
 
 
 /* ========================================== Struct FICR_TRIM_RADIOCORE_HSFLL_TRIM ========================================== */
@@ -27217,12 +27220,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_RADIOCORE_HSFLL_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for RADIOCORE.HSFLL.VSUP                   */
-  __IM  uint32_t  COARSE[6];                         /*!< (@ 0x00000004) Trim value for RADIOCORE.HSFLL.COARSE                 */
-  __IM  uint32_t  FINE[6];                           /*!< (@ 0x0000001C) Trim value for RADIOCORE.HSFLL.FINE                   */
-} NRF_FICR_TRIM_RADIOCORE_HSFLL_TRIM_Type;           /*!< Size = 52 (0x034)                                                    */
+  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for RADIOCORE.HSFLL.TRIM.VSUP              */
+  __IM  uint32_t  COARSE[6];                         /*!< (@ 0x00000004) Trim value for RADIOCORE.HSFLL.TRIM.COARSE            */
+  __IM  uint32_t  FINE[6];                           /*!< (@ 0x0000001C) Trim value for RADIOCORE.HSFLL.TRIM.FINE              */
+  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000034) Trim value for RADIOCORE.HSFLL.TRIM.TCOEF             */
+} NRF_FICR_TRIM_RADIOCORE_HSFLL_TRIM_Type;           /*!< Size = 56 (0x038)                                                    */
 
-/* FICR_TRIM_RADIOCORE_HSFLL_TRIM_VSUP: Trim value for RADIOCORE.HSFLL.VSUP */
+/* FICR_TRIM_RADIOCORE_HSFLL_TRIM_VSUP: Trim value for RADIOCORE.HSFLL.TRIM.VSUP */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_VSUP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VSUP register.                     */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27231,7 +27235,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_RADIOCORE_HSFLL_TRIM_COARSE: Trim value for RADIOCORE.HSFLL.COARSE */
+/* FICR_TRIM_RADIOCORE_HSFLL_TRIM_COARSE: Trim value for RADIOCORE.HSFLL.TRIM.COARSE */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_COARSE_MaxCount (6UL) /*!< Max size of COARSE[6] array.                               */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_COARSE_MaxIndex (5UL) /*!< Max index of COARSE[6] array.                              */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[6] array.                              */
@@ -27243,7 +27247,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_RADIOCORE_HSFLL_TRIM_FINE: Trim value for RADIOCORE.HSFLL.FINE */
+/* FICR_TRIM_RADIOCORE_HSFLL_TRIM_FINE: Trim value for RADIOCORE.HSFLL.TRIM.FINE */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_FINE_MaxCount (6UL) /*!< Max size of FINE[6] array.                                   */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_FINE_MaxIndex (5UL) /*!< Max index of FINE[6] array.                                  */
   #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[6] array.                                  */
@@ -27255,6 +27259,15 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
+/* FICR_TRIM_RADIOCORE_HSFLL_TRIM_TCOEF: Trim value for RADIOCORE.HSFLL.TRIM.TCOEF */
+  #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_TCOEF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TCOEF register.                   */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_TCOEF_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
+  #define FICR_TRIM_RADIOCORE_HSFLL_TRIM_TCOEF_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_HSFLL_TRIM_TCOEF_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/
+
+
 
 /* ============================================ Struct FICR_TRIM_RADIOCORE_HSFLL ============================================= */
 /**
@@ -27262,7 +27275,7 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_RADIOCORE_HSFLL_TRIM_Type TRIM; /*!< (@ 0x00000000) (unspecified)                                        */
-} NRF_FICR_TRIM_RADIOCORE_HSFLL_Type;                /*!< Size = 52 (0x034)                                                    */
+} NRF_FICR_TRIM_RADIOCORE_HSFLL_Type;                /*!< Size = 56 (0x038)                                                    */
 
 
 /* ====================================== Struct FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE ======================================= */
@@ -27272,9 +27285,9 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for RADIOCORE.MEMCONF.BLOCKTYPE[n].TRIM    */
 } NRF_FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_Type;    /*!< Size = 4 (0x004)                                                     */
-  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxCount (3UL) /*!< Size of BLOCKTYPE[3] array.                                */
-  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxIndex (2UL) /*!< Max index of BLOCKTYPE[3] array.                           */
-  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[3] array.                           */
+  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxCount (4UL) /*!< Size of BLOCKTYPE[4] array.                                */
+  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxIndex (3UL) /*!< Max index of BLOCKTYPE[4] array.                           */
+  #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MinIndex (0UL) /*!< Min index of BLOCKTYPE[4] array.                           */
 
 /* FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_TRIM: Trim value for RADIOCORE.MEMCONF.BLOCKTYPE[n].TRIM */
   #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_TRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM register.              */
@@ -27291,8 +27304,8 @@ typedef struct {
   * @brief MEMCONF [FICR_TRIM_RADIOCORE_MEMCONF] (unspecified)
   */
 typedef struct {
-  __IOM NRF_FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_Type BLOCKTYPE[3]; /*!< (@ 0x00000000) (unspecified)                         */
-} NRF_FICR_TRIM_RADIOCORE_MEMCONF_Type;              /*!< Size = 12 (0x00C)                                                    */
+  __IOM NRF_FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_Type BLOCKTYPE[4]; /*!< (@ 0x00000000) (unspecified)                         */
+} NRF_FICR_TRIM_RADIOCORE_MEMCONF_Type;              /*!< Size = 16 (0x010)                                                    */
 
 
 /* ======================================= Struct FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA ======================================== */
@@ -27380,14 +27393,14 @@ typedef struct {
 typedef struct {
   __IOM NRF_FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_Type SPHYNXANA; /*!< (@ 0x00000000) (unspecified)                              */
   __IOM NRF_FICR_TRIM_RADIOCORE_RADIO_RXAGC_Type RXAGC; /*!< (@ 0x00000014) (unspecified)                                      */
-  __IM  uint32_t  PVTTOT;                            /*!< (@ 0x00000018) Trim value for RADIOCORE.RADIO.EXPECTEDPVTTOTRATIO    */
-  __IM  uint32_t  KDTC;                              /*!< (@ 0x0000001C) Trim value for RADIOCORE.RADIO.ESTKDTCVAL             */
-  __IM  uint32_t  TXHFGAIN;                          /*!< (@ 0x00000020) Trim value for RADIOCORE.RADIO.TXINTERFACEHFGAIN      */
-  __IM  uint32_t  PVTTOFIX;                          /*!< (@ 0x00000024) Trim value for RADIOCORE.RADIO.PVTTOFIXRATIO          */
+  __IM  uint32_t  PVTTOT;                            /*!< (@ 0x00000018) Trim value for RADIOCORE.RADIO.PVTTOT                 */
+  __IM  uint32_t  KDTC;                              /*!< (@ 0x0000001C) Trim value for RADIOCORE.RADIO.KDTC                   */
+  __IM  uint32_t  TXHFGAIN;                          /*!< (@ 0x00000020) Trim value for RADIOCORE.RADIO.TXHFGAIN               */
+  __IM  uint32_t  PVTTOFIX;                          /*!< (@ 0x00000024) Trim value for RADIOCORE.RADIO.PVTTOFIX               */
   __IM  uint32_t  LOOPGAIN;                          /*!< (@ 0x00000028) Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND5   */
 } NRF_FICR_TRIM_RADIOCORE_RADIO_Type;                /*!< Size = 44 (0x02C)                                                    */
 
-/* FICR_TRIM_RADIOCORE_RADIO_PVTTOT: Trim value for RADIOCORE.RADIO.EXPECTEDPVTTOTRATIO */
+/* FICR_TRIM_RADIOCORE_RADIO_PVTTOT: Trim value for RADIOCORE.RADIO.PVTTOT */
   #define FICR_TRIM_RADIOCORE_RADIO_PVTTOT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PVTTOT register.                      */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27396,7 +27409,7 @@ typedef struct {
                                                                             of VALUE field.*/
 
 
-/* FICR_TRIM_RADIOCORE_RADIO_KDTC: Trim value for RADIOCORE.RADIO.ESTKDTCVAL */
+/* FICR_TRIM_RADIOCORE_RADIO_KDTC: Trim value for RADIOCORE.RADIO.KDTC */
   #define FICR_TRIM_RADIOCORE_RADIO_KDTC_ResetValue (0xFFFFFFFFUL) /*!< Reset value of KDTC register.                          */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27405,7 +27418,7 @@ typedef struct {
                                                                             VALUE field.*/
 
 
-/* FICR_TRIM_RADIOCORE_RADIO_TXHFGAIN: Trim value for RADIOCORE.RADIO.TXINTERFACEHFGAIN */
+/* FICR_TRIM_RADIOCORE_RADIO_TXHFGAIN: Trim value for RADIOCORE.RADIO.TXHFGAIN */
   #define FICR_TRIM_RADIOCORE_RADIO_TXHFGAIN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TXHFGAIN register.                  */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27414,7 +27427,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_RADIOCORE_RADIO_PVTTOFIX: Trim value for RADIOCORE.RADIO.PVTTOFIXRATIO */
+/* FICR_TRIM_RADIOCORE_RADIO_PVTTOFIX: Trim value for RADIOCORE.RADIO.PVTTOFIX */
   #define FICR_TRIM_RADIOCORE_RADIO_PVTTOFIX_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PVTTOFIX register.                  */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27439,9 +27452,48 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_RADIOCORE_HSFLL_Type HSFLL;    /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_RADIOCORE_MEMCONF_Type MEMCONF; /*!< (@ 0x00000034) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_RADIOCORE_RADIO_Type RADIO;    /*!< (@ 0x00000040) (unspecified)                                         */
-} NRF_FICR_TRIM_RADIOCORE_Type;                      /*!< Size = 108 (0x06C)                                                   */
+  __IOM NRF_FICR_TRIM_RADIOCORE_MEMCONF_Type MEMCONF; /*!< (@ 0x00000038) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_RADIOCORE_RADIO_Type RADIO;    /*!< (@ 0x00000048) (unspecified)                                         */
+} NRF_FICR_TRIM_RADIOCORE_Type;                      /*!< Size = 116 (0x074)                                                   */
+
+
+/* ====================================== Struct FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL ======================================= */
+/**
+  * @brief DRIVECTRL [FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  P[2];                              /*!< (@ 0x00000000) Trim value for GPIO.Pn.PORTCNF.DRIVECTRL              */
+} NRF_FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL_Type;    /*!< Size = 8 (0x008)                                                     */
+
+/* FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL_P: Trim value for GPIO.Pn.PORTCNF.DRIVECTRL */
+  #define FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL_P_MaxCount (2UL) /*!< Max size of P[2] array.                                  */
+  #define FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL_P_MaxIndex (1UL) /*!< Max index of P[2] array.                                 */
+  #define FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL_P_MinIndex (0UL) /*!< Min index of P[2] array.                                 */
+  #define FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL_P_ResetValue (0xFFFFFFFFUL) /*!< Reset value of P[2] register.                 */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL_P_VALUE_Pos (0UL) /*!< Position of VALUE field.                                */
+  #define FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL_P_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL_P_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+
+/* =========================================== Struct FICR_TRIM_BOOT_GPIO_PORTCNF ============================================ */
+/**
+  * @brief PORTCNF [FICR_TRIM_BOOT_GPIO_PORTCNF] (unspecified)
+  */
+typedef struct {
+  __IOM NRF_FICR_TRIM_BOOT_GPIO_PORTCNF_DRIVECTRL_Type DRIVECTRL; /*!< (@ 0x00000000) (unspecified)                            */
+} NRF_FICR_TRIM_BOOT_GPIO_PORTCNF_Type;              /*!< Size = 8 (0x008)                                                     */
+
+
+/* =============================================== Struct FICR_TRIM_BOOT_GPIO ================================================ */
+/**
+  * @brief GPIO [FICR_TRIM_BOOT_GPIO] (unspecified)
+  */
+typedef struct {
+  __IOM NRF_FICR_TRIM_BOOT_GPIO_PORTCNF_Type PORTCNF; /*!< (@ 0x00000000) (unspecified)                                        */
+} NRF_FICR_TRIM_BOOT_GPIO_Type;                      /*!< Size = 8 (0x008)                                                     */
 
 
 /* ============================================== Struct FICR_TRIM_BOOT_VREG1V0 ============================================== */
@@ -27449,16 +27501,64 @@ typedef struct {
   * @brief VREG1V0 [FICR_TRIM_BOOT_VREG1V0] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VOUTHPNOMINAL;                     /*!< (@ 0x00000000) Trim value for SYSCTRL.VREG1V0.VOUTHPNOMINAL          */
+  __IM  uint32_t  VOUTHPNOMINAL;                     /*!< (@ 0x00000000) Config value for SYSCTRL.VREG1V0.VOUTHPNOMINAL        */
 } NRF_FICR_TRIM_BOOT_VREG1V0_Type;                   /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL: Trim value for SYSCTRL.VREG1V0.VOUTHPNOMINAL */
+/* FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL: Config value for SYSCTRL.VREG1V0.VOUTHPNOMINAL */
   #define FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VOUTHPNOMINAL register.           */
 
-/* VALUE @Bits 0..31 : Trim value */
+/* VALUE @Bits 0..31 : Config value */
   #define FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
   #define FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL_VALUE_Pos) /*!<
                                                                             Bit mask of VALUE field.*/
+
+
+
+/* =========================================== Struct FICR_TRIM_BOOT_HSFLL120_TRIM =========================================== */
+/**
+  * @brief TRIM [FICR_TRIM_BOOT_HSFLL120_TRIM] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.HSFLL120.TRIM.VSUP             */
+  __IM  uint32_t  COARSE;                            /*!< (@ 0x00000004) Trim value for SYSCTRL.HSFLL120.TRIM.COARSE           */
+  __IM  uint32_t  FINE;                              /*!< (@ 0x00000008) Trim value for SYSCTRL.HSFLL120.TRIM.FINE             */
+  __IM  uint32_t  TCOEF;                             /*!< (@ 0x0000000C) Trim value for SYSCTRL.HSFLL120.TRIM.TCOEF            */
+} NRF_FICR_TRIM_BOOT_HSFLL120_TRIM_Type;             /*!< Size = 16 (0x010)                                                    */
+
+/* FICR_TRIM_BOOT_HSFLL120_TRIM_VSUP: Trim value for SYSCTRL.HSFLL120.TRIM.VSUP */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_VSUP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VSUP register.                       */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_VSUP_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_VSUP_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_HSFLL120_TRIM_VSUP_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* FICR_TRIM_BOOT_HSFLL120_TRIM_COARSE: Trim value for SYSCTRL.HSFLL120.TRIM.COARSE */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_COARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of COARSE register.                   */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_COARSE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_COARSE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_HSFLL120_TRIM_COARSE_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* FICR_TRIM_BOOT_HSFLL120_TRIM_FINE: Trim value for SYSCTRL.HSFLL120.TRIM.FINE */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_FINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FINE register.                       */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_FINE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_FINE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_HSFLL120_TRIM_FINE_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* FICR_TRIM_BOOT_HSFLL120_TRIM_TCOEF: Trim value for SYSCTRL.HSFLL120.TRIM.TCOEF */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_TCOEF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TCOEF register.                     */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_TCOEF_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
+  #define FICR_TRIM_BOOT_HSFLL120_TRIM_TCOEF_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_HSFLL120_TRIM_TCOEF_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
 
 
 
@@ -27467,37 +27567,8 @@ typedef struct {
   * @brief HSFLL120 [FICR_TRIM_BOOT_HSFLL120] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SYSCTRL.HSFLL120.VSUP                  */
-  __IM  uint32_t  COARSE;                            /*!< (@ 0x00000004) Trim value for SYSCTRL.HSFLL120.COARSE                */
-  __IM  uint32_t  FINE;                              /*!< (@ 0x00000008) Trim value for SYSCTRL.HSFLL120.FINE                  */
-} NRF_FICR_TRIM_BOOT_HSFLL120_Type;                  /*!< Size = 12 (0x00C)                                                    */
-
-/* FICR_TRIM_BOOT_HSFLL120_VSUP: Trim value for SYSCTRL.HSFLL120.VSUP */
-  #define FICR_TRIM_BOOT_HSFLL120_VSUP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VSUP register.                            */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_BOOT_HSFLL120_VSUP_VALUE_Pos (0UL) /*!< Position of VALUE field.                                           */
-  #define FICR_TRIM_BOOT_HSFLL120_VSUP_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_HSFLL120_VSUP_VALUE_Pos) /*!< Bit mask of VALUE
-                                                                            field.*/
-
-
-/* FICR_TRIM_BOOT_HSFLL120_COARSE: Trim value for SYSCTRL.HSFLL120.COARSE */
-  #define FICR_TRIM_BOOT_HSFLL120_COARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of COARSE register.                        */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_BOOT_HSFLL120_COARSE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
-  #define FICR_TRIM_BOOT_HSFLL120_COARSE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_HSFLL120_COARSE_VALUE_Pos) /*!< Bit mask of
-                                                                            VALUE field.*/
-
-
-/* FICR_TRIM_BOOT_HSFLL120_FINE: Trim value for SYSCTRL.HSFLL120.FINE */
-  #define FICR_TRIM_BOOT_HSFLL120_FINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FINE register.                            */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_BOOT_HSFLL120_FINE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                           */
-  #define FICR_TRIM_BOOT_HSFLL120_FINE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_HSFLL120_FINE_VALUE_Pos) /*!< Bit mask of VALUE
-                                                                            field.*/
-
+  __IOM NRF_FICR_TRIM_BOOT_HSFLL120_TRIM_Type TRIM;  /*!< (@ 0x00000000) (unspecified)                                         */
+} NRF_FICR_TRIM_BOOT_HSFLL120_Type;                  /*!< Size = 16 (0x010)                                                    */
 
 
 /* =============================================== Struct FICR_TRIM_BOOT_OTPC ================================================ */
@@ -27505,25 +27576,23 @@ typedef struct {
   * @brief OTPC [FICR_TRIM_BOOT_OTPC] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  WAITSTATES;                        /*!< (@ 0x00000000) OTPC waitstates trim when running with
-                                                                         TRIM.BOOT.HSFLL120 trims*/
-  __IM  uint32_t  FREQUENCY;                         /*!< (@ 0x00000004) OTPC frequency tim when running with TRIM.BOOT.HSFLL120
-                                                                         trims*/
+  __IM  uint32_t  WAITSTATES;                        /*!< (@ 0x00000000) Config value for GLOBAL.OTPC.WAITSTATES               */
+  __IM  uint32_t  FREQUENCY;                         /*!< (@ 0x00000004) Config value for GLOBAL.OTPC.FREQUENCY                */
 } NRF_FICR_TRIM_BOOT_OTPC_Type;                      /*!< Size = 8 (0x008)                                                     */
 
-/* FICR_TRIM_BOOT_OTPC_WAITSTATES: OTPC waitstates trim when running with TRIM.BOOT.HSFLL120 trims */
+/* FICR_TRIM_BOOT_OTPC_WAITSTATES: Config value for GLOBAL.OTPC.WAITSTATES */
   #define FICR_TRIM_BOOT_OTPC_WAITSTATES_ResetValue (0xFFFFFFFFUL) /*!< Reset value of WAITSTATES register.                    */
 
-/* WAITSTATES @Bits 0..6 : Waitstates */
+/* WAITSTATES @Bits 0..31 : Waitstates */
   #define FICR_TRIM_BOOT_OTPC_WAITSTATES_WAITSTATES_Pos (0UL) /*!< Position of WAITSTATES field.                               */
-  #define FICR_TRIM_BOOT_OTPC_WAITSTATES_WAITSTATES_Msk (0x7FUL << FICR_TRIM_BOOT_OTPC_WAITSTATES_WAITSTATES_Pos) /*!< Bit mask
-                                                                            of WAITSTATES field.*/
+  #define FICR_TRIM_BOOT_OTPC_WAITSTATES_WAITSTATES_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_OTPC_WAITSTATES_WAITSTATES_Pos) /*!< Bit
+                                                                            mask of WAITSTATES field.*/
 
 
-/* FICR_TRIM_BOOT_OTPC_FREQUENCY: OTPC frequency tim when running with TRIM.BOOT.HSFLL120 trims */
+/* FICR_TRIM_BOOT_OTPC_FREQUENCY: Config value for GLOBAL.OTPC.FREQUENCY */
   #define FICR_TRIM_BOOT_OTPC_FREQUENCY_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FREQUENCY register.                      */
 
-/* FREQUENCY @Bits 0..31 : Trim value */
+/* FREQUENCY @Bits 0..31 : Frequency in MHz */
   #define FICR_TRIM_BOOT_OTPC_FREQUENCY_FREQUENCY_Pos (0UL) /*!< Position of FREQUENCY field.                                  */
   #define FICR_TRIM_BOOT_OTPC_FREQUENCY_FREQUENCY_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_OTPC_FREQUENCY_FREQUENCY_Pos) /*!< Bit
                                                                             mask of FREQUENCY field.*/
@@ -27535,10 +27604,12 @@ typedef struct {
   * @brief BOOT [FICR_TRIM_BOOT] (unspecified)
   */
 typedef struct {
-  __IOM NRF_FICR_TRIM_BOOT_VREG1V0_Type VREG1V0;     /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_BOOT_HSFLL120_Type HSFLL120;   /*!< (@ 0x00000004) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_BOOT_OTPC_Type OTPC;           /*!< (@ 0x00000010) (unspecified)                                         */
-} NRF_FICR_TRIM_BOOT_Type;                           /*!< Size = 24 (0x018)                                                    */
+  __IOM NRF_FICR_TRIM_BOOT_GPIO_Type GPIO;           /*!< (@ 0x00000000) (unspecified)                                         */
+  __IM  uint32_t  RESERVED;
+  __IOM NRF_FICR_TRIM_BOOT_VREG1V0_Type VREG1V0;     /*!< (@ 0x0000000C) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_BOOT_HSFLL120_Type HSFLL120;   /*!< (@ 0x00000010) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_BOOT_OTPC_Type OTPC;           /*!< (@ 0x00000020) (unspecified)                                         */
+} NRF_FICR_TRIM_BOOT_Type;                           /*!< Size = 40 (0x028)                                                    */
 
 
 /* ================================================= Struct FICR_TRIM_COMMON ================================================= */
@@ -27584,12 +27655,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SECURE_HSFLL_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SECURE.HSFLL.VSUP                      */
-  __IM  uint32_t  COARSE[6];                         /*!< (@ 0x00000004) Trim value for SECURE.HSFLL.COARSE                    */
-  __IM  uint32_t  FINE[6];                           /*!< (@ 0x0000001C) Trim value for SECURE.HSFLL.FINE                      */
-} NRF_FICR_TRIM_SECURE_HSFLL_TRIM_Type;              /*!< Size = 52 (0x034)                                                    */
+  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SECURE.HSFLL.TRIM.VSUP                 */
+  __IM  uint32_t  COARSE[6];                         /*!< (@ 0x00000004) Trim value for SECURE.HSFLL.TRIM.COARSE               */
+  __IM  uint32_t  FINE[6];                           /*!< (@ 0x0000001C) Trim value for SECURE.HSFLL.TRIM.FINE                 */
+  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000034) Trim value for SECURE.HSFLL.TRIM.TCOEF                */
+} NRF_FICR_TRIM_SECURE_HSFLL_TRIM_Type;              /*!< Size = 56 (0x038)                                                    */
 
-/* FICR_TRIM_SECURE_HSFLL_TRIM_VSUP: Trim value for SECURE.HSFLL.VSUP */
+/* FICR_TRIM_SECURE_HSFLL_TRIM_VSUP: Trim value for SECURE.HSFLL.TRIM.VSUP */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_VSUP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VSUP register.                        */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27598,7 +27670,7 @@ typedef struct {
                                                                             of VALUE field.*/
 
 
-/* FICR_TRIM_SECURE_HSFLL_TRIM_COARSE: Trim value for SECURE.HSFLL.COARSE */
+/* FICR_TRIM_SECURE_HSFLL_TRIM_COARSE: Trim value for SECURE.HSFLL.TRIM.COARSE */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_COARSE_MaxCount (6UL) /*!< Max size of COARSE[6] array.                                  */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_COARSE_MaxIndex (5UL) /*!< Max index of COARSE[6] array.                                 */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[6] array.                                 */
@@ -27610,7 +27682,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_SECURE_HSFLL_TRIM_FINE: Trim value for SECURE.HSFLL.FINE */
+/* FICR_TRIM_SECURE_HSFLL_TRIM_FINE: Trim value for SECURE.HSFLL.TRIM.FINE */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_FINE_MaxCount (6UL) /*!< Max size of FINE[6] array.                                      */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_FINE_MaxIndex (5UL) /*!< Max index of FINE[6] array.                                     */
   #define FICR_TRIM_SECURE_HSFLL_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[6] array.                                     */
@@ -27622,6 +27694,15 @@ typedef struct {
                                                                             of VALUE field.*/
 
 
+/* FICR_TRIM_SECURE_HSFLL_TRIM_TCOEF: Trim value for SECURE.HSFLL.TRIM.TCOEF */
+  #define FICR_TRIM_SECURE_HSFLL_TRIM_TCOEF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TCOEF register.                      */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_SECURE_HSFLL_TRIM_TCOEF_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
+  #define FICR_TRIM_SECURE_HSFLL_TRIM_TCOEF_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SECURE_HSFLL_TRIM_TCOEF_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
 
 /* ============================================== Struct FICR_TRIM_SECURE_HSFLL ============================================== */
 /**
@@ -27629,7 +27710,7 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_SECURE_HSFLL_TRIM_Type TRIM;   /*!< (@ 0x00000000) (unspecified)                                         */
-} NRF_FICR_TRIM_SECURE_HSFLL_Type;                   /*!< Size = 52 (0x034)                                                    */
+} NRF_FICR_TRIM_SECURE_HSFLL_Type;                   /*!< Size = 56 (0x038)                                                    */
 
 
 /* ========================================== Struct FICR_TRIM_SECURE_HSFLL200_TRIM ========================================== */
@@ -27637,12 +27718,13 @@ typedef struct {
   * @brief TRIM [FICR_TRIM_SECURE_HSFLL200_TRIM] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SECURE.HSFLL200.VSUP                   */
-  __IM  uint32_t  COARSE[4];                         /*!< (@ 0x00000004) Trim value for SECURE.HSFLL200.COARSE                 */
-  __IM  uint32_t  FINE[4];                           /*!< (@ 0x00000014) Trim value for SECURE.HSFLL200.FINE                   */
-} NRF_FICR_TRIM_SECURE_HSFLL200_TRIM_Type;           /*!< Size = 36 (0x024)                                                    */
+  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000000) Trim value for SECURE.HSFLL200.TRIM.VSUP              */
+  __IM  uint32_t  COARSE[4];                         /*!< (@ 0x00000004) Trim value for SECURE.HSFLL200.TRIM.COARSE            */
+  __IM  uint32_t  FINE[4];                           /*!< (@ 0x00000014) Trim value for SECURE.HSFLL200.TRIM.FINE              */
+  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000024) Trim value for SECURE.HSFLL200.TRIM.TCOEF             */
+} NRF_FICR_TRIM_SECURE_HSFLL200_TRIM_Type;           /*!< Size = 40 (0x028)                                                    */
 
-/* FICR_TRIM_SECURE_HSFLL200_TRIM_VSUP: Trim value for SECURE.HSFLL200.VSUP */
+/* FICR_TRIM_SECURE_HSFLL200_TRIM_VSUP: Trim value for SECURE.HSFLL200.TRIM.VSUP */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_VSUP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VSUP register.                     */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27651,7 +27733,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_SECURE_HSFLL200_TRIM_COARSE: Trim value for SECURE.HSFLL200.COARSE */
+/* FICR_TRIM_SECURE_HSFLL200_TRIM_COARSE: Trim value for SECURE.HSFLL200.TRIM.COARSE */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_COARSE_MaxCount (4UL) /*!< Max size of COARSE[4] array.                               */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_COARSE_MaxIndex (3UL) /*!< Max index of COARSE[4] array.                              */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_COARSE_MinIndex (0UL) /*!< Min index of COARSE[4] array.                              */
@@ -27663,7 +27745,7 @@ typedef struct {
                                                                             Bit mask of VALUE field.*/
 
 
-/* FICR_TRIM_SECURE_HSFLL200_TRIM_FINE: Trim value for SECURE.HSFLL200.FINE */
+/* FICR_TRIM_SECURE_HSFLL200_TRIM_FINE: Trim value for SECURE.HSFLL200.TRIM.FINE */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_FINE_MaxCount (4UL) /*!< Max size of FINE[4] array.                                   */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_FINE_MaxIndex (3UL) /*!< Max index of FINE[4] array.                                  */
   #define FICR_TRIM_SECURE_HSFLL200_TRIM_FINE_MinIndex (0UL) /*!< Min index of FINE[4] array.                                  */
@@ -27675,6 +27757,15 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
+/* FICR_TRIM_SECURE_HSFLL200_TRIM_TCOEF: Trim value for SECURE.HSFLL200.TRIM.TCOEF */
+  #define FICR_TRIM_SECURE_HSFLL200_TRIM_TCOEF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TCOEF register.                   */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_SECURE_HSFLL200_TRIM_TCOEF_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
+  #define FICR_TRIM_SECURE_HSFLL200_TRIM_TCOEF_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SECURE_HSFLL200_TRIM_TCOEF_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/
+
+
 
 /* ============================================ Struct FICR_TRIM_SECURE_HSFLL200 ============================================= */
 /**
@@ -27682,7 +27773,7 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_SECURE_HSFLL200_TRIM_Type TRIM; /*!< (@ 0x00000000) (unspecified)                                        */
-} NRF_FICR_TRIM_SECURE_HSFLL200_Type;                /*!< Size = 36 (0x024)                                                    */
+} NRF_FICR_TRIM_SECURE_HSFLL200_Type;                /*!< Size = 40 (0x028)                                                    */
 
 
 /* ======================================== Struct FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE ======================================== */
@@ -27720,10 +27811,10 @@ typedef struct {
   * @brief BLOCKTYPE [FICR_TRIM_SECURE_MEMCONF200_BLOCKTYPE] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for SECURE.MEMCONF200.TRIM                 */
+  __IM  uint32_t  TRIM;                              /*!< (@ 0x00000000) Trim value for SECURE.MEMCONF200.BLOCKTYPE.TRIM       */
 } NRF_FICR_TRIM_SECURE_MEMCONF200_BLOCKTYPE_Type;    /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_SECURE_MEMCONF200_BLOCKTYPE_TRIM: Trim value for SECURE.MEMCONF200.TRIM */
+/* FICR_TRIM_SECURE_MEMCONF200_BLOCKTYPE_TRIM: Trim value for SECURE.MEMCONF200.BLOCKTYPE.TRIM */
   #define FICR_TRIM_SECURE_MEMCONF200_BLOCKTYPE_TRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TRIM register.              */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27748,10 +27839,10 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_SECURE_HSFLL_Type HSFLL;       /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SECURE_HSFLL200_Type HSFLL200; /*!< (@ 0x00000034) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SECURE_MEMCONF_Type MEMCONF;   /*!< (@ 0x00000058) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SECURE_MEMCONF200_Type MEMCONF200; /*!< (@ 0x00000078) (unspecified)                                     */
-} NRF_FICR_TRIM_SECURE_Type;                         /*!< Size = 124 (0x07C)                                                   */
+  __IOM NRF_FICR_TRIM_SECURE_HSFLL200_Type HSFLL200; /*!< (@ 0x00000038) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SECURE_MEMCONF_Type MEMCONF;   /*!< (@ 0x00000060) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SECURE_MEMCONF200_Type MEMCONF200; /*!< (@ 0x00000080) (unspecified)                                     */
+} NRF_FICR_TRIM_SECURE_Type;                         /*!< Size = 132 (0x084)                                                   */
 
 
 /* ==================================================== Struct FICR_TRIM ===================================================== */
@@ -27760,14 +27851,14 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_SYSCTRL_Type SYSCTRL;          /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_Type GLOBAL;            /*!< (@ 0x00000244) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_APPLICATION_Type APPLICATION;  /*!< (@ 0x00000298) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_RADIOCORE_Type RADIOCORE;      /*!< (@ 0x000002D8) (unspecified)                                         */
-  __IM  uint32_t  RESERVED[38];
-  __IOM NRF_FICR_TRIM_BOOT_Type BOOT;                /*!< (@ 0x000003DC) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_Type GLOBAL;            /*!< (@ 0x00000288) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_APPLICATION_Type APPLICATION;  /*!< (@ 0x000002C8) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_RADIOCORE_Type RADIOCORE;      /*!< (@ 0x00000310) (unspecified)                                         */
+  __IM  uint32_t  RESERVED[18];
+  __IOM NRF_FICR_TRIM_BOOT_Type BOOT;                /*!< (@ 0x000003CC) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_COMMON_Type COMMON;            /*!< (@ 0x000003F4) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_SECURE_Type SECURE;            /*!< (@ 0x00000400) (unspecified)                                         */
-} NRF_FICR_TRIM_Type;                                /*!< Size = 1148 (0x47C)                                                  */
+} NRF_FICR_TRIM_Type;                                /*!< Size = 1156 (0x484)                                                  */
 
 
 /* ==================================================== Struct FICR_BOOT ===================================================== */
@@ -28049,7 +28140,7 @@ typedef struct {
     __IOM NRF_FICR_PRODTEST_Type PRODTEST;           /*!< (@ 0x00000080) (unspecified)                                         */
     __IM uint32_t RESERVED2[17];
     __IOM NRF_FICR_TRIM_Type TRIM;                   /*!< (@ 0x00000100) (unspecified)                                         */
-    __IM uint32_t RESERVED3[9];
+    __IM uint32_t RESERVED3[7];
     __IOM NRF_FICR_BOOT_Type BOOT;                   /*!< (@ 0x000005A0) (unspecified)                                         */
     __IM uint32_t RESERVED4[3];
     __IOM NRF_FICR_SRAM_Type SRAM;                   /*!< (@ 0x000007B0) (unspecified)                                         */
@@ -29405,15 +29496,11 @@ typedef struct {
       __IOM uint32_t DRIVECTRL;                      /*!< (@ 0x00000000) Drive control for impedance matching of the pins in
                                                                          this port*/
     };
-    struct {
-    __IM uint32_t RESERVED;
-      __IOM uint32_t PWRCTRL;                        /*!< (@ 0x00000004) Power control of the pins in this port                */
-    };
-    __IM uint32_t RESERVED1[2];
   };
   #if defined(_GNUC_)
     #pragma GCC diagnostic pop
   #endif
+  __IOM uint32_t  PWRCTRL;                           /*!< (@ 0x00000004) Power control of the pins in this port                */
 } NRF_GPIO_PORTCNF_Type;                             /*!< Size = 8 (0x008)                                                     */
 
 /* GPIO_PORTCNF_DRIVECTRL: Drive control for impedance matching of the pins in this port */
@@ -45372,7 +45459,7 @@ typedef struct {
     #pragma GCC diagnostic ignored "-Wpedantic"
   #endif
   union {
-    __OM uint32_t CCADD;                             /*!< (@ 0x00000008) Count to add to CC[n]                                 */
+    __OM uint32_t CCADD;                             /*!< (@ 0x00000008) Count to add to CC[n] when this register is written.  */
   };
   #if defined(_GNUC_)
     #pragma GCC diagnostic pop
@@ -45399,7 +45486,7 @@ typedef struct {
   #define GRTC_CC_CCH_CCH_Msk (0xFFFFFUL << GRTC_CC_CCH_CCH_Pos) /*!< Bit mask of CCH field.                                   */
 
 
-/* GRTC_CC_CCADD: Count to add to CC[n] */
+/* GRTC_CC_CCADD: Count to add to CC[n] when this register is written. */
   #define GRTC_CC_CCADD_ResetValue (0x00000000UL)    /*!< Reset value of CCADD register.                                       */
 
 /* VALUE @Bits 0..30 : Count to add to CC[n] */
@@ -58703,7 +58790,8 @@ typedef struct {
   __IOM uint32_t  VSUP;                              /*!< (@ 0x00000000) Internal regulator voltage supply level trimming      */
   __IOM uint32_t  COARSE;                            /*!< (@ 0x00000004) Coarse frequency trimming                             */
   __IOM uint32_t  FINE;                              /*!< (@ 0x00000008) Fine frequency trimming                               */
-  __IM  uint32_t  RESERVED[2];
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  TCOEF;                             /*!< (@ 0x00000010) Temperature coefficient trimming                      */
 } NRF_HSFLL_TRIM_Type;                               /*!< Size = 20 (0x014)                                                    */
 
 /* HSFLL_TRIM_VSUP: Internal regulator voltage supply level trimming */
@@ -58728,6 +58816,14 @@ typedef struct {
 /* VALUE @Bits 0..10 : Fine frequency trimming value */
   #define HSFLL_TRIM_FINE_VALUE_Pos (0UL)            /*!< Position of VALUE field.                                             */
   #define HSFLL_TRIM_FINE_VALUE_Msk (0x7FFUL << HSFLL_TRIM_FINE_VALUE_Pos) /*!< Bit mask of VALUE field.                       */
+
+
+/* HSFLL_TRIM_TCOEF: Temperature coefficient trimming */
+  #define HSFLL_TRIM_TCOEF_ResetValue (0x00000000UL) /*!< Reset value of TCOEF register.                                       */
+
+/* VALUE @Bits 0..3 : Trim value. */
+  #define HSFLL_TRIM_TCOEF_VALUE_Pos (0UL)           /*!< Position of VALUE field.                                             */
+  #define HSFLL_TRIM_TCOEF_VALUE_Msk (0xFUL << HSFLL_TRIM_TCOEF_VALUE_Pos) /*!< Bit mask of VALUE field.                       */
 
 
 
@@ -85603,8 +85699,8 @@ typedef struct {
 /* WAITSTATENUM @Bits 0..4 : Register to read the current number of waitstate for the MRAM access and set a new value */
   #define MRAMC_WAITSTATES_WAITSTATENUM_Pos (0UL)    /*!< Position of WAITSTATENUM field.                                      */
   #define MRAMC_WAITSTATES_WAITSTATENUM_Msk (0x1FUL << MRAMC_WAITSTATES_WAITSTATENUM_Pos) /*!< Bit mask of WAITSTATENUM field. */
-  #define MRAMC_WAITSTATES_WAITSTATENUM_Min (0x0UL)  /*!< Min value of WAITSTATENUM field.                                     */
-  #define MRAMC_WAITSTATES_WAITSTATENUM_Max (0x20UL) /*!< Max size of WAITSTATENUM field.                                      */
+  #define MRAMC_WAITSTATES_WAITSTATENUM_Min (0x3UL)  /*!< Min value of WAITSTATENUM field.                                     */
+  #define MRAMC_WAITSTATES_WAITSTATENUM_Max (0x1FUL) /*!< Max size of WAITSTATENUM field.                                      */
 
 /* RDY @Bit 8 : Use RDY (ready) signal from the MRAM macro in addition to waitstates specified above. The data is read which
                 ever of waitstate or RDY signal comes first. */
@@ -90846,8 +90942,8 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  ERASEONEMPTY;                      /*!< (@ 0x00000000) Policy to disable erasing of MRAMC111 memory on
                                                                          backward transition to LCS EMPTY.*/
-  __IOM uint32_t  RFU[7];                            /*!< (@ 0x00000004) (unspecified)                                         */
-} NRF_OICR_NORDIC_POLICY_Type;                       /*!< Size = 32 (0x020)                                                    */
+  __IOM uint32_t  RFU[9];                            /*!< (@ 0x00000004) (unspecified)                                         */
+} NRF_OICR_NORDIC_POLICY_Type;                       /*!< Size = 40 (0x028)                                                    */
 
 /* OICR_NORDIC_POLICY_ERASEONEMPTY: Policy to disable erasing of MRAMC111 memory on backward transition to LCS EMPTY. */
   #define OICR_NORDIC_POLICY_ERASEONEMPTY_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ERASEONEMPTY register.                 */
@@ -90863,10 +90959,10 @@ typedef struct {
 
 
 /* OICR_NORDIC_POLICY_RFU: (unspecified) */
-  #define OICR_NORDIC_POLICY_RFU_MaxCount (7UL)      /*!< Max size of RFU[7] array.                                            */
-  #define OICR_NORDIC_POLICY_RFU_MaxIndex (6UL)      /*!< Max index of RFU[7] array.                                           */
-  #define OICR_NORDIC_POLICY_RFU_MinIndex (0UL)      /*!< Min index of RFU[7] array.                                           */
-  #define OICR_NORDIC_POLICY_RFU_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RFU[7] register.                                */
+  #define OICR_NORDIC_POLICY_RFU_MaxCount (9UL)      /*!< Max size of RFU[9] array.                                            */
+  #define OICR_NORDIC_POLICY_RFU_MaxIndex (8UL)      /*!< Max index of RFU[9] array.                                           */
+  #define OICR_NORDIC_POLICY_RFU_MinIndex (0UL)      /*!< Min index of RFU[9] array.                                           */
+  #define OICR_NORDIC_POLICY_RFU_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RFU[9] register.                                */
 
 /* RFU @Bits 0..31 : Reserved for future use. */
   #define OICR_NORDIC_POLICY_RFU_RFU_Pos (0UL)       /*!< Position of RFU field.                                               */
@@ -90883,8 +90979,6 @@ typedef struct {
                                                                          the device.*/
   __IOM NRF_OICR_NORDIC_LCS_Type LCS;                /*!< (@ 0x000002A4) (unspecified)                                         */
   __IOM NRF_OICR_NORDIC_POLICY_Type POLICY;          /*!< (@ 0x000002C8) ROM enforced device policy                            */
-  __IOM uint32_t  MEMCHECK[2];                       /*!< (@ 0x000002E8) ROM writes these to ensure OTP does not always return
-                                                                         all ones.*/
 } NRF_OICR_NORDIC_Type;                              /*!< Size = 752 (0x2F0)                                                   */
 
 
@@ -96487,11 +96581,11 @@ typedef struct {
     __IOM uint32_t DFTTAPPINENABLE;                  /*!< (@ 0x00000404) Routed to DFT tap controllers and enables target power
                                                                          domain.*/
     __IOM uint32_t ATBGNDCLAMP;                      /*!< (@ 0x00000408) Control of ground clamps for Analog Test Bus lines.   */
-    __IOM uint32_t FORCEALLPOWERON;                  /*!< (@ 0x0000040C) Forces all the power domains to remain ON.            */
+    __IM uint32_t RESERVED3;
     __IOM NRF_POWER_ABB_Type ABB[2];                 /*!< (@ 0x00000410) (unspecified)                                         */
-    __IM uint32_t RESERVED3[54];
+    __IM uint32_t RESERVED4[54];
     __IOM uint32_t REGCONFIG;                        /*!< (@ 0x00000500) Regulator configuration                               */
-    __IM uint32_t RESERVED4;
+    __IM uint32_t RESERVED5;
     __IOM uint32_t BLOCKULPMODE;                     /*!< (@ 0x00000508) Block entering into ULP mode                          */
     __IOM uint32_t BLOCKULVMODE;                     /*!< (@ 0x0000050C) Block entering into ULV mode                          */
     __IOM uint32_t SEMAPHORESTATUS;                  /*!< (@ 0x00000510) Semaphore status                                      */
@@ -96886,18 +96980,6 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL13_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL13 field.                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL13_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL13_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
-
-
-/* POWER_FORCEALLPOWERON: Forces all the power domains to remain ON. */
-  #define POWER_FORCEALLPOWERON_ResetValue (0x00000000UL) /*!< Reset value of FORCEALLPOWERON register.                        */
-
-/* EN @Bit 0 : Enable the forcing all power domains to remain ON. */
-  #define POWER_FORCEALLPOWERON_EN_Pos (0UL)         /*!< Position of EN field.                                                */
-  #define POWER_FORCEALLPOWERON_EN_Msk (0x1UL << POWER_FORCEALLPOWERON_EN_Pos) /*!< Bit mask of EN field.                      */
-  #define POWER_FORCEALLPOWERON_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
-  #define POWER_FORCEALLPOWERON_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
-  #define POWER_FORCEALLPOWERON_EN_Disabled (0x0UL)  /*!< Forcing disabled                                                     */
-  #define POWER_FORCEALLPOWERON_EN_Enabled (0x1UL)   /*!< Forcing enabled                                                      */
 
 
 /* POWER_REGCONFIG: Regulator configuration */
@@ -114842,7 +114924,7 @@ typedef struct {
   #define RADIOACC_DMAB_LISTPTR_ADDRESS_Pos (0UL)    /*!< Position of ADDRESS field.                                           */
   #define RADIOACC_DMAB_LISTPTR_ADDRESS_Msk (0xFFFFFFFFUL << RADIOACC_DMAB_LISTPTR_ADDRESS_Pos) /*!< Bit mask of ADDRESS field.*/
   #define RADIOACC_DMAB_LISTPTR_ADDRESS_Min (0x0UL)  /*!< Min value of ADDRESS field.                                          */
-  #define RADIOACC_DMAB_LISTPTR_ADDRESS_Max (0xFFFFFFFF4UL) /*!< Max size of ADDRESS field.                                    */
+  #define RADIOACC_DMAB_LISTPTR_ADDRESS_Max (0xFFFFFFF4UL) /*!< Max size of ADDRESS field.                                     */
 
 
 /* RADIOACC_DMAB_LISTPARTTHRESH: Threshold value for generating event EVENTS_DMAB.LISTPARTDONE when descriptor list is partially
@@ -117877,14 +117959,16 @@ typedef struct {
   #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_Min (0x80000001UL) /*!< Min enumerator value of OPCODE field.                 */
   #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_Max (0xFFFFFFFFUL) /*!< Max enumerator value of OPCODE field.                 */
   #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_Nop (0xFFFFFFFFUL) /*!< No operation pending.                                 */
-  #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_UROTVerify (0x80000001UL) /*!< This commands allows the firmware update to just
-                                                                            be verified without applying it.*/
-  #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_UROTActivate (0x80000002UL) /*!< This indicates the firmware update shall be
-                                                                            (verified and) applied.*/
-  #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_RecoveryVerify (0x80000003UL) /*!< This commands allows the firmware update to
-                                                                            just be verified without applying it.*/
-  #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_RecoveryActivate (0x80000004UL) /*!< This indicates the firmware update shall
-                                                                            be (verified and) applied.*/
+  #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_UROTVerify (0x80000001UL) /*!< Command to only verify UROT (plain-text or
+                                                                            encrypted) firmware update without applying it.*/
+  #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_UROTActivate (0x80000002UL) /*!< Command to verify and update encrypted UROT
+                                                                            firmware.*/
+  #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_RecoveryVerify (0x80000003UL) /*!< Command to verify the recovery (plain-text
+                                                                            only) firmware update without applying it.*/
+  #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_RecoveryActivate (0x80000004UL) /*!< Command to verify and update plain-text
+                                                                            Recovery firmware.*/
+  #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_UROTPlainTextActivate (0x80000005UL) /*!< Command to verify and update
+                                                                            plain-text UROT firmware.*/
   #define RICR_UROT_UPWD_UPDATE_OPERATION_OPCODE_AROTRecovery (0xA0000001UL) /*!< Instructs the ROM code to boot the recovery
                                                                             image in safe mode to download a AROT image instead
                                                                             of a UROT image.*/
@@ -117910,6 +117994,10 @@ typedef struct {
   #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_VerifyOK (0xF0000006UL) /*!< Signature verification is successful.                 */
   #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_UROTUpdateDisabled (0xF0000007UL) /*!< No valid recovery image is present and hence
                                                                             UROT firmware update is disabled.*/
+  #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_UROTActivated (0xF0000008UL) /*!< UROT firmware update verification and installation
+                                                                            succeeded.*/
+  #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_RecoveryActivated (0xF0000009UL) /*!< Recovery firmware update verification and
+                                                                            installation succeeded.*/
   #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_AROTRecovery (0xF1000000UL) /*!< Recovery image is booted so that the recovery image
                                                                             can download a AROT image that ROM does not verify.*/
 
@@ -121641,6 +121729,8 @@ typedef struct {
   #define SICR_IROT_BOOTSTATUS_STATUS_Max (0xFFFFFFFFUL) /*!< Max enumerator value of STATUS field.                            */
   #define SICR_IROT_BOOTSTATUS_STATUS_NormalMode (0xFFFFFFFFUL) /*!< Normal Mode.                                              */
   #define SICR_IROT_BOOTSTATUS_STATUS_SafeMode (0xA2659BE7UL) /*!< Safe Mode with limited access to system resources.          */
+  #define SICR_IROT_BOOTSTATUS_STATUS_Authdbg_NormalMode (0xDEB609E4UL) /*!< Authenticated debug session in Normal Mode.       */
+  #define SICR_IROT_BOOTSTATUS_STATUS_Authdbg_SafeMode (0xDEB67AFEUL) /*!< Authenticated debug session in Safe Mode.           */
 
 
 
@@ -122990,14 +123080,16 @@ typedef struct {
   #define SICR_UROT_UPDATE_OPERATION_OPCODE_Min (0x80000001UL) /*!< Min enumerator value of OPCODE field.                      */
   #define SICR_UROT_UPDATE_OPERATION_OPCODE_Max (0xFFFFFFFFUL) /*!< Max enumerator value of OPCODE field.                      */
   #define SICR_UROT_UPDATE_OPERATION_OPCODE_Nop (0xFFFFFFFFUL) /*!< No operation pending.                                      */
-  #define SICR_UROT_UPDATE_OPERATION_OPCODE_UROTVerify (0x80000001UL) /*!< This commands allows the firmware update to just be
-                                                                           verified without applying it.*/
-  #define SICR_UROT_UPDATE_OPERATION_OPCODE_UROTActivate (0x80000002UL) /*!< This indicates the firmware update shall be
-                                                                            (verified and) applied.*/
-  #define SICR_UROT_UPDATE_OPERATION_OPCODE_RecoveryVerify (0x80000003UL) /*!< This commands allows the firmware update to just
-                                                                            be verified without applying it.*/
-  #define SICR_UROT_UPDATE_OPERATION_OPCODE_RecoveryActivate (0x80000004UL) /*!< This indicates the firmware update shall be
-                                                                            (verified and) applied.*/
+  #define SICR_UROT_UPDATE_OPERATION_OPCODE_UROTVerify (0x80000001UL) /*!< Command to only verify UROT (plain-text or encrypted)
+                                                                           firmware update without applying it.*/
+  #define SICR_UROT_UPDATE_OPERATION_OPCODE_UROTActivate (0x80000002UL) /*!< Command to verify and update encrypted UROT
+                                                                            firmware.*/
+  #define SICR_UROT_UPDATE_OPERATION_OPCODE_RecoveryVerify (0x80000003UL) /*!< Command to verify the recovery (plain-text only)
+                                                                            firmware update without applying it.*/
+  #define SICR_UROT_UPDATE_OPERATION_OPCODE_RecoveryActivate (0x80000004UL) /*!< Command to verify and update plain-text
+                                                                            Recovery firmware.*/
+  #define SICR_UROT_UPDATE_OPERATION_OPCODE_UROTPlainTextActivate (0x80000005UL) /*!< Command to verify and update plain-text
+                                                                            UROT firmware.*/
   #define SICR_UROT_UPDATE_OPERATION_OPCODE_AROTRecovery (0xA0000001UL) /*!< Instructs the ROM code to boot the recovery image
                                                                             in safe mode to download a AROT image instead of a
                                                                             UROT image.*/
@@ -129682,12 +129774,13 @@ typedef struct {
       #pragma GCC diagnostic ignored "-Wpedantic"
     #endif
     union {
+      __IOM uint32_t FEATURES[576];                  /*!< (@ 0x00000600) Configuration of split security feature [n]           */
       __IOM NRF_SPU_FEATURE_Type FEATURE;            /*!< (@ 0x00000600) (unspecified)                                         */
+      __IM uint32_t RESERVED5[576];
     };
     #if defined(_GNUC_)
       #pragma GCC diagnostic pop
     #endif
-    __IM uint32_t RESERVED5[128];
     __IOM NRF_SPU_PCGCS_Type PCGCS;                  /*!< (@ 0x00000F00) (unspecified)                                         */
   } NRF_SPU_Type;                                    /*!< Size = 3972 (0xF84)                                                  */
 
@@ -129752,6 +129845,43 @@ typedef struct {
   #define SPU_INTPEND_PERIPHACCERR_Max (0x1UL)       /*!< Max enumerator value of PERIPHACCERR field.                          */
   #define SPU_INTPEND_PERIPHACCERR_NotPending (0x0UL) /*!< Read: Not pending                                                   */
   #define SPU_INTPEND_PERIPHACCERR_Pending (0x1UL)   /*!< Read: Pending                                                        */
+
+
+/* SPU_FEATURES: Configuration of split security feature [n] */
+  #define SPU_FEATURES_MaxCount (576UL)              /*!< Max size of FEATURES[576] array.                                     */
+  #define SPU_FEATURES_MaxIndex (575UL)              /*!< Max index of FEATURES[576] array.                                    */
+  #define SPU_FEATURES_MinIndex (0UL)                /*!< Min index of FEATURES[576] array.                                    */
+  #define SPU_FEATURES_ResetValue (0x00000000UL)     /*!< Reset value of FEATURES[576] register.                               */
+
+/* SECATTR @Bit 4 : SECATTR feature */
+  #define SPU_FEATURES_SECATTR_Pos (4UL)             /*!< Position of SECATTR field.                                           */
+  #define SPU_FEATURES_SECATTR_Msk (0x1UL << SPU_FEATURES_SECATTR_Pos) /*!< Bit mask of SECATTR field.                         */
+  #define SPU_FEATURES_SECATTR_Min (0x0UL)           /*!< Min enumerator value of SECATTR field.                               */
+  #define SPU_FEATURES_SECATTR_Max (0x1UL)           /*!< Max enumerator value of SECATTR field.                               */
+  #define SPU_FEATURES_SECATTR_NonSecure (0x0UL)     /*!< Feature is available for non-secure usage                            */
+  #define SPU_FEATURES_SECATTR_Secure (0x1UL)        /*!< Feature is reserved for secure usage                                 */
+
+/* LOCK @Bit 8 : LOCK feature */
+  #define SPU_FEATURES_LOCK_Pos (8UL)                /*!< Position of LOCK field.                                              */
+  #define SPU_FEATURES_LOCK_Msk (0x1UL << SPU_FEATURES_LOCK_Pos) /*!< Bit mask of LOCK field.                                  */
+  #define SPU_FEATURES_LOCK_Min (0x0UL)              /*!< Min enumerator value of LOCK field.                                  */
+  #define SPU_FEATURES_LOCK_Max (0x1UL)              /*!< Max enumerator value of LOCK field.                                  */
+  #define SPU_FEATURES_LOCK_Unlocked (0x0UL)         /*!< Feature permissions can be updated                                   */
+  #define SPU_FEATURES_LOCK_Locked (0x1UL)           /*!< Feature permissions can not be changed until the next reset          */
+
+/* BLOCK @Bit 12 : BLOCK feature */
+  #define SPU_FEATURES_BLOCK_Pos (12UL)              /*!< Position of BLOCK field.                                             */
+  #define SPU_FEATURES_BLOCK_Msk (0x1UL << SPU_FEATURES_BLOCK_Pos) /*!< Bit mask of BLOCK field.                               */
+  #define SPU_FEATURES_BLOCK_Min (0x0UL)             /*!< Min enumerator value of BLOCK field.                                 */
+  #define SPU_FEATURES_BLOCK_Max (0x1UL)             /*!< Max enumerator value of BLOCK field.                                 */
+  #define SPU_FEATURES_BLOCK_Available (0x0UL)       /*!< Feature is accessible                                                */
+  #define SPU_FEATURES_BLOCK_Blocked (0x1UL)         /*!< Feature cannot be accessed until next reset                          */
+
+/* OWNERID @Bits 16..19 : Feature owner ID */
+  #define SPU_FEATURES_OWNERID_Pos (16UL)            /*!< Position of OWNERID field.                                           */
+  #define SPU_FEATURES_OWNERID_Msk (0xFUL << SPU_FEATURES_OWNERID_Pos) /*!< Bit mask of OWNERID field.                         */
+  #define SPU_FEATURES_OWNERID_Min (0x0UL)           /*!< Min value of OWNERID field.                                          */
+  #define SPU_FEATURES_OWNERID_Max (0xFUL)           /*!< Max size of OWNERID field.                                           */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -139961,13 +140091,14 @@ typedef struct {
 /* TWIM_SHORTS: Shortcuts between local events and tasks */
   #define TWIM_SHORTS_ResetValue (0x00000000UL)      /*!< Reset value of SHORTS register.                                      */
 
-/* LASTTX_STARTRX @Bit 7 : Shortcut between event LASTTX and task STARTRX */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Pos (7UL)       /*!< Position of LASTTX_STARTRX field.                                    */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Msk (0x1UL << TWIM_SHORTS_LASTTX_STARTRX_Pos) /*!< Bit mask of LASTTX_STARTRX field.      */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Min (0x0UL)     /*!< Min enumerator value of LASTTX_STARTRX field.                        */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Max (0x1UL)     /*!< Max enumerator value of LASTTX_STARTRX field.                        */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Disabled (0x0UL) /*!< Disable shortcut                                                    */
-  #define TWIM_SHORTS_LASTTX_STARTRX_Enabled (0x1UL) /*!< Enable shortcut                                                      */
+/* LASTTX_DMA_RX_START @Bit 7 : Shortcut between event LASTTX and task DMA.RX.START */
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Pos (7UL)  /*!< Position of LASTTX_DMA_RX_START field.                               */
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Msk (0x1UL << TWIM_SHORTS_LASTTX_DMA_RX_START_Pos) /*!< Bit mask of
+                                                                            LASTTX_DMA_RX_START field.*/
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Min (0x0UL) /*!< Min enumerator value of LASTTX_DMA_RX_START field.                  */
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Max (0x1UL) /*!< Max enumerator value of LASTTX_DMA_RX_START field.                  */
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Disabled (0x0UL) /*!< Disable shortcut                                               */
+  #define TWIM_SHORTS_LASTTX_DMA_RX_START_Enabled (0x1UL) /*!< Enable shortcut                                                 */
 
 /* LASTTX_SUSPEND @Bit 8 : Shortcut between event LASTTX and task SUSPEND */
   #define TWIM_SHORTS_LASTTX_SUSPEND_Pos (8UL)       /*!< Position of LASTTX_SUSPEND field.                                    */
@@ -139985,13 +140116,14 @@ typedef struct {
   #define TWIM_SHORTS_LASTTX_STOP_Disabled (0x0UL)   /*!< Disable shortcut                                                     */
   #define TWIM_SHORTS_LASTTX_STOP_Enabled (0x1UL)    /*!< Enable shortcut                                                      */
 
-/* LASTRX_STARTTX @Bit 10 : Shortcut between event LASTRX and task STARTTX */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Pos (10UL)      /*!< Position of LASTRX_STARTTX field.                                    */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Msk (0x1UL << TWIM_SHORTS_LASTRX_STARTTX_Pos) /*!< Bit mask of LASTRX_STARTTX field.      */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Min (0x0UL)     /*!< Min enumerator value of LASTRX_STARTTX field.                        */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Max (0x1UL)     /*!< Max enumerator value of LASTRX_STARTTX field.                        */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Disabled (0x0UL) /*!< Disable shortcut                                                    */
-  #define TWIM_SHORTS_LASTRX_STARTTX_Enabled (0x1UL) /*!< Enable shortcut                                                      */
+/* LASTRX_DMA_TX_START @Bit 10 : Shortcut between event LASTRX and task DMA.TX.START */
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Pos (10UL) /*!< Position of LASTRX_DMA_TX_START field.                               */
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Msk (0x1UL << TWIM_SHORTS_LASTRX_DMA_TX_START_Pos) /*!< Bit mask of
+                                                                            LASTRX_DMA_TX_START field.*/
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Min (0x0UL) /*!< Min enumerator value of LASTRX_DMA_TX_START field.                  */
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Max (0x1UL) /*!< Max enumerator value of LASTRX_DMA_TX_START field.                  */
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Disabled (0x0UL) /*!< Disable shortcut                                               */
+  #define TWIM_SHORTS_LASTRX_DMA_TX_START_Enabled (0x1UL) /*!< Enable shortcut                                                 */
 
 /* LASTRX_SUSPEND @Bit 11 : Shortcut between event LASTRX and task SUSPEND */
   #define TWIM_SHORTS_LASTRX_SUSPEND_Pos (11UL)      /*!< Position of LASTRX_SUSPEND field.                                    */
@@ -140001,16 +140133,8 @@ typedef struct {
   #define TWIM_SHORTS_LASTRX_SUSPEND_Disabled (0x0UL) /*!< Disable shortcut                                                    */
   #define TWIM_SHORTS_LASTRX_SUSPEND_Enabled (0x1UL) /*!< Enable shortcut                                                      */
 
-/* LASTRX_STOP @Bit 12 : Shortcut between event LASTRX and task STOP */
-  #define TWIM_SHORTS_LASTRX_STOP_Pos (12UL)         /*!< Position of LASTRX_STOP field.                                       */
-  #define TWIM_SHORTS_LASTRX_STOP_Msk (0x1UL << TWIM_SHORTS_LASTRX_STOP_Pos) /*!< Bit mask of LASTRX_STOP field.               */
-  #define TWIM_SHORTS_LASTRX_STOP_Min (0x0UL)        /*!< Min enumerator value of LASTRX_STOP field.                           */
-  #define TWIM_SHORTS_LASTRX_STOP_Max (0x1UL)        /*!< Max enumerator value of LASTRX_STOP field.                           */
-  #define TWIM_SHORTS_LASTRX_STOP_Disabled (0x0UL)   /*!< Disable shortcut                                                     */
-  #define TWIM_SHORTS_LASTRX_STOP_Enabled (0x1UL)    /*!< Enable shortcut                                                      */
-
-/* DMA_RX_BUSERROR_STOP @Bit 19 : Shortcut between event DMA.RX.BUSERROR and task STOP */
-  #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Pos (19UL) /*!< Position of DMA_RX_BUSERROR_STOP field.                             */
+/* DMA_RX_BUSERROR_STOP @Bit 18 : Shortcut between event DMA.RX.BUSERROR and task STOP */
+  #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Pos (18UL) /*!< Position of DMA_RX_BUSERROR_STOP field.                             */
   #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Msk (0x1UL << TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Pos) /*!< Bit mask of
                                                                             DMA_RX_BUSERROR_STOP field.*/
   #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_RX_BUSERROR_STOP field.                */
@@ -140018,8 +140142,8 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Disabled (0x0UL) /*!< Disable shortcut                                              */
   #define TWIM_SHORTS_DMA_RX_BUSERROR_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                */
 
-/* DMA_TX_BUSERROR_STOP @Bit 20 : Shortcut between event DMA.TX.BUSERROR and task STOP */
-  #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Pos (20UL) /*!< Position of DMA_TX_BUSERROR_STOP field.                             */
+/* DMA_TX_BUSERROR_STOP @Bit 19 : Shortcut between event DMA.TX.BUSERROR and task STOP */
+  #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Pos (19UL) /*!< Position of DMA_TX_BUSERROR_STOP field.                             */
   #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Msk (0x1UL << TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Pos) /*!< Bit mask of
                                                                             DMA_TX_BUSERROR_STOP field.*/
   #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_TX_BUSERROR_STOP field.                */
@@ -140027,10 +140151,10 @@ typedef struct {
   #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Disabled (0x0UL) /*!< Disable shortcut                                              */
   #define TWIM_SHORTS_DMA_TX_BUSERROR_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                */
 
-/* DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1 @Bit 21 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[1] Allows
+/* DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1 @Bit 20 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[1] Allows
                                                daisy-chaining match events. */
 
-  #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Pos (21UL) /*!< Position of DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1 field.   */
+  #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Pos (20UL) /*!< Position of DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1 field.   */
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1
                                                                             field.*/
@@ -140041,10 +140165,10 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Disabled (0x0UL) /*!< Disable shortcut                                 */
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Enabled (0x1UL) /*!< Enable shortcut                                   */
 
-/* DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2 @Bit 22 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[2] Allows
+/* DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2 @Bit 21 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[2] Allows
                                                daisy-chaining match events. */
 
-  #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Pos (22UL) /*!< Position of DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2 field.   */
+  #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Pos (21UL) /*!< Position of DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2 field.   */
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2
                                                                             field.*/
@@ -140055,10 +140179,10 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Disabled (0x0UL) /*!< Disable shortcut                                 */
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Enabled (0x1UL) /*!< Enable shortcut                                   */
 
-/* DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3 @Bit 23 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[3] Allows
+/* DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3 @Bit 22 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[3] Allows
                                                daisy-chaining match events. */
 
-  #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos (23UL) /*!< Position of DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3 field.   */
+  #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos (22UL) /*!< Position of DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3 field.   */
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3
                                                                             field.*/
@@ -140069,10 +140193,10 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Disabled (0x0UL) /*!< Disable shortcut                                 */
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Enabled (0x1UL) /*!< Enable shortcut                                   */
 
-/* DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0 @Bit 24 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[0] Allows
+/* DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0 @Bit 23 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[0] Allows
                                                daisy-chaining match events. */
 
-  #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos (24UL) /*!< Position of DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0 field.   */
+  #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos (23UL) /*!< Position of DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0 field.   */
   #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0
                                                                             field.*/
@@ -140083,8 +140207,8 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Disabled (0x0UL) /*!< Disable shortcut                                 */
   #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Enabled (0x1UL) /*!< Enable shortcut                                   */
 
-/* DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0 @Bit 25 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
-  #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Pos (25UL) /*!< Position of DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0 field. */
+/* DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0 @Bit 24 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
+  #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Pos (24UL) /*!< Position of DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0 field. */
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0
                                                                             field.*/
@@ -140095,8 +140219,8 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Disabled (0x0UL) /*!< Disable shortcut                                */
   #define TWIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Enabled (0x1UL) /*!< Enable shortcut                                  */
 
-/* DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1 @Bit 26 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
-  #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Pos (26UL) /*!< Position of DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1 field. */
+/* DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1 @Bit 25 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
+  #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Pos (25UL) /*!< Position of DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1 field. */
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1
                                                                             field.*/
@@ -140107,8 +140231,8 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Disabled (0x0UL) /*!< Disable shortcut                                */
   #define TWIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Enabled (0x1UL) /*!< Enable shortcut                                  */
 
-/* DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2 @Bit 27 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
-  #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Pos (27UL) /*!< Position of DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2 field. */
+/* DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2 @Bit 26 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
+  #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Pos (26UL) /*!< Position of DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2 field. */
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2
                                                                             field.*/
@@ -140119,8 +140243,8 @@ typedef struct {
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Disabled (0x0UL) /*!< Disable shortcut                                */
   #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Enabled (0x1UL) /*!< Enable shortcut                                  */
 
-/* DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3 @Bit 28 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
-  #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3_Pos (28UL) /*!< Position of DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3 field. */
+/* DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3 @Bit 27 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n] */
+  #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3_Pos (27UL) /*!< Position of DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3 field. */
   #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3_Pos) /*!<
                                                                             Bit mask of DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3
                                                                             field.*/
@@ -144243,63 +144367,68 @@ typedef struct {
 /* UARTE_SHORTS: Shortcuts between local events and tasks */
   #define UARTE_SHORTS_ResetValue (0x00000000UL)     /*!< Reset value of SHORTS register.                                      */
 
-/* CTS_STARTRX @Bit 3 : Shortcut between event CTS and task STARTRX */
-  #define UARTE_SHORTS_CTS_STARTRX_Pos (3UL)         /*!< Position of CTS_STARTRX field.                                       */
-  #define UARTE_SHORTS_CTS_STARTRX_Msk (0x1UL << UARTE_SHORTS_CTS_STARTRX_Pos) /*!< Bit mask of CTS_STARTRX field.             */
-  #define UARTE_SHORTS_CTS_STARTRX_Min (0x0UL)       /*!< Min enumerator value of CTS_STARTRX field.                           */
-  #define UARTE_SHORTS_CTS_STARTRX_Max (0x1UL)       /*!< Max enumerator value of CTS_STARTRX field.                           */
-  #define UARTE_SHORTS_CTS_STARTRX_Disabled (0x0UL)  /*!< Disable shortcut                                                     */
-  #define UARTE_SHORTS_CTS_STARTRX_Enabled (0x1UL)   /*!< Enable shortcut                                                      */
+/* CTS_DMA_RX_START @Bit 3 : Shortcut between event CTS and task DMA.RX.START */
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Pos (3UL)    /*!< Position of CTS_DMA_RX_START field.                                  */
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Msk (0x1UL << UARTE_SHORTS_CTS_DMA_RX_START_Pos) /*!< Bit mask of CTS_DMA_RX_START
+                                                                            field.*/
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Min (0x0UL)  /*!< Min enumerator value of CTS_DMA_RX_START field.                      */
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Max (0x1UL)  /*!< Max enumerator value of CTS_DMA_RX_START field.                      */
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Disabled (0x0UL) /*!< Disable shortcut                                                 */
+  #define UARTE_SHORTS_CTS_DMA_RX_START_Enabled (0x1UL) /*!< Enable shortcut                                                   */
 
-/* NCTS_STOPRX @Bit 4 : Shortcut between event NCTS and task STOPRX */
-  #define UARTE_SHORTS_NCTS_STOPRX_Pos (4UL)         /*!< Position of NCTS_STOPRX field.                                       */
-  #define UARTE_SHORTS_NCTS_STOPRX_Msk (0x1UL << UARTE_SHORTS_NCTS_STOPRX_Pos) /*!< Bit mask of NCTS_STOPRX field.             */
-  #define UARTE_SHORTS_NCTS_STOPRX_Min (0x0UL)       /*!< Min enumerator value of NCTS_STOPRX field.                           */
-  #define UARTE_SHORTS_NCTS_STOPRX_Max (0x1UL)       /*!< Max enumerator value of NCTS_STOPRX field.                           */
-  #define UARTE_SHORTS_NCTS_STOPRX_Disabled (0x0UL)  /*!< Disable shortcut                                                     */
-  #define UARTE_SHORTS_NCTS_STOPRX_Enabled (0x1UL)   /*!< Enable shortcut                                                      */
+/* NCTS_DMA_RX_STOP @Bit 4 : Shortcut between event NCTS and task DMA.RX.STOP */
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Pos (4UL)    /*!< Position of NCTS_DMA_RX_STOP field.                                  */
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Msk (0x1UL << UARTE_SHORTS_NCTS_DMA_RX_STOP_Pos) /*!< Bit mask of NCTS_DMA_RX_STOP
+                                                                            field.*/
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Min (0x0UL)  /*!< Min enumerator value of NCTS_DMA_RX_STOP field.                      */
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Max (0x1UL)  /*!< Max enumerator value of NCTS_DMA_RX_STOP field.                      */
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Disabled (0x0UL) /*!< Disable shortcut                                                 */
+  #define UARTE_SHORTS_NCTS_DMA_RX_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                   */
 
-/* ENDRX_STARTRX @Bit 5 : Shortcut between event ENDRX and task STARTRX */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Pos (5UL)       /*!< Position of ENDRX_STARTRX field.                                     */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Msk (0x1UL << UARTE_SHORTS_ENDRX_STARTRX_Pos) /*!< Bit mask of ENDRX_STARTRX field.       */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Min (0x0UL)     /*!< Min enumerator value of ENDRX_STARTRX field.                         */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Max (0x1UL)     /*!< Max enumerator value of ENDRX_STARTRX field.                         */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Disabled (0x0UL) /*!< Disable shortcut                                                    */
-  #define UARTE_SHORTS_ENDRX_STARTRX_Enabled (0x1UL) /*!< Enable shortcut                                                      */
+/* DMA_RX_END_DMA_RX_START @Bit 5 : Shortcut between event DMA.RX.END and task DMA.RX.START */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Pos (5UL) /*!< Position of DMA_RX_END_DMA_RX_START field.                       */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Msk (0x1UL << UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Pos) /*!< Bit mask of
+                                                                            DMA_RX_END_DMA_RX_START field.*/
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Min (0x0UL) /*!< Min enumerator value of DMA_RX_END_DMA_RX_START field.         */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Max (0x1UL) /*!< Max enumerator value of DMA_RX_END_DMA_RX_START field.         */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Disabled (0x0UL) /*!< Disable shortcut                                          */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_START_Enabled (0x1UL) /*!< Enable shortcut                                            */
 
-/* ENDRX_STOPRX @Bit 6 : Shortcut between event ENDRX and task STOPRX */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Pos (6UL)        /*!< Position of ENDRX_STOPRX field.                                      */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Msk (0x1UL << UARTE_SHORTS_ENDRX_STOPRX_Pos) /*!< Bit mask of ENDRX_STOPRX field.          */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Min (0x0UL)      /*!< Min enumerator value of ENDRX_STOPRX field.                          */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Max (0x1UL)      /*!< Max enumerator value of ENDRX_STOPRX field.                          */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Disabled (0x0UL) /*!< Disable shortcut                                                     */
-  #define UARTE_SHORTS_ENDRX_STOPRX_Enabled (0x1UL)  /*!< Enable shortcut                                                      */
+/* DMA_RX_END_DMA_RX_STOP @Bit 6 : Shortcut between event DMA.RX.END and task DMA.RX.STOP */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Pos (6UL) /*!< Position of DMA_RX_END_DMA_RX_STOP field.                         */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Msk (0x1UL << UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Pos) /*!< Bit mask of
+                                                                            DMA_RX_END_DMA_RX_STOP field.*/
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_RX_END_DMA_RX_STOP field.           */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Max (0x1UL) /*!< Max enumerator value of DMA_RX_END_DMA_RX_STOP field.           */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Disabled (0x0UL) /*!< Disable shortcut                                           */
+  #define UARTE_SHORTS_DMA_RX_END_DMA_RX_STOP_Enabled (0x1UL) /*!< Enable shortcut                                             */
 
-/* ENDTX_STOPTX @Bit 18 : Shortcut between event ENDTX and task STOPTX */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Pos (18UL)       /*!< Position of ENDTX_STOPTX field.                                      */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Msk (0x1UL << UARTE_SHORTS_ENDTX_STOPTX_Pos) /*!< Bit mask of ENDTX_STOPTX field.          */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Min (0x0UL)      /*!< Min enumerator value of ENDTX_STOPTX field.                          */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Max (0x1UL)      /*!< Max enumerator value of ENDTX_STOPTX field.                          */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Disabled (0x0UL) /*!< Disable shortcut                                                     */
-  #define UARTE_SHORTS_ENDTX_STOPTX_Enabled (0x1UL)  /*!< Enable shortcut                                                      */
+/* DMA_TX_END_DMA_TX_STOP @Bit 18 : Shortcut between event DMA.TX.END and task DMA.TX.STOP */
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Pos (18UL) /*!< Position of DMA_TX_END_DMA_TX_STOP field.                        */
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Msk (0x1UL << UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Pos) /*!< Bit mask of
+                                                                            DMA_TX_END_DMA_TX_STOP field.*/
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_TX_END_DMA_TX_STOP field.           */
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Max (0x1UL) /*!< Max enumerator value of DMA_TX_END_DMA_TX_STOP field.           */
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Disabled (0x0UL) /*!< Disable shortcut                                           */
+  #define UARTE_SHORTS_DMA_TX_END_DMA_TX_STOP_Enabled (0x1UL) /*!< Enable shortcut                                             */
 
-/* DMA_RX_BUSERROR_STOPRX @Bit 19 : Shortcut between event DMA.RX.BUSERROR and task STOPRX */
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Pos (19UL) /*!< Position of DMA_RX_BUSERROR_STOPRX field.                        */
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Msk (0x1UL << UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Pos) /*!< Bit mask of
-                                                                            DMA_RX_BUSERROR_STOPRX field.*/
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Min (0x0UL) /*!< Min enumerator value of DMA_RX_BUSERROR_STOPRX field.           */
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Max (0x1UL) /*!< Max enumerator value of DMA_RX_BUSERROR_STOPRX field.           */
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Disabled (0x0UL) /*!< Disable shortcut                                           */
-  #define UARTE_SHORTS_DMA_RX_BUSERROR_STOPRX_Enabled (0x1UL) /*!< Enable shortcut                                             */
+/* DMA_RX_BUSERROR_DMA_RX_STOP @Bit 19 : Shortcut between event DMA.RX.BUSERROR and task DMA.RX.STOP */
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Pos (19UL) /*!< Position of DMA_RX_BUSERROR_DMA_RX_STOP field.              */
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Msk (0x1UL << UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Pos) /*!< Bit mask of
+                                                                            DMA_RX_BUSERROR_DMA_RX_STOP field.*/
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_RX_BUSERROR_DMA_RX_STOP field. */
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Max (0x1UL) /*!< Max enumerator value of DMA_RX_BUSERROR_DMA_RX_STOP field. */
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Disabled (0x0UL) /*!< Disable shortcut                                      */
+  #define UARTE_SHORTS_DMA_RX_BUSERROR_DMA_RX_STOP_Enabled (0x1UL) /*!< Enable shortcut                                        */
 
-/* DMA_TX_BUSERROR_STOPTX @Bit 20 : Shortcut between event DMA.TX.BUSERROR and task STOPTX */
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Pos (20UL) /*!< Position of DMA_TX_BUSERROR_STOPTX field.                        */
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Msk (0x1UL << UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Pos) /*!< Bit mask of
-                                                                            DMA_TX_BUSERROR_STOPTX field.*/
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Min (0x0UL) /*!< Min enumerator value of DMA_TX_BUSERROR_STOPTX field.           */
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Max (0x1UL) /*!< Max enumerator value of DMA_TX_BUSERROR_STOPTX field.           */
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Disabled (0x0UL) /*!< Disable shortcut                                           */
-  #define UARTE_SHORTS_DMA_TX_BUSERROR_STOPTX_Enabled (0x1UL) /*!< Enable shortcut                                             */
+/* DMA_TX_BUSERROR_DMA_TX_STOP @Bit 20 : Shortcut between event DMA.TX.BUSERROR and task DMA.TX.STOP */
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Pos (20UL) /*!< Position of DMA_TX_BUSERROR_DMA_TX_STOP field.              */
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Msk (0x1UL << UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Pos) /*!< Bit mask of
+                                                                            DMA_TX_BUSERROR_DMA_TX_STOP field.*/
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_TX_BUSERROR_DMA_TX_STOP field. */
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Max (0x1UL) /*!< Max enumerator value of DMA_TX_BUSERROR_DMA_TX_STOP field. */
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Disabled (0x0UL) /*!< Disable shortcut                                      */
+  #define UARTE_SHORTS_DMA_TX_BUSERROR_DMA_TX_STOP_Enabled (0x1UL) /*!< Enable shortcut                                        */
 
 /* DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1 @Bit 21 : Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[1] Allows
                                                daisy-chaining match events. */
@@ -168179,8 +168308,8 @@ typedef struct {
   #define VPRCSR_TDATA1_TYPE_Min (0x0UL)             /*!< Min enumerator value of TYPE field.                                  */
   #define VPRCSR_TDATA1_TYPE_Max (0xFUL)             /*!< Max enumerator value of TYPE field.                                  */
   #define VPRCSR_TDATA1_TYPE_NOTRIGGER (0x0UL)       /*!< There is no trigger at this tselect                                  */
-  #define VPRCSR_TDATA1_TYPE_MATCH (0x2UL)           /*!< The trigger is an address/data match trigger. The remaining bits in
-                                                          this register act as described in mcontrol*/
+  #define VPRCSR_TDATA1_TYPE_MATCH (0x2UL)           /*!< The trigger is an address match trigger. The remaining bits in this
+                                                          register act as described in mcontrol*/
   #define VPRCSR_TDATA1_TYPE_REMAP (0xFUL)           /*!< This trigger is a remapping trigger. The remaining bits in this
                                                           register behave as described in remapping functionality*/
 
@@ -168437,9 +168566,9 @@ typedef struct {
   #define VPRCSR_MARCHID_BUSWIDTH_Pos (5UL)          /*!< Position of BUSWIDTH field.                                          */
   #define VPRCSR_MARCHID_BUSWIDTH_Msk (0x1UL << VPRCSR_MARCHID_BUSWIDTH_Pos) /*!< Bit mask of BUSWIDTH field.                  */
 
-/* BKPT @Bits 6..8 : Indicates the BKPT parameter option */
+/* BKPT @Bits 6..9 : Indicates the BKPT parameter option */
   #define VPRCSR_MARCHID_BKPT_Pos (6UL)              /*!< Position of BKPT field.                                              */
-  #define VPRCSR_MARCHID_BKPT_Msk (0x7UL << VPRCSR_MARCHID_BKPT_Pos) /*!< Bit mask of BKPT field.                              */
+  #define VPRCSR_MARCHID_BKPT_Msk (0xFUL << VPRCSR_MARCHID_BKPT_Pos) /*!< Bit mask of BKPT field.                              */
 
 /* IMPLEM @Bit 31 : Indicates a non-open implementation */
   #define VPRCSR_MARCHID_IMPLEM_Pos (31UL)           /*!< Position of IMPLEM field.                                            */
@@ -173162,6 +173291,36 @@ typedef struct {
 
 
 
+
+/* =========================================================================================================================== */
+/* ================                                         VPRPUBLIC                                         ================ */
+/* =========================================================================================================================== */
+
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
+/* ==================================================== Struct VPRPUBLIC ===================================================== */
+/**
+  * @brief VPR peripheral registers
+  */
+  typedef struct {                                   /*!< VPRPUBLIC Structure                                                  */
+    __OM uint32_t TASKS_TRIGGER[32];                 /*!< (@ 0x00000000) VPR task [n] register                                 */
+  } NRF_VPRPUBLIC_Type;                              /*!< Size = 128 (0x080)                                                   */
+
+/* VPRPUBLIC_TASKS_TRIGGER: VPR task [n] register */
+  #define VPRPUBLIC_TASKS_TRIGGER_MaxCount (32UL)    /*!< Max size of TASKS_TRIGGER[32] array.                                 */
+  #define VPRPUBLIC_TASKS_TRIGGER_MaxIndex (31UL)    /*!< Max index of TASKS_TRIGGER[32] array.                                */
+  #define VPRPUBLIC_TASKS_TRIGGER_MinIndex (0UL)     /*!< Min index of TASKS_TRIGGER[32] array.                                */
+  #define VPRPUBLIC_TASKS_TRIGGER_ResetValue (0x00000000UL) /*!< Reset value of TASKS_TRIGGER[32] register.                    */
+
+/* TASKS_TRIGGER @Bit 0 : VPR task [n] register */
+  #define VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Pos (0UL) /*!< Position of TASKS_TRIGGER field.                                */
+  #define VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Msk (0x1UL << VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Pos) /*!< Bit mask of
+                                                                            TASKS_TRIGGER field.*/
+  #define VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Min (0x1UL) /*!< Min enumerator value of TASKS_TRIGGER field.                  */
+  #define VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Max (0x1UL) /*!< Max enumerator value of TASKS_TRIGGER field.                  */
+  #define VPRPUBLIC_TASKS_TRIGGER_TASKS_TRIGGER_Trigger (0x1UL) /*!< Trigger task                                              */
+
+
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
 /* =========================================================================================================================== */
 /* ================                                          VREG1V0                                          ================ */

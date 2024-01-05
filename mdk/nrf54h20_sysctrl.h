@@ -240,6 +240,7 @@ typedef enum {
 #define NRF_SYSCTRL_RAMC121_BASE          0x5F8C4000UL
 #define NRF_SYSCTRL_ROMC_BASE             0x5F8C6000UL
 #define NRF_SYSCTRL_MEMCONF120_BASE       0x5F8C7000UL
+#define NRF_SYSCTRL_HSFLL122_BASE         0x5F8CB000UL
 #define NRF_SYSCTRL_HSFLL121_BASE         0x5F8CC000UL
 #define NRF_SYSCTRL_HSFLL120_BASE         0x5F8CD000UL
 #define NRF_SYSCTRL_LRCCONF120_BASE       0x5F8CE000UL
@@ -342,6 +343,7 @@ typedef enum {
 #define NRF_SYSCTRL_RAMC121               ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC121_BASE)
 #define NRF_SYSCTRL_ROMC                  ((NRF_ROMC_Type*)                     NRF_SYSCTRL_ROMC_BASE)
 #define NRF_SYSCTRL_MEMCONF120            ((NRF_MEMCONF_Type*)                  NRF_SYSCTRL_MEMCONF120_BASE)
+#define NRF_SYSCTRL_HSFLL122              ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL122_BASE)
 #define NRF_SYSCTRL_HSFLL121              ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL121_BASE)
 #define NRF_SYSCTRL_HSFLL120              ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL120_BASE)
 #define NRF_SYSCTRL_LRCCONF120            ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF120_BASE)
@@ -445,6 +447,7 @@ typedef enum {
   #define NRF_RAMC121                             NRF_SYSCTRL_RAMC121
   #define NRF_ROMC                                NRF_SYSCTRL_ROMC
   #define NRF_MEMCONF120                          NRF_SYSCTRL_MEMCONF120
+  #define NRF_HSFLL122                            NRF_SYSCTRL_HSFLL122
   #define NRF_HSFLL121                            NRF_SYSCTRL_HSFLL121
   #define NRF_HSFLL120                            NRF_SYSCTRL_HSFLL120
   #define NRF_LRCCONF120                          NRF_SYSCTRL_LRCCONF120
