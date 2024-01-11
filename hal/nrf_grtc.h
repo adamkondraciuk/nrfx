@@ -112,6 +112,20 @@ extern "C" {
 /** @brief Bitmask of CCADD register for the SYSCOUNTER. */
 #define NRF_GRTC_SYSCOUNTER_CCADD_MASK GRTC_CC_CCADD_VALUE_Msk
 
+#if defined(GRTC_SYSCOUNTERL_VALUE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Bitmask of the lower part of the SYSCOUNTER value. */
+#define NRF_GRTC_SYSCOUNTERL_VALUE_MASK GRTC_SYSCOUNTERL_VALUE_Msk
+#else
+#define NRF_GRTC_SYSCOUNTERL_VALUE_MASK GRTC_SYSCOUNTER_SYSCOUNTERL_VALUE_Msk
+#endif
+
+#if defined(GRTC_SYSCOUNTERH_VALUE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Bitmask of the higher part of the SYSCOUNTER value. */
+#define NRF_GRTC_SYSCOUNTERH_VALUE_MASK GRTC_SYSCOUNTERH_VALUE_Msk
+#else
+#define NRF_GRTC_SYSCOUNTERH_VALUE_MASK GRTC_SYSCOUNTER_SYSCOUNTERH_VALUE_Msk
+#endif
+
 /** @brief Bitmask of the higher 32-bits of capture/compare register for the RTCOUNTER. */
 #define NRF_GRTC_RTCOUNTER_CCH_MASK GRTC_RTCOMPAREH_VALUE_Msk
 
