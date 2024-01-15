@@ -156,6 +156,47 @@ extern "C" {
 #define NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT SPIM_DMA_RX_MATCH_CANDIDATE_MaxCount
 #endif
 
+#if NRF_SPIM_HAS_DCX
+#if defined(SPIM_PSEL_DCX_ResetValue) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol specifying default value of DCX pin setting. */
+#define NRF_SPIM_DCX_DEFAULT SPIM_PSEL_DCX_ResetValue
+#else
+#define NRF_SPIM_DCX_DEFAULT 0xFFFFFFFFUL
+#endif
+#endif // NRF_SPIM_HAS_DCX
+
+#if NRF_SPIM_HAS_HW_CSN
+#if defined(SPIM_PSEL_CSN_ResetValue) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol specifying default value of CSN pin setting. */
+#define NRF_SPIM_CSN_DEFAULT SPIM_PSEL_CSN_ResetValue
+#else
+#define NRF_SPIM_CSN_DEFAULT 0xFFFFFFFFUL
+#endif
+
+#if defined(SPIM_CSNDUR_ResetValue) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol specifying default value of CSN duration setting. */
+#define NRF_SPIM_CSNDUR_DEFAULT SPIM_CSNDUR_ResetValue
+#else
+#define NRF_SPIM_CSNDUR_DEFAULT 0x2UL
+#endif
+
+#if defined(SPIM_CSNPOL_ResetValue) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol specifying default value of CSN polarity setting. */
+#define NRF_SPIM_CSNPOL_DEFAULT SPIM_CSNPOL_ResetValue
+#else
+#define NRF_SPIM_CSNPOL_DEFAULT 0x0UL
+#endif
+#endif // NRF_SPIM_HAS_HW_CSN
+
+#if NRF_SPIM_HAS_RXDELAY
+#if defined(SPIM_IFTIMING_RXDELAY_ResetValue) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol specifying default value of RX delay setting. */
+#define NRF_SPIM_RXDELAY_DEFAULT SPIM_IFTIMING_RXDELAY_ResetValue
+#else
+#define NRF_SPIM_RXDELAY_DEFAULT 0x2UL
+#endif
+#endif // NRF_SPIM_HAS_RXDELAY
+
 /** @brief Minimal SPIM frequency in Hz. */
 #define NRF_SPIM_MIN_FREQUENCY (NRFX_KHZ_TO_HZ(125UL))
 

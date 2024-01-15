@@ -77,6 +77,8 @@
 #define SPIM_MAX_DATARATE_TOKEN32 1
 
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
+static const uint32_t rxdelay_support_mask =
+    NRFX_FEATURE_SUPPORTED_MASK(SPIM, FEATURE_RXDELAY_PRESENT);
 static const uint32_t dcx_support_mask =
     NRFX_FEATURE_SUPPORTED_MASK(SPIM, FEATURE_DCX_PRESENT);
 static const uint32_t hw_csn_support_mask =
@@ -91,6 +93,8 @@ static const uint8_t easydma_support_bits[] __UNUSED =
 #define SPIM_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)          \
             (((freq != NRFX_MHZ_TO_HZ(32)) && (freq != NRFX_MHZ_TO_HZ(16))) || \
              ((NRFX_BIT(drv_inst_idx)) & datarate32_support_mask))
+
+#define SPIM_RXDELAY_PRESENT_VALIDATE(drv_inst_idx) (NRFX_BIT(drv_inst_idx) & rxdelay_support_mask)
 
 #define SPIM_DCX_PRESENT_VALIDATE(drv_inst_idx) (NRFX_BIT(drv_inst_idx) & dcx_support_mask)
 
@@ -422,9 +426,9 @@ static void spim_configure(nrfx_spim_t const *        p_instance,
     configure_pins(p_instance, p_config);
 
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
-    bool hw_csn_support = NRFX_BIT(p_instance->drv_inst_idx) & hw_csn_support_mask;
-    bool hw_csn = p_config->use_hw_ss;
-    if (hw_csn_support && hw_csn)
+    bool hw_csn_supported = SPIM_HW_CSN_PRESENT_VALIDATE(p_instance->drv_inst_idx);
+    bool use_csn = hw_csn_supported && p_config->use_hw_ss;
+    if (use_csn)
     {
         p_cb->ss_pin = NRF_SPIM_PIN_NOT_CONNECTED;
     }
@@ -451,27 +455,45 @@ static void spim_configure(nrfx_spim_t const *        p_instance,
 #endif
         .mode      = p_config->mode,
         .bit_order = p_config->bit_order,
-#if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
+#if NRFY_SPIM_HAS_EXTENDED
+        /* Extended config is applied even if only single instance supports it.
+           For other instances, and also when NRFX_SPIM_EXTENDED_ENABLED is 0,
+           apply default configuration. */
         .ext_config =
         {
             .pins =
             {
 #if NRFY_SPIM_HAS_DCX
-                .dcx_pin = p_config->dcx_pin,
+                .dcx_pin = NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED,
+                                            (p_config->dcx_pin,),
+                                            (NRF_SPIM_DCX_DEFAULT,))
 #endif
 #if NRFY_SPIM_HAS_HW_CSN
-                .csn_pin = p_config->use_hw_ss ? p_config->ss_pin : NRF_SPIM_PIN_NOT_CONNECTED,
+                .csn_pin = NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED,
+                                            (use_csn ? p_config->ss_pin : NRF_SPIM_CSN_DEFAULT,),
+                                            (NRF_SPIM_CSN_DEFAULT,))
 #endif
             },
 #if NRFY_SPIM_HAS_HW_CSN
-            .csn_pol      = p_config->ss_active_high ? NRF_SPIM_CSN_POL_HIGH : NRF_SPIM_CSN_POL_LOW,
-            .csn_duration = p_config->ss_duration,
+            .csn_pol      = NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED,
+                                             (use_csn ?
+                                              (p_config->ss_active_high ?
+                                               NRF_SPIM_CSN_POL_HIGH : NRF_SPIM_CSN_POL_LOW) :
+                                               (nrf_spim_csn_pol_t)NRF_SPIM_CSNPOL_DEFAULT,),
+                                              ((nrf_spim_csn_pol_t)NRF_SPIM_CSNPOL_DEFAULT,))
+            .csn_duration = NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED,
+                                             (use_csn ?
+                                              p_config->ss_duration : NRF_SPIM_CSNDUR_DEFAULT,),
+                                             (NRF_SPIM_CSNDUR_DEFAULT,))
 #endif
 #if NRFY_SPIM_HAS_RXDELAY
-            .rx_delay     = p_config->rx_delay
+            .rx_delay = NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED,
+                                         (SPIM_RXDELAY_PRESENT_VALIDATE(p_instance->drv_inst_idx) ?
+                                          p_config->rx_delay : NRF_SPIM_RXDELAY_DEFAULT,),
+                                         (NRF_SPIM_RXDELAY_DEFAULT,))
 #endif
         },
-#endif // NRFX_SPIM_EXTENDED_ENABLED
+#endif // NRFY_SPIM_HAS_EXTENDED
         .skip_psel_cfg = p_config->skip_psel_cfg
     };
 

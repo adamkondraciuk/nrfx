@@ -182,17 +182,6 @@ NRFY_STATIC_INLINE void nrfy_spim_periph_configure(NRF_SPIM_Type *            p_
     {
         nrf_spim_pins_set(p_reg,
             p_config->pins.sck_pin, p_config->pins.mosi_pin, p_config->pins.miso_pin);
-    }
-    nrf_spim_orc_set(p_reg, p_config->orc);
-#if NRFY_SPIM_HAS_FREQUENCY
-    nrf_spim_frequency_set(p_reg, p_config->frequency);
-#elif NRFY_SPIM_HAS_PRESCALER
-    nrf_spim_prescaler_set(p_reg, p_config->prescaler);
-#endif
-    nrf_spim_configure(p_reg, p_config->mode, p_config->bit_order);
-#if NRFY_SPIM_HAS_EXTENDED
-    if (!p_config->skip_psel_cfg)
-    {
 #if NRFY_SPIM_HAS_DCX
         nrf_spim_dcx_pin_set(p_reg, p_config->ext_config.pins.dcx_pin);
 #endif
@@ -203,10 +192,16 @@ NRFY_STATIC_INLINE void nrfy_spim_periph_configure(NRF_SPIM_Type *            p_
                                p_config->ext_config.csn_duration);
 #endif
     }
-#if NRFY_SPIM_HAS_RXDELAY
-        nrf_spim_iftiming_set(p_reg, p_config->ext_config.rx_delay);
+    nrf_spim_orc_set(p_reg, p_config->orc);
+#if NRFY_SPIM_HAS_FREQUENCY
+    nrf_spim_frequency_set(p_reg, p_config->frequency);
+#elif NRFY_SPIM_HAS_PRESCALER
+    nrf_spim_prescaler_set(p_reg, p_config->prescaler);
 #endif
-#endif // NRFY_SPIM_HAS_EXTENDED
+    nrf_spim_configure(p_reg, p_config->mode, p_config->bit_order);
+#if NRFY_SPIM_HAS_RXDELAY
+    nrf_spim_iftiming_set(p_reg, p_config->ext_config.rx_delay);
+#endif
     nrf_barrier_w();
 }
 
