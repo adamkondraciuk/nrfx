@@ -10,8 +10,8 @@ extern "C" {
 #endif
 
 #if defined(HALTIUM_XXAA)
-#define NRF_TWIM_CLOCKPIN_SCL_NEEDED
-#define NRF_TWIM_CLOCKPIN_SDA_NEEDED
+#define NRF_TWIM_CLOCKPIN_SCL_NEEDED 1
+#define NRF_TWIM_CLOCKPIN_SDA_NEEDED 1
 #endif
 
 /**
