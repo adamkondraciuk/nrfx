@@ -100,6 +100,11 @@ extern "C" {
     #define NRF_SPIS_CLOCKPIN_MISO_NEEDED
 #endif
 
+#if defined(NRF54H20_XXAA)
+    #define NRF_TWIM_CLOCKPIN_SDA_NEEDED 1
+    #define NRF_TWIS_CLOCKPIN_SDA_NEEDED 1
+#endif
+
 /*------------------------------------------------------------------------------------------------*/
 /* End of GPIO Extended section                                                                   */
 /*------------------------------------------------------------------------------------------------*/
