@@ -149,7 +149,11 @@ extern "C" {
 #define NRF_GRTC_CHANNEL_INT_MASK(ch) ((uint32_t)(NRF_GRTC_INT_COMPARE0_MASK) << (ch))
 
 /** @brief Main channel that can be used only by the owner of GRTC. */
+#if defined(LUMOS_XXAA)
 #define NRF_GRTC_MAIN_CC_CHANNEL 0
+#else
+#define NRF_GRTC_MAIN_CC_CHANNEL 1
+#endif
 
 /** @brief Bitmask of interrupt enable. */
 #define NRF_GRTC_INTEN_MASK NRFX_BIT_MASK(GRTC_CC_MaxCount)
