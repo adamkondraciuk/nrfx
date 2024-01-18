@@ -211,6 +211,10 @@ typedef enum
     NRF_GPIOTE_EVENT_PORT = offsetof(NRF_GPIOTE_Type, NRF_GPIOTE_EVENTS_PORT_REG), ///< Port event.
 } nrf_gpiote_event_t;
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpedantic"
+#endif
 /** @brief GPIOTE interrupts. */
 typedef enum
 {
@@ -230,6 +234,10 @@ typedef enum
     NRF_GPIOTE_INT_PORT_MASK = NRF_GPIOTE_INT_PORT_MASK_NAME,
 #endif
 } nrf_gpiote_int_t;
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
 /** @brief Symbol specifying bitmask collecting all IN events interrupts. */
 #define NRF_GPIOTE_INT_IN_MASK (NRFX_LISTIFY(GPIOTE_CH_NUM, NRF_GPIOTE_INT_IN, (|), _))

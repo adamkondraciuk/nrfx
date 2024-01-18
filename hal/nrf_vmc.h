@@ -53,6 +53,11 @@ typedef enum
 #endif
 } nrf_vmc_power_t;
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpedantic"
+#endif
+
 /** @brief Retention configuration bits for each section in particular RAM block. */
 typedef enum
 {
@@ -75,6 +80,10 @@ typedef enum
     NRF_VMC_RETENTION_S15 = VMC_RAM_POWER_S15RETENTION_Msk, ///< Keep RAM section S15 of the particular RAM block on or off in System ON mode.
 #endif
 } nrf_vmc_retention_t;
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
 /**
  * @brief Function for setting power configuration for the particular RAM block.
