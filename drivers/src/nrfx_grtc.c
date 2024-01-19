@@ -22,11 +22,11 @@
 #define GRTC_CHANNEL_MASK_TO_INT_MASK(ch_mask) ((ch_mask) << GRTC_INTEN0_COMPARE0_Pos)
 
 #if !defined(NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK)
-#define NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK 0
+#error "Channels mask for GRTC must be defined."
 #endif
 
 #if !defined(NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS)
-#define NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS 0
+#error "Number of channels for GRTC must be defined."
 #endif
 
 #if NRF_GRTC_HAS_RTCOUNTER
