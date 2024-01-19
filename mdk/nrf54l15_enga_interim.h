@@ -174,6 +174,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #define TWIM_SHORTS_LASTRX_STOP_Disabled (0x0UL)
     #define TWIM_SHORTS_LASTRX_STOP_Enabled (0x1UL)
 
+    #define VPR_VEVIF_EVENT_MaxCount 32
+    #define ADDRESS_SLAVE_Pos         (12UL)
+    #define ADDRESS_SLAVE_Msk         (0x3FUL << ADDRESS_SLAVE_Pos)
+
 #endif
 
 #endif
