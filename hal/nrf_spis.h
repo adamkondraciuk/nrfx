@@ -9,6 +9,10 @@
 extern "C" {
 #endif
 
+#if defined(NRF54H20_XXAA)
+#define NRF_SPIS_CLOCKPIN_MISO_NEEDED 1
+#endif
+
 #if defined(HALTIUM_XXAA)
 #define NRF_SPIS_CLOCKPIN_SCK_NEEDED 1
 #endif
