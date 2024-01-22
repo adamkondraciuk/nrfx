@@ -10,16 +10,8 @@
         #include <nrfx_config_nrf54h20_enga_sysctrl.h>
     #endif
 #elif defined(NRF54H20_XXAA)
-    #if defined(NRF_APPLICATION)
-        #include <nrfx_config_nrf54h20_application.h>
-    #elif defined(NRF_RADIOCORE)
-        #include <nrfx_config_nrf54h20_radio.h>
     #elif defined(NRF_SECURE)
         #include <nrfx_config_nrf54h20_secure.h>
-    #elif defined(NRF_FLPR)
-        #include <nrfx_config_nrf54h20_flpr.h>
-    #elif defined(NRF_PPR)
-        #include <nrfx_config_nrf54h20_ppr.h>
     #elif defined(NRF_SYSCTRL)
         #include <nrfx_config_nrf54h20_sysctrl.h>
     #endif
