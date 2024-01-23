@@ -231,7 +231,9 @@ static void configure_pins(nrfx_spim_t const *        p_instance,
 
     nrf_gpio_pin_drive_t pin_drive;
     // Configure pin drive - high drive for 32 MHz clock frequency.
-#if (NRF_SPIM_HAS_FREQUENCY && NRF_SPIM_HAS_32_MHZ_FREQ) || NRF_SPIM_HAS_PRESCALER
+#if defined(LUMOS_XXAA)
+    pin_drive = NRF_GPIO_PIN_H0H1;
+#elif (NRF_SPIM_HAS_FREQUENCY && NRF_SPIM_HAS_32_MHZ_FREQ) || NRF_SPIM_HAS_PRESCALER
     pin_drive = (p_config->frequency == NRFX_MHZ_TO_HZ(32)) ? NRF_GPIO_PIN_H0H1 : NRF_GPIO_PIN_S0S1;
 #else
     pin_drive = NRF_GPIO_PIN_S0S1;
