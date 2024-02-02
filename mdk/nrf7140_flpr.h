@@ -56,16 +56,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 typedef enum {
 /* ===================================================== Core Interrupts ===================================================== */
-  UserSoftware_IRQn                      = -16,      /*!< -16 User Software Interrupt                                          */
-  SuperVisorSoftware_IRQn                = -15,      /*!< -15 Supervisor Software interrupt                                    */
-  MachineSoftware_IRQn                   = -14,      /*!< -14 Machine Software Interrupt                                       */
-  UserTimer_IRQn                         = -12,      /*!< -12 User Timer Interrupt                                             */
-  SuperVisorTimer_IRQn                   = -11,      /*!< -11 Supervisor Timer interrupt                                       */
-  MachineTimer_IRQn                      = -9,       /*!<  -9 Machine Timer Interrupt                                          */
-  UserExternal_IRQn                      = -8,       /*!<  -8 User External (PLIC) Interrupt                                   */
-  SuperVisorExternal_IRQn                = -7,       /*!<  -7 Supervisor External (PLIC) interrupt                             */
-  MachineExternal_IRQn                   = -5,       /*!<  -5 Machine External (PLIC) Interrupt                                */
-  CLICSoftware_IRQn                      = -4,       /*!<  -4 CLIC Software Interrupt                                          */
 /* ============================================== Processor Specific Interrupts ============================================== */
   VPRCLIC_0_IRQn                         = 0,        /*!< 0 VPRCLIC_0                                                          */
   VPRCLIC_1_IRQn                         = 1,        /*!< 1 VPRCLIC_1                                                          */
@@ -106,7 +96,9 @@ typedef enum {
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
   GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
   GSI_IRQn                               = 111,      /*!< 111 GSI                                                              */
-  DISPC_IRQn                             = 112,      /*!< 112 DISPC                                                            */
+  DISPC_0_IRQn                           = 112,      /*!< 112 DISPC_0                                                          */
+  DISPC_1_IRQn                           = 113,      /*!< 113 DISPC_1                                                          */
+  DISPC_2_IRQn                           = 114,      /*!< 114 DISPC_2                                                          */
   GPU_IRQn                               = 115,      /*!< 115 GPU                                                              */
   TBM_IRQn                               = 127,      /*!< 127 TBM                                                              */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
@@ -118,8 +110,6 @@ typedef enum {
   IPCT120_0_IRQn                         = 209,      /*!< 209 IPCT120_0                                                        */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
-  SPIM122_IRQn                           = 213,      /*!< 213 SPIM122                                                          */
-  SPIM123_IRQn                           = 214,      /*!< 214 SPIM123                                                          */
   QSPI120_IRQn                           = 215,      /*!< 215 QSPI120                                                          */
   CAN120_IRQn                            = 216,      /*!< 216 CAN120                                                           */
   MVDMA120_IRQn                          = 217,      /*!< 217 MVDMA120                                                         */
@@ -133,6 +123,8 @@ typedef enum {
   SPIS120_IRQn                           = 229,      /*!< 229 SPIS120                                                          */
   SPIM120_UARTE120_IRQn                  = 230,      /*!< 230 SPIM120_UARTE120                                                 */
   SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
+  SPIM122_IRQn                           = 232,      /*!< 232 SPIM122                                                          */
+  SPIM123_IRQn                           = 233,      /*!< 233 SPIM123                                                          */
   VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
   IPCT130_0_IRQn                         = 289,      /*!< 289 IPCT130_0                                                        */
   RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */

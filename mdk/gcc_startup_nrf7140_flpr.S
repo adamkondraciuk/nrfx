@@ -387,9 +387,9 @@ __isr_vector:
     .long   GRTC_1_IRQHandler
     .long   GRTC_2_IRQHandler
     .long   GSI_IRQHandler
-    .long   DISPC_IRQHandler
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   DISPC_0_IRQHandler
+    .long   DISPC_1_IRQHandler
+    .long   DISPC_2_IRQHandler
     .long   GPU_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -488,8 +488,8 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   I3C120_IRQHandler
     .long   VPR121_IRQHandler
-    .long   SPIM122_IRQHandler
-    .long   SPIM123_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
     .long   QSPI120_IRQHandler
     .long   CAN120_IRQHandler
     .long   MVDMA120_IRQHandler
@@ -507,8 +507,8 @@ __isr_vector:
     .long   SPIS120_IRQHandler
     .long   SPIM120_UARTE120_IRQHandler
     .long   SPIM121_IRQHandler
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   SPIM122_IRQHandler
+    .long   SPIM123_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -884,7 +884,9 @@ Default_Handler:
     IRQ  GRTC_1_IRQHandler
     IRQ  GRTC_2_IRQHandler
     IRQ  GSI_IRQHandler
-    IRQ  DISPC_IRQHandler
+    IRQ  DISPC_0_IRQHandler
+    IRQ  DISPC_1_IRQHandler
+    IRQ  DISPC_2_IRQHandler
     IRQ  GPU_IRQHandler
     IRQ  TBM_IRQHandler
     IRQ  USBHS_IRQHandler
@@ -896,8 +898,6 @@ Default_Handler:
     IRQ  IPCT120_0_IRQHandler
     IRQ  I3C120_IRQHandler
     IRQ  VPR121_IRQHandler
-    IRQ  SPIM122_IRQHandler
-    IRQ  SPIM123_IRQHandler
     IRQ  QSPI120_IRQHandler
     IRQ  CAN120_IRQHandler
     IRQ  MVDMA120_IRQHandler
@@ -911,6 +911,8 @@ Default_Handler:
     IRQ  SPIS120_IRQHandler
     IRQ  SPIM120_UARTE120_IRQHandler
     IRQ  SPIM121_IRQHandler
+    IRQ  SPIM122_IRQHandler
+    IRQ  SPIM123_IRQHandler
     IRQ  VPR130_IRQHandler
     IRQ  IPCT130_0_IRQHandler
     IRQ  RTC130_IRQHandler

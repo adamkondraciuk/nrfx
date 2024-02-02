@@ -196,10 +196,10 @@ __vector_table
         DCD     GRTC_0_IRQHandler
         DCD     GRTC_1_IRQHandler
         DCD     GRTC_2_IRQHandler
-        DCD     GSI_SPU310_IRQHandler
-        DCD     DISPC_IRQHandler
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     SPU310_IRQHandler
+        DCD     SPU410_IRQHandler
+        DCD     DISPC_1_IRQHandler
+        DCD     DISPC_2_IRQHandler
         DCD     GPU_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -298,8 +298,8 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     I3C120_IRQHandler
         DCD     VPR121_IRQHandler
-        DCD     SPIM122_IRQHandler
-        DCD     SPIM123_IRQHandler
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
         DCD     QSPI120_IRQHandler
         DCD     CAN120_IRQHandler
         DCD     MVDMA120_IRQHandler
@@ -317,8 +317,8 @@ __vector_table
         DCD     SPIS120_IRQHandler
         DCD     SPIM120_UARTE120_IRQHandler
         DCD     SPIM121_IRQHandler
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     SPIM122_IRQHandler
+        DCD     SPIM123_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -774,14 +774,24 @@ GRTC_1_IRQHandler
 GRTC_2_IRQHandler
         B .
 
-        PUBWEAK  GSI_SPU310_IRQHandler
+        PUBWEAK  SPU310_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GSI_SPU310_IRQHandler
+SPU310_IRQHandler
         B .
 
-        PUBWEAK  DISPC_IRQHandler
+        PUBWEAK  SPU410_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-DISPC_IRQHandler
+SPU410_IRQHandler
+        B .
+
+        PUBWEAK  DISPC_1_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+DISPC_1_IRQHandler
+        B .
+
+        PUBWEAK  DISPC_2_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+DISPC_2_IRQHandler
         B .
 
         PUBWEAK  GPU_IRQHandler
@@ -889,16 +899,6 @@ I3C120_IRQHandler
 VPR121_IRQHandler
         B .
 
-        PUBWEAK  SPIM122_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-SPIM122_IRQHandler
-        B .
-
-        PUBWEAK  SPIM123_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-SPIM123_IRQHandler
-        B .
-
         PUBWEAK  QSPI120_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 QSPI120_IRQHandler
@@ -967,6 +967,16 @@ SPIM120_UARTE120_IRQHandler
         PUBWEAK  SPIM121_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 SPIM121_IRQHandler
+        B .
+
+        PUBWEAK  SPIM122_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+SPIM122_IRQHandler
+        B .
+
+        PUBWEAK  SPIM123_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+SPIM123_IRQHandler
         B .
 
         PUBWEAK  SPU130_IRQHandler

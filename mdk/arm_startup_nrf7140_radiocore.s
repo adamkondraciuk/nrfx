@@ -86,7 +86,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 ; External Interrupts
                 DCD     SPU000_IRQHandler
                 DCD     MPC_IRQHandler
-                DCD     0                         ; Reserved
+                DCD     CPUC_IRQHandler
                 DCD     MVDMA_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -123,7 +123,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     EGU020_IRQHandler
                 DCD     AAR020_CCM020_IRQHandler
-                DCD     ECB020_IRQHandler
+                DCD     GPIOTE_0_IRQHandler
                 DCD     TIMER020_IRQHandler
                 DCD     TIMER021_IRQHandler
                 DCD     TIMER022_IRQHandler
@@ -196,9 +196,9 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     GRTC_1_IRQHandler
                 DCD     GRTC_2_IRQHandler
                 DCD     GSI_IRQHandler
-                DCD     DISPC_IRQHandler
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     DISPC_0_IRQHandler
+                DCD     DISPC_1_IRQHandler
+                DCD     DISPC_2_IRQHandler
                 DCD     GPU_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -297,8 +297,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     I3C120_IRQHandler
                 DCD     VPR121_IRQHandler
-                DCD     SPIM122_IRQHandler
-                DCD     SPIM123_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
                 DCD     QSPI120_IRQHandler
                 DCD     CAN120_IRQHandler
                 DCD     MVDMA120_IRQHandler
@@ -316,8 +316,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     SPIS120_IRQHandler
                 DCD     SPIM120_UARTE120_IRQHandler
                 DCD     SPIM121_IRQHandler
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     SPIM122_IRQHandler
+                DCD     SPIM123_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -639,6 +639,7 @@ Default_Handler PROC
 
                 EXPORT   SPU000_IRQHandler [WEAK]
                 EXPORT   MPC_IRQHandler [WEAK]
+                EXPORT   CPUC_IRQHandler [WEAK]
                 EXPORT   MVDMA_IRQHandler [WEAK]
                 EXPORT   SPU010_IRQHandler [WEAK]
                 EXPORT   WDT010_IRQHandler [WEAK]
@@ -646,7 +647,7 @@ Default_Handler PROC
                 EXPORT   SPU020_IRQHandler [WEAK]
                 EXPORT   EGU020_IRQHandler [WEAK]
                 EXPORT   AAR020_CCM020_IRQHandler [WEAK]
-                EXPORT   ECB020_IRQHandler [WEAK]
+                EXPORT   GPIOTE_0_IRQHandler [WEAK]
                 EXPORT   TIMER020_IRQHandler [WEAK]
                 EXPORT   TIMER021_IRQHandler [WEAK]
                 EXPORT   TIMER022_IRQHandler [WEAK]
@@ -680,7 +681,9 @@ Default_Handler PROC
                 EXPORT   GRTC_1_IRQHandler [WEAK]
                 EXPORT   GRTC_2_IRQHandler [WEAK]
                 EXPORT   GSI_IRQHandler [WEAK]
-                EXPORT   DISPC_IRQHandler [WEAK]
+                EXPORT   DISPC_0_IRQHandler [WEAK]
+                EXPORT   DISPC_1_IRQHandler [WEAK]
+                EXPORT   DISPC_2_IRQHandler [WEAK]
                 EXPORT   GPU_IRQHandler [WEAK]
                 EXPORT   TBM_IRQHandler [WEAK]
                 EXPORT   USBHS_IRQHandler [WEAK]
@@ -692,8 +695,6 @@ Default_Handler PROC
                 EXPORT   IPCT120_0_IRQHandler [WEAK]
                 EXPORT   I3C120_IRQHandler [WEAK]
                 EXPORT   VPR121_IRQHandler [WEAK]
-                EXPORT   SPIM122_IRQHandler [WEAK]
-                EXPORT   SPIM123_IRQHandler [WEAK]
                 EXPORT   QSPI120_IRQHandler [WEAK]
                 EXPORT   CAN120_IRQHandler [WEAK]
                 EXPORT   MVDMA120_IRQHandler [WEAK]
@@ -707,6 +708,8 @@ Default_Handler PROC
                 EXPORT   SPIS120_IRQHandler [WEAK]
                 EXPORT   SPIM120_UARTE120_IRQHandler [WEAK]
                 EXPORT   SPIM121_IRQHandler [WEAK]
+                EXPORT   SPIM122_IRQHandler [WEAK]
+                EXPORT   SPIM123_IRQHandler [WEAK]
                 EXPORT   VPR130_IRQHandler [WEAK]
                 EXPORT   IPCT130_0_IRQHandler [WEAK]
                 EXPORT   RTC130_IRQHandler [WEAK]
@@ -751,6 +754,7 @@ Default_Handler PROC
                 EXPORT   PDM133_IRQHandler [WEAK]
 SPU000_IRQHandler
 MPC_IRQHandler
+CPUC_IRQHandler
 MVDMA_IRQHandler
 SPU010_IRQHandler
 WDT010_IRQHandler
@@ -758,7 +762,7 @@ WDT011_IRQHandler
 SPU020_IRQHandler
 EGU020_IRQHandler
 AAR020_CCM020_IRQHandler
-ECB020_IRQHandler
+GPIOTE_0_IRQHandler
 TIMER020_IRQHandler
 TIMER021_IRQHandler
 TIMER022_IRQHandler
@@ -792,7 +796,9 @@ GRTC_0_IRQHandler
 GRTC_1_IRQHandler
 GRTC_2_IRQHandler
 GSI_IRQHandler
-DISPC_IRQHandler
+DISPC_0_IRQHandler
+DISPC_1_IRQHandler
+DISPC_2_IRQHandler
 GPU_IRQHandler
 TBM_IRQHandler
 USBHS_IRQHandler
@@ -804,8 +810,6 @@ VPR120_IRQHandler
 IPCT120_0_IRQHandler
 I3C120_IRQHandler
 VPR121_IRQHandler
-SPIM122_IRQHandler
-SPIM123_IRQHandler
 QSPI120_IRQHandler
 CAN120_IRQHandler
 MVDMA120_IRQHandler
@@ -819,6 +823,8 @@ PWM120_IRQHandler
 SPIS120_IRQHandler
 SPIM120_UARTE120_IRQHandler
 SPIM121_IRQHandler
+SPIM122_IRQHandler
+SPIM123_IRQHandler
 VPR130_IRQHandler
 IPCT130_0_IRQHandler
 RTC130_IRQHandler

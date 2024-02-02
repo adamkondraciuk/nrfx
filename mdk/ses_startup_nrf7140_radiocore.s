@@ -157,7 +157,7 @@ _vectors:
 /* External Interrupts */
   ISR_HANDLER   SPU000_IRQHandler
   ISR_HANDLER   MPC_IRQHandler
-  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_HANDLER   CPUC_IRQHandler
   ISR_HANDLER   MVDMA_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
@@ -194,7 +194,7 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   EGU020_IRQHandler
   ISR_HANDLER   AAR020_CCM020_IRQHandler
-  ISR_HANDLER   ECB020_IRQHandler
+  ISR_HANDLER   GPIOTE_0_IRQHandler
   ISR_HANDLER   TIMER020_IRQHandler
   ISR_HANDLER   TIMER021_IRQHandler
   ISR_HANDLER   TIMER022_IRQHandler
@@ -267,9 +267,9 @@ _vectors:
   ISR_HANDLER   GRTC_1_IRQHandler
   ISR_HANDLER   GRTC_2_IRQHandler
   ISR_HANDLER   GSI_IRQHandler
-  ISR_HANDLER   DISPC_IRQHandler
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_HANDLER   DISPC_0_IRQHandler
+  ISR_HANDLER   DISPC_1_IRQHandler
+  ISR_HANDLER   DISPC_2_IRQHandler
   ISR_HANDLER   GPU_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
@@ -368,8 +368,8 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   I3C120_IRQHandler
   ISR_HANDLER   VPR121_IRQHandler
-  ISR_HANDLER   SPIM122_IRQHandler
-  ISR_HANDLER   SPIM123_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   QSPI120_IRQHandler
   ISR_HANDLER   CAN120_IRQHandler
   ISR_HANDLER   MVDMA120_IRQHandler
@@ -387,8 +387,8 @@ _vectors:
   ISR_HANDLER   SPIS120_IRQHandler
   ISR_HANDLER   SPIM120_UARTE120_IRQHandler
   ISR_HANDLER   SPIM121_IRQHandler
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_HANDLER   SPIM122_IRQHandler
+  ISR_HANDLER   SPIM123_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */

@@ -103,14 +103,32 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void VPRCLIC_5_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void VPRCLIC_6_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void VPRCLIC_7_IRQHandler                                        (void);
+ __HANDLER("Default_Handler") void VPRCLIC_8_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void VPRTIM_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void RPU_0_IRQHandler                                            (void);
+ __HANDLER("Default_Handler") void RPU_1_IRQHandler                                            (void);
+ __HANDLER("Default_Handler") void RPU_2_IRQHandler                                            (void);
+ __HANDLER("Default_Handler") void RPU_3_IRQHandler                                            (void);
+ __HANDLER("Default_Handler") void RPU_EFS_0_IRQHandler                                        (void);
+ __HANDLER("Default_Handler") void RPU_EFS_1_IRQHandler                                        (void);
+ __HANDLER("Default_Handler") void LMAC_VPR_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void MVDMA_IRQHandler                                            (void);
+ __HANDLER("Default_Handler") void IPCT_0_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void IPCT_1_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void IPCT_2_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void BELLBOARD_WIFI_0_IRQHandler                                 (void);
+ __HANDLER("Default_Handler") void BELLBOARD_WIFI_1_IRQHandler                                 (void);
+ __HANDLER("Default_Handler") void BELLBOARD_WIFI_2_IRQHandler                                 (void);
+ __HANDLER("Default_Handler") void BELLBOARD_WIFI_3_IRQHandler                                 (void);
  __HANDLER("Default_Handler") void GPIOTE130_0_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void GPIOTE130_1_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void GRTC_0_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void GRTC_1_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void GRTC_2_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void GSI_IRQHandler                                              (void);
- __HANDLER("Default_Handler") void DISPC_IRQHandler                                            (void);
+ __HANDLER("Default_Handler") void DISPC_0_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void DISPC_1_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void DISPC_2_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void GPU_IRQHandler                                              (void);
  __HANDLER("Default_Handler") void TBM_IRQHandler                                              (void);
  __HANDLER("Default_Handler") void USBHS_IRQHandler                                            (void);
@@ -122,8 +140,6 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void IPCT120_0_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void I3C120_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void VPR121_IRQHandler                                           (void);
- __HANDLER("Default_Handler") void SPIM122_IRQHandler                                          (void);
- __HANDLER("Default_Handler") void SPIM123_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void QSPI120_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void CAN120_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void MVDMA120_IRQHandler                                         (void);
@@ -135,8 +151,10 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void TIMER121_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void PWM120_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void SPIS120_IRQHandler                                          (void);
- __HANDLER("Default_Handler") void SPIM120_UARTE120_IRQHandler                                 (void);
+ __HANDLER("Default_Handler") void UARTE120_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void SPIM121_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void SPIM122_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void SPIM123_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void VPR130_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void IPCT130_0_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void RTC130_IRQHandler                                           (void);
@@ -158,26 +176,26 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void TIMER130_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void TIMER131_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void PWM130_IRQHandler                                           (void);
- __HANDLER("Default_Handler") void SERIAL0_IRQHandler                                          (void);
- __HANDLER("Default_Handler") void SERIAL1_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void UARTE130_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void UARTE131_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void PDM130_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void TIMER132_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void TIMER133_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void PWM131_IRQHandler                                           (void);
- __HANDLER("Default_Handler") void SERIAL2_IRQHandler                                          (void);
- __HANDLER("Default_Handler") void SERIAL3_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void UARTE132_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void UARTE133_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void PDM131_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void TIMER134_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void TIMER135_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void PWM132_IRQHandler                                           (void);
- __HANDLER("Default_Handler") void SERIAL4_IRQHandler                                          (void);
- __HANDLER("Default_Handler") void SERIAL5_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void UARTE134_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void UARTE135_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void PDM132_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void TIMER136_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void TIMER137_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void PWM133_IRQHandler                                           (void);
- __HANDLER("Default_Handler") void SERIAL6_IRQHandler                                          (void);
- __HANDLER("Default_Handler") void SERIAL7_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void UARTE136_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void UARTE137_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void PDM133_IRQHandler                                           (void);
 
 /*----------------------------------------------------------------------------
@@ -217,7 +235,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     VPRCLIC_5_IRQHandler,
     VPRCLIC_6_IRQHandler,
     VPRCLIC_7_IRQHandler,
-    0,
+    VPRCLIC_8_IRQHandler,
     0,
     0,
     0,
@@ -241,8 +259,15 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
+    RPU_0_IRQHandler,
+    RPU_1_IRQHandler,
+    RPU_2_IRQHandler,
+    RPU_3_IRQHandler,
+    RPU_EFS_0_IRQHandler,
+    RPU_EFS_1_IRQHandler,
     0,
     0,
+    LMAC_VPR_IRQHandler,
     0,
     0,
     0,
@@ -250,6 +275,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
+    MVDMA_IRQHandler,
     0,
     0,
     0,
@@ -265,6 +291,9 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
+    IPCT_0_IRQHandler,
+    IPCT_1_IRQHandler,
+    IPCT_2_IRQHandler,
     0,
     0,
     0,
@@ -294,21 +323,10 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
+    BELLBOARD_WIFI_0_IRQHandler,
+    BELLBOARD_WIFI_1_IRQHandler,
+    BELLBOARD_WIFI_2_IRQHandler,
+    BELLBOARD_WIFI_3_IRQHandler,
     0,
     0,
     0,
@@ -321,9 +339,9 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     GRTC_1_IRQHandler,
     GRTC_2_IRQHandler,
     GSI_IRQHandler,
-    DISPC_IRQHandler,
-    0,
-    0,
+    DISPC_0_IRQHandler,
+    DISPC_1_IRQHandler,
+    DISPC_2_IRQHandler,
     GPU_IRQHandler,
     0,
     0,
@@ -422,8 +440,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     I3C120_IRQHandler,
     VPR121_IRQHandler,
-    SPIM122_IRQHandler,
-    SPIM123_IRQHandler,
+    0,
+    0,
     QSPI120_IRQHandler,
     CAN120_IRQHandler,
     MVDMA120_IRQHandler,
@@ -439,10 +457,10 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     TIMER121_IRQHandler,
     PWM120_IRQHandler,
     SPIS120_IRQHandler,
-    SPIM120_UARTE120_IRQHandler,
+    UARTE120_IRQHandler,
     SPIM121_IRQHandler,
-    0,
-    0,
+    SPIM122_IRQHandler,
+    SPIM123_IRQHandler,
     0,
     0,
     0,
@@ -630,8 +648,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     TIMER130_IRQHandler,
     TIMER131_IRQHandler,
     PWM130_IRQHandler,
-    SERIAL0_IRQHandler,
-    SERIAL1_IRQHandler,
+    UARTE130_IRQHandler,
+    UARTE131_IRQHandler,
     PDM130_IRQHandler,
     0,
     0,
@@ -646,8 +664,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     TIMER132_IRQHandler,
     TIMER133_IRQHandler,
     PWM131_IRQHandler,
-    SERIAL2_IRQHandler,
-    SERIAL3_IRQHandler,
+    UARTE132_IRQHandler,
+    UARTE133_IRQHandler,
     PDM131_IRQHandler,
     0,
     0,
@@ -662,8 +680,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     TIMER134_IRQHandler,
     TIMER135_IRQHandler,
     PWM132_IRQHandler,
-    SERIAL4_IRQHandler,
-    SERIAL5_IRQHandler,
+    UARTE134_IRQHandler,
+    UARTE135_IRQHandler,
     PDM132_IRQHandler,
     0,
     0,
@@ -678,8 +696,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     TIMER136_IRQHandler,
     TIMER137_IRQHandler,
     PWM133_IRQHandler,
-    SERIAL6_IRQHandler,
-    SERIAL7_IRQHandler,
+    UARTE136_IRQHandler,
+    UARTE137_IRQHandler,
     PDM133_IRQHandler,
     0,
     0,

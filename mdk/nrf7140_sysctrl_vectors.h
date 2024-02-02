@@ -134,7 +134,9 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void GRTC_1_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void GRTC_2_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void GSI_IRQHandler                                              (void);
- __HANDLER("Default_Handler") void DISPC_IRQHandler                                            (void);
+ __HANDLER("Default_Handler") void DISPC_0_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void DISPC_1_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void DISPC_2_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void GPU_IRQHandler                                              (void);
  __HANDLER("Default_Handler") void TBM_IRQHandler                                              (void);
  __HANDLER("Default_Handler") void L2CACHE_IRQHandler                                          (void);
@@ -150,8 +152,6 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void IPCT120_0_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void I3C120_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void VPR121_IRQHandler                                           (void);
- __HANDLER("Default_Handler") void SPIM122_IRQHandler                                          (void);
- __HANDLER("Default_Handler") void SPIM123_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void QSPI120_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void CAN120_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void MVDMA120_IRQHandler                                         (void);
@@ -165,6 +165,8 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void SPIS120_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void SPIM120_UARTE120_IRQHandler                                 (void);
  __HANDLER("Default_Handler") void SPIM121_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void SPIM122_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void SPIM123_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void VPR130_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void IPCT130_0_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void RTC130_IRQHandler                                           (void);
@@ -176,8 +178,9 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void GRCCONF_0_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void GRCCONF_1_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void GRCCONF_2_IRQHandler                                        (void);
+ __HANDLER("Default_Handler") void PCRM_IRQHandler                                             (void);
  __HANDLER("Default_Handler") void RESETHUB_IRQHandler                                         (void);
- __HANDLER("Default_Handler") void CLKMON_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void VREGUSB_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void SAADC_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void COMP_LPCOMP_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void TEMP_IRQHandler                                             (void);
@@ -354,9 +357,9 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     GRTC_1_IRQHandler,
     GRTC_2_IRQHandler,
     GSI_IRQHandler,
-    DISPC_IRQHandler,
-    0,
-    0,
+    DISPC_0_IRQHandler,
+    DISPC_1_IRQHandler,
+    DISPC_2_IRQHandler,
     GPU_IRQHandler,
     0,
     0,
@@ -455,8 +458,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     I3C120_IRQHandler,
     VPR121_IRQHandler,
-    SPIM122_IRQHandler,
-    SPIM123_IRQHandler,
+    0,
+    0,
     QSPI120_IRQHandler,
     CAN120_IRQHandler,
     MVDMA120_IRQHandler,
@@ -474,8 +477,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     SPIS120_IRQHandler,
     SPIM120_UARTE120_IRQHandler,
     SPIM121_IRQHandler,
-    0,
-    0,
+    SPIM122_IRQHandler,
+    SPIM123_IRQHandler,
     0,
     0,
     0,
@@ -565,7 +568,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     GRCCONF_0_IRQHandler,
     GRCCONF_1_IRQHandler,
     GRCCONF_2_IRQHandler,
-    0,
+    PCRM_IRQHandler,
     0,
     0,
     0,
@@ -584,7 +587,6 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    CLKMON_IRQHandler,
     0,
     0,
     0,
@@ -602,6 +604,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
+    VREGUSB_IRQHandler,
     0,
     0,
     0,

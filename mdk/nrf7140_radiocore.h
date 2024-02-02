@@ -60,9 +60,9 @@ typedef enum {
   NonMaskableInt_IRQn                    = -14,      /*!< -14 Non maskable Interrupt, cannot be stopped or preempted           */
   HardFault_IRQn                         = -13,      /*!< -13 Hard Fault, all classes of Fault                                 */
   MemoryManagement_IRQn                  = -12,      /*!< -12 Memory Management, MPU mismatch, including Access Violation and No
-                                                          Match*/                                                                 
+                                                          Match*/
   BusFault_IRQn                          = -11,      /*!< -11 Bus Fault, Pre-Fetch-, Memory Access Fault, other address/memory
-                                                          related Fault*/                                                         
+                                                          related Fault*/
   UsageFault_IRQn                        = -10,      /*!< -10 Usage Fault, i.e. Undef Instruction, Illegal State Transition    */
   SecureFault_IRQn                       = -9,       /*!<  -9 Secure Fault Handler                                             */
   SVCall_IRQn                            = -5,       /*!<  -5 System Service Call via SVC instruction                          */
@@ -72,6 +72,7 @@ typedef enum {
 /* ============================================== Processor Specific Interrupts ============================================== */
   SPU000_IRQn                            = 0,        /*!< 0 SPU000                                                             */
   MPC_IRQn                               = 1,        /*!< 1 MPC                                                                */
+  CPUC_IRQn                              = 2,        /*!< 2 CPUC                                                               */
   MVDMA_IRQn                             = 3,        /*!< 3 MVDMA                                                              */
   SPU010_IRQn                            = 16,       /*!< 16 SPU010                                                            */
   WDT010_IRQn                            = 19,       /*!< 19 WDT010                                                            */
@@ -79,7 +80,7 @@ typedef enum {
   SPU020_IRQn                            = 32,       /*!< 32 SPU020                                                            */
   EGU020_IRQn                            = 37,       /*!< 37 EGU020                                                            */
   AAR020_CCM020_IRQn                     = 38,       /*!< 38 AAR020_CCM020                                                     */
-  ECB020_IRQn                            = 39,       /*!< 39 ECB020                                                            */
+  GPIOTE_0_IRQn                          = 39,       /*!< 39 GPIOTE_0                                                          */
   TIMER020_IRQn                          = 40,       /*!< 40 TIMER020                                                          */
   TIMER021_IRQn                          = 41,       /*!< 41 TIMER021                                                          */
   TIMER022_IRQn                          = 42,       /*!< 42 TIMER022                                                          */
@@ -113,7 +114,9 @@ typedef enum {
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
   GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
   GSI_IRQn                               = 111,      /*!< 111 GSI                                                              */
-  DISPC_IRQn                             = 112,      /*!< 112 DISPC                                                            */
+  DISPC_0_IRQn                           = 112,      /*!< 112 DISPC_0                                                          */
+  DISPC_1_IRQn                           = 113,      /*!< 113 DISPC_1                                                          */
+  DISPC_2_IRQn                           = 114,      /*!< 114 DISPC_2                                                          */
   GPU_IRQn                               = 115,      /*!< 115 GPU                                                              */
   TBM_IRQn                               = 127,      /*!< 127 TBM                                                              */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
@@ -125,8 +128,6 @@ typedef enum {
   IPCT120_0_IRQn                         = 209,      /*!< 209 IPCT120_0                                                        */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
-  SPIM122_IRQn                           = 213,      /*!< 213 SPIM122                                                          */
-  SPIM123_IRQn                           = 214,      /*!< 214 SPIM123                                                          */
   QSPI120_IRQn                           = 215,      /*!< 215 QSPI120                                                          */
   CAN120_IRQn                            = 216,      /*!< 216 CAN120                                                           */
   MVDMA120_IRQn                          = 217,      /*!< 217 MVDMA120                                                         */
@@ -140,6 +141,8 @@ typedef enum {
   SPIS120_IRQn                           = 229,      /*!< 229 SPIS120                                                          */
   SPIM120_UARTE120_IRQn                  = 230,      /*!< 230 SPIM120_UARTE120                                                 */
   SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
+  SPIM122_IRQn                           = 232,      /*!< 232 SPIM122                                                          */
+  SPIM123_IRQn                           = 233,      /*!< 233 SPIM123                                                          */
   VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
   IPCT130_0_IRQn                         = 289,      /*!< 289 IPCT130_0                                                        */
   RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
@@ -200,7 +203,7 @@ typedef enum {
 #define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
 #define __SAUREGION_PRESENT            1             /*!< SAU present                                                          */
-#define __NUM_SAUREGIONS               4             /*!< Number of regions                                                    */
+#define __NUM_SAUREGIONS               8             /*!< Number of regions                                                    */
 
 #include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
 #include "system_nrf.h"                              /*!< nrf7140_radiocore System Library                                     */
@@ -239,18 +242,18 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_RADIOCORE_ICACHEDATA_S_BASE   0x03F00000UL
+#define NRF_RADIOCORE_ICACHEINFO_S_BASE   0x03F10000UL
 #define NRF_RADIOCORE_UICR_NS_BASE        0x0FFFA000UL
-#define NRF_RADIOCORE_ICACHEDATA_S_BASE   0x13F00000UL
-#define NRF_RADIOCORE_ICACHEINFO_S_BASE   0x13F10000UL
-#define NRF_RADIOCORE_DCACHEDATA_S_BASE   0x33F00000UL
-#define NRF_RADIOCORE_DCACHEINFO_S_BASE   0x33F10000UL
+#define NRF_RADIOCORE_DCACHEDATA_S_BASE   0x23F00000UL
+#define NRF_RADIOCORE_DCACHEINFO_S_BASE   0x23F10000UL
 #define NRF_RADIOCORE_ETM_NS_BASE         0xE0041000UL
 #define NRF_RADIOCORE_CTI_S_BASE          0xE0042000UL
-#define NRF_RADIOCORE_CPUC_S_BASE         0xE0080000UL
 #define NRF_RADIOCORE_ICACHE_S_BASE       0xE0082000UL
 #define NRF_RADIOCORE_DCACHE_S_BASE       0xE0083000UL
 #define NRF_RADIOCORE_SPU000_S_BASE       0x53000000UL
 #define NRF_RADIOCORE_MPC_S_BASE          0x53001000UL
+#define NRF_RADIOCORE_CPUC_S_BASE         0xE0080000UL
 #define NRF_RADIOCORE_MVDMA_NS_BASE       0x43003000UL
 #define NRF_RADIOCORE_MVDMA_S_BASE        0x53003000UL
 #define NRF_RADIOCORE_RAMC000_NS_BASE     0x43004000UL
@@ -283,8 +286,8 @@ typedef enum {
 #define NRF_RADIOCORE_CCM020_NS_BASE      0x43026000UL
 #define NRF_RADIOCORE_AAR020_S_BASE       0x53026000UL
 #define NRF_RADIOCORE_CCM020_S_BASE       0x53026000UL
-#define NRF_RADIOCORE_ECB020_NS_BASE      0x43027000UL
-#define NRF_RADIOCORE_ECB020_S_BASE       0x53027000UL
+#define NRF_RADIOCORE_GPIOTE_NS_BASE      0x43027000UL
+#define NRF_RADIOCORE_GPIOTE_S_BASE       0x53027000UL
 #define NRF_RADIOCORE_TIMER020_NS_BASE    0x43028000UL
 #define NRF_RADIOCORE_TIMER020_S_BASE     0x53028000UL
 #define NRF_RADIOCORE_TIMER021_NS_BASE    0x43029000UL
@@ -301,7 +304,7 @@ typedef enum {
 #define NRF_RADIOCORE_PPIB030_S_BASE      0x53031000UL
 #define NRF_RADIOCORE_DPPIC030_NS_BASE    0x43032000UL
 #define NRF_RADIOCORE_DPPIC030_S_BASE     0x53032000UL
-#define NRF_RADIOCORE_RADIOACC_NS_BASE    0x53033000UL
+#define NRF_RADIOCORE_RADIOACC_NS_BASE    0x43033000UL
 #define NRF_RADIOCORE_RADIOACC_S_BASE     0x53033000UL
 #define NRF_RADIOCORE_VPR_NS_BASE         0x43034000UL
 #define NRF_RADIOCORE_VPR_S_BASE          0x53034000UL
@@ -338,18 +341,18 @@ typedef enum {
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_RADIOCORE_UICR_NS             ((NRF_UICR_Type*)                     NRF_RADIOCORE_UICR_NS_BASE)
 #define NRF_RADIOCORE_ICACHEDATA_S        ((NRF_ICACHEDATA_Type*)               NRF_RADIOCORE_ICACHEDATA_S_BASE)
 #define NRF_RADIOCORE_ICACHEINFO_S        ((NRF_ICACHEINFO_Type*)               NRF_RADIOCORE_ICACHEINFO_S_BASE)
+#define NRF_RADIOCORE_UICR_NS             ((NRF_UICR_Type*)                     NRF_RADIOCORE_UICR_NS_BASE)
 #define NRF_RADIOCORE_DCACHEDATA_S        ((NRF_DCACHEDATA_Type*)               NRF_RADIOCORE_DCACHEDATA_S_BASE)
 #define NRF_RADIOCORE_DCACHEINFO_S        ((NRF_DCACHEINFO_Type*)               NRF_RADIOCORE_DCACHEINFO_S_BASE)
 #define NRF_RADIOCORE_ETM_NS              ((NRF_ETM_Type*)                      NRF_RADIOCORE_ETM_NS_BASE)
 #define NRF_RADIOCORE_CTI_S               ((NRF_CTI_Type*)                      NRF_RADIOCORE_CTI_S_BASE)
-#define NRF_RADIOCORE_CPUC_S              ((NRF_CM33SS_Type*)                   NRF_RADIOCORE_CPUC_S_BASE)
 #define NRF_RADIOCORE_ICACHE_S            ((NRF_CACHE_Type*)                    NRF_RADIOCORE_ICACHE_S_BASE)
 #define NRF_RADIOCORE_DCACHE_S            ((NRF_CACHE_Type*)                    NRF_RADIOCORE_DCACHE_S_BASE)
 #define NRF_RADIOCORE_SPU000_S            ((NRF_SPU_Type*)                      NRF_RADIOCORE_SPU000_S_BASE)
 #define NRF_RADIOCORE_MPC_S               ((NRF_MPC_Type*)                      NRF_RADIOCORE_MPC_S_BASE)
+#define NRF_RADIOCORE_CPUC_S              ((NRF_CM33SS_Type*)                   NRF_RADIOCORE_CPUC_S_BASE)
 #define NRF_RADIOCORE_MVDMA_NS            ((NRF_MVDMA_Type*)                    NRF_RADIOCORE_MVDMA_NS_BASE)
 #define NRF_RADIOCORE_MVDMA_S             ((NRF_MVDMA_Type*)                    NRF_RADIOCORE_MVDMA_S_BASE)
 #define NRF_RADIOCORE_RAMC000_NS          ((NRF_RAMC_Type*)                     NRF_RADIOCORE_RAMC000_NS_BASE)
@@ -382,8 +385,8 @@ typedef enum {
 #define NRF_RADIOCORE_CCM020_NS           ((NRF_CCM_Type*)                      NRF_RADIOCORE_CCM020_NS_BASE)
 #define NRF_RADIOCORE_AAR020_S            ((NRF_AAR_Type*)                      NRF_RADIOCORE_AAR020_S_BASE)
 #define NRF_RADIOCORE_CCM020_S            ((NRF_CCM_Type*)                      NRF_RADIOCORE_CCM020_S_BASE)
-#define NRF_RADIOCORE_ECB020_NS           ((NRF_ECB_Type*)                      NRF_RADIOCORE_ECB020_NS_BASE)
-#define NRF_RADIOCORE_ECB020_S            ((NRF_ECB_Type*)                      NRF_RADIOCORE_ECB020_S_BASE)
+#define NRF_RADIOCORE_GPIOTE_NS           ((NRF_GPIOTE_Type*)                   NRF_RADIOCORE_GPIOTE_NS_BASE)
+#define NRF_RADIOCORE_GPIOTE_S            ((NRF_GPIOTE_Type*)                   NRF_RADIOCORE_GPIOTE_S_BASE)
 #define NRF_RADIOCORE_TIMER020_NS         ((NRF_TIMER_Type*)                    NRF_RADIOCORE_TIMER020_NS_BASE)
 #define NRF_RADIOCORE_TIMER020_S          ((NRF_TIMER_Type*)                    NRF_RADIOCORE_TIMER020_S_BASE)
 #define NRF_RADIOCORE_TIMER021_NS         ((NRF_TIMER_Type*)                    NRF_RADIOCORE_TIMER021_NS_BASE)
@@ -450,7 +453,7 @@ typedef enum {
   #define NRF_RADIOCORE_EGU020                    NRF_RADIOCORE_EGU020_NS
   #define NRF_RADIOCORE_AAR020                    NRF_RADIOCORE_AAR020_NS
   #define NRF_RADIOCORE_CCM020                    NRF_RADIOCORE_CCM020_NS
-  #define NRF_RADIOCORE_ECB020                    NRF_RADIOCORE_ECB020_NS
+  #define NRF_RADIOCORE_GPIOTE                    NRF_RADIOCORE_GPIOTE_NS
   #define NRF_RADIOCORE_TIMER020                  NRF_RADIOCORE_TIMER020_NS
   #define NRF_RADIOCORE_TIMER021                  NRF_RADIOCORE_TIMER021_NS
   #define NRF_RADIOCORE_TIMER022                  NRF_RADIOCORE_TIMER022_NS
@@ -477,18 +480,18 @@ typedef enum {
   #define NRF_RADIOCORE_SWI7                      NRF_RADIOCORE_SWI7_NS
   #define NRF_RADIOCORE_BELLBOARD                 NRF_RADIOCORE_BELLBOARD_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
-  #define NRF_RADIOCORE_UICR                      NRF_RADIOCORE_UICR_NS
   #define NRF_RADIOCORE_ICACHEDATA                NRF_RADIOCORE_ICACHEDATA_S
   #define NRF_RADIOCORE_ICACHEINFO                NRF_RADIOCORE_ICACHEINFO_S
+  #define NRF_RADIOCORE_UICR                      NRF_RADIOCORE_UICR_NS
   #define NRF_RADIOCORE_DCACHEDATA                NRF_RADIOCORE_DCACHEDATA_S
   #define NRF_RADIOCORE_DCACHEINFO                NRF_RADIOCORE_DCACHEINFO_S
   #define NRF_RADIOCORE_ETM                       NRF_RADIOCORE_ETM_NS
   #define NRF_RADIOCORE_CTI                       NRF_RADIOCORE_CTI_S
-  #define NRF_RADIOCORE_CPUC                      NRF_RADIOCORE_CPUC_S
   #define NRF_RADIOCORE_ICACHE                    NRF_RADIOCORE_ICACHE_S
   #define NRF_RADIOCORE_DCACHE                    NRF_RADIOCORE_DCACHE_S
   #define NRF_RADIOCORE_SPU000                    NRF_RADIOCORE_SPU000_S
   #define NRF_RADIOCORE_MPC                       NRF_RADIOCORE_MPC_S
+  #define NRF_RADIOCORE_CPUC                      NRF_RADIOCORE_CPUC_S
   #define NRF_RADIOCORE_MVDMA                     NRF_RADIOCORE_MVDMA_S
   #define NRF_RADIOCORE_RAMC000                   NRF_RADIOCORE_RAMC000_S
   #define NRF_RADIOCORE_PCGCS000                  NRF_RADIOCORE_PCGCS000_S
@@ -511,7 +514,7 @@ typedef enum {
   #define NRF_RADIOCORE_EGU020                    NRF_RADIOCORE_EGU020_S
   #define NRF_RADIOCORE_AAR020                    NRF_RADIOCORE_AAR020_S
   #define NRF_RADIOCORE_CCM020                    NRF_RADIOCORE_CCM020_S
-  #define NRF_RADIOCORE_ECB020                    NRF_RADIOCORE_ECB020_S
+  #define NRF_RADIOCORE_GPIOTE                    NRF_RADIOCORE_GPIOTE_S
   #define NRF_RADIOCORE_TIMER020                  NRF_RADIOCORE_TIMER020_S
   #define NRF_RADIOCORE_TIMER021                  NRF_RADIOCORE_TIMER021_S
   #define NRF_RADIOCORE_TIMER022                  NRF_RADIOCORE_TIMER022_S
@@ -550,18 +553,18 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_RADIOCORE                                 /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
-  #define NRF_UICR                                NRF_RADIOCORE_UICR
   #define NRF_ICACHEDATA                          NRF_RADIOCORE_ICACHEDATA
   #define NRF_ICACHEINFO                          NRF_RADIOCORE_ICACHEINFO
+  #define NRF_UICR                                NRF_RADIOCORE_UICR
   #define NRF_DCACHEDATA                          NRF_RADIOCORE_DCACHEDATA
   #define NRF_DCACHEINFO                          NRF_RADIOCORE_DCACHEINFO
   #define NRF_ETM                                 NRF_RADIOCORE_ETM
   #define NRF_CTI                                 NRF_RADIOCORE_CTI
-  #define NRF_CPUC                                NRF_RADIOCORE_CPUC
   #define NRF_ICACHE                              NRF_RADIOCORE_ICACHE
   #define NRF_DCACHE                              NRF_RADIOCORE_DCACHE
   #define NRF_SPU000                              NRF_RADIOCORE_SPU000
   #define NRF_MPC                                 NRF_RADIOCORE_MPC
+  #define NRF_CPUC                                NRF_RADIOCORE_CPUC
   #define NRF_MVDMA                               NRF_RADIOCORE_MVDMA
   #define NRF_RAMC000                             NRF_RADIOCORE_RAMC000
   #define NRF_PCGCS000                            NRF_RADIOCORE_PCGCS000
@@ -584,7 +587,7 @@ typedef enum {
   #define NRF_EGU020                              NRF_RADIOCORE_EGU020
   #define NRF_AAR020                              NRF_RADIOCORE_AAR020
   #define NRF_CCM020                              NRF_RADIOCORE_CCM020
-  #define NRF_ECB020                              NRF_RADIOCORE_ECB020
+  #define NRF_GPIOTE                              NRF_RADIOCORE_GPIOTE
   #define NRF_TIMER020                            NRF_RADIOCORE_TIMER020
   #define NRF_TIMER021                            NRF_RADIOCORE_TIMER021
   #define NRF_TIMER022                            NRF_RADIOCORE_TIMER022

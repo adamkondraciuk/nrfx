@@ -50,10 +50,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #include "nrf7140_application_peripherals.h"
 #elif defined(NRF_BBPR)
   #include "nrf7140_bbpr_peripherals.h"
+#elif defined(NRF_DPPR)
+  #include "nrf7140_dppr_peripherals.h"
 #elif defined(NRF_FLPR)
   #include "nrf7140_flpr_peripherals.h"
 #elif defined(NRF_LMAC)
   #include "nrf7140_lmac_peripherals.h"
+#elif defined(NRF_ML)
+  #include "nrf7140_ml_peripherals.h"
 #elif defined(NRF_PPR)
   #include "nrf7140_ppr_peripherals.h"
 #elif defined(NRF_RADIOCORE)

@@ -34,6 +34,8 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #define __SYSTEM_CLOCK_MHZ (1000000UL)
 #if defined(NRF_PPR)
     #define __SYSTEM_CLOCK_DEFAULT (16ul * __SYSTEM_CLOCK_MHZ)
+#elif defined(NRF_RADIOCORE)
+    #define __SYSTEM_CLOCK_DEFAULT (256ul * __SYSTEM_CLOCK_MHZ)
 #else
     #define __SYSTEM_CLOCK_DEFAULT (320ul * __SYSTEM_CLOCK_MHZ)
 #endif
@@ -72,14 +74,14 @@ void SystemCoreClockUpdate(void)
             if ((NRF_HSFLL->CLOCKSTATUS & HSFLL_CLOCKSTATUS_MODE_Msk) != HSFLL_CLOCKSTATUS_MODE_ClosedLoop)
             {
                 /* Start HSFLL frequency measurement */
-                NRF_HSFLL->EVENTS_FREQMDONE = 0;
-                NRF_HSFLL->TASKS_FREQMEAS = 1;
-                for (volatile int i = 0; i < 200 && NRF_HSFLL->EVENTS_FREQMDONE != 1; i++)
+                NRF_HSFLL->EVENTS_FREQMDONE = 0ul;
+                NRF_HSFLL->TASKS_FREQMEAS = 1ul;
+                for (volatile uint32_t i = 0ul; i < 200ul && NRF_HSFLL->EVENTS_FREQMDONE != 1ul; i++)
                 {
                     /* Wait until frequency measurement is done */
                 }
 
-                if (NRF_HSFLL->EVENTS_FREQMDONE != 1)
+                if (NRF_HSFLL->EVENTS_FREQMDONE != 1ul)
                 {
                     /* Clock measurement never completed, return default CPU clock speed */
                     SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
@@ -88,7 +90,7 @@ void SystemCoreClockUpdate(void)
             }
 
             /* Frequency measurement result is a multiple of 16MHz */
-            SystemCoreClock = NRF_HSFLL->FREQM.MEAS * 16 * __SYSTEM_CLOCK_MHZ;
+            SystemCoreClock = NRF_HSFLL->FREQM.MEAS * 16ul * __SYSTEM_CLOCK_MHZ;
         #else
             SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
         #endif
@@ -102,7 +104,7 @@ void SystemInit(void)
             #if defined(__FPU_PRESENT) && __FPU_PRESENT
                 /* Allow Non-Secure code to run FPU instructions.
                 * If only the secure code should control FPU power state these registers should be configured accordingly in the secure application code. */
-                SCB->NSACR |= (3UL << 10);
+                SCB->NSACR |= (3UL << 10ul);
             #endif
 
             #ifndef NRF_SKIP_SAU_CONFIGURATION   
@@ -113,8 +115,8 @@ void SystemInit(void)
         /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
         * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit
         * operations are not used in your code. */
-        #if (__FPU_USED == 1)
-            SCB->CPACR |= (3UL << 20) | (3UL << 22);
+        #if (__FPU_USED == 1ul)
+            SCB->CPACR |= (3UL << 20ul) | (3UL << 22ul);
             __DSB();
             __ISB();
         #endif

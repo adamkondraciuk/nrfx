@@ -141,8 +141,8 @@ _vectors:
   ISR_RESERVED                           /* Reserved */
 
 /* External Interrupts */
-  ISR_HANDLER   SPU000_IRQHandler
-  ISR_HANDLER   MPC_IRQHandler
+  ISR_HANDLER   VPRCLIC_0_IRQHandler
+  ISR_HANDLER   VPRCLIC_1_IRQHandler
   ISR_HANDLER   VPRCLIC_2_IRQHandler
   ISR_HANDLER   MVDMA_IRQHandler
   ISR_HANDLER   VPRCLIC_4_IRQHandler
@@ -160,8 +160,8 @@ _vectors:
   ISR_HANDLER   VPRTIM_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_HANDLER   WDT010_IRQHandler
-  ISR_HANDLER   WDT011_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
@@ -179,13 +179,13 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   EGU020_IRQHandler
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_HANDLER   AAR020_CCM020_IRQHandler
+  ISR_HANDLER   GPIOTE_IRQHandler
   ISR_HANDLER   TIMER020_IRQHandler
   ISR_HANDLER   TIMER021_IRQHandler
   ISR_HANDLER   TIMER022_IRQHandler
   ISR_HANDLER   RTC_IRQHandler
-  ISR_HANDLER   RADIO_0_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   RADIO_1_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
@@ -229,14 +229,14 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_HANDLER   SWI0_IRQHandler
-  ISR_HANDLER   SWI1_IRQHandler
-  ISR_HANDLER   SWI2_IRQHandler
-  ISR_HANDLER   SWI3_IRQHandler
-  ISR_HANDLER   SWI4_IRQHandler
-  ISR_HANDLER   SWI5_IRQHandler
-  ISR_HANDLER   SWI6_IRQHandler
-  ISR_HANDLER   SWI7_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
@@ -249,13 +249,13 @@ _vectors:
   ISR_HANDLER   GPIOTE130_1_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_HANDLER   GRTC_0_IRQHandler
+  ISR_HANDLER   GRTC_3_IRQHandler
   ISR_HANDLER   GRTC_1_IRQHandler
   ISR_HANDLER   GRTC_2_IRQHandler
   ISR_HANDLER   GSI_IRQHandler
-  ISR_HANDLER   DISPC_IRQHandler
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_HANDLER   DISPC_0_IRQHandler
+  ISR_HANDLER   DISPC_1_IRQHandler
+  ISR_HANDLER   DISPC_2_IRQHandler
   ISR_HANDLER   GPU_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
@@ -354,8 +354,8 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   I3C120_IRQHandler
   ISR_HANDLER   VPR121_IRQHandler
-  ISR_HANDLER   SPIM122_IRQHandler
-  ISR_HANDLER   SPIM123_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   QSPI120_IRQHandler
   ISR_HANDLER   CAN120_IRQHandler
   ISR_HANDLER   MVDMA120_IRQHandler
@@ -373,8 +373,8 @@ _vectors:
   ISR_HANDLER   SPIS120_IRQHandler
   ISR_HANDLER   SPIM120_UARTE120_IRQHandler
   ISR_HANDLER   SPIM121_IRQHandler
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_HANDLER   SPIM122_IRQHandler
+  ISR_HANDLER   SPIM123_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
