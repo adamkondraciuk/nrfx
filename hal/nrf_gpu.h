@@ -21,7 +21,6 @@ typedef enum
 {
     NRF_GPU_EVENT_CORE      = offsetof(NRF_GPU_Type, EVENTS_CORE),     /**< Event indicating that interrupt triggered at GPU core. */
     NRF_GPU_EVENT_SYS_ERROR = offsetof(NRF_GPU_Type, EVENTS_SYSERROR), /**< Event indicating system error */
-    NRF_GPU_EVENT_STARTED   = offsetof(NRF_GPU_Type, EVENTS_STARTED),  /**< Event indicating that the display controller has been enabled. */
     NRF_GPU_EVENT_FREEZE    = offsetof(NRF_GPU_Type, EVENTS_FREEZE),   /**< Event indicating that the GPU has hit a breakpoint and all bus transactions are complete. */
 } nrf_gpu_event_t;
 
@@ -30,7 +29,6 @@ typedef enum
 {
     NRF_GPU_INT_CORE_MASK      = GPU_INTEN_CORE_Msk,     /**< GPU interrupt for CORE event. */
     NRF_GPU_INT_SYS_ERROR_MASK = GPU_INTEN_SYSERROR_Msk, /**< GPU interrupt for SYSERROR event. */
-    NRF_GPU_INT_STARTED_MASK   = GPU_INTEN_STARTED_Msk,  /**< GPU interrupt for STARTED event. */
     NRF_GPU_INT_FREEZE_MASK    = GPU_INTEN_FREEZE_Msk,   /**< GPU interrupt for FREEZE event. */
 } nrf_gpu_int_mask_t;
 

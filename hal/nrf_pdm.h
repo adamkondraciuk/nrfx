@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-#ifndef NRF_PDM0
+#if !defined(NRF_PDM0) && defined(NRF_PDM)
 #define NRF_PDM0 NRF_PDM
 #endif
 

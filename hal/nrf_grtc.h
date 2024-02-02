@@ -202,6 +202,8 @@ typedef enum
 #if NRF_GRTC_SYSCOUNTER_CC_COUNT > 16
     NRF_GRTC_TASK_CAPTURE_16 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[16]), /**< Capture the counter value on channel 16. */
     NRF_GRTC_TASK_CAPTURE_17 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[17]), /**< Capture the counter value on channel 17. */
+#endif
+#if NRF_GRTC_SYSCOUNTER_CC_COUNT > 18
     NRF_GRTC_TASK_CAPTURE_18 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[18]), /**< Capture the counter value on channel 18. */
     NRF_GRTC_TASK_CAPTURE_19 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[19]), /**< Capture the counter value on channel 19. */
     NRF_GRTC_TASK_CAPTURE_20 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[20]), /**< Capture the counter value on channel 20. */
@@ -235,6 +237,8 @@ typedef enum
 #if NRF_GRTC_SYSCOUNTER_CC_COUNT > 16
     NRF_GRTC_EVENT_COMPARE_16      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[16]),     /**< Compare 16 event. */
     NRF_GRTC_EVENT_COMPARE_17      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[17]),     /**< Compare 17 event. */
+#endif
+#if NRF_GRTC_SYSCOUNTER_CC_COUNT > 18
     NRF_GRTC_EVENT_COMPARE_18      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[18]),     /**< Compare 18 event. */
     NRF_GRTC_EVENT_COMPARE_19      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[19]),     /**< Compare 19 event. */
     NRF_GRTC_EVENT_COMPARE_20      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[20]),     /**< Compare 20 event. */
@@ -291,6 +295,8 @@ typedef enum
 #if NRF_GRTC_SYSCOUNTER_CC_COUNT > 16
     NRF_GRTC_INT_COMPARE16_MASK       = GRTC_INTENSET0_COMPARE16_Msk,       /**< GRTC interrupt from compare event on channel 16. */
     NRF_GRTC_INT_COMPARE17_MASK       = GRTC_INTENSET0_COMPARE17_Msk,       /**< GRTC interrupt from compare event on channel 17. */
+#endif
+#if NRF_GRTC_SYSCOUNTER_CC_COUNT > 18
     NRF_GRTC_INT_COMPARE18_MASK       = GRTC_INTENSET0_COMPARE18_Msk,       /**< GRTC interrupt from compare event on channel 18. */
     NRF_GRTC_INT_COMPARE19_MASK       = GRTC_INTENSET0_COMPARE19_Msk,       /**< GRTC interrupt from compare event on channel 19. */
     NRF_GRTC_INT_COMPARE20_MASK       = GRTC_INTENSET0_COMPARE20_Msk,       /**< GRTC interrupt from compare event on channel 20. */

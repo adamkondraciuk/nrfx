@@ -22,16 +22,14 @@ typedef enum
     NRF_DISPC_EVENT_CORE       = offsetof(NRF_DISPC_Type, EVENTS_CORE),      /**< Event indicating that interrupt triggered at DISPC core. */
     NRF_DISPC_EVENT_UNDERRUN   = offsetof(NRF_DISPC_Type, EVENTS_UNDERRUN),  /**< Event indicating that underrun triggered in the DISPC core FIFO */
     NRF_DISPC_EVENT_LOW_BUFFER = offsetof(NRF_DISPC_Type, EVENTS_LOWBUFFER), /**< Event indicating a low level condition in the DISPC core FIFO */
-    NRF_DISPC_EVENT_STARTED    = offsetof(NRF_DISPC_Type, EVENTS_STARTED),   /**< Event indicating that the display controller has been enabled. */
 } nrf_dispc_event_t;
 
 /** @brief DISPC interrupts. */
 typedef enum
 {
-    NRF_DISPC_INT_CORE_MASK       = DISPC_INTEN_CORE_Msk,      /**< DISPC interrupt for CORE event. */
-    NRF_DISPC_INT_UNDERRUN_MASK   = DISPC_INTEN_UNDERRUN_Msk,  /**< DISPC interrupt for UNDERRUN event. */
-    NRF_DISPC_INT_LOW_BUFFER_MASK = DISPC_INTEN_LOWBUFFER_Msk, /**< DISPC interrupt for LOWBUFFER event. */
-    NRF_DISPC_INT_STARTED_MASK    = DISPC_INTEN_STARTED_Msk,   /**< DISPC interrupt for STARTED event. */
+    NRF_DISPC_INT_CORE_MASK       = DISPC_INTEN0_CORE_Msk,      /**< DISPC interrupt for CORE event. */
+    NRF_DISPC_INT_UNDERRUN_MASK   = DISPC_INTEN0_UNDERRUN_Msk,  /**< DISPC interrupt for UNDERRUN event. */
+    NRF_DISPC_INT_LOW_BUFFER_MASK = DISPC_INTEN0_LOWBUFFER_Msk, /**< DISPC interrupt for LOWBUFFER event. */
 } nrf_dispc_int_mask_t;
 
 /**
@@ -68,32 +66,40 @@ NRF_STATIC_INLINE uint32_t nrf_dispc_event_address_get(NRF_DISPC_Type const * p_
 /**
  * @brief Function for enabling specified interrupts.
  *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupts to be enabled.
- *                  Use @ref nrf_dispc_int_mask_t values for bit masking.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] group_idx Index of interrupt group to be enabled.
+ * @param[in] mask      Mask of interrupts to be enabled.
+ *                      Use @ref nrf_dispc_int_mask_t values for bit masking.
  */
-NRF_STATIC_INLINE void nrf_dispc_int_enable(NRF_DISPC_Type * p_reg, uint32_t mask);
+NRF_STATIC_INLINE void nrf_dispc_int_enable(NRF_DISPC_Type * p_reg,
+                                            uint8_t          group_idx,
+                                            uint32_t         mask);
 
 /**
  * @brief Function for disabling specified interrupts.
  *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupts to be disabled.
- *                  Use @ref nrf_dispc_int_mask_t values for bit masking.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] group_idx Index of interrupt group to be disabled.
+ * @param[in] mask      Mask of interrupts to be disabled.
+ *                      Use @ref nrf_dispc_int_mask_t values for bit masking.
  */
-NRF_STATIC_INLINE void nrf_dispc_int_disable(NRF_DISPC_Type * p_reg, uint32_t mask);
+NRF_STATIC_INLINE void nrf_dispc_int_disable(NRF_DISPC_Type * p_reg,
+                                             uint8_t          group_idx,
+                                             uint32_t         mask);
 
 /**
  * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupts to be checked.
- *                  Use @ref nrf_dispc_int_mask_t values for bit masking.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] group_idx Index of interrupt group to be checked.
+ * @param[in] mask      Mask of interrupts to be checked.
+ *                      Use @ref nrf_dispc_int_mask_t values for bit masking.
  *
  * @return true  requested interrupts are enabled.
  * @return false requested interrupts are disabled.
  */
 NRF_STATIC_INLINE bool nrf_dispc_int_enable_check(NRF_DISPC_Type const * p_reg,
+                                                  uint8_t                group_idx,
                                                   uint32_t               mask);
 
 /**
@@ -141,20 +147,64 @@ NRF_STATIC_INLINE uint32_t nrf_dispc_event_address_get(NRF_DISPC_Type const * p_
     return nrf_task_event_address_get(p_reg, event);
 }
 
-NRF_STATIC_INLINE void nrf_dispc_int_enable(NRF_DISPC_Type * p_reg, uint32_t mask)
+NRF_STATIC_INLINE void nrf_dispc_int_enable(NRF_DISPC_Type * p_reg,
+                                            uint8_t          group_idx,
+                                            uint32_t         mask)
 {
-    p_reg->INTENSET = mask;
+    switch (group_idx)
+    {
+        case 0:
+            p_reg->INTENSET0 |= mask;
+            break;
+        case 1:
+            p_reg->INTENSET1 |= mask;
+            break;
+        case 2:
+            p_reg->INTENSET2 |= mask;
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
 }
 
-NRF_STATIC_INLINE void nrf_dispc_int_disable(NRF_DISPC_Type * p_reg, uint32_t mask)
+NRF_STATIC_INLINE void nrf_dispc_int_disable(NRF_DISPC_Type * p_reg,
+                                             uint8_t          group_idx,
+                                             uint32_t         mask)
 {
-    p_reg->INTENCLR = mask;
+    switch (group_idx)
+    {
+        case 0:
+            p_reg->INTENCLR0 |= mask;
+            break;
+        case 1:
+            p_reg->INTENCLR1 |= mask;
+            break;
+        case 2:
+            p_reg->INTENCLR2 |= mask;
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
 }
 
 NRF_STATIC_INLINE bool nrf_dispc_int_enable_check(NRF_DISPC_Type const * p_reg,
+                                                  uint8_t                group_idx,
                                                   uint32_t               mask)
 {
-    return p_reg->INTENSET & mask;
+    switch (group_idx)
+    {
+        case 0:
+            return p_reg->INTENSET0 & mask;
+        case 1:
+            return p_reg->INTENSET1 & mask;
+        case 2:
+            return p_reg->INTENSET2 & mask;
+        default:
+            NRFX_ASSERT(false);
+            return 0;
+    }
 }
 
 NRF_STATIC_INLINE void nrf_dispc_enable(NRF_DISPC_Type * p_reg)
