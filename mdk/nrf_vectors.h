@@ -188,6 +188,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_BBPR)
         #include "nrf54h20_enga_bbpr_vectors.h"
     #endif
+#elif defined(NRF54L15_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf54l15_application_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54l15_flpr_vectors.h"
+    #endif
 #elif defined(NRF54L15_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
         #include "nrf54l15_enga_application_vectors.h"

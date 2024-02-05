@@ -301,6 +301,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf54h20_enga.h"
     #endif
 
+#elif defined (NRF54L15_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf54l15.h"
+    #endif
+
 #elif defined (NRF54L15_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf54l15_enga.h"
