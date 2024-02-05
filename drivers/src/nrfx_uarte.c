@@ -1173,14 +1173,7 @@ static bool rx_flushed_handler(NRF_UARTE_Type * p_uarte, uarte_control_block_t *
         memcpy(p_cb->rx.curr.p_buffer, p_cb->rx.flush.p_buffer, p_cb->rx.flush.length);
         p_cb->rx.off = p_cb->rx.flush.length;
         p_cb->rx.flush.length = 0;
-        if (nrfy_uarte_int_enable_check(p_uarte, NRF_UARTE_INT_RXDRDY_MASK) && p_cb->handler)
-        {
-                user_handler(p_cb, NRFX_UARTE_EVT_RX_BYTE);
-        }
-        else
-        {
-            NRFX_ATOMIC_FETCH_OR(&p_cb->flags, UARTE_FLAG_RX_FROM_FLUSH);
-        }
+        NRFX_ATOMIC_FETCH_OR(&p_cb->flags, UARTE_FLAG_RX_FROM_FLUSH);
     }
 
     return true;
@@ -1226,6 +1219,13 @@ nrfx_err_t nrfx_uarte_rx_enable(nrfx_uarte_t const * p_instance, uint32_t flags)
     {
         release_rx(p_cb);
         return NRFX_ERROR_NO_MEM;
+    }
+
+    if (nrfy_uarte_int_enable_check(p_uarte, NRF_UARTE_INT_RXDRDY_MASK) && p_cb->handler &&
+        (p_cb->flags & UARTE_FLAG_RX_FROM_FLUSH))
+    {
+        NRFX_ATOMIC_FETCH_AND(&p_cb->flags, ~UARTE_FLAG_RX_FROM_FLUSH);
+        user_handler(p_cb, NRFX_UARTE_EVT_RX_BYTE);
     }
 
     /* Check if instance is still enabled. It might get disabled at some point. */
