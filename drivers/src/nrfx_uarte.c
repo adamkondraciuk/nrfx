@@ -1125,6 +1125,7 @@ static void on_rx_disabled(NRF_UARTE_Type        * p_uarte,
                            uarte_control_block_t * p_cb,
                            size_t                  flush_cnt)
 {
+    nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_RXDRDY);
     nrfy_uarte_shorts_disable(p_uarte, NRF_UARTE_SHORT_ENDRX_STARTRX);
     nrfy_uarte_int_disable(p_uarte, rx_int_mask);
     disable_hw_from_rx(p_uarte);
