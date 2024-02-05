@@ -250,7 +250,7 @@ NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_CLIC_Type *         p_r
                                                      nrf_vpr_clic_priority_t priority)
 {
     NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF54L15_ENGA_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF54L15_ENGA_XXAA) && !defined(NRF54L15_XXAA)
     NRFX_ASSERT(priority < VPR_CLIC_PRIO_COUNT);
 #endif
 

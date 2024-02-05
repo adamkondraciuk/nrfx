@@ -1893,12 +1893,21 @@ NRF_STATIC_INLINE nrf_radio_state_t nrf_radio_state_get(NRF_RADIO_Type const * p
 
 NRF_STATIC_INLINE void nrf_radio_datawhiteiv_set(NRF_RADIO_Type * p_reg, uint8_t datawhiteiv)
 {
+#if defined(RADIO_DATAWHITEIV_DATAWHITEIV_Msk)
     p_reg->DATAWHITEIV = (((uint32_t)datawhiteiv) & RADIO_DATAWHITEIV_DATAWHITEIV_Msk);
+#else
+    p_reg->DATAWHITE &= ~RADIO_DATAWHITE_IV_Msk | (((uint32_t)datawhiteiv << RADIO_DATAWHITE_IV_Pos)
+                                                   & RADIO_DATAWHITE_IV_Msk);
+#endif
 }
 
 NRF_STATIC_INLINE uint8_t nrf_radio_datawhiteiv_get(NRF_RADIO_Type const * p_reg)
 {
+#if defined(RADIO_DATAWHITEIV_DATAWHITEIV_Msk)
     return (uint8_t)(p_reg->DATAWHITEIV & RADIO_DATAWHITEIV_DATAWHITEIV_Msk);
+#else
+    return (uint8_t)((p_reg->DATAWHITE & RADIO_DATAWHITE_IV_Msk) >> RADIO_DATAWHITE_IV_Pos);
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_radio_bcc_set(NRF_RADIO_Type * p_reg, uint32_t radio_bcc)

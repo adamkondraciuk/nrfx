@@ -49,7 +49,7 @@
 #elif defined(NRF54H20_XXAA) || defined(NRF54H20_ENGA_XXAA)
     #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
     #define NRFX_DELAY_DWT_PRESENT  0
-#elif defined(NRF54L15_ENGA_XXAA)
+#elif defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA)
     #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
     #define NRFX_DELAY_DWT_PRESENT  1
 #else
