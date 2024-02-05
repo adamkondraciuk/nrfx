@@ -1004,24 +1004,6 @@
 #endif
 
 /**
- * @brief NRFX_SPIM122_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_SPIM122_ENABLED
-#define NRFX_SPIM122_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_SPIM123_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_SPIM123_ENABLED
-#define NRFX_SPIM123_ENABLED 0
-#endif
-
-/**
  * @brief NRFX_SPIM120_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
@@ -1037,6 +1019,24 @@
  */
 #ifndef NRFX_SPIM121_ENABLED
 #define NRFX_SPIM121_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_SPIM122_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_SPIM122_ENABLED
+#define NRFX_SPIM122_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_SPIM123_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_SPIM123_ENABLED
+#define NRFX_SPIM123_ENABLED 0
 #endif
 
 /**

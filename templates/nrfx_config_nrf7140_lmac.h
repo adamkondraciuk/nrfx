@@ -521,129 +521,6 @@
 #endif
 
 /**
- * @brief NRFX_PRS_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_ENABLED
-#define NRFX_PRS_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_CONFIG_LOG_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_CONFIG_LOG_ENABLED
-#define NRFX_PRS_CONFIG_LOG_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_CONFIG_LOG_LEVEL
- *
- * Integer value.
- * Supported values:
- * - Off     = 0
- * - Error   = 1
- * - Warning = 2
- * - Info    = 3
- * - Debug   = 4
- */
-#ifndef NRFX_PRS_CONFIG_LOG_LEVEL
-#define NRFX_PRS_CONFIG_LOG_LEVEL 3
-#endif
-
-/**
- * @brief NRFX_PRS_BOX_0_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_0_ENABLED
-#define NRFX_PRS_BOX_0_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_BOX_1_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_1_ENABLED
-#define NRFX_PRS_BOX_1_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_BOX_2_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_2_ENABLED
-#define NRFX_PRS_BOX_2_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_BOX_3_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_3_ENABLED
-#define NRFX_PRS_BOX_3_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_BOX_4_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_4_ENABLED
-#define NRFX_PRS_BOX_4_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_BOX_5_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_5_ENABLED
-#define NRFX_PRS_BOX_5_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_BOX_6_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_6_ENABLED
-#define NRFX_PRS_BOX_6_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_BOX_7_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_7_ENABLED
-#define NRFX_PRS_BOX_7_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_BOX_8_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_8_ENABLED
-#define NRFX_PRS_BOX_8_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_PRS_BOX_9_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_9_ENABLED
-#define NRFX_PRS_BOX_9_ENABLED 0
-#endif
-
-/**
  * @brief NRFX_PWM_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
@@ -935,24 +812,6 @@
 #endif
 
 /**
- * @brief NRFX_SPIM122_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_SPIM122_ENABLED
-#define NRFX_SPIM122_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_SPIM123_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_SPIM123_ENABLED
-#define NRFX_SPIM123_ENABLED 0
-#endif
-
-/**
  * @brief NRFX_SPIM120_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
@@ -968,6 +827,24 @@
  */
 #ifndef NRFX_SPIM121_ENABLED
 #define NRFX_SPIM121_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_SPIM122_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_SPIM122_ENABLED
+#define NRFX_SPIM122_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_SPIM123_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_SPIM123_ENABLED
+#define NRFX_SPIM123_ENABLED 0
 #endif
 
 /**
