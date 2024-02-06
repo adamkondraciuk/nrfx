@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer for managing the System Protection Unit (SPU) peripheral.
  */
 
+#if defined(SPU_PERIPHACCERR_ADDRESS_ADDRESS_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of peripheral access feature. */
+#define NRF_SPU_HAS_PERIPHERAL_ACCESS 1
+#else
+#define NRF_SPU_HAS_PERIPHERAL_ACCESS 0
+#endif
+
 #if defined(SPU_PERIPH_PERM_OWNERPROG_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Presence of ownership feature. */
 #define NRF_SPU_HAS_OWNERSHIP 1
@@ -73,7 +80,7 @@ extern "C" {
 #define NRF_SPU_HAS_MRAMC 0
 #endif
 
-#if NRF_SPU_HAS_OWNERSHIP
+#if NRF_SPU_HAS_PERIPHERAL_ACCESS
 
 /** @brief Number of peripherals. */
 #define NRF_SPU_PERIPH_COUNT                     SPU_PERIPH_MaxCount
@@ -139,7 +146,7 @@ extern "C" {
 #define NRF_SPU_FEATURE_MRAMC_COUNT              SPU_FEATURE_MRAMC_MaxCount
 #endif
 
-#endif // NRF_SPU_HAS_OWNERSHIP
+#endif // NRF_SPU_HAS_PERIPHERAL_ACCESS
 
 /** @brief SPU events. */
 typedef enum
@@ -185,7 +192,7 @@ typedef enum
 } nrf_spu_mem_perm_t;
 #endif
 
-#if NRF_SPU_HAS_OWNERSHIP
+#if NRF_SPU_HAS_PERIPHERAL_ACCESS
 /** @brief SPU read capabilities for TrustZone Cortex-M secure attribute. */
 typedef enum
 {
@@ -447,7 +454,7 @@ NRF_STATIC_INLINE void nrf_spu_extdomain_set(NRF_SPU_Type * p_reg,
                                              bool           lock_conf);
 #endif
 
-#if NRF_SPU_HAS_OWNERSHIP
+#if NRF_SPU_HAS_PERIPHERAL_ACCESS
 
 /**
  * @brief Function for getting the address of the security violation.
@@ -460,6 +467,7 @@ NRF_STATIC_INLINE void nrf_spu_extdomain_set(NRF_SPU_Type * p_reg,
  */
 NRF_STATIC_INLINE uint32_t nrf_spu_periphaccerr_address_get(NRF_SPU_Type const * p_reg);
 
+#if NRF_SPU_HAS_OWNERSHIP
 /**
  * @brief Function for getting the owner ID of the security violation.
  *
@@ -470,6 +478,7 @@ NRF_STATIC_INLINE uint32_t nrf_spu_periphaccerr_address_get(NRF_SPU_Type const *
  * @return Owner ID of the transaction that caused first error.
  */
 NRF_STATIC_INLINE nrf_owner_t nrf_spu_periphaccerr_ownerid_get(NRF_SPU_Type const * p_reg);
+#endif
 
 /**
  * @brief Function for getting the capabilities for TrustZone Cortex-M secure attribute
@@ -605,6 +614,7 @@ NRF_STATIC_INLINE bool nrf_spu_periph_perm_lock_get(NRF_SPU_Type const * p_reg,
 NRF_STATIC_INLINE void nrf_spu_periph_perm_lock_enable(NRF_SPU_Type * p_reg,
                                                        uint8_t        index);
 
+#if NRF_SPU_HAS_OWNERSHIP
 /**
  * @brief Function for getting the peripheral owner ID of the specified slave.
  *
@@ -638,6 +648,7 @@ NRF_STATIC_INLINE void nrf_spu_periph_perm_ownerid_set(NRF_SPU_Type * p_reg,
  */
 NRF_STATIC_INLINE bool nrf_spu_periph_perm_ownerprog_get(NRF_SPU_Type const * p_reg,
                                                          uint8_t              index);
+#endif // #if NRF_SPU_HAS_OWNERSHIP
 
 /**
  * @brief Function for getting the indication if peripheral with
@@ -752,6 +763,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
                                                     uint8_t           subindex);
 #endif
 
+#if NRF_SPU_HAS_OWNERSHIP
 /**
  * @brief Function for getting the feature owner ID of the specified feature.
  *
@@ -781,7 +793,8 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
                                                    uint8_t           index,
                                                    uint8_t           subindex,
                                                    nrf_owner_t       owner_id);
-#endif
+#endif // NRF_SPU_HAS_OWNERSHIP
+#endif // NRF_SPU_HAS_PERIPHERAL_ACCESS
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -949,16 +962,18 @@ NRF_STATIC_INLINE void nrf_spu_extdomain_set(NRF_SPU_Type * p_reg,
 }
 #endif
 
-#if NRF_SPU_HAS_OWNERSHIP
+#if NRF_SPU_HAS_PERIPHERAL_ACCESS
 NRF_STATIC_INLINE uint32_t nrf_spu_periphaccerr_address_get(NRF_SPU_Type const * p_reg)
 {
     return p_reg->PERIPHACCERR.ADDRESS;
 }
 
+#if NRF_SPU_HAS_OWNERSHIP
 NRF_STATIC_INLINE nrf_owner_t nrf_spu_periphaccerr_ownerid_get(NRF_SPU_Type const * p_reg)
 {
     return (nrf_owner_t)p_reg->PERIPHACCERR.INFO;
 }
+#endif
 
 NRF_STATIC_INLINE bool nrf_spu_periph_perm_present_get(NRF_SPU_Type const * p_reg,
                                                        uint8_t              index)
@@ -968,6 +983,7 @@ NRF_STATIC_INLINE bool nrf_spu_periph_perm_present_get(NRF_SPU_Type const * p_re
            SPU_PERIPH_PERM_PRESENT_Pos;
 }
 
+#if NRF_SPU_HAS_OWNERSHIP
 NRF_STATIC_INLINE bool nrf_spu_periph_perm_ownerprog_get(NRF_SPU_Type const * p_reg,
                                                          uint8_t              index)
 {
@@ -975,6 +991,7 @@ NRF_STATIC_INLINE bool nrf_spu_periph_perm_ownerprog_get(NRF_SPU_Type const * p_
     return (p_reg->PERIPH[index].PERM & SPU_PERIPH_PERM_OWNERPROG_Msk) >>
            SPU_PERIPH_PERM_OWNERPROG_Pos;
 }
+#endif
 
 NRF_STATIC_INLINE bool nrf_spu_periph_perm_lock_get(NRF_SPU_Type const * p_reg,
                                                     uint8_t              index)
@@ -1072,6 +1089,7 @@ NRF_STATIC_INLINE nrf_spu_dma_t nrf_spu_periph_perm_dma_get(NRF_SPU_Type const *
                            SPU_PERIPH_PERM_DMA_Pos);
 }
 
+#if NRF_SPU_HAS_OWNERSHIP
 NRF_STATIC_INLINE nrf_owner_t nrf_spu_periph_perm_ownerid_get(NRF_SPU_Type const * p_reg,
                                                               uint8_t              index)
 {
@@ -1091,6 +1109,7 @@ NRF_STATIC_INLINE void nrf_spu_periph_perm_ownerid_set(NRF_SPU_Type * p_reg,
                                  ((owner_id << SPU_PERIPH_PERM_OWNERID_Pos)
                                   & SPU_PERIPH_PERM_OWNERID_Msk));
 }
+#endif
 
 NRF_STATIC_INLINE bool nrf_spu_feature_secattr_get(NRF_SPU_Type const * p_reg,
                                                    nrf_spu_feature_t    feature,
@@ -1493,6 +1512,7 @@ NRF_STATIC_INLINE bool nrf_spu_feature_block_get(NRF_SPU_Type const * p_reg,
 }
 #endif // NRF_SPU_HAS_BLOCK
 
+#if NRF_SPU_HAS_OWNERSHIP
 NRF_STATIC_INLINE nrf_owner_t nrf_spu_feature_ownerid_get(NRF_SPU_Type const * p_reg,
                                                           nrf_spu_feature_t    feature,
                                                           uint8_t              index,
@@ -1625,6 +1645,7 @@ NRF_STATIC_INLINE nrf_owner_t nrf_spu_feature_ownerid_get(NRF_SPU_Type const * p
             return (nrf_owner_t)0;
     }
 }
+#endif // NRF_SPU_HAS_OWNERSHIP
 
 NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
                                                    nrf_spu_feature_t feature,
@@ -2226,6 +2247,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
 }
 #endif // NRF_SPU_HAS_BLOCK
 
+#if NRF_SPU_HAS_OWNERSHIP
 NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
                                                    nrf_spu_feature_t feature,
                                                    uint8_t           index,
@@ -2431,8 +2453,9 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
             break;
     }
 }
+#endif // NRF_SPU_HAS_OWNERSHIP
 
-#endif
+#endif // NRF_SPU_HAS_PERIPHERAL_ACCESS
 
 #endif // NRF_DECLARE_ONLY
 
