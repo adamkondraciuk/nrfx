@@ -14,7 +14,7 @@
  * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_DEFAULT_IRQ_PRIORITY
-#define NRFX_DEFAULT_IRQ_PRIORITY 3
+#define NRFX_DEFAULT_IRQ_PRIORITY 0
 #endif
 
 /**
