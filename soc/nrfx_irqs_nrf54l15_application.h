@@ -49,6 +49,8 @@ extern "C" {
 // TIMER00_IRQHandler
 #define nrfx_timer_00_irq_handler       TIMER00_IRQHandler
 
+// VREGRLDO_IRQHandler
+
 // SPU10_IRQHandler
 
 // TIMER10_IRQHandler
@@ -119,6 +121,10 @@ extern "C" {
 
 // TIMER24_IRQHandler
 #define nrfx_timer_24_irq_handler       TIMER24_IRQHandler
+
+// PDM20_IRQHandler
+
+// PDM21_IRQHandler
 
 // PWM20_IRQHandler
 #define nrfx_pwm_20_irq_handler         PWM20_IRQHandler
