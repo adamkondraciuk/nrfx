@@ -157,7 +157,11 @@ extern "C" {
 
 /** @brief Main channel that can be used only by the owner of GRTC. */
 #if defined(LUMOS_XXAA)
+#if defined(ISA_RISCV)
+#define NRF_GRTC_MAIN_CC_CHANNEL 4
+#else
 #define NRF_GRTC_MAIN_CC_CHANNEL 0
+#endif
 #else
 #define NRF_GRTC_MAIN_CC_CHANNEL 1
 #endif
