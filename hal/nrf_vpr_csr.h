@@ -21,12 +21,6 @@ extern "C" {
 #define NRF_VPR_CSR_NORDIC_KEY_MASK \
     (VPRCSR_NORDIC_VPRNORDICCTRL_NORDICKEY_Enabled << VPRCSR_NORDIC_VPRNORDICCTRL_NORDICKEY_Pos)
 
-/** @brief Symbol specifying maximum interrupt threshold. */
-#define NRF_VPR_CSR_INT_THRESHOLD_MAX VPRCSR_MINTTHRESH_TH_Max
-
-/** @brief Symbol specifying minimum interrupt threshold. */
-#define NRF_VPR_CSR_INT_THRESHOLD_MIN VPRCSR_MINTTHRESH_TH_Min
-
 /** @brief Interrupt threshold levels. */
 typedef enum
 {
