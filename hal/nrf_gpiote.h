@@ -96,7 +96,8 @@ extern "C" {
 #endif
 
 #if defined(GPIOTE_INTENSET0_PORT0SECURE_Msk)
-#if defined(NRF_TRUSTZONE_NONSECURE) || defined(ISA_RISCV)
+#if defined(NRF_TRUSTZONE_NONSECURE) || \
+    (defined(ISA_RISCV) && defined(HALTIUM_XXAA))
 #define NRF_GPIOTE_SECURE_SUFFIX NONSECURE
 #else
 #define NRF_GPIOTE_SECURE_SUFFIX SECURE
