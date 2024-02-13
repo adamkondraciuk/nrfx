@@ -58,8 +58,8 @@ extern "C" {
 #define NRF_UICR_HAS_PTREXT 0
 #endif
 
-#if defined(UICR_GPIO_OWN_PIN0_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Symbol indicating whether GPIO port owner feature is present. */
+#if defined(UICREXTENDED_GPIO_OWN_PIN0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether GPIO feature is present. */
 #define NRF_UICR_HAS_FEATURE_GPIO 1
 #else
 #define NRF_UICR_HAS_FEATURE_GPIO 0
@@ -91,7 +91,7 @@ extern "C" {
 
 #if NRF_UICR_HAS_FEATURE_GPIO
 /** @brief Number of GPIOs. */
-#define NRF_UICR_GPIO_COUNT        UICR_GPIO_MaxCount
+#define NRF_UICR_GPIO_COUNT        UICREXTENDED_GPIO_MaxCount
 #endif
 
 /** @brief Number of GPIOTE channels. */
@@ -431,6 +431,30 @@ NRF_STATIC_INLINE bool nrf_uicr_boot_region_config_get(NRF_UICR_Type const *    
                                                        nrf_uicr_boot_region_config_t * p_config);
 #endif
 
+#if NRF_UICR_HAS_FEATURE_GPIO
+/**
+ * @brief Function for getting the GPIO instance address associated with the specified GPIO entry.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Index of GPIO entry.
+ *
+ * @return GPIO instance address.
+ */
+NRF_STATIC_INLINE uint32_t nrf_uicr_gpio_instance_get(NRF_UICREXTENDED_Type const * p_reg,
+                                                      uint8_t                       index);
+
+/**
+ * @brief Function for getting the CTRLSEL configuration associated with the specified GPIO pin.
+ *
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] pin_number Absolute pin number.
+ *
+ * @return CTRLSEL configuration.
+ */
+NRF_STATIC_INLINE uint32_t nrf_uicr_gpio_ctrlsel_get(NRF_UICREXTENDED_Type const * p_reg,
+                                                     uint32_t                      pin_number);
+#endif
+
 #ifndef NRF_DECLARE_ONLY
 
 #if NRF_UICR_HAS_MEM_CONFIG
@@ -494,7 +518,7 @@ NRF_STATIC_INLINE uint32_t nrf_uicr_feature_own_get(NRF_UICR_Type const * p_reg,
 #if NRF_UICR_HAS_FEATURE_GPIO
         case NRF_UICR_FEATURE_GPIO:
             NRFX_ASSERT(index < NRF_UICR_GPIO_COUNT);
-            return p_reg->GPIO[index].OWN;
+            return ((NRF_UICREXTENDED_Type *)nrf_uicr_ptrextuicr_get(p_reg))->GPIO[index].OWN;
 #endif
 
         case NRF_UICR_FEATURE_GPIOTE_CH:
@@ -535,7 +559,7 @@ NRF_STATIC_INLINE uint32_t nrf_uicr_feature_secure_get(NRF_UICR_Type const * p_r
 #if NRF_UICR_HAS_FEATURE_GPIO
         case NRF_UICR_FEATURE_GPIO:
             NRFX_ASSERT(index < NRF_UICR_GPIO_COUNT);
-            return p_reg->GPIO[index].SECURE;
+            return ((NRF_UICREXTENDED_Type *)nrf_uicr_ptrextuicr_get(p_reg))->GPIO[index].SECURE;
 #endif
 
         case NRF_UICR_FEATURE_GPIOTE_CH:
@@ -714,6 +738,24 @@ NRF_STATIC_INLINE bool nrf_uicr_boot_region_config_get(NRF_UICR_Type const *    
                             UICR_BOOTCONF_LOCK_Enabled;
     p_config->size_kb     = (reg & UICR_BOOTCONF_SIZE_Msk) >> UICR_BOOTCONF_SIZE_Pos;
     return (reg != UICR_BOOTCONF_ResetValue);
+}
+#endif
+
+#if NRF_UICR_HAS_FEATURE_GPIO
+NRF_STATIC_INLINE uint32_t nrf_uicr_gpio_instance_get(NRF_UICREXTENDED_Type const * p_reg,
+                                                      uint8_t                       index)
+{
+    NRFX_ASSERT(index < NRF_UICR_GPIO_COUNT);
+    return p_reg->GPIO[index].INSTANCE;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_uicr_gpio_ctrlsel_get(NRF_UICREXTENDED_Type const * p_reg,
+                                                     uint32_t                      pin_number)
+{
+    uint32_t port = NRF_PIN_NUMBER_TO_PORT(pin_number);
+    uint32_t pin  = NRF_PIN_NUMBER_TO_PIN(pin_number);
+    NRFX_ASSERT(port < NRF_UICR_GPIO_COUNT);
+    return p_reg->GPIO[port].PIN[pin].CTRLSEL;
 }
 #endif
 
