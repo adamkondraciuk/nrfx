@@ -911,6 +911,12 @@
     #if !defined(GRTC_IRQ_GROUP)
         #error Unknown core.
     #endif
+
+    /* TODO: HM-24456 */
+    #undef  SAADC_TESTCTRL_LINCALEN_Disabled
+    #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
+    #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
+    #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
 #endif
 
 /**************************************************************************************************/
@@ -923,6 +929,12 @@
 
 #if defined(NRF54L15_ENGA_XXAA)
     #include "nrf54l15_enga_interim.h"
+
+    /* TODO: HM-24456 */
+    #undef  SAADC_TESTCTRL_LINCALEN_Disabled
+    #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
+    #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
+    #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
 #endif
 
 /**************************************************************************************************/
@@ -935,6 +947,12 @@
 
 #if defined(NRF54L15_XXAA)
     #include "nrf54l15_interim.h"
+
+    /* TODO: HM-24456 */
+    #undef  SAADC_TESTCTRL_LINCALEN_Disabled
+    #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
+    #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
+    #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
 #endif
 
 /**************************************************************************************************/
@@ -1081,6 +1099,12 @@
     #define TWIM_SHORTS_LASTRX_STOP_Max (0x1UL)
     #define TWIM_SHORTS_LASTRX_STOP_Disabled (0x0UL)
     #define TWIM_SHORTS_LASTRX_STOP_Enabled (0x1UL)
+
+    /* TODO: HM-24456 */
+    #undef  SAADC_TESTCTRL_LINCALEN_Disabled
+    #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
+    #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
+    #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
 #endif
 
 /**************************************************************************************************/
@@ -1412,6 +1436,12 @@
     #define TIMER137_CC_NUM (TIMER137_CC_NUM_MAX + 1UL)
 
     #define RTC_CC_NUM (RTC_CC_NUM_MAX + 1UL)
+
+    /* TODO: HM-24456 */
+    #undef  SAADC_TESTCTRL_LINCALEN_Disabled
+    #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
+    #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
+    #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
 #endif
 
 /**************************************************************************************************/
