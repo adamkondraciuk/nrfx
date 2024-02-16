@@ -41,33 +41,21 @@ typedef enum
 /** @brief TDM events. */
 typedef enum
 {
-    NRF_TDM_EVENT_DMA_END_TX  = offsetof(NRF_TDM_Type, EVENTS_DMA_END_TX),  ///< End of TX transmission.
     NRF_TDM_EVENT_RXPTRUPD    = offsetof(NRF_TDM_Type, EVENTS_RXPTRUPD),    ///< The RXD.PTR register has been copied to internal double buffers.
     NRF_TDM_EVENT_STOPPED     = offsetof(NRF_TDM_Type, EVENTS_STOPPED),     ///< TDM transfer stopped.
     NRF_TDM_EVENT_ABORTED     = offsetof(NRF_TDM_Type, EVENTS_ABORTED),     ///< TDM transfer aborted.
-    NRF_TDM_EVENT_ERROR_TX    = offsetof(NRF_TDM_Type, EVENTS_ERROR_TX),    ///< DMA read from memory failed due to buffer underflow.
-    NRF_TDM_EVENT_ERROR_RX    = offsetof(NRF_TDM_Type, EVENTS_ERROR_RX),    ///< DMA write to memory failed due to overflow.
     NRF_TDM_EVENT_TXPTRUPD    = offsetof(NRF_TDM_Type, EVENTS_TXPTRUPD),    ///< The TXD.PTR register has been copied to internal double buffers.
-    NRF_TDM_EVENT_DMA_END_RX  = offsetof(NRF_TDM_Type, EVENTS_DMA_END_RX),  ///< End of RX transmission.
     NRF_TDM_EVENT_MAXCNT      = offsetof(NRF_TDM_Type, EVENTS_MAXCNT),      ///< MAXCNT block event, generated on the active edge of FSYNC of every MAXCNT block.
-    NRF_TDM_EVENT_BUSERROR_RX = offsetof(NRF_TDM_Type, EVENTS_BUSERROR_RX), ///< AHB/AXI bus error while receoiving.
-    NRF_TDM_EVENT_BUSERROR_TX = offsetof(NRF_TDM_Type, EVENTS_BUSERROR_TX), ///< AHB/AXI bus error while transmitting.
 } nrf_tdm_event_t;
 
 /** @brief TDM interrupts. */
 typedef enum
 {
-    NRF_TDM_INT_DMA_END_TX_MASK    = TDM_INTENSET_DMA_END_TX_Msk,  ///< Interrupt on EVENTS_DMA_END_TX event.
     NRF_TDM_INT_RXPTRUPD_MASK_MASK = TDM_INTENSET_RXPTRUPD_Msk,    ///< Interrupt on RXPTRUPD event.
     NRF_TDM_INT_STOPPED_MASK_MASK  = TDM_INTENSET_STOPPED_Msk,     ///< Interrupt on STOPPED event.
     NRF_TDM_INT_ABORTED_MASK       = TDM_INTENSET_ABORTED_Msk,     ///< Interrupt on EVENTS_ABORTED event.
-    NRF_TDM_INT_ERROR_TX_MASK      = TDM_INTENSET_ERROR_TX_Msk,    ///< Interrupt on EVENTS_ERROR_TX event.
-    NRF_TDM_INT_ERROR_RX_MASK      = TDM_INTENSET_ERROR_RX_Msk,    ///< Interrupt on EVENTS_ERROR_RX event.
     NRF_TDM_INT_TXPTRUPD_MASK_MASK = TDM_INTENSET_TXPTRUPD_Msk,    ///< Interrupt on TXPTRUPD event.
-    NRF_TDM_INT_DMA_END_RX_MASK    = TDM_INTENSET_DMA_END_RX_Msk,  ///< Interrupt on EVENTS_DMA_END_RX event.
     NRF_TDM_INT_MAXCNT_MASK        = TDM_INTENSET_MAXCNT_Msk,      ///< Interrupt on EVENTS_MAXCNT event.
-    NRF_TDM_INT_BUSERROR_RX_MASK   = TDM_INTENSET_BUSERROR_RX_Msk, ///< Interrupt on EVENTS_BUSERROR_RX event.
-    NRF_TDM_INT_BUSERROR_TX_MASK   = TDM_INTENSET_BUSERROR_TX_Msk, ///< Interrupt on EVENTS_BUSERROR_TX event.
 } nrf_tdm_int_mask_t;
 
 /** @brief TDM modes of operation. */
