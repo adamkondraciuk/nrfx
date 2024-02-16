@@ -464,10 +464,26 @@ typedef enum
 /** @brief Types of CRC calculatons regarding address. */
 typedef enum
 {
+#if defined(RADIO_CRCCNF_SKIPADDR_Include) || defined(__NRFX_DOXYGEN__)
     NRF_RADIO_CRC_ADDR_INCLUDE    = RADIO_CRCCNF_SKIPADDR_Include,    /**< CRC calculation includes address field. */
+#else
+    NRF_RADIO_CRC_ADDR_INCLUDE    = RADIO_CRCCNF_OFFSET_Include,      /**< CRC calculation includes address field. */
+#endif
+#if defined(RADIO_CRCCNF_SKIPADDR_Skip) || defined(__NRFX_DOXYGEN__)
     NRF_RADIO_CRC_ADDR_SKIP       = RADIO_CRCCNF_SKIPADDR_Skip,       /**< CRC calculation does not include address field. */
+#else
+    NRF_RADIO_CRC_ADDR_SKIP       = RADIO_CRCCNF_OFFSET_Skip,         /**< CRC calculation does not include address field. */
+#endif
 #if defined(RADIO_CRCCNF_SKIPADDR_Ieee802154) || defined(__NRFX_DOXYGEN__)
     NRF_RADIO_CRC_ADDR_IEEE802154 = RADIO_CRCCNF_SKIPADDR_Ieee802154, /**< CRC calculation as per 802.15.4 standard. */
+#elif defined(RADIO_CRCCNF_OFFSET_LENGTH)
+    NRF_RADIO_CRC_ADDR_IEEE802154 = RADIO_CRCCNF_OFFSET_LENGTH,       /**< CRC calculation as per 802.15.4 standard. */
+#endif
+#if defined(RADIO_CRCCNF_OFFSET_SO) || defined(__NRFX_DOXYGEN__)
+    NRF_RADIO_CRC_ADDR_S0        = RADIO_CRCCNF_OFFSET_SO,            /**< CRC calculation starting at first byte after S0 field. */
+#endif
+#if defined(RADIO_CRCCNF_OFFSET_S1) || defined(__NRFX_DOXYGEN__)
+    NRF_RADIO_CRC_ADDR_S1        = RADIO_CRCCNF_OFFSET_S1,            /**< CRC calculation starting at first byte after S1 field. */
 #endif
 } nrf_radio_crc_addr_t;
 
@@ -1856,7 +1872,11 @@ NRF_STATIC_INLINE void nrf_radio_crc_configure(NRF_RADIO_Type *     p_reg,
                                                uint32_t             crc_polynominal)
 {
     p_reg->CRCCNF = ((uint32_t)crc_length  << RADIO_CRCCNF_LEN_Pos) |
+#if defined(RADIO_CRCCNF_SKIPADDR_Msk)
                     ((uint32_t)crc_address << RADIO_CRCCNF_SKIPADDR_Pos);
+#else
+                    ((uint32_t)crc_address << RADIO_CRCCNF_OFFSET_Pos);
+#endif
     p_reg->CRCPOLY = (crc_polynominal << RADIO_CRCPOLY_CRCPOLY_Pos);
 }
 
