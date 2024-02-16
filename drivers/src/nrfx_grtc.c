@@ -222,10 +222,10 @@ static inline bool is_active(void)
 static inline void grtc_wakeup(void)
 {
 #if defined(NRF_GRTC_HAS_SYSCOUNTER_ARRAY) && (NRF_GRTC_HAS_SYSCOUNTER_ARRAY == 1)
-	nrfy_grtc_sys_counter_active_set(NRF_GRTC, true);
+    nrfy_grtc_sys_counter_active_set(NRF_GRTC, true);
 #else
-	nrfy_grtc_sys_counter_active_state_request_set(NRF_GRTC, true);
-	nrfx_coredep_delay_us(GRTC_SYSCOUNTERVALID_SETTLE_MAX_TIME_US);
+    nrfy_grtc_sys_counter_active_state_request_set(NRF_GRTC, true);
+    nrfx_coredep_delay_us(GRTC_SYSCOUNTERVALID_SETTLE_MAX_TIME_US);
 #endif
 }
 
@@ -234,11 +234,11 @@ static inline void grtc_sleep(void)
     if (NRFX_IS_ENABLED(NRFX_GRTC_CONFIG_SLEEP_ALLOWED))
     {
 #if defined(NRF_GRTC_HAS_SYSCOUNTER_ARRAY) && (NRF_GRTC_HAS_SYSCOUNTER_ARRAY == 1)
-		nrfy_grtc_sys_counter_active_set(NRF_GRTC, false);
+        nrfy_grtc_sys_counter_active_set(NRF_GRTC, false);
 #else
-		nrfy_grtc_sys_counter_active_state_request_set(NRF_GRTC, false);
+        nrfy_grtc_sys_counter_active_state_request_set(NRF_GRTC, false);
 #endif
-	}
+    }
 }
 
 void nrfx_grtc_active_request_set(bool active)
