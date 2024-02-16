@@ -6,6 +6,7 @@
 
 #include <nrfx_vevif.h>
 #include <nrf_bitmask.h>
+#include <hal/nrf_vpr.h>
 #include <hal/nrf_vpr_csr.h>
 #include <hal/nrf_vpr_csr_vevif.h>
 
@@ -52,10 +53,8 @@ nrfx_err_t nrfx_vevif_init(nrf_vpr_clic_priority_t    interrupt_priority,
     m_cb.p_context = p_context;
     m_cb.state     = NRFX_DRV_STATE_INITIALIZED;
 
-    nrf_vpr_csr_machine_interrupts_enable();
-
     nrf_vpr_csr_rtperiph_enable_set(true);
-    nrf_vpr_csr_vevif_tasks_set(0);
+    nrf_vpr_csr_vevif_tasks_clear(NRF_VPR_TASK_TRIGGER_ALL_MASK);
 
     for (uint8_t i = 0; i < NRF_VPR_CSR_VEVIF_EVENT_TASK_COUNT; i++)
     {
