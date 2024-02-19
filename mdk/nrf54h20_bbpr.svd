@@ -8,7 +8,7 @@
   <version>1</version>
   <description>nRF54H20 reference description for system-on-chip with many ARM 32-bit Cortex-M33 microcontrollers</description>
   <licenseText>
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -3688,22 +3688,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     </field>
                   </fields>
                 </register>
-                <register>
-                  <name>TCOEF</name>
-                  <description>Trim value for SECURE.HSFLL.TRIM.TCOEF</description>
-                  <addressOffset>0x034</addressOffset>
-                  <access>read-only</access>
-                  <resetValue>0xFFFFFFFF</resetValue>
-                  <size>0x20</size>
-                  <fields>
-                    <field>
-                      <name>VALUE</name>
-                      <description>Trim value</description>
-                      <lsb>0</lsb>
-                      <msb>31</msb>
-                    </field>
-                  </fields>
-                </register>
               </cluster>
             </cluster>
             <cluster>
@@ -3711,7 +3695,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SECURE_HSFLL200</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x038</addressOffset>
+              <addressOffset>0x034</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -3770,22 +3754,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     </field>
                   </fields>
                 </register>
-                <register>
-                  <name>TCOEF</name>
-                  <description>Trim value for SECURE.HSFLL200.TRIM.TCOEF</description>
-                  <addressOffset>0x024</addressOffset>
-                  <access>read-only</access>
-                  <resetValue>0xFFFFFFFF</resetValue>
-                  <size>0x20</size>
-                  <fields>
-                    <field>
-                      <name>VALUE</name>
-                      <description>Trim value</description>
-                      <lsb>0</lsb>
-                      <msb>31</msb>
-                    </field>
-                  </fields>
-                </register>
               </cluster>
             </cluster>
             <cluster>
@@ -3793,7 +3761,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SECURE_MEMCONF</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x060</addressOffset>
+              <addressOffset>0x058</addressOffset>
               <cluster>
                 <dim>8</dim>
                 <dimIncrement>0x004</dimIncrement>
@@ -3825,7 +3793,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SECURE_MEMCONF200</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x080</addressOffset>
+              <addressOffset>0x078</addressOffset>
               <cluster>
                 <name>BLOCKTYPE</name>
                 <description>Unspecified</description>
@@ -3836,6 +3804,52 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>TRIM</name>
                   <description>Trim value for SECURE.MEMCONF200.BLOCKTYPE.TRIM</description>
                   <addressOffset>0x000</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+              </cluster>
+            </cluster>
+            <cluster>
+              <name>TCOEFS</name>
+              <description>Unspecified</description>
+              <headerStructName>FICR_TRIM_SECURE_TCOEFS</headerStructName>
+              <access>read-write</access>
+              <addressOffset>0x07C</addressOffset>
+              <cluster>
+                <name>TRIM</name>
+                <description>Unspecified</description>
+                <headerStructName>FICR_TRIM_SECURE_TCOEFS_TRIM</headerStructName>
+                <access>read-write</access>
+                <addressOffset>0x000</addressOffset>
+                <register>
+                  <name>HSFLL</name>
+                  <description>Trim value for SECURE.HSFLL.TRIM.TCOEF</description>
+                  <addressOffset>0x000</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>HSFLL200</name>
+                  <description>Trim value for SECURE.HSFLL200.TRIM.TCOEF</description>
+                  <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
                   <size>0x20</size>
@@ -57891,7 +57905,7 @@ A write outputs the value to atbytesm.</description>
         </register>
         <register>
           <name>EVENTS_RTCOMPARESYNC</name>
-          <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
+          <description>Synchronize always-on LFCLK clock domain</description>
           <addressOffset>0x164</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -57899,7 +57913,7 @@ A write outputs the value to atbytesm.</description>
           <fields>
             <field>
               <name>EVENTS_RTCOMPARESYNC</name>
-              <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
+              <description>Synchronize always-on LFCLK clock domain</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -152895,6 +152909,47 @@ A write outputs the value to atbytesm.</description>
             </field>
           </fields>
         </register>
+        <cluster>
+          <name>OVERRIDE</name>
+          <description>Unspecified</description>
+          <headerStructName>TEMP_OVERRIDE</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x518</addressOffset>
+          <register>
+            <name>PWR</name>
+            <description>ANA power up override</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>VAL</name>
+                <description>Override value for the signal</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+              </field>
+              <field>
+                <name>EN</name>
+                <description>Enable the override</description>
+                <lsb>31</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>Override is disabled</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enabled</name>
+                    <description>Override is enabled</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+        </cluster>
         <register>
           <name>A0</name>
           <description>Slope of 1st piece wise linear function</description>
@@ -172495,10 +172550,10 @@ A write outputs the value to atbytesm.</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_BUSERROR_STOP</name>
-              <description>Shortcut between event DMA.RX.BUSERROR and task STOP</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
+              <name>LASTRX_STOP</name>
+              <description>Shortcut between event LASTRX and task STOP</description>
+              <lsb>12</lsb>
+              <msb>12</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -172513,8 +172568,8 @@ A write outputs the value to atbytesm.</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_TX_BUSERROR_STOP</name>
-              <description>Shortcut between event DMA.TX.BUSERROR and task STOP</description>
+              <name>DMA_RX_BUSERROR_STOP</name>
+              <description>Shortcut between event DMA.RX.BUSERROR and task STOP</description>
               <lsb>19</lsb>
               <msb>19</msb>
               <enumeratedValues>
@@ -172531,8 +172586,8 @@ A write outputs the value to atbytesm.</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1</name>
-              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[1] Allows daisy-chaining match events.</description>
+              <name>DMA_TX_BUSERROR_STOP</name>
+              <description>Shortcut between event DMA.TX.BUSERROR and task STOP</description>
               <lsb>20</lsb>
               <msb>20</msb>
               <enumeratedValues>
@@ -172549,8 +172604,8 @@ A write outputs the value to atbytesm.</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2</name>
-              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[2] Allows daisy-chaining match events.</description>
+              <name>DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1</name>
+              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[1] Allows daisy-chaining match events.</description>
               <lsb>21</lsb>
               <msb>21</msb>
               <enumeratedValues>
@@ -172567,8 +172622,8 @@ A write outputs the value to atbytesm.</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3</name>
-              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[3] Allows daisy-chaining match events.</description>
+              <name>DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2</name>
+              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[2] Allows daisy-chaining match events.</description>
               <lsb>22</lsb>
               <msb>22</msb>
               <enumeratedValues>
@@ -172585,8 +172640,8 @@ A write outputs the value to atbytesm.</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0</name>
-              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[0] Allows daisy-chaining match events.</description>
+              <name>DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3</name>
+              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[3] Allows daisy-chaining match events.</description>
               <lsb>23</lsb>
               <msb>23</msb>
               <enumeratedValues>
@@ -172603,8 +172658,8 @@ A write outputs the value to atbytesm.</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0</name>
-              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n]</description>
+              <name>DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0</name>
+              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[0] Allows daisy-chaining match events.</description>
               <lsb>24</lsb>
               <msb>24</msb>
               <enumeratedValues>
@@ -172621,7 +172676,7 @@ A write outputs the value to atbytesm.</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1</name>
+              <name>DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0</name>
               <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n]</description>
               <lsb>25</lsb>
               <msb>25</msb>
@@ -172639,7 +172694,7 @@ A write outputs the value to atbytesm.</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2</name>
+              <name>DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1</name>
               <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n]</description>
               <lsb>26</lsb>
               <msb>26</msb>
@@ -172657,10 +172712,28 @@ A write outputs the value to atbytesm.</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3</name>
+              <name>DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2</name>
               <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n]</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3</name>
+              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n]</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>

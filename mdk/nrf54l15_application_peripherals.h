@@ -47,6 +47,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include <stdbool.h>
+/* Domain definition */
+#define NRF_DOMAIN NRF_DOMAIN_APPLICATION
+
 /*CACHEDATA*/
 #define CACHEDATA_PRESENT 1
 #define CACHEDATA_COUNT 1
@@ -324,6 +327,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define AAR_PRESENT 1
 #define AAR_COUNT 2
 
+#define AAR00_DMAERROR 1                             /*!< (unspecified)                                                        */
+
+#define AAR10_DMAERROR 1                             /*!< (unspecified)                                                        */
+
 /*AES CCM Mode Encryption*/
 #define CCM_PRESENT 1
 #define CCM_COUNT 2
@@ -341,8 +348,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define ECB_COUNT 2
 
 #define ECB00_AMOUNTREG 0                            /*!< (unspecified)                                                        */
+#define ECB00_DMAERROR 1                             /*!< (unspecified)                                                        */
 
 #define ECB10_AMOUNTREG 0                            /*!< (unspecified)                                                        */
+#define ECB10_DMAERROR 1                             /*!< (unspecified)                                                        */
 
 /*CRACEN*/
 #define CRACEN_PRESENT 1
@@ -474,7 +483,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM20_EASYDMA_MAXCNT_SIZE 16                /*!< (unspecified)                                                        */
 #define SPIM20_FEATURE_HARDWARE_CSN_PRESENT 1        /*!< (unspecified)                                                        */
 #define SPIM20_FEATURE_HARDWARE_DCX_PRESENT 1        /*!< (unspecified)                                                        */
-#define SPIM20_FEATURE_RXDELAY_PRESENT 0             /*!< (unspecified)                                                        */
+#define SPIM20_FEATURE_RXDELAY_PRESENT 1             /*!< (unspecified)                                                        */
 #define SPIM20_STALL_STATUS_PRESENT 0                /*!< (unspecified)                                                        */
 #define SPIM20_STALL_STATUS_TX_PRESENT 0             /*!< (unspecified)                                                        */
 #define SPIM20_HSSPI 0                               /*!< (unspecified)                                                        */
@@ -491,7 +500,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM20_RXDELAY_VALUE_RANGE_MIN 0             /*!< (unspecified)                                                        */
 #define SPIM20_RXDELAY_VALUE_RANGE_MAX 7             /*!< (unspecified)                                                        */
 #define SPIM20_RXDELAY_VALUE_RANGE_SIZE 8            /*!< (unspecified)                                                        */
-#define SPIM20_RXDELAY_RESET_VALUE 2                 /*!< (unspecified)                                                        */
+#define SPIM20_RXDELAY_RESET_VALUE 1                 /*!< (unspecified)                                                        */
 #define SPIM20_RXDELAY_FIELD_WIDTH_MIN 0             /*!< (unspecified)                                                        */
 #define SPIM20_RXDELAY_FIELD_WIDTH_MAX 2             /*!< (unspecified)                                                        */
 #define SPIM20_RXDELAY_FIELD_WIDTH_SIZE 3            /*!< (unspecified)                                                        */
@@ -513,7 +522,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM21_EASYDMA_MAXCNT_SIZE 16                /*!< (unspecified)                                                        */
 #define SPIM21_FEATURE_HARDWARE_CSN_PRESENT 1        /*!< (unspecified)                                                        */
 #define SPIM21_FEATURE_HARDWARE_DCX_PRESENT 1        /*!< (unspecified)                                                        */
-#define SPIM21_FEATURE_RXDELAY_PRESENT 0             /*!< (unspecified)                                                        */
+#define SPIM21_FEATURE_RXDELAY_PRESENT 1             /*!< (unspecified)                                                        */
 #define SPIM21_STALL_STATUS_PRESENT 0                /*!< (unspecified)                                                        */
 #define SPIM21_STALL_STATUS_TX_PRESENT 0             /*!< (unspecified)                                                        */
 #define SPIM21_HSSPI 0                               /*!< (unspecified)                                                        */
@@ -530,7 +539,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM21_RXDELAY_VALUE_RANGE_MIN 0             /*!< (unspecified)                                                        */
 #define SPIM21_RXDELAY_VALUE_RANGE_MAX 7             /*!< (unspecified)                                                        */
 #define SPIM21_RXDELAY_VALUE_RANGE_SIZE 8            /*!< (unspecified)                                                        */
-#define SPIM21_RXDELAY_RESET_VALUE 2                 /*!< (unspecified)                                                        */
+#define SPIM21_RXDELAY_RESET_VALUE 1                 /*!< (unspecified)                                                        */
 #define SPIM21_RXDELAY_FIELD_WIDTH_MIN 0             /*!< (unspecified)                                                        */
 #define SPIM21_RXDELAY_FIELD_WIDTH_MAX 2             /*!< (unspecified)                                                        */
 #define SPIM21_RXDELAY_FIELD_WIDTH_SIZE 3            /*!< (unspecified)                                                        */
@@ -552,7 +561,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM22_EASYDMA_MAXCNT_SIZE 16                /*!< (unspecified)                                                        */
 #define SPIM22_FEATURE_HARDWARE_CSN_PRESENT 1        /*!< (unspecified)                                                        */
 #define SPIM22_FEATURE_HARDWARE_DCX_PRESENT 0        /*!< (unspecified)                                                        */
-#define SPIM22_FEATURE_RXDELAY_PRESENT 0             /*!< (unspecified)                                                        */
+#define SPIM22_FEATURE_RXDELAY_PRESENT 1             /*!< (unspecified)                                                        */
 #define SPIM22_STALL_STATUS_PRESENT 0                /*!< (unspecified)                                                        */
 #define SPIM22_STALL_STATUS_TX_PRESENT 0             /*!< (unspecified)                                                        */
 #define SPIM22_HSSPI 0                               /*!< (unspecified)                                                        */
@@ -569,7 +578,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM22_RXDELAY_VALUE_RANGE_MIN 0             /*!< (unspecified)                                                        */
 #define SPIM22_RXDELAY_VALUE_RANGE_MAX 7             /*!< (unspecified)                                                        */
 #define SPIM22_RXDELAY_VALUE_RANGE_SIZE 8            /*!< (unspecified)                                                        */
-#define SPIM22_RXDELAY_RESET_VALUE 2                 /*!< (unspecified)                                                        */
+#define SPIM22_RXDELAY_RESET_VALUE 1                 /*!< (unspecified)                                                        */
 #define SPIM22_RXDELAY_FIELD_WIDTH_MIN 0             /*!< (unspecified)                                                        */
 #define SPIM22_RXDELAY_FIELD_WIDTH_MAX 2             /*!< (unspecified)                                                        */
 #define SPIM22_RXDELAY_FIELD_WIDTH_SIZE 3            /*!< (unspecified)                                                        */
@@ -591,7 +600,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM30_EASYDMA_MAXCNT_SIZE 16                /*!< (unspecified)                                                        */
 #define SPIM30_FEATURE_HARDWARE_CSN_PRESENT 1        /*!< (unspecified)                                                        */
 #define SPIM30_FEATURE_HARDWARE_DCX_PRESENT 0        /*!< (unspecified)                                                        */
-#define SPIM30_FEATURE_RXDELAY_PRESENT 0             /*!< (unspecified)                                                        */
+#define SPIM30_FEATURE_RXDELAY_PRESENT 1             /*!< (unspecified)                                                        */
 #define SPIM30_STALL_STATUS_PRESENT 0                /*!< (unspecified)                                                        */
 #define SPIM30_STALL_STATUS_TX_PRESENT 0             /*!< (unspecified)                                                        */
 #define SPIM30_HSSPI 0                               /*!< (unspecified)                                                        */
@@ -608,7 +617,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM30_RXDELAY_VALUE_RANGE_MIN 0             /*!< (unspecified)                                                        */
 #define SPIM30_RXDELAY_VALUE_RANGE_MAX 7             /*!< (unspecified)                                                        */
 #define SPIM30_RXDELAY_VALUE_RANGE_SIZE 8            /*!< (unspecified)                                                        */
-#define SPIM30_RXDELAY_RESET_VALUE 2                 /*!< (unspecified)                                                        */
+#define SPIM30_RXDELAY_RESET_VALUE 1                 /*!< (unspecified)                                                        */
 #define SPIM30_RXDELAY_FIELD_WIDTH_MIN 0             /*!< (unspecified)                                                        */
 #define SPIM30_RXDELAY_FIELD_WIDTH_MAX 2             /*!< (unspecified)                                                        */
 #define SPIM30_RXDELAY_FIELD_WIDTH_SIZE 3            /*!< (unspecified)                                                        */
@@ -806,11 +815,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE30_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
 #define UARTE30_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-/*GLITCH detector*/
+/*Voltage glitch detectors*/
 #define GLITCHDET_PRESENT 1
 #define GLITCHDET_COUNT 1
-
-#define GLITCHDET_GLITCHDETECTORS 1                  /*!< (unspecified)                                                        */
 
 /*RRAM controller GLITCH detector*/
 #define RRAMC_PRESENT 1
@@ -998,9 +1005,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P1_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P1_CTRLSEL_MAP2 1                            /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
-#define P1_PIN_NUM_MAX 15                            /*!< (unspecified)                                                        */
-#define P1_PIN_NUM_SIZE 16                           /*!< (unspecified)                                                        */
-#define P1_PINS_PRESENT 65535                        /*!< (unspecified)                                                        */
+#define P1_PIN_NUM_MAX 16                            /*!< (unspecified)                                                        */
+#define P1_PIN_NUM_SIZE 17                           /*!< (unspecified)                                                        */
+#define P1_PINS_PRESENT 131071                       /*!< (unspecified)                                                        */
 #define P1_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P1_RETAIN 0                                  /*!< (unspecified)                                                        */
 #define P1_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1014,9 +1021,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P0_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P0_CTRLSEL_MAP2 1                            /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
-#define P0_PIN_NUM_MAX 4                             /*!< (unspecified)                                                        */
-#define P0_PIN_NUM_SIZE 5                            /*!< (unspecified)                                                        */
-#define P0_PINS_PRESENT 31                           /*!< (unspecified)                                                        */
+#define P0_PIN_NUM_MAX 6                             /*!< (unspecified)                                                        */
+#define P0_PIN_NUM_SIZE 7                            /*!< (unspecified)                                                        */
+#define P0_PINS_PRESENT 127                          /*!< (unspecified)                                                        */
 #define P0_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P0_RETAIN 0                                  /*!< (unspecified)                                                        */
 #define P0_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1311,6 +1318,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RADIO_PRESENT 1
 #define RADIO_COUNT 1
 
+#define RADIO_IRQ_COUNT 2
 #define RADIO_WHITENINGPOLY 1                        /*!< (unspecified)                                                        */
 #define RADIO_ADPLLCOMPANION_INCLUDE_DMA 0           /*!< (unspecified)                                                        */
 
@@ -1459,6 +1467,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PDM20_EASYDMATEMP 1                          /*!< (unspecified)                                                        */
 #define PDM20_SAMPLE16 0                             /*!< (unspecified)                                                        */
 #define PDM20_SAMPLE48 1                             /*!< (unspecified)                                                        */
+#define PDM20_MCLKCONFIG_TEMPADDRESS 1               /*!< (unspecified)                                                        */
+#define PDM20_PRESCALER_PRESENT 1                    /*!< (unspecified)                                                        */
 #define PDM20_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
 #define PDM20_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
 #define PDM20_EASYDMAFULLLPMODEINCLUDED 0            /*!< (unspecified)                                                        */
@@ -1470,6 +1480,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PDM21_EASYDMATEMP 1                          /*!< (unspecified)                                                        */
 #define PDM21_SAMPLE16 0                             /*!< (unspecified)                                                        */
 #define PDM21_SAMPLE48 1                             /*!< (unspecified)                                                        */
+#define PDM21_MCLKCONFIG_TEMPADDRESS 1               /*!< (unspecified)                                                        */
+#define PDM21_PRESCALER_PRESENT 1                    /*!< (unspecified)                                                        */
 #define PDM21_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
 #define PDM21_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
 #define PDM21_EASYDMAFULLLPMODEINCLUDED 0            /*!< (unspecified)                                                        */
@@ -1573,6 +1585,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GPIOTE_PRESENT 1
 #define GPIOTE_COUNT 2
 
+#define GPIOTE20_IRQ_COUNT 2
 #define GPIOTE20_LATENCY 0                           /*!< (unspecified)                                                        */
 #define GPIOTE20_GPIOTE_NCHANNELS_MIN 0              /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE20_GPIOTE_NCHANNELS_MAX 7              /*!< Number of GPIOTE channels: 0..7                                      */
@@ -1585,6 +1598,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GPIOTE20_GPIOTE_NINTERRUPTS_SIZE 2           /*!< Number of GPIOTE interrupts: 0..1                                    */
 #define GPIOTE20_HAS_PORT_EVENT 1                    /*!< (unspecified)                                                        */
 
+#define GPIOTE30_IRQ_COUNT 2
 #define GPIOTE30_LATENCY 0                           /*!< (unspecified)                                                        */
 #define GPIOTE30_GPIOTE_NCHANNELS_MIN 0              /*!< Number of GPIOTE channels: 0..3                                      */
 #define GPIOTE30_GPIOTE_NCHANNELS_MAX 3              /*!< Number of GPIOTE channels: 0..3                                      */
@@ -1629,6 +1643,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_PRESENT 1
 #define GRTC_COUNT 1
 
+#define GRTC_IRQ_COUNT 4
 #define GRTC_MSBWIDTH_MIN 0                          /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
                                                           0..14*/
 #define GRTC_MSBWIDTH_MAX 14                         /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
@@ -1652,6 +1667,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_CLKSELREG 1                             /*!< (unspecified)                                                        */
 #define GRTC_CLKSELLFLPRC 0                          /*!< (unspecified)                                                        */
 #define GRTC_CCADD_WRITE_ONLY 0                      /*!< (unspecified)                                                        */
+
+/*PCGC Master*/
+#define PCGCMASTER_PRESENT 1
+#define PCGCMASTER_COUNT 2
+
+#define PCGCM20_POWERCONSUMPTIONCALC 1               /*!< (unspecified)                                                        */
+#define PCGCM20_SETPWRCONTHRESHOLDBASE 1             /*!< (unspecified)                                                        */
+#define PCGCM20_CLOCKFORCEREG 1                      /*!< (unspecified)                                                        */
+#define PCGCM20_MASTERFORCEREG 1                     /*!< (unspecified)                                                        */
+
+#define PCGCM30_POWERCONSUMPTIONCALC 1               /*!< (unspecified)                                                        */
+#define PCGCM30_SETPWRCONTHRESHOLDBASE 1             /*!< (unspecified)                                                        */
+#define PCGCM30_CLOCKFORCEREG 1                      /*!< (unspecified)                                                        */
+#define PCGCM30_MASTERFORCEREG 1                     /*!< (unspecified)                                                        */
 
 /*Comparator*/
 #define COMP_PRESENT 1
@@ -1685,9 +1714,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_PRESENT 1
 #define CLOCK_COUNT 1
 
+#define CLOCK_XOTUNE 1                               /*!< (unspecified)                                                        */
+
 /*Power control*/
 #define POWER_PRESENT 1
 #define POWER_COUNT 1
+
+#define POWER_CONSTLATSTAT 1                         /*!< (unspecified)                                                        */
 
 /*Reset control*/
 #define RESET_PRESENT 1
@@ -1700,15 +1733,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*Voltage regulators*/
 #define REGULATORS_PRESENT 1
 #define REGULATORS_COUNT 1
-
-/*PCGC Master*/
-#define PCGCMASTER_PRESENT 1
-#define PCGCMASTER_COUNT 1
-
-#define PCGCM30_POWERCONSUMPTIONCALC 1               /*!< (unspecified)                                                        */
-#define PCGCM30_SETPWRCONTHRESHOLDBASE 1             /*!< (unspecified)                                                        */
-#define PCGCM30_CLOCKFORCEREG 1                      /*!< (unspecified)                                                        */
-#define PCGCM30_MASTERFORCEREG 1                     /*!< (unspecified)                                                        */
 
 
 #ifdef __cplusplus

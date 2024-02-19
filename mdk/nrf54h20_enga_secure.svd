@@ -8,7 +8,7 @@
   <version>1</version>
   <description>LiliumSOC1 reference description for system-on-chip with many ARM 32-bit Cortex-M33 microcontrollers</description>
   <licenseText>
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -100280,7 +100280,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_RTCOMPARESYNC</name>
-          <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
+          <description>Synchronize always-on LFCLK clock domain</description>
           <addressOffset>0x164</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -100288,7 +100288,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>EVENTS_RTCOMPARESYNC</name>
-              <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
+              <description>Synchronize always-on LFCLK clock domain</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>

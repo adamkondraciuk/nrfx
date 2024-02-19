@@ -8,7 +8,7 @@
   <version>1</version>
   <description>System-on-chip with a 32-bit Arm Cortex-M33 microcontroller</description>
   <licenseText>
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -435,6 +435,68 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <name>FPGA</name>
                     <description>Device is an FPGA</description>
                     <value>0xFFFFFFFF</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>FICRREVISION</name>
+            <description>FICR revision</description>
+            <addressOffset>0x034</addressOffset>
+            <access>read-only</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>REV</name>
+                <description>Incremental number</description>
+                <lsb>0</lsb>
+                <msb>7</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unversioned</name>
+                    <description>Device does not use FICR revision</description>
+                    <value>0xFF</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>DAY</name>
+                <description>Day</description>
+                <lsb>8</lsb>
+                <msb>15</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unversioned</name>
+                    <description>Device does not use FICR revision</description>
+                    <value>0xFF</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>MONTH</name>
+                <description>Month</description>
+                <lsb>16</lsb>
+                <msb>23</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unversioned</name>
+                    <description>Device does not use FICR revision</description>
+                    <value>0xFF</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>YEAR</name>
+                <description>Year</description>
+                <lsb>24</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unversioned</name>
+                    <description>Device does not use FICR revision</description>
+                    <value>0xFF</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -1105,208 +1167,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <dim>1</dim>
           <dimIncrement>0x020</dimIncrement>
-          <name>APPROTECT[%s]</name>
-          <description>Access Port Protection Registers</description>
-          <headerStructName>UICR_APPROTECT</headerStructName>
-          <access>read-writeonce</access>
-          <addressOffset>0x000</addressOffset>
-          <register>
-            <name>PROTECT0</name>
-            <description>Description cluster: Access port protection</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-writeonce</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PALL</name>
-                <lsb>0</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Protected</name>
-                    <description>Blocks debugger read/write access to all CPU registers and memory mapped addresses, and locks TAMPC PROTECT.DOMAIN DBGEN and NIDEN signal protectors.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <dim>0x3</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>UNPROTECT0[%s]</name>
-            <description>Description collection: Access port protection</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PALL</name>
-                <lsb>0</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>TAMPC is locked for all other values than Unprotected.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <dim>0x3</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>UNPROTECT1[%s]</name>
-            <description>Description collection: Access port protection</description>
-            <addressOffset>0x010</addressOffset>
-            <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PALL</name>
-                <lsb>0</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>TAMPC is locked for all other values than Unprotected.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>PROTECT1</name>
-            <description>Description cluster: Access port protection</description>
-            <addressOffset>0x01C</addressOffset>
-            <access>read-writeonce</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PALL</name>
-                <lsb>0</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Protected</name>
-                    <description>Blocks debugger read/write access to all CPU registers and memory mapped addresses, and locks TAMPC PROTECT.DOMAIN DBGEN and NIDEN signal protectors.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <cluster>
-          <dim>1</dim>
-          <dimIncrement>0x020</dimIncrement>
-          <name>SECUREAPPROTECT[%s]</name>
-          <description>Access Port Protection Registers</description>
-          <headerStructName>UICR_SECUREAPPROTECT</headerStructName>
-          <access>read-writeonce</access>
-          <addressOffset>0x020</addressOffset>
-          <register>
-            <name>PROTECT0</name>
-            <description>Description cluster: Access port protection</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-writeonce</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PALL</name>
-                <lsb>0</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Protected</name>
-                    <description>Blocks debugger read/write access to all CPU registers and memory mapped addresses, and locks TAMPC PROTECT.DOMAIN SPIDEN and SPNIDEN signal protectors.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <dim>0x3</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>UNPROTECT0[%s]</name>
-            <description>Description collection: Access port protection register o</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PALL</name>
-                <lsb>0</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>TAMPC is locked for all other values than Unprotected.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <dim>0x3</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>UNPROTECT1[%s]</name>
-            <description>Description collection: Access port protection</description>
-            <addressOffset>0x010</addressOffset>
-            <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PALL</name>
-                <lsb>0</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>TAMPC is locked for all other values than Unprotected.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>PROTECT1</name>
-            <description>Description cluster: Access port protection register</description>
-            <addressOffset>0x01C</addressOffset>
-            <access>read-writeonce</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PALL</name>
-                <lsb>0</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Protected</name>
-                    <description>Blocks debugger read/write access to all CPU registers and memory mapped addresses, and locks TAMPC PROTECT.DOMAIN SPIDEN and SPNIDEN signal protectors.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <cluster>
-          <dim>1</dim>
-          <dimIncrement>0x020</dimIncrement>
           <name>AUXAPPROTECT[%s]</name>
           <description>Access Port Protection Registers</description>
           <headerStructName>UICR_AUXAPPROTECT</headerStructName>
@@ -1414,13 +1274,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <access>read-writeonce</access>
           <addressOffset>0x060</addressOffset>
           <register>
-            <dim>0x3</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>PROTECT0[%s]</name>
-            <description>Description collection: Erase protection</description>
-            <addressOffset>0x004</addressOffset>
+            <name>PROTECT0</name>
+            <description>Description cluster: Erase protection</description>
+            <addressOffset>0x000</addressOffset>
             <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -1430,7 +1288,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Protected</name>
-                    <description>Protected, the device cannot be erased and TAMPC PROTECT.ERASEPROTECT signal protector is locked.</description>
+                    <description>Protected, the device cannot be erased using the CTRL-AP Erase all function and TAMPC PROTECT.ERASEPROTECT signal protector is locked.</description>
                     <value>0x50FA50FA</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -1440,11 +1298,29 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <dim>0x3</dim>
             <dimIncrement>0x4</dimIncrement>
-            <name>PROTECT1[%s]</name>
-            <description>Description collection: Erase protection</description>
-            <addressOffset>0x010</addressOffset>
-            <access>read-writeonce</access>
+            <name>UNPROTECT0[%s]</name>
+            <description>Description collection: This register is not used</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-only</access>
             <resetValue>0x50FA50FA</resetValue>
+            <size>0x20</size>
+          </register>
+          <register>
+            <dim>0x3</dim>
+            <dimIncrement>0x4</dimIncrement>
+            <name>UNPROTECT1[%s]</name>
+            <description>Description collection: This register is not used</description>
+            <addressOffset>0x010</addressOffset>
+            <access>read-only</access>
+            <resetValue>0x50FA50FA</resetValue>
+            <size>0x20</size>
+          </register>
+          <register>
+            <name>PROTECT1</name>
+            <description>Description cluster: Erase protection</description>
+            <addressOffset>0x01C</addressOffset>
+            <access>read-writeonce</access>
+            <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -1454,7 +1330,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Protected</name>
-                    <description>Protected, the device cannot be erased and TAMPC PROTECT.ERASEPROTECT signal protector is locked.</description>
+                    <description>Protected, the device cannot be erased using the CTRL-AP Erase all function and TAMPC PROTECT.ERASEPROTECT signal protector is locked.</description>
                     <value>0x50FA50FA</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -19690,7 +19566,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_END</name>
-          <description>Address resolution procedure complete</description>
+          <description>Address resolution procedure complete or ended due to an error</description>
           <addressOffset>0x100</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -19698,7 +19574,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>EVENTS_END</name>
-              <description>Address resolution procedure complete</description>
+              <description>Address resolution procedure complete or ended due to an error</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -19755,6 +19631,34 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <field>
               <name>EVENTS_NOTRESOLVED</name>
               <description>Address not resolved</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ERROR</name>
+          <description>Operation aborted because of a STOP task or due to an error</description>
+          <addressOffset>0x10C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ERROR</name>
+              <description>Operation aborted because of a STOP task or due to an error</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -19872,6 +19776,39 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
+          <name>PUBLISH_ERROR</name>
+          <description>Publish configuration for event ERROR</description>
+          <addressOffset>0x18C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ERROR will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>INTEN</name>
           <description>Enable or disable interrupt</description>
           <addressOffset>0x300</addressOffset>
@@ -19920,6 +19857,24 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Enable or disable interrupt for event NOTRESOLVED</description>
               <lsb>2</lsb>
               <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ERROR</name>
+              <description>Enable or disable interrupt for event ERROR</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -20002,6 +19957,33 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Write '1' to enable interrupt for event NOTRESOLVED</description>
               <lsb>2</lsb>
               <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ERROR</name>
+              <description>Write '1' to enable interrupt for event ERROR</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -20112,6 +20094,71 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <name>Clear</name>
                   <description>Disable</description>
                   <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ERROR</name>
+              <description>Write '1' to disable interrupt for event ERROR</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ERRORSTATUS</name>
+          <description>Error status</description>
+          <addressOffset>0x404</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ERRORSTATUS</name>
+              <description>Error status when the ERROR event is generated</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NoError</name>
+                  <description>No errors have occurred</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureInptrEnd</name>
+                  <description>End of INPTR job list before data structure was read.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureOutptrEnd</name>
+                  <description>End of OUTPTR job list before data structure was read.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DmaError</name>
+                  <description>Bus error during DMA access.</description>
+                  <value>0x4</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -20443,7 +20490,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_END</name>
-          <description>Encrypt/decrypt complete</description>
+          <description>Encrypt/decrypt complete or ended because of an error</description>
           <addressOffset>0x104</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -20451,7 +20498,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>EVENTS_END</name>
-              <description>Encrypt/decrypt complete</description>
+              <description>Encrypt/decrypt complete or ended because of an error</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -21570,6 +21617,49 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <name>Clear</name>
                   <description>Disable</description>
                   <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ERRORSTATUS</name>
+          <description>Error status</description>
+          <addressOffset>0x400</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ERRORSTATUS</name>
+              <description>Error status when the ERROR event is generated</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NoError</name>
+                  <description>No errors have occurred</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureInptrEnd</name>
+                  <description>End of INPTR job list before data structure was read.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureOutptrEnd</name>
+                  <description>End of OUTPTR job list before data structure was read.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EncryptionTooSlow</name>
+                  <description>Encryption of the unencrypted data structure did not complete in time.</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DmaError</name>
+                  <description>Bus error during DMA access.</description>
+                  <value>0x4</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -33156,7 +33246,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral>
       <name>GLOBAL_GLITCHDET_S</name>
-      <description>GLITCH detector</description>
+      <description>Voltage glitch detectors</description>
       <baseAddress>0x5004B000</baseAddress>
       <headerStructName>GLITCHDET</headerStructName>
       <!--Security dma=NA-->
@@ -33169,228 +33259,221 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <groupName>GLITCHDET</groupName>
       <size>0x20</size>
       <registers>
-        <cluster>
-          <name>GLITCHDETECTOR</name>
-          <description>Glitch detector</description>
-          <headerStructName>GLITCHDET_GLITCHDETECTOR</headerStructName>
-          <access>read-write</access>
+        <register>
+          <name>CONFIG</name>
+          <description>Configuration for glitch detector</description>
           <addressOffset>0x5A0</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000001</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ENABLE</name>
+              <description>Enable glitch detector</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable glitch detector</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable glitch detector</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>MODE</name>
+              <description>Glitch detector mode</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>HighPassFilter</name>
+                  <description>High pass filter mode</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>CapDiv</name>
+                  <description>Cap divider mode</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TRIM</name>
+          <description>Trim configuration for glitch detector</description>
+          <addressOffset>0x5A4</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00004235</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>VREFLDVDD</name>
+              <description>Voltage trimming value for VREFL_DVDD</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>VREFLVDD</name>
+              <description>Voltage trimming value for VREFL_VDD</description>
+              <lsb>4</lsb>
+              <msb>6</msb>
+            </field>
+            <field>
+              <name>VREFHDVDD</name>
+              <description>Voltage trimming value for VREFH_DVDD</description>
+              <lsb>8</lsb>
+              <msb>10</msb>
+            </field>
+            <field>
+              <name>VREFHVDD</name>
+              <description>Voltage trimming value for VREFH_VDD</description>
+              <lsb>12</lsb>
+              <msb>14</msb>
+            </field>
+          </fields>
+        </register>
+        <cluster>
+          <name>DFT</name>
+          <description>Unspecified</description>
+          <headerStructName>GLITCHDET_DFT</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x5B0</addressOffset>
           <register>
-            <name>CONFIG</name>
-            <description>Configuration for glitch detector</description>
-            <addressOffset>0x000</addressOffset>
+            <name>ATB0CONFIG</name>
+            <description>Analog Test Bus 0 (ATB0) configuration</description>
+            <addressOffset>0x00</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000001</resetValue>
+            <resetValue>0x00000000</resetValue>
             <size>0x20</size>
             <fields>
               <field>
-                <name>ENABLE</name>
-                <description>Enable glitch detector</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Disable glitch detector</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Enable glitch detector</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MODE</name>
-                <description>Glitch detector mode</description>
-                <lsb>4</lsb>
-                <msb>4</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>HighPassFilter</name>
-                    <description>High pass filter mode</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>CapDiv</name>
-                    <description>Cap divider mode</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>TRIM</name>
-            <description>Trim configuration for glitch detector</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00004235</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>VREFLDVDD</name>
-                <description>Voltage trimming value for VREFL_DVDD</description>
+                <name>SELMUX</name>
+                <description>Select multiplexer for ATB0</description>
                 <lsb>0</lsb>
                 <msb>2</msb>
-              </field>
-              <field>
-                <name>VREFLVDD</name>
-                <description>Voltage trimming value for VREFL_VDD</description>
-                <lsb>4</lsb>
-                <msb>6</msb>
-              </field>
-              <field>
-                <name>VREFHDVDD</name>
-                <description>Voltage trimming value for VREFH_DVDD</description>
-                <lsb>8</lsb>
-                <msb>10</msb>
-              </field>
-              <field>
-                <name>VREFHVDD</name>
-                <description>Voltage trimming value for VREFH_VDD</description>
-                <lsb>12</lsb>
-                <msb>14</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>HiZ</name>
+                    <description>High impedance</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VDDDIV</name>
+                    <description>Measure/Force VDD_DIV voltage from external</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VDDDIG0V9</name>
+                    <description>Measure/Force VDD_DIG_0V9 voltage from external</description>
+                    <value>0x2</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VSS</name>
+                    <description>VSS</description>
+                    <value>0x3</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>GLITCHSRVDD3V0</name>
+                    <description>Internal signal - GLITCH_SR_VDD_3V0</description>
+                    <value>0x4</value>
+                  </enumeratedValue>
+                </enumeratedValues>
               </field>
             </fields>
           </register>
-          <cluster>
-            <name>DFT</name>
-            <description>Unspecified</description>
-            <headerStructName>GLITCHDET_GLITCHDETECTOR_DFT</headerStructName>
+          <register>
+            <name>ATB1CONFIG</name>
+            <description>Analog Test Bus 1 (ATB1) configuration</description>
+            <addressOffset>0x04</addressOffset>
             <access>read-write</access>
-            <addressOffset>0x10</addressOffset>
-            <register>
-              <name>ATB0CONFIG</name>
-              <description>Analog Test Bus 0 (ATB0) configuration</description>
-              <addressOffset>0x00</addressOffset>
-              <access>read-write</access>
-              <resetValue>0x00000000</resetValue>
-              <size>0x20</size>
-              <fields>
-                <field>
-                  <name>SELMUX</name>
-                  <description>Select multiplexer for ATB0</description>
-                  <lsb>0</lsb>
-                  <msb>2</msb>
-                  <enumeratedValues>
-                    <enumeratedValue>
-                      <name>HiZ</name>
-                      <description>High impedance</description>
-                      <value>0x0</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>VDDDIV</name>
-                      <description>Measure/Force VDD_DIV voltage from external</description>
-                      <value>0x1</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>VDDDIG0V9</name>
-                      <description>Measure/Force VDD_DIG_0V9 voltage from external</description>
-                      <value>0x2</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>VSS</name>
-                      <description>VSS</description>
-                      <value>0x3</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>GLITCHSRVDD3V0</name>
-                      <description>Internal signal - GLITCH_SR_VDD_3V0</description>
-                      <value>0x4</value>
-                    </enumeratedValue>
-                  </enumeratedValues>
-                </field>
-              </fields>
-            </register>
-            <register>
-              <name>ATB1CONFIG</name>
-              <description>Analog Test Bus 1 (ATB1) configuration</description>
-              <addressOffset>0x04</addressOffset>
-              <access>read-write</access>
-              <resetValue>0x00000000</resetValue>
-              <size>0x20</size>
-              <fields>
-                <field>
-                  <name>SELMUX</name>
-                  <description>Select multiplexer for ATB1</description>
-                  <lsb>0</lsb>
-                  <msb>2</msb>
-                  <enumeratedValues>
-                    <enumeratedValue>
-                      <name>HiZ</name>
-                      <description>High impedance</description>
-                      <value>0x0</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>VREFHVDD</name>
-                      <description>Measure VREFH_VDD voltage</description>
-                      <value>0x1</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>VREFLVDD</name>
-                      <description>Measure VREFL_VDD voltage</description>
-                      <value>0x2</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>VREFHDAVDD</name>
-                      <description>Measure VREFH_DVDD voltage</description>
-                      <value>0x3</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>VREFLDVDD</name>
-                      <description>Measure VREFL_DVDD voltage</description>
-                      <value>0x4</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>GLITCHSRDVDD3V0</name>
-                      <description>Internal signal - GLITCH_SR_DVDD_3V0</description>
-                      <value>0x5</value>
-                    </enumeratedValue>
-                  </enumeratedValues>
-                </field>
-              </fields>
-            </register>
-            <register>
-              <name>ATB2CONFIG</name>
-              <description>Analog Test Bus 2 (ATB2) configuration</description>
-              <addressOffset>0x08</addressOffset>
-              <access>read-write</access>
-              <resetValue>0x00000000</resetValue>
-              <size>0x20</size>
-              <fields>
-                <field>
-                  <name>SELMUX</name>
-                  <description>Select multiplexer for ATB2</description>
-                  <lsb>0</lsb>
-                  <msb>1</msb>
-                  <enumeratedValues>
-                    <enumeratedValue>
-                      <name>HiZ</name>
-                      <description>High impedance</description>
-                      <value>0x0</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>VTAMPORDVDD3V0</name>
-                      <description>Internal signal - VTAMP_OR_DVDD_3V0</description>
-                      <value>0x1</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>VTAMPORVDD3V0</name>
-                      <description>Internal signal - VTAMP_OR_VDD_3V0</description>
-                      <value>0x2</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>GLITCHNINT3V0</name>
-                      <description>Internal signal - GLITCH_N_INT_3V0</description>
-                      <value>0x3</value>
-                    </enumeratedValue>
-                  </enumeratedValues>
-                </field>
-              </fields>
-            </register>
-          </cluster>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>SELMUX</name>
+                <description>Select multiplexer for ATB1</description>
+                <lsb>0</lsb>
+                <msb>2</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>HiZ</name>
+                    <description>High impedance</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VREFHVDD</name>
+                    <description>Measure VREFH_VDD voltage</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VREFLVDD</name>
+                    <description>Measure VREFL_VDD voltage</description>
+                    <value>0x2</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VREFHDAVDD</name>
+                    <description>Measure VREFH_DVDD voltage</description>
+                    <value>0x3</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VREFLDVDD</name>
+                    <description>Measure VREFL_DVDD voltage</description>
+                    <value>0x4</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>GLITCHSRDVDD3V0</name>
+                    <description>Internal signal - GLITCH_SR_DVDD_3V0</description>
+                    <value>0x5</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>ATB2CONFIG</name>
+            <description>Analog Test Bus 2 (ATB2) configuration</description>
+            <addressOffset>0x08</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>SELMUX</name>
+                <description>Select multiplexer for ATB2</description>
+                <lsb>0</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>HiZ</name>
+                    <description>High impedance</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VTAMPORDVDD3V0</name>
+                    <description>Internal signal - VTAMP_OR_DVDD_3V0</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VTAMPORVDD3V0</name>
+                    <description>Internal signal - VTAMP_OR_VDD_3V0</description>
+                    <value>0x2</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>GLITCHNINT3V0</name>
+                    <description>Internal signal - GLITCH_N_INT_3V0</description>
+                    <value>0x3</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
         </cluster>
       </registers>
     </peripheral>
@@ -49205,6 +49288,94 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
+          <name>AXIPROLONGREQUEST</name>
+          <description>Configuration of the AxiRequestProlonger module.</description>
+          <addressOffset>0x588</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x80000010</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>PROLONGVALUE</name>
+              <description>Number of additional clocks the request is prolonged</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>SIDEBAND</name>
+              <description>Disable or enable additional sideband request</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable sideband</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable sideband</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>LPICONSERVATIVEMODE</name>
+              <description>Disable or enable LPI conservative mode</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable posted writes</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable posted writes</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FORCEON</name>
+              <description>Disable or enable constant prolong request</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable FORCEON</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable FORCEON</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ENABLE</name>
+              <description>Disable or enable the prolong functionality</description>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable prolong functionality</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable prolong functionality</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <dim>0x1</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>MAINREG[%s]</name>
@@ -52522,7 +52693,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_END</name>
-          <description>Address resolution procedure complete</description>
+          <description>Address resolution procedure complete or ended due to an error</description>
           <addressOffset>0x100</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -52530,7 +52701,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>EVENTS_END</name>
-              <description>Address resolution procedure complete</description>
+              <description>Address resolution procedure complete or ended due to an error</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -52587,6 +52758,34 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <field>
               <name>EVENTS_NOTRESOLVED</name>
               <description>Address not resolved</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ERROR</name>
+          <description>Operation aborted because of a STOP task or due to an error</description>
+          <addressOffset>0x10C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ERROR</name>
+              <description>Operation aborted because of a STOP task or due to an error</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -52704,6 +52903,39 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
+          <name>PUBLISH_ERROR</name>
+          <description>Publish configuration for event ERROR</description>
+          <addressOffset>0x18C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ERROR will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>INTEN</name>
           <description>Enable or disable interrupt</description>
           <addressOffset>0x300</addressOffset>
@@ -52752,6 +52984,24 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Enable or disable interrupt for event NOTRESOLVED</description>
               <lsb>2</lsb>
               <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ERROR</name>
+              <description>Enable or disable interrupt for event ERROR</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -52834,6 +53084,33 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Write '1' to enable interrupt for event NOTRESOLVED</description>
               <lsb>2</lsb>
               <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ERROR</name>
+              <description>Write '1' to enable interrupt for event ERROR</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -52944,6 +53221,71 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <name>Clear</name>
                   <description>Disable</description>
                   <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ERROR</name>
+              <description>Write '1' to disable interrupt for event ERROR</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ERRORSTATUS</name>
+          <description>Error status</description>
+          <addressOffset>0x404</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ERRORSTATUS</name>
+              <description>Error status when the ERROR event is generated</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NoError</name>
+                  <description>No errors have occurred</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureInptrEnd</name>
+                  <description>End of INPTR job list before data structure was read.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureOutptrEnd</name>
+                  <description>End of OUTPTR job list before data structure was read.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DmaError</name>
+                  <description>Bus error during DMA access.</description>
+                  <value>0x4</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -53275,7 +53617,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_END</name>
-          <description>Encrypt/decrypt complete</description>
+          <description>Encrypt/decrypt complete or ended because of an error</description>
           <addressOffset>0x104</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -53283,7 +53625,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>EVENTS_END</name>
-              <description>Encrypt/decrypt complete</description>
+              <description>Encrypt/decrypt complete or ended because of an error</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -54512,6 +54854,49 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <name>Clear</name>
                   <description>Disable</description>
                   <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ERRORSTATUS</name>
+          <description>Error status</description>
+          <addressOffset>0x400</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ERRORSTATUS</name>
+              <description>Error status when the ERROR event is generated</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NoError</name>
+                  <description>No errors have occurred</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureInptrEnd</name>
+                  <description>End of INPTR job list before data structure was read.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureOutptrEnd</name>
+                  <description>End of OUTPTR job list before data structure was read.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EncryptionTooSlow</name>
+                  <description>Encryption of the unencrypted data structure did not complete in time.</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DmaError</name>
+                  <description>Bus error during DMA access.</description>
+                  <value>0x4</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -80766,6 +81151,94 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
+          <name>AXIPROLONGREQUEST</name>
+          <description>Configuration of the AxiRequestProlonger module.</description>
+          <addressOffset>0x588</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x80000010</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>PROLONGVALUE</name>
+              <description>Number of additional clocks the request is prolonged</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>SIDEBAND</name>
+              <description>Disable or enable additional sideband request</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable sideband</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable sideband</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>LPICONSERVATIVEMODE</name>
+              <description>Disable or enable LPI conservative mode</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable posted writes</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable posted writes</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FORCEON</name>
+              <description>Disable or enable constant prolong request</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable FORCEON</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable FORCEON</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ENABLE</name>
+              <description>Disable or enable the prolong functionality</description>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable prolong functionality</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable prolong functionality</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <dim>0x1</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>MAINREG[%s]</name>
@@ -82967,10 +83440,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_BUSERROR_STOP</name>
-              <description>Shortcut between event DMA.RX.BUSERROR and task STOP</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
+              <name>LASTRX_STOP</name>
+              <description>Shortcut between event LASTRX and task STOP</description>
+              <lsb>12</lsb>
+              <msb>12</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -82985,8 +83458,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_TX_BUSERROR_STOP</name>
-              <description>Shortcut between event DMA.TX.BUSERROR and task STOP</description>
+              <name>DMA_RX_BUSERROR_STOP</name>
+              <description>Shortcut between event DMA.RX.BUSERROR and task STOP</description>
               <lsb>19</lsb>
               <msb>19</msb>
               <enumeratedValues>
@@ -83003,8 +83476,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1</name>
-              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[1] Allows daisy-chaining match events.</description>
+              <name>DMA_TX_BUSERROR_STOP</name>
+              <description>Shortcut between event DMA.TX.BUSERROR and task STOP</description>
               <lsb>20</lsb>
               <msb>20</msb>
               <enumeratedValues>
@@ -83021,8 +83494,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2</name>
-              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[2] Allows daisy-chaining match events.</description>
+              <name>DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1</name>
+              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[1] Allows daisy-chaining match events.</description>
               <lsb>21</lsb>
               <msb>21</msb>
               <enumeratedValues>
@@ -83039,8 +83512,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3</name>
-              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[3] Allows daisy-chaining match events.</description>
+              <name>DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2</name>
+              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[2] Allows daisy-chaining match events.</description>
               <lsb>22</lsb>
               <msb>22</msb>
               <enumeratedValues>
@@ -83057,8 +83530,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0</name>
-              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[0] Allows daisy-chaining match events.</description>
+              <name>DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3</name>
+              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[3] Allows daisy-chaining match events.</description>
               <lsb>23</lsb>
               <msb>23</msb>
               <enumeratedValues>
@@ -83075,8 +83548,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0</name>
-              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n]</description>
+              <name>DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0</name>
+              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.ENABLEMATCH[0] Allows daisy-chaining match events.</description>
               <lsb>24</lsb>
               <msb>24</msb>
               <enumeratedValues>
@@ -83093,7 +83566,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1</name>
+              <name>DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0</name>
               <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n]</description>
               <lsb>25</lsb>
               <msb>25</msb>
@@ -83111,7 +83584,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2</name>
+              <name>DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1</name>
               <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n]</description>
               <lsb>26</lsb>
               <msb>26</msb>
@@ -83129,10 +83602,28 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3</name>
+              <name>DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2</name>
               <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n]</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3</name>
+              <description>Shortcut between event DMA.RX.MATCH[n] and task DMA.RX.DISABLEMATCH[n]</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -90382,7 +90873,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <registers>
         <cluster>
           <dim>2</dim>
-          <dimIncrement>0x010</dimIncrement>
+          <dimIncrement>0x00C</dimIncrement>
           <name>POWER[%s]</name>
           <description>Unspecified</description>
           <headerStructName>MEMCONF_POWER</headerStructName>
@@ -90390,7 +90881,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <addressOffset>0x500</addressOffset>
           <register>
             <name>CONTROL</name>
-            <description>Description cluster: RAM/ROM[n] power control register.</description>
+            <description>Description cluster: Control memory block power.</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -90398,7 +90889,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>MEM0</name>
-                <description>Keep the RAM/ROM block MEM[0] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[0] on or off when in System ON mode.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -90416,7 +90907,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM1</name>
-                <description>Keep the RAM/ROM block MEM[1] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[1] on or off when in System ON mode.</description>
                 <lsb>1</lsb>
                 <msb>1</msb>
                 <enumeratedValues>
@@ -90434,7 +90925,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM2</name>
-                <description>Keep the RAM/ROM block MEM[2] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[2] on or off when in System ON mode.</description>
                 <lsb>2</lsb>
                 <msb>2</msb>
                 <enumeratedValues>
@@ -90452,7 +90943,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM3</name>
-                <description>Keep the RAM/ROM block MEM[3] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[3] on or off when in System ON mode.</description>
                 <lsb>3</lsb>
                 <msb>3</msb>
                 <enumeratedValues>
@@ -90470,7 +90961,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM4</name>
-                <description>Keep the RAM/ROM block MEM[4] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[4] on or off when in System ON mode.</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
                 <enumeratedValues>
@@ -90488,7 +90979,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM5</name>
-                <description>Keep the RAM/ROM block MEM[5] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[5] on or off when in System ON mode.</description>
                 <lsb>5</lsb>
                 <msb>5</msb>
                 <enumeratedValues>
@@ -90506,7 +90997,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM6</name>
-                <description>Keep the RAM/ROM block MEM[6] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[6] on or off when in System ON mode.</description>
                 <lsb>6</lsb>
                 <msb>6</msb>
                 <enumeratedValues>
@@ -90524,7 +91015,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM7</name>
-                <description>Keep the RAM/ROM block MEM[7] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[7] on or off when in System ON mode.</description>
                 <lsb>7</lsb>
                 <msb>7</msb>
                 <enumeratedValues>
@@ -90542,7 +91033,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM8</name>
-                <description>Keep the RAM/ROM block MEM[8] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[8] on or off when in System ON mode.</description>
                 <lsb>8</lsb>
                 <msb>8</msb>
                 <enumeratedValues>
@@ -90560,7 +91051,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM9</name>
-                <description>Keep the RAM/ROM block MEM[9] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[9] on or off when in System ON mode.</description>
                 <lsb>9</lsb>
                 <msb>9</msb>
                 <enumeratedValues>
@@ -90578,7 +91069,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM10</name>
-                <description>Keep the RAM/ROM block MEM[10] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[10] on or off when in System ON mode.</description>
                 <lsb>10</lsb>
                 <msb>10</msb>
                 <enumeratedValues>
@@ -90596,7 +91087,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM11</name>
-                <description>Keep the RAM/ROM block MEM[11] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[11] on or off when in System ON mode.</description>
                 <lsb>11</lsb>
                 <msb>11</msb>
                 <enumeratedValues>
@@ -90614,7 +91105,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM12</name>
-                <description>Keep the RAM/ROM block MEM[12] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[12] on or off when in System ON mode.</description>
                 <lsb>12</lsb>
                 <msb>12</msb>
                 <enumeratedValues>
@@ -90632,7 +91123,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM13</name>
-                <description>Keep the RAM/ROM block MEM[13] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[13] on or off when in System ON mode.</description>
                 <lsb>13</lsb>
                 <msb>13</msb>
                 <enumeratedValues>
@@ -90650,7 +91141,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM14</name>
-                <description>Keep the RAM/ROM block MEM[14] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[14] on or off when in System ON mode.</description>
                 <lsb>14</lsb>
                 <msb>14</msb>
                 <enumeratedValues>
@@ -90668,7 +91159,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM15</name>
-                <description>Keep the RAM/ROM block MEM[15] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[15] on or off when in System ON mode.</description>
                 <lsb>15</lsb>
                 <msb>15</msb>
                 <enumeratedValues>
@@ -90686,7 +91177,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM16</name>
-                <description>Keep the RAM/ROM block MEM[16] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[16] on or off when in System ON mode.</description>
                 <lsb>16</lsb>
                 <msb>16</msb>
                 <enumeratedValues>
@@ -90704,7 +91195,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM17</name>
-                <description>Keep the RAM/ROM block MEM[17] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[17] on or off when in System ON mode.</description>
                 <lsb>17</lsb>
                 <msb>17</msb>
                 <enumeratedValues>
@@ -90722,7 +91213,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM18</name>
-                <description>Keep the RAM/ROM block MEM[18] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[18] on or off when in System ON mode.</description>
                 <lsb>18</lsb>
                 <msb>18</msb>
                 <enumeratedValues>
@@ -90740,7 +91231,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM19</name>
-                <description>Keep the RAM/ROM block MEM[19] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[19] on or off when in System ON mode.</description>
                 <lsb>19</lsb>
                 <msb>19</msb>
                 <enumeratedValues>
@@ -90758,7 +91249,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM20</name>
-                <description>Keep the RAM/ROM block MEM[20] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[20] on or off when in System ON mode.</description>
                 <lsb>20</lsb>
                 <msb>20</msb>
                 <enumeratedValues>
@@ -90776,7 +91267,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM21</name>
-                <description>Keep the RAM/ROM block MEM[21] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[21] on or off when in System ON mode.</description>
                 <lsb>21</lsb>
                 <msb>21</msb>
                 <enumeratedValues>
@@ -90794,7 +91285,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM22</name>
-                <description>Keep the RAM/ROM block MEM[22] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[22] on or off when in System ON mode.</description>
                 <lsb>22</lsb>
                 <msb>22</msb>
                 <enumeratedValues>
@@ -90812,7 +91303,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM23</name>
-                <description>Keep the RAM/ROM block MEM[23] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[23] on or off when in System ON mode.</description>
                 <lsb>23</lsb>
                 <msb>23</msb>
                 <enumeratedValues>
@@ -90830,7 +91321,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM24</name>
-                <description>Keep the RAM/ROM block MEM[24] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[24] on or off when in System ON mode.</description>
                 <lsb>24</lsb>
                 <msb>24</msb>
                 <enumeratedValues>
@@ -90848,7 +91339,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM25</name>
-                <description>Keep the RAM/ROM block MEM[25] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[25] on or off when in System ON mode.</description>
                 <lsb>25</lsb>
                 <msb>25</msb>
                 <enumeratedValues>
@@ -90866,7 +91357,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM26</name>
-                <description>Keep the RAM/ROM block MEM[26] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[26] on or off when in System ON mode.</description>
                 <lsb>26</lsb>
                 <msb>26</msb>
                 <enumeratedValues>
@@ -90884,7 +91375,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM27</name>
-                <description>Keep the RAM/ROM block MEM[27] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[27] on or off when in System ON mode.</description>
                 <lsb>27</lsb>
                 <msb>27</msb>
                 <enumeratedValues>
@@ -90902,7 +91393,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM28</name>
-                <description>Keep the RAM/ROM block MEM[28] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[28] on or off when in System ON mode.</description>
                 <lsb>28</lsb>
                 <msb>28</msb>
                 <enumeratedValues>
@@ -90920,7 +91411,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM29</name>
-                <description>Keep the RAM/ROM block MEM[29] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[29] on or off when in System ON mode.</description>
                 <lsb>29</lsb>
                 <msb>29</msb>
                 <enumeratedValues>
@@ -90938,7 +91429,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM30</name>
-                <description>Keep the RAM/ROM block MEM[30] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[30] on or off when in System ON mode.</description>
                 <lsb>30</lsb>
                 <msb>30</msb>
                 <enumeratedValues>
@@ -90956,7 +91447,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM31</name>
-                <description>Keep the RAM/ROM block MEM[31] on or off when in System ON mode.</description>
+                <description>Keep the memory block MEM[31] on or off when in System ON mode.</description>
                 <lsb>31</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
@@ -90984,7 +91475,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>MEM0</name>
-                <description>Keep the RAM block MEM[0] retained when in System OFF mode.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -91002,7 +91492,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM1</name>
-                <description>Keep the RAM block MEM[1] retained when in System OFF mode.</description>
                 <lsb>1</lsb>
                 <msb>1</msb>
                 <enumeratedValues>
@@ -91020,7 +91509,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM2</name>
-                <description>Keep the RAM block MEM[2] retained when in System OFF mode.</description>
                 <lsb>2</lsb>
                 <msb>2</msb>
                 <enumeratedValues>
@@ -91038,7 +91526,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM3</name>
-                <description>Keep the RAM block MEM[3] retained when in System OFF mode.</description>
                 <lsb>3</lsb>
                 <msb>3</msb>
                 <enumeratedValues>
@@ -91056,7 +91543,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM4</name>
-                <description>Keep the RAM block MEM[4] retained when in System OFF mode.</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
                 <enumeratedValues>
@@ -91074,7 +91560,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM5</name>
-                <description>Keep the RAM block MEM[5] retained when in System OFF mode.</description>
                 <lsb>5</lsb>
                 <msb>5</msb>
                 <enumeratedValues>
@@ -91092,7 +91577,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM6</name>
-                <description>Keep the RAM block MEM[6] retained when in System OFF mode.</description>
                 <lsb>6</lsb>
                 <msb>6</msb>
                 <enumeratedValues>
@@ -91110,7 +91594,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM7</name>
-                <description>Keep the RAM block MEM[7] retained when in System OFF mode.</description>
                 <lsb>7</lsb>
                 <msb>7</msb>
                 <enumeratedValues>
@@ -91128,7 +91611,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM8</name>
-                <description>Keep the RAM block MEM[8] retained when in System OFF mode.</description>
                 <lsb>8</lsb>
                 <msb>8</msb>
                 <enumeratedValues>
@@ -91146,7 +91628,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM9</name>
-                <description>Keep the RAM block MEM[9] retained when in System OFF mode.</description>
                 <lsb>9</lsb>
                 <msb>9</msb>
                 <enumeratedValues>
@@ -91164,7 +91645,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM10</name>
-                <description>Keep the RAM block MEM[10] retained when in System OFF mode.</description>
                 <lsb>10</lsb>
                 <msb>10</msb>
                 <enumeratedValues>
@@ -91182,7 +91662,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM11</name>
-                <description>Keep the RAM block MEM[11] retained when in System OFF mode.</description>
                 <lsb>11</lsb>
                 <msb>11</msb>
                 <enumeratedValues>
@@ -91200,7 +91679,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM12</name>
-                <description>Keep the RAM block MEM[12] retained when in System OFF mode.</description>
                 <lsb>12</lsb>
                 <msb>12</msb>
                 <enumeratedValues>
@@ -91218,7 +91696,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM13</name>
-                <description>Keep the RAM block MEM[13] retained when in System OFF mode.</description>
                 <lsb>13</lsb>
                 <msb>13</msb>
                 <enumeratedValues>
@@ -91236,7 +91713,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM14</name>
-                <description>Keep the RAM block MEM[14] retained when in System OFF mode.</description>
                 <lsb>14</lsb>
                 <msb>14</msb>
                 <enumeratedValues>
@@ -91254,7 +91730,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM15</name>
-                <description>Keep the RAM block MEM[15] retained when in System OFF mode.</description>
                 <lsb>15</lsb>
                 <msb>15</msb>
                 <enumeratedValues>
@@ -91272,7 +91747,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM16</name>
-                <description>Keep the RAM block MEM[16] retained when in System OFF mode.</description>
                 <lsb>16</lsb>
                 <msb>16</msb>
                 <enumeratedValues>
@@ -91290,7 +91764,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM17</name>
-                <description>Keep the RAM block MEM[17] retained when in System OFF mode.</description>
                 <lsb>17</lsb>
                 <msb>17</msb>
                 <enumeratedValues>
@@ -91308,7 +91781,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM18</name>
-                <description>Keep the RAM block MEM[18] retained when in System OFF mode.</description>
                 <lsb>18</lsb>
                 <msb>18</msb>
                 <enumeratedValues>
@@ -91326,7 +91798,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM19</name>
-                <description>Keep the RAM block MEM[19] retained when in System OFF mode.</description>
                 <lsb>19</lsb>
                 <msb>19</msb>
                 <enumeratedValues>
@@ -91344,7 +91815,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM20</name>
-                <description>Keep the RAM block MEM[20] retained when in System OFF mode.</description>
                 <lsb>20</lsb>
                 <msb>20</msb>
                 <enumeratedValues>
@@ -91362,7 +91832,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM21</name>
-                <description>Keep the RAM block MEM[21] retained when in System OFF mode.</description>
                 <lsb>21</lsb>
                 <msb>21</msb>
                 <enumeratedValues>
@@ -91380,7 +91849,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM22</name>
-                <description>Keep the RAM block MEM[22] retained when in System OFF mode.</description>
                 <lsb>22</lsb>
                 <msb>22</msb>
                 <enumeratedValues>
@@ -91398,7 +91866,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM23</name>
-                <description>Keep the RAM block MEM[23] retained when in System OFF mode.</description>
                 <lsb>23</lsb>
                 <msb>23</msb>
                 <enumeratedValues>
@@ -91416,7 +91883,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM24</name>
-                <description>Keep the RAM block MEM[24] retained when in System OFF mode.</description>
                 <lsb>24</lsb>
                 <msb>24</msb>
                 <enumeratedValues>
@@ -91434,7 +91900,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM25</name>
-                <description>Keep the RAM block MEM[25] retained when in System OFF mode.</description>
                 <lsb>25</lsb>
                 <msb>25</msb>
                 <enumeratedValues>
@@ -91452,7 +91917,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM26</name>
-                <description>Keep the RAM block MEM[26] retained when in System OFF mode.</description>
                 <lsb>26</lsb>
                 <msb>26</msb>
                 <enumeratedValues>
@@ -91470,7 +91934,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM27</name>
-                <description>Keep the RAM block MEM[27] retained when in System OFF mode.</description>
                 <lsb>27</lsb>
                 <msb>27</msb>
                 <enumeratedValues>
@@ -91488,7 +91951,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM28</name>
-                <description>Keep the RAM block MEM[28] retained when in System OFF mode.</description>
                 <lsb>28</lsb>
                 <msb>28</msb>
                 <enumeratedValues>
@@ -91506,7 +91968,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM29</name>
-                <description>Keep the RAM block MEM[29] retained when in System OFF mode.</description>
                 <lsb>29</lsb>
                 <msb>29</msb>
                 <enumeratedValues>
@@ -91524,7 +91985,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM30</name>
-                <description>Keep the RAM block MEM[30] retained when in System OFF mode.</description>
                 <lsb>30</lsb>
                 <msb>30</msb>
                 <enumeratedValues>
@@ -91542,593 +92002,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>MEM31</name>
-                <description>Keep the RAM block MEM[31] retained when in System OFF mode.</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>RET2</name>
-            <description>Description cluster: RAM retention for the second bank in the RAM block</description>
-            <addressOffset>0x00C</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>MEM0</name>
-                <description>Keep the second bank in RAM block MEM[0] retained when in System OFF mode.</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM1</name>
-                <description>Keep the second bank in RAM block MEM[1] retained when in System OFF mode.</description>
-                <lsb>1</lsb>
-                <msb>1</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM2</name>
-                <description>Keep the second bank in RAM block MEM[2] retained when in System OFF mode.</description>
-                <lsb>2</lsb>
-                <msb>2</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM3</name>
-                <description>Keep the second bank in RAM block MEM[3] retained when in System OFF mode.</description>
-                <lsb>3</lsb>
-                <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM4</name>
-                <description>Keep the second bank in RAM block MEM[4] retained when in System OFF mode.</description>
-                <lsb>4</lsb>
-                <msb>4</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM5</name>
-                <description>Keep the second bank in RAM block MEM[5] retained when in System OFF mode.</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM6</name>
-                <description>Keep the second bank in RAM block MEM[6] retained when in System OFF mode.</description>
-                <lsb>6</lsb>
-                <msb>6</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM7</name>
-                <description>Keep the second bank in RAM block MEM[7] retained when in System OFF mode.</description>
-                <lsb>7</lsb>
-                <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM8</name>
-                <description>Keep the second bank in RAM block MEM[8] retained when in System OFF mode.</description>
-                <lsb>8</lsb>
-                <msb>8</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM9</name>
-                <description>Keep the second bank in RAM block MEM[9] retained when in System OFF mode.</description>
-                <lsb>9</lsb>
-                <msb>9</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM10</name>
-                <description>Keep the second bank in RAM block MEM[10] retained when in System OFF mode.</description>
-                <lsb>10</lsb>
-                <msb>10</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM11</name>
-                <description>Keep the second bank in RAM block MEM[11] retained when in System OFF mode.</description>
-                <lsb>11</lsb>
-                <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM12</name>
-                <description>Keep the second bank in RAM block MEM[12] retained when in System OFF mode.</description>
-                <lsb>12</lsb>
-                <msb>12</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM13</name>
-                <description>Keep the second bank in RAM block MEM[13] retained when in System OFF mode.</description>
-                <lsb>13</lsb>
-                <msb>13</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM14</name>
-                <description>Keep the second bank in RAM block MEM[14] retained when in System OFF mode.</description>
-                <lsb>14</lsb>
-                <msb>14</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM15</name>
-                <description>Keep the second bank in RAM block MEM[15] retained when in System OFF mode.</description>
-                <lsb>15</lsb>
-                <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM16</name>
-                <description>Keep the second bank in RAM block MEM[16] retained when in System OFF mode.</description>
-                <lsb>16</lsb>
-                <msb>16</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM17</name>
-                <description>Keep the second bank in RAM block MEM[17] retained when in System OFF mode.</description>
-                <lsb>17</lsb>
-                <msb>17</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM18</name>
-                <description>Keep the second bank in RAM block MEM[18] retained when in System OFF mode.</description>
-                <lsb>18</lsb>
-                <msb>18</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM19</name>
-                <description>Keep the second bank in RAM block MEM[19] retained when in System OFF mode.</description>
-                <lsb>19</lsb>
-                <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM20</name>
-                <description>Keep the second bank in RAM block MEM[20] retained when in System OFF mode.</description>
-                <lsb>20</lsb>
-                <msb>20</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM21</name>
-                <description>Keep the second bank in RAM block MEM[21] retained when in System OFF mode.</description>
-                <lsb>21</lsb>
-                <msb>21</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM22</name>
-                <description>Keep the second bank in RAM block MEM[22] retained when in System OFF mode.</description>
-                <lsb>22</lsb>
-                <msb>22</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM23</name>
-                <description>Keep the second bank in RAM block MEM[23] retained when in System OFF mode.</description>
-                <lsb>23</lsb>
-                <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM24</name>
-                <description>Keep the second bank in RAM block MEM[24] retained when in System OFF mode.</description>
-                <lsb>24</lsb>
-                <msb>24</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM25</name>
-                <description>Keep the second bank in RAM block MEM[25] retained when in System OFF mode.</description>
-                <lsb>25</lsb>
-                <msb>25</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM26</name>
-                <description>Keep the second bank in RAM block MEM[26] retained when in System OFF mode.</description>
-                <lsb>26</lsb>
-                <msb>26</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM27</name>
-                <description>Keep the second bank in RAM block MEM[27] retained when in System OFF mode.</description>
-                <lsb>27</lsb>
-                <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM28</name>
-                <description>Keep the second bank in RAM block MEM[28] retained when in System OFF mode.</description>
-                <lsb>28</lsb>
-                <msb>28</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM29</name>
-                <description>Keep the second bank in RAM block MEM[29] retained when in System OFF mode.</description>
-                <lsb>29</lsb>
-                <msb>29</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM30</name>
-                <description>Keep the second bank in RAM block MEM[30] retained when in System OFF mode.</description>
-                <lsb>30</lsb>
-                <msb>30</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM31</name>
-                <description>Keep the second bank in RAM block MEM[31] retained when in System OFF mode.</description>
                 <lsb>31</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
@@ -92148,7 +92021,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
         </cluster>
         <cluster>
-          <dim>64</dim>
+          <dim>2</dim>
           <dimIncrement>0x004</dimIncrement>
           <name>BLOCKTYPE[%s]</name>
           <description>Unspecified</description>
@@ -92157,7 +92030,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <addressOffset>0x900</addressOffset>
           <register>
             <name>TRIM</name>
-            <description>Description cluster: Trim configuration for the RAM/ROM block types.</description>
+            <description>Description cluster: Trim configuration for the memory block types.</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -106624,7 +106497,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Calibration value.</description>
           <addressOffset>0x514</addressOffset>
           <access>read-write</access>
-          <resetValue>0x000001CB</resetValue>
+          <resetValue>0x000001C0</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106640,7 +106513,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Slope of 1st piece wise linear function</description>
           <addressOffset>0x520</addressOffset>
           <access>read-write</access>
-          <resetValue>0x000002C4</resetValue>
+          <resetValue>0x000002D6</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106656,7 +106529,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Slope of 2nd piece wise linear function</description>
           <addressOffset>0x524</addressOffset>
           <access>read-write</access>
-          <resetValue>0x000002FB</resetValue>
+          <resetValue>0x0000032D</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106672,7 +106545,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Slope of 3rd piece wise linear function</description>
           <addressOffset>0x528</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000328</resetValue>
+          <resetValue>0x00000384</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106688,7 +106561,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Slope of 4th piece wise linear function</description>
           <addressOffset>0x52C</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000377</resetValue>
+          <resetValue>0x000003E9</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106704,7 +106577,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Slope of 5th piece wise linear function</description>
           <addressOffset>0x530</addressOffset>
           <access>read-write</access>
-          <resetValue>0x000003DD</resetValue>
+          <resetValue>0x0000046F</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106720,7 +106593,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Slope of 6th piece wise linear function</description>
           <addressOffset>0x534</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000046F</resetValue>
+          <resetValue>0x00000522</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106736,7 +106609,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Slope of 7th piece wise linear function</description>
           <addressOffset>0x538</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000055A</resetValue>
+          <resetValue>0x000005B7</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106752,7 +106625,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>y-intercept of 1st piece wise linear function</description>
           <addressOffset>0x540</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000072</resetValue>
+          <resetValue>0x00000FD6</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106768,7 +106641,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>y-intercept of 2nd piece wise linear function</description>
           <addressOffset>0x544</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000000E</resetValue>
+          <resetValue>0x00000F76</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106784,7 +106657,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>y-intercept of 3rd piece wise linear function</description>
           <addressOffset>0x548</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000FEA</resetValue>
+          <resetValue>0x00000F8A</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106800,7 +106673,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>y-intercept of 4th piece wise linear function</description>
           <addressOffset>0x54C</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000FEA</resetValue>
+          <resetValue>0x00000FF8</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106816,7 +106689,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>y-intercept of 5th piece wise linear function</description>
           <addressOffset>0x550</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000004A</resetValue>
+          <resetValue>0x000000CC</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106832,7 +106705,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>y-intercept of 6th piece wise linear function</description>
           <addressOffset>0x554</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000134</resetValue>
+          <resetValue>0x00000207</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106848,7 +106721,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>y-intercept of 7th piece wise linear function</description>
           <addressOffset>0x558</addressOffset>
           <access>read-write</access>
-          <resetValue>0x000002C0</resetValue>
+          <resetValue>0x00000558</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106864,7 +106737,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>End point of 1st piece wise linear function</description>
           <addressOffset>0x560</addressOffset>
           <access>read-write</access>
-          <resetValue>0x000000D8</resetValue>
+          <resetValue>0x000000E2</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106880,7 +106753,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>End point of 2nd piece wise linear function</description>
           <addressOffset>0x564</addressOffset>
           <access>read-write</access>
-          <resetValue>0x000000EC</resetValue>
+          <resetValue>0x00000002</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106896,7 +106769,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>End point of 3rd piece wise linear function</description>
           <addressOffset>0x568</addressOffset>
           <access>read-write</access>
-          <resetValue>0x000000FF</resetValue>
+          <resetValue>0x0000001F</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106912,7 +106785,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>End point of 4th piece wise linear function</description>
           <addressOffset>0x56C</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000001C</resetValue>
+          <resetValue>0x00000038</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106928,7 +106801,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>End point of 5th piece wise linear function</description>
           <addressOffset>0x570</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000003C</resetValue>
+          <resetValue>0x0000004F</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -106944,7 +106817,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>End point of 6th piece wise linear function</description>
           <addressOffset>0x574</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000052</resetValue>
+          <resetValue>0x00000066</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -110384,7 +110257,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Unspecified</description>
               <headerStructName>TAMPC_PROTECT_STRUCT0_AP</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x020</addressOffset>
+              <addressOffset>0x200</addressOffset>
               <cluster>
                 <name>DBGEN</name>
                 <description>Unspecified</description>
@@ -117034,7 +116907,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_RTCOMPARESYNC</name>
-          <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
+          <description>Synchronize always-on LFCLK clock domain</description>
           <addressOffset>0x164</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -117042,7 +116915,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>EVENTS_RTCOMPARESYNC</name>
-              <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
+              <description>Synchronize always-on LFCLK clock domain</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -124350,6 +124223,94 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
+          <name>AXIPROLONGREQUEST</name>
+          <description>Configuration of the AxiRequestProlonger module.</description>
+          <addressOffset>0x588</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x80000010</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>PROLONGVALUE</name>
+              <description>Number of additional clocks the request is prolonged</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>SIDEBAND</name>
+              <description>Disable or enable additional sideband request</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable sideband</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable sideband</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>LPICONSERVATIVEMODE</name>
+              <description>Disable or enable LPI conservative mode</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable posted writes</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable posted writes</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FORCEON</name>
+              <description>Disable or enable constant prolong request</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable FORCEON</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable FORCEON</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ENABLE</name>
+              <description>Disable or enable the prolong functionality</description>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable prolong functionality</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable prolong functionality</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <dim>0x1</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>MAINREG[%s]</name>
@@ -128088,34 +128049,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <access>read-write</access>
           <addressOffset>0x600</addressOffset>
           <register>
-            <name>ATB0CONFIG</name>
-            <description>Analog Test Bus 0 (ATB0) configuration</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>EN</name>
-                <description>Enable the analog test bus</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Analog test bus is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Analog test bus is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
             <name>DTBCONFIG</name>
             <description>Digital Test Bus (DTB0-3) configuration</description>
             <addressOffset>0x10</addressOffset>
@@ -129530,7 +129463,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <registers>
         <register>
           <name>TASKS_XOSTART</name>
-          <description>Start crystal oscillator</description>
+          <description>Start crystal oscillator (HFXO)</description>
           <addressOffset>0x000</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -129538,7 +129471,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>TASKS_XOSTART</name>
-              <description>Start crystal oscillator</description>
+              <description>Start crystal oscillator (HFXO)</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -129553,7 +129486,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>TASKS_XOSTOP</name>
-          <description>Stop crystal oscillator</description>
+          <description>Stop crystal oscillator (HFXO)</description>
           <addressOffset>0x004</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -129561,7 +129494,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>TASKS_XOSTOP</name>
-              <description>Stop crystal oscillator</description>
+              <description>Stop crystal oscillator (HFXO)</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -131838,7 +131771,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </field>
             <field>
               <name>DIF</name>
-              <description>Reset due to wakeup from System OFF mode when wakeup is triggered by entering the Debug Interface mode</description>
+              <description>Reset triggered by Debug Interface</description>
               <lsb>10</lsb>
               <msb>10</msb>
               <enumeratedValues>
@@ -132030,6 +131963,94 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <enumeratedValue>
                   <name>Enabled</name>
                   <description>Enable posted writes</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AXIPROLONGREQUEST</name>
+          <description>Configuration of the AxiRequestProlonger module.</description>
+          <addressOffset>0x588</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x80000010</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>PROLONGVALUE</name>
+              <description>Number of additional clocks the request is prolonged</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>SIDEBAND</name>
+              <description>Disable or enable additional sideband request</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable sideband</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable sideband</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>LPICONSERVATIVEMODE</name>
+              <description>Disable or enable LPI conservative mode</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable posted writes</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable posted writes</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FORCEON</name>
+              <description>Disable or enable constant prolong request</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable FORCEON</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable FORCEON</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ENABLE</name>
+              <description>Disable or enable the prolong functionality</description>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable prolong functionality</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable prolong functionality</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -134783,12 +134804,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>NoValid</name>
-                    <description>Calibration is not ongoing</description>
+                    <description>Calibration has not completed successfully or is ongoing</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Calid</name>
-                    <description>Calibration is ongoing</description>
+                    <name>Valid</name>
+                    <description>Calibration has completed successfully, not time bound so results may be stale</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -134872,7 +134893,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <enumeratedValue>
                     <name>STOP_RCOSC_PWR_DOWN</name>
                     <description>Unspecified</description>
-                    <value>0x019</value>
+                    <value>0x018</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -135541,52 +135562,52 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <size>0x20</size>
             <fields>
               <field>
-                <name>TCFG</name>
-                <description>TCFG test force configuration bus.</description>
+                <name>PWRUPVOUTCMP</name>
+                <description>Override PWRUP_VOUTCMP on by OR-gate</description>
                 <lsb>0</lsb>
+                <msb>0</msb>
+              </field>
+              <field>
+                <name>PWRUPFB</name>
+                <description>Override PWRUP_FB on by OR-gate</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+              </field>
+              <field>
+                <name>PWRUPVREG</name>
+                <description>Override PWRUP_VREG on by OR-gate</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+              </field>
+              <field>
+                <name>BYPASS</name>
+                <description>Override BYPASS on by OR-gate</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+              </field>
+              <field>
+                <name>FORCEULP</name>
+                <description>Forces AFSM to run ULP refresh ie blocks HP and BP</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+              </field>
+              <field>
+                <name>FORCEBP</name>
+                <description>Forces AFSM to run HP (when requested)  ie blocks BP</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
+              </field>
+              <field>
+                <name>DISABLEMBIAS</name>
+                <description>Blocks MBIAS_READY</description>
+                <lsb>6</lsb>
+                <msb>6</msb>
+              </field>
+              <field>
+                <name>RESETDIG</name>
+                <description>Isolates DIG_CORE outputs to 0</description>
+                <lsb>7</lsb>
                 <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>PWRUPVOUTCMP</name>
-                    <description>Unspecified</description>
-                    <value>0x00</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>PWRUPFB</name>
-                    <description>Unspecified</description>
-                    <value>0x02</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>PWRUPVREG</name>
-                    <description>Unspecified</description>
-                    <value>0x04</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>BYPASS</name>
-                    <description>Unspecified</description>
-                    <value>0x08</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>FORCEULP</name>
-                    <description>Unspecified</description>
-                    <value>0x10</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>FORCEBP</name>
-                    <description>Unspecified</description>
-                    <value>0x20</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>DISABLEMBIAS</name>
-                    <description>Unspecified</description>
-                    <value>0x40</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>RESETDIG</name>
-                    <description>Unspecified</description>
-                    <value>0x80</value>
-                  </enumeratedValue>
-                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -135608,6 +135629,34 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <enumeratedValue>
                   <name>Enter</name>
                   <description>Enable System OFF mode</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SYSTEMOFFCFG</name>
+          <description>Configure SystemOff</description>
+          <addressOffset>0x504</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>GRTCWAIT</name>
+              <description>Enabled waiting for GRTC sleep acknowledge before entering SystemOff</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Do not wait for GRTC sleep</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Wait for GRTC sleep</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>

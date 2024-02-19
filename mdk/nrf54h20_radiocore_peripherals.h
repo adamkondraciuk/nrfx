@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -47,6 +47,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include <stdbool.h>
+/* Domain definition */
+#define NRF_DOMAIN NRF_DOMAIN_RADIOCORE
+
 /*CACHEDATA*/
 #define ICACHEDATA_PRESENT 1
 #define ICACHEDATA_COUNT 1
@@ -291,6 +294,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define HSFLL_DITHER_32B 1                           /*!< (unspecified)                                                        */
 #define HSFLL_CLOCKCTRL_MULT_RESET 4                 /*!< Reset value of register CLOCKCTRL.MULT: clockctrl_mult_reset         */
+#define HSFLL_CLOCKCTRL_INTEGER_DIVISION 0           /*!< (unspecified)                                                        */
 
 /*LRCCONF*/
 #define LRCCONF_PRESENT 1
@@ -582,6 +586,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GPIOTE_PRESENT 1
 #define GPIOTE_COUNT 2
 
+#define GPIOTE_IRQ_COUNT 1
 #define GPIOTE_GPIOTE_NCHANNELS_MIN 0                /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE_GPIOTE_NCHANNELS_MAX 7                /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE_GPIOTE_NCHANNELS_SIZE 8               /*!< Number of GPIOTE channels: 0..7                                      */
@@ -591,6 +596,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GPIOTE_GPIOTE_NINTERRUPTS_SIZE 1             /*!< Number of GPIOTE interrupts: 0..0                                    */
 #define GPIOTE_HAS_PORT_EVENT 0                      /*!< (unspecified)                                                        */
 
+#define GPIOTE130_IRQ_COUNT 2
 #define GPIOTE130_GPIOTE_NCHANNELS_MIN 0             /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE130_GPIOTE_NCHANNELS_MAX 7             /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE130_GPIOTE_NCHANNELS_SIZE 8            /*!< Number of GPIOTE channels: 0..7                                      */
@@ -755,6 +761,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RADIO_PRESENT 1
 #define RADIO_COUNT 1
 
+#define RADIO_IRQ_COUNT 2
 #define RADIO_ADPLLCOMPANION_INCLUDE_DMA 0           /*!< (unspecified)                                                        */
 
 /*RADIOACC peripheral*/
@@ -867,6 +874,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define IPCT_PRESENT 1
 #define IPCT_COUNT 3
 
+#define IPCT_IRQ_COUNT 2
+
+#define IPCT120_IRQ_COUNT 1
+
+#define IPCT130_IRQ_COUNT 1
+
 /*Software interrupt*/
 #define SWI_PRESENT 1
 #define SWI_COUNT 8
@@ -874,6 +887,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*BELLBOARD APB registers*/
 #define BELLBOARD_PRESENT 1
 #define BELLBOARD_COUNT 1
+
+#define BELLBOARD_IRQ_COUNT 4
 
 /*Factory Information Configuration Registers*/
 #define FICR_PRESENT 1
@@ -944,6 +959,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_PRESENT 1
 #define GRTC_COUNT 1
 
+#define GRTC_IRQ_COUNT 3
 #define GRTC_MSBWIDTH_MIN 0                          /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
                                                           0..14*/
 #define GRTC_MSBWIDTH_MAX 14                         /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
@@ -967,6 +983,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_CLKSELREG 1                             /*!< (unspecified)                                                        */
 #define GRTC_CLKSELLFLPRC 1                          /*!< (unspecified)                                                        */
 #define GRTC_CCADD_WRITE_ONLY 1                      /*!< (unspecified)                                                        */
+#define GRTC_READY_STATUS_AND_EVENTS 0               /*!< (unspecified)                                                        */
 
 /*Trace buffer monitor*/
 #define TBM_PRESENT 1
@@ -1907,6 +1924,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P0_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
 #define P0_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P0_CTRLSEL_MAP3 0                            /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
@@ -1924,6 +1942,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P1_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
 #define P1_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P1_CTRLSEL_MAP3 0                            /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
@@ -1941,6 +1960,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P2_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
 #define P2_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P2_CTRLSEL_MAP3 0                            /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
@@ -1958,6 +1978,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P6_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
 #define P6_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P6_CTRLSEL_MAP3 0                            /*!< (unspecified)                                                        */
 #define P6_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P6_PIN_NUM_MAX 13                            /*!< (unspecified)                                                        */
 #define P6_PIN_NUM_SIZE 14                           /*!< (unspecified)                                                        */
@@ -1975,6 +1996,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P7_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
 #define P7_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P7_CTRLSEL_MAP3 0                            /*!< (unspecified)                                                        */
 #define P7_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P7_PIN_NUM_MAX 7                             /*!< (unspecified)                                                        */
 #define P7_PIN_NUM_SIZE 8                            /*!< (unspecified)                                                        */
@@ -1992,6 +2014,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P9_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
 #define P9_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P9_CTRLSEL_MAP3 0                            /*!< (unspecified)                                                        */
 #define P9_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P9_PIN_NUM_MAX 5                             /*!< (unspecified)                                                        */
 #define P9_PIN_NUM_SIZE 6                            /*!< (unspecified)                                                        */
@@ -2071,6 +2094,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TEMP_COUNT 1
 
 #define TEMP_HAS_ATBCONFIG 1                         /*!< (unspecified)                                                        */
+#define TEMP_HAS_OVERRIDEPWR 1                       /*!< (unspecified)                                                        */
 
 /*NFC-A compatible radio NFC-A compatible radio*/
 #define NFCT_PRESENT 1

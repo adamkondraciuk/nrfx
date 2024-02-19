@@ -1,6 +1,3 @@
-#ifndef NRF54L_ERRATAS_H
-#define NRF54L_ERRATAS_H
-
 /*
 
 Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
@@ -42,9 +39,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#include <stdint.h>
-#include <stdbool.h>
-#include "compiler_abstraction.h"
+#ifndef NRF54L15_NAME_CHANGE_H
+#define NRF54L15_NAME_CHANGE_H
+
+#ifdef __cplusplus
+    extern "C" {
+#endif
 
 
-#endif /* NRF54L_ERRATAS_H */
+
+
+#ifdef __cplusplus
+}
+#endif
+#endif /* NRF54L15_NAME_CHANGE_H */
+

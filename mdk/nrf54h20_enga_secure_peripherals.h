@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -47,6 +47,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include <stdbool.h>
+/* Domain definition */
+#define NRF_DOMAIN NRF_DOMAIN_SECURE
+
 /*Secure Information Configuration Registers*/
 #define SICR_PRESENT 1
 #define SICR_COUNT 1
@@ -433,9 +436,17 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define IPCT_PRESENT 1
 #define IPCT_COUNT 3
 
+#define IPCT_IRQ_COUNT 2
+
+#define IPCT120_IRQ_COUNT 1
+
+#define IPCT130_IRQ_COUNT 1
+
 /*BELLBOARD APB registers*/
 #define BELLBOARD_PRESENT 1
 #define BELLBOARD_COUNT 1
+
+#define BELLBOARD_IRQ_COUNT 4
 
 /*Control access port*/
 #define CTRLAPPERI_PRESENT 1
@@ -515,6 +526,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GPIOTE_PRESENT 1
 #define GPIOTE_COUNT 1
 
+#define GPIOTE130_IRQ_COUNT 2
 #define GPIOTE130_GPIOTE_NCHANNELS_MIN 0             /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE130_GPIOTE_NCHANNELS_MAX 7             /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE130_GPIOTE_NCHANNELS_SIZE 8            /*!< Number of GPIOTE channels: 0..7                                      */
@@ -529,6 +541,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_PRESENT 1
 #define GRTC_COUNT 1
 
+#define GRTC_IRQ_COUNT 2
 #define GRTC_MSBWIDTH_MIN 0                          /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
                                                           0..14*/
 #define GRTC_MSBWIDTH_MAX 14                         /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :

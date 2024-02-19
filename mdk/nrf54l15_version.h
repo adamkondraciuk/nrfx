@@ -48,10 +48,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
-#define MDK_SOURCE_VERSION_MINOR 5b                  /*!< Minor version of product specification.                              */
+#define MDK_SOURCE_VERSION_MINOR 5e                  /*!< Minor version of product specification.                              */
 #define MDK_SOURCE_VERSION_MICRO                     /*!< Micro version of product specification.                              */
 
-#define MDK_SOURCE_HASH Moonlight_OPS_v0.5C-79-gd551327 /*!< Git hash of product specification source.                         */
+#define MDK_SOURCE_HASH Moonlight_OPS_v0.5E          /*!< Git hash of product specification source.                            */
 
 
 #ifdef __cplusplus

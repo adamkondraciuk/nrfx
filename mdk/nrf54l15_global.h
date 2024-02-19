@@ -242,6 +242,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_GRTC_S_BASE                   0x500E2000UL
 #define NRF_SREGS20_NS_BASE               0x400E6000UL
 #define NRF_SREGS20_S_BASE                0x500E6000UL
+#define NRF_PCGCM20_S_BASE                0x500E7000UL
 #define NRF_SUPPORT20_S_BASE              0x500FF000UL
 #define NRF_SPU30_S_BASE                  0x50100000UL
 #define NRF_DPPIC30_NS_BASE               0x40102000UL
@@ -459,6 +460,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_GRTC_S                        ((NRF_GRTC_Type*)                     NRF_GRTC_S_BASE)
 #define NRF_SREGS20_NS                    ((NRF_SREGS_Type*)                    NRF_SREGS20_NS_BASE)
 #define NRF_SREGS20_S                     ((NRF_SREGS_Type*)                    NRF_SREGS20_S_BASE)
+#define NRF_PCGCM20_S                     ((NRF_PCGCMASTER_Type*)               NRF_PCGCM20_S_BASE)
 #define NRF_SUPPORT20_S                   ((NRF_PCGCSLAVE_Type*)                NRF_SUPPORT20_S_BASE)
 #define NRF_SPU30_S                       ((NRF_SPU_Type*)                      NRF_SPU30_S_BASE)
 #define NRF_DPPIC30_NS                    ((NRF_DPPIC_Type*)                    NRF_DPPIC30_NS_BASE)
@@ -700,6 +702,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_QDEC21                              NRF_QDEC21_S
   #define NRF_GRTC                                NRF_GRTC_S
   #define NRF_SREGS20                             NRF_SREGS20_S
+  #define NRF_PCGCM20                             NRF_PCGCM20_S
   #define NRF_SUPPORT20                           NRF_SUPPORT20_S
   #define NRF_SPU30                               NRF_SPU30_S
   #define NRF_DPPIC30                             NRF_DPPIC30_S
@@ -727,7 +730,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_OSCILLATORS                         NRF_OSCILLATORS_S
   #define NRF_REGULATORS                          NRF_REGULATORS_S
   #define NRF_PCGCM30                             NRF_PCGCM30_S
-#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
+#endif                                               /*!< NRF_TRUSTZONE_NONSECURE                                              */
 
 /* ========================================== End of section using anonymous unions ========================================== */
 

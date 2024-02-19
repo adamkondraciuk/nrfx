@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   62 
+#define MDK_MINOR_VERSION   63 
 #define MDK_MICRO_VERSION   0 
 
 
@@ -305,10 +305,17 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(EXCLUDE_HEADER)
         #include "nrf54l15.h"
     #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf54l15_name_change.h"
+    #endif
+
 
 #elif defined (NRF54L15_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf54l15_enga.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf54l15_enga_name_change.h"
     #endif
 
 #elif defined (NRF9160_XXAA)

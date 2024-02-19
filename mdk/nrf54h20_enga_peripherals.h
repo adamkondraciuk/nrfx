@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -45,6 +45,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef __cplusplus
     extern "C" {
 #endif
+
+/* Domain IDs */
+ typedef enum {
+    NRF_DOMAIN_APPLICATION = 2,
+    NRF_DOMAIN_FLPR = 14,
+    NRF_DOMAIN_GLOBAL = 15,
+    NRF_DOMAIN_PPR = 13,
+    NRF_DOMAIN_RADIOCORE = 3,
+    NRF_DOMAIN_SECURE = 1,
+    NRF_DOMAIN_SYSCTRL = 12,
+} NRF_DOMAINID_Type;
+
+/* Processor IDs */
+ typedef enum {
+    NRF_PROCESSOR_APPLICATION = 2,
+    NRF_PROCESSOR_FLPR = 14,
+    NRF_PROCESSOR_GLOBAL = 15,
+    NRF_PROCESSOR_PPR = 13,
+    NRF_PROCESSOR_RADIOCORE = 3,
+    NRF_PROCESSOR_SECURE = 1,
+    NRF_PROCESSOR_SYSCTRL = 12,
+} NRF_PROCESSORID_Type;
 
 #if defined(NRF_APPLICATION)
   #include "nrf54h20_enga_application_peripherals.h"

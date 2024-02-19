@@ -156,7 +156,7 @@ typedef struct {
 /* AMOUNT @Bits 0..7 : Number of bytes written to memory after triggering the START task. */
   #define AAR_OUT_AMOUNT_AMOUNT_Pos (0UL)            /*!< Position of AMOUNT field.                                            */
   #define AAR_OUT_AMOUNT_AMOUNT_Msk (0xFFUL << AAR_OUT_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.                       */
-  #define AAR_OUT_AMOUNT_AMOUNT_Min (0x1UL)          /*!< Min value of AMOUNT field.                                           */
+  #define AAR_OUT_AMOUNT_AMOUNT_Min (0x01UL)         /*!< Min value of AMOUNT field.                                           */
   #define AAR_OUT_AMOUNT_AMOUNT_Max (0xFFUL)         /*!< Max size of AMOUNT field.                                            */
 
 
@@ -172,24 +172,30 @@ typedef struct {
     __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
     __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
     __IM uint32_t RESERVED1[30];
-    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000100) Address resolution procedure complete                 */
+    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000100) Address resolution procedure complete or ended due to
+                                                                         an error*/
     __IOM uint32_t EVENTS_RESOLVED;                  /*!< (@ 0x00000104) Address resolved                                      */
     __IOM uint32_t EVENTS_NOTRESOLVED;               /*!< (@ 0x00000108) Address not resolved                                  */
-    __IM uint32_t RESERVED2[29];
+    __IOM uint32_t EVENTS_ERROR;                     /*!< (@ 0x0000010C) Operation aborted because of a STOP task or due to an
+                                                                         error*/
+    __IM uint32_t RESERVED2[28];
     __IOM uint32_t PUBLISH_END;                      /*!< (@ 0x00000180) Publish configuration for event END                   */
     __IOM uint32_t PUBLISH_RESOLVED;                 /*!< (@ 0x00000184) Publish configuration for event RESOLVED              */
     __IOM uint32_t PUBLISH_NOTRESOLVED;              /*!< (@ 0x00000188) Publish configuration for event NOTRESOLVED           */
-    __IM uint32_t RESERVED3[93];
+    __IOM uint32_t PUBLISH_ERROR;                    /*!< (@ 0x0000018C) Publish configuration for event ERROR                 */
+    __IM uint32_t RESERVED3[92];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
     __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
     __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
-    __IM uint32_t RESERVED4[125];
+    __IM uint32_t RESERVED4[62];
+    __IM uint32_t ERRORSTATUS;                       /*!< (@ 0x00000404) Error status                                          */
+    __IM uint32_t RESERVED5[62];
     __IOM uint32_t ENABLE;                           /*!< (@ 0x00000500) Enable AAR                                            */
-    __IM uint32_t RESERVED5;
+    __IM uint32_t RESERVED6;
     __IOM uint32_t MAXRESOLVED;                      /*!< (@ 0x00000508) Maximum number of IRKs to resolve                     */
-    __IM uint32_t RESERVED6[9];
+    __IM uint32_t RESERVED7[9];
     __IOM NRF_AAR_IN_Type IN;                        /*!< (@ 0x00000530) IN EasyDMA channel                                    */
-    __IM uint32_t RESERVED7;
+    __IM uint32_t RESERVED8;
     __IOM NRF_AAR_OUT_Type OUT;                      /*!< (@ 0x00000538) OUT EasyDMA channel                                   */
   } NRF_AAR_Type;                                    /*!< Size = 1344 (0x540)                                                  */
 
@@ -221,7 +227,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define AAR_SUBSCRIBE_START_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define AAR_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << AAR_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define AAR_SUBSCRIBE_START_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define AAR_SUBSCRIBE_START_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define AAR_SUBSCRIBE_START_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -239,7 +245,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define AAR_SUBSCRIBE_STOP_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define AAR_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << AAR_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define AAR_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define AAR_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define AAR_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -251,10 +257,10 @@ typedef struct {
   #define AAR_SUBSCRIBE_STOP_EN_Enabled (0x1UL)      /*!< Enable subscription                                                  */
 
 
-/* AAR_EVENTS_END: Address resolution procedure complete */
+/* AAR_EVENTS_END: Address resolution procedure complete or ended due to an error */
   #define AAR_EVENTS_END_ResetValue (0x00000000UL)   /*!< Reset value of EVENTS_END register.                                  */
 
-/* EVENTS_END @Bit 0 : Address resolution procedure complete */
+/* EVENTS_END @Bit 0 : Address resolution procedure complete or ended due to an error */
   #define AAR_EVENTS_END_EVENTS_END_Pos (0UL)        /*!< Position of EVENTS_END field.                                        */
   #define AAR_EVENTS_END_EVENTS_END_Msk (0x1UL << AAR_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field.            */
   #define AAR_EVENTS_END_EVENTS_END_Min (0x0UL)      /*!< Min enumerator value of EVENTS_END field.                            */
@@ -289,13 +295,25 @@ typedef struct {
   #define AAR_EVENTS_NOTRESOLVED_EVENTS_NOTRESOLVED_Generated (0x1UL) /*!< Event generated                                     */
 
 
+/* AAR_EVENTS_ERROR: Operation aborted because of a STOP task or due to an error */
+  #define AAR_EVENTS_ERROR_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ERROR register.                                */
+
+/* EVENTS_ERROR @Bit 0 : Operation aborted because of a STOP task or due to an error */
+  #define AAR_EVENTS_ERROR_EVENTS_ERROR_Pos (0UL)    /*!< Position of EVENTS_ERROR field.                                      */
+  #define AAR_EVENTS_ERROR_EVENTS_ERROR_Msk (0x1UL << AAR_EVENTS_ERROR_EVENTS_ERROR_Pos) /*!< Bit mask of EVENTS_ERROR field.  */
+  #define AAR_EVENTS_ERROR_EVENTS_ERROR_Min (0x0UL)  /*!< Min enumerator value of EVENTS_ERROR field.                          */
+  #define AAR_EVENTS_ERROR_EVENTS_ERROR_Max (0x1UL)  /*!< Max enumerator value of EVENTS_ERROR field.                          */
+  #define AAR_EVENTS_ERROR_EVENTS_ERROR_NotGenerated (0x0UL) /*!< Event not generated                                          */
+  #define AAR_EVENTS_ERROR_EVENTS_ERROR_Generated (0x1UL) /*!< Event generated                                                 */
+
+
 /* AAR_PUBLISH_END: Publish configuration for event END */
   #define AAR_PUBLISH_END_ResetValue (0x00000000UL)  /*!< Reset value of PUBLISH_END register.                                 */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define AAR_PUBLISH_END_CHIDX_Pos (0UL)            /*!< Position of CHIDX field.                                             */
   #define AAR_PUBLISH_END_CHIDX_Msk (0xFFUL << AAR_PUBLISH_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                        */
-  #define AAR_PUBLISH_END_CHIDX_Min (0x0UL)          /*!< Min value of CHIDX field.                                            */
+  #define AAR_PUBLISH_END_CHIDX_Min (0x00UL)         /*!< Min value of CHIDX field.                                            */
   #define AAR_PUBLISH_END_CHIDX_Max (0xFFUL)         /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -313,7 +331,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RESOLVED will publish to */
   #define AAR_PUBLISH_RESOLVED_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define AAR_PUBLISH_RESOLVED_CHIDX_Msk (0xFFUL << AAR_PUBLISH_RESOLVED_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define AAR_PUBLISH_RESOLVED_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define AAR_PUBLISH_RESOLVED_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define AAR_PUBLISH_RESOLVED_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -331,7 +349,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event NOTRESOLVED will publish to */
   #define AAR_PUBLISH_NOTRESOLVED_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define AAR_PUBLISH_NOTRESOLVED_CHIDX_Msk (0xFFUL << AAR_PUBLISH_NOTRESOLVED_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define AAR_PUBLISH_NOTRESOLVED_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define AAR_PUBLISH_NOTRESOLVED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define AAR_PUBLISH_NOTRESOLVED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -341,6 +359,24 @@ typedef struct {
   #define AAR_PUBLISH_NOTRESOLVED_EN_Max (0x1UL)     /*!< Max enumerator value of EN field.                                    */
   #define AAR_PUBLISH_NOTRESOLVED_EN_Disabled (0x0UL) /*!< Disable publishing                                                  */
   #define AAR_PUBLISH_NOTRESOLVED_EN_Enabled (0x1UL) /*!< Enable publishing                                                    */
+
+
+/* AAR_PUBLISH_ERROR: Publish configuration for event ERROR */
+  #define AAR_PUBLISH_ERROR_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_ERROR register.                              */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event ERROR will publish to */
+  #define AAR_PUBLISH_ERROR_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
+  #define AAR_PUBLISH_ERROR_CHIDX_Msk (0xFFUL << AAR_PUBLISH_ERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
+  #define AAR_PUBLISH_ERROR_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
+  #define AAR_PUBLISH_ERROR_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define AAR_PUBLISH_ERROR_EN_Pos (31UL)            /*!< Position of EN field.                                                */
+  #define AAR_PUBLISH_ERROR_EN_Msk (0x1UL << AAR_PUBLISH_ERROR_EN_Pos) /*!< Bit mask of EN field.                              */
+  #define AAR_PUBLISH_ERROR_EN_Min (0x0UL)           /*!< Min enumerator value of EN field.                                    */
+  #define AAR_PUBLISH_ERROR_EN_Max (0x1UL)           /*!< Max enumerator value of EN field.                                    */
+  #define AAR_PUBLISH_ERROR_EN_Disabled (0x0UL)      /*!< Disable publishing                                                   */
+  #define AAR_PUBLISH_ERROR_EN_Enabled (0x1UL)       /*!< Enable publishing                                                    */
 
 
 /* AAR_INTEN: Enable or disable interrupt */
@@ -369,6 +405,14 @@ typedef struct {
   #define AAR_INTEN_NOTRESOLVED_Max (0x1UL)          /*!< Max enumerator value of NOTRESOLVED field.                           */
   #define AAR_INTEN_NOTRESOLVED_Disabled (0x0UL)     /*!< Disable                                                              */
   #define AAR_INTEN_NOTRESOLVED_Enabled (0x1UL)      /*!< Enable                                                               */
+
+/* ERROR @Bit 3 : Enable or disable interrupt for event ERROR */
+  #define AAR_INTEN_ERROR_Pos (3UL)                  /*!< Position of ERROR field.                                             */
+  #define AAR_INTEN_ERROR_Msk (0x1UL << AAR_INTEN_ERROR_Pos) /*!< Bit mask of ERROR field.                                     */
+  #define AAR_INTEN_ERROR_Min (0x0UL)                /*!< Min enumerator value of ERROR field.                                 */
+  #define AAR_INTEN_ERROR_Max (0x1UL)                /*!< Max enumerator value of ERROR field.                                 */
+  #define AAR_INTEN_ERROR_Disabled (0x0UL)           /*!< Disable                                                              */
+  #define AAR_INTEN_ERROR_Enabled (0x1UL)            /*!< Enable                                                               */
 
 
 /* AAR_INTENSET: Enable interrupt */
@@ -401,6 +445,15 @@ typedef struct {
   #define AAR_INTENSET_NOTRESOLVED_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define AAR_INTENSET_NOTRESOLVED_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
+/* ERROR @Bit 3 : Write '1' to enable interrupt for event ERROR */
+  #define AAR_INTENSET_ERROR_Pos (3UL)               /*!< Position of ERROR field.                                             */
+  #define AAR_INTENSET_ERROR_Msk (0x1UL << AAR_INTENSET_ERROR_Pos) /*!< Bit mask of ERROR field.                               */
+  #define AAR_INTENSET_ERROR_Min (0x0UL)             /*!< Min enumerator value of ERROR field.                                 */
+  #define AAR_INTENSET_ERROR_Max (0x1UL)             /*!< Max enumerator value of ERROR field.                                 */
+  #define AAR_INTENSET_ERROR_Set (0x1UL)             /*!< Enable                                                               */
+  #define AAR_INTENSET_ERROR_Disabled (0x0UL)        /*!< Read: Disabled                                                       */
+  #define AAR_INTENSET_ERROR_Enabled (0x1UL)         /*!< Read: Enabled                                                        */
+
 
 /* AAR_INTENCLR: Disable interrupt */
   #define AAR_INTENCLR_ResetValue (0x00000000UL)     /*!< Reset value of INTENCLR register.                                    */
@@ -431,6 +484,29 @@ typedef struct {
   #define AAR_INTENCLR_NOTRESOLVED_Clear (0x1UL)     /*!< Disable                                                              */
   #define AAR_INTENCLR_NOTRESOLVED_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define AAR_INTENCLR_NOTRESOLVED_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
+
+/* ERROR @Bit 3 : Write '1' to disable interrupt for event ERROR */
+  #define AAR_INTENCLR_ERROR_Pos (3UL)               /*!< Position of ERROR field.                                             */
+  #define AAR_INTENCLR_ERROR_Msk (0x1UL << AAR_INTENCLR_ERROR_Pos) /*!< Bit mask of ERROR field.                               */
+  #define AAR_INTENCLR_ERROR_Min (0x0UL)             /*!< Min enumerator value of ERROR field.                                 */
+  #define AAR_INTENCLR_ERROR_Max (0x1UL)             /*!< Max enumerator value of ERROR field.                                 */
+  #define AAR_INTENCLR_ERROR_Clear (0x1UL)           /*!< Disable                                                              */
+  #define AAR_INTENCLR_ERROR_Disabled (0x0UL)        /*!< Read: Disabled                                                       */
+  #define AAR_INTENCLR_ERROR_Enabled (0x1UL)         /*!< Read: Enabled                                                        */
+
+
+/* AAR_ERRORSTATUS: Error status */
+  #define AAR_ERRORSTATUS_ResetValue (0x00000000UL)  /*!< Reset value of ERRORSTATUS register.                                 */
+
+/* ERRORSTATUS @Bits 0..2 : Error status when the ERROR event is generated */
+  #define AAR_ERRORSTATUS_ERRORSTATUS_Pos (0UL)      /*!< Position of ERRORSTATUS field.                                       */
+  #define AAR_ERRORSTATUS_ERRORSTATUS_Msk (0x7UL << AAR_ERRORSTATUS_ERRORSTATUS_Pos) /*!< Bit mask of ERRORSTATUS field.       */
+  #define AAR_ERRORSTATUS_ERRORSTATUS_Min (0x0UL)    /*!< Min enumerator value of ERRORSTATUS field.                           */
+  #define AAR_ERRORSTATUS_ERRORSTATUS_Max (0x4UL)    /*!< Max enumerator value of ERRORSTATUS field.                           */
+  #define AAR_ERRORSTATUS_ERRORSTATUS_NoError (0x0UL) /*!< No errors have occurred                                             */
+  #define AAR_ERRORSTATUS_ERRORSTATUS_PrematureInptrEnd (0x1UL) /*!< End of INPTR job list before data structure was read.     */
+  #define AAR_ERRORSTATUS_ERRORSTATUS_PrematureOutptrEnd (0x2UL) /*!< End of OUTPTR job list before data structure was read.   */
+  #define AAR_ERRORSTATUS_ERRORSTATUS_DmaError (0x4UL) /*!< Bus error during DMA access.                                       */
 
 
 /* AAR_ENABLE: Enable AAR */
@@ -971,7 +1047,7 @@ typedef struct {
     __IOM uint32_t SUBSCRIBE_RATEOVERRIDE;           /*!< (@ 0x00000088) Subscribe configuration for task RATEOVERRIDE         */
     __IM uint32_t RESERVED1[29];
     __IOM uint32_t EVENTS_ENDCONFIG;                 /*!< (@ 0x00000100) Configuration data has been loaded                    */
-    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000104) Encrypt/decrypt complete                              */
+    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000104) Encrypt/decrypt complete or ended because of an error */
     __IOM uint32_t EVENTS_ERROR;                     /*!< (@ 0x00000108) CCM error event                                       */
     __IM uint32_t RESERVED2[29];
     __IOM uint32_t PUBLISH_ENDCONFIG;                /*!< (@ 0x00000180) Publish configuration for event ENDCONFIG             */
@@ -1041,7 +1117,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define CCM_SUBSCRIBE_START_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define CCM_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << CCM_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define CCM_SUBSCRIBE_START_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define CCM_SUBSCRIBE_START_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define CCM_SUBSCRIBE_START_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1059,7 +1135,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define CCM_SUBSCRIBE_STOP_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define CCM_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << CCM_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define CCM_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define CCM_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define CCM_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1077,7 +1153,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RATEOVERRIDE will subscribe to */
   #define CCM_SUBSCRIBE_RATEOVERRIDE_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define CCM_SUBSCRIBE_RATEOVERRIDE_CHIDX_Msk (0xFFUL << CCM_SUBSCRIBE_RATEOVERRIDE_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define CCM_SUBSCRIBE_RATEOVERRIDE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define CCM_SUBSCRIBE_RATEOVERRIDE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define CCM_SUBSCRIBE_RATEOVERRIDE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1102,10 +1178,10 @@ typedef struct {
   #define CCM_EVENTS_ENDCONFIG_EVENTS_ENDCONFIG_Generated (0x1UL) /*!< Event generated                                         */
 
 
-/* CCM_EVENTS_END: Encrypt/decrypt complete */
+/* CCM_EVENTS_END: Encrypt/decrypt complete or ended because of an error */
   #define CCM_EVENTS_END_ResetValue (0x00000000UL)   /*!< Reset value of EVENTS_END register.                                  */
 
-/* EVENTS_END @Bit 0 : Encrypt/decrypt complete */
+/* EVENTS_END @Bit 0 : Encrypt/decrypt complete or ended because of an error */
   #define CCM_EVENTS_END_EVENTS_END_Pos (0UL)        /*!< Position of EVENTS_END field.                                        */
   #define CCM_EVENTS_END_EVENTS_END_Msk (0x1UL << CCM_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field.            */
   #define CCM_EVENTS_END_EVENTS_END_Min (0x0UL)      /*!< Min enumerator value of EVENTS_END field.                            */
@@ -1132,7 +1208,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ENDCONFIG will publish to */
   #define CCM_PUBLISH_ENDCONFIG_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define CCM_PUBLISH_ENDCONFIG_CHIDX_Msk (0xFFUL << CCM_PUBLISH_ENDCONFIG_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define CCM_PUBLISH_ENDCONFIG_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define CCM_PUBLISH_ENDCONFIG_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define CCM_PUBLISH_ENDCONFIG_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1150,7 +1226,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define CCM_PUBLISH_END_CHIDX_Pos (0UL)            /*!< Position of CHIDX field.                                             */
   #define CCM_PUBLISH_END_CHIDX_Msk (0xFFUL << CCM_PUBLISH_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                        */
-  #define CCM_PUBLISH_END_CHIDX_Min (0x0UL)          /*!< Min value of CHIDX field.                                            */
+  #define CCM_PUBLISH_END_CHIDX_Min (0x00UL)         /*!< Min value of CHIDX field.                                            */
   #define CCM_PUBLISH_END_CHIDX_Max (0xFFUL)         /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1168,7 +1244,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ERROR will publish to */
   #define CCM_PUBLISH_ERROR_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define CCM_PUBLISH_ERROR_CHIDX_Msk (0xFFUL << CCM_PUBLISH_ERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define CCM_PUBLISH_ERROR_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define CCM_PUBLISH_ERROR_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define CCM_PUBLISH_ERROR_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1739,15 +1815,20 @@ typedef struct {
   * @brief Clock management
   */
   typedef struct {                                   /*!< CLOCK Structure                                                      */
-    __OM uint32_t TASKS_XOSTART;                     /*!< (@ 0x00000000) Start crystal oscillator                              */
-    __OM uint32_t TASKS_XOSTOP;                      /*!< (@ 0x00000004) Stop crystal oscillator                               */
+    __OM uint32_t TASKS_XOSTART;                     /*!< (@ 0x00000000) Start crystal oscillator (HFXO)                       */
+    __OM uint32_t TASKS_XOSTOP;                      /*!< (@ 0x00000004) Stop crystal oscillator (HFXO)                        */
     __OM uint32_t TASKS_PLLSTART;                    /*!< (@ 0x00000008) Start PLL and keep it running, regardless of the
                                                                          automatic clock requests*/
     __OM uint32_t TASKS_PLLSTOP;                     /*!< (@ 0x0000000C) Stop PLL                                              */
     __OM uint32_t TASKS_LFCLKSTART;                  /*!< (@ 0x00000010) Start LFCLK source as selected in LFCLK.SRC           */
     __OM uint32_t TASKS_LFCLKSTOP;                   /*!< (@ 0x00000014) Stop LFCLK source                                     */
     __OM uint32_t TASKS_CAL;                         /*!< (@ 0x00000018) Start calibration of LFRC oscillator                  */
-    __IM uint32_t RESERVED[25];
+    __OM uint32_t TASKS_XOTUNE;                      /*!< (@ 0x0000001C) Request tuning for HFXO Request IDAC regulation for
+                                                                         XOSC32M*/
+    __OM uint32_t TASKS_XOTUNEABORT;                 /*!< (@ 0x00000020) Abort tuning for HFXO Abort IDAC regulation for
+                                                                         XOSC32M. The latest IDAC code applied when ABORT is
+                                                                         triggered will be used. Refer to DD: digip_1223*/
+    __IM uint32_t RESERVED[23];
     __IOM uint32_t SUBSCRIBE_XOSTART;                /*!< (@ 0x00000080) Subscribe configuration for task XOSTART              */
     __IOM uint32_t SUBSCRIBE_XOSTOP;                 /*!< (@ 0x00000084) Subscribe configuration for task XOSTOP               */
     __IOM uint32_t SUBSCRIBE_PLLSTART;               /*!< (@ 0x00000088) Subscribe configuration for task PLLSTART             */
@@ -1755,33 +1836,53 @@ typedef struct {
     __IOM uint32_t SUBSCRIBE_LFCLKSTART;             /*!< (@ 0x00000090) Subscribe configuration for task LFCLKSTART           */
     __IOM uint32_t SUBSCRIBE_LFCLKSTOP;              /*!< (@ 0x00000094) Subscribe configuration for task LFCLKSTOP            */
     __IOM uint32_t SUBSCRIBE_CAL;                    /*!< (@ 0x00000098) Subscribe configuration for task CAL                  */
-    __IM uint32_t RESERVED1[25];
+    __IOM uint32_t SUBSCRIBE_XOTUNE;                 /*!< (@ 0x0000009C) Subscribe configuration for task XOTUNE               */
+    __IOM uint32_t SUBSCRIBE_XOTUNEABORT;            /*!< (@ 0x000000A0) Subscribe configuration for task XOTUNEABORT          */
+    __IM uint32_t RESERVED1[23];
     __IOM uint32_t EVENTS_XOSTARTED;                 /*!< (@ 0x00000100) Crystal oscillator has started                        */
     __IOM uint32_t EVENTS_PLLSTARTED;                /*!< (@ 0x00000104) PLL started                                           */
     __IOM uint32_t EVENTS_LFCLKSTARTED;              /*!< (@ 0x00000108) LFCLK source started                                  */
     __IOM uint32_t EVENTS_DONE;                      /*!< (@ 0x0000010C) Calibration of LFRC oscillator complete event         */
-    __IM uint32_t RESERVED2[28];
+    __IOM uint32_t EVENTS_XOTUNED;                   /*!< (@ 0x00000110) HFXO tuning is done. XOTUNED is generated after
+                                                                         TASKS_XOSTART or after TASKS_XOTUNE has completed IDAC
+                                                                         regulation complete. XOSC32M quality is good (PKD =
+                                                                         011). Refer to DD: digip_1223*/
+    __IOM uint32_t EVENTS_XOTUNEERROR;               /*!< (@ 0x00000114) HFXO quality issue detected, XOTUNE is needed XOSC32M
+                                                                         quality issue detected (PKD = 111 or 001). IDAC
+                                                                         regulation needed. Refer to DD: digip_1223*/
+    __IOM uint32_t EVENTS_XOTUNEFAILED;              /*!< (@ 0x00000118) HFXO tuning could not be completed IDAC regulation
+                                                                         timed out. XOSC32M could not find a good IDAC code and
+                                                                         does not have good quality (PKD = 111 or 001) Could be
+                                                                         a crystal failure or wrong capacitor values. Can also
+                                                                         be too short IDAC regulation time setting. Refer to DD:
+                                                                         digip_1223*/
+    __IM uint32_t RESERVED2[25];
     __IOM uint32_t PUBLISH_XOSTARTED;                /*!< (@ 0x00000180) Publish configuration for event XOSTARTED             */
     __IOM uint32_t PUBLISH_PLLSTARTED;               /*!< (@ 0x00000184) Publish configuration for event PLLSTARTED            */
     __IOM uint32_t PUBLISH_LFCLKSTARTED;             /*!< (@ 0x00000188) Publish configuration for event LFCLKSTARTED          */
     __IOM uint32_t PUBLISH_DONE;                     /*!< (@ 0x0000018C) Publish configuration for event DONE                  */
-    __IM uint32_t RESERVED3[92];
+    __IOM uint32_t PUBLISH_XOTUNED;                  /*!< (@ 0x00000190) Publish configuration for event XOTUNED               */
+    __IOM uint32_t PUBLISH_XOTUNEERROR;              /*!< (@ 0x00000194) Publish configuration for event XOTUNEERROR           */
+    __IOM uint32_t PUBLISH_XOTUNEFAILED;             /*!< (@ 0x00000198) Publish configuration for event XOTUNEFAILED          */
+    __IM uint32_t RESERVED3[25];
+    __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
+    __IM uint32_t RESERVED4[63];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
     __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
     __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
     __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-    __IM uint32_t RESERVED4[60];
+    __IM uint32_t RESERVED5[60];
     __IOM NRF_CLOCK_XO_Type XO;                      /*!< (@ 0x00000400) (unspecified)                                         */
-    __IM uint32_t RESERVED5[4];
-    __IOM NRF_CLOCK_PLL_Type PLL;                    /*!< (@ 0x00000420) (unspecified)                                         */
     __IM uint32_t RESERVED6[4];
+    __IOM NRF_CLOCK_PLL_Type PLL;                    /*!< (@ 0x00000420) (unspecified)                                         */
+    __IM uint32_t RESERVED7[4];
     __IOM NRF_CLOCK_LFCLK_Type LFCLK;                /*!< (@ 0x00000440) (unspecified)                                         */
   } NRF_CLOCK_Type;                                  /*!< Size = 1108 (0x454)                                                  */
 
-/* CLOCK_TASKS_XOSTART: Start crystal oscillator */
+/* CLOCK_TASKS_XOSTART: Start crystal oscillator (HFXO) */
   #define CLOCK_TASKS_XOSTART_ResetValue (0x00000000UL) /*!< Reset value of TASKS_XOSTART register.                            */
 
-/* TASKS_XOSTART @Bit 0 : Start crystal oscillator */
+/* TASKS_XOSTART @Bit 0 : Start crystal oscillator (HFXO) */
   #define CLOCK_TASKS_XOSTART_TASKS_XOSTART_Pos (0UL) /*!< Position of TASKS_XOSTART field.                                    */
   #define CLOCK_TASKS_XOSTART_TASKS_XOSTART_Msk (0x1UL << CLOCK_TASKS_XOSTART_TASKS_XOSTART_Pos) /*!< Bit mask of TASKS_XOSTART
                                                                             field.*/
@@ -1790,10 +1891,10 @@ typedef struct {
   #define CLOCK_TASKS_XOSTART_TASKS_XOSTART_Trigger (0x1UL) /*!< Trigger task                                                  */
 
 
-/* CLOCK_TASKS_XOSTOP: Stop crystal oscillator */
+/* CLOCK_TASKS_XOSTOP: Stop crystal oscillator (HFXO) */
   #define CLOCK_TASKS_XOSTOP_ResetValue (0x00000000UL) /*!< Reset value of TASKS_XOSTOP register.                              */
 
-/* TASKS_XOSTOP @Bit 0 : Stop crystal oscillator */
+/* TASKS_XOSTOP @Bit 0 : Stop crystal oscillator (HFXO) */
   #define CLOCK_TASKS_XOSTOP_TASKS_XOSTOP_Pos (0UL)  /*!< Position of TASKS_XOSTOP field.                                      */
   #define CLOCK_TASKS_XOSTOP_TASKS_XOSTOP_Msk (0x1UL << CLOCK_TASKS_XOSTOP_TASKS_XOSTOP_Pos) /*!< Bit mask of TASKS_XOSTOP
                                                                             field.*/
@@ -1861,13 +1962,41 @@ typedef struct {
   #define CLOCK_TASKS_CAL_TASKS_CAL_Trigger (0x1UL)  /*!< Trigger task                                                         */
 
 
+/* CLOCK_TASKS_XOTUNE: Request tuning for HFXO Request IDAC regulation for XOSC32M */
+  #define CLOCK_TASKS_XOTUNE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_XOTUNE register.                              */
+
+/* TASKS_XOTUNE @Bit 0 : Request tuning for HFXO Request IDAC regulation for XOSC32M */
+  #define CLOCK_TASKS_XOTUNE_TASKS_XOTUNE_Pos (0UL)  /*!< Position of TASKS_XOTUNE field.                                      */
+  #define CLOCK_TASKS_XOTUNE_TASKS_XOTUNE_Msk (0x1UL << CLOCK_TASKS_XOTUNE_TASKS_XOTUNE_Pos) /*!< Bit mask of TASKS_XOTUNE
+                                                                            field.*/
+  #define CLOCK_TASKS_XOTUNE_TASKS_XOTUNE_Min (0x1UL) /*!< Min enumerator value of TASKS_XOTUNE field.                         */
+  #define CLOCK_TASKS_XOTUNE_TASKS_XOTUNE_Max (0x1UL) /*!< Max enumerator value of TASKS_XOTUNE field.                         */
+  #define CLOCK_TASKS_XOTUNE_TASKS_XOTUNE_Trigger (0x1UL) /*!< Trigger task                                                    */
+
+
+/* CLOCK_TASKS_XOTUNEABORT: Abort tuning for HFXO Abort IDAC regulation for XOSC32M. The latest IDAC code applied when ABORT is
+                             triggered will be used. Refer to DD: digip_1223 */
+
+  #define CLOCK_TASKS_XOTUNEABORT_ResetValue (0x00000000UL) /*!< Reset value of TASKS_XOTUNEABORT register.                    */
+
+/* TASKS_XOTUNEABORT @Bit 0 : Abort tuning for HFXO Abort IDAC regulation for XOSC32M. The latest IDAC code applied when ABORT
+                              is triggered will be used. Refer to DD: digip_1223 */
+
+  #define CLOCK_TASKS_XOTUNEABORT_TASKS_XOTUNEABORT_Pos (0UL) /*!< Position of TASKS_XOTUNEABORT field.                        */
+  #define CLOCK_TASKS_XOTUNEABORT_TASKS_XOTUNEABORT_Msk (0x1UL << CLOCK_TASKS_XOTUNEABORT_TASKS_XOTUNEABORT_Pos) /*!< Bit mask
+                                                                            of TASKS_XOTUNEABORT field.*/
+  #define CLOCK_TASKS_XOTUNEABORT_TASKS_XOTUNEABORT_Min (0x1UL) /*!< Min enumerator value of TASKS_XOTUNEABORT field.          */
+  #define CLOCK_TASKS_XOTUNEABORT_TASKS_XOTUNEABORT_Max (0x1UL) /*!< Max enumerator value of TASKS_XOTUNEABORT field.          */
+  #define CLOCK_TASKS_XOTUNEABORT_TASKS_XOTUNEABORT_Trigger (0x1UL) /*!< Trigger task                                          */
+
+
 /* CLOCK_SUBSCRIBE_XOSTART: Subscribe configuration for task XOSTART */
   #define CLOCK_SUBSCRIBE_XOSTART_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_XOSTART register.                    */
 
 /* CHIDX @Bits 0..7 : DPPI channel that task XOSTART will subscribe to */
   #define CLOCK_SUBSCRIBE_XOSTART_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define CLOCK_SUBSCRIBE_XOSTART_CHIDX_Msk (0xFFUL << CLOCK_SUBSCRIBE_XOSTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define CLOCK_SUBSCRIBE_XOSTART_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define CLOCK_SUBSCRIBE_XOSTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define CLOCK_SUBSCRIBE_XOSTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1885,7 +2014,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task XOSTOP will subscribe to */
   #define CLOCK_SUBSCRIBE_XOSTOP_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define CLOCK_SUBSCRIBE_XOSTOP_CHIDX_Msk (0xFFUL << CLOCK_SUBSCRIBE_XOSTOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define CLOCK_SUBSCRIBE_XOSTOP_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define CLOCK_SUBSCRIBE_XOSTOP_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define CLOCK_SUBSCRIBE_XOSTOP_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1903,7 +2032,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task PLLSTART will subscribe to */
   #define CLOCK_SUBSCRIBE_PLLSTART_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define CLOCK_SUBSCRIBE_PLLSTART_CHIDX_Msk (0xFFUL << CLOCK_SUBSCRIBE_PLLSTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define CLOCK_SUBSCRIBE_PLLSTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define CLOCK_SUBSCRIBE_PLLSTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define CLOCK_SUBSCRIBE_PLLSTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1921,7 +2050,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task PLLSTOP will subscribe to */
   #define CLOCK_SUBSCRIBE_PLLSTOP_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define CLOCK_SUBSCRIBE_PLLSTOP_CHIDX_Msk (0xFFUL << CLOCK_SUBSCRIBE_PLLSTOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define CLOCK_SUBSCRIBE_PLLSTOP_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define CLOCK_SUBSCRIBE_PLLSTOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define CLOCK_SUBSCRIBE_PLLSTOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1939,7 +2068,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task LFCLKSTART will subscribe to */
   #define CLOCK_SUBSCRIBE_LFCLKSTART_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define CLOCK_SUBSCRIBE_LFCLKSTART_CHIDX_Msk (0xFFUL << CLOCK_SUBSCRIBE_LFCLKSTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define CLOCK_SUBSCRIBE_LFCLKSTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define CLOCK_SUBSCRIBE_LFCLKSTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define CLOCK_SUBSCRIBE_LFCLKSTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1957,7 +2086,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task LFCLKSTOP will subscribe to */
   #define CLOCK_SUBSCRIBE_LFCLKSTOP_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define CLOCK_SUBSCRIBE_LFCLKSTOP_CHIDX_Msk (0xFFUL << CLOCK_SUBSCRIBE_LFCLKSTOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define CLOCK_SUBSCRIBE_LFCLKSTOP_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define CLOCK_SUBSCRIBE_LFCLKSTOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define CLOCK_SUBSCRIBE_LFCLKSTOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1975,7 +2104,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CAL will subscribe to */
   #define CLOCK_SUBSCRIBE_CAL_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define CLOCK_SUBSCRIBE_CAL_CHIDX_Msk (0xFFUL << CLOCK_SUBSCRIBE_CAL_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define CLOCK_SUBSCRIBE_CAL_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define CLOCK_SUBSCRIBE_CAL_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define CLOCK_SUBSCRIBE_CAL_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -1985,6 +2114,42 @@ typedef struct {
   #define CLOCK_SUBSCRIBE_CAL_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
   #define CLOCK_SUBSCRIBE_CAL_EN_Disabled (0x0UL)    /*!< Disable subscription                                                 */
   #define CLOCK_SUBSCRIBE_CAL_EN_Enabled (0x1UL)     /*!< Enable subscription                                                  */
+
+
+/* CLOCK_SUBSCRIBE_XOTUNE: Subscribe configuration for task XOTUNE */
+  #define CLOCK_SUBSCRIBE_XOTUNE_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_XOTUNE register.                      */
+
+/* CHIDX @Bits 0..7 : DPPI channel that task XOTUNE will subscribe to */
+  #define CLOCK_SUBSCRIBE_XOTUNE_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
+  #define CLOCK_SUBSCRIBE_XOTUNE_CHIDX_Msk (0xFFUL << CLOCK_SUBSCRIBE_XOTUNE_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
+  #define CLOCK_SUBSCRIBE_XOTUNE_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
+  #define CLOCK_SUBSCRIBE_XOTUNE_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define CLOCK_SUBSCRIBE_XOTUNE_EN_Pos (31UL)       /*!< Position of EN field.                                                */
+  #define CLOCK_SUBSCRIBE_XOTUNE_EN_Msk (0x1UL << CLOCK_SUBSCRIBE_XOTUNE_EN_Pos) /*!< Bit mask of EN field.                    */
+  #define CLOCK_SUBSCRIBE_XOTUNE_EN_Min (0x0UL)      /*!< Min enumerator value of EN field.                                    */
+  #define CLOCK_SUBSCRIBE_XOTUNE_EN_Max (0x1UL)      /*!< Max enumerator value of EN field.                                    */
+  #define CLOCK_SUBSCRIBE_XOTUNE_EN_Disabled (0x0UL) /*!< Disable subscription                                                 */
+  #define CLOCK_SUBSCRIBE_XOTUNE_EN_Enabled (0x1UL)  /*!< Enable subscription                                                  */
+
+
+/* CLOCK_SUBSCRIBE_XOTUNEABORT: Subscribe configuration for task XOTUNEABORT */
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_XOTUNEABORT register.            */
+
+/* CHIDX @Bits 0..7 : DPPI channel that task XOTUNEABORT will subscribe to */
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_CHIDX_Msk (0xFFUL << CLOCK_SUBSCRIBE_XOTUNEABORT_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
+
+/* EN @Bit 31 : (unspecified) */
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_EN_Pos (31UL)  /*!< Position of EN field.                                                */
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_EN_Msk (0x1UL << CLOCK_SUBSCRIBE_XOTUNEABORT_EN_Pos) /*!< Bit mask of EN field.          */
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                    */
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                    */
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_EN_Disabled (0x0UL) /*!< Disable subscription                                            */
+  #define CLOCK_SUBSCRIBE_XOTUNEABORT_EN_Enabled (0x1UL) /*!< Enable subscription                                              */
 
 
 /* CLOCK_EVENTS_XOSTARTED: Crystal oscillator has started */
@@ -2038,13 +2203,66 @@ typedef struct {
   #define CLOCK_EVENTS_DONE_EVENTS_DONE_Generated (0x1UL) /*!< Event generated                                                 */
 
 
+/* CLOCK_EVENTS_XOTUNED: HFXO tuning is done. XOTUNED is generated after TASKS_XOSTART or after TASKS_XOTUNE has completed IDAC
+                          regulation complete. XOSC32M quality is good (PKD = 011). Refer to DD: digip_1223 */
+
+  #define CLOCK_EVENTS_XOTUNED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_XOTUNED register.                          */
+
+/* EVENTS_XOTUNED @Bit 0 : HFXO tuning is done. XOTUNED is generated after TASKS_XOSTART or after TASKS_XOTUNE has completed
+                           IDAC regulation complete. XOSC32M quality is good (PKD = 011). Refer to DD: digip_1223 */
+
+  #define CLOCK_EVENTS_XOTUNED_EVENTS_XOTUNED_Pos (0UL) /*!< Position of EVENTS_XOTUNED field.                                 */
+  #define CLOCK_EVENTS_XOTUNED_EVENTS_XOTUNED_Msk (0x1UL << CLOCK_EVENTS_XOTUNED_EVENTS_XOTUNED_Pos) /*!< Bit mask of
+                                                                            EVENTS_XOTUNED field.*/
+  #define CLOCK_EVENTS_XOTUNED_EVENTS_XOTUNED_Min (0x0UL) /*!< Min enumerator value of EVENTS_XOTUNED field.                   */
+  #define CLOCK_EVENTS_XOTUNED_EVENTS_XOTUNED_Max (0x1UL) /*!< Max enumerator value of EVENTS_XOTUNED field.                   */
+  #define CLOCK_EVENTS_XOTUNED_EVENTS_XOTUNED_NotGenerated (0x0UL) /*!< Event not generated                                    */
+  #define CLOCK_EVENTS_XOTUNED_EVENTS_XOTUNED_Generated (0x1UL) /*!< Event generated                                           */
+
+
+/* CLOCK_EVENTS_XOTUNEERROR: HFXO quality issue detected, XOTUNE is needed XOSC32M quality issue detected (PKD = 111 or 001).
+                              IDAC regulation needed. Refer to DD: digip_1223 */
+
+  #define CLOCK_EVENTS_XOTUNEERROR_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_XOTUNEERROR register.                  */
+
+/* EVENTS_XOTUNEERROR @Bit 0 : HFXO quality issue detected, XOTUNE is needed XOSC32M quality issue detected (PKD = 111 or 001).
+                               IDAC regulation needed. Refer to DD: digip_1223 */
+
+  #define CLOCK_EVENTS_XOTUNEERROR_EVENTS_XOTUNEERROR_Pos (0UL) /*!< Position of EVENTS_XOTUNEERROR field.                     */
+  #define CLOCK_EVENTS_XOTUNEERROR_EVENTS_XOTUNEERROR_Msk (0x1UL << CLOCK_EVENTS_XOTUNEERROR_EVENTS_XOTUNEERROR_Pos) /*!< Bit
+                                                                            mask of EVENTS_XOTUNEERROR field.*/
+  #define CLOCK_EVENTS_XOTUNEERROR_EVENTS_XOTUNEERROR_Min (0x0UL) /*!< Min enumerator value of EVENTS_XOTUNEERROR field.       */
+  #define CLOCK_EVENTS_XOTUNEERROR_EVENTS_XOTUNEERROR_Max (0x1UL) /*!< Max enumerator value of EVENTS_XOTUNEERROR field.       */
+  #define CLOCK_EVENTS_XOTUNEERROR_EVENTS_XOTUNEERROR_NotGenerated (0x0UL) /*!< Event not generated                            */
+  #define CLOCK_EVENTS_XOTUNEERROR_EVENTS_XOTUNEERROR_Generated (0x1UL) /*!< Event generated                                   */
+
+
+/* CLOCK_EVENTS_XOTUNEFAILED: HFXO tuning could not be completed IDAC regulation timed out. XOSC32M could not find a good IDAC
+                               code and does not have good quality (PKD = 111 or 001) Could be a crystal failure or wrong
+                               capacitor values. Can also be too short IDAC regulation time setting. Refer to DD: digip_1223 */
+
+  #define CLOCK_EVENTS_XOTUNEFAILED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_XOTUNEFAILED register.                */
+
+/* EVENTS_XOTUNEFAILED @Bit 0 : HFXO tuning could not be completed IDAC regulation timed out. XOSC32M could not find a good IDAC
+                                code and does not have good quality (PKD = 111 or 001) Could be a crystal failure or wrong
+                                capacitor values. Can also be too short IDAC regulation time setting. Refer to DD: digip_1223 */
+
+  #define CLOCK_EVENTS_XOTUNEFAILED_EVENTS_XOTUNEFAILED_Pos (0UL) /*!< Position of EVENTS_XOTUNEFAILED field.                  */
+  #define CLOCK_EVENTS_XOTUNEFAILED_EVENTS_XOTUNEFAILED_Msk (0x1UL << CLOCK_EVENTS_XOTUNEFAILED_EVENTS_XOTUNEFAILED_Pos) /*!<
+                                                                            Bit mask of EVENTS_XOTUNEFAILED field.*/
+  #define CLOCK_EVENTS_XOTUNEFAILED_EVENTS_XOTUNEFAILED_Min (0x0UL) /*!< Min enumerator value of EVENTS_XOTUNEFAILED field.    */
+  #define CLOCK_EVENTS_XOTUNEFAILED_EVENTS_XOTUNEFAILED_Max (0x1UL) /*!< Max enumerator value of EVENTS_XOTUNEFAILED field.    */
+  #define CLOCK_EVENTS_XOTUNEFAILED_EVENTS_XOTUNEFAILED_NotGenerated (0x0UL) /*!< Event not generated                          */
+  #define CLOCK_EVENTS_XOTUNEFAILED_EVENTS_XOTUNEFAILED_Generated (0x1UL) /*!< Event generated                                 */
+
+
 /* CLOCK_PUBLISH_XOSTARTED: Publish configuration for event XOSTARTED */
   #define CLOCK_PUBLISH_XOSTARTED_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_XOSTARTED register.                    */
 
 /* CHIDX @Bits 0..7 : DPPI channel that event XOSTARTED will publish to */
   #define CLOCK_PUBLISH_XOSTARTED_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define CLOCK_PUBLISH_XOSTARTED_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_XOSTARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define CLOCK_PUBLISH_XOSTARTED_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define CLOCK_PUBLISH_XOSTARTED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define CLOCK_PUBLISH_XOSTARTED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -2062,7 +2280,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event PLLSTARTED will publish to */
   #define CLOCK_PUBLISH_PLLSTARTED_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define CLOCK_PUBLISH_PLLSTARTED_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_PLLSTARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define CLOCK_PUBLISH_PLLSTARTED_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define CLOCK_PUBLISH_PLLSTARTED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define CLOCK_PUBLISH_PLLSTARTED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -2080,7 +2298,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event LFCLKSTARTED will publish to */
   #define CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -2098,7 +2316,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DONE will publish to */
   #define CLOCK_PUBLISH_DONE_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define CLOCK_PUBLISH_DONE_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_DONE_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define CLOCK_PUBLISH_DONE_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define CLOCK_PUBLISH_DONE_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define CLOCK_PUBLISH_DONE_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -2108,6 +2326,60 @@ typedef struct {
   #define CLOCK_PUBLISH_DONE_EN_Max (0x1UL)          /*!< Max enumerator value of EN field.                                    */
   #define CLOCK_PUBLISH_DONE_EN_Disabled (0x0UL)     /*!< Disable publishing                                                   */
   #define CLOCK_PUBLISH_DONE_EN_Enabled (0x1UL)      /*!< Enable publishing                                                    */
+
+
+/* CLOCK_PUBLISH_XOTUNED: Publish configuration for event XOTUNED */
+  #define CLOCK_PUBLISH_XOTUNED_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_XOTUNED register.                        */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event XOTUNED will publish to */
+  #define CLOCK_PUBLISH_XOTUNED_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
+  #define CLOCK_PUBLISH_XOTUNED_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_XOTUNED_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
+  #define CLOCK_PUBLISH_XOTUNED_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
+  #define CLOCK_PUBLISH_XOTUNED_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define CLOCK_PUBLISH_XOTUNED_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define CLOCK_PUBLISH_XOTUNED_EN_Msk (0x1UL << CLOCK_PUBLISH_XOTUNED_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define CLOCK_PUBLISH_XOTUNED_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define CLOCK_PUBLISH_XOTUNED_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define CLOCK_PUBLISH_XOTUNED_EN_Disabled (0x0UL)  /*!< Disable publishing                                                   */
+  #define CLOCK_PUBLISH_XOTUNED_EN_Enabled (0x1UL)   /*!< Enable publishing                                                    */
+
+
+/* CLOCK_PUBLISH_XOTUNEERROR: Publish configuration for event XOTUNEERROR */
+  #define CLOCK_PUBLISH_XOTUNEERROR_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_XOTUNEERROR register.                */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event XOTUNEERROR will publish to */
+  #define CLOCK_PUBLISH_XOTUNEERROR_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
+  #define CLOCK_PUBLISH_XOTUNEERROR_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_XOTUNEERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
+  #define CLOCK_PUBLISH_XOTUNEERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
+  #define CLOCK_PUBLISH_XOTUNEERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
+
+/* EN @Bit 31 : (unspecified) */
+  #define CLOCK_PUBLISH_XOTUNEERROR_EN_Pos (31UL)    /*!< Position of EN field.                                                */
+  #define CLOCK_PUBLISH_XOTUNEERROR_EN_Msk (0x1UL << CLOCK_PUBLISH_XOTUNEERROR_EN_Pos) /*!< Bit mask of EN field.              */
+  #define CLOCK_PUBLISH_XOTUNEERROR_EN_Min (0x0UL)   /*!< Min enumerator value of EN field.                                    */
+  #define CLOCK_PUBLISH_XOTUNEERROR_EN_Max (0x1UL)   /*!< Max enumerator value of EN field.                                    */
+  #define CLOCK_PUBLISH_XOTUNEERROR_EN_Disabled (0x0UL) /*!< Disable publishing                                                */
+  #define CLOCK_PUBLISH_XOTUNEERROR_EN_Enabled (0x1UL) /*!< Enable publishing                                                  */
+
+
+/* CLOCK_PUBLISH_XOTUNEFAILED: Publish configuration for event XOTUNEFAILED */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_XOTUNEFAILED register.              */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event XOTUNEFAILED will publish to */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_XOTUNEFAILED_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
+
+/* EN @Bit 31 : (unspecified) */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_EN_Pos (31UL)   /*!< Position of EN field.                                                */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_EN_Msk (0x1UL << CLOCK_PUBLISH_XOTUNEFAILED_EN_Pos) /*!< Bit mask of EN field.            */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_EN_Min (0x0UL)  /*!< Min enumerator value of EN field.                                    */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_EN_Max (0x1UL)  /*!< Max enumerator value of EN field.                                    */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_EN_Disabled (0x0UL) /*!< Disable publishing                                               */
+  #define CLOCK_PUBLISH_XOTUNEFAILED_EN_Enabled (0x1UL) /*!< Enable publishing                                                 */
 
 
 /* CLOCK_INTEN: Enable or disable interrupt */
@@ -2144,6 +2416,30 @@ typedef struct {
   #define CLOCK_INTEN_DONE_Max (0x1UL)               /*!< Max enumerator value of DONE field.                                  */
   #define CLOCK_INTEN_DONE_Disabled (0x0UL)          /*!< Disable                                                              */
   #define CLOCK_INTEN_DONE_Enabled (0x1UL)           /*!< Enable                                                               */
+
+/* XOTUNED @Bit 4 : Enable or disable interrupt for event XOTUNED */
+  #define CLOCK_INTEN_XOTUNED_Pos (4UL)              /*!< Position of XOTUNED field.                                           */
+  #define CLOCK_INTEN_XOTUNED_Msk (0x1UL << CLOCK_INTEN_XOTUNED_Pos) /*!< Bit mask of XOTUNED field.                           */
+  #define CLOCK_INTEN_XOTUNED_Min (0x0UL)            /*!< Min enumerator value of XOTUNED field.                               */
+  #define CLOCK_INTEN_XOTUNED_Max (0x1UL)            /*!< Max enumerator value of XOTUNED field.                               */
+  #define CLOCK_INTEN_XOTUNED_Disabled (0x0UL)       /*!< Disable                                                              */
+  #define CLOCK_INTEN_XOTUNED_Enabled (0x1UL)        /*!< Enable                                                               */
+
+/* XOTUNEERROR @Bit 5 : Enable or disable interrupt for event XOTUNEERROR */
+  #define CLOCK_INTEN_XOTUNEERROR_Pos (5UL)          /*!< Position of XOTUNEERROR field.                                       */
+  #define CLOCK_INTEN_XOTUNEERROR_Msk (0x1UL << CLOCK_INTEN_XOTUNEERROR_Pos) /*!< Bit mask of XOTUNEERROR field.               */
+  #define CLOCK_INTEN_XOTUNEERROR_Min (0x0UL)        /*!< Min enumerator value of XOTUNEERROR field.                           */
+  #define CLOCK_INTEN_XOTUNEERROR_Max (0x1UL)        /*!< Max enumerator value of XOTUNEERROR field.                           */
+  #define CLOCK_INTEN_XOTUNEERROR_Disabled (0x0UL)   /*!< Disable                                                              */
+  #define CLOCK_INTEN_XOTUNEERROR_Enabled (0x1UL)    /*!< Enable                                                               */
+
+/* XOTUNEFAILED @Bit 6 : Enable or disable interrupt for event XOTUNEFAILED */
+  #define CLOCK_INTEN_XOTUNEFAILED_Pos (6UL)         /*!< Position of XOTUNEFAILED field.                                      */
+  #define CLOCK_INTEN_XOTUNEFAILED_Msk (0x1UL << CLOCK_INTEN_XOTUNEFAILED_Pos) /*!< Bit mask of XOTUNEFAILED field.            */
+  #define CLOCK_INTEN_XOTUNEFAILED_Min (0x0UL)       /*!< Min enumerator value of XOTUNEFAILED field.                          */
+  #define CLOCK_INTEN_XOTUNEFAILED_Max (0x1UL)       /*!< Max enumerator value of XOTUNEFAILED field.                          */
+  #define CLOCK_INTEN_XOTUNEFAILED_Disabled (0x0UL)  /*!< Disable                                                              */
+  #define CLOCK_INTEN_XOTUNEFAILED_Enabled (0x1UL)   /*!< Enable                                                               */
 
 
 /* CLOCK_INTENSET: Enable interrupt */
@@ -2185,6 +2481,33 @@ typedef struct {
   #define CLOCK_INTENSET_DONE_Disabled (0x0UL)       /*!< Read: Disabled                                                       */
   #define CLOCK_INTENSET_DONE_Enabled (0x1UL)        /*!< Read: Enabled                                                        */
 
+/* XOTUNED @Bit 4 : Write '1' to enable interrupt for event XOTUNED */
+  #define CLOCK_INTENSET_XOTUNED_Pos (4UL)           /*!< Position of XOTUNED field.                                           */
+  #define CLOCK_INTENSET_XOTUNED_Msk (0x1UL << CLOCK_INTENSET_XOTUNED_Pos) /*!< Bit mask of XOTUNED field.                     */
+  #define CLOCK_INTENSET_XOTUNED_Min (0x0UL)         /*!< Min enumerator value of XOTUNED field.                               */
+  #define CLOCK_INTENSET_XOTUNED_Max (0x1UL)         /*!< Max enumerator value of XOTUNED field.                               */
+  #define CLOCK_INTENSET_XOTUNED_Set (0x1UL)         /*!< Enable                                                               */
+  #define CLOCK_INTENSET_XOTUNED_Disabled (0x0UL)    /*!< Read: Disabled                                                       */
+  #define CLOCK_INTENSET_XOTUNED_Enabled (0x1UL)     /*!< Read: Enabled                                                        */
+
+/* XOTUNEERROR @Bit 5 : Write '1' to enable interrupt for event XOTUNEERROR */
+  #define CLOCK_INTENSET_XOTUNEERROR_Pos (5UL)       /*!< Position of XOTUNEERROR field.                                       */
+  #define CLOCK_INTENSET_XOTUNEERROR_Msk (0x1UL << CLOCK_INTENSET_XOTUNEERROR_Pos) /*!< Bit mask of XOTUNEERROR field.         */
+  #define CLOCK_INTENSET_XOTUNEERROR_Min (0x0UL)     /*!< Min enumerator value of XOTUNEERROR field.                           */
+  #define CLOCK_INTENSET_XOTUNEERROR_Max (0x1UL)     /*!< Max enumerator value of XOTUNEERROR field.                           */
+  #define CLOCK_INTENSET_XOTUNEERROR_Set (0x1UL)     /*!< Enable                                                               */
+  #define CLOCK_INTENSET_XOTUNEERROR_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define CLOCK_INTENSET_XOTUNEERROR_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* XOTUNEFAILED @Bit 6 : Write '1' to enable interrupt for event XOTUNEFAILED */
+  #define CLOCK_INTENSET_XOTUNEFAILED_Pos (6UL)      /*!< Position of XOTUNEFAILED field.                                      */
+  #define CLOCK_INTENSET_XOTUNEFAILED_Msk (0x1UL << CLOCK_INTENSET_XOTUNEFAILED_Pos) /*!< Bit mask of XOTUNEFAILED field.      */
+  #define CLOCK_INTENSET_XOTUNEFAILED_Min (0x0UL)    /*!< Min enumerator value of XOTUNEFAILED field.                          */
+  #define CLOCK_INTENSET_XOTUNEFAILED_Max (0x1UL)    /*!< Max enumerator value of XOTUNEFAILED field.                          */
+  #define CLOCK_INTENSET_XOTUNEFAILED_Set (0x1UL)    /*!< Enable                                                               */
+  #define CLOCK_INTENSET_XOTUNEFAILED_Disabled (0x0UL) /*!< Read: Disabled                                                     */
+  #define CLOCK_INTENSET_XOTUNEFAILED_Enabled (0x1UL) /*!< Read: Enabled                                                       */
+
 
 /* CLOCK_INTENCLR: Disable interrupt */
   #define CLOCK_INTENCLR_ResetValue (0x00000000UL)   /*!< Reset value of INTENCLR register.                                    */
@@ -2225,6 +2548,33 @@ typedef struct {
   #define CLOCK_INTENCLR_DONE_Disabled (0x0UL)       /*!< Read: Disabled                                                       */
   #define CLOCK_INTENCLR_DONE_Enabled (0x1UL)        /*!< Read: Enabled                                                        */
 
+/* XOTUNED @Bit 4 : Write '1' to disable interrupt for event XOTUNED */
+  #define CLOCK_INTENCLR_XOTUNED_Pos (4UL)           /*!< Position of XOTUNED field.                                           */
+  #define CLOCK_INTENCLR_XOTUNED_Msk (0x1UL << CLOCK_INTENCLR_XOTUNED_Pos) /*!< Bit mask of XOTUNED field.                     */
+  #define CLOCK_INTENCLR_XOTUNED_Min (0x0UL)         /*!< Min enumerator value of XOTUNED field.                               */
+  #define CLOCK_INTENCLR_XOTUNED_Max (0x1UL)         /*!< Max enumerator value of XOTUNED field.                               */
+  #define CLOCK_INTENCLR_XOTUNED_Clear (0x1UL)       /*!< Disable                                                              */
+  #define CLOCK_INTENCLR_XOTUNED_Disabled (0x0UL)    /*!< Read: Disabled                                                       */
+  #define CLOCK_INTENCLR_XOTUNED_Enabled (0x1UL)     /*!< Read: Enabled                                                        */
+
+/* XOTUNEERROR @Bit 5 : Write '1' to disable interrupt for event XOTUNEERROR */
+  #define CLOCK_INTENCLR_XOTUNEERROR_Pos (5UL)       /*!< Position of XOTUNEERROR field.                                       */
+  #define CLOCK_INTENCLR_XOTUNEERROR_Msk (0x1UL << CLOCK_INTENCLR_XOTUNEERROR_Pos) /*!< Bit mask of XOTUNEERROR field.         */
+  #define CLOCK_INTENCLR_XOTUNEERROR_Min (0x0UL)     /*!< Min enumerator value of XOTUNEERROR field.                           */
+  #define CLOCK_INTENCLR_XOTUNEERROR_Max (0x1UL)     /*!< Max enumerator value of XOTUNEERROR field.                           */
+  #define CLOCK_INTENCLR_XOTUNEERROR_Clear (0x1UL)   /*!< Disable                                                              */
+  #define CLOCK_INTENCLR_XOTUNEERROR_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define CLOCK_INTENCLR_XOTUNEERROR_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* XOTUNEFAILED @Bit 6 : Write '1' to disable interrupt for event XOTUNEFAILED */
+  #define CLOCK_INTENCLR_XOTUNEFAILED_Pos (6UL)      /*!< Position of XOTUNEFAILED field.                                      */
+  #define CLOCK_INTENCLR_XOTUNEFAILED_Msk (0x1UL << CLOCK_INTENCLR_XOTUNEFAILED_Pos) /*!< Bit mask of XOTUNEFAILED field.      */
+  #define CLOCK_INTENCLR_XOTUNEFAILED_Min (0x0UL)    /*!< Min enumerator value of XOTUNEFAILED field.                          */
+  #define CLOCK_INTENCLR_XOTUNEFAILED_Max (0x1UL)    /*!< Max enumerator value of XOTUNEFAILED field.                          */
+  #define CLOCK_INTENCLR_XOTUNEFAILED_Clear (0x1UL)  /*!< Disable                                                              */
+  #define CLOCK_INTENCLR_XOTUNEFAILED_Disabled (0x0UL) /*!< Read: Disabled                                                     */
+  #define CLOCK_INTENCLR_XOTUNEFAILED_Enabled (0x1UL) /*!< Read: Enabled                                                       */
+
 
 /* CLOCK_INTPEND: Pending interrupts */
   #define CLOCK_INTPEND_ResetValue (0x00000000UL)    /*!< Reset value of INTPEND register.                                     */
@@ -2260,6 +2610,30 @@ typedef struct {
   #define CLOCK_INTPEND_DONE_Max (0x1UL)             /*!< Max enumerator value of DONE field.                                  */
   #define CLOCK_INTPEND_DONE_NotPending (0x0UL)      /*!< Read: Not pending                                                    */
   #define CLOCK_INTPEND_DONE_Pending (0x1UL)         /*!< Read: Pending                                                        */
+
+/* XOTUNED @Bit 4 : Read pending status of interrupt for event XOTUNED */
+  #define CLOCK_INTPEND_XOTUNED_Pos (4UL)            /*!< Position of XOTUNED field.                                           */
+  #define CLOCK_INTPEND_XOTUNED_Msk (0x1UL << CLOCK_INTPEND_XOTUNED_Pos) /*!< Bit mask of XOTUNED field.                       */
+  #define CLOCK_INTPEND_XOTUNED_Min (0x0UL)          /*!< Min enumerator value of XOTUNED field.                               */
+  #define CLOCK_INTPEND_XOTUNED_Max (0x1UL)          /*!< Max enumerator value of XOTUNED field.                               */
+  #define CLOCK_INTPEND_XOTUNED_NotPending (0x0UL)   /*!< Read: Not pending                                                    */
+  #define CLOCK_INTPEND_XOTUNED_Pending (0x1UL)      /*!< Read: Pending                                                        */
+
+/* XOTUNEERROR @Bit 5 : Read pending status of interrupt for event XOTUNEERROR */
+  #define CLOCK_INTPEND_XOTUNEERROR_Pos (5UL)        /*!< Position of XOTUNEERROR field.                                       */
+  #define CLOCK_INTPEND_XOTUNEERROR_Msk (0x1UL << CLOCK_INTPEND_XOTUNEERROR_Pos) /*!< Bit mask of XOTUNEERROR field.           */
+  #define CLOCK_INTPEND_XOTUNEERROR_Min (0x0UL)      /*!< Min enumerator value of XOTUNEERROR field.                           */
+  #define CLOCK_INTPEND_XOTUNEERROR_Max (0x1UL)      /*!< Max enumerator value of XOTUNEERROR field.                           */
+  #define CLOCK_INTPEND_XOTUNEERROR_NotPending (0x0UL) /*!< Read: Not pending                                                  */
+  #define CLOCK_INTPEND_XOTUNEERROR_Pending (0x1UL)  /*!< Read: Pending                                                        */
+
+/* XOTUNEFAILED @Bit 6 : Read pending status of interrupt for event XOTUNEFAILED */
+  #define CLOCK_INTPEND_XOTUNEFAILED_Pos (6UL)       /*!< Position of XOTUNEFAILED field.                                      */
+  #define CLOCK_INTPEND_XOTUNEFAILED_Msk (0x1UL << CLOCK_INTPEND_XOTUNEFAILED_Pos) /*!< Bit mask of XOTUNEFAILED field.        */
+  #define CLOCK_INTPEND_XOTUNEFAILED_Min (0x0UL)     /*!< Min enumerator value of XOTUNEFAILED field.                          */
+  #define CLOCK_INTPEND_XOTUNEFAILED_Max (0x1UL)     /*!< Max enumerator value of XOTUNEFAILED field.                          */
+  #define CLOCK_INTPEND_XOTUNEFAILED_NotPending (0x0UL) /*!< Read: Not pending                                                 */
+  #define CLOCK_INTPEND_XOTUNEFAILED_Pending (0x1UL) /*!< Read: Pending                                                        */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -2547,7 +2921,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define COMP_SUBSCRIBE_START_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define COMP_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << COMP_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define COMP_SUBSCRIBE_START_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define COMP_SUBSCRIBE_START_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define COMP_SUBSCRIBE_START_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -2565,7 +2939,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define COMP_SUBSCRIBE_STOP_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define COMP_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << COMP_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define COMP_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define COMP_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define COMP_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -2583,7 +2957,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SAMPLE will subscribe to */
   #define COMP_SUBSCRIBE_SAMPLE_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define COMP_SUBSCRIBE_SAMPLE_CHIDX_Msk (0xFFUL << COMP_SUBSCRIBE_SAMPLE_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define COMP_SUBSCRIBE_SAMPLE_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define COMP_SUBSCRIBE_SAMPLE_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define COMP_SUBSCRIBE_SAMPLE_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -2649,7 +3023,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define COMP_PUBLISH_READY_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define COMP_PUBLISH_READY_CHIDX_Msk (0xFFUL << COMP_PUBLISH_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define COMP_PUBLISH_READY_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define COMP_PUBLISH_READY_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define COMP_PUBLISH_READY_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -2667,7 +3041,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DOWN will publish to */
   #define COMP_PUBLISH_DOWN_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define COMP_PUBLISH_DOWN_CHIDX_Msk (0xFFUL << COMP_PUBLISH_DOWN_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define COMP_PUBLISH_DOWN_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define COMP_PUBLISH_DOWN_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define COMP_PUBLISH_DOWN_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -2685,7 +3059,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event UP will publish to */
   #define COMP_PUBLISH_UP_CHIDX_Pos (0UL)            /*!< Position of CHIDX field.                                             */
   #define COMP_PUBLISH_UP_CHIDX_Msk (0xFFUL << COMP_PUBLISH_UP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                        */
-  #define COMP_PUBLISH_UP_CHIDX_Min (0x0UL)          /*!< Min value of CHIDX field.                                            */
+  #define COMP_PUBLISH_UP_CHIDX_Min (0x00UL)         /*!< Min value of CHIDX field.                                            */
   #define COMP_PUBLISH_UP_CHIDX_Max (0xFFUL)         /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -2703,7 +3077,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CROSS will publish to */
   #define COMP_PUBLISH_CROSS_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define COMP_PUBLISH_CROSS_CHIDX_Msk (0xFFUL << COMP_PUBLISH_CROSS_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define COMP_PUBLISH_CROSS_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define COMP_PUBLISH_CROSS_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define COMP_PUBLISH_CROSS_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -3016,13 +3390,13 @@ typedef struct {
 /* THDOWN @Bits 0..5 : VDOWN = (THDOWN+1)/64*VREF */
   #define COMP_TH_THDOWN_Pos (0UL)                   /*!< Position of THDOWN field.                                            */
   #define COMP_TH_THDOWN_Msk (0x3FUL << COMP_TH_THDOWN_Pos) /*!< Bit mask of THDOWN field.                                     */
-  #define COMP_TH_THDOWN_Min (0x0UL)                 /*!< Min value of THDOWN field.                                           */
+  #define COMP_TH_THDOWN_Min (0x00UL)                /*!< Min value of THDOWN field.                                           */
   #define COMP_TH_THDOWN_Max (0x3FUL)                /*!< Max size of THDOWN field.                                            */
 
 /* THUP @Bits 8..13 : VUP = (THUP+1)/64*VREF */
   #define COMP_TH_THUP_Pos (8UL)                     /*!< Position of THUP field.                                              */
   #define COMP_TH_THUP_Msk (0x3FUL << COMP_TH_THUP_Pos) /*!< Bit mask of THUP field.                                           */
-  #define COMP_TH_THUP_Min (0x0UL)                   /*!< Min value of THUP field.                                             */
+  #define COMP_TH_THUP_Min (0x00UL)                  /*!< Min value of THUP field.                                             */
   #define COMP_TH_THUP_Max (0x3FUL)                  /*!< Max size of THUP field.                                              */
 
 
@@ -5439,7 +5813,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CHG[n].EN will subscribe to */
   #define DPPIC_SUBSCRIBE_CHG_EN_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define DPPIC_SUBSCRIBE_CHG_EN_CHIDX_Msk (0xFFUL << DPPIC_SUBSCRIBE_CHG_EN_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define DPPIC_SUBSCRIBE_CHG_EN_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define DPPIC_SUBSCRIBE_CHG_EN_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define DPPIC_SUBSCRIBE_CHG_EN_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -5457,7 +5831,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CHG[n].DIS will subscribe to */
   #define DPPIC_SUBSCRIBE_CHG_DIS_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define DPPIC_SUBSCRIBE_CHG_DIS_CHIDX_Msk (0xFFUL << DPPIC_SUBSCRIBE_CHG_DIS_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define DPPIC_SUBSCRIBE_CHG_DIS_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define DPPIC_SUBSCRIBE_CHG_DIS_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define DPPIC_SUBSCRIBE_CHG_DIS_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -6445,11 +6819,13 @@ typedef struct {
     __IM uint32_t RESERVED3[95];
     __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
     __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
-    __IM uint32_t RESERVED4[129];
+    __IM uint32_t RESERVED4[61];
+    __IM uint32_t ERRORSTATUS;                       /*!< (@ 0x00000400) Error status                                          */
+    __IM uint32_t RESERVED5[67];
     __IOM NRF_ECB_KEY_Type KEY;                      /*!< (@ 0x00000510) (unspecified)                                         */
-    __IM uint32_t RESERVED5[4];
+    __IM uint32_t RESERVED6[4];
     __IOM NRF_ECB_IN_Type IN;                        /*!< (@ 0x00000530) IN EasyDMA channel                                    */
-    __IM uint32_t RESERVED6;
+    __IM uint32_t RESERVED7;
     __IOM NRF_ECB_OUT_Type OUT;                      /*!< (@ 0x00000538) OUT EasyDMA channel                                   */
     __IOM NRF_ECB_CSAA_Type CSAA;                    /*!< (@ 0x0000053C) Channel sounding access address scoring algorithm     */
   } NRF_ECB_Type;                                    /*!< Size = 1352 (0x548)                                                  */
@@ -6482,7 +6858,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define ECB_SUBSCRIBE_START_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define ECB_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << ECB_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define ECB_SUBSCRIBE_START_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define ECB_SUBSCRIBE_START_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define ECB_SUBSCRIBE_START_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -6500,7 +6876,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define ECB_SUBSCRIBE_STOP_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define ECB_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << ECB_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define ECB_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define ECB_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define ECB_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -6542,7 +6918,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define ECB_PUBLISH_END_CHIDX_Pos (0UL)            /*!< Position of CHIDX field.                                             */
   #define ECB_PUBLISH_END_CHIDX_Msk (0xFFUL << ECB_PUBLISH_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                        */
-  #define ECB_PUBLISH_END_CHIDX_Min (0x0UL)          /*!< Min value of CHIDX field.                                            */
+  #define ECB_PUBLISH_END_CHIDX_Min (0x00UL)         /*!< Min value of CHIDX field.                                            */
   #define ECB_PUBLISH_END_CHIDX_Max (0xFFUL)         /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -6560,7 +6936,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ERROR will publish to */
   #define ECB_PUBLISH_ERROR_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define ECB_PUBLISH_ERROR_CHIDX_Msk (0xFFUL << ECB_PUBLISH_ERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define ECB_PUBLISH_ERROR_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define ECB_PUBLISH_ERROR_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define ECB_PUBLISH_ERROR_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -6616,6 +6992,22 @@ typedef struct {
   #define ECB_INTENCLR_ERROR_Enabled (0x1UL)         /*!< Read: Enabled                                                        */
 
 
+/* ECB_ERRORSTATUS: Error status */
+  #define ECB_ERRORSTATUS_ResetValue (0x00000000UL)  /*!< Reset value of ERRORSTATUS register.                                 */
+
+/* ERRORSTATUS @Bits 0..2 : Error status when the ERROR event is generated */
+  #define ECB_ERRORSTATUS_ERRORSTATUS_Pos (0UL)      /*!< Position of ERRORSTATUS field.                                       */
+  #define ECB_ERRORSTATUS_ERRORSTATUS_Msk (0x7UL << ECB_ERRORSTATUS_ERRORSTATUS_Pos) /*!< Bit mask of ERRORSTATUS field.       */
+  #define ECB_ERRORSTATUS_ERRORSTATUS_Min (0x0UL)    /*!< Min enumerator value of ERRORSTATUS field.                           */
+  #define ECB_ERRORSTATUS_ERRORSTATUS_Max (0x4UL)    /*!< Max enumerator value of ERRORSTATUS field.                           */
+  #define ECB_ERRORSTATUS_ERRORSTATUS_NoError (0x0UL) /*!< No errors have occurred                                             */
+  #define ECB_ERRORSTATUS_ERRORSTATUS_PrematureInptrEnd (0x1UL) /*!< End of INPTR job list before data structure was read.     */
+  #define ECB_ERRORSTATUS_ERRORSTATUS_PrematureOutptrEnd (0x2UL) /*!< End of OUTPTR job list before data structure was read.   */
+  #define ECB_ERRORSTATUS_ERRORSTATUS_EncryptionTooSlow (0x3UL) /*!< Encryption of the unencrypted data structure did not
+                                                                     complete in time.*/
+  #define ECB_ERRORSTATUS_ERRORSTATUS_DmaError (0x4UL) /*!< Bus error during DMA access.                                       */
+
+
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
 /* =========================================================================================================================== */
@@ -6667,7 +7059,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task TRIGGER[n] will subscribe to */
   #define EGU_SUBSCRIBE_TRIGGER_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define EGU_SUBSCRIBE_TRIGGER_CHIDX_Msk (0xFFUL << EGU_SUBSCRIBE_TRIGGER_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define EGU_SUBSCRIBE_TRIGGER_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define EGU_SUBSCRIBE_TRIGGER_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define EGU_SUBSCRIBE_TRIGGER_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -6704,7 +7096,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TRIGGERED[n] will publish to */
   #define EGU_PUBLISH_TRIGGERED_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define EGU_PUBLISH_TRIGGERED_CHIDX_Msk (0xFFUL << EGU_PUBLISH_TRIGGERED_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define EGU_PUBLISH_TRIGGERED_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define EGU_PUBLISH_TRIGGERED_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define EGU_PUBLISH_TRIGGERED_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -7498,7 +7890,7 @@ typedef struct {
 /* EVENT @Bits 0..7 : Select which event should generate trace elements. */
   #define ETM_TRCEVENTCTL0R_EVENT_Pos (0UL)          /*!< Position of EVENT field.                                             */
   #define ETM_TRCEVENTCTL0R_EVENT_Msk (0xFFUL << ETM_TRCEVENTCTL0R_EVENT_Pos) /*!< Bit mask of EVENT field.                    */
-  #define ETM_TRCEVENTCTL0R_EVENT_Min (0x0UL)        /*!< Min value of EVENT field.                                            */
+  #define ETM_TRCEVENTCTL0R_EVENT_Min (0x00UL)       /*!< Min value of EVENT field.                                            */
   #define ETM_TRCEVENTCTL0R_EVENT_Max (0xFFUL)       /*!< Max size of EVENT field.                                             */
 
 
@@ -7663,7 +8055,7 @@ typedef struct {
 /* EVENT @Bits 0..7 : Select which event should generate time stamps. */
   #define ETM_TRCTSCTLR_EVENT_Pos (0UL)              /*!< Position of EVENT field.                                             */
   #define ETM_TRCTSCTLR_EVENT_Msk (0xFFUL << ETM_TRCTSCTLR_EVENT_Pos) /*!< Bit mask of EVENT field.                            */
-  #define ETM_TRCTSCTLR_EVENT_Min (0x0UL)            /*!< Min value of EVENT field.                                            */
+  #define ETM_TRCTSCTLR_EVENT_Min (0x00UL)           /*!< Min value of EVENT field.                                            */
   #define ETM_TRCTSCTLR_EVENT_Max (0xFFUL)           /*!< Max size of EVENT field.                                             */
 
 
@@ -7678,7 +8070,7 @@ typedef struct {
 
   #define ETM_TRCSYNCPR_PERIOD_Pos (0UL)             /*!< Position of PERIOD field.                                            */
   #define ETM_TRCSYNCPR_PERIOD_Msk (0x1FUL << ETM_TRCSYNCPR_PERIOD_Pos) /*!< Bit mask of PERIOD field.                         */
-  #define ETM_TRCSYNCPR_PERIOD_Min (0x0UL)           /*!< Min value of PERIOD field.                                           */
+  #define ETM_TRCSYNCPR_PERIOD_Min (0x00UL)          /*!< Min value of PERIOD field.                                           */
   #define ETM_TRCSYNCPR_PERIOD_Max (0x1FUL)          /*!< Max size of PERIOD field.                                            */
   #define ETM_TRCSYNCPR_PERIOD_Disabled (0x00UL)     /*!< Trace synchronization requests are disabled. This setting does not
                                                           disable other types of trace synchronization request.*/
@@ -7692,7 +8084,7 @@ typedef struct {
 /* THRESHOLD @Bits 0..11 : Sets the threshold value for instruction trace cycle counting. */
   #define ETM_TRCCCCTLR_THRESHOLD_Pos (0UL)          /*!< Position of THRESHOLD field.                                         */
   #define ETM_TRCCCCTLR_THRESHOLD_Msk (0xFFFUL << ETM_TRCCCCTLR_THRESHOLD_Pos) /*!< Bit mask of THRESHOLD field.               */
-  #define ETM_TRCCCCTLR_THRESHOLD_Min (0x0UL)        /*!< Min value of THRESHOLD field.                                        */
+  #define ETM_TRCCCCTLR_THRESHOLD_Min (0x000UL)      /*!< Min value of THRESHOLD field.                                        */
   #define ETM_TRCCCCTLR_THRESHOLD_Max (0x7FFUL)      /*!< Max size of THRESHOLD field.                                         */
 
 
@@ -9226,7 +9618,7 @@ typedef struct {
 /* EVENT @Bits 0..7 : Select which event should reset the sequencer. */
   #define ETM_TRCSEQRSTEVR_EVENT_Pos (0UL)           /*!< Position of EVENT field.                                             */
   #define ETM_TRCSEQRSTEVR_EVENT_Msk (0xFFUL << ETM_TRCSEQRSTEVR_EVENT_Pos) /*!< Bit mask of EVENT field.                      */
-  #define ETM_TRCSEQRSTEVR_EVENT_Min (0x0UL)         /*!< Min value of EVENT field.                                            */
+  #define ETM_TRCSEQRSTEVR_EVENT_Min (0x00UL)        /*!< Min value of EVENT field.                                            */
   #define ETM_TRCSEQRSTEVR_EVENT_Max (0xFFUL)        /*!< Max size of EVENT field.                                             */
 
 
@@ -9256,25 +9648,25 @@ typedef struct {
 /* SEL0 @Bits 0..7 : Each field in this collection selects an external input as a resource for the trace unit. */
   #define ETM_TRCEXTINSELR_SEL0_Pos (0UL)            /*!< Position of SEL0 field.                                              */
   #define ETM_TRCEXTINSELR_SEL0_Msk (0xFFUL << ETM_TRCEXTINSELR_SEL0_Pos) /*!< Bit mask of SEL0 field.                         */
-  #define ETM_TRCEXTINSELR_SEL0_Min (0x0UL)          /*!< Min value of SEL0 field.                                             */
+  #define ETM_TRCEXTINSELR_SEL0_Min (0x00UL)         /*!< Min value of SEL0 field.                                             */
   #define ETM_TRCEXTINSELR_SEL0_Max (0xFFUL)         /*!< Max size of SEL0 field.                                              */
 
 /* SEL1 @Bits 8..15 : Each field in this collection selects an external input as a resource for the trace unit. */
   #define ETM_TRCEXTINSELR_SEL1_Pos (8UL)            /*!< Position of SEL1 field.                                              */
   #define ETM_TRCEXTINSELR_SEL1_Msk (0xFFUL << ETM_TRCEXTINSELR_SEL1_Pos) /*!< Bit mask of SEL1 field.                         */
-  #define ETM_TRCEXTINSELR_SEL1_Min (0x0UL)          /*!< Min value of SEL1 field.                                             */
+  #define ETM_TRCEXTINSELR_SEL1_Min (0x00UL)         /*!< Min value of SEL1 field.                                             */
   #define ETM_TRCEXTINSELR_SEL1_Max (0xFFUL)         /*!< Max size of SEL1 field.                                              */
 
 /* SEL2 @Bits 16..23 : Each field in this collection selects an external input as a resource for the trace unit. */
   #define ETM_TRCEXTINSELR_SEL2_Pos (16UL)           /*!< Position of SEL2 field.                                              */
   #define ETM_TRCEXTINSELR_SEL2_Msk (0xFFUL << ETM_TRCEXTINSELR_SEL2_Pos) /*!< Bit mask of SEL2 field.                         */
-  #define ETM_TRCEXTINSELR_SEL2_Min (0x0UL)          /*!< Min value of SEL2 field.                                             */
+  #define ETM_TRCEXTINSELR_SEL2_Min (0x00UL)         /*!< Min value of SEL2 field.                                             */
   #define ETM_TRCEXTINSELR_SEL2_Max (0xFFUL)         /*!< Max size of SEL2 field.                                              */
 
 /* SEL3 @Bits 24..31 : Each field in this collection selects an external input as a resource for the trace unit. */
   #define ETM_TRCEXTINSELR_SEL3_Pos (24UL)           /*!< Position of SEL3 field.                                              */
   #define ETM_TRCEXTINSELR_SEL3_Msk (0xFFUL << ETM_TRCEXTINSELR_SEL3_Pos) /*!< Bit mask of SEL3 field.                         */
-  #define ETM_TRCEXTINSELR_SEL3_Min (0x0UL)          /*!< Min value of SEL3 field.                                             */
+  #define ETM_TRCEXTINSELR_SEL3_Min (0x00UL)         /*!< Min value of SEL3 field.                                             */
   #define ETM_TRCEXTINSELR_SEL3_Max (0xFFUL)         /*!< Max size of SEL3 field.                                              */
 
 
@@ -9291,7 +9683,7 @@ typedef struct {
 
   #define ETM_TRCCNTRLDVR_VALUE_Pos (0UL)            /*!< Position of VALUE field.                                             */
   #define ETM_TRCCNTRLDVR_VALUE_Msk (0xFFFFUL << ETM_TRCCNTRLDVR_VALUE_Pos) /*!< Bit mask of VALUE field.                      */
-  #define ETM_TRCCNTRLDVR_VALUE_Min (0x0UL)          /*!< Min value of VALUE field.                                            */
+  #define ETM_TRCCNTRLDVR_VALUE_Min (0x0000UL)       /*!< Min value of VALUE field.                                            */
   #define ETM_TRCCNTRLDVR_VALUE_Max (0xFFFFUL)       /*!< Max size of VALUE field.                                             */
 
 
@@ -9304,13 +9696,13 @@ typedef struct {
 /* CNTEVENT @Bits 0..7 : Selects an event, that when it occurs causes counter n to decrement. */
   #define ETM_TRCCNTCTLR_CNTEVENT_Pos (0UL)          /*!< Position of CNTEVENT field.                                          */
   #define ETM_TRCCNTCTLR_CNTEVENT_Msk (0xFFUL << ETM_TRCCNTCTLR_CNTEVENT_Pos) /*!< Bit mask of CNTEVENT field.                 */
-  #define ETM_TRCCNTCTLR_CNTEVENT_Min (0x0UL)        /*!< Min value of CNTEVENT field.                                         */
+  #define ETM_TRCCNTCTLR_CNTEVENT_Min (0x00UL)       /*!< Min value of CNTEVENT field.                                         */
   #define ETM_TRCCNTCTLR_CNTEVENT_Max (0xFFUL)       /*!< Max size of CNTEVENT field.                                          */
 
 /* RLDEVENT @Bits 8..15 : Selects an event, that when it occurs causes a reload event for counter n. */
   #define ETM_TRCCNTCTLR_RLDEVENT_Pos (8UL)          /*!< Position of RLDEVENT field.                                          */
   #define ETM_TRCCNTCTLR_RLDEVENT_Msk (0xFFUL << ETM_TRCCNTCTLR_RLDEVENT_Pos) /*!< Bit mask of RLDEVENT field.                 */
-  #define ETM_TRCCNTCTLR_RLDEVENT_Min (0x0UL)        /*!< Min value of RLDEVENT field.                                         */
+  #define ETM_TRCCNTCTLR_RLDEVENT_Min (0x00UL)       /*!< Min value of RLDEVENT field.                                         */
   #define ETM_TRCCNTCTLR_RLDEVENT_Max (0xFFUL)       /*!< Max size of RLDEVENT field.                                          */
 
 /* RLDSELF @Bit 16 : Controls whether a reload event occurs for counter n, when counter n reaches zero. */
@@ -9347,7 +9739,7 @@ typedef struct {
 /* VALUE @Bits 0..15 : Contains the count value of counter n. */
   #define ETM_TRCCNTVR_VALUE_Pos (0UL)               /*!< Position of VALUE field.                                             */
   #define ETM_TRCCNTVR_VALUE_Msk (0xFFFFUL << ETM_TRCCNTVR_VALUE_Pos) /*!< Bit mask of VALUE field.                            */
-  #define ETM_TRCCNTVR_VALUE_Min (0x0UL)             /*!< Min value of VALUE field.                                            */
+  #define ETM_TRCCNTVR_VALUE_Min (0x0000UL)          /*!< Min value of VALUE field.                                            */
   #define ETM_TRCCNTVR_VALUE_Max (0xFFFFUL)          /*!< Max size of VALUE field.                                             */
 
 
@@ -9752,9 +10144,9 @@ typedef struct {
   __IM  uint32_t  ADDR;                              /*!< (@ 0x00000000) Address of the APB register which will be written     */
   __IM  uint32_t  DATA;                              /*!< (@ 0x00000004) Data to be written into the APB register              */
 } NRF_FICR_CHIPCONF_Type;                            /*!< Size = 8 (0x008)                                                     */
-  #define FICR_CHIPCONF_MaxCount (32UL)              /*!< Size of CHIPCONF[32] array.                                          */
-  #define FICR_CHIPCONF_MaxIndex (31UL)              /*!< Max index of CHIPCONF[32] array.                                     */
-  #define FICR_CHIPCONF_MinIndex (0UL)               /*!< Min index of CHIPCONF[32] array.                                     */
+  #define FICR_CHIPCONF_MaxCount (64UL)              /*!< Size of CHIPCONF[64] array.                                          */
+  #define FICR_CHIPCONF_MaxIndex (63UL)              /*!< Max index of CHIPCONF[64] array.                                     */
+  #define FICR_CHIPCONF_MinIndex (0UL)               /*!< Min index of CHIPCONF[64] array.                                     */
 
 /* FICR_CHIPCONF_ADDR: Address of the APB register which will be written */
   #define FICR_CHIPCONF_ADDR_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ADDR register.                                      */
@@ -10344,28 +10736,27 @@ typedef struct {
   * @brief Factory Information Configuration Registers
   */
   typedef struct {                                   /*!< FICR Structure                                                       */
-    __IOM NRF_FICR_CHIPCONF_Type CHIPCONF[32];       /*!< (@ 0x00000000) (unspecified)                                         */
-    __IM uint32_t RESERVED[64];
+    __IOM NRF_FICR_CHIPCONF_Type CHIPCONF[64];       /*!< (@ 0x00000000) (unspecified)                                         */
     __IOM NRF_FICR_DFTENABLE_Type DFTENABLE[1];      /*!< (@ 0x00000200) DFT Enable Registers                                  */
-    __IM uint32_t RESERVED1[56];
+    __IM uint32_t RESERVED[56];
     __IOM NRF_FICR_INFO_Type INFO;                   /*!< (@ 0x00000300) Device info                                           */
-    __IM uint32_t RESERVED2[2];
+    __IM uint32_t RESERVED1[2];
     __IOM NRF_FICR_SOCINFO_Type SOCINFO;             /*!< (@ 0x00000340) SOC info. HWREVISION and PARTNO are also part of
                                                                          CHIPCONF array where they are copied to CTRLAPPERI APB
                                                                          registers.*/
-    __IM uint32_t RESERVED3;
+    __IM uint32_t RESERVED2;
     __IM uint32_t BOARDINFO;                         /*!< (@ 0x00000350) Reserved for board info.                              */
-    __IM uint32_t RESERVED4[11];
+    __IM uint32_t RESERVED3[11];
     __IM uint32_t ER[4];                             /*!< (@ 0x00000380) Common encryption root key, word n                    */
     __IM uint32_t IR[4];                             /*!< (@ 0x00000390) Common identity root key, word n                      */
     __IM uint32_t DEVICEADDRTYPE;                    /*!< (@ 0x000003A0) Device address type                                   */
     __IM uint32_t DEVICEADDR[2];                     /*!< (@ 0x000003A4) Device address n                                      */
-    __IM uint32_t RESERVED5;
+    __IM uint32_t RESERVED4;
     __IOM NRF_FICR_PROTEST_Type PROTEST;             /*!< (@ 0x000003B0) Production test information                           */
-    __IM uint32_t RESERVED6[5];
+    __IM uint32_t RESERVED5[5];
     __IOM NRF_FICR_TRIMCNF_Type TRIMCNF[64];         /*!< (@ 0x00000400) (unspecified)                                         */
     __IOM NRF_FICR_NFC_Type NFC;                     /*!< (@ 0x00000600) (unspecified)                                         */
-    __IM uint32_t RESERVED7[4];
+    __IM uint32_t RESERVED6[4];
     __IM uint32_t XOSC32MTRIM;                       /*!< (@ 0x00000620) XOSC32M capacitor selection trim values               */
     __IM uint32_t XOSC32KTRIM;                       /*!< (@ 0x00000624) XOSC32K capacitor selection trim values               */
   } NRF_FICR_Type;                                   /*!< Size = 1576 (0x628)                                                  */
@@ -10456,130 +10847,112 @@ typedef struct {
 
 #if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
 
-/* =========================================== Struct GLITCHDET_GLITCHDETECTOR_DFT =========================================== */
+/* ================================================== Struct GLITCHDET_DFT =================================================== */
 /**
-  * @brief DFT [GLITCHDET_GLITCHDETECTOR_DFT] (unspecified)
+  * @brief DFT [GLITCHDET_DFT] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  ATB0CONFIG;                        /*!< (@ 0x00000000) Analog Test Bus 0 (ATB0) configuration                */
   __IOM uint32_t  ATB1CONFIG;                        /*!< (@ 0x00000004) Analog Test Bus 1 (ATB1) configuration                */
   __IOM uint32_t  ATB2CONFIG;                        /*!< (@ 0x00000008) Analog Test Bus 2 (ATB2) configuration                */
-} NRF_GLITCHDET_GLITCHDETECTOR_DFT_Type;             /*!< Size = 12 (0x00C)                                                    */
+} NRF_GLITCHDET_DFT_Type;                            /*!< Size = 12 (0x00C)                                                    */
 
-/* GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG: Analog Test Bus 0 (ATB0) configuration */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB0CONFIG register.           */
+/* GLITCHDET_DFT_ATB0CONFIG: Analog Test Bus 0 (ATB0) configuration */
+  #define GLITCHDET_DFT_ATB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB0CONFIG register.                          */
 
 /* SELMUX @Bits 0..2 : Select multiplexer for ATB0 */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                              */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_SELMUX_Msk (0x7UL << GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_SELMUX_Pos) /*!<
-                                                                            Bit mask of SELMUX field.*/
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_SELMUX_Max (0x4UL) /*!< Max enumerator value of SELMUX field.                */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_SELMUX_HiZ (0x0UL) /*!< High impedance                                       */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_SELMUX_VDDDIV (0x1UL) /*!< Measure/Force VDD_DIV voltage from external       */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_SELMUX_VDDDIG0V9 (0x2UL) /*!< Measure/Force VDD_DIG_0V9 voltage from external*/
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_SELMUX_VSS (0x3UL) /*!< VSS                                                  */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB0CONFIG_SELMUX_GLITCHSRVDD3V0 (0x4UL) /*!< Internal signal - GLITCH_SR_VDD_3V0       */
+  #define GLITCHDET_DFT_ATB0CONFIG_SELMUX_Pos (0UL)  /*!< Position of SELMUX field.                                            */
+  #define GLITCHDET_DFT_ATB0CONFIG_SELMUX_Msk (0x7UL << GLITCHDET_DFT_ATB0CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.    */
+  #define GLITCHDET_DFT_ATB0CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                               */
+  #define GLITCHDET_DFT_ATB0CONFIG_SELMUX_Max (0x4UL) /*!< Max enumerator value of SELMUX field.                               */
+  #define GLITCHDET_DFT_ATB0CONFIG_SELMUX_HiZ (0x0UL) /*!< High impedance                                                      */
+  #define GLITCHDET_DFT_ATB0CONFIG_SELMUX_VDDDIV (0x1UL) /*!< Measure/Force VDD_DIV voltage from external                      */
+  #define GLITCHDET_DFT_ATB0CONFIG_SELMUX_VDDDIG0V9 (0x2UL) /*!< Measure/Force VDD_DIG_0V9 voltage from external               */
+  #define GLITCHDET_DFT_ATB0CONFIG_SELMUX_VSS (0x3UL) /*!< VSS                                                                 */
+  #define GLITCHDET_DFT_ATB0CONFIG_SELMUX_GLITCHSRVDD3V0 (0x4UL) /*!< Internal signal - GLITCH_SR_VDD_3V0                      */
 
 
-/* GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG: Analog Test Bus 1 (ATB1) configuration */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB1CONFIG register.           */
+/* GLITCHDET_DFT_ATB1CONFIG: Analog Test Bus 1 (ATB1) configuration */
+  #define GLITCHDET_DFT_ATB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB1CONFIG register.                          */
 
 /* SELMUX @Bits 0..2 : Select multiplexer for ATB1 */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                              */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_Msk (0x7UL << GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_Pos) /*!<
-                                                                            Bit mask of SELMUX field.*/
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_Max (0x5UL) /*!< Max enumerator value of SELMUX field.                */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_HiZ (0x0UL) /*!< High impedance                                       */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_VREFHVDD (0x1UL) /*!< Measure VREFH_VDD voltage                       */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_VREFLVDD (0x2UL) /*!< Measure VREFL_VDD voltage                       */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_VREFHDAVDD (0x3UL) /*!< Measure VREFH_DVDD voltage                    */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_VREFLDVDD (0x4UL) /*!< Measure VREFL_DVDD voltage                     */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB1CONFIG_SELMUX_GLITCHSRDVDD3V0 (0x5UL) /*!< Internal signal - GLITCH_SR_DVDD_3V0     */
+  #define GLITCHDET_DFT_ATB1CONFIG_SELMUX_Pos (0UL)  /*!< Position of SELMUX field.                                            */
+  #define GLITCHDET_DFT_ATB1CONFIG_SELMUX_Msk (0x7UL << GLITCHDET_DFT_ATB1CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.    */
+  #define GLITCHDET_DFT_ATB1CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                               */
+  #define GLITCHDET_DFT_ATB1CONFIG_SELMUX_Max (0x5UL) /*!< Max enumerator value of SELMUX field.                               */
+  #define GLITCHDET_DFT_ATB1CONFIG_SELMUX_HiZ (0x0UL) /*!< High impedance                                                      */
+  #define GLITCHDET_DFT_ATB1CONFIG_SELMUX_VREFHVDD (0x1UL) /*!< Measure VREFH_VDD voltage                                      */
+  #define GLITCHDET_DFT_ATB1CONFIG_SELMUX_VREFLVDD (0x2UL) /*!< Measure VREFL_VDD voltage                                      */
+  #define GLITCHDET_DFT_ATB1CONFIG_SELMUX_VREFHDAVDD (0x3UL) /*!< Measure VREFH_DVDD voltage                                   */
+  #define GLITCHDET_DFT_ATB1CONFIG_SELMUX_VREFLDVDD (0x4UL) /*!< Measure VREFL_DVDD voltage                                    */
+  #define GLITCHDET_DFT_ATB1CONFIG_SELMUX_GLITCHSRDVDD3V0 (0x5UL) /*!< Internal signal - GLITCH_SR_DVDD_3V0                    */
 
 
-/* GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG: Analog Test Bus 2 (ATB2) configuration */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB2CONFIG register.           */
+/* GLITCHDET_DFT_ATB2CONFIG: Analog Test Bus 2 (ATB2) configuration */
+  #define GLITCHDET_DFT_ATB2CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB2CONFIG register.                          */
 
 /* SELMUX @Bits 0..1 : Select multiplexer for ATB2 */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                              */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG_SELMUX_Msk (0x3UL << GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG_SELMUX_Pos) /*!<
-                                                                            Bit mask of SELMUX field.*/
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG_SELMUX_Max (0x3UL) /*!< Max enumerator value of SELMUX field.                */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG_SELMUX_HiZ (0x0UL) /*!< High impedance                                       */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG_SELMUX_VTAMPORDVDD3V0 (0x1UL) /*!< Internal signal - VTAMP_OR_DVDD_3V0       */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG_SELMUX_VTAMPORVDD3V0 (0x2UL) /*!< Internal signal - VTAMP_OR_VDD_3V0         */
-  #define GLITCHDET_GLITCHDETECTOR_DFT_ATB2CONFIG_SELMUX_GLITCHNINT3V0 (0x3UL) /*!< Internal signal - GLITCH_N_INT_3V0         */
-
-
-
-/* ============================================= Struct GLITCHDET_GLITCHDETECTOR ============================================= */
-/**
-  * @brief GLITCHDETECTOR [GLITCHDET_GLITCHDETECTOR] Glitch detector
-  */
-typedef struct {
-  __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) Configuration for glitch detector                     */
-  __IOM uint32_t  TRIM;                              /*!< (@ 0x00000004) Trim configuration for glitch detector                */
-  __IM  uint32_t  RESERVED[2];
-  __IOM NRF_GLITCHDET_GLITCHDETECTOR_DFT_Type DFT;   /*!< (@ 0x00000010) (unspecified)                                         */
-} NRF_GLITCHDET_GLITCHDETECTOR_Type;                 /*!< Size = 28 (0x01C)                                                    */
-
-/* GLITCHDET_GLITCHDETECTOR_CONFIG: Configuration for glitch detector */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_ResetValue (0x00000001UL) /*!< Reset value of CONFIG register.                       */
-
-/* ENABLE @Bit 0 : Enable glitch detector */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Pos (0UL) /*!< Position of ENABLE field.                                      */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Msk (0x1UL << GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Pos) /*!< Bit mask of
-                                                                            ENABLE field.*/
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Min (0x0UL) /*!< Min enumerator value of ENABLE field.                        */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Max (0x1UL) /*!< Max enumerator value of ENABLE field.                        */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Disable (0x0UL) /*!< Disable glitch detector                                  */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Enable (0x1UL) /*!< Enable glitch detector                                    */
-
-/* MODE @Bit 4 : Glitch detector mode */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_Pos (4UL) /*!< Position of MODE field.                                          */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_Msk (0x1UL << GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_Pos) /*!< Bit mask of MODE
-                                                                            field.*/
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_Min (0x0UL) /*!< Min enumerator value of MODE field.                            */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_Max (0x1UL) /*!< Max enumerator value of MODE field.                            */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_HighPassFilter (0x0UL) /*!< High pass filter mode                               */
-  #define GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_CapDiv (0x1UL) /*!< Cap divider mode                                            */
-
-
-/* GLITCHDET_GLITCHDETECTOR_TRIM: Trim configuration for glitch detector */
-  #define GLITCHDET_GLITCHDETECTOR_TRIM_ResetValue (0x00004235UL) /*!< Reset value of TRIM register.                           */
-
-/* VREFLDVDD @Bits 0..2 : Voltage trimming value for VREFL_DVDD */
-  #define GLITCHDET_GLITCHDETECTOR_TRIM_VREFLDVDD_Pos (0UL) /*!< Position of VREFLDVDD field.                                  */
-  #define GLITCHDET_GLITCHDETECTOR_TRIM_VREFLDVDD_Msk (0x7UL << GLITCHDET_GLITCHDETECTOR_TRIM_VREFLDVDD_Pos) /*!< Bit mask of
-                                                                            VREFLDVDD field.*/
-
-/* VREFLVDD @Bits 4..6 : Voltage trimming value for VREFL_VDD */
-  #define GLITCHDET_GLITCHDETECTOR_TRIM_VREFLVDD_Pos (4UL) /*!< Position of VREFLVDD field.                                    */
-  #define GLITCHDET_GLITCHDETECTOR_TRIM_VREFLVDD_Msk (0x7UL << GLITCHDET_GLITCHDETECTOR_TRIM_VREFLVDD_Pos) /*!< Bit mask of
-                                                                            VREFLVDD field.*/
-
-/* VREFHDVDD @Bits 8..10 : Voltage trimming value for VREFH_DVDD */
-  #define GLITCHDET_GLITCHDETECTOR_TRIM_VREFHDVDD_Pos (8UL) /*!< Position of VREFHDVDD field.                                  */
-  #define GLITCHDET_GLITCHDETECTOR_TRIM_VREFHDVDD_Msk (0x7UL << GLITCHDET_GLITCHDETECTOR_TRIM_VREFHDVDD_Pos) /*!< Bit mask of
-                                                                            VREFHDVDD field.*/
-
-/* VREFHVDD @Bits 12..14 : Voltage trimming value for VREFH_VDD */
-  #define GLITCHDET_GLITCHDETECTOR_TRIM_VREFHVDD_Pos (12UL) /*!< Position of VREFHVDD field.                                   */
-  #define GLITCHDET_GLITCHDETECTOR_TRIM_VREFHVDD_Msk (0x7UL << GLITCHDET_GLITCHDETECTOR_TRIM_VREFHVDD_Pos) /*!< Bit mask of
-                                                                            VREFHVDD field.*/
+  #define GLITCHDET_DFT_ATB2CONFIG_SELMUX_Pos (0UL)  /*!< Position of SELMUX field.                                            */
+  #define GLITCHDET_DFT_ATB2CONFIG_SELMUX_Msk (0x3UL << GLITCHDET_DFT_ATB2CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.    */
+  #define GLITCHDET_DFT_ATB2CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                               */
+  #define GLITCHDET_DFT_ATB2CONFIG_SELMUX_Max (0x3UL) /*!< Max enumerator value of SELMUX field.                               */
+  #define GLITCHDET_DFT_ATB2CONFIG_SELMUX_HiZ (0x0UL) /*!< High impedance                                                      */
+  #define GLITCHDET_DFT_ATB2CONFIG_SELMUX_VTAMPORDVDD3V0 (0x1UL) /*!< Internal signal - VTAMP_OR_DVDD_3V0                      */
+  #define GLITCHDET_DFT_ATB2CONFIG_SELMUX_VTAMPORVDD3V0 (0x2UL) /*!< Internal signal - VTAMP_OR_VDD_3V0                        */
+  #define GLITCHDET_DFT_ATB2CONFIG_SELMUX_GLITCHNINT3V0 (0x3UL) /*!< Internal signal - GLITCH_N_INT_3V0                        */
 
 
 /* ==================================================== Struct GLITCHDET ===================================================== */
 /**
-  * @brief GLITCH detector
+  * @brief Voltage glitch detectors
   */
   typedef struct {                                   /*!< GLITCHDET Structure                                                  */
     __IM uint32_t RESERVED[360];
-    __IOM NRF_GLITCHDET_GLITCHDETECTOR_Type GLITCHDETECTOR; /*!< (@ 0x000005A0) Glitch detector                                */
+    __IOM uint32_t CONFIG;                           /*!< (@ 0x000005A0) Configuration for glitch detector                     */
+    __IOM uint32_t TRIM;                             /*!< (@ 0x000005A4) Trim configuration for glitch detector                */
+    __IM uint32_t RESERVED1[2];
+    __IOM NRF_GLITCHDET_DFT_Type DFT;                /*!< (@ 0x000005B0) (unspecified)                                         */
   } NRF_GLITCHDET_Type;                              /*!< Size = 1468 (0x5BC)                                                  */
+
+/* GLITCHDET_CONFIG: Configuration for glitch detector */
+  #define GLITCHDET_CONFIG_ResetValue (0x00000001UL) /*!< Reset value of CONFIG register.                                      */
+
+/* ENABLE @Bit 0 : Enable glitch detector */
+  #define GLITCHDET_CONFIG_ENABLE_Pos (0UL)          /*!< Position of ENABLE field.                                            */
+  #define GLITCHDET_CONFIG_ENABLE_Msk (0x1UL << GLITCHDET_CONFIG_ENABLE_Pos) /*!< Bit mask of ENABLE field.                    */
+  #define GLITCHDET_CONFIG_ENABLE_Min (0x0UL)        /*!< Min enumerator value of ENABLE field.                                */
+  #define GLITCHDET_CONFIG_ENABLE_Max (0x1UL)        /*!< Max enumerator value of ENABLE field.                                */
+  #define GLITCHDET_CONFIG_ENABLE_Disable (0x0UL)    /*!< Disable glitch detector                                              */
+  #define GLITCHDET_CONFIG_ENABLE_Enable (0x1UL)     /*!< Enable glitch detector                                               */
+
+/* MODE @Bit 4 : Glitch detector mode */
+  #define GLITCHDET_CONFIG_MODE_Pos (4UL)            /*!< Position of MODE field.                                              */
+  #define GLITCHDET_CONFIG_MODE_Msk (0x1UL << GLITCHDET_CONFIG_MODE_Pos) /*!< Bit mask of MODE field.                          */
+  #define GLITCHDET_CONFIG_MODE_Min (0x0UL)          /*!< Min enumerator value of MODE field.                                  */
+  #define GLITCHDET_CONFIG_MODE_Max (0x1UL)          /*!< Max enumerator value of MODE field.                                  */
+  #define GLITCHDET_CONFIG_MODE_HighPassFilter (0x0UL) /*!< High pass filter mode                                              */
+  #define GLITCHDET_CONFIG_MODE_CapDiv (0x1UL)       /*!< Cap divider mode                                                     */
+
+
+/* GLITCHDET_TRIM: Trim configuration for glitch detector */
+  #define GLITCHDET_TRIM_ResetValue (0x00004235UL)   /*!< Reset value of TRIM register.                                        */
+
+/* VREFLDVDD @Bits 0..2 : Voltage trimming value for VREFL_DVDD */
+  #define GLITCHDET_TRIM_VREFLDVDD_Pos (0UL)         /*!< Position of VREFLDVDD field.                                         */
+  #define GLITCHDET_TRIM_VREFLDVDD_Msk (0x7UL << GLITCHDET_TRIM_VREFLDVDD_Pos) /*!< Bit mask of VREFLDVDD field.               */
+
+/* VREFLVDD @Bits 4..6 : Voltage trimming value for VREFL_VDD */
+  #define GLITCHDET_TRIM_VREFLVDD_Pos (4UL)          /*!< Position of VREFLVDD field.                                          */
+  #define GLITCHDET_TRIM_VREFLVDD_Msk (0x7UL << GLITCHDET_TRIM_VREFLVDD_Pos) /*!< Bit mask of VREFLVDD field.                  */
+
+/* VREFHDVDD @Bits 8..10 : Voltage trimming value for VREFH_DVDD */
+  #define GLITCHDET_TRIM_VREFHDVDD_Pos (8UL)         /*!< Position of VREFHDVDD field.                                         */
+  #define GLITCHDET_TRIM_VREFHDVDD_Msk (0x7UL << GLITCHDET_TRIM_VREFHDVDD_Pos) /*!< Bit mask of VREFHDVDD field.               */
+
+/* VREFHVDD @Bits 12..14 : Voltage trimming value for VREFH_VDD */
+  #define GLITCHDET_TRIM_VREFHVDD_Pos (12UL)         /*!< Position of VREFHVDD field.                                          */
+  #define GLITCHDET_TRIM_VREFHVDD_Msk (0x7UL << GLITCHDET_TRIM_VREFHVDD_Pos) /*!< Bit mask of VREFHVDD field.                  */
+
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
@@ -13223,7 +13596,7 @@ typedef struct {
   #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                          */
   #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Msk (0xFFUL << GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                       */
+  #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                      */
   #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                       */
 
 /* EN @Bit 31 : (unspecified) */
@@ -13241,7 +13614,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event PORT[n].SECURE will publish to */
   #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Msk (0xFFUL << GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -13344,7 +13717,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task OUT[n] will subscribe to */
   #define GPIOTE_SUBSCRIBE_OUT_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define GPIOTE_SUBSCRIBE_OUT_CHIDX_Msk (0xFFUL << GPIOTE_SUBSCRIBE_OUT_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define GPIOTE_SUBSCRIBE_OUT_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define GPIOTE_SUBSCRIBE_OUT_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define GPIOTE_SUBSCRIBE_OUT_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -13365,7 +13738,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SET[n] will subscribe to */
   #define GPIOTE_SUBSCRIBE_SET_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define GPIOTE_SUBSCRIBE_SET_CHIDX_Msk (0xFFUL << GPIOTE_SUBSCRIBE_SET_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define GPIOTE_SUBSCRIBE_SET_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define GPIOTE_SUBSCRIBE_SET_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define GPIOTE_SUBSCRIBE_SET_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -13386,7 +13759,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CLR[n] will subscribe to */
   #define GPIOTE_SUBSCRIBE_CLR_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define GPIOTE_SUBSCRIBE_CLR_CHIDX_Msk (0xFFUL << GPIOTE_SUBSCRIBE_CLR_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define GPIOTE_SUBSCRIBE_CLR_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define GPIOTE_SUBSCRIBE_CLR_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define GPIOTE_SUBSCRIBE_CLR_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -13422,7 +13795,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event IN[n] will publish to */
   #define GPIOTE_PUBLISH_IN_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define GPIOTE_PUBLISH_IN_CHIDX_Msk (0xFFUL << GPIOTE_PUBLISH_IN_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define GPIOTE_PUBLISH_IN_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define GPIOTE_PUBLISH_IN_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define GPIOTE_PUBLISH_IN_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -14001,7 +14374,7 @@ typedef struct {
 /* PSEL @Bits 4..8 : GPIO number associated with SET[n], CLR[n], and OUT[n] tasks and IN[n] event */
   #define GPIOTE_CONFIG_PSEL_Pos (4UL)               /*!< Position of PSEL field.                                              */
   #define GPIOTE_CONFIG_PSEL_Msk (0x1FUL << GPIOTE_CONFIG_PSEL_Pos) /*!< Bit mask of PSEL field.                               */
-  #define GPIOTE_CONFIG_PSEL_Min (0x0UL)             /*!< Min value of PSEL field.                                             */
+  #define GPIOTE_CONFIG_PSEL_Min (0x00UL)            /*!< Min value of PSEL field.                                             */
   #define GPIOTE_CONFIG_PSEL_Max (0x1FUL)            /*!< Max size of PSEL field.                                              */
 
 /* PORT @Bits 9..12 : Port number */
@@ -14350,7 +14723,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CAPTURE[n] will subscribe to */
   #define GRTC_SUBSCRIBE_CAPTURE_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define GRTC_SUBSCRIBE_CAPTURE_CHIDX_Msk (0xFFUL << GRTC_SUBSCRIBE_CAPTURE_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define GRTC_SUBSCRIBE_CAPTURE_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define GRTC_SUBSCRIBE_CAPTURE_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define GRTC_SUBSCRIBE_CAPTURE_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -14441,7 +14814,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event COMPARE[n] will publish to */
   #define GRTC_PUBLISH_COMPARE_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define GRTC_PUBLISH_COMPARE_CHIDX_Msk (0xFFUL << GRTC_PUBLISH_COMPARE_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define GRTC_PUBLISH_COMPARE_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define GRTC_PUBLISH_COMPARE_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define GRTC_PUBLISH_COMPARE_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -14459,7 +14832,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RTCOMPARE will publish to */
   #define GRTC_PUBLISH_RTCOMPARE_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define GRTC_PUBLISH_RTCOMPARE_CHIDX_Msk (0xFFUL << GRTC_PUBLISH_RTCOMPARE_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define GRTC_PUBLISH_RTCOMPARE_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define GRTC_PUBLISH_RTCOMPARE_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define GRTC_PUBLISH_RTCOMPARE_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -17097,7 +17470,7 @@ typedef struct {
 /* CLKFASTDIV @Bits 0..7 : Fast clock divisor value of clock output */
   #define GRTC_CLKCFG_CLKFASTDIV_Pos (0UL)           /*!< Position of CLKFASTDIV field.                                        */
   #define GRTC_CLKCFG_CLKFASTDIV_Msk (0xFFUL << GRTC_CLKCFG_CLKFASTDIV_Pos) /*!< Bit mask of CLKFASTDIV field.                 */
-  #define GRTC_CLKCFG_CLKFASTDIV_Min (0x1UL)         /*!< Min value of CLKFASTDIV field.                                       */
+  #define GRTC_CLKCFG_CLKFASTDIV_Min (0x01UL)        /*!< Min value of CLKFASTDIV field.                                       */
   #define GRTC_CLKCFG_CLKFASTDIV_Max (0xFFUL)        /*!< Max size of CLKFASTDIV field.                                        */
 
 /* CLKSEL @Bits 16..17 : GRTC LFCLK clock source selection */
@@ -17375,7 +17748,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define I2S_PSEL_MCK_PIN_Pos (0UL)                 /*!< Position of PIN field.                                               */
   #define I2S_PSEL_MCK_PIN_Msk (0x1FUL << I2S_PSEL_MCK_PIN_Pos) /*!< Bit mask of PIN field.                                    */
-  #define I2S_PSEL_MCK_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
+  #define I2S_PSEL_MCK_PIN_Min (0x00UL)              /*!< Min value of PIN field.                                              */
   #define I2S_PSEL_MCK_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -17399,7 +17772,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define I2S_PSEL_SCK_PIN_Pos (0UL)                 /*!< Position of PIN field.                                               */
   #define I2S_PSEL_SCK_PIN_Msk (0x1FUL << I2S_PSEL_SCK_PIN_Pos) /*!< Bit mask of PIN field.                                    */
-  #define I2S_PSEL_SCK_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
+  #define I2S_PSEL_SCK_PIN_Min (0x00UL)              /*!< Min value of PIN field.                                              */
   #define I2S_PSEL_SCK_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -17423,7 +17796,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define I2S_PSEL_LRCK_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define I2S_PSEL_LRCK_PIN_Msk (0x1FUL << I2S_PSEL_LRCK_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define I2S_PSEL_LRCK_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define I2S_PSEL_LRCK_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define I2S_PSEL_LRCK_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -17447,7 +17820,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define I2S_PSEL_SDIN_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define I2S_PSEL_SDIN_PIN_Msk (0x1FUL << I2S_PSEL_SDIN_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define I2S_PSEL_SDIN_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define I2S_PSEL_SDIN_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define I2S_PSEL_SDIN_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -17471,7 +17844,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define I2S_PSEL_SDOUT_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define I2S_PSEL_SDOUT_PIN_Msk (0x1FUL << I2S_PSEL_SDOUT_PIN_Pos) /*!< Bit mask of PIN field.                                */
-  #define I2S_PSEL_SDOUT_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
+  #define I2S_PSEL_SDOUT_PIN_Min (0x00UL)            /*!< Min value of PIN field.                                              */
   #define I2S_PSEL_SDOUT_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -17691,7 +18064,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define I2S_SUBSCRIBE_START_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define I2S_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << I2S_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define I2S_SUBSCRIBE_START_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define I2S_SUBSCRIBE_START_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define I2S_SUBSCRIBE_START_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -17709,7 +18082,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define I2S_SUBSCRIBE_STOP_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define I2S_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << I2S_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define I2S_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define I2S_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define I2S_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -17727,7 +18100,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task DMA_START_TX will subscribe to */
   #define I2S_SUBSCRIBE_DMA_START_TX_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define I2S_SUBSCRIBE_DMA_START_TX_CHIDX_Msk (0xFFUL << I2S_SUBSCRIBE_DMA_START_TX_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define I2S_SUBSCRIBE_DMA_START_TX_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define I2S_SUBSCRIBE_DMA_START_TX_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define I2S_SUBSCRIBE_DMA_START_TX_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -17745,7 +18118,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task DMA_START_RX will subscribe to */
   #define I2S_SUBSCRIBE_DMA_START_RX_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define I2S_SUBSCRIBE_DMA_START_RX_CHIDX_Msk (0xFFUL << I2S_SUBSCRIBE_DMA_START_RX_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define I2S_SUBSCRIBE_DMA_START_RX_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define I2S_SUBSCRIBE_DMA_START_RX_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define I2S_SUBSCRIBE_DMA_START_RX_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -17763,7 +18136,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task DMA_STOP_TX will subscribe to */
   #define I2S_SUBSCRIBE_DMA_STOP_TX_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define I2S_SUBSCRIBE_DMA_STOP_TX_CHIDX_Msk (0xFFUL << I2S_SUBSCRIBE_DMA_STOP_TX_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define I2S_SUBSCRIBE_DMA_STOP_TX_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define I2S_SUBSCRIBE_DMA_STOP_TX_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define I2S_SUBSCRIBE_DMA_STOP_TX_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -17781,7 +18154,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task DMA_STOP_RX will subscribe to */
   #define I2S_SUBSCRIBE_DMA_STOP_RX_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define I2S_SUBSCRIBE_DMA_STOP_RX_CHIDX_Msk (0xFFUL << I2S_SUBSCRIBE_DMA_STOP_RX_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define I2S_SUBSCRIBE_DMA_STOP_RX_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define I2S_SUBSCRIBE_DMA_STOP_RX_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define I2S_SUBSCRIBE_DMA_STOP_RX_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -17941,7 +18314,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DMA_END_TX will publish to */
   #define I2S_PUBLISH_DMA_END_TX_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define I2S_PUBLISH_DMA_END_TX_CHIDX_Msk (0xFFUL << I2S_PUBLISH_DMA_END_TX_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define I2S_PUBLISH_DMA_END_TX_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define I2S_PUBLISH_DMA_END_TX_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define I2S_PUBLISH_DMA_END_TX_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -17959,7 +18332,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RXPTRUPD will publish to */
   #define I2S_PUBLISH_RXPTRUPD_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define I2S_PUBLISH_RXPTRUPD_CHIDX_Msk (0xFFUL << I2S_PUBLISH_RXPTRUPD_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define I2S_PUBLISH_RXPTRUPD_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define I2S_PUBLISH_RXPTRUPD_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define I2S_PUBLISH_RXPTRUPD_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -17977,7 +18350,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STOPPED will publish to */
   #define I2S_PUBLISH_STOPPED_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define I2S_PUBLISH_STOPPED_CHIDX_Msk (0xFFUL << I2S_PUBLISH_STOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define I2S_PUBLISH_STOPPED_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define I2S_PUBLISH_STOPPED_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define I2S_PUBLISH_STOPPED_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -17995,7 +18368,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ERROR_TX will publish to */
   #define I2S_PUBLISH_ERROR_TX_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define I2S_PUBLISH_ERROR_TX_CHIDX_Msk (0xFFUL << I2S_PUBLISH_ERROR_TX_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define I2S_PUBLISH_ERROR_TX_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define I2S_PUBLISH_ERROR_TX_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define I2S_PUBLISH_ERROR_TX_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18013,7 +18386,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ERROR_RX will publish to */
   #define I2S_PUBLISH_ERROR_RX_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define I2S_PUBLISH_ERROR_RX_CHIDX_Msk (0xFFUL << I2S_PUBLISH_ERROR_RX_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define I2S_PUBLISH_ERROR_RX_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define I2S_PUBLISH_ERROR_RX_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define I2S_PUBLISH_ERROR_RX_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18031,7 +18404,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TXPTRUPD will publish to */
   #define I2S_PUBLISH_TXPTRUPD_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define I2S_PUBLISH_TXPTRUPD_CHIDX_Msk (0xFFUL << I2S_PUBLISH_TXPTRUPD_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define I2S_PUBLISH_TXPTRUPD_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define I2S_PUBLISH_TXPTRUPD_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define I2S_PUBLISH_TXPTRUPD_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18049,7 +18422,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DMA_END_RX will publish to */
   #define I2S_PUBLISH_DMA_END_RX_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define I2S_PUBLISH_DMA_END_RX_CHIDX_Msk (0xFFUL << I2S_PUBLISH_DMA_END_RX_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define I2S_PUBLISH_DMA_END_RX_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define I2S_PUBLISH_DMA_END_RX_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define I2S_PUBLISH_DMA_END_RX_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18067,7 +18440,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event FRAMESTART will publish to */
   #define I2S_PUBLISH_FRAMESTART_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define I2S_PUBLISH_FRAMESTART_CHIDX_Msk (0xFFUL << I2S_PUBLISH_FRAMESTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define I2S_PUBLISH_FRAMESTART_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define I2S_PUBLISH_FRAMESTART_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define I2S_PUBLISH_FRAMESTART_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18088,7 +18461,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event BUSERROR[n] will publish to */
   #define I2S_PUBLISH_BUSERROR_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define I2S_PUBLISH_BUSERROR_CHIDX_Msk (0xFFUL << I2S_PUBLISH_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define I2S_PUBLISH_BUSERROR_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define I2S_PUBLISH_BUSERROR_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define I2S_PUBLISH_BUSERROR_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18792,7 +19165,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define LPCOMP_SUBSCRIBE_START_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define LPCOMP_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << LPCOMP_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define LPCOMP_SUBSCRIBE_START_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define LPCOMP_SUBSCRIBE_START_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define LPCOMP_SUBSCRIBE_START_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18810,7 +19183,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define LPCOMP_SUBSCRIBE_STOP_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define LPCOMP_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << LPCOMP_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define LPCOMP_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define LPCOMP_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define LPCOMP_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18828,7 +19201,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SAMPLE will subscribe to */
   #define LPCOMP_SUBSCRIBE_SAMPLE_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define LPCOMP_SUBSCRIBE_SAMPLE_CHIDX_Msk (0xFFUL << LPCOMP_SUBSCRIBE_SAMPLE_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define LPCOMP_SUBSCRIBE_SAMPLE_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define LPCOMP_SUBSCRIBE_SAMPLE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define LPCOMP_SUBSCRIBE_SAMPLE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18896,7 +19269,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define LPCOMP_PUBLISH_READY_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define LPCOMP_PUBLISH_READY_CHIDX_Msk (0xFFUL << LPCOMP_PUBLISH_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define LPCOMP_PUBLISH_READY_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define LPCOMP_PUBLISH_READY_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define LPCOMP_PUBLISH_READY_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18914,7 +19287,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DOWN will publish to */
   #define LPCOMP_PUBLISH_DOWN_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define LPCOMP_PUBLISH_DOWN_CHIDX_Msk (0xFFUL << LPCOMP_PUBLISH_DOWN_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define LPCOMP_PUBLISH_DOWN_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define LPCOMP_PUBLISH_DOWN_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define LPCOMP_PUBLISH_DOWN_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18932,7 +19305,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event UP will publish to */
   #define LPCOMP_PUBLISH_UP_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define LPCOMP_PUBLISH_UP_CHIDX_Msk (0xFFUL << LPCOMP_PUBLISH_UP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define LPCOMP_PUBLISH_UP_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define LPCOMP_PUBLISH_UP_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define LPCOMP_PUBLISH_UP_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -18950,7 +19323,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CROSS will publish to */
   #define LPCOMP_PUBLISH_CROSS_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define LPCOMP_PUBLISH_CROSS_CHIDX_Msk (0xFFUL << LPCOMP_PUBLISH_CROSS_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define LPCOMP_PUBLISH_CROSS_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define LPCOMP_PUBLISH_CROSS_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define LPCOMP_PUBLISH_CROSS_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -20281,7 +20654,7 @@ typedef struct {
 /* MASTERPORT @Bits 4..8 : Master port where erroneous access is detected */
   #define MPC_MEMACCERR_INFO_MASTERPORT_Pos (4UL)    /*!< Position of MASTERPORT field.                                        */
   #define MPC_MEMACCERR_INFO_MASTERPORT_Msk (0x1FUL << MPC_MEMACCERR_INFO_MASTERPORT_Pos) /*!< Bit mask of MASTERPORT field.   */
-  #define MPC_MEMACCERR_INFO_MASTERPORT_Min (0x0UL)  /*!< Min value of MASTERPORT field.                                       */
+  #define MPC_MEMACCERR_INFO_MASTERPORT_Min (0x00UL) /*!< Min value of MASTERPORT field.                                       */
   #define MPC_MEMACCERR_INFO_MASTERPORT_Max (0x1FUL) /*!< Max size of MASTERPORT field.                                        */
 
 /* READ @Bit 12 : Read bit of bus access */
@@ -20508,7 +20881,7 @@ typedef struct {
 /* SLAVENUMBER @Bits 0..4 : Target slave number for region n accesses. Slave number 0 is reserved for default slave */
   #define MPC_REGION_CONFIG_SLAVENUMBER_Pos (0UL)    /*!< Position of SLAVENUMBER field.                                       */
   #define MPC_REGION_CONFIG_SLAVENUMBER_Msk (0x1FUL << MPC_REGION_CONFIG_SLAVENUMBER_Pos) /*!< Bit mask of SLAVENUMBER field.  */
-  #define MPC_REGION_CONFIG_SLAVENUMBER_Min (0x0UL)  /*!< Min value of SLAVENUMBER field.                                      */
+  #define MPC_REGION_CONFIG_SLAVENUMBER_Min (0x00UL) /*!< Min value of SLAVENUMBER field.                                      */
   #define MPC_REGION_CONFIG_SLAVENUMBER_Max (0x1FUL) /*!< Max size of SLAVENUMBER field.                                       */
 
 /* LOCK @Bit 8 : Locks the region n setting */
@@ -20732,7 +21105,7 @@ typedef struct {
   #define MPC_OVERRIDE_CONFIG_SLAVENUMBER_Pos (0UL)  /*!< Position of SLAVENUMBER field.                                       */
   #define MPC_OVERRIDE_CONFIG_SLAVENUMBER_Msk (0x1FUL << MPC_OVERRIDE_CONFIG_SLAVENUMBER_Pos) /*!< Bit mask of SLAVENUMBER
                                                                             field.*/
-  #define MPC_OVERRIDE_CONFIG_SLAVENUMBER_Min (0x0UL) /*!< Min value of SLAVENUMBER field.                                     */
+  #define MPC_OVERRIDE_CONFIG_SLAVENUMBER_Min (0x00UL) /*!< Min value of SLAVENUMBER field.                                    */
   #define MPC_OVERRIDE_CONFIG_SLAVENUMBER_Max (0x1FUL) /*!< Max size of SLAVENUMBER field.                                     */
 
 /* LOCK @Bit 8 : Lock Override region n */
@@ -21180,7 +21553,7 @@ typedef struct {
 /* TXDATABYTES @Bits 3..11 : Number of complete bytes that shall be included in the frame, excluding CRC, parity, and framing. */
   #define NFCT_TXD_AMOUNT_TXDATABYTES_Pos (3UL)      /*!< Position of TXDATABYTES field.                                       */
   #define NFCT_TXD_AMOUNT_TXDATABYTES_Msk (0x1FFUL << NFCT_TXD_AMOUNT_TXDATABYTES_Pos) /*!< Bit mask of TXDATABYTES field.     */
-  #define NFCT_TXD_AMOUNT_TXDATABYTES_Min (0x0UL)    /*!< Min value of TXDATABYTES field.                                      */
+  #define NFCT_TXD_AMOUNT_TXDATABYTES_Min (0x000UL)  /*!< Min value of TXDATABYTES field.                                      */
   #define NFCT_TXD_AMOUNT_TXDATABYTES_Max (0x101UL)  /*!< Max size of TXDATABYTES field.                                       */
 
 
@@ -21822,7 +22195,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task ACTIVATE will subscribe to */
   #define NFCT_SUBSCRIBE_ACTIVATE_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define NFCT_SUBSCRIBE_ACTIVATE_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_ACTIVATE_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define NFCT_SUBSCRIBE_ACTIVATE_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define NFCT_SUBSCRIBE_ACTIVATE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define NFCT_SUBSCRIBE_ACTIVATE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -21840,7 +22213,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task DISABLE will subscribe to */
   #define NFCT_SUBSCRIBE_DISABLE_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define NFCT_SUBSCRIBE_DISABLE_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_DISABLE_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define NFCT_SUBSCRIBE_DISABLE_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define NFCT_SUBSCRIBE_DISABLE_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define NFCT_SUBSCRIBE_DISABLE_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -21858,7 +22231,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SENSE will subscribe to */
   #define NFCT_SUBSCRIBE_SENSE_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define NFCT_SUBSCRIBE_SENSE_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_SENSE_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define NFCT_SUBSCRIBE_SENSE_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define NFCT_SUBSCRIBE_SENSE_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define NFCT_SUBSCRIBE_SENSE_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -21876,7 +22249,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STARTTX will subscribe to */
   #define NFCT_SUBSCRIBE_STARTTX_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define NFCT_SUBSCRIBE_STARTTX_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_STARTTX_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define NFCT_SUBSCRIBE_STARTTX_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define NFCT_SUBSCRIBE_STARTTX_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define NFCT_SUBSCRIBE_STARTTX_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -21894,7 +22267,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOPTX will subscribe to */
   #define NFCT_SUBSCRIBE_STOPTX_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define NFCT_SUBSCRIBE_STOPTX_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_STOPTX_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define NFCT_SUBSCRIBE_STOPTX_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define NFCT_SUBSCRIBE_STOPTX_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define NFCT_SUBSCRIBE_STOPTX_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -21913,7 +22286,7 @@ typedef struct {
   #define NFCT_SUBSCRIBE_START_ROSCCAL_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define NFCT_SUBSCRIBE_START_ROSCCAL_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_START_ROSCCAL_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define NFCT_SUBSCRIBE_START_ROSCCAL_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define NFCT_SUBSCRIBE_START_ROSCCAL_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define NFCT_SUBSCRIBE_START_ROSCCAL_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -21931,7 +22304,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task FREQMEASURE will subscribe to */
   #define NFCT_SUBSCRIBE_FREQMEASURE_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define NFCT_SUBSCRIBE_FREQMEASURE_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_FREQMEASURE_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define NFCT_SUBSCRIBE_FREQMEASURE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define NFCT_SUBSCRIBE_FREQMEASURE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define NFCT_SUBSCRIBE_FREQMEASURE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -21949,7 +22322,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task ENABLERXDATA will subscribe to */
   #define NFCT_SUBSCRIBE_ENABLERXDATA_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define NFCT_SUBSCRIBE_ENABLERXDATA_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_ENABLERXDATA_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define NFCT_SUBSCRIBE_ENABLERXDATA_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define NFCT_SUBSCRIBE_ENABLERXDATA_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define NFCT_SUBSCRIBE_ENABLERXDATA_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -21968,7 +22341,7 @@ typedef struct {
   #define NFCT_SUBSCRIBE_DISABLERXDATA_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define NFCT_SUBSCRIBE_DISABLERXDATA_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_DISABLERXDATA_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define NFCT_SUBSCRIBE_DISABLERXDATA_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define NFCT_SUBSCRIBE_DISABLERXDATA_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define NFCT_SUBSCRIBE_DISABLERXDATA_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -21986,7 +22359,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task GOIDLE will subscribe to */
   #define NFCT_SUBSCRIBE_GOIDLE_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define NFCT_SUBSCRIBE_GOIDLE_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_GOIDLE_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define NFCT_SUBSCRIBE_GOIDLE_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define NFCT_SUBSCRIBE_GOIDLE_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define NFCT_SUBSCRIBE_GOIDLE_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22004,7 +22377,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task GOSLEEP will subscribe to */
   #define NFCT_SUBSCRIBE_GOSLEEP_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define NFCT_SUBSCRIBE_GOSLEEP_CHIDX_Msk (0xFFUL << NFCT_SUBSCRIBE_GOSLEEP_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define NFCT_SUBSCRIBE_GOSLEEP_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define NFCT_SUBSCRIBE_GOSLEEP_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define NFCT_SUBSCRIBE_GOSLEEP_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22304,7 +22677,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define NFCT_PUBLISH_READY_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_READY_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define NFCT_PUBLISH_READY_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_READY_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_READY_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22322,7 +22695,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event FIELDDETECTED will publish to */
   #define NFCT_PUBLISH_FIELDDETECTED_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_FIELDDETECTED_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_FIELDDETECTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define NFCT_PUBLISH_FIELDDETECTED_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define NFCT_PUBLISH_FIELDDETECTED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define NFCT_PUBLISH_FIELDDETECTED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22340,7 +22713,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event FIELDLOST will publish to */
   #define NFCT_PUBLISH_FIELDLOST_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_FIELDLOST_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_FIELDLOST_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define NFCT_PUBLISH_FIELDLOST_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_FIELDLOST_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_FIELDLOST_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22358,7 +22731,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TXFRAMESTART will publish to */
   #define NFCT_PUBLISH_TXFRAMESTART_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_TXFRAMESTART_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_TXFRAMESTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define NFCT_PUBLISH_TXFRAMESTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define NFCT_PUBLISH_TXFRAMESTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define NFCT_PUBLISH_TXFRAMESTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22376,7 +22749,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TXFRAMEEND will publish to */
   #define NFCT_PUBLISH_TXFRAMEEND_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_TXFRAMEEND_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_TXFRAMEEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define NFCT_PUBLISH_TXFRAMEEND_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_TXFRAMEEND_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_TXFRAMEEND_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22394,7 +22767,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RXFRAMESTART will publish to */
   #define NFCT_PUBLISH_RXFRAMESTART_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_RXFRAMESTART_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_RXFRAMESTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define NFCT_PUBLISH_RXFRAMESTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define NFCT_PUBLISH_RXFRAMESTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define NFCT_PUBLISH_RXFRAMESTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22412,7 +22785,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RXFRAMEEND will publish to */
   #define NFCT_PUBLISH_RXFRAMEEND_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_RXFRAMEEND_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_RXFRAMEEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define NFCT_PUBLISH_RXFRAMEEND_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_RXFRAMEEND_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_RXFRAMEEND_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22430,7 +22803,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ERROR will publish to */
   #define NFCT_PUBLISH_ERROR_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_ERROR_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_ERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define NFCT_PUBLISH_ERROR_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_ERROR_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_ERROR_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22449,7 +22822,7 @@ typedef struct {
   #define NFCT_PUBLISH_FREQMEASUREDONE_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define NFCT_PUBLISH_FREQMEASUREDONE_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_FREQMEASUREDONE_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define NFCT_PUBLISH_FREQMEASUREDONE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define NFCT_PUBLISH_FREQMEASUREDONE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define NFCT_PUBLISH_FREQMEASUREDONE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22467,7 +22840,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CALCOMPLETE will publish to */
   #define NFCT_PUBLISH_CALCOMPLETE_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_CALCOMPLETE_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_CALCOMPLETE_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define NFCT_PUBLISH_CALCOMPLETE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_CALCOMPLETE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define NFCT_PUBLISH_CALCOMPLETE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22485,7 +22858,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RXERROR will publish to */
   #define NFCT_PUBLISH_RXERROR_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_RXERROR_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_RXERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define NFCT_PUBLISH_RXERROR_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_RXERROR_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_RXERROR_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22503,7 +22876,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ENDRX will publish to */
   #define NFCT_PUBLISH_ENDRX_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_ENDRX_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_ENDRX_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define NFCT_PUBLISH_ENDRX_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_ENDRX_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_ENDRX_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22521,7 +22894,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ENDTX will publish to */
   #define NFCT_PUBLISH_ENDTX_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_ENDTX_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_ENDTX_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define NFCT_PUBLISH_ENDTX_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_ENDTX_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_ENDTX_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22540,7 +22913,7 @@ typedef struct {
   #define NFCT_PUBLISH_AUTOCOLRESSTARTED_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                         */
   #define NFCT_PUBLISH_AUTOCOLRESSTARTED_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_AUTOCOLRESSTARTED_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define NFCT_PUBLISH_AUTOCOLRESSTARTED_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                      */
+  #define NFCT_PUBLISH_AUTOCOLRESSTARTED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                     */
   #define NFCT_PUBLISH_AUTOCOLRESSTARTED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                      */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22558,7 +22931,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event AUTOCOLRES1 will publish to */
   #define NFCT_PUBLISH_AUTOCOLRES1_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_AUTOCOLRES1_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_AUTOCOLRES1_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define NFCT_PUBLISH_AUTOCOLRES1_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_AUTOCOLRES1_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define NFCT_PUBLISH_AUTOCOLRES1_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22576,7 +22949,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event AUTOCOLRES2 will publish to */
   #define NFCT_PUBLISH_AUTOCOLRES2_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_AUTOCOLRES2_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_AUTOCOLRES2_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define NFCT_PUBLISH_AUTOCOLRES2_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_AUTOCOLRES2_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define NFCT_PUBLISH_AUTOCOLRES2_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22594,7 +22967,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event AUTOCOLRES3 will publish to */
   #define NFCT_PUBLISH_AUTOCOLRES3_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_AUTOCOLRES3_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_AUTOCOLRES3_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define NFCT_PUBLISH_AUTOCOLRES3_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_AUTOCOLRES3_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define NFCT_PUBLISH_AUTOCOLRES3_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22612,7 +22985,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event COLLISION will publish to */
   #define NFCT_PUBLISH_COLLISION_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_COLLISION_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_COLLISION_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define NFCT_PUBLISH_COLLISION_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_COLLISION_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_COLLISION_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22630,7 +23003,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event SELECTED will publish to */
   #define NFCT_PUBLISH_SELECTED_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_SELECTED_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_SELECTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define NFCT_PUBLISH_SELECTED_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_SELECTED_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_SELECTED_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -22648,7 +23021,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STARTED will publish to */
   #define NFCT_PUBLISH_STARTED_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define NFCT_PUBLISH_STARTED_CHIDX_Msk (0xFFUL << NFCT_PUBLISH_STARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define NFCT_PUBLISH_STARTED_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define NFCT_PUBLISH_STARTED_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define NFCT_PUBLISH_STARTED_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -23519,7 +23892,7 @@ typedef struct {
 /* MAXLEN @Bits 0..8 : Size of the RAM buffer allocated to TXD and RXD data storage each */
   #define NFCT_MAXLEN_MAXLEN_Pos (0UL)               /*!< Position of MAXLEN field.                                            */
   #define NFCT_MAXLEN_MAXLEN_Msk (0x1FFUL << NFCT_MAXLEN_MAXLEN_Pos) /*!< Bit mask of MAXLEN field.                            */
-  #define NFCT_MAXLEN_MAXLEN_Min (0x0UL)             /*!< Min value of MAXLEN field.                                           */
+  #define NFCT_MAXLEN_MAXLEN_Min (0x000UL)           /*!< Min value of MAXLEN field.                                           */
   #define NFCT_MAXLEN_MAXLEN_Max (0x101UL)           /*!< Max size of MAXLEN field.                                            */
 
 
@@ -23583,7 +23956,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define NFCT_MODULATIONPSEL_PIN_Pos (0UL)          /*!< Position of PIN field.                                               */
   #define NFCT_MODULATIONPSEL_PIN_Msk (0x1FUL << NFCT_MODULATIONPSEL_PIN_Pos) /*!< Bit mask of PIN field.                      */
-  #define NFCT_MODULATIONPSEL_PIN_Min (0x0UL)        /*!< Min value of PIN field.                                              */
+  #define NFCT_MODULATIONPSEL_PIN_Min (0x00UL)       /*!< Min value of PIN field.                                              */
   #define NFCT_MODULATIONPSEL_PIN_Max (0x1FUL)       /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..6 : Port number */
@@ -24260,8 +24633,7 @@ typedef struct {
   __IOM uint32_t  ATB0CFG;                           /*!< (@ 0x00000014) Analog testbus 0 configuration                        */
   __IOM uint32_t  ATB1CFG;                           /*!< (@ 0x00000018) Analog testbus 1 configuration                        */
   __IOM uint32_t  DTBCFG;                            /*!< (@ 0x0000001C) Digital Test Bus configuration                        */
-  __IOM uint32_t  IDACREGULATIONTIMEOUTSEL;          /*!< (@ 0x00000020) Number of IDAC Regulation attempts before stopping the
-                                                                         regulation*/
+  __IOM uint32_t  PIXODRIVER;                        /*!< (@ 0x00000020) Second complement trim bus for PIXO drive strength    */
 } NRF_OSCILLATORS_XOSC32M_CONFIG_Type;               /*!< Size = 36 (0x024)                                                    */
 
 /* OSCILLATORS_XOSC32M_CONFIG_INJECTMODEENABLE: Enable injection mode for kickstarting the oscillator */
@@ -24356,7 +24728,7 @@ typedef struct {
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_ENPIXOVCOCALINTREF_Disable (0x0UL) /*!< Disable PIXO VCO calibration comparator      */
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_ENPIXOVCOCALINTREF_Enable (0x1UL) /*!< Enable PIXO VCO calibration comparator        */
 
-/* ENPIXOVCOCALEXT @Bit 4 : Enable PIXO VCO Calibration Comparator From External Reference Voltage */
+/* ENPIXOVCOCALEXT @Bit 4 : Enable or disable PIXO VCO calibration comparator with external reference voltage (via ATB0) */
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_ENPIXOVCOCALEXT_Pos (4UL) /*!< Position of ENPIXOVCOCALEXT field.                    */
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_ENPIXOVCOCALEXT_Msk (0x1UL << OSCILLATORS_XOSC32M_CONFIG_TCFG_ENPIXOVCOCALEXT_Pos)
                                                                             /*!< Bit mask of ENPIXOVCOCALEXT field.*/
@@ -24365,10 +24737,16 @@ typedef struct {
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_ENPIXOVCOCALEXT_Disable (0x0UL) /*!< Disable PIXO VCO calibration comparator         */
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_ENPIXOVCOCALEXT_Enable (0x1UL) /*!< Enable PIXO VCO calibration comparator           */
 
-/* BYPASSRADIOCKFILTER @Bit 5 : Disable sharp edges filtering on radio clock */
+/* BYPASSRADIOCKFILTER @Bit 5 : Disable sharp edges filtering (RC filter) on radio clock */
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_BYPASSRADIOCKFILTER_Pos (5UL) /*!< Position of BYPASSRADIOCKFILTER field.            */
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_BYPASSRADIOCKFILTER_Msk (0x1UL << OSCILLATORS_XOSC32M_CONFIG_TCFG_BYPASSRADIOCKFILTER_Pos)
                                                                             /*!< Bit mask of BYPASSRADIOCKFILTER field.*/
+  #define OSCILLATORS_XOSC32M_CONFIG_TCFG_BYPASSRADIOCKFILTER_Min (0x0UL) /*!< Min enumerator value of BYPASSRADIOCKFILTER
+                                                                            field.*/
+  #define OSCILLATORS_XOSC32M_CONFIG_TCFG_BYPASSRADIOCKFILTER_Max (0x1UL) /*!< Max enumerator value of BYPASSRADIOCKFILTER
+                                                                            field.*/
+  #define OSCILLATORS_XOSC32M_CONFIG_TCFG_BYPASSRADIOCKFILTER_Filter (0x0UL) /*!< RC filtered clock                            */
+  #define OSCILLATORS_XOSC32M_CONFIG_TCFG_BYPASSRADIOCKFILTER_Bypass (0x1UL) /*!< Bypass RC-filter                             */
 
 /* ENBIASCURRENTATB0 @Bit 6 : Enable 8 uA biasing current to ATB0 from internal biasing module */
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_ENBIASCURRENTATB0_Pos (6UL) /*!< Position of ENBIASCURRENTATB0 field.                */
@@ -24400,7 +24778,8 @@ typedef struct {
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_ENINTBIAS_Enable (0x1UL) /*!< Enable internal bias enabling                          */
 
 /* DISABLECAPDIVIDERAREG @Bit 9 : Enable or disable capacitive divider at AREG input when going to Pierce mode. This
-                                  functionality will reduce start-up times in Pierce mode */
+                                  functionality will reduce start-up times in Pierce mode PKD will automatically disable the
+                                  capacitive divider internally in AREG when PKD_OUT[1] goes high */
 
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_DISABLECAPDIVIDERAREG_Pos (9UL) /*!< Position of DISABLECAPDIVIDERAREG field.        */
   #define OSCILLATORS_XOSC32M_CONFIG_TCFG_DISABLECAPDIVIDERAREG_Msk (0x1UL << OSCILLATORS_XOSC32M_CONFIG_TCFG_DISABLECAPDIVIDERAREG_Pos)
@@ -24438,12 +24817,17 @@ typedef struct {
   #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_Max (0xBUL) /*!< Max enumerator value of ATB0CFG field.                   */
   #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_HiZ0 (0x0UL) /*!< Allow other IPs to use ATB0                             */
   #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_HiZ1 (0x1UL) /*!< Allow other IPs to use ATB0                             */
-  #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_HiZ2 (0x7UL) /*!< Allow other IPs to use ATB0                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_HiZ2 (0x2UL) /*!< Allow other IPs to use ATB0                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_HiZ3 (0x3UL) /*!< Allow other IPs to use ATB0                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_HiZ4 (0x4UL) /*!< Allow other IPs to use ATB0                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_HiZ5 (0x5UL) /*!< Allow other IPs to use ATB0                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_HiZ6 (0x6UL) /*!< Allow other IPs to use ATB0                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_HiZ7 (0x7UL) /*!< Allow other IPs to use ATB0                             */
   #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_IbppAtb8u (0x8UL) /*!< 8 uA bias generator test current                   */
   #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_VcoCalCmp (0x9UL) /*!< Force external reference voltage to PIXO VCO
                                                                             calibration comparator (instead of using internal
                                                                             reference). This gives possibility to compare VCTRL
-                                                                            of PIXO VCO with externally applied voltage*/
+                                                                            of PIXO VCO with externally applied voltage.*/
   #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_IbppCapCal2u (0xAUL) /*!< 2 uA current used for capacitor calibration     */
   #define OSCILLATORS_XOSC32M_CONFIG_ATB0CFG_ATB0CFG_IbppAregCpy (0xBUL) /*!< Copy of AREG current (divided down by x25)       */
 
@@ -24455,9 +24839,16 @@ typedef struct {
   #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_Pos (0UL) /*!< Position of ATB1CFG field.                                 */
   #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_Msk (0xFUL << OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_Pos) /*!< Bit mask
                                                                             of ATB1CFG field.*/
-  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_Min (0x7UL) /*!< Min enumerator value of ATB1CFG field.                   */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_Min (0x0UL) /*!< Min enumerator value of ATB1CFG field.                   */
   #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_Max (0xCUL) /*!< Max enumerator value of ATB1CFG field.                   */
-  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_HiZ (0x7UL) /*!< Allow other IPs to use ATB1                              */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_HiZ0 (0x0UL) /*!< Allow other IPs to use ATB1                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_HiZ1 (0x1UL) /*!< Allow other IPs to use ATB1                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_HiZ2 (0x2UL) /*!< Allow other IPs to use ATB1                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_HiZ3 (0x3UL) /*!< Allow other IPs to use ATB1                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_HiZ4 (0x4UL) /*!< Allow other IPs to use ATB1                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_HiZ5 (0x5UL) /*!< Allow other IPs to use ATB1                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_HiZ6 (0x6UL) /*!< Allow other IPs to use ATB1                             */
+  #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_HiZ7 (0x7UL) /*!< Allow other IPs to use ATB1                             */
   #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_VddInt3V0 (0x8UL) /*!< Measure internal 3V0 voltage on ATB1               */
   #define OSCILLATORS_XOSC32M_CONFIG_ATB1CFG_ATB1CFG_Xosc32MPierce (0xBUL) /*!< Pierce clock on ATB1 for PN measurement in lab.
                                                                             Keep capacitance on ATB1 as low as possible for this
@@ -24502,21 +24893,13 @@ typedef struct {
                                                                             mask of DTB2TOMUX field.*/
 
 
-/* OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL: Number of IDAC Regulation attempts before stopping the regulation */
-  #define OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL_ResetValue (0x00000002UL) /*!< Reset value of
-                                                                            IDACREGULATIONTIMEOUTSEL register.*/
+/* OSCILLATORS_XOSC32M_CONFIG_PIXODRIVER: Second complement trim bus for PIXO drive strength */
+  #define OSCILLATORS_XOSC32M_CONFIG_PIXODRIVER_ResetValue (0x00000001UL) /*!< Reset value of PIXODRIVER register.             */
 
-/* VAL @Bits 0..1 : (unspecified) */
-  #define OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL_VAL_Pos (0UL) /*!< Position of VAL field.                        */
-  #define OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL_VAL_Msk (0x3UL << OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL_VAL_Pos)
-                                                                            /*!< Bit mask of VAL field.*/
-  #define OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.          */
-  #define OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL_VAL_Max (0x3UL) /*!< Max enumerator value of VAL field.          */
-  #define OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL_VAL_Disable (0x0UL) /*!< Disable counter (no timeout for the IDAC
-                                                                            Regulation)*/
-  #define OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL_VAL_Count32 (0x1UL) /*!< Count 32 regulation attempts            */
-  #define OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL_VAL_Count64 (0x2UL) /*!< Count 64 regulation attempts            */
-  #define OSCILLATORS_XOSC32M_CONFIG_IDACREGULATIONTIMEOUTSEL_VAL_Count128 (0x3UL) /*!< Count 128 regulation attempts          */
+/* VAL @Bits 0..2 : (unspecified) */
+  #define OSCILLATORS_XOSC32M_CONFIG_PIXODRIVER_VAL_Pos (0UL) /*!< Position of VAL field.                                      */
+  #define OSCILLATORS_XOSC32M_CONFIG_PIXODRIVER_VAL_Msk (0x7UL << OSCILLATORS_XOSC32M_CONFIG_PIXODRIVER_VAL_Pos) /*!< Bit mask
+                                                                            of VAL field.*/
 
 
 
@@ -24529,17 +24912,17 @@ typedef struct {
 } NRF_OSCILLATORS_XOSC32M_CALIBRATION_Type;          /*!< Size = 4 (0x004)                                                     */
 
 /* OSCILLATORS_XOSC32M_CALIBRATION_CAL1: Calibration registers written from FICR */
-  #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_ResetValue (0x2A000000UL) /*!< Reset value of CAL1 register.                    */
+  #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_ResetValue (0x2A000010UL) /*!< Reset value of CAL1 register.                    */
 
 /* BIAS @Bits 0..3 : Second complement trim bus for bias generator */
   #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_BIAS_Pos (0UL) /*!< Position of BIAS field.                                     */
   #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_BIAS_Msk (0xFUL << OSCILLATORS_XOSC32M_CALIBRATION_CAL1_BIAS_Pos) /*!< Bit mask
                                                                             of BIAS field.*/
 
-/* PIXODRIVER @Bits 4..6 : Second complement trim bus for PIXO drive strength */
-  #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_PIXODRIVER_Pos (4UL) /*!< Position of PIXODRIVER field.                         */
-  #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_PIXODRIVER_Msk (0x7UL << OSCILLATORS_XOSC32M_CALIBRATION_CAL1_PIXODRIVER_Pos)
-                                                                            /*!< Bit mask of PIXODRIVER field.*/
+/* IDACREGULATIONTIMERSEL @Bits 4..6 : Configure the IDAC regulation time constant 256*(1 + n) us */
+  #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACREGULATIONTIMERSEL_Pos (4UL) /*!< Position of IDACREGULATIONTIMERSEL field. */
+  #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACREGULATIONTIMERSEL_Msk (0x7UL << OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACREGULATIONTIMERSEL_Pos)
+                                                                            /*!< Bit mask of IDACREGULATIONTIMERSEL field.*/
 
 /* PIXOVCO @Bits 7..11 : Second complement trim bus for PIXO VCO */
   #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_PIXOVCO_Pos (7UL) /*!< Position of PIXOVCO field.                               */
@@ -24566,10 +24949,14 @@ typedef struct {
   #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACCODE_Msk (0x1FUL << OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACCODE_Pos) /*!<
                                                                             Bit mask of IDACCODE field.*/
 
-/* IDACREGULATIONTIMERSEL @Bits 29..31 : Configure the IDAC regulation time constant 256*(1 + n) us */
-  #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACREGULATIONTIMERSEL_Pos (29UL) /*!< Position of IDACREGULATIONTIMERSEL field.*/
-  #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACREGULATIONTIMERSEL_Msk (0x7UL << OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACREGULATIONTIMERSEL_Pos)
-                                                                            /*!< Bit mask of IDACREGULATIONTIMERSEL field.*/
+/* IDACREGULATIONTIMEOUTSEL @Bits 29..30 : Configure the number of IDAC Regulation attempts before stopping the regulation.
+                                           Regulation attempts = 32*n attempts (attempts*IDACREGULATIONTIMERSEL us). The counter
+                                           can disabled with n=0 */
+
+  #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACREGULATIONTIMEOUTSEL_Pos (29UL) /*!< Position of IDACREGULATIONTIMEOUTSEL
+                                                                            field.*/
+  #define OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACREGULATIONTIMEOUTSEL_Msk (0x3UL << OSCILLATORS_XOSC32M_CALIBRATION_CAL1_IDACREGULATIONTIMEOUTSEL_Pos)
+                                                                            /*!< Bit mask of IDACREGULATIONTIMEOUTSEL field.*/
 
 
 
@@ -25053,9 +25440,8 @@ typedef struct {
   __IOM uint32_t  PROGCHPUMP;                        /*!< (@ 0x00000004) Program charge pump current                           */
   __IOM uint32_t  MUTE;                              /*!< (@ 0x00000008) Disable clock output                                  */
   __IOM uint32_t  CTRL;                              /*!< (@ 0x0000000C) PLL control register                                  */
-  __IOM uint32_t  TEST0V9;                           /*!< (@ 0x00000010) PLL test 0.9 V                                        */
-  __IOM uint32_t  TRIM;                              /*!< (@ 0x00000014) VCO trim values for the 192 MHz PLL                   */
-} NRF_OSCILLATORS_PLL_CONFIG_Type;                   /*!< Size = 24 (0x018)                                                    */
+  __IOM uint32_t  TRIM;                              /*!< (@ 0x00000010) VCO trim values for the 192 MHz PLL                   */
+} NRF_OSCILLATORS_PLL_CONFIG_Type;                   /*!< Size = 20 (0x014)                                                    */
 
 /* OSCILLATORS_PLL_CONFIG_ATB0CFG: Analog testbus configuration */
   #define OSCILLATORS_PLL_CONFIG_ATB0CFG_ResetValue (0x00000000UL) /*!< Reset value of ATB0CFG register.                       */
@@ -25121,52 +25507,43 @@ typedef struct {
                                                                             field.*/
 
 
-/* OSCILLATORS_PLL_CONFIG_TEST0V9: PLL test 0.9 V */
-  #define OSCILLATORS_PLL_CONFIG_TEST0V9_ResetValue (0x00000000UL) /*!< Reset value of TEST0V9 register.                       */
-
-/* CONSTCURBIAS @Bits 0..2 : Constant current controlling bias */
-  #define OSCILLATORS_PLL_CONFIG_TEST0V9_CONSTCURBIAS_Pos (0UL) /*!< Position of CONSTCURBIAS field.                           */
-  #define OSCILLATORS_PLL_CONFIG_TEST0V9_CONSTCURBIAS_Msk (0x7UL << OSCILLATORS_PLL_CONFIG_TEST0V9_CONSTCURBIAS_Pos) /*!< Bit
-                                                                            mask of CONSTCURBIAS field.*/
-
-/* KVCOBIAS @Bits 3..4 : KVCO controlling bias */
-  #define OSCILLATORS_PLL_CONFIG_TEST0V9_KVCOBIAS_Pos (3UL) /*!< Position of KVCOBIAS field.                                   */
-  #define OSCILLATORS_PLL_CONFIG_TEST0V9_KVCOBIAS_Msk (0x3UL << OSCILLATORS_PLL_CONFIG_TEST0V9_KVCOBIAS_Pos) /*!< Bit mask of
-                                                                            KVCOBIAS field.*/
-
-/* EN @Bit 5 : Enable hardcoded bias setup for VCO */
-  #define OSCILLATORS_PLL_CONFIG_TEST0V9_EN_Pos (5UL) /*!< Position of EN field.                                               */
-  #define OSCILLATORS_PLL_CONFIG_TEST0V9_EN_Msk (0x1UL << OSCILLATORS_PLL_CONFIG_TEST0V9_EN_Pos) /*!< Bit mask of EN field.    */
-
-
 /* OSCILLATORS_PLL_CONFIG_TRIM: VCO trim values for the 192 MHz PLL */
-  #define OSCILLATORS_PLL_CONFIG_TRIM_ResetValue (0x00000515UL) /*!< Reset value of TRIM register.                             */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_ResetValue (0x001E6515UL) /*!< Reset value of TRIM register.                             */
 
-/* VCOTRIM128MHZ @Bits 0..5 : Trim value for the PLL VCO at 128 MHz */
+/* VCOTRIM128MHZ @Bits 0..5 : VCO_TRIM for 128 MHz mode */
   #define OSCILLATORS_PLL_CONFIG_TRIM_VCOTRIM128MHZ_Pos (0UL) /*!< Position of VCOTRIM128MHZ field.                            */
   #define OSCILLATORS_PLL_CONFIG_TRIM_VCOTRIM128MHZ_Msk (0x3FUL << OSCILLATORS_PLL_CONFIG_TRIM_VCOTRIM128MHZ_Pos) /*!< Bit mask
                                                                             of VCOTRIM128MHZ field.*/
 
-/* VCOTRIM192MHZ @Bits 6..11 : Trim value for the PLL VCO at 192 MHz */
+/* VCOTRIM192MHZ @Bits 6..11 : VCO_TRIM for 128 MHz mode */
   #define OSCILLATORS_PLL_CONFIG_TRIM_VCOTRIM192MHZ_Pos (6UL) /*!< Position of VCOTRIM192MHZ field.                            */
   #define OSCILLATORS_PLL_CONFIG_TRIM_VCOTRIM192MHZ_Msk (0x3FUL << OSCILLATORS_PLL_CONFIG_TRIM_VCOTRIM192MHZ_Pos) /*!< Bit mask
                                                                             of VCOTRIM192MHZ field.*/
 
-/* CLOCKREQFILTERDISABLE @Bit 12 : Disable clock request filter */
-  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Pos (12UL) /*!< Position of CLOCKREQFILTERDISABLE field.           */
-  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Msk (0x1UL << OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Pos)
-                                                                            /*!< Bit mask of CLOCKREQFILTERDISABLE field.*/
-  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Min (0x0UL) /*!< Min enumerator value of CLOCKREQFILTERDISABLE
-                                                                            field.*/
-  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Max (0x1UL) /*!< Max enumerator value of CLOCKREQFILTERDISABLE
-                                                                            field.*/
-  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Enable (0x0UL) /*!< Enable clock request filter                    */
-  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Disable (0x1UL) /*!< Disable clock request filter                  */
+/* CONSTCURBIAS128MHZ @Bits 12..14 : CONSTCURBIAS for 128 MHz mode */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_CONSTCURBIAS128MHZ_Pos (12UL) /*!< Position of CONSTCURBIAS128MHZ field.                 */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_CONSTCURBIAS128MHZ_Msk (0x7UL << OSCILLATORS_PLL_CONFIG_TRIM_CONSTCURBIAS128MHZ_Pos) /*!<
+                                                                            Bit mask of CONSTCURBIAS128MHZ field.*/
 
-/* TRIMCOMPENSATIONTHRESHOLD @Bits 13..16 : Threshold for enabling trim compenastion. Trim compensation actived when measured
+/* KVCOBIAS128MHZ @Bits 15..16 : KVCOBIAS for 128 MHz mode */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_KVCOBIAS128MHZ_Pos (15UL) /*!< Position of KVCOBIAS128MHZ field.                         */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_KVCOBIAS128MHZ_Msk (0x3UL << OSCILLATORS_PLL_CONFIG_TRIM_KVCOBIAS128MHZ_Pos) /*!< Bit mask
+                                                                            of KVCOBIAS128MHZ field.*/
+
+/* CONSTCURBIAS192MHZ @Bits 17..19 : CONSTCURBIAS for 192 MHz mode */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_CONSTCURBIAS192MHZ_Pos (17UL) /*!< Position of CONSTCURBIAS192MHZ field.                 */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_CONSTCURBIAS192MHZ_Msk (0x7UL << OSCILLATORS_PLL_CONFIG_TRIM_CONSTCURBIAS192MHZ_Pos) /*!<
+                                                                            Bit mask of CONSTCURBIAS192MHZ field.*/
+
+/* KVCOBIAS192MHZ @Bits 20..21 : KVCOBIAS for 192 MHz mode */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_KVCOBIAS192MHZ_Pos (20UL) /*!< Position of KVCOBIAS192MHZ field.                         */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_KVCOBIAS192MHZ_Msk (0x3UL << OSCILLATORS_PLL_CONFIG_TRIM_KVCOBIAS192MHZ_Pos) /*!< Bit mask
+                                                                            of KVCOBIAS192MHZ field.*/
+
+/* TRIMCOMPENSATIONTHRESHOLD @Bits 24..27 : Threshold for enabling trim compenastion. Trim compensation actived when measured
                                             cycles are below the threshold. */
 
-  #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONTHRESHOLD_Pos (13UL) /*!< Position of TRIMCOMPENSATIONTHRESHOLD field.   */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONTHRESHOLD_Pos (24UL) /*!< Position of TRIMCOMPENSATIONTHRESHOLD field.   */
   #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONTHRESHOLD_Msk (0xFUL << OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONTHRESHOLD_Pos)
                                                                             /*!< Bit mask of TRIMCOMPENSATIONTHRESHOLD field.*/
   #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONTHRESHOLD_Min (0x0UL) /*!< Min enumerator value of
@@ -25177,8 +25554,8 @@ typedef struct {
   #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONTHRESHOLD_T131 (0x1UL) /*!< Threshold at 131 cycles (~1.5 percent)       */
   #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONTHRESHOLD_T117 (0xFUL) /*!< Threshold at 117 cycles (~12 percent)        */
 
-/* TRIMCOMPENSATIONVALUE @Bits 17..19 : Trim compensation when deviation larger than TRIMCOMPENSATIONTHRESHOLD is detected. */
-  #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONVALUE_Pos (17UL) /*!< Position of TRIMCOMPENSATIONVALUE field.           */
+/* TRIMCOMPENSATIONVALUE @Bits 28..30 : Trim compensation when deviation larger than TRIMCOMPENSATIONTHRESHOLD is detected. */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONVALUE_Pos (28UL) /*!< Position of TRIMCOMPENSATIONVALUE field.           */
   #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONVALUE_Msk (0x7UL << OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONVALUE_Pos)
                                                                             /*!< Bit mask of TRIMCOMPENSATIONVALUE field.*/
   #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONVALUE_Min (0x0UL) /*!< Min enumerator value of TRIMCOMPENSATIONVALUE
@@ -25188,6 +25565,17 @@ typedef struct {
   #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONVALUE_Disabled (0x0UL) /*!< Trim compensation disabled                   */
   #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONVALUE_T1 (0x1UL) /*!< Compensate with 1 trim step (~1.5 percent)         */
   #define OSCILLATORS_PLL_CONFIG_TRIM_TRIMCOMPENSATIONVALUE_T7 (0x7UL) /*!< Compensate with 7 trim step (~10.5 percent)        */
+
+/* CLOCKREQFILTERDISABLE @Bit 31 : Disable clock request filter */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Pos (31UL) /*!< Position of CLOCKREQFILTERDISABLE field.           */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Msk (0x1UL << OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Pos)
+                                                                            /*!< Bit mask of CLOCKREQFILTERDISABLE field.*/
+  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Min (0x0UL) /*!< Min enumerator value of CLOCKREQFILTERDISABLE
+                                                                            field.*/
+  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Max (0x1UL) /*!< Max enumerator value of CLOCKREQFILTERDISABLE
+                                                                            field.*/
+  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Enable (0x0UL) /*!< Enable clock request filter                    */
+  #define OSCILLATORS_PLL_CONFIG_TRIM_CLOCKREQFILTERDISABLE_Disable (0x1UL) /*!< Disable clock request filter                  */
 
 
 
@@ -25456,7 +25844,7 @@ typedef struct {
   __IM  uint32_t  CURRENTFREQ;                       /*!< (@ 0x00000004) Current CPU frequency                                 */
   __IM  uint32_t  RESERVED[2];
   __IOM NRF_OSCILLATORS_PLL_CONFIG_Type CONFIG;      /*!< (@ 0x00000010) (unspecified)                                         */
-  __IM  uint32_t  RESERVED1[2];
+  __IM  uint32_t  RESERVED1[3];
   __IOM NRF_OSCILLATORS_PLL_DBG_Type DBG;            /*!< (@ 0x00000030) (unspecified)                                         */
   __IM  uint32_t  RESERVED2[2];
   __IOM NRF_OSCILLATORS_PLL_FREQMETER_Type FREQMETER; /*!< (@ 0x00000040) (unspecified)                                        */
@@ -25503,7 +25891,10 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  PWRUP;                             /*!< (@ 0x00000000) Override PWRUP                                        */
   __IOM uint32_t  RETAIN;                            /*!< (@ 0x00000004) Override RETAIN                                       */
-} NRF_OSCILLATORS_XOSC32KI_OVERRIDE_Type;            /*!< Size = 8 (0x008)                                                     */
+  __IOM uint32_t  CLOCKRUNNING;                      /*!< (@ 0x00000008) Override CLOCKRUNNING                                 */
+  __IOM uint32_t  CLOCKOUTENABLE;                    /*!< (@ 0x0000000C) Override CLOCKOUTENABLE                               */
+  __IOM uint32_t  REQCKCORE;                         /*!< (@ 0x00000010) Override REQCKCORE                                    */
+} NRF_OSCILLATORS_XOSC32KI_OVERRIDE_Type;            /*!< Size = 20 (0x014)                                                    */
 
 /* OSCILLATORS_XOSC32KI_OVERRIDE_PWRUP: Override PWRUP */
   #define OSCILLATORS_XOSC32KI_OVERRIDE_PWRUP_ResetValue (0x00000000UL) /*!< Reset value of PWRUP register.                    */
@@ -25541,6 +25932,60 @@ typedef struct {
   #define OSCILLATORS_XOSC32KI_OVERRIDE_RETAIN_EN_Enabled (0x1UL) /*!< Override is enabled                                     */
 
 
+/* OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING: Override CLOCKRUNNING */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_ResetValue (0x00000000UL) /*!< Reset value of CLOCKRUNNING register.      */
+
+/* VAL @Bit 0 : Override value */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_VAL_Pos (0UL) /*!< Position of VAL field.                                 */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_VAL_Msk (0x1UL << OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_VAL_Pos) /*!<
+                                                                            Bit mask of VAL field.*/
+
+/* EN @Bit 31 : Enable override */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_EN_Pos (31UL) /*!< Position of EN field.                                  */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_EN_Msk (0x1UL << OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_EN_Pos) /*!<
+                                                                            Bit mask of EN field.*/
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                     */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                     */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_EN_Disabled (0x0UL) /*!< Override is disabled                             */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKRUNNING_EN_Enabled (0x1UL) /*!< Override is enabled                               */
+
+
+/* OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE: Override CLOCKOUTENABLE */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_ResetValue (0x00000000UL) /*!< Reset value of CLOCKOUTENABLE register.  */
+
+/* VAL @Bit 0 : Override value */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_VAL_Pos (0UL) /*!< Position of VAL field.                               */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_VAL_Msk (0x1UL << OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_VAL_Pos)
+                                                                            /*!< Bit mask of VAL field.*/
+
+/* EN @Bit 31 : Enable override */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_EN_Pos (31UL) /*!< Position of EN field.                                */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_EN_Msk (0x1UL << OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_EN_Pos)
+                                                                            /*!< Bit mask of EN field.*/
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                   */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                   */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_EN_Disabled (0x0UL) /*!< Override is disabled                           */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_CLOCKOUTENABLE_EN_Enabled (0x1UL) /*!< Override is enabled                             */
+
+
+/* OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE: Override REQCKCORE */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_ResetValue (0x00000000UL) /*!< Reset value of REQCKCORE register.            */
+
+/* VAL @Bit 0 : Override value */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_VAL_Pos (0UL) /*!< Position of VAL field.                                    */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_VAL_Msk (0x1UL << OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_VAL_Pos) /*!< Bit
+                                                                            mask of VAL field.*/
+
+/* EN @Bit 31 : Enable override */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_EN_Pos (31UL) /*!< Position of EN field.                                     */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_EN_Msk (0x1UL << OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_EN_Pos) /*!< Bit mask
+                                                                            of EN field.*/
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                        */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                        */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_EN_Disabled (0x0UL) /*!< Override is disabled                                */
+  #define OSCILLATORS_XOSC32KI_OVERRIDE_REQCKCORE_EN_Enabled (0x1UL) /*!< Override is enabled                                  */
+
+
 
 /* =============================================== Struct OSCILLATORS_XOSC32KI =============================================== */
 /**
@@ -25553,11 +25998,12 @@ typedef struct {
   __IOM uint32_t  TRIM;                              /*!< (@ 0x00000008) Trim values                                           */
   __IOM uint32_t  MUTE;                              /*!< (@ 0x0000000C) Disable clock output                                  */
   __IOM uint32_t  PDCORE;                            /*!< (@ 0x00000010) Power down crystal driver                             */
-  __IOM uint32_t  ATBCFG;                            /*!< (@ 0x00000014) Analog testbus configuration                          */
-  __IOM uint32_t  DTBCFG;                            /*!< (@ 0x00000018) Digital testbus configuration                         */
-  __IOM uint32_t  TCFG;                              /*!< (@ 0x0000001C) Test configuration bus                                */
-  __IOM NRF_OSCILLATORS_XOSC32KI_OVERRIDE_Type OVERRIDE; /*!< (@ 0x00000020) (unspecified)                                     */
-} NRF_OSCILLATORS_XOSC32KI_Type;                     /*!< Size = 40 (0x028)                                                    */
+  __IM  uint32_t  STATUS;                            /*!< (@ 0x00000014) Status of the oscillator                              */
+  __IOM uint32_t  ATBCFG;                            /*!< (@ 0x00000018) Analog testbus configuration                          */
+  __IOM uint32_t  DTBCFG;                            /*!< (@ 0x0000001C) Digital testbus configuration                         */
+  __IOM uint32_t  TCFG;                              /*!< (@ 0x00000020) Test configuration bus                                */
+  __IOM NRF_OSCILLATORS_XOSC32KI_OVERRIDE_Type OVERRIDE; /*!< (@ 0x00000024) (unspecified)                                     */
+} NRF_OSCILLATORS_XOSC32KI_Type;                     /*!< Size = 56 (0x038)                                                    */
 
 /* OSCILLATORS_XOSC32KI_BYPASS: Enable or disable bypass of LFCLK crystal oscillator with external clock source */
   #define OSCILLATORS_XOSC32KI_BYPASS_ResetValue (0x00000000UL) /*!< Reset value of BYPASS register.                           */
@@ -25626,6 +26072,29 @@ typedef struct {
                                                                        down.*/
 
 
+/* OSCILLATORS_XOSC32KI_STATUS: Status of the oscillator */
+  #define OSCILLATORS_XOSC32KI_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                           */
+
+/* STATE @Bits 0..1 : Current state of the FSM */
+  #define OSCILLATORS_XOSC32KI_STATUS_STATE_Pos (0UL) /*!< Position of STATE field.                                            */
+  #define OSCILLATORS_XOSC32KI_STATUS_STATE_Msk (0x3UL << OSCILLATORS_XOSC32KI_STATUS_STATE_Pos) /*!< Bit mask of STATE field. */
+  #define OSCILLATORS_XOSC32KI_STATUS_STATE_Min (0x0UL) /*!< Min enumerator value of STATE field.                              */
+  #define OSCILLATORS_XOSC32KI_STATUS_STATE_Max (0x3UL) /*!< Max enumerator value of STATE field.                              */
+  #define OSCILLATORS_XOSC32KI_STATUS_STATE_Idle (0x0UL) /*!< FSM is idle and waiting for pwrup signal.                        */
+  #define OSCILLATORS_XOSC32KI_STATUS_STATE_Debouncing (0x1UL) /*!< Clock is debouncing.                                       */
+  #define OSCILLATORS_XOSC32KI_STATUS_STATE_Pwrdown (0x2UL) /*!< Clock is finished debouncing.                                 */
+  #define OSCILLATORS_XOSC32KI_STATUS_STATE_Settled (0x3UL) /*!< Clock is being safely shut down.                              */
+
+/* CLOCKRUNNING @Bit 2 : Clock output status */
+  #define OSCILLATORS_XOSC32KI_STATUS_CLOCKRUNNING_Pos (2UL) /*!< Position of CLOCKRUNNING field.                              */
+  #define OSCILLATORS_XOSC32KI_STATUS_CLOCKRUNNING_Msk (0x1UL << OSCILLATORS_XOSC32KI_STATUS_CLOCKRUNNING_Pos) /*!< Bit mask of
+                                                                            CLOCKRUNNING field.*/
+  #define OSCILLATORS_XOSC32KI_STATUS_CLOCKRUNNING_Min (0x0UL) /*!< Min enumerator value of CLOCKRUNNING field.                */
+  #define OSCILLATORS_XOSC32KI_STATUS_CLOCKRUNNING_Max (0x1UL) /*!< Max enumerator value of CLOCKRUNNING field.                */
+  #define OSCILLATORS_XOSC32KI_STATUS_CLOCKRUNNING_NotRunning (0x0UL) /*!< Clock is gated off.                                 */
+  #define OSCILLATORS_XOSC32KI_STATUS_CLOCKRUNNING_Running (0x1UL) /*!< Clock is let through clock gate.                       */
+
+
 /* OSCILLATORS_XOSC32KI_ATBCFG: Analog testbus configuration */
   #define OSCILLATORS_XOSC32KI_ATBCFG_ResetValue (0x00000000UL) /*!< Reset value of ATBCFG register.                           */
 
@@ -25634,9 +26103,10 @@ typedef struct {
   #define OSCILLATORS_XOSC32KI_ATBCFG_ATBCFG_Msk (0x3UL << OSCILLATORS_XOSC32KI_ATBCFG_ATBCFG_Pos) /*!< Bit mask of ATBCFG
                                                                             field.*/
   #define OSCILLATORS_XOSC32KI_ATBCFG_ATBCFG_Min (0x0UL) /*!< Min enumerator value of ATBCFG field.                            */
-  #define OSCILLATORS_XOSC32KI_ATBCFG_ATBCFG_Max (0x2UL) /*!< Max enumerator value of ATBCFG field.                            */
-  #define OSCILLATORS_XOSC32KI_ATBCFG_ATBCFG_Disabled (0x0UL) /*!< Disable                                                     */
+  #define OSCILLATORS_XOSC32KI_ATBCFG_ATBCFG_Max (0x3UL) /*!< Max enumerator value of ATBCFG field.                            */
+  #define OSCILLATORS_XOSC32KI_ATBCFG_ATBCFG_Disabled (0x0UL) /*!< Disabled                                                    */
   #define OSCILLATORS_XOSC32KI_ATBCFG_ATBCFG_IntBias (0x2UL) /*!< Internal bias to ATB0                                        */
+  #define OSCILLATORS_XOSC32KI_ATBCFG_ATBCFG_CapCal (0x3UL) /*!< CAPCAL current                                                */
 
 
 /* OSCILLATORS_XOSC32KI_DTBCFG: Digital testbus configuration */
@@ -25647,9 +26117,10 @@ typedef struct {
   #define OSCILLATORS_XOSC32KI_DTBCFG_DTBCFG_Msk (0x3UL << OSCILLATORS_XOSC32KI_DTBCFG_DTBCFG_Pos) /*!< Bit mask of DTBCFG
                                                                             field.*/
   #define OSCILLATORS_XOSC32KI_DTBCFG_DTBCFG_Min (0x0UL) /*!< Min enumerator value of DTBCFG field.                            */
-  #define OSCILLATORS_XOSC32KI_DTBCFG_DTBCFG_Max (0x2UL) /*!< Max enumerator value of DTBCFG field.                            */
+  #define OSCILLATORS_XOSC32KI_DTBCFG_DTBCFG_Max (0x3UL) /*!< Max enumerator value of DTBCFG field.                            */
   #define OSCILLATORS_XOSC32KI_DTBCFG_DTBCFG_Vss (0x0UL) /*!< VSS                                                              */
   #define OSCILLATORS_XOSC32KI_DTBCFG_DTBCFG_CmpCapCal (0x2UL) /*!< CMP_CAPCAL                                                 */
+  #define OSCILLATORS_XOSC32KI_DTBCFG_DTBCFG_Osc32k (0x3UL) /*!< OSC32K                                                        */
 
 
 /* OSCILLATORS_XOSC32KI_TCFG: Test configuration bus */
@@ -25661,8 +26132,8 @@ typedef struct {
                                                                             CAPCALMODE field.*/
   #define OSCILLATORS_XOSC32KI_TCFG_CAPCALMODE_Min (0x0UL) /*!< Min enumerator value of CAPCALMODE field.                      */
   #define OSCILLATORS_XOSC32KI_TCFG_CAPCALMODE_Max (0x1UL) /*!< Max enumerator value of CAPCALMODE field.                      */
-  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALMODE_Disabled (0x0UL) /*!< (unspecified)                                             */
-  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALMODE_Enabled (0x1UL) /*!< (unspecified)                                              */
+  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALMODE_Disabled (0x0UL) /*!< Disabled                                                  */
+  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALMODE_Enabled (0x1UL) /*!< Enabled                                                    */
 
 /* CAPCALCOMPINV @Bit 1 : Invert CAPCAL comparators */
   #define OSCILLATORS_XOSC32KI_TCFG_CAPCALCOMPINV_Pos (1UL) /*!< Position of CAPCALCOMPINV field.                              */
@@ -25670,8 +26141,8 @@ typedef struct {
                                                                             CAPCALCOMPINV field.*/
   #define OSCILLATORS_XOSC32KI_TCFG_CAPCALCOMPINV_Min (0x0UL) /*!< Min enumerator value of CAPCALCOMPINV field.                */
   #define OSCILLATORS_XOSC32KI_TCFG_CAPCALCOMPINV_Max (0x1UL) /*!< Max enumerator value of CAPCALCOMPINV field.                */
-  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALCOMPINV_NotInverted (0x0UL) /*!< (unspecified)                                       */
-  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALCOMPINV_Inverted (0x1UL) /*!< (unspecified)                                          */
+  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALCOMPINV_NotInverted (0x0UL) /*!< NotInverted                                         */
+  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALCOMPINV_Inverted (0x1UL) /*!< Inverted                                               */
 
 /* CAPCALSTART @Bit 2 : Start CAPCAL measurement */
   #define OSCILLATORS_XOSC32KI_TCFG_CAPCALSTART_Pos (2UL) /*!< Position of CAPCALSTART field.                                  */
@@ -25679,8 +26150,8 @@ typedef struct {
                                                                             CAPCALSTART field.*/
   #define OSCILLATORS_XOSC32KI_TCFG_CAPCALSTART_Min (0x0UL) /*!< Min enumerator value of CAPCALSTART field.                    */
   #define OSCILLATORS_XOSC32KI_TCFG_CAPCALSTART_Max (0x1UL) /*!< Max enumerator value of CAPCALSTART field.                    */
-  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALSTART_DoNotStart (0x0UL) /*!< (unspecified)                                          */
-  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALSTART_Start (0x1UL) /*!< (unspecified)                                               */
+  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALSTART_DoNotStart (0x0UL) /*!< DoNotStart                                             */
+  #define OSCILLATORS_XOSC32KI_TCFG_CAPCALSTART_Start (0x1UL) /*!< Start                                                       */
 
 /* AREGHPEN @Bit 3 : Enable AREG_HP mode, 2x current in AREG */
   #define OSCILLATORS_XOSC32KI_TCFG_AREGHPEN_Pos (3UL) /*!< Position of AREGHPEN field.                                        */
@@ -25688,8 +26159,8 @@ typedef struct {
                                                                             field.*/
   #define OSCILLATORS_XOSC32KI_TCFG_AREGHPEN_Min (0x0UL) /*!< Min enumerator value of AREGHPEN field.                          */
   #define OSCILLATORS_XOSC32KI_TCFG_AREGHPEN_Max (0x1UL) /*!< Max enumerator value of AREGHPEN field.                          */
-  #define OSCILLATORS_XOSC32KI_TCFG_AREGHPEN_Disabled (0x0UL) /*!< (unspecified)                                               */
-  #define OSCILLATORS_XOSC32KI_TCFG_AREGHPEN_Enabled (0x1UL) /*!< (unspecified)                                                */
+  #define OSCILLATORS_XOSC32KI_TCFG_AREGHPEN_Disabled (0x0UL) /*!< Disabled                                                    */
+  #define OSCILLATORS_XOSC32KI_TCFG_AREGHPEN_Enabled (0x1UL) /*!< Enabled                                                      */
 
 /* AREGOFF @Bit 4 : AREG off, only constant current source driving xtal */
   #define OSCILLATORS_XOSC32KI_TCFG_AREGOFF_Pos (4UL) /*!< Position of AREGOFF field.                                          */
@@ -25697,8 +26168,8 @@ typedef struct {
                                                                             field.*/
   #define OSCILLATORS_XOSC32KI_TCFG_AREGOFF_Min (0x0UL) /*!< Min enumerator value of AREGOFF field.                            */
   #define OSCILLATORS_XOSC32KI_TCFG_AREGOFF_Max (0x1UL) /*!< Max enumerator value of AREGOFF field.                            */
-  #define OSCILLATORS_XOSC32KI_TCFG_AREGOFF_AregOn (0x0UL) /*!< (unspecified)                                                  */
-  #define OSCILLATORS_XOSC32KI_TCFG_AREGOFF_AregOff (0x1UL) /*!< (unspecified)                                                 */
+  #define OSCILLATORS_XOSC32KI_TCFG_AREGOFF_AregOn (0x0UL) /*!< AregOn                                                         */
+  #define OSCILLATORS_XOSC32KI_TCFG_AREGOFF_AregOff (0x1UL) /*!< AregOff                                                       */
 
 
 
@@ -25994,7 +26465,7 @@ typedef struct {
     __IOM NRF_OSCILLATORS_PLL_Type PLL;              /*!< (@ 0x00000800) Oscillator control                                    */
     __IM uint32_t RESERVED2[35];
     __IOM NRF_OSCILLATORS_XOSC32KI_Type XOSC32KI;    /*!< (@ 0x00000900) 32 kHz oscillator control                             */
-    __IM uint32_t RESERVED3[54];
+    __IM uint32_t RESERVED3[50];
     __IOM NRF_OSCILLATORS_RCOSC32K_Type RCOSC32K;    /*!< (@ 0x00000A00) 32.768 kHz RC oscillator                              */
   } NRF_OSCILLATORS_Type;                            /*!< Size = 2612 (0xA34)                                                  */
 
@@ -26261,7 +26732,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DMA.BUSERROR will publish to */
   #define PDM_PUBLISH_DMA_BUSERROR_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define PDM_PUBLISH_DMA_BUSERROR_CHIDX_Msk (0xFFUL << PDM_PUBLISH_DMA_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define PDM_PUBLISH_DMA_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define PDM_PUBLISH_DMA_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define PDM_PUBLISH_DMA_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -26391,7 +26862,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define PDM_PSEL_CLK_PIN_Pos (0UL)                 /*!< Position of PIN field.                                               */
   #define PDM_PSEL_CLK_PIN_Msk (0x1FUL << PDM_PSEL_CLK_PIN_Pos) /*!< Bit mask of PIN field.                                    */
-  #define PDM_PSEL_CLK_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
+  #define PDM_PSEL_CLK_PIN_Min (0x00UL)              /*!< Min value of PIN field.                                              */
   #define PDM_PSEL_CLK_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -26415,7 +26886,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define PDM_PSEL_DIN_PIN_Pos (0UL)                 /*!< Position of PIN field.                                               */
   #define PDM_PSEL_DIN_PIN_Msk (0x1FUL << PDM_PSEL_DIN_PIN_Pos) /*!< Bit mask of PIN field.                                    */
-  #define PDM_PSEL_DIN_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
+  #define PDM_PSEL_DIN_PIN_Min (0x00UL)              /*!< Min value of PIN field.                                              */
   #define PDM_PSEL_DIN_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -26460,7 +26931,7 @@ typedef struct {
 /* BUFFSIZE @Bits 0..14 : Length of DMA RAM allocation in number of samples */
   #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Pos (0UL)       /*!< Position of BUFFSIZE field.                                          */
   #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Msk (0x7FFFUL << PDM_SAMPLE_MAXCNT_BUFFSIZE_Pos) /*!< Bit mask of BUFFSIZE field.         */
-  #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Min (0x0UL)     /*!< Min value of BUFFSIZE field.                                         */
+  #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Min (0x0000UL)  /*!< Min value of BUFFSIZE field.                                         */
   #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Max (0x7FFFUL)  /*!< Max size of BUFFSIZE field.                                          */
 
 
@@ -26539,8 +27010,8 @@ typedef struct {
     __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
     __IM uint32_t RESERVED5[124];
     __IOM uint32_t ENABLE;                           /*!< (@ 0x00000500) PDM module enable register                            */
-    __IOM uint32_t PDMCLKCTRL;                       /*!< (@ 0x00000504) PDM clock generator control                           */
-    __IOM uint32_t MODE;                             /*!< (@ 0x00000508) Defines the routing of the connected PDM microphones'
+    __IM uint32_t RESERVED6;
+    __IOM uint32_t MODE;                             /*!< (@ 0x00000508) Defines the routing of the connected PDM microphone
                                                                          signals*/
     __IOM uint32_t FDBYPASS;                         /*!< (@ 0x0000050C) Bypass the frequency doubler in the PDM clock
                                                                          generation*/
@@ -26549,14 +27020,16 @@ typedef struct {
     __IOM uint32_t GAINL;                            /*!< (@ 0x00000518) Left output gain adjustment                           */
     __IOM uint32_t GAINR;                            /*!< (@ 0x0000051C) Right output gain adjustment                          */
     __IOM uint32_t RATIO;                            /*!< (@ 0x00000520) Selects the decimation ratio between PDM_CLK and output
-                                                                         sample rate. Change PDMCLKCTRL accordingly.*/
+                                                                         sample rate. Change PRESCALER accordingly.*/
     __IOM NRF_PDM_FILTER_Type FILTER;                /*!< (@ 0x00000524) (unspecified)                                         */
     __IOM uint32_t PHASE;                            /*!< (@ 0x0000053C) Selection of delay on the clock line (to avoid
                                                                          potential setup&hold timing violation on input data)*/
     __IOM NRF_PDM_PSEL_Type PSEL;                    /*!< (@ 0x00000540) (unspecified)                                         */
-    __IM uint32_t RESERVED6[6];
+    __IM uint32_t RESERVED7[6];
     __IOM NRF_PDM_SAMPLE_Type SAMPLE;                /*!< (@ 0x00000560) (unspecified)                                         */
-    __IM uint32_t RESERVED7[101];
+    __IM uint32_t RESERVED8[5];
+    __IOM uint32_t PRESCALER;                        /*!< (@ 0x00000580) The prescaler is used to set the PDM frequency        */
+    __IM uint32_t RESERVED9[95];
     __IOM NRF_PDM_DMA_Type DMA;                      /*!< (@ 0x00000700) (unspecified)                                         */
   } NRF_PDM_Type;                                    /*!< Size = 1800 (0x708)                                                  */
 
@@ -26588,7 +27061,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define PDM_SUBSCRIBE_START_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define PDM_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << PDM_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define PDM_SUBSCRIBE_START_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define PDM_SUBSCRIBE_START_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define PDM_SUBSCRIBE_START_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -26606,7 +27079,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define PDM_SUBSCRIBE_STOP_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define PDM_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << PDM_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define PDM_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define PDM_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define PDM_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -26679,7 +27152,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STARTED will publish to */
   #define PDM_PUBLISH_STARTED_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define PDM_PUBLISH_STARTED_CHIDX_Msk (0xFFUL << PDM_PUBLISH_STARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define PDM_PUBLISH_STARTED_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define PDM_PUBLISH_STARTED_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define PDM_PUBLISH_STARTED_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -26697,7 +27170,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STOPPED will publish to */
   #define PDM_PUBLISH_STOPPED_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define PDM_PUBLISH_STOPPED_CHIDX_Msk (0xFFUL << PDM_PUBLISH_STOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define PDM_PUBLISH_STOPPED_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define PDM_PUBLISH_STOPPED_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define PDM_PUBLISH_STOPPED_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -26715,7 +27188,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define PDM_PUBLISH_END_CHIDX_Pos (0UL)            /*!< Position of CHIDX field.                                             */
   #define PDM_PUBLISH_END_CHIDX_Msk (0xFFUL << PDM_PUBLISH_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                        */
-  #define PDM_PUBLISH_END_CHIDX_Min (0x0UL)          /*!< Min value of CHIDX field.                                            */
+  #define PDM_PUBLISH_END_CHIDX_Min (0x00UL)         /*!< Min value of CHIDX field.                                            */
   #define PDM_PUBLISH_END_CHIDX_Max (0xFFUL)         /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -26733,7 +27206,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event OVERRUN will publish to */
   #define PDM_PUBLISH_OVERRUN_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define PDM_PUBLISH_OVERRUN_CHIDX_Msk (0xFFUL << PDM_PUBLISH_OVERRUN_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define PDM_PUBLISH_OVERRUN_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define PDM_PUBLISH_OVERRUN_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define PDM_PUBLISH_OVERRUN_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -26956,28 +27429,7 @@ typedef struct {
   #define PDM_ENABLE_ENABLE_Enabled (0x1UL)          /*!< Enable                                                               */
 
 
-/* PDM_PDMCLKCTRL: PDM clock generator control */
-  #define PDM_PDMCLKCTRL_ResetValue (0x08400000UL)   /*!< Reset value of PDMCLKCTRL register.                                  */
-
-/* FREQ @Bits 0..31 : PDM_CLK frequency configuration. */
-  #define PDM_PDMCLKCTRL_FREQ_Pos (0UL)              /*!< Position of FREQ field.                                              */
-  #define PDM_PDMCLKCTRL_FREQ_Msk (0xFFFFFFFFUL << PDM_PDMCLKCTRL_FREQ_Pos) /*!< Bit mask of FREQ field.                       */
-  #define PDM_PDMCLKCTRL_FREQ_Min (0x8000000UL)      /*!< Min enumerator value of FREQ field.                                  */
-  #define PDM_PDMCLKCTRL_FREQ_Max (0xA800000UL)      /*!< Max enumerator value of FREQ field.                                  */
-  #define PDM_PDMCLKCTRL_FREQ_1000K (0x08000000UL)   /*!< PDM_CLK = 32 MHz / 32 = 1.000 MHz                                    */
-  #define PDM_PDMCLKCTRL_FREQ_Default (0x08400000UL) /*!< PDM_CLK = 32 MHz / 31 = 1.032 MHz. Nominal clock for RATIO=Ratio64.
-                                                          Assumes a 20 bit Baud Rate Generator (BRG) dividing the 32 MHz clock.
-                                                          Output of BRG is connected to PDM_CLK, the filter source clock
-                                                          requires twice that rate, a frequency doubler is built in the module
-                                                          to provide 2.048 MHz, which implies a filter clockdiv ratio hardcoded
-                                                          at x2 to the IP.*/
-  #define PDM_PDMCLKCTRL_FREQ_1067K (0x08800000UL)   /*!< PDM_CLK = 32 MHz / 30 = 1.067 MHz                                    */
-  #define PDM_PDMCLKCTRL_FREQ_1231K (0x09800000UL)   /*!< PDM_CLK = 32 MHz / 26 = 1.231 MHz                                    */
-  #define PDM_PDMCLKCTRL_FREQ_1280K (0x0A000000UL)   /*!< PDM_CLK = 32 MHz / 25 = 1.280 MHz. Nominal clock for RATIO=Ratio80.  */
-  #define PDM_PDMCLKCTRL_FREQ_1333K (0x0A800000UL)   /*!< PDM_CLK = 32 MHz / 24 = 1.333 MHz                                    */
-
-
-/* PDM_MODE: Defines the routing of the connected PDM microphones' signals */
+/* PDM_MODE: Defines the routing of the connected PDM microphone signals */
   #define PDM_MODE_ResetValue (0x00000000UL)         /*!< Reset value of MODE register.                                        */
 
 /* OPERATION @Bit 0 : Mono or stereo operation Mono also disables the gated clock to the right filter bank */
@@ -27063,7 +27515,7 @@ typedef struct {
   #define PDM_GAINR_GAINR_MaxGain (0x50UL)           /*!< +20 dB gain adjustment (maximum)                                     */
 
 
-/* PDM_RATIO: Selects the decimation ratio between PDM_CLK and output sample rate. Change PDMCLKCTRL accordingly. */
+/* PDM_RATIO: Selects the decimation ratio between PDM_CLK and output sample rate. Change PRESCALER accordingly. */
   #define PDM_RATIO_ResetValue (0x00000002UL)        /*!< Reset value of RATIO register.                                       */
 
 /* RATIO @Bits 0..2 : Selects the decimation ratio between PDM_CLK and output sample rate */
@@ -27092,6 +27544,16 @@ typedef struct {
   #define PDM_PHASE_PHASE_Msk (0xFUL << PDM_PHASE_PHASE_Pos) /*!< Bit mask of PHASE field.                                     */
   #define PDM_PHASE_PHASE_Min (0x0UL)                /*!< Min value of PHASE field.                                            */
   #define PDM_PHASE_PHASE_Max (0xEUL)                /*!< Max size of PHASE field.                                             */
+
+
+/* PDM_PRESCALER: The prescaler is used to set the PDM frequency */
+  #define PDM_PRESCALER_ResetValue (0x00000004UL)    /*!< Reset value of PRESCALER register.                                   */
+
+/* DIVISOR @Bits 0..31 : Core clock to PDM divisor */
+  #define PDM_PRESCALER_DIVISOR_Pos (0UL)            /*!< Position of DIVISOR field.                                           */
+  #define PDM_PRESCALER_DIVISOR_Msk (0xFFFFFFFFUL << PDM_PRESCALER_DIVISOR_Pos) /*!< Bit mask of DIVISOR field.                */
+  #define PDM_PRESCALER_DIVISOR_Min (0x00000004UL)   /*!< Min value of DIVISOR field.                                          */
+  #define PDM_PRESCALER_DIVISOR_Max (0x0000007EUL)   /*!< Max size of DIVISOR field.                                           */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -27131,7 +27593,9 @@ typedef struct {
     __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
     __IM uint32_t RESERVED5[125];
     __IOM uint32_t GPREGRET[2];                      /*!< (@ 0x00000500) General purpose retention register                    */
-  } NRF_POWER_Type;                                  /*!< Size = 1288 (0x508)                                                  */
+    __IM uint32_t RESERVED6[2];
+    __IM uint32_t CONSTLATSTAT;                      /*!< (@ 0x00000510) Status of constant latency                            */
+  } NRF_POWER_Type;                                  /*!< Size = 1300 (0x514)                                                  */
 
 /* POWER_TASKS_CONSTLAT: Enable Constant Latency mode When going to sleep: CPU is clock gated, but regulators, oscillators and
                           clock tree is kept on. */
@@ -27171,7 +27635,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CONSTLAT will subscribe to */
   #define POWER_SUBSCRIBE_CONSTLAT_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define POWER_SUBSCRIBE_CONSTLAT_CHIDX_Msk (0xFFUL << POWER_SUBSCRIBE_CONSTLAT_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define POWER_SUBSCRIBE_CONSTLAT_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define POWER_SUBSCRIBE_CONSTLAT_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define POWER_SUBSCRIBE_CONSTLAT_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -27189,7 +27653,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task LOWPWR will subscribe to */
   #define POWER_SUBSCRIBE_LOWPWR_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define POWER_SUBSCRIBE_LOWPWR_CHIDX_Msk (0xFFUL << POWER_SUBSCRIBE_LOWPWR_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define POWER_SUBSCRIBE_LOWPWR_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define POWER_SUBSCRIBE_LOWPWR_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define POWER_SUBSCRIBE_LOWPWR_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -27246,7 +27710,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event POFWARN will publish to */
   #define POWER_PUBLISH_POFWARN_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define POWER_PUBLISH_POFWARN_CHIDX_Msk (0xFFUL << POWER_PUBLISH_POFWARN_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define POWER_PUBLISH_POFWARN_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define POWER_PUBLISH_POFWARN_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define POWER_PUBLISH_POFWARN_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -27264,7 +27728,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event SLEEPENTER will publish to */
   #define POWER_PUBLISH_SLEEPENTER_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define POWER_PUBLISH_SLEEPENTER_CHIDX_Msk (0xFFUL << POWER_PUBLISH_SLEEPENTER_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define POWER_PUBLISH_SLEEPENTER_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define POWER_PUBLISH_SLEEPENTER_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define POWER_PUBLISH_SLEEPENTER_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -27282,7 +27746,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event SLEEPEXIT will publish to */
   #define POWER_PUBLISH_SLEEPEXIT_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define POWER_PUBLISH_SLEEPEXIT_CHIDX_Msk (0xFFUL << POWER_PUBLISH_SLEEPEXIT_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define POWER_PUBLISH_SLEEPEXIT_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define POWER_PUBLISH_SLEEPEXIT_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define POWER_PUBLISH_SLEEPEXIT_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -27393,6 +27857,18 @@ typedef struct {
 /* GPREGRET @Bits 0..7 : General purpose retention register */
   #define POWER_GPREGRET_GPREGRET_Pos (0UL)          /*!< Position of GPREGRET field.                                          */
   #define POWER_GPREGRET_GPREGRET_Msk (0xFFUL << POWER_GPREGRET_GPREGRET_Pos) /*!< Bit mask of GPREGRET field.                 */
+
+
+/* POWER_CONSTLATSTAT: Status of constant latency */
+  #define POWER_CONSTLATSTAT_ResetValue (0x00000000UL) /*!< Reset value of CONSTLATSTAT register.                              */
+
+/* STATUS @Bit 0 : Status */
+  #define POWER_CONSTLATSTAT_STATUS_Pos (0UL)        /*!< Position of STATUS field.                                            */
+  #define POWER_CONSTLATSTAT_STATUS_Msk (0x1UL << POWER_CONSTLATSTAT_STATUS_Pos) /*!< Bit mask of STATUS field.                */
+  #define POWER_CONSTLATSTAT_STATUS_Min (0x0UL)      /*!< Min enumerator value of STATUS field.                                */
+  #define POWER_CONSTLATSTAT_STATUS_Max (0x1UL)      /*!< Max enumerator value of STATUS field.                                */
+  #define POWER_CONSTLATSTAT_STATUS_Disable (0x0UL)  /*!< Constant latency disabled                                            */
+  #define POWER_CONSTLATSTAT_STATUS_Enable (0x1UL)   /*!< Constant latency enabled                                             */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -27710,7 +28186,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SEND[n] will subscribe to */
   #define PPIB_SUBSCRIBE_SEND_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define PPIB_SUBSCRIBE_SEND_CHIDX_Msk (0xFFUL << PPIB_SUBSCRIBE_SEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define PPIB_SUBSCRIBE_SEND_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define PPIB_SUBSCRIBE_SEND_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define PPIB_SUBSCRIBE_SEND_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -27747,7 +28223,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RECEIVE[n] will publish to */
   #define PPIB_PUBLISH_RECEIVE_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define PPIB_PUBLISH_RECEIVE_CHIDX_Msk (0xFFUL << PPIB_PUBLISH_RECEIVE_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define PPIB_PUBLISH_RECEIVE_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define PPIB_PUBLISH_RECEIVE_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define PPIB_PUBLISH_RECEIVE_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -27819,7 +28295,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define PWM_SUBSCRIBE_DMA_SEQ_START_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define PWM_SUBSCRIBE_DMA_SEQ_START_CHIDX_Msk (0xFFUL << PWM_SUBSCRIBE_DMA_SEQ_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define PWM_SUBSCRIBE_DMA_SEQ_START_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define PWM_SUBSCRIBE_DMA_SEQ_START_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define PWM_SUBSCRIBE_DMA_SEQ_START_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -27930,7 +28406,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define PWM_PUBLISH_DMA_SEQ_END_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define PWM_PUBLISH_DMA_SEQ_END_CHIDX_Msk (0xFFUL << PWM_PUBLISH_DMA_SEQ_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define PWM_PUBLISH_DMA_SEQ_END_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define PWM_PUBLISH_DMA_SEQ_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define PWM_PUBLISH_DMA_SEQ_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -27948,7 +28424,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define PWM_PUBLISH_DMA_SEQ_READY_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define PWM_PUBLISH_DMA_SEQ_READY_CHIDX_Msk (0xFFUL << PWM_PUBLISH_DMA_SEQ_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define PWM_PUBLISH_DMA_SEQ_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define PWM_PUBLISH_DMA_SEQ_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define PWM_PUBLISH_DMA_SEQ_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -27967,7 +28443,7 @@ typedef struct {
   #define PWM_PUBLISH_DMA_SEQ_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define PWM_PUBLISH_DMA_SEQ_BUSERROR_CHIDX_Msk (0xFFUL << PWM_PUBLISH_DMA_SEQ_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define PWM_PUBLISH_DMA_SEQ_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define PWM_PUBLISH_DMA_SEQ_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define PWM_PUBLISH_DMA_SEQ_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28043,7 +28519,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define PWM_PSEL_OUT_PIN_Pos (0UL)                 /*!< Position of PIN field.                                               */
   #define PWM_PSEL_OUT_PIN_Msk (0x1FUL << PWM_PSEL_OUT_PIN_Pos) /*!< Bit mask of PIN field.                                    */
-  #define PWM_PSEL_OUT_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
+  #define PWM_PSEL_OUT_PIN_Min (0x00UL)              /*!< Min value of PIN field.                                              */
   #define PWM_PSEL_OUT_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -28111,7 +28587,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define PWM_DMA_SEQ_MAXCNT_MAXCNT_Pos (0UL)        /*!< Position of MAXCNT field.                                            */
   #define PWM_DMA_SEQ_MAXCNT_MAXCNT_Msk (0xFFFFUL << PWM_DMA_SEQ_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.             */
-  #define PWM_DMA_SEQ_MAXCNT_MAXCNT_Min (0x1UL)      /*!< Min value of MAXCNT field.                                           */
+  #define PWM_DMA_SEQ_MAXCNT_MAXCNT_Min (0x0001UL)   /*!< Min value of MAXCNT field.                                           */
   #define PWM_DMA_SEQ_MAXCNT_MAXCNT_Max (0xFFFFUL)   /*!< Max size of MAXCNT field.                                            */
 
 
@@ -28123,7 +28599,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define PWM_DMA_SEQ_AMOUNT_AMOUNT_Pos (0UL)        /*!< Position of AMOUNT field.                                            */
   #define PWM_DMA_SEQ_AMOUNT_AMOUNT_Msk (0xFFFFUL << PWM_DMA_SEQ_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
-  #define PWM_DMA_SEQ_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
+  #define PWM_DMA_SEQ_AMOUNT_AMOUNT_Min (0x0001UL)   /*!< Min value of AMOUNT field.                                           */
   #define PWM_DMA_SEQ_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
@@ -28136,7 +28612,7 @@ typedef struct {
   #define PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Pos (0UL) /*!< Position of AMOUNT field.                                            */
   #define PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Msk (0xFFFFUL << PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT
                                                                             field.*/
-  #define PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Min (0x1UL) /*!< Min value of AMOUNT field.                                         */
+  #define PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Min (0x0001UL) /*!< Min value of AMOUNT field.                                      */
   #define PWM_DMA_SEQ_CURRENTAMOUNT_AMOUNT_Max (0xFFFFUL) /*!< Max size of AMOUNT field.                                       */
 
 
@@ -28299,7 +28775,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define PWM_SUBSCRIBE_START_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define PWM_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << PWM_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define PWM_SUBSCRIBE_START_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define PWM_SUBSCRIBE_START_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define PWM_SUBSCRIBE_START_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28317,7 +28793,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define PWM_SUBSCRIBE_STOP_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define PWM_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << PWM_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define PWM_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define PWM_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define PWM_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28335,7 +28811,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task NEXTSTEP will subscribe to */
   #define PWM_SUBSCRIBE_NEXTSTEP_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define PWM_SUBSCRIBE_NEXTSTEP_CHIDX_Msk (0xFFUL << PWM_SUBSCRIBE_NEXTSTEP_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define PWM_SUBSCRIBE_NEXTSTEP_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define PWM_SUBSCRIBE_NEXTSTEP_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define PWM_SUBSCRIBE_NEXTSTEP_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28353,7 +28829,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SEQABORT will subscribe to */
   #define PWM_SUBSCRIBE_SEQABORT_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define PWM_SUBSCRIBE_SEQABORT_CHIDX_Msk (0xFFUL << PWM_SUBSCRIBE_SEQABORT_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define PWM_SUBSCRIBE_SEQABORT_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define PWM_SUBSCRIBE_SEQABORT_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define PWM_SUBSCRIBE_SEQABORT_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28484,7 +28960,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STARTED will publish to */
   #define PWM_PUBLISH_STARTED_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define PWM_PUBLISH_STARTED_CHIDX_Msk (0xFFUL << PWM_PUBLISH_STARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define PWM_PUBLISH_STARTED_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define PWM_PUBLISH_STARTED_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define PWM_PUBLISH_STARTED_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28502,7 +28978,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STOPPED will publish to */
   #define PWM_PUBLISH_STOPPED_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define PWM_PUBLISH_STOPPED_CHIDX_Msk (0xFFUL << PWM_PUBLISH_STOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define PWM_PUBLISH_STOPPED_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define PWM_PUBLISH_STOPPED_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define PWM_PUBLISH_STOPPED_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28523,7 +28999,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event SEQSTARTED[n] will publish to */
   #define PWM_PUBLISH_SEQSTARTED_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define PWM_PUBLISH_SEQSTARTED_CHIDX_Msk (0xFFUL << PWM_PUBLISH_SEQSTARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define PWM_PUBLISH_SEQSTARTED_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define PWM_PUBLISH_SEQSTARTED_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define PWM_PUBLISH_SEQSTARTED_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28544,7 +29020,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event SEQEND[n] will publish to */
   #define PWM_PUBLISH_SEQEND_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define PWM_PUBLISH_SEQEND_CHIDX_Msk (0xFFUL << PWM_PUBLISH_SEQEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define PWM_PUBLISH_SEQEND_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define PWM_PUBLISH_SEQEND_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define PWM_PUBLISH_SEQEND_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28562,7 +29038,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event PWMPERIODEND will publish to */
   #define PWM_PUBLISH_PWMPERIODEND_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define PWM_PUBLISH_PWMPERIODEND_CHIDX_Msk (0xFFUL << PWM_PUBLISH_PWMPERIODEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define PWM_PUBLISH_PWMPERIODEND_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define PWM_PUBLISH_PWMPERIODEND_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define PWM_PUBLISH_PWMPERIODEND_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28580,7 +29056,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event LOOPSDONE will publish to */
   #define PWM_PUBLISH_LOOPSDONE_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define PWM_PUBLISH_LOOPSDONE_CHIDX_Msk (0xFFUL << PWM_PUBLISH_LOOPSDONE_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define PWM_PUBLISH_LOOPSDONE_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define PWM_PUBLISH_LOOPSDONE_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define PWM_PUBLISH_LOOPSDONE_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28598,7 +29074,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RAMUNDERFLOW will publish to */
   #define PWM_PUBLISH_RAMUNDERFLOW_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define PWM_PUBLISH_RAMUNDERFLOW_CHIDX_Msk (0xFFUL << PWM_PUBLISH_RAMUNDERFLOW_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define PWM_PUBLISH_RAMUNDERFLOW_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define PWM_PUBLISH_RAMUNDERFLOW_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define PWM_PUBLISH_RAMUNDERFLOW_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -28619,7 +29095,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event COMPAREMATCH[n] will publish to */
   #define PWM_PUBLISH_COMPAREMATCH_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define PWM_PUBLISH_COMPAREMATCH_CHIDX_Msk (0xFFUL << PWM_PUBLISH_COMPAREMATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define PWM_PUBLISH_COMPAREMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define PWM_PUBLISH_COMPAREMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define PWM_PUBLISH_COMPAREMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -29380,7 +29856,7 @@ typedef struct {
 
   #define PWM_COUNTERTOP_COUNTERTOP_Pos (0UL)        /*!< Position of COUNTERTOP field.                                        */
   #define PWM_COUNTERTOP_COUNTERTOP_Msk (0x7FFFUL << PWM_COUNTERTOP_COUNTERTOP_Pos) /*!< Bit mask of COUNTERTOP field.         */
-  #define PWM_COUNTERTOP_COUNTERTOP_Min (0x3UL)      /*!< Min value of COUNTERTOP field.                                       */
+  #define PWM_COUNTERTOP_COUNTERTOP_Min (0x0003UL)   /*!< Min value of COUNTERTOP field.                                       */
   #define PWM_COUNTERTOP_COUNTERTOP_Max (0x7FFFUL)   /*!< Max size of COUNTERTOP field.                                        */
 
 
@@ -29481,7 +29957,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define QDEC_PSEL_LED_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define QDEC_PSEL_LED_PIN_Msk (0x1FUL << QDEC_PSEL_LED_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define QDEC_PSEL_LED_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define QDEC_PSEL_LED_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define QDEC_PSEL_LED_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -29505,7 +29981,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define QDEC_PSEL_A_PIN_Pos (0UL)                  /*!< Position of PIN field.                                               */
   #define QDEC_PSEL_A_PIN_Msk (0x1FUL << QDEC_PSEL_A_PIN_Pos) /*!< Bit mask of PIN field.                                      */
-  #define QDEC_PSEL_A_PIN_Min (0x0UL)                /*!< Min value of PIN field.                                              */
+  #define QDEC_PSEL_A_PIN_Min (0x00UL)               /*!< Min value of PIN field.                                              */
   #define QDEC_PSEL_A_PIN_Max (0x1FUL)               /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -29529,7 +30005,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define QDEC_PSEL_B_PIN_Pos (0UL)                  /*!< Position of PIN field.                                               */
   #define QDEC_PSEL_B_PIN_Msk (0x1FUL << QDEC_PSEL_B_PIN_Pos) /*!< Bit mask of PIN field.                                      */
-  #define QDEC_PSEL_B_PIN_Min (0x0UL)                /*!< Min value of PIN field.                                              */
+  #define QDEC_PSEL_B_PIN_Min (0x00UL)               /*!< Min value of PIN field.                                              */
   #define QDEC_PSEL_B_PIN_Max (0x1FUL)               /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -29666,7 +30142,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define QDEC_SUBSCRIBE_START_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define QDEC_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << QDEC_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define QDEC_SUBSCRIBE_START_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define QDEC_SUBSCRIBE_START_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define QDEC_SUBSCRIBE_START_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -29684,7 +30160,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define QDEC_SUBSCRIBE_STOP_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define QDEC_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << QDEC_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define QDEC_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define QDEC_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define QDEC_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -29702,7 +30178,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task READCLRACC will subscribe to */
   #define QDEC_SUBSCRIBE_READCLRACC_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define QDEC_SUBSCRIBE_READCLRACC_CHIDX_Msk (0xFFUL << QDEC_SUBSCRIBE_READCLRACC_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define QDEC_SUBSCRIBE_READCLRACC_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define QDEC_SUBSCRIBE_READCLRACC_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define QDEC_SUBSCRIBE_READCLRACC_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -29720,7 +30196,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RDCLRACC will subscribe to */
   #define QDEC_SUBSCRIBE_RDCLRACC_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define QDEC_SUBSCRIBE_RDCLRACC_CHIDX_Msk (0xFFUL << QDEC_SUBSCRIBE_RDCLRACC_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define QDEC_SUBSCRIBE_RDCLRACC_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define QDEC_SUBSCRIBE_RDCLRACC_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define QDEC_SUBSCRIBE_RDCLRACC_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -29738,7 +30214,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RDCLRDBL will subscribe to */
   #define QDEC_SUBSCRIBE_RDCLRDBL_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define QDEC_SUBSCRIBE_RDCLRDBL_CHIDX_Msk (0xFFUL << QDEC_SUBSCRIBE_RDCLRDBL_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define QDEC_SUBSCRIBE_RDCLRDBL_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define QDEC_SUBSCRIBE_RDCLRDBL_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define QDEC_SUBSCRIBE_RDCLRDBL_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -29820,7 +30296,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event SAMPLERDY will publish to */
   #define QDEC_PUBLISH_SAMPLERDY_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define QDEC_PUBLISH_SAMPLERDY_CHIDX_Msk (0xFFUL << QDEC_PUBLISH_SAMPLERDY_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define QDEC_PUBLISH_SAMPLERDY_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define QDEC_PUBLISH_SAMPLERDY_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define QDEC_PUBLISH_SAMPLERDY_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -29838,7 +30314,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event REPORTRDY will publish to */
   #define QDEC_PUBLISH_REPORTRDY_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define QDEC_PUBLISH_REPORTRDY_CHIDX_Msk (0xFFUL << QDEC_PUBLISH_REPORTRDY_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define QDEC_PUBLISH_REPORTRDY_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define QDEC_PUBLISH_REPORTRDY_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define QDEC_PUBLISH_REPORTRDY_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -29856,7 +30332,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ACCOF will publish to */
   #define QDEC_PUBLISH_ACCOF_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define QDEC_PUBLISH_ACCOF_CHIDX_Msk (0xFFUL << QDEC_PUBLISH_ACCOF_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define QDEC_PUBLISH_ACCOF_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define QDEC_PUBLISH_ACCOF_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define QDEC_PUBLISH_ACCOF_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -29874,7 +30350,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DBLRDY will publish to */
   #define QDEC_PUBLISH_DBLRDY_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define QDEC_PUBLISH_DBLRDY_CHIDX_Msk (0xFFUL << QDEC_PUBLISH_DBLRDY_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define QDEC_PUBLISH_DBLRDY_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define QDEC_PUBLISH_DBLRDY_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define QDEC_PUBLISH_DBLRDY_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -29892,7 +30368,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STOPPED will publish to */
   #define QDEC_PUBLISH_STOPPED_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define QDEC_PUBLISH_STOPPED_CHIDX_Msk (0xFFUL << QDEC_PUBLISH_STOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define QDEC_PUBLISH_STOPPED_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define QDEC_PUBLISH_STOPPED_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define QDEC_PUBLISH_STOPPED_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -30161,8 +30637,8 @@ typedef struct {
 /* SAMPLE @Bits 0..31 : Last motion sample */
   #define QDEC_SAMPLE_SAMPLE_Pos (0UL)               /*!< Position of SAMPLE field.                                            */
   #define QDEC_SAMPLE_SAMPLE_Msk (0xFFFFFFFFUL << QDEC_SAMPLE_SAMPLE_Pos) /*!< Bit mask of SAMPLE field.                       */
-  #define QDEC_SAMPLE_SAMPLE_Min (0xFFFFFFFFFFFFFFFFUL) /*!< Min value of SAMPLE field.                                        */
-  #define QDEC_SAMPLE_SAMPLE_Max (0x2UL)             /*!< Max size of SAMPLE field.                                            */
+  #define QDEC_SAMPLE_SAMPLE_Min (0xFFFFFFFFUL)      /*!< Min value of SAMPLE field.                                           */
+  #define QDEC_SAMPLE_SAMPLE_Max (0x00000002UL)      /*!< Max size of SAMPLE field.                                            */
 
 
 /* QDEC_REPORTPER: Number of samples to be taken before REPORTRDY and DBLRDY events can be generated */
@@ -30192,8 +30668,8 @@ typedef struct {
 /* ACC @Bits 0..31 : Register accumulating all valid samples (not double transition) read from the SAMPLE register. */
   #define QDEC_ACC_ACC_Pos (0UL)                     /*!< Position of ACC field.                                               */
   #define QDEC_ACC_ACC_Msk (0xFFFFFFFFUL << QDEC_ACC_ACC_Pos) /*!< Bit mask of ACC field.                                      */
-  #define QDEC_ACC_ACC_Min (0xFFFFFFFFFFFFFC00UL)    /*!< Min value of ACC field.                                              */
-  #define QDEC_ACC_ACC_Max (0x3FFUL)                 /*!< Max size of ACC field.                                               */
+  #define QDEC_ACC_ACC_Min (0xFFFFFC00UL)            /*!< Min value of ACC field.                                              */
+  #define QDEC_ACC_ACC_Max (0x000003FFUL)            /*!< Max size of ACC field.                                               */
 
 
 /* QDEC_ACCREAD: Snapshot of the ACC register, updated by the READCLRACC or RDCLRACC task */
@@ -30202,8 +30678,8 @@ typedef struct {
 /* ACCREAD @Bits 0..31 : Snapshot of the ACC register. */
   #define QDEC_ACCREAD_ACCREAD_Pos (0UL)             /*!< Position of ACCREAD field.                                           */
   #define QDEC_ACCREAD_ACCREAD_Msk (0xFFFFFFFFUL << QDEC_ACCREAD_ACCREAD_Pos) /*!< Bit mask of ACCREAD field.                  */
-  #define QDEC_ACCREAD_ACCREAD_Min (0xFFFFFFFFFFFFFC00UL) /*!< Min value of ACCREAD field.                                     */
-  #define QDEC_ACCREAD_ACCREAD_Max (0x3FFUL)         /*!< Max size of ACCREAD field.                                           */
+  #define QDEC_ACCREAD_ACCREAD_Min (0xFFFFFC00UL)    /*!< Min value of ACCREAD field.                                          */
+  #define QDEC_ACCREAD_ACCREAD_Max (0x000003FFUL)    /*!< Max size of ACCREAD field.                                           */
 
 
 /* QDEC_DBFEN: Enable input debounce filters */
@@ -30224,7 +30700,7 @@ typedef struct {
 /* LEDPRE @Bits 0..8 : Period in us the LED is switched on prior to sampling */
   #define QDEC_LEDPRE_LEDPRE_Pos (0UL)               /*!< Position of LEDPRE field.                                            */
   #define QDEC_LEDPRE_LEDPRE_Msk (0x1FFUL << QDEC_LEDPRE_LEDPRE_Pos) /*!< Bit mask of LEDPRE field.                            */
-  #define QDEC_LEDPRE_LEDPRE_Min (0x1UL)             /*!< Min value of LEDPRE field.                                           */
+  #define QDEC_LEDPRE_LEDPRE_Min (0x001UL)           /*!< Min value of LEDPRE field.                                           */
   #define QDEC_LEDPRE_LEDPRE_Max (0x1FFUL)           /*!< Max size of LEDPRE field.                                            */
 
 
@@ -30402,7 +30878,7 @@ typedef struct {
   #define RADIO_TESTINTERFACE_DEBUGPSEL_IRQ_PIN_Pos (0UL) /*!< Position of PIN field.                                          */
   #define RADIO_TESTINTERFACE_DEBUGPSEL_IRQ_PIN_Msk (0x1FUL << RADIO_TESTINTERFACE_DEBUGPSEL_IRQ_PIN_Pos) /*!< Bit mask of PIN
                                                                             field.*/
-  #define RADIO_TESTINTERFACE_DEBUGPSEL_IRQ_PIN_Min (0x0UL) /*!< Min value of PIN field.                                       */
+  #define RADIO_TESTINTERFACE_DEBUGPSEL_IRQ_PIN_Min (0x00UL) /*!< Min value of PIN field.                                      */
   #define RADIO_TESTINTERFACE_DEBUGPSEL_IRQ_PIN_Max (0x1FUL) /*!< Max size of PIN field.                                       */
 
 /* PORT @Bits 5..8 : Port number */
@@ -30429,7 +30905,7 @@ typedef struct {
   #define RADIO_TESTINTERFACE_DEBUGPSEL_RXCLK_PIN_Pos (0UL) /*!< Position of PIN field.                                        */
   #define RADIO_TESTINTERFACE_DEBUGPSEL_RXCLK_PIN_Msk (0x1FUL << RADIO_TESTINTERFACE_DEBUGPSEL_RXCLK_PIN_Pos) /*!< Bit mask of
                                                                             PIN field.*/
-  #define RADIO_TESTINTERFACE_DEBUGPSEL_RXCLK_PIN_Min (0x0UL) /*!< Min value of PIN field.                                     */
+  #define RADIO_TESTINTERFACE_DEBUGPSEL_RXCLK_PIN_Min (0x00UL) /*!< Min value of PIN field.                                    */
   #define RADIO_TESTINTERFACE_DEBUGPSEL_RXCLK_PIN_Max (0x1FUL) /*!< Max size of PIN field.                                     */
 
 /* PORT @Bits 5..8 : Port number */
@@ -30456,7 +30932,7 @@ typedef struct {
   #define RADIO_TESTINTERFACE_DEBUGPSEL_RXDATA_PIN_Pos (0UL) /*!< Position of PIN field.                                       */
   #define RADIO_TESTINTERFACE_DEBUGPSEL_RXDATA_PIN_Msk (0x1FUL << RADIO_TESTINTERFACE_DEBUGPSEL_RXDATA_PIN_Pos) /*!< Bit mask of
                                                                             PIN field.*/
-  #define RADIO_TESTINTERFACE_DEBUGPSEL_RXDATA_PIN_Min (0x0UL) /*!< Min value of PIN field.                                    */
+  #define RADIO_TESTINTERFACE_DEBUGPSEL_RXDATA_PIN_Min (0x00UL) /*!< Min value of PIN field.                                   */
   #define RADIO_TESTINTERFACE_DEBUGPSEL_RXDATA_PIN_Max (0x1FUL) /*!< Max size of PIN field.                                    */
 
 /* PORT @Bits 5..8 : Port number */
@@ -30483,7 +30959,7 @@ typedef struct {
   #define RADIO_TESTINTERFACE_DEBUGPSEL_TXCLK_PIN_Pos (0UL) /*!< Position of PIN field.                                        */
   #define RADIO_TESTINTERFACE_DEBUGPSEL_TXCLK_PIN_Msk (0x1FUL << RADIO_TESTINTERFACE_DEBUGPSEL_TXCLK_PIN_Pos) /*!< Bit mask of
                                                                             PIN field.*/
-  #define RADIO_TESTINTERFACE_DEBUGPSEL_TXCLK_PIN_Min (0x0UL) /*!< Min value of PIN field.                                     */
+  #define RADIO_TESTINTERFACE_DEBUGPSEL_TXCLK_PIN_Min (0x00UL) /*!< Min value of PIN field.                                    */
   #define RADIO_TESTINTERFACE_DEBUGPSEL_TXCLK_PIN_Max (0x1FUL) /*!< Max size of PIN field.                                     */
 
 /* PORT @Bits 5..8 : Port number */
@@ -30512,7 +30988,7 @@ typedef struct {
   #define RADIO_TESTINTERFACE_DEBUGPSEL_TXDATA_PIN_Pos (0UL) /*!< Position of PIN field.                                       */
   #define RADIO_TESTINTERFACE_DEBUGPSEL_TXDATA_PIN_Msk (0x1FUL << RADIO_TESTINTERFACE_DEBUGPSEL_TXDATA_PIN_Pos) /*!< Bit mask of
                                                                             PIN field.*/
-  #define RADIO_TESTINTERFACE_DEBUGPSEL_TXDATA_PIN_Min (0x0UL) /*!< Min value of PIN field.                                    */
+  #define RADIO_TESTINTERFACE_DEBUGPSEL_TXDATA_PIN_Min (0x00UL) /*!< Min value of PIN field.                                   */
   #define RADIO_TESTINTERFACE_DEBUGPSEL_TXDATA_PIN_Max (0x1FUL) /*!< Max size of PIN field.                                    */
 
 /* PORT @Bits 5..8 : Port number */
@@ -30671,7 +31147,7 @@ typedef struct {
 
 
 /* RADIO_CALIBRATION_DCCONFIG: Calibration config when CALTARGET=DC_CAL */
-  #define RADIO_CALIBRATION_DCCONFIG_ResetValue (0x37021F0DUL) /*!< Reset value of DCCONFIG register.                          */
+  #define RADIO_CALIBRATION_DCCONFIG_ResetValue (0x07021F0DUL) /*!< Reset value of DCCONFIG register.                          */
 
 /* CALTSTART @Bits 0..7 : Startup wait time (default 437.5ns) */
   #define RADIO_CALIBRATION_DCCONFIG_CALTSTART_Pos (0UL) /*!< Position of CALTSTART field.                                     */
@@ -30962,7 +31438,7 @@ typedef struct {
   #define RADIO_SPHYNXANA_RXCTRL_ENCWLOOPBACK_Msk (0x1UL << RADIO_SPHYNXANA_RXCTRL_ENCWLOOPBACK_Pos) /*!< Bit mask of
                                                                             ENCWLOOPBACK field.*/
 
-/* RXTUNEIN @Bits 25..30 : Controls TX_PWR_0V8/PWRCTR_TX_0V9 when in RX or Loopback */
+/* RXTUNEIN @Bits 25..30 : Controls PWRCTR_TX_0V9 when in RX or Loopback. See also OVRVALRXTX.OVRVALSETRXIF. */
   #define RADIO_SPHYNXANA_RXCTRL_RXTUNEIN_Pos (25UL) /*!< Position of RXTUNEIN field.                                          */
   #define RADIO_SPHYNXANA_RXCTRL_RXTUNEIN_Msk (0x3FUL << RADIO_SPHYNXANA_RXCTRL_RXTUNEIN_Pos) /*!< Bit mask of RXTUNEIN field. */
 
@@ -32173,446 +32649,260 @@ typedef struct {
 
 
 
-/* ============================================= Struct RADIO_DECFILTERS_OUTMAIN ============================================= */
+/* ============================================== Struct RADIO_FILTERS_OUTTOMIX ============================================== */
 /**
-  * @brief OUTMAIN [RADIO_DECFILTERS_OUTMAIN] (unspecified)
+  * @brief OUTTOMIX [RADIO_FILTERS_OUTTOMIX] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the output outMain          */
-} NRF_RADIO_DECFILTERS_OUTMAIN_Type;                 /*!< Size = 4 (0x004)                                                     */
+  __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the output outToMix         */
+} NRF_RADIO_FILTERS_OUTTOMIX_Type;                   /*!< Size = 4 (0x004)                                                     */
 
-/* RADIO_DECFILTERS_OUTMAIN_CKSEL: Clock select register for the output outMain */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                         */
+/* RADIO_FILTERS_OUTTOMIX_CKSEL: Clock select register for the output outToMix */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                           */
 
 /* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
                       disabled and data out is assigned directly from data in. */
 
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                         */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_Msk (0x7UL << RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                           */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_Msk (0x7UL << RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL
                                                                             field.*/
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                           */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                           */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                  */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                  */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                  */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                  */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                              */
-  #define RADIO_DECFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                          */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                             */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                             */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                  */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                  */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                    */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                    */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                    */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                    */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                                */
+  #define RADIO_FILTERS_OUTTOMIX_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                            */
 
 
 
-/* ============================================= Struct RADIO_DECFILTERS_DECFIR0 ============================================= */
+/* ============================================== Struct RADIO_FILTERS_OUTTOBB =============================================== */
 /**
-  * @brief DECFIR0 [RADIO_DECFILTERS_DECFIR0] (unspecified)
+  * @brief OUTTOBB [RADIO_FILTERS_OUTTOBB] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the output outToBB          */
+  __IOM uint32_t  SOURCE;                            /*!< (@ 0x00000004) Source select register for the output outToBB         */
+} NRF_RADIO_FILTERS_OUTTOBB_Type;                    /*!< Size = 8 (0x008)                                                     */
+
+/* RADIO_FILTERS_OUTTOBB_CKSEL: Clock select register for the output outToBB */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                            */
+
+/* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
+                      disabled and data out is assigned directly from data in. */
+
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                            */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_Msk (0x7UL << RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL field. */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                              */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                              */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                   */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                   */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                     */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                     */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                     */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                     */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                                 */
+  #define RADIO_FILTERS_OUTTOBB_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                             */
+
+
+/* RADIO_FILTERS_OUTTOBB_SOURCE: Source select register for the output outToBB */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_ResetValue (0x00000006UL) /*!< Reset value of SOURCE register.                          */
+
+/* SOURCE @Bits 0..4 : Data source select */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_Pos (0UL) /*!< Position of SOURCE field.                                         */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_Msk (0x1FUL << RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_Pos) /*!< Bit mask of SOURCE
+                                                                            field.*/
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_Min (0x0UL) /*!< Min enumerator value of SOURCE field.                           */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_Max (0x1FUL) /*!< Max enumerator value of SOURCE field.                          */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_SrcInFromMix (0x1EUL) /*!< SRC_INFROMMIX (NOT LEGAL)                             */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_SrcInFromAdc (0x1FUL) /*!< SRC_INFROMADC (NOT LEGAL)                             */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_SrcDecFIR0 (0x00UL) /*!< SRC_DECFIR0 (NOT LEGAL)                                 */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_SrcDecFIR1 (0x01UL) /*!< SRC_DECFIR1 (NOT LEGAL)                                 */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_SrcDecFIR2 (0x02UL) /*!< SRC_DECFIR2 (NOT LEGAL)                                 */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_SrcIIR0 (0x03UL) /*!< SRC_IIR0 (NOT LEGAL)                                       */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_SrcIIR1 (0x04UL) /*!< SRC_IIR1 (NOT LEGAL)                                       */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_SrcNotchIIR0 (0x05UL) /*!< SRC_NOTCHIIR0                                         */
+  #define RADIO_FILTERS_OUTTOBB_SOURCE_SOURCE_SrcDecFIR (0x06UL) /*!< SRC_DECFIR                                               */
+
+
+
+/* ============================================= Struct RADIO_FILTERS_OUTPEAKDET ============================================= */
+/**
+  * @brief OUTPEAKDET [RADIO_FILTERS_OUTPEAKDET] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the output outPeakDet       */
+  __IOM uint32_t  SOURCE;                            /*!< (@ 0x00000004) Source select register for the output outPeakDet      */
+} NRF_RADIO_FILTERS_OUTPEAKDET_Type;                 /*!< Size = 8 (0x008)                                                     */
+
+/* RADIO_FILTERS_OUTPEAKDET_CKSEL: Clock select register for the output outPeakDet */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                         */
+
+/* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
+                      disabled and data out is assigned directly from data in. */
+
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                         */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_Msk (0x7UL << RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL
+                                                                            field.*/
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                           */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                           */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                  */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                  */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                  */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                  */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                              */
+  #define RADIO_FILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                          */
+
+
+/* RADIO_FILTERS_OUTPEAKDET_SOURCE: Source select register for the output outPeakDet */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_ResetValue (0x00000005UL) /*!< Reset value of SOURCE register.                       */
+
+/* SOURCE @Bits 0..4 : Data source select */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_Pos (0UL) /*!< Position of SOURCE field.                                      */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_Msk (0x1FUL << RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_Pos) /*!< Bit mask of
+                                                                            SOURCE field.*/
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_Min (0x0UL) /*!< Min enumerator value of SOURCE field.                        */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_Max (0x1FUL) /*!< Max enumerator value of SOURCE field.                       */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcInFromMix (0x1EUL) /*!< SRC_INFROMMIX (NOT LEGAL)                          */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcInFromAdc (0x1FUL) /*!< SRC_INFROMADC (NOT LEGAL)                          */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcDecFIR0 (0x00UL) /*!< SRC_DECFIR0 (NOT LEGAL)                              */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcDecFIR1 (0x01UL) /*!< SRC_DECFIR1 (NOT LEGAL)                              */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcDecFIR2 (0x02UL) /*!< SRC_DECFIR2 (NOT LEGAL)                              */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcIIR0 (0x03UL) /*!< SRC_IIR0 (NOT LEGAL)                                    */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcIIR1 (0x04UL) /*!< SRC_IIR1 (NOT LEGAL)                                    */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcNotchIIR0 (0x05UL) /*!< SRC_NOTCHIIR0                                      */
+  #define RADIO_FILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcDecFIR (0x06UL) /*!< SRC_DECFIR                                            */
+
+
+
+/* ============================================== Struct RADIO_FILTERS_DECFIR0 =============================================== */
+/**
+  * @brief DECFIR0 [RADIO_FILTERS_DECFIR0] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the PUnit decFIR0 of type
                                                                          IP_FIR*/
   __IOM uint32_t  CONTROL;                           /*!< (@ 0x00000004) Control register for the PUnit decFIR0 of type IP_FIR */
-  __IOM uint32_t  COEFFS0;                           /*!< (@ 0x00000008) Coefficient register 0 for the PUnit decFIR0 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS1;                           /*!< (@ 0x0000000C) Coefficient register 1 for the PUnit decFIR0 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS2;                           /*!< (@ 0x00000010) Coefficient register 2 for the PUnit decFIR0 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS3;                           /*!< (@ 0x00000014) Coefficient register 3 for the PUnit decFIR0 of type
-                                                                         IP_FIR*/
-} NRF_RADIO_DECFILTERS_DECFIR0_Type;                 /*!< Size = 24 (0x018)                                                    */
+} NRF_RADIO_FILTERS_DECFIR0_Type;                    /*!< Size = 8 (0x008)                                                     */
 
-/* RADIO_DECFILTERS_DECFIR0_CKSEL: Clock select register for the PUnit decFIR0 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_ResetValue (0x00000007UL) /*!< Reset value of CKSEL register.                         */
+/* RADIO_FILTERS_DECFIR0_CKSEL: Clock select register for the PUnit decFIR0 of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_ResetValue (0x00000007UL) /*!< Reset value of CKSEL register.                            */
 
 /* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
                       disabled and data out is assigned directly from data in. */
 
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                         */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_Msk (0x7UL << RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL
-                                                                            field.*/
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                           */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                           */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                  */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                  */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                  */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                  */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                              */
-  #define RADIO_DECFILTERS_DECFIR0_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                          */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                            */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_Msk (0x7UL << RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL field. */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                              */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                              */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                   */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                   */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                     */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                     */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                     */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                     */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                                 */
+  #define RADIO_FILTERS_DECFIR0_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                             */
 
 
-/* RADIO_DECFILTERS_DECFIR0_CONTROL: Control register for the PUnit decFIR0 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR0_CONTROL_ResetValue (0x00000002UL) /*!< Reset value of CONTROL register.                     */
+/* RADIO_FILTERS_DECFIR0_CONTROL: Control register for the PUnit decFIR0 of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR0_CONTROL_ResetValue (0x00000002UL) /*!< Reset value of CONTROL register.                        */
 
 /* TAPSEL @Bits 0..1 : Tap-select: number of active taps minus 2 */
-  #define RADIO_DECFILTERS_DECFIR0_CONTROL_TAPSEL_Pos (0UL) /*!< Position of TAPSEL field.                                     */
-  #define RADIO_DECFILTERS_DECFIR0_CONTROL_TAPSEL_Msk (0x3UL << RADIO_DECFILTERS_DECFIR0_CONTROL_TAPSEL_Pos) /*!< Bit mask of
-                                                                            TAPSEL field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR0_COEFFS0: Coefficient register 0 for the PUnit decFIR0 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS0_ResetValue (0x00000004UL) /*!< Reset value of COEFFS0 register.                     */
-
-/* COEFF0 @Bits 0..3 : Signed filter coefficient 0 */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS0_COEFF0_Pos (0UL) /*!< Position of COEFF0 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS0_COEFF0_Msk (0xFUL << RADIO_DECFILTERS_DECFIR0_COEFFS0_COEFF0_Pos) /*!< Bit mask of
-                                                                            COEFF0 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR0_COEFFS1: Coefficient register 1 for the PUnit decFIR0 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS1_ResetValue (0x00000006UL) /*!< Reset value of COEFFS1 register.                     */
-
-/* COEFF1 @Bits 0..3 : Signed filter coefficient 1 */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS1_COEFF1_Pos (0UL) /*!< Position of COEFF1 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS1_COEFF1_Msk (0xFUL << RADIO_DECFILTERS_DECFIR0_COEFFS1_COEFF1_Pos) /*!< Bit mask of
-                                                                            COEFF1 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR0_COEFFS2: Coefficient register 2 for the PUnit decFIR0 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS2_ResetValue (0x00000006UL) /*!< Reset value of COEFFS2 register.                     */
-
-/* COEFF2 @Bits 0..3 : Signed filter coefficient 2 */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS2_COEFF2_Pos (0UL) /*!< Position of COEFF2 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS2_COEFF2_Msk (0xFUL << RADIO_DECFILTERS_DECFIR0_COEFFS2_COEFF2_Pos) /*!< Bit mask of
-                                                                            COEFF2 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR0_COEFFS3: Coefficient register 3 for the PUnit decFIR0 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS3_ResetValue (0x00000000UL) /*!< Reset value of COEFFS3 register.                     */
-
-/* COEFF3 @Bits 0..3 : Signed filter coefficient 3 */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS3_COEFF3_Pos (0UL) /*!< Position of COEFF3 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR0_COEFFS3_COEFF3_Msk (0xFUL << RADIO_DECFILTERS_DECFIR0_COEFFS3_COEFF3_Pos) /*!< Bit mask of
-                                                                            COEFF3 field.*/
+  #define RADIO_FILTERS_DECFIR0_CONTROL_TAPSEL_Pos (0UL) /*!< Position of TAPSEL field.                                        */
+  #define RADIO_FILTERS_DECFIR0_CONTROL_TAPSEL_Msk (0x3UL << RADIO_FILTERS_DECFIR0_CONTROL_TAPSEL_Pos) /*!< Bit mask of TAPSEL
+                                                                            field.*/
 
 
 
-/* ============================================= Struct RADIO_DECFILTERS_DECFIR1 ============================================= */
+/* ============================================== Struct RADIO_FILTERS_DECFIR1 =============================================== */
 /**
-  * @brief DECFIR1 [RADIO_DECFILTERS_DECFIR1] (unspecified)
+  * @brief DECFIR1 [RADIO_FILTERS_DECFIR1] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the PUnit decFIR1 of type
                                                                          IP_FIR*/
   __IOM uint32_t  CONTROL;                           /*!< (@ 0x00000004) Control register for the PUnit decFIR1 of type IP_FIR */
-  __IOM uint32_t  COEFFS0;                           /*!< (@ 0x00000008) Coefficient register 0 for the PUnit decFIR1 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS1;                           /*!< (@ 0x0000000C) Coefficient register 1 for the PUnit decFIR1 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS2;                           /*!< (@ 0x00000010) Coefficient register 2 for the PUnit decFIR1 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS3;                           /*!< (@ 0x00000014) Coefficient register 3 for the PUnit decFIR1 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS4;                           /*!< (@ 0x00000018) Coefficient register 4 for the PUnit decFIR1 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS5;                           /*!< (@ 0x0000001C) Coefficient register 5 for the PUnit decFIR1 of type
-                                                                         IP_FIR*/
-} NRF_RADIO_DECFILTERS_DECFIR1_Type;                 /*!< Size = 32 (0x020)                                                    */
+} NRF_RADIO_FILTERS_DECFIR1_Type;                    /*!< Size = 8 (0x008)                                                     */
 
-/* RADIO_DECFILTERS_DECFIR1_CKSEL: Clock select register for the PUnit decFIR1 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_ResetValue (0x00000000UL) /*!< Reset value of CKSEL register.                         */
+/* RADIO_FILTERS_DECFIR1_CKSEL: Clock select register for the PUnit decFIR1 of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_ResetValue (0x00000000UL) /*!< Reset value of CKSEL register.                            */
 
 /* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
                       disabled and data out is assigned directly from data in. */
 
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                         */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_Msk (0x7UL << RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL
-                                                                            field.*/
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                           */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                           */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                  */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                  */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                  */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                  */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                              */
-  #define RADIO_DECFILTERS_DECFIR1_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                          */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                            */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_Msk (0x7UL << RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL field. */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                              */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                              */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                   */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                   */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                     */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                     */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                     */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                     */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                                 */
+  #define RADIO_FILTERS_DECFIR1_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                             */
 
 
-/* RADIO_DECFILTERS_DECFIR1_CONTROL: Control register for the PUnit decFIR1 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR1_CONTROL_ResetValue (0x00000004UL) /*!< Reset value of CONTROL register.                     */
+/* RADIO_FILTERS_DECFIR1_CONTROL: Control register for the PUnit decFIR1 of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR1_CONTROL_ResetValue (0x00000004UL) /*!< Reset value of CONTROL register.                        */
 
 /* TAPSEL @Bits 0..2 : Tap-select: number of active taps minus 2 */
-  #define RADIO_DECFILTERS_DECFIR1_CONTROL_TAPSEL_Pos (0UL) /*!< Position of TAPSEL field.                                     */
-  #define RADIO_DECFILTERS_DECFIR1_CONTROL_TAPSEL_Msk (0x7UL << RADIO_DECFILTERS_DECFIR1_CONTROL_TAPSEL_Pos) /*!< Bit mask of
-                                                                            TAPSEL field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR1_COEFFS0: Coefficient register 0 for the PUnit decFIR1 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS0_ResetValue (0x00000008UL) /*!< Reset value of COEFFS0 register.                     */
-
-/* COEFF0 @Bits 0..5 : Signed filter coefficient 0 */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS0_COEFF0_Pos (0UL) /*!< Position of COEFF0 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS0_COEFF0_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR1_COEFFS0_COEFF0_Pos) /*!< Bit mask of
-                                                                            COEFF0 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR1_COEFFS1: Coefficient register 1 for the PUnit decFIR1 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS1_ResetValue (0x00000010UL) /*!< Reset value of COEFFS1 register.                     */
-
-/* COEFF1 @Bits 0..5 : Signed filter coefficient 1 */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS1_COEFF1_Pos (0UL) /*!< Position of COEFF1 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS1_COEFF1_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR1_COEFFS1_COEFF1_Pos) /*!< Bit mask of
-                                                                            COEFF1 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR1_COEFFS2: Coefficient register 2 for the PUnit decFIR1 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS2_ResetValue (0x00000018UL) /*!< Reset value of COEFFS2 register.                     */
-
-/* COEFF2 @Bits 0..5 : Signed filter coefficient 2 */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS2_COEFF2_Pos (0UL) /*!< Position of COEFF2 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS2_COEFF2_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR1_COEFFS2_COEFF2_Pos) /*!< Bit mask of
-                                                                            COEFF2 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR1_COEFFS3: Coefficient register 3 for the PUnit decFIR1 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS3_ResetValue (0x00000010UL) /*!< Reset value of COEFFS3 register.                     */
-
-/* COEFF3 @Bits 0..5 : Signed filter coefficient 3 */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS3_COEFF3_Pos (0UL) /*!< Position of COEFF3 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS3_COEFF3_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR1_COEFFS3_COEFF3_Pos) /*!< Bit mask of
-                                                                            COEFF3 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR1_COEFFS4: Coefficient register 4 for the PUnit decFIR1 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS4_ResetValue (0x00000000UL) /*!< Reset value of COEFFS4 register.                     */
-
-/* COEFF4 @Bits 0..5 : Signed filter coefficient 4 */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS4_COEFF4_Pos (0UL) /*!< Position of COEFF4 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS4_COEFF4_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR1_COEFFS4_COEFF4_Pos) /*!< Bit mask of
-                                                                            COEFF4 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR1_COEFFS5: Coefficient register 5 for the PUnit decFIR1 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS5_ResetValue (0x00000000UL) /*!< Reset value of COEFFS5 register.                     */
-
-/* COEFF5 @Bits 0..5 : Signed filter coefficient 5 */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS5_COEFF5_Pos (0UL) /*!< Position of COEFF5 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR1_COEFFS5_COEFF5_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR1_COEFFS5_COEFF5_Pos) /*!< Bit mask of
-                                                                            COEFF5 field.*/
+  #define RADIO_FILTERS_DECFIR1_CONTROL_TAPSEL_Pos (0UL) /*!< Position of TAPSEL field.                                        */
+  #define RADIO_FILTERS_DECFIR1_CONTROL_TAPSEL_Msk (0x7UL << RADIO_FILTERS_DECFIR1_CONTROL_TAPSEL_Pos) /*!< Bit mask of TAPSEL
+                                                                            field.*/
 
 
 
-/* ============================================= Struct RADIO_DECFILTERS_DECFIR2 ============================================= */
+/* ============================================== Struct RADIO_FILTERS_DECFIR2 =============================================== */
 /**
-  * @brief DECFIR2 [RADIO_DECFILTERS_DECFIR2] (unspecified)
+  * @brief DECFIR2 [RADIO_FILTERS_DECFIR2] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the PUnit decFIR2 of type
                                                                          IP_FIR*/
   __IOM uint32_t  CONTROL;                           /*!< (@ 0x00000004) Control register for the PUnit decFIR2 of type IP_FIR */
-  __IOM uint32_t  COEFFS0;                           /*!< (@ 0x00000008) Coefficient register 0 for the PUnit decFIR2 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS1;                           /*!< (@ 0x0000000C) Coefficient register 1 for the PUnit decFIR2 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS2;                           /*!< (@ 0x00000010) Coefficient register 2 for the PUnit decFIR2 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS3;                           /*!< (@ 0x00000014) Coefficient register 3 for the PUnit decFIR2 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS4;                           /*!< (@ 0x00000018) Coefficient register 4 for the PUnit decFIR2 of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS5;                           /*!< (@ 0x0000001C) Coefficient register 5 for the PUnit decFIR2 of type
-                                                                         IP_FIR*/
-} NRF_RADIO_DECFILTERS_DECFIR2_Type;                 /*!< Size = 32 (0x020)                                                    */
+} NRF_RADIO_FILTERS_DECFIR2_Type;                    /*!< Size = 8 (0x008)                                                     */
 
-/* RADIO_DECFILTERS_DECFIR2_CKSEL: Clock select register for the PUnit decFIR2 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_ResetValue (0x00000001UL) /*!< Reset value of CKSEL register.                         */
+/* RADIO_FILTERS_DECFIR2_CKSEL: Clock select register for the PUnit decFIR2 of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_ResetValue (0x00000001UL) /*!< Reset value of CKSEL register.                            */
 
 /* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
                       disabled and data out is assigned directly from data in. */
 
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                         */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_Msk (0x7UL << RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL
-                                                                            field.*/
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                           */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                           */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                  */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                  */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                  */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                  */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                              */
-  #define RADIO_DECFILTERS_DECFIR2_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                          */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                            */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_Msk (0x7UL << RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL field. */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                              */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                              */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                   */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                   */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                     */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                     */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                     */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                     */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                                 */
+  #define RADIO_FILTERS_DECFIR2_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                             */
 
 
-/* RADIO_DECFILTERS_DECFIR2_CONTROL: Control register for the PUnit decFIR2 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR2_CONTROL_ResetValue (0x00000004UL) /*!< Reset value of CONTROL register.                     */
+/* RADIO_FILTERS_DECFIR2_CONTROL: Control register for the PUnit decFIR2 of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR2_CONTROL_ResetValue (0x00000004UL) /*!< Reset value of CONTROL register.                        */
 
 /* TAPSEL @Bits 0..2 : Tap-select: number of active taps minus 2 */
-  #define RADIO_DECFILTERS_DECFIR2_CONTROL_TAPSEL_Pos (0UL) /*!< Position of TAPSEL field.                                     */
-  #define RADIO_DECFILTERS_DECFIR2_CONTROL_TAPSEL_Msk (0x7UL << RADIO_DECFILTERS_DECFIR2_CONTROL_TAPSEL_Pos) /*!< Bit mask of
-                                                                            TAPSEL field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR2_COEFFS0: Coefficient register 0 for the PUnit decFIR2 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS0_ResetValue (0x00000008UL) /*!< Reset value of COEFFS0 register.                     */
-
-/* COEFF0 @Bits 0..5 : Signed filter coefficient 0 */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS0_COEFF0_Pos (0UL) /*!< Position of COEFF0 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS0_COEFF0_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR2_COEFFS0_COEFF0_Pos) /*!< Bit mask of
-                                                                            COEFF0 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR2_COEFFS1: Coefficient register 1 for the PUnit decFIR2 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS1_ResetValue (0x00000010UL) /*!< Reset value of COEFFS1 register.                     */
-
-/* COEFF1 @Bits 0..5 : Signed filter coefficient 1 */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS1_COEFF1_Pos (0UL) /*!< Position of COEFF1 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS1_COEFF1_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR2_COEFFS1_COEFF1_Pos) /*!< Bit mask of
-                                                                            COEFF1 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR2_COEFFS2: Coefficient register 2 for the PUnit decFIR2 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS2_ResetValue (0x00000018UL) /*!< Reset value of COEFFS2 register.                     */
-
-/* COEFF2 @Bits 0..5 : Signed filter coefficient 2 */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS2_COEFF2_Pos (0UL) /*!< Position of COEFF2 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS2_COEFF2_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR2_COEFFS2_COEFF2_Pos) /*!< Bit mask of
-                                                                            COEFF2 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR2_COEFFS3: Coefficient register 3 for the PUnit decFIR2 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS3_ResetValue (0x00000010UL) /*!< Reset value of COEFFS3 register.                     */
-
-/* COEFF3 @Bits 0..5 : Signed filter coefficient 3 */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS3_COEFF3_Pos (0UL) /*!< Position of COEFF3 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS3_COEFF3_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR2_COEFFS3_COEFF3_Pos) /*!< Bit mask of
-                                                                            COEFF3 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR2_COEFFS4: Coefficient register 4 for the PUnit decFIR2 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS4_ResetValue (0x00000000UL) /*!< Reset value of COEFFS4 register.                     */
-
-/* COEFF4 @Bits 0..5 : Signed filter coefficient 4 */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS4_COEFF4_Pos (0UL) /*!< Position of COEFF4 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS4_COEFF4_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR2_COEFFS4_COEFF4_Pos) /*!< Bit mask of
-                                                                            COEFF4 field.*/
-
-
-/* RADIO_DECFILTERS_DECFIR2_COEFFS5: Coefficient register 5 for the PUnit decFIR2 of type IP_FIR */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS5_ResetValue (0x00000000UL) /*!< Reset value of COEFFS5 register.                     */
-
-/* COEFF5 @Bits 0..5 : Signed filter coefficient 5 */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS5_COEFF5_Pos (0UL) /*!< Position of COEFF5 field.                                     */
-  #define RADIO_DECFILTERS_DECFIR2_COEFFS5_COEFF5_Msk (0x3FUL << RADIO_DECFILTERS_DECFIR2_COEFFS5_COEFF5_Pos) /*!< Bit mask of
-                                                                            COEFF5 field.*/
+  #define RADIO_FILTERS_DECFIR2_CONTROL_TAPSEL_Pos (0UL) /*!< Position of TAPSEL field.                                        */
+  #define RADIO_FILTERS_DECFIR2_CONTROL_TAPSEL_Msk (0x7UL << RADIO_FILTERS_DECFIR2_CONTROL_TAPSEL_Pos) /*!< Bit mask of TAPSEL
+                                                                            field.*/
 
 
 
-/* ================================================= Struct RADIO_DECFILTERS ================================================= */
+/* ================================================ Struct RADIO_FILTERS_IIR0 ================================================ */
 /**
-  * @brief DECFILTERS [RADIO_DECFILTERS] (unspecified)
-  */
-typedef struct {
-  __IOM NRF_RADIO_DECFILTERS_OUTMAIN_Type OUTMAIN;   /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_RADIO_DECFILTERS_DECFIR0_Type DECFIR0;   /*!< (@ 0x00000004) (unspecified)                                         */
-  __IOM NRF_RADIO_DECFILTERS_DECFIR1_Type DECFIR1;   /*!< (@ 0x0000001C) (unspecified)                                         */
-  __IOM NRF_RADIO_DECFILTERS_DECFIR2_Type DECFIR2;   /*!< (@ 0x0000003C) (unspecified)                                         */
-} NRF_RADIO_DECFILTERS_Type;                         /*!< Size = 92 (0x05C)                                                    */
-
-
-/* =========================================== Struct RADIO_CHANNELFILTERS_OUTMAIN =========================================== */
-/**
-  * @brief OUTMAIN [RADIO_CHANNELFILTERS_OUTMAIN] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the output outMain          */
-  __IOM uint32_t  SOURCE;                            /*!< (@ 0x00000004) Source select register for the output outMain         */
-} NRF_RADIO_CHANNELFILTERS_OUTMAIN_Type;             /*!< Size = 8 (0x008)                                                     */
-
-/* RADIO_CHANNELFILTERS_OUTMAIN_CKSEL: Clock select register for the output outMain */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                     */
-
-/* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
-                      disabled and data out is assigned directly from data in. */
-
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                     */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_Msk (0x7UL << RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_Pos) /*!< Bit mask of
-                                                                            CKSEL field.*/
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                       */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                       */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                            */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                            */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                              */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                              */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                              */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                              */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                          */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                      */
-
-
-/* RADIO_CHANNELFILTERS_OUTMAIN_SOURCE: Source select register for the output outMain */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_ResetValue (0x00000004UL) /*!< Reset value of SOURCE register.                   */
-
-/* SOURCE @Bits 0..3 : Data source select */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_Pos (0UL) /*!< Position of SOURCE field.                                  */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_Msk (0xFUL << RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_Pos) /*!< Bit mask
-                                                                            of SOURCE field.*/
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_Min (0x0UL) /*!< Min enumerator value of SOURCE field.                    */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_Max (0xFUL) /*!< Max enumerator value of SOURCE field.                    */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_SrcInMain (0xFUL) /*!< SRC_INMAIN (NOT LEGAL)                             */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_SrcIIR0 (0x0UL) /*!< SRC_IIR0 (NOT LEGAL)                                 */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_SrcIIR1 (0x1UL) /*!< SRC_IIR1 (NOT LEGAL)                                 */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_SrcNotchIIR0 (0x2UL) /*!< SRC_NOTCHIIR0 (NOT LEGAL)                       */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_SrcNotchIIR1 (0x3UL) /*!< SRC_NOTCHIIR1                                   */
-  #define RADIO_CHANNELFILTERS_OUTMAIN_SOURCE_SOURCE_SrcDecFIR (0x4UL) /*!< SRC_DECFIR                                         */
-
-
-
-/* ========================================= Struct RADIO_CHANNELFILTERS_OUTPEAKDET ========================================== */
-/**
-  * @brief OUTPEAKDET [RADIO_CHANNELFILTERS_OUTPEAKDET] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the output outPeakDet       */
-  __IOM uint32_t  SOURCE;                            /*!< (@ 0x00000004) Source select register for the output outPeakDet      */
-} NRF_RADIO_CHANNELFILTERS_OUTPEAKDET_Type;          /*!< Size = 8 (0x008)                                                     */
-
-/* RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL: Clock select register for the output outPeakDet */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                  */
-
-/* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
-                      disabled and data out is assigned directly from data in. */
-
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                  */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_Msk (0x7UL << RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_Pos) /*!< Bit
-                                                                            mask of CKSEL field.*/
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                    */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                    */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                         */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                         */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                           */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                           */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                           */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                           */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                       */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                   */
-
-
-/* RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE: Source select register for the output outPeakDet */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_ResetValue (0x00000003UL) /*!< Reset value of SOURCE register.                */
-
-/* SOURCE @Bits 0..3 : Data source select */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_Pos (0UL) /*!< Position of SOURCE field.                               */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_Msk (0xFUL << RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_Pos) /*!<
-                                                                            Bit mask of SOURCE field.*/
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_Min (0x0UL) /*!< Min enumerator value of SOURCE field.                 */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_Max (0xFUL) /*!< Max enumerator value of SOURCE field.                 */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcInMain (0xFUL) /*!< SRC_INMAIN (NOT LEGAL)                          */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcIIR0 (0x0UL) /*!< SRC_IIR0 (NOT LEGAL)                              */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcIIR1 (0x1UL) /*!< SRC_IIR1 (NOT LEGAL)                              */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcNotchIIR0 (0x2UL) /*!< SRC_NOTCHIIR0 (NOT LEGAL)                    */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcNotchIIR1 (0x3UL) /*!< SRC_NOTCHIIR1                                */
-  #define RADIO_CHANNELFILTERS_OUTPEAKDET_SOURCE_SOURCE_SrcDecFIR (0x4UL) /*!< SRC_DECFIR                                      */
-
-
-
-/* ============================================ Struct RADIO_CHANNELFILTERS_IIR0 ============================================= */
-/**
-  * @brief IIR0 [RADIO_CHANNELFILTERS_IIR0] (unspecified)
+  * @brief IIR0 [RADIO_FILTERS_IIR0] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the PUnit IIR0 of type
@@ -32628,87 +32918,86 @@ typedef struct {
                                                                          IP_IIR2*/
   __IOM uint32_t  COEFFSA2;                          /*!< (@ 0x00000018) Coefficient register A2 for the PUnit IIR0 of type
                                                                          IP_IIR2*/
-} NRF_RADIO_CHANNELFILTERS_IIR0_Type;                /*!< Size = 28 (0x01C)                                                    */
+} NRF_RADIO_FILTERS_IIR0_Type;                       /*!< Size = 28 (0x01C)                                                    */
 
-/* RADIO_CHANNELFILTERS_IIR0_CKSEL: Clock select register for the PUnit IIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                        */
+/* RADIO_FILTERS_IIR0_CKSEL: Clock select register for the PUnit IIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR0_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                               */
 
 /* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
                       disabled and data out is assigned directly from data in. */
 
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                        */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_Msk (0x7UL << RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL
-                                                                            field.*/
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                          */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                          */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                               */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                               */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                 */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                 */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                 */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                 */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                             */
-  #define RADIO_CHANNELFILTERS_IIR0_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                         */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_Pos (0UL)   /*!< Position of CKSEL field.                                             */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_Msk (0x7UL << RADIO_FILTERS_IIR0_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL field.       */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                                 */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                                 */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                      */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                      */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                        */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                        */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                        */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                        */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                                    */
+  #define RADIO_FILTERS_IIR0_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                                */
 
 
-/* RADIO_CHANNELFILTERS_IIR0_STATUS: Status register for the PUnit IIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR0_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                      */
+/* RADIO_FILTERS_IIR0_STATUS: Status register for the PUnit IIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR0_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                             */
 
 /* IQSATURATION @Bits 0..1 : Saturation status for I/Q (bit 0/1) component (bitwise write 1 to clear) */
-  #define RADIO_CHANNELFILTERS_IIR0_STATUS_IQSATURATION_Pos (0UL) /*!< Position of IQSATURATION field.                         */
-  #define RADIO_CHANNELFILTERS_IIR0_STATUS_IQSATURATION_Msk (0x3UL << RADIO_CHANNELFILTERS_IIR0_STATUS_IQSATURATION_Pos) /*!<
-                                                                            Bit mask of IQSATURATION field.*/
+  #define RADIO_FILTERS_IIR0_STATUS_IQSATURATION_Pos (0UL) /*!< Position of IQSATURATION field.                                */
+  #define RADIO_FILTERS_IIR0_STATUS_IQSATURATION_Msk (0x3UL << RADIO_FILTERS_IIR0_STATUS_IQSATURATION_Pos) /*!< Bit mask of
+                                                                            IQSATURATION field.*/
 
 
-/* RADIO_CHANNELFILTERS_IIR0_COEFFSB0: Coefficient register B0 for the PUnit IIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSB0_ResetValue (0x00000080UL) /*!< Reset value of COEFFSB0 register.                  */
+/* RADIO_FILTERS_IIR0_COEFFSB0: Coefficient register B0 for the PUnit IIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR0_COEFFSB0_ResetValue (0x00000080UL) /*!< Reset value of COEFFSB0 register.                         */
 
 /* COEFFB0 @Bits 0..11 : Signed filter coefficient B0 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSB0_COEFFB0_Pos (0UL) /*!< Position of COEFFB0 field.                                 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSB0_COEFFB0_Msk (0xFFFUL << RADIO_CHANNELFILTERS_IIR0_COEFFSB0_COEFFB0_Pos) /*!< Bit
-                                                                            mask of COEFFB0 field.*/
+  #define RADIO_FILTERS_IIR0_COEFFSB0_COEFFB0_Pos (0UL) /*!< Position of COEFFB0 field.                                        */
+  #define RADIO_FILTERS_IIR0_COEFFSB0_COEFFB0_Msk (0xFFFUL << RADIO_FILTERS_IIR0_COEFFSB0_COEFFB0_Pos) /*!< Bit mask of COEFFB0
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_IIR0_COEFFSB1: Coefficient register B1 for the PUnit IIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSB1_ResetValue (0x00000080UL) /*!< Reset value of COEFFSB1 register.                  */
+/* RADIO_FILTERS_IIR0_COEFFSB1: Coefficient register B1 for the PUnit IIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR0_COEFFSB1_ResetValue (0x00000080UL) /*!< Reset value of COEFFSB1 register.                         */
 
 /* COEFFB1 @Bits 0..11 : Signed filter coefficient B1 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSB1_COEFFB1_Pos (0UL) /*!< Position of COEFFB1 field.                                 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSB1_COEFFB1_Msk (0xFFFUL << RADIO_CHANNELFILTERS_IIR0_COEFFSB1_COEFFB1_Pos) /*!< Bit
-                                                                            mask of COEFFB1 field.*/
+  #define RADIO_FILTERS_IIR0_COEFFSB1_COEFFB1_Pos (0UL) /*!< Position of COEFFB1 field.                                        */
+  #define RADIO_FILTERS_IIR0_COEFFSB1_COEFFB1_Msk (0xFFFUL << RADIO_FILTERS_IIR0_COEFFSB1_COEFFB1_Pos) /*!< Bit mask of COEFFB1
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_IIR0_COEFFSB2: Coefficient register B2 for the PUnit IIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSB2_ResetValue (0x00000000UL) /*!< Reset value of COEFFSB2 register.                  */
+/* RADIO_FILTERS_IIR0_COEFFSB2: Coefficient register B2 for the PUnit IIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR0_COEFFSB2_ResetValue (0x00000000UL) /*!< Reset value of COEFFSB2 register.                         */
 
 /* COEFFB2 @Bits 0..11 : Signed filter coefficient B2 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSB2_COEFFB2_Pos (0UL) /*!< Position of COEFFB2 field.                                 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSB2_COEFFB2_Msk (0xFFFUL << RADIO_CHANNELFILTERS_IIR0_COEFFSB2_COEFFB2_Pos) /*!< Bit
-                                                                            mask of COEFFB2 field.*/
+  #define RADIO_FILTERS_IIR0_COEFFSB2_COEFFB2_Pos (0UL) /*!< Position of COEFFB2 field.                                        */
+  #define RADIO_FILTERS_IIR0_COEFFSB2_COEFFB2_Msk (0xFFFUL << RADIO_FILTERS_IIR0_COEFFSB2_COEFFB2_Pos) /*!< Bit mask of COEFFB2
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_IIR0_COEFFSA1: Coefficient register A1 for the PUnit IIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSA1_ResetValue (0x00000D00UL) /*!< Reset value of COEFFSA1 register.                  */
+/* RADIO_FILTERS_IIR0_COEFFSA1: Coefficient register A1 for the PUnit IIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR0_COEFFSA1_ResetValue (0x00000D00UL) /*!< Reset value of COEFFSA1 register.                         */
 
 /* COEFFA1 @Bits 0..11 : Signed filter coefficient A1 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSA1_COEFFA1_Pos (0UL) /*!< Position of COEFFA1 field.                                 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSA1_COEFFA1_Msk (0xFFFUL << RADIO_CHANNELFILTERS_IIR0_COEFFSA1_COEFFA1_Pos) /*!< Bit
-                                                                            mask of COEFFA1 field.*/
+  #define RADIO_FILTERS_IIR0_COEFFSA1_COEFFA1_Pos (0UL) /*!< Position of COEFFA1 field.                                        */
+  #define RADIO_FILTERS_IIR0_COEFFSA1_COEFFA1_Msk (0xFFFUL << RADIO_FILTERS_IIR0_COEFFSA1_COEFFA1_Pos) /*!< Bit mask of COEFFA1
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_IIR0_COEFFSA2: Coefficient register A2 for the PUnit IIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSA2_ResetValue (0x00000000UL) /*!< Reset value of COEFFSA2 register.                  */
+/* RADIO_FILTERS_IIR0_COEFFSA2: Coefficient register A2 for the PUnit IIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR0_COEFFSA2_ResetValue (0x00000000UL) /*!< Reset value of COEFFSA2 register.                         */
 
 /* COEFFA2 @Bits 0..11 : Signed filter coefficient A2 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSA2_COEFFA2_Pos (0UL) /*!< Position of COEFFA2 field.                                 */
-  #define RADIO_CHANNELFILTERS_IIR0_COEFFSA2_COEFFA2_Msk (0xFFFUL << RADIO_CHANNELFILTERS_IIR0_COEFFSA2_COEFFA2_Pos) /*!< Bit
-                                                                            mask of COEFFA2 field.*/
+  #define RADIO_FILTERS_IIR0_COEFFSA2_COEFFA2_Pos (0UL) /*!< Position of COEFFA2 field.                                        */
+  #define RADIO_FILTERS_IIR0_COEFFSA2_COEFFA2_Msk (0xFFFUL << RADIO_FILTERS_IIR0_COEFFSA2_COEFFA2_Pos) /*!< Bit mask of COEFFA2
+                                                                            field.*/
 
 
 
-/* ============================================ Struct RADIO_CHANNELFILTERS_IIR1 ============================================= */
+/* ================================================ Struct RADIO_FILTERS_IIR1 ================================================ */
 /**
-  * @brief IIR1 [RADIO_CHANNELFILTERS_IIR1] (unspecified)
+  * @brief IIR1 [RADIO_FILTERS_IIR1] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the PUnit IIR1 of type
@@ -32724,87 +33013,86 @@ typedef struct {
                                                                          IP_IIR2*/
   __IOM uint32_t  COEFFSA2;                          /*!< (@ 0x00000018) Coefficient register A2 for the PUnit IIR1 of type
                                                                          IP_IIR2*/
-} NRF_RADIO_CHANNELFILTERS_IIR1_Type;                /*!< Size = 28 (0x01C)                                                    */
+} NRF_RADIO_FILTERS_IIR1_Type;                       /*!< Size = 28 (0x01C)                                                    */
 
-/* RADIO_CHANNELFILTERS_IIR1_CKSEL: Clock select register for the PUnit IIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                        */
+/* RADIO_FILTERS_IIR1_CKSEL: Clock select register for the PUnit IIR1 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR1_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                               */
 
 /* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
                       disabled and data out is assigned directly from data in. */
 
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                        */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_Msk (0x7UL << RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL
-                                                                            field.*/
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                          */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                          */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                               */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                               */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                 */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                 */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                 */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                 */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                             */
-  #define RADIO_CHANNELFILTERS_IIR1_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                         */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_Pos (0UL)   /*!< Position of CKSEL field.                                             */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_Msk (0x7UL << RADIO_FILTERS_IIR1_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL field.       */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                                 */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                                 */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                      */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                      */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                        */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                        */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                        */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                        */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                                    */
+  #define RADIO_FILTERS_IIR1_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                                */
 
 
-/* RADIO_CHANNELFILTERS_IIR1_STATUS: Status register for the PUnit IIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR1_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                      */
+/* RADIO_FILTERS_IIR1_STATUS: Status register for the PUnit IIR1 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR1_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                             */
 
 /* IQSATURATION @Bits 0..1 : Saturation status for I/Q (bit 0/1) component (bitwise write 1 to clear) */
-  #define RADIO_CHANNELFILTERS_IIR1_STATUS_IQSATURATION_Pos (0UL) /*!< Position of IQSATURATION field.                         */
-  #define RADIO_CHANNELFILTERS_IIR1_STATUS_IQSATURATION_Msk (0x3UL << RADIO_CHANNELFILTERS_IIR1_STATUS_IQSATURATION_Pos) /*!<
-                                                                            Bit mask of IQSATURATION field.*/
+  #define RADIO_FILTERS_IIR1_STATUS_IQSATURATION_Pos (0UL) /*!< Position of IQSATURATION field.                                */
+  #define RADIO_FILTERS_IIR1_STATUS_IQSATURATION_Msk (0x3UL << RADIO_FILTERS_IIR1_STATUS_IQSATURATION_Pos) /*!< Bit mask of
+                                                                            IQSATURATION field.*/
 
 
-/* RADIO_CHANNELFILTERS_IIR1_COEFFSB0: Coefficient register B0 for the PUnit IIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSB0_ResetValue (0x00000060UL) /*!< Reset value of COEFFSB0 register.                  */
+/* RADIO_FILTERS_IIR1_COEFFSB0: Coefficient register B0 for the PUnit IIR1 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR1_COEFFSB0_ResetValue (0x00000060UL) /*!< Reset value of COEFFSB0 register.                         */
 
 /* COEFFB0 @Bits 0..11 : Signed filter coefficient B0 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSB0_COEFFB0_Pos (0UL) /*!< Position of COEFFB0 field.                                 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSB0_COEFFB0_Msk (0xFFFUL << RADIO_CHANNELFILTERS_IIR1_COEFFSB0_COEFFB0_Pos) /*!< Bit
-                                                                            mask of COEFFB0 field.*/
+  #define RADIO_FILTERS_IIR1_COEFFSB0_COEFFB0_Pos (0UL) /*!< Position of COEFFB0 field.                                        */
+  #define RADIO_FILTERS_IIR1_COEFFSB0_COEFFB0_Msk (0xFFFUL << RADIO_FILTERS_IIR1_COEFFSB0_COEFFB0_Pos) /*!< Bit mask of COEFFB0
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_IIR1_COEFFSB1: Coefficient register B1 for the PUnit IIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSB1_ResetValue (0x00000060UL) /*!< Reset value of COEFFSB1 register.                  */
+/* RADIO_FILTERS_IIR1_COEFFSB1: Coefficient register B1 for the PUnit IIR1 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR1_COEFFSB1_ResetValue (0x00000060UL) /*!< Reset value of COEFFSB1 register.                         */
 
 /* COEFFB1 @Bits 0..11 : Signed filter coefficient B1 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSB1_COEFFB1_Pos (0UL) /*!< Position of COEFFB1 field.                                 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSB1_COEFFB1_Msk (0xFFFUL << RADIO_CHANNELFILTERS_IIR1_COEFFSB1_COEFFB1_Pos) /*!< Bit
-                                                                            mask of COEFFB1 field.*/
+  #define RADIO_FILTERS_IIR1_COEFFSB1_COEFFB1_Pos (0UL) /*!< Position of COEFFB1 field.                                        */
+  #define RADIO_FILTERS_IIR1_COEFFSB1_COEFFB1_Msk (0xFFFUL << RADIO_FILTERS_IIR1_COEFFSB1_COEFFB1_Pos) /*!< Bit mask of COEFFB1
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_IIR1_COEFFSB2: Coefficient register B2 for the PUnit IIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSB2_ResetValue (0x00000060UL) /*!< Reset value of COEFFSB2 register.                  */
+/* RADIO_FILTERS_IIR1_COEFFSB2: Coefficient register B2 for the PUnit IIR1 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR1_COEFFSB2_ResetValue (0x00000060UL) /*!< Reset value of COEFFSB2 register.                         */
 
 /* COEFFB2 @Bits 0..11 : Signed filter coefficient B2 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSB2_COEFFB2_Pos (0UL) /*!< Position of COEFFB2 field.                                 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSB2_COEFFB2_Msk (0xFFFUL << RADIO_CHANNELFILTERS_IIR1_COEFFSB2_COEFFB2_Pos) /*!< Bit
-                                                                            mask of COEFFB2 field.*/
+  #define RADIO_FILTERS_IIR1_COEFFSB2_COEFFB2_Pos (0UL) /*!< Position of COEFFB2 field.                                        */
+  #define RADIO_FILTERS_IIR1_COEFFSB2_COEFFB2_Msk (0xFFFUL << RADIO_FILTERS_IIR1_COEFFSB2_COEFFB2_Pos) /*!< Bit mask of COEFFB2
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_IIR1_COEFFSA1: Coefficient register A1 for the PUnit IIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSA1_ResetValue (0x00000A00UL) /*!< Reset value of COEFFSA1 register.                  */
+/* RADIO_FILTERS_IIR1_COEFFSA1: Coefficient register A1 for the PUnit IIR1 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR1_COEFFSA1_ResetValue (0x00000A00UL) /*!< Reset value of COEFFSA1 register.                         */
 
 /* COEFFA1 @Bits 0..11 : Signed filter coefficient A1 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSA1_COEFFA1_Pos (0UL) /*!< Position of COEFFA1 field.                                 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSA1_COEFFA1_Msk (0xFFFUL << RADIO_CHANNELFILTERS_IIR1_COEFFSA1_COEFFA1_Pos) /*!< Bit
-                                                                            mask of COEFFA1 field.*/
+  #define RADIO_FILTERS_IIR1_COEFFSA1_COEFFA1_Pos (0UL) /*!< Position of COEFFA1 field.                                        */
+  #define RADIO_FILTERS_IIR1_COEFFSA1_COEFFA1_Msk (0xFFFUL << RADIO_FILTERS_IIR1_COEFFSA1_COEFFA1_Pos) /*!< Bit mask of COEFFA1
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_IIR1_COEFFSA2: Coefficient register A2 for the PUnit IIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSA2_ResetValue (0x00000300UL) /*!< Reset value of COEFFSA2 register.                  */
+/* RADIO_FILTERS_IIR1_COEFFSA2: Coefficient register A2 for the PUnit IIR1 of type IP_IIR2 */
+  #define RADIO_FILTERS_IIR1_COEFFSA2_ResetValue (0x00000300UL) /*!< Reset value of COEFFSA2 register.                         */
 
 /* COEFFA2 @Bits 0..11 : Signed filter coefficient A2 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSA2_COEFFA2_Pos (0UL) /*!< Position of COEFFA2 field.                                 */
-  #define RADIO_CHANNELFILTERS_IIR1_COEFFSA2_COEFFA2_Msk (0xFFFUL << RADIO_CHANNELFILTERS_IIR1_COEFFSA2_COEFFA2_Pos) /*!< Bit
-                                                                            mask of COEFFA2 field.*/
+  #define RADIO_FILTERS_IIR1_COEFFSA2_COEFFA2_Pos (0UL) /*!< Position of COEFFA2 field.                                        */
+  #define RADIO_FILTERS_IIR1_COEFFSA2_COEFFA2_Msk (0xFFFUL << RADIO_FILTERS_IIR1_COEFFSA2_COEFFA2_Pos) /*!< Bit mask of COEFFA2
+                                                                            field.*/
 
 
 
-/* ========================================== Struct RADIO_CHANNELFILTERS_NOTCHIIR0 ========================================== */
+/* ============================================= Struct RADIO_FILTERS_NOTCHIIR0 ============================================== */
 /**
-  * @brief NOTCHIIR0 [RADIO_CHANNELFILTERS_NOTCHIIR0] (unspecified)
+  * @brief NOTCHIIR0 [RADIO_FILTERS_NOTCHIIR0] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the PUnit notchIIR0 of type
@@ -32823,201 +33111,107 @@ typedef struct {
                                                                          IP_IIR2*/
   __IOM uint32_t  COEFFSA2;                          /*!< (@ 0x0000001C) Coefficient register A2 for the PUnit notchIIR0 of type
                                                                          IP_IIR2*/
-} NRF_RADIO_CHANNELFILTERS_NOTCHIIR0_Type;           /*!< Size = 32 (0x020)                                                    */
+} NRF_RADIO_FILTERS_NOTCHIIR0_Type;                  /*!< Size = 32 (0x020)                                                    */
 
-/* RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL: Clock select register for the PUnit notchIIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                   */
-
-/* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
-                      disabled and data out is assigned directly from data in. */
-
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                   */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_Msk (0x7UL << RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_Pos) /*!< Bit mask
-                                                                            of CKSEL field.*/
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                     */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                     */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                          */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                          */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                        */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                    */
-
-
-/* RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE: Source select register for the PUnit notchIIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_ResetValue (0x00000001UL) /*!< Reset value of SOURCE register.                 */
-
-/* SOURCE @Bits 0..3 : Data source select */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_Pos (0UL) /*!< Position of SOURCE field.                                */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_Msk (0xFUL << RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_Pos) /*!< Bit
-                                                                            mask of SOURCE field.*/
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_Min (0x0UL) /*!< Min enumerator value of SOURCE field.                  */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_Max (0xFUL) /*!< Max enumerator value of SOURCE field.                  */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcInMain (0xFUL) /*!< SRC_INMAIN (NOT LEGAL)                           */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcIIR0 (0x0UL) /*!< SRC_IIR0 (NOT LEGAL)                               */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcIIR1 (0x1UL) /*!< SRC_IIR1                                           */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcNotchIIR0 (0x2UL) /*!< SRC_NOTCHIIR0 (NOT LEGAL)                     */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcNotchIIR1 (0x3UL) /*!< SRC_NOTCHIIR1 (NOT LEGAL)                     */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcDecFIR (0x4UL) /*!< SRC_DECFIR                                       */
-
-
-/* RADIO_CHANNELFILTERS_NOTCHIIR0_STATUS: Status register for the PUnit notchIIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                 */
-
-/* IQSATURATION @Bits 0..1 : Saturation status for I/Q (bit 0/1) component (bitwise write 1 to clear) */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_STATUS_IQSATURATION_Pos (0UL) /*!< Position of IQSATURATION field.                    */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_STATUS_IQSATURATION_Msk (0x3UL << RADIO_CHANNELFILTERS_NOTCHIIR0_STATUS_IQSATURATION_Pos)
-                                                                            /*!< Bit mask of IQSATURATION field.*/
-
-
-/* RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB0: Coefficient register B0 for the PUnit notchIIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB0_ResetValue (0x000003C0UL) /*!< Reset value of COEFFSB0 register.             */
-
-/* COEFFB0 @Bits 0..11 : Signed filter coefficient B0 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB0_COEFFB0_Pos (0UL) /*!< Position of COEFFB0 field.                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB0_COEFFB0_Msk (0xFFFUL << RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB0_COEFFB0_Pos)
-                                                                            /*!< Bit mask of COEFFB0 field.*/
-
-
-/* RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB1: Coefficient register B1 for the PUnit notchIIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB1_ResetValue (0x00000AB0UL) /*!< Reset value of COEFFSB1 register.             */
-
-/* COEFFB1 @Bits 0..11 : Signed filter coefficient B1 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB1_COEFFB1_Pos (0UL) /*!< Position of COEFFB1 field.                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB1_COEFFB1_Msk (0xFFFUL << RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB1_COEFFB1_Pos)
-                                                                            /*!< Bit mask of COEFFB1 field.*/
-
-
-/* RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB2: Coefficient register B2 for the PUnit notchIIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB2_ResetValue (0x000003C0UL) /*!< Reset value of COEFFSB2 register.             */
-
-/* COEFFB2 @Bits 0..11 : Signed filter coefficient B2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB2_COEFFB2_Pos (0UL) /*!< Position of COEFFB2 field.                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB2_COEFFB2_Msk (0xFFFUL << RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSB2_COEFFB2_Pos)
-                                                                            /*!< Bit mask of COEFFB2 field.*/
-
-
-/* RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSA1: Coefficient register A1 for the PUnit notchIIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSA1_ResetValue (0x00000AB0UL) /*!< Reset value of COEFFSA1 register.             */
-
-/* COEFFA1 @Bits 0..11 : Signed filter coefficient A1 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSA1_COEFFA1_Pos (0UL) /*!< Position of COEFFA1 field.                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSA1_COEFFA1_Msk (0xFFFUL << RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSA1_COEFFA1_Pos)
-                                                                            /*!< Bit mask of COEFFA1 field.*/
-
-
-/* RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSA2: Coefficient register A2 for the PUnit notchIIR0 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSA2_ResetValue (0x00000380UL) /*!< Reset value of COEFFSA2 register.             */
-
-/* COEFFA2 @Bits 0..11 : Signed filter coefficient A2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSA2_COEFFA2_Pos (0UL) /*!< Position of COEFFA2 field.                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSA2_COEFFA2_Msk (0xFFFUL << RADIO_CHANNELFILTERS_NOTCHIIR0_COEFFSA2_COEFFA2_Pos)
-                                                                            /*!< Bit mask of COEFFA2 field.*/
-
-
-
-/* ========================================== Struct RADIO_CHANNELFILTERS_NOTCHIIR1 ========================================== */
-/**
-  * @brief NOTCHIIR1 [RADIO_CHANNELFILTERS_NOTCHIIR1] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the PUnit notchIIR1 of type
-                                                                         IP_IIR2*/
-  __IOM uint32_t  STATUS;                            /*!< (@ 0x00000004) Status register for the PUnit notchIIR1 of type
-                                                                         IP_IIR2*/
-  __IOM uint32_t  COEFFSB0;                          /*!< (@ 0x00000008) Coefficient register B0 for the PUnit notchIIR1 of type
-                                                                         IP_IIR2*/
-  __IOM uint32_t  COEFFSB1;                          /*!< (@ 0x0000000C) Coefficient register B1 for the PUnit notchIIR1 of type
-                                                                         IP_IIR2*/
-  __IOM uint32_t  COEFFSB2;                          /*!< (@ 0x00000010) Coefficient register B2 for the PUnit notchIIR1 of type
-                                                                         IP_IIR2*/
-  __IOM uint32_t  COEFFSA1;                          /*!< (@ 0x00000014) Coefficient register A1 for the PUnit notchIIR1 of type
-                                                                         IP_IIR2*/
-  __IOM uint32_t  COEFFSA2;                          /*!< (@ 0x00000018) Coefficient register A2 for the PUnit notchIIR1 of type
-                                                                         IP_IIR2*/
-} NRF_RADIO_CHANNELFILTERS_NOTCHIIR1_Type;           /*!< Size = 28 (0x01C)                                                    */
-
-/* RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL: Clock select register for the PUnit notchIIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_ResetValue (0x00000007UL) /*!< Reset value of CKSEL register.                   */
+/* RADIO_FILTERS_NOTCHIIR0_CKSEL: Clock select register for the PUnit notchIIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_ResetValue (0x00000002UL) /*!< Reset value of CKSEL register.                          */
 
 /* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
                       disabled and data out is assigned directly from data in. */
 
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                   */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_Msk (0x7UL << RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_Pos) /*!< Bit mask
-                                                                            of CKSEL field.*/
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                     */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                     */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                          */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                          */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                        */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                    */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                          */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_Msk (0x7UL << RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL
+                                                                            field.*/
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                            */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                            */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                 */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                 */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                   */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                   */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                   */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                   */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                               */
+  #define RADIO_FILTERS_NOTCHIIR0_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                           */
 
 
-/* RADIO_CHANNELFILTERS_NOTCHIIR1_STATUS: Status register for the PUnit notchIIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                 */
+/* RADIO_FILTERS_NOTCHIIR0_SOURCE: Source select register for the PUnit notchIIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_ResetValue (0x00000004UL) /*!< Reset value of SOURCE register.                        */
+
+/* SOURCE @Bits 0..4 : Data source select */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_Pos (0UL) /*!< Position of SOURCE field.                                       */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_Msk (0x1FUL << RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_Pos) /*!< Bit mask of
+                                                                            SOURCE field.*/
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_Min (0x0UL) /*!< Min enumerator value of SOURCE field.                         */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_Max (0x1FUL) /*!< Max enumerator value of SOURCE field.                        */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcInFromMix (0x1EUL) /*!< SRC_INFROMMIX (NOT LEGAL)                           */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcInFromAdc (0x1FUL) /*!< SRC_INFROMADC (NOT LEGAL)                           */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcDecFIR0 (0x00UL) /*!< SRC_DECFIR0 (NOT LEGAL)                               */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcDecFIR1 (0x01UL) /*!< SRC_DECFIR1 (NOT LEGAL)                               */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcDecFIR2 (0x02UL) /*!< SRC_DECFIR2 (NOT LEGAL)                               */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcIIR0 (0x03UL) /*!< SRC_IIR0 (NOT LEGAL)                                     */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcIIR1 (0x04UL) /*!< SRC_IIR1                                                 */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcNotchIIR0 (0x05UL) /*!< SRC_NOTCHIIR0 (NOT LEGAL)                           */
+  #define RADIO_FILTERS_NOTCHIIR0_SOURCE_SOURCE_SrcDecFIR (0x06UL) /*!< SRC_DECFIR                                             */
+
+
+/* RADIO_FILTERS_NOTCHIIR0_STATUS: Status register for the PUnit notchIIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_NOTCHIIR0_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                        */
 
 /* IQSATURATION @Bits 0..1 : Saturation status for I/Q (bit 0/1) component (bitwise write 1 to clear) */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_STATUS_IQSATURATION_Pos (0UL) /*!< Position of IQSATURATION field.                    */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_STATUS_IQSATURATION_Msk (0x3UL << RADIO_CHANNELFILTERS_NOTCHIIR1_STATUS_IQSATURATION_Pos)
-                                                                            /*!< Bit mask of IQSATURATION field.*/
+  #define RADIO_FILTERS_NOTCHIIR0_STATUS_IQSATURATION_Pos (0UL) /*!< Position of IQSATURATION field.                           */
+  #define RADIO_FILTERS_NOTCHIIR0_STATUS_IQSATURATION_Msk (0x3UL << RADIO_FILTERS_NOTCHIIR0_STATUS_IQSATURATION_Pos) /*!< Bit
+                                                                            mask of IQSATURATION field.*/
 
 
-/* RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB0: Coefficient register B0 for the PUnit notchIIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB0_ResetValue (0x00000000UL) /*!< Reset value of COEFFSB0 register.             */
+/* RADIO_FILTERS_NOTCHIIR0_COEFFSB0: Coefficient register B0 for the PUnit notchIIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSB0_ResetValue (0x000003C0UL) /*!< Reset value of COEFFSB0 register.                    */
 
 /* COEFFB0 @Bits 0..11 : Signed filter coefficient B0 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB0_COEFFB0_Pos (0UL) /*!< Position of COEFFB0 field.                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB0_COEFFB0_Msk (0xFFFUL << RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB0_COEFFB0_Pos)
-                                                                            /*!< Bit mask of COEFFB0 field.*/
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSB0_COEFFB0_Pos (0UL) /*!< Position of COEFFB0 field.                                   */
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSB0_COEFFB0_Msk (0xFFFUL << RADIO_FILTERS_NOTCHIIR0_COEFFSB0_COEFFB0_Pos) /*!< Bit mask
+                                                                            of COEFFB0 field.*/
 
 
-/* RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB1: Coefficient register B1 for the PUnit notchIIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB1_ResetValue (0x00000000UL) /*!< Reset value of COEFFSB1 register.             */
+/* RADIO_FILTERS_NOTCHIIR0_COEFFSB1: Coefficient register B1 for the PUnit notchIIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSB1_ResetValue (0x00000AB0UL) /*!< Reset value of COEFFSB1 register.                    */
 
 /* COEFFB1 @Bits 0..11 : Signed filter coefficient B1 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB1_COEFFB1_Pos (0UL) /*!< Position of COEFFB1 field.                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB1_COEFFB1_Msk (0xFFFUL << RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB1_COEFFB1_Pos)
-                                                                            /*!< Bit mask of COEFFB1 field.*/
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSB1_COEFFB1_Pos (0UL) /*!< Position of COEFFB1 field.                                   */
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSB1_COEFFB1_Msk (0xFFFUL << RADIO_FILTERS_NOTCHIIR0_COEFFSB1_COEFFB1_Pos) /*!< Bit mask
+                                                                            of COEFFB1 field.*/
 
 
-/* RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB2: Coefficient register B2 for the PUnit notchIIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB2_ResetValue (0x00000000UL) /*!< Reset value of COEFFSB2 register.             */
+/* RADIO_FILTERS_NOTCHIIR0_COEFFSB2: Coefficient register B2 for the PUnit notchIIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSB2_ResetValue (0x000003C0UL) /*!< Reset value of COEFFSB2 register.                    */
 
 /* COEFFB2 @Bits 0..11 : Signed filter coefficient B2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB2_COEFFB2_Pos (0UL) /*!< Position of COEFFB2 field.                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB2_COEFFB2_Msk (0xFFFUL << RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSB2_COEFFB2_Pos)
-                                                                            /*!< Bit mask of COEFFB2 field.*/
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSB2_COEFFB2_Pos (0UL) /*!< Position of COEFFB2 field.                                   */
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSB2_COEFFB2_Msk (0xFFFUL << RADIO_FILTERS_NOTCHIIR0_COEFFSB2_COEFFB2_Pos) /*!< Bit mask
+                                                                            of COEFFB2 field.*/
 
 
-/* RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSA1: Coefficient register A1 for the PUnit notchIIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSA1_ResetValue (0x00000000UL) /*!< Reset value of COEFFSA1 register.             */
+/* RADIO_FILTERS_NOTCHIIR0_COEFFSA1: Coefficient register A1 for the PUnit notchIIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSA1_ResetValue (0x00000AB0UL) /*!< Reset value of COEFFSA1 register.                    */
 
 /* COEFFA1 @Bits 0..11 : Signed filter coefficient A1 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSA1_COEFFA1_Pos (0UL) /*!< Position of COEFFA1 field.                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSA1_COEFFA1_Msk (0xFFFUL << RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSA1_COEFFA1_Pos)
-                                                                            /*!< Bit mask of COEFFA1 field.*/
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSA1_COEFFA1_Pos (0UL) /*!< Position of COEFFA1 field.                                   */
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSA1_COEFFA1_Msk (0xFFFUL << RADIO_FILTERS_NOTCHIIR0_COEFFSA1_COEFFA1_Pos) /*!< Bit mask
+                                                                            of COEFFA1 field.*/
 
 
-/* RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSA2: Coefficient register A2 for the PUnit notchIIR1 of type IP_IIR2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSA2_ResetValue (0x00000000UL) /*!< Reset value of COEFFSA2 register.             */
+/* RADIO_FILTERS_NOTCHIIR0_COEFFSA2: Coefficient register A2 for the PUnit notchIIR0 of type IP_IIR2 */
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSA2_ResetValue (0x00000380UL) /*!< Reset value of COEFFSA2 register.                    */
 
 /* COEFFA2 @Bits 0..11 : Signed filter coefficient A2 */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSA2_COEFFA2_Pos (0UL) /*!< Position of COEFFA2 field.                            */
-  #define RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSA2_COEFFA2_Msk (0xFFFUL << RADIO_CHANNELFILTERS_NOTCHIIR1_COEFFSA2_COEFFA2_Pos)
-                                                                            /*!< Bit mask of COEFFA2 field.*/
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSA2_COEFFA2_Pos (0UL) /*!< Position of COEFFA2 field.                                   */
+  #define RADIO_FILTERS_NOTCHIIR0_COEFFSA2_COEFFA2_Msk (0xFFFUL << RADIO_FILTERS_NOTCHIIR0_COEFFSA2_COEFFA2_Pos) /*!< Bit mask
+                                                                            of COEFFA2 field.*/
 
 
 
-/* =========================================== Struct RADIO_CHANNELFILTERS_DECFIR ============================================ */
+/* =============================================== Struct RADIO_FILTERS_DECFIR =============================================== */
 /**
-  * @brief DECFIR [RADIO_CHANNELFILTERS_DECFIR] (unspecified)
+  * @brief DECFIR [RADIO_FILTERS_DECFIR] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  CKSEL;                             /*!< (@ 0x00000000) Clock select register for the PUnit decFIR of type
@@ -33031,129 +33225,104 @@ typedef struct {
                                                                          IP_FIR*/
   __IOM uint32_t  COEFFS2;                           /*!< (@ 0x00000014) Coefficient register 2 for the PUnit decFIR of type
                                                                          IP_FIR*/
-  __IOM uint32_t  COEFFS3;                           /*!< (@ 0x00000018) Coefficient register 3 for the PUnit decFIR of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS4;                           /*!< (@ 0x0000001C) Coefficient register 4 for the PUnit decFIR of type
-                                                                         IP_FIR*/
-  __IOM uint32_t  COEFFS5;                           /*!< (@ 0x00000020) Coefficient register 5 for the PUnit decFIR of type
-                                                                         IP_FIR*/
-} NRF_RADIO_CHANNELFILTERS_DECFIR_Type;              /*!< Size = 36 (0x024)                                                    */
+} NRF_RADIO_FILTERS_DECFIR_Type;                     /*!< Size = 24 (0x018)                                                    */
 
-/* RADIO_CHANNELFILTERS_DECFIR_CKSEL: Clock select register for the PUnit decFIR of type IP_FIR */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_ResetValue (0x00000007UL) /*!< Reset value of CKSEL register.                      */
+/* RADIO_FILTERS_DECFIR_CKSEL: Clock select register for the PUnit decFIR of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR_CKSEL_ResetValue (0x00000007UL) /*!< Reset value of CKSEL register.                             */
 
 /* CKSEL @Bits 0..2 : Number of times to divide the base clock rate by 2. Exception: highest value gives BYPASS, ie. clock is
                       disabled and data out is assigned directly from data in. */
 
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                      */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_Msk (0x7UL << RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_Pos) /*!< Bit mask of
-                                                                            CKSEL field.*/
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                        */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                        */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                             */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                             */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                               */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                               */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                               */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                               */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                           */
-  #define RADIO_CHANNELFILTERS_DECFIR_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                       */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_Pos (0UL) /*!< Position of CKSEL field.                                             */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_Msk (0x7UL << RADIO_FILTERS_DECFIR_CKSEL_CKSEL_Pos) /*!< Bit mask of CKSEL field.   */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_Min (0x0UL) /*!< Min enumerator value of CKSEL field.                               */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_Max (0x7UL) /*!< Max enumerator value of CKSEL field.                               */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_ClkSel32M (0x0UL) /*!< CKSEL_32M                                                    */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_ClkSel16M (0x1UL) /*!< CKSEL_16M                                                    */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_ClkSel8M (0x2UL) /*!< CKSEL_8M                                                      */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_ClkSel4M (0x3UL) /*!< CKSEL_4M                                                      */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_ClkSel2M (0x4UL) /*!< CKSEL_2M                                                      */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_ClkSel1M (0x5UL) /*!< CKSEL_1M                                                      */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_ClkSel500K (0x6UL) /*!< CKSEL_500K                                                  */
+  #define RADIO_FILTERS_DECFIR_CKSEL_CKSEL_ClkSelBypass (0x7UL) /*!< CKSEL_BYPASS                                              */
 
 
-/* RADIO_CHANNELFILTERS_DECFIR_SOURCE: Source select register for the PUnit decFIR of type IP_FIR */
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_ResetValue (0x00000003UL) /*!< Reset value of SOURCE register.                    */
+/* RADIO_FILTERS_DECFIR_SOURCE: Source select register for the PUnit decFIR of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR_SOURCE_ResetValue (0x00000005UL) /*!< Reset value of SOURCE register.                           */
 
-/* SOURCE @Bits 0..3 : Data source select */
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_Pos (0UL) /*!< Position of SOURCE field.                                   */
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_Msk (0xFUL << RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_Pos) /*!< Bit mask
-                                                                            of SOURCE field.*/
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_Min (0x0UL) /*!< Min enumerator value of SOURCE field.                     */
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_Max (0xFUL) /*!< Max enumerator value of SOURCE field.                     */
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_SrcInMain (0xFUL) /*!< SRC_INMAIN (NOT LEGAL)                              */
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_SrcIIR0 (0x0UL) /*!< SRC_IIR0 (NOT LEGAL)                                  */
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_SrcIIR1 (0x1UL) /*!< SRC_IIR1                                              */
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_SrcNotchIIR0 (0x2UL) /*!< SRC_NOTCHIIR0 (NOT LEGAL)                        */
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_SrcNotchIIR1 (0x3UL) /*!< SRC_NOTCHIIR1                                    */
-  #define RADIO_CHANNELFILTERS_DECFIR_SOURCE_SOURCE_SrcDecFIR (0x4UL) /*!< SRC_DECFIR (NOT LEGAL)                              */
+/* SOURCE @Bits 0..4 : Data source select */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_Pos (0UL) /*!< Position of SOURCE field.                                          */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_Msk (0x1FUL << RADIO_FILTERS_DECFIR_SOURCE_SOURCE_Pos) /*!< Bit mask of SOURCE
+                                                                            field.*/
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_Min (0x0UL) /*!< Min enumerator value of SOURCE field.                            */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_Max (0x1FUL) /*!< Max enumerator value of SOURCE field.                           */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_SrcInFromMix (0x1EUL) /*!< SRC_INFROMMIX (NOT LEGAL)                              */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_SrcInFromAdc (0x1FUL) /*!< SRC_INFROMADC (NOT LEGAL)                              */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_SrcDecFIR0 (0x00UL) /*!< SRC_DECFIR0 (NOT LEGAL)                                  */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_SrcDecFIR1 (0x01UL) /*!< SRC_DECFIR1 (NOT LEGAL)                                  */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_SrcDecFIR2 (0x02UL) /*!< SRC_DECFIR2 (NOT LEGAL)                                  */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_SrcIIR0 (0x03UL) /*!< SRC_IIR0 (NOT LEGAL)                                        */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_SrcIIR1 (0x04UL) /*!< SRC_IIR1                                                    */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_SrcNotchIIR0 (0x05UL) /*!< SRC_NOTCHIIR0                                          */
+  #define RADIO_FILTERS_DECFIR_SOURCE_SOURCE_SrcDecFIR (0x06UL) /*!< SRC_DECFIR (NOT LEGAL)                                    */
 
 
-/* RADIO_CHANNELFILTERS_DECFIR_CONTROL: Control register for the PUnit decFIR of type IP_FIR */
-  #define RADIO_CHANNELFILTERS_DECFIR_CONTROL_ResetValue (0x00000004UL) /*!< Reset value of CONTROL register.                  */
+/* RADIO_FILTERS_DECFIR_CONTROL: Control register for the PUnit decFIR of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR_CONTROL_ResetValue (0x00000004UL) /*!< Reset value of CONTROL register.                         */
 
 /* TAPSEL @Bits 0..2 : Tap-select: number of active taps minus 2 */
-  #define RADIO_CHANNELFILTERS_DECFIR_CONTROL_TAPSEL_Pos (0UL) /*!< Position of TAPSEL field.                                  */
-  #define RADIO_CHANNELFILTERS_DECFIR_CONTROL_TAPSEL_Msk (0x7UL << RADIO_CHANNELFILTERS_DECFIR_CONTROL_TAPSEL_Pos) /*!< Bit mask
-                                                                            of TAPSEL field.*/
+  #define RADIO_FILTERS_DECFIR_CONTROL_TAPSEL_Pos (0UL) /*!< Position of TAPSEL field.                                         */
+  #define RADIO_FILTERS_DECFIR_CONTROL_TAPSEL_Msk (0x7UL << RADIO_FILTERS_DECFIR_CONTROL_TAPSEL_Pos) /*!< Bit mask of TAPSEL
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_DECFIR_COEFFS0: Coefficient register 0 for the PUnit decFIR of type IP_FIR */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS0_ResetValue (0x00000008UL) /*!< Reset value of COEFFS0 register.                  */
+/* RADIO_FILTERS_DECFIR_COEFFS0: Coefficient register 0 for the PUnit decFIR of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR_COEFFS0_ResetValue (0x00000004UL) /*!< Reset value of COEFFS0 register.                         */
 
 /* COEFF0 @Bits 0..5 : Signed filter coefficient 0 */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS0_COEFF0_Pos (0UL) /*!< Position of COEFF0 field.                                  */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS0_COEFF0_Msk (0x3FUL << RADIO_CHANNELFILTERS_DECFIR_COEFFS0_COEFF0_Pos) /*!< Bit
-                                                                            mask of COEFF0 field.*/
+  #define RADIO_FILTERS_DECFIR_COEFFS0_COEFF0_Pos (0UL) /*!< Position of COEFF0 field.                                         */
+  #define RADIO_FILTERS_DECFIR_COEFFS0_COEFF0_Msk (0x3FUL << RADIO_FILTERS_DECFIR_COEFFS0_COEFF0_Pos) /*!< Bit mask of COEFF0
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_DECFIR_COEFFS1: Coefficient register 1 for the PUnit decFIR of type IP_FIR */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS1_ResetValue (0x00000010UL) /*!< Reset value of COEFFS1 register.                  */
+/* RADIO_FILTERS_DECFIR_COEFFS1: Coefficient register 1 for the PUnit decFIR of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR_COEFFS1_ResetValue (0x00000010UL) /*!< Reset value of COEFFS1 register.                         */
 
 /* COEFF1 @Bits 0..5 : Signed filter coefficient 1 */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS1_COEFF1_Pos (0UL) /*!< Position of COEFF1 field.                                  */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS1_COEFF1_Msk (0x3FUL << RADIO_CHANNELFILTERS_DECFIR_COEFFS1_COEFF1_Pos) /*!< Bit
-                                                                            mask of COEFF1 field.*/
+  #define RADIO_FILTERS_DECFIR_COEFFS1_COEFF1_Pos (0UL) /*!< Position of COEFF1 field.                                         */
+  #define RADIO_FILTERS_DECFIR_COEFFS1_COEFF1_Msk (0x3FUL << RADIO_FILTERS_DECFIR_COEFFS1_COEFF1_Pos) /*!< Bit mask of COEFF1
+                                                                            field.*/
 
 
-/* RADIO_CHANNELFILTERS_DECFIR_COEFFS2: Coefficient register 2 for the PUnit decFIR of type IP_FIR */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS2_ResetValue (0x00000018UL) /*!< Reset value of COEFFS2 register.                  */
+/* RADIO_FILTERS_DECFIR_COEFFS2: Coefficient register 2 for the PUnit decFIR of type IP_FIR */
+  #define RADIO_FILTERS_DECFIR_COEFFS2_ResetValue (0x00000018UL) /*!< Reset value of COEFFS2 register.                         */
 
 /* COEFF2 @Bits 0..5 : Signed filter coefficient 2 */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS2_COEFF2_Pos (0UL) /*!< Position of COEFF2 field.                                  */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS2_COEFF2_Msk (0x3FUL << RADIO_CHANNELFILTERS_DECFIR_COEFFS2_COEFF2_Pos) /*!< Bit
-                                                                            mask of COEFF2 field.*/
-
-
-/* RADIO_CHANNELFILTERS_DECFIR_COEFFS3: Coefficient register 3 for the PUnit decFIR of type IP_FIR */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS3_ResetValue (0x00000010UL) /*!< Reset value of COEFFS3 register.                  */
-
-/* COEFF3 @Bits 0..5 : Signed filter coefficient 3 */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS3_COEFF3_Pos (0UL) /*!< Position of COEFF3 field.                                  */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS3_COEFF3_Msk (0x3FUL << RADIO_CHANNELFILTERS_DECFIR_COEFFS3_COEFF3_Pos) /*!< Bit
-                                                                            mask of COEFF3 field.*/
-
-
-/* RADIO_CHANNELFILTERS_DECFIR_COEFFS4: Coefficient register 4 for the PUnit decFIR of type IP_FIR */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS4_ResetValue (0x00000000UL) /*!< Reset value of COEFFS4 register.                  */
-
-/* COEFF4 @Bits 0..5 : Signed filter coefficient 4 */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS4_COEFF4_Pos (0UL) /*!< Position of COEFF4 field.                                  */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS4_COEFF4_Msk (0x3FUL << RADIO_CHANNELFILTERS_DECFIR_COEFFS4_COEFF4_Pos) /*!< Bit
-                                                                            mask of COEFF4 field.*/
-
-
-/* RADIO_CHANNELFILTERS_DECFIR_COEFFS5: Coefficient register 5 for the PUnit decFIR of type IP_FIR */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS5_ResetValue (0x00000000UL) /*!< Reset value of COEFFS5 register.                  */
-
-/* COEFF5 @Bits 0..5 : Signed filter coefficient 5 */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS5_COEFF5_Pos (0UL) /*!< Position of COEFF5 field.                                  */
-  #define RADIO_CHANNELFILTERS_DECFIR_COEFFS5_COEFF5_Msk (0x3FUL << RADIO_CHANNELFILTERS_DECFIR_COEFFS5_COEFF5_Pos) /*!< Bit
-                                                                            mask of COEFF5 field.*/
+  #define RADIO_FILTERS_DECFIR_COEFFS2_COEFF2_Pos (0UL) /*!< Position of COEFF2 field.                                         */
+  #define RADIO_FILTERS_DECFIR_COEFFS2_COEFF2_Msk (0x3FUL << RADIO_FILTERS_DECFIR_COEFFS2_COEFF2_Pos) /*!< Bit mask of COEFF2
+                                                                            field.*/
 
 
 
-/* =============================================== Struct RADIO_CHANNELFILTERS =============================================== */
+/* ================================================== Struct RADIO_FILTERS =================================================== */
 /**
-  * @brief CHANNELFILTERS [RADIO_CHANNELFILTERS] (unspecified)
+  * @brief FILTERS [RADIO_FILTERS] (unspecified)
   */
 typedef struct {
-  __IOM NRF_RADIO_CHANNELFILTERS_OUTMAIN_Type OUTMAIN; /*!< (@ 0x00000000) (unspecified)                                       */
-  __IOM NRF_RADIO_CHANNELFILTERS_OUTPEAKDET_Type OUTPEAKDET; /*!< (@ 0x00000008) (unspecified)                                 */
-  __IOM NRF_RADIO_CHANNELFILTERS_IIR0_Type IIR0;     /*!< (@ 0x00000010) (unspecified)                                         */
-  __IOM NRF_RADIO_CHANNELFILTERS_IIR1_Type IIR1;     /*!< (@ 0x0000002C) (unspecified)                                         */
-  __IOM NRF_RADIO_CHANNELFILTERS_NOTCHIIR0_Type NOTCHIIR0; /*!< (@ 0x00000048) (unspecified)                                   */
-  __IOM NRF_RADIO_CHANNELFILTERS_NOTCHIIR1_Type NOTCHIIR1; /*!< (@ 0x00000068) (unspecified)                                   */
-  __IOM NRF_RADIO_CHANNELFILTERS_DECFIR_Type DECFIR; /*!< (@ 0x00000084) (unspecified)                                         */
-} NRF_RADIO_CHANNELFILTERS_Type;                     /*!< Size = 168 (0x0A8)                                                   */
+  __IOM NRF_RADIO_FILTERS_OUTTOMIX_Type OUTTOMIX;    /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM NRF_RADIO_FILTERS_OUTTOBB_Type OUTTOBB;      /*!< (@ 0x00000004) (unspecified)                                         */
+  __IOM NRF_RADIO_FILTERS_OUTPEAKDET_Type OUTPEAKDET; /*!< (@ 0x0000000C) (unspecified)                                        */
+  __IOM NRF_RADIO_FILTERS_DECFIR0_Type DECFIR0;      /*!< (@ 0x00000014) (unspecified)                                         */
+  __IM  uint32_t  RESERVED[5];
+  __IOM NRF_RADIO_FILTERS_DECFIR1_Type DECFIR1;      /*!< (@ 0x00000030) (unspecified)                                         */
+  __IM  uint32_t  RESERVED1[5];
+  __IOM NRF_RADIO_FILTERS_DECFIR2_Type DECFIR2;      /*!< (@ 0x0000004C) (unspecified)                                         */
+  __IM  uint32_t  RESERVED2[5];
+  __IOM NRF_RADIO_FILTERS_IIR0_Type IIR0;            /*!< (@ 0x00000068) (unspecified)                                         */
+  __IOM NRF_RADIO_FILTERS_IIR1_Type IIR1;            /*!< (@ 0x00000084) (unspecified)                                         */
+  __IOM NRF_RADIO_FILTERS_NOTCHIIR0_Type NOTCHIIR0;  /*!< (@ 0x000000A0) (unspecified)                                         */
+  __IOM NRF_RADIO_FILTERS_DECFIR_Type DECFIR;        /*!< (@ 0x000000C0) (unspecified)                                         */
+} NRF_RADIO_FILTERS_Type;                            /*!< Size = 216 (0x0D8)                                                   */
 
 
 /* ==================================================== Struct RADIO_PSEL ==================================================== */
@@ -33173,7 +33342,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define RADIO_PSEL_DFEGPIO_PIN_Pos (0UL)           /*!< Position of PIN field.                                               */
   #define RADIO_PSEL_DFEGPIO_PIN_Msk (0x1FUL << RADIO_PSEL_DFEGPIO_PIN_Pos) /*!< Bit mask of PIN field.                        */
-  #define RADIO_PSEL_DFEGPIO_PIN_Min (0x0UL)         /*!< Min value of PIN field.                                              */
+  #define RADIO_PSEL_DFEGPIO_PIN_Min (0x00UL)        /*!< Min value of PIN field.                                              */
   #define RADIO_PSEL_DFEGPIO_PIN_Max (0x1FUL)        /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..8 : Port number */
@@ -33539,13 +33708,13 @@ typedef struct {
 
   #define RADIO_LBMAC_PCNF1_MAXLEN_Pos (0UL)         /*!< Position of MAXLEN field.                                            */
   #define RADIO_LBMAC_PCNF1_MAXLEN_Msk (0xFFUL << RADIO_LBMAC_PCNF1_MAXLEN_Pos) /*!< Bit mask of MAXLEN field.                 */
-  #define RADIO_LBMAC_PCNF1_MAXLEN_Min (0x0UL)       /*!< Min value of MAXLEN field.                                           */
+  #define RADIO_LBMAC_PCNF1_MAXLEN_Min (0x00UL)      /*!< Min value of MAXLEN field.                                           */
   #define RADIO_LBMAC_PCNF1_MAXLEN_Max (0xFFUL)      /*!< Max size of MAXLEN field.                                            */
 
 /* STATLEN @Bits 8..15 : Static length in number of bytes */
   #define RADIO_LBMAC_PCNF1_STATLEN_Pos (8UL)        /*!< Position of STATLEN field.                                           */
   #define RADIO_LBMAC_PCNF1_STATLEN_Msk (0xFFUL << RADIO_LBMAC_PCNF1_STATLEN_Pos) /*!< Bit mask of STATLEN field.              */
-  #define RADIO_LBMAC_PCNF1_STATLEN_Min (0x0UL)      /*!< Min value of STATLEN field.                                          */
+  #define RADIO_LBMAC_PCNF1_STATLEN_Min (0x00UL)     /*!< Min value of STATLEN field.                                          */
   #define RADIO_LBMAC_PCNF1_STATLEN_Max (0xFFUL)     /*!< Max size of STATLEN field.                                           */
 
 /* BALEN @Bits 16..18 : Base address length in number of bytes */
@@ -33559,6 +33728,13 @@ typedef struct {
   #define RADIO_LBMAC_PCNF1_STATLENLONG_Msk (0x7UL << RADIO_LBMAC_PCNF1_STATLENLONG_Pos) /*!< Bit mask of STATLENLONG field.   */
   #define RADIO_LBMAC_PCNF1_STATLENLONG_Min (0x0UL)  /*!< Min value of STATLENLONG field.                                      */
   #define RADIO_LBMAC_PCNF1_STATLENLONG_Max (0x7UL)  /*!< Max size of STATLENLONG field.                                       */
+
+/* PREAMBLEEXTEND @Bit 23 : Extra bit to enable longer preambles. Length is PREAMBLEEXTEND,PCNF0.PLEN bytes + 8bits (or 4bits
+                            for LR and 15.4) */
+
+  #define RADIO_LBMAC_PCNF1_PREAMBLEEXTEND_Pos (23UL) /*!< Position of PREAMBLEEXTEND field.                                   */
+  #define RADIO_LBMAC_PCNF1_PREAMBLEEXTEND_Msk (0x1UL << RADIO_LBMAC_PCNF1_PREAMBLEEXTEND_Pos) /*!< Bit mask of PREAMBLEEXTEND
+                                                                            field.*/
 
 /* ENDIAN @Bit 24 : On-air endianness of packet, this applies to the S0, LENGTH, S1, and the PAYLOAD fields. */
   #define RADIO_LBMAC_PCNF1_ENDIAN_Pos (24UL)        /*!< Position of ENDIAN field.                                            */
@@ -33575,6 +33751,14 @@ typedef struct {
   #define RADIO_LBMAC_PCNF1_WHITEEN_Max (0x1UL)      /*!< Max enumerator value of WHITEEN field.                               */
   #define RADIO_LBMAC_PCNF1_WHITEEN_Disabled (0x0UL) /*!< Disable                                                              */
   #define RADIO_LBMAC_PCNF1_WHITEEN_Enabled (0x1UL)  /*!< Enable                                                               */
+
+/* WHITEOFFSET @Bit 26 : If whitening is enabled S0 can be configured to be excluded from whitening */
+  #define RADIO_LBMAC_PCNF1_WHITEOFFSET_Pos (26UL)   /*!< Position of WHITEOFFSET field.                                       */
+  #define RADIO_LBMAC_PCNF1_WHITEOFFSET_Msk (0x1UL << RADIO_LBMAC_PCNF1_WHITEOFFSET_Pos) /*!< Bit mask of WHITEOFFSET field.   */
+  #define RADIO_LBMAC_PCNF1_WHITEOFFSET_Min (0x0UL)  /*!< Min enumerator value of WHITEOFFSET field.                           */
+  #define RADIO_LBMAC_PCNF1_WHITEOFFSET_Max (0x1UL)  /*!< Max enumerator value of WHITEOFFSET field.                           */
+  #define RADIO_LBMAC_PCNF1_WHITEOFFSET_Include (0x0UL) /*!< S0 included in whitening                                          */
+  #define RADIO_LBMAC_PCNF1_WHITEOFFSET_Exclude (0x1UL) /*!< S0 excluded from whitening                                        */
 
 /* REPEATPAYLOAD @Bit 28 : Used to repeat payload content in Tx mode. Transmits PREAMBLE, ADDRESS once, but S0, LENGTH, S1 field
                            size must be set to 0 to avoid repeating those as well */
@@ -33751,16 +33935,20 @@ typedef struct {
   #define RADIO_LBMAC_CRCCNF_LEN_Two (0x2UL)         /*!< CRC length is two bytes and CRC calculation is enabled               */
   #define RADIO_LBMAC_CRCCNF_LEN_Three (0x3UL)       /*!< CRC length is three bytes and CRC calculation is enabled             */
 
-/* SKIPADDR @Bits 8..9 : Include or exclude packet address field out of CRC calculation. */
-  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Pos (8UL)      /*!< Position of SKIPADDR field.                                          */
-  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Msk (0x3UL << RADIO_LBMAC_CRCCNF_SKIPADDR_Pos) /*!< Bit mask of SKIPADDR field.          */
-  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Min (0x0UL)    /*!< Min enumerator value of SKIPADDR field.                              */
-  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Max (0x2UL)    /*!< Max enumerator value of SKIPADDR field.                              */
-  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Include (0x0UL) /*!< CRC calculation includes address field                              */
-  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Skip (0x1UL)   /*!< CRC calculation does not include address field. The CRC calculation
+/* OFFSET @Bits 8..10 : Which packet fields to be kept out of CRC calculation. Subsequent fields after the specified options are
+                        included in CRC calculation. */
+
+  #define RADIO_LBMAC_CRCCNF_OFFSET_Pos (8UL)        /*!< Position of OFFSET field.                                            */
+  #define RADIO_LBMAC_CRCCNF_OFFSET_Msk (0x7UL << RADIO_LBMAC_CRCCNF_OFFSET_Pos) /*!< Bit mask of OFFSET field.                */
+  #define RADIO_LBMAC_CRCCNF_OFFSET_Min (0x0UL)      /*!< Min enumerator value of OFFSET field.                                */
+  #define RADIO_LBMAC_CRCCNF_OFFSET_Max (0x4UL)      /*!< Max enumerator value of OFFSET field.                                */
+  #define RADIO_LBMAC_CRCCNF_OFFSET_Include (0x0UL)  /*!< CRC calculation includes address field                               */
+  #define RADIO_LBMAC_CRCCNF_OFFSET_Skip (0x1UL)     /*!< CRC calculation does not include address field. The CRC calculation
                                                           will start at the first byte after the address.*/
-  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Ieee802154 (0x2UL) /*!< CRC calculation as per 802.15.4 standard. Starting at first byte
-                                                              after length field.*/
+  #define RADIO_LBMAC_CRCCNF_OFFSET_LENGTH (0x2UL)   /*!< CRC calculation as per 802.15.4 standard. Starting at first byte after
+                                                          length field.*/
+  #define RADIO_LBMAC_CRCCNF_OFFSET_SO (0x3UL)       /*!< CRC calculation Starting at first byte after S0 field.               */
+  #define RADIO_LBMAC_CRCCNF_OFFSET_S1 (0x4UL)       /*!< CRC calculation Starting at first byte after S1 field.               */
 
 
 /* RADIO_LBMAC_CRCPOLY: CRC polynomial */
@@ -34278,7 +34466,7 @@ typedef struct {
   __IM  uint32_t  CNACC;                             /*!< (@ 0x00000030) Output of the autocorrelation of the accumulated IQ
                                                                          signal*/
   __IM  uint32_t  FFOEST;                            /*!< (@ 0x00000034) FFO estimate                                          */
-  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  DOWNSAMPLE;                        /*!< (@ 0x00000038) Turn on/off down sample of input IQ-signals           */
   __IM  uint32_t  FINETUNENEXT;                      /*!< (@ 0x0000003C) Number of full ADPLL finetune steps                   */
   __IM  uint32_t  CFOPHASE;                          /*!< (@ 0x00000040) Cordic output of CnAcc                                */
   __IM  uint32_t  FREQOFFSET;                        /*!< (@ 0x00000044) Frequency offset estimate                             */
@@ -34340,10 +34528,14 @@ typedef struct {
 /* RADIO_CSTONES_FFOSOURCE: Source of FFO */
   #define RADIO_CSTONES_FFOSOURCE_ResetValue (0x00000001UL) /*!< Reset value of FFOSOURCE register.                            */
 
-/* FFOSOURCE @Bit 0 : 0: Use FFOIN 1: Calc FFO from CnAcc */
+/* FFOSOURCE @Bit 0 : Use external or internal FFOSOURCE */
   #define RADIO_CSTONES_FFOSOURCE_FFOSOURCE_Pos (0UL) /*!< Position of FFOSOURCE field.                                        */
   #define RADIO_CSTONES_FFOSOURCE_FFOSOURCE_Msk (0x1UL << RADIO_CSTONES_FFOSOURCE_FFOSOURCE_Pos) /*!< Bit mask of FFOSOURCE
                                                                             field.*/
+  #define RADIO_CSTONES_FFOSOURCE_FFOSOURCE_Min (0x0UL) /*!< Min enumerator value of FFOSOURCE field.                          */
+  #define RADIO_CSTONES_FFOSOURCE_FFOSOURCE_Max (0x1UL) /*!< Max enumerator value of FFOSOURCE field.                          */
+  #define RADIO_CSTONES_FFOSOURCE_FFOSOURCE_External (0x0UL) /*!< Use FFOIN                                                    */
+  #define RADIO_CSTONES_FFOSOURCE_FFOSOURCE_Internal (0x1UL) /*!< Calc FFO from CnAcc                                          */
 
 
 /* RADIO_CSTONES_FAEPEER: FAEPEER (Frequency Actuation Error) of peer if known. Used during Mode 0 steps. */
@@ -34366,7 +34558,7 @@ typedef struct {
 /* RADIO_CSTONES_NUMSAMPLESCOEFF: Parameter used in TPM, provided by software */
   #define RADIO_CSTONES_NUMSAMPLESCOEFF_ResetValue (0x0000199AUL) /*!< Reset value of NUMSAMPLESCOEFF register.                */
 
-/* NUMSAMPLESCOEFF @Bits 0..15 : Coefficient 1/(numSamples/16) in Q1.15 format (Default numsamples value is 160) */
+/* NUMSAMPLESCOEFF @Bits 0..15 : Coefficient 2**16/(numSamples/16) in Q1.15 format (Default numsamples value is 160) */
   #define RADIO_CSTONES_NUMSAMPLESCOEFF_NUMSAMPLESCOEFF_Pos (0UL) /*!< Position of NUMSAMPLESCOEFF field.                      */
   #define RADIO_CSTONES_NUMSAMPLESCOEFF_NUMSAMPLESCOEFF_Msk (0xFFFFUL << RADIO_CSTONES_NUMSAMPLESCOEFF_NUMSAMPLESCOEFF_Pos) /*!<
                                                                             Bit mask of NUMSAMPLESCOEFF field.*/
@@ -34436,6 +34628,27 @@ typedef struct {
 /* FFOEST @Bits 0..11 : Units 62.5 ppb. Max range +/-100 ppm plus margin. */
   #define RADIO_CSTONES_FFOEST_FFOEST_Pos (0UL)      /*!< Position of FFOEST field.                                            */
   #define RADIO_CSTONES_FFOEST_FFOEST_Msk (0xFFFUL << RADIO_CSTONES_FFOEST_FFOEST_Pos) /*!< Bit mask of FFOEST field.          */
+
+
+/* RADIO_CSTONES_DOWNSAMPLE: Turn on/off down sample of input IQ-signals */
+  #define RADIO_CSTONES_DOWNSAMPLE_ResetValue (0x00000000UL) /*!< Reset value of DOWNSAMPLE register.                          */
+
+/* ENABLEFILTER @Bit 0 : Turn on/off down sample of input IQ-signals */
+  #define RADIO_CSTONES_DOWNSAMPLE_ENABLEFILTER_Pos (0UL) /*!< Position of ENABLEFILTER field.                                 */
+  #define RADIO_CSTONES_DOWNSAMPLE_ENABLEFILTER_Msk (0x1UL << RADIO_CSTONES_DOWNSAMPLE_ENABLEFILTER_Pos) /*!< Bit mask of
+                                                                            ENABLEFILTER field.*/
+  #define RADIO_CSTONES_DOWNSAMPLE_ENABLEFILTER_Min (0x0UL) /*!< Min enumerator value of ENABLEFILTER field.                   */
+  #define RADIO_CSTONES_DOWNSAMPLE_ENABLEFILTER_Max (0x1UL) /*!< Max enumerator value of ENABLEFILTER field.                   */
+  #define RADIO_CSTONES_DOWNSAMPLE_ENABLEFILTER_OFF (0x0UL) /*!< Disable filter                                                */
+  #define RADIO_CSTONES_DOWNSAMPLE_ENABLEFILTER_ON (0x1UL) /*!< Enable filter                                                  */
+
+/* RATE @Bit 1 : Indicating if BLE1M or BLE2M is used */
+  #define RADIO_CSTONES_DOWNSAMPLE_RATE_Pos (1UL)    /*!< Position of RATE field.                                              */
+  #define RADIO_CSTONES_DOWNSAMPLE_RATE_Msk (0x1UL << RADIO_CSTONES_DOWNSAMPLE_RATE_Pos) /*!< Bit mask of RATE field.          */
+  #define RADIO_CSTONES_DOWNSAMPLE_RATE_Min (0x0UL)  /*!< Min enumerator value of RATE field.                                  */
+  #define RADIO_CSTONES_DOWNSAMPLE_RATE_Max (0x1UL)  /*!< Max enumerator value of RATE field.                                  */
+  #define RADIO_CSTONES_DOWNSAMPLE_RATE_BLE1M (0x0UL) /*!< Radio mode BLE1M is used                                            */
+  #define RADIO_CSTONES_DOWNSAMPLE_RATE_BLE2m (0x1UL) /*!< Radio mode BLE2M is used                                            */
 
 
 /* RADIO_CSTONES_FINETUNENEXT: Number of full ADPLL finetune steps */
@@ -34887,10 +35100,12 @@ typedef struct {
     __OM uint32_t TASKS_CCASTOP;                     /*!< (@ 0x0000002C) Stop the clear channel assessment                     */
     __OM uint32_t TASKS_DFESTART;                    /*!< (@ 0x00000030) Start DFE operation                                   */
     __OM uint32_t TASKS_DFESTOP;                     /*!< (@ 0x00000034) Stop DFE operation                                    */
-    __OM uint32_t TASKS_ACQINJ0DMASTART;             /*!< (@ 0x00000038) Start DMA transaction                                 */
-    __OM uint32_t TASKS_ACQINJ0DMASTOP;              /*!< (@ 0x0000003C) Stop ongoing DMA transaction                          */
-    __OM uint32_t TASKS_ACQINJ1DMASTART;             /*!< (@ 0x00000040) Start DMA transaction                                 */
-    __OM uint32_t TASKS_ACQINJ1DMASTOP;              /*!< (@ 0x00000044) Stop ongoing DMA transaction                          */
+    __OM uint32_t TASKS_ACQINJ0DMASTART;             /*!< (@ 0x00000038) Start DMA transaction of acquisition/injection DMA 0  */
+    __OM uint32_t TASKS_ACQINJ0DMASTOP;              /*!< (@ 0x0000003C) Stop ongoing DMA transaction of acquisition/injection
+                                                                         DMA 0*/
+    __OM uint32_t TASKS_ACQINJ1DMASTART;             /*!< (@ 0x00000040) Start DMA transaction of acquisition/injection DMA 1  */
+    __OM uint32_t TASKS_ACQINJ1DMASTOP;              /*!< (@ 0x00000044) Stop ongoing DMA transaction of acquisition/injection
+                                                                         DMA 1*/
     __IM uint32_t RESERVED[3];
     __OM uint32_t TASKS_LOOPBACKEN;                  /*!< (@ 0x00000054) Enable RADIO in LOOPBACK mode                         */
     __OM uint32_t TASKS_CALSTART;                    /*!< (@ 0x00000058) Start calibration                                     */
@@ -35164,28 +35379,28 @@ typedef struct {
                                                                          frequency outside the 2.4 GHz band*/
     __IM uint32_t RESERVED35[3];
     __IOM uint32_t ADPLLTRIMCOMMAND0;                /*!< (@ 0x000008A0) This value is written to the AdPll when powering up the
-                                                                         digital island. Never reset with SOFTRESET*/
+                                                                         digital island. Never reset with SOFTRESET.*/
     __IOM uint32_t ADPLLTRIMCOMMAND1;                /*!< (@ 0x000008A4) This value is written to the AdPll when powering up the
-                                                                         digital island. Never reset with SOFTRESET*/
+                                                                         digital island. Never reset with SOFTRESET.*/
     __IOM uint32_t ADPLLTRIMCOMMAND2;                /*!< (@ 0x000008A8) This value is written to the AdPll when powering up the
-                                                                         digital island. NEVER reset with SOFTRESET*/
+                                                                         digital island. Never reset with SOFTRESET.*/
     __IOM uint32_t ADPLLTRIMCOMMAND3;                /*!< (@ 0x000008AC) This value is written to the AdPll when powering up the
-                                                                         digital island. NEVER reset with SOFTRESET*/
-    __IOM uint32_t ADPLLSTARTUPCOMMAND0;             /*!< (@ 0x000008B0) This value is written to the AdPll when powering up the
+                                                                         digital island. Never reset with SOFTRESET.*/
+    __IOM uint32_t ADPLLTRIMCOMMAND4;                /*!< (@ 0x000008B0) This value is written to the AdPll when powering up the
+                                                                         digital island. Never reset with SOFTRESET.*/
+    __IOM uint32_t ADPLLTRIMCOMMAND5;                /*!< (@ 0x000008B4) This value is written to the AdPll when powering up the
+                                                                         digital island. Never reset with SOFTRESET.*/
+    __IOM uint32_t ADPLLTRIMCOMMAND6;                /*!< (@ 0x000008B8) This value is written to the AdPll when powering up the
+                                                                         digital island. Never reset with SOFTRESET.*/
+    __IOM uint32_t ADPLLTRIMCOMMAND7;                /*!< (@ 0x000008BC) This value is written to the AdPll when powering up the
+                                                                         digital island. Never reset with SOFTRESET.*/
+    __IOM uint32_t ADPLLSTARTUPCOMMAND0;             /*!< (@ 0x000008C0) This value is written to the AdPll when powering up the
                                                                          digital island*/
-    __IOM uint32_t ADPLLSTARTUPCOMMAND1;             /*!< (@ 0x000008B4) This value is written to the AdPll when powering up the
+    __IOM uint32_t ADPLLSTARTUPCOMMAND1;             /*!< (@ 0x000008C4) This value is written to the AdPll when powering up the
                                                                          digital island*/
-    __IOM uint32_t ADPLLSTARTUPCOMMAND2;             /*!< (@ 0x000008B8) This value is written to the AdPll when powering up the
+    __IOM uint32_t ADPLLSTARTUPCOMMAND2;             /*!< (@ 0x000008C8) This value is written to the AdPll when powering up the
                                                                          digital island*/
-    __IOM uint32_t ADPLLSTARTUPCOMMAND3;             /*!< (@ 0x000008BC) This value is written to the AdPll when powering up the
-                                                                         digital island*/
-    __IOM uint32_t ADPLLSTARTUPCOMMAND4;             /*!< (@ 0x000008C0) This value is written to the AdPll when powering up the
-                                                                         digital island*/
-    __IOM uint32_t ADPLLSTARTUPCOMMAND5;             /*!< (@ 0x000008C4) This value is written to the AdPll when powering up the
-                                                                         digital island*/
-    __IOM uint32_t ADPLLSTARTUPCOMMAND6;             /*!< (@ 0x000008C8) This value is written to the AdPll when powering up the
-                                                                         digital island*/
-    __IOM uint32_t ADPLLSTARTUPCOMMAND7;             /*!< (@ 0x000008CC) This value is written to the AdPll when powering up the
+    __IOM uint32_t ADPLLSTARTUPCOMMAND3;             /*!< (@ 0x000008CC) This value is written to the AdPll when powering up the
                                                                          digital island*/
     __IM uint32_t RESERVED36[3];
     __IOM uint32_t ADPLLCOMPANIONINTEN;              /*!< (@ 0x000008DC) (unspecified)                                         */
@@ -35199,9 +35414,8 @@ typedef struct {
     __IOM uint32_t IQCALCONF;                        /*!< (@ 0x0000090C) Gain and phase mismatch calibration control for I and
                                                                          Q*/
     __IOM uint32_t BBPKDETCONF;                      /*!< (@ 0x00000910) Configuration for baseband peak detector              */
-    __IOM NRF_RADIO_DECFILTERS_Type DECFILTERS;      /*!< (@ 0x00000914) (unspecified)                                         */
-    __IOM NRF_RADIO_CHANNELFILTERS_Type CHANNELFILTERS; /*!< (@ 0x00000970) (unspecified)                                      */
-    __IM uint32_t RESERVED38[58];
+    __IOM NRF_RADIO_FILTERS_Type FILTERS;            /*!< (@ 0x00000914) (unspecified)                                         */
+    __IM uint32_t RESERVED38[69];
     __IM uint32_t CFO_STAT;                          /*!< (@ 0x00000B00) Carrier freq. offset estimate                         */
     __IOM uint32_t PBTEST;                           /*!< (@ 0x00000B04) Test: PB calibration                                  */
     __IOM uint32_t DBCCOEFFS;                        /*!< (@ 0x00000B08) Test and Debug: DBC coefficients override             */
@@ -35501,10 +35715,10 @@ typedef struct {
   #define RADIO_TASKS_DFESTOP_TASKS_DFESTOP_Trigger (0x1UL) /*!< Trigger task                                                  */
 
 
-/* RADIO_TASKS_ACQINJ0DMASTART: Start DMA transaction */
+/* RADIO_TASKS_ACQINJ0DMASTART: Start DMA transaction of acquisition/injection DMA 0 */
   #define RADIO_TASKS_ACQINJ0DMASTART_ResetValue (0x00000000UL) /*!< Reset value of TASKS_ACQINJ0DMASTART register.            */
 
-/* TASKS_ACQINJ0DMASTART @Bit 0 : Start DMA transaction */
+/* TASKS_ACQINJ0DMASTART @Bit 0 : Start DMA transaction of acquisition/injection DMA 0 */
   #define RADIO_TASKS_ACQINJ0DMASTART_TASKS_ACQINJ0DMASTART_Pos (0UL) /*!< Position of TASKS_ACQINJ0DMASTART field.            */
   #define RADIO_TASKS_ACQINJ0DMASTART_TASKS_ACQINJ0DMASTART_Msk (0x1UL << RADIO_TASKS_ACQINJ0DMASTART_TASKS_ACQINJ0DMASTART_Pos)
                                                                             /*!< Bit mask of TASKS_ACQINJ0DMASTART field.*/
@@ -35515,10 +35729,10 @@ typedef struct {
   #define RADIO_TASKS_ACQINJ0DMASTART_TASKS_ACQINJ0DMASTART_Trigger (0x1UL) /*!< Trigger task                                  */
 
 
-/* RADIO_TASKS_ACQINJ0DMASTOP: Stop ongoing DMA transaction */
+/* RADIO_TASKS_ACQINJ0DMASTOP: Stop ongoing DMA transaction of acquisition/injection DMA 0 */
   #define RADIO_TASKS_ACQINJ0DMASTOP_ResetValue (0x00000000UL) /*!< Reset value of TASKS_ACQINJ0DMASTOP register.              */
 
-/* TASKS_ACQINJ0DMASTOP @Bit 0 : Stop ongoing DMA transaction */
+/* TASKS_ACQINJ0DMASTOP @Bit 0 : Stop ongoing DMA transaction of acquisition/injection DMA 0 */
   #define RADIO_TASKS_ACQINJ0DMASTOP_TASKS_ACQINJ0DMASTOP_Pos (0UL) /*!< Position of TASKS_ACQINJ0DMASTOP field.               */
   #define RADIO_TASKS_ACQINJ0DMASTOP_TASKS_ACQINJ0DMASTOP_Msk (0x1UL << RADIO_TASKS_ACQINJ0DMASTOP_TASKS_ACQINJ0DMASTOP_Pos)
                                                                             /*!< Bit mask of TASKS_ACQINJ0DMASTOP field.*/
@@ -35527,10 +35741,10 @@ typedef struct {
   #define RADIO_TASKS_ACQINJ0DMASTOP_TASKS_ACQINJ0DMASTOP_Trigger (0x1UL) /*!< Trigger task                                    */
 
 
-/* RADIO_TASKS_ACQINJ1DMASTART: Start DMA transaction */
+/* RADIO_TASKS_ACQINJ1DMASTART: Start DMA transaction of acquisition/injection DMA 1 */
   #define RADIO_TASKS_ACQINJ1DMASTART_ResetValue (0x00000000UL) /*!< Reset value of TASKS_ACQINJ1DMASTART register.            */
 
-/* TASKS_ACQINJ1DMASTART @Bit 0 : Start DMA transaction */
+/* TASKS_ACQINJ1DMASTART @Bit 0 : Start DMA transaction of acquisition/injection DMA 1 */
   #define RADIO_TASKS_ACQINJ1DMASTART_TASKS_ACQINJ1DMASTART_Pos (0UL) /*!< Position of TASKS_ACQINJ1DMASTART field.            */
   #define RADIO_TASKS_ACQINJ1DMASTART_TASKS_ACQINJ1DMASTART_Msk (0x1UL << RADIO_TASKS_ACQINJ1DMASTART_TASKS_ACQINJ1DMASTART_Pos)
                                                                             /*!< Bit mask of TASKS_ACQINJ1DMASTART field.*/
@@ -35541,10 +35755,10 @@ typedef struct {
   #define RADIO_TASKS_ACQINJ1DMASTART_TASKS_ACQINJ1DMASTART_Trigger (0x1UL) /*!< Trigger task                                  */
 
 
-/* RADIO_TASKS_ACQINJ1DMASTOP: Stop ongoing DMA transaction */
+/* RADIO_TASKS_ACQINJ1DMASTOP: Stop ongoing DMA transaction of acquisition/injection DMA 1 */
   #define RADIO_TASKS_ACQINJ1DMASTOP_ResetValue (0x00000000UL) /*!< Reset value of TASKS_ACQINJ1DMASTOP register.              */
 
-/* TASKS_ACQINJ1DMASTOP @Bit 0 : Stop ongoing DMA transaction */
+/* TASKS_ACQINJ1DMASTOP @Bit 0 : Stop ongoing DMA transaction of acquisition/injection DMA 1 */
   #define RADIO_TASKS_ACQINJ1DMASTOP_TASKS_ACQINJ1DMASTOP_Pos (0UL) /*!< Position of TASKS_ACQINJ1DMASTOP field.               */
   #define RADIO_TASKS_ACQINJ1DMASTOP_TASKS_ACQINJ1DMASTOP_Msk (0x1UL << RADIO_TASKS_ACQINJ1DMASTOP_TASKS_ACQINJ1DMASTOP_Pos)
                                                                             /*!< Bit mask of TASKS_ACQINJ1DMASTOP field.*/
@@ -35671,7 +35885,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task TXEN will subscribe to */
   #define RADIO_SUBSCRIBE_TXEN_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_TXEN_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_TXEN_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define RADIO_SUBSCRIBE_TXEN_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_TXEN_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_TXEN_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35689,7 +35903,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RXEN will subscribe to */
   #define RADIO_SUBSCRIBE_RXEN_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_RXEN_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_RXEN_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define RADIO_SUBSCRIBE_RXEN_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_RXEN_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_RXEN_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35707,7 +35921,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define RADIO_SUBSCRIBE_START_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_SUBSCRIBE_START_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_START_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_START_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35725,7 +35939,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define RADIO_SUBSCRIBE_STOP_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define RADIO_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35743,7 +35957,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task DISABLE will subscribe to */
   #define RADIO_SUBSCRIBE_DISABLE_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_DISABLE_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_DISABLE_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_SUBSCRIBE_DISABLE_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_DISABLE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_DISABLE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35761,7 +35975,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RSSISTART will subscribe to */
   #define RADIO_SUBSCRIBE_RSSISTART_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_RSSISTART_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_RSSISTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define RADIO_SUBSCRIBE_RSSISTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define RADIO_SUBSCRIBE_RSSISTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define RADIO_SUBSCRIBE_RSSISTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35779,7 +35993,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task BCSTART will subscribe to */
   #define RADIO_SUBSCRIBE_BCSTART_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_BCSTART_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_BCSTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_SUBSCRIBE_BCSTART_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_BCSTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_BCSTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35797,7 +36011,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task BCSTOP will subscribe to */
   #define RADIO_SUBSCRIBE_BCSTOP_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_BCSTOP_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_BCSTOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define RADIO_SUBSCRIBE_BCSTOP_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_BCSTOP_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_BCSTOP_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35815,7 +36029,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task EDSTART will subscribe to */
   #define RADIO_SUBSCRIBE_EDSTART_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_EDSTART_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_EDSTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_SUBSCRIBE_EDSTART_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_EDSTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_EDSTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35833,7 +36047,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task EDSTOP will subscribe to */
   #define RADIO_SUBSCRIBE_EDSTOP_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_EDSTOP_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_EDSTOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define RADIO_SUBSCRIBE_EDSTOP_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_EDSTOP_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_EDSTOP_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35851,7 +36065,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CCASTART will subscribe to */
   #define RADIO_SUBSCRIBE_CCASTART_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_CCASTART_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_CCASTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RADIO_SUBSCRIBE_CCASTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_CCASTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RADIO_SUBSCRIBE_CCASTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35869,7 +36083,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CCASTOP will subscribe to */
   #define RADIO_SUBSCRIBE_CCASTOP_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_CCASTOP_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_CCASTOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_SUBSCRIBE_CCASTOP_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_CCASTOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_CCASTOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35887,7 +36101,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task DFESTART will subscribe to */
   #define RADIO_SUBSCRIBE_DFESTART_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_DFESTART_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_DFESTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RADIO_SUBSCRIBE_DFESTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_DFESTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RADIO_SUBSCRIBE_DFESTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35905,7 +36119,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task DFESTOP will subscribe to */
   #define RADIO_SUBSCRIBE_DFESTOP_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_DFESTOP_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_DFESTOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_SUBSCRIBE_DFESTOP_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_DFESTOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_DFESTOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35924,7 +36138,7 @@ typedef struct {
   #define RADIO_SUBSCRIBE_ACQINJ0DMASTART_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                        */
   #define RADIO_SUBSCRIBE_ACQINJ0DMASTART_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_ACQINJ0DMASTART_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define RADIO_SUBSCRIBE_ACQINJ0DMASTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                     */
+  #define RADIO_SUBSCRIBE_ACQINJ0DMASTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                    */
   #define RADIO_SUBSCRIBE_ACQINJ0DMASTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                     */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35943,7 +36157,7 @@ typedef struct {
   #define RADIO_SUBSCRIBE_ACQINJ0DMASTOP_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                         */
   #define RADIO_SUBSCRIBE_ACQINJ0DMASTOP_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_ACQINJ0DMASTOP_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define RADIO_SUBSCRIBE_ACQINJ0DMASTOP_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                      */
+  #define RADIO_SUBSCRIBE_ACQINJ0DMASTOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                     */
   #define RADIO_SUBSCRIBE_ACQINJ0DMASTOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                      */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35962,7 +36176,7 @@ typedef struct {
   #define RADIO_SUBSCRIBE_ACQINJ1DMASTART_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                        */
   #define RADIO_SUBSCRIBE_ACQINJ1DMASTART_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_ACQINJ1DMASTART_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define RADIO_SUBSCRIBE_ACQINJ1DMASTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                     */
+  #define RADIO_SUBSCRIBE_ACQINJ1DMASTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                    */
   #define RADIO_SUBSCRIBE_ACQINJ1DMASTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                     */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35981,7 +36195,7 @@ typedef struct {
   #define RADIO_SUBSCRIBE_ACQINJ1DMASTOP_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                         */
   #define RADIO_SUBSCRIBE_ACQINJ1DMASTOP_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_ACQINJ1DMASTOP_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define RADIO_SUBSCRIBE_ACQINJ1DMASTOP_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                      */
+  #define RADIO_SUBSCRIBE_ACQINJ1DMASTOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                     */
   #define RADIO_SUBSCRIBE_ACQINJ1DMASTOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                      */
 
 /* EN @Bit 31 : (unspecified) */
@@ -35999,7 +36213,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task LOOPBACKEN will subscribe to */
   #define RADIO_SUBSCRIBE_LOOPBACKEN_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_LOOPBACKEN_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_LOOPBACKEN_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define RADIO_SUBSCRIBE_LOOPBACKEN_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define RADIO_SUBSCRIBE_LOOPBACKEN_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define RADIO_SUBSCRIBE_LOOPBACKEN_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36017,7 +36231,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CALSTART will subscribe to */
   #define RADIO_SUBSCRIBE_CALSTART_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_CALSTART_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_CALSTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RADIO_SUBSCRIBE_CALSTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_CALSTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RADIO_SUBSCRIBE_CALSTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36035,7 +36249,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CALSTOP will subscribe to */
   #define RADIO_SUBSCRIBE_CALSTOP_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_CALSTOP_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_CALSTOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_SUBSCRIBE_CALSTOP_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_CALSTOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_CALSTOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36053,7 +36267,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CHNOINCR will subscribe to */
   #define RADIO_SUBSCRIBE_CHNOINCR_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_CHNOINCR_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_CHNOINCR_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RADIO_SUBSCRIBE_CHNOINCR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RADIO_SUBSCRIBE_CHNOINCR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RADIO_SUBSCRIBE_CHNOINCR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36071,7 +36285,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task DFEDMASTART will subscribe to */
   #define RADIO_SUBSCRIBE_DFEDMASTART_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define RADIO_SUBSCRIBE_DFEDMASTART_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_DFEDMASTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define RADIO_SUBSCRIBE_DFEDMASTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define RADIO_SUBSCRIBE_DFEDMASTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define RADIO_SUBSCRIBE_DFEDMASTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36089,7 +36303,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task DFEDMASTOP will subscribe to */
   #define RADIO_SUBSCRIBE_DFEDMASTOP_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_DFEDMASTOP_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_DFEDMASTOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define RADIO_SUBSCRIBE_DFEDMASTOP_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define RADIO_SUBSCRIBE_DFEDMASTOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define RADIO_SUBSCRIBE_DFEDMASTOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36107,7 +36321,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RELOADFREQ will subscribe to */
   #define RADIO_SUBSCRIBE_RELOADFREQ_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_RELOADFREQ_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_RELOADFREQ_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define RADIO_SUBSCRIBE_RELOADFREQ_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define RADIO_SUBSCRIBE_RELOADFREQ_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define RADIO_SUBSCRIBE_RELOADFREQ_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36126,7 +36340,7 @@ typedef struct {
   #define RADIO_SUBSCRIBE_CSTONESSTART_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define RADIO_SUBSCRIBE_CSTONESSTART_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_CSTONESSTART_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define RADIO_SUBSCRIBE_CSTONESSTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define RADIO_SUBSCRIBE_CSTONESSTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define RADIO_SUBSCRIBE_CSTONESSTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36144,7 +36358,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SOFTRESET will subscribe to */
   #define RADIO_SUBSCRIBE_SOFTRESET_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define RADIO_SUBSCRIBE_SOFTRESET_CHIDX_Msk (0xFFUL << RADIO_SUBSCRIBE_SOFTRESET_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define RADIO_SUBSCRIBE_SOFTRESET_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define RADIO_SUBSCRIBE_SOFTRESET_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define RADIO_SUBSCRIBE_SOFTRESET_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36675,7 +36889,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define RADIO_PUBLISH_READY_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_READY_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define RADIO_PUBLISH_READY_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_READY_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_READY_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36693,7 +36907,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TXREADY will publish to */
   #define RADIO_PUBLISH_TXREADY_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_TXREADY_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_TXREADY_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_PUBLISH_TXREADY_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_TXREADY_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_TXREADY_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36711,7 +36925,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RXREADY will publish to */
   #define RADIO_PUBLISH_RXREADY_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_RXREADY_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_RXREADY_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_PUBLISH_RXREADY_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_RXREADY_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_RXREADY_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36729,7 +36943,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ADDRESS will publish to */
   #define RADIO_PUBLISH_ADDRESS_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_ADDRESS_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_ADDRESS_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_PUBLISH_ADDRESS_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_ADDRESS_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_ADDRESS_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36747,7 +36961,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event FRAMESTART will publish to */
   #define RADIO_PUBLISH_FRAMESTART_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_FRAMESTART_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_FRAMESTART_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RADIO_PUBLISH_FRAMESTART_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_FRAMESTART_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RADIO_PUBLISH_FRAMESTART_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36765,7 +36979,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event PAYLOAD will publish to */
   #define RADIO_PUBLISH_PAYLOAD_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_PAYLOAD_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_PAYLOAD_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_PUBLISH_PAYLOAD_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_PAYLOAD_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_PAYLOAD_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36783,7 +36997,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define RADIO_PUBLISH_END_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_END_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define RADIO_PUBLISH_END_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_END_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_END_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36801,7 +37015,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event PHYEND will publish to */
   #define RADIO_PUBLISH_PHYEND_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_PHYEND_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_PHYEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define RADIO_PUBLISH_PHYEND_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_PHYEND_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_PHYEND_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36819,7 +37033,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DISABLED will publish to */
   #define RADIO_PUBLISH_DISABLED_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_DISABLED_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_DISABLED_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define RADIO_PUBLISH_DISABLED_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_DISABLED_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_DISABLED_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36837,7 +37051,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DEVMATCH will publish to */
   #define RADIO_PUBLISH_DEVMATCH_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_DEVMATCH_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_DEVMATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define RADIO_PUBLISH_DEVMATCH_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_DEVMATCH_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_DEVMATCH_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36855,7 +37069,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DEVMISS will publish to */
   #define RADIO_PUBLISH_DEVMISS_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_DEVMISS_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_DEVMISS_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_PUBLISH_DEVMISS_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_DEVMISS_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_DEVMISS_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36873,7 +37087,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CRCOK will publish to */
   #define RADIO_PUBLISH_CRCOK_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CRCOK_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CRCOK_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define RADIO_PUBLISH_CRCOK_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_CRCOK_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_CRCOK_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36891,7 +37105,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CRCERROR will publish to */
   #define RADIO_PUBLISH_CRCERROR_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CRCERROR_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CRCERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define RADIO_PUBLISH_CRCERROR_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_CRCERROR_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_CRCERROR_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36909,7 +37123,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event BCMATCH will publish to */
   #define RADIO_PUBLISH_BCMATCH_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_BCMATCH_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_BCMATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_PUBLISH_BCMATCH_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_BCMATCH_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_BCMATCH_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36927,7 +37141,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event EDEND will publish to */
   #define RADIO_PUBLISH_EDEND_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_EDEND_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_EDEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define RADIO_PUBLISH_EDEND_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_EDEND_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_EDEND_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36945,7 +37159,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event EDSTOPPED will publish to */
   #define RADIO_PUBLISH_EDSTOPPED_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_EDSTOPPED_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_EDSTOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_PUBLISH_EDSTOPPED_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_EDSTOPPED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_EDSTOPPED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36963,7 +37177,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CCAIDLE will publish to */
   #define RADIO_PUBLISH_CCAIDLE_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CCAIDLE_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CCAIDLE_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_PUBLISH_CCAIDLE_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_CCAIDLE_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_CCAIDLE_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36981,7 +37195,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CCABUSY will publish to */
   #define RADIO_PUBLISH_CCABUSY_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CCABUSY_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CCABUSY_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_PUBLISH_CCABUSY_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_CCABUSY_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_CCABUSY_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -36999,7 +37213,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CCASTOPPED will publish to */
   #define RADIO_PUBLISH_CCASTOPPED_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CCASTOPPED_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CCASTOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RADIO_PUBLISH_CCASTOPPED_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_CCASTOPPED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RADIO_PUBLISH_CCASTOPPED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37017,7 +37231,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RATEBOOST will publish to */
   #define RADIO_PUBLISH_RATEBOOST_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_RATEBOOST_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_RATEBOOST_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_PUBLISH_RATEBOOST_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_RATEBOOST_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_RATEBOOST_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37035,7 +37249,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event MHRMATCH will publish to */
   #define RADIO_PUBLISH_MHRMATCH_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_MHRMATCH_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_MHRMATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define RADIO_PUBLISH_MHRMATCH_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_MHRMATCH_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_MHRMATCH_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37053,7 +37267,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event SYNC will publish to */
   #define RADIO_PUBLISH_SYNC_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_SYNC_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_SYNC_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define RADIO_PUBLISH_SYNC_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_SYNC_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_SYNC_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37071,7 +37285,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CTEPRESENT will publish to */
   #define RADIO_PUBLISH_CTEPRESENT_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CTEPRESENT_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CTEPRESENT_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RADIO_PUBLISH_CTEPRESENT_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_CTEPRESENT_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RADIO_PUBLISH_CTEPRESENT_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37089,7 +37303,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CTEWARNING will publish to */
   #define RADIO_PUBLISH_CTEWARNING_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CTEWARNING_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CTEWARNING_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RADIO_PUBLISH_CTEWARNING_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_CTEWARNING_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RADIO_PUBLISH_CTEWARNING_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37107,7 +37321,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DFEEND will publish to */
   #define RADIO_PUBLISH_DFEEND_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_DFEEND_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_DFEEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define RADIO_PUBLISH_DFEEND_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_DFEEND_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_DFEEND_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37125,7 +37339,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event MODEWRITTEN will publish to */
   #define RADIO_PUBLISH_MODEWRITTEN_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_MODEWRITTEN_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_MODEWRITTEN_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define RADIO_PUBLISH_MODEWRITTEN_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define RADIO_PUBLISH_MODEWRITTEN_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define RADIO_PUBLISH_MODEWRITTEN_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37143,7 +37357,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event MODEREADY will publish to */
   #define RADIO_PUBLISH_MODEREADY_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_MODEREADY_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_MODEREADY_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_PUBLISH_MODEREADY_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_MODEREADY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_MODEREADY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37161,7 +37375,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CTEEND will publish to */
   #define RADIO_PUBLISH_CTEEND_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CTEEND_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CTEEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define RADIO_PUBLISH_CTEEND_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_CTEEND_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_CTEEND_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37179,7 +37393,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event LBREADY will publish to */
   #define RADIO_PUBLISH_LBREADY_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_LBREADY_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_LBREADY_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_PUBLISH_LBREADY_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_LBREADY_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_LBREADY_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37197,7 +37411,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CALDONE will publish to */
   #define RADIO_PUBLISH_CALDONE_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CALDONE_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CALDONE_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RADIO_PUBLISH_CALDONE_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_CALDONE_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_CALDONE_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37215,7 +37429,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CHNOUPDATED will publish to */
   #define RADIO_PUBLISH_CHNOUPDATED_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CHNOUPDATED_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CHNOUPDATED_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define RADIO_PUBLISH_CHNOUPDATED_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define RADIO_PUBLISH_CHNOUPDATED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define RADIO_PUBLISH_CHNOUPDATED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37233,7 +37447,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TXTIMERMATCH will publish to */
   #define RADIO_PUBLISH_TXTIMERMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_TXTIMERMATCH_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_TXTIMERMATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define RADIO_PUBLISH_TXTIMERMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define RADIO_PUBLISH_TXTIMERMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define RADIO_PUBLISH_TXTIMERMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37251,7 +37465,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RXTIMERMATCH will publish to */
   #define RADIO_PUBLISH_RXTIMERMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_RXTIMERMATCH_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_RXTIMERMATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define RADIO_PUBLISH_RXTIMERMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define RADIO_PUBLISH_RXTIMERMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define RADIO_PUBLISH_RXTIMERMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37269,7 +37483,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event BESPOKEACK will publish to */
   #define RADIO_PUBLISH_BESPOKEACK_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_BESPOKEACK_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_BESPOKEACK_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RADIO_PUBLISH_BESPOKEACK_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_BESPOKEACK_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RADIO_PUBLISH_BESPOKEACK_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37287,7 +37501,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TXADDRESS will publish to */
   #define RADIO_PUBLISH_TXADDRESS_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_TXADDRESS_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_TXADDRESS_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_PUBLISH_TXADDRESS_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_TXADDRESS_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_TXADDRESS_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37305,7 +37519,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RXADDRESS will publish to */
   #define RADIO_PUBLISH_RXADDRESS_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_RXADDRESS_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_RXADDRESS_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define RADIO_PUBLISH_RXADDRESS_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_RXADDRESS_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define RADIO_PUBLISH_RXADDRESS_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37323,7 +37537,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ACQINJ0DMAEND will publish to */
   #define RADIO_PUBLISH_ACQINJ0DMAEND_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define RADIO_PUBLISH_ACQINJ0DMAEND_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_ACQINJ0DMAEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define RADIO_PUBLISH_ACQINJ0DMAEND_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define RADIO_PUBLISH_ACQINJ0DMAEND_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define RADIO_PUBLISH_ACQINJ0DMAEND_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37341,7 +37555,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ACQINJ1DMAEND will publish to */
   #define RADIO_PUBLISH_ACQINJ1DMAEND_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define RADIO_PUBLISH_ACQINJ1DMAEND_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_ACQINJ1DMAEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define RADIO_PUBLISH_ACQINJ1DMAEND_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define RADIO_PUBLISH_ACQINJ1DMAEND_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define RADIO_PUBLISH_ACQINJ1DMAEND_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -37359,7 +37573,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CSTONESEND will publish to */
   #define RADIO_PUBLISH_CSTONESEND_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RADIO_PUBLISH_CSTONESEND_CHIDX_Msk (0xFFUL << RADIO_PUBLISH_CSTONESEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RADIO_PUBLISH_CSTONESEND_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RADIO_PUBLISH_CSTONESEND_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RADIO_PUBLISH_CSTONESEND_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -40376,7 +40590,7 @@ typedef struct {
 
 /* DTX @Bits 3..4 : Default TX value. Specifies what the RADIO will transmit when it is not started, i.e. between:
                     RADIO.EVENTS_READY and RADIO.TASKS_START RADIO.EVENTS_END and RADIO.TASKS_START RADIO.EVENTS_END and
-                    RADIO.EVENTS_DISABLED) */
+                    RADIO.EVENTS_DISABLED */
 
   #define RADIO_MODECNF_DTX_Pos (3UL)                /*!< Position of DTX field.                                               */
   #define RADIO_MODECNF_DTX_Msk (0x3UL << RADIO_MODECNF_DTX_Pos) /*!< Bit mask of DTX field.                                   */
@@ -40384,7 +40598,7 @@ typedef struct {
   #define RADIO_MODECNF_DTX_Max (0x2UL)              /*!< Max enumerator value of DTX field.                                   */
   #define RADIO_MODECNF_DTX_B1 (0x0UL)               /*!< Transmit '1'                                                         */
   #define RADIO_MODECNF_DTX_B0 (0x1UL)               /*!< Transmit '0'                                                         */
-  #define RADIO_MODECNF_DTX_Center (0x2UL)           /*!< Transmit center frequency When tuning the crystal for centre
+  #define RADIO_MODECNF_DTX_Center (0x2UL)           /*!< Transmit center frequency. When tuning the crystal for centre
                                                           frequency, the RADIO must be set in DTX = Center mode to be able to
                                                           achieve the expected accuracy. This is only a valid setting for
                                                           Nrf_1Mbit, Nrf_2Mbit, Nrf_250kbit, Ble_1Mbit and Ble_2Mbit.*/
@@ -40477,7 +40691,7 @@ typedef struct {
 /* EDLVL @Bits 0..7 : IEEE 802.15.4 energy detect level */
   #define RADIO_EDSAMPLE_EDLVL_Pos (0UL)             /*!< Position of EDLVL field.                                             */
   #define RADIO_EDSAMPLE_EDLVL_Msk (0xFFUL << RADIO_EDSAMPLE_EDLVL_Pos) /*!< Bit mask of EDLVL field.                          */
-  #define RADIO_EDSAMPLE_EDLVL_Min (0x0UL)           /*!< Min value of EDLVL field.                                            */
+  #define RADIO_EDSAMPLE_EDLVL_Min (0x00UL)          /*!< Min value of EDLVL field.                                            */
   #define RADIO_EDSAMPLE_EDLVL_Max (0x7FUL)          /*!< Max size of EDLVL field.                                             */
 
 
@@ -41026,7 +41240,7 @@ typedef struct {
 
 
 /* RADIO_ADPLLCOMPANIONBACKDOORS: This value is written to the AdPll when powering up the digital island */
-  #define RADIO_ADPLLCOMPANIONBACKDOORS_ResetValue (0x00000310UL) /*!< Reset value of ADPLLCOMPANIONBACKDOORS register.        */
+  #define RADIO_ADPLLCOMPANIONBACKDOORS_ResetValue (0x00000320UL) /*!< Reset value of ADPLLCOMPANIONBACKDOORS register.        */
 
 /* FLIPSSEL @Bit 0 : If 0, we flip the interpretation of the sSel signal (to work around a bug if we have managed to flip it
                      somewhere in the design process) */
@@ -41242,7 +41456,9 @@ typedef struct {
   #define RADIO_OVERRIDEFREQ_OVREN_Msk (0x1UL << RADIO_OVERRIDEFREQ_OVREN_Pos) /*!< Bit mask of OVREN field.                   */
 
 
-/* RADIO_ADPLLTRIMCOMMAND0: This value is written to the AdPll when powering up the digital island. Never reset with SOFTRESET */
+/* RADIO_ADPLLTRIMCOMMAND0: This value is written to the AdPll when powering up the digital island. Never reset with SOFTRESET.
+                             */
+
   #define RADIO_ADPLLTRIMCOMMAND0_ResetValue (0x80000000UL) /*!< Reset value of ADPLLTRIMCOMMAND0 register.                    */
 
 /* VALUE @Bits 0..15 : The value to be written the register in the digital island */
@@ -41259,7 +41475,9 @@ typedef struct {
                                                                             DONOTTRANSFER field.*/
 
 
-/* RADIO_ADPLLTRIMCOMMAND1: This value is written to the AdPll when powering up the digital island. Never reset with SOFTRESET */
+/* RADIO_ADPLLTRIMCOMMAND1: This value is written to the AdPll when powering up the digital island. Never reset with SOFTRESET.
+                             */
+
   #define RADIO_ADPLLTRIMCOMMAND1_ResetValue (0x80000000UL) /*!< Reset value of ADPLLTRIMCOMMAND1 register.                    */
 
 /* VALUE @Bits 0..15 : The value to be written the register in the digital island */
@@ -41276,7 +41494,9 @@ typedef struct {
                                                                             DONOTTRANSFER field.*/
 
 
-/* RADIO_ADPLLTRIMCOMMAND2: This value is written to the AdPll when powering up the digital island. NEVER reset with SOFTRESET */
+/* RADIO_ADPLLTRIMCOMMAND2: This value is written to the AdPll when powering up the digital island. Never reset with SOFTRESET.
+                             */
+
   #define RADIO_ADPLLTRIMCOMMAND2_ResetValue (0x80000000UL) /*!< Reset value of ADPLLTRIMCOMMAND2 register.                    */
 
 /* VALUE @Bits 0..15 : The value to be written the register in the digital island */
@@ -41293,7 +41513,9 @@ typedef struct {
                                                                             DONOTTRANSFER field.*/
 
 
-/* RADIO_ADPLLTRIMCOMMAND3: This value is written to the AdPll when powering up the digital island. NEVER reset with SOFTRESET */
+/* RADIO_ADPLLTRIMCOMMAND3: This value is written to the AdPll when powering up the digital island. Never reset with SOFTRESET.
+                             */
+
   #define RADIO_ADPLLTRIMCOMMAND3_ResetValue (0x80000000UL) /*!< Reset value of ADPLLTRIMCOMMAND3 register.                    */
 
 /* VALUE @Bits 0..15 : The value to be written the register in the digital island */
@@ -41307,6 +41529,82 @@ typedef struct {
 /* DONOTTRANSFER @Bit 31 : When 1, we do not transfer this word to AdPll at power up */
   #define RADIO_ADPLLTRIMCOMMAND3_DONOTTRANSFER_Pos (31UL) /*!< Position of DONOTTRANSFER field.                               */
   #define RADIO_ADPLLTRIMCOMMAND3_DONOTTRANSFER_Msk (0x1UL << RADIO_ADPLLTRIMCOMMAND3_DONOTTRANSFER_Pos) /*!< Bit mask of
+                                                                            DONOTTRANSFER field.*/
+
+
+/* RADIO_ADPLLTRIMCOMMAND4: This value is written to the AdPll when powering up the digital island. Never reset with SOFTRESET.
+                             */
+
+  #define RADIO_ADPLLTRIMCOMMAND4_ResetValue (0x80000000UL) /*!< Reset value of ADPLLTRIMCOMMAND4 register.                    */
+
+/* VALUE @Bits 0..15 : The value to be written the register in the digital island */
+  #define RADIO_ADPLLTRIMCOMMAND4_VALUE_Pos (0UL)    /*!< Position of VALUE field.                                             */
+  #define RADIO_ADPLLTRIMCOMMAND4_VALUE_Msk (0xFFFFUL << RADIO_ADPLLTRIMCOMMAND4_VALUE_Pos) /*!< Bit mask of VALUE field.      */
+
+/* ADDRESS @Bits 16..27 : The address of the digital island to write to */
+  #define RADIO_ADPLLTRIMCOMMAND4_ADDRESS_Pos (16UL) /*!< Position of ADDRESS field.                                           */
+  #define RADIO_ADPLLTRIMCOMMAND4_ADDRESS_Msk (0xFFFUL << RADIO_ADPLLTRIMCOMMAND4_ADDRESS_Pos) /*!< Bit mask of ADDRESS field. */
+
+/* DONOTTRANSFER @Bit 31 : When 1, we do not transfer this word to AdPll at power up */
+  #define RADIO_ADPLLTRIMCOMMAND4_DONOTTRANSFER_Pos (31UL) /*!< Position of DONOTTRANSFER field.                               */
+  #define RADIO_ADPLLTRIMCOMMAND4_DONOTTRANSFER_Msk (0x1UL << RADIO_ADPLLTRIMCOMMAND4_DONOTTRANSFER_Pos) /*!< Bit mask of
+                                                                            DONOTTRANSFER field.*/
+
+
+/* RADIO_ADPLLTRIMCOMMAND5: This value is written to the AdPll when powering up the digital island. Never reset with SOFTRESET.
+                             */
+
+  #define RADIO_ADPLLTRIMCOMMAND5_ResetValue (0x80000000UL) /*!< Reset value of ADPLLTRIMCOMMAND5 register.                    */
+
+/* VALUE @Bits 0..15 : The value to be written the register in the digital island */
+  #define RADIO_ADPLLTRIMCOMMAND5_VALUE_Pos (0UL)    /*!< Position of VALUE field.                                             */
+  #define RADIO_ADPLLTRIMCOMMAND5_VALUE_Msk (0xFFFFUL << RADIO_ADPLLTRIMCOMMAND5_VALUE_Pos) /*!< Bit mask of VALUE field.      */
+
+/* ADDRESS @Bits 16..27 : The address of the digital island to write to */
+  #define RADIO_ADPLLTRIMCOMMAND5_ADDRESS_Pos (16UL) /*!< Position of ADDRESS field.                                           */
+  #define RADIO_ADPLLTRIMCOMMAND5_ADDRESS_Msk (0xFFFUL << RADIO_ADPLLTRIMCOMMAND5_ADDRESS_Pos) /*!< Bit mask of ADDRESS field. */
+
+/* DONOTTRANSFER @Bit 31 : When 1, we do not transfer this word to AdPll at power up */
+  #define RADIO_ADPLLTRIMCOMMAND5_DONOTTRANSFER_Pos (31UL) /*!< Position of DONOTTRANSFER field.                               */
+  #define RADIO_ADPLLTRIMCOMMAND5_DONOTTRANSFER_Msk (0x1UL << RADIO_ADPLLTRIMCOMMAND5_DONOTTRANSFER_Pos) /*!< Bit mask of
+                                                                            DONOTTRANSFER field.*/
+
+
+/* RADIO_ADPLLTRIMCOMMAND6: This value is written to the AdPll when powering up the digital island. Never reset with SOFTRESET.
+                             */
+
+  #define RADIO_ADPLLTRIMCOMMAND6_ResetValue (0x80000000UL) /*!< Reset value of ADPLLTRIMCOMMAND6 register.                    */
+
+/* VALUE @Bits 0..15 : The value to be written the register in the digital island */
+  #define RADIO_ADPLLTRIMCOMMAND6_VALUE_Pos (0UL)    /*!< Position of VALUE field.                                             */
+  #define RADIO_ADPLLTRIMCOMMAND6_VALUE_Msk (0xFFFFUL << RADIO_ADPLLTRIMCOMMAND6_VALUE_Pos) /*!< Bit mask of VALUE field.      */
+
+/* ADDRESS @Bits 16..27 : The address of the digital island to write to */
+  #define RADIO_ADPLLTRIMCOMMAND6_ADDRESS_Pos (16UL) /*!< Position of ADDRESS field.                                           */
+  #define RADIO_ADPLLTRIMCOMMAND6_ADDRESS_Msk (0xFFFUL << RADIO_ADPLLTRIMCOMMAND6_ADDRESS_Pos) /*!< Bit mask of ADDRESS field. */
+
+/* DONOTTRANSFER @Bit 31 : When 1, we do not transfer this word to AdPll at power up */
+  #define RADIO_ADPLLTRIMCOMMAND6_DONOTTRANSFER_Pos (31UL) /*!< Position of DONOTTRANSFER field.                               */
+  #define RADIO_ADPLLTRIMCOMMAND6_DONOTTRANSFER_Msk (0x1UL << RADIO_ADPLLTRIMCOMMAND6_DONOTTRANSFER_Pos) /*!< Bit mask of
+                                                                            DONOTTRANSFER field.*/
+
+
+/* RADIO_ADPLLTRIMCOMMAND7: This value is written to the AdPll when powering up the digital island. Never reset with SOFTRESET.
+                             */
+
+  #define RADIO_ADPLLTRIMCOMMAND7_ResetValue (0x80000000UL) /*!< Reset value of ADPLLTRIMCOMMAND7 register.                    */
+
+/* VALUE @Bits 0..15 : The value to be written the register in the digital island */
+  #define RADIO_ADPLLTRIMCOMMAND7_VALUE_Pos (0UL)    /*!< Position of VALUE field.                                             */
+  #define RADIO_ADPLLTRIMCOMMAND7_VALUE_Msk (0xFFFFUL << RADIO_ADPLLTRIMCOMMAND7_VALUE_Pos) /*!< Bit mask of VALUE field.      */
+
+/* ADDRESS @Bits 16..27 : The address of the digital island to write to */
+  #define RADIO_ADPLLTRIMCOMMAND7_ADDRESS_Pos (16UL) /*!< Position of ADDRESS field.                                           */
+  #define RADIO_ADPLLTRIMCOMMAND7_ADDRESS_Msk (0xFFFUL << RADIO_ADPLLTRIMCOMMAND7_ADDRESS_Pos) /*!< Bit mask of ADDRESS field. */
+
+/* DONOTTRANSFER @Bit 31 : When 1, we do not transfer this word to AdPll at power up */
+  #define RADIO_ADPLLTRIMCOMMAND7_DONOTTRANSFER_Pos (31UL) /*!< Position of DONOTTRANSFER field.                               */
+  #define RADIO_ADPLLTRIMCOMMAND7_DONOTTRANSFER_Msk (0x1UL << RADIO_ADPLLTRIMCOMMAND7_DONOTTRANSFER_Pos) /*!< Bit mask of
                                                                             DONOTTRANSFER field.*/
 
 
@@ -41379,78 +41677,6 @@ typedef struct {
 /* DONOTTRANSFER @Bit 31 : When 1, we do not transfer this word to AdPll at power up */
   #define RADIO_ADPLLSTARTUPCOMMAND3_DONOTTRANSFER_Pos (31UL) /*!< Position of DONOTTRANSFER field.                            */
   #define RADIO_ADPLLSTARTUPCOMMAND3_DONOTTRANSFER_Msk (0x1UL << RADIO_ADPLLSTARTUPCOMMAND3_DONOTTRANSFER_Pos) /*!< Bit mask of
-                                                                            DONOTTRANSFER field.*/
-
-
-/* RADIO_ADPLLSTARTUPCOMMAND4: This value is written to the AdPll when powering up the digital island */
-  #define RADIO_ADPLLSTARTUPCOMMAND4_ResetValue (0x80000000UL) /*!< Reset value of ADPLLSTARTUPCOMMAND4 register.              */
-
-/* VALUE @Bits 0..15 : The value to be written the register in the digital island */
-  #define RADIO_ADPLLSTARTUPCOMMAND4_VALUE_Pos (0UL) /*!< Position of VALUE field.                                             */
-  #define RADIO_ADPLLSTARTUPCOMMAND4_VALUE_Msk (0xFFFFUL << RADIO_ADPLLSTARTUPCOMMAND4_VALUE_Pos) /*!< Bit mask of VALUE field.*/
-
-/* ADDRESS @Bits 16..27 : The address of the digital island to write to */
-  #define RADIO_ADPLLSTARTUPCOMMAND4_ADDRESS_Pos (16UL) /*!< Position of ADDRESS field.                                        */
-  #define RADIO_ADPLLSTARTUPCOMMAND4_ADDRESS_Msk (0xFFFUL << RADIO_ADPLLSTARTUPCOMMAND4_ADDRESS_Pos) /*!< Bit mask of ADDRESS
-                                                                            field.*/
-
-/* DONOTTRANSFER @Bit 31 : When 1, we do not transfer this word to AdPll at power up */
-  #define RADIO_ADPLLSTARTUPCOMMAND4_DONOTTRANSFER_Pos (31UL) /*!< Position of DONOTTRANSFER field.                            */
-  #define RADIO_ADPLLSTARTUPCOMMAND4_DONOTTRANSFER_Msk (0x1UL << RADIO_ADPLLSTARTUPCOMMAND4_DONOTTRANSFER_Pos) /*!< Bit mask of
-                                                                            DONOTTRANSFER field.*/
-
-
-/* RADIO_ADPLLSTARTUPCOMMAND5: This value is written to the AdPll when powering up the digital island */
-  #define RADIO_ADPLLSTARTUPCOMMAND5_ResetValue (0x80000000UL) /*!< Reset value of ADPLLSTARTUPCOMMAND5 register.              */
-
-/* VALUE @Bits 0..15 : The value to be written the register in the digital island */
-  #define RADIO_ADPLLSTARTUPCOMMAND5_VALUE_Pos (0UL) /*!< Position of VALUE field.                                             */
-  #define RADIO_ADPLLSTARTUPCOMMAND5_VALUE_Msk (0xFFFFUL << RADIO_ADPLLSTARTUPCOMMAND5_VALUE_Pos) /*!< Bit mask of VALUE field.*/
-
-/* ADDRESS @Bits 16..27 : The address of the digital island to write to */
-  #define RADIO_ADPLLSTARTUPCOMMAND5_ADDRESS_Pos (16UL) /*!< Position of ADDRESS field.                                        */
-  #define RADIO_ADPLLSTARTUPCOMMAND5_ADDRESS_Msk (0xFFFUL << RADIO_ADPLLSTARTUPCOMMAND5_ADDRESS_Pos) /*!< Bit mask of ADDRESS
-                                                                            field.*/
-
-/* DONOTTRANSFER @Bit 31 : When 1, we do not transfer this word to AdPll at power up */
-  #define RADIO_ADPLLSTARTUPCOMMAND5_DONOTTRANSFER_Pos (31UL) /*!< Position of DONOTTRANSFER field.                            */
-  #define RADIO_ADPLLSTARTUPCOMMAND5_DONOTTRANSFER_Msk (0x1UL << RADIO_ADPLLSTARTUPCOMMAND5_DONOTTRANSFER_Pos) /*!< Bit mask of
-                                                                            DONOTTRANSFER field.*/
-
-
-/* RADIO_ADPLLSTARTUPCOMMAND6: This value is written to the AdPll when powering up the digital island */
-  #define RADIO_ADPLLSTARTUPCOMMAND6_ResetValue (0x80000000UL) /*!< Reset value of ADPLLSTARTUPCOMMAND6 register.              */
-
-/* VALUE @Bits 0..15 : The value to be written the register in the digital island */
-  #define RADIO_ADPLLSTARTUPCOMMAND6_VALUE_Pos (0UL) /*!< Position of VALUE field.                                             */
-  #define RADIO_ADPLLSTARTUPCOMMAND6_VALUE_Msk (0xFFFFUL << RADIO_ADPLLSTARTUPCOMMAND6_VALUE_Pos) /*!< Bit mask of VALUE field.*/
-
-/* ADDRESS @Bits 16..27 : The address of the digital island to write to */
-  #define RADIO_ADPLLSTARTUPCOMMAND6_ADDRESS_Pos (16UL) /*!< Position of ADDRESS field.                                        */
-  #define RADIO_ADPLLSTARTUPCOMMAND6_ADDRESS_Msk (0xFFFUL << RADIO_ADPLLSTARTUPCOMMAND6_ADDRESS_Pos) /*!< Bit mask of ADDRESS
-                                                                            field.*/
-
-/* DONOTTRANSFER @Bit 31 : When 1, we do not transfer this word to AdPll at power up */
-  #define RADIO_ADPLLSTARTUPCOMMAND6_DONOTTRANSFER_Pos (31UL) /*!< Position of DONOTTRANSFER field.                            */
-  #define RADIO_ADPLLSTARTUPCOMMAND6_DONOTTRANSFER_Msk (0x1UL << RADIO_ADPLLSTARTUPCOMMAND6_DONOTTRANSFER_Pos) /*!< Bit mask of
-                                                                            DONOTTRANSFER field.*/
-
-
-/* RADIO_ADPLLSTARTUPCOMMAND7: This value is written to the AdPll when powering up the digital island */
-  #define RADIO_ADPLLSTARTUPCOMMAND7_ResetValue (0x80000000UL) /*!< Reset value of ADPLLSTARTUPCOMMAND7 register.              */
-
-/* VALUE @Bits 0..15 : The value to be written the register in the digital island */
-  #define RADIO_ADPLLSTARTUPCOMMAND7_VALUE_Pos (0UL) /*!< Position of VALUE field.                                             */
-  #define RADIO_ADPLLSTARTUPCOMMAND7_VALUE_Msk (0xFFFFUL << RADIO_ADPLLSTARTUPCOMMAND7_VALUE_Pos) /*!< Bit mask of VALUE field.*/
-
-/* ADDRESS @Bits 16..27 : The address of the digital island to write to */
-  #define RADIO_ADPLLSTARTUPCOMMAND7_ADDRESS_Pos (16UL) /*!< Position of ADDRESS field.                                        */
-  #define RADIO_ADPLLSTARTUPCOMMAND7_ADDRESS_Msk (0xFFFUL << RADIO_ADPLLSTARTUPCOMMAND7_ADDRESS_Pos) /*!< Bit mask of ADDRESS
-                                                                            field.*/
-
-/* DONOTTRANSFER @Bit 31 : When 1, we do not transfer this word to AdPll at power up */
-  #define RADIO_ADPLLSTARTUPCOMMAND7_DONOTTRANSFER_Pos (31UL) /*!< Position of DONOTTRANSFER field.                            */
-  #define RADIO_ADPLLSTARTUPCOMMAND7_DONOTTRANSFER_Msk (0x1UL << RADIO_ADPLLSTARTUPCOMMAND7_DONOTTRANSFER_Pos) /*!< Bit mask of
                                                                             DONOTTRANSFER field.*/
 
 
@@ -42351,16 +42577,16 @@ typedef struct {
 /* RADIO_DRIFTLR: Drift Controls in Long Range */
   #define RADIO_DRIFTLR_ResetValue (0x0000033CUL)    /*!< Reset value of DRIFTLR register.                                     */
 
-/* DRIFTHALPHA125 @Bits 0..7 : Override value for IIR feedback , drift estimator (despreadLELLong) */
+/* DRIFTHALPHA125 @Bits 0..7 : Value for IIR feedback , drift estimator (despreadLELLong) */
   #define RADIO_DRIFTLR_DRIFTHALPHA125_Pos (0UL)     /*!< Position of DRIFTHALPHA125 field.                                    */
   #define RADIO_DRIFTLR_DRIFTHALPHA125_Msk (0xFFUL << RADIO_DRIFTLR_DRIFTHALPHA125_Pos) /*!< Bit mask of DRIFTHALPHA125 field. */
 
-/* DRIFTVALIDTH125 @Bits 8..16 : Override value for driftValidTh, drift estimator (despreadLELLong) */
+/* DRIFTVALIDTH125 @Bits 8..16 : Value for driftValidTh, drift estimator (despreadLELLong) */
   #define RADIO_DRIFTLR_DRIFTVALIDTH125_Pos (8UL)    /*!< Position of DRIFTVALIDTH125 field.                                   */
   #define RADIO_DRIFTLR_DRIFTVALIDTH125_Msk (0x1FFUL << RADIO_DRIFTLR_DRIFTVALIDTH125_Pos) /*!< Bit mask of DRIFTVALIDTH125
                                                                             field.*/
 
-/* DRIFTLOWTH125 @Bits 24..29 : Override value for driftLowTh, drift estimator (despreadLELLong) */
+/* DRIFTLOWTH125 @Bits 24..29 : Value for driftLowTh, drift estimator (despreadLELLong) */
   #define RADIO_DRIFTLR_DRIFTLOWTH125_Pos (24UL)     /*!< Position of DRIFTLOWTH125 field.                                     */
   #define RADIO_DRIFTLR_DRIFTLOWTH125_Msk (0x3FUL << RADIO_DRIFTLR_DRIFTLOWTH125_Pos) /*!< Bit mask of DRIFTLOWTH125 field.    */
 
@@ -42368,11 +42594,11 @@ typedef struct {
 /* RADIO_DRIFT1: Drift Estimator configuration */
   #define RADIO_DRIFT1_ResetValue (0x00002820UL)     /*!< Reset value of DRIFT1 register.                                      */
 
-/* ALPHA @Bits 0..7 : Override value for IIR feedback , drift estimator (hypermode) */
+/* ALPHA @Bits 0..7 : Value for IIR feedback , drift estimator (hypermode) */
   #define RADIO_DRIFT1_ALPHA_Pos (0UL)               /*!< Position of ALPHA field.                                             */
   #define RADIO_DRIFT1_ALPHA_Msk (0xFFUL << RADIO_DRIFT1_ALPHA_Pos) /*!< Bit mask of ALPHA field.                              */
 
-/* VALIDTH @Bits 8..16 : Override value for driftValidTh, drift estimator (hypermode) */
+/* VALIDTH @Bits 8..16 : Value for driftValidTh, drift estimator (hypermode) */
   #define RADIO_DRIFT1_VALIDTH_Pos (8UL)             /*!< Position of VALIDTH field.                                           */
   #define RADIO_DRIFT1_VALIDTH_Msk (0x1FFUL << RADIO_DRIFT1_VALIDTH_Pos) /*!< Bit mask of VALIDTH field.                       */
 
@@ -42384,15 +42610,15 @@ typedef struct {
 /* RADIO_DRIFT2: Drift Estimator configuration */
   #define RADIO_DRIFT2_ResetValue (0x0C8A0008UL)     /*!< Reset value of DRIFT2 register.                                      */
 
-/* LOWTH @Bits 0..8 : Override value for driftLowTh, drift estimator (hypermode) */
+/* LOWTH @Bits 0..8 : Value for driftLowTh, drift estimator (hypermode) */
   #define RADIO_DRIFT2_LOWTH_Pos (0UL)               /*!< Position of LOWTH field.                                             */
   #define RADIO_DRIFT2_LOWTH_Msk (0x1FFUL << RADIO_DRIFT2_LOWTH_Pos) /*!< Bit mask of LOWTH field.                             */
 
-/* MAXDIST @Bits 16..19 : Override value for driftMaxDist, drift estimator (hypermode) */
+/* MAXDIST @Bits 16..19 : Value for driftMaxDist, drift estimator (hypermode) */
   #define RADIO_DRIFT2_MAXDIST_Pos (16UL)            /*!< Position of MAXDIST field.                                           */
   #define RADIO_DRIFT2_MAXDIST_Msk (0xFUL << RADIO_DRIFT2_MAXDIST_Pos) /*!< Bit mask of MAXDIST field.                         */
 
-/* DELAYTH @Bits 20..28 : Override value for driftDelayTh, drift estimator (hypermode) */
+/* DELAYTH @Bits 20..28 : Value for driftDelayTh, drift estimator (hypermode) */
   #define RADIO_DRIFT2_DELAYTH_Pos (20UL)            /*!< Position of DELAYTH field.                                           */
   #define RADIO_DRIFT2_DELAYTH_Msk (0x1FFUL << RADIO_DRIFT2_DELAYTH_Pos) /*!< Bit mask of DELAYTH field.                       */
 
@@ -42400,11 +42626,11 @@ typedef struct {
 /* RADIO_DSSS: DSSS synchronizer trim values */
   #define RADIO_DSSS_ResetValue (0x00000202UL)       /*!< Reset value of DSSS register.                                        */
 
-/* PEAKDISTTOL @Bits 0..2 : Override for dsssPeakDistanceTolerance */
+/* PEAKDISTTOL @Bits 0..2 : Minimum tolerance of peak distance */
   #define RADIO_DSSS_PEAKDISTTOL_Pos (0UL)           /*!< Position of PEAKDISTTOL field.                                       */
   #define RADIO_DSSS_PEAKDISTTOL_Msk (0x7UL << RADIO_DSSS_PEAKDISTTOL_Pos) /*!< Bit mask of PEAKDISTTOL field.                 */
 
-/* MINPEAKCOUNT @Bits 8..10 : Override for dsssMinPeakCount */
+/* MINPEAKCOUNT @Bits 8..10 : Minimum number of peaks */
   #define RADIO_DSSS_MINPEAKCOUNT_Pos (8UL)          /*!< Position of MINPEAKCOUNT field.                                      */
   #define RADIO_DSSS_MINPEAKCOUNT_Msk (0x7UL << RADIO_DSSS_MINPEAKCOUNT_Pos) /*!< Bit mask of MINPEAKCOUNT field.              */
 
@@ -42517,6 +42743,18 @@ typedef struct {
   #define RADIO_LRSYNC_FSMODE_Classic (0x0UL)        /*!< classic mode                                                         */
   #define RADIO_LRSYNC_FSMODE_Mlsd (0x1UL)           /*!< MLSD mode                                                            */
 
+/* AUTOCORROFFTIME @Bit 28 : Select when RxAutoCorr is turned off */
+  #define RADIO_LRSYNC_AUTOCORROFFTIME_Pos (28UL)    /*!< Position of AUTOCORROFFTIME field.                                   */
+  #define RADIO_LRSYNC_AUTOCORROFFTIME_Msk (0x1UL << RADIO_LRSYNC_AUTOCORROFFTIME_Pos) /*!< Bit mask of AUTOCORROFFTIME field. */
+  #define RADIO_LRSYNC_AUTOCORROFFTIME_Min (0x0UL)   /*!< Min enumerator value of AUTOCORROFFTIME field.                       */
+  #define RADIO_LRSYNC_AUTOCORROFFTIME_Max (0x1UL)   /*!< Max enumerator value of AUTOCORROFFTIME field.                       */
+  #define RADIO_LRSYNC_AUTOCORROFFTIME_frameSync (0x0UL) /*!< Turn off after local frameSync to save power. Will be turned on
+                                                              before timeout to let samples propagate into RxAutoCorr so that
+                                                              output is ready at timeout*/
+  #define RADIO_LRSYNC_AUTOCORROFFTIME_addressMatch (0x1UL) /*!< Override to turn off after addressMatch from outside
+                                                                 RxSyncEngine. RxAutoCorr output is not used unless there is a
+                                                                 timeout waiting for addressMatch*/
+
 
 /* RADIO_QOVERRIDE26: Override for selecting whether to use LrSyncEngine or the classic demodulator. */
   #define RADIO_QOVERRIDE26_ResetValue (0x00000001UL) /*!< Reset value of QOVERRIDE26 register.                                */
@@ -42601,6 +42839,14 @@ typedef struct {
   #define RADIO_TXCONFIG_IQMODENABLE_Max (0x1UL)     /*!< Max enumerator value of IQMODENABLE field.                           */
   #define RADIO_TXCONFIG_IQMODENABLE_Disabled (0x0UL) /*!< Disable                                                             */
   #define RADIO_TXCONFIG_IQMODENABLE_Enabled (0x1UL) /*!< Enable                                                               */
+
+/* INVERTPOLARITY @Bit 19 : Invert Tx polarity */
+  #define RADIO_TXCONFIG_INVERTPOLARITY_Pos (19UL)   /*!< Position of INVERTPOLARITY field.                                    */
+  #define RADIO_TXCONFIG_INVERTPOLARITY_Msk (0x1UL << RADIO_TXCONFIG_INVERTPOLARITY_Pos) /*!< Bit mask of INVERTPOLARITY field.*/
+  #define RADIO_TXCONFIG_INVERTPOLARITY_Min (0x0UL)  /*!< Min enumerator value of INVERTPOLARITY field.                        */
+  #define RADIO_TXCONFIG_INVERTPOLARITY_Max (0x1UL)  /*!< Max enumerator value of INVERTPOLARITY field.                        */
+  #define RADIO_TXCONFIG_INVERTPOLARITY_Default (0x0UL) /*!< Default                                                           */
+  #define RADIO_TXCONFIG_INVERTPOLARITY_Inverted (0x1UL) /*!< Inverted                                                         */
 
 
 /* RADIO_TXCTRL: Tx control */
@@ -43245,13 +43491,13 @@ typedef struct {
 
   #define RADIO_PCNF1_MAXLEN_Pos (0UL)               /*!< Position of MAXLEN field.                                            */
   #define RADIO_PCNF1_MAXLEN_Msk (0xFFUL << RADIO_PCNF1_MAXLEN_Pos) /*!< Bit mask of MAXLEN field.                             */
-  #define RADIO_PCNF1_MAXLEN_Min (0x0UL)             /*!< Min value of MAXLEN field.                                           */
+  #define RADIO_PCNF1_MAXLEN_Min (0x00UL)            /*!< Min value of MAXLEN field.                                           */
   #define RADIO_PCNF1_MAXLEN_Max (0xFFUL)            /*!< Max size of MAXLEN field.                                            */
 
 /* STATLEN @Bits 8..15 : Static length in number of bytes */
   #define RADIO_PCNF1_STATLEN_Pos (8UL)              /*!< Position of STATLEN field.                                           */
   #define RADIO_PCNF1_STATLEN_Msk (0xFFUL << RADIO_PCNF1_STATLEN_Pos) /*!< Bit mask of STATLEN field.                          */
-  #define RADIO_PCNF1_STATLEN_Min (0x0UL)            /*!< Min value of STATLEN field.                                          */
+  #define RADIO_PCNF1_STATLEN_Min (0x00UL)           /*!< Min value of STATLEN field.                                          */
   #define RADIO_PCNF1_STATLEN_Max (0xFFUL)           /*!< Max size of STATLEN field.                                           */
 
 /* BALEN @Bits 16..18 : Base address length in number of bytes */
@@ -43265,6 +43511,12 @@ typedef struct {
   #define RADIO_PCNF1_STATLENLONG_Msk (0x7UL << RADIO_PCNF1_STATLENLONG_Pos) /*!< Bit mask of STATLENLONG field.               */
   #define RADIO_PCNF1_STATLENLONG_Min (0x0UL)        /*!< Min value of STATLENLONG field.                                      */
   #define RADIO_PCNF1_STATLENLONG_Max (0x7UL)        /*!< Max size of STATLENLONG field.                                       */
+
+/* PREAMBLEEXTEND @Bit 23 : Extra bit to enable longer preambles. Length is PREAMBLEEXTEND,PCNF0.PLEN bytes + 8bits (or 4bits
+                            for LR and 15.4) */
+
+  #define RADIO_PCNF1_PREAMBLEEXTEND_Pos (23UL)      /*!< Position of PREAMBLEEXTEND field.                                    */
+  #define RADIO_PCNF1_PREAMBLEEXTEND_Msk (0x1UL << RADIO_PCNF1_PREAMBLEEXTEND_Pos) /*!< Bit mask of PREAMBLEEXTEND field.      */
 
 /* ENDIAN @Bit 24 : On-air endianness of packet, this applies to the S0, LENGTH, S1, and the PAYLOAD fields. */
   #define RADIO_PCNF1_ENDIAN_Pos (24UL)              /*!< Position of ENDIAN field.                                            */
@@ -43281,6 +43533,14 @@ typedef struct {
   #define RADIO_PCNF1_WHITEEN_Max (0x1UL)            /*!< Max enumerator value of WHITEEN field.                               */
   #define RADIO_PCNF1_WHITEEN_Disabled (0x0UL)       /*!< Disable                                                              */
   #define RADIO_PCNF1_WHITEEN_Enabled (0x1UL)        /*!< Enable                                                               */
+
+/* WHITEOFFSET @Bit 26 : If whitening is enabled S0 can be configured to be excluded from whitening */
+  #define RADIO_PCNF1_WHITEOFFSET_Pos (26UL)         /*!< Position of WHITEOFFSET field.                                       */
+  #define RADIO_PCNF1_WHITEOFFSET_Msk (0x1UL << RADIO_PCNF1_WHITEOFFSET_Pos) /*!< Bit mask of WHITEOFFSET field.               */
+  #define RADIO_PCNF1_WHITEOFFSET_Min (0x0UL)        /*!< Min enumerator value of WHITEOFFSET field.                           */
+  #define RADIO_PCNF1_WHITEOFFSET_Max (0x1UL)        /*!< Max enumerator value of WHITEOFFSET field.                           */
+  #define RADIO_PCNF1_WHITEOFFSET_Include (0x0UL)    /*!< S0 included in whitening                                             */
+  #define RADIO_PCNF1_WHITEOFFSET_Exclude (0x1UL)    /*!< S0 excluded from whitening                                           */
 
 /* REPEATPAYLOAD @Bit 28 : Used to repeat payload content in Tx mode. Transmits PREAMBLE, ADDRESS once, but S0, LENGTH, S1 field
                            size must be set to 0 to avoid repeating those as well */
@@ -43456,16 +43716,20 @@ typedef struct {
   #define RADIO_CRCCNF_LEN_Two (0x2UL)               /*!< CRC length is two bytes and CRC calculation is enabled               */
   #define RADIO_CRCCNF_LEN_Three (0x3UL)             /*!< CRC length is three bytes and CRC calculation is enabled             */
 
-/* SKIPADDR @Bits 8..9 : Include or exclude packet address field out of CRC calculation. */
-  #define RADIO_CRCCNF_SKIPADDR_Pos (8UL)            /*!< Position of SKIPADDR field.                                          */
-  #define RADIO_CRCCNF_SKIPADDR_Msk (0x3UL << RADIO_CRCCNF_SKIPADDR_Pos) /*!< Bit mask of SKIPADDR field.                      */
-  #define RADIO_CRCCNF_SKIPADDR_Min (0x0UL)          /*!< Min enumerator value of SKIPADDR field.                              */
-  #define RADIO_CRCCNF_SKIPADDR_Max (0x2UL)          /*!< Max enumerator value of SKIPADDR field.                              */
-  #define RADIO_CRCCNF_SKIPADDR_Include (0x0UL)      /*!< CRC calculation includes address field                               */
-  #define RADIO_CRCCNF_SKIPADDR_Skip (0x1UL)         /*!< CRC calculation does not include address field. The CRC calculation
+/* OFFSET @Bits 8..10 : Which packet fields to be kept out of CRC calculation. Subsequent fields after the specified options are
+                        included in CRC calculation. */
+
+  #define RADIO_CRCCNF_OFFSET_Pos (8UL)              /*!< Position of OFFSET field.                                            */
+  #define RADIO_CRCCNF_OFFSET_Msk (0x7UL << RADIO_CRCCNF_OFFSET_Pos) /*!< Bit mask of OFFSET field.                            */
+  #define RADIO_CRCCNF_OFFSET_Min (0x0UL)            /*!< Min enumerator value of OFFSET field.                                */
+  #define RADIO_CRCCNF_OFFSET_Max (0x4UL)            /*!< Max enumerator value of OFFSET field.                                */
+  #define RADIO_CRCCNF_OFFSET_Include (0x0UL)        /*!< CRC calculation includes address field                               */
+  #define RADIO_CRCCNF_OFFSET_Skip (0x1UL)           /*!< CRC calculation does not include address field. The CRC calculation
                                                           will start at the first byte after the address.*/
-  #define RADIO_CRCCNF_SKIPADDR_Ieee802154 (0x2UL)   /*!< CRC calculation as per 802.15.4 standard. Starting at first byte after
+  #define RADIO_CRCCNF_OFFSET_LENGTH (0x2UL)         /*!< CRC calculation as per 802.15.4 standard. Starting at first byte after
                                                           length field.*/
+  #define RADIO_CRCCNF_OFFSET_SO (0x3UL)             /*!< CRC calculation Starting at first byte after S0 field.               */
+  #define RADIO_CRCCNF_OFFSET_S1 (0x4UL)             /*!< CRC calculation Starting at first byte after S1 field.               */
 
 
 /* RADIO_CRCPOLY: CRC polynomial */
@@ -44112,19 +44376,39 @@ typedef struct {
 /* REGULATORS_VREGM_TCFG: (unspecified) */
   #define REGULATORS_VREGM_TCFG_ResetValue (0x00000000UL) /*!< Reset value of TCFG register.                                   */
 
-/* TCFG @Bits 0..7 : TCFG test force configuration bus. */
-  #define REGULATORS_VREGM_TCFG_TCFG_Pos (0UL)       /*!< Position of TCFG field.                                              */
-  #define REGULATORS_VREGM_TCFG_TCFG_Msk (0xFFUL << REGULATORS_VREGM_TCFG_TCFG_Pos) /*!< Bit mask of TCFG field.               */
-  #define REGULATORS_VREGM_TCFG_TCFG_Min (0x0UL)     /*!< Min enumerator value of TCFG field.                                  */
-  #define REGULATORS_VREGM_TCFG_TCFG_Max (0x80UL)    /*!< Max enumerator value of TCFG field.                                  */
-  #define REGULATORS_VREGM_TCFG_TCFG_PWRUPVOUTCMP (0x00UL) /*!< (unspecified)                                                  */
-  #define REGULATORS_VREGM_TCFG_TCFG_PWRUPFB (0x02UL) /*!< (unspecified)                                                       */
-  #define REGULATORS_VREGM_TCFG_TCFG_PWRUPVREG (0x04UL) /*!< (unspecified)                                                     */
-  #define REGULATORS_VREGM_TCFG_TCFG_BYPASS (0x08UL) /*!< (unspecified)                                                        */
-  #define REGULATORS_VREGM_TCFG_TCFG_FORCEULP (0x10UL) /*!< (unspecified)                                                      */
-  #define REGULATORS_VREGM_TCFG_TCFG_FORCEBP (0x20UL) /*!< (unspecified)                                                       */
-  #define REGULATORS_VREGM_TCFG_TCFG_DISABLEMBIAS (0x40UL) /*!< (unspecified)                                                  */
-  #define REGULATORS_VREGM_TCFG_TCFG_RESETDIG (0x80UL) /*!< (unspecified)                                                      */
+/* PWRUPVOUTCMP @Bit 0 : Override PWRUP_VOUTCMP on by OR-gate */
+  #define REGULATORS_VREGM_TCFG_PWRUPVOUTCMP_Pos (0UL) /*!< Position of PWRUPVOUTCMP field.                                    */
+  #define REGULATORS_VREGM_TCFG_PWRUPVOUTCMP_Msk (0x1UL << REGULATORS_VREGM_TCFG_PWRUPVOUTCMP_Pos) /*!< Bit mask of PWRUPVOUTCMP
+                                                                            field.*/
+
+/* PWRUPFB @Bit 1 : Override PWRUP_FB on by OR-gate */
+  #define REGULATORS_VREGM_TCFG_PWRUPFB_Pos (1UL)    /*!< Position of PWRUPFB field.                                           */
+  #define REGULATORS_VREGM_TCFG_PWRUPFB_Msk (0x1UL << REGULATORS_VREGM_TCFG_PWRUPFB_Pos) /*!< Bit mask of PWRUPFB field.       */
+
+/* PWRUPVREG @Bit 2 : Override PWRUP_VREG on by OR-gate */
+  #define REGULATORS_VREGM_TCFG_PWRUPVREG_Pos (2UL)  /*!< Position of PWRUPVREG field.                                         */
+  #define REGULATORS_VREGM_TCFG_PWRUPVREG_Msk (0x1UL << REGULATORS_VREGM_TCFG_PWRUPVREG_Pos) /*!< Bit mask of PWRUPVREG field. */
+
+/* BYPASS @Bit 3 : Override BYPASS on by OR-gate */
+  #define REGULATORS_VREGM_TCFG_BYPASS_Pos (3UL)     /*!< Position of BYPASS field.                                            */
+  #define REGULATORS_VREGM_TCFG_BYPASS_Msk (0x1UL << REGULATORS_VREGM_TCFG_BYPASS_Pos) /*!< Bit mask of BYPASS field.          */
+
+/* FORCEULP @Bit 4 : Forces AFSM to run ULP refresh ie blocks HP and BP */
+  #define REGULATORS_VREGM_TCFG_FORCEULP_Pos (4UL)   /*!< Position of FORCEULP field.                                          */
+  #define REGULATORS_VREGM_TCFG_FORCEULP_Msk (0x1UL << REGULATORS_VREGM_TCFG_FORCEULP_Pos) /*!< Bit mask of FORCEULP field.    */
+
+/* FORCEBP @Bit 5 : Forces AFSM to run HP (when requested) ie blocks BP */
+  #define REGULATORS_VREGM_TCFG_FORCEBP_Pos (5UL)    /*!< Position of FORCEBP field.                                           */
+  #define REGULATORS_VREGM_TCFG_FORCEBP_Msk (0x1UL << REGULATORS_VREGM_TCFG_FORCEBP_Pos) /*!< Bit mask of FORCEBP field.       */
+
+/* DISABLEMBIAS @Bit 6 : Blocks MBIAS_READY */
+  #define REGULATORS_VREGM_TCFG_DISABLEMBIAS_Pos (6UL) /*!< Position of DISABLEMBIAS field.                                    */
+  #define REGULATORS_VREGM_TCFG_DISABLEMBIAS_Msk (0x1UL << REGULATORS_VREGM_TCFG_DISABLEMBIAS_Pos) /*!< Bit mask of DISABLEMBIAS
+                                                                            field.*/
+
+/* RESETDIG @Bit 7 : Isolates DIG_CORE outputs to 0 */
+  #define REGULATORS_VREGM_TCFG_RESETDIG_Pos (7UL)   /*!< Position of RESETDIG field.                                          */
+  #define REGULATORS_VREGM_TCFG_RESETDIG_Msk (0x1UL << REGULATORS_VREGM_TCFG_RESETDIG_Pos) /*!< Bit mask of RESETDIG field.    */
 
 
 
@@ -44133,21 +44417,29 @@ typedef struct {
   * @brief CONFIG [REGULATORS_VREGMAIN_CONFIG] Configure the MMI behavior
   */
 typedef struct {
-  __IOM uint32_t  FORCEMODE;                         /*!< (@ 0x00000000) Force the MMI into a certain mode                     */
-  __IOM uint32_t  DEBUGCONTROL;                      /*!< (@ 0x00000004) Analog module debug control signals                   */
+  __IOM uint32_t  FORCEMODE;                         /*!< (@ 0x00000000) Force the MMI into a certain mode. The Force Mode is
+                                                                         NOT retained through SystemOff. If External mode is
+                                                                         required through SystemOff, please refer to
+                                                                         REQUESTEXTERNAL register.*/
+  __IOM uint32_t  REQUESTEXTERNAL;                   /*!< (@ 0x00000004) Request external mode, and switch OFF the regulator
+                                                                         This request is retain through SystemOff*/
   __IOM uint32_t  VREGENLOAD;                        /*!< (@ 0x00000008) Enable test load for P_LR0V9 pad                      */
   __IOM uint32_t  BUCKSETLSCOUNTER;                  /*!< (@ 0x0000000C) Force the counter in the zero-cross detector to the set
-                                                                         value for PFM mode*/
-  __IOM uint32_t  REQUESTEXTERNAL;                   /*!< (@ 0x00000010) Request external mode, and switch OFF the regulator   */
+                                                                         value for PFM mode. Setting MSB high (5) enables
+                                                                         forcing using the first five bits (4:0). If MSB is low
+                                                                         (5), the trim-code will be auto-calibrated in PFM with
+                                                                         initial value 31.*/
+  __IOM uint32_t  DEBUGCONTROL;                      /*!< (@ 0x00000010) Analog module debug control signals                   */
   __IOM uint32_t  ATB0CFG;                           /*!< (@ 0x00000014) Analog testbus 0 configuration                        */
   __IOM uint32_t  ATB1CFG;                           /*!< (@ 0x00000018) Analog testbus 1 configuration                        */
   __IOM uint32_t  DTB0CFG;                           /*!< (@ 0x0000001C) Digital testbus 0 configuration                       */
   __IOM uint32_t  DTB1CFG;                           /*!< (@ 0x00000020) Digital testbus 1 configuration                       */
-  __IOM uint32_t  PWMICMPPULSESSEL;                  /*!< (@ 0x00000024) Number of PWM ICMP pulses to count before switching
-                                                                         back to PFM*/
-} NRF_REGULATORS_VREGMAIN_CONFIG_Type;               /*!< Size = 40 (0x028)                                                    */
+} NRF_REGULATORS_VREGMAIN_CONFIG_Type;               /*!< Size = 36 (0x024)                                                    */
 
-/* REGULATORS_VREGMAIN_CONFIG_FORCEMODE: Force the MMI into a certain mode */
+/* REGULATORS_VREGMAIN_CONFIG_FORCEMODE: Force the MMI into a certain mode. The Force Mode is NOT retained through SystemOff. If
+                                          External mode is required through SystemOff, please refer to REQUESTEXTERNAL register.
+                                          */
+
   #define REGULATORS_VREGMAIN_CONFIG_FORCEMODE_ResetValue (0x00000000UL) /*!< Reset value of FORCEMODE register.               */
 
 /* VAL @Bits 0..1 : Current voltage regulator mode */
@@ -44171,23 +44463,19 @@ typedef struct {
   #define REGULATORS_VREGMAIN_CONFIG_FORCEMODE_EN_Enabled (0x1UL) /*!< Force mode is enabled                                   */
 
 
-/* REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL: Analog module debug control signals */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_ResetValue (0x00000000UL) /*!< Reset value of DEBUGCONTROL register.         */
+/* REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL: Request external mode, and switch OFF the regulator This request is retain
+                                                through SystemOff */
 
-/* VAL @Bits 0..7 : (unspecified) */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Pos (0UL) /*!< Position of VAL field.                                    */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Msk (0xFFUL << REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Pos) /*!< Bit
-                                                                            mask of VAL field.*/
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                      */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Max (0x6UL) /*!< Max enumerator value of VAL field.                      */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit0 (0x00UL) /*!< Force P_DCC on if BUCK is in PWM mode. Do not use.    */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit1 (0x01UL) /*!< Force resistive feedback in BUCK_PFM.                 */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit2 (0x02UL) /*!< Enable comparator in BUCK_PFM to turn off high-side
-                                                                         driver.*/
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit3 (0x03UL) /*!< Force PWM_ICMP low.                                   */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit4 (0x04UL) /*!< Force PFM_ICMP low.                                   */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit5 (0x05UL) /*!< Disable LDO current limiter in all helper modes.      */
-  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit6 (0x06UL) /*!< Disable fast discharge in ELV-exit.                   */
+  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_ResetValue (0x00000000UL) /*!< Reset value of REQUESTEXTERNAL register.   */
+
+/* VAL @Bit 0 : Request external mode for the regulator */
+  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Pos (0UL) /*!< Position of VAL field.                                 */
+  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Msk (0x1UL << REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Pos) /*!<
+                                                                            Bit mask of VAL field.*/
+  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                   */
+  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Max (0x1UL) /*!< Max enumerator value of VAL field.                   */
+  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Disabled (0x0UL) /*!< External mode is not requested                  */
+  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Enabled (0x1UL) /*!< External mode is requested                       */
 
 
 /* REGULATORS_VREGMAIN_CONFIG_VREGENLOAD: Enable test load for P_LR0V9 pad */
@@ -44203,7 +44491,10 @@ typedef struct {
   #define REGULATORS_VREGMAIN_CONFIG_VREGENLOAD_VAL_TestLoad (0x1UL) /*!< 88 Ohm test load, about 10mA load current at 0.9V    */
 
 
-/* REGULATORS_VREGMAIN_CONFIG_BUCKSETLSCOUNTER: Force the counter in the zero-cross detector to the set value for PFM mode */
+/* REGULATORS_VREGMAIN_CONFIG_BUCKSETLSCOUNTER: Force the counter in the zero-cross detector to the set value for PFM mode.
+                                                 Setting MSB high (5) enables forcing using the first five bits (4:0). If MSB is
+                                                 low (5), the trim-code will be auto-calibrated in PFM with initial value 31. */
+
   #define REGULATORS_VREGMAIN_CONFIG_BUCKSETLSCOUNTER_ResetValue (0x00000000UL) /*!< Reset value of BUCKSETLSCOUNTER register. */
 
 /* BUCKSETLSCOUNTER @Bits 0..5 : (unspecified) */
@@ -44212,17 +44503,24 @@ typedef struct {
                                                                             /*!< Bit mask of BUCKSETLSCOUNTER field.*/
 
 
-/* REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL: Request external mode, and switch OFF the regulator */
-  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_ResetValue (0x00000000UL) /*!< Reset value of REQUESTEXTERNAL register.   */
+/* REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL: Analog module debug control signals */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_ResetValue (0x00000000UL) /*!< Reset value of DEBUGCONTROL register.         */
 
-/* VAL @Bit 0 : Request external mode for the regulator */
-  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Pos (0UL) /*!< Position of VAL field.                                 */
-  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Msk (0x1UL << REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Pos) /*!<
-                                                                            Bit mask of VAL field.*/
-  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                   */
-  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Max (0x1UL) /*!< Max enumerator value of VAL field.                   */
-  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Disabled (0x0UL) /*!< External mode is not requested                  */
-  #define REGULATORS_VREGMAIN_CONFIG_REQUESTEXTERNAL_VAL_Enabled (0x1UL) /*!< External mode is requested                       */
+/* VAL @Bits 0..7 : (unspecified) */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Pos (0UL) /*!< Position of VAL field.                                    */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Msk (0xFFUL << REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Pos) /*!< Bit
+                                                                            mask of VAL field.*/
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                      */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Max (0x7UL) /*!< Max enumerator value of VAL field.                      */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit0 (0x00UL) /*!< Force ELV mode.                                       */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit1 (0x01UL) /*!< Force resistive feedback in FB_DIV and REF_DIV.       */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit2 (0x02UL) /*!< Enable comparator in BUCK_LP_PFM to turn off high-side
+                                                                         driver.*/
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit3 (0x03UL) /*!< Force PWM_ICMP low.                                   */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit4 (0x04UL) /*!< Force PFM_ICMP low.                                   */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit5 (0x05UL) /*!< Disable LDO current limiter in all helper modes.      */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit6 (0x06UL) /*!< Disable fast discharge in ELV-exit.                   */
+  #define REGULATORS_VREGMAIN_CONFIG_DEBUGCONTROL_VAL_Bit7 (0x07UL) /*!< Disable counter counting PFM pulses during ELV exit.  */
 
 
 /* REGULATORS_VREGMAIN_CONFIG_ATB0CFG: Analog testbus 0 configuration */
@@ -44239,8 +44537,10 @@ typedef struct {
   #define REGULATORS_VREGMAIN_CONFIG_ATB0CFG_ATB0CFG_PwmErrAmp (0x9UL) /*!< Output of PWM error amplifier                      */
   #define REGULATORS_VREGMAIN_CONFIG_ATB0CFG_ATB0CFG_PwmBg (0xAUL) /*!< PWM bandgap voltage                                    */
   #define REGULATORS_VREGMAIN_CONFIG_ATB0CFG_ATB0CFG_PfmRevDiv (0xBUL) /*!< Reference divider inside PFM                       */
-  #define REGULATORS_VREGMAIN_CONFIG_ATB0CFG_ATB0CFG_PDccVddAO3V0 (0xCUL) /*!< Internal VDD_AO_3V0 for P_DCC                   */
-  #define REGULATORS_VREGMAIN_CONFIG_ATB0CFG_ATB0CFG_PDccVss (0xDUL) /*!< Internal VSS for P_DCC                               */
+  #define REGULATORS_VREGMAIN_CONFIG_ATB0CFG_ATB0CFG_PDccVddAO3V0 (0xCUL) /*!< Internal VDD_AO_3V0 for P_DCC and force PMOS in
+                                                                            output driver ON*/
+  #define REGULATORS_VREGMAIN_CONFIG_ATB0CFG_ATB0CFG_PDccVss (0xDUL) /*!< Internal VSS for P_DCC and force NMOS in output driver
+                                                                          ON*/
   #define REGULATORS_VREGMAIN_CONFIG_ATB0CFG_ATB0CFG_VddAna0V9 (0xEUL) /*!< VDD_ANA_0V9                                        */
   #define REGULATORS_VREGMAIN_CONFIG_ATB0CFG_ATB0CFG_VddDig0V9 (0xFUL) /*!< VDD_DIG_0V9                                        */
 
@@ -44306,22 +44606,6 @@ typedef struct {
   #define REGULATORS_VREGMAIN_CONFIG_DTB1CFG_DTB1CFG_Dtb1Low7 (0x7UL) /*!< Reserved, allow other IPs to use DTB1               */
 
 
-/* REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL: Number of PWM ICMP pulses to count before switching back to PFM */
-  #define REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL_ResetValue (0x00000002UL) /*!< Reset value of PWMICMPPULSESSEL register. */
-
-/* VAL @Bits 0..1 : (unspecified) */
-  #define REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL_VAL_Pos (0UL) /*!< Position of VAL field.                                */
-  #define REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL_VAL_Msk (0x3UL << REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL_VAL_Pos)
-                                                                            /*!< Bit mask of VAL field.*/
-  #define REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                  */
-  #define REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL_VAL_Max (0x3UL) /*!< Max enumerator value of VAL field.                  */
-  #define REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL_VAL_Disable (0x0UL) /*!< Disable counter (no delay before switching back
-                                                                            to PFM)*/
-  #define REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL_VAL_Count32 (0x1UL) /*!< Count to 32                                     */
-  #define REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL_VAL_Count64 (0x2UL) /*!< Count to 64                                     */
-  #define REGULATORS_VREGMAIN_CONFIG_PWMICMPPULSESSEL_VAL_Count128 (0x3UL) /*!< Count to 128                                   */
-
-
 
 /* ========================================= Struct REGULATORS_VREGMAIN_CALIBRATION ========================================== */
 /**
@@ -44333,7 +44617,7 @@ typedef struct {
 } NRF_REGULATORS_VREGMAIN_CALIBRATION_Type;          /*!< Size = 8 (0x008)                                                     */
 
 /* REGULATORS_VREGMAIN_CALIBRATION_CAL1: (unspecified) */
-  #define REGULATORS_VREGMAIN_CALIBRATION_CAL1_ResetValue (0x021FCD18UL) /*!< Reset value of CAL1 register.                    */
+  #define REGULATORS_VREGMAIN_CALIBRATION_CAL1_ResetValue (0x083FCD18UL) /*!< Reset value of CAL1 register.                    */
 
 /* MAXCOILILIM @Bits 0..3 : Set coil current limit to avoid core saturation */
   #define REGULATORS_VREGMAIN_CALIBRATION_CAL1_MAXCOILILIM_Pos (0UL) /*!< Position of MAXCOILILIM field.                       */
@@ -44437,8 +44721,16 @@ typedef struct {
   #define REGULATORS_VREGMAIN_CALIBRATION_CAL1_ENABLEFASTELVEXIT_Disabled (0x0UL) /*!< Fast exit is disabled                   */
   #define REGULATORS_VREGMAIN_CALIBRATION_CAL1_ENABLEFASTELVEXIT_Enabled (0x1UL) /*!< Fast exit is enabled                     */
 
-/* PWMVOLTCAL @Bits 21..25 : Calibration of BUCK_LP_PWM output voltage */
-  #define REGULATORS_VREGMAIN_CALIBRATION_CAL1_PWMVOLTCAL_Pos (21UL) /*!< Position of PWMVOLTCAL field.                        */
+/* PWMICMPPULSESSEL @Bits 21..22 : Configure the number of PWM ICMP pulses to count before switching back to PFM. The counter be
+                                   configured with 32 (4us), 64 (8us), and 128 (16us) pulse count for n=1,2,3, respectively. The
+                                   counter can disabled with n=0 */
+
+  #define REGULATORS_VREGMAIN_CALIBRATION_CAL1_PWMICMPPULSESSEL_Pos (21UL) /*!< Position of PWMICMPPULSESSEL field.            */
+  #define REGULATORS_VREGMAIN_CALIBRATION_CAL1_PWMICMPPULSESSEL_Msk (0x3UL << REGULATORS_VREGMAIN_CALIBRATION_CAL1_PWMICMPPULSESSEL_Pos)
+                                                                            /*!< Bit mask of PWMICMPPULSESSEL field.*/
+
+/* PWMVOLTCAL @Bits 23..27 : Calibration of BUCK_LP_PWM output voltage */
+  #define REGULATORS_VREGMAIN_CALIBRATION_CAL1_PWMVOLTCAL_Pos (23UL) /*!< Position of PWMVOLTCAL field.                        */
   #define REGULATORS_VREGMAIN_CALIBRATION_CAL1_PWMVOLTCAL_Msk (0x1FUL << REGULATORS_VREGMAIN_CALIBRATION_CAL1_PWMVOLTCAL_Pos)
                                                                             /*!< Bit mask of PWMVOLTCAL field.*/
 
@@ -44713,9 +45005,9 @@ typedef struct {
   __IM  uint32_t  BUCKLSCOUNT;                       /*!< (@ 0x00000014) Read counter output controlling low-side current
                                                                          threshold for PFM mode*/
   __IOM NRF_REGULATORS_VREGMAIN_CONFIG_Type CONFIG;  /*!< (@ 0x00000018) Configure the MMI behavior                            */
-  __IOM NRF_REGULATORS_VREGMAIN_CALIBRATION_Type CALIBRATION; /*!< (@ 0x00000040) Calibration values written from FICR         */
-  __IOM NRF_REGULATORS_VREGMAIN_OVERRIDE_Type OVERRIDE; /*!< (@ 0x00000048) Override analog IP signals                         */
-} NRF_REGULATORS_VREGMAIN_Type;                      /*!< Size = 116 (0x074)                                                   */
+  __IOM NRF_REGULATORS_VREGMAIN_CALIBRATION_Type CALIBRATION; /*!< (@ 0x0000003C) Calibration values written from FICR         */
+  __IOM NRF_REGULATORS_VREGMAIN_OVERRIDE_Type OVERRIDE; /*!< (@ 0x00000044) Override analog IP signals                         */
+} NRF_REGULATORS_VREGMAIN_Type;                      /*!< Size = 112 (0x070)                                                   */
 
 /* REGULATORS_VREGMAIN_DCDCEN: Enable DC/DC converter for better power efficiency */
   #define REGULATORS_VREGMAIN_DCDCEN_ResetValue (0x00000000UL) /*!< Reset value of DCDCEN register.                            */
@@ -44823,7 +45115,7 @@ typedef struct {
     __IOM uint32_t WATBCFG;                          /*!< (@ 0x00000580) WATB control                                          */
     __IM uint32_t RESERVED6[31];
     __IOM NRF_REGULATORS_VREGMAIN_Type VREGMAIN;     /*!< (@ 0x00000600) Main voltage regulator                                */
-  } NRF_REGULATORS_Type;                             /*!< Size = 1652 (0x674)                                                  */
+  } NRF_REGULATORS_Type;                             /*!< Size = 1648 (0x670)                                                  */
 
 /* REGULATORS_SYSTEMOFF: System OFF register */
   #define REGULATORS_SYSTEMOFF_ResetValue (0x00000000UL) /*!< Reset value of SYSTEMOFF register.                               */
@@ -44939,107 +45231,83 @@ typedef struct {
 
 
 /* REGULATORS_TRIM: TRIM values */
-  #define REGULATORS_TRIM_ResetValue (0x007FF368UL)  /*!< Reset value of TRIM register.                                        */
+  #define REGULATORS_TRIM_ResetValue (0x00C60C38UL)  /*!< Reset value of TRIM register.                                        */
 
 /* RSTVTH @Bits 0..3 : Threshold trim, power-on reset */
   #define REGULATORS_TRIM_RSTVTH_Pos (0UL)           /*!< Position of RSTVTH field.                                            */
   #define REGULATORS_TRIM_RSTVTH_Msk (0xFUL << REGULATORS_TRIM_RSTVTH_Pos) /*!< Bit mask of RSTVTH field.                      */
 
-/* BGREF @Bits 4..7 : Master bias bandgap trim */
-  #define REGULATORS_TRIM_BGREF_Pos (4UL)            /*!< Position of BGREF field.                                             */
-  #define REGULATORS_TRIM_BGREF_Msk (0xFUL << REGULATORS_TRIM_BGREF_Pos) /*!< Bit mask of BGREF field.                         */
+/* RSTVREFULP @Bits 4..7 : Trim value of VREF_ULP */
+  #define REGULATORS_TRIM_RSTVREFULP_Pos (4UL)       /*!< Position of RSTVREFULP field.                                        */
+  #define REGULATORS_TRIM_RSTVREFULP_Msk (0xFUL << REGULATORS_TRIM_RSTVREFULP_Pos) /*!< Bit mask of RSTVREFULP field.          */
 
-/* VREFULP @Bits 8..11 : Trim value of VREF_ULP */
-  #define REGULATORS_TRIM_VREFULP_Pos (8UL)          /*!< Position of VREFULP field.                                           */
-  #define REGULATORS_TRIM_VREFULP_Msk (0xFUL << REGULATORS_TRIM_VREFULP_Pos) /*!< Bit mask of VREFULP field.                   */
+/* BIASVBG @Bits 8..12 : Master bias bandgap trim */
+  #define REGULATORS_TRIM_BIASVBG_Pos (8UL)          /*!< Position of BIASVBG field.                                           */
+  #define REGULATORS_TRIM_BIASVBG_Msk (0x1FUL << REGULATORS_TRIM_BIASVBG_Pos) /*!< Bit mask of BIASVBG field.                  */
 
-/* ELVPDMAIN @Bit 12 : Allow or prevent ELV mode when PD_MAIN is ON */
-  #define REGULATORS_TRIM_ELVPDMAIN_Pos (12UL)       /*!< Position of ELVPDMAIN field.                                         */
+/* ELVPDMAIN @Bit 16 : Allow or prevent ELV mode when PD_MAIN is ON */
+  #define REGULATORS_TRIM_ELVPDMAIN_Pos (16UL)       /*!< Position of ELVPDMAIN field.                                         */
   #define REGULATORS_TRIM_ELVPDMAIN_Msk (0x1UL << REGULATORS_TRIM_ELVPDMAIN_Pos) /*!< Bit mask of ELVPDMAIN field.             */
   #define REGULATORS_TRIM_ELVPDMAIN_Min (0x0UL)      /*!< Min enumerator value of ELVPDMAIN field.                             */
   #define REGULATORS_TRIM_ELVPDMAIN_Max (0x1UL)      /*!< Max enumerator value of ELVPDMAIN field.                             */
   #define REGULATORS_TRIM_ELVPDMAIN_Allow (0x0UL)    /*!< Allow ELV mode when PD_MAIN is ON                                    */
   #define REGULATORS_TRIM_ELVPDMAIN_Prevent (0x1UL)  /*!< Prevent ELV mode when PD_MAIN is ON                                  */
 
-/* ELVPDLP @Bit 13 : Allow or prevent ELV mode when PD_LP is ON */
-  #define REGULATORS_TRIM_ELVPDLP_Pos (13UL)         /*!< Position of ELVPDLP field.                                           */
+/* ELVPDLP @Bit 17 : Allow or prevent ELV mode when PD_LP is ON */
+  #define REGULATORS_TRIM_ELVPDLP_Pos (17UL)         /*!< Position of ELVPDLP field.                                           */
   #define REGULATORS_TRIM_ELVPDLP_Msk (0x1UL << REGULATORS_TRIM_ELVPDLP_Pos) /*!< Bit mask of ELVPDLP field.                   */
   #define REGULATORS_TRIM_ELVPDLP_Min (0x0UL)        /*!< Min enumerator value of ELVPDLP field.                               */
   #define REGULATORS_TRIM_ELVPDLP_Max (0x1UL)        /*!< Max enumerator value of ELVPDLP field.                               */
   #define REGULATORS_TRIM_ELVPDLP_Allow (0x0UL)      /*!< Allow ELV mode when PD_LP is ON                                      */
   #define REGULATORS_TRIM_ELVPDLP_Prevent (0x1UL)    /*!< Prevent ELV mode when PD_LP is ON                                    */
 
-/* ELVPDPERIPH @Bit 14 : Allow or prevent ELV mode when PD_PERIPH is ON */
-  #define REGULATORS_TRIM_ELVPDPERIPH_Pos (14UL)     /*!< Position of ELVPDPERIPH field.                                       */
+/* ELVPDPERIPH @Bit 18 : Allow or prevent ELV mode when PD_PERIPH is ON */
+  #define REGULATORS_TRIM_ELVPDPERIPH_Pos (18UL)     /*!< Position of ELVPDPERIPH field.                                       */
   #define REGULATORS_TRIM_ELVPDPERIPH_Msk (0x1UL << REGULATORS_TRIM_ELVPDPERIPH_Pos) /*!< Bit mask of ELVPDPERIPH field.       */
   #define REGULATORS_TRIM_ELVPDPERIPH_Min (0x0UL)    /*!< Min enumerator value of ELVPDPERIPH field.                           */
   #define REGULATORS_TRIM_ELVPDPERIPH_Max (0x1UL)    /*!< Max enumerator value of ELVPDPERIPH field.                           */
   #define REGULATORS_TRIM_ELVPDPERIPH_Allow (0x0UL)  /*!< Allow ELV mode when PD_PERIPH is ON                                  */
   #define REGULATORS_TRIM_ELVPDPERIPH_Prevent (0x1UL) /*!< Prevent ELV mode when PD_PERIPH is ON                               */
 
-/* ELVPDMCU @Bit 15 : Allow or prevent ELV mode when PD_PERIPH is ON */
-  #define REGULATORS_TRIM_ELVPDMCU_Pos (15UL)        /*!< Position of ELVPDMCU field.                                          */
-  #define REGULATORS_TRIM_ELVPDMCU_Msk (0x1UL << REGULATORS_TRIM_ELVPDMCU_Pos) /*!< Bit mask of ELVPDMCU field.                */
-  #define REGULATORS_TRIM_ELVPDMCU_Min (0x0UL)       /*!< Min enumerator value of ELVPDMCU field.                              */
-  #define REGULATORS_TRIM_ELVPDMCU_Max (0x1UL)       /*!< Max enumerator value of ELVPDMCU field.                              */
-  #define REGULATORS_TRIM_ELVPDMCU_Allow (0x0UL)     /*!< Allow ELV mode when PD_PERIPH is ON                                  */
-  #define REGULATORS_TRIM_ELVPDMCU_Prevent (0x1UL)   /*!< Prevent ELV mode when PD_PERIPH is ON                                */
+/* ELVLFRC @Bit 19 : Allow or prevent ELV mode when LFRC is ON */
+  #define REGULATORS_TRIM_ELVLFRC_Pos (19UL)         /*!< Position of ELVLFRC field.                                           */
+  #define REGULATORS_TRIM_ELVLFRC_Msk (0x1UL << REGULATORS_TRIM_ELVLFRC_Pos) /*!< Bit mask of ELVLFRC field.                   */
+  #define REGULATORS_TRIM_ELVLFRC_Min (0x0UL)        /*!< Min enumerator value of ELVLFRC field.                               */
+  #define REGULATORS_TRIM_ELVLFRC_Max (0x1UL)        /*!< Max enumerator value of ELVLFRC field.                               */
+  #define REGULATORS_TRIM_ELVLFRC_Allow (0x0UL)      /*!< Allow ELV mode when LFRC is ON                                       */
+  #define REGULATORS_TRIM_ELVLFRC_Prevent (0x1UL)    /*!< Prevent ELV mode when LFRC is ON                                     */
 
-/* ELVPDRADIO @Bit 16 : Allow or prevent ELV mode when PD_RADIO is ON */
-  #define REGULATORS_TRIM_ELVPDRADIO_Pos (16UL)      /*!< Position of ELVPDRADIO field.                                        */
-  #define REGULATORS_TRIM_ELVPDRADIO_Msk (0x1UL << REGULATORS_TRIM_ELVPDRADIO_Pos) /*!< Bit mask of ELVPDRADIO field.          */
-  #define REGULATORS_TRIM_ELVPDRADIO_Min (0x0UL)     /*!< Min enumerator value of ELVPDRADIO field.                            */
-  #define REGULATORS_TRIM_ELVPDRADIO_Max (0x1UL)     /*!< Max enumerator value of ELVPDRADIO field.                            */
-  #define REGULATORS_TRIM_ELVPDRADIO_Allow (0x0UL)   /*!< Allow ELV mode when PD_RADIO is ON                                   */
-  #define REGULATORS_TRIM_ELVPDRADIO_Prevent (0x1UL) /*!< Prevent ELV mode when PD_RADIO is ON                                 */
+/* ELVLFXO @Bit 20 : Allow or prevent ELV mode when LFXO is ON */
+  #define REGULATORS_TRIM_ELVLFXO_Pos (20UL)         /*!< Position of ELVLFXO field.                                           */
+  #define REGULATORS_TRIM_ELVLFXO_Msk (0x1UL << REGULATORS_TRIM_ELVLFXO_Pos) /*!< Bit mask of ELVLFXO field.                   */
+  #define REGULATORS_TRIM_ELVLFXO_Min (0x0UL)        /*!< Min enumerator value of ELVLFXO field.                               */
+  #define REGULATORS_TRIM_ELVLFXO_Max (0x1UL)        /*!< Max enumerator value of ELVLFXO field.                               */
+  #define REGULATORS_TRIM_ELVLFXO_Allow (0x0UL)      /*!< Allow ELV mode when LFXO is ON                                       */
+  #define REGULATORS_TRIM_ELVLFXO_Prevent (0x1UL)    /*!< Prevent ELV mode when LFXO is ON                                     */
 
-/* ELVPDCRACEN @Bit 17 : Allow or prevent ELV mode when PD_CRACEN is ON */
-  #define REGULATORS_TRIM_ELVPDCRACEN_Pos (17UL)     /*!< Position of ELVPDCRACEN field.                                       */
-  #define REGULATORS_TRIM_ELVPDCRACEN_Msk (0x1UL << REGULATORS_TRIM_ELVPDCRACEN_Pos) /*!< Bit mask of ELVPDCRACEN field.       */
-  #define REGULATORS_TRIM_ELVPDCRACEN_Min (0x0UL)    /*!< Min enumerator value of ELVPDCRACEN field.                           */
-  #define REGULATORS_TRIM_ELVPDCRACEN_Max (0x1UL)    /*!< Max enumerator value of ELVPDCRACEN field.                           */
-  #define REGULATORS_TRIM_ELVPDCRACEN_Allow (0x0UL)  /*!< Allow ELV mode when PD_CRACEN is ON                                  */
-  #define REGULATORS_TRIM_ELVPDCRACEN_Prevent (0x1UL) /*!< Prevent ELV mode when PD_CRACEN is ON                               */
+/* ELVGRTC @Bit 21 : Allow or prevent ELV mode when GRTC core is active */
+  #define REGULATORS_TRIM_ELVGRTC_Pos (21UL)         /*!< Position of ELVGRTC field.                                           */
+  #define REGULATORS_TRIM_ELVGRTC_Msk (0x1UL << REGULATORS_TRIM_ELVGRTC_Pos) /*!< Bit mask of ELVGRTC field.                   */
+  #define REGULATORS_TRIM_ELVGRTC_Min (0x0UL)        /*!< Min enumerator value of ELVGRTC field.                               */
+  #define REGULATORS_TRIM_ELVGRTC_Max (0x1UL)        /*!< Max enumerator value of ELVGRTC field.                               */
+  #define REGULATORS_TRIM_ELVGRTC_Allow (0x0UL)      /*!< Allow ELV mode when GRTC core is active                              */
+  #define REGULATORS_TRIM_ELVGRTC_Prevent (0x1UL)    /*!< Prevent ELV mode when GRTC core is active                            */
 
-/* ELVLFCLK @Bit 18 : Allow or prevent ELV mode when LFCLK is ON */
-  #define REGULATORS_TRIM_ELVLFCLK_Pos (18UL)        /*!< Position of ELVLFCLK field.                                          */
-  #define REGULATORS_TRIM_ELVLFCLK_Msk (0x1UL << REGULATORS_TRIM_ELVLFCLK_Pos) /*!< Bit mask of ELVLFCLK field.                */
-  #define REGULATORS_TRIM_ELVLFCLK_Min (0x0UL)       /*!< Min enumerator value of ELVLFCLK field.                              */
-  #define REGULATORS_TRIM_ELVLFCLK_Max (0x1UL)       /*!< Max enumerator value of ELVLFCLK field.                              */
-  #define REGULATORS_TRIM_ELVLFCLK_Allow (0x0UL)     /*!< Allow ELV mode when LFCLK is ON                                      */
-  #define REGULATORS_TRIM_ELVLFCLK_Prevent (0x1UL)   /*!< Prevent ELV mode when LFCLK is ON                                    */
+/* ELVGRTCPWM @Bit 22 : Allow or prevent ELV mode when GRTC PWM is active */
+  #define REGULATORS_TRIM_ELVGRTCPWM_Pos (22UL)      /*!< Position of ELVGRTCPWM field.                                        */
+  #define REGULATORS_TRIM_ELVGRTCPWM_Msk (0x1UL << REGULATORS_TRIM_ELVGRTCPWM_Pos) /*!< Bit mask of ELVGRTCPWM field.          */
+  #define REGULATORS_TRIM_ELVGRTCPWM_Min (0x0UL)     /*!< Min enumerator value of ELVGRTCPWM field.                            */
+  #define REGULATORS_TRIM_ELVGRTCPWM_Max (0x1UL)     /*!< Max enumerator value of ELVGRTCPWM field.                            */
+  #define REGULATORS_TRIM_ELVGRTCPWM_Allow (0x0UL)   /*!< Allow ELV mode when GRTC PWM is active                               */
+  #define REGULATORS_TRIM_ELVGRTCPWM_Prevent (0x1UL) /*!< Prevent ELV mode when GRTC PWM is active                             */
 
-/* ELVXOSC32K @Bit 19 : Allow or prevent ELV mode when XOSC32K is ON */
-  #define REGULATORS_TRIM_ELVXOSC32K_Pos (19UL)      /*!< Position of ELVXOSC32K field.                                        */
-  #define REGULATORS_TRIM_ELVXOSC32K_Msk (0x1UL << REGULATORS_TRIM_ELVXOSC32K_Pos) /*!< Bit mask of ELVXOSC32K field.          */
-  #define REGULATORS_TRIM_ELVXOSC32K_Min (0x0UL)     /*!< Min enumerator value of ELVXOSC32K field.                            */
-  #define REGULATORS_TRIM_ELVXOSC32K_Max (0x1UL)     /*!< Max enumerator value of ELVXOSC32K field.                            */
-  #define REGULATORS_TRIM_ELVXOSC32K_Allow (0x0UL)   /*!< Allow ELV mode when XOSC32K is ON                                    */
-  #define REGULATORS_TRIM_ELVXOSC32K_Prevent (0x1UL) /*!< Prevent ELV mode when XOSC32K is ON                                  */
-
-/* ELVTAMPMON @Bit 20 : Allow or prevent ELV mode when TAMPMON is ON */
-  #define REGULATORS_TRIM_ELVTAMPMON_Pos (20UL)      /*!< Position of ELVTAMPMON field.                                        */
-  #define REGULATORS_TRIM_ELVTAMPMON_Msk (0x1UL << REGULATORS_TRIM_ELVTAMPMON_Pos) /*!< Bit mask of ELVTAMPMON field.          */
-  #define REGULATORS_TRIM_ELVTAMPMON_Min (0x0UL)     /*!< Min enumerator value of ELVTAMPMON field.                            */
-  #define REGULATORS_TRIM_ELVTAMPMON_Max (0x1UL)     /*!< Max enumerator value of ELVTAMPMON field.                            */
-  #define REGULATORS_TRIM_ELVTAMPMON_Allow (0x0UL)   /*!< Allow ELV mode when TAMPMON is ON                                    */
-  #define REGULATORS_TRIM_ELVTAMPMON_Prevent (0x1UL) /*!< Prevent ELV mode when TAMPMON is ON                                  */
-
-/* ELVGRTCLFXO @Bit 21 : Allow or prevent ELV mode when GRTC is ON in LFXO source */
-  #define REGULATORS_TRIM_ELVGRTCLFXO_Pos (21UL)     /*!< Position of ELVGRTCLFXO field.                                       */
-  #define REGULATORS_TRIM_ELVGRTCLFXO_Msk (0x1UL << REGULATORS_TRIM_ELVGRTCLFXO_Pos) /*!< Bit mask of ELVGRTCLFXO field.       */
-  #define REGULATORS_TRIM_ELVGRTCLFXO_Min (0x0UL)    /*!< Min enumerator value of ELVGRTCLFXO field.                           */
-  #define REGULATORS_TRIM_ELVGRTCLFXO_Max (0x1UL)    /*!< Max enumerator value of ELVGRTCLFXO field.                           */
-  #define REGULATORS_TRIM_ELVGRTCLFXO_Allow (0x0UL)  /*!< Allow ELV mode when GRTC is ON in LFXO source                        */
-  #define REGULATORS_TRIM_ELVGRTCLFXO_Prevent (0x1UL) /*!< Prevent ELV mode when GRTC is ON in LFXO source                     */
-
-/* ELVDEBUGGER @Bit 22 : Allow or prevent ELV mode when DEBUGGER is connected */
-  #define REGULATORS_TRIM_ELVDEBUGGER_Pos (22UL)     /*!< Position of ELVDEBUGGER field.                                       */
-  #define REGULATORS_TRIM_ELVDEBUGGER_Msk (0x1UL << REGULATORS_TRIM_ELVDEBUGGER_Pos) /*!< Bit mask of ELVDEBUGGER field.       */
-  #define REGULATORS_TRIM_ELVDEBUGGER_Min (0x0UL)    /*!< Min enumerator value of ELVDEBUGGER field.                           */
-  #define REGULATORS_TRIM_ELVDEBUGGER_Max (0x1UL)    /*!< Max enumerator value of ELVDEBUGGER field.                           */
-  #define REGULATORS_TRIM_ELVDEBUGGER_Allow (0x0UL)  /*!< Allow ELV mode when DEBUGGER is connected                            */
-  #define REGULATORS_TRIM_ELVDEBUGGER_Prevent (0x1UL) /*!< Prevent ELV mode when DEBUGGER is connected                         */
+/* ELVGRTCCLKOUT @Bit 23 : Allow or prevent ELV mode when GRTC CKOUT is active */
+  #define REGULATORS_TRIM_ELVGRTCCLKOUT_Pos (23UL)   /*!< Position of ELVGRTCCLKOUT field.                                     */
+  #define REGULATORS_TRIM_ELVGRTCCLKOUT_Msk (0x1UL << REGULATORS_TRIM_ELVGRTCCLKOUT_Pos) /*!< Bit mask of ELVGRTCCLKOUT field. */
+  #define REGULATORS_TRIM_ELVGRTCCLKOUT_Min (0x0UL)  /*!< Min enumerator value of ELVGRTCCLKOUT field.                         */
+  #define REGULATORS_TRIM_ELVGRTCCLKOUT_Max (0x1UL)  /*!< Max enumerator value of ELVGRTCCLKOUT field.                         */
+  #define REGULATORS_TRIM_ELVGRTCCLKOUT_Allow (0x0UL) /*!< Allow ELV mode when GRTC CKOUT is active                            */
+  #define REGULATORS_TRIM_ELVGRTCCLKOUT_Prevent (0x1UL) /*!< Prevent ELV mode when GRTC CKOUT is active                        */
 
 
 /* REGULATORS_ATBCFG: Analog test bus control */
@@ -45271,7 +45539,7 @@ typedef struct {
   #define RESET_RESETREAS_LPCOMP_NotDetected (0x0UL) /*!< Not detected                                                         */
   #define RESET_RESETREAS_LPCOMP_Detected (0x1UL)    /*!< Detected                                                             */
 
-/* DIF @Bit 10 : Reset due to wakeup from System OFF mode when wakeup is triggered by entering the Debug Interface mode */
+/* DIF @Bit 10 : Reset triggered by Debug Interface */
   #define RESET_RESETREAS_DIF_Pos (10UL)             /*!< Position of DIF field.                                               */
   #define RESET_RESETREAS_DIF_Msk (0x1UL << RESET_RESETREAS_DIF_Pos) /*!< Bit mask of DIF field.                               */
   #define RESET_RESETREAS_DIF_Min (0x0UL)            /*!< Min enumerator value of DIF field.                                   */
@@ -45328,7 +45596,7 @@ typedef struct {
 /* WORDS @Bits 0..6 : Number of 128-bit RRAM words written into load-buffer that are not committed to RRAM */
   #define RRAMC_BUFSTATUS_LOADBUF_WORDS_Pos (0UL)    /*!< Position of WORDS field.                                             */
   #define RRAMC_BUFSTATUS_LOADBUF_WORDS_Msk (0x7FUL << RRAMC_BUFSTATUS_LOADBUF_WORDS_Pos) /*!< Bit mask of WORDS field.        */
-  #define RRAMC_BUFSTATUS_LOADBUF_WORDS_Min (0x0UL)  /*!< Min value of WORDS field.                                            */
+  #define RRAMC_BUFSTATUS_LOADBUF_WORDS_Min (0x00UL) /*!< Min value of WORDS field.                                            */
   #define RRAMC_BUFSTATUS_LOADBUF_WORDS_Max (0x20UL) /*!< Max size of WORDS field.                                             */
 
 
@@ -45531,7 +45799,7 @@ typedef struct {
   #define RRAMC_POWER_CNT_CONFIG0_CNTRELEASEPD_Pos (8UL) /*!< Position of CNTRELEASEPD field.                                  */
   #define RRAMC_POWER_CNT_CONFIG0_CNTRELEASEPD_Msk (0xFFUL << RRAMC_POWER_CNT_CONFIG0_CNTRELEASEPD_Pos) /*!< Bit mask of
                                                                             CNTRELEASEPD field.*/
-  #define RRAMC_POWER_CNT_CONFIG0_CNTRELEASEPD_Min (0x0UL) /*!< Min value of CNTRELEASEPD field.                               */
+  #define RRAMC_POWER_CNT_CONFIG0_CNTRELEASEPD_Min (0x00UL) /*!< Min value of CNTRELEASEPD field.                              */
   #define RRAMC_POWER_CNT_CONFIG0_CNTRELEASEPD_Max (0xFFUL) /*!< Max size of CNTRELEASEPD field.                               */
 
 /* CNTPREPOWERDOWN @Bits 16..19 : Counter for pre-power down - CNT_PRE_POWER_DOWN */
@@ -45545,7 +45813,7 @@ typedef struct {
   #define RRAMC_POWER_CNT_CONFIG0_CNTNAPWAKEUP_Pos (24UL) /*!< Position of CNTNAPWAKEUP field.                                 */
   #define RRAMC_POWER_CNT_CONFIG0_CNTNAPWAKEUP_Msk (0xFFUL << RRAMC_POWER_CNT_CONFIG0_CNTNAPWAKEUP_Pos) /*!< Bit mask of
                                                                             CNTNAPWAKEUP field.*/
-  #define RRAMC_POWER_CNT_CONFIG0_CNTNAPWAKEUP_Min (0x0UL) /*!< Min value of CNTNAPWAKEUP field.                               */
+  #define RRAMC_POWER_CNT_CONFIG0_CNTNAPWAKEUP_Min (0x00UL) /*!< Min value of CNTNAPWAKEUP field.                              */
   #define RRAMC_POWER_CNT_CONFIG0_CNTNAPWAKEUP_Max (0xFFUL) /*!< Max size of CNTNAPWAKEUP field.                               */
 
 
@@ -45556,7 +45824,7 @@ typedef struct {
   #define RRAMC_POWER_CNT_CONFIG1_CNTRRAMWAKEUP_Pos (0UL) /*!< Position of CNTRRAMWAKEUP field.                                */
   #define RRAMC_POWER_CNT_CONFIG1_CNTRRAMWAKEUP_Msk (0x7FFUL << RRAMC_POWER_CNT_CONFIG1_CNTRRAMWAKEUP_Pos) /*!< Bit mask of
                                                                             CNTRRAMWAKEUP field.*/
-  #define RRAMC_POWER_CNT_CONFIG1_CNTRRAMWAKEUP_Min (0x0UL) /*!< Min value of CNTRRAMWAKEUP field.                             */
+  #define RRAMC_POWER_CNT_CONFIG1_CNTRRAMWAKEUP_Min (0x000UL) /*!< Min value of CNTRRAMWAKEUP field.                           */
   #define RRAMC_POWER_CNT_CONFIG1_CNTRRAMWAKEUP_Max (0x7FFUL) /*!< Max size of CNTRRAMWAKEUP field.                            */
 
 /* CNTVDIOVDD @Bits 12..15 : Counter used for setup time from IO power (VDIO) to core power (VDD) of RRAM (tSU_IO_CORE) */
@@ -46092,7 +46360,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task WAKEUP will subscribe to */
   #define RRAMC_SUBSCRIBE_WAKEUP_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define RRAMC_SUBSCRIBE_WAKEUP_CHIDX_Msk (0xFFUL << RRAMC_SUBSCRIBE_WAKEUP_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define RRAMC_SUBSCRIBE_WAKEUP_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define RRAMC_SUBSCRIBE_WAKEUP_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define RRAMC_SUBSCRIBE_WAKEUP_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46110,7 +46378,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CLRWRITEBUF will subscribe to */
   #define RRAMC_SUBSCRIBE_CLRWRITEBUF_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define RRAMC_SUBSCRIBE_CLRWRITEBUF_CHIDX_Msk (0xFFUL << RRAMC_SUBSCRIBE_CLRWRITEBUF_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define RRAMC_SUBSCRIBE_CLRWRITEBUF_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define RRAMC_SUBSCRIBE_CLRWRITEBUF_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define RRAMC_SUBSCRIBE_CLRWRITEBUF_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46129,7 +46397,7 @@ typedef struct {
   #define RRAMC_SUBSCRIBE_COMMITWRITEBUF_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                         */
   #define RRAMC_SUBSCRIBE_COMMITWRITEBUF_CHIDX_Msk (0xFFUL << RRAMC_SUBSCRIBE_COMMITWRITEBUF_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define RRAMC_SUBSCRIBE_COMMITWRITEBUF_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                      */
+  #define RRAMC_SUBSCRIBE_COMMITWRITEBUF_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                     */
   #define RRAMC_SUBSCRIBE_COMMITWRITEBUF_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                      */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46199,7 +46467,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event WOKENUP will publish to */
   #define RRAMC_PUBLISH_WOKENUP_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RRAMC_PUBLISH_WOKENUP_CHIDX_Msk (0xFFUL << RRAMC_PUBLISH_WOKENUP_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RRAMC_PUBLISH_WOKENUP_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RRAMC_PUBLISH_WOKENUP_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RRAMC_PUBLISH_WOKENUP_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46454,7 +46722,7 @@ typedef struct {
 /* WRITEBUFSIZE @Bits 8..13 : write-buffer size in number of 128-bit words */
   #define RRAMC_CONFIG_WRITEBUFSIZE_Pos (8UL)        /*!< Position of WRITEBUFSIZE field.                                      */
   #define RRAMC_CONFIG_WRITEBUFSIZE_Msk (0x3FUL << RRAMC_CONFIG_WRITEBUFSIZE_Pos) /*!< Bit mask of WRITEBUFSIZE field.         */
-  #define RRAMC_CONFIG_WRITEBUFSIZE_Min (0x0UL)      /*!< Min value of WRITEBUFSIZE field.                                     */
+  #define RRAMC_CONFIG_WRITEBUFSIZE_Min (0x00UL)     /*!< Min value of WRITEBUFSIZE field.                                     */
   #define RRAMC_CONFIG_WRITEBUFSIZE_Max (0x20UL)     /*!< Max size of WRITEBUFSIZE field.                                      */
   #define RRAMC_CONFIG_WRITEBUFSIZE_Unbuffered (0x00UL) /*!< Disable buffering                                                 */
 
@@ -46478,19 +46746,19 @@ typedef struct {
   #define RRAMC_WAITSTATES_VALUE0_Pos (0UL)          /*!< Position of VALUE0 field.                                            */
   #define RRAMC_WAITSTATES_VALUE0_Msk (0xFUL << RRAMC_WAITSTATES_VALUE0_Pos) /*!< Bit mask of VALUE0 field.                    */
   #define RRAMC_WAITSTATES_VALUE0_Min (0x0UL)        /*!< Min value of VALUE0 field.                                           */
-  #define RRAMC_WAITSTATES_VALUE0_Max (0x10UL)       /*!< Max size of VALUE0 field.                                            */
+  #define RRAMC_WAITSTATES_VALUE0_Max (0x0UL)        /*!< Max size of VALUE0 field.                                            */
 
 /* VALUE1 @Bits 4..7 : Waitstates value for frequency index [1] */
   #define RRAMC_WAITSTATES_VALUE1_Pos (4UL)          /*!< Position of VALUE1 field.                                            */
   #define RRAMC_WAITSTATES_VALUE1_Msk (0xFUL << RRAMC_WAITSTATES_VALUE1_Pos) /*!< Bit mask of VALUE1 field.                    */
   #define RRAMC_WAITSTATES_VALUE1_Min (0x0UL)        /*!< Min value of VALUE1 field.                                           */
-  #define RRAMC_WAITSTATES_VALUE1_Max (0x10UL)       /*!< Max size of VALUE1 field.                                            */
+  #define RRAMC_WAITSTATES_VALUE1_Max (0x0UL)        /*!< Max size of VALUE1 field.                                            */
 
 /* VALUE2 @Bits 8..11 : Waitstates value for frequency index [2] */
   #define RRAMC_WAITSTATES_VALUE2_Pos (8UL)          /*!< Position of VALUE2 field.                                            */
   #define RRAMC_WAITSTATES_VALUE2_Msk (0xFUL << RRAMC_WAITSTATES_VALUE2_Pos) /*!< Bit mask of VALUE2 field.                    */
   #define RRAMC_WAITSTATES_VALUE2_Min (0x0UL)        /*!< Min value of VALUE2 field.                                           */
-  #define RRAMC_WAITSTATES_VALUE2_Max (0x10UL)       /*!< Max size of VALUE2 field.                                            */
+  #define RRAMC_WAITSTATES_VALUE2_Max (0x0UL)        /*!< Max size of VALUE2 field.                                            */
 
 /* RDONE @Bit 12 : Use RDONE (read done) signal from the RRAM macro in addition to waitstates specified above. The data is read
                    which ever of waitstate or RDONE signal comes first */
@@ -46517,7 +46785,7 @@ typedef struct {
 /* VALUE @Bits 0..11 : Preload value for waiting for a next write */
   #define RRAMC_READYNEXTTIMEOUT_VALUE_Pos (0UL)     /*!< Position of VALUE field.                                             */
   #define RRAMC_READYNEXTTIMEOUT_VALUE_Msk (0xFFFUL << RRAMC_READYNEXTTIMEOUT_VALUE_Pos) /*!< Bit mask of VALUE field.         */
-  #define RRAMC_READYNEXTTIMEOUT_VALUE_Min (0x0UL)   /*!< Min value of VALUE field.                                            */
+  #define RRAMC_READYNEXTTIMEOUT_VALUE_Min (0x000UL) /*!< Min value of VALUE field.                                            */
   #define RRAMC_READYNEXTTIMEOUT_VALUE_Max (0xFFFUL) /*!< Max size of VALUE field.                                             */
 
 /* EN @Bit 31 : Enable ready next timeout */
@@ -46648,7 +46916,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define RTC_SUBSCRIBE_START_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define RTC_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << RTC_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define RTC_SUBSCRIBE_START_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define RTC_SUBSCRIBE_START_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define RTC_SUBSCRIBE_START_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46666,7 +46934,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define RTC_SUBSCRIBE_STOP_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define RTC_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << RTC_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define RTC_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define RTC_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define RTC_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46684,7 +46952,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CLEAR will subscribe to */
   #define RTC_SUBSCRIBE_CLEAR_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define RTC_SUBSCRIBE_CLEAR_CHIDX_Msk (0xFFUL << RTC_SUBSCRIBE_CLEAR_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define RTC_SUBSCRIBE_CLEAR_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define RTC_SUBSCRIBE_CLEAR_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define RTC_SUBSCRIBE_CLEAR_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46702,7 +46970,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task TRIGOVRFLW will subscribe to */
   #define RTC_SUBSCRIBE_TRIGOVRFLW_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define RTC_SUBSCRIBE_TRIGOVRFLW_CHIDX_Msk (0xFFUL << RTC_SUBSCRIBE_TRIGOVRFLW_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define RTC_SUBSCRIBE_TRIGOVRFLW_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define RTC_SUBSCRIBE_TRIGOVRFLW_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define RTC_SUBSCRIBE_TRIGOVRFLW_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46723,7 +46991,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task CAPTURE[n] will subscribe to */
   #define RTC_SUBSCRIBE_CAPTURE_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define RTC_SUBSCRIBE_CAPTURE_CHIDX_Msk (0xFFUL << RTC_SUBSCRIBE_CAPTURE_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define RTC_SUBSCRIBE_CAPTURE_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define RTC_SUBSCRIBE_CAPTURE_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define RTC_SUBSCRIBE_CAPTURE_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46782,7 +47050,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TICK will publish to */
   #define RTC_PUBLISH_TICK_CHIDX_Pos (0UL)           /*!< Position of CHIDX field.                                             */
   #define RTC_PUBLISH_TICK_CHIDX_Msk (0xFFUL << RTC_PUBLISH_TICK_CHIDX_Pos) /*!< Bit mask of CHIDX field.                      */
-  #define RTC_PUBLISH_TICK_CHIDX_Min (0x0UL)         /*!< Min value of CHIDX field.                                            */
+  #define RTC_PUBLISH_TICK_CHIDX_Min (0x00UL)        /*!< Min value of CHIDX field.                                            */
   #define RTC_PUBLISH_TICK_CHIDX_Max (0xFFUL)        /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46800,7 +47068,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event OVRFLW will publish to */
   #define RTC_PUBLISH_OVRFLW_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define RTC_PUBLISH_OVRFLW_CHIDX_Msk (0xFFUL << RTC_PUBLISH_OVRFLW_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define RTC_PUBLISH_OVRFLW_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define RTC_PUBLISH_OVRFLW_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define RTC_PUBLISH_OVRFLW_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -46821,7 +47089,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event COMPARE[n] will publish to */
   #define RTC_PUBLISH_COMPARE_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define RTC_PUBLISH_COMPARE_CHIDX_Msk (0xFFUL << RTC_PUBLISH_COMPARE_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define RTC_PUBLISH_COMPARE_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define RTC_PUBLISH_COMPARE_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define RTC_PUBLISH_COMPARE_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -47295,7 +47563,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CH[n].LIMITH will publish to */
   #define SAADC_PUBLISH_CH_LIMITH_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define SAADC_PUBLISH_CH_LIMITH_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_CH_LIMITH_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define SAADC_PUBLISH_CH_LIMITH_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define SAADC_PUBLISH_CH_LIMITH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define SAADC_PUBLISH_CH_LIMITH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -47313,7 +47581,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CH[n].LIMITL will publish to */
   #define SAADC_PUBLISH_CH_LIMITL_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define SAADC_PUBLISH_CH_LIMITL_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_CH_LIMITL_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define SAADC_PUBLISH_CH_LIMITL_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define SAADC_PUBLISH_CH_LIMITL_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define SAADC_PUBLISH_CH_LIMITL_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -47343,7 +47611,7 @@ typedef struct {
 /* VAL @Bits 0..15 : value */
   #define SAADC_TRIM_LINCALCOEFF_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
   #define SAADC_TRIM_LINCALCOEFF_VAL_Msk (0xFFFFUL << SAADC_TRIM_LINCALCOEFF_VAL_Pos) /*!< Bit mask of VAL field.              */
-  #define SAADC_TRIM_LINCALCOEFF_VAL_Min (0x0UL)     /*!< Min value of VAL field.                                              */
+  #define SAADC_TRIM_LINCALCOEFF_VAL_Min (0x0000UL)  /*!< Min value of VAL field.                                              */
   #define SAADC_TRIM_LINCALCOEFF_VAL_Max (0xFFFFUL)  /*!< Max size of VAL field.                                               */
 
 
@@ -47505,7 +47773,7 @@ typedef struct {
 
   #define SAADC_CH_CONFIG_TACQ_Pos (16UL)            /*!< Position of TACQ field.                                              */
   #define SAADC_CH_CONFIG_TACQ_Msk (0x1FFUL << SAADC_CH_CONFIG_TACQ_Pos) /*!< Bit mask of TACQ field.                          */
-  #define SAADC_CH_CONFIG_TACQ_Min (0x1UL)           /*!< Min value of TACQ field.                                             */
+  #define SAADC_CH_CONFIG_TACQ_Min (0x001UL)         /*!< Min value of TACQ field.                                             */
   #define SAADC_CH_CONFIG_TACQ_Max (0x13FUL)         /*!< Max size of TACQ field.                                              */
 
 /* TCONV @Bits 28..30 : Conversion time. Resulting conversion time is ((TCONV+1) x 250 ns) */
@@ -47925,7 +48193,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define SAADC_SUBSCRIBE_START_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define SAADC_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << SAADC_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define SAADC_SUBSCRIBE_START_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define SAADC_SUBSCRIBE_START_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define SAADC_SUBSCRIBE_START_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -47943,7 +48211,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SAMPLE will subscribe to */
   #define SAADC_SUBSCRIBE_SAMPLE_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define SAADC_SUBSCRIBE_SAMPLE_CHIDX_Msk (0xFFUL << SAADC_SUBSCRIBE_SAMPLE_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define SAADC_SUBSCRIBE_SAMPLE_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define SAADC_SUBSCRIBE_SAMPLE_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define SAADC_SUBSCRIBE_SAMPLE_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -47961,7 +48229,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define SAADC_SUBSCRIBE_STOP_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define SAADC_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << SAADC_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define SAADC_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define SAADC_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define SAADC_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -47980,7 +48248,7 @@ typedef struct {
   #define SAADC_SUBSCRIBE_CALIBRATEOFFSET_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                        */
   #define SAADC_SUBSCRIBE_CALIBRATEOFFSET_CHIDX_Msk (0xFFUL << SAADC_SUBSCRIBE_CALIBRATEOFFSET_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define SAADC_SUBSCRIBE_CALIBRATEOFFSET_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                     */
+  #define SAADC_SUBSCRIBE_CALIBRATEOFFSET_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                    */
   #define SAADC_SUBSCRIBE_CALIBRATEOFFSET_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                     */
 
 /* EN @Bit 31 : (unspecified) */
@@ -48000,7 +48268,7 @@ typedef struct {
   #define SAADC_SUBSCRIBE_CALIBRATELINEARITY_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                     */
   #define SAADC_SUBSCRIBE_CALIBRATELINEARITY_CHIDX_Msk (0xFFUL << SAADC_SUBSCRIBE_CALIBRATELINEARITY_CHIDX_Pos) /*!< Bit mask of
                                                                             CHIDX field.*/
-  #define SAADC_SUBSCRIBE_CALIBRATELINEARITY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                  */
+  #define SAADC_SUBSCRIBE_CALIBRATELINEARITY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                 */
   #define SAADC_SUBSCRIBE_CALIBRATELINEARITY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                  */
 
 /* EN @Bit 31 : (unspecified) */
@@ -48019,7 +48287,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOPDMA will subscribe to */
   #define SAADC_SUBSCRIBE_STOPDMA_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define SAADC_SUBSCRIBE_STOPDMA_CHIDX_Msk (0xFFUL << SAADC_SUBSCRIBE_STOPDMA_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define SAADC_SUBSCRIBE_STOPDMA_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define SAADC_SUBSCRIBE_STOPDMA_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define SAADC_SUBSCRIBE_STOPDMA_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -48130,7 +48398,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STARTED will publish to */
   #define SAADC_PUBLISH_STARTED_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define SAADC_PUBLISH_STARTED_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_STARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define SAADC_PUBLISH_STARTED_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define SAADC_PUBLISH_STARTED_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define SAADC_PUBLISH_STARTED_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -48148,7 +48416,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define SAADC_PUBLISH_END_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define SAADC_PUBLISH_END_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define SAADC_PUBLISH_END_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define SAADC_PUBLISH_END_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define SAADC_PUBLISH_END_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -48166,7 +48434,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event DONE will publish to */
   #define SAADC_PUBLISH_DONE_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define SAADC_PUBLISH_DONE_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_DONE_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define SAADC_PUBLISH_DONE_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define SAADC_PUBLISH_DONE_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define SAADC_PUBLISH_DONE_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -48184,7 +48452,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RESULTDONE will publish to */
   #define SAADC_PUBLISH_RESULTDONE_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define SAADC_PUBLISH_RESULTDONE_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_RESULTDONE_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define SAADC_PUBLISH_RESULTDONE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define SAADC_PUBLISH_RESULTDONE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define SAADC_PUBLISH_RESULTDONE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -48202,7 +48470,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CALIBRATEDONE will publish to */
   #define SAADC_PUBLISH_CALIBRATEDONE_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define SAADC_PUBLISH_CALIBRATEDONE_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_CALIBRATEDONE_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define SAADC_PUBLISH_CALIBRATEDONE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define SAADC_PUBLISH_CALIBRATEDONE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define SAADC_PUBLISH_CALIBRATEDONE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -48220,7 +48488,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STOPPED will publish to */
   #define SAADC_PUBLISH_STOPPED_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define SAADC_PUBLISH_STOPPED_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_STOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define SAADC_PUBLISH_STOPPED_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define SAADC_PUBLISH_STOPPED_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define SAADC_PUBLISH_STOPPED_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -48238,7 +48506,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event AHBERROR will publish to */
   #define SAADC_PUBLISH_AHBERROR_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define SAADC_PUBLISH_AHBERROR_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_AHBERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define SAADC_PUBLISH_AHBERROR_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define SAADC_PUBLISH_AHBERROR_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define SAADC_PUBLISH_AHBERROR_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -48982,7 +49250,7 @@ typedef struct {
 /* CC @Bits 0..10 : Capture and compare value. Sample rate is 16 MHz/CC */
   #define SAADC_SAMPLERATE_CC_Pos (0UL)              /*!< Position of CC field.                                                */
   #define SAADC_SAMPLERATE_CC_Msk (0x7FFUL << SAADC_SAMPLERATE_CC_Pos) /*!< Bit mask of CC field.                              */
-  #define SAADC_SAMPLERATE_CC_Min (0x8UL)            /*!< Min value of CC field.                                               */
+  #define SAADC_SAMPLERATE_CC_Min (0x008UL)          /*!< Min value of CC field.                                               */
   #define SAADC_SAMPLERATE_CC_Max (0x7FFUL)          /*!< Max size of CC field.                                                */
 
 /* MODE @Bit 12 : Select mode for sample rate control */
@@ -49205,7 +49473,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPI_PSEL_SCK_PIN_Pos (0UL)                 /*!< Position of PIN field.                                               */
   #define SPI_PSEL_SCK_PIN_Msk (0x1FUL << SPI_PSEL_SCK_PIN_Pos) /*!< Bit mask of PIN field.                                    */
-  #define SPI_PSEL_SCK_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
+  #define SPI_PSEL_SCK_PIN_Min (0x00UL)              /*!< Min value of PIN field.                                              */
   #define SPI_PSEL_SCK_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
 /* PORT @Bit 5 : Port number */
@@ -49229,7 +49497,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPI_PSEL_MOSI_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define SPI_PSEL_MOSI_PIN_Msk (0x1FUL << SPI_PSEL_MOSI_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define SPI_PSEL_MOSI_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define SPI_PSEL_MOSI_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define SPI_PSEL_MOSI_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bit 5 : Port number */
@@ -49253,7 +49521,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPI_PSEL_MISO_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define SPI_PSEL_MISO_PIN_Msk (0x1FUL << SPI_PSEL_MISO_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define SPI_PSEL_MISO_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define SPI_PSEL_MISO_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define SPI_PSEL_MISO_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bit 5 : Port number */
@@ -49324,7 +49592,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define SPI_PUBLISH_READY_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define SPI_PUBLISH_READY_CHIDX_Msk (0xFFUL << SPI_PUBLISH_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define SPI_PUBLISH_READY_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define SPI_PUBLISH_READY_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define SPI_PUBLISH_READY_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -49408,7 +49676,7 @@ typedef struct {
 /* DIVISOR @Bits 0..6 : Core clock to SCK divisor */
   #define SPI_PRESCALER_DIVISOR_Pos (0UL)            /*!< Position of DIVISOR field.                                           */
   #define SPI_PRESCALER_DIVISOR_Msk (0x7FUL << SPI_PRESCALER_DIVISOR_Pos) /*!< Bit mask of DIVISOR field.                      */
-  #define SPI_PRESCALER_DIVISOR_Min (0x2UL)          /*!< Min value of DIVISOR field.                                          */
+  #define SPI_PRESCALER_DIVISOR_Min (0x02UL)         /*!< Min value of DIVISOR field.                                          */
   #define SPI_PRESCALER_DIVISOR_Max (0x7EUL)         /*!< Max size of DIVISOR field.                                           */
 
 
@@ -49519,7 +49787,7 @@ typedef struct {
   #define SPIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                      */
   #define SPIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Msk (0xFFUL << SPIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Pos) /*!< Bit mask of
                                                                             CHIDX field.*/
-  #define SPIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                   */
+  #define SPIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                  */
   #define SPIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                   */
 
 /* EN @Bit 31 : (unspecified) */
@@ -49542,7 +49810,7 @@ typedef struct {
   #define SPIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                     */
   #define SPIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Msk (0xFFUL << SPIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Pos) /*!< Bit mask of
                                                                             CHIDX field.*/
-  #define SPIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                  */
+  #define SPIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                 */
   #define SPIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                  */
 
 /* EN @Bit 31 : (unspecified) */
@@ -49725,7 +49993,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define SPIM_PUBLISH_DMA_RX_END_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define SPIM_PUBLISH_DMA_RX_END_CHIDX_Msk (0xFFUL << SPIM_PUBLISH_DMA_RX_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define SPIM_PUBLISH_DMA_RX_END_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define SPIM_PUBLISH_DMA_RX_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define SPIM_PUBLISH_DMA_RX_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -49743,7 +50011,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define SPIM_PUBLISH_DMA_RX_READY_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define SPIM_PUBLISH_DMA_RX_READY_CHIDX_Msk (0xFFUL << SPIM_PUBLISH_DMA_RX_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define SPIM_PUBLISH_DMA_RX_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define SPIM_PUBLISH_DMA_RX_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define SPIM_PUBLISH_DMA_RX_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -49762,7 +50030,7 @@ typedef struct {
   #define SPIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define SPIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Msk (0xFFUL << SPIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define SPIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define SPIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define SPIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -49783,7 +50051,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event MATCH[n] will publish to */
   #define SPIM_PUBLISH_DMA_RX_MATCH_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define SPIM_PUBLISH_DMA_RX_MATCH_CHIDX_Msk (0xFFUL << SPIM_PUBLISH_DMA_RX_MATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define SPIM_PUBLISH_DMA_RX_MATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define SPIM_PUBLISH_DMA_RX_MATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define SPIM_PUBLISH_DMA_RX_MATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -49812,7 +50080,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define SPIM_PUBLISH_DMA_TX_END_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define SPIM_PUBLISH_DMA_TX_END_CHIDX_Msk (0xFFUL << SPIM_PUBLISH_DMA_TX_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define SPIM_PUBLISH_DMA_TX_END_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define SPIM_PUBLISH_DMA_TX_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define SPIM_PUBLISH_DMA_TX_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -49830,7 +50098,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define SPIM_PUBLISH_DMA_TX_READY_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define SPIM_PUBLISH_DMA_TX_READY_CHIDX_Msk (0xFFUL << SPIM_PUBLISH_DMA_TX_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define SPIM_PUBLISH_DMA_TX_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define SPIM_PUBLISH_DMA_TX_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define SPIM_PUBLISH_DMA_TX_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -49849,7 +50117,7 @@ typedef struct {
   #define SPIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define SPIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Msk (0xFFUL << SPIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define SPIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define SPIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define SPIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -49908,7 +50176,7 @@ typedef struct {
 
   #define SPIM_IFTIMING_CSNDUR_CSNDUR_Pos (0UL)      /*!< Position of CSNDUR field.                                            */
   #define SPIM_IFTIMING_CSNDUR_CSNDUR_Msk (0xFFUL << SPIM_IFTIMING_CSNDUR_CSNDUR_Pos) /*!< Bit mask of CSNDUR field.           */
-  #define SPIM_IFTIMING_CSNDUR_CSNDUR_Min (0x0UL)    /*!< Min value of CSNDUR field.                                           */
+  #define SPIM_IFTIMING_CSNDUR_CSNDUR_Min (0x00UL)   /*!< Min value of CSNDUR field.                                           */
   #define SPIM_IFTIMING_CSNDUR_CSNDUR_Max (0xFFUL)   /*!< Max size of CSNDUR field.                                            */
 
 
@@ -49931,7 +50199,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPIM_PSEL_SCK_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define SPIM_PSEL_SCK_PIN_Msk (0x1FUL << SPIM_PSEL_SCK_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define SPIM_PSEL_SCK_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define SPIM_PSEL_SCK_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define SPIM_PSEL_SCK_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -49955,7 +50223,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPIM_PSEL_MOSI_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define SPIM_PSEL_MOSI_PIN_Msk (0x1FUL << SPIM_PSEL_MOSI_PIN_Pos) /*!< Bit mask of PIN field.                                */
-  #define SPIM_PSEL_MOSI_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
+  #define SPIM_PSEL_MOSI_PIN_Min (0x00UL)            /*!< Min value of PIN field.                                              */
   #define SPIM_PSEL_MOSI_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -49979,7 +50247,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPIM_PSEL_MISO_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define SPIM_PSEL_MISO_PIN_Msk (0x1FUL << SPIM_PSEL_MISO_PIN_Pos) /*!< Bit mask of PIN field.                                */
-  #define SPIM_PSEL_MISO_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
+  #define SPIM_PSEL_MISO_PIN_Min (0x00UL)            /*!< Min value of PIN field.                                              */
   #define SPIM_PSEL_MISO_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -50003,7 +50271,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPIM_PSEL_DCX_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define SPIM_PSEL_DCX_PIN_Msk (0x1FUL << SPIM_PSEL_DCX_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define SPIM_PSEL_DCX_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define SPIM_PSEL_DCX_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define SPIM_PSEL_DCX_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -50027,7 +50295,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPIM_PSEL_CSN_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define SPIM_PSEL_CSN_PIN_Msk (0x1FUL << SPIM_PSEL_CSN_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define SPIM_PSEL_CSN_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define SPIM_PSEL_CSN_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define SPIM_PSEL_CSN_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -50190,7 +50458,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define SPIM_DMA_RX_MAXCNT_MAXCNT_Pos (0UL)        /*!< Position of MAXCNT field.                                            */
   #define SPIM_DMA_RX_MAXCNT_MAXCNT_Msk (0xFFFFUL << SPIM_DMA_RX_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.             */
-  #define SPIM_DMA_RX_MAXCNT_MAXCNT_Min (0x1UL)      /*!< Min value of MAXCNT field.                                           */
+  #define SPIM_DMA_RX_MAXCNT_MAXCNT_Min (0x0001UL)   /*!< Min value of MAXCNT field.                                           */
   #define SPIM_DMA_RX_MAXCNT_MAXCNT_Max (0xFFFFUL)   /*!< Max size of MAXCNT field.                                            */
 
 
@@ -50202,7 +50470,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define SPIM_DMA_RX_AMOUNT_AMOUNT_Pos (0UL)        /*!< Position of AMOUNT field.                                            */
   #define SPIM_DMA_RX_AMOUNT_AMOUNT_Msk (0xFFFFUL << SPIM_DMA_RX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
-  #define SPIM_DMA_RX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
+  #define SPIM_DMA_RX_AMOUNT_AMOUNT_Min (0x0001UL)   /*!< Min value of AMOUNT field.                                           */
   #define SPIM_DMA_RX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
@@ -50288,7 +50556,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define SPIM_DMA_TX_MAXCNT_MAXCNT_Pos (0UL)        /*!< Position of MAXCNT field.                                            */
   #define SPIM_DMA_TX_MAXCNT_MAXCNT_Msk (0xFFFFUL << SPIM_DMA_TX_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.             */
-  #define SPIM_DMA_TX_MAXCNT_MAXCNT_Min (0x1UL)      /*!< Min value of MAXCNT field.                                           */
+  #define SPIM_DMA_TX_MAXCNT_MAXCNT_Min (0x0001UL)   /*!< Min value of MAXCNT field.                                           */
   #define SPIM_DMA_TX_MAXCNT_MAXCNT_Max (0xFFFFUL)   /*!< Max size of MAXCNT field.                                            */
 
 
@@ -50300,7 +50568,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define SPIM_DMA_TX_AMOUNT_AMOUNT_Pos (0UL)        /*!< Position of AMOUNT field.                                            */
   #define SPIM_DMA_TX_AMOUNT_AMOUNT_Msk (0xFFFFUL << SPIM_DMA_TX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
-  #define SPIM_DMA_TX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
+  #define SPIM_DMA_TX_AMOUNT_AMOUNT_Min (0x0001UL)   /*!< Min value of AMOUNT field.                                           */
   #define SPIM_DMA_TX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
@@ -50460,7 +50728,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define SPIM_SUBSCRIBE_START_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define SPIM_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << SPIM_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define SPIM_SUBSCRIBE_START_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define SPIM_SUBSCRIBE_START_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define SPIM_SUBSCRIBE_START_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -50478,7 +50746,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define SPIM_SUBSCRIBE_STOP_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define SPIM_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << SPIM_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define SPIM_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define SPIM_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define SPIM_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -50496,7 +50764,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SUSPEND will subscribe to */
   #define SPIM_SUBSCRIBE_SUSPEND_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define SPIM_SUBSCRIBE_SUSPEND_CHIDX_Msk (0xFFUL << SPIM_SUBSCRIBE_SUSPEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define SPIM_SUBSCRIBE_SUSPEND_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define SPIM_SUBSCRIBE_SUSPEND_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define SPIM_SUBSCRIBE_SUSPEND_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -50514,7 +50782,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RESUME will subscribe to */
   #define SPIM_SUBSCRIBE_RESUME_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define SPIM_SUBSCRIBE_RESUME_CHIDX_Msk (0xFFUL << SPIM_SUBSCRIBE_RESUME_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define SPIM_SUBSCRIBE_RESUME_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define SPIM_SUBSCRIBE_RESUME_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define SPIM_SUBSCRIBE_RESUME_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -50570,7 +50838,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STARTED will publish to */
   #define SPIM_PUBLISH_STARTED_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define SPIM_PUBLISH_STARTED_CHIDX_Msk (0xFFUL << SPIM_PUBLISH_STARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define SPIM_PUBLISH_STARTED_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define SPIM_PUBLISH_STARTED_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define SPIM_PUBLISH_STARTED_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -50588,7 +50856,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STOPPED will publish to */
   #define SPIM_PUBLISH_STOPPED_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define SPIM_PUBLISH_STOPPED_CHIDX_Msk (0xFFUL << SPIM_PUBLISH_STOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define SPIM_PUBLISH_STOPPED_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define SPIM_PUBLISH_STOPPED_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define SPIM_PUBLISH_STOPPED_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -50606,7 +50874,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define SPIM_PUBLISH_END_CHIDX_Pos (0UL)           /*!< Position of CHIDX field.                                             */
   #define SPIM_PUBLISH_END_CHIDX_Msk (0xFFUL << SPIM_PUBLISH_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                      */
-  #define SPIM_PUBLISH_END_CHIDX_Min (0x0UL)         /*!< Min value of CHIDX field.                                            */
+  #define SPIM_PUBLISH_END_CHIDX_Min (0x00UL)        /*!< Min value of CHIDX field.                                            */
   #define SPIM_PUBLISH_END_CHIDX_Max (0xFFUL)        /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -51120,7 +51388,7 @@ typedef struct {
 /* RXD @Bits 0..7 : RX data received. Double buffered. */
   #define SPIM_RXDDATA_RXD_Pos (0UL)                 /*!< Position of RXD field.                                               */
   #define SPIM_RXDDATA_RXD_Msk (0xFFUL << SPIM_RXDDATA_RXD_Pos) /*!< Bit mask of RXD field.                                    */
-  #define SPIM_RXDDATA_RXD_Min (0x1UL)               /*!< Min value of RXD field.                                              */
+  #define SPIM_RXDDATA_RXD_Min (0x01UL)              /*!< Min value of RXD field.                                              */
   #define SPIM_RXDDATA_RXD_Max (0xFFUL)              /*!< Max size of RXD field.                                               */
 
 
@@ -51130,7 +51398,7 @@ typedef struct {
 /* TXD @Bits 0..7 : TX data to send. Double buffered. */
   #define SPIM_TXDDATA_TXD_Pos (0UL)                 /*!< Position of TXD field.                                               */
   #define SPIM_TXDDATA_TXD_Msk (0xFFUL << SPIM_TXDDATA_TXD_Pos) /*!< Bit mask of TXD field.                                    */
-  #define SPIM_TXDDATA_TXD_Min (0x1UL)               /*!< Min value of TXD field.                                              */
+  #define SPIM_TXDDATA_TXD_Min (0x01UL)              /*!< Min value of TXD field.                                              */
   #define SPIM_TXDDATA_TXD_Max (0xFFUL)              /*!< Max size of TXD field.                                               */
 
 
@@ -51140,7 +51408,7 @@ typedef struct {
 /* DIVISOR @Bits 0..6 : Core clock to SCK divisor */
   #define SPIM_PRESCALER_DIVISOR_Pos (0UL)           /*!< Position of DIVISOR field.                                           */
   #define SPIM_PRESCALER_DIVISOR_Msk (0x7FUL << SPIM_PRESCALER_DIVISOR_Pos) /*!< Bit mask of DIVISOR field.                    */
-  #define SPIM_PRESCALER_DIVISOR_Min (0x2UL)         /*!< Min value of DIVISOR field.                                          */
+  #define SPIM_PRESCALER_DIVISOR_Min (0x02UL)        /*!< Min value of DIVISOR field.                                          */
   #define SPIM_PRESCALER_DIVISOR_Max (0x7EUL)        /*!< Max size of DIVISOR field.                                           */
 
 
@@ -51288,7 +51556,7 @@ typedef struct {
   #define SPIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                      */
   #define SPIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Msk (0xFFUL << SPIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Pos) /*!< Bit mask of
                                                                             CHIDX field.*/
-  #define SPIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                   */
+  #define SPIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                  */
   #define SPIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                   */
 
 /* EN @Bit 31 : (unspecified) */
@@ -51311,7 +51579,7 @@ typedef struct {
   #define SPIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                     */
   #define SPIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Msk (0xFFUL << SPIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Pos) /*!< Bit mask of
                                                                             CHIDX field.*/
-  #define SPIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                  */
+  #define SPIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                 */
   #define SPIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                  */
 
 /* EN @Bit 31 : (unspecified) */
@@ -51494,7 +51762,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define SPIS_PUBLISH_DMA_RX_END_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define SPIS_PUBLISH_DMA_RX_END_CHIDX_Msk (0xFFUL << SPIS_PUBLISH_DMA_RX_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define SPIS_PUBLISH_DMA_RX_END_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define SPIS_PUBLISH_DMA_RX_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define SPIS_PUBLISH_DMA_RX_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -51512,7 +51780,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define SPIS_PUBLISH_DMA_RX_READY_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define SPIS_PUBLISH_DMA_RX_READY_CHIDX_Msk (0xFFUL << SPIS_PUBLISH_DMA_RX_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define SPIS_PUBLISH_DMA_RX_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define SPIS_PUBLISH_DMA_RX_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define SPIS_PUBLISH_DMA_RX_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -51531,7 +51799,7 @@ typedef struct {
   #define SPIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define SPIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Msk (0xFFUL << SPIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define SPIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define SPIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define SPIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -51552,7 +51820,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event MATCH[n] will publish to */
   #define SPIS_PUBLISH_DMA_RX_MATCH_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define SPIS_PUBLISH_DMA_RX_MATCH_CHIDX_Msk (0xFFUL << SPIS_PUBLISH_DMA_RX_MATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define SPIS_PUBLISH_DMA_RX_MATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define SPIS_PUBLISH_DMA_RX_MATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define SPIS_PUBLISH_DMA_RX_MATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -51581,7 +51849,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define SPIS_PUBLISH_DMA_TX_END_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define SPIS_PUBLISH_DMA_TX_END_CHIDX_Msk (0xFFUL << SPIS_PUBLISH_DMA_TX_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define SPIS_PUBLISH_DMA_TX_END_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define SPIS_PUBLISH_DMA_TX_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define SPIS_PUBLISH_DMA_TX_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -51599,7 +51867,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define SPIS_PUBLISH_DMA_TX_READY_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define SPIS_PUBLISH_DMA_TX_READY_CHIDX_Msk (0xFFUL << SPIS_PUBLISH_DMA_TX_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define SPIS_PUBLISH_DMA_TX_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define SPIS_PUBLISH_DMA_TX_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define SPIS_PUBLISH_DMA_TX_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -51618,7 +51886,7 @@ typedef struct {
   #define SPIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define SPIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Msk (0xFFUL << SPIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define SPIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define SPIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define SPIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -51659,7 +51927,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPIS_PSEL_SCK_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define SPIS_PSEL_SCK_PIN_Msk (0x1FUL << SPIS_PSEL_SCK_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define SPIS_PSEL_SCK_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define SPIS_PSEL_SCK_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define SPIS_PSEL_SCK_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -51683,7 +51951,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPIS_PSEL_MISO_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define SPIS_PSEL_MISO_PIN_Msk (0x1FUL << SPIS_PSEL_MISO_PIN_Pos) /*!< Bit mask of PIN field.                                */
-  #define SPIS_PSEL_MISO_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
+  #define SPIS_PSEL_MISO_PIN_Min (0x00UL)            /*!< Min value of PIN field.                                              */
   #define SPIS_PSEL_MISO_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -51707,7 +51975,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPIS_PSEL_MOSI_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define SPIS_PSEL_MOSI_PIN_Msk (0x1FUL << SPIS_PSEL_MOSI_PIN_Pos) /*!< Bit mask of PIN field.                                */
-  #define SPIS_PSEL_MOSI_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
+  #define SPIS_PSEL_MOSI_PIN_Min (0x00UL)            /*!< Min value of PIN field.                                              */
   #define SPIS_PSEL_MOSI_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -51731,7 +51999,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define SPIS_PSEL_CSN_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define SPIS_PSEL_CSN_PIN_Msk (0x1FUL << SPIS_PSEL_CSN_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define SPIS_PSEL_CSN_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define SPIS_PSEL_CSN_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define SPIS_PSEL_CSN_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -51892,7 +52160,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define SPIS_DMA_RX_MAXCNT_MAXCNT_Pos (0UL)        /*!< Position of MAXCNT field.                                            */
   #define SPIS_DMA_RX_MAXCNT_MAXCNT_Msk (0xFFFFUL << SPIS_DMA_RX_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.             */
-  #define SPIS_DMA_RX_MAXCNT_MAXCNT_Min (0x1UL)      /*!< Min value of MAXCNT field.                                           */
+  #define SPIS_DMA_RX_MAXCNT_MAXCNT_Min (0x0001UL)   /*!< Min value of MAXCNT field.                                           */
   #define SPIS_DMA_RX_MAXCNT_MAXCNT_Max (0xFFFFUL)   /*!< Max size of MAXCNT field.                                            */
 
 
@@ -51904,7 +52172,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define SPIS_DMA_RX_AMOUNT_AMOUNT_Pos (0UL)        /*!< Position of AMOUNT field.                                            */
   #define SPIS_DMA_RX_AMOUNT_AMOUNT_Msk (0xFFFFUL << SPIS_DMA_RX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
-  #define SPIS_DMA_RX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
+  #define SPIS_DMA_RX_AMOUNT_AMOUNT_Min (0x0001UL)   /*!< Min value of AMOUNT field.                                           */
   #define SPIS_DMA_RX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
@@ -51976,7 +52244,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define SPIS_DMA_TX_MAXCNT_MAXCNT_Pos (0UL)        /*!< Position of MAXCNT field.                                            */
   #define SPIS_DMA_TX_MAXCNT_MAXCNT_Msk (0xFFFFUL << SPIS_DMA_TX_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.             */
-  #define SPIS_DMA_TX_MAXCNT_MAXCNT_Min (0x1UL)      /*!< Min value of MAXCNT field.                                           */
+  #define SPIS_DMA_TX_MAXCNT_MAXCNT_Min (0x0001UL)   /*!< Min value of MAXCNT field.                                           */
   #define SPIS_DMA_TX_MAXCNT_MAXCNT_Max (0xFFFFUL)   /*!< Max size of MAXCNT field.                                            */
 
 
@@ -51988,7 +52256,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define SPIS_DMA_TX_AMOUNT_AMOUNT_Pos (0UL)        /*!< Position of AMOUNT field.                                            */
   #define SPIS_DMA_TX_AMOUNT_AMOUNT_Msk (0xFFFFUL << SPIS_DMA_TX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
-  #define SPIS_DMA_TX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
+  #define SPIS_DMA_TX_AMOUNT_AMOUNT_Min (0x0001UL)   /*!< Min value of AMOUNT field.                                           */
   #define SPIS_DMA_TX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
@@ -52110,7 +52378,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task ACQUIRE will subscribe to */
   #define SPIS_SUBSCRIBE_ACQUIRE_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define SPIS_SUBSCRIBE_ACQUIRE_CHIDX_Msk (0xFFUL << SPIS_SUBSCRIBE_ACQUIRE_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define SPIS_SUBSCRIBE_ACQUIRE_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define SPIS_SUBSCRIBE_ACQUIRE_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define SPIS_SUBSCRIBE_ACQUIRE_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -52128,7 +52396,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RELEASE will subscribe to */
   #define SPIS_SUBSCRIBE_RELEASE_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define SPIS_SUBSCRIBE_RELEASE_CHIDX_Msk (0xFFUL << SPIS_SUBSCRIBE_RELEASE_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define SPIS_SUBSCRIBE_RELEASE_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define SPIS_SUBSCRIBE_RELEASE_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define SPIS_SUBSCRIBE_RELEASE_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -52184,7 +52452,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STARTED will publish to */
   #define SPIS_PUBLISH_STARTED_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define SPIS_PUBLISH_STARTED_CHIDX_Msk (0xFFUL << SPIS_PUBLISH_STARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define SPIS_PUBLISH_STARTED_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define SPIS_PUBLISH_STARTED_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define SPIS_PUBLISH_STARTED_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -52202,7 +52470,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define SPIS_PUBLISH_END_CHIDX_Pos (0UL)           /*!< Position of CHIDX field.                                             */
   #define SPIS_PUBLISH_END_CHIDX_Msk (0xFFUL << SPIS_PUBLISH_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                      */
-  #define SPIS_PUBLISH_END_CHIDX_Min (0x0UL)         /*!< Min value of CHIDX field.                                            */
+  #define SPIS_PUBLISH_END_CHIDX_Min (0x00UL)        /*!< Min value of CHIDX field.                                            */
   #define SPIS_PUBLISH_END_CHIDX_Max (0xFFUL)        /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -52220,7 +52488,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ACQUIRED will publish to */
   #define SPIS_PUBLISH_ACQUIRED_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define SPIS_PUBLISH_ACQUIRED_CHIDX_Msk (0xFFUL << SPIS_PUBLISH_ACQUIRED_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define SPIS_PUBLISH_ACQUIRED_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define SPIS_PUBLISH_ACQUIRED_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define SPIS_PUBLISH_ACQUIRED_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -55675,7 +55943,7 @@ typedef union {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define TEMP_SUBSCRIBE_START_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define TEMP_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << TEMP_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define TEMP_SUBSCRIBE_START_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define TEMP_SUBSCRIBE_START_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define TEMP_SUBSCRIBE_START_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -55693,7 +55961,7 @@ typedef union {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define TEMP_SUBSCRIBE_STOP_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define TEMP_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << TEMP_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define TEMP_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define TEMP_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define TEMP_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -55724,7 +55992,7 @@ typedef union {
 /* CHIDX @Bits 0..7 : DPPI channel that event DATARDY will publish to */
   #define TEMP_PUBLISH_DATARDY_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define TEMP_PUBLISH_DATARDY_CHIDX_Msk (0xFFUL << TEMP_PUBLISH_DATARDY_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define TEMP_PUBLISH_DATARDY_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define TEMP_PUBLISH_DATARDY_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define TEMP_PUBLISH_DATARDY_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -56124,7 +56392,7 @@ typedef union {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define TIMER_SUBSCRIBE_START_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define TIMER_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << TIMER_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define TIMER_SUBSCRIBE_START_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define TIMER_SUBSCRIBE_START_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define TIMER_SUBSCRIBE_START_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -56142,7 +56410,7 @@ typedef union {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define TIMER_SUBSCRIBE_STOP_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define TIMER_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << TIMER_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define TIMER_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define TIMER_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define TIMER_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -56160,7 +56428,7 @@ typedef union {
 /* CHIDX @Bits 0..7 : DPPI channel that task COUNT will subscribe to */
   #define TIMER_SUBSCRIBE_COUNT_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define TIMER_SUBSCRIBE_COUNT_CHIDX_Msk (0xFFUL << TIMER_SUBSCRIBE_COUNT_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define TIMER_SUBSCRIBE_COUNT_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define TIMER_SUBSCRIBE_COUNT_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define TIMER_SUBSCRIBE_COUNT_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -56178,7 +56446,7 @@ typedef union {
 /* CHIDX @Bits 0..7 : DPPI channel that task CLEAR will subscribe to */
   #define TIMER_SUBSCRIBE_CLEAR_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define TIMER_SUBSCRIBE_CLEAR_CHIDX_Msk (0xFFUL << TIMER_SUBSCRIBE_CLEAR_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define TIMER_SUBSCRIBE_CLEAR_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define TIMER_SUBSCRIBE_CLEAR_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define TIMER_SUBSCRIBE_CLEAR_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -56196,7 +56464,7 @@ typedef union {
 /* CHIDX @Bits 0..7 : DPPI channel that task SHUTDOWN will subscribe to */
   #define TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Msk (0xFFUL << TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -56217,7 +56485,7 @@ typedef union {
 /* CHIDX @Bits 0..7 : DPPI channel that task CAPTURE[n] will subscribe to */
   #define TIMER_SUBSCRIBE_CAPTURE_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define TIMER_SUBSCRIBE_CAPTURE_CHIDX_Msk (0xFFUL << TIMER_SUBSCRIBE_CAPTURE_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define TIMER_SUBSCRIBE_CAPTURE_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define TIMER_SUBSCRIBE_CAPTURE_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define TIMER_SUBSCRIBE_CAPTURE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -56254,7 +56522,7 @@ typedef union {
 /* CHIDX @Bits 0..7 : DPPI channel that event COMPARE[n] will publish to */
   #define TIMER_PUBLISH_COMPARE_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define TIMER_PUBLISH_COMPARE_CHIDX_Msk (0xFFUL << TIMER_PUBLISH_COMPARE_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define TIMER_PUBLISH_COMPARE_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define TIMER_PUBLISH_COMPARE_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define TIMER_PUBLISH_COMPARE_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -57488,7 +57756,7 @@ typedef union {
   #define TPIU_TRIGGERCOUNTERVALUE_TrigCount_Pos (0UL) /*!< Position of TrigCount field.                                       */
   #define TPIU_TRIGGERCOUNTERVALUE_TrigCount_Msk (0xFFUL << TPIU_TRIGGERCOUNTERVALUE_TrigCount_Pos) /*!< Bit mask of TrigCount
                                                                             field.*/
-  #define TPIU_TRIGGERCOUNTERVALUE_TrigCount_Min (0x0UL) /*!< Min value of TrigCount field.                                    */
+  #define TPIU_TRIGGERCOUNTERVALUE_TrigCount_Min (0x00UL) /*!< Min value of TrigCount field.                                   */
   #define TPIU_TRIGGERCOUNTERVALUE_TrigCount_Max (0xFFUL) /*!< Max size of TrigCount field.                                    */
 
 
@@ -57665,7 +57933,7 @@ typedef union {
 
   #define TPIU_TPRCR_PATTCOUNT_Pos (0UL)             /*!< Position of PATTCOUNT field.                                         */
   #define TPIU_TPRCR_PATTCOUNT_Msk (0xFFUL << TPIU_TPRCR_PATTCOUNT_Pos) /*!< Bit mask of PATTCOUNT field.                      */
-  #define TPIU_TPRCR_PATTCOUNT_Min (0x0UL)           /*!< Min value of PATTCOUNT field.                                        */
+  #define TPIU_TPRCR_PATTCOUNT_Min (0x00UL)          /*!< Min value of PATTCOUNT field.                                        */
   #define TPIU_TPRCR_PATTCOUNT_Max (0xFFUL)          /*!< Max size of PATTCOUNT field.                                         */
 
 
@@ -57803,7 +58071,7 @@ typedef union {
 
   #define TPIU_FSCR_CYCCOUNT_Pos (0UL)               /*!< Position of CYCCOUNT field.                                          */
   #define TPIU_FSCR_CYCCOUNT_Msk (0xFFFUL << TPIU_FSCR_CYCCOUNT_Pos) /*!< Bit mask of CYCCOUNT field.                          */
-  #define TPIU_FSCR_CYCCOUNT_Min (0x0UL)             /*!< Min value of CYCCOUNT field.                                         */
+  #define TPIU_FSCR_CYCCOUNT_Min (0x000UL)           /*!< Min value of CYCCOUNT field.                                         */
   #define TPIU_FSCR_CYCCOUNT_Max (0x400UL)           /*!< Max size of CYCCOUNT field.                                          */
 
 
@@ -58391,7 +58659,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define TWI_PSEL_SCL_PIN_Pos (0UL)                 /*!< Position of PIN field.                                               */
   #define TWI_PSEL_SCL_PIN_Msk (0x1FUL << TWI_PSEL_SCL_PIN_Pos) /*!< Bit mask of PIN field.                                    */
-  #define TWI_PSEL_SCL_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
+  #define TWI_PSEL_SCL_PIN_Min (0x00UL)              /*!< Min value of PIN field.                                              */
   #define TWI_PSEL_SCL_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
 /* PORT @Bit 5 : Port number */
@@ -58415,7 +58683,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define TWI_PSEL_SDA_PIN_Pos (0UL)                 /*!< Position of PIN field.                                               */
   #define TWI_PSEL_SDA_PIN_Msk (0x1FUL << TWI_PSEL_SDA_PIN_Pos) /*!< Bit mask of PIN field.                                    */
-  #define TWI_PSEL_SDA_PIN_Min (0x0UL)               /*!< Min value of PIN field.                                              */
+  #define TWI_PSEL_SDA_PIN_Min (0x00UL)              /*!< Min value of PIN field.                                              */
   #define TWI_PSEL_SDA_PIN_Max (0x1FUL)              /*!< Max size of PIN field.                                               */
 
 /* PORT @Bit 5 : Port number */
@@ -58566,7 +58834,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STARTRX will subscribe to */
   #define TWI_SUBSCRIBE_STARTRX_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define TWI_SUBSCRIBE_STARTRX_CHIDX_Msk (0xFFUL << TWI_SUBSCRIBE_STARTRX_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define TWI_SUBSCRIBE_STARTRX_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define TWI_SUBSCRIBE_STARTRX_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define TWI_SUBSCRIBE_STARTRX_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -58584,7 +58852,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STARTTX will subscribe to */
   #define TWI_SUBSCRIBE_STARTTX_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define TWI_SUBSCRIBE_STARTTX_CHIDX_Msk (0xFFUL << TWI_SUBSCRIBE_STARTTX_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define TWI_SUBSCRIBE_STARTTX_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define TWI_SUBSCRIBE_STARTTX_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define TWI_SUBSCRIBE_STARTTX_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -58602,7 +58870,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define TWI_SUBSCRIBE_STOP_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define TWI_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << TWI_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define TWI_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define TWI_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define TWI_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -58620,7 +58888,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SUSPEND will subscribe to */
   #define TWI_SUBSCRIBE_SUSPEND_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define TWI_SUBSCRIBE_SUSPEND_CHIDX_Msk (0xFFUL << TWI_SUBSCRIBE_SUSPEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define TWI_SUBSCRIBE_SUSPEND_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define TWI_SUBSCRIBE_SUSPEND_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define TWI_SUBSCRIBE_SUSPEND_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -58638,7 +58906,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RESUME will subscribe to */
   #define TWI_SUBSCRIBE_RESUME_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define TWI_SUBSCRIBE_RESUME_CHIDX_Msk (0xFFUL << TWI_SUBSCRIBE_RESUME_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define TWI_SUBSCRIBE_RESUME_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define TWI_SUBSCRIBE_RESUME_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define TWI_SUBSCRIBE_RESUME_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -58732,7 +59000,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STOPPED will publish to */
   #define TWI_PUBLISH_STOPPED_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define TWI_PUBLISH_STOPPED_CHIDX_Msk (0xFFUL << TWI_PUBLISH_STOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define TWI_PUBLISH_STOPPED_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define TWI_PUBLISH_STOPPED_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define TWI_PUBLISH_STOPPED_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -58750,7 +59018,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RXDREADY will publish to */
   #define TWI_PUBLISH_RXDREADY_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define TWI_PUBLISH_RXDREADY_CHIDX_Msk (0xFFUL << TWI_PUBLISH_RXDREADY_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define TWI_PUBLISH_RXDREADY_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define TWI_PUBLISH_RXDREADY_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define TWI_PUBLISH_RXDREADY_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -58768,7 +59036,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TXDSENT will publish to */
   #define TWI_PUBLISH_TXDSENT_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define TWI_PUBLISH_TXDSENT_CHIDX_Msk (0xFFUL << TWI_PUBLISH_TXDSENT_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define TWI_PUBLISH_TXDSENT_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define TWI_PUBLISH_TXDSENT_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define TWI_PUBLISH_TXDSENT_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -58786,7 +59054,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ERROR will publish to */
   #define TWI_PUBLISH_ERROR_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define TWI_PUBLISH_ERROR_CHIDX_Msk (0xFFUL << TWI_PUBLISH_ERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define TWI_PUBLISH_ERROR_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define TWI_PUBLISH_ERROR_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define TWI_PUBLISH_ERROR_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -58804,7 +59072,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event BB will publish to */
   #define TWI_PUBLISH_BB_CHIDX_Pos (0UL)             /*!< Position of CHIDX field.                                             */
   #define TWI_PUBLISH_BB_CHIDX_Msk (0xFFUL << TWI_PUBLISH_BB_CHIDX_Pos) /*!< Bit mask of CHIDX field.                          */
-  #define TWI_PUBLISH_BB_CHIDX_Min (0x0UL)           /*!< Min value of CHIDX field.                                            */
+  #define TWI_PUBLISH_BB_CHIDX_Min (0x00UL)          /*!< Min value of CHIDX field.                                            */
   #define TWI_PUBLISH_BB_CHIDX_Max (0xFFUL)          /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -58822,7 +59090,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event SUSPENDED will publish to */
   #define TWI_PUBLISH_SUSPENDED_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define TWI_PUBLISH_SUSPENDED_CHIDX_Msk (0xFFUL << TWI_PUBLISH_SUSPENDED_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define TWI_PUBLISH_SUSPENDED_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define TWI_PUBLISH_SUSPENDED_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define TWI_PUBLISH_SUSPENDED_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59264,7 +59532,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define TWIM_SUBSCRIBE_DMA_RX_START_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define TWIM_SUBSCRIBE_DMA_RX_START_CHIDX_Msk (0xFFUL << TWIM_SUBSCRIBE_DMA_RX_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define TWIM_SUBSCRIBE_DMA_RX_START_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define TWIM_SUBSCRIBE_DMA_RX_START_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define TWIM_SUBSCRIBE_DMA_RX_START_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59282,7 +59550,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define TWIM_SUBSCRIBE_DMA_RX_STOP_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define TWIM_SUBSCRIBE_DMA_RX_STOP_CHIDX_Msk (0xFFUL << TWIM_SUBSCRIBE_DMA_RX_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define TWIM_SUBSCRIBE_DMA_RX_STOP_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define TWIM_SUBSCRIBE_DMA_RX_STOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define TWIM_SUBSCRIBE_DMA_RX_STOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59304,7 +59572,7 @@ typedef struct {
   #define TWIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                      */
   #define TWIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Msk (0xFFUL << TWIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Pos) /*!< Bit mask of
                                                                             CHIDX field.*/
-  #define TWIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                   */
+  #define TWIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                  */
   #define TWIM_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                   */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59327,7 +59595,7 @@ typedef struct {
   #define TWIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                     */
   #define TWIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Msk (0xFFUL << TWIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Pos) /*!< Bit mask of
                                                                             CHIDX field.*/
-  #define TWIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                  */
+  #define TWIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                 */
   #define TWIM_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                  */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59356,7 +59624,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define TWIM_SUBSCRIBE_DMA_TX_START_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define TWIM_SUBSCRIBE_DMA_TX_START_CHIDX_Msk (0xFFUL << TWIM_SUBSCRIBE_DMA_TX_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define TWIM_SUBSCRIBE_DMA_TX_START_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define TWIM_SUBSCRIBE_DMA_TX_START_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define TWIM_SUBSCRIBE_DMA_TX_START_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59374,7 +59642,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define TWIM_SUBSCRIBE_DMA_TX_STOP_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define TWIM_SUBSCRIBE_DMA_TX_STOP_CHIDX_Msk (0xFFUL << TWIM_SUBSCRIBE_DMA_TX_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define TWIM_SUBSCRIBE_DMA_TX_STOP_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define TWIM_SUBSCRIBE_DMA_TX_STOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define TWIM_SUBSCRIBE_DMA_TX_STOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59556,7 +59824,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define TWIM_PUBLISH_DMA_RX_END_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_DMA_RX_END_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_DMA_RX_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define TWIM_PUBLISH_DMA_RX_END_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define TWIM_PUBLISH_DMA_RX_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define TWIM_PUBLISH_DMA_RX_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59574,7 +59842,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define TWIM_PUBLISH_DMA_RX_READY_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_DMA_RX_READY_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_DMA_RX_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define TWIM_PUBLISH_DMA_RX_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define TWIM_PUBLISH_DMA_RX_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define TWIM_PUBLISH_DMA_RX_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59593,7 +59861,7 @@ typedef struct {
   #define TWIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define TWIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define TWIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define TWIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define TWIM_PUBLISH_DMA_RX_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59614,7 +59882,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event MATCH[n] will publish to */
   #define TWIM_PUBLISH_DMA_RX_MATCH_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_DMA_RX_MATCH_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_DMA_RX_MATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define TWIM_PUBLISH_DMA_RX_MATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define TWIM_PUBLISH_DMA_RX_MATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define TWIM_PUBLISH_DMA_RX_MATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59643,7 +59911,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define TWIM_PUBLISH_DMA_TX_END_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_DMA_TX_END_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_DMA_TX_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define TWIM_PUBLISH_DMA_TX_END_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define TWIM_PUBLISH_DMA_TX_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define TWIM_PUBLISH_DMA_TX_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59661,7 +59929,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define TWIM_PUBLISH_DMA_TX_READY_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_DMA_TX_READY_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_DMA_TX_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define TWIM_PUBLISH_DMA_TX_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define TWIM_PUBLISH_DMA_TX_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define TWIM_PUBLISH_DMA_TX_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59680,7 +59948,7 @@ typedef struct {
   #define TWIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define TWIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define TWIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define TWIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define TWIM_PUBLISH_DMA_TX_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -59718,7 +59986,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define TWIM_PSEL_SCL_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define TWIM_PSEL_SCL_PIN_Msk (0x1FUL << TWIM_PSEL_SCL_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define TWIM_PSEL_SCL_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define TWIM_PSEL_SCL_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define TWIM_PSEL_SCL_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -59742,7 +60010,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define TWIM_PSEL_SDA_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define TWIM_PSEL_SDA_PIN_Msk (0x1FUL << TWIM_PSEL_SDA_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define TWIM_PSEL_SDA_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define TWIM_PSEL_SDA_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define TWIM_PSEL_SDA_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -59903,7 +60171,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define TWIM_DMA_RX_MAXCNT_MAXCNT_Pos (0UL)        /*!< Position of MAXCNT field.                                            */
   #define TWIM_DMA_RX_MAXCNT_MAXCNT_Msk (0xFFFFUL << TWIM_DMA_RX_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.             */
-  #define TWIM_DMA_RX_MAXCNT_MAXCNT_Min (0x1UL)      /*!< Min value of MAXCNT field.                                           */
+  #define TWIM_DMA_RX_MAXCNT_MAXCNT_Min (0x0001UL)   /*!< Min value of MAXCNT field.                                           */
   #define TWIM_DMA_RX_MAXCNT_MAXCNT_Max (0xFFFFUL)   /*!< Max size of MAXCNT field.                                            */
 
 
@@ -59915,7 +60183,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define TWIM_DMA_RX_AMOUNT_AMOUNT_Pos (0UL)        /*!< Position of AMOUNT field.                                            */
   #define TWIM_DMA_RX_AMOUNT_AMOUNT_Msk (0xFFFFUL << TWIM_DMA_RX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
-  #define TWIM_DMA_RX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
+  #define TWIM_DMA_RX_AMOUNT_AMOUNT_Min (0x0001UL)   /*!< Min value of AMOUNT field.                                           */
   #define TWIM_DMA_RX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
@@ -59987,7 +60255,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define TWIM_DMA_TX_MAXCNT_MAXCNT_Pos (0UL)        /*!< Position of MAXCNT field.                                            */
   #define TWIM_DMA_TX_MAXCNT_MAXCNT_Msk (0xFFFFUL << TWIM_DMA_TX_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.             */
-  #define TWIM_DMA_TX_MAXCNT_MAXCNT_Min (0x1UL)      /*!< Min value of MAXCNT field.                                           */
+  #define TWIM_DMA_TX_MAXCNT_MAXCNT_Min (0x0001UL)   /*!< Min value of MAXCNT field.                                           */
   #define TWIM_DMA_TX_MAXCNT_MAXCNT_Max (0xFFFFUL)   /*!< Max size of MAXCNT field.                                            */
 
 
@@ -59999,7 +60267,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define TWIM_DMA_TX_AMOUNT_AMOUNT_Pos (0UL)        /*!< Position of AMOUNT field.                                            */
   #define TWIM_DMA_TX_AMOUNT_AMOUNT_Msk (0xFFFFUL << TWIM_DMA_TX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
-  #define TWIM_DMA_TX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
+  #define TWIM_DMA_TX_AMOUNT_AMOUNT_Min (0x0001UL)   /*!< Min value of AMOUNT field.                                           */
   #define TWIM_DMA_TX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
@@ -60147,7 +60415,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define TWIM_SUBSCRIBE_STOP_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define TWIM_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << TWIM_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define TWIM_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define TWIM_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define TWIM_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -60165,7 +60433,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SUSPEND will subscribe to */
   #define TWIM_SUBSCRIBE_SUSPEND_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define TWIM_SUBSCRIBE_SUSPEND_CHIDX_Msk (0xFFUL << TWIM_SUBSCRIBE_SUSPEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define TWIM_SUBSCRIBE_SUSPEND_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define TWIM_SUBSCRIBE_SUSPEND_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define TWIM_SUBSCRIBE_SUSPEND_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -60183,7 +60451,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RESUME will subscribe to */
   #define TWIM_SUBSCRIBE_RESUME_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define TWIM_SUBSCRIBE_RESUME_CHIDX_Msk (0xFFUL << TWIM_SUBSCRIBE_RESUME_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define TWIM_SUBSCRIBE_RESUME_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define TWIM_SUBSCRIBE_RESUME_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define TWIM_SUBSCRIBE_RESUME_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -60277,7 +60545,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STOPPED will publish to */
   #define TWIM_PUBLISH_STOPPED_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_STOPPED_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_STOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define TWIM_PUBLISH_STOPPED_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define TWIM_PUBLISH_STOPPED_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define TWIM_PUBLISH_STOPPED_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -60295,7 +60563,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ERROR will publish to */
   #define TWIM_PUBLISH_ERROR_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_ERROR_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_ERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define TWIM_PUBLISH_ERROR_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define TWIM_PUBLISH_ERROR_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define TWIM_PUBLISH_ERROR_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -60313,7 +60581,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event BB will publish to */
   #define TWIM_PUBLISH_BB_CHIDX_Pos (0UL)            /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_BB_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_BB_CHIDX_Pos) /*!< Bit mask of CHIDX field.                        */
-  #define TWIM_PUBLISH_BB_CHIDX_Min (0x0UL)          /*!< Min value of CHIDX field.                                            */
+  #define TWIM_PUBLISH_BB_CHIDX_Min (0x00UL)         /*!< Min value of CHIDX field.                                            */
   #define TWIM_PUBLISH_BB_CHIDX_Max (0xFFUL)         /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -60331,7 +60599,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event SUSPENDED will publish to */
   #define TWIM_PUBLISH_SUSPENDED_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_SUSPENDED_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_SUSPENDED_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define TWIM_PUBLISH_SUSPENDED_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define TWIM_PUBLISH_SUSPENDED_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define TWIM_PUBLISH_SUSPENDED_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -60349,7 +60617,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event LASTRX will publish to */
   #define TWIM_PUBLISH_LASTRX_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_LASTRX_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_LASTRX_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define TWIM_PUBLISH_LASTRX_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define TWIM_PUBLISH_LASTRX_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define TWIM_PUBLISH_LASTRX_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -60367,7 +60635,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event LASTTX will publish to */
   #define TWIM_PUBLISH_LASTTX_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define TWIM_PUBLISH_LASTTX_CHIDX_Msk (0xFFUL << TWIM_PUBLISH_LASTTX_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define TWIM_PUBLISH_LASTTX_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define TWIM_PUBLISH_LASTTX_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define TWIM_PUBLISH_LASTTX_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61143,7 +61411,7 @@ typedef struct {
   #define TWIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                      */
   #define TWIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Msk (0xFFUL << TWIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Pos) /*!< Bit mask of
                                                                             CHIDX field.*/
-  #define TWIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                   */
+  #define TWIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                  */
   #define TWIS_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                   */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61166,7 +61434,7 @@ typedef struct {
   #define TWIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                     */
   #define TWIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Msk (0xFFUL << TWIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Pos) /*!< Bit mask of
                                                                             CHIDX field.*/
-  #define TWIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                  */
+  #define TWIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                 */
   #define TWIS_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                  */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61348,7 +61616,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define TWIS_PUBLISH_DMA_RX_END_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_DMA_RX_END_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_DMA_RX_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define TWIS_PUBLISH_DMA_RX_END_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_DMA_RX_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_DMA_RX_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61366,7 +61634,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define TWIS_PUBLISH_DMA_RX_READY_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_DMA_RX_READY_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_DMA_RX_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define TWIS_PUBLISH_DMA_RX_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define TWIS_PUBLISH_DMA_RX_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define TWIS_PUBLISH_DMA_RX_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61385,7 +61653,7 @@ typedef struct {
   #define TWIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define TWIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define TWIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define TWIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define TWIS_PUBLISH_DMA_RX_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61406,7 +61674,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event MATCH[n] will publish to */
   #define TWIS_PUBLISH_DMA_RX_MATCH_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_DMA_RX_MATCH_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_DMA_RX_MATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define TWIS_PUBLISH_DMA_RX_MATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define TWIS_PUBLISH_DMA_RX_MATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define TWIS_PUBLISH_DMA_RX_MATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61435,7 +61703,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define TWIS_PUBLISH_DMA_TX_END_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_DMA_TX_END_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_DMA_TX_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define TWIS_PUBLISH_DMA_TX_END_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_DMA_TX_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_DMA_TX_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61453,7 +61721,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define TWIS_PUBLISH_DMA_TX_READY_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_DMA_TX_READY_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_DMA_TX_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define TWIS_PUBLISH_DMA_TX_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
+  #define TWIS_PUBLISH_DMA_TX_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                          */
   #define TWIS_PUBLISH_DMA_TX_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61472,7 +61740,7 @@ typedef struct {
   #define TWIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define TWIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define TWIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define TWIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define TWIS_PUBLISH_DMA_TX_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61510,7 +61778,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define TWIS_PSEL_SCL_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define TWIS_PSEL_SCL_PIN_Msk (0x1FUL << TWIS_PSEL_SCL_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define TWIS_PSEL_SCL_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define TWIS_PSEL_SCL_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define TWIS_PSEL_SCL_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -61534,7 +61802,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define TWIS_PSEL_SDA_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
   #define TWIS_PSEL_SDA_PIN_Msk (0x1FUL << TWIS_PSEL_SDA_PIN_Pos) /*!< Bit mask of PIN field.                                  */
-  #define TWIS_PSEL_SDA_PIN_Min (0x0UL)              /*!< Min value of PIN field.                                              */
+  #define TWIS_PSEL_SDA_PIN_Min (0x00UL)             /*!< Min value of PIN field.                                              */
   #define TWIS_PSEL_SDA_PIN_Max (0x1FUL)             /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -61695,7 +61963,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define TWIS_DMA_RX_MAXCNT_MAXCNT_Pos (0UL)        /*!< Position of MAXCNT field.                                            */
   #define TWIS_DMA_RX_MAXCNT_MAXCNT_Msk (0xFFFFUL << TWIS_DMA_RX_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.             */
-  #define TWIS_DMA_RX_MAXCNT_MAXCNT_Min (0x1UL)      /*!< Min value of MAXCNT field.                                           */
+  #define TWIS_DMA_RX_MAXCNT_MAXCNT_Min (0x0001UL)   /*!< Min value of MAXCNT field.                                           */
   #define TWIS_DMA_RX_MAXCNT_MAXCNT_Max (0xFFFFUL)   /*!< Max size of MAXCNT field.                                            */
 
 
@@ -61707,7 +61975,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define TWIS_DMA_RX_AMOUNT_AMOUNT_Pos (0UL)        /*!< Position of AMOUNT field.                                            */
   #define TWIS_DMA_RX_AMOUNT_AMOUNT_Msk (0xFFFFUL << TWIS_DMA_RX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
-  #define TWIS_DMA_RX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
+  #define TWIS_DMA_RX_AMOUNT_AMOUNT_Min (0x0001UL)   /*!< Min value of AMOUNT field.                                           */
   #define TWIS_DMA_RX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
@@ -61779,7 +62047,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define TWIS_DMA_TX_MAXCNT_MAXCNT_Pos (0UL)        /*!< Position of MAXCNT field.                                            */
   #define TWIS_DMA_TX_MAXCNT_MAXCNT_Msk (0xFFFFUL << TWIS_DMA_TX_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.             */
-  #define TWIS_DMA_TX_MAXCNT_MAXCNT_Min (0x1UL)      /*!< Min value of MAXCNT field.                                           */
+  #define TWIS_DMA_TX_MAXCNT_MAXCNT_Min (0x0001UL)   /*!< Min value of MAXCNT field.                                           */
   #define TWIS_DMA_TX_MAXCNT_MAXCNT_Max (0xFFFFUL)   /*!< Max size of MAXCNT field.                                            */
 
 
@@ -61791,7 +62059,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define TWIS_DMA_TX_AMOUNT_AMOUNT_Pos (0UL)        /*!< Position of AMOUNT field.                                            */
   #define TWIS_DMA_TX_AMOUNT_AMOUNT_Msk (0xFFFFUL << TWIS_DMA_TX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
-  #define TWIS_DMA_TX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
+  #define TWIS_DMA_TX_AMOUNT_AMOUNT_Min (0x0001UL)   /*!< Min value of AMOUNT field.                                           */
   #define TWIS_DMA_TX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
@@ -61975,7 +62243,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define TWIS_SUBSCRIBE_STOP_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define TWIS_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << TWIS_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define TWIS_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define TWIS_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define TWIS_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -61993,7 +62261,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SUSPEND will subscribe to */
   #define TWIS_SUBSCRIBE_SUSPEND_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define TWIS_SUBSCRIBE_SUSPEND_CHIDX_Msk (0xFFUL << TWIS_SUBSCRIBE_SUSPEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define TWIS_SUBSCRIBE_SUSPEND_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define TWIS_SUBSCRIBE_SUSPEND_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define TWIS_SUBSCRIBE_SUSPEND_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62011,7 +62279,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RESUME will subscribe to */
   #define TWIS_SUBSCRIBE_RESUME_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
   #define TWIS_SUBSCRIBE_RESUME_CHIDX_Msk (0xFFUL << TWIS_SUBSCRIBE_RESUME_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define TWIS_SUBSCRIBE_RESUME_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define TWIS_SUBSCRIBE_RESUME_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
   #define TWIS_SUBSCRIBE_RESUME_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62029,7 +62297,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task PREPARERX will subscribe to */
   #define TWIS_SUBSCRIBE_PREPARERX_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define TWIS_SUBSCRIBE_PREPARERX_CHIDX_Msk (0xFFUL << TWIS_SUBSCRIBE_PREPARERX_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define TWIS_SUBSCRIBE_PREPARERX_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define TWIS_SUBSCRIBE_PREPARERX_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define TWIS_SUBSCRIBE_PREPARERX_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62047,7 +62315,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task PREPARETX will subscribe to */
   #define TWIS_SUBSCRIBE_PREPARETX_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define TWIS_SUBSCRIBE_PREPARETX_CHIDX_Msk (0xFFUL << TWIS_SUBSCRIBE_PREPARETX_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define TWIS_SUBSCRIBE_PREPARETX_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define TWIS_SUBSCRIBE_PREPARETX_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define TWIS_SUBSCRIBE_PREPARETX_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62178,7 +62446,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STARTED will publish to */
   #define TWIS_PUBLISH_STARTED_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_STARTED_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_STARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define TWIS_PUBLISH_STARTED_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_STARTED_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_STARTED_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62196,7 +62464,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STOPPED will publish to */
   #define TWIS_PUBLISH_STOPPED_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_STOPPED_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_STOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define TWIS_PUBLISH_STOPPED_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_STOPPED_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_STOPPED_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62214,7 +62482,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ERROR will publish to */
   #define TWIS_PUBLISH_ERROR_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_ERROR_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_ERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define TWIS_PUBLISH_ERROR_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_ERROR_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_ERROR_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62232,7 +62500,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event NACKTX will publish to */
   #define TWIS_PUBLISH_NACKTX_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_NACKTX_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_NACKTX_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define TWIS_PUBLISH_NACKTX_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_NACKTX_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_NACKTX_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62250,7 +62518,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event BB will publish to */
   #define TWIS_PUBLISH_BB_CHIDX_Pos (0UL)            /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_BB_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_BB_CHIDX_Pos) /*!< Bit mask of CHIDX field.                        */
-  #define TWIS_PUBLISH_BB_CHIDX_Min (0x0UL)          /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_BB_CHIDX_Min (0x00UL)         /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_BB_CHIDX_Max (0xFFUL)         /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62268,7 +62536,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event WRITE will publish to */
   #define TWIS_PUBLISH_WRITE_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_WRITE_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_WRITE_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define TWIS_PUBLISH_WRITE_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_WRITE_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_WRITE_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62286,7 +62554,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READ will publish to */
   #define TWIS_PUBLISH_READ_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_READ_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_READ_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define TWIS_PUBLISH_READ_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_READ_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_READ_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62304,7 +62572,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CSSTARTED will publish to */
   #define TWIS_PUBLISH_CSSTARTED_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_CSSTARTED_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_CSSTARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define TWIS_PUBLISH_CSSTARTED_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_CSSTARTED_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_CSSTARTED_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -62322,7 +62590,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CSSTOPPED will publish to */
   #define TWIS_PUBLISH_CSSTOPPED_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define TWIS_PUBLISH_CSSTOPPED_CHIDX_Msk (0xFFUL << TWIS_PUBLISH_CSSTOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define TWIS_PUBLISH_CSSTOPPED_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define TWIS_PUBLISH_CSSTOPPED_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define TWIS_PUBLISH_CSSTOPPED_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63286,7 +63554,7 @@ typedef struct {
   #define UARTE_SUBSCRIBE_DMA_RX_START_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define UARTE_SUBSCRIBE_DMA_RX_START_CHIDX_Msk (0xFFUL << UARTE_SUBSCRIBE_DMA_RX_START_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define UARTE_SUBSCRIBE_DMA_RX_START_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define UARTE_SUBSCRIBE_DMA_RX_START_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define UARTE_SUBSCRIBE_DMA_RX_START_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63304,7 +63572,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define UARTE_SUBSCRIBE_DMA_RX_STOP_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define UARTE_SUBSCRIBE_DMA_RX_STOP_CHIDX_Msk (0xFFUL << UARTE_SUBSCRIBE_DMA_RX_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define UARTE_SUBSCRIBE_DMA_RX_STOP_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define UARTE_SUBSCRIBE_DMA_RX_STOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define UARTE_SUBSCRIBE_DMA_RX_STOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63326,7 +63594,7 @@ typedef struct {
   #define UARTE_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                     */
   #define UARTE_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Msk (0xFFUL << UARTE_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Pos) /*!< Bit mask of
                                                                             CHIDX field.*/
-  #define UARTE_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                  */
+  #define UARTE_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                 */
   #define UARTE_SUBSCRIBE_DMA_RX_ENABLEMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                  */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63349,7 +63617,7 @@ typedef struct {
   #define UARTE_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                    */
   #define UARTE_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Msk (0xFFUL << UARTE_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Pos) /*!< Bit mask
                                                                             of CHIDX field.*/
-  #define UARTE_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                 */
+  #define UARTE_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                */
   #define UARTE_SUBSCRIBE_DMA_RX_DISABLEMATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                 */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63379,7 +63647,7 @@ typedef struct {
   #define UARTE_SUBSCRIBE_DMA_TX_START_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                           */
   #define UARTE_SUBSCRIBE_DMA_TX_START_CHIDX_Msk (0xFFUL << UARTE_SUBSCRIBE_DMA_TX_START_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define UARTE_SUBSCRIBE_DMA_TX_START_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                        */
+  #define UARTE_SUBSCRIBE_DMA_TX_START_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                       */
   #define UARTE_SUBSCRIBE_DMA_TX_START_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                        */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63397,7 +63665,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define UARTE_SUBSCRIBE_DMA_TX_STOP_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                            */
   #define UARTE_SUBSCRIBE_DMA_TX_STOP_CHIDX_Msk (0xFFUL << UARTE_SUBSCRIBE_DMA_TX_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.*/
-  #define UARTE_SUBSCRIBE_DMA_TX_STOP_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                         */
+  #define UARTE_SUBSCRIBE_DMA_TX_STOP_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                        */
   #define UARTE_SUBSCRIBE_DMA_TX_STOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                         */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63579,7 +63847,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define UARTE_PUBLISH_DMA_RX_END_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_DMA_RX_END_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_DMA_RX_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define UARTE_PUBLISH_DMA_RX_END_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define UARTE_PUBLISH_DMA_RX_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define UARTE_PUBLISH_DMA_RX_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63597,7 +63865,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define UARTE_PUBLISH_DMA_RX_READY_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_DMA_RX_READY_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_DMA_RX_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define UARTE_PUBLISH_DMA_RX_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define UARTE_PUBLISH_DMA_RX_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define UARTE_PUBLISH_DMA_RX_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63616,7 +63884,7 @@ typedef struct {
   #define UARTE_PUBLISH_DMA_RX_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                          */
   #define UARTE_PUBLISH_DMA_RX_BUSERROR_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_DMA_RX_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define UARTE_PUBLISH_DMA_RX_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                       */
+  #define UARTE_PUBLISH_DMA_RX_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                      */
   #define UARTE_PUBLISH_DMA_RX_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                       */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63637,7 +63905,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event MATCH[n] will publish to */
   #define UARTE_PUBLISH_DMA_RX_MATCH_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_DMA_RX_MATCH_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_DMA_RX_MATCH_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define UARTE_PUBLISH_DMA_RX_MATCH_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define UARTE_PUBLISH_DMA_RX_MATCH_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define UARTE_PUBLISH_DMA_RX_MATCH_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63666,7 +63934,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
   #define UARTE_PUBLISH_DMA_TX_END_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_DMA_TX_END_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_DMA_TX_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define UARTE_PUBLISH_DMA_TX_END_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
+  #define UARTE_PUBLISH_DMA_TX_END_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
   #define UARTE_PUBLISH_DMA_TX_END_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63684,7 +63952,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
   #define UARTE_PUBLISH_DMA_TX_READY_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_DMA_TX_READY_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_DMA_TX_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define UARTE_PUBLISH_DMA_TX_READY_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define UARTE_PUBLISH_DMA_TX_READY_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define UARTE_PUBLISH_DMA_TX_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63703,7 +63971,7 @@ typedef struct {
   #define UARTE_PUBLISH_DMA_TX_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                          */
   #define UARTE_PUBLISH_DMA_TX_BUSERROR_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_DMA_TX_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX
                                                                             field.*/
-  #define UARTE_PUBLISH_DMA_TX_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                       */
+  #define UARTE_PUBLISH_DMA_TX_BUSERROR_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                      */
   #define UARTE_PUBLISH_DMA_TX_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                       */
 
 /* EN @Bit 31 : (unspecified) */
@@ -63743,7 +64011,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define UARTE_PSEL_TXD_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define UARTE_PSEL_TXD_PIN_Msk (0x1FUL << UARTE_PSEL_TXD_PIN_Pos) /*!< Bit mask of PIN field.                                */
-  #define UARTE_PSEL_TXD_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
+  #define UARTE_PSEL_TXD_PIN_Min (0x00UL)            /*!< Min value of PIN field.                                              */
   #define UARTE_PSEL_TXD_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -63767,7 +64035,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define UARTE_PSEL_CTS_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define UARTE_PSEL_CTS_PIN_Msk (0x1FUL << UARTE_PSEL_CTS_PIN_Pos) /*!< Bit mask of PIN field.                                */
-  #define UARTE_PSEL_CTS_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
+  #define UARTE_PSEL_CTS_PIN_Min (0x00UL)            /*!< Min value of PIN field.                                              */
   #define UARTE_PSEL_CTS_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -63791,7 +64059,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define UARTE_PSEL_RXD_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define UARTE_PSEL_RXD_PIN_Msk (0x1FUL << UARTE_PSEL_RXD_PIN_Pos) /*!< Bit mask of PIN field.                                */
-  #define UARTE_PSEL_RXD_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
+  #define UARTE_PSEL_RXD_PIN_Min (0x00UL)            /*!< Min value of PIN field.                                              */
   #define UARTE_PSEL_RXD_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -63815,7 +64083,7 @@ typedef struct {
 /* PIN @Bits 0..4 : Pin number */
   #define UARTE_PSEL_RTS_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define UARTE_PSEL_RTS_PIN_Msk (0x1FUL << UARTE_PSEL_RTS_PIN_Pos) /*!< Bit mask of PIN field.                                */
-  #define UARTE_PSEL_RTS_PIN_Min (0x0UL)             /*!< Min value of PIN field.                                              */
+  #define UARTE_PSEL_RTS_PIN_Min (0x00UL)            /*!< Min value of PIN field.                                              */
   #define UARTE_PSEL_RTS_PIN_Max (0x1FUL)            /*!< Max size of PIN field.                                               */
 
 /* PORT @Bits 5..7 : Port number */
@@ -63980,7 +64248,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define UARTE_DMA_RX_MAXCNT_MAXCNT_Pos (0UL)       /*!< Position of MAXCNT field.                                            */
   #define UARTE_DMA_RX_MAXCNT_MAXCNT_Msk (0xFFFFUL << UARTE_DMA_RX_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.           */
-  #define UARTE_DMA_RX_MAXCNT_MAXCNT_Min (0x1UL)     /*!< Min value of MAXCNT field.                                           */
+  #define UARTE_DMA_RX_MAXCNT_MAXCNT_Min (0x0001UL)  /*!< Min value of MAXCNT field.                                           */
   #define UARTE_DMA_RX_MAXCNT_MAXCNT_Max (0xFFFFUL)  /*!< Max size of MAXCNT field.                                            */
 
 
@@ -63992,7 +64260,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define UARTE_DMA_RX_AMOUNT_AMOUNT_Pos (0UL)       /*!< Position of AMOUNT field.                                            */
   #define UARTE_DMA_RX_AMOUNT_AMOUNT_Msk (0xFFFFUL << UARTE_DMA_RX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.           */
-  #define UARTE_DMA_RX_AMOUNT_AMOUNT_Min (0x1UL)     /*!< Min value of AMOUNT field.                                           */
+  #define UARTE_DMA_RX_AMOUNT_AMOUNT_Min (0x0001UL)  /*!< Min value of AMOUNT field.                                           */
   #define UARTE_DMA_RX_AMOUNT_AMOUNT_Max (0xFFFFUL)  /*!< Max size of AMOUNT field.                                            */
 
 
@@ -64064,7 +64332,7 @@ typedef struct {
 /* MAXCNT @Bits 0..15 : Maximum number of bytes in channel buffer */
   #define UARTE_DMA_TX_MAXCNT_MAXCNT_Pos (0UL)       /*!< Position of MAXCNT field.                                            */
   #define UARTE_DMA_TX_MAXCNT_MAXCNT_Msk (0xFFFFUL << UARTE_DMA_TX_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.           */
-  #define UARTE_DMA_TX_MAXCNT_MAXCNT_Min (0x1UL)     /*!< Min value of MAXCNT field.                                           */
+  #define UARTE_DMA_TX_MAXCNT_MAXCNT_Min (0x0001UL)  /*!< Min value of MAXCNT field.                                           */
   #define UARTE_DMA_TX_MAXCNT_MAXCNT_Max (0xFFFFUL)  /*!< Max size of MAXCNT field.                                            */
 
 
@@ -64076,7 +64344,7 @@ typedef struct {
 /* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
   #define UARTE_DMA_TX_AMOUNT_AMOUNT_Pos (0UL)       /*!< Position of AMOUNT field.                                            */
   #define UARTE_DMA_TX_AMOUNT_AMOUNT_Msk (0xFFFFUL << UARTE_DMA_TX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.           */
-  #define UARTE_DMA_TX_AMOUNT_AMOUNT_Min (0x1UL)     /*!< Min value of AMOUNT field.                                           */
+  #define UARTE_DMA_TX_AMOUNT_AMOUNT_Min (0x0001UL)  /*!< Min value of AMOUNT field.                                           */
   #define UARTE_DMA_TX_AMOUNT_AMOUNT_Max (0xFFFFUL)  /*!< Max size of AMOUNT field.                                            */
 
 
@@ -64232,7 +64500,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task SUSPEND will subscribe to */
   #define UARTE_SUBSCRIBE_SUSPEND_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define UARTE_SUBSCRIBE_SUSPEND_CHIDX_Msk (0xFFUL << UARTE_SUBSCRIBE_SUSPEND_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define UARTE_SUBSCRIBE_SUSPEND_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define UARTE_SUBSCRIBE_SUSPEND_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define UARTE_SUBSCRIBE_SUSPEND_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64250,7 +64518,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task RESUME will subscribe to */
   #define UARTE_SUBSCRIBE_RESUME_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
   #define UARTE_SUBSCRIBE_RESUME_CHIDX_Msk (0xFFUL << UARTE_SUBSCRIBE_RESUME_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define UARTE_SUBSCRIBE_RESUME_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define UARTE_SUBSCRIBE_RESUME_CHIDX_Min (0x00UL)  /*!< Min value of CHIDX field.                                            */
   #define UARTE_SUBSCRIBE_RESUME_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64268,7 +64536,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task FLUSHRX will subscribe to */
   #define UARTE_SUBSCRIBE_FLUSHRX_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define UARTE_SUBSCRIBE_FLUSHRX_CHIDX_Msk (0xFFUL << UARTE_SUBSCRIBE_FLUSHRX_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define UARTE_SUBSCRIBE_FLUSHRX_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define UARTE_SUBSCRIBE_FLUSHRX_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define UARTE_SUBSCRIBE_FLUSHRX_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64399,7 +64667,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event CTS will publish to */
   #define UARTE_PUBLISH_CTS_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_CTS_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_CTS_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define UARTE_PUBLISH_CTS_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define UARTE_PUBLISH_CTS_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define UARTE_PUBLISH_CTS_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64417,7 +64685,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event NCTS will publish to */
   #define UARTE_PUBLISH_NCTS_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_NCTS_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_NCTS_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define UARTE_PUBLISH_NCTS_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define UARTE_PUBLISH_NCTS_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define UARTE_PUBLISH_NCTS_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64435,7 +64703,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TXDRDY will publish to */
   #define UARTE_PUBLISH_TXDRDY_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_TXDRDY_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_TXDRDY_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define UARTE_PUBLISH_TXDRDY_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define UARTE_PUBLISH_TXDRDY_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define UARTE_PUBLISH_TXDRDY_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64453,7 +64721,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RXDRDY will publish to */
   #define UARTE_PUBLISH_RXDRDY_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_RXDRDY_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_RXDRDY_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
-  #define UARTE_PUBLISH_RXDRDY_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define UARTE_PUBLISH_RXDRDY_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
   #define UARTE_PUBLISH_RXDRDY_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64471,7 +64739,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event ERROR will publish to */
   #define UARTE_PUBLISH_ERROR_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_ERROR_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_ERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define UARTE_PUBLISH_ERROR_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define UARTE_PUBLISH_ERROR_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define UARTE_PUBLISH_ERROR_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64489,7 +64757,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RXTO will publish to */
   #define UARTE_PUBLISH_RXTO_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_RXTO_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_RXTO_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define UARTE_PUBLISH_RXTO_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define UARTE_PUBLISH_RXTO_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define UARTE_PUBLISH_RXTO_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64507,7 +64775,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event RTS will publish to */
   #define UARTE_PUBLISH_RTS_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_RTS_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_RTS_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
-  #define UARTE_PUBLISH_RTS_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define UARTE_PUBLISH_RTS_CHIDX_Min (0x00UL)       /*!< Min value of CHIDX field.                                            */
   #define UARTE_PUBLISH_RTS_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64525,7 +64793,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TXSTOPPED will publish to */
   #define UARTE_PUBLISH_TXSTOPPED_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_TXSTOPPED_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_TXSTOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define UARTE_PUBLISH_TXSTOPPED_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
+  #define UARTE_PUBLISH_TXSTOPPED_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                            */
   #define UARTE_PUBLISH_TXSTOPPED_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -64543,7 +64811,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event FRAMETIMEOUT will publish to */
   #define UARTE_PUBLISH_FRAMETIMEOUT_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
   #define UARTE_PUBLISH_FRAMETIMEOUT_CHIDX_Msk (0xFFUL << UARTE_PUBLISH_FRAMETIMEOUT_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define UARTE_PUBLISH_FRAMETIMEOUT_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+  #define UARTE_PUBLISH_FRAMETIMEOUT_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                         */
   #define UARTE_PUBLISH_FRAMETIMEOUT_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
 
 /* EN @Bit 31 : (unspecified) */
@@ -66228,7 +66496,7 @@ typedef struct {
 /* DATAADDR @Bits 0..11 : Data Address */
   #define VPR_DEBUGIF_HARTINFO_DATAADDR_Pos (0UL)    /*!< Position of DATAADDR field.                                          */
   #define VPR_DEBUGIF_HARTINFO_DATAADDR_Msk (0xFFFUL << VPR_DEBUGIF_HARTINFO_DATAADDR_Pos) /*!< Bit mask of DATAADDR field.    */
-  #define VPR_DEBUGIF_HARTINFO_DATAADDR_Min (0xFFFFFFFFFFFFF800UL) /*!< Min value of DATAADDR field.                           */
+  #define VPR_DEBUGIF_HARTINFO_DATAADDR_Min (0x800UL) /*!< Min value of DATAADDR field.                                        */
   #define VPR_DEBUGIF_HARTINFO_DATAADDR_Max (0x7FFUL) /*!< Max size of DATAADDR field.                                         */
 
 /* DATASIZE @Bits 12..15 : Data Size */
@@ -68910,7 +69178,7 @@ typedef struct {
   #define VPRCSR_NORDIC_CACHE_DATATAGADDR_VAL_Pos (0UL) /*!< Position of VAL field.                                            */
   #define VPRCSR_NORDIC_CACHE_DATATAGADDR_VAL_Msk (0xFFFFFFFFUL << VPRCSR_NORDIC_CACHE_DATATAGADDR_VAL_Pos) /*!< Bit mask of VAL
                                                                             field.*/
-  #define VPRCSR_NORDIC_CACHE_DATATAGADDR_VAL_Min (0x0UL) /*!< Min value of VAL field.                                         */
+  #define VPRCSR_NORDIC_CACHE_DATATAGADDR_VAL_Min (0x00000000UL) /*!< Min value of VAL field.                                  */
   #define VPRCSR_NORDIC_CACHE_DATATAGADDR_VAL_Max (0xFFFFFFFCUL) /*!< Max size of VAL field.                                   */
 
 
@@ -68924,7 +69192,7 @@ typedef struct {
   #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
   #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Msk (0xFFFFFFFFUL << VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Pos) /*!< Bit mask of
                                                                             VAL field.*/
-  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Min (0x0UL) /*!< Min value of VAL field.                                        */
+  #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Min (0x00000000UL) /*!< Min value of VAL field.                                 */
   #define VPRCSR_NORDIC_CACHE_DATABASEADDR_VAL_Max (0xFFFFFFFCUL) /*!< Max size of VAL field.                                  */
 
 
@@ -71621,7 +71889,7 @@ typedef struct {
 /* VAL @Bits 0..31 : (unspecified) */
   #define VPRCSR_NORDIC_OUTBRB_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VPRCSR_NORDIC_OUTBRB_VAL_Msk (0xFFFFFFFFUL << VPRCSR_NORDIC_OUTBRB_VAL_Pos) /*!< Bit mask of VAL field.              */
-  #define VPRCSR_NORDIC_OUTBRB_VAL_Min (0x0UL)       /*!< Min value of VAL field.                                              */
+  #define VPRCSR_NORDIC_OUTBRB_VAL_Min (0x00000000UL) /*!< Min value of VAL field.                                             */
   #define VPRCSR_NORDIC_OUTBRB_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
@@ -71634,7 +71902,7 @@ typedef struct {
 /* VAL @Bits 0..31 : (unspecified) */
   #define VPRCSR_NORDIC_OUTBRW_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
   #define VPRCSR_NORDIC_OUTBRW_VAL_Msk (0xFFFFFFFFUL << VPRCSR_NORDIC_OUTBRW_VAL_Pos) /*!< Bit mask of VAL field.              */
-  #define VPRCSR_NORDIC_OUTBRW_VAL_Min (0x0UL)       /*!< Min value of VAL field.                                              */
+  #define VPRCSR_NORDIC_OUTBRW_VAL_Min (0x00000000UL) /*!< Min value of VAL field.                                             */
   #define VPRCSR_NORDIC_OUTBRW_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                              */
 
 
@@ -71647,7 +71915,7 @@ typedef struct {
 /* VAL @Bits 0..31 : (unspecified) */
   #define VPRCSR_NORDIC_INBRB_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
   #define VPRCSR_NORDIC_INBRB_VAL_Msk (0xFFFFFFFFUL << VPRCSR_NORDIC_INBRB_VAL_Pos) /*!< Bit mask of VAL field.                */
-  #define VPRCSR_NORDIC_INBRB_VAL_Min (0x0UL)        /*!< Min value of VAL field.                                              */
+  #define VPRCSR_NORDIC_INBRB_VAL_Min (0x00000000UL) /*!< Min value of VAL field.                                              */
   #define VPRCSR_NORDIC_INBRB_VAL_Max (0xFFFFFFFFUL) /*!< Max size of VAL field.                                               */
 
 
@@ -71662,7 +71930,7 @@ typedef struct {
     #define VPRCSR_NORDIC_SHIFTCTRLB_SHIFTCNTB_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
     #define VPRCSR_NORDIC_SHIFTCTRLB_SHIFTCNTB_VALUE_Msk (0x3FUL << VPRCSR_NORDIC_SHIFTCTRLB_SHIFTCNTB_VALUE_Pos) /*!< Bit mask
                                                                             of VALUE field.*/
-    #define VPRCSR_NORDIC_SHIFTCTRLB_SHIFTCNTB_VALUE_Min (0x0UL) /*!< Min value of VALUE field.                                */
+    #define VPRCSR_NORDIC_SHIFTCTRLB_SHIFTCNTB_VALUE_Min (0x00UL) /*!< Min value of VALUE field.                               */
     #define VPRCSR_NORDIC_SHIFTCTRLB_SHIFTCNTB_VALUE_Max (0x20UL) /*!< Max size of VALUE field.                                */
 
 /* End field group SHIFTCNTB. */
@@ -71684,7 +71952,7 @@ typedef struct {
     #define VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_FRAMEWIDTH_Pos (12UL) /*!< Position of FRAMEWIDTH field.                         */
     #define VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_FRAMEWIDTH_Msk (0x1FUL << VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_FRAMEWIDTH_Pos) /*!<
                                                                             Bit mask of FRAMEWIDTH field.*/
-    #define VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_FRAMEWIDTH_Min (0x0UL) /*!< Min value of FRAMEWIDTH field.                       */
+    #define VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_FRAMEWIDTH_Min (0x00UL) /*!< Min value of FRAMEWIDTH field.                      */
     #define VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_FRAMEWIDTH_Max (0x10UL) /*!< Max size of FRAMEWIDTH field.                       */
 
 /* End field group OUTMODEB. */
@@ -71712,7 +71980,7 @@ typedef struct {
 /* VALUE @Bits 0..5 : Value */
   #define VPRCSR_NORDIC_SHIFTCNTIN_VALUE_Pos (0UL)   /*!< Position of VALUE field.                                             */
   #define VPRCSR_NORDIC_SHIFTCNTIN_VALUE_Msk (0x3FUL << VPRCSR_NORDIC_SHIFTCNTIN_VALUE_Pos) /*!< Bit mask of VALUE field.      */
-  #define VPRCSR_NORDIC_SHIFTCNTIN_VALUE_Min (0x0UL) /*!< Min value of VALUE field.                                            */
+  #define VPRCSR_NORDIC_SHIFTCNTIN_VALUE_Min (0x00UL) /*!< Min value of VALUE field.                                           */
   #define VPRCSR_NORDIC_SHIFTCNTIN_VALUE_Max (0x3FUL) /*!< Max size of VALUE field.                                            */
 
 
@@ -71725,7 +71993,7 @@ typedef struct {
 /* VALUE @Bits 0..5 : Value */
   #define VPRCSR_NORDIC_SHIFTCNTOUT_VALUE_Pos (0UL)  /*!< Position of VALUE field.                                             */
   #define VPRCSR_NORDIC_SHIFTCNTOUT_VALUE_Msk (0x3FUL << VPRCSR_NORDIC_SHIFTCNTOUT_VALUE_Pos) /*!< Bit mask of VALUE field.    */
-  #define VPRCSR_NORDIC_SHIFTCNTOUT_VALUE_Min (0x0UL) /*!< Min value of VALUE field.                                           */
+  #define VPRCSR_NORDIC_SHIFTCNTOUT_VALUE_Min (0x00UL) /*!< Min value of VALUE field.                                          */
   #define VPRCSR_NORDIC_SHIFTCNTOUT_VALUE_Max (0x3FUL) /*!< Max size of VALUE field.                                           */
 
 
@@ -71738,7 +72006,7 @@ typedef struct {
 /* VALUE @Bits 0..5 : Value */
   #define VPRCSR_NORDIC_SHIFTCNTB_VALUE_Pos (0UL)    /*!< Position of VALUE field.                                             */
   #define VPRCSR_NORDIC_SHIFTCNTB_VALUE_Msk (0x3FUL << VPRCSR_NORDIC_SHIFTCNTB_VALUE_Pos) /*!< Bit mask of VALUE field.        */
-  #define VPRCSR_NORDIC_SHIFTCNTB_VALUE_Min (0x0UL)  /*!< Min value of VALUE field.                                            */
+  #define VPRCSR_NORDIC_SHIFTCNTB_VALUE_Min (0x00UL) /*!< Min value of VALUE field.                                            */
   #define VPRCSR_NORDIC_SHIFTCNTB_VALUE_Max (0x20UL) /*!< Max size of VALUE field.                                             */
 
 
@@ -73191,7 +73459,7 @@ typedef struct {
   #define VPRCSR_NORDIC_OUTMODE_FRAMEWIDTH_Pos (16UL) /*!< Position of FRAMEWIDTH field.                                       */
   #define VPRCSR_NORDIC_OUTMODE_FRAMEWIDTH_Msk (0x1FUL << VPRCSR_NORDIC_OUTMODE_FRAMEWIDTH_Pos) /*!< Bit mask of FRAMEWIDTH
                                                                             field.*/
-  #define VPRCSR_NORDIC_OUTMODE_FRAMEWIDTH_Min (0x0UL) /*!< Min value of FRAMEWIDTH field.                                     */
+  #define VPRCSR_NORDIC_OUTMODE_FRAMEWIDTH_Min (0x00UL) /*!< Min value of FRAMEWIDTH field.                                    */
   #define VPRCSR_NORDIC_OUTMODE_FRAMEWIDTH_Max (0x10UL) /*!< Max size of FRAMEWIDTH field.                                     */
 
 /* SHIFSIZE @Bits 16..19 : Shift size. Only applies if Shift mode is enabled */
@@ -73226,7 +73494,7 @@ typedef struct {
   #define VPRCSR_NORDIC_OUTMODEB_FRAMEWIDTH_Pos (16UL) /*!< Position of FRAMEWIDTH field.                                      */
   #define VPRCSR_NORDIC_OUTMODEB_FRAMEWIDTH_Msk (0x1FUL << VPRCSR_NORDIC_OUTMODEB_FRAMEWIDTH_Pos) /*!< Bit mask of FRAMEWIDTH
                                                                             field.*/
-  #define VPRCSR_NORDIC_OUTMODEB_FRAMEWIDTH_Min (0x0UL) /*!< Min value of FRAMEWIDTH field.                                    */
+  #define VPRCSR_NORDIC_OUTMODEB_FRAMEWIDTH_Min (0x00UL) /*!< Min value of FRAMEWIDTH field.                                   */
   #define VPRCSR_NORDIC_OUTMODEB_FRAMEWIDTH_Max (0x10UL) /*!< Max size of FRAMEWIDTH field.                                    */
 
 
@@ -73845,7 +74113,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
   #define WDT_SUBSCRIBE_START_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define WDT_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << WDT_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define WDT_SUBSCRIBE_START_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define WDT_SUBSCRIBE_START_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define WDT_SUBSCRIBE_START_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -73863,7 +74131,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
   #define WDT_SUBSCRIBE_STOP_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
   #define WDT_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << WDT_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
-  #define WDT_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define WDT_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
   #define WDT_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -73907,7 +74175,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event TIMEOUT will publish to */
   #define WDT_PUBLISH_TIMEOUT_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define WDT_PUBLISH_TIMEOUT_CHIDX_Msk (0xFFUL << WDT_PUBLISH_TIMEOUT_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define WDT_PUBLISH_TIMEOUT_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define WDT_PUBLISH_TIMEOUT_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define WDT_PUBLISH_TIMEOUT_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -73925,7 +74193,7 @@ typedef struct {
 /* CHIDX @Bits 0..7 : DPPI channel that event STOPPED will publish to */
   #define WDT_PUBLISH_STOPPED_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
   #define WDT_PUBLISH_STOPPED_CHIDX_Msk (0xFFUL << WDT_PUBLISH_STOPPED_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define WDT_PUBLISH_STOPPED_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define WDT_PUBLISH_STOPPED_CHIDX_Min (0x00UL)     /*!< Min value of CHIDX field.                                            */
   #define WDT_PUBLISH_STOPPED_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
 
 /* EN @Bit 31 : (unspecified) */
@@ -74127,7 +74395,7 @@ typedef struct {
 /* CRV @Bits 0..31 : Counter reload value in number of cycles of the 32.768 kHz clock */
   #define WDT_CRV_CRV_Pos (0UL)                      /*!< Position of CRV field.                                               */
   #define WDT_CRV_CRV_Msk (0xFFFFFFFFUL << WDT_CRV_CRV_Pos) /*!< Bit mask of CRV field.                                        */
-  #define WDT_CRV_CRV_Min (0xFUL)                    /*!< Min value of CRV field.                                              */
+  #define WDT_CRV_CRV_Min (0x0000000FUL)             /*!< Min value of CRV field.                                              */
   #define WDT_CRV_CRV_Max (0xFFFFFFFFUL)             /*!< Max size of CRV field.                                               */
 
 
