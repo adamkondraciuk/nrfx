@@ -54,6 +54,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     #define NRF_DOMAINS_t NRF_DOMAINID_Type
 
+    
     typedef enum {
         NRF_OWNER_NONE            = 0,  /* Used to denote that ownership is not enforced */
         NRF_OWNER_APPLICATION     = 2,  /* Application Core */
@@ -62,12 +63,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         NRF_OWNER_DBG_RADIOCORE   = 11, /* AHB-AP for Radio core CPU */
     } NRF_OWNERID_Type;
 
-    typedef enum {
-        NRF_PROCESSOR_APPLICATION = 2,  /* Application Core Processor */
-        NRF_PROCESSOR_RADIOCORE   = 3,  /* Radio Core Processor */
-        NRF_PROCESSOR_PPR         = 13, /* Peripheral Processor */
-        NRF_PROCESSOR_FLPR        = 14, /* Fast Lightweight Processor */
-    } NRF_PROCESSORID_Type;
 
 
     #define NRF_DOMAIN_COUNT    NRF_DOMAIN_GLOBAL + 1

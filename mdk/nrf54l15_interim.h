@@ -44,11 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #if defined(NRF54L15_XXAA)
 
-    typedef enum {
-        NRF_DOMAIN_APPLICATION = 1, /*!< Application core                   */
-        NRF_DOMAIN_FLPR    = 2,     /*!< Flipper, Fast Peripheral Processor */
-        NRF_DOMAIN_GLOBAL  = 3,     /*!< Global peripherals                 */
-    } NRF_DOMAINS_t;
+   #define NRF_DOMAINS_t NRF_DOMAINID_Type
 
     #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
 
@@ -167,18 +163,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     #define I2S20_EASYDMA_MAXCNT_SIZE I2S20_EASYDMA_MAXCNT_SIZE_SIZE
 
-    #define TWIM_SHORTS_LASTRX_STOP_Pos (12UL)
-    #define TWIM_SHORTS_LASTRX_STOP_Msk (0x1UL << TWIM_SHORTS_LASTRX_STOP_Pos)
-    #define TWIM_SHORTS_LASTRX_STOP_Min (0x0UL)
-    #define TWIM_SHORTS_LASTRX_STOP_Max (0x1UL)
-    #define TWIM_SHORTS_LASTRX_STOP_Disabled (0x0UL)
-    #define TWIM_SHORTS_LASTRX_STOP_Enabled (0x1UL)
-
-    #define VPR_VEVIF_EVENT_MaxCount 32
+    #define VPR_VEVIF_EVENT_MaxCount  32
+    #define VPR_CLIC_PRIO_COUNT       4
     #define ADDRESS_SLAVE_Pos         (12UL)
     #define ADDRESS_SLAVE_Msk         (0x3FUL << ADDRESS_SLAVE_Pos)
-
-    #define VPR_CLIC_PRIO_COUNT 4
 
 #endif
 
