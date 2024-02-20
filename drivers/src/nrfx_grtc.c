@@ -403,7 +403,7 @@ nrfx_err_t nrfx_grtc_sleep_configure(nrfx_grtc_sleep_config_t const * p_sleep_cf
 {
     NRFX_ASSERT(p_sleep_cfg);
 #if NRFX_IS_ENABLED(NRFX_GRTC_CONFIG_SLEEP_ALLOWED)
-    sleep_configure(sleep_cfg);
+    sleep_configure(p_sleep_cfg);
     return NRFX_SUCCESS;
 #else
     return NRFX_ERROR_NOT_SUPPORTED;
@@ -765,7 +765,7 @@ nrfx_err_t nrfx_grtc_syscounter_cc_relative_set(nrfx_grtc_channel_t *           
     }
     else
     {
-	    nrfy_grtc_sys_counter_cc_add_set(NRF_GRTC,
+        nrfy_grtc_sys_counter_cc_add_set(NRF_GRTC,
                                          p_chan_data->channel,
                                          val,
                                          (nrf_grtc_cc_add_reference_t)reference);
