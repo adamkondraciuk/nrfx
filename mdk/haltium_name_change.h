@@ -99,7 +99,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     NRF_DOMAIN_ISIMCORE    = 7,  /* ISIM Core */
     NRF_DOMAIN_WIFICORE    = 8,  /* Wi-Fi core */
     NRF_DOMAIN_GLOBALFAST  = 12, /* Global Domain - Fast clock domain */
+    NRF_DOMAIN_SYSCTRL     = 12,
     NRF_DOMAIN_GLOBALSLOW  = 13, /* Global Domain - Slow clock domain */
+    NRF_DOMAIN_PPR         = 13,
+    NRF_DOMAIN_FLPR        = 14,
     NRF_DOMAIN_GLOBAL      = 15, /* Global Domain */
  } NRF_DOMAINID_Type;
 
