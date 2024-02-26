@@ -45,7 +45,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
 #define MDK_MINOR_VERSION   63 
-#define MDK_MICRO_VERSION   0 
+#define MDK_MICRO_VERSION   1 
 
 
 /* Define coprocessor domains */
@@ -295,11 +295,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(EXCLUDE_HEADER)
         #include "nrf54h20.h"
     #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf54h20_name_change.h"
+        #include "haltium_name_change.h"
+    #endif
 
 #elif defined (NRF54H20_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf54h20_enga.h"
     #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf54h20_enga_name_change.h"
+        #include "haltium_name_change.h"
+    #endif
+
 
 #elif defined (NRF54L15_XXAA)
     #if !defined(EXCLUDE_HEADER)
@@ -344,10 +353,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(EXCLUDE_HEADER)
         #include "nrf9230_enga.h"
     #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
+    #endif
 
 #elif defined (NRF7140_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf7140.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
     #endif
 #else
     #error "Device must be defined. See nrf.h."

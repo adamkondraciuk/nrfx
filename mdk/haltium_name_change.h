@@ -88,8 +88,54 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
  /* Extra symbols: */
 
+/* Haltium domain IDs */
+ typedef enum {
+    NRF_DOMAIN_SECURE      = 1,  /* Secure Domain */
+    NRF_DOMAIN_APPLICATION = 2,  /* Application Core */
+    NRF_DOMAIN_RADIOCORE   = 3,  /* Radio Core */
+    NRF_DOMAIN_CELLCORE    = 4,  /* Cellular Core */
+    NRF_DOMAIN_CELLDSP     = 5,  /* Cellular DSP Domain */
+    NRF_DOMAIN_CELLRF      = 6,  /* Cellular RF Domain */
+    NRF_DOMAIN_ISIMCORE    = 7,  /* ISIM Core */
+    NRF_DOMAIN_WIFICORE    = 8,  /* Wi-Fi core */
+    NRF_DOMAIN_GLOBALFAST  = 12, /* Global Domain - Fast clock domain */
+    NRF_DOMAIN_GLOBALSLOW  = 13, /* Global Domain - Slow clock domain */
+    NRF_DOMAIN_GLOBAL      = 15, /* Global Domain */
+ } NRF_DOMAINID_Type;
+
+ /* Haltium processor IDs */
+ typedef enum {
+    NRF_PROCESSOR_SECURE      = 1,  /* Secure Domain Processor */
+    NRF_PROCESSOR_APPLICATION = 2,  /* Application Core Processor */
+    NRF_PROCESSOR_RADIOCORE   = 3,  /* Radio Core Processor */
+    NRF_PROCESSOR_CELLCORE    = 4,  /* Cellular Core Processor */
+    NRF_PROCESSOR_CELLDSP     = 5,  /* Cellular DSP Domain Processor */
+    NRF_PROCESSOR_CELLRF      = 6,  /* Cellular RF Domain Processor */
+    NRF_PROCESSOR_ISIMCORE    = 7,  /* ISIM Core Processor */
+    NRF_PROCESSOR_BBPR        = 11, /* Baseband Processor */
+    NRF_PROCESSOR_SYSCTRL     = 12, /* System Controller Processor */
+    NRF_PROCESSOR_PPR         = 13, /* Peripheral Processor */
+    NRF_PROCESSOR_FLPR        = 14, /* Fast Lightweight Processor */
+ } NRF_PROCESSORID_Type;
 
  #define NRF_DOMAINS_t NRF_DOMAINID_Type
+
+ /* Haltium owner IDs */
+ typedef enum {
+    NRF_OWNER_NONE            = 0,  /* Used to denote that ownership is not enforced */
+    NRF_OWNER_SECURE          = 1,  /* Secure Domain */
+    NRF_OWNER_APPLICATION     = 2,  /* Application Core */
+    NRF_OWNER_RADIOCORE       = 3,  /* Radio Core */
+    NRF_OWNER_CELL            = 4,  /* Cellular Core, Cellular DSP Domain and Cellular RF Domain */
+    NRF_OWNER_ISIMCORE        = 5,  /* ISIM Core */
+    NRF_OWNER_SYSCTRL         = 8,  /* System Controller, owned by the Secure Domain */
+    NRF_OWNER_DBG_SECURE      = 9,  /* AHB-AP for Secure Domain CPU */
+    NRF_OWNER_DBG_APPLICATION = 10, /* AHB-AP for Application Core CPU */
+    NRF_OWNER_DBG_RADIOCORE   = 11, /* AHB-AP for Radio core CPU */
+    NRF_OWNER_DBG_CELLCORE    = 12, /* AHB-AP for Cellular Core CPU */
+    NRF_OWNER_DBG_CELLRF      = 13, /* AHB-AP for Cellular RF Domain CPU */
+    NRF_OWNER_DBG_ISIMCORE    = 15 /* AHB-AP for ISIM Core CPU */
+ } NRF_OWNERID_Type;
 
  
  /*lint --flb "Leave library region" */

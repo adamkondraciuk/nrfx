@@ -39,8 +39,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54H20_ENGA_PERIPHERALS_H
-#define NRF54H20_ENGA_PERIPHERALS_H
+#ifndef NRF54H20_NAME_CHANGE_H
+#define NRF54H20_NAME_CHANGE_H
 
 #ifdef __cplusplus
     extern "C" {
@@ -49,26 +49,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-#if defined(NRF_APPLICATION)
-  #include "nrf54h20_enga_application_peripherals.h"
-#elif defined(NRF_BBPR)
-  #include "nrf54h20_enga_bbpr_peripherals.h"
-#elif defined(NRF_FLPR)
-  #include "nrf54h20_enga_flpr_peripherals.h"
-#elif defined(NRF_PPR)
-  #include "nrf54h20_enga_ppr_peripherals.h"
-#elif defined(NRF_RADIOCORE)
-  #include "nrf54h20_enga_radiocore_peripherals.h"
-#elif defined(NRF_SECURE)
-  #include "nrf54h20_enga_secure_peripherals.h"
-#elif defined(NRF_SYSCTRL)
-  #include "nrf54h20_enga_sysctrl_peripherals.h"
-#else
-  #error No processor selected
-#endif
-
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54H20_ENGA_PERIPHERALS_H */
+#endif /* NRF54H20_NAME_CHANGE_H */
 
