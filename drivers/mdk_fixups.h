@@ -12,15 +12,19 @@
 #if defined(HALTIUM_XXAA)
     #include "haltium_interim.h"
 
-    #define NRF_OWNER_SECURE       1
-    #define NRF_OWNER_CELL         4
-    #define NRF_OWNER_ISIMCORE     5
-    #define NRF_OWNER_WIFICORE     6
-    #define NRF_OWNER_SYSCTRL      8
-    #define NRF_OWNER_DBG_SECURE   9
-    #define NRF_OWNER_DBG_CELLCORE 12
-    #define NRF_OWNER_DBG_CELLRF   13
-    #define NRF_OWNER_DBG_ISIMCORE 15
+    #if defined(NRF_SECURE)
+        #define NRF_PROCESSOR NRF_PROCESSOR_SECURE
+    #elif defined(NRF_CELLCORE)
+        #define NRF_PROCESSOR NRF_PROCESSOR_CELLCORE
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_PROCESSOR NRF_PROCESSOR_SYSCTRL
+    #elif defined(NRF_LMAC)
+        #define NRF_PROCESSOR NRF_PROCESSOR_WIFILMAC
+    #elif defined(NRF_UMAC)
+        #define NRF_PROCESSOR NRF_PROCESSOR_WIFIUMAC
+    #elif defined(NRF_BBPR)
+        #define NRF_PROCESSOR NRF_PROCESSOR_BBPR
+    #endif
 
     #if defined(NRF_SECURE)
         #define NRF_OWNER NRF_OWNER_SECURE
@@ -922,72 +926,7 @@
 
 #if defined(NRF7140_XXAA)
 
-    typedef enum {
-        NRF_DOMAIN_APPLICATION = 2,  /* Application Core */
-        NRF_DOMAIN_RADIOCORE   = 3,  /* Radio Core */
-        NRF_DOMAIN_GLOBALFAST  = 12, /* Global Domain - Fast clock domain */
-        NRF_DOMAIN_GLOBALSLOW  = 13, /* Global Domain - Slow clock domain */
-        NRF_DOMAIN_GLOBAL      = 15, /* Global Domain */
-    } NRF_DOMAINID_Type;
-
-    typedef enum {
-        NRF_PROCESSOR_APPLICATION = 2,  /* Application Core Processor */
-        NRF_PROCESSOR_RADIOCORE   = 3,  /* Radio Core Processor */
-        NRF_PROCESSOR_PPR         = 13, /* Peripheral Processor */
-        NRF_PROCESSOR_FLPR        = 14, /* Fast Lightweight Processor */
-    } NRF_PROCESSORID_Type;
-
-    #define NRF_DOMAIN_SECURE   1
-    #define NRF_DOMAIN_CELLCORE 4
-    #define NRF_DOMAIN_CELLDSP  5
-    #define NRF_DOMAIN_CELLRF   6
-    #define NRF_DOMAIN_ISIMCORE 7
-    #define NRF_DOMAIN_WIFICORE 8
-
-    #define NRF_PROCESSOR_SECURE   1
-    #define NRF_PROCESSOR_CELLCORE 4
-    #define NRF_PROCESSOR_CELLDSP  5
-    #define NRF_PROCESSOR_CELLRF   6
-    #define NRF_PROCESSOR_ISIMCORE 7
-    #define NRF_PROCESSOR_WIFILMAC 8
-    #define NRF_PROCESSOR_WIFIUMAC 9
-    #define NRF_PROCESSOR_BBPR     11
-    #define NRF_PROCESSOR_SYSCTRL  12
-
-    #if defined(NRF_SECURE)
-        #define NRF_DOMAIN NRF_DOMAIN_SECURE
-    #elif defined(NRF_CELLCORE)
-        #define NRF_DOMAIN NRF_DOMAIN_CELLCORE
-    #elif defined(NRF_SYSCTRL)
-        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
-    #elif defined(NRF_LMAC)
-        #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
-    #elif defined(NRF_UMAC)
-        #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
-    #endif
-
-    #if defined(NRF_APPLICATION)
-        #define NRF_PROCESSOR NRF_PROCESSOR_APPLICATION
-    #elif defined(NRF_RADIOCORE)
-        #define NRF_PROCESSOR NRF_PROCESSOR_RADIOCORE
-    #elif defined(NRF_FLPR)
-        #define NRF_PROCESSOR NRF_PROCESSOR_FLPR
-    #elif defined(NRF_PPR)
-        #define NRF_PROCESSOR NRF_PROCESSOR_PPR
-    #elif defined(NRF_SECURE)
-        #define NRF_PROCESSOR NRF_PROCESSOR_SECURE
-    #elif defined(NRF_CELLCORE)
-        #define NRF_PROCESSOR NRF_PROCESSOR_CELLCORE
-    #elif defined(NRF_SYSCTRL)
-        #define NRF_PROCESSOR NRF_PROCESSOR_SYSCTRL
-    #elif defined(NRF_LMAC)
-        #define NRF_PROCESSOR NRF_PROCESSOR_WIFILMAC
-    #elif defined(NRF_UMAC)
-        #define NRF_PROCESSOR NRF_PROCESSOR_WIFIUMAC
-    #elif defined(NRF_BBPR)
-        #define NRF_PROCESSOR NRF_PROCESSOR_BBPR
-    #endif
-
+    /* External part */
     #if defined(NRF_APPLICATION)
         #define NRF_DOMAIN NRF_DOMAIN_APPLICATION
     #elif defined(NRF_RADIOCORE)
@@ -998,7 +937,6 @@
         #define NRF_DOMAIN NRF_DOMAIN_GLOBALSLOW
     #endif
 
-    /* External part */
     #if defined(NRF_TRUSTZONE_NONSECURE)
         #if defined(NRF_APPLICATION)
             #define GRTC_IRQ_GROUP 2
@@ -1024,6 +962,18 @@
     #endif
 
     /* Internal part */
+    #if defined(NRF_SECURE)
+        #define NRF_DOMAIN NRF_DOMAIN_SECURE
+    #elif defined(NRF_CELLCORE)
+        #define NRF_DOMAIN NRF_DOMAIN_CELLCORE
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
+    #elif defined(NRF_LMAC)
+        #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
+    #elif defined(NRF_UMAC)
+        #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
+    #endif
+
     #if defined(NRF_TRUSTZONE_NONSECURE)
         #if defined(NRF_SECURE)
             #define GRTC_IRQ_GROUP 0
@@ -1150,72 +1100,7 @@
 
 #if defined(NRF9230_ENGA_XXAA)
 
-    typedef enum {
-        NRF_DOMAIN_APPLICATION = 2,  /* Application Core */
-        NRF_DOMAIN_RADIOCORE   = 3,  /* Radio Core */
-        NRF_DOMAIN_GLOBALFAST  = 12, /* Global Domain - Fast clock domain */
-        NRF_DOMAIN_GLOBALSLOW  = 13, /* Global Domain - Slow clock domain */
-        NRF_DOMAIN_GLOBAL      = 15, /* Global Domain */
-    } NRF_DOMAINID_Type;
-
-    typedef enum {
-        NRF_PROCESSOR_APPLICATION = 2,  /* Application Core Processor */
-        NRF_PROCESSOR_RADIOCORE   = 3,  /* Radio Core Processor */
-        NRF_PROCESSOR_PPR         = 13, /* Peripheral Processor */
-        NRF_PROCESSOR_FLPR        = 14, /* Fast Lightweight Processor */
-    } NRF_PROCESSORID_Type;
-
-    #define NRF_DOMAIN_SECURE   1
-    #define NRF_DOMAIN_CELLCORE 4
-    #define NRF_DOMAIN_CELLDSP  5
-    #define NRF_DOMAIN_CELLRF   6
-    #define NRF_DOMAIN_ISIMCORE 7
-    #define NRF_DOMAIN_WIFICORE 8
-
-    #define NRF_PROCESSOR_SECURE   1
-    #define NRF_PROCESSOR_CELLCORE 4
-    #define NRF_PROCESSOR_CELLDSP  5
-    #define NRF_PROCESSOR_CELLRF   6
-    #define NRF_PROCESSOR_ISIMCORE 7
-    #define NRF_PROCESSOR_WIFILMAC 8
-    #define NRF_PROCESSOR_WIFIUMAC 9
-    #define NRF_PROCESSOR_BBPR     11
-    #define NRF_PROCESSOR_SYSCTRL  12
-
-    #if defined(NRF_SECURE)
-        #define NRF_DOMAIN NRF_DOMAIN_SECURE
-    #elif defined(NRF_CELLCORE)
-        #define NRF_DOMAIN NRF_DOMAIN_CELLCORE
-    #elif defined(NRF_SYSCTRL)
-        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
-    #elif defined(NRF_LMAC)
-        #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
-    #elif defined(NRF_UMAC)
-        #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
-    #endif
-
-    #if defined(NRF_APPLICATION)
-        #define NRF_PROCESSOR NRF_PROCESSOR_APPLICATION
-    #elif defined(NRF_RADIOCORE)
-        #define NRF_PROCESSOR NRF_PROCESSOR_RADIOCORE
-    #elif defined(NRF_FLPR)
-        #define NRF_PROCESSOR NRF_PROCESSOR_FLPR
-    #elif defined(NRF_PPR)
-        #define NRF_PROCESSOR NRF_PROCESSOR_PPR
-    #elif defined(NRF_SECURE)
-        #define NRF_PROCESSOR NRF_PROCESSOR_SECURE
-    #elif defined(NRF_CELLCORE)
-        #define NRF_PROCESSOR NRF_PROCESSOR_CELLCORE
-    #elif defined(NRF_SYSCTRL)
-        #define NRF_PROCESSOR NRF_PROCESSOR_SYSCTRL
-    #elif defined(NRF_LMAC)
-        #define NRF_PROCESSOR NRF_PROCESSOR_WIFILMAC
-    #elif defined(NRF_UMAC)
-        #define NRF_PROCESSOR NRF_PROCESSOR_WIFIUMAC
-    #elif defined(NRF_BBPR)
-        #define NRF_PROCESSOR NRF_PROCESSOR_BBPR
-    #endif
-
+    /* External part */
     #if defined(NRF_APPLICATION)
         #define NRF_DOMAIN NRF_DOMAIN_APPLICATION
     #elif defined(NRF_RADIOCORE)
@@ -1226,7 +1111,6 @@
         #define NRF_DOMAIN NRF_DOMAIN_GLOBALSLOW
     #endif
 
-    /* External part */
     #if defined(NRF_TRUSTZONE_NONSECURE)
         #if defined(NRF_APPLICATION)
             #define GRTC_IRQ_GROUP 2
@@ -1252,6 +1136,18 @@
     #endif
 
     /* Internal part */
+    #if defined(NRF_SECURE)
+        #define NRF_DOMAIN NRF_DOMAIN_SECURE
+    #elif defined(NRF_CELLCORE)
+        #define NRF_DOMAIN NRF_DOMAIN_CELLCORE
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
+    #elif defined(NRF_LMAC)
+        #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
+    #elif defined(NRF_UMAC)
+        #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
+    #endif
+
     #if defined(NRF_TRUSTZONE_NONSECURE)
         #if defined(NRF_SECURE)
             #define GRTC_IRQ_GROUP 0
