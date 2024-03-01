@@ -45,7 +45,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
 #define MDK_MINOR_VERSION   63 
-#define MDK_MICRO_VERSION   1 
+#define MDK_MICRO_VERSION   2 
 
 
 /* Define coprocessor domains */
@@ -296,8 +296,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf54h20.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
-        #include "nrf54h20_name_change.h"
         #include "haltium_name_change.h"
+        #include "nrf54h20_name_change.h"
     #endif
 
 #elif defined (NRF54H20_ENGA_XXAA)
@@ -305,8 +305,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf54h20_enga.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
-        #include "nrf54h20_enga_name_change.h"
         #include "haltium_name_change.h"
+        #include "nrf54h20_enga_name_change.h"
     #endif
 
 

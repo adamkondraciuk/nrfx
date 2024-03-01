@@ -55,7 +55,7 @@ void SystemCoreClockUpdate(void)
         /* FLPR does not have access to its HSFLL, assume default speed. */
         SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
     #else
-        #ifndef NRF_HSFLL
+        #if !defined(NRF_HSFLL) && !defined(NRF_TRUSTZONE_NONSECURE)
             #if defined(NRF_SYSCTRL)
                 #define NRF_HSFLL NRF_HSFLL120
             #elif defined(NRF_BBPR)

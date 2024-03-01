@@ -172,7 +172,7 @@ void SystemInit(void)
             #endif
         #endif
 
-        #if !defined (NRF_SKIP_GLITCHDETECTOR_DISABLE)
+        #if !defined(NRF_TRUSTZONE_NONSECURE) && !defined (NRF_SKIP_GLITCHDETECTOR_DISABLE)
             /* Disable glitch detector */
             #if defined (GLITCHDET_GLITCHDETECTORS)
                 NRF_GLITCHDET_S->GLITCHDETECTOR.CONFIG = (GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Disable << GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Pos);

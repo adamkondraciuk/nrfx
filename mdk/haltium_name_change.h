@@ -98,6 +98,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     NRF_DOMAIN_CELLRF      = 6,  /* Cellular RF Domain */
     NRF_DOMAIN_ISIMCORE    = 7,  /* ISIM Core */
     NRF_DOMAIN_WIFICORE    = 8,  /* Wi-Fi core */
+    NRF_DOMAIN_GRAPHICS    = 9, 
+    NRF_DOMAIN_ML          = 10,
     NRF_DOMAIN_GLOBALFAST  = 12, /* Global Domain - Fast clock domain */
     NRF_DOMAIN_SYSCTRL     = 12,
     NRF_DOMAIN_GLOBALSLOW  = 13, /* Global Domain - Slow clock domain */
@@ -115,6 +117,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     NRF_PROCESSOR_CELLDSP     = 5,  /* Cellular DSP Domain Processor */
     NRF_PROCESSOR_CELLRF      = 6,  /* Cellular RF Domain Processor */
     NRF_PROCESSOR_ISIMCORE    = 7,  /* ISIM Core Processor */
+    NRF_PROCESSOR_WIFILMAC    = 8,  /* LMAC Core Processor */
+    NRF_PROCESSOR_WIFIUMAC    = 9,  /* UMAC Core Processor */
+    NRF_PROCESSOR_DPPR        = 10, /* DPPR Core Processor */
     NRF_PROCESSOR_BBPR        = 11, /* Baseband Processor */
     NRF_PROCESSOR_SYSCTRL     = 12, /* System Controller Processor */
     NRF_PROCESSOR_PPR         = 13, /* Peripheral Processor */
@@ -131,6 +136,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     NRF_OWNER_RADIOCORE       = 3,  /* Radio Core */
     NRF_OWNER_CELL            = 4,  /* Cellular Core, Cellular DSP Domain and Cellular RF Domain */
     NRF_OWNER_ISIMCORE        = 5,  /* ISIM Core */
+    NRF_OWNER_WIFICORE        = 6,  /* WiFi Core */
     NRF_OWNER_SYSCTRL         = 8,  /* System Controller, owned by the Secure Domain */
     NRF_OWNER_DBG_SECURE      = 9,  /* AHB-AP for Secure Domain CPU */
     NRF_OWNER_DBG_APPLICATION = 10, /* AHB-AP for Application Core CPU */
