@@ -191,17 +191,23 @@ NRF_STATIC_INLINE void nrf_hfxo_status_get(NRF_HFXO_Type const * p_reg, nrf_hfxo
 /**
  * @brief Function for getting internal capacitive load value.
  *
+ * @note Capactive load value is expressed in non-linear steps.
+ *       See the Product Specification for exact formula.
+ *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Total capacitance in pF.
+ * @return Capacitance value.
  */
 NRF_STATIC_INLINE uint8_t nrf_hfxo_cload_get(NRF_HFXO_Type const * p_reg);
 
 /**
  * @brief Function for setting internal capacitive load value.
  *
+ * @note Capactive load value is expressed in non-linear steps.
+ *       See the Product Specification for exact formula.
+ *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] cap   Total capacitance in pF.
+ * @param[in] cap   Capacitance value.
  */
 NRF_STATIC_INLINE void nrf_hfxo_cload_set(NRF_HFXO_Type * p_reg, uint8_t cap);
 
@@ -364,29 +370,13 @@ NRF_STATIC_INLINE void nrf_hfxo_status_get(NRF_HFXO_Type const * p_reg, nrf_hfxo
 
 NRF_STATIC_INLINE uint8_t nrf_hfxo_cload_get(NRF_HFXO_Type const * p_reg)
 {
-    uint8_t cload_reg = (uint8_t)p_reg->CLOAD;
-    uint8_t cap = (cload_reg & HFXO_CLOAD_VAL0_Msk) >> HFXO_CLOAD_VAL0_Pos;
-
-    if (cload_reg & HFXO_CLOAD_VAL1_Msk)
-    {
-        cap += 10;
-    }
-    return cap;
+    return p_reg->CLOAD & (HFXO_CLOAD_VAL0_Msk | HFXO_CLOAD_VAL1_Msk);
 }
 
 NRF_STATIC_INLINE void nrf_hfxo_cload_set(NRF_HFXO_Type * p_reg, uint8_t cap)
 {
-    NRFX_ASSERT(cap <= 25);
-    uint32_t cload_reg = 0;
-
-    if (cap > 15)
-    {
-        cload_reg = HFXO_CLOAD_VAL1_Msk;
-        cap -= 10;
-    }
-
-    cload_reg |= (cap << HFXO_CLOAD_VAL0_Pos) & HFXO_CLOAD_VAL0_Msk;
-    p_reg->CLOAD = cload_reg;
+    NRFX_ASSERT(cap <= (HFXO_CLOAD_VAL0_Msk | HFXO_CLOAD_VAL1_Msk));
+    p_reg->CLOAD = cap;
 }
 
 NRF_STATIC_INLINE uint8_t nrf_hfxo_amplitude_control_get(NRF_HFXO_Type const * p_reg)
