@@ -1207,7 +1207,8 @@ NRF_STATIC_INLINE uint8_t nrf_radio_dacnf_ena_get(NRF_RADIO_Type const * p_reg);
  */
 NRF_STATIC_INLINE uint8_t nrf_radio_dacnf_txadd_get(NRF_RADIO_Type const * p_reg);
 
-#if defined(RADIO_INTENSET_MHRMATCH_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(RADIO_INTENSET_MHRMATCH_Msk) || defined(RADIO_INTENSET00_MHRMATCH_Msk) || \
+    defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting MAC Header Match Unit search pattern configuration.
  *
@@ -1244,7 +1245,8 @@ NRF_STATIC_INLINE void nrf_radio_mhmu_pattern_mask_set(NRF_RADIO_Type * p_reg,
  * @return Pattern mask.
  */
 NRF_STATIC_INLINE uint32_t nrf_radio_mhmu_pattern_mask_get(NRF_RADIO_Type const * p_reg);
-#endif // defined(RADIO_INTENSET_MHRMATCH_Msk) || defined(__NRFX_DOXYGEN__)
+#endif // defined(RADIO_INTENSET_MHRMATCH_Msk) || defined(RADIO_INTENSET00_MHRMATCH_Msk) ||
+       // defined(__NRFX_DOXYGEN__)
 
 #if defined(RADIO_MODECNF0_RU_Msk) || defined(__NRFX_DOXYGEN__)
 /**
@@ -1512,7 +1514,8 @@ NRF_STATIC_INLINE uint32_t nrf_radio_dfe_pattern_cnt_get(NRF_RADIO_Type const * 
 NRF_STATIC_INLINE void nrf_radio_dfe_pattern_clear(NRF_RADIO_Type * p_reg);
 #endif // defined(RADIO_SWITCHPATTERN_SWITCHPATTERN_Msk) || defined(__NRFX_DOXYGEN__)
 
-#if defined(RADIO_DFEPACKET_PTR_PTR_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(RADIO_DFEPACKET_PTR_PTR_Msk) || defined(RADIO_DFEPACKET_PTR_OFFSET_Msk) || \
+    defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting the buffer for storing IQ samples or magnitude and phase pairs
  *        of the samples.
@@ -1538,7 +1541,7 @@ NRF_STATIC_INLINE void nrf_radio_dfe_buffer_set(NRF_RADIO_Type * p_reg,
  */
 NRF_STATIC_INLINE uint32_t nrf_radio_dfe_amount_get(NRF_RADIO_Type const * p_reg);
 
-#if defined(RADIO_DFEPACKET_CURRENTAMOUNT_AMOUNT_Msk)
+#if defined(RADIO_DFEPACKET_CURRENTAMOUNT_AMOUNT_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for getting the number of bytes transferred in the current transaction.
  *
@@ -1998,7 +2001,7 @@ NRF_STATIC_INLINE uint8_t nrf_radio_dacnf_txadd_get(NRF_RADIO_Type const * p_reg
                                       RADIO_DACNF_TXADD7_Msk)) >> RADIO_DACNF_TXADD0_Pos);
 }
 
-#if defined(RADIO_INTENSET_MHRMATCH_Msk)
+#if defined(RADIO_INTENSET_MHRMATCH_Msk) || defined(RADIO_INTENSET00_MHRMATCH_Msk)
 void nrf_radio_mhmu_search_pattern_set(NRF_RADIO_Type * p_reg,
                                        uint32_t         radio_mhmu_search_pattern)
 {
@@ -2013,14 +2016,22 @@ NRF_STATIC_INLINE uint32_t nrf_radio_mhmu_search_pattern_get(NRF_RADIO_Type cons
 NRF_STATIC_INLINE void nrf_radio_mhmu_pattern_mask_set(NRF_RADIO_Type * p_reg,
                                                        uint32_t         radio_mhmu_pattern_mask)
 {
+#if defined(RADIO_MHRMATCHMAS_MHRMATCHMAS_Msk)
     p_reg->MHRMATCHMAS = radio_mhmu_pattern_mask;
+#else
+    p_reg->MHRMATCHMASK = radio_mhmu_pattern_mask;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_radio_mhmu_pattern_mask_get(NRF_RADIO_Type const * p_reg)
 {
+#if defined(RADIO_MHRMATCHMAS_MHRMATCHMAS_Msk)
     return p_reg->MHRMATCHMAS;
+#else
+    return p_reg->MHRMATCHMASK;
+#endif
 }
-#endif // defined(RADIO_INTENSET_MHRMATCH_Msk)
+#endif // defined(RADIO_INTENSET_MHRMATCH_Msk) || defined(RADIO_INTENSET00_MHRMATCH_Msk)
 
 #if defined(RADIO_MODECNF0_RU_Msk)
 NRF_STATIC_INLINE void nrf_radio_modecnf0_set(NRF_RADIO_Type * p_reg,
@@ -2248,7 +2259,7 @@ NRF_STATIC_INLINE void nrf_radio_dfe_pattern_clear(NRF_RADIO_Type * p_reg)
 }
 #endif
 
-#if defined(RADIO_DFEPACKET_PTR_PTR_Msk)
+#if defined(RADIO_DFEPACKET_PTR_PTR_Msk) || defined(RADIO_DFEPACKET_PTR_OFFSET_Msk)
 NRF_STATIC_INLINE void nrf_radio_dfe_buffer_set(NRF_RADIO_Type * p_reg,
                                                 uint32_t *       p_buffer,
                                                 size_t           length)
