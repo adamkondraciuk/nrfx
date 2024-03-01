@@ -40,7 +40,7 @@ PROJECT_NAME           = "nrfx"
 
 ### EDIT THIS ###
 
-PROJECT_NUMBER         = "3.3"
+PROJECT_NUMBER         = "3.4"
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -1454,7 +1454,7 @@ GENERATE_ECLIPSEHELP   = YES
 # The default value is: org.doxygen.Project.
 # This tag requires that the tag GENERATE_ECLIPSEHELP is set to YES.
 
-ECLIPSE_DOC_ID         = drivers_nrfx_v3.3.0
+ECLIPSE_DOC_ID         = drivers_nrfx_v3.4.0
 
 # If you want full control over the layout of the generated HTML pages it might
 # be necessary to disable the index and replace it with your own. The
