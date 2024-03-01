@@ -36,8 +36,8 @@ enum {
 /** @brief Macro for creating a TWIS driver instance. */
 #define NRFX_TWIS_INSTANCE(id)                               \
 {                                                            \
-    .p_reg        = NRFX_CONCAT_2(NRF_TWIS, id),             \
-    .drv_inst_idx = NRFX_CONCAT_3(NRFX_TWIS, id, _INST_IDX), \
+    .p_reg        = NRFX_CONCAT(NRF_, TWIS, id),             \
+    .drv_inst_idx = NRFX_CONCAT(NRFX_TWIS, id, _INST_IDX),   \
 }
 
 /** @brief Event callback function event definitions. */

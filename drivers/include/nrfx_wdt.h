@@ -84,8 +84,8 @@ enum {
 /** @brief Macro for creating an instance of the WDT driver. */
 #define NRFX_WDT_INSTANCE(id)                               \
 {                                                           \
-    .p_reg        = NRF_WDT##id,                            \
-    .drv_inst_idx = NRFX_CONCAT_3(NRFX_WDT, id, _INST_IDX), \
+    .p_reg        = NRFX_CONCAT(NRF_, WDT, id),             \
+    .drv_inst_idx = NRFX_CONCAT(NRFX_WDT, id, _INST_IDX),   \
 }
 
 /** @brief Structure for WDT initialization. */

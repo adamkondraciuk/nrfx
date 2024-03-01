@@ -36,8 +36,8 @@ enum {
 /** @brief Macro for creating an instance of the SPIM driver. */
 #define NRFX_SPIM_INSTANCE(id)                               \
 {                                                            \
-    .p_reg        = NRFX_CONCAT_2(NRF_SPIM, id),             \
-    .drv_inst_idx = NRFX_CONCAT_3(NRFX_SPIM, id, _INST_IDX), \
+    .p_reg        = NRFX_CONCAT(NRF_, SPIM, id),             \
+    .drv_inst_idx = NRFX_CONCAT(NRFX_SPIM, id, _INST_IDX),   \
 }
 
 /** @brief Configuration structure of the SPIM driver instance. */

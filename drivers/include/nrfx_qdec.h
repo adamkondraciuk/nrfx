@@ -70,8 +70,8 @@ enum {
 /** @brief Macro for creating an instance of the QDEC driver. */
 #define NRFX_QDEC_INSTANCE(id)                               \
 {                                                            \
-    .p_reg        = NRF_QDEC##id,                            \
-    .drv_inst_idx = NRFX_CONCAT_3(NRFX_QDEC, id, _INST_IDX), \
+    .p_reg        = NRFX_CONCAT(NRF_, QDEC, id),             \
+    .drv_inst_idx = NRFX_CONCAT(NRFX_QDEC, id, _INST_IDX),   \
 }
 
 /**

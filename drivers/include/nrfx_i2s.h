@@ -81,8 +81,8 @@ typedef struct
 /** @brief Macro for creating an I2S driver instance. */
 #define NRFX_I2S_INSTANCE(id)                               \
 {                                                           \
-    .p_reg        = NRF_I2S##id ,                           \
-    .drv_inst_idx = NRFX_CONCAT_3(NRFX_I2S, id, _INST_IDX), \
+    .p_reg        = NRFX_CONCAT(NRF_, I2S, id),             \
+    .drv_inst_idx = NRFX_CONCAT(NRFX_I2S, id, _INST_IDX),   \
 }
 
 #ifndef __NRFX_DOXYGEN__

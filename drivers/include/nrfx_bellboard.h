@@ -34,7 +34,7 @@ enum {
 /** @brief Macro for creating a BELLBOARD driver instance. */
 #define NRFX_BELLBOARD_INSTANCE(id)                                 \
 {                                                                   \
-    .drv_inst_idx = NRFX_CONCAT_3(NRFX_BELLBOARD, id, _INST_IDX),   \
+    .drv_inst_idx = NRFX_CONCAT(NRFX_BELLBOARD, id, _INST_IDX),     \
     .int_idx      = id,                                             \
 }
 

@@ -36,8 +36,8 @@ enum {
 /** @brief Macro for creating an instance of the SPI slave driver. */
 #define NRFX_SPIS_INSTANCE(id)                               \
 {                                                            \
-    .p_reg        = NRFX_CONCAT_2(NRF_SPIS, id),             \
-    .drv_inst_idx = NRFX_CONCAT_3(NRFX_SPIS, id, _INST_IDX), \
+    .p_reg        = NRFX_CONCAT(NRF_, SPIS, id),             \
+    .drv_inst_idx = NRFX_CONCAT(NRFX_SPIS, id, _INST_IDX),   \
 }
 
 /** @brief SPI slave driver event types. */

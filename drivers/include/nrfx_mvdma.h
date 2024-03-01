@@ -53,8 +53,8 @@ enum {
  */
 #define NRFX_MVDMA_INSTANCE(_inst_name)                         \
 {                                                               \
-    .p_reg        = NRFX_CONCAT_2(NRF_, _inst_name),            \
-    .drv_inst_idx = NRFX_CONCAT_3(NRFX_, _inst_name, _INST_IDX) \
+    .p_reg        = NRFX_CONCAT(NRF_, _inst_name),              \
+    .drv_inst_idx = NRFX_CONCAT(NRFX_, _inst_name, _INST_IDX)   \
 }
 
 /** @brief Structure describing copy request for the MVDMA driver. */
