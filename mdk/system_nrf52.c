@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2009-2023 ARM Limited. All rights reserved.
+Copyright (c) 2009-2024 ARM Limited. All rights reserved.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -78,13 +78,13 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
                         | (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos) \
                         | (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos))
 
-#if defined(IS_NRF52832) && IS_NRF52832
+#if defined (IS_NRF52832) && IS_NRF52832
     #define TRACECLK_PIN_CNF NRF_P0->PIN_CNF[20]
     #define TRACEDATA0_PIN_CNF NRF_P0->PIN_CNF[18]
     #define TRACEDATA1_PIN_CNF NRF_P0->PIN_CNF[16]
     #define TRACEDATA2_PIN_CNF NRF_P0->PIN_CNF[15]
     #define TRACEDATA3_PIN_CNF NRF_P0->PIN_CNF[14]
-#elif (defined(IS_NRF52833) && IS_NRF52833) || (defined(IS_NRF52840) && IS_NRF52840)
+#elif (defined (IS_NRF52833) && IS_NRF52833) || (defined (IS_NRF52840) && IS_NRF52840)
     #define TRACECLK_PIN_CNF NRF_P0->PIN_CNF[7]
     #define TRACEDATA0_PIN_CNF NRF_P1->PIN_CNF[0]
     #define TRACEDATA1_PIN_CNF NRF_P0->PIN_CNF[12]
