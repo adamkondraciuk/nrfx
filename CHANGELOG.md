@@ -7,6 +7,7 @@ All notable changes to this project are documented in this file.
 - Added support for changing the sub-power mode in the POWER driver.
 - Added support for sleep configuration in the GRTC driver.
 - Added HAL for TDM peripheral.
+- Implemented a workaround for the anomaly 159 on the nRF5340 SoC in the QSPI driver.
 
 ### Changed
 - Updated MDK to version 8.63.2.
