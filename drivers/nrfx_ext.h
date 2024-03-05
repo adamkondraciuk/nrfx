@@ -73,7 +73,7 @@ extern "C" {
 /*------------------------------------------------------------------------------------------------*/
 
 #if defined(NRF_GPIOTE131)
-    #if (defined(ISA_ARM) && defined(NRF_TRUSTZONE_NONSECURE)) || defined(ISA_RISCV)
+    #if (defined(__CORTEX_M) && defined(NRF_TRUSTZONE_NONSECURE)) || defined(__VPR_REV)
         #define GPIOTE131_IRQn       GPIOTE131_0_IRQn
         #define GPIOTE131_IRQHandler GPIOTE131_0_IRQHandler
     #else
