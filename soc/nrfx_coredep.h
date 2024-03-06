@@ -58,11 +58,13 @@
 
 #if NRFX_CHECK(ISA_RISCV)
 /** @brief Slowdown for RISCV cores. */
-#if defined(NRF54L15_ENGA_XXAA)
+#if !defined(NRFX_DELAY_RISCV_SLOWDOWN)
+#if defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA)
 #define NRFX_DELAY_RISCV_SLOWDOWN 15
 #else
 #define NRFX_DELAY_RISCV_SLOWDOWN 50
-#endif
+#endif // defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA)
+#endif // !defined(NRFX_DELAY_RISCV_SLOWDOWN)
 #endif
 
 /**

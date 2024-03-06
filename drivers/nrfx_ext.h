@@ -296,6 +296,12 @@ extern "C" {
     #endif
 #endif
 
+#if (defined(NRF54L15_ENGA_XXAA) || defined(NRF54L15_XXAA))
+    #if defined(BOARD_FPGA)
+        #define NRFX_DELAY_RISCV_SLOWDOWN 14
+    #endif
+#endif
+
 /*------------------------------------------------------------------------------------------------*/
 /* End of Core-dependent Extended section                                                         */
 /*------------------------------------------------------------------------------------------------*/
