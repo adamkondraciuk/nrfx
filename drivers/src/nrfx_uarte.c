@@ -1986,6 +1986,16 @@ static void irq_handler(NRF_UARTE_Type * p_uarte, uarte_control_block_t * p_cb)
 
         if (endrx)
         {
+            // If interrupt was executed exactly when ENDRX occurred it is possible
+            // that RXSTARTED (which is read before ENDRX) is read as false but it
+            // actually occurred (if there is a linked reception). Read again to be sure.
+            if (!rxstarted)
+            {
+                rxstarted = nrfy_uarte_events_process(p_uarte,
+                                       NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_RXSTARTED),
+                                       NULL);
+            }
+
             if (endrx_irq_handler(p_uarte, p_cb, rxstarted) == true)
             {
                 rxstarted = false;
