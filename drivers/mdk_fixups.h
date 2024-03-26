@@ -878,6 +878,21 @@
     #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
     #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
     #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
+
+    /* HM-24773 */
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Enabled (0x1UL)
+
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos (3UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Enabled (0x1UL)
 #endif
 
 /**************************************************************************************************/
@@ -896,6 +911,110 @@
     #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
     #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
     #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
+
+    /* MLT-8866 */
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Enabled (0x1UL)
+
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos (3UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Enabled (0x1UL)
+
+    /* MLT-8866 */
+    typedef struct {
+      __IOM uint32_t START;
+      __IM uint32_t RESERVED[1];
+    } NRF_PWM_SUBSCRIBE_DMA_SEQ_Type_fixed;
+
+    typedef struct {
+      __IOM NRF_PWM_SUBSCRIBE_DMA_SEQ_Type_fixed SEQ[2];
+    } NRF_PWM_SUBSCRIBE_DMA_Type_fixed;
+
+    typedef struct {
+      __OM  uint32_t START;
+      __IM uint32_t RESERVED[1];
+    } NRF_PWM_TASKS_DMA_SEQ_Type_fixed;
+
+    typedef struct {
+      __OM  NRF_PWM_TASKS_DMA_SEQ_Type_fixed SEQ[2];
+    } NRF_PWM_TASKS_DMA_Type_fixed;
+
+    typedef struct {
+      __OM uint32_t TASKS_START;
+      __OM uint32_t TASKS_STOP;
+      __OM uint32_t TASKS_NEXTSTEP;
+      __OM uint32_t TASKS_SEQABORT;
+      __OM NRF_PWM_TASKS_DMA_Type_fixed TASKS_DMA;
+      __IM uint32_t RESERVED[24];
+      __IOM uint32_t SUBSCRIBE_START;
+      __IOM uint32_t SUBSCRIBE_STOP;
+      __IOM uint32_t SUBSCRIBE_NEXTSTEP;
+      __IOM uint32_t SUBSCRIBE_SEQABORT;
+      __IOM NRF_PWM_SUBSCRIBE_DMA_Type_fixed SUBSCRIBE_DMA;
+      __IM uint32_t RESERVED1[24];
+      __IOM uint32_t EVENTS_STARTED;
+      __IOM uint32_t EVENTS_STOPPED;
+      __IOM uint32_t EVENTS_SEQSTARTED[2];
+      __IOM uint32_t EVENTS_SEQEND[2];
+      __IOM uint32_t EVENTS_PWMPERIODEND;
+      __IOM uint32_t EVENTS_LOOPSDONE;
+      __IOM uint32_t EVENTS_RAMUNDERFLOW;
+      __IOM NRF_PWM_EVENTS_DMA_Type EVENTS_DMA;
+      __IOM uint32_t EVENTS_COMPAREMATCH[4];
+      __IM uint32_t RESERVED2[13];
+      __IOM uint32_t PUBLISH_STARTED;
+      __IOM uint32_t PUBLISH_STOPPED;
+      __IOM uint32_t PUBLISH_SEQSTARTED[2];
+      __IOM uint32_t PUBLISH_SEQEND[2];
+      __IOM uint32_t PUBLISH_PWMPERIODEND;
+      __IOM uint32_t PUBLISH_LOOPSDONE;
+      __IOM uint32_t PUBLISH_RAMUNDERFLOW;
+      __IOM NRF_PWM_PUBLISH_DMA_Type PUBLISH_DMA;
+      __IOM uint32_t PUBLISH_COMPAREMATCH[4];
+      __IM uint32_t RESERVED3[13];
+      __IOM uint32_t SHORTS;
+      __IM uint32_t RESERVED4[63];
+      __IOM uint32_t INTEN;
+      __IOM uint32_t INTENSET;
+      __IOM uint32_t INTENCLR;
+      __IM uint32_t INTPEND;
+      __IM uint32_t RESERVED5[124];
+      __IOM uint32_t ENABLE;
+      __IOM uint32_t MODE;
+      __IOM uint32_t COUNTERTOP;
+      __IOM uint32_t PRESCALER;
+      __IOM uint32_t DECODER;
+      __IOM uint32_t LOOP;
+      __IOM uint32_t IDLEOUT;
+      __IM uint32_t RESERVED6;
+      __IOM NRF_PWM_SEQ_Type SEQ[2];
+      __IOM NRF_PWM_PSEL_Type PSEL;
+      __IM uint32_t RESERVED7[100];
+      __IOM NRF_PWM_DMA_Type DMA;
+    } NRF_PWM_Type_fixed;
+
+    #define NRF_PWM_Type NRF_PWM_Type_fixed
+
+    #undef NRF_PWM20_S
+    #undef NRF_PWM21_S
+    #undef NRF_PWM22_S
+    #undef NRF_PWM20_NS
+    #undef NRF_PWM21_NS
+    #undef NRF_PWM22_NS
+
+    #define NRF_PWM20_S  ((NRF_PWM_Type_fixed*) NRF_PWM20_S_BASE)
+    #define NRF_PWM21_S  ((NRF_PWM_Type_fixed*) NRF_PWM21_S_BASE)
+    #define NRF_PWM22_S  ((NRF_PWM_Type_fixed*) NRF_PWM22_S_BASE)
+    #define NRF_PWM20_NS  ((NRF_PWM_Type_fixed*) NRF_PWM20_NS_BASE)
+    #define NRF_PWM21_NS  ((NRF_PWM_Type_fixed*) NRF_PWM21_NS_BASE)
+    #define NRF_PWM22_NS  ((NRF_PWM_Type_fixed*) NRF_PWM22_NS_BASE)
 #endif
 
 /**************************************************************************************************/
@@ -914,6 +1033,110 @@
     #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
     #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
     #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
+
+    /* MLT-8866 */
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Enabled (0x1UL)
+
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos (3UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Enabled (0x1UL)
+
+    /* MLT-8866 */
+    typedef struct {
+      __IOM uint32_t START;
+      __IM uint32_t RESERVED[1];
+    } NRF_PWM_SUBSCRIBE_DMA_SEQ_Type_fixed;
+
+    typedef struct {
+      __IOM NRF_PWM_SUBSCRIBE_DMA_SEQ_Type_fixed SEQ[2];
+    } NRF_PWM_SUBSCRIBE_DMA_Type_fixed;
+
+    typedef struct {
+      __OM  uint32_t START;
+      __IM uint32_t RESERVED[1];
+    } NRF_PWM_TASKS_DMA_SEQ_Type_fixed;
+
+    typedef struct {
+      __OM  NRF_PWM_TASKS_DMA_SEQ_Type_fixed SEQ[2];
+    } NRF_PWM_TASKS_DMA_Type_fixed;
+
+    typedef struct {
+      __OM uint32_t TASKS_START;
+      __OM uint32_t TASKS_STOP;
+      __OM uint32_t TASKS_NEXTSTEP;
+      __OM uint32_t TASKS_SEQABORT;
+      __OM NRF_PWM_TASKS_DMA_Type_fixed TASKS_DMA;
+      __IM uint32_t RESERVED[24];
+      __IOM uint32_t SUBSCRIBE_START;
+      __IOM uint32_t SUBSCRIBE_STOP;
+      __IOM uint32_t SUBSCRIBE_NEXTSTEP;
+      __IOM uint32_t SUBSCRIBE_SEQABORT;
+      __IOM NRF_PWM_SUBSCRIBE_DMA_Type_fixed SUBSCRIBE_DMA;
+      __IM uint32_t RESERVED1[24];
+      __IOM uint32_t EVENTS_STARTED;
+      __IOM uint32_t EVENTS_STOPPED;
+      __IOM uint32_t EVENTS_SEQSTARTED[2];
+      __IOM uint32_t EVENTS_SEQEND[2];
+      __IOM uint32_t EVENTS_PWMPERIODEND;
+      __IOM uint32_t EVENTS_LOOPSDONE;
+      __IOM uint32_t EVENTS_RAMUNDERFLOW;
+      __IOM NRF_PWM_EVENTS_DMA_Type EVENTS_DMA;
+      __IOM uint32_t EVENTS_COMPAREMATCH[4];
+      __IM uint32_t RESERVED2[13];
+      __IOM uint32_t PUBLISH_STARTED;
+      __IOM uint32_t PUBLISH_STOPPED;
+      __IOM uint32_t PUBLISH_SEQSTARTED[2];
+      __IOM uint32_t PUBLISH_SEQEND[2];
+      __IOM uint32_t PUBLISH_PWMPERIODEND;
+      __IOM uint32_t PUBLISH_LOOPSDONE;
+      __IOM uint32_t PUBLISH_RAMUNDERFLOW;
+      __IOM NRF_PWM_PUBLISH_DMA_Type PUBLISH_DMA;
+      __IOM uint32_t PUBLISH_COMPAREMATCH[4];
+      __IM uint32_t RESERVED3[13];
+      __IOM uint32_t SHORTS;
+      __IM uint32_t RESERVED4[63];
+      __IOM uint32_t INTEN;
+      __IOM uint32_t INTENSET;
+      __IOM uint32_t INTENCLR;
+      __IM uint32_t INTPEND;
+      __IM uint32_t RESERVED5[124];
+      __IOM uint32_t ENABLE;
+      __IOM uint32_t MODE;
+      __IOM uint32_t COUNTERTOP;
+      __IOM uint32_t PRESCALER;
+      __IOM uint32_t DECODER;
+      __IOM uint32_t LOOP;
+      __IOM uint32_t IDLEOUT;
+      __IM uint32_t RESERVED6;
+      __IOM NRF_PWM_SEQ_Type SEQ[2];
+      __IOM NRF_PWM_PSEL_Type PSEL;
+      __IM uint32_t RESERVED7[100];
+      __IOM NRF_PWM_DMA_Type DMA;
+    } NRF_PWM_Type_fixed;
+
+    #define NRF_PWM_Type NRF_PWM_Type_fixed
+
+    #undef NRF_PWM20_S
+    #undef NRF_PWM21_S
+    #undef NRF_PWM22_S
+    #undef NRF_PWM20_NS
+    #undef NRF_PWM21_NS
+    #undef NRF_PWM22_NS
+
+    #define NRF_PWM20_S  ((NRF_PWM_Type_fixed*) NRF_PWM20_S_BASE)
+    #define NRF_PWM21_S  ((NRF_PWM_Type_fixed*) NRF_PWM21_S_BASE)
+    #define NRF_PWM22_S  ((NRF_PWM_Type_fixed*) NRF_PWM22_S_BASE)
+    #define NRF_PWM20_NS  ((NRF_PWM_Type_fixed*) NRF_PWM20_NS_BASE)
+    #define NRF_PWM21_NS  ((NRF_PWM_Type_fixed*) NRF_PWM21_NS_BASE)
+    #define NRF_PWM22_NS  ((NRF_PWM_Type_fixed*) NRF_PWM22_NS_BASE)
 #endif
 
 /**************************************************************************************************/
@@ -1088,6 +1311,21 @@
     #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
     #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
     #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
+
+    /* HM-24773 */
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Enabled (0x1UL)
+
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos (3UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Enabled (0x1UL)
 #endif
 
 /**************************************************************************************************/
@@ -1447,6 +1685,21 @@
     #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
     #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
     #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
+
+    /* HM-24773 */
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Enabled (0x1UL)
+
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos (3UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Enabled (0x1UL)
 #endif
 
 /**************************************************************************************************/
