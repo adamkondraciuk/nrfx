@@ -503,19 +503,17 @@ NRF_STATIC_INLINE void nrf_pwm_seq_ptr_set(NRF_PWM_Type *   p_reg,
                                            uint8_t          seq_id,
                                            uint16_t const * p_values);
 
-#if NRF_PWM_HAS_SEQ_CNT
 /**
  * @brief Function for modifying the total number of duty cycle values
  *        in the specified sequence.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
  * @param[in] seq_id Identifier of the sequence (0 or 1).
- * @param[in] length Number of duty cycle values.
+ * @param[in] length Number of duty cycle values (in 16-bit half words).
  */
 NRF_STATIC_INLINE void nrf_pwm_seq_cnt_set(NRF_PWM_Type * p_reg,
                                            uint8_t        seq_id,
                                            uint16_t       length);
-#endif
 
 /**
  * @brief Function for modifying the additional number of PWM periods spent
@@ -732,9 +730,7 @@ NRF_STATIC_INLINE void nrf_pwm_sequence_set(NRF_PWM_Type *             p_reg,
     NRFX_ASSERT(p_seq != NULL);
 
     nrf_pwm_seq_ptr_set(      p_reg, seq_id, p_seq->values.p_raw);
-#if NRF_PWM_HAS_SEQ_CNT
     nrf_pwm_seq_cnt_set(      p_reg, seq_id, p_seq->length);
-#endif
     nrf_pwm_seq_refresh_set(  p_reg, seq_id, p_seq->repeats);
     nrf_pwm_seq_end_delay_set(p_reg, seq_id, p_seq->end_delay);
 }
@@ -752,17 +748,20 @@ NRF_STATIC_INLINE void nrf_pwm_seq_ptr_set(NRF_PWM_Type *   p_reg,
 #endif
 }
 
-#if NRF_PWM_HAS_SEQ_CNT
 NRF_STATIC_INLINE void nrf_pwm_seq_cnt_set(NRF_PWM_Type * p_reg,
                                            uint8_t        seq_id,
                                            uint16_t       length)
 {
     NRFX_ASSERT(seq_id <= 1);
     NRFX_ASSERT(length != 0);
+#if NRF_PWM_HAS_DMA_REG
+    NRFX_ASSERT(length * sizeof(uint16_t) <= PWM_DMA_SEQ_MAXCNT_MAXCNT_Msk);
+    p_reg->DMA.SEQ[seq_id].MAXCNT = length * sizeof(uint16_t);
+#else
     NRFX_ASSERT(length <= PWM_SEQ_CNT_CNT_Msk);
     p_reg->SEQ[seq_id].CNT = length;
-}
 #endif
+}
 
 NRF_STATIC_INLINE void nrf_pwm_seq_refresh_set(NRF_PWM_Type * p_reg,
                                                uint8_t        seq_id,
