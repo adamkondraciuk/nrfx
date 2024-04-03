@@ -23,7 +23,8 @@ extern "C" {
 #define NRF_PWM_HAS_DMA_REG 0
 #endif
 
-#if defined(PWM_SHORTS_LOOPSDONE_SEQSTART0_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(PWM_SHORTS_LOOPSDONE_SEQSTART0_Msk) || \
+    defined(PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether shorting SEQSTART task with LOOPSDONE event is available. */
 #define NRF_PWM_HAS_SHORT_LOOPSDONE_SEQSTART 1
 #else
@@ -112,13 +113,16 @@ typedef enum
 /** @brief PWM shortcuts. */
 typedef enum
 {
-    NRF_PWM_SHORT_SEQEND0_STOP_MASK        = PWM_SHORTS_SEQEND0_STOP_Msk,        ///< Shortcut between SEQEND[0] event and STOP task.
-    NRF_PWM_SHORT_SEQEND1_STOP_MASK        = PWM_SHORTS_SEQEND1_STOP_Msk,        ///< Shortcut between SEQEND[1] event and STOP task.
-#if NRF_PWM_HAS_SHORT_LOOPSDONE_SEQSTART
-    NRF_PWM_SHORT_LOOPSDONE_SEQSTART0_MASK = PWM_SHORTS_LOOPSDONE_SEQSTART0_Msk, ///< Shortcut between LOOPSDONE event and SEQSTART[0] task.
-    NRF_PWM_SHORT_LOOPSDONE_SEQSTART1_MASK = PWM_SHORTS_LOOPSDONE_SEQSTART1_Msk, ///< Shortcut between LOOPSDONE event and SEQSTART[1] task.
+    NRF_PWM_SHORT_SEQEND0_STOP_MASK        = PWM_SHORTS_SEQEND0_STOP_Msk,             ///< Shortcut between SEQEND[0] event and STOP task.
+    NRF_PWM_SHORT_SEQEND1_STOP_MASK        = PWM_SHORTS_SEQEND1_STOP_Msk,             ///< Shortcut between SEQEND[1] event and STOP task.
+#if defined(PWM_SHORTS_LOOPSDONE_SEQSTART0_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_PWM_SHORT_LOOPSDONE_SEQSTART0_MASK = PWM_SHORTS_LOOPSDONE_SEQSTART0_Msk,      ///< Shortcut between LOOPSDONE event and SEQSTART[0] task.
+    NRF_PWM_SHORT_LOOPSDONE_SEQSTART1_MASK = PWM_SHORTS_LOOPSDONE_SEQSTART1_Msk,      ///< Shortcut between LOOPSDONE event and SEQSTART[1] task.
+#else
+    NRF_PWM_SHORT_LOOPSDONE_SEQSTART0_MASK = PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk, ///< Shortcut between LOOPSDONE event and DMA.SEQ[0].START task.
+    NRF_PWM_SHORT_LOOPSDONE_SEQSTART1_MASK = PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk, ///< Shortcut between LOOPSDONE event and DMA.SEQ[1].START task.
 #endif
-    NRF_PWM_SHORT_LOOPSDONE_STOP_MASK      = PWM_SHORTS_LOOPSDONE_STOP_Msk       ///< Shortcut between LOOPSDONE event and STOP task.
+    NRF_PWM_SHORT_LOOPSDONE_STOP_MASK      = PWM_SHORTS_LOOPSDONE_STOP_Msk            ///< Shortcut between LOOPSDONE event and STOP task.
 } nrf_pwm_short_mask_t;
 
 /** @brief PWM modes of operation. */
