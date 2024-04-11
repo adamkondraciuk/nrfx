@@ -154,12 +154,9 @@ NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
     uint32_t cycles = time_us * NRFX_DELAY_CPU_FREQ_MHZ;
     delay_cycles(cycles);
 #elif NRFX_CHECK(ISA_RISCV)
-    bool rtperiph = nrf_vpr_csr_rtperiph_enable_check();
-    nrf_vpr_csr_rtperiph_enable_set(true);
     nrf_vpr_csr_vtim_count_mode_set(1, NRF_VPR_CSR_VTIM_COUNT_TRIGGER_COMBINED);
     nrf_vpr_csr_vtim_combined_counter_set(time_us * NRFX_DELAY_CPU_FREQ_MHZ);
     nrf_vpr_csr_vtim_combined_wait_trigger();
-    nrf_vpr_csr_rtperiph_enable_set(rtperiph);
 #endif
 }
 
