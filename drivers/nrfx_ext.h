@@ -43,7 +43,7 @@ extern "C" {
         NRF_GPIO_PIN_SEL_DTB      = GPIO_PIN_CNF_CTRLSEL_DTB,
 #endif
 
-#if defined(NRF54H20_ENGA_XXAA) || defined(NRF7140_XAA) || defined(NRF9230_ENGA_XXAA)
+#if defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_ENGA_XXAA)
     #define NRF_GPIO_RETAIN_EXT                                               \
         NRF_GPIO_RETAIN_SECURE_MASK          = GPIO_RETAIN_SECURE_Msk,        \
         NRF_GPIO_RETAIN_CELLULAR_MASK        = GPIO_RETAIN_CELLCORE_Msk,      \
