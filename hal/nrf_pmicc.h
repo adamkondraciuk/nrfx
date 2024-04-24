@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer for managing Power Management Integrated Circuit Controller (PMICC).
  */
 
+#if defined(PMICC_ITHRESHOLD_MaxCount) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether ITHRESHOLD register is treated as an array. */
+#define NRF_PMICC_HAS_ITHRESHOLD_ARRAY 1
+#else
+#define NRF_PMICC_HAS_ITHRESHOLD_ARRAY 0
+#endif
+
 /** @brief Symbol specifying the number of available sources. */
 #define NRF_PMICC_SOURCES_COUNT PMICC_EVENTS_CURRABOVE_MaxCount
 
@@ -176,13 +183,22 @@ NRF_STATIC_INLINE void nrf_pmicc_status_get(NRF_PMICC_Type const * p_reg,
 
 NRF_STATIC_INLINE uint8_t nrf_pmicc_ithreshold_get(NRF_PMICC_Type const * p_reg)
 {
+#if NRF_PMICC_HAS_ITHRESHOLD_ARRAY
+    return (p_reg->ITHRESHOLD[0] & PMICC_ITHRESHOLD_THRES_Msk) >> PMICC_ITHRESHOLD_THRES_Pos;
+#else
     return (p_reg->ITHRESHOLD & PMICC_ITHRESHOLD_THRES_Msk) >> PMICC_ITHRESHOLD_THRES_Pos;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_pmicc_ithreshold_set(NRF_PMICC_Type * p_reg, uint8_t value)
 {
+#if NRF_PMICC_HAS_ITHRESHOLD_ARRAY
+    p_reg->ITHRESHOLD[0] = ((uint32_t)value << PMICC_ITHRESHOLD_THRES_Pos) &
+                                               PMICC_ITHRESHOLD_THRES_Msk;
+#else
     p_reg->ITHRESHOLD = ((uint32_t)value << PMICC_ITHRESHOLD_THRES_Pos) &
                                             PMICC_ITHRESHOLD_THRES_Msk;
+#endif
 }
 
 #endif // NRF_DECLARE_ONLY

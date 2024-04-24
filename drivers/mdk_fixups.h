@@ -5,7 +5,7 @@
 /* Start fixups section for HALTIUM_XXAA                                                          */
 /**************************************************************************************************/
 
-#if defined(NRF7140_XXAA) || defined(NRF9230_ENGA_XXAA)
+#if defined(NRF7140_XXAA)
     #define HALTIUM_XXAA 1
 #endif
 
@@ -873,12 +873,6 @@
         #error Unknown core.
     #endif
 
-    /* TODO: HM-24456 */
-    #undef  SAADC_TESTCTRL_LINCALEN_Disabled
-    #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
-    #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
-    #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
-
     /* HM-24773 */
     #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
     #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos)
@@ -905,12 +899,6 @@
 
 #if defined(NRF54L15_ENGA_XXAA)
     #include "nrf54l15_enga_interim.h"
-
-    /* TODO: HM-24456 */
-    #undef  SAADC_TESTCTRL_LINCALEN_Disabled
-    #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
-    #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
-    #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
 
     /* MLT-8866 */
     #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
@@ -1027,12 +1015,6 @@
 
 #if defined(NRF54L15_XXAA)
     #include "nrf54l15_interim.h"
-
-    /* TODO: HM-24456 */
-    #undef  SAADC_TESTCTRL_LINCALEN_Disabled
-    #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
-    #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
-    #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
 
     /* MLT-8866 */
     #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
@@ -1232,14 +1214,18 @@
     #define NRF_GRAPHICS_AUXPLL               NRF_GRAPHICS_AUXPLL_NS
     #define NRF_AUXPLL                        NRF_GRAPHICS_AUXPLL
 
-    #define P0_PIN_NUM (P0_PIN_NUM_MAX + 1UL)
-    #define P1_PIN_NUM (P1_PIN_NUM_MAX + 1UL)
-    #define P2_PIN_NUM (P2_PIN_NUM_MAX + 1UL)
-    #define P3_PIN_NUM (P3_PIN_NUM_MAX + 1UL)
-    #define P5_PIN_NUM (P5_PIN_NUM_MAX + 1UL)
-    #define P6_PIN_NUM (P6_PIN_NUM_MAX + 1UL)
-    #define P8_PIN_NUM (P8_PIN_NUM_MAX + 1UL)
-    #define P9_PIN_NUM (P9_PIN_NUM_MAX + 1UL)
+    #define P0_PIN_NUM P0_PIN_NUM_SIZE
+    #define P1_PIN_NUM P1_PIN_NUM_SIZE
+    #define P2_PIN_NUM P2_PIN_NUM_SIZE
+    #define P3_PIN_NUM P3_PIN_NUM_SIZE
+    #define P5_PIN_NUM P5_PIN_NUM_SIZE
+    #define P6_PIN_NUM P6_PIN_NUM_SIZE
+    #define P8_PIN_NUM P8_PIN_NUM_SIZE
+    #define P9_PIN_NUM P9_PIN_NUM_SIZE
+
+    #define RTC_CC_NUM    RTC_CC_NUM_SIZE
+    #define RTC130_CC_NUM RTC130_CC_NUM_SIZE
+    #define RTC131_CC_NUM RTC131_CC_NUM_SIZE
 
     #define DPPIC020_CH_NUM (DPPIC020_CH_NUM_MAX + 1UL)
     #define DPPIC030_CH_NUM (DPPIC030_CH_NUM_MAX + 1UL)
@@ -1294,38 +1280,6 @@
     #define TIMER136_CC_NUM (TIMER136_CC_NUM_MAX + 1UL)
     #define TIMER137_CC_NUM (TIMER137_CC_NUM_MAX + 1UL)
 
-    #define RTC_CC_NUM    (RTC_CC_NUM_MAX + 1UL)
-    #define RTC130_CC_NUM (RTC130_CC_NUM_MAX + 1UL)
-    #define RTC131_CC_NUM (RTC131_CC_NUM_MAX + 1UL)
-
-    /* MLT-7849 */
-    #define TWIM_SHORTS_LASTRX_STOP_Pos (12UL)
-    #define TWIM_SHORTS_LASTRX_STOP_Msk (0x1UL << TWIM_SHORTS_LASTRX_STOP_Pos)
-    #define TWIM_SHORTS_LASTRX_STOP_Min (0x0UL)
-    #define TWIM_SHORTS_LASTRX_STOP_Max (0x1UL)
-    #define TWIM_SHORTS_LASTRX_STOP_Disabled (0x0UL)
-    #define TWIM_SHORTS_LASTRX_STOP_Enabled (0x1UL)
-
-    /* TODO: HM-24456 */
-    #undef  SAADC_TESTCTRL_LINCALEN_Disabled
-    #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
-    #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
-    #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
-
-    /* HM-24773 */
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Min (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Max (0x1UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Disabled (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Enabled (0x1UL)
-
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos (3UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Min (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Max (0x1UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Disabled (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Enabled (0x1UL)
 #endif
 
 /**************************************************************************************************/
@@ -1337,55 +1291,9 @@
 /**************************************************************************************************/
 
 #if defined(NRF9230_ENGA_XXAA)
-
-    /* External part */
-    #if defined(NRF_APPLICATION)
-        #define NRF_DOMAIN NRF_DOMAIN_APPLICATION
-    #elif defined(NRF_RADIOCORE)
-        #define NRF_DOMAIN NRF_DOMAIN_RADIOCORE
-    #elif defined(NRF_FLPR)
-        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
-    #elif defined(NRF_PPR)
-        #define NRF_DOMAIN NRF_DOMAIN_GLOBALSLOW
-    #endif
-
-    #if defined(NRF_TRUSTZONE_NONSECURE)
-        #if defined(NRF_APPLICATION)
-            #define GRTC_IRQ_GROUP 2
-            #define GPIOTE_IRQ_GROUP 2
-        #elif defined(NRF_RADIOCORE)
-            #define GRTC_IRQ_GROUP 4
-            #define GPIOTE_IRQ_GROUP 4
-        #endif
-    #elif defined(NRF_PPR)
-        #define GRTC_IRQ_GROUP 10
-        #define GPIOTE_IRQ_GROUP 2
-    #elif defined(NRF_FLPR)
-        #define GRTC_IRQ_GROUP 11
-        #define GPIOTE_IRQ_GROUP 2
-    #else
-        #if defined(NRF_APPLICATION)
-            #define GRTC_IRQ_GROUP 3
-            #define GPIOTE_IRQ_GROUP 3
-        #elif defined(NRF_RADIOCORE)
-            #define GRTC_IRQ_GROUP 5
-            #define GPIOTE_IRQ_GROUP 5
-        #endif
-    #endif
+    #include "nrf9230_enga_interim.h"
 
     /* Internal part */
-    #if defined(NRF_SECURE)
-        #define NRF_DOMAIN NRF_DOMAIN_SECURE
-    #elif defined(NRF_CELLCORE)
-        #define NRF_DOMAIN NRF_DOMAIN_CELLCORE
-    #elif defined(NRF_SYSCTRL)
-        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
-    #elif defined(NRF_LMAC)
-        #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
-    #elif defined(NRF_UMAC)
-        #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
-    #endif
-
     #if defined(NRF_TRUSTZONE_NONSECURE)
         #if defined(NRF_SECURE)
             #define GRTC_IRQ_GROUP 0
@@ -1413,6 +1321,17 @@
         #error Unknown core.
     #endif
 
+    /* TODO: MDK-2336 */
+    #define NRF_DOMAIN_CELLCORE 4
+    #define NRF_DOMAIN_CELLDSP  5
+    #define NRF_DOMAIN_CELLRF   6
+    #define NRF_DOMAIN_ISIMCORE 7
+    #define NRF_PROCESSOR_CELLCORE 4
+    #define NRF_PROCESSOR_CELLDSP  5
+    #define NRF_PROCESSOR_CELLRF   6
+    #define NRF_OWNER_CELL     4
+    #define NRF_OWNER_ISIMCORE 5
+
     #define GPIOTE131_CH_NUM (GPIOTE131_GPIOTE_NCHANNELS_MAX + 1UL)
     #define GPIOTE131_AVAILABLE_GPIO_PORTS 0x3A07UL
 
@@ -1437,128 +1356,11 @@
     #define BICR_HFXO_CONFIG_MODE_Crystal5 (0x5UL)     /*!< Reserved value.                                                      */
     #define BICR_HFXO_CONFIG_MODE_Crystal6 (0x6UL)     /*!< Reserved value.                                                      */
 
-    #define RTC130_CC_NUM (RTC130_CC_NUM_MAX + 1UL)
-    #define RTC131_CC_NUM (RTC131_CC_NUM_MAX + 1UL)
+    #define DPPIC0_CH_NUM DPPIC0_CH_NUM_SIZE
+    #define DPPIC1_CH_NUM DPPIC1_CH_NUM_SIZE
 
-    #if defined(P0_PIN_NUM)
-        #undef P0_PIN_NUM
-    #endif
-    #define P0_PIN_NUM (P0_PIN_NUM_MAX - P0_PIN_NUM_MIN + 1)
-
-    #if defined(P1_PIN_NUM)
-        #undef P1_PIN_NUM
-    #endif
-    #define P1_PIN_NUM (P1_PIN_NUM_MAX - P1_PIN_NUM_MIN + 1)
-
-    #if defined(P2_PIN_NUM)
-        #undef P2_PIN_NUM
-    #endif
-    #define P2_PIN_NUM (P2_PIN_NUM_MAX - P2_PIN_NUM_MIN + 1)
-
-    #if defined(P6_PIN_NUM)
-        #undef P6_PIN_NUM
-    #endif
-    #define P6_PIN_NUM (P6_PIN_NUM_MAX - P6_PIN_NUM_MIN + 1)
-
-    #if defined(P8_PIN_NUM)
-        #undef P8_PIN_NUM
-    #endif
-    #define P8_PIN_NUM (P8_PIN_NUM_MAX - P8_PIN_NUM_MIN + 1)
-
-    #if defined(P9_PIN_NUM)
-        #undef P9_PIN_NUM
-    #endif
-    #define P9_PIN_NUM (P9_PIN_NUM_MAX - P9_PIN_NUM_MIN + 1)
-
-    #if defined(P10_PIN_NUM)
-        #undef P10_PIN_NUM
-    #endif
-    #define P10_PIN_NUM (P10_PIN_NUM_MAX - P10_PIN_NUM_MIN + 1)
-
-    #if defined(P11_PIN_NUM)
-        #undef P11_PIN_NUM
-    #endif
-    #define P11_PIN_NUM (P11_PIN_NUM_MAX - P11_PIN_NUM_MIN + 1)
-
-    #if defined(P12_PIN_NUM)
-        #undef P12_PIN_NUM
-    #endif
-    #define P12_PIN_NUM (P12_PIN_NUM_MAX - P12_PIN_NUM_MIN + 1)
-
-    #if defined(P13_PIN_NUM)
-        #undef P13_PIN_NUM
-    #endif
-    #define P13_PIN_NUM (P13_PIN_NUM_MAX - P13_PIN_NUM_MIN + 1)
-
-    /* TODO: MDK-2220 */
-
-    #if defined(P0_PINS_PRESENT)
-        #undef P0_PINS_PRESENT
-    #endif
-    #define P0_PINS_PRESENT 0x1FFFUL
-
-    #if defined(P1_PINS_PRESENT)
-        #undef P1_PINS_PRESENT
-    #endif
-    #define P1_PINS_PRESENT 0xFFFUL
-
-    #if defined(P2_PINS_PRESENT)
-        #undef P2_PINS_PRESENT
-    #endif
-    #define P2_PINS_PRESENT 0xFFFUL
-
-    #if defined(P6_PINS_PRESENT)
-        #undef P6_PINS_PRESENT
-    #endif
-    #define P6_PINS_PRESENT 0x3FFFUL
-
-    #if defined(P8_PINS_PRESENT)
-        #undef P8_PINS_PRESENT
-    #endif
-    #define P8_PINS_PRESENT 0x1FUL
-
-    #if defined(P9_PINS_PRESENT)
-        #undef P9_PINS_PRESENT
-    #endif
-    #define P9_PINS_PRESENT 0x3FUL
-
-    #if defined(P10_PINS_PRESENT)
-        #undef P10_PINS_PRESENT
-    #endif
-    #define P10_PINS_PRESENT 0xFFUL
-
-    #if defined(P11_PINS_PRESENT)
-        #undef P11_PINS_PRESENT
-    #endif
-    #define P11_PINS_PRESENT 0xFFUL
-
-    #if defined(P12_PINS_PRESENT)
-        #undef P12_PINS_PRESENT
-    #endif
-    #define P12_PINS_PRESENT 0x7UL
-
-    #if defined(P13_PINS_PRESENT)
-        #undef P13_PINS_PRESENT
-    #endif
-    #define P13_PINS_PRESENT 0xFUL
-
-    #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
-    #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
-    #define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
-    #define P6_FEATURE_PINS_PRESENT P6_PINS_PRESENT
-    #define P8_FEATURE_PINS_PRESENT P8_PINS_PRESENT
-    #define P9_FEATURE_PINS_PRESENT P9_PINS_PRESENT
-    #define P10_FEATURE_PINS_PRESENT P10_PINS_PRESENT
-    #define P11_FEATURE_PINS_PRESENT P11_PINS_PRESENT
-    #define P12_FEATURE_PINS_PRESENT P12_PINS_PRESENT
-    #define P13_FEATURE_PINS_PRESENT P13_PINS_PRESENT
-
-    #if defined(DPPIC0_CH_NUM_MAX) && !defined(DPPIC0_CH_NUM)
-        #define DPPIC0_CH_NUM (DPPIC0_CH_NUM_MAX + 1UL)
-    #endif
-    #if defined(DPPIC1_CH_NUM_MAX) && !defined(DPPIC1_CH_NUM)
-        #define DPPIC1_CH_NUM (DPPIC1_CH_NUM_MAX + 1UL)
-    #endif
+    #define DPPIC0_GROUP_NUM DPPIC0_GROUP_NUM_SIZE
+    #define DPPIC1_GROUP_NUM DPPIC1_GROUP_NUM_SIZE
 
     /* TODO: HM-21442 */
     #define OSCRFR_TRIM_OSC_VAL_Val35    OSCRFR_TRIM_OSC_VAL_Val23
@@ -1569,137 +1371,6 @@
     #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
     #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
 
-    #define TWIM120_EASYDMA_MAXCNT_SIZE 16
-    #define TWIM130_EASYDMA_MAXCNT_SIZE 16
-    #define TWIM131_EASYDMA_MAXCNT_SIZE 16
-    #define TWIM132_EASYDMA_MAXCNT_SIZE 16
-    #define TWIM133_EASYDMA_MAXCNT_SIZE 16
-    #define TWIM134_EASYDMA_MAXCNT_SIZE 16
-    #define TWIM135_EASYDMA_MAXCNT_SIZE 16
-    #define TWIM136_EASYDMA_MAXCNT_SIZE 16
-    #define TWIM137_EASYDMA_MAXCNT_SIZE 16
-
-    #define TWIS130_EASYDMA_MAXCNT_SIZE 16
-    #define TWIS131_EASYDMA_MAXCNT_SIZE 16
-    #define TWIS132_EASYDMA_MAXCNT_SIZE 16
-    #define TWIS133_EASYDMA_MAXCNT_SIZE 16
-    #define TWIS134_EASYDMA_MAXCNT_SIZE 16
-    #define TWIS135_EASYDMA_MAXCNT_SIZE 16
-    #define TWIS136_EASYDMA_MAXCNT_SIZE 16
-    #define TWIS137_EASYDMA_MAXCNT_SIZE 16
-
-    #define SPIM120_EASYDMA_MAXCNT_SIZE 16
-    #define SPIM121_EASYDMA_MAXCNT_SIZE 16
-    #define SPIM130_EASYDMA_MAXCNT_SIZE 16
-    #define SPIM131_EASYDMA_MAXCNT_SIZE 16
-    #define SPIM132_EASYDMA_MAXCNT_SIZE 16
-    #define SPIM133_EASYDMA_MAXCNT_SIZE 16
-    #define SPIM134_EASYDMA_MAXCNT_SIZE 16
-    #define SPIM135_EASYDMA_MAXCNT_SIZE 16
-    #define SPIM136_EASYDMA_MAXCNT_SIZE 16
-    #define SPIM137_EASYDMA_MAXCNT_SIZE 16
-
-    #define SPIS120_EASYDMA_MAXCNT_SIZE 16
-    #define SPIS130_EASYDMA_MAXCNT_SIZE 16
-    #define SPIS131_EASYDMA_MAXCNT_SIZE 16
-    #define SPIS132_EASYDMA_MAXCNT_SIZE 16
-    #define SPIS133_EASYDMA_MAXCNT_SIZE 16
-    #define SPIS134_EASYDMA_MAXCNT_SIZE 16
-    #define SPIS135_EASYDMA_MAXCNT_SIZE 16
-    #define SPIS136_EASYDMA_MAXCNT_SIZE 16
-    #define SPIS137_EASYDMA_MAXCNT_SIZE 16
-
-    #define UARTE120_EASYDMA_MAXCNT_SIZE 16
-    #define UARTE130_EASYDMA_MAXCNT_SIZE 16
-    #define UARTE131_EASYDMA_MAXCNT_SIZE 16
-    #define UARTE132_EASYDMA_MAXCNT_SIZE 16
-    #define UARTE133_EASYDMA_MAXCNT_SIZE 16
-    #define UARTE134_EASYDMA_MAXCNT_SIZE 16
-    #define UARTE135_EASYDMA_MAXCNT_SIZE 16
-    #define UARTE136_EASYDMA_MAXCNT_SIZE 16
-    #define UARTE137_EASYDMA_MAXCNT_SIZE 16
-
-    #define DPPIC0_CH_NUM (DPPIC0_CH_NUM_MAX + 1UL)
-    #define DPPIC1_CH_NUM (DPPIC1_CH_NUM_MAX + 1UL)
-
-    #define DPPIC020_CH_NUM (DPPIC020_CH_NUM_MAX + 1UL)
-    #define DPPIC030_CH_NUM (DPPIC030_CH_NUM_MAX + 1UL)
-    #define DPPIC120_CH_NUM (DPPIC120_CH_NUM_MAX + 1UL)
-    #define DPPIC130_CH_NUM (DPPIC130_CH_NUM_MAX + 1UL)
-    #define DPPIC131_CH_NUM (DPPIC131_CH_NUM_MAX + 1UL)
-    #define DPPIC132_CH_NUM (DPPIC132_CH_NUM_MAX + 1UL)
-    #define DPPIC133_CH_NUM (DPPIC133_CH_NUM_MAX + 1UL)
-    #define DPPIC134_CH_NUM (DPPIC134_CH_NUM_MAX + 1UL)
-    #define DPPIC135_CH_NUM (DPPIC135_CH_NUM_MAX + 1UL)
-    #define DPPIC136_CH_NUM (DPPIC136_CH_NUM_MAX + 1UL)
-
-    #define DPPIC0_GROUP_NUM (DPPIC0_GROUP_NUM_MAX + 1UL)
-    #define DPPIC1_GROUP_NUM (DPPIC1_GROUP_NUM_MAX + 1UL)
-
-    #define DPPIC020_GROUP_NUM (DPPIC020_GROUP_NUM_MAX + 1UL)
-    #define DPPIC030_GROUP_NUM (DPPIC030_GROUP_NUM_MAX + 1UL)
-    #define DPPIC120_GROUP_NUM (DPPIC120_GROUP_NUM_MAX + 1UL)
-    #define DPPIC130_GROUP_NUM (DPPIC130_GROUP_NUM_MAX + 1UL)
-    #define DPPIC131_GROUP_NUM (DPPIC131_GROUP_NUM_MAX + 1UL)
-    #define DPPIC132_GROUP_NUM (DPPIC132_GROUP_NUM_MAX + 1UL)
-    #define DPPIC133_GROUP_NUM (DPPIC133_GROUP_NUM_MAX + 1UL)
-    #define DPPIC134_GROUP_NUM (DPPIC134_GROUP_NUM_MAX + 1UL)
-    #define DPPIC135_GROUP_NUM (DPPIC135_GROUP_NUM_MAX + 1UL)
-    #define DPPIC136_GROUP_NUM (DPPIC136_GROUP_NUM_MAX + 1UL)
-
-    #define EGU020_CH_NUM (EGU020_CH_NUM_MAX + 1UL)
-    #define EGU130_CH_NUM (EGU130_CH_NUM_MAX + 1UL)
-
-    #define TIMER020_MAX_SIZE (TIMER020_MAX_SIZE_MAX + 1UL)
-    #define TIMER021_MAX_SIZE (TIMER021_MAX_SIZE_MAX + 1UL)
-    #define TIMER022_MAX_SIZE (TIMER022_MAX_SIZE_MAX + 1UL)
-    #define TIMER120_MAX_SIZE (TIMER120_MAX_SIZE_MAX + 1UL)
-    #define TIMER121_MAX_SIZE (TIMER121_MAX_SIZE_MAX + 1UL)
-    #define TIMER130_MAX_SIZE (TIMER130_MAX_SIZE_MAX + 1UL)
-    #define TIMER131_MAX_SIZE (TIMER131_MAX_SIZE_MAX + 1UL)
-    #define TIMER132_MAX_SIZE (TIMER132_MAX_SIZE_MAX + 1UL)
-    #define TIMER133_MAX_SIZE (TIMER133_MAX_SIZE_MAX + 1UL)
-    #define TIMER134_MAX_SIZE (TIMER134_MAX_SIZE_MAX + 1UL)
-    #define TIMER135_MAX_SIZE (TIMER135_MAX_SIZE_MAX + 1UL)
-    #define TIMER136_MAX_SIZE (TIMER136_MAX_SIZE_MAX + 1UL)
-    #define TIMER137_MAX_SIZE (TIMER137_MAX_SIZE_MAX + 1UL)
-
-    #define TIMER020_CC_NUM (TIMER020_CC_NUM_MAX + 1UL)
-    #define TIMER021_CC_NUM (TIMER021_CC_NUM_MAX + 1UL)
-    #define TIMER022_CC_NUM (TIMER022_CC_NUM_MAX + 1UL)
-    #define TIMER120_CC_NUM (TIMER120_CC_NUM_MAX + 1UL)
-    #define TIMER121_CC_NUM (TIMER121_CC_NUM_MAX + 1UL)
-    #define TIMER130_CC_NUM (TIMER130_CC_NUM_MAX + 1UL)
-    #define TIMER131_CC_NUM (TIMER131_CC_NUM_MAX + 1UL)
-    #define TIMER132_CC_NUM (TIMER132_CC_NUM_MAX + 1UL)
-    #define TIMER133_CC_NUM (TIMER133_CC_NUM_MAX + 1UL)
-    #define TIMER134_CC_NUM (TIMER134_CC_NUM_MAX + 1UL)
-    #define TIMER135_CC_NUM (TIMER135_CC_NUM_MAX + 1UL)
-    #define TIMER136_CC_NUM (TIMER136_CC_NUM_MAX + 1UL)
-    #define TIMER137_CC_NUM (TIMER137_CC_NUM_MAX + 1UL)
-
-    #define RTC_CC_NUM (RTC_CC_NUM_MAX + 1UL)
-
-    /* TODO: HM-24456 */
-    #undef  SAADC_TESTCTRL_LINCALEN_Disabled
-    #undef  SAADC_TESTCTRL_CALDMAWREN_Disabled
-    #define SAADC_TESTCTRL_LINCALEN_Disabled   (0x0UL)
-    #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL)
-
-    /* HM-24773 */
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Min (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Max (0x1UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Disabled (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Enabled (0x1UL)
-
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos (3UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Min (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Max (0x1UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Disabled (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Enabled (0x1UL)
 #endif
 
 /**************************************************************************************************/
