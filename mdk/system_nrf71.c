@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2009-2023 ARM Limited. All rights reserved.
+Copyright (c) 2009-2024 ARM Limited. All rights reserved.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -55,13 +55,15 @@ void SystemCoreClockUpdate(void)
         /* FLPR does not have access to its HSFLL, assume default speed. */
         SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
     #else
-        #ifndef NRF_HSFLL
+        #if !defined(NRF_HSFLL) && !defined(NRF_TRUSTZONE_NONSECURE) 
             #if defined(NRF_SYSCTRL)
                 #define NRF_HSFLL NRF_HSFLL120
             #elif defined(NRF_BBPR)
                 #define NRF_HSFLL NRF_RADIOCORE_HSFLL
             #elif defined(NRF_UMAC) || defined(NRF_LMAC)
                 #define NRF_HSFLL NRF_WIFICORE_HSFLL
+            #elif defined (NRF_DPPR)
+                #define NRF_HSFLL NRF_ML_HSFLL
             #else
                 #error "Could not find CPU HSFLL"
             #endif

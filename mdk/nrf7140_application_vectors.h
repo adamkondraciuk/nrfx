@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -160,6 +160,10 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void WDT132_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void EGU130_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void RESETHUB_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void AUDIOPLL_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void USBHSPLL_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void VREGUSB_IRQHandler                                          (void);
+ __HANDLER("Default_Handler") void AUDIOPLLPM_IRQHandler                                       (void);
  __HANDLER("Default_Handler") void SAADC_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void COMP_LPCOMP_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void TEMP_IRQHandler                                             (void);
@@ -566,6 +570,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
+    AUDIOPLL_IRQHandler,
+    USBHSPLL_IRQHandler,
     0,
     0,
     0,
@@ -580,10 +586,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    0,
-    0,
-    0,
-    0,
+    VREGUSB_IRQHandler,
+    AUDIOPLLPM_IRQHandler,
     0,
     0,
     0,

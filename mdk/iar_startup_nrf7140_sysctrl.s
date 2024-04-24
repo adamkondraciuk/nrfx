@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2024 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -430,8 +430,8 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     AUDIOPLL_IRQHandler
+        DCD     USBHSPLL_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -447,6 +447,7 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     VREGUSB_IRQHandler
+        DCD     AUDIOPLLPM_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -462,8 +463,7 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     PMICC_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -1062,9 +1062,29 @@ PCRM_IRQHandler
 RESETHUB_IRQHandler
         j .
 
+        PUBWEAK  AUDIOPLL_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+AUDIOPLL_IRQHandler
+        j .
+
+        PUBWEAK  USBHSPLL_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+USBHSPLL_IRQHandler
+        j .
+
         PUBWEAK  VREGUSB_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 VREGUSB_IRQHandler
+        j .
+
+        PUBWEAK  AUDIOPLLPM_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+AUDIOPLLPM_IRQHandler
+        j .
+
+        PUBWEAK  PMICC_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+PMICC_IRQHandler
         j .
 
         PUBWEAK  SAADC_IRQHandler

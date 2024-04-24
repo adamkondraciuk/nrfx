@@ -113,6 +113,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_LMAC)
         #include "nrf7140_xxaa_lmac_memory.h"
     #endif
+    #if defined(NRF_DPPR)
+        #include "nrf7140_xxaa_dppr_memory.h"
+    #endif
 #elif defined(NRF9230_ENGA_XXAA)
     #if defined(NRF_SECURE)
         #include "nrf9230_enga_xxaa_secure_memory.h"
@@ -143,6 +146,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
     #if defined(NRF_BBPR)
         #include "nrf9230_enga_xxaa_bbpr_memory.h"
+    #endif
+#elif defined(NRF9230_XXAA)
+    #if defined(NRF_SECURE)
+        #include "nrf9230_xxaa_secure_memory.h"
+    #endif
+    #if defined(NRF_APPLICATION)
+        #include "nrf9230_xxaa_application_memory.h"
+    #endif
+    #if defined(NRF_RADIOCORE)
+        #include "nrf9230_xxaa_radiocore_memory.h"
+    #endif
+    #if defined(NRF_CELLCORE)
+        #include "nrf9230_xxaa_cellcore_memory.h"
+    #endif
+    #if defined(NRF_CELLRF)
+        #include "nrf9230_xxaa_cellrf_memory.h"
+    #endif
+    #if defined(NRF_ISIMCORE)
+        #include "nrf9230_xxaa_isimcore_memory.h"
+    #endif
+    #if defined(NRF_SYSCTRL)
+        #include "nrf9230_xxaa_sysctrl_memory.h"
+    #endif
+    #if defined(NRF_PPR)
+        #include "nrf9230_xxaa_ppr_memory.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf9230_xxaa_flpr_memory.h"
+    #endif
+    #if defined(NRF_BBPR)
+        #include "nrf9230_xxaa_bbpr_memory.h"
     #endif
 #elif defined(NRF54H20_ENGA_XXAA)
     #if defined(NRF_SECURE)

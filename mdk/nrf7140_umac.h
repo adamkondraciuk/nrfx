@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -125,6 +125,10 @@ typedef enum {
   WDT132_IRQn                            = 300,      /*!< 300 WDT132                                                           */
   EGU130_IRQn                            = 301,      /*!< 301 EGU130                                                           */
   RESETHUB_IRQn                          = 329,      /*!< 329 RESETHUB                                                         */
+  AUDIOPLL_IRQn                          = 343,      /*!< 343 AUDIOPLL                                                         */
+  USBHSPLL_IRQn                          = 344,      /*!< 344 USBHSPLL                                                         */
+  VREGUSB_IRQn                           = 359,      /*!< 359 VREGUSB                                                          */
+  AUDIOPLLPM_IRQn                        = 360,      /*!< 360 AUDIOPLLPM                                                       */
   SAADC_IRQn                             = 386,      /*!< 386 SAADC                                                            */
   COMP_LPCOMP_IRQn                       = 387,      /*!< 387 COMP_LPCOMP                                                      */
   TEMP_IRQn                              = 388,      /*!< 388 TEMP                                                             */
@@ -161,6 +165,33 @@ typedef enum {
   PDM133_IRQn                            = 471,      /*!< 471 PDM133                                                           */
 } IRQn_Type;
 
+/* ==================================================== Interrupt Aliases ==================================================== */
+#define GRTC_IRQn                     GRTC_0_IRQn
+#define GRTC_IRQHandler               GRTC_0_IRQHandler
+#define SPIM120_IRQn                  UARTE120_IRQn
+#define SPIM120_IRQHandler            UARTE120_IRQHandler
+#define UARTE120_IRQn                 UARTE120_IRQn
+#define UARTE120_IRQHandler           UARTE120_IRQHandler
+#define COMP_IRQn                     COMP_LPCOMP_IRQn
+#define COMP_IRQHandler               COMP_LPCOMP_IRQHandler
+#define LPCOMP_IRQn                   COMP_LPCOMP_IRQn
+#define LPCOMP_IRQHandler             COMP_LPCOMP_IRQHandler
+#define SERIAL0_IRQn                  UARTE130_IRQn
+#define SERIAL0_IRQHandler            UARTE130_IRQHandler
+#define SERIAL1_IRQn                  UARTE131_IRQn
+#define SERIAL1_IRQHandler            UARTE131_IRQHandler
+#define SERIAL2_IRQn                  UARTE132_IRQn
+#define SERIAL2_IRQHandler            UARTE132_IRQHandler
+#define SERIAL3_IRQn                  UARTE133_IRQn
+#define SERIAL3_IRQHandler            UARTE133_IRQHandler
+#define SERIAL4_IRQn                  UARTE134_IRQn
+#define SERIAL4_IRQHandler            UARTE134_IRQHandler
+#define SERIAL5_IRQn                  UARTE135_IRQn
+#define SERIAL5_IRQHandler            UARTE135_IRQHandler
+#define SERIAL6_IRQn                  UARTE136_IRQn
+#define SERIAL6_IRQHandler            UARTE136_IRQHandler
+#define SERIAL7_IRQn                  UARTE137_IRQn
+#define SERIAL7_IRQHandler            UARTE137_IRQHandler
 
 /* =========================================================================================================================== */
 /* ================                           Processor and Core Peripheral Section                           ================ */
@@ -168,6 +199,9 @@ typedef enum {
 
 /* ====================== Configuration of the Nordic Semiconductor VPR Processor and Core Peripherals ======================= */
 #define __VPR_REV                    1.4             /*!< VPR Core Revision                                                    */
+#define __VPR_REV_MAJOR                1             /*!< VPR Core Major Revision                                              */
+#define __VPR_REV_MINOR                4             /*!< VPR Core Minor Revision                                              */
+#define __VPR_REV_PATCH                0             /*!< VPR Core Patch Revision                                              */
 #define __DSP_PRESENT                  0             /*!< DSP present or not                                                   */
 #define __CLIC_PRIO_BITS               3             /*!< Number of Bits used for Priority Levels                              */
 #define __MTVT_PRESENT                 1             /*!< CPU supports alternate Vector Table address                          */
@@ -176,8 +210,18 @@ typedef enum {
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
 #define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 
+#define NRF_VPR     NRF_WIFICORE_VPRUMAC             /*!< VPR instance name                                                    */
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< nrf7140_umac System Library                                          */
+
+#endif                                               /*!< NRF_UMAC                                                             */
+
+
+#ifdef NRF_UMAC
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_WIFICORE
+  #define NRF_PROCESSOR                 NRF_PROCESSOR_WIFIUMAC
+  #define NRF_OWNER                     NRF_OWNER_WIFICORE
 
 #endif                                               /*!< NRF_UMAC                                                             */
 
@@ -225,7 +269,7 @@ typedef enum {
 /* ================                                  Local Domain Remapping                                  ================ */
 /* =========================================================================================================================== */
 
-#ifdef NRF_UMAC                                      /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+#ifdef NRF_UMAC                                      /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
   #define NRF_VPRCLIC                             NRF_UMAC_VPRCLIC
 #endif                                               /*!< NRF_UMAC                                                             */
 

@@ -1,6 +1,6 @@
 /*
  
-Copyright (c) 2009-2023 ARM Limited. All rights reserved.
+Copyright (c) 2009-2024 ARM Limited. All rights reserved.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -39,7 +39,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
     .equ    Stack_Size, __STACK_SIZE
 #else
     .align 3
-    .equ    Stack_Size, 2048
+    .equ    Stack_Size, 6144
 #endif
     .globl __StackTop
     .globl __StackLimit
@@ -56,7 +56,7 @@ __StackTop:
 #elif defined(__HEAP_SIZE)
     .equ Heap_Size, __HEAP_SIZE
 #else
-    .equ Heap_Size, 2048
+    .equ Heap_Size, 6144
 #endif
     .globl __HeapBase
     .globl __HeapLimit
@@ -433,6 +433,8 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
+    .long   AUDIOPLL_IRQHandler
+    .long   USBHSPLL_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -447,10 +449,8 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   VREGUSB_IRQHandler
+    .long   AUDIOPLLPM_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -867,6 +867,10 @@ Default_Handler:
     IRQ  WDT132_IRQHandler
     IRQ  EGU130_IRQHandler
     IRQ  RESETHUB_IRQHandler
+    IRQ  AUDIOPLL_IRQHandler
+    IRQ  USBHSPLL_IRQHandler
+    IRQ  VREGUSB_IRQHandler
+    IRQ  AUDIOPLLPM_IRQHandler
     IRQ  SPU132_IRQHandler
     IRQ  SAADC_IRQHandler
     IRQ  COMP_LPCOMP_IRQHandler

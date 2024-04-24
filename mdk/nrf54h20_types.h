@@ -77,6 +77,50 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define __IOM    volatile                          /*!< Defines 'read / write' structure member permissions                  */
 #endif
 
+/* ======================================================= Domain IDs ======================================================== */
+/**
+  * @brief (unspecified)
+  */
+typedef enum {
+  NRF_DOMAIN_SECURE                          = 1,    /*!< Secure Domain                                                        */
+  NRF_DOMAIN_APPLICATION                     = 2,    /*!< Application Core                                                     */
+  NRF_DOMAIN_RADIOCORE                       = 3,    /*!< Radio Core                                                           */
+  NRF_DOMAIN_GLOBALFAST                      = 12,   /*!< Global Domain - Fast clock domain                                    */
+  NRF_DOMAIN_GLOBALSLOW                      = 13,   /*!< Global Domain - Slow clock domain                                    */
+  NRF_DOMAIN_GLOBAL                          = 15,   /*!< Global Domain                                                        */
+} NRF_DOMAINID_Type;
+
+/* ====================================================== Processor IDs ====================================================== */
+/**
+  * @brief (unspecified)
+  */
+typedef enum {
+  NRF_PROCESSOR_SECURE                       = 1,    /*!< Secure Domain Processor                                              */
+  NRF_PROCESSOR_APPLICATION                  = 2,    /*!< Application Core Processor                                           */
+  NRF_PROCESSOR_RADIOCORE                    = 3,    /*!< Radio Core Processor                                                 */
+  NRF_PROCESSOR_BBPR                         = 11,   /*!< Baseband Processor                                                   */
+  NRF_PROCESSOR_SYSCTRL                      = 12,   /*!< System Controller Processor                                          */
+  NRF_PROCESSOR_PPR                          = 13,   /*!< Peripheral Processor                                                 */
+  NRF_PROCESSOR_FLPR                         = 14,   /*!< Fast Lightweight Processor                                           */
+} NRF_PROCESSORID_Type;
+
+/* ======================================================== Owner IDs ======================================================== */
+/**
+  * @brief (unspecified)
+  */
+typedef enum {
+  NRF_OWNER_NONE                             = 0,    /*!< Used to denote that ownership is not enforced                        */
+  NRF_OWNER_GLOBAL                           = 0,    /*!< Used to denote that ownership is not enforced                        */
+  NRF_OWNER_SECURE                           = 1,    /*!< Secure Domain Processor                                              */
+  NRF_OWNER_APPLICATION                      = 2,    /*!< Application Core                                                     */
+  NRF_OWNER_RADIOCORE                        = 3,    /*!< Radio Core                                                           */
+  NRF_OWNER_SYSCTRL                          = 8,    /*!< System Controller, owned by the Secure Domain                        */
+  NRF_OWNER_DBG_SECURE                       = 9,    /*!< AHB-AP for Secure Domain CPU                                         */
+  NRF_OWNER_DBG_APPLICATION                  = 10,   /*!< AHB-AP for Application Core CPU                                      */
+  NRF_OWNER_DBG_RADIOCORE                    = 11,   /*!< AHB-AP for Radio core CPU                                            */
+  NRF_OWNER_NONEXISTENT                      = 15,   /*!< Non-existing owner in SecDom                                         */
+} NRF_OWNERID_Type;
+
 
 /* ========================================= Start of section using anonymous unions ========================================= */
 
@@ -7965,12 +8009,17 @@ typedef struct {
   * @brief IOPORT [BICR_IOPORT] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  POWER0;                            /*!< (@ 0x00000000) Power configuration for P0 to P7 IO ports.            */
+  __IOM uint32_t  POWER0;                            /*!< (@ 0x00000000) Power configuration for P0 to P7 IO ports. Note: P0 is
+                                                                         not included in the fields of this register because it
+                                                                         is always internally supplied and therefore considered
+                                                                         'Shorted'.*/
   __IOM uint32_t  POWER1;                            /*!< (@ 0x00000004) Power configuration for P8 to P15 IO ports.           */
   __IOM uint32_t  DRIVECTRL0;                        /*!< (@ 0x00000008) Drive control configuration for P0 to P7 IO ports.    */
 } NRF_BICR_IOPORT_Type;                              /*!< Size = 12 (0x00C)                                                    */
 
-/* BICR_IOPORT_POWER0: Power configuration for P0 to P7 IO ports. */
+/* BICR_IOPORT_POWER0: Power configuration for P0 to P7 IO ports. Note: P0 is not included in the fields of this register
+                        because it is always internally supplied and therefore considered 'Shorted'. */
+
   #define BICR_IOPORT_POWER0_ResetValue (0xFFFFFFFFUL) /*!< Reset value of POWER0 register.                                    */
 
 /* P1 @Bits 4..7 : P1 power configuration. */
@@ -8103,6 +8152,7 @@ typedef struct {
   #define BICR_LFOSC_LFXOCONFIG_MODE_Crystal (0x0UL) /*!< LFXO in external crystal oscillator mode.                            */
   #define BICR_LFOSC_LFXOCONFIG_MODE_ExtSine (0x2UL) /*!< LFXO in external sine wave mode.                                     */
   #define BICR_LFOSC_LFXOCONFIG_MODE_ExtSquare (0x3UL) /*!< LFXO in external square wave mode.                                 */
+  #define BICR_LFOSC_LFXOCONFIG_MODE_Disabled (0x6UL) /*!< LFXO is not to be used.                                             */
 
 /* LOADCAP @Bits 8..15 : Built-in load capacitors selection in 1 pF steps. Max. value 25 pF. */
   #define BICR_LFOSC_LFXOCONFIG_LOADCAP_Pos (8UL)    /*!< Position of LOADCAP field.                                           */
@@ -8190,8 +8240,6 @@ typedef struct {
   #define BICR_HFXO_CONFIG_MODE_Unconfigured (0x7UL) /*!< The mode is unconfigured.                                            */
   #define BICR_HFXO_CONFIG_MODE_Crystal (0x0UL)      /*!< HFXO in external crystal oscillator mode.                            */
   #define BICR_HFXO_CONFIG_MODE_ExtSquare (0x3UL)    /*!< HFXO in external square wave mode.                                   */
-  #define BICR_HFXO_CONFIG_MODE_Auto (0x6UL)         /*!< Either Pierce or PIXO automatically handled by the system based on
-                                                          system requests.*/
 
 /* LOADCAP @Bits 12..19 : Built-in load capacitors selection in 0.25 pF steps. Max. value 25.75 pF. */
   #define BICR_HFXO_CONFIG_LOADCAP_Pos (12UL)        /*!< Position of LOADCAP field.                                           */
@@ -9484,7 +9532,7 @@ typedef struct {
     __IOM uint32_t SUBSCRIBE_RATEOVERRIDE;           /*!< (@ 0x00000088) Subscribe configuration for task RATEOVERRIDE         */
     __IM uint32_t RESERVED1[29];
     __IOM uint32_t EVENTS_ENDCONFIG;                 /*!< (@ 0x00000100) Configuration data has been loaded                    */
-    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000104) Encrypt/decrypt complete                              */
+    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000104) Encrypt/decrypt complete or ended because of an error */
     __IOM uint32_t EVENTS_ERROR;                     /*!< (@ 0x00000108) CCM error event                                       */
     __IM uint32_t RESERVED2[29];
     __IOM uint32_t PUBLISH_ENDCONFIG;                /*!< (@ 0x00000180) Publish configuration for event ENDCONFIG             */
@@ -9615,10 +9663,10 @@ typedef struct {
   #define CCM_EVENTS_ENDCONFIG_EVENTS_ENDCONFIG_Generated (0x1UL) /*!< Event generated                                         */
 
 
-/* CCM_EVENTS_END: Encrypt/decrypt complete */
+/* CCM_EVENTS_END: Encrypt/decrypt complete or ended because of an error */
   #define CCM_EVENTS_END_ResetValue (0x00000000UL)   /*!< Reset value of EVENTS_END register.                                  */
 
-/* EVENTS_END @Bit 0 : Encrypt/decrypt complete */
+/* EVENTS_END @Bit 0 : Encrypt/decrypt complete or ended because of an error */
   #define CCM_EVENTS_END_EVENTS_END_Pos (0UL)        /*!< Position of EVENTS_END field.                                        */
   #define CCM_EVENTS_END_EVENTS_END_Msk (0x1UL << CCM_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field.            */
   #define CCM_EVENTS_END_EVENTS_END_Min (0x0UL)      /*!< Min enumerator value of EVENTS_END field.                            */
@@ -27325,11 +27373,10 @@ typedef struct {
   * @brief RXAGC [FICR_TRIM_RADIOCORE_RADIO_RXAGC] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  CALIBRATION;                       /*!< (@ 0x00000000) Trim value for RSSICAL and ED154CAL in
-                                                                         RADIOCORE.RADIO.RXAGC.CALIBRATION*/
+  __IM  uint32_t  CALIBRATION;                       /*!< (@ 0x00000000) RADIOCORE.RADIO.RXAGC.CALIBRATION                     */
 } NRF_FICR_TRIM_RADIOCORE_RADIO_RXAGC_Type;          /*!< Size = 4 (0x004)                                                     */
 
-/* FICR_TRIM_RADIOCORE_RADIO_RXAGC_CALIBRATION: Trim value for RSSICAL and ED154CAL in RADIOCORE.RADIO.RXAGC.CALIBRATION */
+/* FICR_TRIM_RADIOCORE_RADIO_RXAGC_CALIBRATION: RADIOCORE.RADIO.RXAGC.CALIBRATION */
   #define FICR_TRIM_RADIOCORE_RADIO_RXAGC_CALIBRATION_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALIBRATION register.      */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27350,7 +27397,7 @@ typedef struct {
   __IM  uint32_t  KDTC;                              /*!< (@ 0x0000001C) Trim value for RADIOCORE.RADIO.KDTC                   */
   __IM  uint32_t  TXHFGAIN;                          /*!< (@ 0x00000020) Trim value for RADIOCORE.RADIO.TXHFGAIN               */
   __IM  uint32_t  PVTTOFIX;                          /*!< (@ 0x00000024) Trim value for RADIOCORE.RADIO.PVTTOFIX               */
-  __IM  uint32_t  LOOPGAIN;                          /*!< (@ 0x00000028) Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND5   */
+  __IM  uint32_t  LOOPGAIN;                          /*!< (@ 0x00000028) Trim value for RADIOCORE.RADIO.ADPLLTRIMCOMMAND0      */
 } NRF_FICR_TRIM_RADIOCORE_RADIO_Type;                /*!< Size = 44 (0x02C)                                                    */
 
 /* FICR_TRIM_RADIOCORE_RADIO_PVTTOT: Trim value for RADIOCORE.RADIO.PVTTOT */
@@ -27389,7 +27436,7 @@ typedef struct {
                                                                             mask of VALUE field.*/
 
 
-/* FICR_TRIM_RADIOCORE_RADIO_LOOPGAIN: Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND5 */
+/* FICR_TRIM_RADIOCORE_RADIO_LOOPGAIN: Trim value for RADIOCORE.RADIO.ADPLLTRIMCOMMAND0 */
   #define FICR_TRIM_RADIOCORE_RADIO_LOOPGAIN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LOOPGAIN register.                  */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -27454,8 +27501,19 @@ typedef struct {
   * @brief VREG1V0 [FICR_TRIM_BOOT_VREG1V0] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  VOUTHPNOMINAL;                     /*!< (@ 0x00000000) Config value for SYSCTRL.VREG1V0.VOUTHPNOMINAL        */
-} NRF_FICR_TRIM_BOOT_VREG1V0_Type;                   /*!< Size = 4 (0x004)                                                     */
+  __IM  uint32_t  VOUTHPRADIOHELPER;                 /*!< (@ 0x00000000) Config value for SYSCTRL.VREG1V0.VOUTHPRADIO when
+                                                                         VREG1V0 used in Helper mode*/
+  __IM  uint32_t  VOUTHPNOMINAL;                     /*!< (@ 0x00000004) Config value for SYSCTRL.VREG1V0.VOUTHPNOMINAL        */
+} NRF_FICR_TRIM_BOOT_VREG1V0_Type;                   /*!< Size = 8 (0x008)                                                     */
+
+/* FICR_TRIM_BOOT_VREG1V0_VOUTHPRADIOHELPER: Config value for SYSCTRL.VREG1V0.VOUTHPRADIO when VREG1V0 used in Helper mode */
+  #define FICR_TRIM_BOOT_VREG1V0_VOUTHPRADIOHELPER_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VOUTHPRADIOHELPER register.   */
+
+/* VALUE @Bits 0..31 : Config value */
+  #define FICR_TRIM_BOOT_VREG1V0_VOUTHPRADIOHELPER_VALUE_Pos (0UL) /*!< Position of VALUE field.                               */
+  #define FICR_TRIM_BOOT_VREG1V0_VOUTHPRADIOHELPER_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_VREG1V0_VOUTHPRADIOHELPER_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
 
 /* FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL: Config value for SYSCTRL.VREG1V0.VOUTHPNOMINAL */
   #define FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VOUTHPNOMINAL register.           */
@@ -27558,8 +27616,7 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_BOOT_GPIO_Type GPIO;           /*!< (@ 0x00000000) (unspecified)                                         */
-  __IM  uint32_t  RESERVED;
-  __IOM NRF_FICR_TRIM_BOOT_VREG1V0_Type VREG1V0;     /*!< (@ 0x0000000C) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_BOOT_VREG1V0_Type VREG1V0;     /*!< (@ 0x00000008) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_BOOT_HSFLL120_Type HSFLL120;   /*!< (@ 0x00000010) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_BOOT_OTPC_Type OTPC;           /*!< (@ 0x00000020) (unspecified)                                         */
 } NRF_FICR_TRIM_BOOT_Type;                           /*!< Size = 40 (0x028)                                                    */
@@ -29458,19 +29515,8 @@ typedef struct {
   * @brief PORTCNF [GPIO_PORTCNF] (unspecified)
   */
 typedef struct {
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
-  #endif
-  union {
-    struct {
-      __IOM uint32_t DRIVECTRL;                      /*!< (@ 0x00000000) Drive control for impedance matching of the pins in
+  __IOM uint32_t  DRIVECTRL;                         /*!< (@ 0x00000000) Drive control for impedance matching of the pins in
                                                                          this port*/
-    };
-  };
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic pop
-  #endif
   __IOM uint32_t  PWRCTRL;                           /*!< (@ 0x00000004) Power control of the pins in this port                */
 } NRF_GPIO_PORTCNF_Type;                             /*!< Size = 8 (0x008)                                                     */
 
@@ -45114,6 +45160,102 @@ typedef struct {
   #define GRCCONF_SYSTEMOFFSTAT_STATUS3_Ready (0x0UL) /*!< Power domain [3] is ready to go to system OFF                       */
   #define GRCCONF_SYSTEMOFFSTAT_STATUS3_Prevent (0x1UL) /*!< Power domain [3] is preventing system OFF                         */
 
+/* STATUS4 @Bit 4 : System OFF status for power domain [4] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS4_Pos (4UL)    /*!< Position of STATUS4 field.                                           */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS4_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS4_Pos) /*!< Bit mask of STATUS4 field.       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS4_Min (0x0UL)  /*!< Min enumerator value of STATUS4 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS4_Max (0x1UL)  /*!< Max enumerator value of STATUS4 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS4_Ready (0x0UL) /*!< Power domain [4] is ready to go to system OFF                       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS4_Prevent (0x1UL) /*!< Power domain [4] is preventing system OFF                         */
+
+/* STATUS5 @Bit 5 : System OFF status for power domain [5] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS5_Pos (5UL)    /*!< Position of STATUS5 field.                                           */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS5_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS5_Pos) /*!< Bit mask of STATUS5 field.       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS5_Min (0x0UL)  /*!< Min enumerator value of STATUS5 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS5_Max (0x1UL)  /*!< Max enumerator value of STATUS5 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS5_Ready (0x0UL) /*!< Power domain [5] is ready to go to system OFF                       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS5_Prevent (0x1UL) /*!< Power domain [5] is preventing system OFF                         */
+
+/* STATUS6 @Bit 6 : System OFF status for power domain [6] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS6_Pos (6UL)    /*!< Position of STATUS6 field.                                           */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS6_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS6_Pos) /*!< Bit mask of STATUS6 field.       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS6_Min (0x0UL)  /*!< Min enumerator value of STATUS6 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS6_Max (0x1UL)  /*!< Max enumerator value of STATUS6 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS6_Ready (0x0UL) /*!< Power domain [6] is ready to go to system OFF                       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS6_Prevent (0x1UL) /*!< Power domain [6] is preventing system OFF                         */
+
+/* STATUS7 @Bit 7 : System OFF status for power domain [7] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS7_Pos (7UL)    /*!< Position of STATUS7 field.                                           */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS7_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS7_Pos) /*!< Bit mask of STATUS7 field.       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS7_Min (0x0UL)  /*!< Min enumerator value of STATUS7 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS7_Max (0x1UL)  /*!< Max enumerator value of STATUS7 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS7_Ready (0x0UL) /*!< Power domain [7] is ready to go to system OFF                       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS7_Prevent (0x1UL) /*!< Power domain [7] is preventing system OFF                         */
+
+/* STATUS8 @Bit 8 : System OFF status for power domain [8] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS8_Pos (8UL)    /*!< Position of STATUS8 field.                                           */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS8_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS8_Pos) /*!< Bit mask of STATUS8 field.       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS8_Min (0x0UL)  /*!< Min enumerator value of STATUS8 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS8_Max (0x1UL)  /*!< Max enumerator value of STATUS8 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS8_Ready (0x0UL) /*!< Power domain [8] is ready to go to system OFF                       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS8_Prevent (0x1UL) /*!< Power domain [8] is preventing system OFF                         */
+
+/* STATUS9 @Bit 9 : System OFF status for power domain [9] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS9_Pos (9UL)    /*!< Position of STATUS9 field.                                           */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS9_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS9_Pos) /*!< Bit mask of STATUS9 field.       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS9_Min (0x0UL)  /*!< Min enumerator value of STATUS9 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS9_Max (0x1UL)  /*!< Max enumerator value of STATUS9 field.                               */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS9_Ready (0x0UL) /*!< Power domain [9] is ready to go to system OFF                       */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS9_Prevent (0x1UL) /*!< Power domain [9] is preventing system OFF                         */
+
+/* STATUS10 @Bit 10 : System OFF status for power domain [10] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS10_Pos (10UL)  /*!< Position of STATUS10 field.                                          */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS10_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS10_Pos) /*!< Bit mask of STATUS10 field.    */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS10_Min (0x0UL) /*!< Min enumerator value of STATUS10 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS10_Max (0x1UL) /*!< Max enumerator value of STATUS10 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS10_Ready (0x0UL) /*!< Power domain [10] is ready to go to system OFF                     */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS10_Prevent (0x1UL) /*!< Power domain [10] is preventing system OFF                       */
+
+/* STATUS11 @Bit 11 : System OFF status for power domain [11] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS11_Pos (11UL)  /*!< Position of STATUS11 field.                                          */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS11_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS11_Pos) /*!< Bit mask of STATUS11 field.    */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS11_Min (0x0UL) /*!< Min enumerator value of STATUS11 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS11_Max (0x1UL) /*!< Max enumerator value of STATUS11 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS11_Ready (0x0UL) /*!< Power domain [11] is ready to go to system OFF                     */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS11_Prevent (0x1UL) /*!< Power domain [11] is preventing system OFF                       */
+
+/* STATUS12 @Bit 12 : System OFF status for power domain [12] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS12_Pos (12UL)  /*!< Position of STATUS12 field.                                          */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS12_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS12_Pos) /*!< Bit mask of STATUS12 field.    */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS12_Min (0x0UL) /*!< Min enumerator value of STATUS12 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS12_Max (0x1UL) /*!< Max enumerator value of STATUS12 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS12_Ready (0x0UL) /*!< Power domain [12] is ready to go to system OFF                     */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS12_Prevent (0x1UL) /*!< Power domain [12] is preventing system OFF                       */
+
+/* STATUS13 @Bit 13 : System OFF status for power domain [13] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS13_Pos (13UL)  /*!< Position of STATUS13 field.                                          */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS13_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS13_Pos) /*!< Bit mask of STATUS13 field.    */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS13_Min (0x0UL) /*!< Min enumerator value of STATUS13 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS13_Max (0x1UL) /*!< Max enumerator value of STATUS13 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS13_Ready (0x0UL) /*!< Power domain [13] is ready to go to system OFF                     */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS13_Prevent (0x1UL) /*!< Power domain [13] is preventing system OFF                       */
+
+/* STATUS14 @Bit 14 : System OFF status for power domain [14] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS14_Pos (14UL)  /*!< Position of STATUS14 field.                                          */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS14_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS14_Pos) /*!< Bit mask of STATUS14 field.    */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS14_Min (0x0UL) /*!< Min enumerator value of STATUS14 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS14_Max (0x1UL) /*!< Max enumerator value of STATUS14 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS14_Ready (0x0UL) /*!< Power domain [14] is ready to go to system OFF                     */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS14_Prevent (0x1UL) /*!< Power domain [14] is preventing system OFF                       */
+
+/* STATUS15 @Bit 15 : System OFF status for power domain [15] */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS15_Pos (15UL)  /*!< Position of STATUS15 field.                                          */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS15_Msk (0x1UL << GRCCONF_SYSTEMOFFSTAT_STATUS15_Pos) /*!< Bit mask of STATUS15 field.    */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS15_Min (0x0UL) /*!< Min enumerator value of STATUS15 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS15_Max (0x1UL) /*!< Max enumerator value of STATUS15 field.                              */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS15_Ready (0x0UL) /*!< Power domain [15] is ready to go to system OFF                     */
+  #define GRCCONF_SYSTEMOFFSTAT_STATUS15_Prevent (0x1UL) /*!< Power domain [15] is preventing system OFF                       */
+
 
 /* GRCCONF_PDREQSTATUS: Power domain request status */
   #define GRCCONF_PDREQSTATUS_MaxCount (2UL)         /*!< Max size of PDREQSTATUS[2] array.                                    */
@@ -45425,16 +45567,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  CCL;                               /*!< (@ 0x00000000) The lower 32-bits of Capture/Compare register CC[n]   */
   __IOM uint32_t  CCH;                               /*!< (@ 0x00000004) The higher 32-bits of Capture/Compare register CC[n]  */
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
-  #endif
-  union {
-    __OM uint32_t CCADD;                             /*!< (@ 0x00000008) Count to add to CC[n] when this register is written.  */
-  };
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic pop
-  #endif
+  __OM  uint32_t  CCADD;                             /*!< (@ 0x00000008) Count to add to CC[n] when this register is written.  */
   __IOM uint32_t  CCEN;                              /*!< (@ 0x0000000C) Configure Capture/Compare register CC[n]              */
 } NRF_GRTC_CC_Type;                                  /*!< Size = 16 (0x010)                                                    */
   #define GRTC_CC_MaxCount (16UL)                    /*!< Size of CC[16] array.                                                */
@@ -77787,7 +77920,7 @@ typedef struct {
   #define LRCCONF_AX2XWAITSTATES_MaxCount (16UL)     /*!< Max size of AX2XWAITSTATES[16] array.                                */
   #define LRCCONF_AX2XWAITSTATES_MaxIndex (15UL)     /*!< Max index of AX2XWAITSTATES[16] array.                               */
   #define LRCCONF_AX2XWAITSTATES_MinIndex (0UL)      /*!< Min index of AX2XWAITSTATES[16] array.                               */
-  #define LRCCONF_AX2XWAITSTATES_ResetValue (0x00000007UL) /*!< Reset value of AX2XWAITSTATES[16] register.                    */
+  #define LRCCONF_AX2XWAITSTATES_ResetValue (0x00000000UL) /*!< Reset value of AX2XWAITSTATES[16] register.                    */
 
 /* WAITSTATES @Bits 0..2 : Number of waitstates */
   #define LRCCONF_AX2XWAITSTATES_WAITSTATES_Pos (0UL) /*!< Position of WAITSTATES field.                                       */
@@ -92047,16 +92180,7 @@ typedef struct {
     __IOM uint32_t STANDBYTIMEOUT;                   /*!< (@ 0x00000554) Timeout to go into standby mode.                      */
     __IOM uint32_t FREQUENCY;                        /*!< (@ 0x00000558) Clock frequency of OTPC.                              */
     __IM uint32_t RESERVED7;
-    #if defined(_GNUC_)
-      #pragma GCC diagnostic push
-      #pragma GCC diagnostic ignored "-Wpedantic"
-    #endif
-    union {
-      __IOM uint32_t REGION[6];                      /*!< (@ 0x00000560) Configuration for region [n]                          */
-    };
-    #if defined(_GNUC_)
-      #pragma GCC diagnostic pop
-    #endif
+    __IOM uint32_t REGION[6];                        /*!< (@ 0x00000560) Configuration for region [n]                          */
     __IM uint32_t RESERVED8[34];
     __IOM NRF_OTPC_TEST_Type TEST;                   /*!< (@ 0x00000600) (unspecified)                                         */
     __IM uint32_t RESERVED9[2];
@@ -92448,29 +92572,29 @@ typedef struct {
       #pragma GCC diagnostic ignored "-Wpedantic"
     #endif
     union {
-      __IOM uint32_t PENALTY[2];                     /*!< (@ 0x00000C00) Penalty level for power/clock pair n. When
+      __IOM uint32_t PENALTY[5];                     /*!< (@ 0x00000C00) Penalty level for power/clock pair n. When
                                                                          FULL_PCP_ZERO feature is not supported, PENALTY[0]
                                                                          address overlaps the PENALTY0 address and register
                                                                          description for PENALTY[0] is not valid.*/
       __IOM uint32_t PENALTY0;                       /*!< (@ 0x00000C00) Penalty level for power/clock pair 0. The register
                                                                          description is valid only when FULL_PCP_ZERO feature is
                                                                          not supported*/
-      __IM uint32_t RESERVED1[2];
+      __IM uint32_t RESERVED1[5];
     };
     #if defined(_GNUC_)
       #pragma GCC diagnostic pop
     #endif
-    __IM uint32_t RESERVED2[30];
-    __IOM uint32_t FORCEOVERRIDE[2];                 /*!< (@ 0x00000C80) Force override of power/clock pair n.                 */
-  } NRF_PCGCSLAVE_Type;                              /*!< Size = 3208 (0xC88)                                                  */
+    __IM uint32_t RESERVED2[27];
+    __IOM uint32_t FORCEOVERRIDE[5];                 /*!< (@ 0x00000C80) Force override of power/clock pair n.                 */
+  } NRF_PCGCSLAVE_Type;                              /*!< Size = 3220 (0xC94)                                                  */
 
 /* PCGCSLAVE_PENALTY: Penalty level for power/clock pair n. When FULL_PCP_ZERO feature is not supported, PENALTY[0] address
                        overlaps the PENALTY0 address and register description for PENALTY[0] is not valid. */
 
-  #define PCGCSLAVE_PENALTY_MaxCount (2UL)           /*!< Max size of PENALTY[2] array.                                        */
-  #define PCGCSLAVE_PENALTY_MaxIndex (1UL)           /*!< Max index of PENALTY[2] array.                                       */
-  #define PCGCSLAVE_PENALTY_MinIndex (0UL)           /*!< Min index of PENALTY[2] array.                                       */
-  #define PCGCSLAVE_PENALTY_ResetValue (0xFFFFFFFCUL) /*!< Reset value of PENALTY[2] register.                                 */
+  #define PCGCSLAVE_PENALTY_MaxCount (5UL)           /*!< Max size of PENALTY[5] array.                                        */
+  #define PCGCSLAVE_PENALTY_MaxIndex (4UL)           /*!< Max index of PENALTY[5] array.                                       */
+  #define PCGCSLAVE_PENALTY_MinIndex (0UL)           /*!< Min index of PENALTY[5] array.                                       */
+  #define PCGCSLAVE_PENALTY_ResetValue (0xFFFFFFFCUL) /*!< Reset value of PENALTY[5] register.                                 */
 
 /* PENALTY @Bits 0..1 : Penalty level */
   #define PCGCSLAVE_PENALTY_PENALTY_Pos (0UL)        /*!< Position of PENALTY field.                                           */
@@ -92488,10 +92612,10 @@ typedef struct {
 
 
 /* PCGCSLAVE_FORCEOVERRIDE: Force override of power/clock pair n. */
-  #define PCGCSLAVE_FORCEOVERRIDE_MaxCount (2UL)     /*!< Max size of FORCEOVERRIDE[2] array.                                  */
-  #define PCGCSLAVE_FORCEOVERRIDE_MaxIndex (1UL)     /*!< Max index of FORCEOVERRIDE[2] array.                                 */
-  #define PCGCSLAVE_FORCEOVERRIDE_MinIndex (0UL)     /*!< Min index of FORCEOVERRIDE[2] array.                                 */
-  #define PCGCSLAVE_FORCEOVERRIDE_ResetValue (0x00000000UL) /*!< Reset value of FORCEOVERRIDE[2] register.                     */
+  #define PCGCSLAVE_FORCEOVERRIDE_MaxCount (5UL)     /*!< Max size of FORCEOVERRIDE[5] array.                                  */
+  #define PCGCSLAVE_FORCEOVERRIDE_MaxIndex (4UL)     /*!< Max index of FORCEOVERRIDE[5] array.                                 */
+  #define PCGCSLAVE_FORCEOVERRIDE_MinIndex (0UL)     /*!< Min index of FORCEOVERRIDE[5] array.                                 */
+  #define PCGCSLAVE_FORCEOVERRIDE_ResetValue (0x00000000UL) /*!< Reset value of FORCEOVERRIDE[5] register.                     */
 
 /* CLOCKFORCINGPRE @Bits 0..3 : CLOCKFORCINGPRE */
   #define PCGCSLAVE_FORCEOVERRIDE_CLOCKFORCINGPRE_Pos (0UL) /*!< Position of CLOCKFORCINGPRE field.                            */
@@ -98445,6 +98569,24 @@ typedef struct {
   #define PWM_SHORTS_SEQEND1_STOP_Disabled (0x0UL)   /*!< Disable shortcut                                                     */
   #define PWM_SHORTS_SEQEND1_STOP_Enabled (0x1UL)    /*!< Enable shortcut                                                      */
 
+/* LOOPSDONE_DMA_SEQ0_START @Bit 2 : Shortcut between event LOOPSDONE and task DMA.SEQ[n].START */
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL) /*!< Position of LOOPSDONE_DMA_SEQ0_START field.                       */
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos) /*!< Bit mask of
+                                                                            LOOPSDONE_DMA_SEQ0_START field.*/
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Min (0x0UL) /*!< Min enumerator value of LOOPSDONE_DMA_SEQ0_START field.         */
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Max (0x1UL) /*!< Max enumerator value of LOOPSDONE_DMA_SEQ0_START field.         */
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Disabled (0x0UL) /*!< Disable shortcut                                           */
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Enabled (0x1UL) /*!< Enable shortcut                                             */
+
+/* LOOPSDONE_DMA_SEQ1_START @Bit 3 : Shortcut between event LOOPSDONE and task DMA.SEQ[n].START */
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos (3UL) /*!< Position of LOOPSDONE_DMA_SEQ1_START field.                       */
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos) /*!< Bit mask of
+                                                                            LOOPSDONE_DMA_SEQ1_START field.*/
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Min (0x0UL) /*!< Min enumerator value of LOOPSDONE_DMA_SEQ1_START field.         */
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Max (0x1UL) /*!< Max enumerator value of LOOPSDONE_DMA_SEQ1_START field.         */
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Disabled (0x0UL) /*!< Disable shortcut                                           */
+  #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Enabled (0x1UL) /*!< Enable shortcut                                             */
+
 /* LOOPSDONE_STOP @Bit 4 : Shortcut between event LOOPSDONE and task STOP */
   #define PWM_SHORTS_LOOPSDONE_STOP_Pos (4UL)        /*!< Position of LOOPSDONE_STOP field.                                    */
   #define PWM_SHORTS_LOOPSDONE_STOP_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_STOP_Pos) /*!< Bit mask of LOOPSDONE_STOP field.        */
@@ -99387,16 +99529,7 @@ typedef struct {
     __IM int32_t  ACC;                               /*!< (@ 0x00000514) Register accumulating the valid transitions           */
     __IM int32_t  ACCREAD;                           /*!< (@ 0x00000518) Snapshot of the ACC register, updated by the READCLRACC
                                                                          or RDCLRACC task*/
-    #if defined(_GNUC_)
-      #pragma GCC diagnostic push
-      #pragma GCC diagnostic ignored "-Wpedantic"
-    #endif
-    union {
-      __IOM NRF_QDEC_PSEL_Type PSEL;                 /*!< (@ 0x0000051C) (unspecified)                                         */
-    };
-    #if defined(_GNUC_)
-      #pragma GCC diagnostic pop
-    #endif
+    __IOM NRF_QDEC_PSEL_Type PSEL;                   /*!< (@ 0x0000051C) (unspecified)                                         */
     __IOM uint32_t DBFEN;                            /*!< (@ 0x00000528) Enable input debounce filters                         */
     __IM uint32_t RESERVED6[5];
     __IOM uint32_t LEDPRE;                           /*!< (@ 0x00000540) Time period the LED is switched ON prior to sampling  */
@@ -116416,17 +116549,8 @@ typedef struct {
   #define RESETINFO_RESETREAS_LOCAL_LOCKUP_NotDetected (0x0UL) /*!< Not detected                                               */
   #define RESETINFO_RESETREAS_LOCAL_LOCKUP_Detected (0x1UL) /*!< Detected                                                      */
 
-/* CROSSDOMAIN @Bit 4 : Reset due to cross domain reset source. */
-  #define RESETINFO_RESETREAS_LOCAL_CROSSDOMAIN_Pos (4UL) /*!< Position of CROSSDOMAIN field.                                  */
-  #define RESETINFO_RESETREAS_LOCAL_CROSSDOMAIN_Msk (0x1UL << RESETINFO_RESETREAS_LOCAL_CROSSDOMAIN_Pos) /*!< Bit mask of
-                                                                            CROSSDOMAIN field.*/
-  #define RESETINFO_RESETREAS_LOCAL_CROSSDOMAIN_Min (0x0UL) /*!< Min enumerator value of CROSSDOMAIN field.                    */
-  #define RESETINFO_RESETREAS_LOCAL_CROSSDOMAIN_Max (0x1UL) /*!< Max enumerator value of CROSSDOMAIN field.                    */
-  #define RESETINFO_RESETREAS_LOCAL_CROSSDOMAIN_NotDetected (0x0UL) /*!< Not detected                                          */
-  #define RESETINFO_RESETREAS_LOCAL_CROSSDOMAIN_Detected (0x1UL) /*!< Detected                                                 */
-
-/* UNRETAINEDWAKE @Bit 5 : Reset due to wake from unretained state. */
-  #define RESETINFO_RESETREAS_LOCAL_UNRETAINEDWAKE_Pos (5UL) /*!< Position of UNRETAINEDWAKE field.                            */
+/* UNRETAINEDWAKE @Bit 4 : Reset due to wake from unretained state. */
+  #define RESETINFO_RESETREAS_LOCAL_UNRETAINEDWAKE_Pos (4UL) /*!< Position of UNRETAINEDWAKE field.                            */
   #define RESETINFO_RESETREAS_LOCAL_UNRETAINEDWAKE_Msk (0x1UL << RESETINFO_RESETREAS_LOCAL_UNRETAINEDWAKE_Pos) /*!< Bit mask of
                                                                             UNRETAINEDWAKE field.*/
 
@@ -116955,6 +117079,40 @@ typedef struct {
                                                                          intregrity check of the signed-manifest. Utilized in
                                                                          scenarios involving warm-boot and firmware update.*/
 } NRF_RICR_UROT_SMWD_Type;                           /*!< Size = 320 (0x140)                                                   */
+
+
+/* ================================================= Struct RICR_UROT_OWNER ================================================== */
+/**
+  * @brief OWNER [RICR_UROT_OWNER] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  UROT;                              /*!< (@ 0x00000000) Indicates the owner of UROT firmware.                 */
+  __IOM uint32_t  RECOVERY;                          /*!< (@ 0x00000004) Indicates the owner of Recovery firmware.             */
+} NRF_RICR_UROT_OWNER_Type;                          /*!< Size = 8 (0x008)                                                     */
+
+/* RICR_UROT_OWNER_UROT: Indicates the owner of UROT firmware. */
+
+/* OWNER @Bits 0..31 : Indicates whether UROT owner is uninitialized, Nordic or User. */
+  #define RICR_UROT_OWNER_UROT_OWNER_Pos (0UL)       /*!< Position of OWNER field.                                             */
+  #define RICR_UROT_OWNER_UROT_OWNER_Msk (0xFFFFFFFFUL << RICR_UROT_OWNER_UROT_OWNER_Pos) /*!< Bit mask of OWNER field.        */
+  #define RICR_UROT_OWNER_UROT_OWNER_Min (0x67CA0593UL) /*!< Min enumerator value of OWNER field.                              */
+  #define RICR_UROT_OWNER_UROT_OWNER_Max (0xFFFFFFFFUL) /*!< Max enumerator value of OWNER field.                              */
+  #define RICR_UROT_OWNER_UROT_OWNER_Uninitialized (0xFFFFFFFFUL) /*!< Owner is not initialized yet.                           */
+  #define RICR_UROT_OWNER_UROT_OWNER_Nordic (0xFD3D8E75UL) /*!< Owner is Nordic.                                               */
+  #define RICR_UROT_OWNER_UROT_OWNER_User (0x67CA0593UL) /*!< Owner is customer(User).                                         */
+
+
+/* RICR_UROT_OWNER_RECOVERY: Indicates the owner of Recovery firmware. */
+
+/* OWNER @Bits 0..31 : Indicates whether Recovery owner is uninitialized, Nordic or User. */
+  #define RICR_UROT_OWNER_RECOVERY_OWNER_Pos (0UL)   /*!< Position of OWNER field.                                             */
+  #define RICR_UROT_OWNER_RECOVERY_OWNER_Msk (0xFFFFFFFFUL << RICR_UROT_OWNER_RECOVERY_OWNER_Pos) /*!< Bit mask of OWNER field.*/
+  #define RICR_UROT_OWNER_RECOVERY_OWNER_Min (0x67CA0593UL) /*!< Min enumerator value of OWNER field.                          */
+  #define RICR_UROT_OWNER_RECOVERY_OWNER_Max (0xFFFFFFFFUL) /*!< Max enumerator value of OWNER field.                          */
+  #define RICR_UROT_OWNER_RECOVERY_OWNER_Uninitialized (0xFFFFFFFFUL) /*!< Owner is not initialized yet.                       */
+  #define RICR_UROT_OWNER_RECOVERY_OWNER_Nordic (0xFD3D8E75UL) /*!< Owner is Nordic.                                           */
+  #define RICR_UROT_OWNER_RECOVERY_OWNER_User (0x67CA0593UL) /*!< Owner is customer(User).                                     */
+
 
 
 /* ====================================== Struct RICR_UROT_RECOVERY_SMWD_SM_TBS_PUBKEY ======================================= */
@@ -117957,17 +118115,14 @@ typedef struct {
   #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_InvalidManifest (0xF0000002UL) /*!< The information in the manifest is invalid.    */
   #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_StaleFW (0xF0000003UL) /*!< The timestamp on the firmware is older than the current
                                                                         one.*/
-  #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_InvalidLayout (0xF0000004UL) /*!< The firmware update is built for the wrong layout.
-                                                                            Any update that overwrites the existing firmware is
-                                                                            disallowed.*/
   #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_VerifyFailure (0xF0000005UL) /*!< The signature did not verify.                    */
   #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_VerifyOK (0xF0000006UL) /*!< Signature verification is successful.                 */
-  #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_UROTUpdateDisabled (0xF0000007UL) /*!< No valid recovery image is present and hence
-                                                                            UROT firmware update is disabled.*/
+  #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_UROTUpdateDisabled (0xF0000007UL) /*!< UROT firmware update is disabled via policy.*/
   #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_UROTActivated (0xF0000008UL) /*!< UROT firmware update verification and installation
                                                                             succeeded.*/
   #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_RecoveryActivated (0xF0000009UL) /*!< Recovery firmware update verification and
                                                                             installation succeeded.*/
+  #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_RecoveryUpdateDisabled (0xF000000AUL) /*!< Recovery update is disabled via policy. */
   #define RICR_UROT_UPWD_UPDATE_STATUS_CODE_AROTRecovery (0xF1000000UL) /*!< Recovery image is booted so that the recovery image
                                                                             can download a AROT image that ROM does not verify.*/
 
@@ -118056,7 +118211,8 @@ typedef struct {
 typedef struct {
   __IOM NRF_RICR_UROT_SMWD_Type SMWD;                /*!< (@ 0x00000000) Signed Manifest verified by the secure domain ROM Code
                                                                          to establish the primary RoT with digest.*/
-  __IM  uint32_t  RESERVED[48];
+  __IM  uint32_t  RESERVED[46];
+  __IOM NRF_RICR_UROT_OWNER_Type OWNER;              /*!< (@ 0x000001F8) (unspecified)                                         */
   __IOM NRF_RICR_UROT_RECOVERY_Type RECOVERY;        /*!< (@ 0x00000200) (unspecified)                                         */
   __IOM NRF_RICR_UROT_UPWD_Type UPWD;                /*!< (@ 0x00000340) Update with digest. Digest is used to ensure SICR
                                                                          contents where not tampered when resuming any paused
@@ -119176,19 +119332,8 @@ typedef struct {
   * @brief CH [SAADC_CH] (unspecified)
   */
 typedef struct {
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
-  #endif
-  union {
-    struct {
-      __IOM uint32_t PSELP;                          /*!< (@ 0x00000000) Input positive pin selection for CH[n]                */
-      __IOM uint32_t PSELN;                          /*!< (@ 0x00000004) Input negative pin selection for CH[n]                */
-    };
-  };
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic pop
-  #endif
+  __IOM uint32_t  PSELP;                             /*!< (@ 0x00000000) Input positive pin selection for CH[n]                */
+  __IOM uint32_t  PSELN;                             /*!< (@ 0x00000004) Input negative pin selection for CH[n]                */
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000008) Input configuration for CH[n]                         */
   __IOM uint32_t  LIMIT;                             /*!< (@ 0x0000000C) High/low limits for event monitoring a channel        */
 } NRF_SAADC_CH_Type;                                 /*!< Size = 16 (0x010)                                                    */
@@ -119199,11 +119344,11 @@ typedef struct {
 /* SAADC_CH_PSELP: Input positive pin selection for CH[n] */
   #define SAADC_CH_PSELP_ResetValue (0x00000000UL)   /*!< Reset value of PSELP register.                                       */
 
-/* PIN @Bits 0..4 : Analog positive input pin select */
+/* PIN @Bits 0..4 : GPIO pin selection. */
   #define SAADC_CH_PSELP_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define SAADC_CH_PSELP_PIN_Msk (0x1FUL << SAADC_CH_PSELP_PIN_Pos) /*!< Bit mask of PIN field.                                */
 
-/* PORT @Bits 8..11 : GPIO Port selection */
+/* PORT @Bits 8..11 : GPIO port selection */
   #define SAADC_CH_PSELP_PORT_Pos (8UL)              /*!< Position of PORT field.                                              */
   #define SAADC_CH_PSELP_PORT_Msk (0xFUL << SAADC_CH_PSELP_PORT_Pos) /*!< Bit mask of PORT field.                              */
 
@@ -119241,7 +119386,7 @@ typedef struct {
 /* SAADC_CH_PSELN: Input negative pin selection for CH[n] */
   #define SAADC_CH_PSELN_ResetValue (0x00000000UL)   /*!< Reset value of PSELN register.                                       */
 
-/* PIN @Bits 0..4 : Analog negative input pin select */
+/* PIN @Bits 0..4 : GPIO pin selection. */
   #define SAADC_CH_PSELN_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
   #define SAADC_CH_PSELN_PIN_Msk (0x1FUL << SAADC_CH_PSELN_PIN_Pos) /*!< Bit mask of PIN field.                                */
 
@@ -119287,11 +119432,12 @@ typedef struct {
   #define SAADC_CH_CONFIG_GAIN_Pos (8UL)             /*!< Position of GAIN field.                                              */
   #define SAADC_CH_CONFIG_GAIN_Msk (0x7UL << SAADC_CH_CONFIG_GAIN_Pos) /*!< Bit mask of GAIN field.                            */
   #define SAADC_CH_CONFIG_GAIN_Min (0x0UL)           /*!< Min enumerator value of GAIN field.                                  */
-  #define SAADC_CH_CONFIG_GAIN_Max (0x3UL)           /*!< Max enumerator value of GAIN field.                                  */
+  #define SAADC_CH_CONFIG_GAIN_Max (0x4UL)           /*!< Max enumerator value of GAIN field.                                  */
   #define SAADC_CH_CONFIG_GAIN_Gain2_3 (0x0UL)       /*!< 2/3                                                                  */
   #define SAADC_CH_CONFIG_GAIN_Gain1 (0x1UL)         /*!< 1                                                                    */
   #define SAADC_CH_CONFIG_GAIN_Gain2 (0x2UL)         /*!< 2                                                                    */
-  #define SAADC_CH_CONFIG_GAIN_Gain4 (0x3UL)         /*!< 4                                                                    */
+  #define SAADC_CH_CONFIG_GAIN_Gain3 (0x3UL)         /*!< 4                                                                    */
+  #define SAADC_CH_CONFIG_GAIN_Gain1_2 (0x4UL)       /*!< 1/2                                                                  */
 
 /* BURST @Bit 11 : Enable burst mode */
   #define SAADC_CH_CONFIG_BURST_Pos (11UL)           /*!< Position of BURST field.                                             */
@@ -119457,13 +119603,14 @@ typedef struct {
   #define SAADC_DFT_ATB0CONFIG_SELMUX_Msk (0x7UL << SAADC_DFT_ATB0CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.            */
   #define SAADC_DFT_ATB0CONFIG_SELMUX_Min (0x0UL)    /*!< Min enumerator value of SELMUX field.                                */
   #define SAADC_DFT_ATB0CONFIG_SELMUX_Max (0x7UL)    /*!< Max enumerator value of SELMUX field.                                */
-  #define SAADC_DFT_ATB0CONFIG_SELMUX_INMUX (0x0UL)  /*!< ATB0 connected to PADC_INMUX, available on PADC_IN                   */
-  #define SAADC_DFT_ATB0CONFIG_SELMUX_VREF (0x1UL)   /*!< ATB0 connected to VREF                                               */
-  #define SAADC_DFT_ATB0CONFIG_SELMUX_VREFBUFF (0x2UL) /*!< ATB0 connected to VREF_BUFF                                        */
-  #define SAADC_DFT_ATB0CONFIG_SELMUX_VREFIBPSR10U (0x3UL) /*!< ATB0 connected to ATB_PADC_VREF_IBPSR_10U for current
+  #define SAADC_DFT_ATB0CONFIG_SELMUX_InMux (0x0UL)  /*!< ATB0 connected to PADC_INMUX, available on PADC_IN                   */
+  #define SAADC_DFT_ATB0CONFIG_SELMUX_Vref (0x1UL)   /*!< ATB0 connected to VREF                                               */
+  #define SAADC_DFT_ATB0CONFIG_SELMUX_VrefBuff (0x2UL) /*!< ATB0 connected to VREF_BUFF                                        */
+  #define SAADC_DFT_ATB0CONFIG_SELMUX_VrefIbpsr10U (0x3UL) /*!< ATB0 connected to ATB_PADC_VREF_IBPSR_10U for current
                                                                 measurement*/
-  #define SAADC_DFT_ATB0CONFIG_SELMUX_VREFIBPS3U (0x4UL) /*!< ATB0 connected to ATB_PADC_VREF_IBPS_3U                          */
-  #define SAADC_DFT_ATB0CONFIG_SELMUX_Spare0 (0x5UL) /*!< Spare pin                                                            */
+  #define SAADC_DFT_ATB0CONFIG_SELMUX_VrefIbps3U (0x4UL) /*!< ATB0 connected to ATB_PADC_VREF_IBPS_3U                          */
+  #define SAADC_DFT_ATB0CONFIG_SELMUX_VrefLpfDisabled (0x5UL) /*!< ATB0 connected to VREF, internal reference with LPF
+                                                                   bypassed.*/
   #define SAADC_DFT_ATB0CONFIG_SELMUX_Spare1 (0x6UL) /*!< Spare pin                                                            */
   #define SAADC_DFT_ATB0CONFIG_SELMUX_Spare2 (0x7UL) /*!< Spare pin                                                            */
 
@@ -119484,13 +119631,13 @@ typedef struct {
   #define SAADC_DFT_ATB1CONFIG_SELMUX_Msk (0x7UL << SAADC_DFT_ATB1CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.            */
   #define SAADC_DFT_ATB1CONFIG_SELMUX_Min (0x0UL)    /*!< Min enumerator value of SELMUX field.                                */
   #define SAADC_DFT_ATB1CONFIG_SELMUX_Max (0x7UL)    /*!< Max enumerator value of SELMUX field.                                */
-  #define SAADC_DFT_ATB1CONFIG_SELMUX_INMUX (0x0UL)  /*!< ATB1 connected to PADC_INMUX, available on both PADC_IP and PADC_IN  */
-  #define SAADC_DFT_ATB1CONFIG_SELMUX_VREFviaATBBUF (0x1UL) /*!< ATB1 connected to VREF via ATBBUF                             */
-  #define SAADC_DFT_ATB1CONFIG_SELMUX_VREFBUFFviaATBUF (0x2UL) /*!< ATB1 connected to VREF_BUFF via ATBUF                      */
-  #define SAADC_DFT_ATB1CONFIG_SELMUX_LDO (0x3UL)    /*!< ATB1 connected to PADC_LDO resistive divider to measure 1.5V/2 via
+  #define SAADC_DFT_ATB1CONFIG_SELMUX_Inmux (0x0UL)  /*!< ATB1 connected to PADC_INMUX, available on both PADC_IP and PADC_IN  */
+  #define SAADC_DFT_ATB1CONFIG_SELMUX_VrefViaAtbuf (0x1UL) /*!< ATB1 connected to VREF via ATBBUF                              */
+  #define SAADC_DFT_ATB1CONFIG_SELMUX_VrefBuffViaAtbuf (0x2UL) /*!< ATB1 connected to VREF_BUFF via ATBUF                      */
+  #define SAADC_DFT_ATB1CONFIG_SELMUX_Ldo (0x3UL)    /*!< ATB1 connected to PADC_LDO resistive divider to measure 1.5V/2 via
                                                           ATBUF*/
-  #define SAADC_DFT_ATB1CONFIG_SELMUX_VREFIBPS3U (0x4UL) /*!< SATB1 connected to ATB_PADC_VREF_IBPS_3U                         */
-  #define SAADC_DFT_ATB1CONFIG_SELMUX_Spare0 (0x5UL) /*!< Spare pin                                                            */
+  #define SAADC_DFT_ATB1CONFIG_SELMUX_VrefIbps3U (0x4UL) /*!< SATB1 connected to ATB_PADC_VREF_IBPS_3U                         */
+  #define SAADC_DFT_ATB1CONFIG_SELMUX_Spare0 (0x5UL) /*!< (unspecified)                                                        */
   #define SAADC_DFT_ATB1CONFIG_SELMUX_Spare1 (0x6UL) /*!< Spare pin                                                            */
   #define SAADC_DFT_ATB1CONFIG_SELMUX_Spare2 (0x7UL) /*!< Spare pin                                                            */
 
@@ -119575,7 +119722,9 @@ typedef struct {
   typedef struct {                                   /*!< SAADC Structure                                                      */
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start the ADC and prepare the result buffer in RAM    */
     __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000004) Take one ADC sample, if scan is enabled all channels
-                                                                         are sampled*/
+                                                                         are sampled. This task requires that SAADC has started,
+                                                                         i.e. EVENTS_STARTED was set and EVENTS_STOPPED was
+                                                                         not.*/
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000008) Stop the ADC and terminate any on-going conversion    */
     __OM uint32_t TASKS_CALIBRATEOFFSET;             /*!< (@ 0x0000000C) Starts offset auto-calibration Noise shaping should be
                                                                          disabled*/
@@ -119666,10 +119815,14 @@ typedef struct {
   #define SAADC_TASKS_START_TASKS_START_Trigger (0x1UL) /*!< Trigger task                                                      */
 
 
-/* SAADC_TASKS_SAMPLE: Take one ADC sample, if scan is enabled all channels are sampled */
+/* SAADC_TASKS_SAMPLE: Take one ADC sample, if scan is enabled all channels are sampled. This task requires that SAADC has
+                        started, i.e. EVENTS_STARTED was set and EVENTS_STOPPED was not. */
+
   #define SAADC_TASKS_SAMPLE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_SAMPLE register.                              */
 
-/* TASKS_SAMPLE @Bit 0 : Take one ADC sample, if scan is enabled all channels are sampled */
+/* TASKS_SAMPLE @Bit 0 : Take one ADC sample, if scan is enabled all channels are sampled. This task requires that SAADC has
+                         started, i.e. EVENTS_STARTED was set and EVENTS_STOPPED was not. */
+
   #define SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Pos (0UL)  /*!< Position of TASKS_SAMPLE field.                                      */
   #define SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Msk (0x1UL << SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Pos) /*!< Bit mask of TASKS_SAMPLE
                                                                             field.*/
@@ -120889,17 +121042,17 @@ typedef struct {
 /* CALDMAWREN @Bit 30 : Enable writing offset calibration values to DMA */
   #define SAADC_TESTCTRL_CALDMAWREN_Pos (30UL)       /*!< Position of CALDMAWREN field.                                        */
   #define SAADC_TESTCTRL_CALDMAWREN_Msk (0x1UL << SAADC_TESTCTRL_CALDMAWREN_Pos) /*!< Bit mask of CALDMAWREN field.            */
-  #define SAADC_TESTCTRL_CALDMAWREN_Min (0x1UL)      /*!< Min enumerator value of CALDMAWREN field.                            */
+  #define SAADC_TESTCTRL_CALDMAWREN_Min (0x0UL)      /*!< Min enumerator value of CALDMAWREN field.                            */
   #define SAADC_TESTCTRL_CALDMAWREN_Max (0x1UL)      /*!< Max enumerator value of CALDMAWREN field.                            */
-  #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x1UL) /*!< Writing values is disabled                                           */
+  #define SAADC_TESTCTRL_CALDMAWREN_Disabled (0x0UL) /*!< Writing values is disabled                                           */
   #define SAADC_TESTCTRL_CALDMAWREN_Enabled (0x1UL)  /*!< Writing values is enabled                                            */
 
 /* LINCALEN @Bit 31 : Enables the use of linear calibration values TRIM.LINCALCOEFF[n] */
   #define SAADC_TESTCTRL_LINCALEN_Pos (31UL)         /*!< Position of LINCALEN field.                                          */
   #define SAADC_TESTCTRL_LINCALEN_Msk (0x1UL << SAADC_TESTCTRL_LINCALEN_Pos) /*!< Bit mask of LINCALEN field.                  */
-  #define SAADC_TESTCTRL_LINCALEN_Min (0x1UL)        /*!< Min enumerator value of LINCALEN field.                              */
+  #define SAADC_TESTCTRL_LINCALEN_Min (0x0UL)        /*!< Min enumerator value of LINCALEN field.                              */
   #define SAADC_TESTCTRL_LINCALEN_Max (0x1UL)        /*!< Max enumerator value of LINCALEN field.                              */
-  #define SAADC_TESTCTRL_LINCALEN_Disabled (0x1UL)   /*!< Use of linear calibration is disabled                                */
+  #define SAADC_TESTCTRL_LINCALEN_Disabled (0x0UL)   /*!< Use of linear calibration is disabled                                */
   #define SAADC_TESTCTRL_LINCALEN_Enabled (0x1UL)    /*!< Use of linear calibration is enabled                                 */
 
 
@@ -120919,24 +121072,28 @@ typedef struct {
   #define SAADC_CAL_CALGAIN_Pos (8UL)                /*!< Position of CALGAIN field.                                           */
   #define SAADC_CAL_CALGAIN_Msk (0x7FUL << SAADC_CAL_CALGAIN_Pos) /*!< Bit mask of CALGAIN field.                              */
   #define SAADC_CAL_CALGAIN_Min (0x0UL)              /*!< Min enumerator value of CALGAIN field.                               */
-  #define SAADC_CAL_CALGAIN_Max (0x40UL)             /*!< Max enumerator value of CALGAIN field.                               */
+  #define SAADC_CAL_CALGAIN_Max (0x3FUL)             /*!< Max enumerator value of CALGAIN field.                               */
   #define SAADC_CAL_CALGAIN_Default (0x00UL)         /*!< Default gain, for +1/2 input (assume full-scale = +-1) the output will
                                                           be 1024*/
   #define SAADC_CAL_CALGAIN_High (0x3FUL)            /*!< High gain setting                                                    */
-  #define SAADC_CAL_CALGAIN_Low (0x40UL)             /*!< Low gain setting                                                     */
+  #define SAADC_CAL_CALGAIN_Low (0x00UL)             /*!< Low gain setting                                                     */
 
 
 /* SAADC_CALREF: Calibration control for reference voltage */
   #define SAADC_CALREF_ResetValue (0x00000000UL)     /*!< Reset value of CALREF register.                                      */
 
-/* VREF @Bits 0..6 : Offset binary coding */
+/* VREF @Bits 0..5 : Offset binary coding */
   #define SAADC_CALREF_VREF_Pos (0UL)                /*!< Position of VREF field.                                              */
-  #define SAADC_CALREF_VREF_Msk (0x7FUL << SAADC_CALREF_VREF_Pos) /*!< Bit mask of VREF field.                                 */
+  #define SAADC_CALREF_VREF_Msk (0x3FUL << SAADC_CALREF_VREF_Pos) /*!< Bit mask of VREF field.                                 */
   #define SAADC_CALREF_VREF_Min (0x0UL)              /*!< Min enumerator value of VREF field.                                  */
-  #define SAADC_CALREF_VREF_Max (0x40UL)             /*!< Max enumerator value of VREF field.                                  */
-  #define SAADC_CALREF_VREF_Default (0x00UL)         /*!< Default vref, in typical corner VREF=1.2V                            */
+  #define SAADC_CALREF_VREF_Max (0x3FUL)             /*!< Max enumerator value of VREF field.                                  */
+  #define SAADC_CALREF_VREF_Default (0x00UL)         /*!< Default vref, in typical corner VREF=1.024V                          */
   #define SAADC_CALREF_VREF_High (0x3FUL)            /*!< Low output code (high reference voltage)                             */
-  #define SAADC_CALREF_VREF_Low (0x40UL)             /*!< High output code (low reference voltage)                             */
+  #define SAADC_CALREF_VREF_Low (0x00UL)             /*!< High output code (low reference voltage)                             */
+
+/* VREFLPFDISABLE @Bit 6 : Disable the internal reference low pass filter */
+  #define SAADC_CALREF_VREFLPFDISABLE_Pos (6UL)      /*!< Position of VREFLPFDISABLE field.                                    */
+  #define SAADC_CALREF_VREFLPFDISABLE_Msk (0x1UL << SAADC_CALREF_VREFLPFDISABLE_Pos) /*!< Bit mask of VREFLPFDISABLE field.    */
 
 /* IREF @Bits 8..11 : Calibration control for reference current. See design description for coding */
   #define SAADC_CALREF_IREF_Pos (8UL)                /*!< Position of IREF field.                                              */
@@ -120956,10 +121113,13 @@ typedef struct {
   #define SAADC_NOISESHAPE_NOISESHAPE_Min (0x0UL)    /*!< Min enumerator value of NOISESHAPE field.                            */
   #define SAADC_NOISESHAPE_NOISESHAPE_Max (0x3UL)    /*!< Max enumerator value of NOISESHAPE field.                            */
   #define SAADC_NOISESHAPE_NOISESHAPE_Disable (0x0UL) /*!< Disable noiseshaping. Oversampling based on accumulate and average. */
-  #define SAADC_NOISESHAPE_NOISESHAPE_Audio (0x1UL)  /*!< Noiseshaping and decimating. Larger passband. See design description
-                                                          for more information*/
-  #define SAADC_NOISESHAPE_NOISESHAPE_Accuracy (0x2UL) /*!< Noiseshaping and decimating. Smaller passband. See design
-                                                            description for more information*/
+  #define SAADC_NOISESHAPE_NOISESHAPE_Audio (0x1UL)  /*!< Noiseshaping and decimating. Larger passband. Provides a 100kS/s cut
+                                                          off frequency, 8x the oversampling ratio. See design description for
+                                                          more information*/
+  #define SAADC_NOISESHAPE_NOISESHAPE_Accuracy (0x2UL) /*!< Noiseshaping and decimating. Smaller passband. Recommended
+                                                            resolution setting is 14 bits. Provides a 10kS/s cut off frequency,
+                                                            32x the oversampling ratio. See design description for more
+                                                            information*/
   #define SAADC_NOISESHAPE_NOISESHAPE_Stage1 (0x3UL) /*!< Result from common 1st stage filter. For debugging only              */
 
 
@@ -123076,17 +123236,14 @@ typedef struct {
   #define SICR_UROT_UPDATE_STATUS_CODE_UnknownOperation (0xF0000001UL) /*!< Unknown OPCODE in SICR.UROT.UPDATE.OPERATION.      */
   #define SICR_UROT_UPDATE_STATUS_CODE_InvalidManifest (0xF0000002UL) /*!< The information in the manifest is invalid.         */
   #define SICR_UROT_UPDATE_STATUS_CODE_StaleFW (0xF0000003UL) /*!< The timestamp on the firmware is older than the current one.*/
-  #define SICR_UROT_UPDATE_STATUS_CODE_InvalidLayout (0xF0000004UL) /*!< The firmware update is built for the wrong layout. Any
-                                                                         update that overwrites the existing firmware is
-                                                                         disallowed.*/
   #define SICR_UROT_UPDATE_STATUS_CODE_VerifyFailure (0xF0000005UL) /*!< The signature did not verify.                         */
   #define SICR_UROT_UPDATE_STATUS_CODE_VerifyOK (0xF0000006UL) /*!< Signature verification is successful.                      */
-  #define SICR_UROT_UPDATE_STATUS_CODE_UROTUpdateDisabled (0xF0000007UL) /*!< No valid recovery image is present and hence UROT
-                                                                            firmware update is disabled.*/
+  #define SICR_UROT_UPDATE_STATUS_CODE_UROTUpdateDisabled (0xF0000007UL) /*!< UROT firmware update is disabled via policy.     */
   #define SICR_UROT_UPDATE_STATUS_CODE_UROTActivated (0xF0000008UL) /*!< UROT firmware update verification and installation
                                                                          succeeded.*/
   #define SICR_UROT_UPDATE_STATUS_CODE_RecoveryActivated (0xF0000009UL) /*!< Recovery firmware update verification and
                                                                             installation succeeded.*/
+  #define SICR_UROT_UPDATE_STATUS_CODE_RecoveryUpdateDisabled (0xF000000AUL) /*!< Recovery update is disabled via policy.      */
   #define SICR_UROT_UPDATE_STATUS_CODE_AROTRecovery (0xF1000000UL) /*!< Recovery image is booted so that the recovery image can
                                                                         download a AROT image that ROM does not verify.*/
 
@@ -123117,48 +123274,1276 @@ typedef struct {
 
 
 
-/* ================================================= Struct SICR_AROT_SECURE ================================================= */
+/* ============================================ Struct SICR_AROT_SECURE_OEMPUBKEY ============================================ */
 /**
-  * @brief SECURE [SICR_AROT_SECURE] Any next-stage secure domain firmware related.
+  * @brief OEMPUBKEY [SICR_AROT_SECURE_OEMPUBKEY] The public key used by the top level SUIT manifest. The public key is stored
+            as additional authenticated data (AAD) in unencrypted form using an AEAD scheme realized by AES-256 GCM mode, with
+            the secure domain KEK used as a secret key. The initialization vector is provided in NONCE register. Key attributes
+            from ATTR register shall be used as an additional authenticated data (AAD) in AEAD. The content of PUBKEY registers
+            shall be used as an additional authenticated data (AAD) in AEAD.
+
   */
 typedef struct {
-  __IM  uint32_t  TBD;                               /*!< (@ 0x00000000) To be added once the secure domain ROM-related
-                                                                         interface is agreed.*/
-  __IM  uint32_t  RESERVED[255];
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the top level SUIT manifest public key
+                                                                         generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  PUBKEY[16];                        /*!< (@ 0x00000008) The top level SUIT manifest public key generation [n].
+                                                                         This field is used as an additional authenticated data
+                                                                         (AAD) in AEAD.*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000048) The authentication tag of the top level SUIT manifest
+                                                                         public key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000058) (unspecified)                                         */
+} NRF_SICR_AROT_SECURE_OEMPUBKEY_Type;               /*!< Size = 96 (0x060)                                                    */
+  #define SICR_AROT_SECURE_OEMPUBKEY_MaxCount (3UL)  /*!< Size of OEMPUBKEY[3] array.                                          */
+  #define SICR_AROT_SECURE_OEMPUBKEY_MaxIndex (2UL)  /*!< Max index of OEMPUBKEY[3] array.                                     */
+  #define SICR_AROT_SECURE_OEMPUBKEY_MinIndex (0UL)  /*!< Min index of OEMPUBKEY[3] array.                                     */
+
+/* SICR_AROT_SECURE_OEMPUBKEY_NONCE: The initialization vector of the encryption algorithm used to protect the top level SUIT
+                                      manifest public key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_SECURE_OEMPUBKEY_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
+  #define SICR_AROT_SECURE_OEMPUBKEY_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_SECURE_OEMPUBKEY_NONCE_VALUE_Pos) /*!< Bit mask
+                                                                            of VALUE field.*/
+
+
+/* SICR_AROT_SECURE_OEMPUBKEY_ATTR: The attributes of the local domain firmware master encryption key generation [n]. This field
+                                     is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_SECURE_OEMPUBKEY_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                          */
+  #define SICR_AROT_SECURE_OEMPUBKEY_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_SECURE_OEMPUBKEY_ATTR_TYPE_Pos) /*!< Bit mask of TYPE
+                                                                            field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_SECURE_OEMPUBKEY_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                           */
+  #define SICR_AROT_SECURE_OEMPUBKEY_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_SECURE_OEMPUBKEY_ATTR_LEN_Pos) /*!< Bit mask of LEN
+                                                                            field.*/
+
+
+/* SICR_AROT_SECURE_OEMPUBKEY_PUBKEY: The top level SUIT manifest public key generation [n]. This field is used as an additional
+                                       authenticated data (AAD) in AEAD. */
+
+  #define SICR_AROT_SECURE_OEMPUBKEY_PUBKEY_MaxCount (16UL) /*!< Max size of PUBKEY[16] array.                                 */
+  #define SICR_AROT_SECURE_OEMPUBKEY_PUBKEY_MaxIndex (15UL) /*!< Max index of PUBKEY[16] array.                                */
+  #define SICR_AROT_SECURE_OEMPUBKEY_PUBKEY_MinIndex (0UL) /*!< Min index of PUBKEY[16] array.                                 */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_SECURE_OEMPUBKEY_PUBKEY_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
+  #define SICR_AROT_SECURE_OEMPUBKEY_PUBKEY_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_SECURE_OEMPUBKEY_PUBKEY_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_SECURE_OEMPUBKEY_MAC: The authentication tag of the top level SUIT manifest public key generation [n]. */
+  #define SICR_AROT_SECURE_OEMPUBKEY_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                         */
+  #define SICR_AROT_SECURE_OEMPUBKEY_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                        */
+  #define SICR_AROT_SECURE_OEMPUBKEY_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                        */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_SECURE_OEMPUBKEY_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
+  #define SICR_AROT_SECURE_OEMPUBKEY_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_SECURE_OEMPUBKEY_MAC_VALUE_Pos) /*!< Bit mask of
+                                                                            VALUE field.*/
+
+
+/* SICR_AROT_SECURE_OEMPUBKEY_RFU: (unspecified) */
+  #define SICR_AROT_SECURE_OEMPUBKEY_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                         */
+  #define SICR_AROT_SECURE_OEMPUBKEY_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                        */
+  #define SICR_AROT_SECURE_OEMPUBKEY_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                        */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_SECURE_OEMPUBKEY_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
+  #define SICR_AROT_SECURE_OEMPUBKEY_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_SECURE_OEMPUBKEY_RFU_VALUE_Pos) /*!< Bit mask of
+                                                                            VALUE field.*/
+
+
+
+/* ================================================= Struct SICR_AROT_SECURE ================================================= */
+/**
+  * @brief SECURE [SICR_AROT_SECURE] (unspecified)
+  */
+typedef struct {
+  __IOM NRF_SICR_AROT_SECURE_OEMPUBKEY_Type OEMPUBKEY[3]; /*!< (@ 0x00000000) The public key used by the top level SUIT
+                                                                            manifest. The public key is stored as additional
+                                                                            authenticated data (AAD) in unencrypted form using
+                                                                            an AEAD scheme realized by AES-256 GCM mode, with
+                                                                            the secure domain KEK used as a secret key. The
+                                                                            initialization vector is provided in NONCE register.
+                                                                            Key attributes from ATTR register shall be used as
+                                                                            an additional authenticated data (AAD) in AEAD. The
+                                                                            content of PUBKEY registers shall be used as an
+                                                                            additional authenticated data (AAD) in AEAD.*/
+  __IM  uint32_t  RESERVED[184];
 } NRF_SICR_AROT_SECURE_Type;                         /*!< Size = 1024 (0x400)                                                  */
+
+
+/* =========================================== Struct SICR_AROT_APPLICATION_FWENC ============================================ */
+/**
+  * @brief FWENC [SICR_AROT_APPLICATION_FWENC] Local domain firmware master encryption key. The key is stored in an encrypted
+            then authenticated form using an AEAD scheme realized by AES-256 GCM mode, with the local domain KEK used as a
+            secret key. The initialization vector is provided in NONCE register. Key attributes from ATTR register shall be used
+            as an additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain firmware master
+                                                                         encryption key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  CIPHERTEXT[8];                     /*!< (@ 0x00000008) The encrypted local domain firmware master encryption
+                                                                         key generation [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000028) The authentication tag of the local domain firmware
+                                                                         master encryption key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000038) (unspecified)                                         */
+} NRF_SICR_AROT_APPLICATION_FWENC_Type;              /*!< Size = 64 (0x040)                                                    */
+  #define SICR_AROT_APPLICATION_FWENC_MaxCount (2UL) /*!< Size of FWENC[2] array.                                              */
+  #define SICR_AROT_APPLICATION_FWENC_MaxIndex (1UL) /*!< Max index of FWENC[2] array.                                         */
+  #define SICR_AROT_APPLICATION_FWENC_MinIndex (0UL) /*!< Min index of FWENC[2] array.                                         */
+
+/* SICR_AROT_APPLICATION_FWENC_NONCE: The initialization vector of the encryption algorithm used to protect the local domain
+                                       firmware master encryption key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_APPLICATION_FWENC_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
+  #define SICR_AROT_APPLICATION_FWENC_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_FWENC_NONCE_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_FWENC_ATTR: The attributes of the local domain firmware master encryption key generation [n]. This
+                                      field is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_APPLICATION_FWENC_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                         */
+  #define SICR_AROT_APPLICATION_FWENC_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_APPLICATION_FWENC_ATTR_TYPE_Pos) /*!< Bit mask of
+                                                                            TYPE field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_APPLICATION_FWENC_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                          */
+  #define SICR_AROT_APPLICATION_FWENC_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_APPLICATION_FWENC_ATTR_LEN_Pos) /*!< Bit mask of LEN
+                                                                            field.*/
+
+
+/* SICR_AROT_APPLICATION_FWENC_CIPHERTEXT: The encrypted local domain firmware master encryption key generation [n]. */
+  #define SICR_AROT_APPLICATION_FWENC_CIPHERTEXT_MaxCount (8UL) /*!< Max size of CIPHERTEXT[8] array.                          */
+  #define SICR_AROT_APPLICATION_FWENC_CIPHERTEXT_MaxIndex (7UL) /*!< Max index of CIPHERTEXT[8] array.                         */
+  #define SICR_AROT_APPLICATION_FWENC_CIPHERTEXT_MinIndex (0UL) /*!< Min index of CIPHERTEXT[8] array.                         */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_APPLICATION_FWENC_CIPHERTEXT_VALUE_Pos (0UL) /*!< Position of VALUE field.                                 */
+  #define SICR_AROT_APPLICATION_FWENC_CIPHERTEXT_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_FWENC_CIPHERTEXT_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_FWENC_MAC: The authentication tag of the local domain firmware master encryption key generation [n]. */
+  #define SICR_AROT_APPLICATION_FWENC_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                        */
+  #define SICR_AROT_APPLICATION_FWENC_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                       */
+  #define SICR_AROT_APPLICATION_FWENC_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                       */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_APPLICATION_FWENC_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                        */
+  #define SICR_AROT_APPLICATION_FWENC_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_FWENC_MAC_VALUE_Pos) /*!< Bit mask of
+                                                                            VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_FWENC_RFU: (unspecified) */
+  #define SICR_AROT_APPLICATION_FWENC_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                        */
+  #define SICR_AROT_APPLICATION_FWENC_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                       */
+  #define SICR_AROT_APPLICATION_FWENC_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                       */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_APPLICATION_FWENC_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                        */
+  #define SICR_AROT_APPLICATION_FWENC_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_FWENC_RFU_VALUE_Pos) /*!< Bit mask of
+                                                                            VALUE field.*/
+
+
+
+/* ======================================== Struct SICR_AROT_APPLICATION_AUTHDEBUGKEY ======================================== */
+/**
+  * @brief AUTHDEBUGKEY [SICR_AROT_APPLICATION_AUTHDEBUGKEY] Local domain authenticated debug access public key. The public key
+            is stored as additional authenticated data (AAD) in unencrypted form using an AEAD scheme realized by AES-256 GCM
+            mode, with the local domain KEK used as a secret key. The initialization vector is provided in NONCE register. Key
+            attributes from ATTR register shall be used as an additional authenticated data (AAD) in AEAD. The content of PUBKEY
+            registers shall be used as an additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain authenticated debug
+                                                                         access public key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  PUBKEY[16];                        /*!< (@ 0x00000008) The local domain authenticated debug access public key
+                                                                         generation [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000048) The authentication tag of the local domain
+                                                                         authenticated debug access public key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000058) (unspecified)                                         */
+} NRF_SICR_AROT_APPLICATION_AUTHDEBUGKEY_Type;       /*!< Size = 96 (0x060)                                                    */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_MaxCount (3UL) /*!< Size of AUTHDEBUGKEY[3] array.                                */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_MaxIndex (2UL) /*!< Max index of AUTHDEBUGKEY[3] array.                           */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_MinIndex (0UL) /*!< Min index of AUTHDEBUGKEY[3] array.                           */
+
+/* SICR_AROT_APPLICATION_AUTHDEBUGKEY_NONCE: The initialization vector of the encryption algorithm used to protect the local
+                                              domain authenticated debug access public key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                               */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_AUTHDEBUGKEY_NONCE_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_AUTHDEBUGKEY_ATTR: The attributes of the local domain firmware master encryption key generation [n].
+                                             This field is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                  */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_APPLICATION_AUTHDEBUGKEY_ATTR_TYPE_Pos) /*!<
+                                                                            Bit mask of TYPE field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                   */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_APPLICATION_AUTHDEBUGKEY_ATTR_LEN_Pos) /*!< Bit
+                                                                            mask of LEN field.*/
+
+
+/* SICR_AROT_APPLICATION_AUTHDEBUGKEY_PUBKEY: The local domain authenticated debug access public key generation [n]. */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_PUBKEY_MaxCount (16UL) /*!< Max size of PUBKEY[16] array.                         */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_PUBKEY_MaxIndex (15UL) /*!< Max index of PUBKEY[16] array.                        */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_PUBKEY_MinIndex (0UL) /*!< Min index of PUBKEY[16] array.                         */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_PUBKEY_VALUE_Pos (0UL) /*!< Position of VALUE field.                              */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_PUBKEY_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_AUTHDEBUGKEY_PUBKEY_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_AUTHDEBUGKEY_MAC: The authentication tag of the local domain authenticated debug access public key
+                                            generation [n]. */
+
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                 */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                 */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_AUTHDEBUGKEY_MAC_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_AUTHDEBUGKEY_RFU: (unspecified) */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                 */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                 */
+  #define SICR_AROT_APPLICATION_AUTHDEBUGKEY_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_AUTHDEBUGKEY_RFU_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+
+/* ========================================= Struct SICR_AROT_APPLICATION_SUITPUBKEY ========================================= */
+/**
+  * @brief SUITPUBKEY [SICR_AROT_APPLICATION_SUITPUBKEY] Public key used by the local domain SUIT manifest. The public key is
+            stored as additional authenticated data (AAD) in unencrypted form using an AEAD scheme realized by AES-256 GCM mode,
+            with the local domain KEK used as a secret key. The initialization vector is provided in NONCE register. Key
+            attributes from ATTR register shall be used as an additional authenticated data (AAD) in AEAD. The content of PUBKEY
+            registers shall be used as an additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain SUIT manifest public
+                                                                         key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  PUBKEY[16];                        /*!< (@ 0x00000008) The local domain SUIT manifest public key generation
+                                                                         [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000048) The authentication tag of the local domain SUIT
+                                                                         manifest public key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000058) (unspecified)                                         */
+} NRF_SICR_AROT_APPLICATION_SUITPUBKEY_Type;         /*!< Size = 96 (0x060)                                                    */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_MaxCount (3UL) /*!< Size of SUITPUBKEY[3] array.                                    */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_MaxIndex (2UL) /*!< Max index of SUITPUBKEY[3] array.                               */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_MinIndex (0UL) /*!< Min index of SUITPUBKEY[3] array.                               */
+
+/* SICR_AROT_APPLICATION_SUITPUBKEY_NONCE: The initialization vector of the encryption algorithm used to protect the local
+                                            domain SUIT manifest public key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                 */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_SUITPUBKEY_NONCE_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_SUITPUBKEY_ATTR: The attributes of the local domain firmware master encryption key generation [n]. This
+                                           field is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                    */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_APPLICATION_SUITPUBKEY_ATTR_TYPE_Pos) /*!< Bit
+                                                                            mask of TYPE field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                     */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_APPLICATION_SUITPUBKEY_ATTR_LEN_Pos) /*!< Bit
+                                                                            mask of LEN field.*/
+
+
+/* SICR_AROT_APPLICATION_SUITPUBKEY_PUBKEY: The local domain SUIT manifest public key generation [n]. */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_PUBKEY_MaxCount (16UL) /*!< Max size of PUBKEY[16] array.                           */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_PUBKEY_MaxIndex (15UL) /*!< Max index of PUBKEY[16] array.                          */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_PUBKEY_MinIndex (0UL) /*!< Min index of PUBKEY[16] array.                           */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_PUBKEY_VALUE_Pos (0UL) /*!< Position of VALUE field.                                */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_PUBKEY_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_SUITPUBKEY_PUBKEY_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_SUITPUBKEY_MAC: The authentication tag of the local domain SUIT manifest public key generation [n]. */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                   */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                  */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                  */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_SUITPUBKEY_MAC_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_SUITPUBKEY_RFU: (unspecified) */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                   */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                  */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                  */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
+  #define SICR_AROT_APPLICATION_SUITPUBKEY_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_SUITPUBKEY_RFU_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/
+
 
 
 /* ============================================== Struct SICR_AROT_APPLICATION =============================================== */
 /**
-  * @brief APPLICATION [SICR_AROT_APPLICATION] Extended RoT to the application core/domain.
+  * @brief APPLICATION [SICR_AROT_APPLICATION] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  TBD;                               /*!< (@ 0x00000000) To be added once the secure domain ROM-related
-                                                                         interface is agreed.*/
-  __IM  uint32_t  RESERVED[255];
+  __IOM NRF_SICR_AROT_APPLICATION_FWENC_Type FWENC[2]; /*!< (@ 0x00000000) Local domain firmware master encryption key. The key
+                                                                           is stored in an encrypted then authenticated form
+                                                                           using an AEAD scheme realized by AES-256 GCM mode,
+                                                                           with the local domain KEK used as a secret key. The
+                                                                           initialization vector is provided in NONCE register.
+                                                                           Key attributes from ATTR register shall be used as an
+                                                                           additional authenticated data (AAD) in AEAD.*/
+  __IOM NRF_SICR_AROT_APPLICATION_AUTHDEBUGKEY_Type AUTHDEBUGKEY[3]; /*!< (@ 0x00000080) Local domain authenticated debug access
+                                                                            public key. The public key is stored as additional
+                                                                            authenticated data (AAD) in unencrypted form using
+                                                                            an AEAD scheme realized by AES-256 GCM mode, with
+                                                                            the local domain KEK used as a secret key. The
+                                                                            initialization vector is provided in NONCE register.
+                                                                            Key attributes from ATTR register shall be used as
+                                                                            an additional authenticated data (AAD) in AEAD. The
+                                                                            content of PUBKEY registers shall be used as an
+                                                                            additional authenticated data (AAD) in AEAD.*/
+  __IOM NRF_SICR_AROT_APPLICATION_SUITPUBKEY_Type SUITPUBKEY[3]; /*!< (@ 0x000001A0) Public key used by the local domain SUIT
+                                                                            manifest. The public key is stored as additional
+                                                                            authenticated data (AAD) in unencrypted form using
+                                                                            an AEAD scheme realized by AES-256 GCM mode, with
+                                                                            the local domain KEK used as a secret key. The
+                                                                            initialization vector is provided in NONCE register.
+                                                                            Key attributes from ATTR register shall be used as
+                                                                            an additional authenticated data (AAD) in AEAD. The
+                                                                            content of PUBKEY registers shall be used as an
+                                                                            additional authenticated data (AAD) in AEAD.*/
+  __IM  uint32_t  RESERVED[80];
 } NRF_SICR_AROT_APPLICATION_Type;                    /*!< Size = 1024 (0x400)                                                  */
+
+
+/* ============================================== Struct SICR_AROT_RADIO_FWENC =============================================== */
+/**
+  * @brief FWENC [SICR_AROT_RADIO_FWENC] Local domain firmware master encryption key. The key is stored in an encrypted then
+            authenticated form using an AEAD scheme realized by AES-256 GCM mode, with the local domain KEK used as a secret
+            key. The initialization vector is provided in NONCE register. Key attributes from ATTR register shall be used as an
+            additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain firmware master
+                                                                         encryption key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  CIPHERTEXT[8];                     /*!< (@ 0x00000008) The encrypted local domain firmware master encryption
+                                                                         key generation [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000028) The authentication tag of the local domain firmware
+                                                                         master encryption key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000038) (unspecified)                                         */
+} NRF_SICR_AROT_RADIO_FWENC_Type;                    /*!< Size = 64 (0x040)                                                    */
+  #define SICR_AROT_RADIO_FWENC_MaxCount (2UL)       /*!< Size of FWENC[2] array.                                              */
+  #define SICR_AROT_RADIO_FWENC_MaxIndex (1UL)       /*!< Max index of FWENC[2] array.                                         */
+  #define SICR_AROT_RADIO_FWENC_MinIndex (0UL)       /*!< Min index of FWENC[2] array.                                         */
+
+/* SICR_AROT_RADIO_FWENC_NONCE: The initialization vector of the encryption algorithm used to protect the local domain firmware
+                                 master encryption key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_RADIO_FWENC_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                            */
+  #define SICR_AROT_RADIO_FWENC_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_FWENC_NONCE_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/
+
+
+/* SICR_AROT_RADIO_FWENC_ATTR: The attributes of the local domain firmware master encryption key generation [n]. This field is
+                                used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_RADIO_FWENC_ATTR_TYPE_Pos (0UL)  /*!< Position of TYPE field.                                              */
+  #define SICR_AROT_RADIO_FWENC_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_RADIO_FWENC_ATTR_TYPE_Pos) /*!< Bit mask of TYPE field.   */
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_RADIO_FWENC_ATTR_LEN_Pos (16UL)  /*!< Position of LEN field.                                               */
+  #define SICR_AROT_RADIO_FWENC_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_RADIO_FWENC_ATTR_LEN_Pos) /*!< Bit mask of LEN field.      */
+
+
+/* SICR_AROT_RADIO_FWENC_CIPHERTEXT: The encrypted local domain firmware master encryption key generation [n]. */
+  #define SICR_AROT_RADIO_FWENC_CIPHERTEXT_MaxCount (8UL) /*!< Max size of CIPHERTEXT[8] array.                                */
+  #define SICR_AROT_RADIO_FWENC_CIPHERTEXT_MaxIndex (7UL) /*!< Max index of CIPHERTEXT[8] array.                               */
+  #define SICR_AROT_RADIO_FWENC_CIPHERTEXT_MinIndex (0UL) /*!< Min index of CIPHERTEXT[8] array.                               */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_RADIO_FWENC_CIPHERTEXT_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
+  #define SICR_AROT_RADIO_FWENC_CIPHERTEXT_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_FWENC_CIPHERTEXT_VALUE_Pos) /*!< Bit mask
+                                                                            of VALUE field.*/
+
+
+/* SICR_AROT_RADIO_FWENC_MAC: The authentication tag of the local domain firmware master encryption key generation [n]. */
+  #define SICR_AROT_RADIO_FWENC_MAC_MaxCount (4UL)   /*!< Max size of MAC[4] array.                                            */
+  #define SICR_AROT_RADIO_FWENC_MAC_MaxIndex (3UL)   /*!< Max index of MAC[4] array.                                           */
+  #define SICR_AROT_RADIO_FWENC_MAC_MinIndex (0UL)   /*!< Min index of MAC[4] array.                                           */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_RADIO_FWENC_MAC_VALUE_Pos (0UL)  /*!< Position of VALUE field.                                             */
+  #define SICR_AROT_RADIO_FWENC_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_FWENC_MAC_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/
+
+
+/* SICR_AROT_RADIO_FWENC_RFU: (unspecified) */
+  #define SICR_AROT_RADIO_FWENC_RFU_MaxCount (2UL)   /*!< Max size of RFU[2] array.                                            */
+  #define SICR_AROT_RADIO_FWENC_RFU_MaxIndex (1UL)   /*!< Max index of RFU[2] array.                                           */
+  #define SICR_AROT_RADIO_FWENC_RFU_MinIndex (0UL)   /*!< Min index of RFU[2] array.                                           */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_RADIO_FWENC_RFU_VALUE_Pos (0UL)  /*!< Position of VALUE field.                                             */
+  #define SICR_AROT_RADIO_FWENC_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_FWENC_RFU_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/
+
+
+
+/* =========================================== Struct SICR_AROT_RADIO_AUTHDEBUGKEY =========================================== */
+/**
+  * @brief AUTHDEBUGKEY [SICR_AROT_RADIO_AUTHDEBUGKEY] Local domain authenticated debug access public key. The public key is
+            stored as additional authenticated data (AAD) in unencrypted form using an AEAD scheme realized by AES-256 GCM mode,
+            with the local domain KEK used as a secret key. The initialization vector is provided in NONCE register. Key
+            attributes from ATTR register shall be used as an additional authenticated data (AAD) in AEAD. The content of PUBKEY
+            registers shall be used as an additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain authenticated debug
+                                                                         access public key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  PUBKEY[16];                        /*!< (@ 0x00000008) The local domain authenticated debug access public key
+                                                                         generation [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000048) The authentication tag of the local domain
+                                                                         authenticated debug access public key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000058) (unspecified)                                         */
+} NRF_SICR_AROT_RADIO_AUTHDEBUGKEY_Type;             /*!< Size = 96 (0x060)                                                    */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_MaxCount (3UL) /*!< Size of AUTHDEBUGKEY[3] array.                                      */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_MaxIndex (2UL) /*!< Max index of AUTHDEBUGKEY[3] array.                                 */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_MinIndex (0UL) /*!< Min index of AUTHDEBUGKEY[3] array.                                 */
+
+/* SICR_AROT_RADIO_AUTHDEBUGKEY_NONCE: The initialization vector of the encryption algorithm used to protect the local domain
+                                        authenticated debug access public key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_AUTHDEBUGKEY_NONCE_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_RADIO_AUTHDEBUGKEY_ATTR: The attributes of the local domain firmware master encryption key generation [n]. This
+                                       field is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                        */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_RADIO_AUTHDEBUGKEY_ATTR_TYPE_Pos) /*!< Bit mask of
+                                                                            TYPE field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                         */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_RADIO_AUTHDEBUGKEY_ATTR_LEN_Pos) /*!< Bit mask of LEN
+                                                                            field.*/
+
+
+/* SICR_AROT_RADIO_AUTHDEBUGKEY_PUBKEY: The local domain authenticated debug access public key generation [n]. */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_PUBKEY_MaxCount (16UL) /*!< Max size of PUBKEY[16] array.                               */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_PUBKEY_MaxIndex (15UL) /*!< Max index of PUBKEY[16] array.                              */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_PUBKEY_MinIndex (0UL) /*!< Min index of PUBKEY[16] array.                               */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_PUBKEY_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_PUBKEY_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_AUTHDEBUGKEY_PUBKEY_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_RADIO_AUTHDEBUGKEY_MAC: The authentication tag of the local domain authenticated debug access public key generation
+                                      [n]. */
+
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                       */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                      */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                      */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_AUTHDEBUGKEY_MAC_VALUE_Pos) /*!< Bit mask
+                                                                            of VALUE field.*/
+
+
+/* SICR_AROT_RADIO_AUTHDEBUGKEY_RFU: (unspecified) */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                       */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                      */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                      */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
+  #define SICR_AROT_RADIO_AUTHDEBUGKEY_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_AUTHDEBUGKEY_RFU_VALUE_Pos) /*!< Bit mask
+                                                                            of VALUE field.*/
+
+
+
+/* ============================================ Struct SICR_AROT_RADIO_SUITPUBKEY ============================================ */
+/**
+  * @brief SUITPUBKEY [SICR_AROT_RADIO_SUITPUBKEY] Public key used by the local domain SUIT manifest. The public key is stored
+            as additional authenticated data (AAD) in unencrypted form using an AEAD scheme realized by AES-256 GCM mode, with
+            the local domain KEK used as a secret key. The initialization vector is provided in NONCE register. Key attributes
+            from ATTR register shall be used as an additional authenticated data (AAD) in AEAD. The content of PUBKEY registers
+            shall be used as an additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain SUIT manifest public
+                                                                         key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  PUBKEY[16];                        /*!< (@ 0x00000008) The local domain SUIT manifest public key generation
+                                                                         [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000048) The authentication tag of the local domain SUIT
+                                                                         manifest public key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000058) (unspecified)                                         */
+} NRF_SICR_AROT_RADIO_SUITPUBKEY_Type;               /*!< Size = 96 (0x060)                                                    */
+  #define SICR_AROT_RADIO_SUITPUBKEY_MaxCount (3UL)  /*!< Size of SUITPUBKEY[3] array.                                         */
+  #define SICR_AROT_RADIO_SUITPUBKEY_MaxIndex (2UL)  /*!< Max index of SUITPUBKEY[3] array.                                    */
+  #define SICR_AROT_RADIO_SUITPUBKEY_MinIndex (0UL)  /*!< Min index of SUITPUBKEY[3] array.                                    */
+
+/* SICR_AROT_RADIO_SUITPUBKEY_NONCE: The initialization vector of the encryption algorithm used to protect the local domain SUIT
+                                      manifest public key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_RADIO_SUITPUBKEY_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
+  #define SICR_AROT_RADIO_SUITPUBKEY_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_SUITPUBKEY_NONCE_VALUE_Pos) /*!< Bit mask
+                                                                            of VALUE field.*/
+
+
+/* SICR_AROT_RADIO_SUITPUBKEY_ATTR: The attributes of the local domain firmware master encryption key generation [n]. This field
+                                     is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_RADIO_SUITPUBKEY_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                          */
+  #define SICR_AROT_RADIO_SUITPUBKEY_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_RADIO_SUITPUBKEY_ATTR_TYPE_Pos) /*!< Bit mask of TYPE
+                                                                            field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_RADIO_SUITPUBKEY_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                           */
+  #define SICR_AROT_RADIO_SUITPUBKEY_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_RADIO_SUITPUBKEY_ATTR_LEN_Pos) /*!< Bit mask of LEN
+                                                                            field.*/
+
+
+/* SICR_AROT_RADIO_SUITPUBKEY_PUBKEY: The local domain SUIT manifest public key generation [n]. */
+  #define SICR_AROT_RADIO_SUITPUBKEY_PUBKEY_MaxCount (16UL) /*!< Max size of PUBKEY[16] array.                                 */
+  #define SICR_AROT_RADIO_SUITPUBKEY_PUBKEY_MaxIndex (15UL) /*!< Max index of PUBKEY[16] array.                                */
+  #define SICR_AROT_RADIO_SUITPUBKEY_PUBKEY_MinIndex (0UL) /*!< Min index of PUBKEY[16] array.                                 */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_RADIO_SUITPUBKEY_PUBKEY_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
+  #define SICR_AROT_RADIO_SUITPUBKEY_PUBKEY_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_SUITPUBKEY_PUBKEY_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_RADIO_SUITPUBKEY_MAC: The authentication tag of the local domain SUIT manifest public key generation [n]. */
+  #define SICR_AROT_RADIO_SUITPUBKEY_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                         */
+  #define SICR_AROT_RADIO_SUITPUBKEY_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                        */
+  #define SICR_AROT_RADIO_SUITPUBKEY_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                        */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_RADIO_SUITPUBKEY_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
+  #define SICR_AROT_RADIO_SUITPUBKEY_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_SUITPUBKEY_MAC_VALUE_Pos) /*!< Bit mask of
+                                                                            VALUE field.*/
+
+
+/* SICR_AROT_RADIO_SUITPUBKEY_RFU: (unspecified) */
+  #define SICR_AROT_RADIO_SUITPUBKEY_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                         */
+  #define SICR_AROT_RADIO_SUITPUBKEY_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                        */
+  #define SICR_AROT_RADIO_SUITPUBKEY_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                        */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_RADIO_SUITPUBKEY_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
+  #define SICR_AROT_RADIO_SUITPUBKEY_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_SUITPUBKEY_RFU_VALUE_Pos) /*!< Bit mask of
+                                                                            VALUE field.*/
+
 
 
 /* ================================================= Struct SICR_AROT_RADIO ================================================== */
 /**
-  * @brief RADIO [SICR_AROT_RADIO] Interface to extend the RoT to the radio core/domain.
+  * @brief RADIO [SICR_AROT_RADIO] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  TBD;                               /*!< (@ 0x00000000) To be added once the secure domain ROM-related
-                                                                         interface is agreed.*/
-  __IM  uint32_t  RESERVED[255];
+  __IOM NRF_SICR_AROT_RADIO_FWENC_Type FWENC[2];     /*!< (@ 0x00000000) Local domain firmware master encryption key. The key is
+                                                                         stored in an encrypted then authenticated form using an
+                                                                         AEAD scheme realized by AES-256 GCM mode, with the
+                                                                         local domain KEK used as a secret key. The
+                                                                         initialization vector is provided in NONCE register.
+                                                                         Key attributes from ATTR register shall be used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM NRF_SICR_AROT_RADIO_AUTHDEBUGKEY_Type AUTHDEBUGKEY[3]; /*!< (@ 0x00000080) Local domain authenticated debug access
+                                                                            public key. The public key is stored as additional
+                                                                            authenticated data (AAD) in unencrypted form using
+                                                                            an AEAD scheme realized by AES-256 GCM mode, with
+                                                                            the local domain KEK used as a secret key. The
+                                                                            initialization vector is provided in NONCE register.
+                                                                            Key attributes from ATTR register shall be used as
+                                                                            an additional authenticated data (AAD) in AEAD. The
+                                                                            content of PUBKEY registers shall be used as an
+                                                                            additional authenticated data (AAD) in AEAD.*/
+  __IOM NRF_SICR_AROT_RADIO_SUITPUBKEY_Type SUITPUBKEY[3]; /*!< (@ 0x000001A0) Public key used by the local domain SUIT
+                                                                            manifest. The public key is stored as additional
+                                                                            authenticated data (AAD) in unencrypted form using
+                                                                            an AEAD scheme realized by AES-256 GCM mode, with
+                                                                            the local domain KEK used as a secret key. The
+                                                                            initialization vector is provided in NONCE register.
+                                                                            Key attributes from ATTR register shall be used as
+                                                                            an additional authenticated data (AAD) in AEAD. The
+                                                                            content of PUBKEY registers shall be used as an
+                                                                            additional authenticated data (AAD) in AEAD.*/
+  __IM  uint32_t  RESERVED[80];
 } NRF_SICR_AROT_RADIO_Type;                          /*!< Size = 1024 (0x400)                                                  */
+
+
+/* =========================================== Struct SICR_AROT_CELLULARCORE_FWENC =========================================== */
+/**
+  * @brief FWENC [SICR_AROT_CELLULARCORE_FWENC] Local domain firmware master encryption key. The key is stored in an encrypted
+            then authenticated form using an AEAD scheme realized by AES-256 GCM mode, with the local domain KEK used as a
+            secret key. The initialization vector is provided in NONCE register. Key attributes from ATTR register shall be used
+            as an additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain firmware master
+                                                                         encryption key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  CIPHERTEXT[8];                     /*!< (@ 0x00000008) The encrypted local domain firmware master encryption
+                                                                         key generation [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000028) The authentication tag of the local domain firmware
+                                                                         master encryption key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000038) (unspecified)                                         */
+} NRF_SICR_AROT_CELLULARCORE_FWENC_Type;             /*!< Size = 64 (0x040)                                                    */
+  #define SICR_AROT_CELLULARCORE_FWENC_MaxCount (2UL) /*!< Size of FWENC[2] array.                                             */
+  #define SICR_AROT_CELLULARCORE_FWENC_MaxIndex (1UL) /*!< Max index of FWENC[2] array.                                        */
+  #define SICR_AROT_CELLULARCORE_FWENC_MinIndex (0UL) /*!< Min index of FWENC[2] array.                                        */
+
+/* SICR_AROT_CELLULARCORE_FWENC_NONCE: The initialization vector of the encryption algorithm used to protect the local domain
+                                        firmware master encryption key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_CELLULARCORE_FWENC_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
+  #define SICR_AROT_CELLULARCORE_FWENC_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_FWENC_NONCE_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_FWENC_ATTR: The attributes of the local domain firmware master encryption key generation [n]. This
+                                       field is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_CELLULARCORE_FWENC_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                        */
+  #define SICR_AROT_CELLULARCORE_FWENC_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_CELLULARCORE_FWENC_ATTR_TYPE_Pos) /*!< Bit mask of
+                                                                            TYPE field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_CELLULARCORE_FWENC_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                         */
+  #define SICR_AROT_CELLULARCORE_FWENC_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_CELLULARCORE_FWENC_ATTR_LEN_Pos) /*!< Bit mask of LEN
+                                                                            field.*/
+
+
+/* SICR_AROT_CELLULARCORE_FWENC_CIPHERTEXT: The encrypted local domain firmware master encryption key generation [n]. */
+  #define SICR_AROT_CELLULARCORE_FWENC_CIPHERTEXT_MaxCount (8UL) /*!< Max size of CIPHERTEXT[8] array.                         */
+  #define SICR_AROT_CELLULARCORE_FWENC_CIPHERTEXT_MaxIndex (7UL) /*!< Max index of CIPHERTEXT[8] array.                        */
+  #define SICR_AROT_CELLULARCORE_FWENC_CIPHERTEXT_MinIndex (0UL) /*!< Min index of CIPHERTEXT[8] array.                        */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_CELLULARCORE_FWENC_CIPHERTEXT_VALUE_Pos (0UL) /*!< Position of VALUE field.                                */
+  #define SICR_AROT_CELLULARCORE_FWENC_CIPHERTEXT_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_FWENC_CIPHERTEXT_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_FWENC_MAC: The authentication tag of the local domain firmware master encryption key generation [n]. */
+  #define SICR_AROT_CELLULARCORE_FWENC_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                       */
+  #define SICR_AROT_CELLULARCORE_FWENC_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                      */
+  #define SICR_AROT_CELLULARCORE_FWENC_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                      */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_CELLULARCORE_FWENC_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
+  #define SICR_AROT_CELLULARCORE_FWENC_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_FWENC_MAC_VALUE_Pos) /*!< Bit mask
+                                                                            of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_FWENC_RFU: (unspecified) */
+  #define SICR_AROT_CELLULARCORE_FWENC_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                       */
+  #define SICR_AROT_CELLULARCORE_FWENC_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                      */
+  #define SICR_AROT_CELLULARCORE_FWENC_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                      */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_CELLULARCORE_FWENC_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
+  #define SICR_AROT_CELLULARCORE_FWENC_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_FWENC_RFU_VALUE_Pos) /*!< Bit mask
+                                                                            of VALUE field.*/
+
+
+
+/* ======================================= Struct SICR_AROT_CELLULARCORE_AUTHDEBUGKEY ======================================== */
+/**
+  * @brief AUTHDEBUGKEY [SICR_AROT_CELLULARCORE_AUTHDEBUGKEY] Local domain authenticated debug access public key. The public key
+            is stored as additional authenticated data (AAD) in unencrypted form using an AEAD scheme realized by AES-256 GCM
+            mode, with the local domain KEK used as a secret key. The initialization vector is provided in NONCE register. Key
+            attributes from ATTR register shall be used as an additional authenticated data (AAD) in AEAD. The content of PUBKEY
+            registers shall be used as an additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain authenticated debug
+                                                                         access public key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  PUBKEY[16];                        /*!< (@ 0x00000008) The local domain authenticated debug access public key
+                                                                         generation [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000048) The authentication tag of the local domain
+                                                                         authenticated debug access public key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000058) (unspecified)                                         */
+} NRF_SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_Type;      /*!< Size = 96 (0x060)                                                    */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_MaxCount (3UL) /*!< Size of AUTHDEBUGKEY[3] array.                               */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_MaxIndex (2UL) /*!< Max index of AUTHDEBUGKEY[3] array.                          */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_MinIndex (0UL) /*!< Min index of AUTHDEBUGKEY[3] array.                          */
+
+/* SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_NONCE: The initialization vector of the encryption algorithm used to protect the local
+                                               domain authenticated debug access public key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                              */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_NONCE_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_ATTR: The attributes of the local domain firmware master encryption key generation [n].
+                                              This field is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                 */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_ATTR_TYPE_Pos) /*!<
+                                                                            Bit mask of TYPE field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                  */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_ATTR_LEN_Pos) /*!<
+                                                                            Bit mask of LEN field.*/
+
+
+/* SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_PUBKEY: The local domain authenticated debug access public key generation [n]. */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_PUBKEY_MaxCount (16UL) /*!< Max size of PUBKEY[16] array.                        */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_PUBKEY_MaxIndex (15UL) /*!< Max index of PUBKEY[16] array.                       */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_PUBKEY_MinIndex (0UL) /*!< Min index of PUBKEY[16] array.                        */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_PUBKEY_VALUE_Pos (0UL) /*!< Position of VALUE field.                             */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_PUBKEY_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_PUBKEY_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_MAC: The authentication tag of the local domain authenticated debug access public key
+                                             generation [n]. */
+
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                               */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                               */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_MAC_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_RFU: (unspecified) */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                               */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                               */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                */
+  #define SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_RFU_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+
+/* ======================================== Struct SICR_AROT_CELLULARCORE_SUITPUBKEY ========================================= */
+/**
+  * @brief SUITPUBKEY [SICR_AROT_CELLULARCORE_SUITPUBKEY] Public key used by the local domain SUIT manifest. The public key is
+            stored as additional authenticated data (AAD) in unencrypted form using an AEAD scheme realized by AES-256 GCM mode,
+            with the local domain KEK used as a secret key. The initialization vector is provided in NONCE register. Key
+            attributes from ATTR register shall be used as an additional authenticated data (AAD) in AEAD. The content of PUBKEY
+            registers shall be used as an additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain SUIT manifest public
+                                                                         key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  PUBKEY[16];                        /*!< (@ 0x00000008) The local domain SUIT manifest public key generation
+                                                                         [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000048) The authentication tag of the local domain SUIT
+                                                                         manifest public key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000058) (unspecified)                                         */
+} NRF_SICR_AROT_CELLULARCORE_SUITPUBKEY_Type;        /*!< Size = 96 (0x060)                                                    */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_MaxCount (3UL) /*!< Size of SUITPUBKEY[3] array.                                   */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_MaxIndex (2UL) /*!< Max index of SUITPUBKEY[3] array.                              */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_MinIndex (0UL) /*!< Min index of SUITPUBKEY[3] array.                              */
+
+/* SICR_AROT_CELLULARCORE_SUITPUBKEY_NONCE: The initialization vector of the encryption algorithm used to protect the local
+                                             domain SUIT manifest public key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_SUITPUBKEY_NONCE_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_SUITPUBKEY_ATTR: The attributes of the local domain firmware master encryption key generation [n].
+                                            This field is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                   */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_CELLULARCORE_SUITPUBKEY_ATTR_TYPE_Pos) /*!< Bit
+                                                                            mask of TYPE field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                    */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_CELLULARCORE_SUITPUBKEY_ATTR_LEN_Pos) /*!< Bit
+                                                                            mask of LEN field.*/
+
+
+/* SICR_AROT_CELLULARCORE_SUITPUBKEY_PUBKEY: The local domain SUIT manifest public key generation [n]. */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_PUBKEY_MaxCount (16UL) /*!< Max size of PUBKEY[16] array.                          */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_PUBKEY_MaxIndex (15UL) /*!< Max index of PUBKEY[16] array.                         */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_PUBKEY_MinIndex (0UL) /*!< Min index of PUBKEY[16] array.                          */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_PUBKEY_VALUE_Pos (0UL) /*!< Position of VALUE field.                               */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_PUBKEY_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_SUITPUBKEY_PUBKEY_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_SUITPUBKEY_MAC: The authentication tag of the local domain SUIT manifest public key generation [n]. */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                  */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                 */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                 */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                  */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_SUITPUBKEY_MAC_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_SUITPUBKEY_RFU: (unspecified) */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                  */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                 */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                 */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                  */
+  #define SICR_AROT_CELLULARCORE_SUITPUBKEY_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_SUITPUBKEY_RFU_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/
+
 
 
 /* ============================================== Struct SICR_AROT_CELLULARCORE ============================================== */
 /**
-  * @brief CELLULARCORE [SICR_AROT_CELLULARCORE] Interface to extend the RoT to the cellular core/domain.
+  * @brief CELLULARCORE [SICR_AROT_CELLULARCORE] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  TBD;                               /*!< (@ 0x00000000) To be added once the secure domain ROM-related
-                                                                         interface is agreed.*/
-  __IM  uint32_t  RESERVED[255];
+  __IOM NRF_SICR_AROT_CELLULARCORE_FWENC_Type FWENC[2]; /*!< (@ 0x00000000) Local domain firmware master encryption key. The key
+                                                                            is stored in an encrypted then authenticated form
+                                                                            using an AEAD scheme realized by AES-256 GCM mode,
+                                                                            with the local domain KEK used as a secret key. The
+                                                                            initialization vector is provided in NONCE register.
+                                                                            Key attributes from ATTR register shall be used as
+                                                                            an additional authenticated data (AAD) in AEAD.*/
+  __IOM NRF_SICR_AROT_CELLULARCORE_AUTHDEBUGKEY_Type AUTHDEBUGKEY[3]; /*!< (@ 0x00000080) Local domain authenticated debug
+                                                                            access public key. The public key is stored as
+                                                                            additional authenticated data (AAD) in unencrypted
+                                                                            form using an AEAD scheme realized by AES-256 GCM
+                                                                            mode, with the local domain KEK used as a secret
+                                                                            key. The initialization vector is provided in NONCE
+                                                                            register. Key attributes from ATTR register shall be
+                                                                            used as an additional authenticated data (AAD) in
+                                                                            AEAD. The content of PUBKEY registers shall be used
+                                                                            as an additional authenticated data (AAD) in AEAD.*/
+  __IOM NRF_SICR_AROT_CELLULARCORE_SUITPUBKEY_Type SUITPUBKEY[3]; /*!< (@ 0x000001A0) Public key used by the local domain SUIT
+                                                                            manifest. The public key is stored as additional
+                                                                            authenticated data (AAD) in unencrypted form using
+                                                                            an AEAD scheme realized by AES-256 GCM mode, with
+                                                                            the local domain KEK used as a secret key. The
+                                                                            initialization vector is provided in NONCE register.
+                                                                            Key attributes from ATTR register shall be used as
+                                                                            an additional authenticated data (AAD) in AEAD. The
+                                                                            content of PUBKEY registers shall be used as an
+                                                                            additional authenticated data (AAD) in AEAD.*/
+  __IM  uint32_t  RESERVED[80];
 } NRF_SICR_AROT_CELLULARCORE_Type;                   /*!< Size = 1024 (0x400)                                                  */
+
+
+/* ============================================= Struct SICR_AROT_WIFICORE_FWENC ============================================= */
+/**
+  * @brief FWENC [SICR_AROT_WIFICORE_FWENC] Local domain firmware master encryption key. The key is stored in an encrypted then
+            authenticated form using an AEAD scheme realized by AES-256 GCM mode, with the local domain KEK used as a secret
+            key. The initialization vector is provided in NONCE register. Key attributes from ATTR register shall be used as an
+            additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain firmware master
+                                                                         encryption key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  CIPHERTEXT[8];                     /*!< (@ 0x00000008) The encrypted local domain firmware master encryption
+                                                                         key generation [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000028) The authentication tag of the local domain firmware
+                                                                         master encryption key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000038) (unspecified)                                         */
+} NRF_SICR_AROT_WIFICORE_FWENC_Type;                 /*!< Size = 64 (0x040)                                                    */
+  #define SICR_AROT_WIFICORE_FWENC_MaxCount (2UL)    /*!< Size of FWENC[2] array.                                              */
+  #define SICR_AROT_WIFICORE_FWENC_MaxIndex (1UL)    /*!< Max index of FWENC[2] array.                                         */
+  #define SICR_AROT_WIFICORE_FWENC_MinIndex (0UL)    /*!< Min index of FWENC[2] array.                                         */
+
+/* SICR_AROT_WIFICORE_FWENC_NONCE: The initialization vector of the encryption algorithm used to protect the local domain
+                                    firmware master encryption key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_WIFICORE_FWENC_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
+  #define SICR_AROT_WIFICORE_FWENC_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_FWENC_NONCE_VALUE_Pos) /*!< Bit mask of
+                                                                            VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_FWENC_ATTR: The attributes of the local domain firmware master encryption key generation [n]. This field
+                                   is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_WIFICORE_FWENC_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                            */
+  #define SICR_AROT_WIFICORE_FWENC_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_WIFICORE_FWENC_ATTR_TYPE_Pos) /*!< Bit mask of TYPE
+                                                                            field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_WIFICORE_FWENC_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                             */
+  #define SICR_AROT_WIFICORE_FWENC_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_WIFICORE_FWENC_ATTR_LEN_Pos) /*!< Bit mask of LEN field.*/
+
+
+/* SICR_AROT_WIFICORE_FWENC_CIPHERTEXT: The encrypted local domain firmware master encryption key generation [n]. */
+  #define SICR_AROT_WIFICORE_FWENC_CIPHERTEXT_MaxCount (8UL) /*!< Max size of CIPHERTEXT[8] array.                             */
+  #define SICR_AROT_WIFICORE_FWENC_CIPHERTEXT_MaxIndex (7UL) /*!< Max index of CIPHERTEXT[8] array.                            */
+  #define SICR_AROT_WIFICORE_FWENC_CIPHERTEXT_MinIndex (0UL) /*!< Min index of CIPHERTEXT[8] array.                            */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_WIFICORE_FWENC_CIPHERTEXT_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
+  #define SICR_AROT_WIFICORE_FWENC_CIPHERTEXT_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_FWENC_CIPHERTEXT_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_FWENC_MAC: The authentication tag of the local domain firmware master encryption key generation [n]. */
+  #define SICR_AROT_WIFICORE_FWENC_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                           */
+  #define SICR_AROT_WIFICORE_FWENC_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                          */
+  #define SICR_AROT_WIFICORE_FWENC_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                          */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_WIFICORE_FWENC_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                           */
+  #define SICR_AROT_WIFICORE_FWENC_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_FWENC_MAC_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/
+
+
+/* SICR_AROT_WIFICORE_FWENC_RFU: (unspecified) */
+  #define SICR_AROT_WIFICORE_FWENC_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                           */
+  #define SICR_AROT_WIFICORE_FWENC_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                          */
+  #define SICR_AROT_WIFICORE_FWENC_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                          */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_WIFICORE_FWENC_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                           */
+  #define SICR_AROT_WIFICORE_FWENC_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_FWENC_RFU_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/
+
+
+
+/* ========================================= Struct SICR_AROT_WIFICORE_AUTHDEBUGKEY ========================================== */
+/**
+  * @brief AUTHDEBUGKEY [SICR_AROT_WIFICORE_AUTHDEBUGKEY] Local domain authenticated debug access public key. The public key is
+            stored as additional authenticated data (AAD) in unencrypted form using an AEAD scheme realized by AES-256 GCM mode,
+            with the local domain KEK used as a secret key. The initialization vector is provided in NONCE register. Key
+            attributes from ATTR register shall be used as an additional authenticated data (AAD) in AEAD. The content of PUBKEY
+            registers shall be used as an additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain authenticated debug
+                                                                         access public key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  PUBKEY[16];                        /*!< (@ 0x00000008) The local domain authenticated debug access public key
+                                                                         generation [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000048) The authentication tag of the local domain
+                                                                         authenticated debug access public key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000058) (unspecified)                                         */
+} NRF_SICR_AROT_WIFICORE_AUTHDEBUGKEY_Type;          /*!< Size = 96 (0x060)                                                    */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_MaxCount (3UL) /*!< Size of AUTHDEBUGKEY[3] array.                                   */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_MaxIndex (2UL) /*!< Max index of AUTHDEBUGKEY[3] array.                              */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_MinIndex (0UL) /*!< Min index of AUTHDEBUGKEY[3] array.                              */
+
+/* SICR_AROT_WIFICORE_AUTHDEBUGKEY_NONCE: The initialization vector of the encryption algorithm used to protect the local domain
+                                           authenticated debug access public key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                  */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_AUTHDEBUGKEY_NONCE_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_AUTHDEBUGKEY_ATTR: The attributes of the local domain firmware master encryption key generation [n]. This
+                                          field is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                     */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_WIFICORE_AUTHDEBUGKEY_ATTR_TYPE_Pos) /*!< Bit
+                                                                            mask of TYPE field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                      */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_WIFICORE_AUTHDEBUGKEY_ATTR_LEN_Pos) /*!< Bit mask
+                                                                            of LEN field.*/
+
+
+/* SICR_AROT_WIFICORE_AUTHDEBUGKEY_PUBKEY: The local domain authenticated debug access public key generation [n]. */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_PUBKEY_MaxCount (16UL) /*!< Max size of PUBKEY[16] array.                            */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_PUBKEY_MaxIndex (15UL) /*!< Max index of PUBKEY[16] array.                           */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_PUBKEY_MinIndex (0UL) /*!< Min index of PUBKEY[16] array.                            */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_PUBKEY_VALUE_Pos (0UL) /*!< Position of VALUE field.                                 */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_PUBKEY_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_AUTHDEBUGKEY_PUBKEY_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_AUTHDEBUGKEY_MAC: The authentication tag of the local domain authenticated debug access public key
+                                         generation [n]. */
+
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                    */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                   */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                   */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_AUTHDEBUGKEY_MAC_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_AUTHDEBUGKEY_RFU: (unspecified) */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                    */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                   */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                   */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
+  #define SICR_AROT_WIFICORE_AUTHDEBUGKEY_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_AUTHDEBUGKEY_RFU_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+
+/* ========================================== Struct SICR_AROT_WIFICORE_SUITPUBKEY =========================================== */
+/**
+  * @brief SUITPUBKEY [SICR_AROT_WIFICORE_SUITPUBKEY] Public key used by the local domain SUIT manifest. The public key is
+            stored as additional authenticated data (AAD) in unencrypted form using an AEAD scheme realized by AES-256 GCM mode,
+            with the local domain KEK used as a secret key. The initialization vector is provided in NONCE register. Key
+            attributes from ATTR register shall be used as an additional authenticated data (AAD) in AEAD. The content of PUBKEY
+            registers shall be used as an additional authenticated data (AAD) in AEAD.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the local domain SUIT manifest public
+                                                                         key generation [n].*/
+  __IOM uint32_t  ATTR;                              /*!< (@ 0x00000004) The attributes of the local domain firmware master
+                                                                         encryption key generation [n]. This field is used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM uint32_t  PUBKEY[16];                        /*!< (@ 0x00000008) The local domain SUIT manifest public key generation
+                                                                         [n].*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000048) The authentication tag of the local domain SUIT
+                                                                         manifest public key generation [n].*/
+  __IOM uint32_t  RFU[2];                            /*!< (@ 0x00000058) (unspecified)                                         */
+} NRF_SICR_AROT_WIFICORE_SUITPUBKEY_Type;            /*!< Size = 96 (0x060)                                                    */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_MaxCount (3UL) /*!< Size of SUITPUBKEY[3] array.                                       */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_MaxIndex (2UL) /*!< Max index of SUITPUBKEY[3] array.                                  */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_MinIndex (0UL) /*!< Min index of SUITPUBKEY[3] array.                                  */
+
+/* SICR_AROT_WIFICORE_SUITPUBKEY_NONCE: The initialization vector of the encryption algorithm used to protect the local domain
+                                         SUIT manifest public key generation [n]. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_SUITPUBKEY_NONCE_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_SUITPUBKEY_ATTR: The attributes of the local domain firmware master encryption key generation [n]. This
+                                        field is used as an additional authenticated data (AAD) in AEAD. */
+
+
+/* TYPE @Bits 0..15 : Type of the key. This field should follow the key type encoding from PSA Crypto API v1.2.1. */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_ATTR_TYPE_Pos (0UL) /*!< Position of TYPE field.                                       */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_ATTR_TYPE_Msk (0xFFFFUL << SICR_AROT_WIFICORE_SUITPUBKEY_ATTR_TYPE_Pos) /*!< Bit mask of
+                                                                            TYPE field.*/
+
+/* LEN @Bits 16..31 : Length of the key in bits. */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_ATTR_LEN_Pos (16UL) /*!< Position of LEN field.                                        */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_ATTR_LEN_Msk (0xFFFFUL << SICR_AROT_WIFICORE_SUITPUBKEY_ATTR_LEN_Pos) /*!< Bit mask of
+                                                                            LEN field.*/
+
+
+/* SICR_AROT_WIFICORE_SUITPUBKEY_PUBKEY: The local domain SUIT manifest public key generation [n]. */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_PUBKEY_MaxCount (16UL) /*!< Max size of PUBKEY[16] array.                              */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_PUBKEY_MaxIndex (15UL) /*!< Max index of PUBKEY[16] array.                             */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_PUBKEY_MinIndex (0UL) /*!< Min index of PUBKEY[16] array.                              */
+
+/* VALUE @Bits 0..31 : Value for word [o] in the key value [n]. */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_PUBKEY_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_PUBKEY_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_SUITPUBKEY_PUBKEY_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_SUITPUBKEY_MAC: The authentication tag of the local domain SUIT manifest public key generation [n]. */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                      */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                                     */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                                     */
+
+/* VALUE @Bits 0..31 : The word [o] of the authentication tag. */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_SUITPUBKEY_MAC_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_SUITPUBKEY_RFU: (unspecified) */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_RFU_MaxCount (2UL) /*!< Max size of RFU[2] array.                                      */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_RFU_MaxIndex (1UL) /*!< Max index of RFU[2] array.                                     */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_RFU_MinIndex (0UL) /*!< Min index of RFU[2] array.                                     */
+
+/* VALUE @Bits 0..31 : RFU word [o]. */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
+  #define SICR_AROT_WIFICORE_SUITPUBKEY_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_SUITPUBKEY_RFU_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+
+/* ================================================ Struct SICR_AROT_WIFICORE ================================================ */
+/**
+  * @brief WIFICORE [SICR_AROT_WIFICORE] (unspecified)
+  */
+typedef struct {
+  __IOM NRF_SICR_AROT_WIFICORE_FWENC_Type FWENC[2];  /*!< (@ 0x00000000) Local domain firmware master encryption key. The key is
+                                                                         stored in an encrypted then authenticated form using an
+                                                                         AEAD scheme realized by AES-256 GCM mode, with the
+                                                                         local domain KEK used as a secret key. The
+                                                                         initialization vector is provided in NONCE register.
+                                                                         Key attributes from ATTR register shall be used as an
+                                                                         additional authenticated data (AAD) in AEAD.*/
+  __IOM NRF_SICR_AROT_WIFICORE_AUTHDEBUGKEY_Type AUTHDEBUGKEY[3]; /*!< (@ 0x00000080) Local domain authenticated debug access
+                                                                            public key. The public key is stored as additional
+                                                                            authenticated data (AAD) in unencrypted form using
+                                                                            an AEAD scheme realized by AES-256 GCM mode, with
+                                                                            the local domain KEK used as a secret key. The
+                                                                            initialization vector is provided in NONCE register.
+                                                                            Key attributes from ATTR register shall be used as
+                                                                            an additional authenticated data (AAD) in AEAD. The
+                                                                            content of PUBKEY registers shall be used as an
+                                                                            additional authenticated data (AAD) in AEAD.*/
+  __IOM NRF_SICR_AROT_WIFICORE_SUITPUBKEY_Type SUITPUBKEY[3]; /*!< (@ 0x000001A0) Public key used by the local domain SUIT
+                                                                            manifest. The public key is stored as additional
+                                                                            authenticated data (AAD) in unencrypted form using
+                                                                            an AEAD scheme realized by AES-256 GCM mode, with
+                                                                            the local domain KEK used as a secret key. The
+                                                                            initialization vector is provided in NONCE register.
+                                                                            Key attributes from ATTR register shall be used as
+                                                                            an additional authenticated data (AAD) in AEAD. The
+                                                                            content of PUBKEY registers shall be used as an
+                                                                            additional authenticated data (AAD) in AEAD.*/
+  __IM  uint32_t  RESERVED[80];
+} NRF_SICR_AROT_WIFICORE_Type;                       /*!< Size = 1024 (0x400)                                                  */
 
 
 /* ==================================================== Struct SICR_AROT ===================================================== */
@@ -123170,12 +124555,12 @@ typedef struct {
 
   */
 typedef struct {
-  __IOM NRF_SICR_AROT_SECURE_Type SECURE;            /*!< (@ 0x00000000) Any next-stage secure domain firmware related.        */
-  __IOM NRF_SICR_AROT_APPLICATION_Type APPLICATION;  /*!< (@ 0x00000400) Extended RoT to the application core/domain.          */
-  __IOM NRF_SICR_AROT_RADIO_Type RADIO;              /*!< (@ 0x00000800) Interface to extend the RoT to the radio core/domain. */
-  __IOM NRF_SICR_AROT_CELLULARCORE_Type CELLULARCORE; /*!< (@ 0x00000C00) Interface to extend the RoT to the cellular
-                                                                          core/domain.*/
-} NRF_SICR_AROT_Type;                                /*!< Size = 4096 (0x1000)                                                 */
+  __IOM NRF_SICR_AROT_SECURE_Type SECURE;            /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM NRF_SICR_AROT_APPLICATION_Type APPLICATION;  /*!< (@ 0x00000400) (unspecified)                                         */
+  __IOM NRF_SICR_AROT_RADIO_Type RADIO;              /*!< (@ 0x00000800) (unspecified)                                         */
+  __IOM NRF_SICR_AROT_CELLULARCORE_Type CELLULARCORE; /*!< (@ 0x00000C00) (unspecified)                                        */
+  __IOM NRF_SICR_AROT_WIFICORE_Type WIFICORE;        /*!< (@ 0x00001000) (unspecified)                                         */
+} NRF_SICR_AROT_Type;                                /*!< Size = 5120 (0x1400)                                                 */
 
 /* ======================================================= Struct SICR ======================================================= */
 /**
@@ -123197,7 +124582,7 @@ typedef struct {
                                                                          accessed the secure domain firmware. Any operations
                                                                          related to the local domains must be requested via the
                                                                          secure domain firmware API.*/
-  } NRF_SICR_Type;                                   /*!< Size = 9472 (0x2500)                                                 */
+  } NRF_SICR_Type;                                   /*!< Size = 10496 (0x2900)                                                */
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
@@ -129584,16 +130969,7 @@ typedef union {
   struct {
     __IOM NRF_SPU_FEATURE_IPCT_Type IPCT;            /*!< (@ 0x00000000) (unspecified)                                         */
     __IOM NRF_SPU_FEATURE_DPPIC_Type DPPIC;          /*!< (@ 0x00000080) (unspecified)                                         */
-    #if defined(_GNUC_)
-      #pragma GCC diagnostic push
-      #pragma GCC diagnostic ignored "-Wpedantic"
-    #endif
-    union {
-      __IOM NRF_SPU_FEATURE_GPIOTE_Type GPIOTE[1];   /*!< (@ 0x00000100) (unspecified)                                         */
-    };
-    #if defined(_GNUC_)
-      #pragma GCC diagnostic pop
-    #endif
+    __IOM NRF_SPU_FEATURE_GPIOTE_Type GPIOTE[1];     /*!< (@ 0x00000100) (unspecified)                                         */
     __IM uint32_t RESERVED[48];
     #if defined(_GNUC_)
       #pragma GCC diagnostic push
@@ -129664,19 +131040,10 @@ typedef union {
   * @brief PCGCS [SPU_PCGCS] (unspecified)
   */
 typedef struct {
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
-  #endif
-  union {
-    __IOM uint32_t PENALTY[1];                       /*!< (@ 0x00000000) Penalty level for power/clock pair n. When
+  __IOM uint32_t  PENALTY[1];                        /*!< (@ 0x00000000) Penalty level for power/clock pair n. When
                                                                          FULL_PCP_ZERO feature is not supported, PENALTY[0]
                                                                          address overlaps the PENALTY0 address and register
                                                                          description for PENALTY[0] is not valid.*/
-  };
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic pop
-  #endif
   __IM  uint32_t  RESERVED[31];
   __IOM uint32_t  FORCEOVERRIDE[1];                  /*!< (@ 0x00000080) Force override of power/clock pair n.                 */
 } NRF_SPU_PCGCS_Type;                                /*!< Size = 132 (0x084)                                                   */
@@ -150910,6 +152277,516 @@ typedef struct {
   #define UICR_TRACE_PORTCONFIG_PORTCONFIG_EightSpeed (0x0UL) /*!< One eigth speed                                             */
 
 
+
+/* ============================================== Struct UICR_TAMPER_DETECTION =============================================== */
+/**
+  * @brief DETECTION [UICR_TAMPER_DETECTION] Tamper policy configuration for detected security events.
+  */
+typedef struct {
+  __IOM uint32_t  ENABLE;                            /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM uint32_t  RESPONSE0;                         /*!< (@ 0x00000004) (unspecified)                                         */
+  __IOM uint32_t  RESPONSE1;                         /*!< (@ 0x00000008) (unspecified)                                         */
+  __IOM uint32_t  TEMPDETECTORCONFIG;                /*!< (@ 0x0000000C) (unspecified)                                         */
+} NRF_UICR_TAMPER_DETECTION_Type;                    /*!< Size = 16 (0x010)                                                    */
+
+/* UICR_TAMPER_DETECTION_ENABLE: (unspecified) */
+  #define UICR_TAMPER_DETECTION_ENABLE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ENABLE register.                          */
+
+/* GlobalEnable @Bit 0 : Enable tamper detection. When disabled all tamper enable and policy switches are ignored. */
+  #define UICR_TAMPER_DETECTION_ENABLE_GlobalEnable_Pos (0UL) /*!< Position of GlobalEnable field.                             */
+  #define UICR_TAMPER_DETECTION_ENABLE_GlobalEnable_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_GlobalEnable_Pos) /*!< Bit mask
+                                                                            of GlobalEnable field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_GlobalEnable_Min (0x0UL) /*!< Min enumerator value of GlobalEnable field.               */
+  #define UICR_TAMPER_DETECTION_ENABLE_GlobalEnable_Max (0x1UL) /*!< Max enumerator value of GlobalEnable field.               */
+  #define UICR_TAMPER_DETECTION_ENABLE_GlobalEnable_Enable (0x0UL) /*!< Enable tamper detection.                               */
+  #define UICR_TAMPER_DETECTION_ENABLE_GlobalEnable_Disable (0x1UL) /*!< Disable tamper detection.                             */
+
+/* VoltageLevel @Bit 1 : Enable voltage level detectors (VDETs) on supply lines. An automatic system reset is issued when
+                         voltage on the corresponding supply line is too low. */
+
+  #define UICR_TAMPER_DETECTION_ENABLE_VoltageLevel_Pos (1UL) /*!< Position of VoltageLevel field.                             */
+  #define UICR_TAMPER_DETECTION_ENABLE_VoltageLevel_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_VoltageLevel_Pos) /*!< Bit mask
+                                                                            of VoltageLevel field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_VoltageLevel_Min (0x0UL) /*!< Min enumerator value of VoltageLevel field.               */
+  #define UICR_TAMPER_DETECTION_ENABLE_VoltageLevel_Max (0x1UL) /*!< Max enumerator value of VoltageLevel field.               */
+  #define UICR_TAMPER_DETECTION_ENABLE_VoltageLevel_Enable (0x0UL) /*!< Enable voltage level detectors.                        */
+  #define UICR_TAMPER_DETECTION_ENABLE_VoltageLevel_Disable (0x1UL) /*!< Disable voltage level detectors.                      */
+
+/* Watchdog @Bit 2 : Reserved field, as watchdog timer is always enabled. */
+  #define UICR_TAMPER_DETECTION_ENABLE_Watchdog_Pos (2UL) /*!< Position of Watchdog field.                                     */
+  #define UICR_TAMPER_DETECTION_ENABLE_Watchdog_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_Watchdog_Pos) /*!< Bit mask of
+                                                                            Watchdog field.*/
+
+/* ExternalTamperSwitch @Bit 3 : Enable external tamper switch detector. */
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalTamperSwitch_Pos (3UL) /*!< Position of ExternalTamperSwitch field.             */
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalTamperSwitch_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_ExternalTamperSwitch_Pos)
+                                                                            /*!< Bit mask of ExternalTamperSwitch field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalTamperSwitch_Min (0x0UL) /*!< Min enumerator value of ExternalTamperSwitch
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalTamperSwitch_Max (0x1UL) /*!< Max enumerator value of ExternalTamperSwitch
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalTamperSwitch_Enable (0x0UL) /*!< Enable external tamper switch detector.        */
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalTamperSwitch_Disable (0x1UL) /*!< Disable external tamper switch detector.      */
+
+/* ExternalActiveShield @Bit 4 : Enable external active shield detector. */
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalActiveShield_Pos (4UL) /*!< Position of ExternalActiveShield field.             */
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalActiveShield_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_ExternalActiveShield_Pos)
+                                                                            /*!< Bit mask of ExternalActiveShield field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalActiveShield_Min (0x0UL) /*!< Min enumerator value of ExternalActiveShield
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalActiveShield_Max (0x1UL) /*!< Max enumerator value of ExternalActiveShield
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalActiveShield_Enable (0x0UL) /*!< Enable external active shield detector.        */
+  #define UICR_TAMPER_DETECTION_ENABLE_ExternalActiveShield_Disable (0x1UL) /*!< Disable external active shield detector.      */
+
+/* InternalActiveShield @Bit 5 : Enable internal active shield detector. */
+  #define UICR_TAMPER_DETECTION_ENABLE_InternalActiveShield_Pos (5UL) /*!< Position of InternalActiveShield field.             */
+  #define UICR_TAMPER_DETECTION_ENABLE_InternalActiveShield_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_InternalActiveShield_Pos)
+                                                                            /*!< Bit mask of InternalActiveShield field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_InternalActiveShield_Min (0x0UL) /*!< Min enumerator value of InternalActiveShield
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_InternalActiveShield_Max (0x1UL) /*!< Max enumerator value of InternalActiveShield
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_InternalActiveShield_Enable (0x0UL) /*!< Enable internal active shield detector.        */
+  #define UICR_TAMPER_DETECTION_ENABLE_InternalActiveShield_Disable (0x1UL) /*!< Disable internal active shield detector.      */
+
+/* InternalDetectors @Bit 6 : Reserved field, as internal detectors are always enabled. */
+  #define UICR_TAMPER_DETECTION_ENABLE_InternalDetectors_Pos (6UL) /*!< Position of InternalDetectors field.                   */
+  #define UICR_TAMPER_DETECTION_ENABLE_InternalDetectors_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_InternalDetectors_Pos) /*!<
+                                                                            Bit mask of InternalDetectors field.*/
+
+/* HardFault @Bit 7 : Configure if tamper prevention should react on hard faults. */
+  #define UICR_TAMPER_DETECTION_ENABLE_HardFault_Pos (7UL) /*!< Position of HardFault field.                                   */
+  #define UICR_TAMPER_DETECTION_ENABLE_HardFault_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_HardFault_Pos) /*!< Bit mask of
+                                                                            HardFault field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_HardFault_Min (0x0UL) /*!< Min enumerator value of HardFault field.                     */
+  #define UICR_TAMPER_DETECTION_ENABLE_HardFault_Max (0x1UL) /*!< Max enumerator value of HardFault field.                     */
+  #define UICR_TAMPER_DETECTION_ENABLE_HardFault_Enable (0x0UL) /*!< Enable hard fault detector.                               */
+  #define UICR_TAMPER_DETECTION_ENABLE_HardFault_Disable (0x1UL) /*!< Disable hard fault detector.                             */
+
+/* ApiFault @Bit 8 : Configure if tamper prevention should react on invalid API usage. */
+  #define UICR_TAMPER_DETECTION_ENABLE_ApiFault_Pos (8UL) /*!< Position of ApiFault field.                                     */
+  #define UICR_TAMPER_DETECTION_ENABLE_ApiFault_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_ApiFault_Pos) /*!< Bit mask of
+                                                                            ApiFault field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_ApiFault_Min (0x0UL) /*!< Min enumerator value of ApiFault field.                       */
+  #define UICR_TAMPER_DETECTION_ENABLE_ApiFault_Max (0x1UL) /*!< Max enumerator value of ApiFault field.                       */
+  #define UICR_TAMPER_DETECTION_ENABLE_ApiFault_Enable (0x0UL) /*!< Enable API fault detector.                                 */
+  #define UICR_TAMPER_DETECTION_ENABLE_ApiFault_Disable (0x1UL) /*!< Disable API fault detector.                               */
+
+/* AdacFault @Bit 9 : Configure if tamper prevention should react on invalid ADAC usage. */
+  #define UICR_TAMPER_DETECTION_ENABLE_AdacFault_Pos (9UL) /*!< Position of AdacFault field.                                   */
+  #define UICR_TAMPER_DETECTION_ENABLE_AdacFault_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_AdacFault_Pos) /*!< Bit mask of
+                                                                            AdacFault field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_AdacFault_Min (0x0UL) /*!< Min enumerator value of AdacFault field.                     */
+  #define UICR_TAMPER_DETECTION_ENABLE_AdacFault_Max (0x1UL) /*!< Max enumerator value of AdacFault field.                     */
+  #define UICR_TAMPER_DETECTION_ENABLE_AdacFault_Enable (0x0UL) /*!< Enable invalid ADAC usage detector.                       */
+  #define UICR_TAMPER_DETECTION_ENABLE_AdacFault_Disable (0x1UL) /*!< Disable invalid ADAC usage detector.                     */
+
+/* StateFault @Bit 10 : Configure if tamper prevention should react on invalid firmware execution state. */
+  #define UICR_TAMPER_DETECTION_ENABLE_StateFault_Pos (10UL) /*!< Position of StateFault field.                                */
+  #define UICR_TAMPER_DETECTION_ENABLE_StateFault_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_StateFault_Pos) /*!< Bit mask of
+                                                                            StateFault field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_StateFault_Min (0x0UL) /*!< Min enumerator value of StateFault field.                   */
+  #define UICR_TAMPER_DETECTION_ENABLE_StateFault_Max (0x1UL) /*!< Max enumerator value of StateFault field.                   */
+  #define UICR_TAMPER_DETECTION_ENABLE_StateFault_Enable (0x0UL) /*!< Enable invalid firmware execution state detector.        */
+  #define UICR_TAMPER_DETECTION_ENABLE_StateFault_Disable (0x1UL) /*!< Disable invalid firmware execution state detector.      */
+
+/* TemperatureFault @Bit 11 : Configure if tamper prevention should react when on-die temperature exceeds a valid range. */
+  #define UICR_TAMPER_DETECTION_ENABLE_TemperatureFault_Pos (11UL) /*!< Position of TemperatureFault field.                    */
+  #define UICR_TAMPER_DETECTION_ENABLE_TemperatureFault_Msk (0x1UL << UICR_TAMPER_DETECTION_ENABLE_TemperatureFault_Pos) /*!<
+                                                                            Bit mask of TemperatureFault field.*/
+  #define UICR_TAMPER_DETECTION_ENABLE_TemperatureFault_Min (0x0UL) /*!< Min enumerator value of TemperatureFault field.       */
+  #define UICR_TAMPER_DETECTION_ENABLE_TemperatureFault_Max (0x1UL) /*!< Max enumerator value of TemperatureFault field.       */
+  #define UICR_TAMPER_DETECTION_ENABLE_TemperatureFault_Enable (0x0UL) /*!< Enable invalid out-of-range temperature detector.  */
+  #define UICR_TAMPER_DETECTION_ENABLE_TemperatureFault_Disable (0x1UL) /*!< Disable invalid out-of-range temperature detector.*/
+
+
+/* UICR_TAMPER_DETECTION_RESPONSE0: (unspecified) */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RESPONSE0 register.                    */
+
+/* VoltageLevel @Bits 0..3 : Configure tamper policy for invalid voltage level on supply lines. */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_VoltageLevel_Pos (0UL) /*!< Position of VoltageLevel field.                          */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_VoltageLevel_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE0_VoltageLevel_Pos) /*!< Bit
+                                                                            mask of VoltageLevel field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_VoltageLevel_Min (0x2UL) /*!< Min enumerator value of VoltageLevel field.            */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_VoltageLevel_Max (0xFUL) /*!< Max enumerator value of VoltageLevel field.            */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_VoltageLevel_PowerCycle (0x2UL) /*!< Block secure services until power cycling the
+                                                                            device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_VoltageLevel_15Minutes (0x3UL) /*!< Block secure services until device has been
+                                                                            powered and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_VoltageLevel_1Hour (0x4UL) /*!< Block secure services until device has been powered
+                                                                          and idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_VoltageLevel_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning, this
+                                                                            bricks the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_VoltageLevel_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic reset. */
+
+/* Watchdog @Bits 4..7 : Configure tamper policy for watchdog timer. */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_Watchdog_Pos (4UL) /*!< Position of Watchdog field.                                  */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_Watchdog_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE0_Watchdog_Pos) /*!< Bit mask of
+                                                                            Watchdog field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_Watchdog_Min (0x2UL) /*!< Min enumerator value of Watchdog field.                    */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_Watchdog_Max (0xFUL) /*!< Max enumerator value of Watchdog field.                    */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_Watchdog_PowerCycle (0x2UL) /*!< Block secure services until power cycling the
+                                                                           device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_Watchdog_15Minutes (0x3UL) /*!< Block secure services until device has been powered
+                                                                          and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_Watchdog_1Hour (0x4UL) /*!< Block secure services until device has been powered and
+                                                                      idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_Watchdog_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning, this bricks
+                                                                            the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_Watchdog_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic reset.     */
+
+/* ExternalTamperSwitch @Bits 8..11 : Configure tamper policy for external tamper switch. */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_Pos (8UL) /*!< Position of ExternalTamperSwitch field.          */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_Pos)
+                                                                            /*!< Bit mask of ExternalTamperSwitch field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_Min (0x1UL) /*!< Min enumerator value of ExternalTamperSwitch
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_Max (0xFUL) /*!< Max enumerator value of ExternalTamperSwitch
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_Manual (0x1UL) /*!< Block secure services until requested to
+                                                                            unblock secure services. Allows user application to
+                                                                            take required actions.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_PowerCycle (0x2UL) /*!< Block secure services until power cycling
+                                                                            the device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_15Minutes (0x3UL) /*!< Block secure services until device has
+                                                                            been powered and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_1Hour (0x4UL) /*!< Block secure services until device has been
+                                                                            powered and idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning,
+                                                                            this bricks the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalTamperSwitch_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic
+                                                                            reset.*/
+
+/* ExternalActiveShield @Bits 12..15 : Configure tamper policy for external active shield. BICR is used to specify which
+                                       channels (GPIOs) are enabled. */
+
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_Pos (12UL) /*!< Position of ExternalActiveShield field.         */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_Pos)
+                                                                            /*!< Bit mask of ExternalActiveShield field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_Min (0x1UL) /*!< Min enumerator value of ExternalActiveShield
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_Max (0xFUL) /*!< Max enumerator value of ExternalActiveShield
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_Manual (0x1UL) /*!< Block secure services until requested to
+                                                                            unblock secure services. Allows user application to
+                                                                            take required actions.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_PowerCycle (0x2UL) /*!< Block secure services until power cycling
+                                                                            the device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_15Minutes (0x3UL) /*!< Block secure services until device has
+                                                                            been powered and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_1Hour (0x4UL) /*!< Block secure services until device has been
+                                                                            powered and idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning,
+                                                                            this bricks the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ExternalActiveShield_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic
+                                                                            reset.*/
+
+/* InternalActiveShield @Bits 16..19 : Configure tamper policy for internal active shield. */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_Pos (16UL) /*!< Position of InternalActiveShield field.         */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_Pos)
+                                                                            /*!< Bit mask of InternalActiveShield field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_Min (0x1UL) /*!< Min enumerator value of InternalActiveShield
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_Max (0xFUL) /*!< Max enumerator value of InternalActiveShield
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_Manual (0x1UL) /*!< Block secure services until requested to
+                                                                            unblock secure services. Allows user application to
+                                                                            take required actions.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_PowerCycle (0x2UL) /*!< Block secure services until power cycling
+                                                                            the device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_15Minutes (0x3UL) /*!< Block secure services until device has
+                                                                            been powered and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_1Hour (0x4UL) /*!< Block secure services until device has been
+                                                                            powered and idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning,
+                                                                            this bricks the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalActiveShield_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic
+                                                                            reset.*/
+
+/* InternalDetectors @Bits 20..23 : Configure tamper policy for internal detectors including glitch detector, signal protector
+                                    and CRACEN detector. See for more information. An automatic reset is issued upon detection.
+                                    */
+
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalDetectors_Pos (20UL) /*!< Position of InternalDetectors field.               */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalDetectors_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE0_InternalDetectors_Pos)
+                                                                            /*!< Bit mask of InternalDetectors field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalDetectors_Min (0x2UL) /*!< Min enumerator value of InternalDetectors field.  */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalDetectors_Max (0xFUL) /*!< Max enumerator value of InternalDetectors field.  */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalDetectors_PowerCycle (0x2UL) /*!< Block secure services until power cycling
+                                                                            the device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalDetectors_15Minutes (0x3UL) /*!< Block secure services until device has been
+                                                                            powered and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalDetectors_1Hour (0x4UL) /*!< Block secure services until device has been
+                                                                            powered and idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalDetectors_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning, this
+                                                                            bricks the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_InternalDetectors_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic
+                                                                            reset.*/
+
+/* HardFault @Bits 24..27 : Configure tamper policy for hard fault. */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_HardFault_Pos (24UL) /*!< Position of HardFault field.                               */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_HardFault_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE0_HardFault_Pos) /*!< Bit mask
+                                                                            of HardFault field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_HardFault_Min (0x1UL) /*!< Min enumerator value of HardFault field.                  */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_HardFault_Max (0xFUL) /*!< Max enumerator value of HardFault field.                  */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_HardFault_Manual (0x1UL) /*!< Block secure services until requested to unblock secure
+                                                                        services. Allows user application to take required
+                                                                        actions.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_HardFault_PowerCycle (0x2UL) /*!< Block secure services until power cycling the
+                                                                            device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_HardFault_15Minutes (0x3UL) /*!< Block secure services until device has been powered
+                                                                           and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_HardFault_1Hour (0x4UL) /*!< Block secure services until device has been powered and
+                                                                       idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_HardFault_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning, this bricks
+                                                                            the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_HardFault_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic reset.    */
+
+/* ApiFault @Bits 28..31 : Configure tamper policy for invalid API usage. */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_Pos (28UL) /*!< Position of ApiFault field.                                 */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_Pos) /*!< Bit mask of
+                                                                            ApiFault field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_Min (0x1UL) /*!< Min enumerator value of ApiFault field.                    */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_Max (0xFUL) /*!< Max enumerator value of ApiFault field.                    */
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_Manual (0x1UL) /*!< Block secure services until requested to unblock secure
+                                                                       services. Allows user application to take required
+                                                                       actions.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_PowerCycle (0x2UL) /*!< Block secure services until power cycling the
+                                                                           device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_15Minutes (0x3UL) /*!< Block secure services until device has been powered
+                                                                          and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_1Hour (0x4UL) /*!< Block secure services until device has been powered and
+                                                                      idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning, this bricks
+                                                                            the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE0_ApiFault_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic reset.     */
+
+
+/* UICR_TAMPER_DETECTION_RESPONSE1: (unspecified) */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RESPONSE1 register.                    */
+
+/* AdacFault @Bits 0..3 : Configure tamper policy for invalid ADAC usage. */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_Pos (0UL) /*!< Position of AdacFault field.                                */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_Pos) /*!< Bit mask
+                                                                            of AdacFault field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_Min (0x1UL) /*!< Min enumerator value of AdacFault field.                  */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_Max (0xFUL) /*!< Max enumerator value of AdacFault field.                  */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_Manual (0x1UL) /*!< Block secure services until requested to unblock secure
+                                                                        services. Allows user application to take required
+                                                                        actions.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_PowerCycle (0x2UL) /*!< Block secure services until power cycling the
+                                                                            device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_15Minutes (0x3UL) /*!< Block secure services until device has been powered
+                                                                           and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_1Hour (0x4UL) /*!< Block secure services until device has been powered and
+                                                                       idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning, this bricks
+                                                                            the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_AdacFault_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic reset.    */
+
+/* StateFault @Bits 4..7 : Configure tamper policy for illegal firmware execution state. Automatic reset is issued be secure
+                           domain before secure services are permitted again. */
+
+  #define UICR_TAMPER_DETECTION_RESPONSE1_StateFault_Pos (4UL) /*!< Position of StateFault field.                              */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_StateFault_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE1_StateFault_Pos) /*!< Bit mask
+                                                                            of StateFault field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_StateFault_Min (0x1UL) /*!< Min enumerator value of StateFault field.                */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_StateFault_Max (0xFUL) /*!< Max enumerator value of StateFault field.                */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_StateFault_Manual (0x1UL) /*!< Block secure services until requested to unblock secure
+                                                                         services. Allows user application to take required
+                                                                         actions.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_StateFault_PowerCycle (0x2UL) /*!< Block secure services until power cycling the
+                                                                            device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_StateFault_15Minutes (0x3UL) /*!< Block secure services until device has been powered
+                                                                            and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_StateFault_1Hour (0x4UL) /*!< Block secure services until device has been powered and
+                                                                        idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_StateFault_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning, this bricks
+                                                                            the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_StateFault_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic reset.   */
+
+/* TemperatureFault @Bits 8..11 : Configure out-of-range on-die temperature tamper policy. A reset is required to continue
+                                  providing secure services once the on-temperature is within valid operating conditions again.
+                                  This reset is automatically triggered by the secure domain. */
+
+  #define UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_Pos (8UL) /*!< Position of TemperatureFault field.                  */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_Msk (0xFUL << UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_Pos)
+                                                                            /*!< Bit mask of TemperatureFault field.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_Min (0x1UL) /*!< Min enumerator value of TemperatureFault field.    */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_Max (0xFUL) /*!< Max enumerator value of TemperatureFault field.    */
+  #define UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_Manual (0x1UL) /*!< Block secure services until requested to unblock
+                                                                            secure services. Allows user application to take
+                                                                            required actions.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_PowerCycle (0x2UL) /*!< Block secure services until power cycling the
+                                                                            device.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_15Minutes (0x3UL) /*!< Block secure services until device has been
+                                                                            powered and idle for 15 minutes.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_1Hour (0x4UL) /*!< Block secure services until device has been
+                                                                            powered and idle for one hour.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_LCSDiscarded (0xAUL) /*!< Transition to LCS Discarded. Warning, this
+                                                                            bricks the device permanently.*/
+  #define UICR_TAMPER_DETECTION_RESPONSE1_TemperatureFault_ResetOnly (0xFUL) /*!< No addition penalty besides the automatic
+                                                                            reset.*/
+
+
+/* UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG: (unspecified) */
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TEMPDETECTORCONFIG register.  */
+
+/* TemperatureDetectionStrategy @Bits 0..1 : Configure when on-die temperature sensor should check the temperature. */
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionStrategy_Pos (0UL) /*!< Position of
+                                                                            TemperatureDetectionStrategy field.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionStrategy_Msk (0x3UL << UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionStrategy_Pos)
+                                                                            /*!< Bit mask of TemperatureDetectionStrategy
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionStrategy_Min (0x1UL) /*!< Min enumerator value of
+                                                                            TemperatureDetectionStrategy field.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionStrategy_Max (0x3UL) /*!< Max enumerator value of
+                                                                            TemperatureDetectionStrategy field.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionStrategy_Periodically (0x1UL) /*!< On-die temperature
+                                                                            sensor is read periodically with selected interval.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionStrategy_OnServiceCallAndPeriodically (0x2UL) /*!< On-die
+                                                                            temperature sensor is read before each secure
+                                                                            service call and periodically with selected
+                                                                            interval.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionStrategy_OnServiceCallOnly (0x3UL) /*!< On-die
+                                                                            temperature sensor is read before each secure
+                                                                            service call.*/
+
+/* TemperatureDetectionInterval @Bits 2..3 : Configure interval for on-die temperature reading if periodic reading is enabled. */
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionInterval_Pos (2UL) /*!< Position of
+                                                                            TemperatureDetectionInterval field.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionInterval_Msk (0x3UL << UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionInterval_Pos)
+                                                                            /*!< Bit mask of TemperatureDetectionInterval
+                                                                            field.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionInterval_Min (0x0UL) /*!< Min enumerator value of
+                                                                            TemperatureDetectionInterval field.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionInterval_Max (0x3UL) /*!< Max enumerator value of
+                                                                            TemperatureDetectionInterval field.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionInterval_1Minute (0x0UL) /*!< On-die temperature sensor
+                                                                            is read with one minute intervals.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionInterval_15Minutes (0x2UL) /*!< On-die temperature sensor
+                                                                            is read with 15 minutes intervals.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_TemperatureDetectionInterval_1Hour (0x3UL) /*!< On-die temperature sensor is
+                                                                            read with one hour intervals.*/
+
+/* LowTemperatureThresholdShift @Bits 4..11 : Low temperature detection threshold shift in degrees Celsius. The low temperature
+                                              threshold is calculated by adding the threshold shift to the minimum operating
+                                              temperature of the SoC. */
+
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_LowTemperatureThresholdShift_Pos (4UL) /*!< Position of
+                                                                            LowTemperatureThresholdShift field.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_LowTemperatureThresholdShift_Msk (0xFFUL << UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_LowTemperatureThresholdShift_Pos)
+                                                                            /*!< Bit mask of LowTemperatureThresholdShift
+                                                                            field.*/
+
+/* HighTemperatureThresholdShift @Bits 12..19 : High temperature detection threshold shift in degrees Celsius. The high
+                                                temperature threshold is calculated by subtracting the threshold shift from the
+                                                maximum operating temperature of the SoC. */
+
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_HighTemperatureThresholdShift_Pos (12UL) /*!< Position of
+                                                                            HighTemperatureThresholdShift field.*/
+  #define UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_HighTemperatureThresholdShift_Msk (0xFFUL << UICR_TAMPER_DETECTION_TEMPDETECTORCONFIG_HighTemperatureThresholdShift_Pos)
+                                                                            /*!< Bit mask of HighTemperatureThresholdShift
+                                                                            field.*/
+
+
+
+/* =========================================== Struct UICR_TAMPER_COUNTERMEASURES ============================================ */
+/**
+  * @brief COUNTERMEASURES [UICR_TAMPER_COUNTERMEASURES] Configuration of countermeasures.
+  */
+typedef struct {
+  __IOM uint32_t  ENABLE;                            /*!< (@ 0x00000000) (unspecified)                                         */
+} NRF_UICR_TAMPER_COUNTERMEASURES_Type;              /*!< Size = 4 (0x004)                                                     */
+
+/* UICR_TAMPER_COUNTERMEASURES_ENABLE: (unspecified) */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ENABLE register.                    */
+
+/* DPAAES @Bit 0 : Configure Differential Power Analysis countermeasure for CRACEN AES. */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAAES_Pos (0UL) /*!< Position of DPAAES field.                                   */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAAES_Msk (0x1UL << UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAAES_Pos) /*!< Bit mask
+                                                                            of DPAAES field.*/
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAAES_Min (0x0UL) /*!< Min enumerator value of DPAAES field.                     */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAAES_Max (0x1UL) /*!< Max enumerator value of DPAAES field.                     */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAAES_Enable (0x0UL) /*!< Enable countermeasure.                                 */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAAES_Disable (0x1UL) /*!< Disable countermeasure.                               */
+
+/* DPAPK @Bit 1 : Configure Differential Power Analysis countermeasure for CRACEN PK. */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAPK_Pos (1UL) /*!< Position of DPAPK field.                                     */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAPK_Msk (0x1UL << UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAPK_Pos) /*!< Bit mask of
+                                                                            DPAPK field.*/
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAPK_Min (0x0UL) /*!< Min enumerator value of DPAPK field.                       */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAPK_Max (0x1UL) /*!< Max enumerator value of DPAPK field.                       */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAPK_Enable (0x0UL) /*!< Enable countermeasure.                                  */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAPK_Disable (0x1UL) /*!< Disable countermeasure.                                */
+
+/* DPASM4 @Bit 2 : Configure Differential Power Analysis countermeasure for CRACEN SM4. */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPASM4_Pos (2UL) /*!< Position of DPASM4 field.                                   */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPASM4_Msk (0x1UL << UICR_TAMPER_COUNTERMEASURES_ENABLE_DPASM4_Pos) /*!< Bit mask
+                                                                            of DPASM4 field.*/
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPASM4_Min (0x0UL) /*!< Min enumerator value of DPASM4 field.                     */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPASM4_Max (0x1UL) /*!< Max enumerator value of DPASM4 field.                     */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPASM4_Enable (0x0UL) /*!< Enable countermeasure.                                 */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPASM4_Disable (0x1UL) /*!< Disable countermeasure.                               */
+
+/* DPAECC @Bit 3 : Reserved for configuration of Differential Power Analysis countermeasure for CRACEN ECC. */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAECC_Pos (3UL) /*!< Position of DPAECC field.                                   */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAECC_Msk (0x1UL << UICR_TAMPER_COUNTERMEASURES_ENABLE_DPAECC_Pos) /*!< Bit mask
+                                                                            of DPAECC field.*/
+
+/* DFAAES @Bit 4 : Reserved for configuration of Differential Fault Analysis countermeasure for CRACEN AES. */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DFAAES_Pos (4UL) /*!< Position of DFAAES field.                                   */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DFAAES_Msk (0x1UL << UICR_TAMPER_COUNTERMEASURES_ENABLE_DFAAES_Pos) /*!< Bit mask
+                                                                            of DFAAES field.*/
+
+/* DFAPK @Bit 5 : Reserved for configuration of Differential Fault Analysis countermeasure for CRACEN PK. */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DFAPK_Pos (5UL) /*!< Position of DFAPK field.                                     */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DFAPK_Msk (0x1UL << UICR_TAMPER_COUNTERMEASURES_ENABLE_DFAPK_Pos) /*!< Bit mask of
+                                                                            DFAPK field.*/
+
+/* DFASM4 @Bit 6 : Reserved for configuration of Differential Fault Analysis countermeasure for CRACEN SM4. */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DFASM4_Pos (6UL) /*!< Position of DFASM4 field.                                   */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DFASM4_Msk (0x1UL << UICR_TAMPER_COUNTERMEASURES_ENABLE_DFASM4_Pos) /*!< Bit mask
+                                                                            of DFASM4 field.*/
+
+/* DFAECC @Bit 7 : Reserved for configuration of Differential Fault Analysis countermeasure for CRACEN ECC. */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DFAECC_Pos (7UL) /*!< Position of DFAECC field.                                   */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_DFAECC_Msk (0x1UL << UICR_TAMPER_COUNTERMEASURES_ENABLE_DFAECC_Pos) /*!< Bit mask
+                                                                            of DFAECC field.*/
+
+/* KEYLOAD @Bit 8 : Configure countermeasure for verifying if cryptography key is loaded correctly into CRACEN. */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_KEYLOAD_Pos (8UL) /*!< Position of KEYLOAD field.                                 */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_KEYLOAD_Msk (0x1UL << UICR_TAMPER_COUNTERMEASURES_ENABLE_KEYLOAD_Pos) /*!< Bit mask
+                                                                            of KEYLOAD field.*/
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_KEYLOAD_Min (0x0UL) /*!< Min enumerator value of KEYLOAD field.                   */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_KEYLOAD_Max (0x1UL) /*!< Max enumerator value of KEYLOAD field.                   */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_KEYLOAD_Enable (0x0UL) /*!< Enable countermeasure.                                */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_KEYLOAD_Disable (0x1UL) /*!< Disable countermeasure.                              */
+
+/* ClockDithering @Bit 9 : Configure the clock dithering countermeasure. When enabled clock will be randomly jittered based on
+                           TRNG. */
+
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_ClockDithering_Pos (9UL) /*!< Position of ClockDithering field.                   */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_ClockDithering_Msk (0x1UL << UICR_TAMPER_COUNTERMEASURES_ENABLE_ClockDithering_Pos)
+                                                                            /*!< Bit mask of ClockDithering field.*/
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_ClockDithering_Min (0x0UL) /*!< Min enumerator value of ClockDithering field.     */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_ClockDithering_Max (0x1UL) /*!< Max enumerator value of ClockDithering field.     */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_ClockDithering_Enable (0x0UL) /*!< Enable countermeasure.                         */
+  #define UICR_TAMPER_COUNTERMEASURES_ENABLE_ClockDithering_Disable (0x1UL) /*!< Disable countermeasure.                       */
+
+
+
+/* =================================================== Struct UICR_TAMPER ==================================================== */
+/**
+  * @brief TAMPER [UICR_TAMPER] (unspecified)
+  */
+typedef struct {
+  __IOM NRF_UICR_TAMPER_DETECTION_Type DETECTION;    /*!< (@ 0x00000000) Tamper policy configuration for detected security
+                                                                         events.*/
+  __IOM NRF_UICR_TAMPER_COUNTERMEASURES_Type COUNTERMEASURES; /*!< (@ 0x00000010) Configuration of countermeasures.            */
+} NRF_UICR_TAMPER_Type;                              /*!< Size = 20 (0x014)                                                    */
+
 /* ======================================================= Struct UICR ======================================================= */
 /**
   * @brief User information configuration registers
@@ -150929,12 +152806,14 @@ typedef struct {
     __IM uint32_t RESERVED4[16];
     __IOM NRF_UICR_MAILBOX_Type MAILBOX[8];          /*!< (@ 0x00000700) (unspecified)                                         */
     __IOM NRF_UICR_TRACE_Type TRACE;                 /*!< (@ 0x00000740) (unspecified)                                         */
-    __IM uint32_t RESERVED5[12];
+    __IM uint32_t RESERVED5[4];
+    __IOM NRF_UICR_TAMPER_Type TAMPER;               /*!< (@ 0x00000760) (unspecified)                                         */
+    __IM uint32_t RESERVED6[3];
     __IOM uint32_t INITSVTOR;                        /*!< (@ 0x00000780) Initial value of the secure VTOR (Vector Table Offset
                                                                          Register) after CPU reset.*/
     __IOM uint32_t INITNSVTOR;                       /*!< (@ 0x00000784) Initial value of the non-secure VTOR (Vector Table
                                                                          Offset Register).*/
-    __IM uint32_t RESERVED6[29];
+    __IM uint32_t RESERVED7[29];
     __IOM uint32_t PTREXTUICR;                       /*!< (@ 0x000007FC) Pointer to extended UICR.                             */
   } NRF_UICR_Type;                                   /*!< Size = 2048 (0x800)                                                  */
 
@@ -174256,7 +176135,7 @@ typedef struct {
 
 
 /* VREG1V0_ITHRESHOLD: Current threshold for mode transistion */
-  #define VREG1V0_ITHRESHOLD_ResetValue (0x00000005UL) /*!< Reset value of ITHRESHOLD register.                                */
+  #define VREG1V0_ITHRESHOLD_ResetValue (0x0000000AUL) /*!< Reset value of ITHRESHOLD register.                                */
 
 /* VAL @Bits 0..3 : Current consumption */
   #define VREG1V0_ITHRESHOLD_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
@@ -179823,19 +181702,10 @@ typedef struct {
   * @brief PCGCSLAVE [VREGVS0V8_PCGCSLAVE] (unspecified)
   */
 typedef struct {
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
-  #endif
-  union {
-    __IOM uint32_t PENALTY[2];                       /*!< (@ 0x00000000) Penalty level for power/clock pair n. When
+  __IOM uint32_t  PENALTY[2];                        /*!< (@ 0x00000000) Penalty level for power/clock pair n. When
                                                                          FULL_PCP_ZERO feature is not supported, PENALTY[0]
                                                                          address overlaps the PENALTY0 address and register
                                                                          description for PENALTY[0] is not valid.*/
-  };
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic pop
-  #endif
   __IM  uint32_t  RESERVED[30];
   __IOM uint32_t  FORCEOVERRIDE[2];                  /*!< (@ 0x00000080) Force override of power/clock pair n.                 */
 } NRF_VREGVS0V8_PCGCSLAVE_Type;                      /*!< Size = 136 (0x088)                                                   */
@@ -180241,7 +182111,7 @@ typedef struct {
 
 
 /* VREGVS0V8_ITHRESHOLD: Current threshold for mode transistion */
-  #define VREGVS0V8_ITHRESHOLD_ResetValue (0x00000005UL) /*!< Reset value of ITHRESHOLD register.                              */
+  #define VREGVS0V8_ITHRESHOLD_ResetValue (0x0000000AUL) /*!< Reset value of ITHRESHOLD register.                              */
 
 /* VAL @Bits 0..3 : Current consumption */
   #define VREGVS0V8_ITHRESHOLD_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */

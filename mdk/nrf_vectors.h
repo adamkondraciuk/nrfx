@@ -113,6 +113,40 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_LMAC)
         #include "nrf7140_lmac_vectors.h"
     #endif
+    #if defined(NRF_DPPR)
+        #include "nrf7140_dppr_vectors.h"
+    #endif
+#elif defined(NRF9230_XXAA)
+    #if defined(NRF_SECURE)
+        #include "nrf9230_secure_vectors.h"
+    #endif
+    #if defined(NRF_APPLICATION)
+        #include "nrf9230_application_vectors.h"
+    #endif
+    #if defined(NRF_RADIOCORE)
+        #include "nrf9230_radiocore_vectors.h"
+    #endif
+    #if defined(NRF_CELLCORE)
+        #include "nrf9230_cellcore_vectors.h"
+    #endif
+    #if defined(NRF_CELLRF)
+        #include "nrf9230_cellrf_vectors.h"
+    #endif
+    #if defined(NRF_ISIMCORE)
+        #include "nrf9230_isimcore_vectors.h"
+    #endif
+    #if defined(NRF_SYSCTRL)
+        #include "nrf9230_sysctrl_vectors.h"
+    #endif
+    #if defined(NRF_PPR)
+        #include "nrf9230_ppr_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf9230_flpr_vectors.h"
+    #endif
+    #if defined(NRF_BBPR)
+        #include "nrf9230_bbpr_vectors.h"
+    #endif
 #elif defined(NRF9230_ENGA_XXAA)
     #if defined(NRF_SECURE)
         #include "nrf9230_enga_secure_vectors.h"

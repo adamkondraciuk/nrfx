@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2024 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -30,7 +30,7 @@ Stack_Size      EQU __STARTUP_CONFIG_STACK_SIZE
                 ELIF :DEF: __STACK_SIZE
 Stack_Size      EQU __STACK_SIZE
                 ELSE
-Stack_Size      EQU 2048
+Stack_Size      EQU 6144
                 ENDIF
                 
                 IF :DEF: __STARTUP_CONFIG
@@ -48,7 +48,7 @@ Heap_Size       EQU __STARTUP_CONFIG_HEAP_SIZE
                 ELIF :DEF: __HEAP_SIZE
 Heap_Size       EQU __HEAP_SIZE
                 ELSE
-Heap_Size       EQU 2048
+Heap_Size       EQU 6144
                 ENDIF
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
@@ -427,6 +427,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
+                DCD     AUDIOPLL_IRQHandler
+                DCD     USBHSPLL_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -441,10 +443,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     VREGUSB_IRQHandler
+                DCD     AUDIOPLLPM_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -716,6 +716,10 @@ Default_Handler PROC
                 EXPORT   WDT132_IRQHandler [WEAK]
                 EXPORT   EGU130_IRQHandler [WEAK]
                 EXPORT   RESETHUB_IRQHandler [WEAK]
+                EXPORT   AUDIOPLL_IRQHandler [WEAK]
+                EXPORT   USBHSPLL_IRQHandler [WEAK]
+                EXPORT   VREGUSB_IRQHandler [WEAK]
+                EXPORT   AUDIOPLLPM_IRQHandler [WEAK]
                 EXPORT   SPU132_IRQHandler [WEAK]
                 EXPORT   SAADC_IRQHandler [WEAK]
                 EXPORT   COMP_LPCOMP_IRQHandler [WEAK]
@@ -835,6 +839,10 @@ WDT131_IRQHandler
 WDT132_IRQHandler
 EGU130_IRQHandler
 RESETHUB_IRQHandler
+AUDIOPLL_IRQHandler
+USBHSPLL_IRQHandler
+VREGUSB_IRQHandler
+AUDIOPLLPM_IRQHandler
 SPU132_IRQHandler
 SAADC_IRQHandler
 COMP_LPCOMP_IRQHandler

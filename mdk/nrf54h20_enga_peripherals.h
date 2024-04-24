@@ -46,9 +46,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     extern "C" {
 #endif
 
-
-
-
 #if defined(NRF_APPLICATION)
   #include "nrf54h20_enga_application_peripherals.h"
 #elif defined(NRF_BBPR)

@@ -47,9 +47,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include <stdbool.h>
-/* Domain definition */
-#define NRF_DOMAIN NRF_DOMAIN_BBPR
-
 /*VPR CSR registers*/
 #define VPRCSR_PRESENT 1
 #define VPRCSR_COUNT 1
@@ -112,6 +109,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FICR_NFC_ON 1                                /*!< (unspecified)                                                        */
 #define FICR_ML_ON 0                                 /*!< (unspecified)                                                        */
 #define FICR_SDCARD_ON 0                             /*!< (unspecified)                                                        */
+#define FICR_VREG_1V8_0V8 0                          /*!< (unspecified)                                                        */
+#define FICR_AUDIO_USB_PROGRAMMABLE_OWNER 0          /*!< (unspecified)                                                        */
 
 /*USBHSCORE*/
 #define USBHSCORE_PRESENT 1

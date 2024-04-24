@@ -1,6 +1,6 @@
 /*
  
-Copyright (c) 2009-2023 ARM Limited. All rights reserved.
+Copyright (c) 2009-2024 ARM Limited. All rights reserved.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -618,6 +618,8 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
+    .long   AUDIOPLL_IRQHandler
+    .long   USBHSPLL_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -632,10 +634,8 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   VREGUSB_IRQHandler
+    .long   AUDIOPLLPM_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -922,6 +922,10 @@ Default_Handler:
     IRQ  WDT132_IRQHandler
     IRQ  EGU130_IRQHandler
     IRQ  RESETHUB_IRQHandler
+    IRQ  AUDIOPLL_IRQHandler
+    IRQ  USBHSPLL_IRQHandler
+    IRQ  VREGUSB_IRQHandler
+    IRQ  AUDIOPLLPM_IRQHandler
     IRQ  SAADC_IRQHandler
     IRQ  COMP_LPCOMP_IRQHandler
     IRQ  TEMP_IRQHandler

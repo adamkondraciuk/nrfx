@@ -4353,13 +4353,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>HFXO</name>
               <description>Unspecified</description>
-              <headerStructName>HFXO</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_HFXO</headerStructName>
               <access>read-write</access>
               <addressOffset>0x38</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>HFXO_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_HFXO_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -5845,7 +5845,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x004</dimIncrement>
                 <name>REPAIR[%s]</name>
                 <description>Unspecified</description>
-                <headerStructName>REPAIR</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>

@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -142,7 +142,11 @@ typedef enum {
   GRCCONF_2_IRQn                         = 322,      /*!< 322 GRCCONF_2                                                        */
   PCRM_IRQn                              = 323,      /*!< 323 PCRM                                                             */
   RESETHUB_IRQn                          = 329,      /*!< 329 RESETHUB                                                         */
+  AUDIOPLL_IRQn                          = 343,      /*!< 343 AUDIOPLL                                                         */
+  USBHSPLL_IRQn                          = 344,      /*!< 344 USBHSPLL                                                         */
   VREGUSB_IRQn                           = 359,      /*!< 359 VREGUSB                                                          */
+  AUDIOPLLPM_IRQn                        = 360,      /*!< 360 AUDIOPLLPM                                                       */
+  PMICC_IRQn                             = 376,      /*!< 376 PMICC                                                            */
   SAADC_IRQn                             = 386,      /*!< 386 SAADC                                                            */
   COMP_LPCOMP_IRQn                       = 387,      /*!< 387 COMP_LPCOMP                                                      */
   TEMP_IRQn                              = 388,      /*!< 388 TEMP                                                             */
@@ -179,6 +183,95 @@ typedef enum {
   PDM133_IRQn                            = 471,      /*!< 471 PDM133                                                           */
 } IRQn_Type;
 
+/* ==================================================== Interrupt Aliases ==================================================== */
+#define SPIM120_IRQn                  SPIM120_UARTE120_IRQn
+#define SPIM120_IRQHandler            SPIM120_UARTE120_IRQHandler
+#define UARTE120_IRQn                 SPIM120_UARTE120_IRQn
+#define UARTE120_IRQHandler           SPIM120_UARTE120_IRQHandler
+#define COMP_IRQn                     COMP_LPCOMP_IRQn
+#define COMP_IRQHandler               COMP_LPCOMP_IRQHandler
+#define LPCOMP_IRQn                   COMP_LPCOMP_IRQn
+#define LPCOMP_IRQHandler             COMP_LPCOMP_IRQHandler
+#define SPIM130_IRQn                  SERIAL0_IRQn
+#define SPIM130_IRQHandler            SERIAL0_IRQHandler
+#define SPIS130_IRQn                  SERIAL0_IRQn
+#define SPIS130_IRQHandler            SERIAL0_IRQHandler
+#define TWIM130_IRQn                  SERIAL0_IRQn
+#define TWIM130_IRQHandler            SERIAL0_IRQHandler
+#define TWIS130_IRQn                  SERIAL0_IRQn
+#define TWIS130_IRQHandler            SERIAL0_IRQHandler
+#define UARTE130_IRQn                 SERIAL0_IRQn
+#define UARTE130_IRQHandler           SERIAL0_IRQHandler
+#define SPIM131_IRQn                  SERIAL1_IRQn
+#define SPIM131_IRQHandler            SERIAL1_IRQHandler
+#define SPIS131_IRQn                  SERIAL1_IRQn
+#define SPIS131_IRQHandler            SERIAL1_IRQHandler
+#define TWIM131_IRQn                  SERIAL1_IRQn
+#define TWIM131_IRQHandler            SERIAL1_IRQHandler
+#define TWIS131_IRQn                  SERIAL1_IRQn
+#define TWIS131_IRQHandler            SERIAL1_IRQHandler
+#define UARTE131_IRQn                 SERIAL1_IRQn
+#define UARTE131_IRQHandler           SERIAL1_IRQHandler
+#define SPIM132_IRQn                  SERIAL2_IRQn
+#define SPIM132_IRQHandler            SERIAL2_IRQHandler
+#define SPIS132_IRQn                  SERIAL2_IRQn
+#define SPIS132_IRQHandler            SERIAL2_IRQHandler
+#define TWIM132_IRQn                  SERIAL2_IRQn
+#define TWIM132_IRQHandler            SERIAL2_IRQHandler
+#define TWIS132_IRQn                  SERIAL2_IRQn
+#define TWIS132_IRQHandler            SERIAL2_IRQHandler
+#define UARTE132_IRQn                 SERIAL2_IRQn
+#define UARTE132_IRQHandler           SERIAL2_IRQHandler
+#define SPIM133_IRQn                  SERIAL3_IRQn
+#define SPIM133_IRQHandler            SERIAL3_IRQHandler
+#define SPIS133_IRQn                  SERIAL3_IRQn
+#define SPIS133_IRQHandler            SERIAL3_IRQHandler
+#define TWIM133_IRQn                  SERIAL3_IRQn
+#define TWIM133_IRQHandler            SERIAL3_IRQHandler
+#define TWIS133_IRQn                  SERIAL3_IRQn
+#define TWIS133_IRQHandler            SERIAL3_IRQHandler
+#define UARTE133_IRQn                 SERIAL3_IRQn
+#define UARTE133_IRQHandler           SERIAL3_IRQHandler
+#define SPIM134_IRQn                  SERIAL4_IRQn
+#define SPIM134_IRQHandler            SERIAL4_IRQHandler
+#define SPIS134_IRQn                  SERIAL4_IRQn
+#define SPIS134_IRQHandler            SERIAL4_IRQHandler
+#define TWIM134_IRQn                  SERIAL4_IRQn
+#define TWIM134_IRQHandler            SERIAL4_IRQHandler
+#define TWIS134_IRQn                  SERIAL4_IRQn
+#define TWIS134_IRQHandler            SERIAL4_IRQHandler
+#define UARTE134_IRQn                 SERIAL4_IRQn
+#define UARTE134_IRQHandler           SERIAL4_IRQHandler
+#define SPIM135_IRQn                  SERIAL5_IRQn
+#define SPIM135_IRQHandler            SERIAL5_IRQHandler
+#define SPIS135_IRQn                  SERIAL5_IRQn
+#define SPIS135_IRQHandler            SERIAL5_IRQHandler
+#define TWIM135_IRQn                  SERIAL5_IRQn
+#define TWIM135_IRQHandler            SERIAL5_IRQHandler
+#define TWIS135_IRQn                  SERIAL5_IRQn
+#define TWIS135_IRQHandler            SERIAL5_IRQHandler
+#define UARTE135_IRQn                 SERIAL5_IRQn
+#define UARTE135_IRQHandler           SERIAL5_IRQHandler
+#define SPIM136_IRQn                  SERIAL6_IRQn
+#define SPIM136_IRQHandler            SERIAL6_IRQHandler
+#define SPIS136_IRQn                  SERIAL6_IRQn
+#define SPIS136_IRQHandler            SERIAL6_IRQHandler
+#define TWIM136_IRQn                  SERIAL6_IRQn
+#define TWIM136_IRQHandler            SERIAL6_IRQHandler
+#define TWIS136_IRQn                  SERIAL6_IRQn
+#define TWIS136_IRQHandler            SERIAL6_IRQHandler
+#define UARTE136_IRQn                 SERIAL6_IRQn
+#define UARTE136_IRQHandler           SERIAL6_IRQHandler
+#define SPIM137_IRQn                  SERIAL7_IRQn
+#define SPIM137_IRQHandler            SERIAL7_IRQHandler
+#define SPIS137_IRQn                  SERIAL7_IRQn
+#define SPIS137_IRQHandler            SERIAL7_IRQHandler
+#define TWIM137_IRQn                  SERIAL7_IRQn
+#define TWIM137_IRQHandler            SERIAL7_IRQHandler
+#define TWIS137_IRQn                  SERIAL7_IRQn
+#define TWIS137_IRQHandler            SERIAL7_IRQHandler
+#define UARTE137_IRQn                 SERIAL7_IRQn
+#define UARTE137_IRQHandler           SERIAL7_IRQHandler
 
 /* =========================================================================================================================== */
 /* ================                           Processor and Core Peripheral Section                           ================ */
@@ -186,6 +279,9 @@ typedef enum {
 
 /* ====================== Configuration of the Nordic Semiconductor VPR Processor and Core Peripherals ======================= */
 #define __VPR_REV                    1.1             /*!< VPR Core Revision                                                    */
+#define __VPR_REV_MAJOR                1             /*!< VPR Core Major Revision                                              */
+#define __VPR_REV_MINOR                1             /*!< VPR Core Minor Revision                                              */
+#define __VPR_REV_PATCH                0             /*!< VPR Core Patch Revision                                              */
 #define __DSP_PRESENT                  0             /*!< DSP present or not                                                   */
 #define __CLIC_PRIO_BITS               3             /*!< Number of Bits used for Priority Levels                              */
 #define __MTVT_PRESENT                 1             /*!< CPU supports alternate Vector Table address                          */
@@ -194,8 +290,18 @@ typedef enum {
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
 #define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 
+#define NRF_VPR               NRF_VPR120             /*!< VPR instance name                                                    */
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< nrf7140_sysctrl System Library                                       */
+
+#endif                                               /*!< NRF_SYSCTRL                                                          */
+
+
+#ifdef NRF_SYSCTRL
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_GLOBALFAST
+  #define NRF_PROCESSOR                 NRF_PROCESSOR_SYSCTRL
+  #define NRF_OWNER                     NRF_OWNER_SYSCTRL
 
 #endif                                               /*!< NRF_SYSCTRL                                                          */
 
@@ -256,8 +362,6 @@ typedef enum {
 #define NRF_SYSCTRL_RAMC121_BASE          0x5F8C4000UL
 #define NRF_SYSCTRL_ROMC_BASE             0x5F8C6000UL
 #define NRF_SYSCTRL_MEMCONF120_BASE       0x5F8C7000UL
-#define NRF_SYSCTRL_HSFLL122_BASE         0x5F8CB000UL
-#define NRF_SYSCTRL_HSFLL121_BASE         0x5F8CC000UL
 #define NRF_SYSCTRL_HSFLL120_BASE         0x5F8CD000UL
 #define NRF_SYSCTRL_LRCCONF120_BASE       0x5F8CE000UL
 #define NRF_SYSCTRL_PCGCM120_BASE         0x5F8CF000UL
@@ -289,8 +393,6 @@ typedef enum {
 #define NRF_SYSCTRL_FLL16M_BASE           0x5F954000UL
 #define NRF_SYSCTRL_HFXO64M_BASE          0x5F955000UL
 #define NRF_SYSCTRL_CLKMON_BASE           0x5F956000UL
-#define NRF_SYSCTRL_AUDIOPLL_BASE         0x5F957000UL
-#define NRF_SYSCTRL_USBHSPLL_BASE         0x5F958000UL
 #define NRF_SYSCTRL_POWER_BASE            0x5F960000UL
 #define NRF_SYSCTRL_VREGMAIN_BASE         0x5F961000UL
 #define NRF_SYSCTRL_VREGAO1V8_BASE        0x5F962000UL
@@ -298,19 +400,19 @@ typedef enum {
 #define NRF_SYSCTRL_VREGAO0V8_BASE        0x5F964000UL
 #define NRF_SYSCTRL_VREGVS0V8_BASE        0x5F965000UL
 #define NRF_SYSCTRL_VREGSU_BASE           0x5F966000UL
-#define NRF_SYSCTRL_VREGUSB_BASE          0x5F967000UL
-#define NRF_SYSCTRL_AUDIOPLLPM_BASE       0x5F968000UL
 #define NRF_SYSCTRL_VREGMRAM130_BASE      0x5F969000UL
 #define NRF_SYSCTRL_VREGMRAM131_BASE      0x5F96A000UL
 #define NRF_SYSCTRL_OSCRFR_BASE           0x5F96B000UL
 #define NRF_SYSCTRL_SWEXT_BASE            0x5F96C000UL
 #define NRF_SYSCTRL_MBIAS_BASE            0x5F96D000UL
+#define NRF_SYSCTRL_VREG1V80V8_BASE       0x5F96E000UL
 #define NRF_SYSCTRL_VDETAO1V8_BASE        0x5F970000UL
 #define NRF_SYSCTRL_VDETAO0V8_BASE        0x5F971000UL
 #define NRF_SYSCTRL_VDETVS0V8_BASE        0x5F972000UL
 #define NRF_SYSCTRL_VDETIO_BASE           0x5F974000UL
 #define NRF_SYSCTRL_VDETAO5V0_BASE        0x5F975000UL
 #define NRF_SYSCTRL_VDET1V0_BASE          0x5F976000UL
+#define NRF_SYSCTRL_PMICC_BASE            0x5F978000UL
 #define NRF_SYSCTRL_VDETPOF5V0_BASE       0x5F979000UL
 #define NRF_SYSCTRL_VDETPOFVBAT_BASE      0x5F97A000UL
 #define NRF_SYSCTRL_PPIB132_BASE          0x5F98D000UL
@@ -361,8 +463,6 @@ typedef enum {
 #define NRF_SYSCTRL_RAMC121               ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC121_BASE)
 #define NRF_SYSCTRL_ROMC                  ((NRF_ROMC_Type*)                     NRF_SYSCTRL_ROMC_BASE)
 #define NRF_SYSCTRL_MEMCONF120            ((NRF_MEMCONF_Type*)                  NRF_SYSCTRL_MEMCONF120_BASE)
-#define NRF_SYSCTRL_HSFLL122              ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL122_BASE)
-#define NRF_SYSCTRL_HSFLL121              ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL121_BASE)
 #define NRF_SYSCTRL_HSFLL120              ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL120_BASE)
 #define NRF_SYSCTRL_LRCCONF120            ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF120_BASE)
 #define NRF_SYSCTRL_PCGCM120              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM120_BASE)
@@ -394,8 +494,6 @@ typedef enum {
 #define NRF_SYSCTRL_FLL16M                ((NRF_FLL16M_Type*)                   NRF_SYSCTRL_FLL16M_BASE)
 #define NRF_SYSCTRL_HFXO64M               ((NRF_HFXO64M_Type*)                  NRF_SYSCTRL_HFXO64M_BASE)
 #define NRF_SYSCTRL_CLKMON                ((NRF_CLKMON_Type*)                   NRF_SYSCTRL_CLKMON_BASE)
-#define NRF_SYSCTRL_AUDIOPLL              ((NRF_AUXPLL_Type*)                   NRF_SYSCTRL_AUDIOPLL_BASE)
-#define NRF_SYSCTRL_USBHSPLL              ((NRF_AUXPLL_Type*)                   NRF_SYSCTRL_USBHSPLL_BASE)
 #define NRF_SYSCTRL_POWER                 ((NRF_POWER_Type*)                    NRF_SYSCTRL_POWER_BASE)
 #define NRF_SYSCTRL_VREGMAIN              ((NRF_VREGMAIN_Type*)                 NRF_SYSCTRL_VREGMAIN_BASE)
 #define NRF_SYSCTRL_VREGAO1V8             ((NRF_VREGAO1V8_Type*)                NRF_SYSCTRL_VREGAO1V8_BASE)
@@ -403,19 +501,19 @@ typedef enum {
 #define NRF_SYSCTRL_VREGAO0V8             ((NRF_VREGAO0V8_Type*)                NRF_SYSCTRL_VREGAO0V8_BASE)
 #define NRF_SYSCTRL_VREGVS0V8             ((NRF_VREGVS0V8_Type*)                NRF_SYSCTRL_VREGVS0V8_BASE)
 #define NRF_SYSCTRL_VREGSU                ((NRF_VREGSU_Type*)                   NRF_SYSCTRL_VREGSU_BASE)
-#define NRF_SYSCTRL_VREGUSB               ((NRF_VREGUSB_Type*)                  NRF_SYSCTRL_VREGUSB_BASE)
-#define NRF_SYSCTRL_AUDIOPLLPM            ((NRF_AUXPM_Type*)                    NRF_SYSCTRL_AUDIOPLLPM_BASE)
 #define NRF_SYSCTRL_VREGMRAM130           ((NRF_VREGMRAM_Type*)                 NRF_SYSCTRL_VREGMRAM130_BASE)
 #define NRF_SYSCTRL_VREGMRAM131           ((NRF_VREGMRAM_Type*)                 NRF_SYSCTRL_VREGMRAM131_BASE)
 #define NRF_SYSCTRL_OSCRFR                ((NRF_OSCRFR_Type*)                   NRF_SYSCTRL_OSCRFR_BASE)
 #define NRF_SYSCTRL_SWEXT                 ((NRF_SWEXT_Type*)                    NRF_SYSCTRL_SWEXT_BASE)
 #define NRF_SYSCTRL_MBIAS                 ((NRF_MBIAS_Type*)                    NRF_SYSCTRL_MBIAS_BASE)
+#define NRF_SYSCTRL_VREG1V80V8            ((NRF_VREGVS0V8_Type*)                NRF_SYSCTRL_VREG1V80V8_BASE)
 #define NRF_SYSCTRL_VDETAO1V8             ((NRF_VDETAO1V8_Type*)                NRF_SYSCTRL_VDETAO1V8_BASE)
 #define NRF_SYSCTRL_VDETAO0V8             ((NRF_VDETAO0V8_Type*)                NRF_SYSCTRL_VDETAO0V8_BASE)
 #define NRF_SYSCTRL_VDETVS0V8             ((NRF_VDETVS0V8_Type*)                NRF_SYSCTRL_VDETVS0V8_BASE)
 #define NRF_SYSCTRL_VDETIO                ((NRF_VDETIO_Type*)                   NRF_SYSCTRL_VDETIO_BASE)
 #define NRF_SYSCTRL_VDETAO5V0             ((NRF_VDETAO5V0_Type*)                NRF_SYSCTRL_VDETAO5V0_BASE)
 #define NRF_SYSCTRL_VDET1V0               ((NRF_VDET1V0_Type*)                  NRF_SYSCTRL_VDET1V0_BASE)
+#define NRF_SYSCTRL_PMICC                 ((NRF_PMICC_Type*)                    NRF_SYSCTRL_PMICC_BASE)
 #define NRF_SYSCTRL_VDETPOF5V0            ((NRF_VDETPOF5V0_Type*)               NRF_SYSCTRL_VDETPOF5V0_BASE)
 #define NRF_SYSCTRL_VDETPOFVBAT           ((NRF_VDETPOF5V0_Type*)               NRF_SYSCTRL_VDETPOFVBAT_BASE)
 #define NRF_SYSCTRL_PPIB132               ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB132_BASE)
@@ -441,7 +539,7 @@ typedef enum {
 /* ================                                  Local Domain Remapping                                  ================ */
 /* =========================================================================================================================== */
 
-#ifdef NRF_SYSCTRL                                   /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+#ifdef NRF_SYSCTRL                                   /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
   #define NRF_OICR                                NRF_SYSCTRL_OICR
   #define NRF_L2CACHEDATA                         NRF_SYSCTRL_L2CACHEDATA
   #define NRF_L2CACHEINFO                         NRF_SYSCTRL_L2CACHEINFO
@@ -467,8 +565,6 @@ typedef enum {
   #define NRF_RAMC121                             NRF_SYSCTRL_RAMC121
   #define NRF_ROMC                                NRF_SYSCTRL_ROMC
   #define NRF_MEMCONF120                          NRF_SYSCTRL_MEMCONF120
-  #define NRF_HSFLL122                            NRF_SYSCTRL_HSFLL122
-  #define NRF_HSFLL121                            NRF_SYSCTRL_HSFLL121
   #define NRF_HSFLL120                            NRF_SYSCTRL_HSFLL120
   #define NRF_LRCCONF120                          NRF_SYSCTRL_LRCCONF120
   #define NRF_PCGCM120                            NRF_SYSCTRL_PCGCM120
@@ -500,8 +596,6 @@ typedef enum {
   #define NRF_FLL16M                              NRF_SYSCTRL_FLL16M
   #define NRF_HFXO64M                             NRF_SYSCTRL_HFXO64M
   #define NRF_CLKMON                              NRF_SYSCTRL_CLKMON
-  #define NRF_AUDIOPLL                            NRF_SYSCTRL_AUDIOPLL
-  #define NRF_USBHSPLL                            NRF_SYSCTRL_USBHSPLL
   #define NRF_POWER                               NRF_SYSCTRL_POWER
   #define NRF_VREGMAIN                            NRF_SYSCTRL_VREGMAIN
   #define NRF_VREGAO1V8                           NRF_SYSCTRL_VREGAO1V8
@@ -509,19 +603,19 @@ typedef enum {
   #define NRF_VREGAO0V8                           NRF_SYSCTRL_VREGAO0V8
   #define NRF_VREGVS0V8                           NRF_SYSCTRL_VREGVS0V8
   #define NRF_VREGSU                              NRF_SYSCTRL_VREGSU
-  #define NRF_VREGUSB                             NRF_SYSCTRL_VREGUSB
-  #define NRF_AUDIOPLLPM                          NRF_SYSCTRL_AUDIOPLLPM
   #define NRF_VREGMRAM130                         NRF_SYSCTRL_VREGMRAM130
   #define NRF_VREGMRAM131                         NRF_SYSCTRL_VREGMRAM131
   #define NRF_OSCRFR                              NRF_SYSCTRL_OSCRFR
   #define NRF_SWEXT                               NRF_SYSCTRL_SWEXT
   #define NRF_MBIAS                               NRF_SYSCTRL_MBIAS
+  #define NRF_VREG1V80V8                          NRF_SYSCTRL_VREG1V80V8
   #define NRF_VDETAO1V8                           NRF_SYSCTRL_VDETAO1V8
   #define NRF_VDETAO0V8                           NRF_SYSCTRL_VDETAO0V8
   #define NRF_VDETVS0V8                           NRF_SYSCTRL_VDETVS0V8
   #define NRF_VDETIO                              NRF_SYSCTRL_VDETIO
   #define NRF_VDETAO5V0                           NRF_SYSCTRL_VDETAO5V0
   #define NRF_VDET1V0                             NRF_SYSCTRL_VDET1V0
+  #define NRF_PMICC                               NRF_SYSCTRL_PMICC
   #define NRF_VDETPOF5V0                          NRF_SYSCTRL_VDETPOF5V0
   #define NRF_VDETPOFVBAT                         NRF_SYSCTRL_VDETPOFVBAT
   #define NRF_PPIB132                             NRF_SYSCTRL_PPIB132

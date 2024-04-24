@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -183,6 +183,99 @@ typedef enum {
   SERIAL7_IRQn                           = 470,      /*!< 470 SERIAL7                                                          */
 } IRQn_Type;
 
+/* ==================================================== Interrupt Aliases ==================================================== */
+#define SPU200_IRQn                   SPU200_SPU210_IRQn
+#define SPU200_IRQHandler             SPU200_SPU210_IRQHandler
+#define SPU210_IRQn                   SPU200_SPU210_IRQn
+#define SPU210_IRQHandler             SPU200_SPU210_IRQHandler
+#define SPIM120_IRQn                  SPIM120_UARTE120_IRQn
+#define SPIM120_IRQHandler            SPIM120_UARTE120_IRQHandler
+#define UARTE120_IRQn                 SPIM120_UARTE120_IRQn
+#define UARTE120_IRQHandler           SPIM120_UARTE120_IRQHandler
+#define COMP_IRQn                     COMP_LPCOMP_IRQn
+#define COMP_IRQHandler               COMP_LPCOMP_IRQHandler
+#define LPCOMP_IRQn                   COMP_LPCOMP_IRQn
+#define LPCOMP_IRQHandler             COMP_LPCOMP_IRQHandler
+#define SPIM130_IRQn                  SERIAL0_IRQn
+#define SPIM130_IRQHandler            SERIAL0_IRQHandler
+#define SPIS130_IRQn                  SERIAL0_IRQn
+#define SPIS130_IRQHandler            SERIAL0_IRQHandler
+#define TWIM130_IRQn                  SERIAL0_IRQn
+#define TWIM130_IRQHandler            SERIAL0_IRQHandler
+#define TWIS130_IRQn                  SERIAL0_IRQn
+#define TWIS130_IRQHandler            SERIAL0_IRQHandler
+#define UARTE130_IRQn                 SERIAL0_IRQn
+#define UARTE130_IRQHandler           SERIAL0_IRQHandler
+#define SPIM131_IRQn                  SERIAL1_IRQn
+#define SPIM131_IRQHandler            SERIAL1_IRQHandler
+#define SPIS131_IRQn                  SERIAL1_IRQn
+#define SPIS131_IRQHandler            SERIAL1_IRQHandler
+#define TWIM131_IRQn                  SERIAL1_IRQn
+#define TWIM131_IRQHandler            SERIAL1_IRQHandler
+#define TWIS131_IRQn                  SERIAL1_IRQn
+#define TWIS131_IRQHandler            SERIAL1_IRQHandler
+#define UARTE131_IRQn                 SERIAL1_IRQn
+#define UARTE131_IRQHandler           SERIAL1_IRQHandler
+#define SPIM132_IRQn                  SERIAL2_IRQn
+#define SPIM132_IRQHandler            SERIAL2_IRQHandler
+#define SPIS132_IRQn                  SERIAL2_IRQn
+#define SPIS132_IRQHandler            SERIAL2_IRQHandler
+#define TWIM132_IRQn                  SERIAL2_IRQn
+#define TWIM132_IRQHandler            SERIAL2_IRQHandler
+#define TWIS132_IRQn                  SERIAL2_IRQn
+#define TWIS132_IRQHandler            SERIAL2_IRQHandler
+#define UARTE132_IRQn                 SERIAL2_IRQn
+#define UARTE132_IRQHandler           SERIAL2_IRQHandler
+#define SPIM133_IRQn                  SERIAL3_IRQn
+#define SPIM133_IRQHandler            SERIAL3_IRQHandler
+#define SPIS133_IRQn                  SERIAL3_IRQn
+#define SPIS133_IRQHandler            SERIAL3_IRQHandler
+#define TWIM133_IRQn                  SERIAL3_IRQn
+#define TWIM133_IRQHandler            SERIAL3_IRQHandler
+#define TWIS133_IRQn                  SERIAL3_IRQn
+#define TWIS133_IRQHandler            SERIAL3_IRQHandler
+#define UARTE133_IRQn                 SERIAL3_IRQn
+#define UARTE133_IRQHandler           SERIAL3_IRQHandler
+#define SPIM134_IRQn                  SERIAL4_IRQn
+#define SPIM134_IRQHandler            SERIAL4_IRQHandler
+#define SPIS134_IRQn                  SERIAL4_IRQn
+#define SPIS134_IRQHandler            SERIAL4_IRQHandler
+#define TWIM134_IRQn                  SERIAL4_IRQn
+#define TWIM134_IRQHandler            SERIAL4_IRQHandler
+#define TWIS134_IRQn                  SERIAL4_IRQn
+#define TWIS134_IRQHandler            SERIAL4_IRQHandler
+#define UARTE134_IRQn                 SERIAL4_IRQn
+#define UARTE134_IRQHandler           SERIAL4_IRQHandler
+#define SPIM135_IRQn                  SERIAL5_IRQn
+#define SPIM135_IRQHandler            SERIAL5_IRQHandler
+#define SPIS135_IRQn                  SERIAL5_IRQn
+#define SPIS135_IRQHandler            SERIAL5_IRQHandler
+#define TWIM135_IRQn                  SERIAL5_IRQn
+#define TWIM135_IRQHandler            SERIAL5_IRQHandler
+#define TWIS135_IRQn                  SERIAL5_IRQn
+#define TWIS135_IRQHandler            SERIAL5_IRQHandler
+#define UARTE135_IRQn                 SERIAL5_IRQn
+#define UARTE135_IRQHandler           SERIAL5_IRQHandler
+#define SPIM136_IRQn                  SERIAL6_IRQn
+#define SPIM136_IRQHandler            SERIAL6_IRQHandler
+#define SPIS136_IRQn                  SERIAL6_IRQn
+#define SPIS136_IRQHandler            SERIAL6_IRQHandler
+#define TWIM136_IRQn                  SERIAL6_IRQn
+#define TWIM136_IRQHandler            SERIAL6_IRQHandler
+#define TWIS136_IRQn                  SERIAL6_IRQn
+#define TWIS136_IRQHandler            SERIAL6_IRQHandler
+#define UARTE136_IRQn                 SERIAL6_IRQn
+#define UARTE136_IRQHandler           SERIAL6_IRQHandler
+#define SPIM137_IRQn                  SERIAL7_IRQn
+#define SPIM137_IRQHandler            SERIAL7_IRQHandler
+#define SPIS137_IRQn                  SERIAL7_IRQn
+#define SPIS137_IRQHandler            SERIAL7_IRQHandler
+#define TWIM137_IRQn                  SERIAL7_IRQn
+#define TWIM137_IRQHandler            SERIAL7_IRQHandler
+#define TWIS137_IRQn                  SERIAL7_IRQn
+#define TWIS137_IRQHandler            SERIAL7_IRQHandler
+#define UARTE137_IRQn                 SERIAL7_IRQn
+#define UARTE137_IRQHandler           SERIAL7_IRQHandler
 
 /* =========================================================================================================================== */
 /* ================                           Processor and Core Peripheral Section                           ================ */
@@ -203,6 +296,15 @@ typedef enum {
 
 #include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
 #include "system_nrf.h"                              /*!< nrf9230_enga_secure System Library                                   */
+
+#endif                                               /*!< NRF_SECURE                                                           */
+
+
+#ifdef NRF_SECURE
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_SECURE
+  #define NRF_PROCESSOR                 NRF_PROCESSOR_SECURE
+  #define NRF_OWNER                     NRF_OWNER_SECURE
 
 #endif                                               /*!< NRF_SECURE                                                           */
 
@@ -521,85 +623,115 @@ typedef enum {
   #define NRF_SECURE_SPU135                       NRF_SECURE_SPU135_S
   #define NRF_SECURE_SPU136                       NRF_SECURE_SPU136_S
   #define NRF_SECURE_SPU137                       NRF_SECURE_SPU137_S
-#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
+#endif                                               /*!< NRF_TRUSTZONE_NONSECURE                                              */
 
 /* =========================================================================================================================== */
 /* ================                                  Local Domain Remapping                                  ================ */
 /* =========================================================================================================================== */
 
-#ifdef NRF_SECURE                                    /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
-  #define NRF_ICACHEDATA                          NRF_SECURE_ICACHEDATA
-  #define NRF_ICACHEINFO                          NRF_SECURE_ICACHEINFO
-  #define NRF_SICR                                NRF_SECURE_SICR
-  #define NRF_RICR                                NRF_SECURE_RICR
-  #define NRF_DCACHEDATA                          NRF_SECURE_DCACHEDATA
-  #define NRF_DCACHEINFO                          NRF_SECURE_DCACHEINFO
-  #define NRF_CRACENCORE                          NRF_SECURE_CRACENCORE
-  #define NRF_MEMCONF200                          NRF_SECURE_MEMCONF200
-  #define NRF_ETM                                 NRF_SECURE_ETM
-  #define NRF_CTI                                 NRF_SECURE_CTI
-  #define NRF_CPUC                                NRF_SECURE_CPUC
-  #define NRF_ICACHE                              NRF_SECURE_ICACHE
-  #define NRF_DCACHE                              NRF_SECURE_DCACHE
-  #define NRF_SPU000                              NRF_SECURE_SPU000
-  #define NRF_MPC000                              NRF_SECURE_MPC000
-  #define NRF_MVDMA                               NRF_SECURE_MVDMA
-  #define NRF_RAMC000                             NRF_SECURE_RAMC000
-  #define NRF_ROMC                                NRF_SECURE_ROMC
-  #define NRF_CRACEN                              NRF_SECURE_CRACEN
-  #define NRF_RAMC001                             NRF_SECURE_RAMC001
-  #define NRF_PCGCS000                            NRF_SECURE_PCGCS000
-  #define NRF_PCGCM000                            NRF_SECURE_PCGCM000
-  #define NRF_HSFLL                               NRF_SECURE_HSFLL
-  #define NRF_LRCCONF000                          NRF_SECURE_LRCCONF000
-  #define NRF_PCGCM001                            NRF_SECURE_PCGCM001
-  #define NRF_SPU010                              NRF_SECURE_SPU010
-  #define NRF_CPUCONF                             NRF_SECURE_CPUCONF
-  #define NRF_MEMCONF                             NRF_SECURE_MEMCONF
-  #define NRF_WDT010                              NRF_SECURE_WDT010
-  #define NRF_WDT011                              NRF_SECURE_WDT011
-  #define NRF_TAMPC                               NRF_SECURE_TAMPC
-  #define NRF_MUTEX                               NRF_SECURE_MUTEX
-  #define NRF_BILS                                NRF_SECURE_BILS
-  #define NRF_PCGCS010                            NRF_SECURE_PCGCS010
-  #define NRF_PCGCM010                            NRF_SECURE_PCGCM010
-  #define NRF_ABB                                 NRF_SECURE_ABB
-  #define NRF_LRCCONF010                          NRF_SECURE_LRCCONF010
-  #define NRF_RESETINFO                           NRF_SECURE_RESETINFO
-  #define NRF_PCGCM011                            NRF_SECURE_PCGCM011
-  #define NRF_IPCT                                NRF_SECURE_IPCT
-  #define NRF_SWI0                                NRF_SECURE_SWI0
-  #define NRF_SWI1                                NRF_SECURE_SWI1
-  #define NRF_SWI2                                NRF_SECURE_SWI2
-  #define NRF_SWI3                                NRF_SECURE_SWI3
-  #define NRF_SWI4                                NRF_SECURE_SWI4
-  #define NRF_SWI5                                NRF_SECURE_SWI5
-  #define NRF_SWI6                                NRF_SECURE_SWI6
-  #define NRF_SWI7                                NRF_SECURE_SWI7
-  #define NRF_BELLBOARD                           NRF_SECURE_BELLBOARD
-  #define NRF_MPC200                              NRF_SECURE_MPC200
-  #define NRF_SPU200                              NRF_SECURE_SPU200
-  #define NRF_SPU210                              NRF_SECURE_SPU210
-  #define NRF_CTRLAP                              NRF_SECURE_CTRLAP
-  #define NRF_SPU110                              NRF_SECURE_SPU110
-  #define NRF_MPC110                              NRF_SECURE_MPC110
-  #define NRF_SPU111                              NRF_SECURE_SPU111
-  #define NRF_MPC111                              NRF_SECURE_MPC111
-  #define NRF_SPU120                              NRF_SECURE_SPU120
-  #define NRF_MPC120                              NRF_SECURE_MPC120
-  #define NRF_SPU121                              NRF_SECURE_SPU121
-  #define NRF_SPU122                              NRF_SECURE_SPU122
-  #define NRF_SPU130                              NRF_SECURE_SPU130
-  #define NRF_MPC130                              NRF_SECURE_MPC130
-  #define NRF_SPU131                              NRF_SECURE_SPU131
-  #define NRF_IPCMAP                              NRF_SECURE_IPCMAP
-  #define NRF_IRQMAP                              NRF_SECURE_IRQMAP
-  #define NRF_SPU132                              NRF_SECURE_SPU132
-  #define NRF_SPU133                              NRF_SECURE_SPU133
-  #define NRF_SPU134                              NRF_SECURE_SPU134
-  #define NRF_SPU135                              NRF_SECURE_SPU135
-  #define NRF_SPU136                              NRF_SECURE_SPU136
-  #define NRF_SPU137                              NRF_SECURE_SPU137
+#ifdef NRF_SECURE                                    /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
+  #ifdef NRF_TRUSTZONE_NONSECURE                     /*!< Remap only nonsecure instances.                                      */
+    #define NRF_CRACENCORE                        NRF_SECURE_CRACENCORE
+    #define NRF_MEMCONF200                        NRF_SECURE_MEMCONF200
+    #define NRF_ETM                               NRF_SECURE_ETM
+    #define NRF_MVDMA                             NRF_SECURE_MVDMA
+    #define NRF_RAMC000                           NRF_SECURE_RAMC000
+    #define NRF_ROMC                              NRF_SECURE_ROMC
+    #define NRF_CRACEN                            NRF_SECURE_CRACEN
+    #define NRF_RAMC001                           NRF_SECURE_RAMC001
+    #define NRF_CPUCONF                           NRF_SECURE_CPUCONF
+    #define NRF_MEMCONF                           NRF_SECURE_MEMCONF
+    #define NRF_WDT010                            NRF_SECURE_WDT010
+    #define NRF_WDT011                            NRF_SECURE_WDT011
+    #define NRF_MUTEX                             NRF_SECURE_MUTEX
+    #define NRF_IPCT                              NRF_SECURE_IPCT
+    #define NRF_SWI0                              NRF_SECURE_SWI0
+    #define NRF_SWI1                              NRF_SECURE_SWI1
+    #define NRF_SWI2                              NRF_SECURE_SWI2
+    #define NRF_SWI3                              NRF_SECURE_SWI3
+    #define NRF_SWI4                              NRF_SECURE_SWI4
+    #define NRF_SWI5                              NRF_SECURE_SWI5
+    #define NRF_SWI6                              NRF_SECURE_SWI6
+    #define NRF_SWI7                              NRF_SECURE_SWI7
+    #define NRF_BELLBOARD                         NRF_SECURE_BELLBOARD
+    #define NRF_MPC200                            NRF_SECURE_MPC200
+    #define NRF_SPU200                            NRF_SECURE_SPU200
+    #define NRF_SPU210                            NRF_SECURE_SPU210
+    #define NRF_CTRLAP                            NRF_SECURE_CTRLAP
+  #else                                              /*!< Remap all instances.                                                 */
+    #define NRF_ICACHEDATA                        NRF_SECURE_ICACHEDATA
+    #define NRF_ICACHEINFO                        NRF_SECURE_ICACHEINFO
+    #define NRF_SICR                              NRF_SECURE_SICR
+    #define NRF_RICR                              NRF_SECURE_RICR
+    #define NRF_DCACHEDATA                        NRF_SECURE_DCACHEDATA
+    #define NRF_DCACHEINFO                        NRF_SECURE_DCACHEINFO
+    #define NRF_CRACENCORE                        NRF_SECURE_CRACENCORE
+    #define NRF_MEMCONF200                        NRF_SECURE_MEMCONF200
+    #define NRF_ETM                               NRF_SECURE_ETM
+    #define NRF_CTI                               NRF_SECURE_CTI
+    #define NRF_CPUC                              NRF_SECURE_CPUC
+    #define NRF_ICACHE                            NRF_SECURE_ICACHE
+    #define NRF_DCACHE                            NRF_SECURE_DCACHE
+    #define NRF_SPU000                            NRF_SECURE_SPU000
+    #define NRF_MPC000                            NRF_SECURE_MPC000
+    #define NRF_MVDMA                             NRF_SECURE_MVDMA
+    #define NRF_RAMC000                           NRF_SECURE_RAMC000
+    #define NRF_ROMC                              NRF_SECURE_ROMC
+    #define NRF_CRACEN                            NRF_SECURE_CRACEN
+    #define NRF_RAMC001                           NRF_SECURE_RAMC001
+    #define NRF_PCGCS000                          NRF_SECURE_PCGCS000
+    #define NRF_PCGCM000                          NRF_SECURE_PCGCM000
+    #define NRF_HSFLL                             NRF_SECURE_HSFLL
+    #define NRF_LRCCONF000                        NRF_SECURE_LRCCONF000
+    #define NRF_PCGCM001                          NRF_SECURE_PCGCM001
+    #define NRF_SPU010                            NRF_SECURE_SPU010
+    #define NRF_CPUCONF                           NRF_SECURE_CPUCONF
+    #define NRF_MEMCONF                           NRF_SECURE_MEMCONF
+    #define NRF_WDT010                            NRF_SECURE_WDT010
+    #define NRF_WDT011                            NRF_SECURE_WDT011
+    #define NRF_TAMPC                             NRF_SECURE_TAMPC
+    #define NRF_MUTEX                             NRF_SECURE_MUTEX
+    #define NRF_BILS                              NRF_SECURE_BILS
+    #define NRF_PCGCS010                          NRF_SECURE_PCGCS010
+    #define NRF_PCGCM010                          NRF_SECURE_PCGCM010
+    #define NRF_ABB                               NRF_SECURE_ABB
+    #define NRF_LRCCONF010                        NRF_SECURE_LRCCONF010
+    #define NRF_RESETINFO                         NRF_SECURE_RESETINFO
+    #define NRF_PCGCM011                          NRF_SECURE_PCGCM011
+    #define NRF_IPCT                              NRF_SECURE_IPCT
+    #define NRF_SWI0                              NRF_SECURE_SWI0
+    #define NRF_SWI1                              NRF_SECURE_SWI1
+    #define NRF_SWI2                              NRF_SECURE_SWI2
+    #define NRF_SWI3                              NRF_SECURE_SWI3
+    #define NRF_SWI4                              NRF_SECURE_SWI4
+    #define NRF_SWI5                              NRF_SECURE_SWI5
+    #define NRF_SWI6                              NRF_SECURE_SWI6
+    #define NRF_SWI7                              NRF_SECURE_SWI7
+    #define NRF_BELLBOARD                         NRF_SECURE_BELLBOARD
+    #define NRF_MPC200                            NRF_SECURE_MPC200
+    #define NRF_SPU200                            NRF_SECURE_SPU200
+    #define NRF_SPU210                            NRF_SECURE_SPU210
+    #define NRF_CTRLAP                            NRF_SECURE_CTRLAP
+    #define NRF_SPU110                            NRF_SECURE_SPU110
+    #define NRF_MPC110                            NRF_SECURE_MPC110
+    #define NRF_SPU111                            NRF_SECURE_SPU111
+    #define NRF_MPC111                            NRF_SECURE_MPC111
+    #define NRF_SPU120                            NRF_SECURE_SPU120
+    #define NRF_MPC120                            NRF_SECURE_MPC120
+    #define NRF_SPU121                            NRF_SECURE_SPU121
+    #define NRF_SPU122                            NRF_SECURE_SPU122
+    #define NRF_SPU130                            NRF_SECURE_SPU130
+    #define NRF_MPC130                            NRF_SECURE_MPC130
+    #define NRF_SPU131                            NRF_SECURE_SPU131
+    #define NRF_IPCMAP                            NRF_SECURE_IPCMAP
+    #define NRF_IRQMAP                            NRF_SECURE_IRQMAP
+    #define NRF_SPU132                            NRF_SECURE_SPU132
+    #define NRF_SPU133                            NRF_SECURE_SPU133
+    #define NRF_SPU134                            NRF_SECURE_SPU134
+    #define NRF_SPU135                            NRF_SECURE_SPU135
+    #define NRF_SPU136                            NRF_SECURE_SPU136
+    #define NRF_SPU137                            NRF_SECURE_SPU137
+  #endif                                             /*!< NRF_TRUSTZONE_NONSECURE                                              */
 #endif                                               /*!< NRF_SECURE                                                           */
 
 /* ========================================== End of section using anonymous unions ========================================== */

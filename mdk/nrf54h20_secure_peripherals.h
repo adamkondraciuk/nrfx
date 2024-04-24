@@ -47,9 +47,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include <stdbool.h>
-/* Domain definition */
-#define NRF_DOMAIN NRF_DOMAIN_SECURE
-
 /*CACHEDATA*/
 #define ICACHEDATA_PRESENT 1
 #define ICACHEDATA_COUNT 1
@@ -638,15 +635,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PCGCSLAVE_PRESENT 1
 #define PCGCSLAVE_COUNT 2
 
-#define PCGCS000_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS000_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS000_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS000_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS000_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS000_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS000_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS000_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS010_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS010_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS010_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS010_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS010_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS010_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS010_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS010_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
@@ -790,6 +787,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RESETINFO_COUNT 1
 
 #define RESETINFO_HASRESETREAS 1                     /*!< (unspecified)                                                        */
+#define RESETINFO_CROSSDOMAINRESET 0                 /*!< (unspecified)                                                        */
 
 /*IPCT APB registers*/
 #define IPCT_PRESENT 1
@@ -834,6 +832,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FICR_NFC_ON 1                                /*!< (unspecified)                                                        */
 #define FICR_ML_ON 0                                 /*!< (unspecified)                                                        */
 #define FICR_SDCARD_ON 0                             /*!< (unspecified)                                                        */
+#define FICR_VREG_1V8_0V8 0                          /*!< (unspecified)                                                        */
+#define FICR_AUDIO_USB_PROGRAMMABLE_OWNER 0          /*!< (unspecified)                                                        */
 
 /*USBHSCORE*/
 #define USBHSCORE_PRESENT 1
@@ -2691,7 +2691,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TWIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-/* ================================================= SECURE_SPU010_FEATURES ================================================== */
+/* ============================================= SPU010 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU010.FEATURES controlling access permissions of features with split security
   */
@@ -2705,7 +2705,7 @@ typedef enum {
   NRF_SECURE_SPU010_FEATURES_CRACEN_SEED     = 224,  /*!< Index of access permissions for SEED register of CRACEN              */
 } NRF_SECURE_SPU010_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU111_FEATURES ================================================== */
+/* ============================================= SPU111 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU111.FEATURES controlling access permissions of features with split security
   */
@@ -2917,7 +2917,7 @@ typedef enum {
   NRF_SECURE_SPU111_FEATURES_MRAMC111_READY  = 389,  /*!< Index of access permissions for READY/READYNEXT registers of MRAMC111*/
 } NRF_SECURE_SPU111_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU120_FEATURES ================================================== */
+/* ============================================= SPU120 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU120.FEATURES controlling access permissions of features with split security
   */
@@ -2938,7 +2938,7 @@ typedef enum {
   NRF_SECURE_SPU120_FEATURES_VPR120_TASKS_15 = 207,  /*!< Index of access permissions for task pair [31:30] of VPR120          */
 } NRF_SECURE_SPU120_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU121_FEATURES ================================================== */
+/* ============================================= SPU121 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU121.FEATURES controlling access permissions of features with split security
   */
@@ -2953,7 +2953,7 @@ typedef enum {
   NRF_SECURE_SPU121_FEATURES_IPCT120_CH_7    = 7,    /*!< Index of access permissions for channel 7 of IPCT120                 */
 } NRF_SECURE_SPU121_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU122_FEATURES ================================================== */
+/* ============================================= SPU122 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU122.FEATURES controlling access permissions of features with split security
   */
@@ -2970,7 +2970,7 @@ typedef enum {
   NRF_SECURE_SPU122_FEATURES_DPPIC120_CHG_1  = 57,   /*!< Index of access permissions for channel group 1 of DPPIC120          */
 } NRF_SECURE_SPU122_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU131_FEATURES ================================================== */
+/* ============================================= SPU131 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU131.FEATURES controlling access permissions of features with split security
   */
@@ -3074,7 +3074,7 @@ typedef enum {
   NRF_SECURE_SPU131_FEATURES_P9_PIN_5        = 421,  /*!< Index of access permissions for pin 5 of GPIO port P9                */
 } NRF_SECURE_SPU131_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU132_FEATURES ================================================== */
+/* ============================================= SPU132 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU132.FEATURES controlling access permissions of features with split security
   */
@@ -3091,7 +3091,7 @@ typedef enum {
   NRF_SECURE_SPU132_FEATURES_DPPIC131_CHG_1  = 57,   /*!< Index of access permissions for channel group 1 of DPPIC131          */
 } NRF_SECURE_SPU132_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU133_FEATURES ================================================== */
+/* ============================================= SPU133 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU133.FEATURES controlling access permissions of features with split security
   */
@@ -3145,7 +3145,7 @@ typedef enum {
   NRF_SECURE_SPU133_FEATURES_GRTC_INTERRUPT_10 = 170, /*!< Index of access permissions for interrupt 0 of GRTC                 */
 } NRF_SECURE_SPU133_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU134_FEATURES ================================================== */
+/* ============================================= SPU134 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU134.FEATURES controlling access permissions of features with split security
   */
@@ -3162,7 +3162,7 @@ typedef enum {
   NRF_SECURE_SPU134_FEATURES_DPPIC133_CHG_1  = 57,   /*!< Index of access permissions for channel group 1 of DPPIC133          */
 } NRF_SECURE_SPU134_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU135_FEATURES ================================================== */
+/* ============================================= SPU135 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU135.FEATURES controlling access permissions of features with split security
   */
@@ -3179,7 +3179,7 @@ typedef enum {
   NRF_SECURE_SPU135_FEATURES_DPPIC134_CHG_1  = 57,   /*!< Index of access permissions for channel group 1 of DPPIC134          */
 } NRF_SECURE_SPU135_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU136_FEATURES ================================================== */
+/* ============================================= SPU136 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU136.FEATURES controlling access permissions of features with split security
   */
@@ -3196,7 +3196,7 @@ typedef enum {
   NRF_SECURE_SPU136_FEATURES_DPPIC135_CHG_1  = 57,   /*!< Index of access permissions for channel group 1 of DPPIC135          */
 } NRF_SECURE_SPU136_FEATURES_ENUM_t;
 
-/* ================================================= SECURE_SPU137_FEATURES ================================================== */
+/* ============================================= SPU137 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU137.FEATURES controlling access permissions of features with split security
   */

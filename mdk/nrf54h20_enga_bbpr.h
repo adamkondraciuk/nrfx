@@ -246,6 +246,9 @@ typedef enum {
 
 /* ====================== Configuration of the Nordic Semiconductor VPR Processor and Core Peripherals ======================= */
 #define __VPR_REV                    0.7             /*!< VPR Core Revision                                                    */
+#define __VPR_REV_MAJOR                0             /*!< VPR Core Major Revision                                              */
+#define __VPR_REV_MINOR                7             /*!< VPR Core Minor Revision                                              */
+#define __VPR_REV_PATCH                0             /*!< VPR Core Patch Revision                                              */
 #define __DSP_PRESENT                  0             /*!< DSP present or not                                                   */
 #define __CLIC_PRIO_BITS               3             /*!< Number of Bits used for Priority Levels                              */
 #define __MTVT_PRESENT                 1             /*!< CPU supports alternate Vector Table address                          */
@@ -254,8 +257,18 @@ typedef enum {
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
 #define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 
+#define NRF_VPR        NRF_RADIOCORE_VPR             /*!< VPR instance name                                                    */
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< nrf54h20_enga_bbpr System Library                                    */
+
+#endif                                               /*!< NRF_BBPR                                                             */
+
+
+#ifdef NRF_BBPR
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_RADIOCORE
+  #define NRF_PROCESSOR                 NRF_PROCESSOR_BBPR
+  #define NRF_OWNER                     NRF_OWNER_RADIOCORE
 
 #endif                                               /*!< NRF_BBPR                                                             */
 

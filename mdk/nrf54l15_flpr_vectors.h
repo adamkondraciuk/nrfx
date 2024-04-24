@@ -138,6 +138,7 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void CTRLAP_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void TIMER00_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void VREGRLDO_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void ECCRAMC_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void SPU10_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void TIMER10_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void RTC10_IRQHandler                                            (void);
@@ -301,7 +302,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     TIMER00_IRQHandler,
     0,
     VREGRLDO_IRQHandler,
-    0,
+    ECCRAMC_IRQHandler,
     0,
     0,
     0,

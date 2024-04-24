@@ -3280,7 +3280,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x14</addressOffset>
                 <register>
                   <name>CALIBRATION</name>
-                  <description>Trim value for RSSICAL and ED154CAL in RADIOCORE.RADIO.RXAGC.CALIBRATION</description>
+                  <description>RADIOCORE.RADIO.RXAGC.CALIBRATION</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3361,7 +3361,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>LOOPGAIN</name>
-                <description>Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND5</description>
+                <description>Trim value for RADIOCORE.RADIO.ADPLLTRIMCOMMAND0</description>
                 <addressOffset>0x28</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -3427,11 +3427,27 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_BOOT_VREG1V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x00C</addressOffset>
+              <addressOffset>0x008</addressOffset>
+              <register>
+                <name>VOUTHPRADIOHELPER</name>
+                <description>Config value for SYSCTRL.VREG1V0.VOUTHPRADIO when VREG1V0 used in Helper mode</description>
+                <addressOffset>0x000</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Config value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
               <register>
                 <name>VOUTHPNOMINAL</name>
                 <description>Config value for SYSCTRL.VREG1V0.VOUTHPNOMINAL</description>
-                <addressOffset>0x000</addressOffset>
+                <addressOffset>0x004</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <size>0x20</size>
@@ -97721,7 +97737,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>CONFIG</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPLL_CONFIG</headerStructName>
+          <headerStructName>AUXPLL_CONFIG</headerStructName>
           <access>read-write</access>
           <addressOffset>0x410</addressOffset>
           <register>
@@ -97843,7 +97859,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>TRIM</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPLL_TRIM</headerStructName>
+          <headerStructName>AUXPLL_TRIM</headerStructName>
           <access>read-write</access>
           <addressOffset>0x440</addressOffset>
           <register>
@@ -97883,7 +97899,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>AUXPLLCTRL</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPLL_AUXPLLCTRL</headerStructName>
+          <headerStructName>AUXPLL_AUXPLLCTRL</headerStructName>
           <access>read-write</access>
           <addressOffset>0x460</addressOffset>
           <register>
@@ -98089,7 +98105,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>OVERRIDE</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPLL_OVERRIDE</headerStructName>
+          <headerStructName>AUXPLL_OVERRIDE</headerStructName>
           <access>read-write</access>
           <addressOffset>0x500</addressOffset>
           <register>
@@ -98494,7 +98510,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>DFT</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPLL_DFT</headerStructName>
+          <headerStructName>AUXPLL_DFT</headerStructName>
           <access>read-write</access>
           <addressOffset>0x600</addressOffset>
           <register>
@@ -98900,7 +98916,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>CONFIG</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPM_CONFIG</headerStructName>
+          <headerStructName>AUXPM_CONFIG</headerStructName>
           <access>read-write</access>
           <addressOffset>0x420</addressOffset>
           <register>
@@ -99039,7 +99055,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>TRIM</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPM_TRIM</headerStructName>
+          <headerStructName>AUXPM_TRIM</headerStructName>
           <access>read-write</access>
           <addressOffset>0x450</addressOffset>
           <register>
@@ -99132,7 +99148,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>OVERRIDE</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPM_OVERRIDE</headerStructName>
+          <headerStructName>AUXPM_OVERRIDE</headerStructName>
           <access>read-write</access>
           <addressOffset>0x580</addressOffset>
           <register>
@@ -99343,7 +99359,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>DFT</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPM_DFT</headerStructName>
+          <headerStructName>AUXPM_DFT</headerStructName>
           <access>read-write</access>
           <addressOffset>0x680</addressOffset>
           <register>
@@ -117168,6 +117184,42 @@ A write outputs the value to atbytesm.</description>
               <description>Shortcut between event SEQEND[n] and task STOP</description>
               <lsb>1</lsb>
               <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>LOOPSDONE_DMA_SEQ0_START</name>
+              <description>Shortcut between event LOOPSDONE and task DMA.SEQ[n].START</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>LOOPSDONE_DMA_SEQ1_START</name>
+              <description>Shortcut between event LOOPSDONE and task DMA.SEQ[n].START</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -145238,7 +145290,7 @@ A write outputs the value to atbytesm.</description>
         </register>
         <register>
           <name>TASKS_SAMPLE</name>
-          <description>Take one ADC sample, if scan is enabled all channels are sampled</description>
+          <description>Take one ADC sample, if scan is enabled all channels are sampled. This task requires that SAADC has started, i.e. EVENTS_STARTED was set and EVENTS_STOPPED was not.</description>
           <addressOffset>0x004</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -145246,7 +145298,7 @@ A write outputs the value to atbytesm.</description>
           <fields>
             <field>
               <name>TASKS_SAMPLE</name>
-              <description>Take one ADC sample, if scan is enabled all channels are sampled</description>
+              <description>Take one ADC sample, if scan is enabled all channels are sampled. This task requires that SAADC has started, i.e. EVENTS_STARTED was set and EVENTS_STOPPED was not.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -148058,13 +148110,13 @@ A write outputs the value to atbytesm.</description>
             <fields>
               <field>
                 <name>PIN</name>
-                <description>Analog positive input pin select</description>
+                <description>GPIO pin selection.</description>
                 <lsb>0</lsb>
                 <msb>4</msb>
               </field>
               <field>
                 <name>PORT</name>
-                <description>GPIO Port selection</description>
+                <description>GPIO port selection</description>
                 <lsb>8</lsb>
                 <msb>11</msb>
               </field>
@@ -148164,7 +148216,7 @@ A write outputs the value to atbytesm.</description>
             <fields>
               <field>
                 <name>PIN</name>
-                <description>Analog negative input pin select</description>
+                <description>GPIO pin selection.</description>
                 <lsb>0</lsb>
                 <msb>4</msb>
               </field>
@@ -148290,9 +148342,14 @@ A write outputs the value to atbytesm.</description>
                     <value>0x2</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Gain4</name>
+                    <name>Gain3</name>
                     <description>4</description>
                     <value>0x3</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Gain1_2</name>
+                    <description>1/2</description>
+                    <value>0x4</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -148737,7 +148794,7 @@ A write outputs the value to atbytesm.</description>
                 <enumeratedValue>
                   <name>Disabled</name>
                   <description>Writing values is disabled</description>
-                  <value>0x1</value>
+                  <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
@@ -148755,7 +148812,7 @@ A write outputs the value to atbytesm.</description>
                 <enumeratedValue>
                   <name>Disabled</name>
                   <description>Use of linear calibration is disabled</description>
-                  <value>0x1</value>
+                  <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
@@ -148816,7 +148873,7 @@ A write outputs the value to atbytesm.</description>
                 <enumeratedValue>
                   <name>Low</name>
                   <description>Low gain setting</description>
-                  <value>0x40</value>
+                  <value>0x00</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -148834,11 +148891,11 @@ A write outputs the value to atbytesm.</description>
               <name>VREF</name>
               <description>Offset binary coding</description>
               <lsb>0</lsb>
-              <msb>6</msb>
+              <msb>5</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
-                  <description>Default vref, in typical corner VREF=1.2V</description>
+                  <description>Default vref, in typical corner VREF=1.024V</description>
                   <value>0x00</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -148849,9 +148906,15 @@ A write outputs the value to atbytesm.</description>
                 <enumeratedValue>
                   <name>Low</name>
                   <description>High output code (low reference voltage)</description>
-                  <value>0x40</value>
+                  <value>0x00</value>
                 </enumeratedValue>
               </enumeratedValues>
+            </field>
+            <field>
+              <name>VREFLPFDISABLE</name>
+              <description>Disable the internal reference low pass filter</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
             </field>
             <field>
               <name>IREF</name>
@@ -148888,12 +148951,12 @@ A write outputs the value to atbytesm.</description>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Audio</name>
-                  <description>Noiseshaping and decimating. Larger passband. See design description for more information</description>
+                  <description>Noiseshaping and decimating. Larger passband. Provides a 100kS/s cut off frequency, 8x the oversampling ratio. See design description for more information</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Accuracy</name>
-                  <description>Noiseshaping and decimating. Smaller passband. See design description for more information</description>
+                  <description>Noiseshaping and decimating. Smaller passband. Recommended resolution setting is 14 bits. Provides a 10kS/s cut off frequency, 32x the oversampling ratio. See design description for more information</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -149073,33 +149136,33 @@ A write outputs the value to atbytesm.</description>
                 <msb>2</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>INMUX</name>
+                    <name>InMux</name>
                     <description>ATB0 connected to PADC_INMUX, available on PADC_IN</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VREF</name>
+                    <name>Vref</name>
                     <description>ATB0 connected to VREF</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VREFBUFF</name>
+                    <name>VrefBuff</name>
                     <description>ATB0 connected to VREF_BUFF</description>
                     <value>0x2</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VREFIBPSR10U</name>
+                    <name>VrefIbpsr10U</name>
                     <description>ATB0 connected to ATB_PADC_VREF_IBPSR_10U for current measurement</description>
                     <value>0x3</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VREFIBPS3U</name>
+                    <name>VrefIbps3U</name>
                     <description>ATB0 connected to ATB_PADC_VREF_IBPS_3U</description>
                     <value>0x4</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Spare0</name>
-                    <description>Spare pin</description>
+                    <name>VrefLpfDisabled</name>
+                    <description>ATB0 connected to VREF, internal reference with LPF bypassed.</description>
                     <value>0x5</value>
                   </enumeratedValue>
                   <enumeratedValue>
@@ -149149,33 +149212,33 @@ A write outputs the value to atbytesm.</description>
                 <msb>2</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>INMUX</name>
+                    <name>Inmux</name>
                     <description>ATB1 connected to PADC_INMUX, available on both PADC_IP and PADC_IN</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VREFviaATBBUF</name>
+                    <name>VrefViaAtbuf</name>
                     <description>ATB1 connected to VREF via ATBBUF</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VREFBUFFviaATBUF</name>
+                    <name>VrefBuffViaAtbuf</name>
                     <description>ATB1 connected to VREF_BUFF via ATBUF</description>
                     <value>0x2</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>LDO</name>
+                    <name>Ldo</name>
                     <description>ATB1 connected to PADC_LDO resistive divider to measure 1.5V/2 via ATBUF</description>
                     <value>0x3</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VREFIBPS3U</name>
+                    <name>VrefIbps3U</name>
                     <description>SATB1 connected to ATB_PADC_VREF_IBPS_3U</description>
                     <value>0x4</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Spare0</name>
-                    <description>Spare pin</description>
+                    <description>Unspecified</description>
                     <value>0x5</value>
                   </enumeratedValue>
                   <enumeratedValue>
@@ -166430,7 +166493,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>PSEL</name>
           <description>Unspecified</description>
-          <headerStructName>PSEL</headerStructName>
+          <headerStructName>QDEC_PSEL</headerStructName>
           <access>read-write</access>
           <addressOffset>0x51C</addressOffset>
           <register>

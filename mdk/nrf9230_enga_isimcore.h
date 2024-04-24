@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -142,6 +142,95 @@ typedef enum {
   SERIAL7_IRQn                           = 470,      /*!< 470 SERIAL7                                                          */
 } IRQn_Type;
 
+/* ==================================================== Interrupt Aliases ==================================================== */
+#define SPIM120_IRQn                  SPIM120_UARTE120_IRQn
+#define SPIM120_IRQHandler            SPIM120_UARTE120_IRQHandler
+#define UARTE120_IRQn                 SPIM120_UARTE120_IRQn
+#define UARTE120_IRQHandler           SPIM120_UARTE120_IRQHandler
+#define COMP_IRQn                     COMP_LPCOMP_IRQn
+#define COMP_IRQHandler               COMP_LPCOMP_IRQHandler
+#define LPCOMP_IRQn                   COMP_LPCOMP_IRQn
+#define LPCOMP_IRQHandler             COMP_LPCOMP_IRQHandler
+#define SPIM130_IRQn                  SERIAL0_IRQn
+#define SPIM130_IRQHandler            SERIAL0_IRQHandler
+#define SPIS130_IRQn                  SERIAL0_IRQn
+#define SPIS130_IRQHandler            SERIAL0_IRQHandler
+#define TWIM130_IRQn                  SERIAL0_IRQn
+#define TWIM130_IRQHandler            SERIAL0_IRQHandler
+#define TWIS130_IRQn                  SERIAL0_IRQn
+#define TWIS130_IRQHandler            SERIAL0_IRQHandler
+#define UARTE130_IRQn                 SERIAL0_IRQn
+#define UARTE130_IRQHandler           SERIAL0_IRQHandler
+#define SPIM131_IRQn                  SERIAL1_IRQn
+#define SPIM131_IRQHandler            SERIAL1_IRQHandler
+#define SPIS131_IRQn                  SERIAL1_IRQn
+#define SPIS131_IRQHandler            SERIAL1_IRQHandler
+#define TWIM131_IRQn                  SERIAL1_IRQn
+#define TWIM131_IRQHandler            SERIAL1_IRQHandler
+#define TWIS131_IRQn                  SERIAL1_IRQn
+#define TWIS131_IRQHandler            SERIAL1_IRQHandler
+#define UARTE131_IRQn                 SERIAL1_IRQn
+#define UARTE131_IRQHandler           SERIAL1_IRQHandler
+#define SPIM132_IRQn                  SERIAL2_IRQn
+#define SPIM132_IRQHandler            SERIAL2_IRQHandler
+#define SPIS132_IRQn                  SERIAL2_IRQn
+#define SPIS132_IRQHandler            SERIAL2_IRQHandler
+#define TWIM132_IRQn                  SERIAL2_IRQn
+#define TWIM132_IRQHandler            SERIAL2_IRQHandler
+#define TWIS132_IRQn                  SERIAL2_IRQn
+#define TWIS132_IRQHandler            SERIAL2_IRQHandler
+#define UARTE132_IRQn                 SERIAL2_IRQn
+#define UARTE132_IRQHandler           SERIAL2_IRQHandler
+#define SPIM133_IRQn                  SERIAL3_IRQn
+#define SPIM133_IRQHandler            SERIAL3_IRQHandler
+#define SPIS133_IRQn                  SERIAL3_IRQn
+#define SPIS133_IRQHandler            SERIAL3_IRQHandler
+#define TWIM133_IRQn                  SERIAL3_IRQn
+#define TWIM133_IRQHandler            SERIAL3_IRQHandler
+#define TWIS133_IRQn                  SERIAL3_IRQn
+#define TWIS133_IRQHandler            SERIAL3_IRQHandler
+#define UARTE133_IRQn                 SERIAL3_IRQn
+#define UARTE133_IRQHandler           SERIAL3_IRQHandler
+#define SPIM134_IRQn                  SERIAL4_IRQn
+#define SPIM134_IRQHandler            SERIAL4_IRQHandler
+#define SPIS134_IRQn                  SERIAL4_IRQn
+#define SPIS134_IRQHandler            SERIAL4_IRQHandler
+#define TWIM134_IRQn                  SERIAL4_IRQn
+#define TWIM134_IRQHandler            SERIAL4_IRQHandler
+#define TWIS134_IRQn                  SERIAL4_IRQn
+#define TWIS134_IRQHandler            SERIAL4_IRQHandler
+#define UARTE134_IRQn                 SERIAL4_IRQn
+#define UARTE134_IRQHandler           SERIAL4_IRQHandler
+#define SPIM135_IRQn                  SERIAL5_IRQn
+#define SPIM135_IRQHandler            SERIAL5_IRQHandler
+#define SPIS135_IRQn                  SERIAL5_IRQn
+#define SPIS135_IRQHandler            SERIAL5_IRQHandler
+#define TWIM135_IRQn                  SERIAL5_IRQn
+#define TWIM135_IRQHandler            SERIAL5_IRQHandler
+#define TWIS135_IRQn                  SERIAL5_IRQn
+#define TWIS135_IRQHandler            SERIAL5_IRQHandler
+#define UARTE135_IRQn                 SERIAL5_IRQn
+#define UARTE135_IRQHandler           SERIAL5_IRQHandler
+#define SPIM136_IRQn                  SERIAL6_IRQn
+#define SPIM136_IRQHandler            SERIAL6_IRQHandler
+#define SPIS136_IRQn                  SERIAL6_IRQn
+#define SPIS136_IRQHandler            SERIAL6_IRQHandler
+#define TWIM136_IRQn                  SERIAL6_IRQn
+#define TWIM136_IRQHandler            SERIAL6_IRQHandler
+#define TWIS136_IRQn                  SERIAL6_IRQn
+#define TWIS136_IRQHandler            SERIAL6_IRQHandler
+#define UARTE136_IRQn                 SERIAL6_IRQn
+#define UARTE136_IRQHandler           SERIAL6_IRQHandler
+#define SPIM137_IRQn                  SERIAL7_IRQn
+#define SPIM137_IRQHandler            SERIAL7_IRQHandler
+#define SPIS137_IRQn                  SERIAL7_IRQn
+#define SPIS137_IRQHandler            SERIAL7_IRQHandler
+#define TWIM137_IRQn                  SERIAL7_IRQn
+#define TWIM137_IRQHandler            SERIAL7_IRQHandler
+#define TWIS137_IRQn                  SERIAL7_IRQn
+#define TWIS137_IRQHandler            SERIAL7_IRQHandler
+#define UARTE137_IRQn                 SERIAL7_IRQn
+#define UARTE137_IRQHandler           SERIAL7_IRQHandler
 
 /* =========================================================================================================================== */
 /* ================                           Processor and Core Peripheral Section                           ================ */
@@ -162,6 +251,14 @@ typedef enum {
 
 #include "core_cm0.h"                                /*!< ARM Cortex-M0 processor and core peripherals                         */
 #include "system_nrf.h"                              /*!< nrf9230_enga_isimcore System Library                                 */
+
+#endif                                               /*!< NRF_ISIMCORE                                                         */
+
+
+#ifdef NRF_ISIMCORE
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_ISIMCORE
+  #define NRF_OWNER                     NRF_OWNER_ISIMCORE
 
 #endif                                               /*!< NRF_ISIMCORE                                                         */
 
@@ -289,32 +386,42 @@ typedef enum {
   #define NRF_ISIMCORE_MHU1RCV                    NRF_ISIMCORE_MHU1RCV_S
   #define NRF_ISIMCORE_MHUIRQMAP                  NRF_ISIMCORE_MHUIRQMAP_S
   #define NRF_ISIMCORE_PCGCS2                     NRF_ISIMCORE_PCGCS2_S
-#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
+#endif                                               /*!< NRF_TRUSTZONE_NONSECURE                                              */
 
 /* =========================================================================================================================== */
 /* ================                                  Local Domain Remapping                                  ================ */
 /* =========================================================================================================================== */
 
-#ifdef NRF_ISIMCORE                                  /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
-  #define NRF_SPU0                                NRF_ISIMCORE_SPU0
-  #define NRF_CPUCONF                             NRF_ISIMCORE_CPUCONF
-  #define NRF_CICTRL                              NRF_ISIMCORE_CICTRL
-  #define NRF_LRCCONF0                            NRF_ISIMCORE_LRCCONF0
-  #define NRF_PCGCM0                              NRF_ISIMCORE_PCGCM0
-  #define NRF_PCGCS0                              NRF_ISIMCORE_PCGCS0
-  #define NRF_SPU1                                NRF_ISIMCORE_SPU1
-  #define NRF_MPC                                 NRF_ISIMCORE_MPC
-  #define NRF_HSFLL                               NRF_ISIMCORE_HSFLL
-  #define NRF_LRCCONF1                            NRF_ISIMCORE_LRCCONF1
-  #define NRF_PCGCM1                              NRF_ISIMCORE_PCGCM1
-  #define NRF_PCGCS1                              NRF_ISIMCORE_PCGCS1
-  #define NRF_SPU2                                NRF_ISIMCORE_SPU2
-  #define NRF_MHU0SND                             NRF_ISIMCORE_MHU0SND
-  #define NRF_MHU0RCV                             NRF_ISIMCORE_MHU0RCV
-  #define NRF_MHU1SND                             NRF_ISIMCORE_MHU1SND
-  #define NRF_MHU1RCV                             NRF_ISIMCORE_MHU1RCV
-  #define NRF_MHUIRQMAP                           NRF_ISIMCORE_MHUIRQMAP
-  #define NRF_PCGCS2                              NRF_ISIMCORE_PCGCS2
+#ifdef NRF_ISIMCORE                                  /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
+  #ifdef NRF_TRUSTZONE_NONSECURE                     /*!< Remap only nonsecure instances.                                      */
+    #define NRF_CPUCONF                           NRF_ISIMCORE_CPUCONF
+    #define NRF_CICTRL                            NRF_ISIMCORE_CICTRL
+    #define NRF_MHU0SND                           NRF_ISIMCORE_MHU0SND
+    #define NRF_MHU0RCV                           NRF_ISIMCORE_MHU0RCV
+    #define NRF_MHU1SND                           NRF_ISIMCORE_MHU1SND
+    #define NRF_MHU1RCV                           NRF_ISIMCORE_MHU1RCV
+    #define NRF_MHUIRQMAP                         NRF_ISIMCORE_MHUIRQMAP
+  #else                                              /*!< Remap all instances.                                                 */
+    #define NRF_SPU0                              NRF_ISIMCORE_SPU0
+    #define NRF_CPUCONF                           NRF_ISIMCORE_CPUCONF
+    #define NRF_CICTRL                            NRF_ISIMCORE_CICTRL
+    #define NRF_LRCCONF0                          NRF_ISIMCORE_LRCCONF0
+    #define NRF_PCGCM0                            NRF_ISIMCORE_PCGCM0
+    #define NRF_PCGCS0                            NRF_ISIMCORE_PCGCS0
+    #define NRF_SPU1                              NRF_ISIMCORE_SPU1
+    #define NRF_MPC                               NRF_ISIMCORE_MPC
+    #define NRF_HSFLL                             NRF_ISIMCORE_HSFLL
+    #define NRF_LRCCONF1                          NRF_ISIMCORE_LRCCONF1
+    #define NRF_PCGCM1                            NRF_ISIMCORE_PCGCM1
+    #define NRF_PCGCS1                            NRF_ISIMCORE_PCGCS1
+    #define NRF_SPU2                              NRF_ISIMCORE_SPU2
+    #define NRF_MHU0SND                           NRF_ISIMCORE_MHU0SND
+    #define NRF_MHU0RCV                           NRF_ISIMCORE_MHU0RCV
+    #define NRF_MHU1SND                           NRF_ISIMCORE_MHU1SND
+    #define NRF_MHU1RCV                           NRF_ISIMCORE_MHU1RCV
+    #define NRF_MHUIRQMAP                         NRF_ISIMCORE_MHUIRQMAP
+    #define NRF_PCGCS2                            NRF_ISIMCORE_PCGCS2
+  #endif                                             /*!< NRF_TRUSTZONE_NONSECURE                                              */
 #endif                                               /*!< NRF_ISIMCORE                                                         */
 
 /* ========================================== End of section using anonymous unions ========================================== */

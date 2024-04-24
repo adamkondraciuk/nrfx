@@ -100,6 +100,7 @@ typedef enum {
   CTRLAP_IRQn                            = 82,       /*!< 82 CTRLAP                                                            */
   TIMER00_IRQn                           = 85,       /*!< 85 TIMER00                                                           */
   VREGRLDO_IRQn                          = 87,       /*!< 87 VREGRLDO                                                          */
+  ECCRAMC_IRQn                           = 88,       /*!< 88 ECCRAMC                                                           */
   SPU10_IRQn                             = 128,      /*!< 128 SPU10                                                            */
   TIMER10_IRQn                           = 133,      /*!< 133 TIMER10                                                          */
   RTC10_IRQn                             = 134,      /*!< 134 RTC10                                                            */
@@ -227,6 +228,9 @@ typedef enum {
 
 /* ====================== Configuration of the Nordic Semiconductor VPR Processor and Core Peripherals ======================= */
 #define __VPR_REV                  1.4.1             /*!< VPR Core Revision                                                    */
+#define __VPR_REV_MAJOR                1             /*!< VPR Core Major Revision                                              */
+#define __VPR_REV_MINOR                4             /*!< VPR Core Minor Revision                                              */
+#define __VPR_REV_PATCH                0             /*!< VPR Core Patch Revision                                              */
 #define __DSP_PRESENT                  0             /*!< DSP present or not                                                   */
 #define __CLIC_PRIO_BITS               2             /*!< Number of Bits used for Priority Levels                              */
 #define __MTVT_PRESENT                 1             /*!< CPU supports alternate Vector Table address                          */
@@ -235,8 +239,17 @@ typedef enum {
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
 #define __INTERRUPTS_MAX             270             /*!< Size of interrupt vector table                                       */
 
+#define NRF_VPR                NRF_VPR00             /*!< VPR instance name                                                    */
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< nrf54l15_flpr System Library                                         */
+
+#endif                                               /*!< NRF_FLPR                                                             */
+
+
+#ifdef NRF_FLPR
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_NONE
+  #define NRF_PROCESSOR                 NRF_PROCESSOR_VPR
 
 #endif                                               /*!< NRF_FLPR                                                             */
 

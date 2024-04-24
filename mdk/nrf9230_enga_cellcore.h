@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -184,6 +184,95 @@ typedef enum {
   SERIAL7_IRQn                           = 470,      /*!< 470 SERIAL7                                                          */
 } IRQn_Type;
 
+/* ==================================================== Interrupt Aliases ==================================================== */
+#define SPIM120_IRQn                  SPIM120_UARTE120_IRQn
+#define SPIM120_IRQHandler            SPIM120_UARTE120_IRQHandler
+#define UARTE120_IRQn                 SPIM120_UARTE120_IRQn
+#define UARTE120_IRQHandler           SPIM120_UARTE120_IRQHandler
+#define COMP_IRQn                     COMP_LPCOMP_IRQn
+#define COMP_IRQHandler               COMP_LPCOMP_IRQHandler
+#define LPCOMP_IRQn                   COMP_LPCOMP_IRQn
+#define LPCOMP_IRQHandler             COMP_LPCOMP_IRQHandler
+#define SPIM130_IRQn                  SERIAL0_IRQn
+#define SPIM130_IRQHandler            SERIAL0_IRQHandler
+#define SPIS130_IRQn                  SERIAL0_IRQn
+#define SPIS130_IRQHandler            SERIAL0_IRQHandler
+#define TWIM130_IRQn                  SERIAL0_IRQn
+#define TWIM130_IRQHandler            SERIAL0_IRQHandler
+#define TWIS130_IRQn                  SERIAL0_IRQn
+#define TWIS130_IRQHandler            SERIAL0_IRQHandler
+#define UARTE130_IRQn                 SERIAL0_IRQn
+#define UARTE130_IRQHandler           SERIAL0_IRQHandler
+#define SPIM131_IRQn                  SERIAL1_IRQn
+#define SPIM131_IRQHandler            SERIAL1_IRQHandler
+#define SPIS131_IRQn                  SERIAL1_IRQn
+#define SPIS131_IRQHandler            SERIAL1_IRQHandler
+#define TWIM131_IRQn                  SERIAL1_IRQn
+#define TWIM131_IRQHandler            SERIAL1_IRQHandler
+#define TWIS131_IRQn                  SERIAL1_IRQn
+#define TWIS131_IRQHandler            SERIAL1_IRQHandler
+#define UARTE131_IRQn                 SERIAL1_IRQn
+#define UARTE131_IRQHandler           SERIAL1_IRQHandler
+#define SPIM132_IRQn                  SERIAL2_IRQn
+#define SPIM132_IRQHandler            SERIAL2_IRQHandler
+#define SPIS132_IRQn                  SERIAL2_IRQn
+#define SPIS132_IRQHandler            SERIAL2_IRQHandler
+#define TWIM132_IRQn                  SERIAL2_IRQn
+#define TWIM132_IRQHandler            SERIAL2_IRQHandler
+#define TWIS132_IRQn                  SERIAL2_IRQn
+#define TWIS132_IRQHandler            SERIAL2_IRQHandler
+#define UARTE132_IRQn                 SERIAL2_IRQn
+#define UARTE132_IRQHandler           SERIAL2_IRQHandler
+#define SPIM133_IRQn                  SERIAL3_IRQn
+#define SPIM133_IRQHandler            SERIAL3_IRQHandler
+#define SPIS133_IRQn                  SERIAL3_IRQn
+#define SPIS133_IRQHandler            SERIAL3_IRQHandler
+#define TWIM133_IRQn                  SERIAL3_IRQn
+#define TWIM133_IRQHandler            SERIAL3_IRQHandler
+#define TWIS133_IRQn                  SERIAL3_IRQn
+#define TWIS133_IRQHandler            SERIAL3_IRQHandler
+#define UARTE133_IRQn                 SERIAL3_IRQn
+#define UARTE133_IRQHandler           SERIAL3_IRQHandler
+#define SPIM134_IRQn                  SERIAL4_IRQn
+#define SPIM134_IRQHandler            SERIAL4_IRQHandler
+#define SPIS134_IRQn                  SERIAL4_IRQn
+#define SPIS134_IRQHandler            SERIAL4_IRQHandler
+#define TWIM134_IRQn                  SERIAL4_IRQn
+#define TWIM134_IRQHandler            SERIAL4_IRQHandler
+#define TWIS134_IRQn                  SERIAL4_IRQn
+#define TWIS134_IRQHandler            SERIAL4_IRQHandler
+#define UARTE134_IRQn                 SERIAL4_IRQn
+#define UARTE134_IRQHandler           SERIAL4_IRQHandler
+#define SPIM135_IRQn                  SERIAL5_IRQn
+#define SPIM135_IRQHandler            SERIAL5_IRQHandler
+#define SPIS135_IRQn                  SERIAL5_IRQn
+#define SPIS135_IRQHandler            SERIAL5_IRQHandler
+#define TWIM135_IRQn                  SERIAL5_IRQn
+#define TWIM135_IRQHandler            SERIAL5_IRQHandler
+#define TWIS135_IRQn                  SERIAL5_IRQn
+#define TWIS135_IRQHandler            SERIAL5_IRQHandler
+#define UARTE135_IRQn                 SERIAL5_IRQn
+#define UARTE135_IRQHandler           SERIAL5_IRQHandler
+#define SPIM136_IRQn                  SERIAL6_IRQn
+#define SPIM136_IRQHandler            SERIAL6_IRQHandler
+#define SPIS136_IRQn                  SERIAL6_IRQn
+#define SPIS136_IRQHandler            SERIAL6_IRQHandler
+#define TWIM136_IRQn                  SERIAL6_IRQn
+#define TWIM136_IRQHandler            SERIAL6_IRQHandler
+#define TWIS136_IRQn                  SERIAL6_IRQn
+#define TWIS136_IRQHandler            SERIAL6_IRQHandler
+#define UARTE136_IRQn                 SERIAL6_IRQn
+#define UARTE136_IRQHandler           SERIAL6_IRQHandler
+#define SPIM137_IRQn                  SERIAL7_IRQn
+#define SPIM137_IRQHandler            SERIAL7_IRQHandler
+#define SPIS137_IRQn                  SERIAL7_IRQn
+#define SPIS137_IRQHandler            SERIAL7_IRQHandler
+#define TWIM137_IRQn                  SERIAL7_IRQn
+#define TWIM137_IRQHandler            SERIAL7_IRQHandler
+#define TWIS137_IRQn                  SERIAL7_IRQn
+#define TWIS137_IRQHandler            SERIAL7_IRQHandler
+#define UARTE137_IRQn                 SERIAL7_IRQn
+#define UARTE137_IRQHandler           SERIAL7_IRQHandler
 
 /* =========================================================================================================================== */
 /* ================                           Processor and Core Peripheral Section                           ================ */
@@ -204,6 +293,15 @@ typedef enum {
 
 #include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
 #include "system_nrf.h"                              /*!< nrf9230_enga_cellcore System Library                                 */
+
+#endif                                               /*!< NRF_CELLCORE                                                         */
+
+
+#ifdef NRF_CELLCORE
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_CELLCORE
+  #define NRF_PROCESSOR                 NRF_PROCESSOR_CELLCORE
+  #define NRF_OWNER                     NRF_OWNER_CELL
 
 #endif                                               /*!< NRF_CELLCORE                                                         */
 
@@ -578,79 +676,133 @@ typedef enum {
   #define NRF_CELLCORE_SWI6                       NRF_CELLCORE_SWI6_NS
   #define NRF_CELLCORE_SWI7                       NRF_CELLCORE_SWI7_NS
   #define NRF_CELLCORE_BELLBOARD                  NRF_CELLCORE_BELLBOARD_S
-#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
+#endif                                               /*!< NRF_TRUSTZONE_NONSECURE                                              */
 
 /* =========================================================================================================================== */
 /* ================                                  Local Domain Remapping                                  ================ */
 /* =========================================================================================================================== */
 
-#ifdef NRF_CELLCORE                                  /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
-  #define NRF_ICACHEDATA                          NRF_CELLCORE_ICACHEDATA
-  #define NRF_ICACHEINFO                          NRF_CELLCORE_ICACHEINFO
-  #define NRF_UICR                                NRF_CELLCORE_UICR
-  #define NRF_DCACHEDATA                          NRF_CELLCORE_DCACHEDATA
-  #define NRF_DCACHEINFO                          NRF_CELLCORE_DCACHEINFO
-  #define NRF_ETM                                 NRF_CELLCORE_ETM
-  #define NRF_CTI                                 NRF_CELLCORE_CTI
-  #define NRF_CPUC                                NRF_CELLCORE_CPUC
-  #define NRF_ICACHE                              NRF_CELLCORE_ICACHE
-  #define NRF_DCACHE                              NRF_CELLCORE_DCACHE
-  #define NRF_SPU0                                NRF_CELLCORE_SPU0
-  #define NRF_HSFLL                               NRF_CELLCORE_HSFLL
-  #define NRF_LRCCONF0                            NRF_CELLCORE_LRCCONF0
-  #define NRF_MPC                                 NRF_CELLCORE_MPC
-  #define NRF_MVDMA                               NRF_CELLCORE_MVDMA
-  #define NRF_RAMC00                              NRF_CELLCORE_RAMC00
-  #define NRF_AESLTE                              NRF_CELLCORE_AESLTE
-  #define NRF_SNOW                                NRF_CELLCORE_SNOW
-  #define NRF_ZUC                                 NRF_CELLCORE_ZUC
-  #define NRF_TRACEDELAYREG                       NRF_CELLCORE_TRACEDELAYREG
-  #define NRF_PCGCS0                              NRF_CELLCORE_PCGCS0
-  #define NRF_CELLCOREHSPDCTRL                    NRF_CELLCORE_CELLCOREHSPDCTRL
-  #define NRF_PCGCM0                              NRF_CELLCORE_PCGCM0
-  #define NRF_SPU1                                NRF_CELLCORE_SPU1
-  #define NRF_LRCCONF1                            NRF_CELLCORE_LRCCONF1
-  #define NRF_RESETINFO                           NRF_CELLCORE_RESETINFO
-  #define NRF_CPUCONF                             NRF_CELLCORE_CPUCONF
-  #define NRF_MEMCONF                             NRF_CELLCORE_MEMCONF
-  #define NRF_WDT0                                NRF_CELLCORE_WDT0
-  #define NRF_WDT1                                NRF_CELLCORE_WDT1
-  #define NRF_RTC                                 NRF_CELLCORE_RTC
-  #define NRF_PCGCS1                              NRF_CELLCORE_PCGCS1
-  #define NRF_CELLCORELSPDCTRL                    NRF_CELLCORE_CELLCORELSPDCTRL
-  #define NRF_PCGCM1                              NRF_CELLCORE_PCGCM1
-  #define NRF_PPIB0                               NRF_CELLCORE_PPIB0
-  #define NRF_BILS                                NRF_CELLCORE_BILS
-  #define NRF_SPU2                                NRF_CELLCORE_SPU2
-  #define NRF_DPPIC0                              NRF_CELLCORE_DPPIC0
-  #define NRF_LFCLKCALIBMEAS                      NRF_CELLCORE_LFCLKCALIBMEAS
-  #define NRF_TIMEREVENTSYNCH                     NRF_CELLCORE_TIMEREVENTSYNCH
-  #define NRF_TIMEMARKMUX0                        NRF_CELLCORE_TIMEMARKMUX0
-  #define NRF_PPIB1                               NRF_CELLCORE_PPIB1
-  #define NRF_PCGCS2                              NRF_CELLCORE_PCGCS2
-  #define NRF_SPU3                                NRF_CELLCORE_SPU3
-  #define NRF_LRCCONF3                            NRF_CELLCORE_LRCCONF3
-  #define NRF_DPPIC1                              NRF_CELLCORE_DPPIC1
-  #define NRF_TIMEMARKMUX1                        NRF_CELLCORE_TIMEMARKMUX1
-  #define NRF_MCPLL                               NRF_CELLCORE_MCPLL
-  #define NRF_PCGCS3                              NRF_CELLCORE_PCGCS3
-  #define NRF_CELLCORETIMERPDCTRL                 NRF_CELLCORE_CELLCORETIMERPDCTRL
-  #define NRF_PCGCM3                              NRF_CELLCORE_PCGCM3
-  #define NRF_TIMEMARKMUX2                        NRF_CELLCORE_TIMEMARKMUX2
-  #define NRF_PPIB2                               NRF_CELLCORE_PPIB2
-  #define NRF_SYSTEMTIMER                         NRF_CELLCORE_SYSTEMTIMER
-  #define NRF_LTETIMER                            NRF_CELLCORE_LTETIMER
-  #define NRF_GNSSTIMER                           NRF_CELLCORE_GNSSTIMER
-  #define NRF_IPCT                                NRF_CELLCORE_IPCT
-  #define NRF_SWI0                                NRF_CELLCORE_SWI0
-  #define NRF_SWI1                                NRF_CELLCORE_SWI1
-  #define NRF_SWI2                                NRF_CELLCORE_SWI2
-  #define NRF_SWI3                                NRF_CELLCORE_SWI3
-  #define NRF_SWI4                                NRF_CELLCORE_SWI4
-  #define NRF_SWI5                                NRF_CELLCORE_SWI5
-  #define NRF_SWI6                                NRF_CELLCORE_SWI6
-  #define NRF_SWI7                                NRF_CELLCORE_SWI7
-  #define NRF_BELLBOARD                           NRF_CELLCORE_BELLBOARD
+#ifdef NRF_CELLCORE                                  /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
+  #ifdef NRF_TRUSTZONE_NONSECURE                     /*!< Remap only nonsecure instances.                                      */
+    #define NRF_UICR                              NRF_CELLCORE_UICR
+    #define NRF_ETM                               NRF_CELLCORE_ETM
+    #define NRF_HSFLL                             NRF_CELLCORE_HSFLL
+    #define NRF_LRCCONF0                          NRF_CELLCORE_LRCCONF0
+    #define NRF_MVDMA                             NRF_CELLCORE_MVDMA
+    #define NRF_RAMC00                            NRF_CELLCORE_RAMC00
+    #define NRF_AESLTE                            NRF_CELLCORE_AESLTE
+    #define NRF_SNOW                              NRF_CELLCORE_SNOW
+    #define NRF_ZUC                               NRF_CELLCORE_ZUC
+    #define NRF_TRACEDELAYREG                     NRF_CELLCORE_TRACEDELAYREG
+    #define NRF_PCGCS0                            NRF_CELLCORE_PCGCS0
+    #define NRF_CELLCOREHSPDCTRL                  NRF_CELLCORE_CELLCOREHSPDCTRL
+    #define NRF_PCGCM0                            NRF_CELLCORE_PCGCM0
+    #define NRF_LRCCONF1                          NRF_CELLCORE_LRCCONF1
+    #define NRF_CPUCONF                           NRF_CELLCORE_CPUCONF
+    #define NRF_MEMCONF                           NRF_CELLCORE_MEMCONF
+    #define NRF_WDT0                              NRF_CELLCORE_WDT0
+    #define NRF_WDT1                              NRF_CELLCORE_WDT1
+    #define NRF_RTC                               NRF_CELLCORE_RTC
+    #define NRF_PCGCS1                            NRF_CELLCORE_PCGCS1
+    #define NRF_CELLCORELSPDCTRL                  NRF_CELLCORE_CELLCORELSPDCTRL
+    #define NRF_PCGCM1                            NRF_CELLCORE_PCGCM1
+    #define NRF_PPIB0                             NRF_CELLCORE_PPIB0
+    #define NRF_DPPIC0                            NRF_CELLCORE_DPPIC0
+    #define NRF_LFCLKCALIBMEAS                    NRF_CELLCORE_LFCLKCALIBMEAS
+    #define NRF_TIMEREVENTSYNCH                   NRF_CELLCORE_TIMEREVENTSYNCH
+    #define NRF_TIMEMARKMUX0                      NRF_CELLCORE_TIMEMARKMUX0
+    #define NRF_PPIB1                             NRF_CELLCORE_PPIB1
+    #define NRF_PCGCS2                            NRF_CELLCORE_PCGCS2
+    #define NRF_LRCCONF3                          NRF_CELLCORE_LRCCONF3
+    #define NRF_DPPIC1                            NRF_CELLCORE_DPPIC1
+    #define NRF_TIMEMARKMUX1                      NRF_CELLCORE_TIMEMARKMUX1
+    #define NRF_MCPLL                             NRF_CELLCORE_MCPLL
+    #define NRF_PCGCS3                            NRF_CELLCORE_PCGCS3
+    #define NRF_CELLCORETIMERPDCTRL               NRF_CELLCORE_CELLCORETIMERPDCTRL
+    #define NRF_PCGCM3                            NRF_CELLCORE_PCGCM3
+    #define NRF_TIMEMARKMUX2                      NRF_CELLCORE_TIMEMARKMUX2
+    #define NRF_PPIB2                             NRF_CELLCORE_PPIB2
+    #define NRF_SYSTEMTIMER                       NRF_CELLCORE_SYSTEMTIMER
+    #define NRF_LTETIMER                          NRF_CELLCORE_LTETIMER
+    #define NRF_GNSSTIMER                         NRF_CELLCORE_GNSSTIMER
+    #define NRF_IPCT                              NRF_CELLCORE_IPCT
+    #define NRF_SWI0                              NRF_CELLCORE_SWI0
+    #define NRF_SWI1                              NRF_CELLCORE_SWI1
+    #define NRF_SWI2                              NRF_CELLCORE_SWI2
+    #define NRF_SWI3                              NRF_CELLCORE_SWI3
+    #define NRF_SWI4                              NRF_CELLCORE_SWI4
+    #define NRF_SWI5                              NRF_CELLCORE_SWI5
+    #define NRF_SWI6                              NRF_CELLCORE_SWI6
+    #define NRF_SWI7                              NRF_CELLCORE_SWI7
+    #define NRF_BELLBOARD                         NRF_CELLCORE_BELLBOARD
+  #else                                              /*!< Remap all instances.                                                 */
+    #define NRF_ICACHEDATA                        NRF_CELLCORE_ICACHEDATA
+    #define NRF_ICACHEINFO                        NRF_CELLCORE_ICACHEINFO
+    #define NRF_UICR                              NRF_CELLCORE_UICR
+    #define NRF_DCACHEDATA                        NRF_CELLCORE_DCACHEDATA
+    #define NRF_DCACHEINFO                        NRF_CELLCORE_DCACHEINFO
+    #define NRF_ETM                               NRF_CELLCORE_ETM
+    #define NRF_CTI                               NRF_CELLCORE_CTI
+    #define NRF_CPUC                              NRF_CELLCORE_CPUC
+    #define NRF_ICACHE                            NRF_CELLCORE_ICACHE
+    #define NRF_DCACHE                            NRF_CELLCORE_DCACHE
+    #define NRF_SPU0                              NRF_CELLCORE_SPU0
+    #define NRF_HSFLL                             NRF_CELLCORE_HSFLL
+    #define NRF_LRCCONF0                          NRF_CELLCORE_LRCCONF0
+    #define NRF_MPC                               NRF_CELLCORE_MPC
+    #define NRF_MVDMA                             NRF_CELLCORE_MVDMA
+    #define NRF_RAMC00                            NRF_CELLCORE_RAMC00
+    #define NRF_AESLTE                            NRF_CELLCORE_AESLTE
+    #define NRF_SNOW                              NRF_CELLCORE_SNOW
+    #define NRF_ZUC                               NRF_CELLCORE_ZUC
+    #define NRF_TRACEDELAYREG                     NRF_CELLCORE_TRACEDELAYREG
+    #define NRF_PCGCS0                            NRF_CELLCORE_PCGCS0
+    #define NRF_CELLCOREHSPDCTRL                  NRF_CELLCORE_CELLCOREHSPDCTRL
+    #define NRF_PCGCM0                            NRF_CELLCORE_PCGCM0
+    #define NRF_SPU1                              NRF_CELLCORE_SPU1
+    #define NRF_LRCCONF1                          NRF_CELLCORE_LRCCONF1
+    #define NRF_RESETINFO                         NRF_CELLCORE_RESETINFO
+    #define NRF_CPUCONF                           NRF_CELLCORE_CPUCONF
+    #define NRF_MEMCONF                           NRF_CELLCORE_MEMCONF
+    #define NRF_WDT0                              NRF_CELLCORE_WDT0
+    #define NRF_WDT1                              NRF_CELLCORE_WDT1
+    #define NRF_RTC                               NRF_CELLCORE_RTC
+    #define NRF_PCGCS1                            NRF_CELLCORE_PCGCS1
+    #define NRF_CELLCORELSPDCTRL                  NRF_CELLCORE_CELLCORELSPDCTRL
+    #define NRF_PCGCM1                            NRF_CELLCORE_PCGCM1
+    #define NRF_PPIB0                             NRF_CELLCORE_PPIB0
+    #define NRF_BILS                              NRF_CELLCORE_BILS
+    #define NRF_SPU2                              NRF_CELLCORE_SPU2
+    #define NRF_DPPIC0                            NRF_CELLCORE_DPPIC0
+    #define NRF_LFCLKCALIBMEAS                    NRF_CELLCORE_LFCLKCALIBMEAS
+    #define NRF_TIMEREVENTSYNCH                   NRF_CELLCORE_TIMEREVENTSYNCH
+    #define NRF_TIMEMARKMUX0                      NRF_CELLCORE_TIMEMARKMUX0
+    #define NRF_PPIB1                             NRF_CELLCORE_PPIB1
+    #define NRF_PCGCS2                            NRF_CELLCORE_PCGCS2
+    #define NRF_SPU3                              NRF_CELLCORE_SPU3
+    #define NRF_LRCCONF3                          NRF_CELLCORE_LRCCONF3
+    #define NRF_DPPIC1                            NRF_CELLCORE_DPPIC1
+    #define NRF_TIMEMARKMUX1                      NRF_CELLCORE_TIMEMARKMUX1
+    #define NRF_MCPLL                             NRF_CELLCORE_MCPLL
+    #define NRF_PCGCS3                            NRF_CELLCORE_PCGCS3
+    #define NRF_CELLCORETIMERPDCTRL               NRF_CELLCORE_CELLCORETIMERPDCTRL
+    #define NRF_PCGCM3                            NRF_CELLCORE_PCGCM3
+    #define NRF_TIMEMARKMUX2                      NRF_CELLCORE_TIMEMARKMUX2
+    #define NRF_PPIB2                             NRF_CELLCORE_PPIB2
+    #define NRF_SYSTEMTIMER                       NRF_CELLCORE_SYSTEMTIMER
+    #define NRF_LTETIMER                          NRF_CELLCORE_LTETIMER
+    #define NRF_GNSSTIMER                         NRF_CELLCORE_GNSSTIMER
+    #define NRF_IPCT                              NRF_CELLCORE_IPCT
+    #define NRF_SWI0                              NRF_CELLCORE_SWI0
+    #define NRF_SWI1                              NRF_CELLCORE_SWI1
+    #define NRF_SWI2                              NRF_CELLCORE_SWI2
+    #define NRF_SWI3                              NRF_CELLCORE_SWI3
+    #define NRF_SWI4                              NRF_CELLCORE_SWI4
+    #define NRF_SWI5                              NRF_CELLCORE_SWI5
+    #define NRF_SWI6                              NRF_CELLCORE_SWI6
+    #define NRF_SWI7                              NRF_CELLCORE_SWI7
+    #define NRF_BELLBOARD                         NRF_CELLCORE_BELLBOARD
+  #endif                                             /*!< NRF_TRUSTZONE_NONSECURE                                              */
 #endif                                               /*!< NRF_CELLCORE                                                         */
 
 /* ========================================== End of section using anonymous unions ========================================== */

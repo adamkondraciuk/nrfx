@@ -278,6 +278,15 @@ typedef enum {
 #endif                                               /*!< NRF_SECURE                                                           */
 
 
+#ifdef NRF_SECURE
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_SECURE
+  #define NRF_PROCESSOR                 NRF_PROCESSOR_SECURE
+  #define NRF_OWNER                     NRF_OWNER_SECURE
+
+#endif                                               /*!< NRF_SECURE                                                           */
+
+
 /* ========================================= Start of section using anonymous unions ========================================= */
 
 #include "compiler_abstraction.h"

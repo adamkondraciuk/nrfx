@@ -243,7 +243,7 @@ _vectors:
   ISR_HANDLER   TIMER00_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   VREGRLDO_IRQHandler
-  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_HANDLER   ECCRAMC_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */

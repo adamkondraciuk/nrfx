@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -126,18 +126,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define HSFLL200_DITHER_32B 1                        /*!< (unspecified)                                                        */
 #define HSFLL200_CLOCKCTRL_MULT_RESET 4              /*!< Reset value of register CLOCKCTRL.MULT: clockctrl_mult_reset         */
-
-#define HSFLL122_DITHER_32B 1                        /*!< (unspecified)                                                        */
-#define HSFLL122_CLOCKCTRL_MULT_RESET 4              /*!< Reset value of register CLOCKCTRL.MULT: clockctrl_mult_reset         */
-
-#define HSFLL121_DITHER_32B 1                        /*!< (unspecified)                                                        */
-#define HSFLL121_CLOCKCTRL_MULT_RESET 4              /*!< Reset value of register CLOCKCTRL.MULT: clockctrl_mult_reset         */
+#define HSFLL200_CLOCKCTRL_INTEGER_DIVISION 0        /*!< (unspecified)                                                        */
 
 #define HSFLL120_DITHER_32B 1                        /*!< (unspecified)                                                        */
 #define HSFLL120_CLOCKCTRL_MULT_RESET 4              /*!< Reset value of register CLOCKCTRL.MULT: clockctrl_mult_reset         */
+#define HSFLL120_CLOCKCTRL_INTEGER_DIVISION 0        /*!< (unspecified)                                                        */
 
 #define HSFLL300_DITHER_32B 1                        /*!< (unspecified)                                                        */
 #define HSFLL300_CLOCKCTRL_MULT_RESET 4              /*!< Reset value of register CLOCKCTRL.MULT: clockctrl_mult_reset         */
+#define HSFLL300_CLOCKCTRL_INTEGER_DIVISION 0        /*!< (unspecified)                                                        */
+
+#define HSFLL122_DITHER_32B 1                        /*!< (unspecified)                                                        */
+#define HSFLL122_CLOCKCTRL_MULT_RESET 4              /*!< Reset value of register CLOCKCTRL.MULT: clockctrl_mult_reset         */
+#define HSFLL122_CLOCKCTRL_INTEGER_DIVISION 1        /*!< (unspecified)                                                        */
+
+#define HSFLL121_DITHER_32B 1                        /*!< (unspecified)                                                        */
+#define HSFLL121_CLOCKCTRL_MULT_RESET 4              /*!< Reset value of register CLOCKCTRL.MULT: clockctrl_mult_reset         */
+#define HSFLL121_CLOCKCTRL_INTEGER_DIVISION 0        /*!< (unspecified)                                                        */
 
 /*LRCCONF*/
 #define LRCCONF_PRESENT 1
@@ -500,6 +505,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLIC_PRESENT 1
 #define CLIC_COUNT 1
 
+#define VPRCLIC_IRQ_COUNT 32
 #define VPRCLIC_IRQNUM_MIN 0                         /*!< Supported interrupts (IRQNUM): 0..479                                */
 #define VPRCLIC_IRQNUM_MAX 479                       /*!< Supported interrupts (IRQNUM): 0..479                                */
 #define VPRCLIC_IRQNUM_SIZE 480                      /*!< Supported interrupts (IRQNUM): 0..479                                */
@@ -729,17 +735,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLKMON_PRESENT 1
 #define CLKMON_COUNT 1
 
-/*AUXPLL*/
-#define AUXPLL_PRESENT 1
-#define AUXPLL_COUNT 4
-
 /*POWER*/
 #define POWER_PRESENT 1
 #define POWER_COUNT 1
 
-#define POWER_NABBDOMAIN_MIN 0                       /*!< Number of ABB domains: 0..1                                          */
-#define POWER_NABBDOMAIN_MAX 1                       /*!< Number of ABB domains: 0..1                                          */
-#define POWER_NABBDOMAIN_SIZE 2                      /*!< Number of ABB domains: 0..1                                          */
+#define POWER_NABBDOMAIN_MIN 0                       /*!< Number of ABB domains: 0..3                                          */
+#define POWER_NABBDOMAIN_MAX 3                       /*!< Number of ABB domains: 0..3                                          */
+#define POWER_NABBDOMAIN_SIZE 4                      /*!< Number of ABB domains: 0..3                                          */
 #define POWER_NATBGNDCLAMP_MIN 0                     /*!< Number of ATB ground clamps: 0..17                                   */
 #define POWER_NATBGNDCLAMP_MAX 17                    /*!< Number of ATB ground clamps: 0..17                                   */
 #define POWER_NATBGNDCLAMP_SIZE 18                   /*!< Number of ATB ground clamps: 0..17                                   */
@@ -749,6 +751,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*VREGMAIN peripheral*/
 #define VREGMAIN_PRESENT 1
 #define VREGMAIN_COUNT 1
+
+#define VREGMAIN_WIFI_SUPPORTED 1                    /*!< (unspecified)                                                        */
 
 /*VREGAO1V8 peripheral*/
 #define VREGAO1V8_PRESENT 1
@@ -764,8 +768,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*VREGVS0V8 peripheral*/
 #define VREGVS0V8_PRESENT 1
-#define VREGVS0V8_COUNT 2
+#define VREGVS0V8_COUNT 3
 
+#define VREGVS0V8_INCLUDE_PCGCS 0                    /*!< (unspecified)                                                        */
 #define VREGVS0V8_VREGVS0V8_NUM_CLOCK_POWER_PAIR_MIN 0 /*!< Number of clock/power pairs used by the instance of PCGC Slave -
                                                             [0..2]*/
 #define VREGVS0V8_VREGVS0V8_NUM_CLOCK_POWER_PAIR_MAX 2 /*!< Number of clock/power pairs used by the instance of PCGC Slave -
@@ -773,7 +778,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VREGVS0V8_VREGVS0V8_NUM_CLOCK_POWER_PAIR_SIZE 3 /*!< Number of clock/power pairs used by the instance of PCGC Slave -
                                                              [0..2]*/
 #define VREGVS0V8_VREGVS0V8_NOTFULLPCPZERO 0         /*!< (unspecified)                                                        */
+#define VREGVS0V8_HIGHER_CURRENT_LIMIT 1             /*!< (unspecified)                                                        */
 
+#define VREG1V80V8_INCLUDE_PCGCS 0                   /*!< (unspecified)                                                        */
+#define VREG1V80V8_VREGVS0V8_NUM_CLOCK_POWER_PAIR_MIN 0 /*!< Number of clock/power pairs used by the instance of PCGC Slave -
+                                                             [0..2]*/
+#define VREG1V80V8_VREGVS0V8_NUM_CLOCK_POWER_PAIR_MAX 2 /*!< Number of clock/power pairs used by the instance of PCGC Slave -
+                                                             [0..2]*/
+#define VREG1V80V8_VREGVS0V8_NUM_CLOCK_POWER_PAIR_SIZE 3 /*!< Number of clock/power pairs used by the instance of PCGC Slave -
+                                                              [0..2]*/
+#define VREG1V80V8_VREGVS0V8_NOTFULLPCPZERO 0        /*!< (unspecified)                                                        */
+#define VREG1V80V8_HIGHER_CURRENT_LIMIT 1            /*!< (unspecified)                                                        */
+
+#define VREGGFX_INCLUDE_PCGCS 1                      /*!< (unspecified)                                                        */
 #define VREGGFX_VREGVS0V8_NUM_CLOCK_POWER_PAIR_MIN 0 /*!< Number of clock/power pairs used by the instance of PCGC Slave -
                                                           [0..2]*/
 #define VREGGFX_VREGVS0V8_NUM_CLOCK_POWER_PAIR_MAX 2 /*!< Number of clock/power pairs used by the instance of PCGC Slave -
@@ -781,20 +798,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VREGGFX_VREGVS0V8_NUM_CLOCK_POWER_PAIR_SIZE 3 /*!< Number of clock/power pairs used by the instance of PCGC Slave -
                                                            [0..2]*/
 #define VREGGFX_VREGVS0V8_NOTFULLPCPZERO 0           /*!< (unspecified)                                                        */
+#define VREGGFX_HIGHER_CURRENT_LIMIT 1               /*!< (unspecified)                                                        */
 
 /*VREGSU peripheral*/
 #define VREGSU_PRESENT 1
 #define VREGSU_COUNT 1
-
-/*VREGUSB peripheral*/
-#define VREGUSB_PRESENT 1
-#define VREGUSB_COUNT 1
-
-#define VREGUSB_PROLONGED_WAKEUP 1                   /*!< (unspecified)                                                        */
-
-/*AUXPM*/
-#define AUXPM_PRESENT 1
-#define AUXPM_COUNT 3
 
 /*VREGMRAM peripheral*/
 #define VREGMRAM_PRESENT 1
@@ -841,6 +849,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VDET1V0_PRESENT 1
 #define VDET1V0_COUNT 1
 
+/*PMIC Controller*/
+#define PMICC_PRESENT 1
+#define PMICC_COUNT 1
+
+#define PMICC_ITHRESHOLD_EVENTS 1                    /*!< (unspecified)                                                        */
+#define PMICC_ITHRESHOLD_EVENT_0 VDD_VS_0V8          /*!< (unspecified)                                                        */
+#define PMICC_ITHRESHOLD_EVENT_1 VDD_AO_0V8          /*!< (unspecified)                                                        */
+#define PMICC_ITHRESHOLD_EVENT_2 VDD_AO_1V8          /*!< (unspecified)                                                        */
+#define PMICC_ITHRESHOLD_EVENT_3 0                   /*!< (unspecified)                                                        */
+
 /*VDETPOF5V0 peripheral*/
 #define VDETPOF5V0_PRESENT 1
 #define VDETPOF5V0_COUNT 2
@@ -854,6 +872,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FICR_NFC_ON 1                                /*!< (unspecified)                                                        */
 #define FICR_ML_ON 1                                 /*!< (unspecified)                                                        */
 #define FICR_SDCARD_ON 1                             /*!< (unspecified)                                                        */
+#define FICR_VREG_1V8_0V8 1                          /*!< (unspecified)                                                        */
+#define FICR_AUDIO_USB_PROGRAMMABLE_OWNER 1          /*!< (unspecified)                                                        */
 
 /*USBHSCORE*/
 #define USBHSCORE_PRESENT 1
@@ -914,10 +934,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define ATBFUNNEL_PRESENT 1
 #define ATBFUNNEL_COUNT 4
 
+/*AUXPLL*/
+#define AUXPLL_PRESENT 1
+#define AUXPLL_COUNT 4
+
+/*AUXPM*/
+#define AUXPM_PRESENT 1
+#define AUXPM_COUNT 3
+
 /*GPIO Tasks and Events*/
 #define GPIOTE_PRESENT 1
 #define GPIOTE_COUNT 1
 
+#define GPIOTE130_IRQ_COUNT 2
 #define GPIOTE130_GPIOTE_NCHANNELS_MIN 0             /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE130_GPIOTE_NCHANNELS_MAX 7             /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE130_GPIOTE_NCHANNELS_SIZE 8            /*!< Number of GPIOTE channels: 0..7                                      */
@@ -933,15 +962,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_PRESENT 1
 #define GRTC_COUNT 1
 
+#define GRTC_IRQ_COUNT 3
 #define GRTC_MSBWIDTH_MIN 0                          /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
                                                           0..14*/
 #define GRTC_MSBWIDTH_MAX 14                         /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
                                                           0..14*/
 #define GRTC_MSBWIDTH_SIZE 15                        /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
                                                           0..14*/
-#define GRTC_NCC_MIN 0                               /*!< Number of compare/capture registers : 0..17                          */
-#define GRTC_NCC_MAX 17                              /*!< Number of compare/capture registers : 0..17                          */
-#define GRTC_NCC_SIZE 18                             /*!< Number of compare/capture registers : 0..17                          */
+#define GRTC_NCC_MIN 0                               /*!< Number of compare/capture registers : 0..18                          */
+#define GRTC_NCC_MAX 18                              /*!< Number of compare/capture registers : 0..18                          */
+#define GRTC_NCC_SIZE 19                             /*!< Number of compare/capture registers : 0..18                          */
 #define GRTC_NTIMEOUT_MIN 0                          /*!< Width of the TIMEOUT register : 0..15                                */
 #define GRTC_NTIMEOUT_MAX 15                         /*!< Width of the TIMEOUT register : 0..15                                */
 #define GRTC_NTIMEOUT_SIZE 16                        /*!< Width of the TIMEOUT register : 0..15                                */
@@ -956,6 +986,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_CLKSELREG 1                             /*!< (unspecified)                                                        */
 #define GRTC_CLKSELLFLPRC 1                          /*!< (unspecified)                                                        */
 #define GRTC_CCADD_WRITE_ONLY 1                      /*!< (unspecified)                                                        */
+#define GRTC_READY_STATUS_AND_EVENTS 0               /*!< (unspecified)                                                        */
 
 /*GSI*/
 #define GSI_PRESENT 1
@@ -971,6 +1002,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define DISPC_PRESENT 1
 #define DISPC_COUNT 1
 
+#define DISPC_IRQ_COUNT 3
 #define DISPC_DISPC_NUM_CLOCK_POWER_PAIR_MIN 0       /*!< Number of clock/power pairs used by the instance of PCGC Slave -
                                                           [0..1]*/
 #define DISPC_DISPC_NUM_CLOCK_POWER_PAIR_MAX 1       /*!< Number of clock/power pairs used by the instance of PCGC Slave -
@@ -1182,6 +1214,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define IPCT_PRESENT 1
 #define IPCT_COUNT 2
 
+#define IPCT120_IRQ_COUNT 1
+
+#define IPCT130_IRQ_COUNT 1
+
 /*MUTEX*/
 #define MUTEX_PRESENT 1
 #define MUTEX_COUNT 2
@@ -1204,6 +1240,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define QSPI120_EASYDMAPATTERNMATCHERINCLUDED 0      /*!< (unspecified)                                                        */
 #define QSPI120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
 #define QSPI120_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define QSPI120_NUM_CLOCK_POWER_PAIR_MIN 0           /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define QSPI120_NUM_CLOCK_POWER_PAIR_MAX 0           /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define QSPI120_NUM_CLOCK_POWER_PAIR_SIZE 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define QSPI120_NOTFULLPCPZERO 1                     /*!< (unspecified)                                                        */
+#define QSPI120_PENALTYTASKS 0                       /*!< (unspecified)                                                        */
+#define QSPI120_AXI_LITE 1                           /*!< (unspecified)                                                        */
+#define QSPI120_FIFO_DEPTH 16                        /*!< Depth of the transmit and receive FIFOs is 16                        */
 
 #define QSPI121_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
 #define QSPI121_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
@@ -1211,6 +1254,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define QSPI121_EASYDMAPATTERNMATCHERINCLUDED 0      /*!< (unspecified)                                                        */
 #define QSPI121_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
 #define QSPI121_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define QSPI121_NUM_CLOCK_POWER_PAIR_MIN 0           /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define QSPI121_NUM_CLOCK_POWER_PAIR_MAX 0           /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define QSPI121_NUM_CLOCK_POWER_PAIR_SIZE 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define QSPI121_NOTFULLPCPZERO 1                     /*!< (unspecified)                                                        */
+#define QSPI121_PENALTYTASKS 0                       /*!< (unspecified)                                                        */
+#define QSPI121_AXI_LITE 1                           /*!< (unspecified)                                                        */
+#define QSPI121_FIFO_DEPTH 16                        /*!< Depth of the transmit and receive FIFOs is 16                        */
 
 /*Controller Area Network*/
 #define CAN_PRESENT 1
@@ -2289,12 +2339,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define EGU130_CH_NUM_MAX 7                          /*!< (unspecified)                                                        */
 #define EGU130_CH_NUM_SIZE 8                         /*!< (unspecified)                                                        */
 
+/*Coexistence controller*/
+#define COEXC_PRESENT 1
+#define COEXC_COUNT 1
+
+#define COEXC_NCLIENTS_MIN 0                         /*!< Number of clients supported : 0..5                                   */
+#define COEXC_NCLIENTS_MAX 5                         /*!< Number of clients supported : 0..5                                   */
+#define COEXC_NCLIENTS_SIZE 6                        /*!< Number of clients supported : 0..5                                   */
+#define COEXC_NMODES_MIN 0                           /*!< Number of modes per client: 0..3                                     */
+#define COEXC_NMODES_MAX 3                           /*!< Number of modes per client: 0..3                                     */
+#define COEXC_NMODES_SIZE 4                          /*!< Number of modes per client: 0..3                                     */
+#define COEXC_NCCMALLOWMODES_MIN 0                   /*!< (unspecified)                                                        */
+#define COEXC_NCCMALLOWMODES_MAX 3                   /*!< (unspecified)                                                        */
+#define COEXC_NCCMALLOWMODES_SIZE 4                  /*!< (unspecified)                                                        */
+#define COEXC_NPRIORITYBITS_MIN 16                   /*!< CCCONF priority bits : 16..23                                        */
+#define COEXC_NPRIORITYBITS_MAX 23                   /*!< CCCONF priority bits : 16..23                                        */
+#define COEXC_NPRIORITYBITS_SIZE 24                  /*!< CCCONF priority bits : 16..23                                        */
+#define COEXC_COEXC_NUM_CLOCK_POWER_PAIR_MIN 0       /*!< Number of clock/power pairs used by the instance of PCGC Slave -
+                                                          [0..1]*/
+#define COEXC_COEXC_NUM_CLOCK_POWER_PAIR_MAX 1       /*!< Number of clock/power pairs used by the instance of PCGC Slave -
+                                                          [0..1]*/
+#define COEXC_COEXC_NUM_CLOCK_POWER_PAIR_SIZE 2      /*!< Number of clock/power pairs used by the instance of PCGC Slave -
+                                                          [0..1]*/
+#define COEXC_COEXC_NOTFULLPCPZERO 1                 /*!< (unspecified)                                                        */
+
 /*GPIO Port*/
 #define GPIO_PRESENT 1
 #define GPIO_COUNT 8
 
-#define P0_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P0_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P0_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P0_CTRLSEL_MAP3 1                            /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
@@ -2308,10 +2383,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P0_WIFI_CORE_PRESENT 1                       /*!< (unspecified)                                                        */
 #define P0_RETAIN_PER_PIN 1                          /*!< (unspecified)                                                        */
 #define P0_CLOCKPIN 1                                /*!< (unspecified)                                                        */
-#define P0_BIASCTRL 1                                /*!< (unspecified)                                                        */
+#define P0_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
-#define P1_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P1_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P1_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P1_CTRLSEL_MAP3 1                            /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
@@ -2325,10 +2401,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P1_WIFI_CORE_PRESENT 1                       /*!< (unspecified)                                                        */
 #define P1_RETAIN_PER_PIN 1                          /*!< (unspecified)                                                        */
 #define P1_CLOCKPIN 1                                /*!< (unspecified)                                                        */
-#define P1_BIASCTRL 1                                /*!< (unspecified)                                                        */
+#define P1_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
-#define P2_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P2_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P2_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P2_CTRLSEL_MAP3 1                            /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_MAX 17                            /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_SIZE 18                           /*!< (unspecified)                                                        */
@@ -2342,10 +2419,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P2_WIFI_CORE_PRESENT 1                       /*!< (unspecified)                                                        */
 #define P2_RETAIN_PER_PIN 1                          /*!< (unspecified)                                                        */
 #define P2_CLOCKPIN 1                                /*!< (unspecified)                                                        */
-#define P2_BIASCTRL 1                                /*!< (unspecified)                                                        */
+#define P2_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
-#define P3_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P3_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P3_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P3_CTRLSEL_MAP3 1                            /*!< (unspecified)                                                        */
 #define P3_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P3_PIN_NUM_MAX 17                            /*!< (unspecified)                                                        */
 #define P3_PIN_NUM_SIZE 18                           /*!< (unspecified)                                                        */
@@ -2359,10 +2437,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P3_WIFI_CORE_PRESENT 1                       /*!< (unspecified)                                                        */
 #define P3_RETAIN_PER_PIN 1                          /*!< (unspecified)                                                        */
 #define P3_CLOCKPIN 1                                /*!< (unspecified)                                                        */
-#define P3_BIASCTRL 1                                /*!< (unspecified)                                                        */
+#define P3_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
-#define P5_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P5_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P5_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P5_CTRLSEL_MAP3 1                            /*!< (unspecified)                                                        */
 #define P5_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P5_PIN_NUM_MAX 13                            /*!< (unspecified)                                                        */
 #define P5_PIN_NUM_SIZE 14                           /*!< (unspecified)                                                        */
@@ -2378,8 +2457,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P5_CLOCKPIN 1                                /*!< (unspecified)                                                        */
 #define P5_BIASCTRL 1                                /*!< (unspecified)                                                        */
 
-#define P6_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P6_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P6_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P6_CTRLSEL_MAP3 1                            /*!< (unspecified)                                                        */
 #define P6_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P6_PIN_NUM_MAX 13                            /*!< (unspecified)                                                        */
 #define P6_PIN_NUM_SIZE 14                           /*!< (unspecified)                                                        */
@@ -2393,10 +2473,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P6_WIFI_CORE_PRESENT 1                       /*!< (unspecified)                                                        */
 #define P6_RETAIN_PER_PIN 1                          /*!< (unspecified)                                                        */
 #define P6_CLOCKPIN 1                                /*!< (unspecified)                                                        */
-#define P6_BIASCTRL 1                                /*!< (unspecified)                                                        */
+#define P6_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
-#define P8_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P8_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P8_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P8_CTRLSEL_MAP3 1                            /*!< (unspecified)                                                        */
 #define P8_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P8_PIN_NUM_MAX 4                             /*!< (unspecified)                                                        */
 #define P8_PIN_NUM_SIZE 5                            /*!< (unspecified)                                                        */
@@ -2410,10 +2491,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P8_WIFI_CORE_PRESENT 1                       /*!< (unspecified)                                                        */
 #define P8_RETAIN_PER_PIN 1                          /*!< (unspecified)                                                        */
 #define P8_CLOCKPIN 1                                /*!< (unspecified)                                                        */
-#define P8_BIASCTRL 1                                /*!< (unspecified)                                                        */
+#define P8_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
-#define P9_CTRLSEL_MAP1 1                            /*!< (unspecified)                                                        */
+#define P9_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P9_CTRLSEL_MAP2 0                            /*!< (unspecified)                                                        */
+#define P9_CTRLSEL_MAP3 1                            /*!< (unspecified)                                                        */
 #define P9_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P9_PIN_NUM_MAX 5                             /*!< (unspecified)                                                        */
 #define P9_PIN_NUM_SIZE 6                            /*!< (unspecified)                                                        */
@@ -2427,7 +2509,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P9_WIFI_CORE_PRESENT 1                       /*!< (unspecified)                                                        */
 #define P9_RETAIN_PER_PIN 1                          /*!< (unspecified)                                                        */
 #define P9_CLOCKPIN 1                                /*!< (unspecified)                                                        */
-#define P9_BIASCTRL 1                                /*!< (unspecified)                                                        */
+#define P9_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
 /*GPIO Internal*/
 #define GPIOINTERNAL_PRESENT 1
@@ -2444,8 +2526,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RESETHUB_PRESENT 1
 #define RESETHUB_COUNT 1
 
-#define RESETHUB_DOMAIN_MASK 508                     /*!< Mask for supported domains.                                          */
+#define RESETHUB_DOMAIN_MASK 2044                    /*!< Mask for supported domains.                                          */
 #define RESETHUB_CROSSDOMAINRESET 0                  /*!< (unspecified)                                                        */
+
+/*VREGUSB peripheral*/
+#define VREGUSB_PRESENT 1
+#define VREGUSB_COUNT 1
+
+#define VREGUSB_PROLONGED_WAKEUP 1                   /*!< (unspecified)                                                        */
 
 /*Analog to Digital Converter*/
 #define SAADC_PRESENT 1
@@ -2493,6 +2581,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TEMP_COUNT 1
 
 #define TEMP_HAS_ATBCONFIG 1                         /*!< (unspecified)                                                        */
+#define TEMP_HAS_OVERRIDEPWR 0                       /*!< (unspecified)                                                        */
 
 /*NFC-A compatible radio NFC-A compatible radio*/
 #define NFCT_PRESENT 1
@@ -2661,30 +2750,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SIMIF_COUNT 1
 
 #define SIMIF130_SWOVERRIDE_REGS 1                   /*!< (unspecified)                                                        */
-
-/*Coexistence controller*/
-#define COEXC_PRESENT 1
-#define COEXC_COUNT 1
-
-#define COEXC_NCLIENTS_MIN 0                         /*!< Number of clients supported : 0..5                                   */
-#define COEXC_NCLIENTS_MAX 5                         /*!< Number of clients supported : 0..5                                   */
-#define COEXC_NCLIENTS_SIZE 6                        /*!< Number of clients supported : 0..5                                   */
-#define COEXC_NMODES_MIN 0                           /*!< Number of modes per client: 0..3                                     */
-#define COEXC_NMODES_MAX 3                           /*!< Number of modes per client: 0..3                                     */
-#define COEXC_NMODES_SIZE 4                          /*!< Number of modes per client: 0..3                                     */
-#define COEXC_NCCMALLOWMODES_MIN 0                   /*!< (unspecified)                                                        */
-#define COEXC_NCCMALLOWMODES_MAX 3                   /*!< (unspecified)                                                        */
-#define COEXC_NCCMALLOWMODES_SIZE 4                  /*!< (unspecified)                                                        */
-#define COEXC_NPRIORITYBITS_MIN 16                   /*!< CCCONF priority bits : 16..23                                        */
-#define COEXC_NPRIORITYBITS_MAX 23                   /*!< CCCONF priority bits : 16..23                                        */
-#define COEXC_NPRIORITYBITS_SIZE 24                  /*!< CCCONF priority bits : 16..23                                        */
-#define COEXC_COEXC_NUM_CLOCK_POWER_PAIR_MIN 0       /*!< Number of clock/power pairs used by the instance of PCGC Slave -
-                                                          [0..1]*/
-#define COEXC_COEXC_NUM_CLOCK_POWER_PAIR_MAX 1       /*!< Number of clock/power pairs used by the instance of PCGC Slave -
-                                                          [0..1]*/
-#define COEXC_COEXC_NUM_CLOCK_POWER_PAIR_SIZE 2      /*!< Number of clock/power pairs used by the instance of PCGC Slave -
-                                                          [0..1]*/
-#define COEXC_COEXC_NOTFULLPCPZERO 1                 /*!< (unspecified)                                                        */
 
 /*I2C compatible Two-Wire Master Interface with EasyDMA*/
 #define TWIM_PRESENT 1

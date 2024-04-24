@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -142,6 +142,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SDCARD_NS_BASE                0x4F8C9000UL
 #define NRF_SDCARD_S_BASE                 0x5F8C9000UL
 #define NRF_LRCCONF_SDCARD_NS_BASE        0x4F8CA000UL
+#define NRF_HSFLL122_NS_BASE              0x4F8CB000UL
+#define NRF_HSFLL122_S_BASE               0x5F8CB000UL
+#define NRF_HSFLL121_NS_BASE              0x4F8CC000UL
+#define NRF_HSFLL121_S_BASE               0x5F8CC000UL
 #define NRF_IPCT120_NS_BASE               0x4F8D1000UL
 #define NRF_IPCT120_S_BASE                0x5F8D1000UL
 #define NRF_MUTEX120_NS_BASE              0x4F8D2000UL
@@ -205,6 +209,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_WDT132_S_BASE                 0x5F92C000UL
 #define NRF_EGU130_NS_BASE                0x4F92D000UL
 #define NRF_EGU130_S_BASE                 0x5F92D000UL
+#define NRF_COEXC_NS_BASE                 0x4F92E000UL
+#define NRF_COEXC_S_BASE                  0x5F92E000UL
 #define NRF_P0_NS_BASE                    0x4F938000UL
 #define NRF_P1_NS_BASE                    0x4F938200UL
 #define NRF_P2_NS_BASE                    0x4F938400UL
@@ -224,6 +230,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_P9_S_BASE                     0x5F939200UL
 #define NRF_GPIOINTERNAL_S_BASE           0x5F939E00UL
 #define NRF_RESETHUB_S_BASE               0x5F949000UL
+#define NRF_AUDIOPLL_NS_BASE              0x5F957000UL
+#define NRF_AUDIOPLL_S_BASE               0x5F957000UL
+#define NRF_USBHSPLL_NS_BASE              0x5F958000UL
+#define NRF_USBHSPLL_S_BASE               0x5F958000UL
+#define NRF_VREGUSB_NS_BASE               0x5F967000UL
+#define NRF_VREGUSB_S_BASE                0x5F967000UL
+#define NRF_AUDIOPLLPM_NS_BASE            0x5F968000UL
+#define NRF_AUDIOPLLPM_S_BASE             0x5F968000UL
 #define NRF_DPPIC131_NS_BASE              0x4F981000UL
 #define NRF_DPPIC131_S_BASE               0x5F981000UL
 #define NRF_SAADC_NS_BASE                 0x4F982000UL
@@ -248,8 +262,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SIMIF130_S_BASE               0x5F996000UL
 #define NRF_TDM131_NS_BASE                0x4F997000UL
 #define NRF_TDM131_S_BASE                 0x5F997000UL
-#define NRF_COEXC_NS_BASE                 0x4F998000UL
-#define NRF_COEXC_S_BASE                  0x5F998000UL
 #define NRF_TDM132_NS_BASE                0x4F999000UL
 #define NRF_TDM132_S_BASE                 0x5F999000UL
 #define NRF_DPPIC133_NS_BASE              0x4F9A1000UL
@@ -441,6 +453,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SDCARD_NS                     ((NRF_SDCARD_Type*)                   NRF_SDCARD_NS_BASE)
 #define NRF_SDCARD_S                      ((NRF_SDCARD_Type*)                   NRF_SDCARD_S_BASE)
 #define NRF_LRCCONF_SDCARD_NS             ((NRF_LRCCONF_Type*)                  NRF_LRCCONF_SDCARD_NS_BASE)
+#define NRF_HSFLL122_NS                   ((NRF_HSFLL_Type*)                    NRF_HSFLL122_NS_BASE)
+#define NRF_HSFLL122_S                    ((NRF_HSFLL_Type*)                    NRF_HSFLL122_S_BASE)
+#define NRF_HSFLL121_NS                   ((NRF_HSFLL_Type*)                    NRF_HSFLL121_NS_BASE)
+#define NRF_HSFLL121_S                    ((NRF_HSFLL_Type*)                    NRF_HSFLL121_S_BASE)
 #define NRF_IPCT120_NS                    ((NRF_IPCT_Type*)                     NRF_IPCT120_NS_BASE)
 #define NRF_IPCT120_S                     ((NRF_IPCT_Type*)                     NRF_IPCT120_S_BASE)
 #define NRF_MUTEX120_NS                   ((NRF_MUTEX_Type*)                    NRF_MUTEX120_NS_BASE)
@@ -504,6 +520,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_WDT132_S                      ((NRF_WDT_Type*)                      NRF_WDT132_S_BASE)
 #define NRF_EGU130_NS                     ((NRF_EGU_Type*)                      NRF_EGU130_NS_BASE)
 #define NRF_EGU130_S                      ((NRF_EGU_Type*)                      NRF_EGU130_S_BASE)
+#define NRF_COEXC_NS                      ((NRF_COEXC_Type*)                    NRF_COEXC_NS_BASE)
+#define NRF_COEXC_S                       ((NRF_COEXC_Type*)                    NRF_COEXC_S_BASE)
 #define NRF_P0_NS                         ((NRF_GPIO_Type*)                     NRF_P0_NS_BASE)
 #define NRF_P1_NS                         ((NRF_GPIO_Type*)                     NRF_P1_NS_BASE)
 #define NRF_P2_NS                         ((NRF_GPIO_Type*)                     NRF_P2_NS_BASE)
@@ -523,6 +541,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_P9_S                          ((NRF_GPIO_Type*)                     NRF_P9_S_BASE)
 #define NRF_GPIOINTERNAL_S                ((NRF_GPIOINTERNAL_Type*)             NRF_GPIOINTERNAL_S_BASE)
 #define NRF_RESETHUB_S                    ((NRF_RESETHUB_Type*)                 NRF_RESETHUB_S_BASE)
+#define NRF_AUDIOPLL_NS                   ((NRF_AUXPLL_Type*)                   NRF_AUDIOPLL_NS_BASE)
+#define NRF_AUDIOPLL_S                    ((NRF_AUXPLL_Type*)                   NRF_AUDIOPLL_S_BASE)
+#define NRF_USBHSPLL_NS                   ((NRF_AUXPLL_Type*)                   NRF_USBHSPLL_NS_BASE)
+#define NRF_USBHSPLL_S                    ((NRF_AUXPLL_Type*)                   NRF_USBHSPLL_S_BASE)
+#define NRF_VREGUSB_NS                    ((NRF_VREGUSB_Type*)                  NRF_VREGUSB_NS_BASE)
+#define NRF_VREGUSB_S                     ((NRF_VREGUSB_Type*)                  NRF_VREGUSB_S_BASE)
+#define NRF_AUDIOPLLPM_NS                 ((NRF_AUXPM_Type*)                    NRF_AUDIOPLLPM_NS_BASE)
+#define NRF_AUDIOPLLPM_S                  ((NRF_AUXPM_Type*)                    NRF_AUDIOPLLPM_S_BASE)
 #define NRF_DPPIC131_NS                   ((NRF_DPPIC_Type*)                    NRF_DPPIC131_NS_BASE)
 #define NRF_DPPIC131_S                    ((NRF_DPPIC_Type*)                    NRF_DPPIC131_S_BASE)
 #define NRF_SAADC_NS                      ((NRF_SAADC_Type*)                    NRF_SAADC_NS_BASE)
@@ -547,8 +573,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SIMIF130_S                    ((NRF_SIMIF_Type*)                    NRF_SIMIF130_S_BASE)
 #define NRF_TDM131_NS                     ((NRF_TDM_Type*)                      NRF_TDM131_NS_BASE)
 #define NRF_TDM131_S                      ((NRF_TDM_Type*)                      NRF_TDM131_S_BASE)
-#define NRF_COEXC_NS                      ((NRF_COEXC_Type*)                    NRF_COEXC_NS_BASE)
-#define NRF_COEXC_S                       ((NRF_COEXC_Type*)                    NRF_COEXC_S_BASE)
 #define NRF_TDM132_NS                     ((NRF_TDM_Type*)                      NRF_TDM132_NS_BASE)
 #define NRF_TDM132_S                      ((NRF_TDM_Type*)                      NRF_TDM132_S_BASE)
 #define NRF_DPPIC133_NS                   ((NRF_DPPIC_Type*)                    NRF_DPPIC133_NS_BASE)
@@ -726,6 +750,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_VPR120                              NRF_VPR120_NS
   #define NRF_SDCARD                              NRF_SDCARD_NS
   #define NRF_LRCCONF_SDCARD                      NRF_LRCCONF_SDCARD_NS
+  #define NRF_HSFLL122                            NRF_HSFLL122_NS
+  #define NRF_HSFLL121                            NRF_HSFLL121_NS
   #define NRF_IPCT120                             NRF_IPCT120_NS
   #define NRF_MUTEX120                            NRF_MUTEX120_NS
   #define NRF_PROTOTYPE                           NRF_PROTOTYPE_NS
@@ -759,6 +785,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_WDT131                              NRF_WDT131_NS
   #define NRF_WDT132                              NRF_WDT132_NS
   #define NRF_EGU130                              NRF_EGU130_NS
+  #define NRF_COEXC                               NRF_COEXC_NS
   #define NRF_P0                                  NRF_P0_NS
   #define NRF_P1                                  NRF_P1_NS
   #define NRF_P2                                  NRF_P2_NS
@@ -768,6 +795,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_P8                                  NRF_P8_NS
   #define NRF_P9                                  NRF_P9_NS
   #define NRF_GPIOINTERNAL                        NRF_GPIOINTERNAL_NS
+  #define NRF_AUDIOPLL                            NRF_AUDIOPLL_NS
+  #define NRF_USBHSPLL                            NRF_USBHSPLL_NS
+  #define NRF_VREGUSB                             NRF_VREGUSB_NS
+  #define NRF_AUDIOPLLPM                          NRF_AUDIOPLLPM_NS
   #define NRF_DPPIC131                            NRF_DPPIC131_NS
   #define NRF_SAADC                               NRF_SAADC_NS
   #define NRF_COMP                                NRF_COMP_NS
@@ -780,7 +811,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_QDEC131                             NRF_QDEC131_NS
   #define NRF_SIMIF130                            NRF_SIMIF130_NS
   #define NRF_TDM131                              NRF_TDM131_NS
-  #define NRF_COEXC                               NRF_COEXC_NS
   #define NRF_TDM132                              NRF_TDM132_NS
   #define NRF_DPPIC133                            NRF_DPPIC133_NS
   #define NRF_TIMER130                            NRF_TIMER130_NS
@@ -894,6 +924,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_VPR120                              NRF_VPR120_S
   #define NRF_SDCARD                              NRF_SDCARD_S
   #define NRF_LRCCONF_SDCARD                      NRF_LRCCONF_SDCARD_NS
+  #define NRF_HSFLL122                            NRF_HSFLL122_S
+  #define NRF_HSFLL121                            NRF_HSFLL121_S
   #define NRF_IPCT120                             NRF_IPCT120_S
   #define NRF_MUTEX120                            NRF_MUTEX120_NS
   #define NRF_PROTOTYPE                           NRF_PROTOTYPE_NS
@@ -927,6 +959,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_WDT131                              NRF_WDT131_S
   #define NRF_WDT132                              NRF_WDT132_S
   #define NRF_EGU130                              NRF_EGU130_S
+  #define NRF_COEXC                               NRF_COEXC_S
   #define NRF_P0                                  NRF_P0_S
   #define NRF_P1                                  NRF_P1_S
   #define NRF_P2                                  NRF_P2_S
@@ -937,6 +970,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_P9                                  NRF_P9_S
   #define NRF_GPIOINTERNAL                        NRF_GPIOINTERNAL_S
   #define NRF_RESETHUB                            NRF_RESETHUB_S
+  #define NRF_AUDIOPLL                            NRF_AUDIOPLL_S
+  #define NRF_USBHSPLL                            NRF_USBHSPLL_S
+  #define NRF_VREGUSB                             NRF_VREGUSB_S
+  #define NRF_AUDIOPLLPM                          NRF_AUDIOPLLPM_S
   #define NRF_DPPIC131                            NRF_DPPIC131_S
   #define NRF_SAADC                               NRF_SAADC_S
   #define NRF_COMP                                NRF_COMP_S
@@ -949,7 +986,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_QDEC131                             NRF_QDEC131_S
   #define NRF_SIMIF130                            NRF_SIMIF130_S
   #define NRF_TDM131                              NRF_TDM131_S
-  #define NRF_COEXC                               NRF_COEXC_S
   #define NRF_TDM132                              NRF_TDM132_S
   #define NRF_DPPIC133                            NRF_DPPIC133_S
   #define NRF_TIMER130                            NRF_TIMER130_S
@@ -1011,7 +1047,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TWIS137                             NRF_TWIS137_S
   #define NRF_UARTE137                            NRF_UARTE137_S
   #define NRF_PDM133                              NRF_PDM133_S
-#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
+#endif                                               /*!< NRF_TRUSTZONE_NONSECURE                                              */
 
 /* ========================================== End of section using anonymous unions ========================================== */
 

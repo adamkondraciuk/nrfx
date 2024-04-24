@@ -363,7 +363,7 @@ __isr_vector:
     .long   TIMER00_IRQHandler
     .long   0                           /*Reserved */
     .long   VREGRLDO_IRQHandler
-    .long   0                           /*Reserved */
+    .long   ECCRAMC_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -679,6 +679,7 @@ Default_Handler:
     IRQ  CTRLAP_IRQHandler
     IRQ  TIMER00_IRQHandler
     IRQ  VREGRLDO_IRQHandler
+    IRQ  ECCRAMC_IRQHandler
     IRQ  SPU10_IRQHandler
     IRQ  TIMER10_IRQHandler
     IRQ  RTC10_IRQHandler

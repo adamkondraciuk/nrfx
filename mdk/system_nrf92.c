@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2009-2023 ARM Limited. All rights reserved.
+Copyright (c) 2009-2024 ARM Limited. All rights reserved.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -55,7 +55,7 @@ void SystemCoreClockUpdate(void)
         /* FLPR does not have access to its HSFLL, assume default speed. */
         SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
     #else
-        #ifndef NRF_HSFLL
+        #if !defined(NRF_HSFLL) && !defined(NRF_TRUSTZONE_NONSECURE)
             #if defined(NRF_SYSCTRL)
                 #define NRF_HSFLL NRF_HSFLL120
             #elif defined(NRF_BBPR)
@@ -74,7 +74,7 @@ void SystemCoreClockUpdate(void)
                 /* Start HSFLL frequency measurement */
                 NRF_HSFLL->EVENTS_FREQMDONE = 0ul;
                 NRF_HSFLL->TASKS_FREQMEAS = 1ul;
-                for (volatile unsigned i = 0ul; i < 200ul && NRF_HSFLL->EVENTS_FREQMDONE != 1ul; i++)
+                for (volatile uint32_t i = 0ul; i < 200ul && NRF_HSFLL->EVENTS_FREQMDONE != 1ul; i++)
                 {
                     /* Wait until frequency measurement is done */
                 }

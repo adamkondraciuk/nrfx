@@ -8,7 +8,7 @@
   <version>1</version>
   <description>nRF9230_enga reference description for system-on-chip with many ARM 32-bit Cortex-M33 microcontrollers</description>
   <licenseText>
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -12720,6 +12720,96 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     </enumeratedValue>
                   </enumeratedValues>
                 </field>
+                <field>
+                  <name>STMCELLDSP</name>
+                  <description>STM trace from Cellular DSP</description>
+                  <lsb>6</lsb>
+                  <msb>6</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMCELLDSPLOCAL</name>
+                  <description>STM trace from Cellular DSP local STM</description>
+                  <lsb>7</lsb>
+                  <msb>7</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ETMCELLDSP</name>
+                  <description>ETM trace from Cellular DSP</description>
+                  <lsb>8</lsb>
+                  <msb>8</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMCELLRF</name>
+                  <description>STM trace from Cellular RF CPU</description>
+                  <lsb>9</lsb>
+                  <msb>9</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMISIM</name>
+                  <description>STM trace from iSIM secure core</description>
+                  <lsb>10</lsb>
+                  <msb>10</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
               </fields>
             </register>
           </cluster>
@@ -12832,6 +12922,96 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <description>STM trace from BBPR CPU</description>
                   <lsb>5</lsb>
                   <msb>5</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMCELLDSP</name>
+                  <description>STM trace from Cellular DSP</description>
+                  <lsb>6</lsb>
+                  <msb>6</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMCELLDSPLOCAL</name>
+                  <description>STM trace from Cellular DSP local STM</description>
+                  <lsb>7</lsb>
+                  <msb>7</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ETMCELLDSP</name>
+                  <description>ETM trace from Cellular DSP</description>
+                  <lsb>8</lsb>
+                  <msb>8</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMCELLRF</name>
+                  <description>STM trace from Cellular RF CPU</description>
+                  <lsb>9</lsb>
+                  <msb>9</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMISIM</name>
+                  <description>STM trace from iSIM secure core</description>
+                  <lsb>10</lsb>
+                  <msb>10</msb>
                   <enumeratedValues>
                     <enumeratedValue>
                       <name>NotRequested</name>
@@ -12970,6 +13150,96 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     </enumeratedValue>
                   </enumeratedValues>
                 </field>
+                <field>
+                  <name>STMCELLDSP</name>
+                  <description>STM trace from Cellular DSP</description>
+                  <lsb>6</lsb>
+                  <msb>6</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMCELLDSPLOCAL</name>
+                  <description>STM trace from Cellular DSP local STM</description>
+                  <lsb>7</lsb>
+                  <msb>7</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ETMCELLDSP</name>
+                  <description>ETM trace from Cellular DSP</description>
+                  <lsb>8</lsb>
+                  <msb>8</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMCELLRF</name>
+                  <description>STM trace from Cellular RF CPU</description>
+                  <lsb>9</lsb>
+                  <msb>9</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMISIM</name>
+                  <description>STM trace from iSIM secure core</description>
+                  <lsb>10</lsb>
+                  <msb>10</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
               </fields>
             </register>
           </cluster>
@@ -13010,6 +13280,850 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
             </fields>
           </register>
+        </cluster>
+        <cluster>
+          <name>TAMPER</name>
+          <description>Unspecified</description>
+          <headerStructName>UICR_TAMPER</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x760</addressOffset>
+          <cluster>
+            <name>DETECTION</name>
+            <description>Tamper policy configuration for detected security events.</description>
+            <headerStructName>UICR_TAMPER_DETECTION</headerStructName>
+            <access>read-write</access>
+            <addressOffset>0x000</addressOffset>
+            <register>
+              <name>ENABLE</name>
+              <description>Unspecified</description>
+              <addressOffset>0x000</addressOffset>
+              <access>read-write</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <size>0x20</size>
+              <fields>
+                <field>
+                  <name>GlobalEnable</name>
+                  <description>Enable tamper detection. When disabled all tamper enable and policy switches are ignored.</description>
+                  <lsb>0</lsb>
+                  <msb>0</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable tamper detection.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable tamper detection.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>VoltageLevel</name>
+                  <description>Enable voltage level detectors (VDETs) on supply lines. An automatic system reset is issued when voltage on the corresponding supply line is too low.</description>
+                  <lsb>1</lsb>
+                  <msb>1</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable voltage level detectors.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable voltage level detectors.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>Watchdog</name>
+                  <description>Reserved field, as watchdog timer is always enabled.</description>
+                  <lsb>2</lsb>
+                  <msb>2</msb>
+                </field>
+                <field>
+                  <name>ExternalTamperSwitch</name>
+                  <description>Enable external tamper switch detector.</description>
+                  <lsb>3</lsb>
+                  <msb>3</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable external tamper switch detector.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable external tamper switch detector.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ExternalActiveShield</name>
+                  <description>Enable external active shield detector.</description>
+                  <lsb>4</lsb>
+                  <msb>4</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable external active shield detector.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable external active shield detector.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>InternalActiveShield</name>
+                  <description>Enable internal active shield detector.</description>
+                  <lsb>5</lsb>
+                  <msb>5</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable internal active shield detector.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable internal active shield detector.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>InternalDetectors</name>
+                  <description>Reserved field, as internal detectors are always enabled.</description>
+                  <lsb>6</lsb>
+                  <msb>6</msb>
+                </field>
+                <field>
+                  <name>HardFault</name>
+                  <description>Configure if tamper prevention should react on hard faults.</description>
+                  <lsb>7</lsb>
+                  <msb>7</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable hard fault detector.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable hard fault detector.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ApiFault</name>
+                  <description>Configure if tamper prevention should react on invalid API usage.</description>
+                  <lsb>8</lsb>
+                  <msb>8</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable API fault detector.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable API fault detector.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>AdacFault</name>
+                  <description>Configure if tamper prevention should react on invalid ADAC usage.</description>
+                  <lsb>9</lsb>
+                  <msb>9</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable invalid ADAC usage detector.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable invalid ADAC usage detector.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>StateFault</name>
+                  <description>Configure if tamper prevention should react on invalid firmware execution state.</description>
+                  <lsb>10</lsb>
+                  <msb>10</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable invalid firmware execution state detector.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable invalid firmware execution state detector.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>TemperatureFault</name>
+                  <description>Configure if tamper prevention should react when on-die temperature exceeds a valid range.</description>
+                  <lsb>11</lsb>
+                  <msb>11</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable invalid out-of-range temperature detector.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable invalid out-of-range temperature detector.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>RESPONSE0</name>
+              <description>Unspecified</description>
+              <addressOffset>0x004</addressOffset>
+              <access>read-write</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <size>0x20</size>
+              <fields>
+                <field>
+                  <name>VoltageLevel</name>
+                  <description>Configure tamper policy for invalid voltage level on supply lines.</description>
+                  <lsb>0</lsb>
+                  <msb>3</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>Watchdog</name>
+                  <description>Configure tamper policy for watchdog timer.</description>
+                  <lsb>4</lsb>
+                  <msb>7</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ExternalTamperSwitch</name>
+                  <description>Configure tamper policy for external tamper switch.</description>
+                  <lsb>8</lsb>
+                  <msb>11</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Manual</name>
+                      <description>Block secure services until requested to unblock secure services. Allows user application to take required actions.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ExternalActiveShield</name>
+                  <description>Configure tamper policy for external active shield. BICR is used to specify which channels (GPIOs) are enabled.</description>
+                  <lsb>12</lsb>
+                  <msb>15</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Manual</name>
+                      <description>Block secure services until requested to unblock secure services. Allows user application to take required actions.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>InternalActiveShield</name>
+                  <description>Configure tamper policy for internal active shield.</description>
+                  <lsb>16</lsb>
+                  <msb>19</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Manual</name>
+                      <description>Block secure services until requested to unblock secure services. Allows user application to take required actions.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>InternalDetectors</name>
+                  <description>Configure tamper policy for internal detectors including glitch detector, signal protector and CRACEN detector. See for more information. An automatic reset is issued upon detection.</description>
+                  <lsb>20</lsb>
+                  <msb>23</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>HardFault</name>
+                  <description>Configure tamper policy for hard fault.</description>
+                  <lsb>24</lsb>
+                  <msb>27</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Manual</name>
+                      <description>Block secure services until requested to unblock secure services. Allows user application to take required actions.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ApiFault</name>
+                  <description>Configure tamper policy for invalid API usage.</description>
+                  <lsb>28</lsb>
+                  <msb>31</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Manual</name>
+                      <description>Block secure services until requested to unblock secure services. Allows user application to take required actions.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>RESPONSE1</name>
+              <description>Unspecified</description>
+              <addressOffset>0x008</addressOffset>
+              <access>read-write</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <size>0x20</size>
+              <fields>
+                <field>
+                  <name>AdacFault</name>
+                  <description>Configure tamper policy for invalid ADAC usage.</description>
+                  <lsb>0</lsb>
+                  <msb>3</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Manual</name>
+                      <description>Block secure services until requested to unblock secure services. Allows user application to take required actions.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>StateFault</name>
+                  <description>Configure tamper policy for illegal firmware execution state. Automatic reset is issued be secure domain before secure services are permitted again.</description>
+                  <lsb>4</lsb>
+                  <msb>7</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Manual</name>
+                      <description>Block secure services until requested to unblock secure services. Allows user application to take required actions.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>TemperatureFault</name>
+                  <description>Configure out-of-range on-die temperature tamper policy. A reset is required to continue providing secure services once the on-temperature is within valid operating conditions again. This reset is automatically triggered by the secure domain.</description>
+                  <lsb>8</lsb>
+                  <msb>11</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Manual</name>
+                      <description>Block secure services until requested to unblock secure services. Allows user application to take required actions.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>PowerCycle</name>
+                      <description>Block secure services until power cycling the device.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>Block secure services until device has been powered and idle for 15 minutes.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>Block secure services until device has been powered and idle for one hour.</description>
+                      <value>0x4</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>LCSDiscarded</name>
+                      <description>Transition to LCS Discarded. Warning, this bricks the device permanently.</description>
+                      <value>0xA</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>ResetOnly</name>
+                      <description>No addition penalty besides the automatic reset.</description>
+                      <value>0xF</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>TEMPDETECTORCONFIG</name>
+              <description>Unspecified</description>
+              <addressOffset>0x00C</addressOffset>
+              <access>read-write</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <size>0x20</size>
+              <fields>
+                <field>
+                  <name>TemperatureDetectionStrategy</name>
+                  <description>Configure when on-die temperature sensor should check the temperature.</description>
+                  <lsb>0</lsb>
+                  <msb>1</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Periodically</name>
+                      <description>On-die temperature sensor is read periodically with selected interval.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>OnServiceCallAndPeriodically</name>
+                      <description>On-die temperature sensor is read before each secure service call and periodically with selected interval.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>OnServiceCallOnly</name>
+                      <description>On-die temperature sensor is read before each secure service call.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>TemperatureDetectionInterval</name>
+                  <description>Configure interval for on-die temperature reading if periodic reading is enabled.</description>
+                  <lsb>2</lsb>
+                  <msb>3</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>1Minute</name>
+                      <description>On-die temperature sensor is read with one minute intervals.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>15Minutes</name>
+                      <description>On-die temperature sensor is read with 15 minutes intervals.</description>
+                      <value>0x2</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>1Hour</name>
+                      <description>On-die temperature sensor is read with one hour intervals.</description>
+                      <value>0x3</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>LowTemperatureThresholdShift</name>
+                  <description>Low temperature detection threshold shift in degrees Celsius. The low temperature threshold is calculated by adding the threshold shift to the minimum operating temperature of the SoC.</description>
+                  <lsb>4</lsb>
+                  <msb>11</msb>
+                </field>
+                <field>
+                  <name>HighTemperatureThresholdShift</name>
+                  <description>High temperature detection threshold shift in degrees Celsius. The high temperature threshold is calculated by subtracting the threshold shift from the maximum operating temperature of the SoC.</description>
+                  <lsb>12</lsb>
+                  <msb>19</msb>
+                </field>
+              </fields>
+            </register>
+          </cluster>
+          <cluster>
+            <name>COUNTERMEASURES</name>
+            <description>Configuration of countermeasures.</description>
+            <headerStructName>UICR_TAMPER_COUNTERMEASURES</headerStructName>
+            <access>read-write</access>
+            <addressOffset>0x010</addressOffset>
+            <register>
+              <name>ENABLE</name>
+              <description>Unspecified</description>
+              <addressOffset>0x000</addressOffset>
+              <access>read-write</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <size>0x20</size>
+              <fields>
+                <field>
+                  <name>DPAAES</name>
+                  <description>Configure Differential Power Analysis countermeasure for CRACEN AES.</description>
+                  <lsb>0</lsb>
+                  <msb>0</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable countermeasure.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable countermeasure.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>DPAPK</name>
+                  <description>Configure Differential Power Analysis countermeasure for CRACEN PK.</description>
+                  <lsb>1</lsb>
+                  <msb>1</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable countermeasure.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable countermeasure.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>DPASM4</name>
+                  <description>Configure Differential Power Analysis countermeasure for CRACEN SM4.</description>
+                  <lsb>2</lsb>
+                  <msb>2</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable countermeasure.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable countermeasure.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>DPAECC</name>
+                  <description>Reserved for configuration of Differential Power Analysis countermeasure for CRACEN ECC.</description>
+                  <lsb>3</lsb>
+                  <msb>3</msb>
+                </field>
+                <field>
+                  <name>DFAAES</name>
+                  <description>Reserved for configuration of Differential Fault Analysis countermeasure for CRACEN AES.</description>
+                  <lsb>4</lsb>
+                  <msb>4</msb>
+                </field>
+                <field>
+                  <name>DFAPK</name>
+                  <description>Reserved for configuration of Differential Fault Analysis countermeasure for CRACEN PK.</description>
+                  <lsb>5</lsb>
+                  <msb>5</msb>
+                </field>
+                <field>
+                  <name>DFASM4</name>
+                  <description>Reserved for configuration of Differential Fault Analysis countermeasure for CRACEN SM4.</description>
+                  <lsb>6</lsb>
+                  <msb>6</msb>
+                </field>
+                <field>
+                  <name>DFAECC</name>
+                  <description>Reserved for configuration of Differential Fault Analysis countermeasure for CRACEN ECC.</description>
+                  <lsb>7</lsb>
+                  <msb>7</msb>
+                </field>
+                <field>
+                  <name>KEYLOAD</name>
+                  <description>Configure countermeasure for verifying if cryptography key is loaded correctly into CRACEN.</description>
+                  <lsb>8</lsb>
+                  <msb>8</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable countermeasure.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable countermeasure.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ClockDithering</name>
+                  <description>Configure the clock dithering countermeasure. When enabled clock will be randomly jittered based on TRNG.</description>
+                  <lsb>9</lsb>
+                  <msb>9</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enable</name>
+                      <description>Enable countermeasure.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disable</name>
+                      <description>Disable countermeasure.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+              </fields>
+            </register>
+          </cluster>
         </cluster>
         <register>
           <name>INITSVTOR</name>
@@ -13084,40 +14198,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <addressOffset>0x004</addressOffset>
           <register>
             <name>POWER0</name>
-            <description>Power configuration for P0 to P7 IO ports.</description>
+            <description>Power configuration for P0 to P7 IO ports. Note: P0 is not included in the fields of this register because it is always internally supplied and therefore considered 'Shorted'.</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
-              <field>
-                <name>P0</name>
-                <description>P0 power configuration.</description>
-                <lsb>0</lsb>
-                <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0xF</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External1V8</name>
-                    <description>Port supply is provided externally at 1.8 V.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
               <field>
                 <name>P1</name>
                 <description>P1 power configuration.</description>
@@ -13401,45 +14487,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <size>0x20</size>
             <fields>
               <field>
-                <name>P0</name>
-                <description>P0 drive control configuration.</description>
-                <lsb>0</lsb>
-                <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
-                    <value>0xF</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P1</name>
-                <description>P1 drive control configuration.</description>
-                <lsb>4</lsb>
-                <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
-                    <value>0xF</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P2</name>
-                <description>P2 drive control configuration.</description>
-                <lsb>8</lsb>
-                <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
-                    <value>0xF</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
                 <name>P6</name>
                 <description>P6 drive control configuration.</description>
                 <lsb>24</lsb>
@@ -13525,71 +14572,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
-              <field>
-                <name>P9</name>
-                <description>P9 drive control configuration.</description>
-                <lsb>4</lsb>
-                <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
-                    <value>0xF</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P10</name>
-                <description>P10 drive control configuration.</description>
-                <lsb>8</lsb>
-                <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
-                    <value>0xF</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P11</name>
-                <description>P11 drive control configuration.</description>
-                <lsb>12</lsb>
-                <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
-                    <value>0xF</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P12</name>
-                <description>P12 drive control configuration.</description>
-                <lsb>16</lsb>
-                <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
-                    <value>0xF</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P13</name>
-                <description>P13 drive control configuration.</description>
-                <lsb>20</lsb>
-                <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
-                    <value>0xF</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
             </fields>
           </register>
         </cluster>
@@ -13598,11 +14580,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <description>Unspecified</description>
           <headerStructName>BICR_LFOSC</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x18</addressOffset>
+          <addressOffset>0x018</addressOffset>
           <register>
             <name>LFXOCONFIG</name>
             <description>LFXO configuration. Note. This configuration might be overridden by FICR configuration.</description>
-            <addressOffset>0x00</addressOffset>
+            <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -13686,6 +14668,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <description>LFXO in external square wave mode.</description>
                     <value>0x3</value>
                   </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>LFXO is not to be used.</description>
+                    <value>0x6</value>
+                  </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
@@ -13724,7 +14711,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>LFXOCAL</name>
             <description>LFXO calibration needed. Must be written to 0xFFFFFFFF after any modification of the LFXO board circuit, load capacitance, or crystal swap.</description>
-            <addressOffset>0x04</addressOffset>
+            <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -13747,7 +14734,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>LFRCAUTOCALCONFIG</name>
             <description>LFRC autocalibration configuration.</description>
-            <addressOffset>0x08</addressOffset>
+            <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -13796,11 +14783,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <description>Unspecified</description>
           <headerStructName>BICR_HFXO64M</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x2C</addressOffset>
+          <addressOffset>0x02C</addressOffset>
           <register>
             <name>CONFIG</name>
             <description>HFXO64M configuration. Note. This configuration might be overridden by FICR configuration.</description>
-            <addressOffset>0x00</addressOffset>
+            <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -13858,7 +14845,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>STARTUPTIME</name>
             <description>HFXO64M startup time in us. Note. This configuration might be overridden by FICR configuration.</description>
-            <addressOffset>0x04</addressOffset>
+            <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -13884,11 +14871,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <description>Unspecified</description>
           <headerStructName>BICR_TAMPC</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x34</addressOffset>
+          <addressOffset>0x034</addressOffset>
           <register>
             <name>TAMPERSWITCH</name>
             <description>Configuration for external tamper switch detector.</description>
-            <addressOffset>0x00</addressOffset>
+            <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -13916,7 +14903,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>ACTIVESHIELD</name>
             <description>Configuration for active shield channels.</description>
-            <addressOffset>0x04</addressOffset>
+            <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -14001,11 +14988,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <description>Unspecified</description>
           <headerStructName>BICR_MISPROT</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x3C</addressOffset>
+          <addressOffset>0x03C</addressOffset>
           <register>
             <name>POWERCONFIG</name>
             <description>Misconfiguration report for POWER.CONFIG register.</description>
-            <addressOffset>0x00</addressOffset>
+            <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -14033,7 +15020,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>IOPORTPOWER</name>
             <description>Misconfiguration report for IOPORT.POWER0 and IOPORT.POWER1 registers.</description>
-            <addressOffset>0x04</addressOffset>
+            <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -14061,7 +15048,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>IOPORTDRIVECTRL</name>
             <description>Misconfiguration report for IOPORT.DRIVECTRL0 and IOPORT.DRIVECTRL1 registers.</description>
-            <addressOffset>0x08</addressOffset>
+            <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -14090,13 +15077,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>PMIC</name>
           <description>Unspecified</description>
-          <headerStructName>PMIC</headerStructName>
+          <headerStructName>BICR_PMIC</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x48</addressOffset>
+          <addressOffset>0xC8</addressOffset>
           <register>
             <name>LDOIO1V8</name>
             <description>Configuration for PMIC LDO_IO1V8.</description>
-            <addressOffset>0x80</addressOffset>
+            <addressOffset>0x00</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -14218,7 +15205,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>LDOIO3V3</name>
             <description>Configuration for PMIC LDO_IO3V3.</description>
-            <addressOffset>0x84</addressOffset>
+            <addressOffset>0x04</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
@@ -15481,7 +16468,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>CFGCKSW16M</name>
-                  <description>Trim value for SYSCTRL.FLL16M.CFGCKSW16M</description>
+                  <description>Config value for SYSCTRL.FLL16M.CONFIG.CFGCKSW16M</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15489,7 +16476,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <fields>
                     <field>
                       <name>VALUE</name>
-                      <description>Trim value</description>
+                      <description>Config value</description>
                       <lsb>0</lsb>
                       <msb>31</msb>
                     </field>
@@ -15504,7 +16491,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x4</addressOffset>
                 <register>
                   <name>RCOARSE</name>
-                  <description>Trim value for SYSCTRL.FLL16M.RCOARSE</description>
+                  <description>Trim value for SYSCTRL.FLL16M.TRIM.RCOARSE</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15520,7 +16507,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>RFINE</name>
-                  <description>Trim value for SYSCTRL.FLL16M.RFINE</description>
+                  <description>Trim value for SYSCTRL.FLL16M.TRIM.RFINE</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15536,7 +16523,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for SYSCTRL.FLL16M.VSUP</description>
+                  <description>Trim value for SYSCTRL.FLL16M.TRIM.VSUP</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15552,7 +16539,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>CKSW16MTRIM</name>
-                  <description>Trim value for SYSCTRL.FLL16M.CKSW16MTRIM</description>
+                  <description>Trim value for SYSCTRL.FLL16M.TRIM.CKSW16MTRIM</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15568,7 +16555,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TCOEF</name>
-                  <description>Trim value for SYSCTRL.FLL16M.TCOEF</description>
+                  <description>Trim value for SYSCTRL.FLL16M.TRIM.TCOEF</description>
                   <addressOffset>0x10</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15598,7 +16585,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>LFRCOSCTRIM</name>
-                  <description>Trim value for SYSCTRL.LFRC.LFRCOSCTRIM</description>
+                  <description>Trim value for SYSCTRL.LFRC.CAL.LFRCOSCTRIM</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15628,7 +16615,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>PDLOWERTHR</name>
-                  <description>Trim value for SYSCTRL.LFXO.PDLOWERTHR</description>
+                  <description>Trim value for SYSCTRL.LFXO.TRIM.PDLOWERTHR</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15644,7 +16631,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>PDUPPERTHR</name>
-                  <description>Trim value for SYSCTRL.LFXO.PDUPPERTHR</description>
+                  <description>Trim value for SYSCTRL.LFXO.TRIM.PDUPPERTHR</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15660,7 +16647,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>BIAS</name>
-                  <description>Trim value for SYSCTRL.LFXO.BIAS</description>
+                  <description>Trim value for SYSCTRL.LFXO.TRIM.BIAS</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15676,7 +16663,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>PIXO</name>
-                  <description>Trim value for SYSCTRL.LFXO.PIXO</description>
+                  <description>Trim value for SYSCTRL.LFXO.TRIM.PIXO</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15692,7 +16679,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TRIMBUS</name>
-                  <description>Trim value for SYSCTRL.LFXO.TRIMBUS</description>
+                  <description>Trim value for SYSCTRL.LFXO.TRIM.TRIMBUS</description>
                   <addressOffset>0x10</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15778,7 +16765,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <addressOffset>0x3C</addressOffset>
               <register>
                 <name>VSUP</name>
-                <description>Trim value for SYSCTRL.LFLPRC.VSUP</description>
+                <description>Trim value for SYSCTRL.LFLPRC.TRIM.VSUP</description>
                 <addressOffset>0x0</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -15794,7 +16781,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>RCOARSE</name>
-                <description>Trim value for SYSCTRL.LFLPRC.RCOARSE</description>
+                <description>Trim value for SYSCTRL.LFLPRC.TRIM.RCOARSE</description>
                 <addressOffset>0x4</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -15810,7 +16797,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>RFINE</name>
-                <description>Trim value for SYSCTRL.LFLPRC.RFINE</description>
+                <description>Trim value for SYSCTRL.LFLPRC.TRIM.RFINE</description>
                 <addressOffset>0x8</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -15826,7 +16813,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>PWMFINE</name>
-                <description>Trim value for SYSCTRL.LFLPRC.PWMFINE</description>
+                <description>Trim value for SYSCTRL.LFLPRC.TRIM.PWMFINE</description>
                 <addressOffset>0xC</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -15855,7 +16842,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>CTUNE</name>
-                  <description>Trim value for SYSCTRL.AUDIOPLL.CTUNE</description>
+                  <description>Trim value for SYSCTRL.AUDIOPLL.TRIM.CTUNE</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15915,7 +16902,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>CTUNE</name>
-                  <description>Trim value for SYSCTRL.USBHSPLL.CTUNE</description>
+                  <description>Trim value for SYSCTRL.USBHSPLL.TRIM.CTUNE</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15945,7 +16932,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>CFG</name>
-                  <description>Trim value for SYSCTRL.MBIAS.CFG</description>
+                  <description>Config value for SYSCTRL.MBIAS.CONFIG.CFG</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15968,7 +16955,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x4</addressOffset>
                 <register>
                   <name>MBIASIBPP</name>
-                  <description>Trim value for SYSCTRL.MBIAS.MBIASIBPP</description>
+                  <description>Trim value for SYSCTRL.MBIAS.TRIM.MBIASIBPP</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15984,7 +16971,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>MBIASIBPSR</name>
-                  <description>Trim value for SYSCTRL.MBIAS.MBIASIBPSR</description>
+                  <description>Trim value for SYSCTRL.MBIAS.TRIM.MBIASIBPSR</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16014,7 +17001,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>OSC</name>
-                  <description>Trim value for SYSCTRL.OSCRFR.OSC</description>
+                  <description>Trim value for SYSCTRL.OSCRFR.TRIM.OSC</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16030,7 +17017,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>IBPSR</name>
-                  <description>Trim value for SYSCTRL.OSCRFR.IBPSR</description>
+                  <description>Trim value for SYSCTRL.OSCRFR.TRIM.IBPSR</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16060,7 +17047,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VBG</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM130.VBG</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM130.TRIM.VBG</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16076,7 +17063,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>BIAS</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM130.BIAS</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM130.TRIM.BIAS</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16092,7 +17079,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>VPR</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM130.VPR</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM130.TRIM.VPR</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16108,7 +17095,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>VREF</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM130.VREF</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM130.TRIM.VREF</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16138,7 +17125,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VBG</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM131.VBG</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM131.TRIM.VBG</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16154,7 +17141,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>BIAS</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM131.BIAS</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM131.TRIM.BIAS</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16170,7 +17157,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>VPR</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM131.VPR</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM131.TRIM.VPR</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16186,7 +17173,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>VREF</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM131.VREF</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM131.TRIM.VREF</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16216,7 +17203,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>TRIMVDD</name>
-                  <description>Trim value for SYSCTRL.VREGUSB.TRIMVDD</description>
+                  <description>Trim value for SYSCTRL.VREGUSB.TRIM.TRIMVDD</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16232,7 +17219,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TRIMIBP</name>
-                  <description>Trim value for SYSCTRL.VREGUSB.TRIMIBP</description>
+                  <description>Trim value for SYSCTRL.VREGUSB.TRIM.TRIMIBP</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16248,7 +17235,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TRIM0V8</name>
-                  <description>Trim value for SYSCTRL.VREGUSB.TRIM0V8</description>
+                  <description>Trim value for SYSCTRL.VREGUSB.TRIM.TRIM0V8</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16264,7 +17251,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TRIM3V3</name>
-                  <description>Trim value for SYSCTRL.VREGUSB.TRIM3V3</description>
+                  <description>Trim value for SYSCTRL.VREGUSB.TRIM.TRIM3V3</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16294,7 +17281,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>BROWNOUT</name>
-                  <description>Trim value for SYSCTRL.VDETAO0V8.BROWNOUT</description>
+                  <description>Trim value for SYSCTRL.VDETAO0V8.TRIM.BROWNOUT</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16310,7 +17297,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>PWRGOOD</name>
-                  <description>Trim value for SYSCTRL.VDETAO0V8.PWRGOOD</description>
+                  <description>Trim value for SYSCTRL.VDETAO0V8.TRIM.PWRGOOD</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16341,7 +17328,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <fields>
                     <field>
                       <name>VALUE</name>
-                      <description>Trim value</description>
+                      <description>Config value</description>
                       <lsb>0</lsb>
                       <msb>31</msb>
                     </field>
@@ -16363,7 +17350,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>BROWNOUTLVLHIGH</name>
-                  <description>Trim value for SYSCTRL.VDETAO1V8.BROWNOUTLVLHIGH</description>
+                  <description>Trim value for SYSCTRL.VDETAO1V8.TRIM.BROWNOUTLVLHIGH</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16379,7 +17366,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>BROWNOUTLVLLOW</name>
-                  <description>Trim value for SYSCTRL.VDETAO1V8.BROWNOUTLVLLOW</description>
+                  <description>Trim value for SYSCTRL.VDETAO1V8.TRIM.BROWNOUTLVLLOW</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16409,7 +17396,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>BROWNOUT</name>
-                  <description>Trim value for SYSCTRL.VDETVS0V8.BROWNOUT</description>
+                  <description>Trim value for SYSCTRL.VDETVS0V8.TRIM.BROWNOUT</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16425,7 +17412,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>PWRGOOD</name>
-                  <description>Trim value for SYSCTRL.VDETVS0V8.PWRGOOD</description>
+                  <description>Trim value for SYSCTRL.VDETVS0V8.TRIM.PWRGOOD</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16455,7 +17442,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>PWRGOOD</name>
-                  <description>Trim value for SYSCTRL.VDET1V0.PWRGOOD</description>
+                  <description>Trim value for SYSCTRL.VDET1V0.TRIM.PWRGOOD</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16485,7 +17472,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for SYSCTRL.HSFLL120.VSUP</description>
+                  <description>Trim value for SYSCTRL.HSFLL120.TRIM.VSUP</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16503,7 +17490,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for SYSCTRL.HSFLL120.COARSE</description>
+                  <description>Description collection: Trim value for SYSCTRL.HSFLL120.TRIM.COARSE</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16521,7 +17508,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for SYSCTRL.HSFLL120.FINE</description>
+                  <description>Description collection: Trim value for SYSCTRL.HSFLL120.TRIM.FINE</description>
                   <addressOffset>0x1C</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16537,7 +17524,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TCOEF</name>
-                  <description>Trim value for SYSCTRL.HSFLL120.TCOEF</description>
+                  <description>Trim value for SYSCTRL.HSFLL120.TRIM.TCOEF</description>
                   <addressOffset>0x34</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16567,7 +17554,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for SYSCTRL.HSFLL121.VSUP</description>
+                  <description>Trim value for SYSCTRL.HSFLL121.TRIM.VSUP</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16585,7 +17572,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for SYSCTRL.HSFLL121.COARSE</description>
+                  <description>Description collection: Trim value for SYSCTRL.HSFLL121.TRIM.COARSE</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16603,7 +17590,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for SYSCTRL.HSFLL121.FINE</description>
+                  <description>Description collection: Trim value for SYSCTRL.HSFLL121.TRIM.FINE</description>
                   <addressOffset>0x1C</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16619,7 +17606,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TCOEF</name>
-                  <description>Trim value for SYSCTRL.HSFLL121.TCOEF</description>
+                  <description>Trim value for SYSCTRL.HSFLL121.TRIM.TCOEF</description>
                   <addressOffset>0x34</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16875,7 +17862,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>CTUNE</name>
-                  <description>Trim value for GLOBAL.CANPLL.CTUNE</description>
+                  <description>Trim value for GLOBAL.CANPLL.TRIM.CTUNE</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16984,7 +17971,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>RCALTRIM</name>
-                <description>Trim value used during production test</description>
+                <description>Trim value for GLOBAL.COMP.DFT.RCALTRIM</description>
                 <addressOffset>0x4</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -17020,7 +18007,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for APPLICATION.HSFLL.VSUP</description>
+                  <description>Trim value for APPLICATION.HSFLL.TRIM.VSUP</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17038,7 +18025,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for APPLICATION.HSFLL.COARSE</description>
+                  <description>Description collection: Trim value for APPLICATION.HSFLL.TRIM.COARSE</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17056,7 +18043,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for APPLICATION.HSFLL.FINE</description>
+                  <description>Description collection: Trim value for APPLICATION.HSFLL.TRIM.FINE</description>
                   <addressOffset>0x1C</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17079,7 +18066,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <access>read-write</access>
               <addressOffset>0x34</addressOffset>
               <cluster>
-                <dim>3</dim>
+                <dim>4</dim>
                 <dimIncrement>0x004</dimIncrement>
                 <name>BLOCKTYPE[%s]</name>
                 <description>Unspecified</description>
@@ -17110,7 +18097,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>FICR_TRIM_RADIOCORE</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x2D8</addressOffset>
+            <addressOffset>0x2DC</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
@@ -17125,7 +18112,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for RADIOCORE.HSFLL.VSUP</description>
+                  <description>Trim value for RADIOCORE.HSFLL.TRIM.VSUP</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17143,7 +18130,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for RADIOCORE.HSFLL.COARSE</description>
+                  <description>Description collection: Trim value for RADIOCORE.HSFLL.TRIM.COARSE</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17161,7 +18148,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for RADIOCORE.HSFLL.FINE</description>
+                  <description>Description collection: Trim value for RADIOCORE.HSFLL.TRIM.FINE</description>
                   <addressOffset>0x1C</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17184,7 +18171,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <access>read-write</access>
               <addressOffset>0x34</addressOffset>
               <cluster>
-                <dim>3</dim>
+                <dim>4</dim>
                 <dimIncrement>0x004</dimIncrement>
                 <name>BLOCKTYPE[%s]</name>
                 <description>Unspecified</description>
@@ -17214,7 +18201,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_RADIOCORE_RADIO</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x40</addressOffset>
+              <addressOffset>0x44</addressOffset>
               <cluster>
                 <name>SPHYNXANA</name>
                 <description>Unspecified</description>
@@ -17327,7 +18314,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </cluster>
               <register>
                 <name>PVTTOT</name>
-                <description>Trim value for RADIOCORE.RADIO.EXPECTEDPVTTOTRATIO</description>
+                <description>Trim value for RADIOCORE.RADIO.PVTTOT</description>
                 <addressOffset>0x18</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -17343,7 +18330,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>KDTC</name>
-                <description>Trim value for RADIOCORE.RADIO.ESTKDTCVAL</description>
+                <description>Trim value for RADIOCORE.RADIO.KDTC</description>
                 <addressOffset>0x1C</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -17359,7 +18346,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>TXHFGAIN</name>
-                <description>Trim value for RADIOCORE.RADIO.TXINTERFACEHFGAIN</description>
+                <description>Trim value for RADIOCORE.RADIO.TXHFGAIN</description>
                 <addressOffset>0x20</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -17375,7 +18362,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>PVTTOFIX</name>
-                <description>Trim value for RADIOCORE.RADIO.PVTTOFIXRATIO</description>
+                <description>Trim value for RADIOCORE.RADIO.PVTTOFIX</description>
                 <addressOffset>0x24</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -17419,54 +18406,61 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <headerStructName>FICR_TRIM_BOOT_HSFLL120</headerStructName>
               <access>read-write</access>
               <addressOffset>0x004</addressOffset>
-              <register>
-                <name>VSUP</name>
-                <description>Trim value for SYSCTRL.HSFLL120.VSUP</description>
+              <cluster>
+                <name>TRIM</name>
+                <description>Unspecified</description>
+                <headerStructName>FICR_TRIM_BOOT_HSFLL120_TRIM</headerStructName>
+                <access>read-write</access>
                 <addressOffset>0x000</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>COARSE</name>
-                <description>Trim value for SYSCTRL.HSFLL120.COARSE</description>
-                <addressOffset>0x004</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>FINE</name>
-                <description>Trim value for SYSCTRL.HSFLL120.FINE</description>
-                <addressOffset>0x008</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
+                <register>
+                  <name>VSUP</name>
+                  <description>Trim value for SYSCTRL.HSFLL120.TRIM.VSUP</description>
+                  <addressOffset>0x000</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>COARSE</name>
+                  <description>Trim value for SYSCTRL.HSFLL120.TRIM.COARSE</description>
+                  <addressOffset>0x004</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>FINE</name>
+                  <description>Trim value for SYSCTRL.HSFLL120.TRIM.FINE</description>
+                  <addressOffset>0x008</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+              </cluster>
             </cluster>
             <cluster>
               <name>OTPC</name>
@@ -17476,7 +18470,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <addressOffset>0x010</addressOffset>
               <register>
                 <name>WAITSTATES</name>
-                <description>OTPC waitstates trim when running with TRIM.BOOT.HSFLL120 trims</description>
+                <description>Config value for GLOBAL.OTPC.WAITSTATES</description>
                 <addressOffset>0x000</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -17486,13 +18480,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <name>WAITSTATES</name>
                     <description>Waitstates</description>
                     <lsb>0</lsb>
-                    <msb>6</msb>
+                    <msb>31</msb>
                   </field>
                 </fields>
               </register>
               <register>
                 <name>FREQUENCY</name>
-                <description>OTPC frequency tim when running with TRIM.BOOT.HSFLL120 trims</description>
+                <description>Config value for GLOBAL.OTPC.FREQUENCY</description>
                 <addressOffset>0x004</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -17500,7 +18494,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <fields>
                   <field>
                     <name>FREQUENCY</name>
-                    <description>Trim value</description>
+                    <description>Frequency in MHz</description>
                     <lsb>0</lsb>
                     <msb>31</msb>
                   </field>
@@ -17583,7 +18577,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for SECURE.HSFLL.VSUP</description>
+                  <description>Trim value for SECURE.HSFLL.TRIM.VSUP</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17601,7 +18595,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for SECURE.HSFLL.COARSE</description>
+                  <description>Description collection: Trim value for SECURE.HSFLL.TRIM.COARSE</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17619,7 +18613,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for SECURE.HSFLL.FINE</description>
+                  <description>Description collection: Trim value for SECURE.HSFLL.TRIM.FINE</description>
                   <addressOffset>0x01C</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17649,7 +18643,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for SECURE.HSFLL200.VSUP</description>
+                  <description>Trim value for SECURE.HSFLL200.TRIM.VSUP</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17667,7 +18661,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x4</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for SECURE.HSFLL200.COARSE</description>
+                  <description>Description collection: Trim value for SECURE.HSFLL200.TRIM.COARSE</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17685,7 +18679,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x4</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for SECURE.HSFLL200.FINE</description>
+                  <description>Description collection: Trim value for SECURE.HSFLL200.TRIM.FINE</description>
                   <addressOffset>0x014</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17747,7 +18741,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>TRIM</name>
-                  <description>Trim value for SECURE.MEMCONF200.TRIM</description>
+                  <description>Trim value for SECURE.MEMCONF200.BLOCKTYPE.TRIM</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17776,54 +18770,61 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <headerStructName>FICR_TRIM_CELLCORE_HSFLL</headerStructName>
               <access>read-write</access>
               <addressOffset>0x000</addressOffset>
-              <register>
-                <name>VSUP</name>
-                <description>Trim value for CELLCORE.HSFLL.VSUP</description>
+              <cluster>
+                <name>TRIM</name>
+                <description>Unspecified</description>
+                <headerStructName>FICR_TRIM_CELLCORE_HSFLL_TRIM</headerStructName>
+                <access>read-write</access>
                 <addressOffset>0x000</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>COARSE</name>
-                <description>Trim value for CELLCORE.HSFLL.COARSE</description>
-                <addressOffset>0x004</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>FINE</name>
-                <description>Trim value for CELLCORE.HSFLL.FINE</description>
-                <addressOffset>0x008</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
+                <register>
+                  <name>VSUP</name>
+                  <description>Trim value for CELLCORE.HSFLL.TRIM.VSUP</description>
+                  <addressOffset>0x000</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>COARSE</name>
+                  <description>Trim value for CELLCORE.HSFLL.TRIM.COARSE</description>
+                  <addressOffset>0x004</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>FINE</name>
+                  <description>Trim value for CELLCORE.HSFLL.TRIM.FINE</description>
+                  <addressOffset>0x008</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+              </cluster>
             </cluster>
             <cluster>
               <name>MEMCONF</name>
@@ -17901,7 +18902,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for CELLDSP.HSFLL.VSUP</description>
+                  <description>Trim value for CELLDSP.HSFLL.TRIM.VSUP</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17919,7 +18920,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x5</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for CELLDSP.HSFLL.COARSE</description>
+                  <description>Description collection: Trim value for CELLDSP.HSFLL.TRIM.COARSE</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -17937,7 +18938,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x5</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for CELLDSP.HSFLL.FINE</description>
+                  <description>Description collection: Trim value for CELLDSP.HSFLL.TRIM.FINE</description>
                   <addressOffset>0x018</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -18031,7 +19032,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for CELLRF.HSFLL.VSUP</description>
+                  <description>Trim value for CELLRF.HSFLL.TRIM.VSUP</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -18047,7 +19048,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>COARSE</name>
-                  <description>Trim value for CELLRF.HSFLL.COARSE</description>
+                  <description>Trim value for CELLRF.HSFLL.TRIM.COARSE</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -18063,7 +19064,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>FINE</name>
-                  <description>Trim value for CELLRF.HSFLL.FINE</description>
+                  <description>Trim value for CELLRF.HSFLL.TRIM.FINE</description>
                   <addressOffset>0x008</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -18831,7 +19832,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for ISIMCORE.HSFLL.VSUP</description>
+                  <description>Trim value for ISIMCORE.HSFLL.TRIM.VSUP</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -18847,7 +19848,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>COARSE</name>
-                  <description>Trim value for ISIMCORE.HSFLL.COARSE</description>
+                  <description>Trim value for ISIMCORE.HSFLL.TRIM.COARSE</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -18863,7 +19864,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>FINE</name>
-                  <description>Trim value for ISIMCORE.HSFLL.FINE</description>
+                  <description>Trim value for ISIMCORE.HSFLL.TRIM.FINE</description>
                   <addressOffset>0x008</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -76164,19 +77165,19 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>FEATURE</name>
           <description>Unspecified</description>
-          <headerStructName>FEATURE</headerStructName>
+          <headerStructName>SPU_FEATURE</headerStructName>
           <access>read-write</access>
           <addressOffset>0x600</addressOffset>
           <cluster>
             <name>STRUCT0</name>
             <description>Unspecified</description>
-            <headerStructName>FEATURE_STRUCT0</headerStructName>
+            <headerStructName>SPU_FEATURE_STRUCT0</headerStructName>
             <access>read-write</access>
             <addressOffset>0x000</addressOffset>
             <cluster>
               <name>IPCT</name>
               <description>Unspecified</description>
-              <headerStructName>FEATURE_STRUCT0_IPCT</headerStructName>
+              <headerStructName>SPU_FEATURE_STRUCT0_IPCT</headerStructName>
               <access>read-write</access>
               <addressOffset>0x000</addressOffset>
               <register>
@@ -76331,7 +77332,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <cluster>
               <name>DPPIC</name>
               <description>Unspecified</description>
-              <headerStructName>FEATURE_STRUCT0_DPPIC</headerStructName>
+              <headerStructName>SPU_FEATURE_STRUCT0_DPPIC</headerStructName>
               <access>read-write</access>
               <addressOffset>0x080</addressOffset>
               <register>
@@ -76488,7 +77489,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <dimIncrement>0x040</dimIncrement>
               <name>GPIOTE[%s]</name>
               <description>Unspecified</description>
-              <headerStructName>GPIOTE</headerStructName>
+              <headerStructName>SPU_FEATURE_STRUCT0_GPIOTE</headerStructName>
               <access>read-write</access>
               <addressOffset>0x100</addressOffset>
               <register>
@@ -77332,7 +78333,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <cluster>
             <name>BELLS</name>
             <description>Unspecified</description>
-            <headerStructName>FEATURE_BELLS</headerStructName>
+            <headerStructName>SPU_FEATURE_BELLS</headerStructName>
             <alternateCluster>STRUCT0</alternateCluster>
             <access>read-write</access>
             <addressOffset>0x000</addressOffset>
@@ -77341,7 +78342,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <dimIncrement>0x0C0</dimIncrement>
               <name>PROCESSOR[%s]</name>
               <description>Unspecified</description>
-              <headerStructName>FEATURE_BELLS_PROCESSOR</headerStructName>
+              <headerStructName>SPU_FEATURE_BELLS_PROCESSOR</headerStructName>
               <access>read-write</access>
               <addressOffset>0x000</addressOffset>
               <register>
@@ -77571,7 +78572,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <cluster>
             <name>STRUCT1</name>
             <description>Unspecified</description>
-            <headerStructName>FEATURE_STRUCT1</headerStructName>
+            <headerStructName>SPU_FEATURE_STRUCT1</headerStructName>
             <alternateCluster>STRUCT0</alternateCluster>
             <access>read-write</access>
             <addressOffset>0x000</addressOffset>
@@ -86611,7 +87612,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Description collection: AX2X bridge waitstates for the domain [n], where n is the Domain ID.</description>
           <addressOffset>0x500</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000007</resetValue>
+          <resetValue>0x00000000</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -109043,7 +110044,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_RTCOMPARESYNC</name>
-          <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
+          <description>Synchronize always-on LFCLK clock domain</description>
           <addressOffset>0x164</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -109051,7 +110052,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>EVENTS_RTCOMPARESYNC</name>
-              <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
+              <description>Synchronize always-on LFCLK clock domain</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -139271,7 +140272,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>CCADD</name>
-            <description>Description cluster: Count to add to CC[n]</description>
+            <description>Description cluster: Count to add to CC[n] when this register is written.</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -148877,7 +149878,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>CONFIG</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPLL_CONFIG</headerStructName>
+          <headerStructName>AUXPLL_CONFIG</headerStructName>
           <access>read-write</access>
           <addressOffset>0x410</addressOffset>
           <register>
@@ -148999,7 +150000,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>TRIM</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPLL_TRIM</headerStructName>
+          <headerStructName>AUXPLL_TRIM</headerStructName>
           <access>read-write</access>
           <addressOffset>0x440</addressOffset>
           <register>
@@ -149039,7 +150040,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>AUXPLLCTRL</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPLL_AUXPLLCTRL</headerStructName>
+          <headerStructName>AUXPLL_AUXPLLCTRL</headerStructName>
           <access>read-write</access>
           <addressOffset>0x460</addressOffset>
           <register>
@@ -149245,7 +150246,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>OVERRIDE</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPLL_OVERRIDE</headerStructName>
+          <headerStructName>AUXPLL_OVERRIDE</headerStructName>
           <access>read-write</access>
           <addressOffset>0x500</addressOffset>
           <register>
@@ -149650,7 +150651,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>DFT</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPLL_DFT</headerStructName>
+          <headerStructName>AUXPLL_DFT</headerStructName>
           <access>read-write</access>
           <addressOffset>0x600</addressOffset>
           <register>
@@ -150055,7 +151056,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>CONFIG</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPM_CONFIG</headerStructName>
+          <headerStructName>AUXPM_CONFIG</headerStructName>
           <access>read-write</access>
           <addressOffset>0x420</addressOffset>
           <register>
@@ -150194,7 +151195,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>TRIM</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPM_TRIM</headerStructName>
+          <headerStructName>AUXPM_TRIM</headerStructName>
           <access>read-write</access>
           <addressOffset>0x450</addressOffset>
           <register>
@@ -150287,7 +151288,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>OVERRIDE</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPM_OVERRIDE</headerStructName>
+          <headerStructName>AUXPM_OVERRIDE</headerStructName>
           <access>read-write</access>
           <addressOffset>0x580</addressOffset>
           <register>
@@ -150498,7 +151499,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>DFT</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_AUXPM_DFT</headerStructName>
+          <headerStructName>AUXPM_DFT</headerStructName>
           <access>read-write</access>
           <addressOffset>0x680</addressOffset>
           <register>
@@ -167800,6 +168801,42 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
+              <name>LOOPSDONE_DMA_SEQ0_START</name>
+              <description>Shortcut between event LOOPSDONE and task DMA.SEQ[n].START</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>LOOPSDONE_DMA_SEQ1_START</name>
+              <description>Shortcut between event LOOPSDONE and task DMA.SEQ[n].START</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
               <name>LOOPSDONE_STOP</name>
               <description>Shortcut between event LOOPSDONE and task STOP</description>
               <lsb>4</lsb>
@@ -177964,8 +179001,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <size>0x20</size>
           <fields>
             <field>
-              <name>CTS_STARTRX</name>
-              <description>Shortcut between event CTS and task STARTRX</description>
+              <name>CTS_DMA_RX_START</name>
+              <description>Shortcut between event CTS and task DMA.RX.START</description>
               <lsb>3</lsb>
               <msb>3</msb>
               <enumeratedValues>
@@ -177982,8 +179019,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>NCTS_STOPRX</name>
-              <description>Shortcut between event NCTS and task STOPRX</description>
+              <name>NCTS_DMA_RX_STOP</name>
+              <description>Shortcut between event NCTS and task DMA.RX.STOP</description>
               <lsb>4</lsb>
               <msb>4</msb>
               <enumeratedValues>
@@ -178000,8 +179037,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>ENDRX_STARTRX</name>
-              <description>Shortcut between event ENDRX and task STARTRX</description>
+              <name>DMA_RX_END_DMA_RX_START</name>
+              <description>Shortcut between event DMA.RX.END and task DMA.RX.START</description>
               <lsb>5</lsb>
               <msb>5</msb>
               <enumeratedValues>
@@ -178018,8 +179055,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>ENDRX_STOPRX</name>
-              <description>Shortcut between event ENDRX and task STOPRX</description>
+              <name>DMA_RX_END_DMA_RX_STOP</name>
+              <description>Shortcut between event DMA.RX.END and task DMA.RX.STOP</description>
               <lsb>6</lsb>
               <msb>6</msb>
               <enumeratedValues>
@@ -178036,8 +179073,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>ENDTX_STOPTX</name>
-              <description>Shortcut between event ENDTX and task STOPTX</description>
+              <name>DMA_TX_END_DMA_TX_STOP</name>
+              <description>Shortcut between event DMA.TX.END and task DMA.TX.STOP</description>
               <lsb>18</lsb>
               <msb>18</msb>
               <enumeratedValues>
@@ -178054,8 +179091,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_BUSERROR_STOPRX</name>
-              <description>Shortcut between event DMA.RX.BUSERROR and task STOPRX</description>
+              <name>DMA_RX_BUSERROR_DMA_RX_STOP</name>
+              <description>Shortcut between event DMA.RX.BUSERROR and task DMA.RX.STOP</description>
               <lsb>19</lsb>
               <msb>19</msb>
               <enumeratedValues>
@@ -178072,8 +179109,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_TX_BUSERROR_STOPTX</name>
-              <description>Shortcut between event DMA.TX.BUSERROR and task STOPTX</description>
+              <name>DMA_TX_BUSERROR_DMA_TX_STOP</name>
+              <description>Shortcut between event DMA.TX.BUSERROR and task DMA.TX.STOP</description>
               <lsb>20</lsb>
               <msb>20</msb>
               <enumeratedValues>
@@ -182221,8 +183258,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <size>0x20</size>
           <fields>
             <field>
-              <name>LASTTX_STARTRX</name>
-              <description>Shortcut between event LASTTX and task STARTRX</description>
+              <name>LASTTX_DMA_RX_START</name>
+              <description>Shortcut between event LASTTX and task DMA.RX.START</description>
               <lsb>7</lsb>
               <msb>7</msb>
               <enumeratedValues>
@@ -182275,8 +183312,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </enumeratedValues>
             </field>
             <field>
-              <name>LASTRX_STARTTX</name>
-              <description>Shortcut between event LASTRX and task STARTTX</description>
+              <name>LASTRX_DMA_TX_START</name>
+              <description>Shortcut between event LASTRX and task DMA.TX.START</description>
               <lsb>10</lsb>
               <msb>10</msb>
               <enumeratedValues>
@@ -211497,7 +212534,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>PSEL</name>
           <description>Unspecified</description>
-          <headerStructName>PSEL</headerStructName>
+          <headerStructName>QDEC_PSEL</headerStructName>
           <access>read-write</access>
           <addressOffset>0x51C</addressOffset>
           <register>

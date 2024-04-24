@@ -77,6 +77,50 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define __IOM    volatile                          /*!< Defines 'read / write' structure member permissions                  */
 #endif
 
+/* ======================================================= Domain IDs ======================================================== */
+/**
+  * @brief (unspecified)
+  */
+typedef enum {
+  NRF_DOMAIN_SECURE                          = 1,    /*!< Secure Domain                                                        */
+  NRF_DOMAIN_APPLICATION                     = 2,    /*!< Application Core                                                     */
+  NRF_DOMAIN_RADIOCORE                       = 3,    /*!< Radio Core                                                           */
+  NRF_DOMAIN_GLOBALFAST                      = 12,   /*!< Global Domain - Fast clock domain                                    */
+  NRF_DOMAIN_GLOBALSLOW                      = 13,   /*!< Global Domain - Slow clock domain                                    */
+  NRF_DOMAIN_GLOBAL                          = 15,   /*!< Global Domain                                                        */
+} NRF_DOMAINID_Type;
+
+/* ====================================================== Processor IDs ====================================================== */
+/**
+  * @brief (unspecified)
+  */
+typedef enum {
+  NRF_PROCESSOR_SECURE                       = 1,    /*!< Secure Domain Processor                                              */
+  NRF_PROCESSOR_APPLICATION                  = 2,    /*!< Application Core Processor                                           */
+  NRF_PROCESSOR_RADIOCORE                    = 3,    /*!< Radio Core Processor                                                 */
+  NRF_PROCESSOR_BBPR                         = 11,   /*!< Baseband Processor                                                   */
+  NRF_PROCESSOR_SYSCTRL                      = 12,   /*!< System Controller Processor                                          */
+  NRF_PROCESSOR_PPR                          = 13,   /*!< Peripheral Processor                                                 */
+  NRF_PROCESSOR_FLPR                         = 14,   /*!< Fast Lightweight Processor                                           */
+} NRF_PROCESSORID_Type;
+
+/* ======================================================== Owner IDs ======================================================== */
+/**
+  * @brief (unspecified)
+  */
+typedef enum {
+  NRF_OWNER_NONE                             = 0,    /*!< Used to denote that ownership is not enforced                        */
+  NRF_OWNER_GLOBAL                           = 0,    /*!< Used to denote that ownership is not enforced                        */
+  NRF_OWNER_SECURE                           = 1,    /*!< Secure Domain Processor                                              */
+  NRF_OWNER_APPLICATION                      = 2,    /*!< Application Core                                                     */
+  NRF_OWNER_RADIOCORE                        = 3,    /*!< Radio Core                                                           */
+  NRF_OWNER_SYSCTRL                          = 8,    /*!< System Controller, owned by the Secure Domain                        */
+  NRF_OWNER_DBG_SECURE                       = 9,    /*!< AHB-AP for Secure Domain CPU                                         */
+  NRF_OWNER_DBG_APPLICATION                  = 10,   /*!< AHB-AP for Application Core CPU                                      */
+  NRF_OWNER_DBG_RADIOCORE                    = 11,   /*!< AHB-AP for Radio core CPU                                            */
+  NRF_OWNER_NONEXISTENT                      = 15,   /*!< Non-existing owner in SecDom                                         */
+} NRF_OWNERID_Type;
+
 
 /* ========================================= Start of section using anonymous unions ========================================= */
 
@@ -30354,16 +30398,7 @@ typedef struct {
   * @brief MEMCONF120 [FICR_TRIM_SYSCTRL_MEMCONF120] (unspecified)
   */
 typedef struct {
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
-  #endif
-  union {
-    __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_Type REPAIR[36]; /*!< (@ 0x00000000) (unspecified)                           */
-  };
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic pop
-  #endif
+  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_Type REPAIR[36]; /*!< (@ 0x00000000) (unspecified)                             */
   __IM  uint32_t  RESERVED[8];
   __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_Type BLOCKTYPE[8]; /*!< (@ 0x000000B0) (unspecified)                        */
 } NRF_FICR_TRIM_SYSCTRL_MEMCONF120_Type;             /*!< Size = 208 (0x0D0)                                                   */
@@ -30408,16 +30443,7 @@ typedef struct {
   __IOM NRF_FICR_TRIM_SYSCTRL_LFRC_Type LFRC;        /*!< (@ 0x00000014) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_SYSCTRL_LFXO_Type LFXO;        /*!< (@ 0x00000018) (unspecified)                                         */
   __IM  uint32_t  RESERVED[3];
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
-  #endif
-  union {
-    __IOM NRF_FICR_TRIM_SYSCTRL_HFXO_Type HFXO;      /*!< (@ 0x00000038) (unspecified)                                         */
-  };
-  #if defined(_GNUC_)
-    #pragma GCC diagnostic pop
-  #endif
+  __IOM NRF_FICR_TRIM_SYSCTRL_HFXO_Type HFXO;        /*!< (@ 0x00000038) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_SYSCTRL_AUDIOPLL_Type AUDIOPLL; /*!< (@ 0x00000058) (unspecified)                                        */
   __IOM NRF_FICR_TRIM_SYSCTRL_AUDIOPLLPM_Type AUDIOPLLPM; /*!< (@ 0x0000005C) (unspecified)                                    */
   __IOM NRF_FICR_TRIM_SYSCTRL_USBHSPLL_Type USBHSPLL; /*!< (@ 0x00000060) (unspecified)                                        */
@@ -92696,16 +92722,7 @@ typedef struct {
     __IOM uint32_t STANDBYTIMEOUT;                   /*!< (@ 0x00000554) Timeout to go into standby mode.                      */
     __IOM uint32_t FREQUENCY;                        /*!< (@ 0x00000558) Clock frequency of OTPC.                              */
     __IM uint32_t RESERVED7;
-    #if defined(_GNUC_)
-      #pragma GCC diagnostic push
-      #pragma GCC diagnostic ignored "-Wpedantic"
-    #endif
-    union {
-      __IOM uint32_t REGIONLOCK;                     /*!< (@ 0x00000560) Region lock.                                          */
-    };
-    #if defined(_GNUC_)
-      #pragma GCC diagnostic pop
-    #endif
+    __IOM uint32_t REGIONLOCK;                       /*!< (@ 0x00000560) Region lock.                                          */
     __IM uint32_t RESERVED8[39];
     __IOM NRF_OTPC_TEST_Type TEST;                   /*!< (@ 0x00000600) (unspecified)                                         */
     __IM uint32_t RESERVED9[2];

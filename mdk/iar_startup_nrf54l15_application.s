@@ -173,7 +173,7 @@ __vector_table
         DCD     TIMER00_IRQHandler
         DCD     0                         ; Reserved
         DCD     VREGRLDO_IRQHandler
-        DCD     0                         ; Reserved
+        DCD     ECCRAMC_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -508,6 +508,11 @@ TIMER00_IRQHandler
         PUBWEAK  VREGRLDO_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 VREGRLDO_IRQHandler
+        B .
+
+        PUBWEAK  ECCRAMC_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+ECCRAMC_IRQHandler
         B .
 
         PUBWEAK  SPU10_IRQHandler

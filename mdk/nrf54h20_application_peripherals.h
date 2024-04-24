@@ -47,9 +47,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include <stdbool.h>
-/* Domain definition */
-#define NRF_DOMAIN NRF_DOMAIN_APPLICATION
-
 /*Extended UICR.*/
 #define UICREXTENDED_PRESENT 1
 #define UICREXTENDED_COUNT 1
@@ -86,6 +83,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define BICR_PRESENT 1
 #define BICR_COUNT 1
 
+#define BICR_P0_INTERNAL 1                           /*!< (unspecified)                                                        */
 #define BICR_P0_POWER 0                              /*!< (unspecified)                                                        */
 #define BICR_P1_POWER 1                              /*!< (unspecified)                                                        */
 #define BICR_P2_POWER 1                              /*!< (unspecified)                                                        */
@@ -134,6 +132,22 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define BICR_P13_DRIVECTRL 0                         /*!< (unspecified)                                                        */
 #define BICR_P14_DRIVECTRL 0                         /*!< (unspecified)                                                        */
 #define BICR_P15_DRIVECTRL 0                         /*!< (unspecified)                                                        */
+#define BICR_P0_BIASCTRL 0                           /*!< (unspecified)                                                        */
+#define BICR_P1_BIASCTRL 0                           /*!< (unspecified)                                                        */
+#define BICR_P2_BIASCTRL 0                           /*!< (unspecified)                                                        */
+#define BICR_P3_BIASCTRL 0                           /*!< (unspecified)                                                        */
+#define BICR_P4_BIASCTRL 0                           /*!< (unspecified)                                                        */
+#define BICR_P5_BIASCTRL 0                           /*!< (unspecified)                                                        */
+#define BICR_P6_BIASCTRL 0                           /*!< (unspecified)                                                        */
+#define BICR_P7_BIASCTRL 0                           /*!< (unspecified)                                                        */
+#define BICR_P8_BIASCTRL 0                           /*!< (unspecified)                                                        */
+#define BICR_P9_BIASCTRL 0                           /*!< (unspecified)                                                        */
+#define BICR_P10_BIASCTRL 0                          /*!< (unspecified)                                                        */
+#define BICR_P11_BIASCTRL 0                          /*!< (unspecified)                                                        */
+#define BICR_P12_BIASCTRL 0                          /*!< (unspecified)                                                        */
+#define BICR_P13_BIASCTRL 0                          /*!< (unspecified)                                                        */
+#define BICR_P14_BIASCTRL 0                          /*!< (unspecified)                                                        */
+#define BICR_P15_BIASCTRL 0                          /*!< (unspecified)                                                        */
 #define BICR_HFXO64M 0                               /*!< (unspecified)                                                        */
 #define BICR_POWER 1                                 /*!< (unspecified)                                                        */
 #define BICR_SIP 0                                   /*!< (unspecified)                                                        */
@@ -141,6 +155,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define BICR_GRAPHICS_DOMAIN_PRESENT 0               /*!< (unspecified)                                                        */
 #define BICR_WIFI_DOMAIN_PRESENT 0                   /*!< (unspecified)                                                        */
 #define BICR_WIFI_RADIO 0                            /*!< (unspecified)                                                        */
+#define BICR_SDCARD_PRESENT 0                        /*!< (unspecified)                                                        */
 
 /*CACHEDATA*/
 #define DCACHEDATA_PRESENT 1
@@ -281,15 +296,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PCGCSLAVE_PRESENT 1
 #define PCGCSLAVE_COUNT 2
 
-#define PCGCS000_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS000_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS000_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS000_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS000_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS000_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS000_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS000_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS010_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS010_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS010_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS010_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS010_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS010_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS010_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS010_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
@@ -425,6 +440,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RESETINFO_COUNT 1
 
 #define RESETINFO_HASRESETREAS 1                     /*!< (unspecified)                                                        */
+#define RESETINFO_CROSSDOMAINRESET 0                 /*!< (unspecified)                                                        */
 
 /*IPCT APB registers*/
 #define IPCT_PRESENT 1
@@ -455,6 +471,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FICR_NFC_ON 1                                /*!< (unspecified)                                                        */
 #define FICR_ML_ON 0                                 /*!< (unspecified)                                                        */
 #define FICR_SDCARD_ON 0                             /*!< (unspecified)                                                        */
+#define FICR_VREG_1V8_0V8 0                          /*!< (unspecified)                                                        */
+#define FICR_AUDIO_USB_PROGRAMMABLE_OWNER 0          /*!< (unspecified)                                                        */
 
 /*USBHSCORE*/
 #define USBHSCORE_PRESENT 1
@@ -2316,7 +2334,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TWIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-/* =============================================== APPLICATION_SPU010_FEATURES =============================================== */
+/* ============================================= SPU010 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU010.FEATURES controlling access permissions of features with split security
   */

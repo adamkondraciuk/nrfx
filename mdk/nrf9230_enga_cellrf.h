@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -96,6 +96,7 @@ typedef enum {
   IPCT_5_IRQn                            = 32,       /*!< 32 IPCT_5                                                            */
 } IRQn_Type;
 
+/* ==================================================== Interrupt Aliases ==================================================== */
 
 /* =========================================================================================================================== */
 /* ================                           Processor and Core Peripheral Section                           ================ */
@@ -116,6 +117,15 @@ typedef enum {
 
 #include "core_cm0.h"                                /*!< ARM Cortex-M0 processor and core peripherals                         */
 #include "system_nrf.h"                              /*!< nrf9230_enga_cellrf System Library                                   */
+
+#endif                                               /*!< NRF_CELLRF                                                           */
+
+
+#ifdef NRF_CELLRF
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_CELLRF
+  #define NRF_PROCESSOR                 NRF_PROCESSOR_CELLRF
+  #define NRF_OWNER                     NRF_OWNER_CELL
 
 #endif                                               /*!< NRF_CELLRF                                                           */
 
@@ -249,7 +259,7 @@ typedef enum {
 /* ================                                  Local Domain Remapping                                  ================ */
 /* =========================================================================================================================== */
 
-#ifdef NRF_CELLRF                                    /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+#ifdef NRF_CELLRF                                    /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
   #define NRF_PCGCS0                              NRF_CELLRF_PCGCS0
   #define NRF_RAMCM0                              NRF_CELLRF_RAMCM0
   #define NRF_RAMCDATA                            NRF_CELLRF_RAMCDATA

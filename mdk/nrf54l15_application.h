@@ -86,6 +86,7 @@ typedef enum {
   CM33SS_IRQn                            = 83,       /*!< 83 CM33SS                                                            */
   TIMER00_IRQn                           = 85,       /*!< 85 TIMER00                                                           */
   VREGRLDO_IRQn                          = 87,       /*!< 87 VREGRLDO                                                          */
+  ECCRAMC_IRQn                           = 88,       /*!< 88 ECCRAMC                                                           */
   SPU10_IRQn                             = 128,      /*!< 128 SPU10                                                            */
   TIMER10_IRQn                           = 133,      /*!< 133 TIMER10                                                          */
   RTC10_IRQn                             = 134,      /*!< 134 RTC10                                                            */
@@ -219,13 +220,21 @@ typedef enum {
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  1             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
-#define __INTERRUPTS_MAX             176             /*!< Size of interrupt vector table                                       */
+#define __INTERRUPTS_MAX             270             /*!< Size of interrupt vector table                                       */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
 #define __SAUREGION_PRESENT            1             /*!< SAU present                                                          */
 #define __NUM_SAUREGIONS               4             /*!< Number of regions                                                    */
 
 #include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
 #include "system_nrf.h"                              /*!< nrf54l15_application System Library                                  */
+
+#endif                                               /*!< NRF_APPLICATION                                                      */
+
+
+#ifdef NRF_APPLICATION
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_NONE
+  #define NRF_PROCESSOR                 NRF_PROCESSOR_CM33
 
 #endif                                               /*!< NRF_APPLICATION                                                      */
 

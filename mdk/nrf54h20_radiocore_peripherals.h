@@ -47,9 +47,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include <stdbool.h>
-/* Domain definition */
-#define NRF_DOMAIN NRF_DOMAIN_RADIOCORE
-
 /*CACHEDATA*/
 #define ICACHEDATA_PRESENT 1
 #define ICACHEDATA_COUNT 1
@@ -264,27 +261,27 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PCGCSLAVE_PRESENT 1
 #define PCGCSLAVE_COUNT 4
 
-#define PCGCS000_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS000_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS000_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS000_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS000_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS000_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS000_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS000_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS010_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS010_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS010_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS010_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS010_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS010_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS010_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS010_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS020_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS020_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS020_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS020_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS020_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS020_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS020_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS020_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS030_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS030_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS030_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS030_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS030_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS030_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS030_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS030_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
@@ -451,6 +448,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RESETINFO_COUNT 1
 
 #define RESETINFO_HASRESETREAS 1                     /*!< (unspecified)                                                        */
+#define RESETINFO_CROSSDOMAINRESET 0                 /*!< (unspecified)                                                        */
 
 /*Distributed programmable peripheral interconnect controller*/
 #define DPPIC_PRESENT 1
@@ -899,6 +897,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FICR_NFC_ON 1                                /*!< (unspecified)                                                        */
 #define FICR_ML_ON 0                                 /*!< (unspecified)                                                        */
 #define FICR_SDCARD_ON 0                             /*!< (unspecified)                                                        */
+#define FICR_VREG_1V8_0V8 0                          /*!< (unspecified)                                                        */
+#define FICR_AUDIO_USB_PROGRAMMABLE_OWNER 0          /*!< (unspecified)                                                        */
 
 /*USBHSCORE*/
 #define USBHSCORE_PRESENT 1
@@ -2480,7 +2480,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TWIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-/* ================================================ RADIOCORE_SPU020_FEATURES ================================================ */
+/* ============================================= SPU020 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU020.FEATURES controlling access permissions of features with split security
   */
@@ -2533,7 +2533,7 @@ typedef enum {
   NRF_RADIOCORE_SPU020_FEATURES_DPPIC020_CHG_3 = 67, /*!< Index of access permissions for channel group 3 of DPPIC020          */
 } NRF_RADIOCORE_SPU020_FEATURES_ENUM_t;
 
-/* ================================================ RADIOCORE_SPU030_FEATURES ================================================ */
+/* ============================================= SPU030 Split Security Features ============================================== */
 /**
   * @brief Indexes in SPU030.FEATURES controlling access permissions of features with split security
   */

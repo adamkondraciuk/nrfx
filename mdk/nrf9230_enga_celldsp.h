@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -158,6 +158,183 @@ typedef enum {
   SERIAL7_IRQn                           = 470,      /*!< 470 SERIAL7                                                          */
 } IRQn_Type;
 
+/* ==================================================== Interrupt Aliases ==================================================== */
+#define HARQ_0_IRQn                   HARQ_0_LTEFE_2_IRQn
+#define HARQ_0_IRQHandler             HARQ_0_LTEFE_2_IRQHandler
+#define LTEFE_2_2_IRQn                HARQ_0_LTEFE_2_IRQn
+#define LTEFE_2_2_IRQHandler          HARQ_0_LTEFE_2_IRQHandler
+#define HARQ_1_IRQn                   HARQ_1_LTEFE_3_VITERBI_0_IRQn
+#define HARQ_1_IRQHandler             HARQ_1_LTEFE_3_VITERBI_0_IRQHandler
+#define LTEFE_3_3_IRQn                HARQ_1_LTEFE_3_VITERBI_0_IRQn
+#define LTEFE_3_3_IRQHandler          HARQ_1_LTEFE_3_VITERBI_0_IRQHandler
+#define VITERBI_0_IRQn                HARQ_1_LTEFE_3_VITERBI_0_IRQn
+#define VITERBI_0_IRQHandler          HARQ_1_LTEFE_3_VITERBI_0_IRQHandler
+#define HARQ_2_IRQn                   HARQ_2_LTEFE_4_VITERBI_1_IRQn
+#define HARQ_2_IRQHandler             HARQ_2_LTEFE_4_VITERBI_1_IRQHandler
+#define LTEFE_4_4_IRQn                HARQ_2_LTEFE_4_VITERBI_1_IRQn
+#define LTEFE_4_4_IRQHandler          HARQ_2_LTEFE_4_VITERBI_1_IRQHandler
+#define VITERBI_1_IRQn                HARQ_2_LTEFE_4_VITERBI_1_IRQn
+#define VITERBI_1_IRQHandler          HARQ_2_LTEFE_4_VITERBI_1_IRQHandler
+#define DECTSYNC_IRQn                 DECTSYNC_HARQ_3_LTEFE_5_VITERBI_2_IRQn
+#define DECTSYNC_IRQHandler           DECTSYNC_HARQ_3_LTEFE_5_VITERBI_2_IRQHandler
+#define HARQ_3_IRQn                   DECTSYNC_HARQ_3_LTEFE_5_VITERBI_2_IRQn
+#define HARQ_3_IRQHandler             DECTSYNC_HARQ_3_LTEFE_5_VITERBI_2_IRQHandler
+#define LTEFE_5_5_IRQn                DECTSYNC_HARQ_3_LTEFE_5_VITERBI_2_IRQn
+#define LTEFE_5_5_IRQHandler          DECTSYNC_HARQ_3_LTEFE_5_VITERBI_2_IRQHandler
+#define VITERBI_2_IRQn                DECTSYNC_HARQ_3_LTEFE_5_VITERBI_2_IRQn
+#define VITERBI_2_IRQHandler          DECTSYNC_HARQ_3_LTEFE_5_VITERBI_2_IRQHandler
+#define HARQ_4_IRQn                   HARQ_4_LTEFE_6_VITERBI_3_IRQn
+#define HARQ_4_IRQHandler             HARQ_4_LTEFE_6_VITERBI_3_IRQHandler
+#define LTEFE_6_6_IRQn                HARQ_4_LTEFE_6_VITERBI_3_IRQn
+#define LTEFE_6_6_IRQHandler          HARQ_4_LTEFE_6_VITERBI_3_IRQHandler
+#define VITERBI_3_IRQn                HARQ_4_LTEFE_6_VITERBI_3_IRQn
+#define VITERBI_3_IRQHandler          HARQ_4_LTEFE_6_VITERBI_3_IRQHandler
+#define HARQ_5_IRQn                   HARQ_5_LTEFE_7_IRQn
+#define HARQ_5_IRQHandler             HARQ_5_LTEFE_7_IRQHandler
+#define LTEFE_7_7_IRQn                HARQ_5_LTEFE_7_IRQn
+#define LTEFE_7_7_IRQHandler          HARQ_5_LTEFE_7_IRQHandler
+#define HARQ_6_IRQn                   HARQ_6_LTEFE_8_IRQn
+#define HARQ_6_IRQHandler             HARQ_6_LTEFE_8_IRQHandler
+#define LTEFE_8_8_IRQn                HARQ_6_LTEFE_8_IRQn
+#define LTEFE_8_8_IRQHandler          HARQ_6_LTEFE_8_IRQHandler
+#define HARQ_7_IRQn                   HARQ_7_IPCT_0_LTEFE_9_IRQn
+#define HARQ_7_IRQHandler             HARQ_7_IPCT_0_LTEFE_9_IRQHandler
+#define IPCT_0_IRQn                   HARQ_7_IPCT_0_LTEFE_9_IRQn
+#define IPCT_0_IRQHandler             HARQ_7_IPCT_0_LTEFE_9_IRQHandler
+#define LTEFE_9_9_IRQn                HARQ_7_IPCT_0_LTEFE_9_IRQn
+#define LTEFE_9_9_IRQHandler          HARQ_7_IPCT_0_LTEFE_9_IRQHandler
+#define IPCT_1_IRQn                   IPCT_1_LTEFE_10_IRQn
+#define IPCT_1_IRQHandler             IPCT_1_LTEFE_10_IRQHandler
+#define LTEFE_10_10_IRQn              IPCT_1_LTEFE_10_IRQn
+#define LTEFE_10_10_IRQHandler        IPCT_1_LTEFE_10_IRQHandler
+#define IPCT_2_IRQn                   IPCT_2_LTEFE_11_IRQn
+#define IPCT_2_IRQHandler             IPCT_2_LTEFE_11_IRQHandler
+#define LTEFE_11_11_IRQn              IPCT_2_LTEFE_11_IRQn
+#define LTEFE_11_11_IRQHandler        IPCT_2_LTEFE_11_IRQHandler
+#define ABB_IRQn                      ABB_LTEFE_13_IRQn
+#define ABB_IRQHandler                ABB_LTEFE_13_IRQHandler
+#define LTEFE_13_13_IRQn              ABB_LTEFE_13_IRQn
+#define LTEFE_13_13_IRQHandler        ABB_LTEFE_13_IRQHandler
+#define GNSSFE_1_1_IRQn               GNSSFE_1_WIFIBFE_0_IRQn
+#define GNSSFE_1_1_IRQHandler         GNSSFE_1_WIFIBFE_0_IRQHandler
+#define WIFIBFE_0_IRQn                GNSSFE_1_WIFIBFE_0_IRQn
+#define WIFIBFE_0_IRQHandler          GNSSFE_1_WIFIBFE_0_IRQHandler
+#define GNSSFE_2_2_IRQn               GNSSFE_2_WIFIBFE_1_WIFIGNFE_0_IRQn
+#define GNSSFE_2_2_IRQHandler         GNSSFE_2_WIFIBFE_1_WIFIGNFE_0_IRQHandler
+#define WIFIBFE_1_IRQn                GNSSFE_2_WIFIBFE_1_WIFIGNFE_0_IRQn
+#define WIFIBFE_1_IRQHandler          GNSSFE_2_WIFIBFE_1_WIFIGNFE_0_IRQHandler
+#define WIFIGNFE_0_IRQn               GNSSFE_2_WIFIBFE_1_WIFIGNFE_0_IRQn
+#define WIFIGNFE_0_IRQHandler         GNSSFE_2_WIFIBFE_1_WIFIGNFE_0_IRQHandler
+#define GNSSFE_3_3_IRQn               GNSSFE_3_WIFIBFE_2_WIFIGNFE_1_IRQn
+#define GNSSFE_3_3_IRQHandler         GNSSFE_3_WIFIBFE_2_WIFIGNFE_1_IRQHandler
+#define WIFIBFE_2_IRQn                GNSSFE_3_WIFIBFE_2_WIFIGNFE_1_IRQn
+#define WIFIBFE_2_IRQHandler          GNSSFE_3_WIFIBFE_2_WIFIGNFE_1_IRQHandler
+#define WIFIGNFE_1_IRQn               GNSSFE_3_WIFIBFE_2_WIFIGNFE_1_IRQn
+#define WIFIGNFE_1_IRQHandler         GNSSFE_3_WIFIBFE_2_WIFIGNFE_1_IRQHandler
+#define GNSSFE_4_4_IRQn               GNSSFE_4_WIFIBFE_3_WIFIGNFE_2_IRQn
+#define GNSSFE_4_4_IRQHandler         GNSSFE_4_WIFIBFE_3_WIFIGNFE_2_IRQHandler
+#define WIFIBFE_3_IRQn                GNSSFE_4_WIFIBFE_3_WIFIGNFE_2_IRQn
+#define WIFIBFE_3_IRQHandler          GNSSFE_4_WIFIBFE_3_WIFIGNFE_2_IRQHandler
+#define WIFIGNFE_2_IRQn               GNSSFE_4_WIFIBFE_3_WIFIGNFE_2_IRQn
+#define WIFIGNFE_2_IRQHandler         GNSSFE_4_WIFIBFE_3_WIFIGNFE_2_IRQHandler
+#define GNSSFE_5_5_IRQn               GNSSFE_5_WIFIBFE_4_WIFIGNFE_3_IRQn
+#define GNSSFE_5_5_IRQHandler         GNSSFE_5_WIFIBFE_4_WIFIGNFE_3_IRQHandler
+#define WIFIBFE_4_IRQn                GNSSFE_5_WIFIBFE_4_WIFIGNFE_3_IRQn
+#define WIFIBFE_4_IRQHandler          GNSSFE_5_WIFIBFE_4_WIFIGNFE_3_IRQHandler
+#define WIFIGNFE_3_IRQn               GNSSFE_5_WIFIBFE_4_WIFIGNFE_3_IRQn
+#define WIFIGNFE_3_IRQHandler         GNSSFE_5_WIFIBFE_4_WIFIGNFE_3_IRQHandler
+#define WIFIBFE_5_5_IRQn              WIFIBFE_5_WIFIGNFE_4_IRQn
+#define WIFIBFE_5_5_IRQHandler        WIFIBFE_5_WIFIGNFE_4_IRQHandler
+#define WIFIGNFE_4_IRQn               WIFIBFE_5_WIFIGNFE_4_IRQn
+#define WIFIGNFE_4_IRQHandler         WIFIBFE_5_WIFIGNFE_4_IRQHandler
+#define SPIM120_IRQn                  SPIM120_UARTE120_IRQn
+#define SPIM120_IRQHandler            SPIM120_UARTE120_IRQHandler
+#define UARTE120_IRQn                 SPIM120_UARTE120_IRQn
+#define UARTE120_IRQHandler           SPIM120_UARTE120_IRQHandler
+#define COMP_IRQn                     COMP_LPCOMP_IRQn
+#define COMP_IRQHandler               COMP_LPCOMP_IRQHandler
+#define LPCOMP_IRQn                   COMP_LPCOMP_IRQn
+#define LPCOMP_IRQHandler             COMP_LPCOMP_IRQHandler
+#define SPIM130_IRQn                  SERIAL0_IRQn
+#define SPIM130_IRQHandler            SERIAL0_IRQHandler
+#define SPIS130_IRQn                  SERIAL0_IRQn
+#define SPIS130_IRQHandler            SERIAL0_IRQHandler
+#define TWIM130_IRQn                  SERIAL0_IRQn
+#define TWIM130_IRQHandler            SERIAL0_IRQHandler
+#define TWIS130_IRQn                  SERIAL0_IRQn
+#define TWIS130_IRQHandler            SERIAL0_IRQHandler
+#define UARTE130_IRQn                 SERIAL0_IRQn
+#define UARTE130_IRQHandler           SERIAL0_IRQHandler
+#define SPIM131_IRQn                  SERIAL1_IRQn
+#define SPIM131_IRQHandler            SERIAL1_IRQHandler
+#define SPIS131_IRQn                  SERIAL1_IRQn
+#define SPIS131_IRQHandler            SERIAL1_IRQHandler
+#define TWIM131_IRQn                  SERIAL1_IRQn
+#define TWIM131_IRQHandler            SERIAL1_IRQHandler
+#define TWIS131_IRQn                  SERIAL1_IRQn
+#define TWIS131_IRQHandler            SERIAL1_IRQHandler
+#define UARTE131_IRQn                 SERIAL1_IRQn
+#define UARTE131_IRQHandler           SERIAL1_IRQHandler
+#define SPIM132_IRQn                  SERIAL2_IRQn
+#define SPIM132_IRQHandler            SERIAL2_IRQHandler
+#define SPIS132_IRQn                  SERIAL2_IRQn
+#define SPIS132_IRQHandler            SERIAL2_IRQHandler
+#define TWIM132_IRQn                  SERIAL2_IRQn
+#define TWIM132_IRQHandler            SERIAL2_IRQHandler
+#define TWIS132_IRQn                  SERIAL2_IRQn
+#define TWIS132_IRQHandler            SERIAL2_IRQHandler
+#define UARTE132_IRQn                 SERIAL2_IRQn
+#define UARTE132_IRQHandler           SERIAL2_IRQHandler
+#define SPIM133_IRQn                  SERIAL3_IRQn
+#define SPIM133_IRQHandler            SERIAL3_IRQHandler
+#define SPIS133_IRQn                  SERIAL3_IRQn
+#define SPIS133_IRQHandler            SERIAL3_IRQHandler
+#define TWIM133_IRQn                  SERIAL3_IRQn
+#define TWIM133_IRQHandler            SERIAL3_IRQHandler
+#define TWIS133_IRQn                  SERIAL3_IRQn
+#define TWIS133_IRQHandler            SERIAL3_IRQHandler
+#define UARTE133_IRQn                 SERIAL3_IRQn
+#define UARTE133_IRQHandler           SERIAL3_IRQHandler
+#define SPIM134_IRQn                  SERIAL4_IRQn
+#define SPIM134_IRQHandler            SERIAL4_IRQHandler
+#define SPIS134_IRQn                  SERIAL4_IRQn
+#define SPIS134_IRQHandler            SERIAL4_IRQHandler
+#define TWIM134_IRQn                  SERIAL4_IRQn
+#define TWIM134_IRQHandler            SERIAL4_IRQHandler
+#define TWIS134_IRQn                  SERIAL4_IRQn
+#define TWIS134_IRQHandler            SERIAL4_IRQHandler
+#define UARTE134_IRQn                 SERIAL4_IRQn
+#define UARTE134_IRQHandler           SERIAL4_IRQHandler
+#define SPIM135_IRQn                  SERIAL5_IRQn
+#define SPIM135_IRQHandler            SERIAL5_IRQHandler
+#define SPIS135_IRQn                  SERIAL5_IRQn
+#define SPIS135_IRQHandler            SERIAL5_IRQHandler
+#define TWIM135_IRQn                  SERIAL5_IRQn
+#define TWIM135_IRQHandler            SERIAL5_IRQHandler
+#define TWIS135_IRQn                  SERIAL5_IRQn
+#define TWIS135_IRQHandler            SERIAL5_IRQHandler
+#define UARTE135_IRQn                 SERIAL5_IRQn
+#define UARTE135_IRQHandler           SERIAL5_IRQHandler
+#define SPIM136_IRQn                  SERIAL6_IRQn
+#define SPIM136_IRQHandler            SERIAL6_IRQHandler
+#define SPIS136_IRQn                  SERIAL6_IRQn
+#define SPIS136_IRQHandler            SERIAL6_IRQHandler
+#define TWIM136_IRQn                  SERIAL6_IRQn
+#define TWIM136_IRQHandler            SERIAL6_IRQHandler
+#define TWIS136_IRQn                  SERIAL6_IRQn
+#define TWIS136_IRQHandler            SERIAL6_IRQHandler
+#define UARTE136_IRQn                 SERIAL6_IRQn
+#define UARTE136_IRQHandler           SERIAL6_IRQHandler
+#define SPIM137_IRQn                  SERIAL7_IRQn
+#define SPIM137_IRQHandler            SERIAL7_IRQHandler
+#define SPIS137_IRQn                  SERIAL7_IRQn
+#define SPIS137_IRQHandler            SERIAL7_IRQHandler
+#define TWIM137_IRQn                  SERIAL7_IRQn
+#define TWIM137_IRQHandler            SERIAL7_IRQHandler
+#define TWIS137_IRQn                  SERIAL7_IRQn
+#define TWIS137_IRQHandler            SERIAL7_IRQHandler
+#define UARTE137_IRQn                 SERIAL7_IRQn
+#define UARTE137_IRQHandler           SERIAL7_IRQHandler
 
 /* =========================================================================================================================== */
 /* ================                           Processor and Core Peripheral Section                           ================ */
@@ -172,6 +349,15 @@ typedef enum {
 #define __INTERRUPTS_MAX              55             /*!< Size of interrupt vector table                                       */
 
 #include "system_nrf.h"                              /*!< nrf9230_enga_celldsp System Library                                  */
+
+#endif                                               /*!< NRF_CELLDSP                                                          */
+
+
+#ifdef NRF_CELLDSP
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_CELLDSP
+  #define NRF_PROCESSOR                 NRF_PROCESSOR_CELLDSP
+  #define NRF_OWNER                     NRF_OWNER_CELL
 
 #endif                                               /*!< NRF_CELLDSP                                                          */
 
@@ -295,7 +481,7 @@ typedef enum {
 /* ================                                  Local Domain Remapping                                  ================ */
 /* =========================================================================================================================== */
 
-#ifdef NRF_CELLDSP                                   /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+#ifdef NRF_CELLDSP                                   /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
   #define NRF_LSTMDATA                            NRF_CELLDSP_LSTMDATA
   #define NRF_HSFLL                               NRF_CELLDSP_HSFLL
   #define NRF_LRCCONF0                            NRF_CELLDSP_LRCCONF0

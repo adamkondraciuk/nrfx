@@ -44,8 +44,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   63 
-#define MDK_MICRO_VERSION   2 
+#define MDK_MINOR_VERSION   64 
+#define MDK_MICRO_VERSION   0 
 
 
 /* Define coprocessor domains */
@@ -153,10 +153,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 #endif
 
-/* Define NRF92_SERIES for common use in nRF91 series devices. */
-#if defined (NRF9230_ENGA_XXAA) || defined (NRF9230_XXAA)
+/* Define NRF92_SERIES for common use in nRF92 series devices. */
+#if defined (NRF9230_XXAA) || defined(NRF9230_ENGA_XXAA)
     #ifndef NRF92_SERIES
         #define NRF92_SERIES
+    #endif
+    #ifndef HALTIUM_XXAA
+        #define HALTIUM_XXAA
     #endif
 #endif
 
@@ -349,6 +352,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #define NRF_FICR_NS ((NRF_FICR_Type*)          NRF_FICR_NS_BASE)
     #endif
 
+#elif defined (NRF9230_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf9230.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
+    #endif
 #elif defined (NRF9230_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf9230_enga.h"

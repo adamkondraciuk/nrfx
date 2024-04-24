@@ -125,6 +125,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SREGS00_NS_BASE               0x40056000UL
 #define NRF_SREGS00_S_BASE                0x50056000UL
 #define NRF_VREGRLDO_S_BASE               0x50057000UL
+#define NRF_ECCRAMC_S_BASE                0x50058000UL
 #define NRF_SUPPORT00_S_BASE              0x5005F000UL
 #define NRF_SPU10_S_BASE                  0x50080000UL
 #define NRF_DPPIC10_NS_BASE               0x40082000UL
@@ -343,6 +344,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SREGS00_NS                    ((NRF_SREGS_Type*)                    NRF_SREGS00_NS_BASE)
 #define NRF_SREGS00_S                     ((NRF_SREGS_Type*)                    NRF_SREGS00_S_BASE)
 #define NRF_VREGRLDO_S                    ((NRF_VREGRLDO_Type*)                 NRF_VREGRLDO_S_BASE)
+#define NRF_ECCRAMC_S                     ((NRF_ECCRAMC_Type*)                  NRF_ECCRAMC_S_BASE)
 #define NRF_SUPPORT00_S                   ((NRF_PCGCSLAVE_Type*)                NRF_SUPPORT00_S_BASE)
 #define NRF_SPU10_S                       ((NRF_SPU_Type*)                      NRF_SPU10_S_BASE)
 #define NRF_DPPIC10_NS                    ((NRF_DPPIC_Type*)                    NRF_DPPIC10_NS_BASE)
@@ -641,6 +643,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TIMER00                             NRF_TIMER00_S
   #define NRF_SREGS00                             NRF_SREGS00_S
   #define NRF_VREGRLDO                            NRF_VREGRLDO_S
+  #define NRF_ECCRAMC                             NRF_ECCRAMC_S
   #define NRF_SUPPORT00                           NRF_SUPPORT00_S
   #define NRF_SPU10                               NRF_SPU10_S
   #define NRF_DPPIC10                             NRF_DPPIC10_S

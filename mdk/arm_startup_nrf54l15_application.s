@@ -172,7 +172,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     TIMER00_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     VREGRLDO_IRQHandler
-                DCD     0                         ; Reserved
+                DCD     ECCRAMC_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -444,6 +444,7 @@ Default_Handler PROC
                 EXPORT   CM33SS_IRQHandler [WEAK]
                 EXPORT   TIMER00_IRQHandler [WEAK]
                 EXPORT   VREGRLDO_IRQHandler [WEAK]
+                EXPORT   ECCRAMC_IRQHandler [WEAK]
                 EXPORT   SPU10_IRQHandler [WEAK]
                 EXPORT   TIMER10_IRQHandler [WEAK]
                 EXPORT   RTC10_IRQHandler [WEAK]
@@ -505,6 +506,7 @@ CTRLAP_IRQHandler
 CM33SS_IRQHandler
 TIMER00_IRQHandler
 VREGRLDO_IRQHandler
+ECCRAMC_IRQHandler
 SPU10_IRQHandler
 TIMER10_IRQHandler
 RTC10_IRQHandler

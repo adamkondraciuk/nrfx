@@ -47,9 +47,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include <stdbool.h>
-/* Domain definition */
-#define NRF_DOMAIN NRF_DOMAIN_SECURE
-
 /*Secure Information Configuration Registers*/
 #define SICR_PRESENT 1
 #define SICR_COUNT 1

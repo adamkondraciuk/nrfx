@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -45,6 +45,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef __cplusplus
     extern "C" {
 #endif
+
+
+#ifdef NRF_WIFICORE
+
+  #define NRF_DOMAIN                    NRF_DOMAIN_WIFICORE
+  #define NRF_OWNER                     NRF_OWNER_WIFICORE
+
+#endif                                               /*!< NRF_WIFICORE                                                         */
 
 
 /* ========================================= Start of section using anonymous unions ========================================= */
@@ -95,7 +103,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_WIFICORE_PCGCS010_BASE        0x48012000UL
 #define NRF_WIFICORE_MEMCONF_BASE         0x48013000UL
 #define NRF_WIFICORE_RPURFBUS_BASE        0x48020000UL
-#define NRF_WIFICORE_BELLBOARD_BASE       0x5F09C000UL
+#define NRF_WIFICORE_BELLBOARD_BASE       0x4F09C000UL
 #define NRF_WIFICORE_RPUMAC_BASE          0x48080000UL
 #define NRF_WIFICORE_RPUPHY_BASE          0x48080000UL
 #define NRF_WIFICORE_RPUSYS_BASE          0x48080000UL
@@ -134,7 +142,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* ================                                  Local Domain Remapping                                  ================ */
 /* =========================================================================================================================== */
 
-#ifdef NRF_WIFICORE                                  /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+#ifdef NRF_WIFICORE                                  /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
   #define NRF_UICR                                NRF_WIFICORE_UICR
   #define NRF_VPRLMAC                             NRF_WIFICORE_VPRLMAC
   #define NRF_VPRUMAC                             NRF_WIFICORE_VPRUMAC

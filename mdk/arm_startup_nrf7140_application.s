@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2024 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -427,6 +427,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
+                DCD     AUDIOPLL_IRQHandler
+                DCD     USBHSPLL_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -441,10 +443,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     VREGUSB_IRQHandler
+                DCD     AUDIOPLLPM_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -701,6 +701,10 @@ Default_Handler PROC
                 EXPORT   WDT132_IRQHandler [WEAK]
                 EXPORT   EGU130_IRQHandler [WEAK]
                 EXPORT   RESETHUB_IRQHandler [WEAK]
+                EXPORT   AUDIOPLL_IRQHandler [WEAK]
+                EXPORT   USBHSPLL_IRQHandler [WEAK]
+                EXPORT   VREGUSB_IRQHandler [WEAK]
+                EXPORT   AUDIOPLLPM_IRQHandler [WEAK]
                 EXPORT   SAADC_IRQHandler [WEAK]
                 EXPORT   COMP_LPCOMP_IRQHandler [WEAK]
                 EXPORT   TEMP_IRQHandler [WEAK]
@@ -799,6 +803,10 @@ WDT131_IRQHandler
 WDT132_IRQHandler
 EGU130_IRQHandler
 RESETHUB_IRQHandler
+AUDIOPLL_IRQHandler
+USBHSPLL_IRQHandler
+VREGUSB_IRQHandler
+AUDIOPLLPM_IRQHandler
 SAADC_IRQHandler
 COMP_LPCOMP_IRQHandler
 TEMP_IRQHandler

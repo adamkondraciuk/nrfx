@@ -33,27 +33,32 @@ LOAD 0x0E080000 0x00020000
     .ANY(+RW, +ZI) ; RW data and ZI data
     }
 
-    RAM3 0x2F100000 0x00060000
+    RAM3 0x2F100000 0x00080000
     {
     .ANY(+RW, +ZI) ; RW data and ZI data
     }
 
-    RAM4 0x2F880000 0x00010000
+    RAM4 0x2F180000 0x00060000
     {
     .ANY(+RW, +ZI) ; RW data and ZI data
     }
 
-    RAM5 0x2F890000 0x00008000
+    RAM5 0x2F880000 0x00010000
     {
     .ANY(+RW, +ZI) ; RW data and ZI data
     }
 
-    RAM6 0x2FC00000 0x00004000
+    RAM6 0x2F890000 0x00010000
     {
     .ANY(+RW, +ZI) ; RW data and ZI data
     }
 
-    RAM7 0x2FC04000 0x00004000
+    RAM7 0x2FC00000 0x00010000
+    {
+    .ANY(+RW, +ZI) ; RW data and ZI data
+    }
+
+    RAM8 0x2FC10000 0x00004000
     {
     .ANY(+RW, +ZI) ; RW data and ZI data
     }

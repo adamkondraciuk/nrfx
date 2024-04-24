@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -41,10 +41,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_DEVICE_MEM_H_
 
 #ifndef __DEFAULT_STACK_SIZE
-    #define __DEFAULT_STACK_SIZE 2048
+    #define __DEFAULT_STACK_SIZE 6144
 #endif
 #ifndef __DEFAULT_HEAP_SIZE
-    #define __DEFAULT_HEAP_SIZE 2048
+    #define __DEFAULT_HEAP_SIZE 6144
 #endif
 
 /* Device memory Flash: */
@@ -53,11 +53,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* Device memory ROMFlash: */
 #define NRF_MEMORY_ROMFLASH_BASE 0x01000000
-#define NRF_MEMORY_ROMFLASH_SIZE 0x00010000
+#define NRF_MEMORY_ROMFLASH_SIZE 0x00020000
 
 /* Device memory RAM: */
 #define NRF_MEMORY_RAM_BASE 0x21000000
-#define NRF_MEMORY_RAM_SIZE 0x00008000
+#define NRF_MEMORY_RAM_SIZE 0x00018000
 
 /* Device memory PeripheralsAPBS: */
 #define NRF_MEMORY_PERIPHERALSAPBS_BASE 0x51000000

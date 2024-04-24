@@ -47,9 +47,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include <stdbool.h>
-/* Domain definition */
-#define NRF_DOMAIN NRF_DOMAIN_SYSCTRL
-
 /*VPR CSR registers*/
 #define VPRCSR_PRESENT 1
 #define VPRCSR_COUNT 1
@@ -321,87 +318,87 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PCGCSLAVE_PRESENT 1
 #define PCGCSLAVE_COUNT 14
 
-#define PCGCS200_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS200_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS200_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS200_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS200_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS200_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS200_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS200_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS110_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS110_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS110_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS110_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS110_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS110_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS110_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS110_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS120_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS120_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS120_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS120_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS120_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS120_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS120_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS120_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS121_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS121_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS121_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS121_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS121_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS121_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS121_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS121_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS122_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS122_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS122_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS122_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS122_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS122_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS122_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS122_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS130_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS130_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS130_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS130_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS130_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS130_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS130_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS130_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS131_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS131_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS131_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS131_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS131_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS131_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS131_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS131_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS132_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS132_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS132_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS132_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS132_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS132_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS132_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS132_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS133_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS133_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS133_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS133_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS133_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS133_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS133_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS133_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS134_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS134_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS134_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS134_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS134_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS134_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS134_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS134_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS135_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS135_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS135_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS135_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS135_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS135_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS135_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS135_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS136_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS136_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS136_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS136_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS136_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS136_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS136_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS136_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS137_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS137_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS137_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS137_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS137_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS137_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS137_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS137_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS138_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS138_NUM_CLOCK_POWER_PAIR_MAX 1          /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
-#define PCGCS138_NUM_CLOCK_POWER_PAIR_SIZE 2         /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
+#define PCGCS138_NUM_CLOCK_POWER_PAIR_MIN 0          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS138_NUM_CLOCK_POWER_PAIR_MAX 4          /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
+#define PCGCS138_NUM_CLOCK_POWER_PAIR_SIZE 5         /*!< Number of clock/power pairs used by PCGC Slave - [0..4]              */
 #define PCGCS138_NOTFULLPCPZERO 1                    /*!< (unspecified)                                                        */
 #define PCGCS138_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
@@ -641,6 +638,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VREGMAIN_PRESENT 1
 #define VREGMAIN_COUNT 1
 
+#define VREGMAIN_WIFI_SUPPORTED 0                    /*!< (unspecified)                                                        */
+
 /*VREGAO1V8 peripheral*/
 #define VREGAO1V8_PRESENT 1
 #define VREGAO1V8_COUNT 1
@@ -665,6 +664,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VREGVS0V8_VREGVS0V8_NUM_CLOCK_POWER_PAIR_SIZE 3 /*!< Number of clock/power pairs used by the instance of PCGC Slave -
                                                              [0..2]*/
 #define VREGVS0V8_VREGVS0V8_NOTFULLPCPZERO 0         /*!< (unspecified)                                                        */
+#define VREGVS0V8_HIGHER_CURRENT_LIMIT 0             /*!< (unspecified)                                                        */
 
 /*VREGSU peripheral*/
 #define VREGSU_PRESENT 1
@@ -738,6 +738,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FICR_NFC_ON 1                                /*!< (unspecified)                                                        */
 #define FICR_ML_ON 0                                 /*!< (unspecified)                                                        */
 #define FICR_SDCARD_ON 0                             /*!< (unspecified)                                                        */
+#define FICR_VREG_1V8_0V8 0                          /*!< (unspecified)                                                        */
+#define FICR_AUDIO_USB_PROGRAMMABLE_OWNER 0          /*!< (unspecified)                                                        */
 
 /*USBHSCORE*/
 #define USBHSCORE_PRESENT 1

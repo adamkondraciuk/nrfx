@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -49,9 +49,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
 #define MDK_SOURCE_VERSION_MINOR 2                   /*!< Minor version of product specification.                              */
-#define MDK_SOURCE_VERSION_MICRO 3                   /*!< Micro version of product specification.                              */
+#define MDK_SOURCE_VERSION_MICRO 7                   /*!< Micro version of product specification.                              */
 
-#define MDK_SOURCE_HASH Lilium_FP1_IPS_v0.2.27       /*!< Git hash of product specification source.                            */
+#define MDK_SOURCE_HASH Halti_FP1_IPS_v0.2.30-3-gcc908c36 /*!< Git hash of product specification source.                       */
 
 
 #ifdef __cplusplus
