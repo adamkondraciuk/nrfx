@@ -168,8 +168,6 @@ typedef enum {
 /* ==================================================== Interrupt Aliases ==================================================== */
 #define GRTC_IRQn                     GRTC_0_IRQn
 #define GRTC_IRQHandler               GRTC_0_IRQHandler
-#define GRTC_IRQn                     GRTC_1_IRQn
-#define GRTC_IRQHandler               GRTC_1_IRQHandler
 #define SPIM120_IRQn                  UARTE120_IRQn
 #define SPIM120_IRQHandler            UARTE120_IRQHandler
 #define UARTE120_IRQn                 UARTE120_IRQn
