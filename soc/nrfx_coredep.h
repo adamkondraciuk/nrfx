@@ -154,10 +154,26 @@ NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
     uint32_t cycles = time_us * NRFX_DELAY_CPU_FREQ_MHZ;
     delay_cycles(cycles);
 #elif NRFX_CHECK(ISA_RISCV)
+#if !NRFX_CHECK(NRFX_COREDEP_VPR_LEGACY)
     nrf_vpr_csr_vtim_count_mode_set(1, NRF_VPR_CSR_VTIM_COUNT_TRIGGER_COMBINED);
     nrf_vpr_csr_vtim_combined_counter_set(time_us * NRFX_DELAY_CPU_FREQ_MHZ);
     nrf_vpr_csr_vtim_combined_wait_trigger();
-#endif
+#else
+    #if !defined(NRFX_DELAY_RISCV_SLOWDOWN)
+        #if defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA)
+            #define NRFX_DELAY_RISCV_SLOWDOWN 15
+        #else
+            #define NRFX_DELAY_RISCV_SLOWDOWN 50
+        #endif // defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA)
+    #endif // !defined(NRFX_DELAY_RISCV_SLOWDOWN)
+
+    for (volatile uint32_t i = 0;
+             i < ((NRFX_DELAY_CPU_FREQ_MHZ * time_us) / NRFX_DELAY_RISCV_SLOWDOWN);
+             i++)
+        {}
+
+#endif // !NRFX_CHECK(NRFX_CONFIG_COREDEP_VPR_LEGACY)
+#endif // NRFX_CHECK(ISA_ARM)
 }
 
 #endif // !NRFX_CHECK(NRFX_DELAY_DWT_BASED_DELAY)
