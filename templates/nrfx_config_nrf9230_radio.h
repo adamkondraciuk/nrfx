@@ -1,12 +1,15 @@
 /*$$$LICENCE_NORDIC_STANDARD<2024>$$$*/
 
-#ifndef NRFX_CONFIG_NRF9230_ENGA_APPLICATION_H__
-#define NRFX_CONFIG_NRF9230_ENGA_APPLICATION_H__
+#ifndef NRFX_CONFIG_NRF9230_RADIO_H__
+#define NRFX_CONFIG_NRF9230_RADIO_H__
 
 #ifndef NRFX_CONFIG_H__
 #error "This file should not be included directly. Include nrfx_config.h instead."
 #endif
 
+#ifndef NRFX_RTC0_ENABLED
+#define NRFX_RTC0_ENABLED 1
+#endif
 
 /**
  * @brief NRFX_DEFAULT_IRQ_PRIORITY
@@ -147,6 +150,20 @@
 #endif
 
 /**
+ * @brief NRFX_DPPI020_PUB_CONFIG_ALLOWED_CHANNELS_MASK
+ */
+#ifndef NRFX_DPPI020_PUB_CONFIG_ALLOWED_CHANNELS_MASK
+#define NRFX_DPPI020_PUB_CONFIG_ALLOWED_CHANNELS_MASK 0x00000003
+#endif
+
+/**
+ * @brief NRFX_DPPI030_PUB_CONFIG_ALLOWED_CHANNELS_MASK
+ */
+#ifndef NRFX_DPPI030_PUB_CONFIG_ALLOWED_CHANNELS_MASK
+#define NRFX_DPPI030_PUB_CONFIG_ALLOWED_CHANNELS_MASK 0x00000003
+#endif
+
+/**
  * @brief NRFX_DPPI120_PUB_CONFIG_ALLOWED_CHANNELS_MASK
  */
 #ifndef NRFX_DPPI120_PUB_CONFIG_ALLOWED_CHANNELS_MASK
@@ -200,6 +217,20 @@
  */
 #ifndef NRFX_DPPI136_PUB_CONFIG_ALLOWED_CHANNELS_MASK
 #define NRFX_DPPI136_PUB_CONFIG_ALLOWED_CHANNELS_MASK 0x00000081
+#endif
+
+/**
+ * @brief NRFX_DPPI020_SUB_CONFIG_ALLOWED_CHANNELS_MASK
+ */
+#ifndef NRFX_DPPI020_SUB_CONFIG_ALLOWED_CHANNELS_MASK
+#define NRFX_DPPI020_SUB_CONFIG_ALLOWED_CHANNELS_MASK 0x0000000c
+#endif
+
+/**
+ * @brief NRFX_DPPI030_SUB_CONFIG_ALLOWED_CHANNELS_MASK
+ */
+#ifndef NRFX_DPPI030_SUB_CONFIG_ALLOWED_CHANNELS_MASK
+#define NRFX_DPPI030_SUB_CONFIG_ALLOWED_CHANNELS_MASK 0x0000000c
 #endif
 
 /**
@@ -274,6 +305,15 @@
  */
 #ifndef NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
+#endif
+
+/**
+ * @brief NRFX_EGU020_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_EGU020_ENABLED
+#define NRFX_EGU020_ENABLED 0
 #endif
 
 /**
@@ -403,7 +443,7 @@
  * @brief NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK
  */
 #ifndef NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK
-#define NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK 0x000000f0
+#define NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK 0x00000f00
 #endif
 
 /**
@@ -440,70 +480,10 @@
 #endif
 
 /**
- * @brief NRFX_I2S_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_I2S_ENABLED
-#define NRFX_I2S_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY
- *
- * Integer value. Minimum: 0. Maximum: 7.
- */
-#ifndef NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY
-#define NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
-#endif
-
-/**
- * @brief NRFX_I2S_CONFIG_LOG_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_I2S_CONFIG_LOG_ENABLED
-#define NRFX_I2S_CONFIG_LOG_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_I2S_CONFIG_LOG_LEVEL
- *
- * Integer value.
- * Supported values:
- * - Off     = 0
- * - Error   = 1
- * - Warning = 2
- * - Info    = 3
- * - Debug   = 4
- */
-#ifndef NRFX_I2S_CONFIG_LOG_LEVEL
-#define NRFX_I2S_CONFIG_LOG_LEVEL 3
-#endif
-
-/**
- * @brief NRFX_I2S130_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_I2S130_ENABLED
-#define NRFX_I2S130_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_I2S131_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_I2S131_ENABLED
-#define NRFX_I2S131_ENABLED 0
-#endif
-
-/**
  * @brief NRFX_IPCT_PUB_CONFIG_ALLOWED_CHANNELS_MASK
  */
 #ifndef NRFX_IPCT_PUB_CONFIG_ALLOWED_CHANNELS_MASK
-#define NRFX_IPCT_PUB_CONFIG_ALLOWED_CHANNELS_MASK 0x00000003
+#define NRFX_IPCT_PUB_CONFIG_ALLOWED_CHANNELS_MASK 0x00000030
 #endif
 
 /**
@@ -524,7 +504,7 @@
  * @brief NRFX_IPCT_SUB_CONFIG_ALLOWED_CHANNELS_MASK
  */
 #ifndef NRFX_IPCT_SUB_CONFIG_ALLOWED_CHANNELS_MASK
-#define NRFX_IPCT_SUB_CONFIG_ALLOWED_CHANNELS_MASK 0x0000000c
+#define NRFX_IPCT_SUB_CONFIG_ALLOWED_CHANNELS_MASK 0x000000c0
 #endif
 
 /**
@@ -1373,6 +1353,33 @@
 #endif
 
 /**
+ * @brief NRFX_TIMER020_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_TIMER020_ENABLED
+#define NRFX_TIMER020_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_TIMER021_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_TIMER021_ENABLED
+#define NRFX_TIMER021_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_TIMER022_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_TIMER022_ENABLED
+#define NRFX_TIMER022_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_TIMER120_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
@@ -1963,4 +1970,4 @@
 #define NRFX_WDT132_ENABLED 0
 #endif
 
-#endif // NRFX_CONFIG_NRF9230_ENGA_APPLICATION_H__
+#endif // NRFX_CONFIG_NRF9230_RADIO_H__
