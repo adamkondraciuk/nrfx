@@ -1374,6 +1374,174 @@
 #endif
 
 /**************************************************************************************************/
+/* Start fixups section for NRF9230_XXAA                                                          */
+/**************************************************************************************************/
+
+#if defined(NRF9230_XXAA)
+    /* External part */
+    #if defined(NRF_APPLICATION)
+        #define NRF_DOMAIN NRF_DOMAIN_APPLICATION
+    #elif defined(NRF_RADIOCORE)
+        #define NRF_DOMAIN NRF_DOMAIN_RADIOCORE
+    #elif defined(NRF_FLPR)
+        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
+    #elif defined(NRF_PPR)
+        #define NRF_DOMAIN NRF_DOMAIN_GLOBALSLOW
+    #endif
+
+    #if defined(NRF_TRUSTZONE_NONSECURE)
+        #if defined(NRF_APPLICATION)
+            #define GRTC_IRQ_GROUP 2
+            #define GPIOTE_IRQ_GROUP 2
+        #elif defined(NRF_RADIOCORE)
+            #define GRTC_IRQ_GROUP 4
+            #define GPIOTE_IRQ_GROUP 4
+        #endif
+    #elif defined(NRF_PPR)
+        #define GRTC_IRQ_GROUP 10
+        #define GPIOTE_IRQ_GROUP 2
+    #elif defined(NRF_FLPR)
+        #define GRTC_IRQ_GROUP 11
+        #define GPIOTE_IRQ_GROUP 2
+    #else
+        #if defined(NRF_APPLICATION)
+            #define GRTC_IRQ_GROUP 3
+            #define GPIOTE_IRQ_GROUP 3
+        #elif defined(NRF_RADIOCORE)
+            #define GRTC_IRQ_GROUP 5
+            #define GPIOTE_IRQ_GROUP 5
+        #endif
+    #endif
+
+    /* Internal part */
+    #if defined(NRF_TRUSTZONE_NONSECURE)
+        #if defined(NRF_SECURE)
+            #define GRTC_IRQ_GROUP 0
+            #define GPIOTE_IRQ_GROUP 0
+        #elif defined(NRF_CELLCORE)
+            #define GRTC_IRQ_GROUP 8
+            #define GPIOTE_IRQ_GROUP 4
+        #endif
+    #elif defined(NRF_SYSCTRL)
+        #define GRTC_IRQ_GROUP 7
+        #define GPIOTE_IRQ_GROUP 6
+    #elif defined(NRF_BBPR)
+        #define GRTC_IRQ_GROUP 12
+    #else
+        #if defined(NRF_SECURE)
+            #define GRTC_IRQ_GROUP 1
+            #define GPIOTE_IRQ_GROUP 1
+        #elif defined(NRF_CELLCORE)
+            #define GRTC_IRQ_GROUP 9
+            #define GPIOTE_IRQ_GROUP 5
+        #endif
+    #endif
+
+    #if !defined(GRTC_IRQ_GROUP)
+        #error Unknown core.
+    #endif
+
+    #define GPIOTE131_CH_NUM (GPIOTE131_GPIOTE_NCHANNELS_MAX + 1UL)
+    #define GPIOTE131_AVAILABLE_GPIO_PORTS 0x3A07UL
+
+    // Old HFXO modes are not supported
+    #ifdef BICR_HFXO_CONFIG_MODE_Pierce
+        #undef BICR_HFXO_CONFIG_MODE_Pierce
+    #endif
+    #ifdef BICR_HFXO_CONFIG_MODE_PIXO
+        #undef BICR_HFXO_CONFIG_MODE_PIXO
+    #endif
+    #ifdef BICR_HFXO_CONFIG_MODE_ExtSquare
+        #undef BICR_HFXO_CONFIG_MODE_ExtSquare
+    #endif
+    #ifdef BICR_HFXO_CONFIG_MODE_Auto
+        #undef BICR_HFXO_CONFIG_MODE_Auto
+    #endif
+    #define BICR_HFXO_CONFIG_MODE_Normal   (0x0UL)     /*!< HFXO Normal mode.                                                    */
+    #define BICR_HFXO_CONFIG_MODE_TCXO     (0x1UL)     /*!< HFXO TCXO/bypass mode.                                               */
+    #define BICR_HFXO_CONFIG_MODE_Crystal2 (0x2UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal3 (0x3UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal4 (0x4UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal5 (0x5UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal6 (0x6UL)     /*!< Reserved value.                                                      */
+
+    #define DPPIC0_CH_NUM DPPIC0_CH_NUM_SIZE
+    #define DPPIC1_CH_NUM DPPIC1_CH_NUM_SIZE
+
+    #define DPPIC0_GROUP_NUM DPPIC0_GROUP_NUM_SIZE
+    #define DPPIC1_GROUP_NUM DPPIC1_GROUP_NUM_SIZE
+
+    #define P0_PIN_NUM  P0_PIN_NUM_SIZE
+    #define P1_PIN_NUM  P1_PIN_NUM_SIZE
+    #define P2_PIN_NUM  P2_PIN_NUM_SIZE
+    #define P6_PIN_NUM  P6_PIN_NUM_SIZE
+    #define P8_PIN_NUM  P8_PIN_NUM_SIZE
+    #define P9_PIN_NUM  P9_PIN_NUM_SIZE
+    #define P10_PIN_NUM P10_PIN_NUM_SIZE
+    #define P11_PIN_NUM P11_PIN_NUM_SIZE
+    #define P12_PIN_NUM P12_PIN_NUM_SIZE
+    #define P13_PIN_NUM P13_PIN_NUM_SIZE
+
+    #define RTC_CC_NUM    RTC_CC_NUM_SIZE
+    #define RTC130_CC_NUM RTC130_CC_NUM_SIZE
+    #define RTC131_CC_NUM RTC131_CC_NUM_SIZE
+
+    #define DPPIC020_CH_NUM (DPPIC020_CH_NUM_MAX + 1UL)
+    #define DPPIC030_CH_NUM (DPPIC030_CH_NUM_MAX + 1UL)
+    #define DPPIC120_CH_NUM (DPPIC120_CH_NUM_MAX + 1UL)
+    #define DPPIC130_CH_NUM (DPPIC130_CH_NUM_MAX + 1UL)
+    #define DPPIC131_CH_NUM (DPPIC131_CH_NUM_MAX + 1UL)
+    #define DPPIC132_CH_NUM (DPPIC132_CH_NUM_MAX + 1UL)
+    #define DPPIC133_CH_NUM (DPPIC133_CH_NUM_MAX + 1UL)
+    #define DPPIC134_CH_NUM (DPPIC134_CH_NUM_MAX + 1UL)
+    #define DPPIC135_CH_NUM (DPPIC135_CH_NUM_MAX + 1UL)
+    #define DPPIC136_CH_NUM (DPPIC136_CH_NUM_MAX + 1UL)
+
+    #define DPPIC020_GROUP_NUM (DPPIC020_GROUP_NUM_MAX + 1UL)
+    #define DPPIC030_GROUP_NUM (DPPIC030_GROUP_NUM_MAX + 1UL)
+    #define DPPIC120_GROUP_NUM (DPPIC120_GROUP_NUM_MAX + 1UL)
+    #define DPPIC130_GROUP_NUM (DPPIC130_GROUP_NUM_MAX + 1UL)
+    #define DPPIC131_GROUP_NUM (DPPIC131_GROUP_NUM_MAX + 1UL)
+    #define DPPIC132_GROUP_NUM (DPPIC132_GROUP_NUM_MAX + 1UL)
+    #define DPPIC133_GROUP_NUM (DPPIC133_GROUP_NUM_MAX + 1UL)
+    #define DPPIC134_GROUP_NUM (DPPIC134_GROUP_NUM_MAX + 1UL)
+    #define DPPIC135_GROUP_NUM (DPPIC135_GROUP_NUM_MAX + 1UL)
+    #define DPPIC136_GROUP_NUM (DPPIC136_GROUP_NUM_MAX + 1UL)
+
+    #define EGU020_CH_NUM (EGU020_CH_NUM_MAX + 1UL)
+    #define EGU130_CH_NUM (EGU130_CH_NUM_MAX + 1UL)
+
+    #define TIMER020_MAX_SIZE (TIMER020_MAX_SIZE_MAX + 1UL)
+    #define TIMER021_MAX_SIZE (TIMER021_MAX_SIZE_MAX + 1UL)
+    #define TIMER022_MAX_SIZE (TIMER022_MAX_SIZE_MAX + 1UL)
+    #define TIMER120_MAX_SIZE (TIMER120_MAX_SIZE_MAX + 1UL)
+    #define TIMER121_MAX_SIZE (TIMER121_MAX_SIZE_MAX + 1UL)
+    #define TIMER130_MAX_SIZE (TIMER130_MAX_SIZE_MAX + 1UL)
+    #define TIMER131_MAX_SIZE (TIMER131_MAX_SIZE_MAX + 1UL)
+    #define TIMER132_MAX_SIZE (TIMER132_MAX_SIZE_MAX + 1UL)
+    #define TIMER133_MAX_SIZE (TIMER133_MAX_SIZE_MAX + 1UL)
+    #define TIMER134_MAX_SIZE (TIMER134_MAX_SIZE_MAX + 1UL)
+    #define TIMER135_MAX_SIZE (TIMER135_MAX_SIZE_MAX + 1UL)
+    #define TIMER136_MAX_SIZE (TIMER136_MAX_SIZE_MAX + 1UL)
+    #define TIMER137_MAX_SIZE (TIMER137_MAX_SIZE_MAX + 1UL)
+
+    #define TIMER020_CC_NUM (TIMER020_CC_NUM_MAX + 1UL)
+    #define TIMER021_CC_NUM (TIMER021_CC_NUM_MAX + 1UL)
+    #define TIMER022_CC_NUM (TIMER022_CC_NUM_MAX + 1UL)
+    #define TIMER120_CC_NUM (TIMER120_CC_NUM_MAX + 1UL)
+    #define TIMER121_CC_NUM (TIMER121_CC_NUM_MAX + 1UL)
+    #define TIMER130_CC_NUM (TIMER130_CC_NUM_MAX + 1UL)
+    #define TIMER131_CC_NUM (TIMER131_CC_NUM_MAX + 1UL)
+    #define TIMER132_CC_NUM (TIMER132_CC_NUM_MAX + 1UL)
+    #define TIMER133_CC_NUM (TIMER133_CC_NUM_MAX + 1UL)
+    #define TIMER134_CC_NUM (TIMER134_CC_NUM_MAX + 1UL)
+    #define TIMER135_CC_NUM (TIMER135_CC_NUM_MAX + 1UL)
+    #define TIMER136_CC_NUM (TIMER136_CC_NUM_MAX + 1UL)
+    #define TIMER137_CC_NUM (TIMER137_CC_NUM_MAX + 1UL)
+
+#endif
+
+/**************************************************************************************************/
 /* End fixups section for NRF9230_ENGA_XXAA                                                            */
 /**************************************************************************************************/
 
