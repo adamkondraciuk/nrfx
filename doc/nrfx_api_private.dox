@@ -17,7 +17,11 @@
 
 @defgroup nrf_mramc MRAMC
 
+@defgroup nrf_otpc OTPC
+
 @defgroup nrf_pcrm PCRM
+
+@defgroup nrf_pmicc PMICC
 
 @defgroup nrf_resethub RESET
 
