@@ -96,9 +96,12 @@
 
 // Flag indicates that RX was aborted.
 #define UARTE_FLAG_RX_ABORTED              UARTE_FLAG(RX, 6)
-//
+
 // Flag indicates that there are new bytes from flushed buffer copied to the user buffer.
 #define UARTE_FLAG_RX_FROM_FLUSH           UARTE_FLAG(RX, 7)
+
+// Flag indicates user explicitly aborted RX.
+#define UARTE_FLAG_RX_FORCED_ABORT         UARTE_FLAG(RX, 8)
 
 // Flag is set if instance was configured to control PSEL pins during the initialization.
 #define UARTE_FLAG_PSEL_UNINIT             UARTE_FLAG(MISC, 0)
@@ -1566,8 +1569,16 @@ static nrfx_err_t rx_abort(NRF_UARTE_Type *        p_uarte,
     // We need to ensure that operation is not interrupted by the UARTE interrupt since we
     // are changing state flags. Otherwise interrupt may be executed with RX_ABORTED flag set
     // but before STOPRX task is triggered which may lead to unexpected behavior.
-    if (!((p_cb->flags & (UARTE_FLAG_RX_ENABLED | UARTE_FLAG_RX_ABORTED)) == UARTE_FLAG_RX_ENABLED))
+    if (!((p_cb->flags & (UARTE_FLAG_RX_ENABLED | UARTE_FLAG_RX_ABORTED)) ==
+        UARTE_FLAG_RX_ENABLED))
     {
+        // If we late with the abort we still want to clean flushed data since explicit
+        // abort indicates that we are not interested in the data that ended up in the
+        // FIFO.
+        if (disable_all) {
+            p_cb->rx.flush.length = 0;
+        }
+
         return NRFX_ERROR_INVALID_STATE;
     }
 
@@ -1576,7 +1587,7 @@ static nrfx_err_t rx_abort(NRF_UARTE_Type *        p_uarte,
     if (disable_all || !endrx_startrx)
     {
         nrfy_uarte_shorts_disable(p_uarte, NRF_UARTE_SHORT_ENDRX_STARTRX);
-        flag = UARTE_FLAG_RX_STOP_ON_END | UARTE_FLAG_RX_ABORTED;
+        flag = UARTE_FLAG_RX_STOP_ON_END | UARTE_FLAG_RX_ABORTED | UARTE_FLAG_RX_FORCED_ABORT;
     }
     else
     {
@@ -1780,7 +1791,9 @@ static void rxto_irq_handler(NRF_UARTE_Type *        p_uarte,
         p_cb->rx.p_cache->user[0] = (nrfy_uarte_buffer_t){ NULL, 0 };
     }
 
-    rx_flush(p_uarte, p_cb);
+    if (!(p_cb->flags & UARTE_FLAG_RX_FORCED_ABORT)) {
+        rx_flush(p_uarte, p_cb);
+    }
 
     on_rx_disabled(p_uarte, p_cb, p_cb->rx.flush.length);
 }
