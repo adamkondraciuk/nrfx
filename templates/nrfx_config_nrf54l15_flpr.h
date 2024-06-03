@@ -1538,15 +1538,6 @@
 #endif
 
 /**
- * @brief NRFX_UARTE_CONFIG_RX_CACHE_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_UARTE_CONFIG_RX_CACHE_ENABLED
-#define NRFX_UARTE_CONFIG_RX_CACHE_ENABLED 1
-#endif
-
-/**
  * @brief NRFX_UARTE_RX_FIFO_FLUSH_WORKAROUND_MAGIC_BYTE
  *
  * Integer value. Minimum: 0. Maximum: 255.
