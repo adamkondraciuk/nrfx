@@ -183,7 +183,7 @@ static void spim_abort(NRF_SPIM_Type * p_spim, spim_control_block_t * p_cb)
     }
     p_cb->transfer_in_progress = false;
 #if defined(HALTIUM_XXAA)
-    if (!p_cb->disable_on_xfer_end)
+    if (p_cb->disable_on_xfer_end)
 #endif
     {
         nrfy_spim_disable(p_spim);
@@ -781,7 +781,7 @@ static nrfx_err_t spim_xfer(NRF_SPIM_Type               * p_spim,
     p_cb->disable_on_xfer_end = (flags & (NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER |
                                           NRFX_SPIM_FLAG_HOLD_XFER |
                                           NRFX_SPIM_FLAG_REPEATED_XFER)) ?
-                                false : nrfy_spim_enable_check(p_spim);
+                                true : !nrfy_spim_enable_check(p_spim);
 #endif
     nrfy_spim_enable(p_spim);
 
