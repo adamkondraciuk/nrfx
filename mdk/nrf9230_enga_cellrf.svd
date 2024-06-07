@@ -8,7 +8,7 @@
   <version>1</version>
   <description>nRF9230_enga reference description for system-on-chip with many ARM 32-bit Cortex-M33 microcontrollers</description>
   <licenseText>
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -1207,7 +1207,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>CFGCKSW16M</name>
-                  <description>Config value for SYSCTRL.FLL16M.CONFIG.CFGCKSW16M</description>
+                  <description>Trim value for SYSCTRL.FLL16M.CFGCKSW16M</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1215,7 +1215,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <fields>
                     <field>
                       <name>VALUE</name>
-                      <description>Config value</description>
+                      <description>Trim value</description>
                       <lsb>0</lsb>
                       <msb>31</msb>
                     </field>
@@ -1230,7 +1230,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x4</addressOffset>
                 <register>
                   <name>RCOARSE</name>
-                  <description>Trim value for SYSCTRL.FLL16M.TRIM.RCOARSE</description>
+                  <description>Trim value for SYSCTRL.FLL16M.RCOARSE</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1246,7 +1246,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>RFINE</name>
-                  <description>Trim value for SYSCTRL.FLL16M.TRIM.RFINE</description>
+                  <description>Trim value for SYSCTRL.FLL16M.RFINE</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1262,7 +1262,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for SYSCTRL.FLL16M.TRIM.VSUP</description>
+                  <description>Trim value for SYSCTRL.FLL16M.VSUP</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1278,7 +1278,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>CKSW16MTRIM</name>
-                  <description>Trim value for SYSCTRL.FLL16M.TRIM.CKSW16MTRIM</description>
+                  <description>Trim value for SYSCTRL.FLL16M.CKSW16MTRIM</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1294,7 +1294,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TCOEF</name>
-                  <description>Trim value for SYSCTRL.FLL16M.TRIM.TCOEF</description>
+                  <description>Trim value for SYSCTRL.FLL16M.TCOEF</description>
                   <addressOffset>0x10</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1324,7 +1324,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>LFRCOSCTRIM</name>
-                  <description>Trim value for SYSCTRL.LFRC.CAL.LFRCOSCTRIM</description>
+                  <description>Trim value for SYSCTRL.LFRC.LFRCOSCTRIM</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1354,7 +1354,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>PDLOWERTHR</name>
-                  <description>Trim value for SYSCTRL.LFXO.TRIM.PDLOWERTHR</description>
+                  <description>Trim value for SYSCTRL.LFXO.PDLOWERTHR</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1370,7 +1370,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>PDUPPERTHR</name>
-                  <description>Trim value for SYSCTRL.LFXO.TRIM.PDUPPERTHR</description>
+                  <description>Trim value for SYSCTRL.LFXO.PDUPPERTHR</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1386,7 +1386,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>BIAS</name>
-                  <description>Trim value for SYSCTRL.LFXO.TRIM.BIAS</description>
+                  <description>Trim value for SYSCTRL.LFXO.BIAS</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1402,7 +1402,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>PIXO</name>
-                  <description>Trim value for SYSCTRL.LFXO.TRIM.PIXO</description>
+                  <description>Trim value for SYSCTRL.LFXO.PIXO</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1418,7 +1418,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TRIMBUS</name>
-                  <description>Trim value for SYSCTRL.LFXO.TRIM.TRIMBUS</description>
+                  <description>Trim value for SYSCTRL.LFXO.TRIMBUS</description>
                   <addressOffset>0x10</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1504,7 +1504,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <addressOffset>0x3C</addressOffset>
               <register>
                 <name>VSUP</name>
-                <description>Trim value for SYSCTRL.LFLPRC.TRIM.VSUP</description>
+                <description>Trim value for SYSCTRL.LFLPRC.VSUP</description>
                 <addressOffset>0x0</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -1520,7 +1520,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>RCOARSE</name>
-                <description>Trim value for SYSCTRL.LFLPRC.TRIM.RCOARSE</description>
+                <description>Trim value for SYSCTRL.LFLPRC.RCOARSE</description>
                 <addressOffset>0x4</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -1536,7 +1536,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>RFINE</name>
-                <description>Trim value for SYSCTRL.LFLPRC.TRIM.RFINE</description>
+                <description>Trim value for SYSCTRL.LFLPRC.RFINE</description>
                 <addressOffset>0x8</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -1552,7 +1552,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>PWMFINE</name>
-                <description>Trim value for SYSCTRL.LFLPRC.TRIM.PWMFINE</description>
+                <description>Trim value for SYSCTRL.LFLPRC.PWMFINE</description>
                 <addressOffset>0xC</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -1581,7 +1581,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>CTUNE</name>
-                  <description>Trim value for SYSCTRL.AUDIOPLL.TRIM.CTUNE</description>
+                  <description>Trim value for SYSCTRL.AUDIOPLL.CTUNE</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1641,7 +1641,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>CTUNE</name>
-                  <description>Trim value for SYSCTRL.USBHSPLL.TRIM.CTUNE</description>
+                  <description>Trim value for SYSCTRL.USBHSPLL.CTUNE</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1671,7 +1671,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>CFG</name>
-                  <description>Config value for SYSCTRL.MBIAS.CONFIG.CFG</description>
+                  <description>Trim value for SYSCTRL.MBIAS.CFG</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1694,7 +1694,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x4</addressOffset>
                 <register>
                   <name>MBIASIBPP</name>
-                  <description>Trim value for SYSCTRL.MBIAS.TRIM.MBIASIBPP</description>
+                  <description>Trim value for SYSCTRL.MBIAS.MBIASIBPP</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1710,7 +1710,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>MBIASIBPSR</name>
-                  <description>Trim value for SYSCTRL.MBIAS.TRIM.MBIASIBPSR</description>
+                  <description>Trim value for SYSCTRL.MBIAS.MBIASIBPSR</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1740,7 +1740,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>OSC</name>
-                  <description>Trim value for SYSCTRL.OSCRFR.TRIM.OSC</description>
+                  <description>Trim value for SYSCTRL.OSCRFR.OSC</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1756,7 +1756,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>IBPSR</name>
-                  <description>Trim value for SYSCTRL.OSCRFR.TRIM.IBPSR</description>
+                  <description>Trim value for SYSCTRL.OSCRFR.IBPSR</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1786,7 +1786,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VBG</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM130.TRIM.VBG</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM130.VBG</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1802,7 +1802,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>BIAS</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM130.TRIM.BIAS</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM130.BIAS</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1818,7 +1818,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>VPR</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM130.TRIM.VPR</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM130.VPR</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1834,7 +1834,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>VREF</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM130.TRIM.VREF</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM130.VREF</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1864,7 +1864,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VBG</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM131.TRIM.VBG</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM131.VBG</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1880,7 +1880,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>BIAS</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM131.TRIM.BIAS</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM131.BIAS</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1896,7 +1896,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>VPR</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM131.TRIM.VPR</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM131.VPR</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1912,7 +1912,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>VREF</name>
-                  <description>Trim value for SYSCTRL.VREGMRAM131.TRIM.VREF</description>
+                  <description>Trim value for SYSCTRL.VREGMRAM131.VREF</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1942,7 +1942,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>TRIMVDD</name>
-                  <description>Trim value for SYSCTRL.VREGUSB.TRIM.TRIMVDD</description>
+                  <description>Trim value for SYSCTRL.VREGUSB.TRIMVDD</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1958,7 +1958,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TRIMIBP</name>
-                  <description>Trim value for SYSCTRL.VREGUSB.TRIM.TRIMIBP</description>
+                  <description>Trim value for SYSCTRL.VREGUSB.TRIMIBP</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1974,7 +1974,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TRIM0V8</name>
-                  <description>Trim value for SYSCTRL.VREGUSB.TRIM.TRIM0V8</description>
+                  <description>Trim value for SYSCTRL.VREGUSB.TRIM0V8</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -1990,7 +1990,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TRIM3V3</name>
-                  <description>Trim value for SYSCTRL.VREGUSB.TRIM.TRIM3V3</description>
+                  <description>Trim value for SYSCTRL.VREGUSB.TRIM3V3</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2020,7 +2020,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>BROWNOUT</name>
-                  <description>Trim value for SYSCTRL.VDETAO0V8.TRIM.BROWNOUT</description>
+                  <description>Trim value for SYSCTRL.VDETAO0V8.BROWNOUT</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2036,7 +2036,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>PWRGOOD</name>
-                  <description>Trim value for SYSCTRL.VDETAO0V8.TRIM.PWRGOOD</description>
+                  <description>Trim value for SYSCTRL.VDETAO0V8.PWRGOOD</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2067,7 +2067,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <fields>
                     <field>
                       <name>VALUE</name>
-                      <description>Config value</description>
+                      <description>Trim value</description>
                       <lsb>0</lsb>
                       <msb>31</msb>
                     </field>
@@ -2089,7 +2089,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>BROWNOUTLVLHIGH</name>
-                  <description>Trim value for SYSCTRL.VDETAO1V8.TRIM.BROWNOUTLVLHIGH</description>
+                  <description>Trim value for SYSCTRL.VDETAO1V8.BROWNOUTLVLHIGH</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2105,7 +2105,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>BROWNOUTLVLLOW</name>
-                  <description>Trim value for SYSCTRL.VDETAO1V8.TRIM.BROWNOUTLVLLOW</description>
+                  <description>Trim value for SYSCTRL.VDETAO1V8.BROWNOUTLVLLOW</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2135,7 +2135,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>BROWNOUT</name>
-                  <description>Trim value for SYSCTRL.VDETVS0V8.TRIM.BROWNOUT</description>
+                  <description>Trim value for SYSCTRL.VDETVS0V8.BROWNOUT</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2151,7 +2151,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>PWRGOOD</name>
-                  <description>Trim value for SYSCTRL.VDETVS0V8.TRIM.PWRGOOD</description>
+                  <description>Trim value for SYSCTRL.VDETVS0V8.PWRGOOD</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2181,7 +2181,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>PWRGOOD</name>
-                  <description>Trim value for SYSCTRL.VDET1V0.TRIM.PWRGOOD</description>
+                  <description>Trim value for SYSCTRL.VDET1V0.PWRGOOD</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2211,7 +2211,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for SYSCTRL.HSFLL120.TRIM.VSUP</description>
+                  <description>Trim value for SYSCTRL.HSFLL120.VSUP</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2229,7 +2229,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for SYSCTRL.HSFLL120.TRIM.COARSE</description>
+                  <description>Description collection: Trim value for SYSCTRL.HSFLL120.COARSE</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2247,7 +2247,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for SYSCTRL.HSFLL120.TRIM.FINE</description>
+                  <description>Description collection: Trim value for SYSCTRL.HSFLL120.FINE</description>
                   <addressOffset>0x1C</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2263,7 +2263,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TCOEF</name>
-                  <description>Trim value for SYSCTRL.HSFLL120.TRIM.TCOEF</description>
+                  <description>Trim value for SYSCTRL.HSFLL120.TCOEF</description>
                   <addressOffset>0x34</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2293,7 +2293,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for SYSCTRL.HSFLL121.TRIM.VSUP</description>
+                  <description>Trim value for SYSCTRL.HSFLL121.VSUP</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2311,7 +2311,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for SYSCTRL.HSFLL121.TRIM.COARSE</description>
+                  <description>Description collection: Trim value for SYSCTRL.HSFLL121.COARSE</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2329,7 +2329,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for SYSCTRL.HSFLL121.TRIM.FINE</description>
+                  <description>Description collection: Trim value for SYSCTRL.HSFLL121.FINE</description>
                   <addressOffset>0x1C</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2345,7 +2345,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>TCOEF</name>
-                  <description>Trim value for SYSCTRL.HSFLL121.TRIM.TCOEF</description>
+                  <description>Trim value for SYSCTRL.HSFLL121.TCOEF</description>
                   <addressOffset>0x34</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2601,7 +2601,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>CTUNE</name>
-                  <description>Trim value for GLOBAL.CANPLL.TRIM.CTUNE</description>
+                  <description>Trim value for GLOBAL.CANPLL.CTUNE</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2710,7 +2710,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>RCALTRIM</name>
-                <description>Trim value for GLOBAL.COMP.DFT.RCALTRIM</description>
+                <description>Trim value used during production test</description>
                 <addressOffset>0x4</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -2746,7 +2746,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for APPLICATION.HSFLL.TRIM.VSUP</description>
+                  <description>Trim value for APPLICATION.HSFLL.VSUP</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2764,7 +2764,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for APPLICATION.HSFLL.TRIM.COARSE</description>
+                  <description>Description collection: Trim value for APPLICATION.HSFLL.COARSE</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2782,7 +2782,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for APPLICATION.HSFLL.TRIM.FINE</description>
+                  <description>Description collection: Trim value for APPLICATION.HSFLL.FINE</description>
                   <addressOffset>0x1C</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2805,7 +2805,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <access>read-write</access>
               <addressOffset>0x34</addressOffset>
               <cluster>
-                <dim>4</dim>
+                <dim>3</dim>
                 <dimIncrement>0x004</dimIncrement>
                 <name>BLOCKTYPE[%s]</name>
                 <description>Unspecified</description>
@@ -2836,7 +2836,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>FICR_TRIM_RADIOCORE</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x2DC</addressOffset>
+            <addressOffset>0x2D8</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
@@ -2851,7 +2851,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for RADIOCORE.HSFLL.TRIM.VSUP</description>
+                  <description>Trim value for RADIOCORE.HSFLL.VSUP</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2869,7 +2869,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for RADIOCORE.HSFLL.TRIM.COARSE</description>
+                  <description>Description collection: Trim value for RADIOCORE.HSFLL.COARSE</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2887,7 +2887,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for RADIOCORE.HSFLL.TRIM.FINE</description>
+                  <description>Description collection: Trim value for RADIOCORE.HSFLL.FINE</description>
                   <addressOffset>0x1C</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -2910,7 +2910,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <access>read-write</access>
               <addressOffset>0x34</addressOffset>
               <cluster>
-                <dim>4</dim>
+                <dim>3</dim>
                 <dimIncrement>0x004</dimIncrement>
                 <name>BLOCKTYPE[%s]</name>
                 <description>Unspecified</description>
@@ -2940,7 +2940,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_RADIOCORE_RADIO</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x44</addressOffset>
+              <addressOffset>0x40</addressOffset>
               <cluster>
                 <name>SPHYNXANA</name>
                 <description>Unspecified</description>
@@ -3053,7 +3053,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </cluster>
               <register>
                 <name>PVTTOT</name>
-                <description>Trim value for RADIOCORE.RADIO.PVTTOT</description>
+                <description>Trim value for RADIOCORE.RADIO.EXPECTEDPVTTOTRATIO</description>
                 <addressOffset>0x18</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -3069,7 +3069,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>KDTC</name>
-                <description>Trim value for RADIOCORE.RADIO.KDTC</description>
+                <description>Trim value for RADIOCORE.RADIO.ESTKDTCVAL</description>
                 <addressOffset>0x1C</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -3085,7 +3085,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>TXHFGAIN</name>
-                <description>Trim value for RADIOCORE.RADIO.TXHFGAIN</description>
+                <description>Trim value for RADIOCORE.RADIO.TXINTERFACEHFGAIN</description>
                 <addressOffset>0x20</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -3101,7 +3101,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>PVTTOFIX</name>
-                <description>Trim value for RADIOCORE.RADIO.PVTTOFIX</description>
+                <description>Trim value for RADIOCORE.RADIO.PVTTOFIXRATIO</description>
                 <addressOffset>0x24</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -3145,61 +3145,54 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <headerStructName>FICR_TRIM_BOOT_HSFLL120</headerStructName>
               <access>read-write</access>
               <addressOffset>0x004</addressOffset>
-              <cluster>
-                <name>TRIM</name>
-                <description>Unspecified</description>
-                <headerStructName>FICR_TRIM_BOOT_HSFLL120_TRIM</headerStructName>
-                <access>read-write</access>
+              <register>
+                <name>VSUP</name>
+                <description>Trim value for SYSCTRL.HSFLL120.VSUP</description>
                 <addressOffset>0x000</addressOffset>
-                <register>
-                  <name>VSUP</name>
-                  <description>Trim value for SYSCTRL.HSFLL120.TRIM.VSUP</description>
-                  <addressOffset>0x000</addressOffset>
-                  <access>read-only</access>
-                  <resetValue>0xFFFFFFFF</resetValue>
-                  <size>0x20</size>
-                  <fields>
-                    <field>
-                      <name>VALUE</name>
-                      <description>Trim value</description>
-                      <lsb>0</lsb>
-                      <msb>31</msb>
-                    </field>
-                  </fields>
-                </register>
-                <register>
-                  <name>COARSE</name>
-                  <description>Trim value for SYSCTRL.HSFLL120.TRIM.COARSE</description>
-                  <addressOffset>0x004</addressOffset>
-                  <access>read-only</access>
-                  <resetValue>0xFFFFFFFF</resetValue>
-                  <size>0x20</size>
-                  <fields>
-                    <field>
-                      <name>VALUE</name>
-                      <description>Trim value</description>
-                      <lsb>0</lsb>
-                      <msb>31</msb>
-                    </field>
-                  </fields>
-                </register>
-                <register>
-                  <name>FINE</name>
-                  <description>Trim value for SYSCTRL.HSFLL120.TRIM.FINE</description>
-                  <addressOffset>0x008</addressOffset>
-                  <access>read-only</access>
-                  <resetValue>0xFFFFFFFF</resetValue>
-                  <size>0x20</size>
-                  <fields>
-                    <field>
-                      <name>VALUE</name>
-                      <description>Trim value</description>
-                      <lsb>0</lsb>
-                      <msb>31</msb>
-                    </field>
-                  </fields>
-                </register>
-              </cluster>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>COARSE</name>
+                <description>Trim value for SYSCTRL.HSFLL120.COARSE</description>
+                <addressOffset>0x004</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>FINE</name>
+                <description>Trim value for SYSCTRL.HSFLL120.FINE</description>
+                <addressOffset>0x008</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
             </cluster>
             <cluster>
               <name>OTPC</name>
@@ -3209,7 +3202,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <addressOffset>0x010</addressOffset>
               <register>
                 <name>WAITSTATES</name>
-                <description>Config value for GLOBAL.OTPC.WAITSTATES</description>
+                <description>OTPC waitstates trim when running with TRIM.BOOT.HSFLL120 trims</description>
                 <addressOffset>0x000</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -3219,13 +3212,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <name>WAITSTATES</name>
                     <description>Waitstates</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>6</msb>
                   </field>
                 </fields>
               </register>
               <register>
                 <name>FREQUENCY</name>
-                <description>Config value for GLOBAL.OTPC.FREQUENCY</description>
+                <description>OTPC frequency tim when running with TRIM.BOOT.HSFLL120 trims</description>
                 <addressOffset>0x004</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -3233,7 +3226,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <fields>
                   <field>
                     <name>FREQUENCY</name>
-                    <description>Frequency in MHz</description>
+                    <description>Trim value</description>
                     <lsb>0</lsb>
                     <msb>31</msb>
                   </field>
@@ -3316,7 +3309,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for SECURE.HSFLL.TRIM.VSUP</description>
+                  <description>Trim value for SECURE.HSFLL.VSUP</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3334,7 +3327,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for SECURE.HSFLL.TRIM.COARSE</description>
+                  <description>Description collection: Trim value for SECURE.HSFLL.COARSE</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3352,7 +3345,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x6</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for SECURE.HSFLL.TRIM.FINE</description>
+                  <description>Description collection: Trim value for SECURE.HSFLL.FINE</description>
                   <addressOffset>0x01C</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3382,7 +3375,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for SECURE.HSFLL200.TRIM.VSUP</description>
+                  <description>Trim value for SECURE.HSFLL200.VSUP</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3400,7 +3393,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x4</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for SECURE.HSFLL200.TRIM.COARSE</description>
+                  <description>Description collection: Trim value for SECURE.HSFLL200.COARSE</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3418,7 +3411,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x4</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for SECURE.HSFLL200.TRIM.FINE</description>
+                  <description>Description collection: Trim value for SECURE.HSFLL200.FINE</description>
                   <addressOffset>0x014</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3480,7 +3473,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>TRIM</name>
-                  <description>Trim value for SECURE.MEMCONF200.BLOCKTYPE.TRIM</description>
+                  <description>Trim value for SECURE.MEMCONF200.TRIM</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3509,61 +3502,54 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <headerStructName>FICR_TRIM_CELLCORE_HSFLL</headerStructName>
               <access>read-write</access>
               <addressOffset>0x000</addressOffset>
-              <cluster>
-                <name>TRIM</name>
-                <description>Unspecified</description>
-                <headerStructName>FICR_TRIM_CELLCORE_HSFLL_TRIM</headerStructName>
-                <access>read-write</access>
+              <register>
+                <name>VSUP</name>
+                <description>Trim value for CELLCORE.HSFLL.VSUP</description>
                 <addressOffset>0x000</addressOffset>
-                <register>
-                  <name>VSUP</name>
-                  <description>Trim value for CELLCORE.HSFLL.TRIM.VSUP</description>
-                  <addressOffset>0x000</addressOffset>
-                  <access>read-only</access>
-                  <resetValue>0xFFFFFFFF</resetValue>
-                  <size>0x20</size>
-                  <fields>
-                    <field>
-                      <name>VALUE</name>
-                      <description>Trim value</description>
-                      <lsb>0</lsb>
-                      <msb>31</msb>
-                    </field>
-                  </fields>
-                </register>
-                <register>
-                  <name>COARSE</name>
-                  <description>Trim value for CELLCORE.HSFLL.TRIM.COARSE</description>
-                  <addressOffset>0x004</addressOffset>
-                  <access>read-only</access>
-                  <resetValue>0xFFFFFFFF</resetValue>
-                  <size>0x20</size>
-                  <fields>
-                    <field>
-                      <name>VALUE</name>
-                      <description>Trim value</description>
-                      <lsb>0</lsb>
-                      <msb>31</msb>
-                    </field>
-                  </fields>
-                </register>
-                <register>
-                  <name>FINE</name>
-                  <description>Trim value for CELLCORE.HSFLL.TRIM.FINE</description>
-                  <addressOffset>0x008</addressOffset>
-                  <access>read-only</access>
-                  <resetValue>0xFFFFFFFF</resetValue>
-                  <size>0x20</size>
-                  <fields>
-                    <field>
-                      <name>VALUE</name>
-                      <description>Trim value</description>
-                      <lsb>0</lsb>
-                      <msb>31</msb>
-                    </field>
-                  </fields>
-                </register>
-              </cluster>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>COARSE</name>
+                <description>Trim value for CELLCORE.HSFLL.COARSE</description>
+                <addressOffset>0x004</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>FINE</name>
+                <description>Trim value for CELLCORE.HSFLL.FINE</description>
+                <addressOffset>0x008</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
             </cluster>
             <cluster>
               <name>MEMCONF</name>
@@ -3641,7 +3627,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for CELLDSP.HSFLL.TRIM.VSUP</description>
+                  <description>Trim value for CELLDSP.HSFLL.VSUP</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3659,7 +3645,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x5</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>COARSE[%s]</name>
-                  <description>Description collection: Trim value for CELLDSP.HSFLL.TRIM.COARSE</description>
+                  <description>Description collection: Trim value for CELLDSP.HSFLL.COARSE</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3677,7 +3663,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <dim>0x5</dim>
                   <dimIncrement>0x4</dimIncrement>
                   <name>FINE[%s]</name>
-                  <description>Description collection: Trim value for CELLDSP.HSFLL.TRIM.FINE</description>
+                  <description>Description collection: Trim value for CELLDSP.HSFLL.FINE</description>
                   <addressOffset>0x018</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3771,7 +3757,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for CELLRF.HSFLL.TRIM.VSUP</description>
+                  <description>Trim value for CELLRF.HSFLL.VSUP</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3787,7 +3773,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>COARSE</name>
-                  <description>Trim value for CELLRF.HSFLL.TRIM.COARSE</description>
+                  <description>Trim value for CELLRF.HSFLL.COARSE</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -3803,7 +3789,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>FINE</name>
-                  <description>Trim value for CELLRF.HSFLL.TRIM.FINE</description>
+                  <description>Trim value for CELLRF.HSFLL.FINE</description>
                   <addressOffset>0x008</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -4571,7 +4557,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x000</addressOffset>
                 <register>
                   <name>VSUP</name>
-                  <description>Trim value for ISIMCORE.HSFLL.TRIM.VSUP</description>
+                  <description>Trim value for ISIMCORE.HSFLL.VSUP</description>
                   <addressOffset>0x000</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -4587,7 +4573,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>COARSE</name>
-                  <description>Trim value for ISIMCORE.HSFLL.TRIM.COARSE</description>
+                  <description>Trim value for ISIMCORE.HSFLL.COARSE</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -4603,7 +4589,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>FINE</name>
-                  <description>Trim value for ISIMCORE.HSFLL.TRIM.FINE</description>
+                  <description>Trim value for ISIMCORE.HSFLL.FINE</description>
                   <addressOffset>0x008</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -45026,7 +45012,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <description>Description collection: AX2X bridge waitstates for the domain [n], where n is the Domain ID.</description>
           <addressOffset>0x500</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <resetValue>0x00000007</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -52995,6 +52981,38 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <headerStructName>RFTIMER_CC</headerStructName>
           <access>read-write</access>
           <addressOffset>0x540</addressOffset>
+          <!--CC_0.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_0.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_1.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_1.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_2.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_2.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_3.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_3.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_4.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_4.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_5.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_5.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_6.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_6.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_7.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_7.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_8.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_8.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_9.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_9.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_10.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_10.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_11.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_11.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_12.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_12.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_13.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_13.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_14.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_14.HI.ResetValue = 0xFFFFFFFF-->
+          <!--CC_15.LO.ResetValue = 0xFFFFFFFF-->
+          <!--CC_15.HI.ResetValue = 0xFFFFFFFF-->
           <register>
             <name>LO</name>
             <description>Description cluster: Capture/Compare[n] Low Word register</description>
@@ -75367,7 +75385,7 @@ A write outputs the value to atbytesm.</description>
           <description>TX DFE datapath configuration</description>
           <addressOffset>0x508</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00800000</resetValue>
+          <resetValue>0x00000000</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -79919,7 +79937,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>TX_PPALMB_MAINAUX_PWRUP</name>
-              <description>TX_PPALMB_MAINAUX_PWRUP</description>
               <lsb>5</lsb>
               <msb>5</msb>
             </field>
@@ -80056,7 +80073,7 @@ A write outputs the value to atbytesm.</description>
           <description>TX Isolate set register</description>
           <addressOffset>0x718</addressOffset>
           <access>read-write</access>
-          <resetValue>0x000000FF</resetValue>
+          <resetValue>0xFFFFFFFF</resetValue>
           <modifiedWriteValues>oneToSet</modifiedWriteValues>
           <size>0x20</size>
           <fields>
@@ -80211,7 +80228,7 @@ A write outputs the value to atbytesm.</description>
           <description>TX Isolate clear register</description>
           <addressOffset>0x71C</addressOffset>
           <access>read-write</access>
-          <resetValue>0x000000FF</resetValue>
+          <resetValue>0xFFFFFFFF</resetValue>
           <modifiedWriteValues>oneToClear</modifiedWriteValues>
           <size>0x20</size>
           <fields>
@@ -81241,7 +81258,6 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
             </field>
             <field>
               <name>TX_TXDAC_SPARE</name>
-              <description>TX_TXDAC_SPARE</description>
               <lsb>28</lsb>
               <msb>31</msb>
             </field>
@@ -81646,25 +81662,21 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
           <fields>
             <field>
               <name>TX_TXABB_V2I_DCIP_BIAS</name>
-              <description>TX_TXABB_V2I_DCIP_BIAS</description>
               <lsb>0</lsb>
               <msb>3</msb>
             </field>
             <field>
               <name>TX_TXABB_V2I_DCIN_BIAS</name>
-              <description>TX_TXABB_V2I_DCIN_BIAS</description>
               <lsb>4</lsb>
               <msb>7</msb>
             </field>
             <field>
               <name>TX_TXABB_V2I_DCQP_BIAS</name>
-              <description>TX_TXABB_V2I_DCQP_BIAS</description>
               <lsb>8</lsb>
               <msb>11</msb>
             </field>
             <field>
               <name>TX_TXABB_V2I_DCQN_BIAS</name>
-              <description>TX_TXABB_V2I_DCQN_BIAS</description>
               <lsb>12</lsb>
               <msb>15</msb>
             </field>
@@ -85045,7 +85057,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         </register>
         <register>
           <name>TASKS_RX_CAPT_SAMPLE_CNT_0</name>
-          <description>Captures sample counter value to RX_SAMPLE_CNT_CAPT_0 register.</description>
+          <description>Captures sample counter value to RX_SAMPLE_CNT_CC_0 register.</description>
           <addressOffset>0x018</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -85053,7 +85065,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
           <fields>
             <field>
               <name>TASKS_RX_CAPT_SAMPLE_CNT_0</name>
-              <description>Captures sample counter value to RX_SAMPLE_CNT_CAPT_0 register.</description>
+              <description>Captures sample counter value to RX_SAMPLE_CNT_CC_0 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -85068,7 +85080,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         </register>
         <register>
           <name>TASKS_RX_CAPT_SAMPLE_CNT_1</name>
-          <description>Captures sample counter value to RX_SAMPLE_CNT_CAPT_1 register.</description>
+          <description>Captures sample counter value to RX_SAMPLE_CNT_CC_1 register.</description>
           <addressOffset>0x01C</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -85076,7 +85088,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
           <fields>
             <field>
               <name>TASKS_RX_CAPT_SAMPLE_CNT_1</name>
-              <description>Captures sample counter value to RX_SAMPLE_CNT_CAPT_1 register.</description>
+              <description>Captures sample counter value to RX_SAMPLE_CNT_CC_1 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -86083,7 +86095,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         </register>
         <register>
           <name>EVENTS_RX_SAMPLE_CNT_COMP_0</name>
-          <description>RX sample count matches to value in RX_SAMPLE_CNT_COMP_0 register.</description>
+          <description>RX sample count matches to value in RX_SAMPLE_COUNT_CC_0 register.</description>
           <addressOffset>0x110</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -86091,7 +86103,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
           <fields>
             <field>
               <name>EVENTS_RX_SAMPLE_CNT_COMP_0</name>
-              <description>RX sample count matches to value in RX_SAMPLE_CNT_COMP_0 register.</description>
+              <description>RX sample count matches to value in RX_SAMPLE_COUNT_CC_0 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -86111,7 +86123,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         </register>
         <register>
           <name>EVENTS_RX_SAMPLE_CNT_COMP_1</name>
-          <description>RX sample count matches to value in RX_SAMPLE_CNT_COMP_1 register.</description>
+          <description>RX sample count matches to value in RX_SAMPLE_COUNT_CC_1 register.</description>
           <addressOffset>0x114</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -86119,7 +86131,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
           <fields>
             <field>
               <name>EVENTS_RX_SAMPLE_CNT_COMP_1</name>
-              <description>RX sample count matches to value in RX_SAMPLE_CNT_COMP_1 register.</description>
+              <description>RX sample count matches to value in RX_SAMPLE_COUNT_CC_1 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -86195,7 +86207,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         </register>
         <register>
           <name>EVENTS_RX_SAMPLE_CNT_CAPT_0</name>
-          <description>RX sample count value is captured to RX_SAMPLE_CNT_CAPT_0 register.</description>
+          <description>RX sample count value is captured to RX_SAMPLE_COUNT_CC_0 register.</description>
           <addressOffset>0x120</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -86203,7 +86215,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
           <fields>
             <field>
               <name>EVENTS_RX_SAMPLE_CNT_CAPT_0</name>
-              <description>RX sample count value is captured to RX_SAMPLE_CNT_CAPT_0 register.</description>
+              <description>RX sample count value is captured to RX_SAMPLE_COUNT_CC_0 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -86223,7 +86235,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         </register>
         <register>
           <name>EVENTS_RX_SAMPLE_CNT_CAPT_1</name>
-          <description>RX sample count value is captured to RX_SAMPLE_CNT_CAPT_1 register.</description>
+          <description>RX sample count value is captured to RX_SAMPLE_COUNT_CC_1 register.</description>
           <addressOffset>0x124</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -86231,7 +86243,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
           <fields>
             <field>
               <name>EVENTS_RX_SAMPLE_CNT_CAPT_1</name>
-              <description>RX sample count value is captured to RX_SAMPLE_CNT_CAPT_1 register.</description>
+              <description>RX sample count value is captured to RX_SAMPLE_COUNT_CC_1 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -101617,7 +101629,7 @@ interface clock.</description>
         </register>
         <register>
           <name>WIFI_CROSSCORRCOEFFCOMPLEXGN1</name>
-          <description>Wi-Fi g/n cross-correlator complex FIR filter coefficients.</description>
+          <description>Wi-Fi g/n cross-correlator cpmplex FIR filter coefficients.</description>
           <addressOffset>0xA08</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -101670,54 +101682,6 @@ interface clock.</description>
               <description>FIR coefficient 15 (signed value).</description>
               <lsb>28</lsb>
               <msb>31</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>WIFI_ENERGYDETTHRSNWB</name>
-          <description>Scaling value for wide band energy detector threshold filter.</description>
-          <addressOffset>0xA54</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>THRS</name>
-              <description>Scaling value for energy detector threshold filter.</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>WIFI_IQENERGYWB</name>
-          <description>Wide band energy detector RMS output.</description>
-          <addressOffset>0xA68</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DATA</name>
-              <description>Energy detector RMS output.</description>
-              <lsb>0</lsb>
-              <msb>14</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>WIFI_IQENERGYFILTWB</name>
-          <description>Wide band energy detector threshold filter output.</description>
-          <addressOffset>0xA6C</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DATA</name>
-              <description>Energy detector threshold filter output.</description>
-              <lsb>0</lsb>
-              <msb>14</msb>
             </field>
           </fields>
         </register>
@@ -101892,7 +101856,7 @@ interface clock.</description>
         </register>
         <register>
           <name>TASKS_RX_CAPT_SAMPLE_CNT_0</name>
-          <description>Captures sample counter value to RX_SAMPLE_CNT_CAPT_0 register.</description>
+          <description>Captures sample counter value to RX_SAMPLE_CNT_CC_0 register.</description>
           <addressOffset>0x018</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -101900,7 +101864,7 @@ interface clock.</description>
           <fields>
             <field>
               <name>TASKS_RX_CAPT_SAMPLE_CNT_0</name>
-              <description>Captures sample counter value to RX_SAMPLE_CNT_CAPT_0 register.</description>
+              <description>Captures sample counter value to RX_SAMPLE_CNT_CC_0 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -101915,7 +101879,7 @@ interface clock.</description>
         </register>
         <register>
           <name>TASKS_RX_CAPT_SAMPLE_CNT_1</name>
-          <description>Captures sample counter value to RX_SAMPLE_CNT_CAPT_1 register.</description>
+          <description>Captures sample counter value to RX_SAMPLE_CNT_CC_1 register.</description>
           <addressOffset>0x01C</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -101923,7 +101887,7 @@ interface clock.</description>
           <fields>
             <field>
               <name>TASKS_RX_CAPT_SAMPLE_CNT_1</name>
-              <description>Captures sample counter value to RX_SAMPLE_CNT_CAPT_1 register.</description>
+              <description>Captures sample counter value to RX_SAMPLE_CNT_CC_1 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -102309,7 +102273,7 @@ interface clock.</description>
         </register>
         <register>
           <name>EVENTS_RX_SAMPLE_CNT_COMP_0</name>
-          <description>RX sample count matches to value in RX_SAMPLE_CNT_COMP_0 register.</description>
+          <description>RX sample count matches to value in RX_SAMPLE_COUNT_CC_0 register.</description>
           <addressOffset>0x110</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -102317,7 +102281,7 @@ interface clock.</description>
           <fields>
             <field>
               <name>EVENTS_RX_SAMPLE_CNT_COMP_0</name>
-              <description>RX sample count matches to value in RX_SAMPLE_CNT_COMP_0 register.</description>
+              <description>RX sample count matches to value in RX_SAMPLE_COUNT_CC_0 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -102337,7 +102301,7 @@ interface clock.</description>
         </register>
         <register>
           <name>EVENTS_RX_SAMPLE_CNT_COMP_1</name>
-          <description>RX sample count matches to value in RX_SAMPLE_CNT_COMP_1 register.</description>
+          <description>RX sample count matches to value in RX_SAMPLE_COUNT_CC_1 register.</description>
           <addressOffset>0x114</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -102345,7 +102309,7 @@ interface clock.</description>
           <fields>
             <field>
               <name>EVENTS_RX_SAMPLE_CNT_COMP_1</name>
-              <description>RX sample count matches to value in RX_SAMPLE_CNT_COMP_1 register.</description>
+              <description>RX sample count matches to value in RX_SAMPLE_COUNT_CC_1 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -102421,7 +102385,7 @@ interface clock.</description>
         </register>
         <register>
           <name>EVENTS_RX_SAMPLE_CNT_CAPT_0</name>
-          <description>RX sample count value is captured to RX_SAMPLE_CNT_CAPT_0 register.</description>
+          <description>RX sample count value is captured to RX_SAMPLE_COUNT_CC_0 register.</description>
           <addressOffset>0x120</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -102429,7 +102393,7 @@ interface clock.</description>
           <fields>
             <field>
               <name>EVENTS_RX_SAMPLE_CNT_CAPT_0</name>
-              <description>RX sample count value is captured to RX_SAMPLE_CNT_CAPT_0 register.</description>
+              <description>RX sample count value is captured to RX_SAMPLE_COUNT_CC_0 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -102449,7 +102413,7 @@ interface clock.</description>
         </register>
         <register>
           <name>EVENTS_RX_SAMPLE_CNT_CAPT_1</name>
-          <description>RX sample count value is captured to RX_SAMPLE_CNT_CAPT_1 register.</description>
+          <description>RX sample count value is captured to RX_SAMPLE_COUNT_CC_1 register.</description>
           <addressOffset>0x124</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -102457,7 +102421,7 @@ interface clock.</description>
           <fields>
             <field>
               <name>EVENTS_RX_SAMPLE_CNT_CAPT_1</name>
-              <description>RX sample count value is captured to RX_SAMPLE_CNT_CAPT_1 register.</description>
+              <description>RX sample count value is captured to RX_SAMPLE_COUNT_CC_1 register.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -119134,7 +119098,7 @@ clock.</description>
     </peripheral>
     <peripheral>
       <name>RFSERVICES</name>
-      <description>AhmaRfSubsystem general control register map AhmaRfSubsystem general control register map</description>
+      <description>AhmaRfSubsystem general control register map</description>
       <baseAddress>0x46045000</baseAddress>
       <addressBlock>
         <offset>0</offset>
@@ -119580,12 +119544,12 @@ clock.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Off</name>
-                  <description>Clock request off</description>
+                  <description>Unspecified</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>On</name>
-                  <description>Clock request on</description>
+                  <description>Unspecified</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -119647,12 +119611,12 @@ clock.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NoEffect</name>
-                  <description>Writing 0 has no effect</description>
+                  <description>Unspecified</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Set</name>
-                  <description>Writing 1 sets/clears the register</description>
+                  <description>Unspecified</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -119665,12 +119629,12 @@ clock.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NoEffect</name>
-                  <description>Writing 0 has no effect</description>
+                  <description>Unspecified</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Set</name>
-                  <description>Writing 1 sets/clears the register</description>
+                  <description>Unspecified</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -119694,12 +119658,12 @@ clock.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NoEffect</name>
-                  <description>Writing 0 has no effect</description>
+                  <description>Unspecified</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>Set</name>
-                  <description>Writing 1 sets/clears the register</description>
+                  <name>Clr</name>
+                  <description>Unspecified</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -119712,12 +119676,12 @@ clock.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NoEffect</name>
-                  <description>Writing 0 has no effect</description>
+                  <description>Unspecified</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>Set</name>
-                  <description>Writing 1 sets/clears the register</description>
+                  <name>Clr</name>
+                  <description>Unspecified</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -119842,22 +119806,22 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NoConnection</name>
-                  <description>Nothing connected to debug output</description>
+                  <description>Unspecified</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Debug1</name>
-                  <description>Debug signal selection 1</description>
+                  <description>Unspecified</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Debug2</name>
-                  <description>Debug signal selection 2</description>
+                  <description>Unspecified</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>NotUsed</name>
-                  <description>Not used</description>
+                  <description>Unspecified</description>
                   <value>0x3</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -119874,7 +119838,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>VBATSCALERENABLE</name>
-              <description>Enables the VBAT voltage scaler for measuring battery voltage. Scaler itself is located outside of CellRF (padring).</description>
+              <description>Enables the VBAT voltage scaler for measuring battery voltage</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -119886,34 +119850,6 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                 <enumeratedValue>
                   <name>On</name>
                   <description>VBAT Scaler disabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PADCONFPOWERREQ</name>
-          <description>Request Power for the domain storing PAD configurations.</description>
-          <addressOffset>0x55C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EN</name>
-              <description>Enables power request for PD_GD_CORE3_ACT domain. When set, it will be ensured that the PAD configurations in GPIO peripheral will not be reset before PAD retention is applied.</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Off</name>
-                  <description>Power request disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>On</name>
-                  <description>Power request enabled</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -120108,7 +120044,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>EVENTS_DEBUGBOOT</name>
-          <description>This IRQ is triggered by the DEBUGBOOT task to wake the Cortex-M0 up if needed. This IRQ is enabled by default but due to tool flow limitation that is not visible in INTEN reset value</description>
+          <description>This IRQ is triggered by the WARMBOOT task to wake the Cortex-M0 up if needed. This IRQ is enabled by default but due to tool flow limitation that is not visible in INTEN reset value.</description>
           <addressOffset>0x108</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -120116,7 +120052,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>EVENTS_DEBUGBOOT</name>
-              <description>This IRQ is triggered by the DEBUGBOOT task to wake the Cortex-M0 up if needed. This IRQ is enabled by default but due to tool flow limitation that is not visible in INTEN reset value</description>
+              <description>This IRQ is triggered by the WARMBOOT task to wake the Cortex-M0 up if needed. This IRQ is enabled by default but due to tool flow limitation that is not visible in INTEN reset value.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -120583,7 +120519,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <description>PERI_ACT power domain isolation status</description>
           <addressOffset>0x408</addressOffset>
           <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
+          <resetValue>0x00000001</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -120599,7 +120535,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <description>Debug power request status</description>
           <addressOffset>0x40C</addressOffset>
           <access>read-only</access>
-          <resetValue>0x00000003</resetValue>
+          <resetValue>0x00000000</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -145578,7 +145514,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>EVENTS_RTCOMPARESYNC</name>
-          <description>Synchronize always-on LFCLK clock domain</description>
+          <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
           <addressOffset>0x164</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -145586,7 +145522,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>EVENTS_RTCOMPARESYNC</name>
-              <description>Synchronize always-on LFCLK clock domain</description>
+              <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -175806,7 +175742,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           </register>
           <register>
             <name>CCADD</name>
-            <description>Description cluster: Count to add to CC[n] when this register is written.</description>
+            <description>Description cluster: Count to add to CC[n]</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -185309,7 +185245,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         <cluster>
           <name>CONFIG</name>
           <description>Unspecified</description>
-          <headerStructName>AUXPLL_CONFIG</headerStructName>
+          <headerStructName>GLOBAL_AUXPLL_CONFIG</headerStructName>
           <access>read-write</access>
           <addressOffset>0x410</addressOffset>
           <register>
@@ -185431,7 +185367,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         <cluster>
           <name>TRIM</name>
           <description>Unspecified</description>
-          <headerStructName>AUXPLL_TRIM</headerStructName>
+          <headerStructName>GLOBAL_AUXPLL_TRIM</headerStructName>
           <access>read-write</access>
           <addressOffset>0x440</addressOffset>
           <register>
@@ -185471,7 +185407,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         <cluster>
           <name>AUXPLLCTRL</name>
           <description>Unspecified</description>
-          <headerStructName>AUXPLL_AUXPLLCTRL</headerStructName>
+          <headerStructName>GLOBAL_AUXPLL_AUXPLLCTRL</headerStructName>
           <access>read-write</access>
           <addressOffset>0x460</addressOffset>
           <register>
@@ -185677,7 +185613,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         <cluster>
           <name>OVERRIDE</name>
           <description>Unspecified</description>
-          <headerStructName>AUXPLL_OVERRIDE</headerStructName>
+          <headerStructName>GLOBAL_AUXPLL_OVERRIDE</headerStructName>
           <access>read-write</access>
           <addressOffset>0x500</addressOffset>
           <register>
@@ -186082,7 +186018,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         <cluster>
           <name>DFT</name>
           <description>Unspecified</description>
-          <headerStructName>AUXPLL_DFT</headerStructName>
+          <headerStructName>GLOBAL_AUXPLL_DFT</headerStructName>
           <access>read-write</access>
           <addressOffset>0x600</addressOffset>
           <register>
@@ -186488,7 +186424,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         <cluster>
           <name>CONFIG</name>
           <description>Unspecified</description>
-          <headerStructName>AUXPM_CONFIG</headerStructName>
+          <headerStructName>GLOBAL_AUXPM_CONFIG</headerStructName>
           <access>read-write</access>
           <addressOffset>0x420</addressOffset>
           <register>
@@ -186627,7 +186563,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         <cluster>
           <name>TRIM</name>
           <description>Unspecified</description>
-          <headerStructName>AUXPM_TRIM</headerStructName>
+          <headerStructName>GLOBAL_AUXPM_TRIM</headerStructName>
           <access>read-write</access>
           <addressOffset>0x450</addressOffset>
           <register>
@@ -186720,7 +186656,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         <cluster>
           <name>OVERRIDE</name>
           <description>Unspecified</description>
-          <headerStructName>AUXPM_OVERRIDE</headerStructName>
+          <headerStructName>GLOBAL_AUXPM_OVERRIDE</headerStructName>
           <access>read-write</access>
           <addressOffset>0x580</addressOffset>
           <register>
@@ -186931,7 +186867,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         <cluster>
           <name>DFT</name>
           <description>Unspecified</description>
-          <headerStructName>AUXPM_DFT</headerStructName>
+          <headerStructName>GLOBAL_AUXPM_DFT</headerStructName>
           <access>read-write</access>
           <addressOffset>0x680</addressOffset>
           <register>
@@ -204027,42 +203963,6 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>LOOPSDONE_DMA_SEQ0_START</name>
-              <description>Shortcut between event LOOPSDONE and task DMA.SEQ[n].START</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>LOOPSDONE_DMA_SEQ1_START</name>
-              <description>Shortcut between event LOOPSDONE and task DMA.SEQ[n].START</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
               <name>LOOPSDONE_STOP</name>
               <description>Shortcut between event LOOPSDONE and task STOP</description>
               <lsb>4</lsb>
@@ -214193,8 +214093,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <size>0x20</size>
           <fields>
             <field>
-              <name>CTS_DMA_RX_START</name>
-              <description>Shortcut between event CTS and task DMA.RX.START</description>
+              <name>CTS_STARTRX</name>
+              <description>Shortcut between event CTS and task STARTRX</description>
               <lsb>3</lsb>
               <msb>3</msb>
               <enumeratedValues>
@@ -214211,8 +214111,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>NCTS_DMA_RX_STOP</name>
-              <description>Shortcut between event NCTS and task DMA.RX.STOP</description>
+              <name>NCTS_STOPRX</name>
+              <description>Shortcut between event NCTS and task STOPRX</description>
               <lsb>4</lsb>
               <msb>4</msb>
               <enumeratedValues>
@@ -214229,8 +214129,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_END_DMA_RX_START</name>
-              <description>Shortcut between event DMA.RX.END and task DMA.RX.START</description>
+              <name>ENDRX_STARTRX</name>
+              <description>Shortcut between event ENDRX and task STARTRX</description>
               <lsb>5</lsb>
               <msb>5</msb>
               <enumeratedValues>
@@ -214247,8 +214147,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_END_DMA_RX_STOP</name>
-              <description>Shortcut between event DMA.RX.END and task DMA.RX.STOP</description>
+              <name>ENDRX_STOPRX</name>
+              <description>Shortcut between event ENDRX and task STOPRX</description>
               <lsb>6</lsb>
               <msb>6</msb>
               <enumeratedValues>
@@ -214265,8 +214165,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_TX_END_DMA_TX_STOP</name>
-              <description>Shortcut between event DMA.TX.END and task DMA.TX.STOP</description>
+              <name>ENDTX_STOPTX</name>
+              <description>Shortcut between event ENDTX and task STOPTX</description>
               <lsb>18</lsb>
               <msb>18</msb>
               <enumeratedValues>
@@ -214283,8 +214183,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_RX_BUSERROR_DMA_RX_STOP</name>
-              <description>Shortcut between event DMA.RX.BUSERROR and task DMA.RX.STOP</description>
+              <name>DMA_RX_BUSERROR_STOPRX</name>
+              <description>Shortcut between event DMA.RX.BUSERROR and task STOPRX</description>
               <lsb>19</lsb>
               <msb>19</msb>
               <enumeratedValues>
@@ -214301,8 +214201,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>DMA_TX_BUSERROR_DMA_TX_STOP</name>
-              <description>Shortcut between event DMA.TX.BUSERROR and task DMA.TX.STOP</description>
+              <name>DMA_TX_BUSERROR_STOPTX</name>
+              <description>Shortcut between event DMA.TX.BUSERROR and task STOPTX</description>
               <lsb>20</lsb>
               <msb>20</msb>
               <enumeratedValues>
@@ -218408,8 +218308,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <size>0x20</size>
           <fields>
             <field>
-              <name>LASTTX_DMA_RX_START</name>
-              <description>Shortcut between event LASTTX and task DMA.RX.START</description>
+              <name>LASTTX_STARTRX</name>
+              <description>Shortcut between event LASTTX and task STARTRX</description>
               <lsb>7</lsb>
               <msb>7</msb>
               <enumeratedValues>
@@ -218462,8 +218362,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               </enumeratedValues>
             </field>
             <field>
-              <name>LASTRX_DMA_TX_START</name>
-              <description>Shortcut between event LASTRX and task DMA.TX.START</description>
+              <name>LASTRX_STARTTX</name>
+              <description>Shortcut between event LASTRX and task STARTTX</description>
               <lsb>10</lsb>
               <msb>10</msb>
               <enumeratedValues>
@@ -248417,7 +248317,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         <cluster>
           <name>PSEL</name>
           <description>Unspecified</description>
-          <headerStructName>QDEC_PSEL</headerStructName>
+          <headerStructName>PSEL</headerStructName>
           <access>read-write</access>
           <addressOffset>0x51C</addressOffset>
           <register>

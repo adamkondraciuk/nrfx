@@ -1,6 +1,6 @@
 /*
  
-Copyright (c) 2009-2024 ARM Limited. All rights reserved.
+Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -651,7 +651,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   PMICC_IRQHandler
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -924,7 +924,6 @@ Default_Handler:
     IRQ  GRCCONF_1_IRQHandler
     IRQ  GRCCONF_2_IRQHandler
     IRQ  RESETHUB_IRQHandler
-    IRQ  PMICC_IRQHandler
     IRQ  SAADC_IRQHandler
     IRQ  COMP_LPCOMP_IRQHandler
     IRQ  TEMP_IRQHandler

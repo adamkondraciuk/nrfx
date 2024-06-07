@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2024 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -463,7 +463,7 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     PMICC_IRQHandler
+        DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -1030,11 +1030,6 @@ GRCCONF_2_IRQHandler
         PUBWEAK  RESETHUB_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 RESETHUB_IRQHandler
-        j .
-
-        PUBWEAK  PMICC_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-PMICC_IRQHandler
         j .
 
         PUBWEAK  SAADC_IRQHandler
