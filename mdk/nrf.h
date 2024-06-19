@@ -154,7 +154,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF92_SERIES for common use in nRF92 series devices. */
-#if defined (NRF9230_XXAA) || defined(NRF9230_ENGA_XXAA)
+#if defined (NRF9230_XXAA) || defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA)
     #ifndef NRF92_SERIES
         #define NRF92_SERIES
     #endif
@@ -378,6 +378,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF9230_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf9230_enga.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
+    #endif
+#elif defined (NRF9230_ENGB_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf9230_engb.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
         #include "haltium_name_change.h"
