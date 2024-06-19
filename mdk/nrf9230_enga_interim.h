@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "haltium_interim.h"
 
-#if defined(NRF9230_ENGA_XXAA)
+#if defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA)
 
     #if defined(NRF_TRUSTZONE_NONSECURE)
         #if defined(NRF_APPLICATION)

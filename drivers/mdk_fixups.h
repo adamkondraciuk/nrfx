@@ -1724,6 +1724,131 @@
     #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
 
 #endif
+/**************************************************************************************************/
+/* Start fixups section for NRF9230_ENGB_XXAA                                                          */
+/**************************************************************************************************/
+
+#if defined(NRF9230_ENGB_XXAA)
+    #if defined(NRF_SECURE)
+        #define NRF_DOMAIN NRF_DOMAIN_SECURE
+    #elif defined(NRF_APPLICATION)
+        #define NRF_DOMAIN NRF_DOMAIN_APPLICATION
+    #elif defined(NRF_RADIOCORE)
+        #define NRF_DOMAIN NRF_DOMAIN_RADIOCORE
+    #elif defined(NRF_CELLCORE)
+        #define NRF_DOMAIN NRF_DOMAIN_CELLCORE
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
+    #elif defined(NRF_FLPR)
+        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
+    #elif defined(NRF_PPR)
+        #define NRF_DOMAIN NRF_DOMAIN_GLOBALSLOW
+    #endif
+
+    #if defined(NRF_APPLICATION)
+        #define NRF_PROCESSOR NRF_PROCESSOR_APPLICATION
+    #elif defined(NRF_RADIOCORE)
+        #define NRF_PROCESSOR NRF_PROCESSOR_RADIOCORE
+    #elif defined(NRF_FLPR)
+        #define NRF_PROCESSOR NRF_PROCESSOR_FLPR
+    #elif defined(NRF_PPR)
+        #define NRF_PROCESSOR NRF_PROCESSOR_PPR
+    #endif
+
+    #if defined(NRF_APPLICATION)
+        #define NRF_OWNER NRF_OWNER_APPLICATION
+    #elif defined(NRF_RADIOCORE)
+        #define NRF_OWNER NRF_OWNER_RADIOCORE
+    #elif defined(NRF_FLPR) && !defined(NRF_OWNER)
+        #define NRF_OWNER NRF_OWNER_APPLICATION
+    #elif defined(NRF_PPR) && !defined(NRF_OWNER)
+        #define NRF_OWNER NRF_OWNER_APPLICATION
+    #endif
+
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Enabled (0x1UL)
+
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos (3UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Min (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Max (0x1UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Disabled (0x0UL)
+    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Enabled (0x1UL)
+
+    #include "nrf9230_enga_interim.h"
+
+    /* Internal part */
+    #if defined(NRF_TRUSTZONE_NONSECURE)
+        #if defined(NRF_SECURE)
+            #define GRTC_IRQ_GROUP 0
+            #define GPIOTE_IRQ_GROUP 0
+        #elif defined(NRF_CELLCORE)
+            #define GRTC_IRQ_GROUP 8
+            #define GPIOTE_IRQ_GROUP 4
+        #endif
+    #elif defined(NRF_SYSCTRL)
+        #define GRTC_IRQ_GROUP 7
+        #define GPIOTE_IRQ_GROUP 6
+    #elif defined(NRF_BBPR)
+        #define GRTC_IRQ_GROUP 12
+    #else
+        #if defined(NRF_SECURE)
+            #define GRTC_IRQ_GROUP 1
+            #define GPIOTE_IRQ_GROUP 1
+        #elif defined(NRF_CELLCORE)
+            #define GRTC_IRQ_GROUP 9
+            #define GPIOTE_IRQ_GROUP 5
+        #endif
+    #endif
+
+    #if !defined(GRTC_IRQ_GROUP)
+        #error Unknown core.
+    #endif
+
+    #define GPIOTE131_CH_NUM (GPIOTE131_GPIOTE_NCHANNELS_MAX + 1UL)
+    #define GPIOTE131_AVAILABLE_GPIO_PORTS 0x3A07UL
+
+    // Old HFXO modes are not supported
+    #ifdef BICR_HFXO_CONFIG_MODE_Pierce
+        #undef BICR_HFXO_CONFIG_MODE_Pierce
+    #endif
+    #ifdef BICR_HFXO_CONFIG_MODE_PIXO
+        #undef BICR_HFXO_CONFIG_MODE_PIXO
+    #endif
+    #ifdef BICR_HFXO_CONFIG_MODE_ExtSquare
+        #undef BICR_HFXO_CONFIG_MODE_ExtSquare
+    #endif
+    #ifdef BICR_HFXO_CONFIG_MODE_Auto
+        #undef BICR_HFXO_CONFIG_MODE_Auto
+    #endif
+    #define BICR_HFXO_CONFIG_MODE_Normal   (0x0UL)     /*!< HFXO Normal mode.                                                    */
+    #define BICR_HFXO_CONFIG_MODE_TCXO     (0x1UL)     /*!< HFXO TCXO/bypass mode.                                               */
+    #define BICR_HFXO_CONFIG_MODE_Crystal2 (0x2UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal3 (0x3UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal4 (0x4UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal5 (0x5UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal6 (0x6UL)     /*!< Reserved value.                                                      */
+
+    #define DPPIC0_CH_NUM DPPIC0_CH_NUM_SIZE
+    #define DPPIC1_CH_NUM DPPIC1_CH_NUM_SIZE
+
+    #define DPPIC0_GROUP_NUM DPPIC0_GROUP_NUM_SIZE
+    #define DPPIC1_GROUP_NUM DPPIC1_GROUP_NUM_SIZE
+
+    /* TODO: HM-21442 */
+    #define OSCRFR_TRIM_OSC_VAL_Val35    OSCRFR_TRIM_OSC_VAL_Val23
+    #define OSCRFR_TRIM_OSC_VAL_Val154   OSCRFR_TRIM_OSC_VAL_Val54
+    #define OSCRFR_TRIM_OSC_VAL_Val670   OSCRFR_TRIM_OSC_VAL_Val98
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg54 OSCRFR_TRIM_OSC_VAL_ValNeg51
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg49 OSCRFR_TRIM_OSC_VAL_ValNeg42
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
+
+#endif
 
 /**************************************************************************************************/
 /* Start fixups section for NRF9230_XXAA                                                          */
