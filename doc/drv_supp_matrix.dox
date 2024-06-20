@@ -24,6 +24,7 @@ The following table presents MDK symbol used for a specific device.
 | nRF52840           | NRF52840_XXAA                                                            |
 | nRF54H20           | NRF54H20_XXAA<br>NRF_APPLICATION<br>NRF_RADIOCORE<br>NRF_PPR<br>NRF_FLPR |
 | nRF54L15 EngA      | NRF54L15_ENGA_XXAA<br>NRF_APPLICATION<br>NRF_FLPR                        |
+| nRF54L20 EngA      | NRF54L20_ENGA_XXAA<br>NRF_APPLICATION<br>NRF_FLPR                        |
 | nRF9131<br>nRF9161 | NRF9120_XXAA                                                             |
 | nRF9160            | NRF9160_XXAA                                                             |
 

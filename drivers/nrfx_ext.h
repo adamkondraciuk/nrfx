@@ -263,6 +263,17 @@ extern "C" {
          NRF_REGULATORS_ELV_ELVGRTCPWM_MASK     = REGULATORS_TRIM_ELVGRTCPWM_Msk,      \
          NRF_REGULATORS_ELV_ELVGRTCCLKOUT_MASK  = REGULATORS_TRIM_ELVGRTCCLKOUT_Msk,), \
    ())
+#elif defined(NRF54L20_ENGA_XXAA)
+#define NRF_REGULATORS_ELV_MODE_ALL_MASK (REGULATORS_TRIM_ELVPDMAIN_Msk   | \
+                                          REGULATORS_TRIM_ELVPDLP_Msk     | \
+                                          REGULATORS_TRIM_ELVPDPERIPH_Msk)
+
+#define NRF_REGULATORS_ELV_MODE_ALLOW_MASK_EXT                                    \
+    NRFX_COND_CODE_1(NRF_REGULATORS_HAS_TRIM,                                     \
+        (NRF_REGULATORS_ELV_ELVPDMAIN_MASK   = REGULATORS_TRIM_ELVPDMAIN_Msk,     \
+         NRF_REGULATORS_ELV_ELVPDLP_MASK     = REGULATORS_TRIM_ELVPDLP_Msk,       \
+         NRF_REGULATORS_ELV_ELVPDPERIPH_MASK = REGULATORS_TRIM_ELVPDPERIPH_Msk,), \
+   ())
 #endif
 
 
@@ -297,7 +308,7 @@ extern "C" {
     #endif
 #endif
 
-#if (defined(NRF54L15_ENGA_XXAA) || defined(NRF54L15_XXAA))
+#if (defined(NRF54L15_ENGA_XXAA) || defined(NRF54L15_XXAA) || defined(NRF54L20_ENGA_XXAA))
     #if defined(BOARD_FPGA)
         #define NRFX_DELAY_RISCV_SLOWDOWN 14
     #endif

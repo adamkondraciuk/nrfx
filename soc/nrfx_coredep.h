@@ -53,7 +53,7 @@
 #elif defined(NRF54H20_XXAA) || defined(NRF54H20_ENGA_XXAA)
     #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
     #define NRFX_DELAY_DWT_PRESENT  0
-#elif defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA)
+#elif defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA) || defined(NRF54L20_ENGA_XXAA)
     #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
     #define NRFX_DELAY_DWT_PRESENT  1
 #else
@@ -160,11 +160,11 @@ NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
     nrf_vpr_csr_vtim_combined_wait_trigger();
 #else
     #if !defined(NRFX_DELAY_RISCV_SLOWDOWN)
-        #if defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA)
+        #if defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA) || defined(NRF54L20_ENGA_XXAA)
             #define NRFX_DELAY_RISCV_SLOWDOWN 15
         #else
             #define NRFX_DELAY_RISCV_SLOWDOWN 50
-        #endif // defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA)
+        #endif // defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA) || defined(NRF54L20_ENGA_XXAA)
     #endif // !defined(NRFX_DELAY_RISCV_SLOWDOWN)
 
     for (volatile uint32_t i = 0;
