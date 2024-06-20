@@ -44,8 +44,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   64 
-#define MDK_MICRO_VERSION   0 
+#define MDK_MINOR_VERSION   65 
+#define MDK_MICRO_VERSION   1 
 
 
 /* Define coprocessor domains */
@@ -130,7 +130,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF54L_SERIES for common use in nRF54L series devices */
-#if defined (NRF54L15_ENGA_XXAA) || defined (NRF54L15_XXAA)
+#if defined (NRF54L15_ENGA_XXAA) || defined (NRF54L15_XXAA) || defined (NRF54L20_ENGA_XXAA)
     #ifndef NRF54L_SERIES
         #define NRF54L_SERIES
     #endif
@@ -139,7 +139,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 #endif
 
-
+/* Define NRF71_SERIES for common use in nRF71 series devices. */
 #if defined (NRF7140_XXAA)
     #ifndef NRF71_SERIES
         #define NRF71_SERIES
@@ -147,8 +147,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF91_SERIES for common use in nRF91 series devices. */
-#if defined (NRF9160_XXAA) ||  defined (NRF9120_XXAA)
-    #ifndef NRF91_SERIES    
+#if defined (NRF9160_XXAA) || defined(NRF9120_XXAA)
+    #ifndef NRF91_SERIES
         #define NRF91_SERIES
     #endif
 #endif
@@ -313,6 +313,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 
 
+#elif defined (NRF54L09_ENGA_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf54l09_enga.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf54l09_enga_name_change.h"
+    #endif
+
 #elif defined (NRF54L15_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf54l15.h"
@@ -328,6 +336,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
         #include "nrf54l15_enga_name_change.h"
+    #endif
+
+#elif defined (NRF54L20_ENGA_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf54l20_enga.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf54l20_enga_name_change.h"
     #endif
 
 #elif defined (NRF9160_XXAA)
@@ -376,8 +392,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 #else
     #error "Device must be defined. See nrf.h."
-#endif /* NRF51, NRF52805_XXAA, NRF52810_XXAA, NRF52811_XXAA, NRF52820_XXAA, NRF52832_XXAA, NRF52832_XXAB, NRF52833_XXAA, NRF52840_XXAA, NRF5340_XXAA_APPLICATION, NRF5340_XXAA_NETWORK, NRF9160_XXAA */
-
+#endif /* NRF5001_XXAA, NRF5002_XXAA, NRF51, NRF52805_XXAA, NRF52810_XXAA, NRF52811_XXAA, NRF52832_XXAA, NRF52832_XXAB, NRF52840_XXAA, NRF5340_XXAA_APPLICATION, NRF5340_XXAA_NETWORK, NRF9160_XXAA, NRF9160_XXAA_MODEM, NRF9280_XXAA */
 #include "compiler_abstraction.h"
 
 #endif /* NRF_H */

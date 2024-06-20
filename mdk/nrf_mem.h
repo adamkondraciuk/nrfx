@@ -222,12 +222,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_BBPR)
         #include "nrf54h20_xxaa_bbpr_memory.h"
     #endif
-#elif defined(NRF54L15_ENGA_XXAA)
+#elif defined(NRF54L09_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
-        #include "nrf54l15_enga_xxaa_application_memory.h"
+        #include "nrf54l09_enga_xxaa_application_memory.h"
     #endif
     #if defined(NRF_FLPR)
-        #include "nrf54l15_enga_xxaa_flpr_memory.h"
+        #include "nrf54l09_enga_xxaa_flpr_memory.h"
     #endif
 #elif defined(NRF54L15_XXAA)
     #if defined(NRF_APPLICATION)
@@ -236,6 +236,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_FLPR)
         #include "nrf54l15_xxaa_flpr_memory.h"
     #endif
+#elif defined(NRF54L15_ENGA_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf54l15_enga_xxaa_application_memory.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54l15_enga_xxaa_flpr_memory.h"
+    #endif
+#elif defined(NRF54L20_ENGA_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf54l20_enga_xxaa_application_memory.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54l20_enga_xxaa_flpr_memory.h"
+    #endif
+
 #else
     #error "Device must be defined. See nrf_mem.h."
 #endif
