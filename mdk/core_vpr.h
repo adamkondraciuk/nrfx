@@ -54,30 +54,30 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* ================                                  CSR declaration                                          ================ */
 /* =========================================================================================================================== */
 
-#define CSR_MCYCLE        0xB00
-#define CSR_MINSTRET      0xB02
-#define CSR_MCYCLEH       0xB80
-#define CSR_MINSTRETH     0xB82
-#define CSR_MVENDORID     0xF11
-#define CSR_MARCHID       0xF12
-#define CSR_MIMPID        0xF13
-#define CSR_MHARTID       0xF14
-#define CSR_MSTATUS       0x300
-#define CSR_MISA          0x301
-#define CSR_MTVEC         0x305
-#define CSR_MTVT          0x307
-#define CSR_MSCRATCH      0x340
-#define CSR_MEPC          0x341
-#define CSR_MCAUSE        0x342
-#define CSR_MTVAL         0x343
-#define CSR_MINTSTATUS    0x346
-#define CSR_MCLICBASE     0x350
-#define CSR_DCSR          0x7b0
-#define CSR_DPC           0x7b1
-#define CSR_UCYCLE        0xc00
-#define CSR_UINSTRET      0xc02
-#define CSR_UCYCLEH       0xc80
-#define CSR_UINSTRETH     0xc82
+#define CSR_MCYCLE        0xB00        
+#define CSR_MINSTRET      0xB02      
+#define CSR_MCYCLEH       0xB80       
+#define CSR_MINSTRETH     0xB82     
+#define CSR_MVENDORID     0xF11     
+#define CSR_MARCHID       0xF12       
+#define CSR_MIMPID        0xF13        
+#define CSR_MHARTID       0xF14       
+#define CSR_MSTATUS       0x300       
+#define CSR_MISA          0x301          
+#define CSR_MTVEC         0x305         
+#define CSR_MTVT          0x307          
+#define CSR_MSCRATCH      0x340     
+#define CSR_MEPC          0x341          
+#define CSR_MCAUSE        0x342        
+#define CSR_MTVAL         0x343                 
+#define CSR_MINTSTATUS    0x346    
+#define CSR_MCLICBASE     0x350     
+#define CSR_DCSR          0x7b0          
+#define CSR_DPC           0x7b1           
+#define CSR_UCYCLE        0xc00        
+#define CSR_UINSTRET      0xc02      
+#define CSR_UCYCLEH       0xc80       
+#define CSR_UINSTRETH     0xc82     
 
 
 #define CSR_NORDIC_CTRL   0x7c0
