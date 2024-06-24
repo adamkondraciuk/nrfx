@@ -10,6 +10,13 @@
 extern "C" {
 #endif
 
+#if NRF_UARTE_HAS_FRAME_TIMEOUT || defined(__NRFX_DOXYGEN__)
+/** @refhal{NRF_UARTE_HAS_FRAME_TIMEOUT} */
+#define NRFY_UARTE_HAS_FRAME_TIMEOUT 1
+#else
+#define NRFY_UARTE_HAS_FRAME_TIMEOUT 0
+#endif
+
 typedef struct nrfy_uarte_buffer_t nrfy_uarte_buffer_t;
 
 NRFY_STATIC_INLINE void __nrfy_internal_uarte_event_enabled_clear(NRF_UARTE_Type *  p_reg,
@@ -578,6 +585,17 @@ NRFY_STATIC_INLINE uint32_t nrfy_uarte_rx_amount_get(NRF_UARTE_Type const * p_re
     nrf_barrier_r();
     return amount;
 }
+
+#if NRFX_CHECK(NRFY_UARTE_HAS_FRAME_TIMEOUT)
+/** @refhal{nrf_uarte_frame_timeout_set} */
+NRFY_STATIC_INLINE void nrfy_uarte_frame_timeout_set(NRF_UARTE_Type * p_reg,
+                                                     uint32_t         timeout)
+{
+    nrf_barrier_r();
+    nrf_uarte_frame_timeout_set(p_reg, timeout);
+    nrf_barrier_r();
+}
+#endif
 /** @} */
 
 NRFY_STATIC_INLINE void __nrfy_internal_uarte_event_enabled_clear(NRF_UARTE_Type *  p_reg,
@@ -626,6 +644,9 @@ uint32_t __nrfy_internal_uarte_events_process(NRF_UARTE_Type *            p_reg,
     (void)__nrfy_internal_uarte_event_handle(p_reg, mask, NRF_UARTE_EVENT_RXSTARTED, &evt_mask);
     (void)__nrfy_internal_uarte_event_handle(p_reg, mask, NRF_UARTE_EVENT_TXSTARTED, &evt_mask);
     (void)__nrfy_internal_uarte_event_handle(p_reg, mask, NRF_UARTE_EVENT_TXSTOPPED, &evt_mask);
+#if NRFY_UARTE_HAS_FRAME_TIMEOUT
+    (void)__nrfy_internal_uarte_event_handle(p_reg, mask, NRF_UARTE_EVENT_FRAME_TIMEOUT, &evt_mask);
+#endif
 
     if (mask & NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ENDRX))
     {
