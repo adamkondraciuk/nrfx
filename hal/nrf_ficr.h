@@ -73,6 +73,20 @@ extern "C" {
 #define NRF_FICR_HAS_NFC_TAGHEADER_ARRAY 0
 #endif
 
+#if defined(FICR_DEVICEADDR_DEVICEADDR_Msk) || defined(NRF51) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether FICR DEVICEADDR[n] registers are present. */
+#define NRF_FICR_HAS_DEVICE_ADDR 1
+#else
+#define NRF_FICR_HAS_DEVICE_ADDR 0
+#endif
+
+#if defined(FICR_BLE_ADDR_ADDR_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether FICR BLE.ADDR[n] registers are present. */
+#define NRF_FICR_HAS_BLE_ADDR 1
+#else
+#define NRF_FICR_HAS_BLE_ADDR 0
+#endif
+
 #if NRF_FICR_HAS_CODE_PAGE_SIZE || NRF_FICR_HAS_INFO_CODE_PAGE_SIZE
 /**
  * @brief Function for getting the size of the code memory page.
@@ -118,6 +132,18 @@ NRF_STATIC_INLINE uint32_t nrf_ficr_deviceid_get(NRF_FICR_Type const * p_reg, ui
  */
 NRF_STATIC_INLINE uint32_t nrf_ficr_nfc_tagheader_get(NRF_FICR_Type const * p_reg,
                                                       uint32_t              tagheader_id);
+#endif
+
+#if NRF_FICR_HAS_DEVICE_ADDR || NRF_FICR_HAS_BLE_ADDR
+/**
+ * @brief Function for getting the unique device address.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] reg_id Register index.
+ *
+ * @return Unique device address.
+ */
+NRF_STATIC_INLINE uint32_t nrf_ficr_deviceaddr_get(NRF_FICR_Type const * p_reg, uint32_t reg_id);
 #endif
 
 #ifndef NRF_DECLARE_ONLY
@@ -185,6 +211,17 @@ NRF_STATIC_INLINE uint32_t nrf_ficr_nfc_tagheader_get(NRF_FICR_Type const * p_re
         default:
             return 0;
     }
+#endif
+}
+#endif
+
+#if NRF_FICR_HAS_DEVICE_ADDR || NRF_FICR_HAS_BLE_ADDR
+NRF_STATIC_INLINE uint32_t nrf_ficr_deviceaddr_get(NRF_FICR_Type const * p_reg, uint32_t reg_id)
+{
+#if NRF_FICR_HAS_BLE_ADDR
+    return p_reg->BLE.ADDR[reg_id];
+#else
+    return p_reg->DEVICEADDR[reg_id];
 #endif
 }
 #endif
