@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2024>$$$*/
 
-#ifndef NRFX_CONFIG_NRF9230_ENGA_SECURE_H__
-#define NRFX_CONFIG_NRF9230_ENGA_SECURE_H__
+#ifndef NRFX_CONFIG_NRF9230_ENGB_SECURE_H__
+#define NRFX_CONFIG_NRF9230_ENGB_SECURE_H__
 
 #ifndef NRFX_CONFIG_H__
 #error "This file should not be included directly. Include nrfx_config.h instead."
@@ -1763,6 +1763,15 @@
 #endif
 
 /**
+ * @brief NRFX_UARTE_RX_FIFO_FLUSH_WORKAROUND_MAGIC_BYTE
+ *
+ * Integer value. Minimum: 0. Maximum: 255.
+ */
+#ifndef NRFX_UARTE_RX_FIFO_FLUSH_WORKAROUND_MAGIC_BYTE
+#define NRFX_UARTE_RX_FIFO_FLUSH_WORKAROUND_MAGIC_BYTE 171
+#endif
+
+/**
  * @brief NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0. Maximum: 7.
@@ -1963,4 +1972,4 @@
 #define NRFX_WDT132_ENABLED 0
 #endif
 
-#endif // NRFX_CONFIG_NRF9230_ENGA_SECURE_H__
+#endif // NRFX_CONFIG_NRF9230_ENGB_SECURE_H__
