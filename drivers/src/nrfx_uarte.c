@@ -1438,7 +1438,8 @@ static void rx_flush(NRF_UARTE_Type * p_uarte, uarte_control_block_t * p_cb)
          * determine that by watermarking flush buffer to check if it was overwritten.
          * However, if fifo contained amount of bytes equal to last transfer and
          * bytes are equal to watermarking it will be dropped. */
-        memset(p_cb->rx.flush.p_buffer, 0xAA, UARTE_HW_RX_FIFO_SIZE);
+        memset(p_cb->rx.flush.p_buffer,
+               NRFX_UARTE_RX_FIFO_FLUSH_WORKAROUND_MAGIC_BYTE, UARTE_HW_RX_FIFO_SIZE);
     }
 
     nrfy_uarte_rx_buffer_set(p_uarte, p_cb->rx.flush.p_buffer, UARTE_HW_RX_FIFO_SIZE);
@@ -1467,7 +1468,7 @@ static void rx_flush(NRF_UARTE_Type * p_uarte, uarte_control_block_t * p_cb)
 
             for (size_t i = 0; i < UARTE_HW_RX_FIFO_SIZE; i++)
             {
-                if (p_cb->rx.flush.p_buffer[i] != 0xAA)
+                if (p_cb->rx.flush.p_buffer[i] != NRFX_UARTE_RX_FIFO_FLUSH_WORKAROUND_MAGIC_BYTE)
                 {
                     return;
                 }
