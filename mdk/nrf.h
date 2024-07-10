@@ -44,8 +44,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   65 
-#define MDK_MICRO_VERSION   1 
+#define MDK_MINOR_VERSION   66 
+#define MDK_MICRO_VERSION   0 
 
 
 /* Define coprocessor domains */
@@ -76,6 +76,40 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #ifndef NRF5340_XXAA_NETWORK
             #define NRF5340_XXAA_NETWORK
         #endif
+    #endif
+#endif
+
+#if defined (NRF9160_XXAA)
+    #ifndef NRF9160_XXAA_APPLICATION
+        #define NRF9160_XXAA_APPLICATION
+    #endif
+#endif
+
+#if defined (NRF9160_XXAA_APPLICATION)
+    #ifndef NRF9160_XXAA
+        #define NRF9160_XXAA
+    #endif
+#endif
+#if defined (NRF9160_XXAA_APPLICATION)
+    #ifndef NRF_APPLICATION
+        #define NRF_APPLICATION
+    #endif
+#endif
+
+#if defined (NRF9120_XXAA)
+    #ifndef NRF9120_XXAA_APPLICATION
+        #define NRF9120_XXAA_APPLICATION
+    #endif
+#endif
+
+#if defined (NRF9120_XXAA_APPLICATION)
+    #ifndef NRF9120_XXAA
+        #define NRF9120_XXAA
+    #endif
+#endif
+#if defined (NRF9120_XXAA_APPLICATION)
+    #ifndef NRF_APPLICATION
+        #define NRF_APPLICATION
     #endif
 #endif
 
@@ -130,7 +164,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF54L_SERIES for common use in nRF54L series devices */
-#if defined (NRF54L15_ENGA_XXAA) || defined (NRF54L15_XXAA) || defined (NRF54L20_ENGA_XXAA)
+#if defined (NRF54L09_ENGA_XXAA) || defined (NRF54L15_ENGA_XXAA) || defined (NRF54L15_XXAA) ||  defined (NRF54L20_ENGA_XXAA)
     #ifndef NRF54L_SERIES
         #define NRF54L_SERIES
     #endif
@@ -144,6 +178,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #ifndef NRF71_SERIES
         #define NRF71_SERIES
     #endif
+    #ifndef HALTIUM_XXAA
+        #define HALTIUM_XXAA
+    #endif
 #endif
 
 /* Define NRF91_SERIES for common use in nRF91 series devices. */
@@ -154,7 +191,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF92_SERIES for common use in nRF92 series devices. */
-#if defined (NRF9230_XXAA) || defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA)
+#if defined (NRF9230_XXAA) || defined(NRF9230_ENGB_XXAA)
     #ifndef NRF92_SERIES
         #define NRF92_SERIES
     #endif
@@ -162,6 +199,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #define HALTIUM_XXAA
     #endif
 #endif
+
 
 /* Device selection for device includes. */
 #if defined (NRF51)
@@ -346,10 +384,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf54l20_enga_name_change.h"
     #endif
 
-#elif defined (NRF9160_XXAA)
-    #include "nrf9160.h"
-    #include "nrf9160_bitfields.h"
-    #include "nrf91_name_change.h"
+#elif defined (NRF9120_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf9120.h"
+    #endif
+    #if !defined(EXCLUDE_BITFIELDS)
+        #include "nrf9120_bitfields.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf91_name_change.h"
+    #endif
 
     /* Address of locations in RAM that will be used to store a NS-accessible version of FICR */
     #if !defined(NRF_FICR_NS)
@@ -357,10 +401,22 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #define NRF_FICR_NS ((NRF_FICR_Type*)          NRF_FICR_NS_BASE)
     #endif
 
-#elif defined (NRF9120_XXAA)
-    #include "nrf9120.h"
-    #include "nrf9120_bitfields.h"
-    #include "nrf91_name_change.h"
+    /* Address of locations in RAM that will be used to store a NS-accessible version of FICR */
+    #if !defined(NRF_FICR_NS)
+        #define NRF_FICR_NS_BASE 0x2007F000
+        #define NRF_FICR_NS ((NRF_FICR_Type*)          NRF_FICR_NS_BASE)
+    #endif
+
+#elif defined (NRF9160_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf9160.h"
+    #endif
+    #if !defined(EXCLUDE_BITFIELDS)
+        #include "nrf9160_bitfields.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf91_name_change.h"
+    #endif
 
     /* Address of locations in RAM that will be used to store a NS-accessible version of FICR */
     #if !defined(NRF_FICR_NS)
@@ -397,9 +453,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(EXCLUDE_PORTABILITY)
         #include "haltium_name_change.h"
     #endif
+
 #else
+
     #error "Device must be defined. See nrf.h."
-#endif /* NRF5001_XXAA, NRF5002_XXAA, NRF51, NRF52805_XXAA, NRF52810_XXAA, NRF52811_XXAA, NRF52832_XXAA, NRF52832_XXAB, NRF52840_XXAA, NRF5340_XXAA_APPLICATION, NRF5340_XXAA_NETWORK, NRF9160_XXAA, NRF9160_XXAA_MODEM, NRF9280_XXAA */
+#endif /* NRF51, NRF52805_XXAA, NRF52810_XXAA, NRF52811_XXAA, NRF52832_XXAA, NRF52832_XXAB, NRF52840_XXAA, NRF5340_XXAA_APPLICATION, NRF5340_XXAA_NETWORK, NRF9160_XXAA, NRF9280_XXAA */
 #include "compiler_abstraction.h"
 
 #endif /* NRF_H */

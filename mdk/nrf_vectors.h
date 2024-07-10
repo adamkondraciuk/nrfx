@@ -40,7 +40,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef NRF_VECTORS_H_
 #define NRF_VECTORS_H_
 
-#if defined(NRF51422_XXAA)
+#if defined(NRF5001_XXAA)
+    #include "nrf5001_vectors.h"
+#elif defined(NRF51422_XXAA)
     #include "nrf51422_vectors.h"
 #elif defined(NRF51422_XXAB)
     #include "nrf51422_vectors.h"
@@ -81,10 +83,71 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_NETWORK)
         #include "nrf5340_network_vectors.h"
     #endif
-#elif defined(NRF9120_XXAA)
-    #include "nrf9120_vectors.h"
-#elif defined(NRF9160_XXAA)
-    #include "nrf9160_vectors.h"
+#elif defined(NRF54L15_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf54l15_application_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54l15_flpr_vectors.h"
+    #endif
+#elif defined(NRF54L15_ENGA_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf54l15_enga_application_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54l15_enga_flpr_vectors.h"
+    #endif
+#elif defined(NRF54L20_ENGA_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf54l20_enga_application_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54l20_enga_flpr_vectors.h"
+    #endif
+#elif defined(NRF54H20_XXAA)
+    #if defined(NRF_SECURE)
+        #include "nrf54h20_secure_vectors.h"
+    #endif
+    #if defined(NRF_APPLICATION)
+        #include "nrf54h20_application_vectors.h"
+    #endif
+    #if defined(NRF_RADIOCORE)
+        #include "nrf54h20_radiocore_vectors.h"
+    #endif
+    #if defined(NRF_SYSCTRL)
+        #include "nrf54h20_sysctrl_vectors.h"
+    #endif
+    #if defined(NRF_PPR)
+        #include "nrf54h20_ppr_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54h20_flpr_vectors.h"
+    #endif
+    #if defined(NRF_BBPR)
+        #include "nrf54h20_bbpr_vectors.h"
+    #endif
+#elif defined(NRF54H20_ENGA_XXAA)
+    #if defined(NRF_SECURE)
+        #include "nrf54h20_enga_secure_vectors.h"
+    #endif
+    #if defined(NRF_APPLICATION)
+        #include "nrf54h20_enga_application_vectors.h"
+    #endif
+    #if defined(NRF_RADIOCORE)
+        #include "nrf54h20_enga_radiocore_vectors.h"
+    #endif
+    #if defined(NRF_SYSCTRL)
+        #include "nrf54h20_enga_sysctrl_vectors.h"
+    #endif
+    #if defined(NRF_PPR)
+        #include "nrf54h20_enga_ppr_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54h20_enga_flpr_vectors.h"
+    #endif
+    #if defined(NRF_BBPR)
+        #include "nrf54h20_enga_bbpr_vectors.h"
+    #endif
 #elif defined(NRF7140_XXAA)
     #if defined(NRF_SECURE)
         #include "nrf7140_secure_vectors.h"
@@ -116,36 +179,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_DPPR)
         #include "nrf7140_dppr_vectors.h"
     #endif
-#elif defined(NRF9230_XXAA)
-    #if defined(NRF_SECURE)
-        #include "nrf9230_secure_vectors.h"
-    #endif
+#elif defined(NRF9120_XXAA)
     #if defined(NRF_APPLICATION)
-        #include "nrf9230_application_vectors.h"
+        #include "nrf9120_vectors.h"
     #endif
-    #if defined(NRF_RADIOCORE)
-        #include "nrf9230_radiocore_vectors.h"
-    #endif
-    #if defined(NRF_CELLCORE)
-        #include "nrf9230_cellcore_vectors.h"
-    #endif
-    #if defined(NRF_CELLRF)
-        #include "nrf9230_cellrf_vectors.h"
-    #endif
-    #if defined(NRF_ISIMCORE)
-        #include "nrf9230_isimcore_vectors.h"
-    #endif
-    #if defined(NRF_SYSCTRL)
-        #include "nrf9230_sysctrl_vectors.h"
-    #endif
-    #if defined(NRF_PPR)
-        #include "nrf9230_ppr_vectors.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf9230_flpr_vectors.h"
-    #endif
-    #if defined(NRF_BBPR)
-        #include "nrf9230_bbpr_vectors.h"
+#elif defined(NRF9160_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf9160_vectors.h"
     #endif
 #elif defined(NRF9230_ENGA_XXAA)
     #if defined(NRF_SECURE)
@@ -209,77 +249,36 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_BBPR)
         #include "nrf9230_engb_bbpr_vectors.h"
     #endif
-#elif defined(NRF54H20_XXAA)
+#elif defined(NRF9230_XXAA)
     #if defined(NRF_SECURE)
-        #include "nrf54h20_secure_vectors.h"
+        #include "nrf9230_secure_vectors.h"
     #endif
     #if defined(NRF_APPLICATION)
-        #include "nrf54h20_application_vectors.h"
+        #include "nrf9230_application_vectors.h"
     #endif
     #if defined(NRF_RADIOCORE)
-        #include "nrf54h20_radiocore_vectors.h"
+        #include "nrf9230_radiocore_vectors.h"
+    #endif
+    #if defined(NRF_CELLCORE)
+        #include "nrf9230_cellcore_vectors.h"
+    #endif
+    #if defined(NRF_CELLRF)
+        #include "nrf9230_cellrf_vectors.h"
+    #endif
+    #if defined(NRF_ISIMCORE)
+        #include "nrf9230_isimcore_vectors.h"
     #endif
     #if defined(NRF_SYSCTRL)
-        #include "nrf54h20_sysctrl_vectors.h"
+        #include "nrf9230_sysctrl_vectors.h"
     #endif
     #if defined(NRF_PPR)
-        #include "nrf54h20_ppr_vectors.h"
+        #include "nrf9230_ppr_vectors.h"
     #endif
     #if defined(NRF_FLPR)
-        #include "nrf54h20_flpr_vectors.h"
+        #include "nrf9230_flpr_vectors.h"
     #endif
     #if defined(NRF_BBPR)
-        #include "nrf54h20_bbpr_vectors.h"
-    #endif
-#elif defined(NRF54H20_ENGA_XXAA)
-    #if defined(NRF_SECURE)
-        #include "nrf54h20_enga_secure_vectors.h"
-    #endif
-    #if defined(NRF_APPLICATION)
-        #include "nrf54h20_enga_application_vectors.h"
-    #endif
-    #if defined(NRF_RADIOCORE)
-        #include "nrf54h20_enga_radiocore_vectors.h"
-    #endif
-    #if defined(NRF_SYSCTRL)
-        #include "nrf54h20_enga_sysctrl_vectors.h"
-    #endif
-    #if defined(NRF_PPR)
-        #include "nrf54h20_enga_ppr_vectors.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54h20_enga_flpr_vectors.h"
-    #endif
-    #if defined(NRF_BBPR)
-        #include "nrf54h20_enga_bbpr_vectors.h"
-    #endif
-#elif defined(NRF54L09_ENGA_XXAA)
-    #if defined(NRF_APPLICATION)
-        #include "nrf54l09_enga_application_vectors.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54l09_enga_flpr_vectors.h"
-    #endif
-#elif defined(NRF54L15_XXAA)
-    #if defined(NRF_APPLICATION)
-        #include "nrf54l15_application_vectors.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54l15_flpr_vectors.h"
-    #endif
-#elif defined(NRF54L15_ENGA_XXAA)
-    #if defined(NRF_APPLICATION)
-        #include "nrf54l15_enga_application_vectors.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54l15_enga_flpr_vectors.h"
-    #endif
-#elif defined(NRF54L20_ENGA_XXAA)
-    #if defined(NRF_APPLICATION)
-        #include "nrf54l20_enga_application_vectors.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54l20_enga_flpr_vectors.h"
+        #include "nrf9230_bbpr_vectors.h"
     #endif
 #else
     #error "Device must be defined. See nrf_vectors.h."

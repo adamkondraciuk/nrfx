@@ -44,7 +44,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*lint ++flb "Enter library region */
 
-#if defined(NRF51)
+#if defined (NRF51422_XXAA) || defined (NRF51422_XXAB) || defined (NRF51422_XXAC)
+    #include "nrf51422_peripherals.h"
+#elif defined (NRF51801_XXAB)
+    #include "nrf51801_peripherals.h"
+#elif defined (NRF51802_XXAA)
+    #include "nrf51802_peripherals.h"
+#elif defined (NRF51822_XXAA) || defined (NRF51822_XXAB) || defined (NRF51822_XXAC)
+    #include "nrf51822_peripherals.h"
+#elif defined (NRF51824_XXAA)
+    #include "nrf51824_peripherals.h"
+
+#elif defined(NRF51)
     #include "nrf51_peripherals.h"
 
 #elif defined(NRF52805_XXAA)
@@ -62,10 +73,17 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined(NRF52840_XXAA)
     #include "nrf52840_peripherals.h"
 
-#elif defined (NRF5340_XXAA_APPLICATION)
-    #include "nrf5340_application_peripherals.h"
-#elif defined (NRF5340_XXAA_NETWORK)
-    #include "nrf5340_network_peripherals.h"
+#elif defined (NRF5340_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf5340_application_peripherals.h"
+    #elif defined (NRF_NETWORK)
+        #include "nrf5340_network_peripherals.h"
+    #endif
+
+#elif defined (NRF54H20_XXAA)
+    #include "nrf54h20_peripherals.h"
+#elif defined (NRF54H20_ENGA_XXAA)
+    #include "nrf54h20_enga_peripherals.h"
 
 #elif defined (NRF54L09_ENGA_XXAA)
     #include "nrf54l09_enga_peripherals.h"
@@ -79,23 +97,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF54L20_ENGA_XXAA)
     #include "nrf54l20_enga_peripherals.h"
 
-#elif defined (NRF54H20_XXAA)
-    #include "nrf54h20_peripherals.h"
-#elif defined (NRF54H20_ENGA_XXAA)
-    #include "nrf54h20_enga_peripherals.h"
-
 #elif defined (NRF7140_XXAA)
     #include "nrf7140_peripherals.h"
 
-#elif defined(NRF9120_XXAA)
+#elif defined (NRF9120_XXAA)
     #include "nrf9120_peripherals.h"
-#elif defined(NRF9160_XXAA)
+    
+#elif defined (NRF9160_XXAA)
     #include "nrf9160_peripherals.h"
 
 #elif defined (NRF9230_XXAA)
     #include "nrf9230_peripherals.h"
+    
 #elif defined (NRF9230_ENGA_XXAA)
     #include "nrf9230_enga_peripherals.h"
+
 #elif defined (NRF9230_ENGB_XXAA)
     #include "nrf9230_engb_peripherals.h"
 
