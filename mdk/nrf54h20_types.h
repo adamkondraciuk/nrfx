@@ -216,7 +216,8 @@ typedef struct {
     __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
     __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
     __IM uint32_t RESERVED1[30];
-    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000100) Address resolution procedure complete                 */
+    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000100) Address resolution procedure complete or ended due to
+                                                                         an error*/
     __IOM uint32_t EVENTS_RESOLVED;                  /*!< (@ 0x00000104) Address resolved                                      */
     __IOM uint32_t EVENTS_NOTRESOLVED;               /*!< (@ 0x00000108) Address not resolved                                  */
     __IM uint32_t RESERVED2[29];
@@ -295,10 +296,10 @@ typedef struct {
   #define AAR_SUBSCRIBE_STOP_EN_Enabled (0x1UL)      /*!< Enable subscription                                                  */
 
 
-/* AAR_EVENTS_END: Address resolution procedure complete */
+/* AAR_EVENTS_END: Address resolution procedure complete or ended due to an error */
   #define AAR_EVENTS_END_ResetValue (0x00000000UL)   /*!< Reset value of EVENTS_END register.                                  */
 
-/* EVENTS_END @Bit 0 : Address resolution procedure complete */
+/* EVENTS_END @Bit 0 : Address resolution procedure complete or ended due to an error */
   #define AAR_EVENTS_END_EVENTS_END_Pos (0UL)        /*!< Position of EVENTS_END field.                                        */
   #define AAR_EVENTS_END_EVENTS_END_Msk (0x1UL << AAR_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field.            */
   #define AAR_EVENTS_END_EVENTS_END_Min (0x0UL)      /*!< Min enumerator value of EVENTS_END field.                            */
@@ -644,25 +645,25 @@ typedef struct {
   #define ABB_TRIM_LOCKRANGE_MinIndex (0UL)          /*!< Min index of LOCKRANGE[4] array.                                     */
   #define ABB_TRIM_LOCKRANGE_ResetValue (0x00000000UL) /*!< Reset value of LOCKRANGE[4] register.                              */
 
-/* LOCKRANGEHIGHP @Bits 0..7 : Lock range high boundary for VPW biased devices. */
-  #define ABB_TRIM_LOCKRANGE_LOCKRANGEHIGHP_Pos (0UL) /*!< Position of LOCKRANGEHIGHP field.                                   */
-  #define ABB_TRIM_LOCKRANGE_LOCKRANGEHIGHP_Msk (0xFFUL << ABB_TRIM_LOCKRANGE_LOCKRANGEHIGHP_Pos) /*!< Bit mask of
-                                                                            LOCKRANGEHIGHP field.*/
-
-/* LOCKRANGELOWP @Bits 8..15 : Lock range low boundary for VPW biased devices. */
-  #define ABB_TRIM_LOCKRANGE_LOCKRANGELOWP_Pos (8UL) /*!< Position of LOCKRANGELOWP field.                                     */
-  #define ABB_TRIM_LOCKRANGE_LOCKRANGELOWP_Msk (0xFFUL << ABB_TRIM_LOCKRANGE_LOCKRANGELOWP_Pos) /*!< Bit mask of LOCKRANGELOWP
+/* LOCKRANGELOWN @Bits 0..7 : Lock range low boundary for VNW biased devices. */
+  #define ABB_TRIM_LOCKRANGE_LOCKRANGELOWN_Pos (0UL) /*!< Position of LOCKRANGELOWN field.                                     */
+  #define ABB_TRIM_LOCKRANGE_LOCKRANGELOWN_Msk (0xFFUL << ABB_TRIM_LOCKRANGE_LOCKRANGELOWN_Pos) /*!< Bit mask of LOCKRANGELOWN
                                                                             field.*/
 
-/* LOCKRANGEHIGHN @Bits 16..23 : Lock range high boundary for VNW biased devices. */
-  #define ABB_TRIM_LOCKRANGE_LOCKRANGEHIGHN_Pos (16UL) /*!< Position of LOCKRANGEHIGHN field.                                  */
+/* LOCKRANGEHIGHN @Bits 8..15 : Lock range high boundary for VNW biased devices. */
+  #define ABB_TRIM_LOCKRANGE_LOCKRANGEHIGHN_Pos (8UL) /*!< Position of LOCKRANGEHIGHN field.                                   */
   #define ABB_TRIM_LOCKRANGE_LOCKRANGEHIGHN_Msk (0xFFUL << ABB_TRIM_LOCKRANGE_LOCKRANGEHIGHN_Pos) /*!< Bit mask of
                                                                             LOCKRANGEHIGHN field.*/
 
-/* LOCKRANGELOWN @Bits 24..31 : Lock range low boundary for VNW biased devices. */
-  #define ABB_TRIM_LOCKRANGE_LOCKRANGELOWN_Pos (24UL) /*!< Position of LOCKRANGELOWN field.                                    */
-  #define ABB_TRIM_LOCKRANGE_LOCKRANGELOWN_Msk (0xFFUL << ABB_TRIM_LOCKRANGE_LOCKRANGELOWN_Pos) /*!< Bit mask of LOCKRANGELOWN
+/* LOCKRANGELOWP @Bits 16..23 : Lock range low boundary for VPW biased devices. */
+  #define ABB_TRIM_LOCKRANGE_LOCKRANGELOWP_Pos (16UL) /*!< Position of LOCKRANGELOWP field.                                    */
+  #define ABB_TRIM_LOCKRANGE_LOCKRANGELOWP_Msk (0xFFUL << ABB_TRIM_LOCKRANGE_LOCKRANGELOWP_Pos) /*!< Bit mask of LOCKRANGELOWP
                                                                             field.*/
+
+/* LOCKRANGEHIGHP @Bits 24..31 : Lock range high boundary for VPW biased devices. */
+  #define ABB_TRIM_LOCKRANGE_LOCKRANGEHIGHP_Pos (24UL) /*!< Position of LOCKRANGEHIGHP field.                                  */
+  #define ABB_TRIM_LOCKRANGE_LOCKRANGEHIGHP_Msk (0xFFUL << ABB_TRIM_LOCKRANGE_LOCKRANGEHIGHP_Pos) /*!< Bit mask of
+                                                                            LOCKRANGEHIGHP field.*/
 
 
 /* ABB_TRIM_PVTMONCYCLES: PVTMONCYCLES trim values for operation points */
@@ -17672,9 +17673,7 @@ typedef struct {
   */
 typedef struct {
   __IOM uint32_t  PTR;                               /*!< (@ 0x00000000) Input pointer                                         */
-  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x00000004) Number of bytes read from the input data, not including
-                                                                         the job list structure*/
-} NRF_ECB_IN_Type;                                   /*!< Size = 8 (0x008)                                                     */
+} NRF_ECB_IN_Type;                                   /*!< Size = 4 (0x004)                                                     */
 
 /* ECB_IN_PTR: Input pointer */
   #define ECB_IN_PTR_ResetValue (0x00000000UL)       /*!< Reset value of PTR register.                                         */
@@ -17682,14 +17681,6 @@ typedef struct {
 /* PTR @Bits 0..31 : Points to a job list containing unencrypted ECB data structure */
   #define ECB_IN_PTR_PTR_Pos (0UL)                   /*!< Position of PTR field.                                               */
   #define ECB_IN_PTR_PTR_Msk (0xFFFFFFFFUL << ECB_IN_PTR_PTR_Pos) /*!< Bit mask of PTR field.                                  */
-
-
-/* ECB_IN_AMOUNT: Number of bytes read from the input data, not including the job list structure */
-  #define ECB_IN_AMOUNT_ResetValue (0x00000000UL)    /*!< Reset value of AMOUNT register.                                      */
-
-/* AMOUNT @Bits 0..31 : Number of bytes read from the input data */
-  #define ECB_IN_AMOUNT_AMOUNT_Pos (0UL)             /*!< Position of AMOUNT field.                                            */
-  #define ECB_IN_AMOUNT_AMOUNT_Msk (0xFFFFFFFFUL << ECB_IN_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.                   */
 
 
 
@@ -17700,9 +17691,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  PTR;                               /*!< (@ 0x00000000) Output pointer Points to a job list containing
                                                                          encrypted ECB data structure*/
-  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x00000004) Number of bytes available in the output data, not
-                                                                         including the job list structure*/
-} NRF_ECB_OUT_Type;                                  /*!< Size = 8 (0x008)                                                     */
+} NRF_ECB_OUT_Type;                                  /*!< Size = 4 (0x004)                                                     */
 
 /* ECB_OUT_PTR: Output pointer Points to a job list containing encrypted ECB data structure */
   #define ECB_OUT_PTR_ResetValue (0x00000000UL)      /*!< Reset value of PTR register.                                         */
@@ -17710,14 +17699,6 @@ typedef struct {
 /* PTR @Bits 0..31 : Output pointer */
   #define ECB_OUT_PTR_PTR_Pos (0UL)                  /*!< Position of PTR field.                                               */
   #define ECB_OUT_PTR_PTR_Msk (0xFFFFFFFFUL << ECB_OUT_PTR_PTR_Pos) /*!< Bit mask of PTR field.                                */
-
-
-/* ECB_OUT_AMOUNT: Number of bytes available in the output data, not including the job list structure */
-  #define ECB_OUT_AMOUNT_ResetValue (0x00000000UL)   /*!< Reset value of AMOUNT register.                                      */
-
-/* AMOUNT @Bits 0..31 : Number of bytes available in the output data */
-  #define ECB_OUT_AMOUNT_AMOUNT_Pos (0UL)            /*!< Position of AMOUNT field.                                            */
-  #define ECB_OUT_AMOUNT_AMOUNT_Msk (0xFFFFFFFFUL << ECB_OUT_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.                 */
 
 
 /* ======================================================= Struct ECB ======================================================== */
@@ -17744,8 +17725,9 @@ typedef struct {
     __IOM NRF_ECB_KEY_Type KEY;                      /*!< (@ 0x00000510) (unspecified)                                         */
     __IM uint32_t RESERVED5[4];
     __IOM NRF_ECB_IN_Type IN;                        /*!< (@ 0x00000530) IN EasyDMA channel                                    */
+    __IM uint32_t RESERVED6;
     __IOM NRF_ECB_OUT_Type OUT;                      /*!< (@ 0x00000538) OUT EasyDMA channel                                   */
-  } NRF_ECB_Type;                                    /*!< Size = 1344 (0x540)                                                  */
+  } NRF_ECB_Type;                                    /*!< Size = 1340 (0x53C)                                                  */
 
 /* ECB_TASKS_START: Start ECB block encrypt */
   #define ECB_TASKS_START_ResetValue (0x00000000UL)  /*!< Reset value of TASKS_START register.                                 */
@@ -119436,7 +119418,7 @@ typedef struct {
   #define SAADC_CH_CONFIG_GAIN_Gain2_3 (0x0UL)       /*!< 2/3                                                                  */
   #define SAADC_CH_CONFIG_GAIN_Gain1 (0x1UL)         /*!< 1                                                                    */
   #define SAADC_CH_CONFIG_GAIN_Gain2 (0x2UL)         /*!< 2                                                                    */
-  #define SAADC_CH_CONFIG_GAIN_Gain3 (0x3UL)         /*!< 4                                                                    */
+  #define SAADC_CH_CONFIG_GAIN_Gain4 (0x3UL)         /*!< 4                                                                    */
   #define SAADC_CH_CONFIG_GAIN_Gain1_2 (0x4UL)       /*!< 1/2                                                                  */
 
 /* BURST @Bit 11 : Enable burst mode */
@@ -119498,13 +119480,26 @@ typedef struct {
   * @brief RESULT [SAADC_RESULT] RESULT EasyDMA channel
   */
 typedef struct {
-  __IOM uint32_t  PTR;                               /*!< (@ 0x00000000) Data pointer                                          */
-  __IOM uint32_t  MAXCNT;                            /*!< (@ 0x00000004) Maximum number of buffer bytes to transfer            */
-  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x00000008) Number of buffer bytes transferred since last START,
+  __IOM uint32_t  DMAENABLE;                         /*!< (@ 0x00000000) This register has no other function than defining the
+                                                                         value on the dmaChannelPeripheralEnable output. (which
+                                                                         is not connected)*/
+  __IOM uint32_t  PTR;                               /*!< (@ 0x00000004) Data pointer                                          */
+  __IOM uint32_t  MAXCNT;                            /*!< (@ 0x00000008) Maximum number of buffer bytes to transfer            */
+  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of buffer bytes transferred since last START,
                                                                          updated after the END or STOPPED events*/
-  __IM  uint32_t  CURRENTAMOUNT;                     /*!< (@ 0x0000000C) Number of buffer bytes transferred since last START,
+  __IM  uint32_t  CURRENTAMOUNT;                     /*!< (@ 0x00000010) Number of buffer bytes transferred since last START,
                                                                          continuously updated*/
-} NRF_SAADC_RESULT_Type;                             /*!< Size = 16 (0x010)                                                    */
+} NRF_SAADC_RESULT_Type;                             /*!< Size = 20 (0x014)                                                    */
+
+/* SAADC_RESULT_DMAENABLE: This register has no other function than defining the value on the dmaChannelPeripheralEnable output.
+                            (which is not connected) */
+
+  #define SAADC_RESULT_DMAENABLE_ResetValue (0x00000000UL) /*!< Reset value of DMAENABLE register.                             */
+
+/* ENABLE @Bit 0 : Enable DMA */
+  #define SAADC_RESULT_DMAENABLE_ENABLE_Pos (0UL)    /*!< Position of ENABLE field.                                            */
+  #define SAADC_RESULT_DMAENABLE_ENABLE_Msk (0x1UL << SAADC_RESULT_DMAENABLE_ENABLE_Pos) /*!< Bit mask of ENABLE field.        */
+
 
 /* SAADC_RESULT_PTR: Data pointer */
   #define SAADC_RESULT_PTR_ResetValue (0x00000000UL) /*!< Reset value of PTR register.                                         */
@@ -119768,7 +119763,8 @@ typedef struct {
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
     __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
     __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
-    __IM uint32_t RESERVED5[61];
+    __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
+    __IM uint32_t RESERVED5[60];
     __IM uint32_t STATUS;                            /*!< (@ 0x00000400) Status                                                */
     __IM uint32_t PCRMSTATUS;                        /*!< (@ 0x00000404) PCRM Status                                           */
     __IM uint32_t STATUSANA;                         /*!< (@ 0x00000408) Status bit for analog macro                           */
@@ -119787,8 +119783,8 @@ typedef struct {
                                                                          should be used.*/
     __IOM uint32_t SAMPLERATE;                       /*!< (@ 0x000005F8) Controls normal or continuous sample rate             */
     __IOM uint32_t PCRMREQ;                          /*!< (@ 0x000005FC) PCRM request for clean power                          */
-    __IM uint32_t RESERVED10[11];
-    __IOM NRF_SAADC_RESULT_Type RESULT;              /*!< (@ 0x0000062C) RESULT EasyDMA channel                                */
+    __IM uint32_t RESERVED10[10];
+    __IOM NRF_SAADC_RESULT_Type RESULT;              /*!< (@ 0x00000628) RESULT EasyDMA channel                                */
     __IOM uint32_t TESTCTRL;                         /*!< (@ 0x0000063C) Control signals used during test of ADC               */
     __IOM uint32_t CAL;                              /*!< (@ 0x00000640) Calibration control for offset and gain error         */
     __IOM uint32_t CALREF;                           /*!< (@ 0x00000644) Calibration control for reference voltage             */
@@ -119797,7 +119793,7 @@ typedef struct {
     __IOM uint32_t EASYDMAMODE;                      /*!< (@ 0x00000658) Configure EasyDMA mode.                               */
     __IM uint32_t RESERVED12;
     __IOM uint32_t TERMINATEONAHBERROR;              /*!< (@ 0x00000660) Enable EasyDMA termination on AHB error               */
-    __IOM uint32_t AHBERRORADDRESS;                  /*!< (@ 0x00000664) Address of the last AHB error transaction             */
+    __IM uint32_t AHBERRORADDRESS;                   /*!< (@ 0x00000664) Address of the last AHB error transaction             */
     __IM uint32_t RESERVED13[38];
     __IOM NRF_SAADC_OVERRIDE_Type OVERRIDE;          /*!< (@ 0x00000700) (unspecified)                                         */
     __IM uint32_t RESERVED14[62];
@@ -120878,6 +120874,194 @@ typedef struct {
   #define SAADC_INTENCLR_AHBERROR_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
 
 
+/* SAADC_INTPEND: Pending interrupts */
+  #define SAADC_INTPEND_ResetValue (0x00000000UL)    /*!< Reset value of INTPEND register.                                     */
+
+/* STARTED @Bit 0 : Read pending status of interrupt for event STARTED */
+  #define SAADC_INTPEND_STARTED_Pos (0UL)            /*!< Position of STARTED field.                                           */
+  #define SAADC_INTPEND_STARTED_Msk (0x1UL << SAADC_INTPEND_STARTED_Pos) /*!< Bit mask of STARTED field.                       */
+  #define SAADC_INTPEND_STARTED_Min (0x0UL)          /*!< Min enumerator value of STARTED field.                               */
+  #define SAADC_INTPEND_STARTED_Max (0x1UL)          /*!< Max enumerator value of STARTED field.                               */
+  #define SAADC_INTPEND_STARTED_NotPending (0x0UL)   /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_STARTED_Pending (0x1UL)      /*!< Read: Pending                                                        */
+
+/* END @Bit 1 : Read pending status of interrupt for event END */
+  #define SAADC_INTPEND_END_Pos (1UL)                /*!< Position of END field.                                               */
+  #define SAADC_INTPEND_END_Msk (0x1UL << SAADC_INTPEND_END_Pos) /*!< Bit mask of END field.                                   */
+  #define SAADC_INTPEND_END_Min (0x0UL)              /*!< Min enumerator value of END field.                                   */
+  #define SAADC_INTPEND_END_Max (0x1UL)              /*!< Max enumerator value of END field.                                   */
+  #define SAADC_INTPEND_END_NotPending (0x0UL)       /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_END_Pending (0x1UL)          /*!< Read: Pending                                                        */
+
+/* DONE @Bit 2 : Read pending status of interrupt for event DONE */
+  #define SAADC_INTPEND_DONE_Pos (2UL)               /*!< Position of DONE field.                                              */
+  #define SAADC_INTPEND_DONE_Msk (0x1UL << SAADC_INTPEND_DONE_Pos) /*!< Bit mask of DONE field.                                */
+  #define SAADC_INTPEND_DONE_Min (0x0UL)             /*!< Min enumerator value of DONE field.                                  */
+  #define SAADC_INTPEND_DONE_Max (0x1UL)             /*!< Max enumerator value of DONE field.                                  */
+  #define SAADC_INTPEND_DONE_NotPending (0x0UL)      /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_DONE_Pending (0x1UL)         /*!< Read: Pending                                                        */
+
+/* RESULTDONE @Bit 3 : Read pending status of interrupt for event RESULTDONE */
+  #define SAADC_INTPEND_RESULTDONE_Pos (3UL)         /*!< Position of RESULTDONE field.                                        */
+  #define SAADC_INTPEND_RESULTDONE_Msk (0x1UL << SAADC_INTPEND_RESULTDONE_Pos) /*!< Bit mask of RESULTDONE field.              */
+  #define SAADC_INTPEND_RESULTDONE_Min (0x0UL)       /*!< Min enumerator value of RESULTDONE field.                            */
+  #define SAADC_INTPEND_RESULTDONE_Max (0x1UL)       /*!< Max enumerator value of RESULTDONE field.                            */
+  #define SAADC_INTPEND_RESULTDONE_NotPending (0x0UL) /*!< Read: Not pending                                                   */
+  #define SAADC_INTPEND_RESULTDONE_Pending (0x1UL)   /*!< Read: Pending                                                        */
+
+/* CALIBRATEDONE @Bit 4 : Read pending status of interrupt for event CALIBRATEDONE */
+  #define SAADC_INTPEND_CALIBRATEDONE_Pos (4UL)      /*!< Position of CALIBRATEDONE field.                                     */
+  #define SAADC_INTPEND_CALIBRATEDONE_Msk (0x1UL << SAADC_INTPEND_CALIBRATEDONE_Pos) /*!< Bit mask of CALIBRATEDONE field.     */
+  #define SAADC_INTPEND_CALIBRATEDONE_Min (0x0UL)    /*!< Min enumerator value of CALIBRATEDONE field.                         */
+  #define SAADC_INTPEND_CALIBRATEDONE_Max (0x1UL)    /*!< Max enumerator value of CALIBRATEDONE field.                         */
+  #define SAADC_INTPEND_CALIBRATEDONE_NotPending (0x0UL) /*!< Read: Not pending                                                */
+  #define SAADC_INTPEND_CALIBRATEDONE_Pending (0x1UL) /*!< Read: Pending                                                       */
+
+/* STOPPED @Bit 5 : Read pending status of interrupt for event STOPPED */
+  #define SAADC_INTPEND_STOPPED_Pos (5UL)            /*!< Position of STOPPED field.                                           */
+  #define SAADC_INTPEND_STOPPED_Msk (0x1UL << SAADC_INTPEND_STOPPED_Pos) /*!< Bit mask of STOPPED field.                       */
+  #define SAADC_INTPEND_STOPPED_Min (0x0UL)          /*!< Min enumerator value of STOPPED field.                               */
+  #define SAADC_INTPEND_STOPPED_Max (0x1UL)          /*!< Max enumerator value of STOPPED field.                               */
+  #define SAADC_INTPEND_STOPPED_NotPending (0x0UL)   /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_STOPPED_Pending (0x1UL)      /*!< Read: Pending                                                        */
+
+/* CH0LIMITH @Bit 6 : Read pending status of interrupt for event CH0LIMITH */
+  #define SAADC_INTPEND_CH0LIMITH_Pos (6UL)          /*!< Position of CH0LIMITH field.                                         */
+  #define SAADC_INTPEND_CH0LIMITH_Msk (0x1UL << SAADC_INTPEND_CH0LIMITH_Pos) /*!< Bit mask of CH0LIMITH field.                 */
+  #define SAADC_INTPEND_CH0LIMITH_Min (0x0UL)        /*!< Min enumerator value of CH0LIMITH field.                             */
+  #define SAADC_INTPEND_CH0LIMITH_Max (0x1UL)        /*!< Max enumerator value of CH0LIMITH field.                             */
+  #define SAADC_INTPEND_CH0LIMITH_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH0LIMITH_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH0LIMITL @Bit 7 : Read pending status of interrupt for event CH0LIMITL */
+  #define SAADC_INTPEND_CH0LIMITL_Pos (7UL)          /*!< Position of CH0LIMITL field.                                         */
+  #define SAADC_INTPEND_CH0LIMITL_Msk (0x1UL << SAADC_INTPEND_CH0LIMITL_Pos) /*!< Bit mask of CH0LIMITL field.                 */
+  #define SAADC_INTPEND_CH0LIMITL_Min (0x0UL)        /*!< Min enumerator value of CH0LIMITL field.                             */
+  #define SAADC_INTPEND_CH0LIMITL_Max (0x1UL)        /*!< Max enumerator value of CH0LIMITL field.                             */
+  #define SAADC_INTPEND_CH0LIMITL_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH0LIMITL_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH1LIMITH @Bit 8 : Read pending status of interrupt for event CH1LIMITH */
+  #define SAADC_INTPEND_CH1LIMITH_Pos (8UL)          /*!< Position of CH1LIMITH field.                                         */
+  #define SAADC_INTPEND_CH1LIMITH_Msk (0x1UL << SAADC_INTPEND_CH1LIMITH_Pos) /*!< Bit mask of CH1LIMITH field.                 */
+  #define SAADC_INTPEND_CH1LIMITH_Min (0x0UL)        /*!< Min enumerator value of CH1LIMITH field.                             */
+  #define SAADC_INTPEND_CH1LIMITH_Max (0x1UL)        /*!< Max enumerator value of CH1LIMITH field.                             */
+  #define SAADC_INTPEND_CH1LIMITH_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH1LIMITH_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH1LIMITL @Bit 9 : Read pending status of interrupt for event CH1LIMITL */
+  #define SAADC_INTPEND_CH1LIMITL_Pos (9UL)          /*!< Position of CH1LIMITL field.                                         */
+  #define SAADC_INTPEND_CH1LIMITL_Msk (0x1UL << SAADC_INTPEND_CH1LIMITL_Pos) /*!< Bit mask of CH1LIMITL field.                 */
+  #define SAADC_INTPEND_CH1LIMITL_Min (0x0UL)        /*!< Min enumerator value of CH1LIMITL field.                             */
+  #define SAADC_INTPEND_CH1LIMITL_Max (0x1UL)        /*!< Max enumerator value of CH1LIMITL field.                             */
+  #define SAADC_INTPEND_CH1LIMITL_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH1LIMITL_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH2LIMITH @Bit 10 : Read pending status of interrupt for event CH2LIMITH */
+  #define SAADC_INTPEND_CH2LIMITH_Pos (10UL)         /*!< Position of CH2LIMITH field.                                         */
+  #define SAADC_INTPEND_CH2LIMITH_Msk (0x1UL << SAADC_INTPEND_CH2LIMITH_Pos) /*!< Bit mask of CH2LIMITH field.                 */
+  #define SAADC_INTPEND_CH2LIMITH_Min (0x0UL)        /*!< Min enumerator value of CH2LIMITH field.                             */
+  #define SAADC_INTPEND_CH2LIMITH_Max (0x1UL)        /*!< Max enumerator value of CH2LIMITH field.                             */
+  #define SAADC_INTPEND_CH2LIMITH_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH2LIMITH_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH2LIMITL @Bit 11 : Read pending status of interrupt for event CH2LIMITL */
+  #define SAADC_INTPEND_CH2LIMITL_Pos (11UL)         /*!< Position of CH2LIMITL field.                                         */
+  #define SAADC_INTPEND_CH2LIMITL_Msk (0x1UL << SAADC_INTPEND_CH2LIMITL_Pos) /*!< Bit mask of CH2LIMITL field.                 */
+  #define SAADC_INTPEND_CH2LIMITL_Min (0x0UL)        /*!< Min enumerator value of CH2LIMITL field.                             */
+  #define SAADC_INTPEND_CH2LIMITL_Max (0x1UL)        /*!< Max enumerator value of CH2LIMITL field.                             */
+  #define SAADC_INTPEND_CH2LIMITL_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH2LIMITL_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH3LIMITH @Bit 12 : Read pending status of interrupt for event CH3LIMITH */
+  #define SAADC_INTPEND_CH3LIMITH_Pos (12UL)         /*!< Position of CH3LIMITH field.                                         */
+  #define SAADC_INTPEND_CH3LIMITH_Msk (0x1UL << SAADC_INTPEND_CH3LIMITH_Pos) /*!< Bit mask of CH3LIMITH field.                 */
+  #define SAADC_INTPEND_CH3LIMITH_Min (0x0UL)        /*!< Min enumerator value of CH3LIMITH field.                             */
+  #define SAADC_INTPEND_CH3LIMITH_Max (0x1UL)        /*!< Max enumerator value of CH3LIMITH field.                             */
+  #define SAADC_INTPEND_CH3LIMITH_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH3LIMITH_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH3LIMITL @Bit 13 : Read pending status of interrupt for event CH3LIMITL */
+  #define SAADC_INTPEND_CH3LIMITL_Pos (13UL)         /*!< Position of CH3LIMITL field.                                         */
+  #define SAADC_INTPEND_CH3LIMITL_Msk (0x1UL << SAADC_INTPEND_CH3LIMITL_Pos) /*!< Bit mask of CH3LIMITL field.                 */
+  #define SAADC_INTPEND_CH3LIMITL_Min (0x0UL)        /*!< Min enumerator value of CH3LIMITL field.                             */
+  #define SAADC_INTPEND_CH3LIMITL_Max (0x1UL)        /*!< Max enumerator value of CH3LIMITL field.                             */
+  #define SAADC_INTPEND_CH3LIMITL_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH3LIMITL_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH4LIMITH @Bit 14 : Read pending status of interrupt for event CH4LIMITH */
+  #define SAADC_INTPEND_CH4LIMITH_Pos (14UL)         /*!< Position of CH4LIMITH field.                                         */
+  #define SAADC_INTPEND_CH4LIMITH_Msk (0x1UL << SAADC_INTPEND_CH4LIMITH_Pos) /*!< Bit mask of CH4LIMITH field.                 */
+  #define SAADC_INTPEND_CH4LIMITH_Min (0x0UL)        /*!< Min enumerator value of CH4LIMITH field.                             */
+  #define SAADC_INTPEND_CH4LIMITH_Max (0x1UL)        /*!< Max enumerator value of CH4LIMITH field.                             */
+  #define SAADC_INTPEND_CH4LIMITH_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH4LIMITH_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH4LIMITL @Bit 15 : Read pending status of interrupt for event CH4LIMITL */
+  #define SAADC_INTPEND_CH4LIMITL_Pos (15UL)         /*!< Position of CH4LIMITL field.                                         */
+  #define SAADC_INTPEND_CH4LIMITL_Msk (0x1UL << SAADC_INTPEND_CH4LIMITL_Pos) /*!< Bit mask of CH4LIMITL field.                 */
+  #define SAADC_INTPEND_CH4LIMITL_Min (0x0UL)        /*!< Min enumerator value of CH4LIMITL field.                             */
+  #define SAADC_INTPEND_CH4LIMITL_Max (0x1UL)        /*!< Max enumerator value of CH4LIMITL field.                             */
+  #define SAADC_INTPEND_CH4LIMITL_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH4LIMITL_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH5LIMITH @Bit 16 : Read pending status of interrupt for event CH5LIMITH */
+  #define SAADC_INTPEND_CH5LIMITH_Pos (16UL)         /*!< Position of CH5LIMITH field.                                         */
+  #define SAADC_INTPEND_CH5LIMITH_Msk (0x1UL << SAADC_INTPEND_CH5LIMITH_Pos) /*!< Bit mask of CH5LIMITH field.                 */
+  #define SAADC_INTPEND_CH5LIMITH_Min (0x0UL)        /*!< Min enumerator value of CH5LIMITH field.                             */
+  #define SAADC_INTPEND_CH5LIMITH_Max (0x1UL)        /*!< Max enumerator value of CH5LIMITH field.                             */
+  #define SAADC_INTPEND_CH5LIMITH_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH5LIMITH_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH5LIMITL @Bit 17 : Read pending status of interrupt for event CH5LIMITL */
+  #define SAADC_INTPEND_CH5LIMITL_Pos (17UL)         /*!< Position of CH5LIMITL field.                                         */
+  #define SAADC_INTPEND_CH5LIMITL_Msk (0x1UL << SAADC_INTPEND_CH5LIMITL_Pos) /*!< Bit mask of CH5LIMITL field.                 */
+  #define SAADC_INTPEND_CH5LIMITL_Min (0x0UL)        /*!< Min enumerator value of CH5LIMITL field.                             */
+  #define SAADC_INTPEND_CH5LIMITL_Max (0x1UL)        /*!< Max enumerator value of CH5LIMITL field.                             */
+  #define SAADC_INTPEND_CH5LIMITL_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH5LIMITL_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH6LIMITH @Bit 18 : Read pending status of interrupt for event CH6LIMITH */
+  #define SAADC_INTPEND_CH6LIMITH_Pos (18UL)         /*!< Position of CH6LIMITH field.                                         */
+  #define SAADC_INTPEND_CH6LIMITH_Msk (0x1UL << SAADC_INTPEND_CH6LIMITH_Pos) /*!< Bit mask of CH6LIMITH field.                 */
+  #define SAADC_INTPEND_CH6LIMITH_Min (0x0UL)        /*!< Min enumerator value of CH6LIMITH field.                             */
+  #define SAADC_INTPEND_CH6LIMITH_Max (0x1UL)        /*!< Max enumerator value of CH6LIMITH field.                             */
+  #define SAADC_INTPEND_CH6LIMITH_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH6LIMITH_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH6LIMITL @Bit 19 : Read pending status of interrupt for event CH6LIMITL */
+  #define SAADC_INTPEND_CH6LIMITL_Pos (19UL)         /*!< Position of CH6LIMITL field.                                         */
+  #define SAADC_INTPEND_CH6LIMITL_Msk (0x1UL << SAADC_INTPEND_CH6LIMITL_Pos) /*!< Bit mask of CH6LIMITL field.                 */
+  #define SAADC_INTPEND_CH6LIMITL_Min (0x0UL)        /*!< Min enumerator value of CH6LIMITL field.                             */
+  #define SAADC_INTPEND_CH6LIMITL_Max (0x1UL)        /*!< Max enumerator value of CH6LIMITL field.                             */
+  #define SAADC_INTPEND_CH6LIMITL_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH6LIMITL_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH7LIMITH @Bit 20 : Read pending status of interrupt for event CH7LIMITH */
+  #define SAADC_INTPEND_CH7LIMITH_Pos (20UL)         /*!< Position of CH7LIMITH field.                                         */
+  #define SAADC_INTPEND_CH7LIMITH_Msk (0x1UL << SAADC_INTPEND_CH7LIMITH_Pos) /*!< Bit mask of CH7LIMITH field.                 */
+  #define SAADC_INTPEND_CH7LIMITH_Min (0x0UL)        /*!< Min enumerator value of CH7LIMITH field.                             */
+  #define SAADC_INTPEND_CH7LIMITH_Max (0x1UL)        /*!< Max enumerator value of CH7LIMITH field.                             */
+  #define SAADC_INTPEND_CH7LIMITH_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH7LIMITH_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* CH7LIMITL @Bit 21 : Read pending status of interrupt for event CH7LIMITL */
+  #define SAADC_INTPEND_CH7LIMITL_Pos (21UL)         /*!< Position of CH7LIMITL field.                                         */
+  #define SAADC_INTPEND_CH7LIMITL_Msk (0x1UL << SAADC_INTPEND_CH7LIMITL_Pos) /*!< Bit mask of CH7LIMITL field.                 */
+  #define SAADC_INTPEND_CH7LIMITL_Min (0x0UL)        /*!< Min enumerator value of CH7LIMITL field.                             */
+  #define SAADC_INTPEND_CH7LIMITL_Max (0x1UL)        /*!< Max enumerator value of CH7LIMITL field.                             */
+  #define SAADC_INTPEND_CH7LIMITL_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_CH7LIMITL_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* AHBERROR @Bit 22 : Read pending status of interrupt for event AHBERROR */
+  #define SAADC_INTPEND_AHBERROR_Pos (22UL)          /*!< Position of AHBERROR field.                                          */
+  #define SAADC_INTPEND_AHBERROR_Msk (0x1UL << SAADC_INTPEND_AHBERROR_Pos) /*!< Bit mask of AHBERROR field.                    */
+  #define SAADC_INTPEND_AHBERROR_Min (0x0UL)         /*!< Min enumerator value of AHBERROR field.                              */
+  #define SAADC_INTPEND_AHBERROR_Max (0x1UL)         /*!< Max enumerator value of AHBERROR field.                              */
+  #define SAADC_INTPEND_AHBERROR_NotPending (0x0UL)  /*!< Read: Not pending                                                    */
+  #define SAADC_INTPEND_AHBERROR_Pending (0x1UL)     /*!< Read: Pending                                                        */
+
+
 /* SAADC_STATUS: Status */
   #define SAADC_STATUS_ResetValue (0x00000000UL)     /*!< Reset value of STATUS register.                                      */
 
@@ -120924,6 +121108,14 @@ typedef struct {
   #define SAADC_ENABLE_ENABLE_Max (0x1UL)            /*!< Max enumerator value of ENABLE field.                                */
   #define SAADC_ENABLE_ENABLE_Disabled (0x0UL)       /*!< Disable ADC                                                          */
   #define SAADC_ENABLE_ENABLE_Enabled (0x1UL)        /*!< Enable ADC                                                           */
+
+/* POWERDOWNANA @Bit 8 : Power down analog between samples. See text for more info. */
+  #define SAADC_ENABLE_POWERDOWNANA_Pos (8UL)        /*!< Position of POWERDOWNANA field.                                      */
+  #define SAADC_ENABLE_POWERDOWNANA_Msk (0x1UL << SAADC_ENABLE_POWERDOWNANA_Pos) /*!< Bit mask of POWERDOWNANA field.          */
+  #define SAADC_ENABLE_POWERDOWNANA_Min (0x0UL)      /*!< Min enumerator value of POWERDOWNANA field.                          */
+  #define SAADC_ENABLE_POWERDOWNANA_Max (0x1UL)      /*!< Max enumerator value of POWERDOWNANA field.                          */
+  #define SAADC_ENABLE_POWERDOWNANA_KeepOn (0x0UL)   /*!< Keep analog on between samples                                       */
+  #define SAADC_ENABLE_POWERDOWNANA_PowerDown (0x1UL) /*!< Turn off analog between samples                                     */
 
 
 /* SAADC_REGRESULT: Last conversion result */
@@ -121039,7 +121231,7 @@ typedef struct {
   #define SAADC_TESTCTRL_PWRUP_15us (0x2UL)          /*!< 15 us                                                                */
   #define SAADC_TESTCTRL_PWRUP_20us (0x3UL)          /*!< 20 us                                                                */
 
-/* CALDMAWREN @Bit 30 : Enable writing offset calibration values to DMA */
+/* CALDMAWREN @Bit 30 : Enable writing calibration values to DMA */
   #define SAADC_TESTCTRL_CALDMAWREN_Pos (30UL)       /*!< Position of CALDMAWREN field.                                        */
   #define SAADC_TESTCTRL_CALDMAWREN_Msk (0x1UL << SAADC_TESTCTRL_CALDMAWREN_Pos) /*!< Bit mask of CALDMAWREN field.            */
   #define SAADC_TESTCTRL_CALDMAWREN_Min (0x0UL)      /*!< Min enumerator value of CALDMAWREN field.                            */
@@ -121072,11 +121264,31 @@ typedef struct {
   #define SAADC_CAL_CALGAIN_Pos (8UL)                /*!< Position of CALGAIN field.                                           */
   #define SAADC_CAL_CALGAIN_Msk (0x7FUL << SAADC_CAL_CALGAIN_Pos) /*!< Bit mask of CALGAIN field.                              */
   #define SAADC_CAL_CALGAIN_Min (0x0UL)              /*!< Min enumerator value of CALGAIN field.                               */
-  #define SAADC_CAL_CALGAIN_Max (0x3FUL)             /*!< Max enumerator value of CALGAIN field.                               */
+  #define SAADC_CAL_CALGAIN_Max (0x40UL)             /*!< Max enumerator value of CALGAIN field.                               */
   #define SAADC_CAL_CALGAIN_Default (0x00UL)         /*!< Default gain, for +1/2 input (assume full-scale = +-1) the output will
                                                           be 1024*/
   #define SAADC_CAL_CALGAIN_High (0x3FUL)            /*!< High gain setting                                                    */
-  #define SAADC_CAL_CALGAIN_Low (0x00UL)             /*!< Low gain setting                                                     */
+  #define SAADC_CAL_CALGAIN_Low (0x40UL)             /*!< Low gain setting                                                     */
+
+/* CALGAIN3V3 @Bits 16..22 : Offset binary coding */
+  #define SAADC_CAL_CALGAIN3V3_Pos (16UL)            /*!< Position of CALGAIN3V3 field.                                        */
+  #define SAADC_CAL_CALGAIN3V3_Msk (0x7FUL << SAADC_CAL_CALGAIN3V3_Pos) /*!< Bit mask of CALGAIN3V3 field.                     */
+  #define SAADC_CAL_CALGAIN3V3_Min (0x0UL)           /*!< Min enumerator value of CALGAIN3V3 field.                            */
+  #define SAADC_CAL_CALGAIN3V3_Max (0x40UL)          /*!< Max enumerator value of CALGAIN3V3 field.                            */
+  #define SAADC_CAL_CALGAIN3V3_Default (0x00UL)      /*!< Default gain, for +1/2 input (assume full-scale = +-1) the output will
+                                                          be 1024*/
+  #define SAADC_CAL_CALGAIN3V3_High (0x3FUL)         /*!< High gain setting                                                    */
+  #define SAADC_CAL_CALGAIN3V3_Low (0x40UL)          /*!< Low gain setting                                                     */
+
+/* CALGAIN5V0 @Bits 24..30 : Offset binary coding */
+  #define SAADC_CAL_CALGAIN5V0_Pos (24UL)            /*!< Position of CALGAIN5V0 field.                                        */
+  #define SAADC_CAL_CALGAIN5V0_Msk (0x7FUL << SAADC_CAL_CALGAIN5V0_Pos) /*!< Bit mask of CALGAIN5V0 field.                     */
+  #define SAADC_CAL_CALGAIN5V0_Min (0x0UL)           /*!< Min enumerator value of CALGAIN5V0 field.                            */
+  #define SAADC_CAL_CALGAIN5V0_Max (0x40UL)          /*!< Max enumerator value of CALGAIN5V0 field.                            */
+  #define SAADC_CAL_CALGAIN5V0_Default (0x00UL)      /*!< Default gain, for +1/2 input (assume full-scale = +-1) the output will
+                                                          be 1024*/
+  #define SAADC_CAL_CALGAIN5V0_High (0x3FUL)         /*!< High gain setting                                                    */
+  #define SAADC_CAL_CALGAIN5V0_Low (0x40UL)          /*!< Low gain setting                                                     */
 
 
 /* SAADC_CALREF: Calibration control for reference voltage */
@@ -121102,6 +121314,10 @@ typedef struct {
 /* VREFTC @Bits 16..18 : Calibration code for reference temperature coefficient. See design description for coding */
   #define SAADC_CALREF_VREFTC_Pos (16UL)             /*!< Position of VREFTC field.                                            */
   #define SAADC_CALREF_VREFTC_Msk (0x7UL << SAADC_CALREF_VREFTC_Pos) /*!< Bit mask of VREFTC field.                            */
+
+/* LDO @Bits 24..25 : Calibration code for LDO VREF. See design description for coding */
+  #define SAADC_CALREF_LDO_Pos (24UL)                /*!< Position of LDO field.                                               */
+  #define SAADC_CALREF_LDO_Msk (0x3UL << SAADC_CALREF_LDO_Pos) /*!< Bit mask of LDO field.                                     */
 
 
 /* SAADC_NOISESHAPE: Enable noise shaping */
@@ -123362,6 +123578,98 @@ typedef struct {
 
 
 
+/* ========================================= Struct SICR_AROT_SECURE_PERSONALIZATION ========================================= */
+/**
+  * @brief PERSONALIZATION [SICR_AROT_SECURE_PERSONALIZATION] The device unique pad used as part of a personalization string
+            during IKG key generation.
+
+  */
+typedef struct {
+  __IOM uint32_t  PAD[4];                            /*!< (@ 0x00000000) The device unique pad.                                */
+} NRF_SICR_AROT_SECURE_PERSONALIZATION_Type;         /*!< Size = 16 (0x010)                                                    */
+
+/* SICR_AROT_SECURE_PERSONALIZATION_PAD: The device unique pad. */
+  #define SICR_AROT_SECURE_PERSONALIZATION_PAD_MaxCount (4UL) /*!< Max size of PAD[4] array.                                   */
+  #define SICR_AROT_SECURE_PERSONALIZATION_PAD_MaxIndex (3UL) /*!< Max index of PAD[4] array.                                  */
+  #define SICR_AROT_SECURE_PERSONALIZATION_PAD_MinIndex (0UL) /*!< Min index of PAD[4] array.                                  */
+
+/* VALUE @Bits 0..31 : Value for word [n] in the unique pad. */
+  #define SICR_AROT_SECURE_PERSONALIZATION_PAD_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
+  #define SICR_AROT_SECURE_PERSONALIZATION_PAD_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_SECURE_PERSONALIZATION_PAD_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/
+
+
+
+/* ======================================= Struct SICR_AROT_SECURE_DATAPROTECTION_UICR ======================================= */
+/**
+  * @brief UICR [SICR_AROT_SECURE_DATAPROTECTION_UICR] Authentication tag used for validation of the content of the UICRs. The
+            UICRs content provides information about a domain peripherals associations and memory layout configuration. It is
+            stored in an unencrypted form in a dedicated memory location. A validation shall be performed using an AEAD scheme
+            realized by AES-256 GCM mode, with the domain KEK used as a secret key and UICR content used as additional
+            authenticated data (AAD). The initialization vector is provided in NONCE register.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the domain UICRs content.*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000004) The authentication tag of the domain UICRs.           */
+  __IOM uint32_t  RFU[3];                            /*!< (@ 0x00000014) (unspecified)                                         */
+} NRF_SICR_AROT_SECURE_DATAPROTECTION_UICR_Type;     /*!< Size = 32 (0x020)                                                    */
+
+/* SICR_AROT_SECURE_DATAPROTECTION_UICR_NONCE: The initialization vector of the encryption algorithm used to protect the domain
+                                                UICRs content. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                             */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_SECURE_DATAPROTECTION_UICR_NONCE_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_SECURE_DATAPROTECTION_UICR_MAC: The authentication tag of the domain UICRs. */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                               */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                              */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                              */
+
+/* VALUE @Bits 0..31 : The word [n] of the authentication tag. */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                               */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_SECURE_DATAPROTECTION_UICR_MAC_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_SECURE_DATAPROTECTION_UICR_RFU: (unspecified) */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_RFU_MaxCount (3UL) /*!< Max size of RFU[3] array.                               */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_RFU_MaxIndex (2UL) /*!< Max index of RFU[3] array.                              */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_RFU_MinIndex (0UL) /*!< Min index of RFU[3] array.                              */
+
+/* VALUE @Bits 0..31 : RFU word [n]. */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                               */
+  #define SICR_AROT_SECURE_DATAPROTECTION_UICR_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_SECURE_DATAPROTECTION_UICR_RFU_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+
+/* ========================================= Struct SICR_AROT_SECURE_DATAPROTECTION ========================================== */
+/**
+  * @brief DATAPROTECTION [SICR_AROT_SECURE_DATAPROTECTION] Elements used for validation of data provisioned onto a device by
+            the local domain.
+
+  */
+typedef struct {
+  __IOM NRF_SICR_AROT_SECURE_DATAPROTECTION_UICR_Type UICR; /*!< (@ 0x00000000) Authentication tag used for validation of the
+                                                                            content of the UICRs. The UICRs content provides
+                                                                            information about a domain peripherals associations
+                                                                            and memory layout configuration. It is stored in an
+                                                                            unencrypted form in a dedicated memory location. A
+                                                                            validation shall be performed using an AEAD scheme
+                                                                            realized by AES-256 GCM mode, with the domain KEK
+                                                                            used as a secret key and UICR content used as
+                                                                            additional authenticated data (AAD). The
+                                                                            initialization vector is provided in NONCE
+                                                                            register.*/
+} NRF_SICR_AROT_SECURE_DATAPROTECTION_Type;          /*!< Size = 32 (0x020)                                                    */
+
+
 /* ================================================= Struct SICR_AROT_SECURE ================================================= */
 /**
   * @brief SECURE [SICR_AROT_SECURE] (unspecified)
@@ -123377,7 +123685,11 @@ typedef struct {
                                                                             an additional authenticated data (AAD) in AEAD. The
                                                                             content of PUBKEY registers shall be used as an
                                                                             additional authenticated data (AAD) in AEAD.*/
-  __IM  uint32_t  RESERVED[184];
+  __IOM NRF_SICR_AROT_SECURE_PERSONALIZATION_Type PERSONALIZATION; /*!< (@ 0x00000120) The device unique pad used as part of a
+                                                                            personalization string during IKG key generation.*/
+  __IOM NRF_SICR_AROT_SECURE_DATAPROTECTION_Type DATAPROTECTION; /*!< (@ 0x00000130) Elements used for validation of data
+                                                                            provisioned onto a device by the local domain.*/
+  __IM  uint32_t  RESERVED[172];
 } NRF_SICR_AROT_SECURE_Type;                         /*!< Size = 1024 (0x400)                                                  */
 
 
@@ -123637,6 +123949,115 @@ typedef struct {
 
 
 
+/* ==================================== Struct SICR_AROT_APPLICATION_DATAPROTECTION_UICR ===================================== */
+/**
+  * @brief UICR [SICR_AROT_APPLICATION_DATAPROTECTION_UICR] Authentication tag used for validation of the content of the UICRs.
+            The UICRs content provides information about a domain peripherals associations and memory layout configuration. It
+            is stored in an unencrypted form in a dedicated memory location. A validation shall be performed using an AEAD
+            scheme realized by AES-256 GCM mode, with the domain KEK used as a secret key and UICR content used as additional
+            authenticated data (AAD). The initialization vector is provided in NONCE register.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the domain UICRs content.*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000004) The authentication tag of the domain UICRs.           */
+  __IOM uint32_t  RFU[3];                            /*!< (@ 0x00000014) (unspecified)                                         */
+} NRF_SICR_AROT_APPLICATION_DATAPROTECTION_UICR_Type; /*!< Size = 32 (0x020)                                                   */
+
+/* SICR_AROT_APPLICATION_DATAPROTECTION_UICR_NONCE: The initialization vector of the encryption algorithm used to protect the
+                                                     domain UICRs content. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                        */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_DATAPROTECTION_UICR_NONCE_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_DATAPROTECTION_UICR_MAC: The authentication tag of the domain UICRs. */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                          */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                         */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                         */
+
+/* VALUE @Bits 0..31 : The word [n] of the authentication tag. */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                          */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_DATAPROTECTION_UICR_MAC_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_DATAPROTECTION_UICR_RFU: (unspecified) */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_RFU_MaxCount (3UL) /*!< Max size of RFU[3] array.                          */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_RFU_MaxIndex (2UL) /*!< Max index of RFU[3] array.                         */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_RFU_MinIndex (0UL) /*!< Min index of RFU[3] array.                         */
+
+/* VALUE @Bits 0..31 : RFU word [n]. */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                          */
+  #define SICR_AROT_APPLICATION_DATAPROTECTION_UICR_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_DATAPROTECTION_UICR_RFU_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+
+/* ======================================= Struct SICR_AROT_APPLICATION_DATAPROTECTION ======================================= */
+/**
+  * @brief DATAPROTECTION [SICR_AROT_APPLICATION_DATAPROTECTION] Elements used for validation of data provisioned onto a device
+            by the local domain.
+
+  */
+typedef struct {
+  __IOM NRF_SICR_AROT_APPLICATION_DATAPROTECTION_UICR_Type UICR; /*!< (@ 0x00000000) Authentication tag used for validation of
+                                                                            the content of the UICRs. The UICRs content provides
+                                                                            information about a domain peripherals associations
+                                                                            and memory layout configuration. It is stored in an
+                                                                            unencrypted form in a dedicated memory location. A
+                                                                            validation shall be performed using an AEAD scheme
+                                                                            realized by AES-256 GCM mode, with the domain KEK
+                                                                            used as a secret key and UICR content used as
+                                                                            additional authenticated data (AAD). The
+                                                                            initialization vector is provided in NONCE
+                                                                            register.*/
+} NRF_SICR_AROT_APPLICATION_DATAPROTECTION_Type;     /*!< Size = 32 (0x020)                                                    */
+
+
+/* ======================================== Struct SICR_AROT_APPLICATION_DOMAINSTATE ========================================= */
+/**
+  * @brief DOMAINSTATE [SICR_AROT_APPLICATION_DOMAINSTATE] Registers holding the information regarding the local domain state.
+  */
+typedef struct {
+  __IOM uint32_t  RFU[3];                            /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM uint32_t  LCS;                               /*!< (@ 0x0000000C) The local domain lifecycle state as determined by the
+                                                                         URoT.*/
+} NRF_SICR_AROT_APPLICATION_DOMAINSTATE_Type;        /*!< Size = 16 (0x010)                                                    */
+
+/* SICR_AROT_APPLICATION_DOMAINSTATE_RFU: (unspecified) */
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_RFU_MaxCount (3UL) /*!< Max size of RFU[3] array.                                  */
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_RFU_MaxIndex (2UL) /*!< Max index of RFU[3] array.                                 */
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_RFU_MinIndex (0UL) /*!< Min index of RFU[3] array.                                 */
+
+/* VALUE @Bits 0..31 : RFU word [n]. */
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                  */
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_DOMAINSTATE_RFU_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_APPLICATION_DOMAINSTATE_LCS: The local domain lifecycle state as determined by the URoT. */
+
+/* STATE @Bits 0..31 : The local domain lifecycle state. */
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_LCS_STATE_Pos (0UL) /*!< Position of STATE field.                                  */
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_LCS_STATE_Msk (0xFFFFFFFFUL << SICR_AROT_APPLICATION_DOMAINSTATE_LCS_STATE_Pos) /*!<
+                                                                            Bit mask of STATE field.*/
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_LCS_STATE_Min (0x3590FCC5UL) /*!< Min enumerator value of STATE field.             */
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_LCS_STATE_Max (0xF6852179UL) /*!< Max enumerator value of STATE field.             */
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_LCS_STATE_AssemblyAndTest (0x3590FCC5UL) /*!< The local domain assets are installed
+                                                                            in this state. This includes the optional local
+                                                                            domain ARoT (its secure program).*/
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_LCS_STATE_ARoTProvisioning (0xF6852179UL) /*!< The optional local domain ARoT is
+                                                                            provisioned in this state.*/
+  #define SICR_AROT_APPLICATION_DOMAINSTATE_LCS_STATE_Secured (0x9F6B5F01UL) /*!< The local domain assets are provisioned and
+                                                                            secured.*/
+
+
+
 /* ============================================== Struct SICR_AROT_APPLICATION =============================================== */
 /**
   * @brief APPLICATION [SICR_AROT_APPLICATION] (unspecified)
@@ -123669,7 +124090,11 @@ typedef struct {
                                                                             an additional authenticated data (AAD) in AEAD. The
                                                                             content of PUBKEY registers shall be used as an
                                                                             additional authenticated data (AAD) in AEAD.*/
-  __IM  uint32_t  RESERVED[80];
+  __IOM NRF_SICR_AROT_APPLICATION_DATAPROTECTION_Type DATAPROTECTION; /*!< (@ 0x000002C0) Elements used for validation of data
+                                                                            provisioned onto a device by the local domain.*/
+  __IOM NRF_SICR_AROT_APPLICATION_DOMAINSTATE_Type DOMAINSTATE; /*!< (@ 0x000002E0) Registers holding the information regarding
+                                                                            the local domain state.*/
+  __IM  uint32_t  RESERVED[68];
 } NRF_SICR_AROT_APPLICATION_Type;                    /*!< Size = 1024 (0x400)                                                  */
 
 
@@ -123927,6 +124352,115 @@ typedef struct {
 
 
 
+/* ======================================= Struct SICR_AROT_RADIO_DATAPROTECTION_UICR ======================================== */
+/**
+  * @brief UICR [SICR_AROT_RADIO_DATAPROTECTION_UICR] Authentication tag used for validation of the content of the UICRs. The
+            UICRs content provides information about a domain peripherals associations and memory layout configuration. It is
+            stored in an unencrypted form in a dedicated memory location. A validation shall be performed using an AEAD scheme
+            realized by AES-256 GCM mode, with the domain KEK used as a secret key and UICR content used as additional
+            authenticated data (AAD). The initialization vector is provided in NONCE register.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the domain UICRs content.*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000004) The authentication tag of the domain UICRs.           */
+  __IOM uint32_t  RFU[3];                            /*!< (@ 0x00000014) (unspecified)                                         */
+} NRF_SICR_AROT_RADIO_DATAPROTECTION_UICR_Type;      /*!< Size = 32 (0x020)                                                    */
+
+/* SICR_AROT_RADIO_DATAPROTECTION_UICR_NONCE: The initialization vector of the encryption algorithm used to protect the domain
+                                               UICRs content. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                              */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_DATAPROTECTION_UICR_NONCE_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_RADIO_DATAPROTECTION_UICR_MAC: The authentication tag of the domain UICRs. */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                                */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                               */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                               */
+
+/* VALUE @Bits 0..31 : The word [n] of the authentication tag. */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_DATAPROTECTION_UICR_MAC_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_RADIO_DATAPROTECTION_UICR_RFU: (unspecified) */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_RFU_MaxCount (3UL) /*!< Max size of RFU[3] array.                                */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_RFU_MaxIndex (2UL) /*!< Max index of RFU[3] array.                               */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_RFU_MinIndex (0UL) /*!< Min index of RFU[3] array.                               */
+
+/* VALUE @Bits 0..31 : RFU word [n]. */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                */
+  #define SICR_AROT_RADIO_DATAPROTECTION_UICR_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_DATAPROTECTION_UICR_RFU_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+
+/* ========================================== Struct SICR_AROT_RADIO_DATAPROTECTION ========================================== */
+/**
+  * @brief DATAPROTECTION [SICR_AROT_RADIO_DATAPROTECTION] Elements used for validation of data provisioned onto a device by the
+            local domain.
+
+  */
+typedef struct {
+  __IOM NRF_SICR_AROT_RADIO_DATAPROTECTION_UICR_Type UICR; /*!< (@ 0x00000000) Authentication tag used for validation of the
+                                                                            content of the UICRs. The UICRs content provides
+                                                                            information about a domain peripherals associations
+                                                                            and memory layout configuration. It is stored in an
+                                                                            unencrypted form in a dedicated memory location. A
+                                                                            validation shall be performed using an AEAD scheme
+                                                                            realized by AES-256 GCM mode, with the domain KEK
+                                                                            used as a secret key and UICR content used as
+                                                                            additional authenticated data (AAD). The
+                                                                            initialization vector is provided in NONCE
+                                                                            register.*/
+} NRF_SICR_AROT_RADIO_DATAPROTECTION_Type;           /*!< Size = 32 (0x020)                                                    */
+
+
+/* =========================================== Struct SICR_AROT_RADIO_DOMAINSTATE ============================================ */
+/**
+  * @brief DOMAINSTATE [SICR_AROT_RADIO_DOMAINSTATE] Registers holding the information regarding the local domain state.
+  */
+typedef struct {
+  __IOM uint32_t  RFU[3];                            /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM uint32_t  LCS;                               /*!< (@ 0x0000000C) The local domain lifecycle state as determined by the
+                                                                         URoT.*/
+} NRF_SICR_AROT_RADIO_DOMAINSTATE_Type;              /*!< Size = 16 (0x010)                                                    */
+
+/* SICR_AROT_RADIO_DOMAINSTATE_RFU: (unspecified) */
+  #define SICR_AROT_RADIO_DOMAINSTATE_RFU_MaxCount (3UL) /*!< Max size of RFU[3] array.                                        */
+  #define SICR_AROT_RADIO_DOMAINSTATE_RFU_MaxIndex (2UL) /*!< Max index of RFU[3] array.                                       */
+  #define SICR_AROT_RADIO_DOMAINSTATE_RFU_MinIndex (0UL) /*!< Min index of RFU[3] array.                                       */
+
+/* VALUE @Bits 0..31 : RFU word [n]. */
+  #define SICR_AROT_RADIO_DOMAINSTATE_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                        */
+  #define SICR_AROT_RADIO_DOMAINSTATE_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_DOMAINSTATE_RFU_VALUE_Pos) /*!< Bit mask of
+                                                                            VALUE field.*/
+
+
+/* SICR_AROT_RADIO_DOMAINSTATE_LCS: The local domain lifecycle state as determined by the URoT. */
+
+/* STATE @Bits 0..31 : The local domain lifecycle state. */
+  #define SICR_AROT_RADIO_DOMAINSTATE_LCS_STATE_Pos (0UL) /*!< Position of STATE field.                                        */
+  #define SICR_AROT_RADIO_DOMAINSTATE_LCS_STATE_Msk (0xFFFFFFFFUL << SICR_AROT_RADIO_DOMAINSTATE_LCS_STATE_Pos) /*!< Bit mask of
+                                                                            STATE field.*/
+  #define SICR_AROT_RADIO_DOMAINSTATE_LCS_STATE_Min (0x3590FCC5UL) /*!< Min enumerator value of STATE field.                   */
+  #define SICR_AROT_RADIO_DOMAINSTATE_LCS_STATE_Max (0xF6852179UL) /*!< Max enumerator value of STATE field.                   */
+  #define SICR_AROT_RADIO_DOMAINSTATE_LCS_STATE_AssemblyAndTest (0x3590FCC5UL) /*!< The local domain assets are installed in
+                                                                            this state. This includes the optional local domain
+                                                                            ARoT (its secure program).*/
+  #define SICR_AROT_RADIO_DOMAINSTATE_LCS_STATE_ARoTProvisioning (0xF6852179UL) /*!< The optional local domain ARoT is
+                                                                            provisioned in this state.*/
+  #define SICR_AROT_RADIO_DOMAINSTATE_LCS_STATE_Secured (0x9F6B5F01UL) /*!< The local domain assets are provisioned and
+                                                                            secured.*/
+
+
+
 /* ================================================= Struct SICR_AROT_RADIO ================================================== */
 /**
   * @brief RADIO [SICR_AROT_RADIO] (unspecified)
@@ -123959,7 +124493,11 @@ typedef struct {
                                                                             an additional authenticated data (AAD) in AEAD. The
                                                                             content of PUBKEY registers shall be used as an
                                                                             additional authenticated data (AAD) in AEAD.*/
-  __IM  uint32_t  RESERVED[80];
+  __IOM NRF_SICR_AROT_RADIO_DATAPROTECTION_Type DATAPROTECTION; /*!< (@ 0x000002C0) Elements used for validation of data
+                                                                            provisioned onto a device by the local domain.*/
+  __IOM NRF_SICR_AROT_RADIO_DOMAINSTATE_Type DOMAINSTATE; /*!< (@ 0x000002E0) Registers holding the information regarding the
+                                                                            local domain state.*/
+  __IM  uint32_t  RESERVED[68];
 } NRF_SICR_AROT_RADIO_Type;                          /*!< Size = 1024 (0x400)                                                  */
 
 
@@ -124219,6 +124757,115 @@ typedef struct {
 
 
 
+/* ==================================== Struct SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR ==================================== */
+/**
+  * @brief UICR [SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR] Authentication tag used for validation of the content of the UICRs.
+            The UICRs content provides information about a domain peripherals associations and memory layout configuration. It
+            is stored in an unencrypted form in a dedicated memory location. A validation shall be performed using an AEAD
+            scheme realized by AES-256 GCM mode, with the domain KEK used as a secret key and UICR content used as additional
+            authenticated data (AAD). The initialization vector is provided in NONCE register.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the domain UICRs content.*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000004) The authentication tag of the domain UICRs.           */
+  __IOM uint32_t  RFU[3];                            /*!< (@ 0x00000014) (unspecified)                                         */
+} NRF_SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_Type; /*!< Size = 32 (0x020)                                                  */
+
+/* SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_NONCE: The initialization vector of the encryption algorithm used to protect the
+                                                      domain UICRs content. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                       */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_NONCE_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_MAC: The authentication tag of the domain UICRs. */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                         */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                        */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                        */
+
+/* VALUE @Bits 0..31 : The word [n] of the authentication tag. */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                         */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_MAC_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_RFU: (unspecified) */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_RFU_MaxCount (3UL) /*!< Max size of RFU[3] array.                         */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_RFU_MaxIndex (2UL) /*!< Max index of RFU[3] array.                        */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_RFU_MinIndex (0UL) /*!< Min index of RFU[3] array.                        */
+
+/* VALUE @Bits 0..31 : RFU word [n]. */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                         */
+  #define SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_RFU_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+
+/* ====================================== Struct SICR_AROT_CELLULARCORE_DATAPROTECTION ======================================= */
+/**
+  * @brief DATAPROTECTION [SICR_AROT_CELLULARCORE_DATAPROTECTION] Elements used for validation of data provisioned onto a device
+            by the local domain.
+
+  */
+typedef struct {
+  __IOM NRF_SICR_AROT_CELLULARCORE_DATAPROTECTION_UICR_Type UICR; /*!< (@ 0x00000000) Authentication tag used for validation of
+                                                                            the content of the UICRs. The UICRs content provides
+                                                                            information about a domain peripherals associations
+                                                                            and memory layout configuration. It is stored in an
+                                                                            unencrypted form in a dedicated memory location. A
+                                                                            validation shall be performed using an AEAD scheme
+                                                                            realized by AES-256 GCM mode, with the domain KEK
+                                                                            used as a secret key and UICR content used as
+                                                                            additional authenticated data (AAD). The
+                                                                            initialization vector is provided in NONCE
+                                                                            register.*/
+} NRF_SICR_AROT_CELLULARCORE_DATAPROTECTION_Type;    /*!< Size = 32 (0x020)                                                    */
+
+
+/* ======================================== Struct SICR_AROT_CELLULARCORE_DOMAINSTATE ======================================== */
+/**
+  * @brief DOMAINSTATE [SICR_AROT_CELLULARCORE_DOMAINSTATE] Registers holding the information regarding the local domain state.
+  */
+typedef struct {
+  __IOM uint32_t  RFU[3];                            /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM uint32_t  LCS;                               /*!< (@ 0x0000000C) The local domain lifecycle state as determined by the
+                                                                         URoT.*/
+} NRF_SICR_AROT_CELLULARCORE_DOMAINSTATE_Type;       /*!< Size = 16 (0x010)                                                    */
+
+/* SICR_AROT_CELLULARCORE_DOMAINSTATE_RFU: (unspecified) */
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_RFU_MaxCount (3UL) /*!< Max size of RFU[3] array.                                 */
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_RFU_MaxIndex (2UL) /*!< Max index of RFU[3] array.                                */
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_RFU_MinIndex (0UL) /*!< Min index of RFU[3] array.                                */
+
+/* VALUE @Bits 0..31 : RFU word [n]. */
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                 */
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_DOMAINSTATE_RFU_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_CELLULARCORE_DOMAINSTATE_LCS: The local domain lifecycle state as determined by the URoT. */
+
+/* STATE @Bits 0..31 : The local domain lifecycle state. */
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_LCS_STATE_Pos (0UL) /*!< Position of STATE field.                                 */
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_LCS_STATE_Msk (0xFFFFFFFFUL << SICR_AROT_CELLULARCORE_DOMAINSTATE_LCS_STATE_Pos)
+                                                                            /*!< Bit mask of STATE field.*/
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_LCS_STATE_Min (0x3590FCC5UL) /*!< Min enumerator value of STATE field.            */
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_LCS_STATE_Max (0xF6852179UL) /*!< Max enumerator value of STATE field.            */
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_LCS_STATE_AssemblyAndTest (0x3590FCC5UL) /*!< The local domain assets are installed
+                                                                            in this state. This includes the optional local
+                                                                            domain ARoT (its secure program).*/
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_LCS_STATE_ARoTProvisioning (0xF6852179UL) /*!< The optional local domain ARoT is
+                                                                            provisioned in this state.*/
+  #define SICR_AROT_CELLULARCORE_DOMAINSTATE_LCS_STATE_Secured (0x9F6B5F01UL) /*!< The local domain assets are provisioned and
+                                                                            secured.*/
+
+
+
 /* ============================================== Struct SICR_AROT_CELLULARCORE ============================================== */
 /**
   * @brief CELLULARCORE [SICR_AROT_CELLULARCORE] (unspecified)
@@ -124251,7 +124898,11 @@ typedef struct {
                                                                             an additional authenticated data (AAD) in AEAD. The
                                                                             content of PUBKEY registers shall be used as an
                                                                             additional authenticated data (AAD) in AEAD.*/
-  __IM  uint32_t  RESERVED[80];
+  __IOM NRF_SICR_AROT_CELLULARCORE_DATAPROTECTION_Type DATAPROTECTION; /*!< (@ 0x000002C0) Elements used for validation of data
+                                                                            provisioned onto a device by the local domain.*/
+  __IOM NRF_SICR_AROT_CELLULARCORE_DOMAINSTATE_Type DOMAINSTATE; /*!< (@ 0x000002E0) Registers holding the information regarding
+                                                                            the local domain state.*/
+  __IM  uint32_t  RESERVED[68];
 } NRF_SICR_AROT_CELLULARCORE_Type;                   /*!< Size = 1024 (0x400)                                                  */
 
 
@@ -124510,6 +125161,115 @@ typedef struct {
 
 
 
+/* ====================================== Struct SICR_AROT_WIFICORE_DATAPROTECTION_UICR ====================================== */
+/**
+  * @brief UICR [SICR_AROT_WIFICORE_DATAPROTECTION_UICR] Authentication tag used for validation of the content of the UICRs. The
+            UICRs content provides information about a domain peripherals associations and memory layout configuration. It is
+            stored in an unencrypted form in a dedicated memory location. A validation shall be performed using an AEAD scheme
+            realized by AES-256 GCM mode, with the domain KEK used as a secret key and UICR content used as additional
+            authenticated data (AAD). The initialization vector is provided in NONCE register.
+
+  */
+typedef struct {
+  __IOM uint32_t  NONCE;                             /*!< (@ 0x00000000) The initialization vector of the encryption algorithm
+                                                                         used to protect the domain UICRs content.*/
+  __IOM uint32_t  MAC[4];                            /*!< (@ 0x00000004) The authentication tag of the domain UICRs.           */
+  __IOM uint32_t  RFU[3];                            /*!< (@ 0x00000014) (unspecified)                                         */
+} NRF_SICR_AROT_WIFICORE_DATAPROTECTION_UICR_Type;   /*!< Size = 32 (0x020)                                                    */
+
+/* SICR_AROT_WIFICORE_DATAPROTECTION_UICR_NONCE: The initialization vector of the encryption algorithm used to protect the
+                                                  domain UICRs content. */
+
+
+/* VALUE @Bits 0..31 : Value of nonce used by AEAD. */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_NONCE_VALUE_Pos (0UL) /*!< Position of VALUE field.                           */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_NONCE_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_DATAPROTECTION_UICR_NONCE_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_DATAPROTECTION_UICR_MAC: The authentication tag of the domain UICRs. */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_MAC_MaxCount (4UL) /*!< Max size of MAC[4] array.                             */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_MAC_MaxIndex (3UL) /*!< Max index of MAC[4] array.                            */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_MAC_MinIndex (0UL) /*!< Min index of MAC[4] array.                            */
+
+/* VALUE @Bits 0..31 : The word [n] of the authentication tag. */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_MAC_VALUE_Pos (0UL) /*!< Position of VALUE field.                             */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_MAC_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_DATAPROTECTION_UICR_MAC_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_DATAPROTECTION_UICR_RFU: (unspecified) */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_RFU_MaxCount (3UL) /*!< Max size of RFU[3] array.                             */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_RFU_MaxIndex (2UL) /*!< Max index of RFU[3] array.                            */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_RFU_MinIndex (0UL) /*!< Min index of RFU[3] array.                            */
+
+/* VALUE @Bits 0..31 : RFU word [n]. */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                             */
+  #define SICR_AROT_WIFICORE_DATAPROTECTION_UICR_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_DATAPROTECTION_UICR_RFU_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/
+
+
+
+/* ======================================== Struct SICR_AROT_WIFICORE_DATAPROTECTION ========================================= */
+/**
+  * @brief DATAPROTECTION [SICR_AROT_WIFICORE_DATAPROTECTION] Elements used for validation of data provisioned onto a device by
+            the local domain.
+
+  */
+typedef struct {
+  __IOM NRF_SICR_AROT_WIFICORE_DATAPROTECTION_UICR_Type UICR; /*!< (@ 0x00000000) Authentication tag used for validation of the
+                                                                            content of the UICRs. The UICRs content provides
+                                                                            information about a domain peripherals associations
+                                                                            and memory layout configuration. It is stored in an
+                                                                            unencrypted form in a dedicated memory location. A
+                                                                            validation shall be performed using an AEAD scheme
+                                                                            realized by AES-256 GCM mode, with the domain KEK
+                                                                            used as a secret key and UICR content used as
+                                                                            additional authenticated data (AAD). The
+                                                                            initialization vector is provided in NONCE
+                                                                            register.*/
+} NRF_SICR_AROT_WIFICORE_DATAPROTECTION_Type;        /*!< Size = 32 (0x020)                                                    */
+
+
+/* ========================================== Struct SICR_AROT_WIFICORE_DOMAINSTATE ========================================== */
+/**
+  * @brief DOMAINSTATE [SICR_AROT_WIFICORE_DOMAINSTATE] Registers holding the information regarding the local domain state.
+  */
+typedef struct {
+  __IOM uint32_t  RFU[3];                            /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM uint32_t  LCS;                               /*!< (@ 0x0000000C) The local domain lifecycle state as determined by the
+                                                                         URoT.*/
+} NRF_SICR_AROT_WIFICORE_DOMAINSTATE_Type;           /*!< Size = 16 (0x010)                                                    */
+
+/* SICR_AROT_WIFICORE_DOMAINSTATE_RFU: (unspecified) */
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_RFU_MaxCount (3UL) /*!< Max size of RFU[3] array.                                     */
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_RFU_MaxIndex (2UL) /*!< Max index of RFU[3] array.                                    */
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_RFU_MinIndex (0UL) /*!< Min index of RFU[3] array.                                    */
+
+/* VALUE @Bits 0..31 : RFU word [n]. */
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_RFU_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_RFU_VALUE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_DOMAINSTATE_RFU_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/
+
+
+/* SICR_AROT_WIFICORE_DOMAINSTATE_LCS: The local domain lifecycle state as determined by the URoT. */
+
+/* STATE @Bits 0..31 : The local domain lifecycle state. */
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_LCS_STATE_Pos (0UL) /*!< Position of STATE field.                                     */
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_LCS_STATE_Msk (0xFFFFFFFFUL << SICR_AROT_WIFICORE_DOMAINSTATE_LCS_STATE_Pos) /*!< Bit
+                                                                            mask of STATE field.*/
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_LCS_STATE_Min (0x3590FCC5UL) /*!< Min enumerator value of STATE field.                */
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_LCS_STATE_Max (0xF6852179UL) /*!< Max enumerator value of STATE field.                */
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_LCS_STATE_AssemblyAndTest (0x3590FCC5UL) /*!< The local domain assets are installed in
+                                                                            this state. This includes the optional local domain
+                                                                            ARoT (its secure program).*/
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_LCS_STATE_ARoTProvisioning (0xF6852179UL) /*!< The optional local domain ARoT is
+                                                                            provisioned in this state.*/
+  #define SICR_AROT_WIFICORE_DOMAINSTATE_LCS_STATE_Secured (0x9F6B5F01UL) /*!< The local domain assets are provisioned and
+                                                                            secured.*/
+
+
+
 /* ================================================ Struct SICR_AROT_WIFICORE ================================================ */
 /**
   * @brief WIFICORE [SICR_AROT_WIFICORE] (unspecified)
@@ -124542,7 +125302,11 @@ typedef struct {
                                                                             an additional authenticated data (AAD) in AEAD. The
                                                                             content of PUBKEY registers shall be used as an
                                                                             additional authenticated data (AAD) in AEAD.*/
-  __IM  uint32_t  RESERVED[80];
+  __IOM NRF_SICR_AROT_WIFICORE_DATAPROTECTION_Type DATAPROTECTION; /*!< (@ 0x000002C0) Elements used for validation of data
+                                                                            provisioned onto a device by the local domain.*/
+  __IOM NRF_SICR_AROT_WIFICORE_DOMAINSTATE_Type DOMAINSTATE; /*!< (@ 0x000002E0) Registers holding the information regarding the
+                                                                            local domain state.*/
+  __IM  uint32_t  RESERVED[68];
 } NRF_SICR_AROT_WIFICORE_Type;                       /*!< Size = 1024 (0x400)                                                  */
 
 

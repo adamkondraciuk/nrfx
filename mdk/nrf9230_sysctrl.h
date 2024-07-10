@@ -356,6 +356,7 @@ typedef enum {
 #define NRF_SYSCTRL_MEMCONF120_BASE       0x5F8C7000UL
 #define NRF_SYSCTRL_HSFLL120_BASE         0x5F8CD000UL
 #define NRF_SYSCTRL_LRCCONF120_BASE       0x5F8CE000UL
+#define NRF_SYSCTRL_RESETINFO120_BASE     0x5F8CE000UL
 #define NRF_SYSCTRL_PCGCM120_BASE         0x5F8CF000UL
 #define NRF_SYSCTRL_PCGCS120_BASE         0x5F8EA000UL
 #define NRF_SYSCTRL_PCGCS121_BASE         0x5F8EB000UL
@@ -373,6 +374,7 @@ typedef enum {
 #define NRF_SYSCTRL_PCGCS131_BASE         0x5F93C000UL
 #define NRF_SYSCTRL_PCGCM130_BASE         0x5F93D000UL
 #define NRF_SYSCTRL_LRCCONF130_BASE       0x5F93E000UL
+#define NRF_SYSCTRL_RESETINFO130_BASE     0x5F93E000UL
 #define NRF_SYSCTRL_PCGCM131_BASE         0x5F93F000UL
 #define NRF_SYSCTRL_GRCCONF_BASE          0x5F940000UL
 #define NRF_SYSCTRL_PCRM_BASE             0x5F943000UL
@@ -446,6 +448,7 @@ typedef enum {
 #define NRF_SYSCTRL_MEMCONF120            ((NRF_MEMCONF_Type*)                  NRF_SYSCTRL_MEMCONF120_BASE)
 #define NRF_SYSCTRL_HSFLL120              ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL120_BASE)
 #define NRF_SYSCTRL_LRCCONF120            ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF120_BASE)
+#define NRF_SYSCTRL_RESETINFO120          ((NRF_RESETINFO_Type*)                NRF_SYSCTRL_RESETINFO120_BASE)
 #define NRF_SYSCTRL_PCGCM120              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM120_BASE)
 #define NRF_SYSCTRL_PCGCS120              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS120_BASE)
 #define NRF_SYSCTRL_PCGCS121              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS121_BASE)
@@ -463,6 +466,7 @@ typedef enum {
 #define NRF_SYSCTRL_PCGCS131              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS131_BASE)
 #define NRF_SYSCTRL_PCGCM130              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM130_BASE)
 #define NRF_SYSCTRL_LRCCONF130            ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF130_BASE)
+#define NRF_SYSCTRL_RESETINFO130          ((NRF_RESETINFO_Type*)                NRF_SYSCTRL_RESETINFO130_BASE)
 #define NRF_SYSCTRL_PCGCM131              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM131_BASE)
 #define NRF_SYSCTRL_GRCCONF               ((NRF_GRCCONF_Type*)                  NRF_SYSCTRL_GRCCONF_BASE)
 #define NRF_SYSCTRL_PCRM                  ((NRF_PCRM_Type*)                     NRF_SYSCTRL_PCRM_BASE)
@@ -537,6 +541,7 @@ typedef enum {
   #define NRF_MEMCONF120                          NRF_SYSCTRL_MEMCONF120
   #define NRF_HSFLL120                            NRF_SYSCTRL_HSFLL120
   #define NRF_LRCCONF120                          NRF_SYSCTRL_LRCCONF120
+  #define NRF_RESETINFO120                        NRF_SYSCTRL_RESETINFO120
   #define NRF_PCGCM120                            NRF_SYSCTRL_PCGCM120
   #define NRF_PCGCS120                            NRF_SYSCTRL_PCGCS120
   #define NRF_PCGCS121                            NRF_SYSCTRL_PCGCS121
@@ -554,6 +559,7 @@ typedef enum {
   #define NRF_PCGCS131                            NRF_SYSCTRL_PCGCS131
   #define NRF_PCGCM130                            NRF_SYSCTRL_PCGCM130
   #define NRF_LRCCONF130                          NRF_SYSCTRL_LRCCONF130
+  #define NRF_RESETINFO130                        NRF_SYSCTRL_RESETINFO130
   #define NRF_PCGCM131                            NRF_SYSCTRL_PCGCM131
   #define NRF_GRCCONF                             NRF_SYSCTRL_GRCCONF
   #define NRF_PCRM                                NRF_SYSCTRL_PCRM

@@ -442,13 +442,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RFSERVICES_PRESENT 1
 #define RFSERVICES_COUNT 1
 
-#define RFSERVICES_INC_PADCNF_PWRREQ 1               /*!< (unspecified)                                                        */
+#define RFSERVICES_INC_PADCNF_PWRREQ 0               /*!< (unspecified)                                                        */
 
 /*AhmaRfSubsystem general control register map*/
 #define RFCORESERVICES_PRESENT 1
 #define RFCORESERVICES_COUNT 1
 
-#define RFCORESERVICES_INC_RESETREQ 0                /*!< (unspecified)                                                        */
+#define RFCORESERVICES_EXTENDED_REGS 0               /*!< (unspecified)                                                        */
 
 /*MVDMA performs direct-memory-accesses between memories. Data is transferred according to job descriptor lists. Each transfer has corresponding source and sink descriptor lists with matching data amounts. The lists are in memory and they contain data buffer information, address pointers, buffer sizes and data type attributes.*/
 

@@ -1074,6 +1074,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                                                            [0..2]*/
 #define VREGGFX_VREGVS0V8_NOTFULLPCPZERO 0           /*!< (unspecified)                                                        */
 #define VREGGFX_HIGHER_CURRENT_LIMIT 1               /*!< (unspecified)                                                        */
+#define VREGGFX_ADD_HP_HELPER_MODE 1                 /*!< (unspecified)                                                        */
 
 /*GPIO Tasks and Events*/
 #define GPIOTE_PRESENT 1
@@ -3187,7 +3188,6 @@ typedef enum {
   NRF_SECURE_SPU010_FEATURES_IPCT_CH_3       = 3,    /*!< Index of access permissions for channel 3 of IPCT                    */
   NRF_SECURE_SPU010_FEATURES_IPCT_INTERRUPT_0 = 24,  /*!< Index of access permissions for interrupt 0 of IPCT                  */
   NRF_SECURE_SPU010_FEATURES_IPCT_INTERRUPT_1 = 25,  /*!< Index of access permissions for interrupt 1 of IPCT                  */
-  NRF_SECURE_SPU010_FEATURES_CRACEN_SEED     = 224,  /*!< Index of access permissions for SEED register of CRACEN              */
 } NRF_SECURE_SPU010_FEATURES_ENUM_t;
 
 /* ============================================= SPU111 Split Security Features ============================================== */
@@ -3574,6 +3574,19 @@ typedef enum {
   NRF_SECURE_SPU131_FEATURES_GPIOTE130_INTERRUPT_5 = 77, /*!< Index of access permissions for interrupt 5 of GPIOTE130         */
   NRF_SECURE_SPU131_FEATURES_GPIOTE130_INTERRUPT_6 = 78, /*!< Index of access permissions for interrupt 6 of GPIOTE130         */
   NRF_SECURE_SPU131_FEATURES_GPIOTE130_INTERRUPT_7 = 79, /*!< Index of access permissions for interrupt 7 of GPIOTE130         */
+  NRF_SECURE_SPU131_FEATURES_COEXC_CCCONF_0  = 80,   /*!< Index of access permissions for CCCONF[0] register of COEXC          */
+  NRF_SECURE_SPU131_FEATURES_COEXC_CCCONF_1  = 81,   /*!< Index of access permissions for CCCONF[1] register of COEXC          */
+  NRF_SECURE_SPU131_FEATURES_COEXC_CCCONF_2  = 82,   /*!< Index of access permissions for CCCONF[2] register of COEXC          */
+  NRF_SECURE_SPU131_FEATURES_COEXC_CCCONF_3  = 83,   /*!< Index of access permissions for CCCONF[3] register of COEXC          */
+  NRF_SECURE_SPU131_FEATURES_COEXC_CCCONF_4  = 84,   /*!< Index of access permissions for CCCONF[4] register of COEXC          */
+  NRF_SECURE_SPU131_FEATURES_COEXC_CCCONF_5  = 85,   /*!< Index of access permissions for CCCONF[5] register of COEXC          */
+  NRF_SECURE_SPU131_FEATURES_COEXC_TURNAROUND_0 = 96, /*!< Index of access permissions for TURNAROUND[0] register of COEXC     */
+  NRF_SECURE_SPU131_FEATURES_COEXC_TURNAROUND_1 = 97, /*!< Index of access permissions for TURNAROUND[1] register of COEXC     */
+  NRF_SECURE_SPU131_FEATURES_COEXC_TURNAROUND_2 = 98, /*!< Index of access permissions for TURNAROUND[2] register of COEXC     */
+  NRF_SECURE_SPU131_FEATURES_COEXC_TURNAROUND_3 = 99, /*!< Index of access permissions for TURNAROUND[3] register of COEXC     */
+  NRF_SECURE_SPU131_FEATURES_COEXC_TURNAROUND_4 = 100, /*!< Index of access permissions for TURNAROUND[4] register of COEXC    */
+  NRF_SECURE_SPU131_FEATURES_COEXC_TURNAROUND_5 = 101, /*!< Index of access permissions for TURNAROUND[5] register of COEXC    */
+  NRF_SECURE_SPU131_FEATURES_COEXC_CCMALLOW  = 112,  /*!< Index of access permissions for CCMALLOW registers of COEXC          */
   NRF_SECURE_SPU131_FEATURES_P0_PIN_0        = 128,  /*!< Index of access permissions for pin 0 of GPIO port P0                */
   NRF_SECURE_SPU131_FEATURES_P0_PIN_1        = 129,  /*!< Index of access permissions for pin 1 of GPIO port P0                */
   NRF_SECURE_SPU131_FEATURES_P0_PIN_2        = 130,  /*!< Index of access permissions for pin 2 of GPIO port P0                */
@@ -3705,19 +3718,6 @@ typedef enum {
   NRF_SECURE_SPU133_FEATURES_DPPIC132_CH_7   = 39,   /*!< Index of access permissions for channel 7 of DPPIC132                */
   NRF_SECURE_SPU133_FEATURES_DPPIC132_CHG_0  = 56,   /*!< Index of access permissions for channel group 0 of DPPIC132          */
   NRF_SECURE_SPU133_FEATURES_DPPIC132_CHG_1  = 57,   /*!< Index of access permissions for channel group 1 of DPPIC132          */
-  NRF_SECURE_SPU133_FEATURES_COEXC_CCCONF_0  = 64,   /*!< Index of access permissions for CCCONF[0] register of COEXC          */
-  NRF_SECURE_SPU133_FEATURES_COEXC_CCCONF_1  = 65,   /*!< Index of access permissions for CCCONF[1] register of COEXC          */
-  NRF_SECURE_SPU133_FEATURES_COEXC_CCCONF_2  = 66,   /*!< Index of access permissions for CCCONF[2] register of COEXC          */
-  NRF_SECURE_SPU133_FEATURES_COEXC_CCCONF_3  = 67,   /*!< Index of access permissions for CCCONF[3] register of COEXC          */
-  NRF_SECURE_SPU133_FEATURES_COEXC_CCCONF_4  = 68,   /*!< Index of access permissions for CCCONF[4] register of COEXC          */
-  NRF_SECURE_SPU133_FEATURES_COEXC_CCCONF_5  = 69,   /*!< Index of access permissions for CCCONF[5] register of COEXC          */
-  NRF_SECURE_SPU133_FEATURES_COEXC_TURNAROUND_0 = 72, /*!< Index of access permissions for TURNAROUND[0] register of COEXC     */
-  NRF_SECURE_SPU133_FEATURES_COEXC_TURNAROUND_1 = 73, /*!< Index of access permissions for TURNAROUND[1] register of COEXC     */
-  NRF_SECURE_SPU133_FEATURES_COEXC_TURNAROUND_2 = 74, /*!< Index of access permissions for TURNAROUND[2] register of COEXC     */
-  NRF_SECURE_SPU133_FEATURES_COEXC_TURNAROUND_3 = 75, /*!< Index of access permissions for TURNAROUND[3] register of COEXC     */
-  NRF_SECURE_SPU133_FEATURES_COEXC_TURNAROUND_4 = 76, /*!< Index of access permissions for TURNAROUND[4] register of COEXC     */
-  NRF_SECURE_SPU133_FEATURES_COEXC_TURNAROUND_5 = 77, /*!< Index of access permissions for TURNAROUND[5] register of COEXC     */
-  NRF_SECURE_SPU133_FEATURES_COEXC_CCMALLOW  = 80,   /*!< Index of access permissions for CCMALLOW registers of COEXC          */
   NRF_SECURE_SPU133_FEATURES_GRTC_CC_0       = 128,  /*!< Index of access permissions for compare and capture channel 0 of GRTC*/
   NRF_SECURE_SPU133_FEATURES_GRTC_CC_1       = 129,  /*!< Index of access permissions for compare and capture channel 1 of GRTC*/
   NRF_SECURE_SPU133_FEATURES_GRTC_CC_2       = 130,  /*!< Index of access permissions for compare and capture channel 2 of GRTC*/
@@ -3746,8 +3746,6 @@ typedef enum {
                                                           GRTC*/
   NRF_SECURE_SPU133_FEATURES_GRTC_CC_18      = 146,  /*!< Index of access permissions for compare and capture channel 18 of
                                                           GRTC*/
-  NRF_SECURE_SPU133_FEATURES_GRTC_CC_19      = 147,  /*!< Index of access permissions for compare and capture channel 19 of
-                                                          GRTC*/
   NRF_SECURE_SPU133_FEATURES_GRTC_PWMCONFIG  = 157,  /*!< Index of access permissions for PWMCONFIG register of GRTC           */
   NRF_SECURE_SPU133_FEATURES_GRTC_CLK        = 158,  /*!< Index of access permissions for CLKOUT/CLKCFG registers of GRTC      */
   NRF_SECURE_SPU133_FEATURES_GRTC_SYSCOUNTER = 159,  /*!< Index of access permissions for SYSCOUNTERL/SYSCOUNTERH registers of
@@ -3767,7 +3765,6 @@ typedef enum {
   NRF_SECURE_SPU133_FEATURES_GRTC_INTERRUPT_12 = 172, /*!< Index of access permissions for interrupt 0 of GRTC                 */
   NRF_SECURE_SPU133_FEATURES_GRTC_INTERRUPT_13 = 173, /*!< Index of access permissions for interrupt 0 of GRTC                 */
   NRF_SECURE_SPU133_FEATURES_GRTC_INTERRUPT_14 = 174, /*!< Index of access permissions for interrupt 0 of GRTC                 */
-  NRF_SECURE_SPU133_FEATURES_GRTC_INTERRUPT_15 = 175, /*!< Index of access permissions for interrupt 0 of GRTC                 */
 } NRF_SECURE_SPU133_FEATURES_ENUM_t;
 
 /* ============================================= SPU134 Split Security Features ============================================== */

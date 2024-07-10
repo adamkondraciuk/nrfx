@@ -85547,7 +85547,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Initial value of the secure VTOR (Vector Table Offset Register) after CPU reset.</description>
           <addressOffset>0x500</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <resetValue>0xE0000000</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -85563,7 +85563,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Initial value of the non-secure VTOR (Vector Table Offset Register).</description>
           <addressOffset>0x504</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <resetValue>0xE0000000</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -95050,7 +95050,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_END</name>
-          <description>Address resolution procedure complete</description>
+          <description>Address resolution procedure complete or ended due to an error</description>
           <addressOffset>0x100</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -95058,7 +95058,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>EVENTS_END</name>
-              <description>Address resolution procedure complete</description>
+              <description>Address resolution procedure complete or ended due to an error</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -144013,22 +144013,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
             </fields>
           </register>
-          <register>
-            <name>AMOUNT</name>
-            <description>Number of bytes read from the input data, not including the job list structure</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>AMOUNT</name>
-                <description>Number of bytes read from the input data</description>
-                <lsb>0</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
         </cluster>
         <cluster>
           <name>OUT</name>
@@ -144047,22 +144031,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <field>
                 <name>PTR</name>
                 <description>Output pointer</description>
-                <lsb>0</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>AMOUNT</name>
-            <description>Number of bytes available in the output data, not including the job list structure</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>AMOUNT</name>
-                <description>Number of bytes available in the output data</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -195887,7 +195855,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     <peripheral>
       <name>GLOBAL_MRAMC110_NS</name>
       <description>MRAM controller 0</description>
-      <baseAddress>0x5F092000</baseAddress>
+      <baseAddress>0x4F092000</baseAddress>
       <headerStructName>MRAMC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -199088,7 +199056,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <name>GLOBAL_MRAMC110_S</name>
       <description>MRAM controller 1</description>
       <baseAddress>0x5F092000</baseAddress>
-      <alternatePeripheral>GLOBAL_MRAMC110_NS</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -199099,7 +199066,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     <peripheral derivedFrom="GLOBAL_MRAMC110_NS">
       <name>GLOBAL_MRAMC111_NS</name>
       <description>MRAM controller 2</description>
-      <baseAddress>0x5F093000</baseAddress>
+      <baseAddress>0x4F093000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -199111,7 +199078,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <name>GLOBAL_MRAMC111_S</name>
       <description>MRAM controller 3</description>
       <baseAddress>0x5F093000</baseAddress>
-      <alternatePeripheral>GLOBAL_MRAMC111_NS</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -241419,6 +241385,453 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
+          <name>INTPEND</name>
+          <description>Pending interrupts</description>
+          <addressOffset>0x30C</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>STARTED</name>
+              <description>Read pending status of interrupt for event STARTED</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>END</name>
+              <description>Read pending status of interrupt for event END</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DONE</name>
+              <description>Read pending status of interrupt for event DONE</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RESULTDONE</name>
+              <description>Read pending status of interrupt for event RESULTDONE</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CALIBRATEDONE</name>
+              <description>Read pending status of interrupt for event CALIBRATEDONE</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>STOPPED</name>
+              <description>Read pending status of interrupt for event STOPPED</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH0LIMITH</name>
+              <description>Read pending status of interrupt for event CH0LIMITH</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH0LIMITL</name>
+              <description>Read pending status of interrupt for event CH0LIMITL</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH1LIMITH</name>
+              <description>Read pending status of interrupt for event CH1LIMITH</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH1LIMITL</name>
+              <description>Read pending status of interrupt for event CH1LIMITL</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH2LIMITH</name>
+              <description>Read pending status of interrupt for event CH2LIMITH</description>
+              <lsb>10</lsb>
+              <msb>10</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH2LIMITL</name>
+              <description>Read pending status of interrupt for event CH2LIMITL</description>
+              <lsb>11</lsb>
+              <msb>11</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH3LIMITH</name>
+              <description>Read pending status of interrupt for event CH3LIMITH</description>
+              <lsb>12</lsb>
+              <msb>12</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH3LIMITL</name>
+              <description>Read pending status of interrupt for event CH3LIMITL</description>
+              <lsb>13</lsb>
+              <msb>13</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH4LIMITH</name>
+              <description>Read pending status of interrupt for event CH4LIMITH</description>
+              <lsb>14</lsb>
+              <msb>14</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH4LIMITL</name>
+              <description>Read pending status of interrupt for event CH4LIMITL</description>
+              <lsb>15</lsb>
+              <msb>15</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH5LIMITH</name>
+              <description>Read pending status of interrupt for event CH5LIMITH</description>
+              <lsb>16</lsb>
+              <msb>16</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH5LIMITL</name>
+              <description>Read pending status of interrupt for event CH5LIMITL</description>
+              <lsb>17</lsb>
+              <msb>17</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH6LIMITH</name>
+              <description>Read pending status of interrupt for event CH6LIMITH</description>
+              <lsb>18</lsb>
+              <msb>18</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH6LIMITL</name>
+              <description>Read pending status of interrupt for event CH6LIMITL</description>
+              <lsb>19</lsb>
+              <msb>19</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH7LIMITH</name>
+              <description>Read pending status of interrupt for event CH7LIMITH</description>
+              <lsb>20</lsb>
+              <msb>20</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH7LIMITL</name>
+              <description>Read pending status of interrupt for event CH7LIMITL</description>
+              <lsb>21</lsb>
+              <msb>21</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>AHBERROR</name>
+              <description>Read pending status of interrupt for event AHBERROR</description>
+              <lsb>22</lsb>
+              <msb>22</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>STATUS</name>
           <description>Status</description>
           <addressOffset>0x400</addressOffset>
@@ -241548,6 +241961,24 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <enumeratedValue>
                   <name>Enabled</name>
                   <description>Enable ADC</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>POWERDOWNANA</name>
+              <description>Power down analog between samples. See text for more info.</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>KeepOn</name>
+                  <description>Keep analog on between samples</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PowerDown</name>
+                  <description>Turn off analog between samples</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -241804,7 +242235,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                     <value>0x2</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Gain3</name>
+                    <name>Gain4</name>
                     <description>4</description>
                     <value>0x3</value>
                   </enumeratedValue>
@@ -242115,11 +242546,27 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>RESULT EasyDMA channel</description>
           <headerStructName>GLOBAL_SAADC_RESULT</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x62C</addressOffset>
+          <addressOffset>0x628</addressOffset>
+          <register>
+            <name>DMAENABLE</name>
+            <description>This register has no other function than defining the value on the dmaChannelPeripheralEnable output. (which is not connected)</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ENABLE</name>
+                <description>Enable DMA</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+              </field>
+            </fields>
+          </register>
           <register>
             <name>PTR</name>
             <description>Data pointer</description>
-            <addressOffset>0x000</addressOffset>
+            <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -242135,7 +242582,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>MAXCNT</name>
             <description>Maximum number of buffer bytes to transfer</description>
-            <addressOffset>0x004</addressOffset>
+            <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -242151,7 +242598,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>AMOUNT</name>
             <description>Number of buffer bytes transferred since last START, updated after the END or STOPPED events</description>
-            <addressOffset>0x008</addressOffset>
+            <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -242167,7 +242614,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>CURRENTAMOUNT</name>
             <description>Number of buffer bytes transferred since last START, continuously updated</description>
-            <addressOffset>0x00C</addressOffset>
+            <addressOffset>0x010</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -242249,7 +242696,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </field>
             <field>
               <name>CALDMAWREN</name>
-              <description>Enable writing offset calibration values to DMA</description>
+              <description>Enable writing calibration values to DMA</description>
               <lsb>30</lsb>
               <msb>30</msb>
               <enumeratedValues>
@@ -242335,7 +242782,53 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <enumeratedValue>
                   <name>Low</name>
                   <description>Low gain setting</description>
+                  <value>0x40</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CALGAIN3V3</name>
+              <description>Offset binary coding</description>
+              <lsb>16</lsb>
+              <msb>22</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Default</name>
+                  <description>Default gain, for +1/2 input (assume full-scale = +-1) the output will be 1024</description>
                   <value>0x00</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>High gain setting</description>
+                  <value>0x3F</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Low gain setting</description>
+                  <value>0x40</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CALGAIN5V0</name>
+              <description>Offset binary coding</description>
+              <lsb>24</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Default</name>
+                  <description>Default gain, for +1/2 input (assume full-scale = +-1) the output will be 1024</description>
+                  <value>0x00</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>High gain setting</description>
+                  <value>0x3F</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Low gain setting</description>
+                  <value>0x40</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -242389,6 +242882,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Calibration code for reference temperature coefficient. See design description for coding</description>
               <lsb>16</lsb>
               <msb>18</msb>
+            </field>
+            <field>
+              <name>LDO</name>
+              <description>Calibration code for LDO VREF. See design description for coding</description>
+              <lsb>24</lsb>
+              <msb>25</msb>
             </field>
           </fields>
         </register>
@@ -242490,7 +242989,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <name>AHBERRORADDRESS</name>
           <description>Address of the last AHB error transaction</description>
           <addressOffset>0x664</addressOffset>
-          <access>read-write</access>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
           <fields>

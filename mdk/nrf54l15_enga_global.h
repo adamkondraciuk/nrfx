@@ -98,11 +98,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_ECB00_NS_BASE                 0x40047000UL
 #define NRF_ECB00_S_BASE                  0x50047000UL
 #define NRF_CRACEN_S_BASE                 0x50048000UL
-#define NRF_SPI00_NS_BASE                 0x4004A000UL
 #define NRF_SPIM00_NS_BASE                0x4004A000UL
 #define NRF_SPIS00_NS_BASE                0x4004A000UL
 #define NRF_UARTE00_NS_BASE               0x4004A000UL
-#define NRF_SPI00_S_BASE                  0x5004A000UL
 #define NRF_SPIM00_S_BASE                 0x5004A000UL
 #define NRF_SPIS00_S_BASE                 0x5004A000UL
 #define NRF_UARTE00_S_BASE                0x5004A000UL
@@ -158,37 +156,31 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_PPIB21_S_BASE                 0x500C4000UL
 #define NRF_PPIB22_NS_BASE                0x400C5000UL
 #define NRF_PPIB22_S_BASE                 0x500C5000UL
-#define NRF_SPI20_NS_BASE                 0x400C6000UL
 #define NRF_SPIM20_NS_BASE                0x400C6000UL
 #define NRF_SPIS20_NS_BASE                0x400C6000UL
 #define NRF_TWIM20_NS_BASE                0x400C6000UL
 #define NRF_TWIS20_NS_BASE                0x400C6000UL
 #define NRF_UARTE20_NS_BASE               0x400C6000UL
-#define NRF_SPI20_S_BASE                  0x500C6000UL
 #define NRF_SPIM20_S_BASE                 0x500C6000UL
 #define NRF_SPIS20_S_BASE                 0x500C6000UL
 #define NRF_TWIM20_S_BASE                 0x500C6000UL
 #define NRF_TWIS20_S_BASE                 0x500C6000UL
 #define NRF_UARTE20_S_BASE                0x500C6000UL
-#define NRF_SPI21_NS_BASE                 0x400C7000UL
 #define NRF_SPIM21_NS_BASE                0x400C7000UL
 #define NRF_SPIS21_NS_BASE                0x400C7000UL
 #define NRF_TWIM21_NS_BASE                0x400C7000UL
 #define NRF_TWIS21_NS_BASE                0x400C7000UL
 #define NRF_UARTE21_NS_BASE               0x400C7000UL
-#define NRF_SPI21_S_BASE                  0x500C7000UL
 #define NRF_SPIM21_S_BASE                 0x500C7000UL
 #define NRF_SPIS21_S_BASE                 0x500C7000UL
 #define NRF_TWIM21_S_BASE                 0x500C7000UL
 #define NRF_TWIS21_S_BASE                 0x500C7000UL
 #define NRF_UARTE21_S_BASE                0x500C7000UL
-#define NRF_SPI22_NS_BASE                 0x400C8000UL
 #define NRF_SPIM22_NS_BASE                0x400C8000UL
 #define NRF_SPIS22_NS_BASE                0x400C8000UL
 #define NRF_TWIM22_NS_BASE                0x400C8000UL
 #define NRF_TWIS22_NS_BASE                0x400C8000UL
 #define NRF_UARTE22_NS_BASE               0x400C8000UL
-#define NRF_SPI22_S_BASE                  0x500C8000UL
 #define NRF_SPIM22_S_BASE                 0x500C8000UL
 #define NRF_SPIS22_S_BASE                 0x500C8000UL
 #define NRF_TWIM22_S_BASE                 0x500C8000UL
@@ -243,13 +235,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_DPPIC30_S_BASE                0x50102000UL
 #define NRF_PPIB30_NS_BASE                0x40103000UL
 #define NRF_PPIB30_S_BASE                 0x50103000UL
-#define NRF_SPI30_NS_BASE                 0x40104000UL
 #define NRF_SPIM30_NS_BASE                0x40104000UL
 #define NRF_SPIS30_NS_BASE                0x40104000UL
 #define NRF_TWIM30_NS_BASE                0x40104000UL
 #define NRF_TWIS30_NS_BASE                0x40104000UL
 #define NRF_UARTE30_NS_BASE               0x40104000UL
-#define NRF_SPI30_S_BASE                  0x50104000UL
 #define NRF_SPIM30_S_BASE                 0x50104000UL
 #define NRF_SPIS30_S_BASE                 0x50104000UL
 #define NRF_TWIM30_S_BASE                 0x50104000UL
@@ -310,11 +300,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_ECB00_NS                      ((NRF_ECB_Type*)                      NRF_ECB00_NS_BASE)
 #define NRF_ECB00_S                       ((NRF_ECB_Type*)                      NRF_ECB00_S_BASE)
 #define NRF_CRACEN_S                      ((NRF_CRACEN_Type*)                   NRF_CRACEN_S_BASE)
-#define NRF_SPI00_NS                      ((NRF_SPI_Type*)                      NRF_SPI00_NS_BASE)
 #define NRF_SPIM00_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM00_NS_BASE)
 #define NRF_SPIS00_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS00_NS_BASE)
 #define NRF_UARTE00_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE00_NS_BASE)
-#define NRF_SPI00_S                       ((NRF_SPI_Type*)                      NRF_SPI00_S_BASE)
 #define NRF_SPIM00_S                      ((NRF_SPIM_Type*)                     NRF_SPIM00_S_BASE)
 #define NRF_SPIS00_S                      ((NRF_SPIS_Type*)                     NRF_SPIS00_S_BASE)
 #define NRF_UARTE00_S                     ((NRF_UARTE_Type*)                    NRF_UARTE00_S_BASE)
@@ -370,37 +358,31 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_PPIB21_S                      ((NRF_PPIB_Type*)                     NRF_PPIB21_S_BASE)
 #define NRF_PPIB22_NS                     ((NRF_PPIB_Type*)                     NRF_PPIB22_NS_BASE)
 #define NRF_PPIB22_S                      ((NRF_PPIB_Type*)                     NRF_PPIB22_S_BASE)
-#define NRF_SPI20_NS                      ((NRF_SPI_Type*)                      NRF_SPI20_NS_BASE)
 #define NRF_SPIM20_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM20_NS_BASE)
 #define NRF_SPIS20_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS20_NS_BASE)
 #define NRF_TWIM20_NS                     ((NRF_TWIM_Type*)                     NRF_TWIM20_NS_BASE)
 #define NRF_TWIS20_NS                     ((NRF_TWIS_Type*)                     NRF_TWIS20_NS_BASE)
 #define NRF_UARTE20_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE20_NS_BASE)
-#define NRF_SPI20_S                       ((NRF_SPI_Type*)                      NRF_SPI20_S_BASE)
 #define NRF_SPIM20_S                      ((NRF_SPIM_Type*)                     NRF_SPIM20_S_BASE)
 #define NRF_SPIS20_S                      ((NRF_SPIS_Type*)                     NRF_SPIS20_S_BASE)
 #define NRF_TWIM20_S                      ((NRF_TWIM_Type*)                     NRF_TWIM20_S_BASE)
 #define NRF_TWIS20_S                      ((NRF_TWIS_Type*)                     NRF_TWIS20_S_BASE)
 #define NRF_UARTE20_S                     ((NRF_UARTE_Type*)                    NRF_UARTE20_S_BASE)
-#define NRF_SPI21_NS                      ((NRF_SPI_Type*)                      NRF_SPI21_NS_BASE)
 #define NRF_SPIM21_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM21_NS_BASE)
 #define NRF_SPIS21_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS21_NS_BASE)
 #define NRF_TWIM21_NS                     ((NRF_TWIM_Type*)                     NRF_TWIM21_NS_BASE)
 #define NRF_TWIS21_NS                     ((NRF_TWIS_Type*)                     NRF_TWIS21_NS_BASE)
 #define NRF_UARTE21_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE21_NS_BASE)
-#define NRF_SPI21_S                       ((NRF_SPI_Type*)                      NRF_SPI21_S_BASE)
 #define NRF_SPIM21_S                      ((NRF_SPIM_Type*)                     NRF_SPIM21_S_BASE)
 #define NRF_SPIS21_S                      ((NRF_SPIS_Type*)                     NRF_SPIS21_S_BASE)
 #define NRF_TWIM21_S                      ((NRF_TWIM_Type*)                     NRF_TWIM21_S_BASE)
 #define NRF_TWIS21_S                      ((NRF_TWIS_Type*)                     NRF_TWIS21_S_BASE)
 #define NRF_UARTE21_S                     ((NRF_UARTE_Type*)                    NRF_UARTE21_S_BASE)
-#define NRF_SPI22_NS                      ((NRF_SPI_Type*)                      NRF_SPI22_NS_BASE)
 #define NRF_SPIM22_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM22_NS_BASE)
 #define NRF_SPIS22_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS22_NS_BASE)
 #define NRF_TWIM22_NS                     ((NRF_TWIM_Type*)                     NRF_TWIM22_NS_BASE)
 #define NRF_TWIS22_NS                     ((NRF_TWIS_Type*)                     NRF_TWIS22_NS_BASE)
 #define NRF_UARTE22_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE22_NS_BASE)
-#define NRF_SPI22_S                       ((NRF_SPI_Type*)                      NRF_SPI22_S_BASE)
 #define NRF_SPIM22_S                      ((NRF_SPIM_Type*)                     NRF_SPIM22_S_BASE)
 #define NRF_SPIS22_S                      ((NRF_SPIS_Type*)                     NRF_SPIS22_S_BASE)
 #define NRF_TWIM22_S                      ((NRF_TWIM_Type*)                     NRF_TWIM22_S_BASE)
@@ -455,13 +437,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_DPPIC30_S                     ((NRF_DPPIC_Type*)                    NRF_DPPIC30_S_BASE)
 #define NRF_PPIB30_NS                     ((NRF_PPIB_Type*)                     NRF_PPIB30_NS_BASE)
 #define NRF_PPIB30_S                      ((NRF_PPIB_Type*)                     NRF_PPIB30_S_BASE)
-#define NRF_SPI30_NS                      ((NRF_SPI_Type*)                      NRF_SPI30_NS_BASE)
 #define NRF_SPIM30_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM30_NS_BASE)
 #define NRF_SPIS30_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS30_NS_BASE)
 #define NRF_TWIM30_NS                     ((NRF_TWIM_Type*)                     NRF_TWIM30_NS_BASE)
 #define NRF_TWIS30_NS                     ((NRF_TWIS_Type*)                     NRF_TWIS30_NS_BASE)
 #define NRF_UARTE30_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE30_NS_BASE)
-#define NRF_SPI30_S                       ((NRF_SPI_Type*)                      NRF_SPI30_S_BASE)
 #define NRF_SPIM30_S                      ((NRF_SPIM_Type*)                     NRF_SPIM30_S_BASE)
 #define NRF_SPIS30_S                      ((NRF_SPIS_Type*)                     NRF_SPIS30_S_BASE)
 #define NRF_TWIM30_S                      ((NRF_TWIM_Type*)                     NRF_TWIM30_S_BASE)
@@ -510,7 +490,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_AAR00                               NRF_AAR00_NS
   #define NRF_CCM00                               NRF_CCM00_NS
   #define NRF_ECB00                               NRF_ECB00_NS
-  #define NRF_SPI00                               NRF_SPI00_NS
   #define NRF_SPIM00                              NRF_SPIM00_NS
   #define NRF_SPIS00                              NRF_SPIS00_NS
   #define NRF_UARTE00                             NRF_UARTE00_NS
@@ -537,19 +516,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_PPIB20                              NRF_PPIB20_NS
   #define NRF_PPIB21                              NRF_PPIB21_NS
   #define NRF_PPIB22                              NRF_PPIB22_NS
-  #define NRF_SPI20                               NRF_SPI20_NS
   #define NRF_SPIM20                              NRF_SPIM20_NS
   #define NRF_SPIS20                              NRF_SPIS20_NS
   #define NRF_TWIM20                              NRF_TWIM20_NS
   #define NRF_TWIS20                              NRF_TWIS20_NS
   #define NRF_UARTE20                             NRF_UARTE20_NS
-  #define NRF_SPI21                               NRF_SPI21_NS
   #define NRF_SPIM21                              NRF_SPIM21_NS
   #define NRF_SPIS21                              NRF_SPIS21_NS
   #define NRF_TWIM21                              NRF_TWIM21_NS
   #define NRF_TWIS21                              NRF_TWIS21_NS
   #define NRF_UARTE21                             NRF_UARTE21_NS
-  #define NRF_SPI22                               NRF_SPI22_NS
   #define NRF_SPIM22                              NRF_SPIM22_NS
   #define NRF_SPIS22                              NRF_SPIS22_NS
   #define NRF_TWIM22                              NRF_TWIM22_NS
@@ -578,7 +554,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_SREGS20                             NRF_SREGS20_NS
   #define NRF_DPPIC30                             NRF_DPPIC30_NS
   #define NRF_PPIB30                              NRF_PPIB30_NS
-  #define NRF_SPI30                               NRF_SPI30_NS
   #define NRF_SPIM30                              NRF_SPIM30_NS
   #define NRF_SPIS30                              NRF_SPIS30_NS
   #define NRF_TWIM30                              NRF_TWIM30_NS
@@ -612,7 +587,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_CCM00                               NRF_CCM00_S
   #define NRF_ECB00                               NRF_ECB00_S
   #define NRF_CRACEN                              NRF_CRACEN_S
-  #define NRF_SPI00                               NRF_SPI00_S
   #define NRF_SPIM00                              NRF_SPIM00_S
   #define NRF_SPIS00                              NRF_SPIS00_S
   #define NRF_UARTE00                             NRF_UARTE00_S
@@ -645,19 +619,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_PPIB20                              NRF_PPIB20_S
   #define NRF_PPIB21                              NRF_PPIB21_S
   #define NRF_PPIB22                              NRF_PPIB22_S
-  #define NRF_SPI20                               NRF_SPI20_S
   #define NRF_SPIM20                              NRF_SPIM20_S
   #define NRF_SPIS20                              NRF_SPIS20_S
   #define NRF_TWIM20                              NRF_TWIM20_S
   #define NRF_TWIS20                              NRF_TWIS20_S
   #define NRF_UARTE20                             NRF_UARTE20_S
-  #define NRF_SPI21                               NRF_SPI21_S
   #define NRF_SPIM21                              NRF_SPIM21_S
   #define NRF_SPIS21                              NRF_SPIS21_S
   #define NRF_TWIM21                              NRF_TWIM21_S
   #define NRF_TWIS21                              NRF_TWIS21_S
   #define NRF_UARTE21                             NRF_UARTE21_S
-  #define NRF_SPI22                               NRF_SPI22_S
   #define NRF_SPIM22                              NRF_SPIM22_S
   #define NRF_SPIS22                              NRF_SPIS22_S
   #define NRF_TWIM22                              NRF_TWIM22_S
@@ -689,7 +660,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_SPU30                               NRF_SPU30_S
   #define NRF_DPPIC30                             NRF_DPPIC30_S
   #define NRF_PPIB30                              NRF_PPIB30_S
-  #define NRF_SPI30                               NRF_SPI30_S
   #define NRF_SPIM30                              NRF_SPIM30_S
   #define NRF_SPIS30                              NRF_SPIS30_S
   #define NRF_TWIM30                              NRF_TWIM30_S

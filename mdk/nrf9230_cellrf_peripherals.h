@@ -448,7 +448,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RFCORESERVICES_PRESENT 1
 #define RFCORESERVICES_COUNT 1
 
-#define RFCORESERVICES_INC_RESETREQ 1                /*!< (unspecified)                                                        */
+#define RFCORESERVICES_EXTENDED_REGS 1               /*!< (unspecified)                                                        */
 
 /*MVDMA performs direct-memory-accesses between memories. Data is transferred according to job descriptor lists. Each transfer has corresponding source and sink descriptor lists with matching data amounts. The lists are in memory and they contain data buffer information, address pointers, buffer sizes and data type attributes.*/
 

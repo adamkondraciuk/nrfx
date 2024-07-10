@@ -564,6 +564,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MEMCONF130_RETAIN_INTERNAL_DOC 0             /*!< (unspecified)                                                        */
 #define MEMCONF130_TRIM_INTERNAL_DOC 0               /*!< (unspecified)                                                        */
 
+/*RESETINFO*/
+#define RESETINFO_PRESENT 1
+#define RESETINFO_COUNT 2
+
+#define RESETINFO120_HASRESETREAS 1                  /*!< (unspecified)                                                        */
+#define RESETINFO120_CROSSDOMAINRESET 1              /*!< (unspecified)                                                        */
+
+#define RESETINFO130_HASRESETREAS 1                  /*!< (unspecified)                                                        */
+#define RESETINFO130_CROSSDOMAINRESET 1              /*!< (unspecified)                                                        */
+
 /*Watchdog Timer*/
 #define WDT_PRESENT 1
 #define WDT_COUNT 3

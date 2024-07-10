@@ -114849,7 +114849,7 @@ A write outputs the value to atbytesm.</description>
           <register>
             <name>CTRL4</name>
             <description>ABB control 4</description>
-            <addressOffset>0x00C</addressOffset>
+            <addressOffset>0xC</addressOffset>
             <access>read-write</access>
             <resetValue>0x00010800</resetValue>
             <size>0x20</size>
@@ -114871,7 +114871,7 @@ A write outputs the value to atbytesm.</description>
           <register>
             <name>VENDORCONFIG0</name>
             <description>Vendor config 0</description>
-            <addressOffset>0x010</addressOffset>
+            <addressOffset>0x10</addressOffset>
             <access>read-write</access>
             <resetValue>0xB6000002</resetValue>
             <size>0x20</size>
@@ -114887,7 +114887,7 @@ A write outputs the value to atbytesm.</description>
           <register>
             <name>VENDORCONFIG1</name>
             <description>Vendor config 1</description>
-            <addressOffset>0x014</addressOffset>
+            <addressOffset>0x14</addressOffset>
             <access>read-write</access>
             <resetValue>0x000120E7</resetValue>
             <size>0x20</size>
@@ -114942,26 +114942,26 @@ A write outputs the value to atbytesm.</description>
             <size>0x20</size>
             <fields>
               <field>
-                <name>LOCKRANGEHIGHP</name>
-                <description>Lock range high boundary for VPW biased devices.</description>
+                <name>LOCKRANGELOWN</name>
+                <description>Lock range low boundary for VNW biased devices.</description>
                 <lsb>0</lsb>
                 <msb>7</msb>
               </field>
               <field>
-                <name>LOCKRANGELOWP</name>
-                <description>Lock range low boundary for VPW biased devices.</description>
+                <name>LOCKRANGEHIGHN</name>
+                <description>Lock range high boundary for VNW biased devices.</description>
                 <lsb>8</lsb>
                 <msb>15</msb>
               </field>
               <field>
-                <name>LOCKRANGEHIGHN</name>
-                <description>Lock range high boundary for VNW biased devices.</description>
+                <name>LOCKRANGELOWP</name>
+                <description>Lock range low boundary for VPW biased devices.</description>
                 <lsb>16</lsb>
                 <msb>23</msb>
               </field>
               <field>
-                <name>LOCKRANGELOWN</name>
-                <description>Lock range low boundary for VNW biased devices.</description>
+                <name>LOCKRANGEHIGHP</name>
+                <description>Lock range high boundary for VPW biased devices.</description>
                 <lsb>24</lsb>
                 <msb>31</msb>
               </field>

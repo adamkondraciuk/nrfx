@@ -2815,7 +2815,6 @@ typedef enum {
   NRF_SECURE_SPU010_FEATURES_IPCT_CH_3       = 3,    /*!< Index of access permissions for channel 3 of IPCT                    */
   NRF_SECURE_SPU010_FEATURES_IPCT_INTERRUPT_0 = 24,  /*!< Index of access permissions for interrupt 0 of IPCT                  */
   NRF_SECURE_SPU010_FEATURES_IPCT_INTERRUPT_1 = 25,  /*!< Index of access permissions for interrupt 1 of IPCT                  */
-  NRF_SECURE_SPU010_FEATURES_CRACEN_SEED     = 224,  /*!< Index of access permissions for SEED register of CRACEN              */
 } NRF_SECURE_SPU010_FEATURES_ENUM_t;
 
 /* ============================================= SPU111 Split Security Features ============================================== */

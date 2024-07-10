@@ -391,45 +391,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                                                           for a word, or a halfword-aligned address is used for a halfword
                                                           access.*/
 
-/*Serial Peripheral Interface*/
-#define SPI_PRESENT 1
-#define SPI_COUNT 5
-
-#define SPI00_LEGACYPSEL 0                           /*!< (unspecified)                                                        */
-#define SPI00_PRESCALER_PRESENT 1                    /*!< (unspecified)                                                        */
-#define SPI00_PRESCALER_DIVISOR_RANGE_MIN 4          /*!< (unspecified)                                                        */
-#define SPI00_PRESCALER_DIVISOR_RANGE_MAX 126        /*!< (unspecified)                                                        */
-#define SPI00_PRESCALER_DIVISOR_RANGE_SIZE 127       /*!< (unspecified)                                                        */
-#define SPI00_CORE_FREQUENCY 128                     /*!< Peripheral core clock frequency is 128 MHz.                          */
-
-#define SPI20_LEGACYPSEL 0                           /*!< (unspecified)                                                        */
-#define SPI20_PRESCALER_PRESENT 1                    /*!< (unspecified)                                                        */
-#define SPI20_PRESCALER_DIVISOR_RANGE_MIN 2          /*!< (unspecified)                                                        */
-#define SPI20_PRESCALER_DIVISOR_RANGE_MAX 126        /*!< (unspecified)                                                        */
-#define SPI20_PRESCALER_DIVISOR_RANGE_SIZE 127       /*!< (unspecified)                                                        */
-#define SPI20_CORE_FREQUENCY 16                      /*!< Peripheral core clock frequency is 16 MHz.                           */
-
-#define SPI21_LEGACYPSEL 0                           /*!< (unspecified)                                                        */
-#define SPI21_PRESCALER_PRESENT 1                    /*!< (unspecified)                                                        */
-#define SPI21_PRESCALER_DIVISOR_RANGE_MIN 2          /*!< (unspecified)                                                        */
-#define SPI21_PRESCALER_DIVISOR_RANGE_MAX 126        /*!< (unspecified)                                                        */
-#define SPI21_PRESCALER_DIVISOR_RANGE_SIZE 127       /*!< (unspecified)                                                        */
-#define SPI21_CORE_FREQUENCY 16                      /*!< Peripheral core clock frequency is 16 MHz.                           */
-
-#define SPI22_LEGACYPSEL 0                           /*!< (unspecified)                                                        */
-#define SPI22_PRESCALER_PRESENT 1                    /*!< (unspecified)                                                        */
-#define SPI22_PRESCALER_DIVISOR_RANGE_MIN 2          /*!< (unspecified)                                                        */
-#define SPI22_PRESCALER_DIVISOR_RANGE_MAX 126        /*!< (unspecified)                                                        */
-#define SPI22_PRESCALER_DIVISOR_RANGE_SIZE 127       /*!< (unspecified)                                                        */
-#define SPI22_CORE_FREQUENCY 16                      /*!< Peripheral core clock frequency is 16 MHz.                           */
-
-#define SPI30_LEGACYPSEL 0                           /*!< (unspecified)                                                        */
-#define SPI30_PRESCALER_PRESENT 1                    /*!< (unspecified)                                                        */
-#define SPI30_PRESCALER_DIVISOR_RANGE_MIN 2          /*!< (unspecified)                                                        */
-#define SPI30_PRESCALER_DIVISOR_RANGE_MAX 126        /*!< (unspecified)                                                        */
-#define SPI30_PRESCALER_DIVISOR_RANGE_SIZE 127       /*!< (unspecified)                                                        */
-#define SPI30_CORE_FREQUENCY 16                      /*!< Peripheral core clock frequency is 16 MHz.                           */
-
 /*Serial Peripheral Interface Master with EasyDMA*/
 #define SPIM_PRESENT 1
 #define SPIM_COUNT 5
@@ -1000,10 +961,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define P2_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P2_CTRLSEL_MAP2 1                            /*!< (unspecified)                                                        */
+#define P2_CTRLSEL_MAP3 0                            /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_MAX 10                            /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_SIZE 11                           /*!< (unspecified)                                                        */
-#define P2_PINS_PRESENT 2047                         /*!< (unspecified)                                                        */
+#define P2_FEATURE_PINS_PRESENT 2047                 /*!< (unspecified)                                                        */
 #define P2_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P2_RETAIN 0                                  /*!< (unspecified)                                                        */
 #define P2_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1013,13 +975,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P2_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
 #define P2_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
 #define P2_CLOCKPIN 0                                /*!< (unspecified)                                                        */
+#define P2_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
 #define P1_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P1_CTRLSEL_MAP2 1                            /*!< (unspecified)                                                        */
+#define P1_CTRLSEL_MAP3 0                            /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_MAX 16                            /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_SIZE 17                           /*!< (unspecified)                                                        */
-#define P1_PINS_PRESENT 131071                       /*!< (unspecified)                                                        */
+#define P1_FEATURE_PINS_PRESENT 131071               /*!< (unspecified)                                                        */
 #define P1_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P1_RETAIN 0                                  /*!< (unspecified)                                                        */
 #define P1_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1029,13 +993,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P1_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
 #define P1_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
 #define P1_CLOCKPIN 0                                /*!< (unspecified)                                                        */
+#define P1_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
 #define P0_CTRLSEL_MAP1 0                            /*!< (unspecified)                                                        */
 #define P0_CTRLSEL_MAP2 1                            /*!< (unspecified)                                                        */
+#define P0_CTRLSEL_MAP3 0                            /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_MAX 6                             /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_SIZE 7                            /*!< (unspecified)                                                        */
-#define P0_PINS_PRESENT 127                          /*!< (unspecified)                                                        */
+#define P0_FEATURE_PINS_PRESENT 127                  /*!< (unspecified)                                                        */
 #define P0_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P0_RETAIN 0                                  /*!< (unspecified)                                                        */
 #define P0_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1045,6 +1011,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P0_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
 #define P0_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
 #define P0_CLOCKPIN 0                                /*!< (unspecified)                                                        */
+#define P0_BIASCTRL 0                                /*!< (unspecified)                                                        */
 
 /*GPIO Internal*/
 #define GPIOINTERNAL_PRESENT 1
@@ -1476,8 +1443,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define MEMCONF_RETTRIM 1                            /*!< (unspecified)                                                        */
 #define MEMCONF_REPAIR 0                             /*!< (unspecified)                                                        */
+#define MEMCONF_REPAIR_INTERNAL_DOC 0                /*!< (unspecified)                                                        */
 #define MEMCONF_POWER 1                              /*!< (unspecified)                                                        */
 #define MEMCONF_RET2 1                               /*!< (unspecified)                                                        */
+#define MEMCONF_TRIM_INTERNAL_DOC 1                  /*!< (unspecified)                                                        */
 
 /*Pulse Density Modulation (Digital Microphone) Interface*/
 #define PDM_PRESENT 1

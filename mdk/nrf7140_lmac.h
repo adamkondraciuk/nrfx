@@ -82,116 +82,36 @@ typedef enum {
   BELLBOARD_WIFI_1_IRQn                  = 97,       /*!< 97 BELLBOARD_WIFI_1                                                  */
   BELLBOARD_WIFI_2_IRQn                  = 98,       /*!< 98 BELLBOARD_WIFI_2                                                  */
   BELLBOARD_WIFI_3_IRQn                  = 99,       /*!< 99 BELLBOARD_WIFI_3                                                  */
-  GPIOTE130_0_IRQn                       = 104,      /*!< 104 GPIOTE130_0                                                      */
-  GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE130_1                                                      */
   GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
-  GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
-  GSI_IRQn                               = 111,      /*!< 111 GSI                                                              */
-  DISPC_0_IRQn                           = 112,      /*!< 112 DISPC_0                                                          */
-  DISPC_1_IRQn                           = 113,      /*!< 113 DISPC_1                                                          */
-  DISPC_2_IRQn                           = 114,      /*!< 114 DISPC_2                                                          */
-  GPU_IRQn                               = 115,      /*!< 115 GPU                                                              */
-  TBM_IRQn                               = 127,      /*!< 127 TBM                                                              */
-  USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
-  MRAMC110_IRQn                          = 146,      /*!< 146 MRAMC110                                                         */
-  MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
-  EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
-  OTPC_IRQn                              = 197,      /*!< 197 OTPC                                                             */
-  VPR120_IRQn                            = 200,      /*!< 200 VPR120                                                           */
-  IPCT120_0_IRQn                         = 209,      /*!< 209 IPCT120_0                                                        */
-  I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
-  VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
-  QSPI120_IRQn                           = 215,      /*!< 215 QSPI120                                                          */
-  CAN120_IRQn                            = 216,      /*!< 216 CAN120                                                           */
-  MVDMA120_IRQn                          = 217,      /*!< 217 MVDMA120                                                         */
-  CAN121_IRQn                            = 219,      /*!< 219 CAN121                                                           */
-  MVDMA121_IRQn                          = 220,      /*!< 220 MVDMA121                                                         */
-  I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
-  QSPI121_IRQn                           = 223,      /*!< 223 QSPI121                                                          */
-  TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
-  TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
-  PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
-  SPIS120_IRQn                           = 229,      /*!< 229 SPIS120                                                          */
   UARTE120_IRQn                          = 230,      /*!< 230 UARTE120                                                         */
-  SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
-  SPIM122_IRQn                           = 232,      /*!< 232 SPIM122                                                          */
-  SPIM123_IRQn                           = 233,      /*!< 233 SPIM123                                                          */
-  VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
-  IPCT130_0_IRQn                         = 289,      /*!< 289 IPCT130_0                                                        */
-  RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
-  RTC131_IRQn                            = 297,      /*!< 297 RTC131                                                           */
-  WDT131_IRQn                            = 299,      /*!< 299 WDT131                                                           */
-  WDT132_IRQn                            = 300,      /*!< 300 WDT132                                                           */
-  EGU130_IRQn                            = 301,      /*!< 301 EGU130                                                           */
-  RESETHUB_IRQn                          = 329,      /*!< 329 RESETHUB                                                         */
-  AUDIOPLL_IRQn                          = 343,      /*!< 343 AUDIOPLL                                                         */
-  USBHSPLL_IRQn                          = 344,      /*!< 344 USBHSPLL                                                         */
-  VREGUSB_IRQn                           = 359,      /*!< 359 VREGUSB                                                          */
-  AUDIOPLLPM_IRQn                        = 360,      /*!< 360 AUDIOPLLPM                                                       */
-  SAADC_IRQn                             = 386,      /*!< 386 SAADC                                                            */
-  COMP_LPCOMP_IRQn                       = 387,      /*!< 387 COMP_LPCOMP                                                      */
-  TEMP_IRQn                              = 388,      /*!< 388 TEMP                                                             */
-  NFCT_IRQn                              = 389,      /*!< 389 NFCT                                                             */
-  TDM130_IRQn                            = 402,      /*!< 402 TDM130                                                           */
-  QDEC130_IRQn                           = 404,      /*!< 404 QDEC130                                                          */
-  QDEC131_IRQn                           = 405,      /*!< 405 QDEC131                                                          */
-  SIMIF130_IRQn                          = 406,      /*!< 406 SIMIF130                                                         */
-  TDM131_IRQn                            = 407,      /*!< 407 TDM131                                                           */
-  TDM132_IRQn                            = 409,      /*!< 409 TDM132                                                           */
-  TIMER130_IRQn                          = 418,      /*!< 418 TIMER130                                                         */
-  TIMER131_IRQn                          = 419,      /*!< 419 TIMER131                                                         */
-  PWM130_IRQn                            = 420,      /*!< 420 PWM130                                                           */
-  UARTE130_IRQn                          = 421,      /*!< 421 UARTE130                                                         */
-  UARTE131_IRQn                          = 422,      /*!< 422 UARTE131                                                         */
-  PDM130_IRQn                            = 423,      /*!< 423 PDM130                                                           */
-  TIMER132_IRQn                          = 434,      /*!< 434 TIMER132                                                         */
-  TIMER133_IRQn                          = 435,      /*!< 435 TIMER133                                                         */
-  PWM131_IRQn                            = 436,      /*!< 436 PWM131                                                           */
-  UARTE132_IRQn                          = 437,      /*!< 437 UARTE132                                                         */
-  UARTE133_IRQn                          = 438,      /*!< 438 UARTE133                                                         */
-  PDM131_IRQn                            = 439,      /*!< 439 PDM131                                                           */
-  TIMER134_IRQn                          = 450,      /*!< 450 TIMER134                                                         */
-  TIMER135_IRQn                          = 451,      /*!< 451 TIMER135                                                         */
-  PWM132_IRQn                            = 452,      /*!< 452 PWM132                                                           */
-  UARTE134_IRQn                          = 453,      /*!< 453 UARTE134                                                         */
-  UARTE135_IRQn                          = 454,      /*!< 454 UARTE135                                                         */
-  PDM132_IRQn                            = 455,      /*!< 455 PDM132                                                           */
-  TIMER136_IRQn                          = 466,      /*!< 466 TIMER136                                                         */
-  TIMER137_IRQn                          = 467,      /*!< 467 TIMER137                                                         */
-  PWM133_IRQn                            = 468,      /*!< 468 PWM133                                                           */
-  UARTE136_IRQn                          = 469,      /*!< 469 UARTE136                                                         */
-  UARTE137_IRQn                          = 470,      /*!< 470 UARTE137                                                         */
-  PDM133_IRQn                            = 471,      /*!< 471 PDM133                                                           */
+  SERIAL0_IRQn                           = 421,      /*!< 421 SERIAL0                                                          */
+  SERIAL1_IRQn                           = 422,      /*!< 422 SERIAL1                                                          */
+  SERIAL2_IRQn                           = 437,      /*!< 437 SERIAL2                                                          */
+  SERIAL3_IRQn                           = 438,      /*!< 438 SERIAL3                                                          */
+  SERIAL4_IRQn                           = 453,      /*!< 453 SERIAL4                                                          */
+  SERIAL5_IRQn                           = 454,      /*!< 454 SERIAL5                                                          */
+  SERIAL6_IRQn                           = 469,      /*!< 469 SERIAL6                                                          */
+  SERIAL7_IRQn                           = 470,      /*!< 470 SERIAL7                                                          */
 } IRQn_Type;
 
 /* ==================================================== Interrupt Aliases ==================================================== */
-#define GRTC_IRQn                     GRTC_0_IRQn
-#define GRTC_IRQHandler               GRTC_0_IRQHandler
-#define SPIM120_IRQn                  UARTE120_IRQn
-#define SPIM120_IRQHandler            UARTE120_IRQHandler
-#define UARTE120_IRQn                 UARTE120_IRQn
-#define UARTE120_IRQHandler           UARTE120_IRQHandler
-#define COMP_IRQn                     COMP_LPCOMP_IRQn
-#define COMP_IRQHandler               COMP_LPCOMP_IRQHandler
-#define LPCOMP_IRQn                   COMP_LPCOMP_IRQn
-#define LPCOMP_IRQHandler             COMP_LPCOMP_IRQHandler
-#define SERIAL0_IRQn                  UARTE130_IRQn
-#define SERIAL0_IRQHandler            UARTE130_IRQHandler
-#define SERIAL1_IRQn                  UARTE131_IRQn
-#define SERIAL1_IRQHandler            UARTE131_IRQHandler
-#define SERIAL2_IRQn                  UARTE132_IRQn
-#define SERIAL2_IRQHandler            UARTE132_IRQHandler
-#define SERIAL3_IRQn                  UARTE133_IRQn
-#define SERIAL3_IRQHandler            UARTE133_IRQHandler
-#define SERIAL4_IRQn                  UARTE134_IRQn
-#define SERIAL4_IRQHandler            UARTE134_IRQHandler
-#define SERIAL5_IRQn                  UARTE135_IRQn
-#define SERIAL5_IRQHandler            UARTE135_IRQHandler
-#define SERIAL6_IRQn                  UARTE136_IRQn
-#define SERIAL6_IRQHandler            UARTE136_IRQHandler
-#define SERIAL7_IRQn                  UARTE137_IRQn
-#define SERIAL7_IRQHandler            UARTE137_IRQHandler
+#define UARTE130_IRQn                 SERIAL0_IRQn
+#define UARTE130_IRQHandler           SERIAL0_IRQHandler
+#define UARTE131_IRQn                 SERIAL1_IRQn
+#define UARTE131_IRQHandler           SERIAL1_IRQHandler
+#define UARTE132_IRQn                 SERIAL2_IRQn
+#define UARTE132_IRQHandler           SERIAL2_IRQHandler
+#define UARTE133_IRQn                 SERIAL3_IRQn
+#define UARTE133_IRQHandler           SERIAL3_IRQHandler
+#define UARTE134_IRQn                 SERIAL4_IRQn
+#define UARTE134_IRQHandler           SERIAL4_IRQHandler
+#define UARTE135_IRQn                 SERIAL5_IRQn
+#define UARTE135_IRQHandler           SERIAL5_IRQHandler
+#define UARTE136_IRQn                 SERIAL6_IRQn
+#define UARTE136_IRQHandler           SERIAL6_IRQHandler
+#define UARTE137_IRQn                 SERIAL7_IRQn
+#define UARTE137_IRQHandler           SERIAL7_IRQHandler
 
 /* =========================================================================================================================== */
 /* ================                           Processor and Core Peripheral Section                           ================ */

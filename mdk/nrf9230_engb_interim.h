@@ -39,47 +39,53 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54H20_INTERIM_H__
-#define NRF54H20_INTERIM_H__
+#ifndef NRF9230_ENGB_INTERIM_H__
+#define NRF9230_ENGB_INTERIM_H__
 
 #include "haltium_interim.h"
 
-#if defined(NRF54H20_XXAA)
+#if defined(NRF9230_ENGB_XXAA)
 
     #if defined(NRF_TRUSTZONE_NONSECURE)
         #if defined(NRF_APPLICATION)
             #define GRTC_IRQ_GROUP 2
-            #define GPIOTE_IRQ_GROUP 2
+            #define GPIOTE130_IRQ_GROUP 2
+            #define GPIOTE131_IRQ_GROUP 1
         #elif defined(NRF_RADIOCORE)
             #define GRTC_IRQ_GROUP 4
-            #define GPIOTE_IRQ_GROUP 4
+            #define GPIOTE130_IRQ_GROUP 4
         #else
             #error Unknown core.
         #endif
     #elif defined(NRF_PPR)
-        #define GRTC_IRQ_GROUP 8
-        #define GPIOTE_IRQ_GROUP 2
+        #define GRTC_IRQ_GROUP 10
+        #define GPIOTE130_IRQ_GROUP 2
     #elif defined(NRF_FLPR)
-        #define GRTC_IRQ_GROUP 9
-        #define GPIOTE_IRQ_GROUP 2
+        #define GRTC_IRQ_GROUP 11
+        #define GPIOTE130_IRQ_GROUP 2
     #else
         #if defined(NRF_APPLICATION)
             #define GRTC_IRQ_GROUP 3
-            #define GPIOTE_IRQ_GROUP 3
+            #define GPIOTE130_IRQ_GROUP 3
+            #define GPIOTE131_IRQ_GROUP 2
         #elif defined(NRF_RADIOCORE)
             #define GRTC_IRQ_GROUP 5
-            #define GPIOTE_IRQ_GROUP 5
+            #define GPIOTE130_IRQ_GROUP 5
         #else
             #error Unknown core.
         #endif
     #endif
 
-    #define P0_PIN_NUM P0_PIN_NUM_SIZE
-    #define P1_PIN_NUM P1_PIN_NUM_SIZE
-    #define P2_PIN_NUM P2_PIN_NUM_SIZE
-    #define P6_PIN_NUM P6_PIN_NUM_SIZE
-    #define P7_PIN_NUM P7_PIN_NUM_SIZE
-    #define P9_PIN_NUM P9_PIN_NUM_SIZE
+    #define P0_PIN_NUM  P0_PIN_NUM_SIZE
+    #define P1_PIN_NUM  P1_PIN_NUM_SIZE
+    #define P2_PIN_NUM  P2_PIN_NUM_SIZE
+    #define P6_PIN_NUM  P6_PIN_NUM_SIZE
+    #define P8_PIN_NUM  P8_PIN_NUM_SIZE
+    #define P9_PIN_NUM  P9_PIN_NUM_SIZE
+    #define P10_PIN_NUM P10_PIN_NUM_SIZE
+    #define P11_PIN_NUM P11_PIN_NUM_SIZE
+    #define P12_PIN_NUM P12_PIN_NUM_SIZE
+    #define P13_PIN_NUM P13_PIN_NUM_SIZE
 
     #define DPPI_CH_NUM 8
 
@@ -124,7 +130,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #define TIMER137_CC_NUM TIMER137_CC_NUM_SIZE
 
     #define DPPIC020_CH_NUM DPPIC020_CH_NUM_SIZE
-    #define DPPIC030_CH_NUM DPPIC030_CH_NUM_SIZE
     #define DPPIC120_CH_NUM DPPIC120_CH_NUM_SIZE
     #define DPPIC130_CH_NUM DPPIC130_CH_NUM_SIZE
     #define DPPIC131_CH_NUM DPPIC131_CH_NUM_SIZE
@@ -135,7 +140,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #define DPPIC136_CH_NUM DPPIC136_CH_NUM_SIZE
 
     #define DPPIC020_GROUP_NUM DPPIC020_GROUP_NUM_SIZE
-    #define DPPIC030_GROUP_NUM DPPIC030_GROUP_NUM_SIZE
     #define DPPIC120_GROUP_NUM DPPIC120_GROUP_NUM_SIZE
     #define DPPIC130_GROUP_NUM DPPIC130_GROUP_NUM_SIZE
     #define DPPIC131_GROUP_NUM DPPIC131_GROUP_NUM_SIZE
@@ -148,7 +152,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #define EGU020_CH_NUM EGU020_CH_NUM_SIZE
     #define EGU130_CH_NUM EGU130_CH_NUM_SIZE
 
-
 #endif
 
-#endif // NRF54H20_INTERIM_H__
+#endif // NRF9230_ENGB_INTERIM_H__

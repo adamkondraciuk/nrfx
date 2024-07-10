@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -53,6 +53,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #elif defined(NRF_RADIOCORE)
             #define GRTC_IRQ_GROUP 4
             #define GPIOTE_IRQ_GROUP 4
+        #else
+            #error Unknown core.
         #endif
     #elif defined(NRF_PPR) || defined(NRF_FLPR)
         #define GRTC_IRQ_GROUP 2
@@ -64,6 +66,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #elif defined(NRF_RADIOCORE)
             #define GRTC_IRQ_GROUP 5
             #define GPIOTE_IRQ_GROUP 5
+        #else
+            #error Unknown core.
         #endif
     #endif
 
@@ -394,7 +398,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #define TIMER137_CC_NUM TIMER137_CC_NUM_SIZE
 
     #define DPPIC020_CH_NUM DPPIC020_CH_NUM_SIZE
-    #define DPPIC030_CH_NUM DPPIC030_CH_NUM_SIZE
     #define DPPIC120_CH_NUM DPPIC120_CH_NUM_SIZE
     #define DPPIC130_CH_NUM DPPIC130_CH_NUM_SIZE
     #define DPPIC131_CH_NUM DPPIC131_CH_NUM_SIZE
@@ -405,7 +408,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #define DPPIC136_CH_NUM DPPIC136_CH_NUM_SIZE
 
     #define DPPIC020_GROUP_NUM DPPIC020_GROUP_NUM_SIZE
-    #define DPPIC030_GROUP_NUM DPPIC030_GROUP_NUM_SIZE
     #define DPPIC120_GROUP_NUM DPPIC120_GROUP_NUM_SIZE
     #define DPPIC130_GROUP_NUM DPPIC130_GROUP_NUM_SIZE
     #define DPPIC131_GROUP_NUM DPPIC131_GROUP_NUM_SIZE

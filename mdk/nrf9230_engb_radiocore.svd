@@ -95178,7 +95178,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_END</name>
-          <description>Address resolution procedure complete</description>
+          <description>Address resolution procedure complete or ended due to an error</description>
           <addressOffset>0x100</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -95186,7 +95186,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>EVENTS_END</name>
-              <description>Address resolution procedure complete</description>
+              <description>Address resolution procedure complete or ended due to an error</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -95243,6 +95243,34 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <field>
               <name>EVENTS_NOTRESOLVED</name>
               <description>Address not resolved</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ERROR</name>
+          <description>Operation aborted because of a STOP task or due to an error</description>
+          <addressOffset>0x10C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ERROR</name>
+              <description>Operation aborted because of a STOP task or due to an error</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -95360,6 +95388,39 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
+          <name>PUBLISH_ERROR</name>
+          <description>Publish configuration for event ERROR</description>
+          <addressOffset>0x18C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ERROR will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>INTEN</name>
           <description>Enable or disable interrupt</description>
           <addressOffset>0x300</addressOffset>
@@ -95408,6 +95469,24 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Enable or disable interrupt for event NOTRESOLVED</description>
               <lsb>2</lsb>
               <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ERROR</name>
+              <description>Enable or disable interrupt for event ERROR</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -95490,6 +95569,33 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Write '1' to enable interrupt for event NOTRESOLVED</description>
               <lsb>2</lsb>
               <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ERROR</name>
+              <description>Write '1' to enable interrupt for event ERROR</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -95600,6 +95706,71 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <name>Clear</name>
                   <description>Disable</description>
                   <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ERROR</name>
+              <description>Write '1' to disable interrupt for event ERROR</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ERRORSTATUS</name>
+          <description>Error status</description>
+          <addressOffset>0x404</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ERRORSTATUS</name>
+              <description>Error status when the ERROR event is generated</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NoError</name>
+                  <description>No errors have occurred</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureInptrEnd</name>
+                  <description>End of INPTR job list before data structure was read.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureOutptrEnd</name>
+                  <description>End of OUTPTR job list before data structure was read.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DmaError</name>
+                  <description>Bus error during DMA access.</description>
+                  <value>0x4</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -97058,6 +97229,49 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </field>
           </fields>
         </register>
+        <register>
+          <name>ERRORSTATUS</name>
+          <description>Error status</description>
+          <addressOffset>0x400</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ERRORSTATUS</name>
+              <description>Error status when the ERROR event is generated</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NoError</name>
+                  <description>No errors have occurred</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureInptrEnd</name>
+                  <description>End of INPTR job list before data structure was read.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PrematureOutptrEnd</name>
+                  <description>End of OUTPTR job list before data structure was read.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Aborted</name>
+                  <description>Encryption aborted due to higher priority peripheral requesting or using the AES module.</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DmaError</name>
+                  <description>Bus error during DMA access.</description>
+                  <value>0x4</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
         <cluster>
           <name>KEY</name>
           <description>Unspecified</description>
@@ -97105,22 +97319,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
             </fields>
           </register>
-          <register>
-            <name>AMOUNT</name>
-            <description>Number of bytes read from the input data, not including the job list structure</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>AMOUNT</name>
-                <description>Number of bytes read from the input data</description>
-                <lsb>0</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
         </cluster>
         <cluster>
           <name>OUT</name>
@@ -97139,22 +97337,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <field>
                 <name>PTR</name>
                 <description>Output pointer</description>
-                <lsb>0</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>AMOUNT</name>
-            <description>Number of bytes available in the output data, not including the job list structure</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>AMOUNT</name>
-                <description>Number of bytes available in the output data</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -188687,7 +188869,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     <peripheral>
       <name>GLOBAL_MRAMC110_NS</name>
       <description>MRAM controller 0</description>
-      <baseAddress>0x5F092000</baseAddress>
+      <baseAddress>0x4F092000</baseAddress>
       <headerStructName>MRAMC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -191891,7 +192073,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <name>GLOBAL_MRAMC110_S</name>
       <description>MRAM controller 1</description>
       <baseAddress>0x5F092000</baseAddress>
-      <alternatePeripheral>GLOBAL_MRAMC110_NS</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
@@ -191903,7 +192084,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     <peripheral derivedFrom="GLOBAL_MRAMC110_NS">
       <name>GLOBAL_MRAMC111_NS</name>
       <description>MRAM controller 2</description>
-      <baseAddress>0x5F093000</baseAddress>
+      <baseAddress>0x4F093000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
@@ -191916,7 +192097,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <name>GLOBAL_MRAMC111_S</name>
       <description>MRAM controller 3</description>
       <baseAddress>0x5F093000</baseAddress>
-      <alternatePeripheral>GLOBAL_MRAMC111_NS</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->

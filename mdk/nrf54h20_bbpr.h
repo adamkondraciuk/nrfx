@@ -156,10 +156,10 @@ typedef enum {
 } IRQn_Type;
 
 /* ==================================================== Interrupt Aliases ==================================================== */
-#define VPRCLIC_IRQn                  MVDMA_IRQn
-#define VPRCLIC_IRQHandler            MVDMA_IRQHandler
-#define GRTC_IRQn                     GRTC_3_IRQn
-#define GRTC_IRQHandler               GRTC_3_IRQHandler
+#define VPRCLIC_3_IRQn                MVDMA_IRQn
+#define VPRCLIC_3_IRQHandler          MVDMA_IRQHandler
+#define GRTC_0_IRQn                   GRTC_3_IRQn
+#define GRTC_0_IRQHandler             GRTC_3_IRQHandler
 #define SPIM120_IRQn                  SPIM120_UARTE120_IRQn
 #define SPIM120_IRQHandler            SPIM120_UARTE120_IRQHandler
 #define UARTE120_IRQn                 SPIM120_UARTE120_IRQn

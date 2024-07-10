@@ -135,8 +135,6 @@ typedef enum {
 #define AAR00_IRQHandler              AAR00_CCM00_IRQHandler
 #define CCM00_IRQn                    AAR00_CCM00_IRQn
 #define CCM00_IRQHandler              AAR00_CCM00_IRQHandler
-#define SPI00_IRQn                    SERIAL00_IRQn
-#define SPI00_IRQHandler              SERIAL00_IRQHandler
 #define SPIM00_IRQn                   SERIAL00_IRQn
 #define SPIM00_IRQHandler             SERIAL00_IRQHandler
 #define SPIS00_IRQn                   SERIAL00_IRQn
@@ -147,8 +145,6 @@ typedef enum {
 #define AAR10_IRQHandler              AAR10_CCM10_IRQHandler
 #define CCM10_IRQn                    AAR10_CCM10_IRQn
 #define CCM10_IRQHandler              AAR10_CCM10_IRQHandler
-#define SPI20_IRQn                    SERIAL20_IRQn
-#define SPI20_IRQHandler              SERIAL20_IRQHandler
 #define SPIM20_IRQn                   SERIAL20_IRQn
 #define SPIM20_IRQHandler             SERIAL20_IRQHandler
 #define SPIS20_IRQn                   SERIAL20_IRQn
@@ -159,8 +155,6 @@ typedef enum {
 #define TWIS20_IRQHandler             SERIAL20_IRQHandler
 #define UARTE20_IRQn                  SERIAL20_IRQn
 #define UARTE20_IRQHandler            SERIAL20_IRQHandler
-#define SPI21_IRQn                    SERIAL21_IRQn
-#define SPI21_IRQHandler              SERIAL21_IRQHandler
 #define SPIM21_IRQn                   SERIAL21_IRQn
 #define SPIM21_IRQHandler             SERIAL21_IRQHandler
 #define SPIS21_IRQn                   SERIAL21_IRQn
@@ -171,8 +165,6 @@ typedef enum {
 #define TWIS21_IRQHandler             SERIAL21_IRQHandler
 #define UARTE21_IRQn                  SERIAL21_IRQn
 #define UARTE21_IRQHandler            SERIAL21_IRQHandler
-#define SPI22_IRQn                    SERIAL22_IRQn
-#define SPI22_IRQHandler              SERIAL22_IRQHandler
 #define SPIM22_IRQn                   SERIAL22_IRQn
 #define SPIM22_IRQHandler             SERIAL22_IRQHandler
 #define SPIS22_IRQn                   SERIAL22_IRQn
@@ -183,8 +175,6 @@ typedef enum {
 #define TWIS22_IRQHandler             SERIAL22_IRQHandler
 #define UARTE22_IRQn                  SERIAL22_IRQn
 #define UARTE22_IRQHandler            SERIAL22_IRQHandler
-#define SPI30_IRQn                    SERIAL30_IRQn
-#define SPI30_IRQHandler              SERIAL30_IRQHandler
 #define SPIM30_IRQn                   SERIAL30_IRQn
 #define SPIM30_IRQHandler             SERIAL30_IRQHandler
 #define SPIS30_IRQn                   SERIAL30_IRQn

@@ -15660,461 +15660,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_SPI00_NS</name>
-      <description>Serial Peripheral Interface 0</description>
-      <baseAddress>0x4004D000</baseAddress>
-      <headerStructName>SPI</headerStructName>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>SERIAL00</name>
-        <value>77</value>
-      </interrupt>
-      <groupName>SPI</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>EVENTS_READY</name>
-          <description>TXD byte sent and RXD byte received</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_READY</name>
-              <description>TXD byte sent and RXD byte received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_READY</name>
-          <description>Publish configuration for event READY</description>
-          <addressOffset>0x188</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event READY will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Enable or disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to enable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>Enable SPI</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable SPI</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable SPI</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable SPI</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <name>PSEL</name>
-          <description>Unspecified</description>
-          <headerStructName>GLOBAL_SPI_PSEL</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x508</addressOffset>
-          <register>
-            <name>SCK</name>
-            <description>Pin select for SCK</description>
-            <addressOffset>0x0</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
-            <addressOffset>0x4</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MISO</name>
-            <description>Pin select for MISO signal</description>
-            <addressOffset>0x8</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <register>
-          <name>RXD</name>
-          <description>RXD register</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>RXD</name>
-              <description>RX data received. Double buffered</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TXD</name>
-          <description>TXD register</description>
-          <addressOffset>0x51C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TXD</name>
-              <description>TX data to send. Double buffered.</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PRESCALER</name>
-          <description>The prescaler is used to set the SPI frequency.</description>
-          <addressOffset>0x52C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000040</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DIVISOR</name>
-              <description>Core clock to SCK divisor</description>
-              <lsb>0</lsb>
-              <msb>6</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CONFIG</name>
-          <description>Configuration register</description>
-          <addressOffset>0x554</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ORDER</name>
-              <description>Bit order</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>MsbFirst</name>
-                  <description>Most significant bit shifted out first</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LsbFirst</name>
-                  <description>Least significant bit shifted out first</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPHA</name>
-              <description>Serial clock (SCK) phase</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Leading</name>
-                  <description>Sample on leading edge of clock, shift serial data on trailing edge</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Trailing</name>
-                  <description>Sample on trailing edge of clock, shift serial data on leading edge</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPOL</name>
-              <description>Serial clock (SCK) polarity</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ActiveHigh</name>
-                  <description>Active high</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ActiveLow</name>
-                  <description>Active low</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
       <name>GLOBAL_SPIM00_NS</name>
       <description>Serial Peripheral Interface Master with EasyDMA 0</description>
       <baseAddress>0x4004D000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI00_NS</alternatePeripheral>
       <headerStructName>SPIM</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -19276,7 +18824,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS00_NS</name>
       <description>SPI Slave 0</description>
       <baseAddress>0x4004D000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI00_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM00_NS</alternatePeripheral>
       <headerStructName>SPIS</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -22181,7 +21729,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE00_NS</name>
       <description>UART with EasyDMA 0</description>
       <baseAddress>0x4004D000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI00_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM00_NS</alternatePeripheral>
       <headerStructName>UARTE</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -26485,22 +26033,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPI00_NS">
-      <name>GLOBAL_SPI00_S</name>
-      <description>Serial Peripheral Interface 1</description>
-      <baseAddress>0x5004D000</baseAddress>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL00</name>
-        <value>77</value>
-      </interrupt>
-    </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM00_NS">
       <name>GLOBAL_SPIM00_S</name>
       <description>Serial Peripheral Interface Master with EasyDMA 1</description>
       <baseAddress>0x5004D000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI00_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -26512,7 +26048,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS00_S</name>
       <description>SPI Slave 1</description>
       <baseAddress>0x5004D000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI00_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM00_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -26524,7 +26060,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE00_S</name>
       <description>UART with EasyDMA 1</description>
       <baseAddress>0x5004D000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI00_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM00_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -35602,11 +35138,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>GRTC</name>
                   <description>GRTC peripheral</description>
                   <value>0x4</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>TND</name>
-                  <description>Trace and Debug Subsystem</description>
-                  <value>0x7</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -62412,18 +61943,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>DATAWHITEIV</name>
-          <description>Data whitening initial value</description>
+          <name>DATAWHITE</name>
+          <description>Data whitening configuration</description>
           <addressOffset>0x540</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000040</resetValue>
+          <resetValue>0x00890040</resetValue>
           <size>0x20</size>
           <fields>
             <field>
-              <name>DATAWHITEIV</name>
-              <description>Data whitening initial value. Bit 6 is hardwired to '1', writing '0' to it has no effect, and it will always be read back and used by the device as '1'.</description>
+              <name>IV</name>
+              <description>Whitening initial value</description>
               <lsb>0</lsb>
-              <msb>6</msb>
+              <msb>8</msb>
+            </field>
+            <field>
+              <name>POLY</name>
+              <description>Whitening polynomial</description>
+              <lsb>16</lsb>
+              <msb>25</msb>
             </field>
           </fields>
         </register>
@@ -76651,462 +76188,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
     </peripheral>
-    <peripheral>
-      <name>GLOBAL_SPI20_NS</name>
-      <description>Serial Peripheral Interface 0</description>
-      <baseAddress>0x400C6000</baseAddress>
-      <headerStructName>SPI</headerStructName>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>SERIAL20</name>
-        <value>198</value>
-      </interrupt>
-      <groupName>SPI</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>EVENTS_READY</name>
-          <description>TXD byte sent and RXD byte received</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_READY</name>
-              <description>TXD byte sent and RXD byte received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_READY</name>
-          <description>Publish configuration for event READY</description>
-          <addressOffset>0x188</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event READY will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Enable or disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to enable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>Enable SPI</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable SPI</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable SPI</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable SPI</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <name>PSEL</name>
-          <description>Unspecified</description>
-          <headerStructName>GLOBAL_SPI_PSEL</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x508</addressOffset>
-          <register>
-            <name>SCK</name>
-            <description>Pin select for SCK</description>
-            <addressOffset>0x0</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
-            <addressOffset>0x4</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MISO</name>
-            <description>Pin select for MISO signal</description>
-            <addressOffset>0x8</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <register>
-          <name>RXD</name>
-          <description>RXD register</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>RXD</name>
-              <description>RX data received. Double buffered</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TXD</name>
-          <description>TXD register</description>
-          <addressOffset>0x51C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TXD</name>
-              <description>TX data to send. Double buffered.</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PRESCALER</name>
-          <description>The prescaler is used to set the SPI frequency.</description>
-          <addressOffset>0x52C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000040</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DIVISOR</name>
-              <description>Core clock to SCK divisor</description>
-              <lsb>0</lsb>
-              <msb>6</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CONFIG</name>
-          <description>Configuration register</description>
-          <addressOffset>0x554</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ORDER</name>
-              <description>Bit order</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>MsbFirst</name>
-                  <description>Most significant bit shifted out first</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LsbFirst</name>
-                  <description>Least significant bit shifted out first</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPHA</name>
-              <description>Serial clock (SCK) phase</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Leading</name>
-                  <description>Sample on leading edge of clock, shift serial data on trailing edge</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Trailing</name>
-                  <description>Sample on trailing edge of clock, shift serial data on leading edge</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPOL</name>
-              <description>Serial clock (SCK) polarity</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ActiveHigh</name>
-                  <description>Active high</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ActiveLow</name>
-                  <description>Active low</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM00_NS">
       <name>GLOBAL_SPIM20_NS</name>
       <description>Serial Peripheral Interface Master with EasyDMA 2</description>
       <baseAddress>0x400C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI20_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -77118,7 +76203,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS20_NS</name>
       <description>SPI Slave 2</description>
       <baseAddress>0x400C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI20_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM20_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -77130,7 +76215,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM20_NS</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 0</description>
       <baseAddress>0x400C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI20_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM20_NS</alternatePeripheral>
       <headerStructName>TWIM</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -80714,7 +79799,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS20_NS</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 0</description>
       <baseAddress>0x400C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI20_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM20_NS</alternatePeripheral>
       <headerStructName>TWIS</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -84653,18 +83738,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE20_NS</name>
       <description>UART with EasyDMA 2</description>
       <baseAddress>0x400C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI20_NS</alternatePeripheral>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL20</name>
-        <value>198</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPI20_NS">
-      <name>GLOBAL_SPI20_S</name>
-      <description>Serial Peripheral Interface 1</description>
-      <baseAddress>0x500C6000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM20_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -84676,7 +83750,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIM20_S</name>
       <description>Serial Peripheral Interface Master with EasyDMA 3</description>
       <baseAddress>0x500C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI20_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -84688,7 +83761,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS20_S</name>
       <description>SPI Slave 3</description>
       <baseAddress>0x500C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI20_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM20_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -84700,7 +83773,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM20_S</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 1</description>
       <baseAddress>0x500C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI20_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM20_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -84712,7 +83785,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS20_S</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 1</description>
       <baseAddress>0x500C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI20_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM20_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -84724,7 +83797,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE20_S</name>
       <description>UART with EasyDMA 3</description>
       <baseAddress>0x500C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI20_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM20_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -84732,462 +83805,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <value>198</value>
       </interrupt>
     </peripheral>
-    <peripheral>
-      <name>GLOBAL_SPI21_NS</name>
-      <description>Serial Peripheral Interface 0</description>
-      <baseAddress>0x400C7000</baseAddress>
-      <headerStructName>SPI</headerStructName>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>SERIAL21</name>
-        <value>199</value>
-      </interrupt>
-      <groupName>SPI</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>EVENTS_READY</name>
-          <description>TXD byte sent and RXD byte received</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_READY</name>
-              <description>TXD byte sent and RXD byte received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_READY</name>
-          <description>Publish configuration for event READY</description>
-          <addressOffset>0x188</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event READY will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Enable or disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to enable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>Enable SPI</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable SPI</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable SPI</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable SPI</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <name>PSEL</name>
-          <description>Unspecified</description>
-          <headerStructName>GLOBAL_SPI_PSEL</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x508</addressOffset>
-          <register>
-            <name>SCK</name>
-            <description>Pin select for SCK</description>
-            <addressOffset>0x0</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
-            <addressOffset>0x4</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MISO</name>
-            <description>Pin select for MISO signal</description>
-            <addressOffset>0x8</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <register>
-          <name>RXD</name>
-          <description>RXD register</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>RXD</name>
-              <description>RX data received. Double buffered</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TXD</name>
-          <description>TXD register</description>
-          <addressOffset>0x51C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TXD</name>
-              <description>TX data to send. Double buffered.</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PRESCALER</name>
-          <description>The prescaler is used to set the SPI frequency.</description>
-          <addressOffset>0x52C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000040</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DIVISOR</name>
-              <description>Core clock to SCK divisor</description>
-              <lsb>0</lsb>
-              <msb>6</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CONFIG</name>
-          <description>Configuration register</description>
-          <addressOffset>0x554</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ORDER</name>
-              <description>Bit order</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>MsbFirst</name>
-                  <description>Most significant bit shifted out first</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LsbFirst</name>
-                  <description>Least significant bit shifted out first</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPHA</name>
-              <description>Serial clock (SCK) phase</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Leading</name>
-                  <description>Sample on leading edge of clock, shift serial data on trailing edge</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Trailing</name>
-                  <description>Sample on trailing edge of clock, shift serial data on leading edge</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPOL</name>
-              <description>Serial clock (SCK) polarity</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ActiveHigh</name>
-                  <description>Active high</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ActiveLow</name>
-                  <description>Active low</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM00_NS">
       <name>GLOBAL_SPIM21_NS</name>
       <description>Serial Peripheral Interface Master with EasyDMA 4</description>
       <baseAddress>0x400C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI21_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85199,7 +83820,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS21_NS</name>
       <description>SPI Slave 4</description>
       <baseAddress>0x400C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI21_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM21_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85211,7 +83832,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM21_NS</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 2</description>
       <baseAddress>0x400C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI21_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM21_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85223,7 +83844,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS21_NS</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 2</description>
       <baseAddress>0x400C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI21_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM21_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85235,18 +83856,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE21_NS</name>
       <description>UART with EasyDMA 4</description>
       <baseAddress>0x400C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI21_NS</alternatePeripheral>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL21</name>
-        <value>199</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPI21_NS">
-      <name>GLOBAL_SPI21_S</name>
-      <description>Serial Peripheral Interface 1</description>
-      <baseAddress>0x500C7000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM21_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85258,7 +83868,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIM21_S</name>
       <description>Serial Peripheral Interface Master with EasyDMA 5</description>
       <baseAddress>0x500C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI21_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85270,7 +83879,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS21_S</name>
       <description>SPI Slave 5</description>
       <baseAddress>0x500C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI21_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM21_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85282,7 +83891,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM21_S</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 3</description>
       <baseAddress>0x500C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI21_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM21_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85294,7 +83903,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS21_S</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 3</description>
       <baseAddress>0x500C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI21_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM21_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85306,7 +83915,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE21_S</name>
       <description>UART with EasyDMA 5</description>
       <baseAddress>0x500C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI21_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM21_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85314,462 +83923,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <value>199</value>
       </interrupt>
     </peripheral>
-    <peripheral>
-      <name>GLOBAL_SPI22_NS</name>
-      <description>Serial Peripheral Interface 0</description>
-      <baseAddress>0x400C8000</baseAddress>
-      <headerStructName>SPI</headerStructName>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>SERIAL22</name>
-        <value>200</value>
-      </interrupt>
-      <groupName>SPI</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>EVENTS_READY</name>
-          <description>TXD byte sent and RXD byte received</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_READY</name>
-              <description>TXD byte sent and RXD byte received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_READY</name>
-          <description>Publish configuration for event READY</description>
-          <addressOffset>0x188</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event READY will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Enable or disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to enable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>Enable SPI</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable SPI</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable SPI</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable SPI</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <name>PSEL</name>
-          <description>Unspecified</description>
-          <headerStructName>GLOBAL_SPI_PSEL</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x508</addressOffset>
-          <register>
-            <name>SCK</name>
-            <description>Pin select for SCK</description>
-            <addressOffset>0x0</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
-            <addressOffset>0x4</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MISO</name>
-            <description>Pin select for MISO signal</description>
-            <addressOffset>0x8</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <register>
-          <name>RXD</name>
-          <description>RXD register</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>RXD</name>
-              <description>RX data received. Double buffered</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TXD</name>
-          <description>TXD register</description>
-          <addressOffset>0x51C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TXD</name>
-              <description>TX data to send. Double buffered.</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PRESCALER</name>
-          <description>The prescaler is used to set the SPI frequency.</description>
-          <addressOffset>0x52C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000040</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DIVISOR</name>
-              <description>Core clock to SCK divisor</description>
-              <lsb>0</lsb>
-              <msb>6</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CONFIG</name>
-          <description>Configuration register</description>
-          <addressOffset>0x554</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ORDER</name>
-              <description>Bit order</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>MsbFirst</name>
-                  <description>Most significant bit shifted out first</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LsbFirst</name>
-                  <description>Least significant bit shifted out first</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPHA</name>
-              <description>Serial clock (SCK) phase</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Leading</name>
-                  <description>Sample on leading edge of clock, shift serial data on trailing edge</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Trailing</name>
-                  <description>Sample on trailing edge of clock, shift serial data on leading edge</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPOL</name>
-              <description>Serial clock (SCK) polarity</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ActiveHigh</name>
-                  <description>Active high</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ActiveLow</name>
-                  <description>Active low</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM00_NS">
       <name>GLOBAL_SPIM22_NS</name>
       <description>Serial Peripheral Interface Master with EasyDMA 6</description>
       <baseAddress>0x400C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI22_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85781,7 +83938,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS22_NS</name>
       <description>SPI Slave 6</description>
       <baseAddress>0x400C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI22_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM22_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85793,7 +83950,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM22_NS</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 4</description>
       <baseAddress>0x400C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI22_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM22_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85805,7 +83962,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS22_NS</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 4</description>
       <baseAddress>0x400C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI22_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM22_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85817,18 +83974,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE22_NS</name>
       <description>UART with EasyDMA 6</description>
       <baseAddress>0x400C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI22_NS</alternatePeripheral>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL22</name>
-        <value>200</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPI22_NS">
-      <name>GLOBAL_SPI22_S</name>
-      <description>Serial Peripheral Interface 1</description>
-      <baseAddress>0x500C8000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM22_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85840,7 +83986,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIM22_S</name>
       <description>Serial Peripheral Interface Master with EasyDMA 7</description>
       <baseAddress>0x500C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI22_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85852,7 +83997,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS22_S</name>
       <description>SPI Slave 7</description>
       <baseAddress>0x500C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI22_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM22_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85864,7 +84009,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM22_S</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 5</description>
       <baseAddress>0x500C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI22_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM22_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85876,7 +84021,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS22_S</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 5</description>
       <baseAddress>0x500C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI22_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM22_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -85888,7 +84033,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE22_S</name>
       <description>UART with EasyDMA 7</description>
       <baseAddress>0x500C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI22_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM22_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -97386,7 +95531,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CALDMAWREN</name>
-              <description>Enable writing offset calibration values to DMA</description>
+              <description>Enable writing calibration values to DMA</description>
               <lsb>30</lsb>
               <msb>30</msb>
               <enumeratedValues>
@@ -120748,462 +118893,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
     </peripheral>
-    <peripheral>
-      <name>GLOBAL_SPI23_NS</name>
-      <description>Serial Peripheral Interface 0</description>
-      <baseAddress>0x400ED000</baseAddress>
-      <headerStructName>SPI</headerStructName>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>SERIAL23</name>
-        <value>237</value>
-      </interrupt>
-      <groupName>SPI</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>EVENTS_READY</name>
-          <description>TXD byte sent and RXD byte received</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_READY</name>
-              <description>TXD byte sent and RXD byte received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_READY</name>
-          <description>Publish configuration for event READY</description>
-          <addressOffset>0x188</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event READY will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Enable or disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to enable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>Enable SPI</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable SPI</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable SPI</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable SPI</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <name>PSEL</name>
-          <description>Unspecified</description>
-          <headerStructName>GLOBAL_SPI_PSEL</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x508</addressOffset>
-          <register>
-            <name>SCK</name>
-            <description>Pin select for SCK</description>
-            <addressOffset>0x0</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
-            <addressOffset>0x4</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MISO</name>
-            <description>Pin select for MISO signal</description>
-            <addressOffset>0x8</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <register>
-          <name>RXD</name>
-          <description>RXD register</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>RXD</name>
-              <description>RX data received. Double buffered</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TXD</name>
-          <description>TXD register</description>
-          <addressOffset>0x51C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TXD</name>
-              <description>TX data to send. Double buffered.</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PRESCALER</name>
-          <description>The prescaler is used to set the SPI frequency.</description>
-          <addressOffset>0x52C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000040</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DIVISOR</name>
-              <description>Core clock to SCK divisor</description>
-              <lsb>0</lsb>
-              <msb>6</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CONFIG</name>
-          <description>Configuration register</description>
-          <addressOffset>0x554</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ORDER</name>
-              <description>Bit order</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>MsbFirst</name>
-                  <description>Most significant bit shifted out first</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LsbFirst</name>
-                  <description>Least significant bit shifted out first</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPHA</name>
-              <description>Serial clock (SCK) phase</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Leading</name>
-                  <description>Sample on leading edge of clock, shift serial data on trailing edge</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Trailing</name>
-                  <description>Sample on trailing edge of clock, shift serial data on leading edge</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPOL</name>
-              <description>Serial clock (SCK) polarity</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ActiveHigh</name>
-                  <description>Active high</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ActiveLow</name>
-                  <description>Active low</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM00_NS">
       <name>GLOBAL_SPIM23_NS</name>
       <description>Serial Peripheral Interface Master with EasyDMA 8</description>
       <baseAddress>0x400ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI23_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121215,7 +118908,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS23_NS</name>
       <description>SPI Slave 8</description>
       <baseAddress>0x400ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI23_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121227,7 +118920,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM23_NS</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 6</description>
       <baseAddress>0x400ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI23_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121239,7 +118932,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS23_NS</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 6</description>
       <baseAddress>0x400ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI23_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121251,18 +118944,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE23_NS</name>
       <description>UART with EasyDMA 8</description>
       <baseAddress>0x400ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI23_NS</alternatePeripheral>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL23</name>
-        <value>237</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPI23_NS">
-      <name>GLOBAL_SPI23_S</name>
-      <description>Serial Peripheral Interface 1</description>
-      <baseAddress>0x500ED000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM23_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121274,7 +118956,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIM23_S</name>
       <description>Serial Peripheral Interface Master with EasyDMA 9</description>
       <baseAddress>0x500ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI23_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121286,7 +118967,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS23_S</name>
       <description>SPI Slave 9</description>
       <baseAddress>0x500ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI23_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121298,7 +118979,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM23_S</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 7</description>
       <baseAddress>0x500ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI23_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121310,7 +118991,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS23_S</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 7</description>
       <baseAddress>0x500ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI23_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121322,7 +119003,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE23_S</name>
       <description>UART with EasyDMA 9</description>
       <baseAddress>0x500ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI23_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121330,462 +119011,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <value>237</value>
       </interrupt>
     </peripheral>
-    <peripheral>
-      <name>GLOBAL_SPI24_NS</name>
-      <description>Serial Peripheral Interface 0</description>
-      <baseAddress>0x400EE000</baseAddress>
-      <headerStructName>SPI</headerStructName>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>SERIAL24</name>
-        <value>238</value>
-      </interrupt>
-      <groupName>SPI</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>EVENTS_READY</name>
-          <description>TXD byte sent and RXD byte received</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_READY</name>
-              <description>TXD byte sent and RXD byte received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_READY</name>
-          <description>Publish configuration for event READY</description>
-          <addressOffset>0x188</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event READY will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Enable or disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to enable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>Enable SPI</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable SPI</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable SPI</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable SPI</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <name>PSEL</name>
-          <description>Unspecified</description>
-          <headerStructName>GLOBAL_SPI_PSEL</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x508</addressOffset>
-          <register>
-            <name>SCK</name>
-            <description>Pin select for SCK</description>
-            <addressOffset>0x0</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
-            <addressOffset>0x4</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MISO</name>
-            <description>Pin select for MISO signal</description>
-            <addressOffset>0x8</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <register>
-          <name>RXD</name>
-          <description>RXD register</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>RXD</name>
-              <description>RX data received. Double buffered</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TXD</name>
-          <description>TXD register</description>
-          <addressOffset>0x51C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TXD</name>
-              <description>TX data to send. Double buffered.</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PRESCALER</name>
-          <description>The prescaler is used to set the SPI frequency.</description>
-          <addressOffset>0x52C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000040</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DIVISOR</name>
-              <description>Core clock to SCK divisor</description>
-              <lsb>0</lsb>
-              <msb>6</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CONFIG</name>
-          <description>Configuration register</description>
-          <addressOffset>0x554</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ORDER</name>
-              <description>Bit order</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>MsbFirst</name>
-                  <description>Most significant bit shifted out first</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LsbFirst</name>
-                  <description>Least significant bit shifted out first</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPHA</name>
-              <description>Serial clock (SCK) phase</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Leading</name>
-                  <description>Sample on leading edge of clock, shift serial data on trailing edge</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Trailing</name>
-                  <description>Sample on trailing edge of clock, shift serial data on leading edge</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPOL</name>
-              <description>Serial clock (SCK) polarity</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ActiveHigh</name>
-                  <description>Active high</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ActiveLow</name>
-                  <description>Active low</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM00_NS">
       <name>GLOBAL_SPIM24_NS</name>
       <description>Serial Peripheral Interface Master with EasyDMA 10</description>
       <baseAddress>0x400EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI24_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121797,7 +119026,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS24_NS</name>
       <description>SPI Slave 10</description>
       <baseAddress>0x400EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI24_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121809,7 +119038,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM24_NS</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 8</description>
       <baseAddress>0x400EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI24_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121821,7 +119050,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS24_NS</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 8</description>
       <baseAddress>0x400EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI24_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121833,18 +119062,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE24_NS</name>
       <description>UART with EasyDMA 10</description>
       <baseAddress>0x400EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI24_NS</alternatePeripheral>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL24</name>
-        <value>238</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPI24_NS">
-      <name>GLOBAL_SPI24_S</name>
-      <description>Serial Peripheral Interface 1</description>
-      <baseAddress>0x500EE000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM24_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121856,7 +119074,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIM24_S</name>
       <description>Serial Peripheral Interface Master with EasyDMA 11</description>
       <baseAddress>0x500EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI24_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121868,7 +119085,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS24_S</name>
       <description>SPI Slave 11</description>
       <baseAddress>0x500EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI24_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121880,7 +119097,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM24_S</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 9</description>
       <baseAddress>0x500EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI24_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121892,7 +119109,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS24_S</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 9</description>
       <baseAddress>0x500EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI24_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121904,7 +119121,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE24_S</name>
       <description>UART with EasyDMA 11</description>
       <baseAddress>0x500EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI24_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -121961,462 +119178,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
     </peripheral>
-    <peripheral>
-      <name>GLOBAL_SPI30_NS</name>
-      <description>Serial Peripheral Interface 0</description>
-      <baseAddress>0x40104000</baseAddress>
-      <headerStructName>SPI</headerStructName>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>SERIAL30</name>
-        <value>260</value>
-      </interrupt>
-      <groupName>SPI</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>EVENTS_READY</name>
-          <description>TXD byte sent and RXD byte received</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_READY</name>
-              <description>TXD byte sent and RXD byte received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_READY</name>
-          <description>Publish configuration for event READY</description>
-          <addressOffset>0x188</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event READY will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Enable or disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to enable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to disable interrupt for event READY</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>Enable SPI</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable SPI</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable SPI</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable SPI</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <name>PSEL</name>
-          <description>Unspecified</description>
-          <headerStructName>GLOBAL_SPI_PSEL</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x508</addressOffset>
-          <register>
-            <name>SCK</name>
-            <description>Pin select for SCK</description>
-            <addressOffset>0x0</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
-            <addressOffset>0x4</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MISO</name>
-            <description>Pin select for MISO signal</description>
-            <addressOffset>0x8</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>PORT</name>
-                <description>Port number</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <register>
-          <name>RXD</name>
-          <description>RXD register</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>RXD</name>
-              <description>RX data received. Double buffered</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TXD</name>
-          <description>TXD register</description>
-          <addressOffset>0x51C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TXD</name>
-              <description>TX data to send. Double buffered.</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PRESCALER</name>
-          <description>The prescaler is used to set the SPI frequency.</description>
-          <addressOffset>0x52C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000040</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DIVISOR</name>
-              <description>Core clock to SCK divisor</description>
-              <lsb>0</lsb>
-              <msb>6</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CONFIG</name>
-          <description>Configuration register</description>
-          <addressOffset>0x554</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ORDER</name>
-              <description>Bit order</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>MsbFirst</name>
-                  <description>Most significant bit shifted out first</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LsbFirst</name>
-                  <description>Least significant bit shifted out first</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPHA</name>
-              <description>Serial clock (SCK) phase</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Leading</name>
-                  <description>Sample on leading edge of clock, shift serial data on trailing edge</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Trailing</name>
-                  <description>Sample on trailing edge of clock, shift serial data on leading edge</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPOL</name>
-              <description>Serial clock (SCK) polarity</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ActiveHigh</name>
-                  <description>Active high</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ActiveLow</name>
-                  <description>Active low</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM00_NS">
       <name>GLOBAL_SPIM30_NS</name>
       <description>Serial Peripheral Interface Master with EasyDMA 12</description>
       <baseAddress>0x40104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI30_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -122428,7 +119193,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS30_NS</name>
       <description>SPI Slave 12</description>
       <baseAddress>0x40104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI30_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -122440,7 +119205,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM30_NS</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 10</description>
       <baseAddress>0x40104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI30_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -122452,7 +119217,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS30_NS</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 10</description>
       <baseAddress>0x40104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI30_NS</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -122464,18 +119229,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE30_NS</name>
       <description>UART with EasyDMA 12</description>
       <baseAddress>0x40104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI30_NS</alternatePeripheral>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL30</name>
-        <value>260</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPI30_NS">
-      <name>GLOBAL_SPI30_S</name>
-      <description>Serial Peripheral Interface 1</description>
-      <baseAddress>0x50104000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM30_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -122487,7 +119241,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIM30_S</name>
       <description>Serial Peripheral Interface Master with EasyDMA 13</description>
       <baseAddress>0x50104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI30_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -122499,7 +119252,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_SPIS30_S</name>
       <description>SPI Slave 13</description>
       <baseAddress>0x50104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI30_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -122511,7 +119264,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIM30_S</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 11</description>
       <baseAddress>0x50104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI30_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -122523,7 +119276,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_TWIS30_S</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 11</description>
       <baseAddress>0x50104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI30_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -122535,7 +119288,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <name>GLOBAL_UARTE30_S</name>
       <description>UART with EasyDMA 13</description>
       <baseAddress>0x50104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPI30_S</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -126599,6 +123352,22 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <field>
               <name>RRKEY</name>
               <description>Reload request key</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TSKEY</name>
+          <description>Task stop key</description>
+          <addressOffset>0x514</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x6E524635</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>TSKEY</name>
+              <description>Task stop key</description>
               <lsb>0</lsb>
               <msb>31</msb>
             </field>

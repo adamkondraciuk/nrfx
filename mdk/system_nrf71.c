@@ -109,9 +109,9 @@ void SystemInit(void)
                 SCB->NSACR |= (3UL << 10ul);
             #endif
 
-            #ifndef NRF_SKIP_SAU_CONFIGURATION   
+            #ifndef NRF_SKIP_SAU_CONFIGURATION
                 configure_default_sau();
-            #endif     
+            #endif
         #endif
 
         /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
@@ -121,6 +121,14 @@ void SystemInit(void)
             SCB->CPACR |= (3UL << 20ul) | (3UL << 22ul);
             __DSB();
             __ISB();
+        #endif
+    #endif
+
+    #if defined(NFCT_PRESENT)
+        #if defined(NRF_CONFIG_NFCT_PINS_AS_GPIOS)
+            NRF_NFCT->PADCONFIG = NFCT_PADCONFIG_ENABLE_Disabled << NFCT_PADCONFIG_ENABLE_Pos;
+        #else
+            NRF_NFCT->PADCONFIG = NFCT_PADCONFIG_ENABLE_Enabled << NFCT_PADCONFIG_ENABLE_Pos;
         #endif
     #endif
 }

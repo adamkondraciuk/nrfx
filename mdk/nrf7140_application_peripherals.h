@@ -669,6 +669,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                                                            [0..2]*/
 #define VREGGFX_VREGVS0V8_NOTFULLPCPZERO 0           /*!< (unspecified)                                                        */
 #define VREGGFX_HIGHER_CURRENT_LIMIT 1               /*!< (unspecified)                                                        */
+#define VREGGFX_ADD_HP_HELPER_MODE 1                 /*!< (unspecified)                                                        */
 
 /*GPIO Tasks and Events*/
 #define GPIOTE_PRESENT 1

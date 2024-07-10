@@ -200,8 +200,8 @@ typedef enum {
 #define GSI_IRQHandler                SPU310_IRQHandler
 #define SPU310_IRQn                   SPU310_IRQn
 #define SPU310_IRQHandler             SPU310_IRQHandler
-#define DISPC_IRQn                    SPU410_IRQn
-#define DISPC_IRQHandler              SPU410_IRQHandler
+#define DISPC_0_IRQn                  SPU410_IRQn
+#define DISPC_0_IRQHandler            SPU410_IRQHandler
 #define SPU410_IRQn                   SPU410_IRQn
 #define SPU410_IRQHandler             SPU410_IRQHandler
 #define SPU200_IRQn                   SPU200_SPU210_IRQn

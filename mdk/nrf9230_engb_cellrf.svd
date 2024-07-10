@@ -101674,54 +101674,6 @@ interface clock.</description>
           </fields>
         </register>
         <register>
-          <name>WIFI_ENERGYDETTHRSNWB</name>
-          <description>Scaling value for wide band energy detector threshold filter.</description>
-          <addressOffset>0xA54</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>THRS</name>
-              <description>Scaling value for energy detector threshold filter.</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>WIFI_IQENERGYWB</name>
-          <description>Wide band energy detector RMS output.</description>
-          <addressOffset>0xA68</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DATA</name>
-              <description>Energy detector RMS output.</description>
-              <lsb>0</lsb>
-              <msb>14</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>WIFI_IQENERGYFILTWB</name>
-          <description>Wide band energy detector threshold filter output.</description>
-          <addressOffset>0xA6C</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DATA</name>
-              <description>Energy detector threshold filter output.</description>
-              <lsb>0</lsb>
-              <msb>14</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>RX_RCCALIBRESULT</name>
           <description>RX RC calibrator result</description>
           <addressOffset>0xB00</addressOffset>
@@ -119886,34 +119838,6 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                 <enumeratedValue>
                   <name>On</name>
                   <description>VBAT Scaler disabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PADCONFPOWERREQ</name>
-          <description>Request Power for the domain storing PAD configurations.</description>
-          <addressOffset>0x55C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EN</name>
-              <description>Enables power request for PD_GD_CORE3_ACT domain. When set, it will be ensured that the PAD configurations in GPIO peripheral will not be reset before PAD retention is applied.</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Off</name>
-                  <description>Power request disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>On</name>
-                  <description>Power request enabled</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>

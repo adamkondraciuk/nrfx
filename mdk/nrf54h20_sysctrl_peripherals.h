@@ -557,6 +557,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MEMCONF130_RETAIN_INTERNAL_DOC 0             /*!< (unspecified)                                                        */
 #define MEMCONF130_TRIM_INTERNAL_DOC 0               /*!< (unspecified)                                                        */
 
+/*RESETINFO*/
+#define RESETINFO_PRESENT 1
+#define RESETINFO_COUNT 2
+
+#define RESETINFO120_HASRESETREAS 1                  /*!< (unspecified)                                                        */
+#define RESETINFO120_CROSSDOMAINRESET 0              /*!< (unspecified)                                                        */
+
+#define RESETINFO130_HASRESETREAS 1                  /*!< (unspecified)                                                        */
+#define RESETINFO130_CROSSDOMAINRESET 0              /*!< (unspecified)                                                        */
+
 /*Watchdog Timer*/
 #define WDT_PRESENT 1
 #define WDT_COUNT 3
@@ -648,9 +658,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VREG1V0_PRESENT 1
 #define VREG1V0_COUNT 1
 
+#define VREG1V0_ENABLE_HELPER_MODES 0                /*!< (unspecified)                                                        */
+
 /*VREGAO0V8 peripheral*/
 #define VREGAO0V8_PRESENT 1
 #define VREGAO0V8_COUNT 1
+
+#define VREGAO0V8_OVERRIDE_CFGDYNAMIC 0              /*!< (unspecified)                                                        */
 
 /*VREGVS0V8 peripheral*/
 #define VREGVS0V8_PRESENT 1
@@ -665,6 +679,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                                                              [0..2]*/
 #define VREGVS0V8_VREGVS0V8_NOTFULLPCPZERO 0         /*!< (unspecified)                                                        */
 #define VREGVS0V8_HIGHER_CURRENT_LIMIT 0             /*!< (unspecified)                                                        */
+#define VREGVS0V8_ADD_HP_HELPER_MODE 0               /*!< (unspecified)                                                        */
 
 /*VREGSU peripheral*/
 #define VREGSU_PRESENT 1

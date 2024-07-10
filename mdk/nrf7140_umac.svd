@@ -63703,6 +63703,22 @@ A write outputs the value to atbytesm.</description>
             </field>
           </fields>
         </register>
+        <register>
+          <name>VOUTHPHELPER</name>
+          <description>High power helper mode output voltage programming</description>
+          <addressOffset>0x494</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x0000002C</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>VAL</name>
+              <description>Output voltage value</description>
+              <lsb>0</lsb>
+              <msb>5</msb>
+            </field>
+          </fields>
+        </register>
         <cluster>
           <name>OVERRIDE</name>
           <description>Unspecified</description>
@@ -64567,14 +64583,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>GPIOTE130_0</name>
-        <value>104</value>
-      </interrupt>
-      <interrupt>
-        <name>GPIOTE130_1</name>
-        <value>105</value>
-      </interrupt>
       <groupName>GPIOTE</groupName>
       <size>0x20</size>
       <registers>
@@ -67500,14 +67508,6 @@ A write outputs the value to atbytesm.</description>
       <interrupt>
         <name>GRTC_0</name>
         <value>108</value>
-      </interrupt>
-      <interrupt>
-        <name>GRTC_1</name>
-        <value>109</value>
-      </interrupt>
-      <interrupt>
-        <name>GRTC_2</name>
-        <value>110</value>
       </interrupt>
       <groupName>GRTC</groupName>
       <size>0x20</size>
@@ -103321,10 +103321,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x3000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>GSI</name>
-        <value>111</value>
-      </interrupt>
       <groupName>GSI</groupName>
       <size>0x20</size>
       <registers>
@@ -112107,18 +112103,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x2000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>DISPC_0</name>
-        <value>112</value>
-      </interrupt>
-      <interrupt>
-        <name>DISPC_1</name>
-        <value>113</value>
-      </interrupt>
-      <interrupt>
-        <name>DISPC_2</name>
-        <value>114</value>
-      </interrupt>
       <groupName>DISPC</groupName>
       <size>0x20</size>
       <registers>
@@ -155617,10 +155601,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x2000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>GPU</name>
-        <value>115</value>
-      </interrupt>
       <groupName>GPU</groupName>
       <size>0x20</size>
       <registers>
@@ -160029,10 +160009,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>TBM</name>
-        <value>127</value>
-      </interrupt>
       <groupName>TBM</groupName>
       <size>0x20</size>
       <registers>
@@ -160583,10 +160559,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>USBHS</name>
-        <value>134</value>
-      </interrupt>
       <groupName>USBHS</groupName>
       <size>0x20</size>
       <registers>
@@ -161667,10 +161639,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>MRAMC110</name>
-        <value>146</value>
-      </interrupt>
       <groupName>MRAMC</groupName>
       <size>0x20</size>
       <registers>
@@ -164899,10 +164867,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F093000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>MRAMC111</name>
-        <value>147</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_EXMIF</name>
@@ -164915,10 +164879,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>EXMIF</name>
-        <value>149</value>
-      </interrupt>
       <groupName>EXMIF</groupName>
       <size>0x20</size>
       <registers>
@@ -170306,10 +170266,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>OTPC</name>
-        <value>197</value>
-      </interrupt>
       <groupName>OTPC</groupName>
       <size>0x20</size>
       <registers>
@@ -171720,10 +171676,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>VPR120</name>
-        <value>200</value>
-      </interrupt>
       <groupName>VPR</groupName>
       <size>0x20</size>
       <registers>
@@ -184691,10 +184643,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>IPCT120_0</name>
-        <value>209</value>
-      </interrupt>
       <groupName>IPCT</groupName>
       <size>0x20</size>
       <registers>
@@ -186928,10 +186876,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>I3C120</name>
-        <value>211</value>
-      </interrupt>
       <groupName>I3C</groupName>
       <size>0x20</size>
       <registers>
@@ -187527,10 +187471,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F8D4000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>VPR121</name>
-        <value>212</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_QSPI120</name>
@@ -187544,10 +187484,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>QSPI120</name>
-        <value>215</value>
-      </interrupt>
       <groupName>QSPI</groupName>
       <size>0x20</size>
       <registers>
@@ -192216,10 +192152,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>CAN120</name>
-        <value>216</value>
-      </interrupt>
       <groupName>CAN</groupName>
       <size>0x20</size>
       <registers>
@@ -192959,10 +192891,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>MVDMA120</name>
-        <value>217</value>
-      </interrupt>
       <groupName>MVDMA</groupName>
       <size>0x20</size>
       <registers>
@@ -195356,10 +195284,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F8DB000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>CAN121</name>
-        <value>219</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_MVDMA120">
       <name>GLOBAL_MVDMA121</name>
@@ -195367,10 +195291,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F8DC000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>MVDMA121</name>
-        <value>220</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_RAMC122">
       <name>GLOBAL_RAMC123</name>
@@ -195385,10 +195305,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F8DE000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>I3C121</name>
-        <value>222</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_QSPI120">
       <name>GLOBAL_QSPI121</name>
@@ -195396,10 +195312,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F8DF000</baseAddress>
       <!--Security dma=NSA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>QSPI121</name>
-        <value>223</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_DPPIC120</name>
@@ -198485,10 +198397,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>TIMER120</name>
-        <value>226</value>
-      </interrupt>
       <groupName>TIMER</groupName>
       <size>0x20</size>
       <registers>
@@ -199972,10 +199880,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F8E3000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TIMER121</name>
-        <value>227</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_PWM120</name>
@@ -199989,10 +199893,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>PWM120</name>
-        <value>228</value>
-      </interrupt>
       <groupName>PWM</groupName>
       <size>0x20</size>
       <registers>
@@ -203506,10 +203406,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>SPIS120</name>
-        <value>229</value>
-      </interrupt>
       <groupName>SPIS</groupName>
       <size>0x20</size>
       <registers>
@@ -214099,10 +213995,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F8E7000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>SPIM121</name>
-        <value>231</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM120">
       <name>GLOBAL_SPIM122</name>
@@ -214110,10 +214002,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F8E8000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>SPIM122</name>
-        <value>232</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM120">
       <name>GLOBAL_SPIM123</name>
@@ -214121,10 +214009,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F8E9000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>SPIM123</name>
-        <value>233</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_VPR120">
       <name>GLOBAL_VPR130</name>
@@ -214132,10 +214016,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F908000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>VPR130</name>
-        <value>264</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_IPCT120">
       <name>GLOBAL_IPCT130</name>
@@ -214144,10 +214024,6 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <!--Split access-->
-      <interrupt>
-        <name>IPCT130_0</name>
-        <value>289</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_DPPIC120">
       <name>GLOBAL_DPPIC130</name>
@@ -214176,10 +214052,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>RTC130</name>
-        <value>296</value>
-      </interrupt>
       <groupName>RTC</groupName>
       <size>0x20</size>
       <registers>
@@ -216627,10 +216499,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F929000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>RTC131</name>
-        <value>297</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_WDT131</name>
@@ -216644,10 +216512,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>WDT131</name>
-        <value>299</value>
-      </interrupt>
       <groupName>WDT</groupName>
       <size>0x20</size>
       <registers>
@@ -217825,10 +217689,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F92C000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>WDT132</name>
-        <value>300</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_EGU130</name>
@@ -217842,10 +217702,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>EGU130</name>
-        <value>301</value>
-      </interrupt>
       <groupName>EGU</groupName>
       <size>0x20</size>
       <registers>
@@ -229346,10 +229202,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>RESETHUB</name>
-        <value>329</value>
-      </interrupt>
       <groupName>RESETHUB</groupName>
       <size>0x20</size>
       <registers>
@@ -231072,10 +230924,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F957000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>AUDIOPLL</name>
-        <value>343</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_CANPLL">
       <name>GLOBAL_USBHSPLL</name>
@@ -231083,10 +230931,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F958000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>USBHSPLL</name>
-        <value>344</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_VREGUSB</name>
@@ -231099,10 +230943,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>VREGUSB</name>
-        <value>359</value>
-      </interrupt>
       <groupName>VREGUSB</groupName>
       <size>0x20</size>
       <registers>
@@ -232672,10 +232512,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F968000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>AUDIOPLLPM</name>
-        <value>360</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_DPPIC120">
       <name>GLOBAL_DPPIC131</name>
@@ -232696,10 +232532,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>SAADC</name>
-        <value>386</value>
-      </interrupt>
       <groupName>SAADC</groupName>
       <size>0x20</size>
       <registers>
@@ -235395,6 +235227,453 @@ A write outputs the value to atbytesm.</description>
           </fields>
         </register>
         <register>
+          <name>INTPEND</name>
+          <description>Pending interrupts</description>
+          <addressOffset>0x30C</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>STARTED</name>
+              <description>Read pending status of interrupt for event STARTED</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>END</name>
+              <description>Read pending status of interrupt for event END</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DONE</name>
+              <description>Read pending status of interrupt for event DONE</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RESULTDONE</name>
+              <description>Read pending status of interrupt for event RESULTDONE</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CALIBRATEDONE</name>
+              <description>Read pending status of interrupt for event CALIBRATEDONE</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>STOPPED</name>
+              <description>Read pending status of interrupt for event STOPPED</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH0LIMITH</name>
+              <description>Read pending status of interrupt for event CH0LIMITH</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH0LIMITL</name>
+              <description>Read pending status of interrupt for event CH0LIMITL</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH1LIMITH</name>
+              <description>Read pending status of interrupt for event CH1LIMITH</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH1LIMITL</name>
+              <description>Read pending status of interrupt for event CH1LIMITL</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH2LIMITH</name>
+              <description>Read pending status of interrupt for event CH2LIMITH</description>
+              <lsb>10</lsb>
+              <msb>10</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH2LIMITL</name>
+              <description>Read pending status of interrupt for event CH2LIMITL</description>
+              <lsb>11</lsb>
+              <msb>11</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH3LIMITH</name>
+              <description>Read pending status of interrupt for event CH3LIMITH</description>
+              <lsb>12</lsb>
+              <msb>12</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH3LIMITL</name>
+              <description>Read pending status of interrupt for event CH3LIMITL</description>
+              <lsb>13</lsb>
+              <msb>13</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH4LIMITH</name>
+              <description>Read pending status of interrupt for event CH4LIMITH</description>
+              <lsb>14</lsb>
+              <msb>14</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH4LIMITL</name>
+              <description>Read pending status of interrupt for event CH4LIMITL</description>
+              <lsb>15</lsb>
+              <msb>15</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH5LIMITH</name>
+              <description>Read pending status of interrupt for event CH5LIMITH</description>
+              <lsb>16</lsb>
+              <msb>16</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH5LIMITL</name>
+              <description>Read pending status of interrupt for event CH5LIMITL</description>
+              <lsb>17</lsb>
+              <msb>17</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH6LIMITH</name>
+              <description>Read pending status of interrupt for event CH6LIMITH</description>
+              <lsb>18</lsb>
+              <msb>18</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH6LIMITL</name>
+              <description>Read pending status of interrupt for event CH6LIMITL</description>
+              <lsb>19</lsb>
+              <msb>19</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH7LIMITH</name>
+              <description>Read pending status of interrupt for event CH7LIMITH</description>
+              <lsb>20</lsb>
+              <msb>20</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH7LIMITL</name>
+              <description>Read pending status of interrupt for event CH7LIMITL</description>
+              <lsb>21</lsb>
+              <msb>21</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>AHBERROR</name>
+              <description>Read pending status of interrupt for event AHBERROR</description>
+              <lsb>22</lsb>
+              <msb>22</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>STATUS</name>
           <description>Status</description>
           <addressOffset>0x400</addressOffset>
@@ -235524,6 +235803,24 @@ A write outputs the value to atbytesm.</description>
                 <enumeratedValue>
                   <name>Enabled</name>
                   <description>Enable ADC</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>POWERDOWNANA</name>
+              <description>Power down analog between samples. See text for more info.</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>KeepOn</name>
+                  <description>Keep analog on between samples</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PowerDown</name>
+                  <description>Turn off analog between samples</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -235780,7 +236077,7 @@ A write outputs the value to atbytesm.</description>
                     <value>0x2</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Gain3</name>
+                    <name>Gain4</name>
                     <description>4</description>
                     <value>0x3</value>
                   </enumeratedValue>
@@ -236091,11 +236388,27 @@ A write outputs the value to atbytesm.</description>
           <description>RESULT EasyDMA channel</description>
           <headerStructName>GLOBAL_SAADC_RESULT</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x62C</addressOffset>
+          <addressOffset>0x628</addressOffset>
+          <register>
+            <name>DMAENABLE</name>
+            <description>This register has no other function than defining the value on the dmaChannelPeripheralEnable output. (which is not connected)</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ENABLE</name>
+                <description>Enable DMA</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+              </field>
+            </fields>
+          </register>
           <register>
             <name>PTR</name>
             <description>Data pointer</description>
-            <addressOffset>0x000</addressOffset>
+            <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -236111,7 +236424,7 @@ A write outputs the value to atbytesm.</description>
           <register>
             <name>MAXCNT</name>
             <description>Maximum number of buffer bytes to transfer</description>
-            <addressOffset>0x004</addressOffset>
+            <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -236127,7 +236440,7 @@ A write outputs the value to atbytesm.</description>
           <register>
             <name>AMOUNT</name>
             <description>Number of buffer bytes transferred since last START, updated after the END or STOPPED events</description>
-            <addressOffset>0x008</addressOffset>
+            <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -236143,7 +236456,7 @@ A write outputs the value to atbytesm.</description>
           <register>
             <name>CURRENTAMOUNT</name>
             <description>Number of buffer bytes transferred since last START, continuously updated</description>
-            <addressOffset>0x00C</addressOffset>
+            <addressOffset>0x010</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -236225,7 +236538,7 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>CALDMAWREN</name>
-              <description>Enable writing offset calibration values to DMA</description>
+              <description>Enable writing calibration values to DMA</description>
               <lsb>30</lsb>
               <msb>30</msb>
               <enumeratedValues>
@@ -236311,7 +236624,53 @@ A write outputs the value to atbytesm.</description>
                 <enumeratedValue>
                   <name>Low</name>
                   <description>Low gain setting</description>
+                  <value>0x40</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CALGAIN3V3</name>
+              <description>Offset binary coding</description>
+              <lsb>16</lsb>
+              <msb>22</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Default</name>
+                  <description>Default gain, for +1/2 input (assume full-scale = +-1) the output will be 1024</description>
                   <value>0x00</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>High gain setting</description>
+                  <value>0x3F</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Low gain setting</description>
+                  <value>0x40</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CALGAIN5V0</name>
+              <description>Offset binary coding</description>
+              <lsb>24</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Default</name>
+                  <description>Default gain, for +1/2 input (assume full-scale = +-1) the output will be 1024</description>
+                  <value>0x00</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>High gain setting</description>
+                  <value>0x3F</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Low gain setting</description>
+                  <value>0x40</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -236365,6 +236724,12 @@ A write outputs the value to atbytesm.</description>
               <description>Calibration code for reference temperature coefficient. See design description for coding</description>
               <lsb>16</lsb>
               <msb>18</msb>
+            </field>
+            <field>
+              <name>LDO</name>
+              <description>Calibration code for LDO VREF. See design description for coding</description>
+              <lsb>24</lsb>
+              <msb>25</msb>
             </field>
           </fields>
         </register>
@@ -236466,7 +236831,7 @@ A write outputs the value to atbytesm.</description>
           <name>AHBERRORADDRESS</name>
           <description>Address of the last AHB error transaction</description>
           <addressOffset>0x664</addressOffset>
-          <access>read-write</access>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
           <fields>
@@ -236905,10 +237270,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>COMP_LPCOMP</name>
-        <value>387</value>
-      </interrupt>
       <groupName>COMP</groupName>
       <size>0x20</size>
       <registers>
@@ -238648,10 +239009,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>COMP_LPCOMP</name>
-        <value>387</value>
-      </interrupt>
       <groupName>LPCOMP</groupName>
       <size>0x20</size>
       <registers>
@@ -240069,10 +240426,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>TEMP</name>
-        <value>388</value>
-      </interrupt>
       <groupName>TEMP</groupName>
       <size>0x20</size>
       <registers>
@@ -240860,10 +241213,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>NFCT</name>
-        <value>389</value>
-      </interrupt>
       <groupName>NFCT</groupName>
       <size>0x20</size>
       <registers>
@@ -247032,10 +247381,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>TDM130</name>
-        <value>402</value>
-      </interrupt>
       <groupName>TDM</groupName>
       <size>0x20</size>
       <registers>
@@ -250728,10 +251073,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>QDEC130</name>
-        <value>404</value>
-      </interrupt>
       <groupName>QDEC</groupName>
       <size>0x20</size>
       <registers>
@@ -252305,10 +252646,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F995000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>QDEC131</name>
-        <value>405</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_SIMIF130</name>
@@ -252322,10 +252659,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>SIMIF130</name>
-        <value>406</value>
-      </interrupt>
       <groupName>SIMIF</groupName>
       <size>0x20</size>
       <registers>
@@ -256800,10 +257133,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F997000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TDM131</name>
-        <value>407</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_TDM130">
       <name>GLOBAL_TDM132</name>
@@ -256811,10 +257140,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F999000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TDM132</name>
-        <value>409</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_DPPIC120">
       <name>GLOBAL_DPPIC133</name>
@@ -256830,10 +257155,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9A2000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TIMER130</name>
-        <value>418</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_TIMER120">
       <name>GLOBAL_TIMER131</name>
@@ -256841,10 +257162,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9A3000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TIMER131</name>
-        <value>419</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_PWM120">
       <name>GLOBAL_PWM130</name>
@@ -256852,10 +257169,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9A4000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>PWM130</name>
-        <value>420</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM120">
       <name>GLOBAL_SPIM130</name>
@@ -256864,7 +257177,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE130</name>
+        <name>SERIAL0</name>
         <value>421</value>
       </interrupt>
     </peripheral>
@@ -256876,7 +257189,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE130</name>
+        <name>SERIAL0</name>
         <value>421</value>
       </interrupt>
     </peripheral>
@@ -256894,7 +257207,7 @@ A write outputs the value to atbytesm.</description>
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>UARTE130</name>
+        <name>SERIAL0</name>
         <value>421</value>
       </interrupt>
       <groupName>TWIM</groupName>
@@ -260592,7 +260905,7 @@ A write outputs the value to atbytesm.</description>
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>UARTE130</name>
+        <name>SERIAL0</name>
         <value>421</value>
       </interrupt>
       <groupName>TWIS</groupName>
@@ -264613,7 +264926,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE130</name>
+        <name>SERIAL0</name>
         <value>421</value>
       </interrupt>
     </peripheral>
@@ -264624,7 +264937,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE131</name>
+        <name>SERIAL1</name>
         <value>422</value>
       </interrupt>
     </peripheral>
@@ -264636,7 +264949,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE131</name>
+        <name>SERIAL1</name>
         <value>422</value>
       </interrupt>
     </peripheral>
@@ -264648,7 +264961,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE131</name>
+        <name>SERIAL1</name>
         <value>422</value>
       </interrupt>
     </peripheral>
@@ -264660,7 +264973,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE131</name>
+        <name>SERIAL1</name>
         <value>422</value>
       </interrupt>
     </peripheral>
@@ -264672,7 +264985,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE131</name>
+        <name>SERIAL1</name>
         <value>422</value>
       </interrupt>
     </peripheral>
@@ -264688,10 +265001,6 @@ A write outputs the value to atbytesm.</description>
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>PDM130</name>
-        <value>423</value>
-      </interrupt>
       <groupName>PDM</groupName>
       <size>0x20</size>
       <registers>
@@ -266484,10 +266793,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9B2000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TIMER132</name>
-        <value>434</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_TIMER120">
       <name>GLOBAL_TIMER133</name>
@@ -266495,10 +266800,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9B3000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TIMER133</name>
-        <value>435</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_PWM120">
       <name>GLOBAL_PWM131</name>
@@ -266506,10 +266807,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9B4000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>PWM131</name>
-        <value>436</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM120">
       <name>GLOBAL_SPIM132</name>
@@ -266518,7 +266815,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE132</name>
+        <name>SERIAL2</name>
         <value>437</value>
       </interrupt>
     </peripheral>
@@ -266530,7 +266827,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE132</name>
+        <name>SERIAL2</name>
         <value>437</value>
       </interrupt>
     </peripheral>
@@ -266542,7 +266839,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE132</name>
+        <name>SERIAL2</name>
         <value>437</value>
       </interrupt>
     </peripheral>
@@ -266554,7 +266851,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE132</name>
+        <name>SERIAL2</name>
         <value>437</value>
       </interrupt>
     </peripheral>
@@ -266566,7 +266863,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE132</name>
+        <name>SERIAL2</name>
         <value>437</value>
       </interrupt>
     </peripheral>
@@ -266577,7 +266874,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE133</name>
+        <name>SERIAL3</name>
         <value>438</value>
       </interrupt>
     </peripheral>
@@ -266589,7 +266886,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE133</name>
+        <name>SERIAL3</name>
         <value>438</value>
       </interrupt>
     </peripheral>
@@ -266601,7 +266898,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE133</name>
+        <name>SERIAL3</name>
         <value>438</value>
       </interrupt>
     </peripheral>
@@ -266613,7 +266910,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE133</name>
+        <name>SERIAL3</name>
         <value>438</value>
       </interrupt>
     </peripheral>
@@ -266625,7 +266922,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE133</name>
+        <name>SERIAL3</name>
         <value>438</value>
       </interrupt>
     </peripheral>
@@ -266635,10 +266932,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9B7000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>PDM131</name>
-        <value>439</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_DPPIC120">
       <name>GLOBAL_DPPIC135</name>
@@ -266654,10 +266947,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9C2000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TIMER134</name>
-        <value>450</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_TIMER120">
       <name>GLOBAL_TIMER135</name>
@@ -266665,10 +266954,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9C3000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TIMER135</name>
-        <value>451</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_PWM120">
       <name>GLOBAL_PWM132</name>
@@ -266676,10 +266961,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9C4000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>PWM132</name>
-        <value>452</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM120">
       <name>GLOBAL_SPIM134</name>
@@ -266688,7 +266969,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE134</name>
+        <name>SERIAL4</name>
         <value>453</value>
       </interrupt>
     </peripheral>
@@ -266700,7 +266981,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE134</name>
+        <name>SERIAL4</name>
         <value>453</value>
       </interrupt>
     </peripheral>
@@ -266712,7 +266993,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE134</name>
+        <name>SERIAL4</name>
         <value>453</value>
       </interrupt>
     </peripheral>
@@ -266724,7 +267005,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE134</name>
+        <name>SERIAL4</name>
         <value>453</value>
       </interrupt>
     </peripheral>
@@ -266736,7 +267017,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE134</name>
+        <name>SERIAL4</name>
         <value>453</value>
       </interrupt>
     </peripheral>
@@ -266747,7 +267028,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE135</name>
+        <name>SERIAL5</name>
         <value>454</value>
       </interrupt>
     </peripheral>
@@ -266759,7 +267040,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE135</name>
+        <name>SERIAL5</name>
         <value>454</value>
       </interrupt>
     </peripheral>
@@ -266771,7 +267052,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE135</name>
+        <name>SERIAL5</name>
         <value>454</value>
       </interrupt>
     </peripheral>
@@ -266783,7 +267064,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE135</name>
+        <name>SERIAL5</name>
         <value>454</value>
       </interrupt>
     </peripheral>
@@ -266795,7 +267076,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE135</name>
+        <name>SERIAL5</name>
         <value>454</value>
       </interrupt>
     </peripheral>
@@ -266805,10 +267086,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9C7000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>PDM132</name>
-        <value>455</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_DPPIC120">
       <name>GLOBAL_DPPIC136</name>
@@ -266824,10 +267101,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9D2000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TIMER136</name>
-        <value>466</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_TIMER120">
       <name>GLOBAL_TIMER137</name>
@@ -266835,10 +267108,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9D3000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>TIMER137</name>
-        <value>467</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_PWM120">
       <name>GLOBAL_PWM133</name>
@@ -266846,10 +267115,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9D4000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>PWM133</name>
-        <value>468</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_SPIM120">
       <name>GLOBAL_SPIM136</name>
@@ -266858,7 +267123,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE136</name>
+        <name>SERIAL6</name>
         <value>469</value>
       </interrupt>
     </peripheral>
@@ -266870,7 +267135,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE136</name>
+        <name>SERIAL6</name>
         <value>469</value>
       </interrupt>
     </peripheral>
@@ -266882,7 +267147,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE136</name>
+        <name>SERIAL6</name>
         <value>469</value>
       </interrupt>
     </peripheral>
@@ -266894,7 +267159,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE136</name>
+        <name>SERIAL6</name>
         <value>469</value>
       </interrupt>
     </peripheral>
@@ -266906,7 +267171,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE136</name>
+        <name>SERIAL6</name>
         <value>469</value>
       </interrupt>
     </peripheral>
@@ -266917,7 +267182,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE137</name>
+        <name>SERIAL7</name>
         <value>470</value>
       </interrupt>
     </peripheral>
@@ -266929,7 +267194,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE137</name>
+        <name>SERIAL7</name>
         <value>470</value>
       </interrupt>
     </peripheral>
@@ -266941,7 +267206,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE137</name>
+        <name>SERIAL7</name>
         <value>470</value>
       </interrupt>
     </peripheral>
@@ -266953,7 +267218,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE137</name>
+        <name>SERIAL7</name>
         <value>470</value>
       </interrupt>
     </peripheral>
@@ -266965,7 +267230,7 @@ A write outputs the value to atbytesm.</description>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>UARTE137</name>
+        <name>SERIAL7</name>
         <value>470</value>
       </interrupt>
     </peripheral>
@@ -266975,10 +267240,6 @@ A write outputs the value to atbytesm.</description>
       <baseAddress>0x5F9D7000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>PDM133</name>
-        <value>471</value>
-      </interrupt>
     </peripheral>
   </peripherals>
 </device>

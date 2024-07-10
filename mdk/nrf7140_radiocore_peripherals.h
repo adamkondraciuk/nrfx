@@ -683,6 +683,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define AAR_PRESENT 1
 #define AAR_COUNT 3
 
+#define AAR020_DMAERROR 1                            /*!< (unspecified)                                                        */
+#define AAR020_ERRORSTATUS 1                         /*!< (unspecified)                                                        */
+#define AAR020_ERROREVENT 1                          /*!< (unspecified)                                                        */
+
+#define AAR030_DMAERROR 1                            /*!< (unspecified)                                                        */
+#define AAR030_ERRORSTATUS 1                         /*!< (unspecified)                                                        */
+#define AAR030_ERROREVENT 1                          /*!< (unspecified)                                                        */
+
+#define AAR031_DMAERROR 1                            /*!< (unspecified)                                                        */
+#define AAR031_ERRORSTATUS 1                         /*!< (unspecified)                                                        */
+#define AAR031_ERROREVENT 1                          /*!< (unspecified)                                                        */
+
 /*AES CCM Mode Encryption*/
 #define CCM_PRESENT 1
 #define CCM_COUNT 3
@@ -983,9 +995,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define ECB_PRESENT 1
 #define ECB_COUNT 2
 
-#define ECB030_AMOUNTREG 1                           /*!< (unspecified)                                                        */
+#define ECB030_AMOUNTREG 0                           /*!< (unspecified)                                                        */
+#define ECB030_DMAERROR 1                            /*!< (unspecified)                                                        */
+#define ECB030_ERRORSTATUS 1                         /*!< (unspecified)                                                        */
 
-#define ECB031_AMOUNTREG 1                           /*!< (unspecified)                                                        */
+#define ECB031_AMOUNTREG 0                           /*!< (unspecified)                                                        */
+#define ECB031_DMAERROR 1                            /*!< (unspecified)                                                        */
+#define ECB031_ERRORSTATUS 1                         /*!< (unspecified)                                                        */
 
 /*IPCT APB registers*/
 #define IPCT_PRESENT 1
@@ -1095,6 +1111,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                                                            [0..2]*/
 #define VREGGFX_VREGVS0V8_NOTFULLPCPZERO 0           /*!< (unspecified)                                                        */
 #define VREGGFX_HIGHER_CURRENT_LIMIT 1               /*!< (unspecified)                                                        */
+#define VREGGFX_ADD_HP_HELPER_MODE 1                 /*!< (unspecified)                                                        */
 
 /*Global Real-time counter*/
 #define GRTC_PRESENT 1

@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -44,28 +44,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #if defined(HALTIUM_XXAA)
 
+
     #define NRF_DOMAIN_COUNT    NRF_DOMAIN_GLOBAL + 1
     #define NRF_PROCESSOR_COUNT NRF_PROCESSOR_FLPR + 1
 
-    #if defined(NRF_APPLICATION)
-        #define NRF_PROCESSOR NRF_PROCESSOR_APPLICATION
-    #elif defined(NRF_RADIOCORE)
-        #define NRF_PROCESSOR NRF_PROCESSOR_RADIOCORE
-    #elif defined(NRF_FLPR)
-        #define NRF_PROCESSOR NRF_PROCESSOR_FLPR
-    #elif defined(NRF_PPR)
-        #define NRF_PROCESSOR NRF_PROCESSOR_PPR
-    #endif
-
-    #if defined(NRF_APPLICATION)
-        #define NRF_OWNER NRF_OWNER_APPLICATION
-    #elif defined(NRF_RADIOCORE)
-        #define NRF_OWNER NRF_OWNER_RADIOCORE
-    #elif defined(NRF_FLPR) && !defined(NRF_OWNER)
-        #define NRF_OWNER NRF_OWNER_APPLICATION
-    #elif defined(NRF_PPR) && !defined(NRF_OWNER)
-        #define NRF_OWNER NRF_OWNER_APPLICATION
-    #endif
 
     #define ADDRESS_REGION_Pos        (29UL)
     #define ADDRESS_REGION_Msk        (0x7UL << ADDRESS_REGION_Pos)

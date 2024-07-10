@@ -118952,6 +118952,510 @@ A write outputs the value to atbytesm.</description>
       <description>LRCCONF 2</description>
       <baseAddress>0x5F8CE000</baseAddress>
     </peripheral>
+    <peripheral>
+      <name>RESETINFO120</name>
+      <description>RESETINFO 0</description>
+      <baseAddress>0x5F8CE000</baseAddress>
+      <alternatePeripheral>LRCCONF120</alternatePeripheral>
+      <headerStructName>RESETINFO</headerStructName>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <groupName>RESETINFO</groupName>
+      <size>0x20</size>
+      <registers>
+        <cluster>
+          <name>RESETREAS</name>
+          <description>Unspecified</description>
+          <headerStructName>RESETINFO_RESETREAS</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x4A0</addressOffset>
+          <register>
+            <name>GLOBAL</name>
+            <description>Global reset reason.</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>RESETPORONLY</name>
+                <description>Reset from power on reset (reset reason POR or BOR).</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>RESETPIN</name>
+                <description>Reset from pin reset detected.</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>DOG</name>
+                <description>Reset from the SysCtrl watchdog timer detected.</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>CTRLAP</name>
+                <description>Reset from CTRL-AP detected.</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SECSREQ</name>
+                <description>Reset due to secure domain system reset request.</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SECWDT0</name>
+                <description>Reset due to the first instance of watchdog timer in secure domain detected.</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SECWDT1</name>
+                <description>Reset due to the second instance of watchdog timer in secure domain detected.</description>
+                <lsb>6</lsb>
+                <msb>6</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SECLOCKUP</name>
+                <description>Reset due to secure domain lockup.</description>
+                <lsb>7</lsb>
+                <msb>7</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SECTAMPER</name>
+                <description>Reset due to secure domain tamper detected</description>
+                <lsb>8</lsb>
+                <msb>8</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>RESETPOR</name>
+                <description>Reset from power on reset (reset reason other than POR or BOR).</description>
+                <lsb>9</lsb>
+                <msb>9</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>OFF</name>
+                <description>Reset due to wakeup from System OFF mode when wakeup is triggered by DETECT signal from GPIO.</description>
+                <lsb>16</lsb>
+                <msb>16</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>LPCOMP</name>
+                <description>Reset due to wakeup from System OFF mode when wakeup is triggered by LPCOMP (Low Power Comparator).</description>
+                <lsb>17</lsb>
+                <msb>17</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>DIF</name>
+                <description>Reset due to wakeup from System OFF mode when wakeup is triggered by entering the debug interface mode.</description>
+                <lsb>18</lsb>
+                <msb>18</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>GRTC</name>
+                <description>Reset due to wakeup from System OFF mode when wakeup is triggered by GRTC interrupt.</description>
+                <lsb>19</lsb>
+                <msb>19</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>NFC</name>
+                <description>Reset due to wakeup from System OFF mode when wakeup is triggered by NFC field detection in sense mode.</description>
+                <lsb>20</lsb>
+                <msb>20</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>VUSB</name>
+                <description>Reset after wakeup from System OFF mode due to VBUS rising into valid range.</description>
+                <lsb>21</lsb>
+                <msb>21</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>LOCAL</name>
+            <description>Local reset reason.</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>DOG</name>
+                <description>Reset from the local watchdog timer detected</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>DOGNS</name>
+                <description>Reset from the local non-secure watchdog timer detected</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SREQ</name>
+                <description>Reset from the local soft reset request detected.</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>LOCKUP</name>
+                <description>Reset from local CPU lockup detected</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>UNRETAINEDWAKE</name>
+                <description>Reset due to wake from unretained state.</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+              </field>
+            </fields>
+          </register>
+        </cluster>
+        <cluster>
+          <name>ERROR</name>
+          <description>Unspecified</description>
+          <headerStructName>RESETINFO_ERROR</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x4A8</addressOffset>
+          <register>
+            <name>STATUS</name>
+            <description>Reset error status.</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ERRORSTATUS</name>
+                <description>Error status</description>
+                <lsb>0</lsb>
+                <msb>3</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>ADDRESS</name>
+            <description>Reset error address.</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ERRORADDRESS</name>
+                <description>Error address</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+        </cluster>
+        <register>
+          <name>RESTOREVALID</name>
+          <description>Valid restore image is present in RAM.</description>
+          <addressOffset>0x4C0</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>RESTOREVALID</name>
+              <description>Valid restore image is present in RAM.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotPreset</name>
+                  <description>Not present</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Present</name>
+                  <description>Present</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MASKLOCKUP</name>
+          <description>Mask CPU lockup signal.</description>
+          <addressOffset>0x4C4</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>MASK</name>
+              <description>Mask lockup signal</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotMask</name>
+                  <description>Do not mask lockup signal</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Mask</name>
+                  <description>Mask lockup signal</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
     <peripheral derivedFrom="PCGCM200">
       <name>PCGCM120</name>
       <description>PCGC Master 3</description>
@@ -159023,6 +159527,12 @@ A write outputs the value to atbytesm.</description>
       <name>LRCCONF130</name>
       <description>LRCCONF 3</description>
       <baseAddress>0x5F93E000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="RESETINFO120">
+      <name>RESETINFO130</name>
+      <description>RESETINFO 1</description>
+      <baseAddress>0x5F93E000</baseAddress>
+      <alternatePeripheral>LRCCONF130</alternatePeripheral>
     </peripheral>
     <peripheral derivedFrom="PCGCM200">
       <name>PCGCM131</name>
@@ -229494,6 +230004,453 @@ A write outputs the value to atbytesm.</description>
           </fields>
         </register>
         <register>
+          <name>INTPEND</name>
+          <description>Pending interrupts</description>
+          <addressOffset>0x30C</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>STARTED</name>
+              <description>Read pending status of interrupt for event STARTED</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>END</name>
+              <description>Read pending status of interrupt for event END</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DONE</name>
+              <description>Read pending status of interrupt for event DONE</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RESULTDONE</name>
+              <description>Read pending status of interrupt for event RESULTDONE</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CALIBRATEDONE</name>
+              <description>Read pending status of interrupt for event CALIBRATEDONE</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>STOPPED</name>
+              <description>Read pending status of interrupt for event STOPPED</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH0LIMITH</name>
+              <description>Read pending status of interrupt for event CH0LIMITH</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH0LIMITL</name>
+              <description>Read pending status of interrupt for event CH0LIMITL</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH1LIMITH</name>
+              <description>Read pending status of interrupt for event CH1LIMITH</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH1LIMITL</name>
+              <description>Read pending status of interrupt for event CH1LIMITL</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH2LIMITH</name>
+              <description>Read pending status of interrupt for event CH2LIMITH</description>
+              <lsb>10</lsb>
+              <msb>10</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH2LIMITL</name>
+              <description>Read pending status of interrupt for event CH2LIMITL</description>
+              <lsb>11</lsb>
+              <msb>11</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH3LIMITH</name>
+              <description>Read pending status of interrupt for event CH3LIMITH</description>
+              <lsb>12</lsb>
+              <msb>12</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH3LIMITL</name>
+              <description>Read pending status of interrupt for event CH3LIMITL</description>
+              <lsb>13</lsb>
+              <msb>13</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH4LIMITH</name>
+              <description>Read pending status of interrupt for event CH4LIMITH</description>
+              <lsb>14</lsb>
+              <msb>14</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH4LIMITL</name>
+              <description>Read pending status of interrupt for event CH4LIMITL</description>
+              <lsb>15</lsb>
+              <msb>15</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH5LIMITH</name>
+              <description>Read pending status of interrupt for event CH5LIMITH</description>
+              <lsb>16</lsb>
+              <msb>16</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH5LIMITL</name>
+              <description>Read pending status of interrupt for event CH5LIMITL</description>
+              <lsb>17</lsb>
+              <msb>17</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH6LIMITH</name>
+              <description>Read pending status of interrupt for event CH6LIMITH</description>
+              <lsb>18</lsb>
+              <msb>18</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH6LIMITL</name>
+              <description>Read pending status of interrupt for event CH6LIMITL</description>
+              <lsb>19</lsb>
+              <msb>19</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH7LIMITH</name>
+              <description>Read pending status of interrupt for event CH7LIMITH</description>
+              <lsb>20</lsb>
+              <msb>20</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CH7LIMITL</name>
+              <description>Read pending status of interrupt for event CH7LIMITL</description>
+              <lsb>21</lsb>
+              <msb>21</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>AHBERROR</name>
+              <description>Read pending status of interrupt for event AHBERROR</description>
+              <lsb>22</lsb>
+              <msb>22</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>STATUS</name>
           <description>Status</description>
           <addressOffset>0x400</addressOffset>
@@ -229623,6 +230580,24 @@ A write outputs the value to atbytesm.</description>
                 <enumeratedValue>
                   <name>Enabled</name>
                   <description>Enable ADC</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>POWERDOWNANA</name>
+              <description>Power down analog between samples. See text for more info.</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>KeepOn</name>
+                  <description>Keep analog on between samples</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PowerDown</name>
+                  <description>Turn off analog between samples</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -229879,7 +230854,7 @@ A write outputs the value to atbytesm.</description>
                     <value>0x2</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Gain3</name>
+                    <name>Gain4</name>
                     <description>4</description>
                     <value>0x3</value>
                   </enumeratedValue>
@@ -230190,11 +231165,27 @@ A write outputs the value to atbytesm.</description>
           <description>RESULT EasyDMA channel</description>
           <headerStructName>GLOBAL_SAADC_RESULT</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x62C</addressOffset>
+          <addressOffset>0x628</addressOffset>
+          <register>
+            <name>DMAENABLE</name>
+            <description>This register has no other function than defining the value on the dmaChannelPeripheralEnable output. (which is not connected)</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ENABLE</name>
+                <description>Enable DMA</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+              </field>
+            </fields>
+          </register>
           <register>
             <name>PTR</name>
             <description>Data pointer</description>
-            <addressOffset>0x000</addressOffset>
+            <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -230210,7 +231201,7 @@ A write outputs the value to atbytesm.</description>
           <register>
             <name>MAXCNT</name>
             <description>Maximum number of buffer bytes to transfer</description>
-            <addressOffset>0x004</addressOffset>
+            <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -230226,7 +231217,7 @@ A write outputs the value to atbytesm.</description>
           <register>
             <name>AMOUNT</name>
             <description>Number of buffer bytes transferred since last START, updated after the END or STOPPED events</description>
-            <addressOffset>0x008</addressOffset>
+            <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -230242,7 +231233,7 @@ A write outputs the value to atbytesm.</description>
           <register>
             <name>CURRENTAMOUNT</name>
             <description>Number of buffer bytes transferred since last START, continuously updated</description>
-            <addressOffset>0x00C</addressOffset>
+            <addressOffset>0x010</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -230324,7 +231315,7 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>CALDMAWREN</name>
-              <description>Enable writing offset calibration values to DMA</description>
+              <description>Enable writing calibration values to DMA</description>
               <lsb>30</lsb>
               <msb>30</msb>
               <enumeratedValues>
@@ -230410,7 +231401,53 @@ A write outputs the value to atbytesm.</description>
                 <enumeratedValue>
                   <name>Low</name>
                   <description>Low gain setting</description>
+                  <value>0x40</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CALGAIN3V3</name>
+              <description>Offset binary coding</description>
+              <lsb>16</lsb>
+              <msb>22</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Default</name>
+                  <description>Default gain, for +1/2 input (assume full-scale = +-1) the output will be 1024</description>
                   <value>0x00</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>High gain setting</description>
+                  <value>0x3F</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Low gain setting</description>
+                  <value>0x40</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CALGAIN5V0</name>
+              <description>Offset binary coding</description>
+              <lsb>24</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Default</name>
+                  <description>Default gain, for +1/2 input (assume full-scale = +-1) the output will be 1024</description>
+                  <value>0x00</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>High gain setting</description>
+                  <value>0x3F</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Low gain setting</description>
+                  <value>0x40</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -230464,6 +231501,12 @@ A write outputs the value to atbytesm.</description>
               <description>Calibration code for reference temperature coefficient. See design description for coding</description>
               <lsb>16</lsb>
               <msb>18</msb>
+            </field>
+            <field>
+              <name>LDO</name>
+              <description>Calibration code for LDO VREF. See design description for coding</description>
+              <lsb>24</lsb>
+              <msb>25</msb>
             </field>
           </fields>
         </register>
@@ -230565,7 +231608,7 @@ A write outputs the value to atbytesm.</description>
           <name>AHBERRORADDRESS</name>
           <description>Address of the last AHB error transaction</description>
           <addressOffset>0x664</addressOffset>
-          <access>read-write</access>
+          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
           <fields>

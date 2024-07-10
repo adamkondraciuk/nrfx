@@ -106531,7 +106531,7 @@ A write outputs the value to atbytesm.</description>
     <peripheral>
       <name>GLOBAL_MRAMC110_NS</name>
       <description>MRAM controller 0</description>
-      <baseAddress>0x5F092000</baseAddress>
+      <baseAddress>0x4F092000</baseAddress>
       <headerStructName>MRAMC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -109735,7 +109735,6 @@ A write outputs the value to atbytesm.</description>
       <name>GLOBAL_MRAMC110_S</name>
       <description>MRAM controller 1</description>
       <baseAddress>0x5F092000</baseAddress>
-      <alternatePeripheral>GLOBAL_MRAMC110_NS</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
@@ -109747,7 +109746,7 @@ A write outputs the value to atbytesm.</description>
     <peripheral derivedFrom="GLOBAL_MRAMC110_NS">
       <name>GLOBAL_MRAMC111_NS</name>
       <description>MRAM controller 2</description>
-      <baseAddress>0x5F093000</baseAddress>
+      <baseAddress>0x4F093000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
@@ -109760,7 +109759,6 @@ A write outputs the value to atbytesm.</description>
       <name>GLOBAL_MRAMC111_S</name>
       <description>MRAM controller 3</description>
       <baseAddress>0x5F093000</baseAddress>
-      <alternatePeripheral>GLOBAL_MRAMC111_NS</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->

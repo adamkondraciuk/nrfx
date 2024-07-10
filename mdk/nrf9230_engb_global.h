@@ -118,9 +118,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_TBM_S_BASE                    0xBF003000UL
 #define NRF_USBHS_NS_BASE                 0x4F086000UL
 #define NRF_USBHS_S_BASE                  0x5F086000UL
-#define NRF_MRAMC110_NS_BASE              0x5F092000UL
+#define NRF_MRAMC110_NS_BASE              0x4F092000UL
 #define NRF_MRAMC110_S_BASE               0x5F092000UL
-#define NRF_MRAMC111_NS_BASE              0x5F093000UL
+#define NRF_MRAMC111_NS_BASE              0x4F093000UL
 #define NRF_MRAMC111_S_BASE               0x5F093000UL
 #define NRF_EXMIF_NS_BASE                 0x4F095000UL
 #define NRF_EXMIF_S_BASE                  0x5F095000UL
