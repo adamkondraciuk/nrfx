@@ -161,7 +161,7 @@ extern "C" {
 #define NRFX_INTERCONNECT_DPPIC_MAP                     \
 {                                                       \
     {                                                   \
-        .apb_index     = NRF_APB_INDEX_MCU_AUX,         \
+        .apb_index     = NRF_APB_INDEX_MCU    ,         \
         .dppic         = NRF_DPPIC01,                   \
         .channels_mask = NRFX_BIT_MASK(DPPIC01_CH_NUM), \
         .apb_size      = 0x40000                        \
