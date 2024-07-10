@@ -44,7 +44,7 @@ extern "C" {
             (NRF_GPIO_PIN_SEL_CELLULAR = GPIO_PIN_CNF_CTRLSEL_CELL), ())
 #endif
 
-#if defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA)
+#if defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_ENGA_XXAA)
     #define NRF_GPIO_RETAIN_EXT                                               \
         NRF_GPIO_RETAIN_SECURE_MASK          = GPIO_RETAIN_SECURE_Msk,        \
         NRF_GPIO_RETAIN_CELLULAR_MASK        = GPIO_RETAIN_CELLCORE_Msk,      \
@@ -178,11 +178,7 @@ extern "C" {
 #endif // !defined(NRF_GRTC_HAS_EXTENDED)
 
 #if !defined(NRF_GRTC_HAS_RTCOUNTER)
-    #if defined(LUMOS_XXAA)
-        #define NRF_GRTC_HAS_RTCOUNTER 1
-    #else
-        #define NRF_GRTC_HAS_RTCOUNTER 0
-    #endif
+    #define NRF_GRTC_HAS_RTCOUNTER 0
 #endif // defined(LUMOS_XXAA)
 
 /*------------------------------------------------------------------------------------------------*/
