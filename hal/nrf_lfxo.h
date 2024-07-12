@@ -171,7 +171,7 @@ NRF_STATIC_INLINE bool nrf_lfxo_statusana_settled_check(NRF_LFXO_Type const * p_
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Total capacitance in pF.
+ * @return Capacitance value in pF, resolution: 1pF.
  */
 NRF_STATIC_INLINE uint8_t nrf_lfxo_cload_get(NRF_LFXO_Type const * p_reg);
 
@@ -179,7 +179,7 @@ NRF_STATIC_INLINE uint8_t nrf_lfxo_cload_get(NRF_LFXO_Type const * p_reg);
  * @brief Function for setting internal capacitive load value.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] cap   Total capacitance in pF.
+ * @param[in] cap   Capacitance value in pF, resolution: 1pF.
  */
 NRF_STATIC_INLINE void nrf_lfxo_cload_set(NRF_LFXO_Type * p_reg, uint8_t cap);
 
@@ -295,7 +295,7 @@ NRF_STATIC_INLINE void nrf_lfxo_cload_set(NRF_LFXO_Type * p_reg, uint8_t cap)
     NRFX_ASSERT(cap <= 25);
     uint32_t cload_reg = 0;
 
-    if (cap > 15)
+    if (cap >= 10) /* in pF */
     {
         cload_reg = LFXO_CLOAD_VAL1_Msk;
         cap -= 10;

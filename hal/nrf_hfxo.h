@@ -196,7 +196,7 @@ NRF_STATIC_INLINE void nrf_hfxo_status_get(NRF_HFXO_Type const * p_reg, nrf_hfxo
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Capacitance value.
+ * @return Capacitance value in pF, resolution: 0.25pF.
  */
 NRF_STATIC_INLINE uint8_t nrf_hfxo_cload_get(NRF_HFXO_Type const * p_reg);
 
@@ -207,7 +207,7 @@ NRF_STATIC_INLINE uint8_t nrf_hfxo_cload_get(NRF_HFXO_Type const * p_reg);
  *       See the Product Specification for exact formula.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] cap   Capacitance value.
+ * @param[in] cap   Capacitance value in pF, resolution: 0.25pF.
  */
 NRF_STATIC_INLINE void nrf_hfxo_cload_set(NRF_HFXO_Type * p_reg, uint8_t cap);
 
@@ -376,7 +376,16 @@ NRF_STATIC_INLINE uint8_t nrf_hfxo_cload_get(NRF_HFXO_Type const * p_reg)
 NRF_STATIC_INLINE void nrf_hfxo_cload_set(NRF_HFXO_Type * p_reg, uint8_t cap)
 {
     NRFX_ASSERT(cap <= (HFXO_CLOAD_VAL0_Msk | HFXO_CLOAD_VAL1_Msk));
-    p_reg->CLOAD = cap;
+    uint32_t cload_reg = 0;
+
+    if (cap >= 40) /* 40 => 10pf, resolution: 0.25pF */
+    {
+        cload_reg = HFXO_CLOAD_VAL1_Msk;
+        cap -= 40;
+    }
+
+    cload_reg |= (cap << HFXO_CLOAD_VAL0_Pos) & HFXO_CLOAD_VAL0_Msk;
+    p_reg->CLOAD = cload_reg;
 }
 
 NRF_STATIC_INLINE uint8_t nrf_hfxo_amplitude_control_get(NRF_HFXO_Type const * p_reg)
