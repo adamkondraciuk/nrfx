@@ -834,6 +834,10 @@
     #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
     #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
 
+    
+    #define DPPIC030_CH_NUM (DPPIC030_CH_NUM_MAX + 1UL)
+    #define DPPIC030_GROUP_NUM (DPPIC030_GROUP_NUM_MAX + 1UL)
+
 #endif
 
 /**************************************************************************************************/
@@ -1726,6 +1730,10 @@
     #define OSCRFR_TRIM_OSC_VAL_ValNeg49 OSCRFR_TRIM_OSC_VAL_ValNeg42
     #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
     #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
+
+
+    #define DPPIC030_CH_NUM (DPPIC030_CH_NUM_MAX + 1UL)
+    #define DPPIC030_GROUP_NUM (DPPIC030_GROUP_NUM_MAX + 1UL)
 
 #endif
 

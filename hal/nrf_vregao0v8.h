@@ -58,6 +58,13 @@ extern "C" {
 #define NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_PWRUP_CORE_HP 0
 #endif
 
+#if defined(VREGAO0V8_CONFIG_CFGDYNAMIC_ILIMLOW_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the CFGDYNAMIC register is available. */
+#define NRF_VREGAO0V8_HAS_CFGDYNAMIC_REG 1
+#else
+#define NRF_VREGAO0V8_HAS_CFGDYNAMIC_REG 0
+#endif
+
 /** @brief VREGAO0V8 events. */
 typedef enum
 {
@@ -341,6 +348,7 @@ void nrf_vregao0v8_config_static_set(NRF_VREGAO0V8_Type *          p_reg,
 NRF_STATIC_INLINE nrf_vregao0v8_config_static_t
 nrf_vregao0v8_config_static_get(NRF_VREGAO0V8_Type const * p_reg);
 
+#if NRF_VREGAO0V8_HAS_CFGDYNAMIC_REG
 /**
  * @brief Function for setting voltage regulator dynamic configuration.
  *
@@ -360,6 +368,7 @@ void nrf_vregao0v8_config_dynamic_set(NRF_VREGAO0V8_Type *           p_reg,
  */
 NRF_STATIC_INLINE nrf_vregao0v8_config_dynamic_t
 nrf_vregao0v8_config_dynamic_get(NRF_VREGAO0V8_Type const * p_reg);
+#endif
 
 /**
  * @brief Function for setting current reference trimming.
@@ -707,6 +716,7 @@ nrf_vregao0v8_config_static_get(NRF_VREGAO0V8_Type const * p_reg)
     return cfg;
 }
 
+#if NRF_VREGAO0V8_HAS_CFGDYNAMIC_REG
 NRF_STATIC_INLINE
 void nrf_vregao0v8_config_dynamic_set(NRF_VREGAO0V8_Type *           p_reg,
                                       nrf_vregao0v8_config_dynamic_t cfg)
@@ -726,6 +736,7 @@ nrf_vregao0v8_config_dynamic_get(NRF_VREGAO0V8_Type const * p_reg)
 
     return cfg;
 }
+#endif //NRF_VREGAO0V8_HAS_CFGDYNAMIC_REG
 
 NRF_STATIC_INLINE void nrf_vregao0v8_trim_iref_set(NRF_VREGAO0V8_Type * p_reg, uint8_t val)
 {

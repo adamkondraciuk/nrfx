@@ -191,7 +191,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF92_SERIES for common use in nRF92 series devices. */
-#if defined (NRF9230_XXAA) || defined(NRF9230_ENGB_XXAA)
+#if defined (NRF9230_XXAA) || defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA)
     #ifndef NRF92_SERIES
         #define NRF92_SERIES
     #endif
