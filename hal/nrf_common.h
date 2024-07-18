@@ -76,12 +76,23 @@ extern "C" {
 #define DMA_BUFFER_UNIFIED_BYTE_ACCESS 1
 #endif
 
-#if defined(LUMOS_XXAA)
+#if defined(NRF_TRUSTZONE_NONSECURE)
+#if defined(NRF_CONFIG_CPU_FREQ_MHZ) && (NRF_CONFIG_CPU_FREQ_MHZ == 64)
+#define NRF_CPU_FREQ_IS_64MHZ 1
+#elif defined(NRF_CONFIG_CPU_FREQ_MHZ) && (NRF_CONFIG_CPU_FREQ_MHZ == 128)
+#define NRF_CPU_FREQ_IS_128MHZ 1
+#elif !defined(NRF_CONFIG_CPU_FREQ_MHZ)
+#error "MCU frequency not specified"
+#else
+#error "Invalid MCU frequency"
+#endif
+#else
 #if defined(NRF_SKIP_CLOCK_CONFIGURATION) || \
     (defined(NRF_CONFIG_CPU_FREQ_MHZ) && (NRF_CONFIG_CPU_FREQ_MHZ == 64))
 #define NRF_CPU_FREQ_IS_64MHZ 1
-#elif !defined(NRF_CONFIG_CPU_FREQ_MHZ) || \
-    (defined(NRF_CONFIG_CPU_FREQ_MHZ) && (NRF_CONFIG_CPU_FREQ_MHZ == 128))
+#elif defined(NRF_CONFIG_CPU_FREQ_MHZ) && (NRF_CONFIG_CPU_FREQ_MHZ == 128)
+#define NRF_CPU_FREQ_IS_128MHZ 1
+#elif !defined(NRF_CONFIG_CPU_FREQ_MHZ)
 #define NRF_CPU_FREQ_IS_128MHZ 1
 #else
 #error "Invalid MCU frequency"
