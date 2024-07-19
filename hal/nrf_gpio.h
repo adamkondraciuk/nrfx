@@ -175,26 +175,8 @@ typedef enum
     NRF_GPIO_PIN_D0H1 = GPIO_PIN_CNF_DRIVE_D0H1, ///< Disconnect '0', high drive '1'.
     NRF_GPIO_PIN_S0D1 = GPIO_PIN_CNF_DRIVE_S0D1, ///< Standard '0', disconnect '1'.
     NRF_GPIO_PIN_H0D1 = GPIO_PIN_CNF_DRIVE_H0D1, ///< High drive '0', disconnect '1'.
-#if defined(GPIO_PIN_CNF_DRIVE_E0S1) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIO_PIN_E0S1 = GPIO_PIN_CNF_DRIVE_E0S1, ///< Extra high drive '0', standard '1'.
-#endif
-#if defined(GPIO_PIN_CNF_DRIVE_S0E1) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIO_PIN_S0E1 = GPIO_PIN_CNF_DRIVE_S0E1, ///< Standard '0', extra high drive '1'.
-#endif
 #if defined(GPIO_PIN_CNF_DRIVE_E0E1) || defined(__NRFX_DOXYGEN__)
     NRF_GPIO_PIN_E0E1 = GPIO_PIN_CNF_DRIVE_E0E1, ///< Extra high drive '0', extra high drive '1'.
-#endif
-#if defined(GPIO_PIN_CNF_DRIVE_E0H1) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIO_PIN_E0H1 = GPIO_PIN_CNF_DRIVE_E0H1, ///< Extra high drive '0', high drive '1'.
-#endif
-#if defined(GPIO_PIN_CNF_DRIVE_H0E1) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIO_PIN_H0E1 = GPIO_PIN_CNF_DRIVE_H0E1, ///< High drive '0', extra high drive '1'.
-#endif
-#if defined(GPIO_PIN_CNF_DRIVE_D0E1) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIO_PIN_D0E1 = GPIO_PIN_CNF_DRIVE_D0E1, ///< Disconnect '0', extra high drive '1'.
-#endif
-#if defined(GPIO_PIN_CNF_DRIVE_E0D1) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIO_PIN_E0D1 = GPIO_PIN_CNF_DRIVE_E0D1, ///< Extra high drive '0', disconnect '1'.
 #endif
 #else
     NRF_GPIO_PIN_S0S1 = GPIO_PIN_CNF_DRIVE0_S0 |
@@ -213,20 +195,8 @@ typedef enum
                         (GPIO_PIN_CNF_DRIVE1_D1 << GPIO_PIN_CNF_DRIVE1_OFFSET),
     NRF_GPIO_PIN_H0D1 = GPIO_PIN_CNF_DRIVE0_H0 |
                         (GPIO_PIN_CNF_DRIVE1_D1 << GPIO_PIN_CNF_DRIVE1_OFFSET),
-    NRF_GPIO_PIN_E0S1 = GPIO_PIN_CNF_DRIVE0_E0 |
-                        (GPIO_PIN_CNF_DRIVE1_S1 << GPIO_PIN_CNF_DRIVE1_OFFSET),
-    NRF_GPIO_PIN_S0E1 = GPIO_PIN_CNF_DRIVE0_S0 |
-                        (GPIO_PIN_CNF_DRIVE1_E1 << GPIO_PIN_CNF_DRIVE1_OFFSET),
     NRF_GPIO_PIN_E0E1 = GPIO_PIN_CNF_DRIVE0_E0 |
                         (GPIO_PIN_CNF_DRIVE1_E1 << GPIO_PIN_CNF_DRIVE1_OFFSET),
-    NRF_GPIO_PIN_E0H1 = GPIO_PIN_CNF_DRIVE0_E0 |
-                        (GPIO_PIN_CNF_DRIVE1_H1 << GPIO_PIN_CNF_DRIVE1_OFFSET),
-    NRF_GPIO_PIN_H0E1 = GPIO_PIN_CNF_DRIVE0_H0 |
-                        (GPIO_PIN_CNF_DRIVE1_E1 << GPIO_PIN_CNF_DRIVE1_OFFSET),
-    NRF_GPIO_PIN_D0E1 = GPIO_PIN_CNF_DRIVE0_D0 |
-                        (GPIO_PIN_CNF_DRIVE1_E1 << GPIO_PIN_CNF_DRIVE1_OFFSET),
-    NRF_GPIO_PIN_E0D1 = GPIO_PIN_CNF_DRIVE0_E0 |
-                        (GPIO_PIN_CNF_DRIVE1_D1 << GPIO_PIN_CNF_DRIVE1_OFFSET),
 #endif // defined(GPIO_PIN_CNF_DRIVE_Msk) || defined(__NRFX_DOXYGEN__)
 } nrf_gpio_pin_drive_t;
 
