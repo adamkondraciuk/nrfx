@@ -411,7 +411,9 @@ NRFY_STATIC_INLINE void nrfy_uarte_publish_clear(NRF_UARTE_Type *  p_reg, nrf_ua
 NRFY_STATIC_INLINE uint32_t nrfy_uarte_errorsrc_get_and_clear(NRF_UARTE_Type * p_reg)
 {
     nrf_barrier_rw();
-    uint32_t errorsrc = nrf_uarte_errorsrc_get_and_clear(p_reg);
+    uint32_t errorsrc = nrf_uarte_errorsrc_get(p_reg);
+    nrf_barrier_rw();
+    nrf_uarte_errorsrc_clear(p_reg, errorsrc);
     nrf_barrier_rw();
     return errorsrc;
 }
