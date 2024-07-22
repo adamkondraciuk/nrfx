@@ -76,20 +76,20 @@ typedef enum
 /** @brief AUXPLL Loop divider base settings. */
 typedef enum
 {
-    NRF_AUXPLL_DIVIDER_RANGE_LOW  = AUXPLL_CONFIG_CFGSTATIC_AUXPLLRANGE_Low,        /**< Low range divider setting. Fractional divider in the range 3..4 */
-    NRF_AUXPLL_DIVIDER_RANGE_MID  = AUXPLL_CONFIG_CFGSTATIC_AUXPLLRANGE_Mid,        /**< Mid range divider setting. Fractional divider in the range 4..5 */
-    NRF_AUXPLL_DIVIDER_RANGE_HIGH = AUXPLL_CONFIG_CFGSTATIC_AUXPLLRANGE_High,       /**< High range divider setting. Fractional divider in the range 5..6 */
+    NRF_AUXPLL_DIVIDER_RANGE_LOW  = AUXPLL_CONFIG_CFGSTATIC_AUXPLLRANGE_Low,        /**< Low range divider setting. Fractional divider in the range 3..4. */
+    NRF_AUXPLL_DIVIDER_RANGE_MID  = AUXPLL_CONFIG_CFGSTATIC_AUXPLLRANGE_Mid,        /**< Mid range divider setting. Fractional divider in the range 4..5. */
+    NRF_AUXPLL_DIVIDER_RANGE_HIGH = AUXPLL_CONFIG_CFGSTATIC_AUXPLLRANGE_High,       /**< High range divider setting. Fractional divider in the range 5..6. */
     NRF_AUXPLL_DIVIDER_RANGE_MAX  = AUXPLL_CONFIG_CFGSTATIC_AUXPLLRANGE_StaticHigh, /**< Maximum static divider setting. Fractional division not supported. */
-} nrf_auxpll_divider_range_t ;
+} nrf_auxpll_divider_range_t;
 
 /** @brief AUXPLL configuration. */
 typedef struct
 {
-    uint8_t outdrive;                 /**< Output buffer drive strength selection. Range 0..3 */
-    uint8_t current_tune;             /**< Constant current tune for ring oscillator. Range 0..15 */
-    bool sdm_off;                     /**< Turn off sigma delta modulation */
-    bool dither_off;                  /**< Turn off dither in sigma delta modulator */
-    nrf_auxpll_divider_range_t range; /**< Loop divider base settings */
+    uint8_t outdrive;                 /**< Output buffer drive strength selection. Range 0..3. */
+    uint8_t current_tune;             /**< Constant current tune for ring oscillator. Range 0..15. */
+    bool sdm_off;                     /**< Turn off sigma delta modulation. */
+    bool dither_off;                  /**< Turn off dither in sigma delta modulator. */
+    nrf_auxpll_divider_range_t range; /**< Loop divider base settings. */
 } nrf_auxpll_config_t;
 
 /**
