@@ -72,12 +72,20 @@ extern "C" {
 #define NRF_UARTE_HAS_FRAME_TIMEOUT 0
 #endif
 
+/** @brief Base frequency value 320 MHz for UARTE. */
+#define NRF_UARTE_BASE_FREQUENCY_320MHZ (NRFX_MHZ_TO_HZ(320UL))
 /** @brief Base frequency value 128 MHz for UARTE. */
 #define NRF_UARTE_BASE_FREQUENCY_128MHZ (NRFX_MHZ_TO_HZ(128UL))
 /** @brief Base frequency value 64 MHz for UARTE. */
 #define NRF_UARTE_BASE_FREQUENCY_64MHZ  (NRFX_MHZ_TO_HZ(64UL))
 /** @brief Base frequency value 16 MHz for UARTE. */
 #define NRF_UARTE_BASE_FREQUENCY_16MHZ  (NRFX_MHZ_TO_HZ(16UL))
+
+#if !defined(NRF_UARTE_IS_320MHZ_UARTE)
+/** @brief Macro for checking whether the base frequency for the specified UARTE is 320 MHz. */
+#define NRF_UARTE_IS_320MHZ_UARTE(p_reg)                                                     \
+    NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(UARTE120), (p_reg == NRF_UARTE120), (false))
+#endif
 
 #if !defined(NRF_UARTE_IS_128MHZ_UARTE)
 /** @brief Macro for checking whether the base frequency for the specified UARTE is 128 MHz. */
@@ -101,9 +109,10 @@ extern "C" {
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 #define NRF_UARTE_BASE_FREQUENCY_GET(p_reg)                                  \
+    ((NRF_UARTE_IS_320MHZ_UARTE(p_reg)) ? (NRF_UARTE_BASE_FREQUENCY_320MHZ): \
     ((NRF_UARTE_IS_128MHZ_UARTE(p_reg)) ? (NRF_UARTE_BASE_FREQUENCY_128MHZ): \
     ((NRF_UARTE_IS_64MHZ_UARTE(p_reg))  ? (NRF_UARTE_BASE_FREQUENCY_64MHZ) : \
-    (NRF_UARTE_BASE_FREQUENCY_16MHZ)))
+    (NRF_UARTE_BASE_FREQUENCY_16MHZ))))
 
 /** @brief UARTE tasks. */
 typedef enum
