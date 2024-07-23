@@ -23,7 +23,7 @@ extern "C" {
 #define NRF_RESETHUB_HAS_CROSSDOMAIN 0
 #endif
 
-#if defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGA_XXAA) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether cellular domain is present. */
 #define NRF_RESETHUB_HAS_CELLULAR 1
 #else
