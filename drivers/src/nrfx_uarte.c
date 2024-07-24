@@ -1667,7 +1667,7 @@ nrfx_err_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
 
     if (p_cb->handler == NULL)
     {
-        size_t rx_amount;
+        size_t rx_amount = 0;
 
         do
         {
