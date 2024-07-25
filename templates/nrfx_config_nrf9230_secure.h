@@ -1445,15 +1445,6 @@
 #endif
 
 /**
- * @brief NRFX_TWIM120_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_TWIM120_ENABLED
-#define NRFX_TWIM120_ENABLED 0
-#endif
-
-/**
  * @brief NRFX_TWIM130_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
