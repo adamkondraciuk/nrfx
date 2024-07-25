@@ -1567,9 +1567,6 @@
         #error Unknown core.
     #endif
 
-    #define GPIOTE131_CH_NUM (GPIOTE131_GPIOTE_NCHANNELS_MAX + 1UL)
-    #define GPIOTE131_AVAILABLE_GPIO_PORTS 0x3A07UL
-
     // Old HFXO modes are not supported
     #ifdef BICR_HFXO_CONFIG_MODE_Pierce
         #undef BICR_HFXO_CONFIG_MODE_Pierce
@@ -1692,9 +1689,6 @@
         #error Unknown core.
     #endif
 
-    #define GPIOTE131_CH_NUM (GPIOTE131_GPIOTE_NCHANNELS_MAX + 1UL)
-    #define GPIOTE131_AVAILABLE_GPIO_PORTS 0x3A07UL
-
     // Old HFXO modes are not supported
     #ifdef BICR_HFXO_CONFIG_MODE_Pierce
         #undef BICR_HFXO_CONFIG_MODE_Pierce
@@ -1730,10 +1724,6 @@
     #define OSCRFR_TRIM_OSC_VAL_ValNeg49 OSCRFR_TRIM_OSC_VAL_ValNeg42
     #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
     #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
-
-
-    #define DPPIC030_CH_NUM (DPPIC030_CH_NUM_MAX + 1UL)
-    #define DPPIC030_GROUP_NUM (DPPIC030_GROUP_NUM_MAX + 1UL)
 
 #endif
 
@@ -1777,6 +1767,9 @@
         #endif
     #endif
 
+    #define GPIOTE131_CH_NUM (GPIOTE131_GPIOTE_NCHANNELS_MAX + 1UL)
+    #define GPIOTE131_AVAILABLE_GPIO_PORTS 0x3A07UL
+
     /* Internal part */
     #if defined(NRF_TRUSTZONE_NONSECURE)
         #if defined(NRF_SECURE)
@@ -1804,9 +1797,6 @@
     #if !defined(GRTC_IRQ_GROUP)
         #error Unknown core.
     #endif
-
-    #define GPIOTE131_CH_NUM (GPIOTE131_GPIOTE_NCHANNELS_MAX + 1UL)
-    #define GPIOTE131_AVAILABLE_GPIO_PORTS 0x3A07UL
 
     // Old HFXO modes are not supported
     #ifdef BICR_HFXO_CONFIG_MODE_Pierce
