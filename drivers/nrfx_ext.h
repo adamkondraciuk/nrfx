@@ -189,7 +189,7 @@ extern "C" {
 /* Start of PRS Extended section                                                                  */
 /*------------------------------------------------------------------------------------------------*/
 
-#if defined(NRF7140_XXAA) || defined(NRF9230_ENGA_XXAA)|| defined(NRF9230_ENGB_XXAA) || defined(NRF9230_XXAA)
+#if defined(NRF7140_XXAA) || defined(NRF9230_ENGA_XXAA) || defined(NRF9230_XXAA)
     #define NRF_PRS_BOX_EXT
     #define NRFX_PRS_BOX_0_ADDR NRF_UARTE130
     #define NRFX_PRS_BOX_1_ADDR NRF_UARTE131
