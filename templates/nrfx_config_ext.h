@@ -19,7 +19,7 @@
     #if defined(NRF_APPLICATION)
         #include <nrfx_config_nrf9230_enga_application.h>
     #elif defined(NRF_RADIOCORE)
-        #include <nrfx_config_nrf9230_enga_radio.h>
+        #include <nrfx_config_nrf9230_enga_radiocore.h>
     #elif defined(NRF_CELLCORE)
         #include <nrfx_config_nrf9230_enga_cellular.h>
     #elif defined(NRF_SECURE)
@@ -35,7 +35,7 @@
     #if defined(NRF_APPLICATION)
         #include <nrfx_config_nrf9230_application.h>
     #elif defined(NRF_RADIOCORE)
-        #include <nrfx_config_nrf9230_radio.h>
+        #include <nrfx_config_nrf9230_radiocore.h>
     #elif defined(NRF_CELLCORE)
         #include <nrfx_config_nrf9230_cellular.h>
     #elif defined(NRF_SECURE)
@@ -51,7 +51,7 @@
     #if defined(NRF_APPLICATION)
         #include <nrfx_config_nrf7140_application.h>
     #elif defined(NRF_RADIOCORE)
-        #include <nrfx_config_nrf7140_radio.h>
+        #include <nrfx_config_nrf7140_radiocore.h>
     #elif defined(NRF_SECURE)
         #include <nrfx_config_nrf7140_secure.h>
     #elif defined(NRF_FLPR)
