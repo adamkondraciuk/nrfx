@@ -1,5 +1,5 @@
-nRF54L15 Eng A drivers
+nRF54L20 Eng A drivers
 ======================
 
-.. doxygenpage:: nrf54l15_enga_drivers
+.. doxygenpage:: nrf54l20_enga_drivers
     :content-only:
