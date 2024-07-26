@@ -522,7 +522,6 @@ NRF_STATIC_INLINE void nrf_gpio_port_pin_write(NRF_GPIO_Type * p_reg,
  */
 NRF_STATIC_INLINE uint32_t nrf_gpio_pin_read(uint32_t pin_number);
 
-
 /**
  * @brief Function for reading the input level of a GPIO pin of a given port.
  *

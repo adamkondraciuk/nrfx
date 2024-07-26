@@ -145,7 +145,7 @@ typedef union
     NRFX_LISTIFY(1, RAM_NON_UNIFORM_SECTION_DECLARE, (,),             \
                  1, 6), /* Section 0 of block 1 - 1 * 32 kB units. */ \
     NRFX_LISTIFY(1, RAM_NON_UNIFORM_SECTION_DECLARE, (,),             \
-                 1, 7)  /* Section 0 of block 1 - 1 * 32 kB units. */ 
+                 1, 7)  /* Section 0 of block 1 - 1 * 32 kB units. */
 #elif defined(NRF9120_XXAA) || defined(NRF9160_XXAA)
 #define RAM_SECTION_UNIT_SIZE          8192
 #define RAM_UNIFORM_BLOCKS             8

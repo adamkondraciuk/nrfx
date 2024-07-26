@@ -442,18 +442,18 @@ NRF_STATIC_INLINE uint32_t nrf_uarte_errorsrc_get_and_clear(NRF_UARTE_Type * p_r
 
 /**
  * @brief Function for getting error source mask.
- * 
+ *
  * @param p_reg Pointer to the structure of registers of the peripheral.
- * 
- * @return Mask with error source flags. 
+ *
+ * @return Mask with error source flags.
  */
 NRF_STATIC_INLINE uint32_t nrf_uarte_errorsrc_get(NRF_UARTE_Type * p_reg);
 
 /**
  * @brief Function for clearing error source flags after reading.
- * 
+ *
  * @param p_reg Pointer to the structure of registers of the peripheral.
- * 
+ *
  * @param errsrc_mask Mask with error sources to be cleared.
  */
 NRF_STATIC_INLINE void nrf_uarte_errorsrc_clear(NRF_UARTE_Type * p_reg, uint32_t errsrc_mask);
