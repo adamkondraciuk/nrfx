@@ -17,6 +17,10 @@
 #define NRFX_LOG_MODULE UARTE
 #include <nrfx_log.h>
 
+#if !defined(NRFX_UARTE_RX_FIFO_FLUSH_WORKAROUND_MAGIC_BYTE)
+#define NRFX_UARTE_RX_FIFO_FLUSH_WORKAROUND_MAGIC_BYTE 171
+#endif
+
 #define UARTEX_LENGTH_VALIDATE(periph_name, prefix, i, drv_inst_idx, len1, len2) \
     (((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) && \
      NRFX_EASYDMA_LENGTH_VALIDATE(NRFX_CONCAT(periph_name, prefix, i), len1, len2))
