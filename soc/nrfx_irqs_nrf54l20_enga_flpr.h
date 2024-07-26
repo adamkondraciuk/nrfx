@@ -103,14 +103,6 @@ extern "C" {
 // VPRCLIC_31_IRQHandler
 #define nrfx_vevif_31_irq_handler        VPRCLIC_31_IRQHandler
 
-// SWI00_IRQHandler
-
-// SWI01_IRQHandler
-
-// SWI02_IRQHandler
-
-// SWI03_IRQHandler
-
 // SPU00_IRQHandler
 
 // MPC00_IRQHandler
@@ -119,7 +111,7 @@ extern "C" {
 
 // ECB00_IRQHandler
 
-// CRACEN_IRQ
+// VPR00_IRQHandler
 
 // SERIAL00_IRQ
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
@@ -136,8 +128,6 @@ extern "C" {
 // RRAMC_IRQHandler
 #define nrfx_rramc_irq_handler          RRAMC_IRQHandler
 
-// VPR00_IRQHandler
-
 // CTRLAP_IRQHandler
 
 // CM33SS_IRQHandler
@@ -145,13 +135,17 @@ extern "C" {
 // TIMER00_IRQHandler
 #define nrfx_timer_00_irq_handler       TIMER00_IRQHandler
 
+// EGU00_IRQHandler
+#define nrfx_egu_00_irq_handler         EGU00_IRQHandler
+
+// CRACEN_IRQ
+
+// USBHS_IRQHandler
+
 // SPU10_IRQHandler
 
 // TIMER10_IRQHandler
 #define nrfx_timer_10_irq_handler       TIMER10_IRQHandler
-
-// RTC10_IRQHandler
-#define nrfx_rtc_10_irq_handler         RTC10_IRQHandler
 
 // EGU10_IRQHandler
 #define nrfx_egu_10_irq_handler         EGU10_IRQHandler
@@ -216,6 +210,12 @@ extern "C" {
 // TIMER24_IRQHandler
 #define nrfx_timer_24_irq_handler       TIMER24_IRQHandler
 
+// PDM20_IRQHandler
+#define nrfx_pdm_20_irq_handler         PDM20_IRQHandler
+
+// PDM21_IRQHandler
+#define nrfx_pdm_21_irq_handler         PDM21_IRQHandler
+
 // PWM20_IRQHandler
 #define nrfx_pwm_20_irq_handler         PWM20_IRQHandler
 
@@ -238,11 +238,6 @@ extern "C" {
 // GPIOTE20_1_IRQHandler
 #define nrfx_gpiote_20_irq_handler      GPIOTE20_IRQHandler
 
-// TAMPC_IRQHandler
-
-// I2S20_IRQHandler
-#define nrfx_i2s_20_irq_handler         I2S20_IRQHandler
-
 // QDEC20_IRQHandler
 #define nrfx_qdec_20_irq_handler        QDEC20_IRQHandler
 
@@ -255,11 +250,37 @@ extern "C" {
 // GRTC_3_IRQHandler
 #define nrfx_grtc_irq_handler           GRTC_IRQHandler
 
+// TDM_IRQHandler
+
+// SERIAL23_IRQHandler
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
+#define nrfx_prs_box_4_irq_handler      SERIAL23_IRQHandler
+#else
+#define nrfx_spim_23_irq_handler        SERIAL23_IRQHandler
+#define nrfx_spis_23_irq_handler        SERIAL23_IRQHandler
+#define nrfx_twim_23_irq_handler        SERIAL23_IRQHandler
+#define nrfx_twis_23_irq_handler        SERIAL23_IRQHandler
+#define nrfx_spi_23_irq_handler         SERIAL23_IRQHandler
+#define nrfx_uarte_23_irq_handler       SERIAL23_IRQHandler
+#endif
+
+// SERIAL24_IRQHandler
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_5_ENABLED)
+#define nrfx_prs_box_5_irq_handler      SERIAL24_IRQHandler
+#else
+#define nrfx_spim_24_irq_handler        SERIAL24_IRQHandler
+#define nrfx_spis_24_irq_handler        SERIAL24_IRQHandler
+#define nrfx_twim_24_irq_handler        SERIAL24_IRQHandler
+#define nrfx_twis_24_irq_handler        SERIAL24_IRQHandler
+#define nrfx_spi_24_irq_handler         SERIAL24_IRQHandler
+#define nrfx_uarte_24_irq_handler       SERIAL24_IRQHandler
+#endif
+
 // SPU30_IRQHandler
 
 // SERIAL30_IRQHandler
-#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
-#define nrfx_prs_box_4_irq_handler      SERIAL30_IRQHandler
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_6_ENABLED)
+#define nrfx_prs_box_6_irq_handler      SERIAL30_IRQHandler
 #else
 #define nrfx_spim_30_irq_handler        SERIAL30_IRQHandler
 #define nrfx_spis_30_irq_handler        SERIAL30_IRQHandler
@@ -268,9 +289,6 @@ extern "C" {
 #define nrfx_spi_30_irq_handler         SERIAL30_IRQHandler
 #define nrfx_uarte_30_irq_handler       SERIAL30_IRQHandler
 #endif
-
-// RTC30_IRQHandler
-#define nrfx_rtc_30_irq_handler         RTC30_IRQHandler
 
 // COMP_LPCOMP_IRQHandler
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_5_ENABLED)
@@ -292,6 +310,8 @@ extern "C" {
 
 // CLOCK_POWER_IRQHandler
 #define nrfx_power_clock_irq_handler    CLOCK_POWER_IRQHandler
+
+// TAMPC_IRQHandler
 
 #ifdef __cplusplus
 }

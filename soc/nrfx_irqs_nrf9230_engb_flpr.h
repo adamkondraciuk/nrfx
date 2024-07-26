@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2024>$$$*/
 
-#ifndef NRFX_IRQS_NRF9230_ENGB_PPR_H__
-#define NRFX_IRQS_NRF9230_ENGB_PPR_H__
+#ifndef NRFX_IRQS_NRF9230_ENGB_FLPR_H__
+#define NRFX_IRQS_NRF9230_ENGB_FLPR_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -325,4 +325,4 @@ extern "C" {
 }
 #endif
 
-#endif // NRFX_IRQS_NRF9230_ENGB_PPR_H__
+#endif // NRFX_IRQS_NRF9230_ENGB_FLPR_H__
