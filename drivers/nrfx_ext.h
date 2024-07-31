@@ -59,12 +59,6 @@ extern "C" {
         NRF_GPIO_RETAIN_DEBUG_MASK           = GPIO_RETAIN_TDD_Msk,
 #endif
 
-#if defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA)
-    #define NRF_UARTE_CLOCKPIN_TXD_NEEDED
-    #define NRF_SPIM_CLOCKPIN_MOSI_NEEDED
-    #define NRF_SPIS_CLOCKPIN_MISO_NEEDED
-#endif
-
 /*------------------------------------------------------------------------------------------------*/
 /* End of GPIO Extended section                                                                   */
 /*------------------------------------------------------------------------------------------------*/
@@ -84,7 +78,8 @@ extern "C" {
 #endif
 
 #if defined(NRF_GPIOTE131) && \
-    (defined(NRF_CELLCORE) || ((defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA)) && defined(NRF_SYSCTRL)))
+    (defined(NRF_CELLCORE) || ((defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA)) && \
+     defined(NRF_SYSCTRL)))
     #define NRF_GPIOTE_IRQn_EXT GPIOTE131_IRQn
     #define NRF_GPIOTE_INDEX 131
 #endif
@@ -150,7 +145,7 @@ extern "C" {
 /* Start of IDS Extended section                                                                  */
 /*------------------------------------------------------------------------------------------------*/
 
-#if defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA) 
+#if defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA)
 #define NRFX_IDS_DOMAIN_ENUM_EXT NRFX_IDS_DOMAIN_CELL = NRF_PROCESSOR_CELLCORE,
 #define NRFX_IDS_DOMAIN_EXT                  \
         case NRFX_IDS_DOMAIN_CELL:           \
@@ -298,7 +293,7 @@ extern "C" {
     #elif defined(BOARD_FPGA)
         #define NRFX_DELAY_CPU_FREQ_MHZ ((SystemCoreClock / 1000000) / CONFIG_NRFX_SYS_CLOCK_DIV)
         #define NRFX_DELAY_DWT_PRESENT  1
-    #elif defined(NRF7140_XXAA) || defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA) 
+    #elif defined(NRF7140_XXAA) || defined(NRF9230_ENGA_XXAA)
         #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
         #define NRFX_DELAY_DWT_PRESENT  0
     #endif
