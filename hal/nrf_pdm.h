@@ -117,8 +117,26 @@ typedef enum
 /** @brief PDM ratio between PDM_CLK and output sample rate. */
 typedef enum
 {
-    NRF_PDM_RATIO_64X = PDM_RATIO_RATIO_Ratio64, ///< Ratio of 64.
-    NRF_PDM_RATIO_80X = PDM_RATIO_RATIO_Ratio80  ///< Ratio of 80.
+#if defined(PDM_RATIO_RATIO_Ratio32)  || defined(__NRFX_DOXYGEN__)
+    NRF_PDM_RATIO_32X  = PDM_RATIO_RATIO_Ratio32,  ///< Ratio of 32.
+#endif
+#if defined(PDM_RATIO_RATIO_Ratio48)  || defined(__NRFX_DOXYGEN__)
+    NRF_PDM_RATIO_48X  = PDM_RATIO_RATIO_Ratio48,  ///< Ratio of 48.
+#endif
+#if defined(PDM_RATIO_RATIO_Ratio50)  || defined(__NRFX_DOXYGEN__)
+    NRF_PDM_RATIO_50X  = PDM_RATIO_RATIO_Ratio50,  ///< Ratio of 50.
+#endif
+    NRF_PDM_RATIO_64X  = PDM_RATIO_RATIO_Ratio64,  ///< Ratio of 64.
+    NRF_PDM_RATIO_80X  = PDM_RATIO_RATIO_Ratio80,  ///< Ratio of 80.
+#if defined(PDM_RATIO_RATIO_Ratio96)  || defined(__NRFX_DOXYGEN__)
+    NRF_PDM_RATIO_96X  = PDM_RATIO_RATIO_Ratio96,  ///< Ratio of 96.
+#endif
+#if defined(PDM_RATIO_RATIO_Ratio100) || defined(__NRFX_DOXYGEN__)
+    NRF_PDM_RATIO_100X = PDM_RATIO_RATIO_Ratio100, ///< Ratio of 100.
+#endif
+#if defined(PDM_RATIO_RATIO_Ratio128) || defined(__NRFX_DOXYGEN__)
+    NRF_PDM_RATIO_128X = PDM_RATIO_RATIO_Ratio128, ///< Ratio of 128.
+#endif
 } nrf_pdm_ratio_t;
 #endif
 
