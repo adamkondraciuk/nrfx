@@ -67,11 +67,19 @@ static void pdm_configure(nrfx_pdm_config_t const * p_config)
             .clk_pin = p_config->clk_pin,
             .din_pin = p_config->din_pin,
         },
+#if NRF_PDM_HAS_PDMCLKCTRL
         .clock_freq  = p_config->clock_freq,
+#else
+        .prescaler   = p_config->prescaler,
+#endif
         .gain_l      = p_config->gain_l,
         .gain_r      = p_config->gain_r,
-        NRFX_COND_CODE_1(NRF_PDM_HAS_RATIO_CONFIG, (.ratio = p_config->ratio,), ())
-        NRFX_COND_CODE_1(NRF_PDM_HAS_MCLKCONFIG, (.mclksrc = p_config->mclksrc,), ())
+#if NRF_PDM_HAS_RATIO_CONFIG
+        .ratio       = p_config->ratio,
+#endif
+#if NRF_PDM_HAS_MCLKCONFIG
+        .mclksrc = p_config->mclksrc,
+#endif
         .skip_psel_cfg = p_config->skip_psel_cfg
     };
 
@@ -123,6 +131,17 @@ nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
                              NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
+#if NRF_PDM_HAS_PRESCALER
+        if (p_config->prescaler > NRF_PDM_PRESCALER_MAX ||
+            p_config->prescaler < NRF_PDM_PRESCALER_MIN)
+        {
+            err_code = NRFX_ERROR_INVALID_PARAM;
+            NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                             __func__,
+                             NRFX_LOG_ERROR_STRING_GET(err_code));
+            return err_code;
+        }
+#endif
         pdm_configure(p_config);
     }
 
@@ -148,6 +167,13 @@ nrfx_err_t nrfx_pdm_reconfigure(nrfx_pdm_config_t const * p_config)
     {
         return NRFX_ERROR_INVALID_PARAM;
     }
+#if NRF_PDM_HAS_PRESCALER
+    if (p_config->prescaler > NRF_PDM_PRESCALER_MAX ||
+        p_config->prescaler < NRF_PDM_PRESCALER_MIN)
+    {
+        return NRFX_ERROR_INVALID_PARAM;
+    }
+#endif
 
     if (m_cb.op_state != NRFX_PDM_STATE_IDLE)
     {

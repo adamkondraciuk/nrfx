@@ -42,7 +42,11 @@ typedef struct
     nrf_pdm_edge_t    edge;               ///< Sampling mode.
     uint32_t          clk_pin;            ///< CLK pin number.
     uint32_t          din_pin;            ///< DIN pin number.
+#if NRF_PDM_HAS_PDMCLKCTRL
     nrf_pdm_freq_t    clock_freq;         ///< Clock frequency.
+#elif NRF_PDM_HAS_PRESCALER
+    uint32_t          prescaler;          ///< Prescaler divisor.
+#endif
     nrf_pdm_gain_t    gain_l;             ///< Left channel gain.
     nrf_pdm_gain_t    gain_r;             ///< Right channel gain.
     uint8_t           interrupt_priority; ///< Interrupt priority.
@@ -86,7 +90,10 @@ typedef struct
     .edge               = NRF_PDM_EDGE_LEFTFALLING,             \
     .clk_pin            = _pin_clk,                             \
     .din_pin            = _pin_din,                             \
-    .clock_freq         = NRF_PDM_FREQ_1032K,                   \
+    NRFX_COND_CODE_1(NRF_PDM_HAS_PDMCLKCTRL,                    \
+                     (.clock_freq = NRF_PDM_FREQ_1032K,), ())   \
+    NRFX_COND_CODE_1(NRF_PDM_HAS_PRESCALER,                     \
+                     (.prescaler = 4,), ())                     \
     .gain_l             = NRF_PDM_GAIN_DEFAULT,                 \
     .gain_r             = NRF_PDM_GAIN_DEFAULT,                 \
     .interrupt_priority = NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY, \
