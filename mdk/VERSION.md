@@ -22,6 +22,6 @@ Following table presents current MDK version for specified targets:
 |nrf7140       |8.66.0 Strictly Confidential           |
 |nrf9120       |8.66.0 External                        |
 |nrf9160       |8.66.0 External                        |
-|nrf9230 enga  |8.66.0 Strictly Confidential           |
+|nrf9230 enga  |8.59.0 Strictly Confidential           |
 |nrf9230 engb  |8.66.0 Strictly Confidential           |
 |nrf9230       |8.66.0 Strictly Confidential           |
