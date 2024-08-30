@@ -9,6 +9,12 @@
     #elif defined(NRF_SYSCTRL)
         #include <nrfx_config_nrf54h20_enga_sysctrl.h>
     #endif
+#elif defined(NRF54H20_ENGB_XXAA)
+    #elif defined(NRF_SECURE)
+        #include <nrfx_config_nrf54h20_engb_secure.h>
+    #elif defined(NRF_SYSCTRL)
+        #include <nrfx_config_nrf54h20_engb_sysctrl.h>
+    #endif
 #elif defined(NRF54H20_XXAA)
     #elif defined(NRF_SECURE)
         #include <nrfx_config_nrf54h20_secure.h>

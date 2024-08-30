@@ -845,7 +845,38 @@
 /**************************************************************************************************/
 
 /**************************************************************************************************/
-/* Start fixups section for NRF54H20_XXAA (LILIUMFP1)                                             */
+/* Start fixups section for NRF54H20_ENGB_XXAA (LILIUM 1.0)                                       */
+/**************************************************************************************************/
+
+#if defined(NRF54H20_ENGB_XXAA)
+    #include "nrf54h20_engb_interim.h"
+
+    /* Internal part */
+    #if defined(NRF_TRUSTZONE_NONSECURE)
+        #if defined(NRF_SECURE)
+            #define GRTC_IRQ_GROUP 0
+            #define GPIOTE_IRQ_GROUP 0
+        #endif
+    #elif defined(NRF_SYSCTRL)
+        #define GRTC_IRQ_GROUP 7
+        #define GPIOTE_IRQ_GROUP 6
+    #elif defined(NRF_BBPR)
+        #define GRTC_IRQ_GROUP 10
+    #else
+        #if defined(NRF_SECURE)
+            #define GRTC_IRQ_GROUP 1
+            #define GPIOTE_IRQ_GROUP 1
+        #endif
+    #endif
+
+    #if !defined(GRTC_IRQ_GROUP)
+        #error Unknown core.
+    #endif
+
+#endif
+
+/**************************************************************************************************/
+/* Start fixups section for NRF54H20_XXAA (LILIUM 1.1)                                            */
 /**************************************************************************************************/
 
 #if defined(NRF54H20_XXAA)
@@ -873,20 +904,6 @@
         #error Unknown core.
     #endif
 
-    /* HM-24773 */
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos (2UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Pos)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Min (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Max (0x1UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Disabled (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ0_START_Enabled (0x1UL)
-
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos (3UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Msk (0x1UL << PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Pos)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Min (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Max (0x1UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Disabled (0x0UL)
-    #define PWM_SHORTS_LOOPSDONE_DMA_SEQ1_START_Enabled (0x1UL)
 #endif
 
 /**************************************************************************************************/
