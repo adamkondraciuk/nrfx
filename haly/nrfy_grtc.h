@@ -173,16 +173,20 @@ NRFY_STATIC_INLINE void nrfy_grtc_prepare(NRF_GRTC_Type * p_reg, bool busy_wait)
 #if NRFY_GRTC_HAS_RTCOUNTER
     nrf_grtc_publish_clear(p_reg, NRF_GRTC_EVENT_RTCOMPARE);
 #endif
+#if NRFX_IS_ENABLED(NRFX_GRTC_CONFIG_CLEAR_AT_INIT)
     nrf_grtc_task_trigger(p_reg, NRF_GRTC_TASK_CLEAR);
     nrf_barrier_w();
+#endif
     nrf_grtc_task_trigger(p_reg, NRF_GRTC_TASK_START);
     nrf_barrier_w();
     if (busy_wait)
     {
 #if NRFY_GRTC_HAS_RTCOUNTER
+#if NRFX_IS_ENABLED(NRFX_GRTC_CONFIG_CLEAR_AT_INIT)
         // Make sure that RTCOUNTER is cleared and does not contain the old value.
         while (__nrfy_internal_grtc_rt_counter_read(p_reg) > 1ULL)
         {}
+#endif
         // Wait one 32k cycle to make sure that RTCOUNTER has started.
         uint64_t t = __nrfy_internal_grtc_rt_counter_read(p_reg);
         while (__nrfy_internal_grtc_rt_counter_read(p_reg) == t)

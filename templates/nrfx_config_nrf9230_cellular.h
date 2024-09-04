@@ -419,6 +419,15 @@
 #endif
 
 /**
+ * @brief NRFX_GRTC_CONFIG_CLEAR_AT_INIT
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_GRTC_CONFIG_CLEAR_AT_INIT
+#define NRFX_GRTC_CONFIG_CLEAR_AT_INIT 0
+#endif
+
+/**
  * @brief NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS
  *
  * Integer value.
