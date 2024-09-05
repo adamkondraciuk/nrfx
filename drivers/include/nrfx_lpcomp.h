@@ -23,25 +23,6 @@ extern "C" {
  */
 typedef void (* nrfx_lpcomp_event_handler_t)(nrf_lpcomp_event_t event);
 
-/** @brief LPCOMP shortcut masks. */
-typedef enum
-{
-    NRFX_LPCOMP_SHORT_STOP_AFTER_CROSS_EVT = NRF_LPCOMP_SHORT_CROSS_STOP_MASK,   ///< Shortcut between the CROSS event and the STOP task.
-    NRFX_LPCOMP_SHORT_STOP_AFTER_UP_EVT    = NRF_LPCOMP_SHORT_UP_STOP_MASK,      ///< Shortcut between the UP event and the STOP task.
-    NRFX_LPCOMP_SHORT_STOP_AFTER_DOWN_EVT  = NRF_LPCOMP_SHORT_DOWN_STOP_MASK,    ///< Shortcut between the DOWN event and the STOP task.
-    NRFX_LPCOMP_SHORT_READY_STOP_MASK      = NRF_LPCOMP_SHORT_READY_STOP_MASK,   ///< Shortcut between READY event and STOP task.
-    NRFX_LPCOMP_SHORT_READY_SAMPLE_MASK    = NRF_LPCOMP_SHORT_READY_SAMPLE_MASK, ///< Shortcut between READY event and SAMPLE task.
-} nrfx_lpcomp_short_mask_t;
-
-/** @brief LPCOMP events masks. */
-typedef enum
-{
-    NRFX_LPCOMP_EVT_EN_READY_MASK = NRF_LPCOMP_INT_READY_MASK, ///< READY event (generated when the module is ready).
-    NRFX_LPCOMP_EVT_EN_UP_MASK    = NRF_LPCOMP_INT_UP_MASK,    ///< UP event (generated when VIN+ crosses VIN- while increasing).
-    NRFX_LPCOMP_EVT_EN_DOWN_MASK  = NRF_LPCOMP_INT_DOWN_MASK,  ///< DOWN event (generated when VIN+ crosses VIN- while decreasing).
-    NRFX_LPCOMP_EVT_EN_CROSS_MASK = NRF_LPCOMP_INT_CROSS_MASK, ///< CROSS event (generated after VIN+ == VIN-).
-} nrfx_lpcomp_evt_en_mask_t;
-
 /** @brief LPCOMP configuration. */
 typedef struct
 {
@@ -151,9 +132,9 @@ bool nrfx_lpcomp_init_check(void);
  * enables the LPCOMP peripheral and its interrupts.
  *
  * @param[in] lpcomp_evt_en_mask Mask of events to be enabled. This parameter is to be built as
- *                               an OR of elements from @ref nrfx_lpcomp_evt_en_mask_t.
+ *                               an OR of elements from @ref nrf_lpcomp_int_mask_t.
  * @param[in] lpcomp_shorts_mask Mask of shortcuts to be enabled. This parameter is to be built as
- *                               an OR of elements from @ref nrfx_lpcomp_short_mask_t.
+ *                               an OR of elements from @ref nrf_lpcomp_short_mask_t.
  *
  * @sa nrfx_lpcomp_init
  */
@@ -162,12 +143,14 @@ void nrfx_lpcomp_start(uint32_t lpcomp_evt_en_mask, uint32_t lpcomp_shorts_mask)
 /**
  * @brief Function for enabling the LPCOMP peripheral and interrupts.
  *
+ * @deprecated Use @ref nrfx_lpcomp_start instead.
+ *
  * Before calling this function, the driver must be initialized. This function
  * enables the LPCOMP peripheral and its interrupts.
  *
  * @sa nrfx_lpcomp_disable
  */
-void nrfx_lpcomp_enable(void);
+NRFX_STATIC_INLINE void nrfx_lpcomp_enable(void);
 
 /**
  * @brief Function for stopping the LPCOMP peripheral.
@@ -182,12 +165,14 @@ void nrfx_lpcomp_stop(void);
 /**
  * @brief Function for disabling the LPCOMP peripheral.
  *
+ * @deprecated Use @ref nrfx_lpcomp_stop instead.
+ *
  * Before calling this function, the driver must be initialized. This function disables the LPCOMP
  * peripheral and its interrupts.
  *
  * @sa nrfx_lpcomp_enable
  */
-void nrfx_lpcomp_disable(void);
+NRFX_STATIC_INLINE void nrfx_lpcomp_disable(void);
 
 /**
  * @brief Function for copying the current state of the low power comparator result to the RESULT register.
@@ -196,6 +181,20 @@ void nrfx_lpcomp_disable(void);
  * @retval 1 The input voltage is above the threshold (VIN+ > VIN-).
  */
 uint32_t nrfx_lpcomp_sample(void);
+
+#ifndef NRFX_DECLARE_ONLY
+
+NRFX_STATIC_INLINE void nrfx_lpcomp_enable(void)
+{
+    nrfx_lpcomp_start(0, 0);
+}
+
+NRFX_STATIC_INLINE void nrfx_lpcomp_disable(void)
+{
+    nrfx_lpcomp_stop();
+}
+
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

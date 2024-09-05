@@ -122,23 +122,6 @@ NRFY_STATIC_INLINE uint32_t nrfy_lpcomp_events_process(NRF_LPCOMP_Type * p_reg,
 }
 
 /**
- * @brief Function for reading the current state of the LPCOMP input.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- *
- * @retval false The input voltage is below the threshold.
- * @retval true  The input voltage is above the threshold.
- */
-NRFY_STATIC_INLINE bool nrfy_lpcomp_sample_check(NRF_LPCOMP_Type * p_reg)
-{
-    nrf_lpcomp_task_trigger(p_reg, NRF_LPCOMP_TASK_SAMPLE);
-    nrf_barrier_rw();
-    bool sample = nrf_lpcomp_result_get(p_reg);
-    nrf_barrier_r();
-    return sample;
-}
-
-/**
  * @brief Function for reading the current state of the LPCOMP.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -153,6 +136,19 @@ NRFY_STATIC_INLINE uint32_t nrfy_lpcomp_sample(NRF_LPCOMP_Type * p_reg)
     uint32_t sample = nrf_lpcomp_result_get(p_reg);
     nrf_barrier_r();
     return sample;
+}
+
+/**
+ * @brief Function for reading the current state of the LPCOMP input.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval false The input voltage is below the threshold.
+ * @retval true  The input voltage is above the threshold.
+ */
+NRFY_STATIC_INLINE bool nrfy_lpcomp_sample_check(NRF_LPCOMP_Type * p_reg)
+{
+    return (bool)nrfy_lpcomp_sample(p_reg);
 }
 
 /** @refhal{nrf_lpcomp_ref_set} */
