@@ -19,6 +19,15 @@ extern "C" {
  * @brief   Hardware access layer for managing the Pulse Density Modulation (PDM) peripheral.
  */
 
+/**
+ * @brief Macro for getting a pointer to the structure of registers of the PDM peripheral.
+ *
+ * @param[in] idx PDM instance index.
+ *
+ * @return Pointer to the structure of registers of the PDM peripheral.
+ */
+#define NRF_PDM_INST_GET(idx) NRFX_CONCAT_2(NRF_PDM, idx)
+
 #if defined(PDM_MCLKCONFIG_SRC_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether master clock source configuration is available. */
 #define NRF_PDM_HAS_MCLKCONFIG 1
