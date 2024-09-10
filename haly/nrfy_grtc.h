@@ -275,7 +275,7 @@ NRFY_STATIC_INLINE uint64_t nrfy_grtc_sys_counter_get(NRF_GRTC_Type const * p_re
  *
  * @return True if SYSCOUNTER is ready to be read, false otherwise.
  */
-NRFY_STATIC_INLINE bool nrfy_grtc_sys_conter_ready_check(NRF_GRTC_Type const * p_reg)
+NRFY_STATIC_INLINE bool nrfy_grtc_sys_counter_ready_check(NRF_GRTC_Type const * p_reg)
 {
 #if NRFY_GRTC_HAS_SYSCOUNTER_ARRAY
     nrf_grtc_sys_counter_low_get(p_reg); // Dummy read, required.
