@@ -60,6 +60,13 @@ extern "C" {
 #define NRF_GRTC_HAS_CLKSEL 0
 #endif
 
+#if defined(GRTC_CLKCFG_CLKSEL_LFLPRC) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether RC oscillator clock source is available. */
+#define NRF_GRTC_HAS_CLKSEL_LFLPRC 1
+#else
+#define NRF_GRTC_HAS_CLKSEL_LFLPRC 0
+#endif
+
 #if defined(GRTC_SYSCOUNTER_SYSCOUNTERL_VALUE_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether GRTC has multiple SYSCOUNTER registers. */
 #define NRF_GRTC_HAS_SYSCOUNTER_ARRAY 1
@@ -342,6 +349,9 @@ typedef enum
 {
     NRF_GRTC_CLKSEL_LFXO  = GRTC_CLKCFG_CLKSEL_LFXO,        /**< LFXO oscillator as the clock source. */
     NRF_GRTC_CLKSEL_LFCLK = GRTC_CLKCFG_CLKSEL_SystemLFCLK, /**< System LFCLK as the clock source. */
+#if NRF_GRTC_HAS_CLKSEL_LFLPRC
+    NRF_GRTC_CLKSEL_LFLPRC = GRTC_CLKCFG_CLKSEL_LFLPRC,     /**< System LFLPRC as the clock source. */
+#endif
 } nrf_grtc_clksel_t;
 #endif
 
