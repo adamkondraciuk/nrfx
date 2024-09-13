@@ -90,12 +90,24 @@ extern "C" {
 #endif
 #endif // !defined(NRF_GRTC_HAS_EXTENDED)
 
+#if defined(GRTC_IRQ_GROUP) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether GRTC interrupt groups are present. */
+#define NRF_GRTC_HAS_INT_GROUPS 1
+#else
+#define NRF_GRTC_HAS_INT_GROUPS 0
+#endif
+
 /** @brief Symbol indicating actual domain index. */
 #define NRF_GRTC_DOMAIN_INDEX GRTC_IRQ_GROUP
 
 /** @brief Symbol indicating actual SYSCOUNTER index. */
 #if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
     #define GRTC_SYSCOUNTER SYSCOUNTER[NRF_GRTC_DOMAIN_INDEX]
+#endif
+
+/** @brief Number of capture/compare channels for SYSCOUNTER. */
+#if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+    #define NRF_GRTC_SYSCOUNTER_COUNT GRTC_SYSCOUNTER_MaxCount
 #endif
 
 /** @brief Interrupts INTEN register definition. */
@@ -475,6 +487,46 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_int_enable_check(NRF_GRTC_Type const * p_reg
  */
 NRF_STATIC_INLINE uint32_t nrf_grtc_int_pending_get(NRF_GRTC_Type const * p_reg);
 
+#if NRF_GRTC_HAS_INT_GROUPS
+/**
+ * @brief Function for enabling interrupts in the specified group.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] group_idx Index of interrupt group to be enabled.
+ * @param[in] mask      Mask of interrupts to be enabled.
+ *                      Use @ref nrf_grtc_int_mask_t values for bit masking.
+ */
+NRF_STATIC_INLINE void nrf_grtc_int_group_enable(NRF_GRTC_Type * p_reg,
+                                                 uint8_t         group_idx,
+                                                 uint32_t        mask);
+
+/**
+ * @brief Function for disabling interrupts in the specified group.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] group_idx Index of interrupt group to be disabled.
+ * @param[in] mask      Mask of interrupts to be disabled.
+ *                      Use @ref nrf_grtc_int_mask_t values for bit masking.
+ */
+NRF_STATIC_INLINE void nrf_grtc_int_group_disable(NRF_GRTC_Type * p_reg,
+                                                  uint8_t         group_idx,
+                                                  uint32_t        mask);
+
+/**
+ * @brief Function for checking if the specified interrupts from a given group are enabled.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] group_idx Index of interrupt group to be checked.
+ * @param[in] mask      Mask of interrupts to be checked.
+ *                      Use @ref nrf_grtc_int_mask_t values for bit masking.
+ *
+ * @return Mask of enabled interrupts.
+ */
+NRF_STATIC_INLINE uint32_t nrf_grtc_int_group_enable_check(NRF_GRTC_Type const * p_reg,
+                                                           uint8_t               group_idx,
+                                                           uint32_t              mask);
+#endif // NRF_GRTC_HAS_INT_GROUPS
+
 #if NRF_GRTC_HAS_PWM
 /**
  * @brief Function for enabling events.
@@ -674,6 +726,17 @@ NRF_STATIC_INLINE uint64_t nrf_grtc_sys_counter_get(NRF_GRTC_Type const * p_reg)
 NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg);
 
 #if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+/**
+ * @brief Function for returning the 64-bit SYSCOUNTER value of the specified index.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Index of SYSCOUNTER value to be read.
+ *
+ * @return SYSCOUNTER value of specified index.
+ */
+NRF_STATIC_INLINE uint64_t nrf_grtc_sys_counter_indexed_get(NRF_GRTC_Type const * p_reg,
+                                                            uint8_t               index);
+
 /**
  * @brief Function for setting the request to keep the specified SYSCOUNTER channel active.
  *
@@ -1086,6 +1149,256 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_int_pending_get(NRF_GRTC_Type const * p_reg)
     return p_reg->GRTC_INTPEND;
 }
 
+#if NRF_GRTC_HAS_INT_GROUPS
+NRF_STATIC_INLINE void nrf_grtc_int_group_enable(NRF_GRTC_Type * p_reg,
+                                                 uint8_t         group_idx,
+                                                 uint32_t        mask)
+{
+    switch (group_idx)
+    {
+        case 0:
+            p_reg->INTENSET0 = mask;
+            break;
+        case 1:
+            p_reg->INTENSET1 = mask;
+            break;
+#if defined(GRTC_INTENSET2_COMPARE0_Msk)
+        case 2:
+            p_reg->INTENSET2 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET3_COMPARE0_Msk)
+        case 3:
+            p_reg->INTENSET3 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET4_COMPARE0_Msk)
+        case 4:
+            p_reg->INTENSET4 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET5_COMPARE0_Msk)
+        case 5:
+            p_reg->INTENSET5 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET6_COMPARE0_Msk)
+        case 6:
+            p_reg->INTENSET6 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET7_COMPARE0_Msk)
+        case 7:
+            p_reg->INTENSET7 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET8_COMPARE0_Msk)
+        case 8:
+            p_reg->INTENSET8 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET9_COMPARE0_Msk)
+        case 9:
+            p_reg->INTENSET9 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET10_COMPARE0_Msk)
+        case 10:
+            p_reg->INTENSET10 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET11_COMPARE0_Msk)
+        case 11:
+            p_reg->INTENSET11 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET12_COMPARE0_Msk)
+        case 12:
+            p_reg->INTENSET12 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET13_COMPARE0_Msk)
+        case 13:
+            p_reg->INTENSET13 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET14_COMPARE0_Msk)
+        case 14:
+            p_reg->INTENSET14 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENSET15_COMPARE0_Msk)
+        case 15:
+            p_reg->INTENSET15 = mask;
+            break;
+#endif
+       default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_grtc_int_group_disable(NRF_GRTC_Type * p_reg,
+                                                  uint8_t         group_idx,
+                                                  uint32_t        mask)
+{
+    switch (group_idx)
+    {
+        case 0:
+            p_reg->INTENCLR0 = mask;
+            break;
+        case 1:
+            p_reg->INTENCLR1 = mask;
+            break;
+#if defined(GRTC_INTENCLR2_COMPARE0_Msk)
+        case 2:
+            p_reg->INTENCLR2 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR3_COMPARE0_Msk)
+        case 3:
+            p_reg->INTENCLR3 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR4_COMPARE0_Msk)
+        case 4:
+            p_reg->INTENCLR4 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR5_COMPARE0_Msk)
+        case 5:
+            p_reg->INTENCLR5 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR6_COMPARE0_Msk)
+        case 6:
+            p_reg->INTENCLR6 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR7_COMPARE0_Msk)
+        case 7:
+            p_reg->INTENCLR7 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR8_COMPARE0_Msk)
+        case 8:
+            p_reg->INTENCLR8 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR9_COMPARE0_Msk)
+        case 9:
+            p_reg->INTENCLR9 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR10_COMPARE0_Msk)
+        case 10:
+            p_reg->INTENCLR10 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR11_COMPARE0_Msk)
+        case 11:
+            p_reg->INTENCLR11 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR12_COMPARE0_Msk)
+        case 12:
+            p_reg->INTENCLR12 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR13_COMPARE0_Msk)
+        case 13:
+            p_reg->INTENCLR13 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR14_COMPARE0_Msk)
+        case 14:
+            p_reg->INTENCLR14 = mask;
+            break;
+#endif
+#if defined(GRTC_INTENCLR15_COMPARE0_Msk)
+        case 15:
+            p_reg->INTENCLR15 = mask;
+            break;
+#endif
+       default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE uint32_t nrf_grtc_int_group_enable_check(NRF_GRTC_Type const * p_reg,
+                                                           uint8_t               group_idx,
+                                                           uint32_t              mask)
+{
+    switch (group_idx)
+    {
+        case 0:
+            return p_reg->INTENSET0 & mask;
+        case 1:
+            return p_reg->INTENSET1 & mask;
+#if defined(GRTC_INTENSET2_COMPARE0_Msk)
+        case 2:
+            return p_reg->INTENSET2 & mask;
+#endif
+#if defined(GRTC_INTENSET3_COMPARE0_Msk)
+        case 3:
+            return p_reg->INTENSET3 & mask;
+#endif
+#if defined(GRTC_INTENSET4_COMPARE0_Msk)
+        case 4:
+            return p_reg->INTENSET4 & mask;
+#endif
+#if defined(GRTC_INTENSET5_COMPARE0_Msk)
+        case 5:
+            return p_reg->INTENSET5 & mask;
+#endif
+#if defined(GRTC_INTENSET6_COMPARE0_Msk)
+        case 6:
+            return p_reg->INTENSET6 & mask;
+#endif
+#if defined(GRTC_INTENSET7_COMPARE0_Msk)
+        case 7:
+            return p_reg->INTENSET7 & mask;
+#endif
+#if defined(GRTC_INTENSET8_COMPARE0_Msk)
+        case 8:
+            return p_reg->INTENSET8 & mask;
+#endif
+#if defined(GRTC_INTENSET9_COMPARE0_Msk)
+        case 9:
+            return p_reg->INTENSET9 & mask;
+#endif
+#if defined(GRTC_INTENSET10_COMPARE0_Msk)
+        case 10:
+            return p_reg->INTENSET10 & mask;
+#endif
+#if defined(GRTC_INTENSET11_COMPARE0_Msk)
+        case 11:
+            return p_reg->INTENSET11 & mask;
+#endif
+#if defined(GRTC_INTENSET12_COMPARE0_Msk)
+        case 12:
+            return p_reg->INTENSET12 & mask;
+#endif
+#if defined(GRTC_INTENSET13_COMPARE0_Msk)
+        case 13:
+            return p_reg->INTENSET13 & mask;
+#endif
+#if defined(GRTC_INTENSET14_COMPARE0_Msk)
+        case 14:
+            return p_reg->INTENSET14 & mask;
+#endif
+#if defined(GRTC_INTENSET15_COMPARE0_Msk)
+        case 15:
+            return p_reg->INTENSET15 & mask;
+#endif
+       default:
+            NRFX_ASSERT(false);
+            return 0;
+    }
+}
+#endif // NRF_GRTC_HAS_INT_GROUPS
+
 #if NRF_GRTC_HAS_PWM
 NRF_STATIC_INLINE void nrf_grtc_event_enable(NRF_GRTC_Type * p_reg, uint32_t mask)
 {
@@ -1228,6 +1541,13 @@ NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const *
 }
 
 #if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+NRF_STATIC_INLINE uint64_t nrf_grtc_sys_counter_indexed_get(NRF_GRTC_Type const * p_reg,
+                                                            uint8_t               index)
+{
+    NRFX_ASSERT(index < NRF_GRTC_SYSCOUNTER_COUNT);
+    return *((const uint64_t volatile *)&p_reg->SYSCOUNTER[index]);
+}
+
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_set(NRF_GRTC_Type * p_reg, bool enable)
 {
     p_reg->GRTC_SYSCOUNTER.ACTIVE = ((p_reg->GRTC_SYSCOUNTER.ACTIVE &
