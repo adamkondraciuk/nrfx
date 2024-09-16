@@ -30,6 +30,13 @@ extern "C" {
 #define NRF_HSFLL_HAS_DITHERINIT 0
 #endif
 
+#if defined(HSFLL_TRIM_TCOEF_VALUE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether HSFLL has temperature coefficient trimming. */
+#define NRF_HSFLL_HAS_TCOEF_TRIM 1
+#else
+#define NRF_HSFLL_HAS_TCOEF_TRIM 0
+#endif
+
 /** @brief HSFLL tasks. */
 typedef enum
 {
@@ -113,6 +120,9 @@ typedef struct
     uint16_t coarse; ///< Coarse frequance trimming.
     uint16_t fine;   ///< Fine frequency trimming.
     uint8_t  vsup;   ///< Internal regulator voltage supply level trimming.
+#if NRF_HSFLL_HAS_TCOEF_TRIM
+    uint8_t  tcoef;  ///< Temperature coefficient trimming.
+#endif
 } nrf_hsfll_trim_t;
 
 /**
@@ -552,6 +562,9 @@ NRF_STATIC_INLINE void nrf_hsfll_trim_set(NRF_HSFLL_Type *         p_reg,
     p_reg->TRIM.VSUP   = p_trim->vsup;
     p_reg->TRIM.COARSE = p_trim->coarse;
     p_reg->TRIM.FINE   = p_trim->fine;
+#if NRF_HSFLL_HAS_TCOEF_TRIM
+    p_reg->TRIM.TCOEF  = p_trim->tcoef;
+#endif
 
     nrf_hsfll_mirror_lock_set(p_reg, false);
 }
@@ -564,6 +577,9 @@ NRF_STATIC_INLINE void nrf_hsfll_trim_get(NRF_HSFLL_Type const * p_reg,
     p_trim->vsup   = (uint8_t)p_reg->TRIM.VSUP;
     p_trim->coarse = (uint8_t)p_reg->TRIM.COARSE;
     p_trim->fine   = (uint8_t)p_reg->TRIM.FINE;
+#if NRF_HSFLL_HAS_TCOEF_TRIM
+    p_trim->tcoef =  (uint8_t)p_reg->TRIM.TCOEF;
+#endif
 }
 
 #endif // NRF_DECLARE_ONLY
