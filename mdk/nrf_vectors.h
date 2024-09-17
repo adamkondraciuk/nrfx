@@ -191,6 +191,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_BBPR)
         #include "nrf54h20_engb_bbpr_vectors.h"
     #endif
+#elif defined(NRF7120_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf7120_application_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf7120_flpr_vectors.h"
+    #endif
+    #if defined(NRF_UMAC)
+        #include "nrf7120_umac_vectors.h"
+    #endif
+    #if defined(NRF_LMAC)
+        #include "nrf7120_lmac_vectors.h"
+    #endif
 #elif defined(NRF7140_XXAA)
     #if defined(NRF_SECURE)
         #include "nrf7140_secure_vectors.h"

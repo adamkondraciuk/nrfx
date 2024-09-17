@@ -110,6 +110,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF7140_XXAA)
     #include "nrf7140_peripherals.h"
 
+#elif defined (NRF7120_XXAA)
+    #include "nrf7120_peripherals.h"
+
 #elif defined (NRF9120_XXAA)
     #include "nrf9120_peripherals.h"
     

@@ -182,6 +182,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #define HALTIUM_XXAA
     #endif
 #endif
+/* Define NRF71_SERIES for common use in nRF71 series devices. */
+#if defined (NRF7120_XXAA)
+    #ifndef NRF71_SERIES
+        #define NRF71_SERIES
+    #endif
+    #ifndef LUMOS_XXAA
+        #define LUMOS_XXAA
+    #endif
+#endif
 
 /* Define NRF91_SERIES for common use in nRF91 series devices. */
 #if defined (NRF9160_XXAA) || defined(NRF9120_XXAA)
@@ -477,6 +486,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
         #include "haltium_name_change.h"
+    #endif
+
+#elif defined (NRF7120_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf7120.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf7120_name_change.h"
     #endif
 
 #else

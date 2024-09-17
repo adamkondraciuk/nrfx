@@ -189,6 +189,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_BBPR)
         #include "nrf54h20_engb_xxaa_bbpr_memory.h"
     #endif
+#elif defined(NRF7120_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf7120_xxaa_application_memory.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf7120_xxaa_flpr_memory.h"
+    #endif
+    #if defined(NRF_UMAC)
+        #include "nrf7120_xxaa_umac_memory.h"
+    #endif
+    #if defined(NRF_LMAC)
+        #include "nrf7120_xxaa_lmac_memory.h"
+    #endif
 #elif defined(NRF7140_XXAA)
     #if defined(NRF_SECURE)
         #include "nrf7140_xxaa_secure_memory.h"
