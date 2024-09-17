@@ -301,6 +301,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(EXCLUDE_PORTABILITY)
         #include "nrf51_to_nrf52840.h"
         #include "nrf52_to_nrf52840.h"
+        #include "nrf52840_name_change.h"
     #endif
 
 #elif defined (NRF5340_XXAA)
