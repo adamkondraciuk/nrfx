@@ -5839,10 +5839,8 @@ typedef struct {
   #define CCM_MODE_MODE_Min (0x0UL)                  /*!< Min enumerator value of MODE field.                                  */
   #define CCM_MODE_MODE_Max (0x2UL)                  /*!< Max enumerator value of MODE field.                                  */
   #define CCM_MODE_MODE_Encryption (0x0UL)           /*!< AES CCM packet encryption mode                                       */
-  #define CCM_MODE_MODE_Decryption (0x1UL)           /*!< AES CCM packet decryption mode                                       */
-  #define CCM_MODE_MODE_FastDecryption (0x2UL)       /*!< AES fast decrypt mode. This mode will run CCM decryption as fast as
-                                                          possible, i.e. not locked to a radio data rate. This can be used when
-                                                          a packet has been completely received.*/
+  #define CCM_MODE_MODE_Decryption (0x1UL)           /*!< This mode will run CCM decryption in the speed of the DATARATE field.*/
+  #define CCM_MODE_MODE_FastDecryption (0x2UL)       /*!< AES CCM decryption mode.                                             */
 
 /* PROTOCOL @Bits 8..9 : Protocol and packet format selection */
   #define CCM_MODE_PROTOCOL_Pos (8UL)                /*!< Position of PROTOCOL field.                                          */
@@ -5898,8 +5896,8 @@ typedef struct {
 /* CCM_ADATAMASK: CCM adata mask. */
   #define CCM_ADATAMASK_ResetValue (0x000000E3UL)    /*!< Reset value of ADATAMASK register.                                   */
 
-/* ADATAMASK @Bits 0..7 : CCM adata mask. The rationale for this is to support on-the-fly masking of BLE header, as per the
-                          Bluetooth Spec. */
+/* ADATAMASK @Bits 0..7 : CCM adata mask. The rationale for this is to support the masking of BLE header, as per the Bluetooth
+                          Spec. */
 
   #define CCM_ADATAMASK_ADATAMASK_Pos (0UL)          /*!< Position of ADATAMASK field.                                         */
   #define CCM_ADATAMASK_ADATAMASK_Msk (0xFFUL << CCM_ADATAMASK_ADATAMASK_Pos) /*!< Bit mask of ADATAMASK field.                */
@@ -11465,8 +11463,10 @@ typedef struct {
   #define ECB_ERRORSTATUS_ERRORSTATUS_NoError (0x0UL) /*!< No errors have occurred                                             */
   #define ECB_ERRORSTATUS_ERRORSTATUS_PrematureInptrEnd (0x1UL) /*!< End of INPTR job list before data structure was read.     */
   #define ECB_ERRORSTATUS_ERRORSTATUS_PrematureOutptrEnd (0x2UL) /*!< End of OUTPTR job list before data structure was read.   */
-  #define ECB_ERRORSTATUS_ERRORSTATUS_EncryptionTooSlow (0x3UL) /*!< Encryption of the unencrypted data structure did not
-                                                                     complete in time.*/
+  #define ECB_ERRORSTATUS_ERRORSTATUS_EncryptionTooSlow (0x3UL) /*!< Encryption aborted due to higher priority peripheral
+                                                                     requesting or using the AES module.*/
+  #define ECB_ERRORSTATUS_ERRORSTATUS_Aborted (0x3UL) /*!< Encryption aborted due to higher priority peripheral requesting or
+                                                           using the AES module.*/
   #define ECB_ERRORSTATUS_ERRORSTATUS_DmaError (0x4UL) /*!< Bus error during DMA access.                                       */
 
 
@@ -14915,8 +14915,8 @@ typedef struct {
   __IM  uint32_t  VARIANT;                           /*!< (@ 0x00000020) Part Variant, Hardware version and Production
                                                                          configuration*/
   __IM  uint32_t  PACKAGE;                           /*!< (@ 0x00000024) Package option                                        */
-  __IM  uint32_t  RAM;                               /*!< (@ 0x00000028) RAM variant                                           */
-  __IM  uint32_t  RRAM;                              /*!< (@ 0x0000002C) RRAM variant                                          */
+  __IM  uint32_t  RAM;                               /*!< (@ 0x00000028) RAM size (KB)                                         */
+  __IM  uint32_t  RRAM;                              /*!< (@ 0x0000002C) RRAM size (KB)                                        */
   __IM  uint32_t  DEVICETYPE;                        /*!< (@ 0x00000030) Device type                                           */
   __IM  uint32_t  FICRREVISION;                      /*!< (@ 0x00000034) FICR revision                                         */
 } NRF_FICR_INFO_Type;                                /*!< Size = 56 (0x038)                                                    */
@@ -14984,10 +14984,10 @@ typedef struct {
   #define FICR_INFO_PACKAGE_PACKAGE_Unspecified (0xFFFFFFFFUL) /*!< Unspecified                                                */
 
 
-/* FICR_INFO_RAM: RAM variant */
+/* FICR_INFO_RAM: RAM size (KB) */
   #define FICR_INFO_RAM_ResetValue (0xFFFFFFFFUL)    /*!< Reset value of RAM register.                                         */
 
-/* RAM @Bits 0..31 : RAM variant */
+/* RAM @Bits 0..31 : RAM size (KB) */
   #define FICR_INFO_RAM_RAM_Pos (0UL)                /*!< Position of RAM field.                                               */
   #define FICR_INFO_RAM_RAM_Msk (0xFFFFFFFFUL << FICR_INFO_RAM_RAM_Pos) /*!< Bit mask of RAM field.                            */
   #define FICR_INFO_RAM_RAM_Min (0xFFFFFFFFUL)       /*!< Min enumerator value of RAM field.                                   */
@@ -14995,10 +14995,10 @@ typedef struct {
   #define FICR_INFO_RAM_RAM_Unspecified (0xFFFFFFFFUL) /*!< Unspecified                                                        */
 
 
-/* FICR_INFO_RRAM: RRAM variant */
+/* FICR_INFO_RRAM: RRAM size (KB) */
   #define FICR_INFO_RRAM_ResetValue (0xFFFFFFFFUL)   /*!< Reset value of RRAM register.                                        */
 
-/* RRAM @Bits 0..31 : RRAM variant */
+/* RRAM @Bits 0..31 : RRAM size (KB) */
   #define FICR_INFO_RRAM_RRAM_Pos (0UL)              /*!< Position of RRAM field.                                              */
   #define FICR_INFO_RRAM_RRAM_Msk (0xFFFFFFFFUL << FICR_INFO_RRAM_RRAM_Pos) /*!< Bit mask of RRAM field.                       */
   #define FICR_INFO_RRAM_RRAM_Min (0xFFFFFFFFUL)     /*!< Min enumerator value of RRAM field.                                  */
@@ -15072,6 +15072,9 @@ typedef struct {
 /* PARTNO @Bits 0..31 : (unspecified) */
   #define FICR_SOCINFO_PARTNO_PARTNO_Pos (0UL)       /*!< Position of PARTNO field.                                            */
   #define FICR_SOCINFO_PARTNO_PARTNO_Msk (0xFFFFFFFFUL << FICR_SOCINFO_PARTNO_PARTNO_Pos) /*!< Bit mask of PARTNO field.       */
+  #define FICR_SOCINFO_PARTNO_PARTNO_Min (0x29UL)    /*!< Min enumerator value of PARTNO field.                                */
+  #define FICR_SOCINFO_PARTNO_PARTNO_Max (0x29UL)    /*!< Max enumerator value of PARTNO field.                                */
+  #define FICR_SOCINFO_PARTNO_PARTNO_nRF54L20 (0x00000029UL) /*!< nRF54L20                                                     */
 
 
 /* FICR_SOCINFO_HWREVISION: Hardware Revision of the device. Will be updated in production test. */
@@ -19275,7 +19278,8 @@ typedef struct {
     __IOM uint32_t EVENTS_COMPARE[12];               /*!< (@ 0x00000100) Compare event on CC[n] match                          */
     __IM uint32_t RESERVED3[12];
     __IOM uint32_t EVENTS_RTCOMPARE;                 /*!< (@ 0x00000160) Compare event on RTCOMPARE register match             */
-    __IOM uint32_t EVENTS_RTCOMPARESYNC;             /*!< (@ 0x00000164) Synchronize always-on LFCLK clock domain              */
+    __IOM uint32_t EVENTS_RTCOMPARESYNC;             /*!< (@ 0x00000164) The GRTC low frequency timer is synchronized with the
+                                                                         SYSCOUNTER*/
     __IOM uint32_t EVENTS_SYSCOUNTERVALID;           /*!< (@ 0x00000168) The SYSCOUNTER is in active state and value is valid  */
     __IOM uint32_t EVENTS_PWMPERIODEND;              /*!< (@ 0x0000016C) Event on end of each PWM period                       */
     __IM uint32_t RESERVED4[4];
@@ -19310,8 +19314,8 @@ typedef struct {
     __IM uint32_t RTCOUNTERH;                        /*!< (@ 0x00000504) The most significant bits of the RTCOUNTER counter.   */
     __IM uint32_t RESERVED10[2];
     __IOM uint32_t MODE;                             /*!< (@ 0x00000510) Counter mode selection                                */
-    __IM uint32_t SYSCOUNTERL;                       /*!< (@ 0x00000514) The lower 32-bits of the SYSCOUNTER                   */
-    __IM uint32_t SYSCOUNTERH;                       /*!< (@ 0x00000518) The higher 20-bits of the SYSCOUNTER                  */
+    __IOM uint32_t SYSCOUNTERL;                      /*!< (@ 0x00000514) The lower 32-bits of the SYSCOUNTER                   */
+    __IOM uint32_t SYSCOUNTERH;                      /*!< (@ 0x00000518) The higher 20-bits of the SYSCOUNTER                  */
     __IM uint32_t RESERVED11;
     __IOM NRF_GRTC_CC_Type CC[12];                   /*!< (@ 0x00000520) (unspecified)                                         */
     __IM uint32_t RESERVED12[48];
@@ -19457,10 +19461,10 @@ typedef struct {
   #define GRTC_EVENTS_RTCOMPARE_EVENTS_RTCOMPARE_Generated (0x1UL) /*!< Event generated                                        */
 
 
-/* GRTC_EVENTS_RTCOMPARESYNC: Synchronize always-on LFCLK clock domain */
+/* GRTC_EVENTS_RTCOMPARESYNC: The GRTC low frequency timer is synchronized with the SYSCOUNTER */
   #define GRTC_EVENTS_RTCOMPARESYNC_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_RTCOMPARESYNC register.               */
 
-/* EVENTS_RTCOMPARESYNC @Bit 0 : Synchronize always-on LFCLK clock domain */
+/* EVENTS_RTCOMPARESYNC @Bit 0 : The GRTC low frequency timer is synchronized with the SYSCOUNTER */
   #define GRTC_EVENTS_RTCOMPARESYNC_EVENTS_RTCOMPARESYNC_Pos (0UL) /*!< Position of EVENTS_RTCOMPARESYNC field.                */
   #define GRTC_EVENTS_RTCOMPARESYNC_EVENTS_RTCOMPARESYNC_Msk (0x1UL << GRTC_EVENTS_RTCOMPARESYNC_EVENTS_RTCOMPARESYNC_Pos) /*!<
                                                                             Bit mask of EVENTS_RTCOMPARESYNC field.*/
@@ -37479,27 +37483,24 @@ typedef struct {
 /* LEN @Bits 0..1 : CRC length in number of bytes. */
   #define RADIO_LBMAC_CRCCNF_LEN_Pos (0UL)           /*!< Position of LEN field.                                               */
   #define RADIO_LBMAC_CRCCNF_LEN_Msk (0x3UL << RADIO_LBMAC_CRCCNF_LEN_Pos) /*!< Bit mask of LEN field.                         */
-  #define RADIO_LBMAC_CRCCNF_LEN_Min (0x1UL)         /*!< Min value of LEN field.                                              */
-  #define RADIO_LBMAC_CRCCNF_LEN_Max (0x3UL)         /*!< Max size of LEN field.                                               */
+  #define RADIO_LBMAC_CRCCNF_LEN_Min (0x0UL)         /*!< Min enumerator value of LEN field.                                   */
+  #define RADIO_LBMAC_CRCCNF_LEN_Max (0x3UL)         /*!< Max enumerator value of LEN field.                                   */
   #define RADIO_LBMAC_CRCCNF_LEN_Disabled (0x0UL)    /*!< CRC length is zero and CRC calculation is disabled                   */
   #define RADIO_LBMAC_CRCCNF_LEN_One (0x1UL)         /*!< CRC length is one byte and CRC calculation is enabled                */
   #define RADIO_LBMAC_CRCCNF_LEN_Two (0x2UL)         /*!< CRC length is two bytes and CRC calculation is enabled               */
   #define RADIO_LBMAC_CRCCNF_LEN_Three (0x3UL)       /*!< CRC length is three bytes and CRC calculation is enabled             */
 
-/* OFFSET @Bits 8..10 : Which packet fields to be kept out of CRC calculation. Subsequent fields after the specified options are
-                        included in CRC calculation. */
-
-  #define RADIO_LBMAC_CRCCNF_OFFSET_Pos (8UL)        /*!< Position of OFFSET field.                                            */
-  #define RADIO_LBMAC_CRCCNF_OFFSET_Msk (0x7UL << RADIO_LBMAC_CRCCNF_OFFSET_Pos) /*!< Bit mask of OFFSET field.                */
-  #define RADIO_LBMAC_CRCCNF_OFFSET_Min (0x0UL)      /*!< Min enumerator value of OFFSET field.                                */
-  #define RADIO_LBMAC_CRCCNF_OFFSET_Max (0x4UL)      /*!< Max enumerator value of OFFSET field.                                */
-  #define RADIO_LBMAC_CRCCNF_OFFSET_Include (0x0UL)  /*!< CRC calculation includes address field                               */
-  #define RADIO_LBMAC_CRCCNF_OFFSET_Skip (0x1UL)     /*!< CRC calculation does not include address field. The CRC calculation
-                                                          will start at the first byte after the address.*/
-  #define RADIO_LBMAC_CRCCNF_OFFSET_LENGTH (0x2UL)   /*!< CRC calculation as per 802.15.4 standard. Starting at first byte after
-                                                          length field.*/
-  #define RADIO_LBMAC_CRCCNF_OFFSET_SO (0x3UL)       /*!< CRC calculation Starting at first byte after S0 field.               */
-  #define RADIO_LBMAC_CRCCNF_OFFSET_S1 (0x4UL)       /*!< CRC calculation Starting at first byte after S1 field.               */
+/* SKIPADDR @Bits 8..10 : Control whether CRC calculation skips the address field. Other fields can also be skipped. */
+  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Pos (8UL)      /*!< Position of SKIPADDR field.                                          */
+  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Msk (0x7UL << RADIO_LBMAC_CRCCNF_SKIPADDR_Pos) /*!< Bit mask of SKIPADDR field.          */
+  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Min (0x0UL)    /*!< Min enumerator value of SKIPADDR field.                              */
+  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Max (0x4UL)    /*!< Max enumerator value of SKIPADDR field.                              */
+  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Include (0x0UL) /*!< CRC calculation includes address field                              */
+  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Skip (0x1UL)   /*!< CRC calculation starting at first byte after address field.          */
+  #define RADIO_LBMAC_CRCCNF_SKIPADDR_Ieee802154 (0x2UL) /*!< CRC calculation starting at first byte after length field (as per
+                                                              802.15.4 standard).*/
+  #define RADIO_LBMAC_CRCCNF_SKIPADDR_SkipS0 (0x3UL) /*!< CRC calculation starting at first byte after S0 field.               */
+  #define RADIO_LBMAC_CRCCNF_SKIPADDR_SkipS1 (0x4UL) /*!< CRC calculation starting at first byte after S1 field.               */
 
 
 /* RADIO_LBMAC_CRCPOLY: CRC polynomial */
@@ -44602,34 +44603,35 @@ typedef struct {
   #define RADIO_TXPOWER_TXPOWER_Msk (0x7FFUL << RADIO_TXPOWER_TXPOWER_Pos) /*!< Bit mask of TXPOWER field.                     */
   #define RADIO_TXPOWER_TXPOWER_Min (0x0UL)          /*!< Min enumerator value of TXPOWER field.                               */
   #define RADIO_TXPOWER_TXPOWER_Max (0x130UL)        /*!< Max enumerator value of TXPOWER field.                               */
-  #define RADIO_TXPOWER_TXPOWER_Pos10dBm (0x03FUL)   /*!< +10 dBm                                                              */
-  #define RADIO_TXPOWER_TXPOWER_Pos9dBm (0x039UL)    /*!< +9 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Pos8dBm (0x033UL)    /*!< +8 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Pos7dBm (0x02DUL)    /*!< +7 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Pos6dBm (0x028UL)    /*!< +6 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Pos5dBm (0x023UL)    /*!< +5 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Pos4dBm (0x01FUL)    /*!< +4 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Pos3dBm (0x01BUL)    /*!< +3 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Pos2dBm (0x018UL)    /*!< +2 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Pos1dBm (0x015UL)    /*!< +1 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_0dBm (0x013UL)       /*!< 0 dBm                                                                */
-  #define RADIO_TXPOWER_TXPOWER_Neg1dBm (0x011UL)    /*!< -1 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Neg2dBm (0x00FUL)    /*!< -2 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Neg3dBm (0x00DUL)    /*!< -3 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Neg4dBm (0x00BUL)    /*!< -4 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Neg5dBm (0x00AUL)    /*!< -5 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Neg6dBm (0x009UL)    /*!< -6 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Neg7dBm (0x008UL)    /*!< -7 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Neg8dBm (0x007UL)    /*!< -8 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Neg9dBm (0x006UL)    /*!< -9 dBm                                                               */
-  #define RADIO_TXPOWER_TXPOWER_Neg10dBm (0x005UL)   /*!< -10 dBm                                                              */
-  #define RADIO_TXPOWER_TXPOWER_Neg12dBm (0x004UL)   /*!< -12 dBm                                                              */
-  #define RADIO_TXPOWER_TXPOWER_Neg14dBm (0x003UL)   /*!< -14 dBm                                                              */
-  #define RADIO_TXPOWER_TXPOWER_Neg16dBm (0x002UL)   /*!< -16 dBm                                                              */
-  #define RADIO_TXPOWER_TXPOWER_Neg20dBm (0x001UL)   /*!< -20 dBm                                                              */
-  #define RADIO_TXPOWER_TXPOWER_Neg26dBm (0x000UL)   /*!< -26 dBm                                                              */
+  #define RADIO_TXPOWER_TXPOWER_Pos8dBm (0x03FUL)    /*!< +8 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Pos7dBm (0x039UL)    /*!< +7 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Pos6dBm (0x033UL)    /*!< +6 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Pos5dBm (0x02DUL)    /*!< +5 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Pos4dBm (0x028UL)    /*!< +4 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Pos3dBm (0x023UL)    /*!< +3 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Pos2dBm (0x01FUL)    /*!< +2 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Pos1dBm (0x01BUL)    /*!< +1 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_0dBm (0x018UL)       /*!< 0 dBm                                                                */
+  #define RADIO_TXPOWER_TXPOWER_Neg1dBm (0x015UL)    /*!< -1 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Neg2dBm (0x013UL)    /*!< -2 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Neg3dBm (0x011UL)    /*!< -3 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Neg4dBm (0x00FUL)    /*!< -4 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Neg5dBm (0x00DUL)    /*!< -5 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Neg6dBm (0x00BUL)    /*!< -6 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Neg7dBm (0x00AUL)    /*!< -7 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Neg8dBm (0x009UL)    /*!< -8 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Neg9dBm (0x008UL)    /*!< -9 dBm                                                               */
+  #define RADIO_TXPOWER_TXPOWER_Neg10dBm (0x007UL)   /*!< -10 dBm                                                              */
+  #define RADIO_TXPOWER_TXPOWER_Neg12dBm (0x006UL)   /*!< -12 dBm                                                              */
+  #define RADIO_TXPOWER_TXPOWER_Neg14dBm (0x005UL)   /*!< -14 dBm                                                              */
+  #define RADIO_TXPOWER_TXPOWER_Neg16dBm (0x004UL)   /*!< -16 dBm                                                              */
+  #define RADIO_TXPOWER_TXPOWER_Neg18dBm (0x003UL)   /*!< -18 dBm                                                              */
+  #define RADIO_TXPOWER_TXPOWER_Neg20dBm (0x002UL)   /*!< -20 dBm                                                              */
+  #define RADIO_TXPOWER_TXPOWER_Neg22dBm (0x002UL)   /*!< -22 dBm                                                              */
+  #define RADIO_TXPOWER_TXPOWER_Neg28dBm (0x001UL)   /*!< -28 dBm                                                              */
   #define RADIO_TXPOWER_TXPOWER_Neg40dBm (0x130UL)   /*!< -40 dBm                                                              */
   #define RADIO_TXPOWER_TXPOWER_Neg46dBm (0x110UL)   /*!< -46 dBm                                                              */
+  #define RADIO_TXPOWER_TXPOWER_Neg100dBm (0x000UL)  /*!< -100 dBm                                                             */
 
 
 /* RADIO_TIFS: Interframe spacing in us */
@@ -47445,27 +47447,24 @@ typedef struct {
 /* LEN @Bits 0..1 : CRC length in number of bytes. */
   #define RADIO_CRCCNF_LEN_Pos (0UL)                 /*!< Position of LEN field.                                               */
   #define RADIO_CRCCNF_LEN_Msk (0x3UL << RADIO_CRCCNF_LEN_Pos) /*!< Bit mask of LEN field.                                     */
-  #define RADIO_CRCCNF_LEN_Min (0x1UL)               /*!< Min value of LEN field.                                              */
-  #define RADIO_CRCCNF_LEN_Max (0x3UL)               /*!< Max size of LEN field.                                               */
+  #define RADIO_CRCCNF_LEN_Min (0x0UL)               /*!< Min enumerator value of LEN field.                                   */
+  #define RADIO_CRCCNF_LEN_Max (0x3UL)               /*!< Max enumerator value of LEN field.                                   */
   #define RADIO_CRCCNF_LEN_Disabled (0x0UL)          /*!< CRC length is zero and CRC calculation is disabled                   */
   #define RADIO_CRCCNF_LEN_One (0x1UL)               /*!< CRC length is one byte and CRC calculation is enabled                */
   #define RADIO_CRCCNF_LEN_Two (0x2UL)               /*!< CRC length is two bytes and CRC calculation is enabled               */
   #define RADIO_CRCCNF_LEN_Three (0x3UL)             /*!< CRC length is three bytes and CRC calculation is enabled             */
 
-/* OFFSET @Bits 8..10 : Which packet fields to be kept out of CRC calculation. Subsequent fields after the specified options are
-                        included in CRC calculation. */
-
-  #define RADIO_CRCCNF_OFFSET_Pos (8UL)              /*!< Position of OFFSET field.                                            */
-  #define RADIO_CRCCNF_OFFSET_Msk (0x7UL << RADIO_CRCCNF_OFFSET_Pos) /*!< Bit mask of OFFSET field.                            */
-  #define RADIO_CRCCNF_OFFSET_Min (0x0UL)            /*!< Min enumerator value of OFFSET field.                                */
-  #define RADIO_CRCCNF_OFFSET_Max (0x4UL)            /*!< Max enumerator value of OFFSET field.                                */
-  #define RADIO_CRCCNF_OFFSET_Include (0x0UL)        /*!< CRC calculation includes address field                               */
-  #define RADIO_CRCCNF_OFFSET_Skip (0x1UL)           /*!< CRC calculation does not include address field. The CRC calculation
-                                                          will start at the first byte after the address.*/
-  #define RADIO_CRCCNF_OFFSET_LENGTH (0x2UL)         /*!< CRC calculation as per 802.15.4 standard. Starting at first byte after
-                                                          length field.*/
-  #define RADIO_CRCCNF_OFFSET_SO (0x3UL)             /*!< CRC calculation Starting at first byte after S0 field.               */
-  #define RADIO_CRCCNF_OFFSET_S1 (0x4UL)             /*!< CRC calculation Starting at first byte after S1 field.               */
+/* SKIPADDR @Bits 8..10 : Control whether CRC calculation skips the address field. Other fields can also be skipped. */
+  #define RADIO_CRCCNF_SKIPADDR_Pos (8UL)            /*!< Position of SKIPADDR field.                                          */
+  #define RADIO_CRCCNF_SKIPADDR_Msk (0x7UL << RADIO_CRCCNF_SKIPADDR_Pos) /*!< Bit mask of SKIPADDR field.                      */
+  #define RADIO_CRCCNF_SKIPADDR_Min (0x0UL)          /*!< Min enumerator value of SKIPADDR field.                              */
+  #define RADIO_CRCCNF_SKIPADDR_Max (0x4UL)          /*!< Max enumerator value of SKIPADDR field.                              */
+  #define RADIO_CRCCNF_SKIPADDR_Include (0x0UL)      /*!< CRC calculation includes address field                               */
+  #define RADIO_CRCCNF_SKIPADDR_Skip (0x1UL)         /*!< CRC calculation starting at first byte after address field.          */
+  #define RADIO_CRCCNF_SKIPADDR_Ieee802154 (0x2UL)   /*!< CRC calculation starting at first byte after length field (as per
+                                                          802.15.4 standard).*/
+  #define RADIO_CRCCNF_SKIPADDR_SkipS0 (0x3UL)       /*!< CRC calculation starting at first byte after S0 field.               */
+  #define RADIO_CRCCNF_SKIPADDR_SkipS1 (0x4UL)       /*!< CRC calculation starting at first byte after S1 field.               */
 
 
 /* RADIO_CRCPOLY: CRC polynomial */
@@ -49511,6 +49510,33 @@ typedef struct {
 
 
 
+/* ==================================================== Struct RRAMC_ECC ===================================================== */
+/**
+  * @brief ECC [RRAMC_ECC] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  ERRORADDR;                         /*!< (@ 0x00000000) Address of the first ECC error that could not be
+                                                                         corrected*/
+  __IM  uint32_t  CORRADDR;                          /*!< (@ 0x00000004) Address of the first ECC error that was corrected     */
+} NRF_RRAMC_ECC_Type;                                /*!< Size = 8 (0x008)                                                     */
+
+/* RRAMC_ECC_ERRORADDR: Address of the first ECC error that could not be corrected */
+  #define RRAMC_ECC_ERRORADDR_ResetValue (0x00FFFFFFUL) /*!< Reset value of ERRORADDR register.                                */
+
+/* ADDRESS @Bits 0..31 : ECC error address */
+  #define RRAMC_ECC_ERRORADDR_ADDRESS_Pos (0UL)      /*!< Position of ADDRESS field.                                           */
+  #define RRAMC_ECC_ERRORADDR_ADDRESS_Msk (0xFFFFFFFFUL << RRAMC_ECC_ERRORADDR_ADDRESS_Pos) /*!< Bit mask of ADDRESS field.    */
+
+
+/* RRAMC_ECC_CORRADDR: Address of the first ECC error that was corrected */
+  #define RRAMC_ECC_CORRADDR_ResetValue (0x00FFFFFFUL) /*!< Reset value of CORRADDR register.                                  */
+
+/* ADDRESS @Bits 0..31 : Address of the ECC error that was corrected */
+  #define RRAMC_ECC_CORRADDR_ADDRESS_Pos (0UL)       /*!< Position of ADDRESS field.                                           */
+  #define RRAMC_ECC_CORRADDR_ADDRESS_Msk (0xFFFFFFFFUL << RRAMC_ECC_CORRADDR_ADDRESS_Pos) /*!< Bit mask of ADDRESS field.      */
+
+
+
 /* ================================================= Struct RRAMC_POWER_CNT ================================================== */
 /**
   * @brief CNT [RRAMC_POWER_CNT] Counter/timing configuration for 32 MHz frequency
@@ -49632,13 +49658,15 @@ typedef struct {
   #define RRAMC_POWER_STANDBYCONFIG_MODE_Pos (0UL)   /*!< Position of MODE field.                                              */
   #define RRAMC_POWER_STANDBYCONFIG_MODE_Msk (0x3UL << RRAMC_POWER_STANDBYCONFIG_MODE_Pos) /*!< Bit mask of MODE field.        */
   #define RRAMC_POWER_STANDBYCONFIG_MODE_Min (0x0UL) /*!< Min enumerator value of MODE field.                                  */
-  #define RRAMC_POWER_STANDBYCONFIG_MODE_Max (0x2UL) /*!< Max enumerator value of MODE field.                                  */
-  #define RRAMC_POWER_STANDBYCONFIG_MODE_Normal (0x0UL) /*!< The RRAM automatically goes into standby mode while the RRAM is not
+  #define RRAMC_POWER_STANDBYCONFIG_MODE_Max (0x3UL) /*!< Max enumerator value of MODE field.                                  */
+  #define RRAMC_POWER_STANDBYCONFIG_MODE_Normal (0x0UL) /*!< The RRAM automatically goes into idle mode while the RRAM is not
                                                              being accessed*/
   #define RRAMC_POWER_STANDBYCONFIG_MODE_NAP (0x1UL) /*!< The RRAM goes into NAP mode when the access timeout counter is
                                                           expired*/
   #define RRAMC_POWER_STANDBYCONFIG_MODE_PowerDown (0x2UL) /*!< The RRAM goes into power down mode when the access timeout
                                                                 counter is expired*/
+  #define RRAMC_POWER_STANDBYCONFIG_MODE_Standby (0x3UL) /*!< The RRAM automatically goes into standby mode while the RRAM is
+                                                              not being accessed*/
 
 
 /* RRAMC_POWER_LOWPOWERCONFIG: Low power mode configuration */
@@ -49960,8 +49988,98 @@ typedef struct {
   #define RRAMC_TEST_TESTMODE_MODE_Max (0xBCDEUL)    /*!< Max enumerator value of MODE field.                                  */
   #define RRAMC_TEST_TESTMODE_MODE_NORMAL (0x0000UL) /*!< Read: Not in test-mode                                               */
   #define RRAMC_TEST_TESTMODE_MODE_TESTMODE1 (0x0001UL) /*!< Read: In TESTMODE1                                                */
+  #define RRAMC_TEST_TESTMODE_MODE_TESTMODE2 (0x0002UL) /*!< Read: In TESTMODE2                                                */
   #define RRAMC_TEST_TESTMODE_MODE_SetNORMAL (0x0000UL) /*!< Write: Sets NORMAL mode                                           */
   #define RRAMC_TEST_TESTMODE_MODE_SetTESTMODE1 (0xBCDEUL) /*!< Write: Sets TESTMODE1. Enables the MASSERASE                   */
+  #define RRAMC_TEST_TESTMODE_MODE_SetTESTMODE2 (0xABCDUL) /*!< Write: Sets TESTMODE2. Used for direct control of TRC          */
+
+
+
+/* ================================================= Struct RRAMC_TESTMODE2 ================================================== */
+/**
+  * @brief TESTMODE2 [RRAMC_TESTMODE2] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  RESERVED[3];
+  __IOM uint32_t  DATA[5];                           /*!< (@ 0x0000000C) Data in/out of TRC register                           */
+  __IOM uint32_t  ADDR;                              /*!< (@ 0x00000020) Address bits of TRC                                   */
+  __IM  uint32_t  RESERVED1[4];
+  __IOM uint32_t  TRCCOMMAND;                        /*!< (@ 0x00000034) Test register trigger for TESTREGDATA/ADDR registers  */
+} NRF_RRAMC_TESTMODE2_Type;                          /*!< Size = 56 (0x038)                                                    */
+
+/* RRAMC_TESTMODE2_DATA: Data in/out of TRC register */
+  #define RRAMC_TESTMODE2_DATA_MaxCount (5UL)        /*!< Max size of DATA[5] array.                                           */
+  #define RRAMC_TESTMODE2_DATA_MaxIndex (4UL)        /*!< Max index of DATA[5] array.                                          */
+  #define RRAMC_TESTMODE2_DATA_MinIndex (0UL)        /*!< Min index of DATA[5] array.                                          */
+  #define RRAMC_TESTMODE2_DATA_ResetValue (0x00000000UL) /*!< Reset value of DATA[5] register.                                 */
+
+/* VAL @Bits 0..31 : Data[m] from/to TRC register */
+  #define RRAMC_TESTMODE2_DATA_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
+  #define RRAMC_TESTMODE2_DATA_VAL_Msk (0xFFFFFFFFUL << RRAMC_TESTMODE2_DATA_VAL_Pos) /*!< Bit mask of VAL field.              */
+
+
+/* RRAMC_TESTMODE2_ADDR: Address bits of TRC */
+  #define RRAMC_TESTMODE2_ADDR_ResetValue (0x00000000UL) /*!< Reset value of ADDR register.                                    */
+
+/* YADDR @Bits 0..5 : Y-ADDR lines of TRC */
+  #define RRAMC_TESTMODE2_ADDR_YADDR_Pos (0UL)       /*!< Position of YADDR field.                                             */
+  #define RRAMC_TESTMODE2_ADDR_YADDR_Msk (0x3FUL << RRAMC_TESTMODE2_ADDR_YADDR_Pos) /*!< Bit mask of YADDR field.              */
+
+/* XADDR @Bits 6..18 : X-ADDR lines of TRC */
+  #define RRAMC_TESTMODE2_ADDR_XADDR_Pos (6UL)       /*!< Position of XADDR field.                                             */
+  #define RRAMC_TESTMODE2_ADDR_XADDR_Msk (0x1FFFUL << RRAMC_TESTMODE2_ADDR_XADDR_Pos) /*!< Bit mask of XADDR field.            */
+
+/* IFREN @Bit 31 : IFREN (access to info page) line of TRC */
+  #define RRAMC_TESTMODE2_ADDR_IFREN_Pos (31UL)      /*!< Position of IFREN field.                                             */
+  #define RRAMC_TESTMODE2_ADDR_IFREN_Msk (0x1UL << RRAMC_TESTMODE2_ADDR_IFREN_Pos) /*!< Bit mask of IFREN field.               */
+
+
+/* RRAMC_TESTMODE2_TRCCOMMAND: Test register trigger for TESTREGDATA/ADDR registers */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_ResetValue (0x00000000UL) /*!< Reset value of TRCCOMMAND register.                        */
+
+/* READCONFIG @Bit 0 : Trigger READ_CONFIG */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_READCONFIG_Pos (0UL) /*!< Position of READCONFIG field.                                   */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_READCONFIG_Msk (0x1UL << RRAMC_TESTMODE2_TRCCOMMAND_READCONFIG_Pos) /*!< Bit mask of
+                                                                            READCONFIG field.*/
+
+/* WRTCONFIG @Bit 1 : Trigger WRT_CONFIG */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_WRTCONFIG_Pos (1UL) /*!< Position of WRTCONFIG field.                                     */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_WRTCONFIG_Msk (0x1UL << RRAMC_TESTMODE2_TRCCOMMAND_WRTCONFIG_Pos) /*!< Bit mask of
+                                                                            WRTCONFIG field.*/
+
+/* READ @Bit 2 : Trigger read */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_READ_Pos (2UL)  /*!< Position of READ field.                                              */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_READ_Msk (0x1UL << RRAMC_TESTMODE2_TRCCOMMAND_READ_Pos) /*!< Bit mask of READ field.      */
+
+/* LOAD @Bit 3 : Trigger LOAD */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_LOAD_Pos (3UL)  /*!< Position of LOAD field.                                              */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_LOAD_Msk (0x1UL << RRAMC_TESTMODE2_TRCCOMMAND_LOAD_Pos) /*!< Bit mask of LOAD field.      */
+
+/* WRITE @Bit 4 : Trigger WRITE */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_WRITE_Pos (4UL) /*!< Position of WRITE field.                                             */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_WRITE_Msk (0x1UL << RRAMC_TESTMODE2_TRCCOMMAND_WRITE_Pos) /*!< Bit mask of WRITE field.   */
+
+/* REWRITE @Bit 5 : Trigger REWRITE */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_REWRITE_Pos (5UL) /*!< Position of REWRITE field.                                         */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_REWRITE_Msk (0x1UL << RRAMC_TESTMODE2_TRCCOMMAND_REWRITE_Pos) /*!< Bit mask of REWRITE
+                                                                            field.*/
+
+/* DMA @Bit 6 : Trigger DMA */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_DMA_Pos (6UL)   /*!< Position of DMA field.                                               */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_DMA_Msk (0x1UL << RRAMC_TESTMODE2_TRCCOMMAND_DMA_Pos) /*!< Bit mask of DMA field.         */
+
+/* RSTREG @Bit 7 : Trigger RST_REG */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_RSTREG_Pos (7UL) /*!< Position of RSTREG field.                                           */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_RSTREG_Msk (0x1UL << RRAMC_TESTMODE2_TRCCOMMAND_RSTREG_Pos) /*!< Bit mask of RSTREG field.*/
+
+/* CLRLOAD @Bit 8 : Trigger CLR_LOAD */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_CLRLOAD_Pos (8UL) /*!< Position of CLRLOAD field.                                         */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_CLRLOAD_Msk (0x1UL << RRAMC_TESTMODE2_TRCCOMMAND_CLRLOAD_Pos) /*!< Bit mask of CLRLOAD
+                                                                            field.*/
+
+/* RECALL @Bit 9 : Trigger RECALL */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_RECALL_Pos (9UL) /*!< Position of RECALL field.                                           */
+  #define RRAMC_TESTMODE2_TRCCOMMAND_RECALL_Msk (0x1UL << RRAMC_TESTMODE2_TRCCOMMAND_RECALL_Pos) /*!< Bit mask of RECALL field.*/
 
 
 
@@ -50031,7 +50149,9 @@ typedef struct {
     __IOM uint32_t EVENTS_READY;                     /*!< (@ 0x00000104) RRAMC is ready                                        */
     __IOM uint32_t EVENTS_READYNEXT;                 /*!< (@ 0x00000108) Ready to accept a new write operation                 */
     __IOM uint32_t EVENTS_ACCESSERROR;               /*!< (@ 0x0000010C) RRAM access error                                     */
-    __IM uint32_t RESERVED2[28];
+    __IOM uint32_t EVENTS_ECCERROR;                  /*!< (@ 0x00000110) Uncorrectable ECC error detected                      */
+    __IOM uint32_t EVENTS_ECCERRORCORR;              /*!< (@ 0x00000114) ECC error detected and corrected                      */
+    __IM uint32_t RESERVED2[26];
     __IOM uint32_t PUBLISH_WOKENUP;                  /*!< (@ 0x00000180) Publish configuration for event WOKENUP               */
     __IM uint32_t RESERVED3[95];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
@@ -50044,22 +50164,26 @@ typedef struct {
     __IM uint32_t ACCESSERRORADDR;                   /*!< (@ 0x00000408) Address of the first access error                     */
     __IM uint32_t TRCSTATUS;                         /*!< (@ 0x0000040C) TRC status                                            */
     __IOM NRF_RRAMC_BUFSTATUS_Type BUFSTATUS;        /*!< (@ 0x00000410) (unspecified)                                         */
-    __IM uint32_t RESERVED5[57];
+    __IM uint32_t RESERVED5;
+    __IOM NRF_RRAMC_ECC_Type ECC;                    /*!< (@ 0x00000420) (unspecified)                                         */
+    __IM uint32_t RESERVED6[54];
     __IOM uint32_t CONFIG;                           /*!< (@ 0x00000500) Configuration register                                */
     __IOM uint32_t READCONFIG;                       /*!< (@ 0x00000504) Read configuration register                           */
     __IOM uint32_t WAITSTATES;                       /*!< (@ 0x00000508) Waitstates for RRAM read access                       */
     __IOM uint32_t READYNEXTTIMEOUT;                 /*!< (@ 0x0000050C) Configuration for ready next timeout counter, in units
                                                                          of AXI clock frequency*/
     __IOM NRF_RRAMC_POWER_Type POWER;                /*!< (@ 0x00000510) (unspecified)                                         */
-    __IM uint32_t RESERVED6[3];
+    __IM uint32_t RESERVED7[3];
     __IOM NRF_RRAMC_ERASE_Type ERASE;                /*!< (@ 0x00000540) (unspecified)                                         */
-    __IM uint32_t RESERVED7[2];
+    __IM uint32_t RESERVED8[2];
     __IOM NRF_RRAMC_REGION_Type REGION[5];           /*!< (@ 0x00000550) (unspecified)                                         */
-    __IM uint32_t RESERVED8[22];
+    __IM uint32_t RESERVED9[22];
     __IOM NRF_RRAMC_INTERNAL_Type INTERNAL;          /*!< (@ 0x000005D0) (unspecified)                                         */
-    __IM uint32_t RESERVED9[4];
+    __IM uint32_t RESERVED10[4];
     __IOM NRF_RRAMC_TEST_Type TEST;                  /*!< (@ 0x00000600) (unspecified)                                         */
-    __IM uint32_t RESERVED10[383];
+    __IM uint32_t RESERVED11[3];
+    __IOM NRF_RRAMC_TESTMODE2_Type TESTMODE2;        /*!< (@ 0x00000610) (unspecified)                                         */
+    __IM uint32_t RESERVED12[366];
     __IOM NRF_RRAMC_PCGCSLAVE_Type PCGCSLAVE;        /*!< (@ 0x00000C00) (unspecified)                                         */
   } NRF_RRAMC_Type;                                  /*!< Size = 3208 (0xC88)                                                  */
 
@@ -50206,6 +50330,32 @@ typedef struct {
   #define RRAMC_EVENTS_ACCESSERROR_EVENTS_ACCESSERROR_Generated (0x1UL) /*!< Event generated                                   */
 
 
+/* RRAMC_EVENTS_ECCERROR: Uncorrectable ECC error detected */
+  #define RRAMC_EVENTS_ECCERROR_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ECCERROR register.                        */
+
+/* EVENTS_ECCERROR @Bit 0 : Uncorrectable ECC error detected */
+  #define RRAMC_EVENTS_ECCERROR_EVENTS_ECCERROR_Pos (0UL) /*!< Position of EVENTS_ECCERROR field.                              */
+  #define RRAMC_EVENTS_ECCERROR_EVENTS_ECCERROR_Msk (0x1UL << RRAMC_EVENTS_ECCERROR_EVENTS_ECCERROR_Pos) /*!< Bit mask of
+                                                                            EVENTS_ECCERROR field.*/
+  #define RRAMC_EVENTS_ECCERROR_EVENTS_ECCERROR_Min (0x0UL) /*!< Min enumerator value of EVENTS_ECCERROR field.                */
+  #define RRAMC_EVENTS_ECCERROR_EVENTS_ECCERROR_Max (0x1UL) /*!< Max enumerator value of EVENTS_ECCERROR field.                */
+  #define RRAMC_EVENTS_ECCERROR_EVENTS_ECCERROR_NotGenerated (0x0UL) /*!< Event not generated                                  */
+  #define RRAMC_EVENTS_ECCERROR_EVENTS_ECCERROR_Generated (0x1UL) /*!< Event generated                                         */
+
+
+/* RRAMC_EVENTS_ECCERRORCORR: ECC error detected and corrected */
+  #define RRAMC_EVENTS_ECCERRORCORR_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ECCERRORCORR register.                */
+
+/* EVENTS_ECCERRORCORR @Bit 0 : ECC error detected and corrected */
+  #define RRAMC_EVENTS_ECCERRORCORR_EVENTS_ECCERRORCORR_Pos (0UL) /*!< Position of EVENTS_ECCERRORCORR field.                  */
+  #define RRAMC_EVENTS_ECCERRORCORR_EVENTS_ECCERRORCORR_Msk (0x1UL << RRAMC_EVENTS_ECCERRORCORR_EVENTS_ECCERRORCORR_Pos) /*!<
+                                                                            Bit mask of EVENTS_ECCERRORCORR field.*/
+  #define RRAMC_EVENTS_ECCERRORCORR_EVENTS_ECCERRORCORR_Min (0x0UL) /*!< Min enumerator value of EVENTS_ECCERRORCORR field.    */
+  #define RRAMC_EVENTS_ECCERRORCORR_EVENTS_ECCERRORCORR_Max (0x1UL) /*!< Max enumerator value of EVENTS_ECCERRORCORR field.    */
+  #define RRAMC_EVENTS_ECCERRORCORR_EVENTS_ECCERRORCORR_NotGenerated (0x0UL) /*!< Event not generated                          */
+  #define RRAMC_EVENTS_ECCERRORCORR_EVENTS_ECCERRORCORR_Generated (0x1UL) /*!< Event generated                                 */
+
+
 /* RRAMC_PUBLISH_WOKENUP: Publish configuration for event WOKENUP */
   #define RRAMC_PUBLISH_WOKENUP_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_WOKENUP register.                        */
 
@@ -50259,6 +50409,22 @@ typedef struct {
   #define RRAMC_INTEN_ACCESSERROR_Disabled (0x0UL)   /*!< Disable                                                              */
   #define RRAMC_INTEN_ACCESSERROR_Enabled (0x1UL)    /*!< Enable                                                               */
 
+/* ECCERROR @Bit 4 : Enable or disable interrupt for event ECCERROR */
+  #define RRAMC_INTEN_ECCERROR_Pos (4UL)             /*!< Position of ECCERROR field.                                          */
+  #define RRAMC_INTEN_ECCERROR_Msk (0x1UL << RRAMC_INTEN_ECCERROR_Pos) /*!< Bit mask of ECCERROR field.                        */
+  #define RRAMC_INTEN_ECCERROR_Min (0x0UL)           /*!< Min enumerator value of ECCERROR field.                              */
+  #define RRAMC_INTEN_ECCERROR_Max (0x1UL)           /*!< Max enumerator value of ECCERROR field.                              */
+  #define RRAMC_INTEN_ECCERROR_Disabled (0x0UL)      /*!< Disable                                                              */
+  #define RRAMC_INTEN_ECCERROR_Enabled (0x1UL)       /*!< Enable                                                               */
+
+/* ECCERRORCORR @Bit 5 : Enable or disable interrupt for event ECCERRORCORR */
+  #define RRAMC_INTEN_ECCERRORCORR_Pos (5UL)         /*!< Position of ECCERRORCORR field.                                      */
+  #define RRAMC_INTEN_ECCERRORCORR_Msk (0x1UL << RRAMC_INTEN_ECCERRORCORR_Pos) /*!< Bit mask of ECCERRORCORR field.            */
+  #define RRAMC_INTEN_ECCERRORCORR_Min (0x0UL)       /*!< Min enumerator value of ECCERRORCORR field.                          */
+  #define RRAMC_INTEN_ECCERRORCORR_Max (0x1UL)       /*!< Max enumerator value of ECCERRORCORR field.                          */
+  #define RRAMC_INTEN_ECCERRORCORR_Disabled (0x0UL)  /*!< Disable                                                              */
+  #define RRAMC_INTEN_ECCERRORCORR_Enabled (0x1UL)   /*!< Enable                                                               */
+
 
 /* RRAMC_INTENSET: Enable interrupt */
   #define RRAMC_INTENSET_ResetValue (0x00000000UL)   /*!< Reset value of INTENSET register.                                    */
@@ -50298,6 +50464,24 @@ typedef struct {
   #define RRAMC_INTENSET_ACCESSERROR_Set (0x1UL)     /*!< Enable                                                               */
   #define RRAMC_INTENSET_ACCESSERROR_Disabled (0x0UL) /*!< Read: Disabled                                                      */
   #define RRAMC_INTENSET_ACCESSERROR_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* ECCERROR @Bit 4 : Write '1' to enable interrupt for event ECCERROR */
+  #define RRAMC_INTENSET_ECCERROR_Pos (4UL)          /*!< Position of ECCERROR field.                                          */
+  #define RRAMC_INTENSET_ECCERROR_Msk (0x1UL << RRAMC_INTENSET_ECCERROR_Pos) /*!< Bit mask of ECCERROR field.                  */
+  #define RRAMC_INTENSET_ECCERROR_Min (0x0UL)        /*!< Min enumerator value of ECCERROR field.                              */
+  #define RRAMC_INTENSET_ECCERROR_Max (0x1UL)        /*!< Max enumerator value of ECCERROR field.                              */
+  #define RRAMC_INTENSET_ECCERROR_Set (0x1UL)        /*!< Enable                                                               */
+  #define RRAMC_INTENSET_ECCERROR_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define RRAMC_INTENSET_ECCERROR_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
+
+/* ECCERRORCORR @Bit 5 : Write '1' to enable interrupt for event ECCERRORCORR */
+  #define RRAMC_INTENSET_ECCERRORCORR_Pos (5UL)      /*!< Position of ECCERRORCORR field.                                      */
+  #define RRAMC_INTENSET_ECCERRORCORR_Msk (0x1UL << RRAMC_INTENSET_ECCERRORCORR_Pos) /*!< Bit mask of ECCERRORCORR field.      */
+  #define RRAMC_INTENSET_ECCERRORCORR_Min (0x0UL)    /*!< Min enumerator value of ECCERRORCORR field.                          */
+  #define RRAMC_INTENSET_ECCERRORCORR_Max (0x1UL)    /*!< Max enumerator value of ECCERRORCORR field.                          */
+  #define RRAMC_INTENSET_ECCERRORCORR_Set (0x1UL)    /*!< Enable                                                               */
+  #define RRAMC_INTENSET_ECCERRORCORR_Disabled (0x0UL) /*!< Read: Disabled                                                     */
+  #define RRAMC_INTENSET_ECCERRORCORR_Enabled (0x1UL) /*!< Read: Enabled                                                       */
 
 
 /* RRAMC_INTENCLR: Disable interrupt */
@@ -50339,6 +50523,24 @@ typedef struct {
   #define RRAMC_INTENCLR_ACCESSERROR_Disabled (0x0UL) /*!< Read: Disabled                                                      */
   #define RRAMC_INTENCLR_ACCESSERROR_Enabled (0x1UL) /*!< Read: Enabled                                                        */
 
+/* ECCERROR @Bit 4 : Write '1' to disable interrupt for event ECCERROR */
+  #define RRAMC_INTENCLR_ECCERROR_Pos (4UL)          /*!< Position of ECCERROR field.                                          */
+  #define RRAMC_INTENCLR_ECCERROR_Msk (0x1UL << RRAMC_INTENCLR_ECCERROR_Pos) /*!< Bit mask of ECCERROR field.                  */
+  #define RRAMC_INTENCLR_ECCERROR_Min (0x0UL)        /*!< Min enumerator value of ECCERROR field.                              */
+  #define RRAMC_INTENCLR_ECCERROR_Max (0x1UL)        /*!< Max enumerator value of ECCERROR field.                              */
+  #define RRAMC_INTENCLR_ECCERROR_Clear (0x1UL)      /*!< Disable                                                              */
+  #define RRAMC_INTENCLR_ECCERROR_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define RRAMC_INTENCLR_ECCERROR_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
+
+/* ECCERRORCORR @Bit 5 : Write '1' to disable interrupt for event ECCERRORCORR */
+  #define RRAMC_INTENCLR_ECCERRORCORR_Pos (5UL)      /*!< Position of ECCERRORCORR field.                                      */
+  #define RRAMC_INTENCLR_ECCERRORCORR_Msk (0x1UL << RRAMC_INTENCLR_ECCERRORCORR_Pos) /*!< Bit mask of ECCERRORCORR field.      */
+  #define RRAMC_INTENCLR_ECCERRORCORR_Min (0x0UL)    /*!< Min enumerator value of ECCERRORCORR field.                          */
+  #define RRAMC_INTENCLR_ECCERRORCORR_Max (0x1UL)    /*!< Max enumerator value of ECCERRORCORR field.                          */
+  #define RRAMC_INTENCLR_ECCERRORCORR_Clear (0x1UL)  /*!< Disable                                                              */
+  #define RRAMC_INTENCLR_ECCERRORCORR_Disabled (0x0UL) /*!< Read: Disabled                                                     */
+  #define RRAMC_INTENCLR_ECCERRORCORR_Enabled (0x1UL) /*!< Read: Enabled                                                       */
+
 
 /* RRAMC_INTPEND: Pending interrupts */
   #define RRAMC_INTPEND_ResetValue (0x00000000UL)    /*!< Reset value of INTPEND register.                                     */
@@ -50374,6 +50576,22 @@ typedef struct {
   #define RRAMC_INTPEND_ACCESSERROR_Max (0x1UL)      /*!< Max enumerator value of ACCESSERROR field.                           */
   #define RRAMC_INTPEND_ACCESSERROR_NotPending (0x0UL) /*!< Read: Not pending                                                  */
   #define RRAMC_INTPEND_ACCESSERROR_Pending (0x1UL)  /*!< Read: Pending                                                        */
+
+/* ECCERROR @Bit 4 : Read pending status of interrupt for event ECCERROR */
+  #define RRAMC_INTPEND_ECCERROR_Pos (4UL)           /*!< Position of ECCERROR field.                                          */
+  #define RRAMC_INTPEND_ECCERROR_Msk (0x1UL << RRAMC_INTPEND_ECCERROR_Pos) /*!< Bit mask of ECCERROR field.                    */
+  #define RRAMC_INTPEND_ECCERROR_Min (0x0UL)         /*!< Min enumerator value of ECCERROR field.                              */
+  #define RRAMC_INTPEND_ECCERROR_Max (0x1UL)         /*!< Max enumerator value of ECCERROR field.                              */
+  #define RRAMC_INTPEND_ECCERROR_NotPending (0x0UL)  /*!< Read: Not pending                                                    */
+  #define RRAMC_INTPEND_ECCERROR_Pending (0x1UL)     /*!< Read: Pending                                                        */
+
+/* ECCERRORCORR @Bit 5 : Read pending status of interrupt for event ECCERRORCORR */
+  #define RRAMC_INTPEND_ECCERRORCORR_Pos (5UL)       /*!< Position of ECCERRORCORR field.                                      */
+  #define RRAMC_INTPEND_ECCERRORCORR_Msk (0x1UL << RRAMC_INTPEND_ECCERRORCORR_Pos) /*!< Bit mask of ECCERRORCORR field.        */
+  #define RRAMC_INTPEND_ECCERRORCORR_Min (0x0UL)     /*!< Min enumerator value of ECCERRORCORR field.                          */
+  #define RRAMC_INTPEND_ECCERRORCORR_Max (0x1UL)     /*!< Max enumerator value of ECCERRORCORR field.                          */
+  #define RRAMC_INTPEND_ECCERRORCORR_NotPending (0x0UL) /*!< Read: Not pending                                                 */
+  #define RRAMC_INTPEND_ECCERRORCORR_Pending (0x1UL) /*!< Read: Pending                                                        */
 
 
 /* RRAMC_READY: RRAMC ready status */
@@ -50471,6 +50689,18 @@ typedef struct {
   #define RRAMC_CONFIG_WRITEBUFSIZE_Max (0x20UL)     /*!< Max size of WRITEBUFSIZE field.                                      */
   #define RRAMC_CONFIG_WRITEBUFSIZE_Unbuffered (0x00UL) /*!< Disable buffering                                                 */
 
+/* WRITEBUFMSBCONFIG @Bit 16 : Configuration of writing the write buffer into load buffer when writing to the most significant
+                               byte in the current RRAM word */
+
+  #define RRAMC_CONFIG_WRITEBUFMSBCONFIG_Pos (16UL)  /*!< Position of WRITEBUFMSBCONFIG field.                                 */
+  #define RRAMC_CONFIG_WRITEBUFMSBCONFIG_Msk (0x1UL << RRAMC_CONFIG_WRITEBUFMSBCONFIG_Pos) /*!< Bit mask of WRITEBUFMSBCONFIG
+                                                                            field.*/
+  #define RRAMC_CONFIG_WRITEBUFMSBCONFIG_Min (0x0UL) /*!< Min enumerator value of WRITEBUFMSBCONFIG field.                     */
+  #define RRAMC_CONFIG_WRITEBUFMSBCONFIG_Max (0x1UL) /*!< Max enumerator value of WRITEBUFMSBCONFIG field.                     */
+  #define RRAMC_CONFIG_WRITEBUFMSBCONFIG_Automatic (0x0UL) /*!< Automatically writes the write buffer into load buffer         */
+  #define RRAMC_CONFIG_WRITEBUFMSBCONFIG_NotAutomatic (0x1UL) /*!< Writing the write buffer into load buffer is not done
+                                                                   automatically*/
+
 
 /* RRAMC_READCONFIG: Read configuration register */
   #define RRAMC_READCONFIG_ResetValue (0x00000000UL) /*!< Reset value of READCONFIG register.                                  */
@@ -50506,7 +50736,7 @@ typedef struct {
   #define RRAMC_WAITSTATES_VALUE2_Max (0xFUL)        /*!< Max size of VALUE2 field.                                            */
 
 /* RDONE @Bit 12 : Use RDONE (read done) signal from the RRAM macro in addition to waitstates specified above. The data is read
-                   which ever of waitstate or RDONE signal comes first */
+                   after RDONE signal is set, regardless of waitstates value. */
 
   #define RRAMC_WAITSTATES_RDONE_Pos (12UL)          /*!< Position of RDONE field.                                             */
   #define RRAMC_WAITSTATES_RDONE_Msk (0x1UL << RRAMC_WAITSTATES_RDONE_Pos) /*!< Bit mask of RDONE field.                       */

@@ -971,6 +971,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define ATBFUNNEL_PRESENT 1
 #define ATBFUNNEL_COUNT 4
 
+/*Granular Power Requester*/
+#define GPR_PRESENT 1
+#define GPR_COUNT 1
+
+#define GPR_NUM_CPWRUPM 9                            /*!< Number of power-control interfaces: 9                                */
+
 /*Global Real-time counter*/
 #define GRTC_PRESENT 1
 #define GRTC_COUNT 1
@@ -2241,12 +2247,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define QDEC130_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
 
 #define QDEC131_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
-
-/*SIM card interface*/
-#define SIMIF_PRESENT 1
-#define SIMIF_COUNT 1
-
-#define SIMIF130_SWOVERRIDE_REGS 0                   /*!< (unspecified)                                                        */
 
 /*I2C compatible Two-Wire Master Interface with EasyDMA*/
 #define TWIM_PRESENT 1

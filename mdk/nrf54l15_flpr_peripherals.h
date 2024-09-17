@@ -127,7 +127,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CRACENCORE_CRACENRESETVALUES 1               /*!< (unspecified)                                                        */
 #define CRACENCORE_SHA3RESETVALUES 0                 /*!< (unspecified)                                                        */
 #define CRACENCORE_PKE_DATA_MEMORY 0x51808000        /*!< (unspecified)                                                        */
-#define CRACENCORE_PKE_DATA_MEMORY_SIZE 17408        /*!< (unspecified)                                                        */
+#define CRACENCORE_PKE_DATA_MEMORY_SIZE 16384        /*!< (unspecified)                                                        */
 #define CRACENCORE_PKE_CODE_MEMORY 0x5180C000        /*!< (unspecified)                                                        */
 #define CRACENCORE_PKE_CODE_MEMORY_SIZE 5120         /*!< (unspecified)                                                        */
 
@@ -318,8 +318,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define AAR_COUNT 2
 
 #define AAR00_DMAERROR 1                             /*!< (unspecified)                                                        */
+#define AAR00_ERRORSTATUS 1                          /*!< (unspecified)                                                        */
+#define AAR00_ERROREVENT 1                           /*!< (unspecified)                                                        */
 
 #define AAR10_DMAERROR 1                             /*!< (unspecified)                                                        */
+#define AAR10_ERRORSTATUS 1                          /*!< (unspecified)                                                        */
+#define AAR10_ERROREVENT 1                           /*!< (unspecified)                                                        */
 
 /*AES CCM Mode Encryption*/
 #define CCM_PRESENT 1
@@ -330,7 +334,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CCM00_DMAERROR 1                             /*!< (unspecified)                                                        */
 
 #define CCM10_AMOUNTREG 0                            /*!< (unspecified)                                                        */
-#define CCM10_ONTHEFLYDECRYPTION 1                   /*!< (unspecified)                                                        */
+#define CCM10_ONTHEFLYDECRYPTION 0                   /*!< (unspecified)                                                        */
 #define CCM10_DMAERROR 0                             /*!< (unspecified)                                                        */
 
 /*AES ECB Mode Encryption*/
@@ -339,9 +343,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define ECB00_AMOUNTREG 0                            /*!< (unspecified)                                                        */
 #define ECB00_DMAERROR 1                             /*!< (unspecified)                                                        */
+#define ECB00_ERRORSTATUS 1                          /*!< (unspecified)                                                        */
 
 #define ECB10_AMOUNTREG 0                            /*!< (unspecified)                                                        */
 #define ECB10_DMAERROR 1                             /*!< (unspecified)                                                        */
+#define ECB10_ERRORSTATUS 1                          /*!< (unspecified)                                                        */
 
 /*CRACEN*/
 #define CRACEN_PRESENT 1
@@ -776,7 +782,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RRAMC_PRESENT 1
 #define RRAMC_COUNT 1
 
-#define RRAMC_TESTMODE2 0                            /*!< (unspecified)                                                        */
+#define RRAMC_TESTMODE2 1                            /*!< (unspecified)                                                        */
+#define RRAMC_TESTMODE2TSMC 1                        /*!< (unspecified)                                                        */
+#define RRAMC_WRITEBUFMSBCONFIG 1                    /*!< (unspecified)                                                        */
+#define RRAMC_REGIONCONFIGLOCK 1                     /*!< (unspecified)                                                        */
 #define RRAMC_NRRAMWORDSIZE 128                      /*!< RRAM word size : 128 bits per wordline                               */
 #define RRAMC_NCONSUMERS_MIN 0                       /*!< Number of supported consumers for low power mode: 0..3               */
 #define RRAMC_NCONSUMERS_MAX 3                       /*!< Number of supported consumers for low power mode: 0..3               */
@@ -784,8 +793,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RRAMC_NREGIONS_MIN 0                         /*!< Number of supported regions at REGION register group : 0..4          */
 #define RRAMC_NREGIONS_MAX 4                         /*!< Number of supported regions at REGION register group : 0..4          */
 #define RRAMC_NREGIONS_SIZE 5                        /*!< Number of supported regions at REGION register group : 0..4          */
-#define RRAMC_ECCCORRADDR 0                          /*!< (unspecified)                                                        */
-#define RRAMC_ECCERROR 0                             /*!< (unspecified)                                                        */
+#define RRAMC_ECCCORRADDR 1                          /*!< (unspecified)                                                        */
+#define RRAMC_ECCERROR 1                             /*!< (unspecified)                                                        */
 #define RRAMC_NWRITEBUFSIZE 32                       /*!< Maximum write buffer size : 32                                       */
 #define RRAMC_WRITEBUFSIZE8EN 0                      /*!< (unspecified)                                                        */
 #define RRAMC_WRITEBUFSIZE16EN 0                     /*!< (unspecified)                                                        */
@@ -1441,7 +1450,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PDM20_EASYDMATEMP 1                          /*!< (unspecified)                                                        */
 #define PDM20_SAMPLE16 0                             /*!< (unspecified)                                                        */
 #define PDM20_SAMPLE48 1                             /*!< (unspecified)                                                        */
-#define PDM20_MCLKCONFIG_TEMPADDRESS 1               /*!< (unspecified)                                                        */
 #define PDM20_PRESCALER_PRESENT 1                    /*!< (unspecified)                                                        */
 #define PDM20_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
 #define PDM20_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
@@ -1454,7 +1462,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PDM21_EASYDMATEMP 1                          /*!< (unspecified)                                                        */
 #define PDM21_SAMPLE16 0                             /*!< (unspecified)                                                        */
 #define PDM21_SAMPLE48 1                             /*!< (unspecified)                                                        */
-#define PDM21_MCLKCONFIG_TEMPADDRESS 1               /*!< (unspecified)                                                        */
 #define PDM21_PRESCALER_PRESENT 1                    /*!< (unspecified)                                                        */
 #define PDM21_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
 #define PDM21_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
@@ -1634,6 +1641,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_CLKSELREG 1                             /*!< (unspecified)                                                        */
 #define GRTC_CLKSELLFLPRC 1                          /*!< (unspecified)                                                        */
 #define GRTC_CCADD_WRITE_ONLY 0                      /*!< (unspecified)                                                        */
+#define GRTC_READY_STATUS_AND_EVENTS 0               /*!< (unspecified)                                                        */
+#define GRTC_SYSCOUNTER_LOADED_STATUS 0              /*!< (unspecified)                                                        */
+#define GRTC_CC_PAST_STATUS 0                        /*!< (unspecified)                                                        */
+#define GRTC_SYSCOUNTER_WRITEABLE 0                  /*!< (unspecified)                                                        */
 
 /*PCGC Master*/
 #define PCGCMASTER_PRESENT 1

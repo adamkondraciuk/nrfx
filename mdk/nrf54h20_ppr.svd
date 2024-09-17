@@ -54409,6 +54409,528 @@ A write outputs the value to atbytesm.</description>
       <!--Security securemapping=NS-->
     </peripheral>
     <peripheral>
+      <name>GLOBAL_GPR</name>
+      <description>Granular Power Requester</description>
+      <baseAddress>0xBF050000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=NS-->
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <groupName>GPR</groupName>
+      <size>0x20</size>
+      <registers>
+        <register>
+          <name>CPWRUPREQ</name>
+          <description>Debug Power Request Register</description>
+          <addressOffset>0x0</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CPWRUPREQ_BIT0</name>
+              <description>Bit 0 of the cpwrupreq output port.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>CPWRUPREQ_BIT1</name>
+              <description>Bit 1 of the cpwrupreq output port.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>CPWRUPREQ_BIT2</name>
+              <description>Bit 2 of the cpwrupreq output port.</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>CPWRUPREQ_BIT3</name>
+              <description>Bit 3 of the cpwrupreq output port.</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>CPWRUPREQ_BIT4</name>
+              <description>Bit 4 of the cpwrupreq output port.</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>CPWRUPREQ_BIT5</name>
+              <description>Bit 5 of the cpwrupreq output port.</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+            </field>
+            <field>
+              <name>CPWRUPREQ_BIT6</name>
+              <description>Bit 6 of the cpwrupreq output port.</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+            </field>
+            <field>
+              <name>CPWRUPREQ_BIT7</name>
+              <description>Bit 7 of the cpwrupreq output port.</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>CPWRUPREQ_BIT8</name>
+              <description>Bit 8 of the cpwrupreq output port.</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CPWRUPACK</name>
+          <description>Debug Power Acknowledge Register</description>
+          <addressOffset>0x4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CPWRUPACK_BIT0</name>
+              <description>Bit 0 of the cpwrupack input port.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>CPWRUPACK_BIT1</name>
+              <description>Bit 1 of the cpwrupack input port.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>CPWRUPACK_BIT2</name>
+              <description>Bit 2 of the cpwrupack input port.</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>CPWRUPACK_BIT3</name>
+              <description>Bit 3 of the cpwrupack input port.</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>CPWRUPACK_BIT4</name>
+              <description>Bit 4 of the cpwrupack input port.</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>CPWRUPACK_BIT5</name>
+              <description>Bit 5 of the cpwrupack input port.</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+            </field>
+            <field>
+              <name>CPWRUPACK_BIT6</name>
+              <description>Bit 6 of the cpwrupack input port.</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+            </field>
+            <field>
+              <name>CPWRUPACK_BIT7</name>
+              <description>Bit 7 of the cpwrupack input port.</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>CPWRUPACK_BIT8</name>
+              <description>Bit 8 of the cpwrupack input port.</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ITCTRL</name>
+          <description>Integration Mode Control Register</description>
+          <addressOffset>0xF00</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>INTEGRATION_MODE</name>
+              <description>When you read this register, CXGPR returns a zero because no integration functionality is implemented.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLAIMSET</name>
+          <description>Claim Tag Set Register</description>
+          <addressOffset>0xFA0</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x0000000F</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CLAIMSET</name>
+              <description>On Read for each bit 1 means claim tag bit implemented. On Write for each bit 0 has no effect, 1 sets the relevant bit of the claim tag</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLAIMCLR</name>
+          <description>Claim Tag Clear Register</description>
+          <addressOffset>0xFA4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CLAIMCLR</name>
+              <description>The value present reflects the present value of the Claim Tag.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LOCKACCESS</name>
+          <description>Lock Access Register</description>
+          <addressOffset>0xFB0</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>LOCKACCESS</name>
+              <description>When you write 0xC5ACCE55, subsequent write operations to this device are enabled. Any other value disables subsequent write operations.</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LOCKSTATUS</name>
+          <description>Lock Status Register</description>
+          <addressOffset>0xFB4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000003</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>LOCKEXIST</name>
+              <description>Indicates that a lock control mechanism is present in this device.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>LOCKGRANT</name>
+              <description>Returns the present lock status of the device.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>LOCKTYPE</name>
+              <description>Indicates that the Lock Access Register is implemented as 32-bit.</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AUTHSTATUS</name>
+          <description>Authentication Status Register</description>
+          <addressOffset>0xFB8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>NSID</name>
+              <description>Indicates the security level for Non-Secure Invasive Debug.</description>
+              <lsb>0</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>NSNID</name>
+              <description>Indicates the security level for Non-Secure Non-Invasive Debug.</description>
+              <lsb>2</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>SID</name>
+              <description>Indicates the security level for Secure Invasive Debug.</description>
+              <lsb>4</lsb>
+              <msb>5</msb>
+            </field>
+            <field>
+              <name>SNID</name>
+              <description>Indicates the security level for Secure Non-Invasive Debug.</description>
+              <lsb>6</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DEVARCH</name>
+          <description>Device Architecture Register</description>
+          <addressOffset>0xFBC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x47700A34</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ARCHID</name>
+              <description>Indicates the architecture of the component.</description>
+              <lsb>0</lsb>
+              <msb>15</msb>
+            </field>
+            <field>
+              <name>REVISION</name>
+              <description>Indicates the revision of the architecture.</description>
+              <lsb>16</lsb>
+              <msb>19</msb>
+            </field>
+            <field>
+              <name>PRESENT</name>
+              <description>Indicates whether the DEVARCH register is present.</description>
+              <lsb>20</lsb>
+              <msb>20</msb>
+            </field>
+            <field>
+              <name>ARCHITECT</name>
+              <description>Indicates the JEP106 code pf the architect who specifies the architecture of the component. Bits [31:28] are the JEP106 continuation code. Bits [27:21] are the JEP106 identity code.</description>
+              <lsb>21</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DEVID</name>
+          <description>Device Configuration Register</description>
+          <addressOffset>0xFC8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000001</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CPWRUPM_COUNT</name>
+              <description>The value present in this field indicates the number of CPWRUP master interfaces available in CXGPR. Permitted range of values: 0x1 to 0x20.</description>
+              <lsb>0</lsb>
+              <msb>5</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DEVTYPE</name>
+          <description>Device Type Identifier Register</description>
+          <addressOffset>0xFCC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000034</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>MAJOR_TYPE</name>
+              <description>Major classification of the type of the debug component as specified in the CoreSight Architecture Specification  for this debug and trace component.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>SUB_TYPE</name>
+              <description>Sub-classification of the type of the debug component as specified in the CoreSight Architecture Specification within the major classification as specified in the Major_Type field.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID4</name>
+          <description>Peripheral ID4 Register</description>
+          <addressOffset>0xFD0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000004</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>DES_2</name>
+              <description>This is the JEDEC JEP106 continuation code. This code along with, bits[6:4] of the identity code defined in PERIPHID0 register. and with bits[3:0] of the identity code defined in PERIPHID1 register, gives the designer of the component.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>SIZE</name>
+              <description>This is a 4-bit value that indicates the total contiguous size in powers of two of the memory window that this component uses  from the standard 4KB. If a component only requires the standard 4KB size then this reads as 0x0, for 8KB: 0x1, 16KB:0x2, 32KB: 0x3, until 128MB.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID0</name>
+          <description>Peripheral ID0 Register</description>
+          <addressOffset>0xFE0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x000000A4</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>PART_0</name>
+              <description>Bits [7:0] of the components 12 bit part number. The  designer of the component assigns this part number.</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID1</name>
+          <description>Peripheral ID1 Register</description>
+          <addressOffset>0xFE4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x000000B9</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>PART_1</name>
+              <description>Bits[11:8] of the components 12 bit part number. The  designer of the component assigns this part number.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>DES_0</name>
+              <description>Bits[3:0] of the JEDEC JEP106 identity code. This code, along with bits[6:4] of the identity code defined in PERIPHID2 register and the continuation code defined in PERIPHID4 register, gives the designer of the component.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID2</name>
+          <description>Peripheral ID2 Register</description>
+          <addressOffset>0xFE8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000B</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>DES_1</name>
+              <description>Bits[6:4] of the JEDEC JEP106 identity code. This code, along with bits[3:0] of the identity code defined in PERIPHID1 register and the continuation code defined in PERIPHID4 register, gives the designer of the component.</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>JEDEC</name>
+              <description>Always set. Indicates if the JEDEC assigned designer ID is used.</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>REVISION</name>
+              <description>An incremental value starting from 0x0 for the first revision of this component. This increases by 1 for both major and minor revisions and is used  to identify the major or minor revisions.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PERIPHID3</name>
+          <description>Peripheral ID3 Register</description>
+          <addressOffset>0xFEC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CMOD</name>
+              <description>Indicates if the customer modified the behavior of the component. In most cases, this field might be zero. The customer changes this value on modifications to this component.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>REVAND</name>
+              <description>Indicates minor errata fixes specific to the revision of the component being used, for example metal fixes after implementation. In most cases, this field might be zero. ARM recommends that the component designers ensure that a metal fix can change this field if required, for example, by driving it from registers that reset to zero.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID0</name>
+          <description>Component ID0 Register</description>
+          <addressOffset>0xFF0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000D</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>PRMBL_0</name>
+              <description>Contains bits[7:0] of the component identification code.</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID1</name>
+          <description>Component ID1 Register</description>
+          <addressOffset>0xFF4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000090</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>PRMBL_1</name>
+              <description>Contains bits [11:8] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>CLASS</name>
+              <description>Class of the component, for example, if the component is a ROM table or a generic CoreSight component. Contains bits[15:12] of the component identification code.</description>
+              <lsb>4</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID2</name>
+          <description>Component ID2 Register</description>
+          <addressOffset>0xFF8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000005</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>PRMBL_2</name>
+              <description>Contains bits [23:16] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMPID3</name>
+          <description>Component ID3 Register</description>
+          <addressOffset>0xFFC</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x000000B1</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>PRMBL_3</name>
+              <description>Contains bits [31:24] of the component identification</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
       <name>VPRCLIC</name>
       <description>VPR CLIC registers</description>
       <baseAddress>0xF0000000</baseAddress>
@@ -167174,4390 +167696,6 @@ A write outputs the value to atbytesm.</description>
         <name>QDEC131</name>
         <value>405</value>
       </interrupt>
-    </peripheral>
-    <peripheral>
-      <name>GLOBAL_SIMIF130</name>
-      <description>SIM card interface</description>
-      <baseAddress>0x5F996000</baseAddress>
-      <headerStructName>SIMIF</headerStructName>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>SIMIF130</name>
-        <value>406</value>
-      </interrupt>
-      <groupName>SIMIF</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>TASKS_DMASTARTRX</name>
-          <description>start DMA transfer from SIM card to memory</description>
-          <addressOffset>0x000</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_DMASTARTRX</name>
-              <description>start DMA transfer from SIM card to memory</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_DMASTOPRX</name>
-          <description>stop DMA transfer from SIM card to memory</description>
-          <addressOffset>0x004</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_DMASTOPRX</name>
-              <description>stop DMA transfer from SIM card to memory</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_DMASTARTTX</name>
-          <description>start DMA transfer from memory  to SIM card</description>
-          <addressOffset>0x008</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_DMASTARTTX</name>
-              <description>start DMA transfer from memory  to SIM card</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_DMASTOPTX</name>
-          <description>start DMA transfer from memory  to SIM card</description>
-          <addressOffset>0x00C</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_DMASTOPTX</name>
-              <description>start DMA transfer from memory  to SIM card</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_RSTSET</name>
-          <description>Set SIM card reset signal</description>
-          <addressOffset>0x010</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_RSTSET</name>
-              <description>Set SIM card reset signal</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_RSTCLEAR</name>
-          <description>Clear SIM card reset signal</description>
-          <addressOffset>0x014</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_RSTCLEAR</name>
-              <description>Clear SIM card reset signal</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_RESET</name>
-          <description>Reset everything</description>
-          <addressOffset>0x018</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_RESET</name>
-              <description>Reset everything</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_UARTRX</name>
-          <description>Start Uart for Rx access</description>
-          <addressOffset>0x01C</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_UARTRX</name>
-              <description>Start Uart for Rx access</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_UARTTX</name>
-          <description>Start Uart for Tx access</description>
-          <addressOffset>0x020</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_UARTTX</name>
-              <description>Start Uart for Tx access</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_STARTWRITEFROMREG</name>
-          <description>Write test data from Ahb test reg to Ahb Rx bus</description>
-          <addressOffset>0x024</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_STARTWRITEFROMREG</name>
-              <description>Write test data from Ahb test reg to Ahb Rx bus</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_STARTREADTOREG</name>
-          <description>Read data from Ahb Tx bus to Ahb test reg</description>
-          <addressOffset>0x028</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_STARTREADTOREG</name>
-              <description>Read data from Ahb Tx bus to Ahb test reg</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_PROTOCOLT0SET</name>
-          <description>Start using protocol T0</description>
-          <addressOffset>0x02C</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_PROTOCOLT0SET</name>
-              <description>Start using protocol T0</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_PROTOCOLT1SET</name>
-          <description>Start using protocol T1</description>
-          <addressOffset>0x030</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_PROTOCOLT1SET</name>
-              <description>Start using protocol T1</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_PROTOCOLNONSET</name>
-          <description>Start using protocol none</description>
-          <addressOffset>0x034</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_PROTOCOLNONSET</name>
-              <description>Start using protocol none</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_TIMECOUNTCLEAR</name>
-          <description>Stop and clear time out counter</description>
-          <addressOffset>0x038</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_TIMECOUNTCLEAR</name>
-              <description>Stop and clear time out counter</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <name>TASKS_UART</name>
-          <description>Peripheral tasks.</description>
-          <headerStructName>SIMIF_TASKS_UART</headerStructName>
-          <access>write-only</access>
-          <addressOffset>0x080</addressOffset>
-          <register>
-            <name>SUSPEND</name>
-            <description>Suspend UART</description>
-            <addressOffset>0x000</addressOffset>
-            <access>write-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>SUSPEND</name>
-                <description>Suspend UART</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Trigger</name>
-                    <description>Trigger task</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>RESUME</name>
-            <description>Resume UART</description>
-            <addressOffset>0x004</addressOffset>
-            <access>write-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>RESUME</name>
-                <description>Resume UART</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Trigger</name>
-                    <description>Trigger task</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>STOPRX</name>
-            <description>Stop UART data reception</description>
-            <addressOffset>0x00C</addressOffset>
-            <access>write-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>STOPRX</name>
-                <description>Stop UART data reception</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Trigger</name>
-                    <description>Trigger task</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>STOPTX</name>
-            <description>Stop UART data transmission</description>
-            <addressOffset>0x014</addressOffset>
-            <access>write-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>STOPTX</name>
-                <description>Stop UART data transmission</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Trigger</name>
-                    <description>Trigger task</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>STARTTRX</name>
-            <description>Start UART data transmission and reception</description>
-            <addressOffset>0x018</addressOffset>
-            <access>write-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>STARTTRX</name>
-                <description>Start UART data transmission and reception</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Trigger</name>
-                    <description>Trigger task</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>STOPTRX</name>
-            <description>Stop UART data transmission and reception</description>
-            <addressOffset>0x01C</addressOffset>
-            <access>write-only</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>STOPTRX</name>
-                <description>Stop UART data transmission and reception</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Trigger</name>
-                    <description>Trigger task</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <cluster>
-          <name>EVENTS_DMA</name>
-          <description>Peripheral events.</description>
-          <headerStructName>SIMIF_EVENTS_DMA</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x100</addressOffset>
-          <register>
-            <name>RXSTARTED</name>
-            <description>DMA Rx  operation started</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>RXSTARTED</name>
-                <description>DMA Rx  operation started</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>NotGenerated</name>
-                    <description>Event not generated</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Generated</name>
-                    <description>Event generated</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>RXDONE</name>
-            <description>DMA Tx  operation finished</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>RXDONE</name>
-                <description>DMA Tx  operation finished</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>NotGenerated</name>
-                    <description>Event not generated</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Generated</name>
-                    <description>Event generated</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>TXSTARTED</name>
-            <description>DMA Tx operation started</description>
-            <addressOffset>0x008</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>TXSTARTED</name>
-                <description>DMA Tx operation started</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>NotGenerated</name>
-                    <description>Event not generated</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Generated</name>
-                    <description>Event generated</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>TXDONE</name>
-            <description>DMA Tx operation finished</description>
-            <addressOffset>0x00C</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>TXDONE</name>
-                <description>DMA Tx operation finished</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>NotGenerated</name>
-                    <description>Event not generated</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Generated</name>
-                    <description>Event generated</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <register>
-          <name>EVENTS_INVALIDCONVENTION</name>
-          <description>ATR.TS convention not recognized</description>
-          <addressOffset>0x110</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_INVALIDCONVENTION</name>
-              <description>ATR.TS convention not recognized</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_PARITYERROR</name>
-          <description>Rx byte parity error</description>
-          <addressOffset>0x114</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_PARITYERROR</name>
-              <description>Rx byte parity error</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_ATRTIMEOUT</name>
-          <description>No ATR between 400 and 40000 sim clock cycles</description>
-          <addressOffset>0x118</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_ATRTIMEOUT</name>
-              <description>No ATR between 400 and 40000 sim clock cycles</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_CWTIMEOUT</name>
-          <description>T=1 character wait timeout</description>
-          <addressOffset>0x11C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_CWTIMEOUT</name>
-              <description>T=1 character wait timeout</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_BWTIMEOUT</name>
-          <description>Block Wait timeout</description>
-          <addressOffset>0x120</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_BWTIMEOUT</name>
-              <description>Block Wait timeout</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_SW1SW2</name>
-          <description>SW1 and SW2 bytes  received</description>
-          <addressOffset>0x124</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_SW1SW2</name>
-              <description>SW1 and SW2 bytes  received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_RESET</name>
-          <description>Everything reset</description>
-          <addressOffset>0x128</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_RESET</name>
-              <description>Everything reset</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_INS</name>
-          <description>T=0 procedure byte  INS received</description>
-          <addressOffset>0x12C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_INS</name>
-              <description>T=0 procedure byte  INS received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_NINS</name>
-          <description>T=0 procedure byte  !INS received</description>
-          <addressOffset>0x130</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_NINS</name>
-              <description>T=0 procedure byte  !INS received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_ERROR</name>
-          <description>Error response</description>
-          <addressOffset>0x134</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_ERROR</name>
-              <description>Error response</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_READYTX</name>
-          <description>Byte sent after START_WRITE_FROM_REG</description>
-          <addressOffset>0x138</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_READYTX</name>
-              <description>Byte sent after START_WRITE_FROM_REG</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_RXDATAREADY</name>
-          <description>Byte received after START_READ_TO_REG</description>
-          <addressOffset>0x13C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_RXDATAREADY</name>
-              <description>Byte received after START_READ_TO_REG</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_T1RXOVERRUN</name>
-          <description>Unexpected bytes received after DMA RX[0...N], SW1SW2 in T=1</description>
-          <addressOffset>0x140</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_T1RXOVERRUN</name>
-              <description>Unexpected bytes received after DMA RX[0...N], SW1SW2 in T=1</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_T1TXABORTED</name>
-          <description>T=1 card responded with S(ABORT request)</description>
-          <addressOffset>0x144</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_T1TXABORTED</name>
-              <description>T=1 card responded with S(ABORT request)</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_T1NONIBLOCK</name>
-          <description>T=1 unrecognized (S or R) block (with correct LRC) stored in RX_DATA</description>
-          <addressOffset>0x148</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_T1NONIBLOCK</name>
-              <description>T=1 unrecognized (S or R) block (with correct LRC) stored in RX_DATA</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_T1LENERROR</name>
-          <description>T=1 LEN = 255</description>
-          <addressOffset>0x14C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_T1LENERROR</name>
-              <description>T=1 LEN = 255</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_EDCERROR</name>
-          <description>T=1 EDC error</description>
-          <addressOffset>0x150</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_EDCERROR</name>
-              <description>T=1 EDC error</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_NADERROR</name>
-          <description>T=1 NAD error</description>
-          <addressOffset>0x154</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_NADERROR</name>
-              <description>T=1 NAD error</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_ERRORCOUNTMAX</name>
-          <description>number of unsuccessful rx or tx operations equals max value</description>
-          <addressOffset>0x158</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_ERRORCOUNTMAX</name>
-              <description>number of unsuccessful rx or tx operations equals max value</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_T1RXMORE</name>
-          <description>More bit high in PCB of Rx T=1 I block</description>
-          <addressOffset>0x15C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_T1RXMORE</name>
-              <description>More bit high in PCB of Rx T=1 I block</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_T1RXFRAMEEND</name>
-          <description>Len byte + 1 bytes of T1 Rx data received</description>
-          <addressOffset>0x160</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_T1RXFRAMEEND</name>
-              <description>Len byte + 1 bytes of T1 Rx data received</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHORTS</name>
-          <description>Shortcuts between local events and tasks</description>
-          <addressOffset>0x200</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMA_TXDONE_DMASTARTRX</name>
-              <description>Shortcut between event DMA.TXDONE and task DMASTARTRX</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMA_TXDONE_UARTRX</name>
-              <description>Shortcut between event DMA.TXDONE and task UARTRX</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMA_TXDONE_PROTOCOLT0SET</name>
-              <description>Shortcut between event DMA.TXDONE and task PROTOCOLT0SET</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMA_TXDONE_PROTOCOLT1SET</name>
-              <description>Shortcut between event DMA.TXDONE and task PROTOCOLT1SET</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMA_TXDONE_PROTOCOLNONSET</name>
-              <description>Shortcut between event DMA.TXDONE and task PROTOCOLNONSET</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMARXSTARTED</name>
-              <description>Enable or disable interrupt for event DMARXSTARTED</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMARXDONE</name>
-              <description>Enable or disable interrupt for event DMARXDONE</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMATXSTARTED</name>
-              <description>Enable or disable interrupt for event DMATXSTARTED</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMATXDONE</name>
-              <description>Enable or disable interrupt for event DMATXDONE</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>INVALIDCONVENTION</name>
-              <description>Enable or disable interrupt for event INVALIDCONVENTION</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PARITYERROR</name>
-              <description>Enable or disable interrupt for event PARITYERROR</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ATRTIMEOUT</name>
-              <description>Enable or disable interrupt for event ATRTIMEOUT</description>
-              <lsb>6</lsb>
-              <msb>6</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CWTIMEOUT</name>
-              <description>Enable or disable interrupt for event CWTIMEOUT</description>
-              <lsb>7</lsb>
-              <msb>7</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>BWTIMEOUT</name>
-              <description>Enable or disable interrupt for event BWTIMEOUT</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SW1SW2</name>
-              <description>Enable or disable interrupt for event SW1SW2</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>RESET</name>
-              <description>Enable or disable interrupt for event RESET</description>
-              <lsb>10</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>INS</name>
-              <description>Enable or disable interrupt for event INS</description>
-              <lsb>11</lsb>
-              <msb>11</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NINS</name>
-              <description>Enable or disable interrupt for event NINS</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ERROR</name>
-              <description>Enable or disable interrupt for event ERROR</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>READYTX</name>
-              <description>Enable or disable interrupt for event READYTX</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>RXDATAREADY</name>
-              <description>Enable or disable interrupt for event RXDATAREADY</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXOVERRUN</name>
-              <description>Enable or disable interrupt for event T1RXOVERRUN</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1TXABORTED</name>
-              <description>Enable or disable interrupt for event T1TXABORTED</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1NONIBLOCK</name>
-              <description>Enable or disable interrupt for event T1NONIBLOCK</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1LENERROR</name>
-              <description>Enable or disable interrupt for event T1LENERROR</description>
-              <lsb>19</lsb>
-              <msb>19</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>EDCERROR</name>
-              <description>Enable or disable interrupt for event EDCERROR</description>
-              <lsb>20</lsb>
-              <msb>20</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NADERROR</name>
-              <description>Enable or disable interrupt for event NADERROR</description>
-              <lsb>21</lsb>
-              <msb>21</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ERRORCOUNTMAX</name>
-              <description>Enable or disable interrupt for event ERRORCOUNTMAX</description>
-              <lsb>22</lsb>
-              <msb>22</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXMORE</name>
-              <description>Enable or disable interrupt for event T1RXMORE</description>
-              <lsb>23</lsb>
-              <msb>23</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXFRAMEEND</name>
-              <description>Enable or disable interrupt for event T1RXFRAMEEND</description>
-              <lsb>24</lsb>
-              <msb>24</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMARXSTARTED</name>
-              <description>Write '1' to enable interrupt for event DMARXSTARTED</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMARXDONE</name>
-              <description>Write '1' to enable interrupt for event DMARXDONE</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMATXSTARTED</name>
-              <description>Write '1' to enable interrupt for event DMATXSTARTED</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMATXDONE</name>
-              <description>Write '1' to enable interrupt for event DMATXDONE</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>INVALIDCONVENTION</name>
-              <description>Write '1' to enable interrupt for event INVALIDCONVENTION</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PARITYERROR</name>
-              <description>Write '1' to enable interrupt for event PARITYERROR</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ATRTIMEOUT</name>
-              <description>Write '1' to enable interrupt for event ATRTIMEOUT</description>
-              <lsb>6</lsb>
-              <msb>6</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CWTIMEOUT</name>
-              <description>Write '1' to enable interrupt for event CWTIMEOUT</description>
-              <lsb>7</lsb>
-              <msb>7</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>BWTIMEOUT</name>
-              <description>Write '1' to enable interrupt for event BWTIMEOUT</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SW1SW2</name>
-              <description>Write '1' to enable interrupt for event SW1SW2</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>RESET</name>
-              <description>Write '1' to enable interrupt for event RESET</description>
-              <lsb>10</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>INS</name>
-              <description>Write '1' to enable interrupt for event INS</description>
-              <lsb>11</lsb>
-              <msb>11</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NINS</name>
-              <description>Write '1' to enable interrupt for event NINS</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ERROR</name>
-              <description>Write '1' to enable interrupt for event ERROR</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>READYTX</name>
-              <description>Write '1' to enable interrupt for event READYTX</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>RXDATAREADY</name>
-              <description>Write '1' to enable interrupt for event RXDATAREADY</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXOVERRUN</name>
-              <description>Write '1' to enable interrupt for event T1RXOVERRUN</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1TXABORTED</name>
-              <description>Write '1' to enable interrupt for event T1TXABORTED</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1NONIBLOCK</name>
-              <description>Write '1' to enable interrupt for event T1NONIBLOCK</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1LENERROR</name>
-              <description>Write '1' to enable interrupt for event T1LENERROR</description>
-              <lsb>19</lsb>
-              <msb>19</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>EDCERROR</name>
-              <description>Write '1' to enable interrupt for event EDCERROR</description>
-              <lsb>20</lsb>
-              <msb>20</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NADERROR</name>
-              <description>Write '1' to enable interrupt for event NADERROR</description>
-              <lsb>21</lsb>
-              <msb>21</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ERRORCOUNTMAX</name>
-              <description>Write '1' to enable interrupt for event ERRORCOUNTMAX</description>
-              <lsb>22</lsb>
-              <msb>22</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXMORE</name>
-              <description>Write '1' to enable interrupt for event T1RXMORE</description>
-              <lsb>23</lsb>
-              <msb>23</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXFRAMEEND</name>
-              <description>Write '1' to enable interrupt for event T1RXFRAMEEND</description>
-              <lsb>24</lsb>
-              <msb>24</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMARXSTARTED</name>
-              <description>Write '1' to disable interrupt for event DMARXSTARTED</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMARXDONE</name>
-              <description>Write '1' to disable interrupt for event DMARXDONE</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMATXSTARTED</name>
-              <description>Write '1' to disable interrupt for event DMATXSTARTED</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMATXDONE</name>
-              <description>Write '1' to disable interrupt for event DMATXDONE</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>INVALIDCONVENTION</name>
-              <description>Write '1' to disable interrupt for event INVALIDCONVENTION</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PARITYERROR</name>
-              <description>Write '1' to disable interrupt for event PARITYERROR</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ATRTIMEOUT</name>
-              <description>Write '1' to disable interrupt for event ATRTIMEOUT</description>
-              <lsb>6</lsb>
-              <msb>6</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CWTIMEOUT</name>
-              <description>Write '1' to disable interrupt for event CWTIMEOUT</description>
-              <lsb>7</lsb>
-              <msb>7</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>BWTIMEOUT</name>
-              <description>Write '1' to disable interrupt for event BWTIMEOUT</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SW1SW2</name>
-              <description>Write '1' to disable interrupt for event SW1SW2</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>RESET</name>
-              <description>Write '1' to disable interrupt for event RESET</description>
-              <lsb>10</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>INS</name>
-              <description>Write '1' to disable interrupt for event INS</description>
-              <lsb>11</lsb>
-              <msb>11</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NINS</name>
-              <description>Write '1' to disable interrupt for event NINS</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ERROR</name>
-              <description>Write '1' to disable interrupt for event ERROR</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>READYTX</name>
-              <description>Write '1' to disable interrupt for event READYTX</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>RXDATAREADY</name>
-              <description>Write '1' to disable interrupt for event RXDATAREADY</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXOVERRUN</name>
-              <description>Write '1' to disable interrupt for event T1RXOVERRUN</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1TXABORTED</name>
-              <description>Write '1' to disable interrupt for event T1TXABORTED</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1NONIBLOCK</name>
-              <description>Write '1' to disable interrupt for event T1NONIBLOCK</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1LENERROR</name>
-              <description>Write '1' to disable interrupt for event T1LENERROR</description>
-              <lsb>19</lsb>
-              <msb>19</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>EDCERROR</name>
-              <description>Write '1' to disable interrupt for event EDCERROR</description>
-              <lsb>20</lsb>
-              <msb>20</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NADERROR</name>
-              <description>Write '1' to disable interrupt for event NADERROR</description>
-              <lsb>21</lsb>
-              <msb>21</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ERRORCOUNTMAX</name>
-              <description>Write '1' to disable interrupt for event ERRORCOUNTMAX</description>
-              <lsb>22</lsb>
-              <msb>22</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXMORE</name>
-              <description>Write '1' to disable interrupt for event T1RXMORE</description>
-              <lsb>23</lsb>
-              <msb>23</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXFRAMEEND</name>
-              <description>Write '1' to disable interrupt for event T1RXFRAMEEND</description>
-              <lsb>24</lsb>
-              <msb>24</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTPEND</name>
-          <description>Pending interrupts</description>
-          <addressOffset>0x30C</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMARXSTARTED</name>
-              <description>Read pending status of interrupt for event DMARXSTARTED</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMARXDONE</name>
-              <description>Read pending status of interrupt for event DMARXDONE</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMATXSTARTED</name>
-              <description>Read pending status of interrupt for event DMATXSTARTED</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DMATXDONE</name>
-              <description>Read pending status of interrupt for event DMATXDONE</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>INVALIDCONVENTION</name>
-              <description>Read pending status of interrupt for event INVALIDCONVENTION</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PARITYERROR</name>
-              <description>Read pending status of interrupt for event PARITYERROR</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ATRTIMEOUT</name>
-              <description>Read pending status of interrupt for event ATRTIMEOUT</description>
-              <lsb>6</lsb>
-              <msb>6</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CWTIMEOUT</name>
-              <description>Read pending status of interrupt for event CWTIMEOUT</description>
-              <lsb>7</lsb>
-              <msb>7</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>BWTIMEOUT</name>
-              <description>Read pending status of interrupt for event BWTIMEOUT</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SW1SW2</name>
-              <description>Read pending status of interrupt for event SW1SW2</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>RESET</name>
-              <description>Read pending status of interrupt for event RESET</description>
-              <lsb>10</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>INS</name>
-              <description>Read pending status of interrupt for event INS</description>
-              <lsb>11</lsb>
-              <msb>11</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NINS</name>
-              <description>Read pending status of interrupt for event NINS</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ERROR</name>
-              <description>Read pending status of interrupt for event ERROR</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>READYTX</name>
-              <description>Read pending status of interrupt for event READYTX</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>RXDATAREADY</name>
-              <description>Read pending status of interrupt for event RXDATAREADY</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXOVERRUN</name>
-              <description>Read pending status of interrupt for event T1RXOVERRUN</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1TXABORTED</name>
-              <description>Read pending status of interrupt for event T1TXABORTED</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1NONIBLOCK</name>
-              <description>Read pending status of interrupt for event T1NONIBLOCK</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1LENERROR</name>
-              <description>Read pending status of interrupt for event T1LENERROR</description>
-              <lsb>19</lsb>
-              <msb>19</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>EDCERROR</name>
-              <description>Read pending status of interrupt for event EDCERROR</description>
-              <lsb>20</lsb>
-              <msb>20</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NADERROR</name>
-              <description>Read pending status of interrupt for event NADERROR</description>
-              <lsb>21</lsb>
-              <msb>21</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ERRORCOUNTMAX</name>
-              <description>Read pending status of interrupt for event ERRORCOUNTMAX</description>
-              <lsb>22</lsb>
-              <msb>22</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXMORE</name>
-              <description>Read pending status of interrupt for event T1RXMORE</description>
-              <lsb>23</lsb>
-              <msb>23</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>T1RXFRAMEEND</name>
-              <description>Read pending status of interrupt for event T1RXFRAMEEND</description>
-              <lsb>24</lsb>
-              <msb>24</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SW1SW2</name>
-          <description>Sw1 and Sw2 bytes received from Sim card in T=1 mode</description>
-          <addressOffset>0x400</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>SW1</name>
-              <description>Sw1 data byte received</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>SW2</name>
-              <description>Sw2 data byte received</description>
-              <lsb>8</lsb>
-              <msb>15</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CONVENTION</name>
-          <description>Data convention used in traffic between controller and SIM card</description>
-          <addressOffset>0x404</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DATACONVENTION</name>
-              <description>Data convention between controller and SIM card</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Direct</name>
-                  <description>Direct convention: 1 = High, LSB first</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Inverse</name>
-                  <description>Inverse convention: 1 = Low, MSB first</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>LRCOUT</name>
-          <description>Latest generated LRC value</description>
-          <addressOffset>0x408</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>LRCOUT</name>
-              <description>Latest generated LRC value</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>RXDATA</name>
-          <description>NonDMA received data</description>
-          <addressOffset>0x40C</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>RXDATA</name>
-              <description>NonDMA received data or Rx data of T=1 S block if RxBufferLength = 3</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>T0SWXCOUNT</name>
-          <description>Number of SWx bytes received after T=0 Rx DMA finished</description>
-          <addressOffset>0x410</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>T0SWXCOUNT</name>
-              <description>Number of SWx bytes received after T=0 Rx DMA finished</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CLKRATE</name>
-          <description>Divider value for setting the clock rate to the SIM card.</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000018</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CLOCKRATE</name>
-              <description>Divider for setting the clock frequency to the SIM card clock (clock  = input clock / ClockRate</description>
-              <lsb>0</lsb>
-              <msb>6</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>BAUDRATE</name>
-          <description>Divider value for setting the baud rate to the SIM card.</description>
-          <addressOffset>0x504</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000174</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>BAUDRATE</name>
-              <description>Divider for setting the baud rate to the SIM card.(Baud rate  = Sim card clock/BaudRate).</description>
-              <lsb>0</lsb>
-              <msb>8</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CHARACTERGUARDTIME</name>
-          <description>Character Guard time</description>
-          <addressOffset>0x508</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x0000000C</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHARACTERGUARDTIME</name>
-              <description>Guard time from leading edge of the character to the leading edge of the next character in ETU</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CHARACTERWAITTIME</name>
-          <description>Character Wait time</description>
-          <addressOffset>0x50C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x0000000D</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHARACTERWAITTIME</name>
-              <description>T=1 character Rx wait time in ETU</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>BLOCKWAITTIME</name>
-          <description>Block Wait time</description>
-          <addressOffset>0x510</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00002580</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>BLOCKWAITTIME</name>
-              <description>Block wait time in ETU, default 9600</description>
-              <lsb>0</lsb>
-              <msb>15</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PROTOCOL</name>
-          <description>Protocol selection</description>
-          <addressOffset>0x514</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>PROTOCOL</name>
-              <description>Protocol selection 0: T=0, 1: T=1</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>T0</name>
-                  <description>T=0</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>T1</name>
-                  <description>T=1</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>LOWIMPEDANCE</name>
-          <description>Low impedance driver use</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>LOWIMPEDANCE</name>
-              <description>Low impedance driver use</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>OpenDrain</name>
-                  <description>open drain</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LowImpedance</name>
-                  <description>use 		low impedance drivers</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>T1PCBCONTROL</name>
-          <description>T=1 Tx PCB bits 5:6</description>
-          <addressOffset>0x51C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>MOREDATABIT</name>
-              <description>More data (chaining) bit, PCB[5]</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-            </field>
-            <field>
-              <name>SENDSEQUENCENUMBER</name>
-              <description>Send Sequence number, PCB[6]</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-            </field>
-            <field>
-              <name>RECEIVEDSEQUENCENUMBER</name>
-              <description>Rx Send Sequence number in T1 I Block</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CLOCKCONTROL</name>
-          <description>Clock Control</description>
-          <addressOffset>0x520</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000004</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable clock</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ClockOff</name>
-                  <description>Clock is off</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ClockOn</name>
-                  <description>Clock is on</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLOCKSTOP</name>
-              <description>Clock stop state</description>
-              <lsb>1</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Illegal</name>
-                  <description>Not allowed</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>High</name>
-                  <description>Clock stops low</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Low</name>
-                  <description>Clock stops high</description>
-                  <value>0x2</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>VOLTAGE</name>
-          <description>Sim card operating voltage</description>
-          <addressOffset>0x524</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000001</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>VOLTAGE</name>
-              <description>Sim card operating voltage</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0V</name>
-                  <description>Card voltage off</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1800mV</name>
-                  <description>Card operating voltage 1.8V</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>3000mV</name>
-                  <description>Card operating voltage 3V</description>
-                  <value>0x2</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>LRCENABLE</name>
-          <description>LRC Calculation enable</description>
-          <addressOffset>0x528</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>LRCENABLE</name>
-              <description>LRC Calculation enable for T=1</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disable</name>
-                  <description>LRC calculation disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enable</name>
-                  <description>LRC 			calculation enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TXDATA</name>
-          <description>NonDMA data to be sent to the SIM card</description>
-          <addressOffset>0x52C</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TXDATA</name>
-              <description>NonDMA data to be sent to the SIM card</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>UARTCONFIG</name>
-          <description>Uart configuration</description>
-          <addressOffset>0x530</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>UARTCONFIG</name>
-              <description>Uart configuration, for details see Uart spec</description>
-              <lsb>0</lsb>
-              <msb>2</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>WRITEMAXATT</name>
-          <description>Number of write attempts before error interrupt</description>
-          <addressOffset>0x534</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x0000000A</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>WRITEMAXATT</name>
-              <description>Number of write attempts before error interrupt</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>READMAXATT</name>
-          <description>Number of read attempts before error interrupt</description>
-          <addressOffset>0x538</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x0000000A</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READMAXATT</name>
-              <description>Number of read attempts before error interrupt</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>AHBTESTWRITE</name>
-          <description>Test data to write through AHB RX bus</description>
-          <addressOffset>0x53C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>WRITETESTDATA</name>
-              <description>Test data for Ahb write access for Ahb Rx bus</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>AHBTESTENABLE</name>
-              <description>Enable bit for Ahb testing, both read and write</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>AHBTESTREAD</name>
-          <description>Test data to read through AHB TX bus</description>
-          <addressOffset>0x540</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>READTESTDATA</name>
-              <description>Test data read through Ahb Tx bus</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>RXPROLOGUEDATA</name>
-          <description>Four first Rx data bytes from card</description>
-          <addressOffset>0x544</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>RXBYTE0</name>
-              <description>First Rx byte from card</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>RXBYTE1</name>
-              <description>Second Rx byte from card</description>
-              <lsb>8</lsb>
-              <msb>15</msb>
-            </field>
-            <field>
-              <name>RXBYTE2</name>
-              <description>Third Rx byte from card</description>
-              <lsb>16</lsb>
-              <msb>23</msb>
-            </field>
-            <field>
-              <name>RXBYTE3</name>
-              <description>Fourth Rx byte from card</description>
-              <lsb>24</lsb>
-              <msb>31</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>UARTENABLE</name>
-          <description>UART Enable</description>
-          <addressOffset>0x574</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>UART master enable</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>UARTRXENABLE</name>
-          <description>UART Rx Enable</description>
-          <addressOffset>0x578</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>UART Rx enable</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>UARTTXENABLE</name>
-          <description>UART Tx Enable</description>
-          <addressOffset>0x57C</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>UART Tx enable</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>UARTADDRESS</name>
-          <description>Set address for RX (when UART frame size is 9)</description>
-          <addressOffset>0x580</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>ADDRESS</name>
-              <description>UART address in 9b mode</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>UARTFRAMETIMEOUT</name>
-          <description>Number of symbol periods before timeout</description>
-          <addressOffset>0x584</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000010</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TIMEOUT</name>
-              <description>Number of symbol periods before timeout</description>
-              <lsb>0</lsb>
-              <msb>9</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DMARXADDR</name>
-          <description>DMA access  buffer RAM start address</description>
-          <addressOffset>0x600</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMARXSTARTADDRESS</name>
-              <description>DMA access  buffer RAM start address</description>
-              <lsb>0</lsb>
-              <msb>31</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DMARXBUFFERSIZE</name>
-          <description>Byte count to receive in Dma Rx operation</description>
-          <addressOffset>0x604</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMARXBUFFERSIZE</name>
-              <description>Byte count to receive in Dma Rx operation</description>
-              <lsb>0</lsb>
-              <msb>8</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DMARXBYTECOUNT</name>
-          <description>Byte count received in latest Dma Rx operation</description>
-          <addressOffset>0x608</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMARXBYTECOUNT</name>
-              <description>Byte count received in latest Dma Rx operation</description>
-              <lsb>0</lsb>
-              <msb>8</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DMARXENABLE</name>
-          <description>Enable for rx dma</description>
-          <addressOffset>0x60C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMARXENABLE</name>
-              <description>Enable for rx dma</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DMARXSELECTLIST</name>
-          <description>Rx select address from list</description>
-          <addressOffset>0x610</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMARXSELECTLIST</name>
-              <description>Select address from list</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DMATXADDR</name>
-          <description>Start address for DMA access in buffer RAM</description>
-          <addressOffset>0x700</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMATXSTARTADDRESS</name>
-              <description>Start address for DMA access in buffer RAM</description>
-              <lsb>0</lsb>
-              <msb>31</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DMATXBUFFERSIZE</name>
-          <description>Byte count to transmit in Dma Rx operation</description>
-          <addressOffset>0x704</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMATXBUFFERSIZE</name>
-              <description>Byte count to transmit in Dma Tx operation</description>
-              <lsb>0</lsb>
-              <msb>8</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DMATXBYTECOUNT</name>
-          <description>Byte count transmitted in latest Dma Tx operation</description>
-          <addressOffset>0x708</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMATXBYTECOUNT</name>
-              <description>Byte count transmitted in latest Dma Tx operation</description>
-              <lsb>0</lsb>
-              <msb>8</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DMATXENABLE</name>
-          <description>Enable for rx dma</description>
-          <addressOffset>0x70C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMATXENABLE</name>
-              <description>Enable for rx dma</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DMATXSELECTLIST</name>
-          <description>Tx select address from list</description>
-          <addressOffset>0x710</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMATXSELECTLIST</name>
-              <description>Select address from list</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-            </field>
-          </fields>
-        </register>
-      </registers>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_TDM130">
       <name>GLOBAL_TDM131</name>

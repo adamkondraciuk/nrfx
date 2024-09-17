@@ -104,6 +104,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_ATBFUNNEL211_NS_BASE          0xBF04D000UL
 #define NRF_ATBFUNNEL212_NS_BASE          0xBF04E000UL
 #define NRF_ATBFUNNEL213_NS_BASE          0xBF04F000UL
+#define NRF_GPR_NS_BASE                   0xBF050000UL
 #define NRF_GPIOTE130_NS_BASE             0x4F934000UL
 #define NRF_GPIOTE130_S_BASE              0x5F934000UL
 #define NRF_GRTC_NS_BASE                  0x4F99C000UL
@@ -210,8 +211,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_QDEC130_S_BASE                0x5F994000UL
 #define NRF_QDEC131_NS_BASE               0x4F995000UL
 #define NRF_QDEC131_S_BASE                0x5F995000UL
-#define NRF_SIMIF130_NS_BASE              0x4F996000UL
-#define NRF_SIMIF130_S_BASE               0x5F996000UL
 #define NRF_TDM131_NS_BASE                0x4F997000UL
 #define NRF_TDM131_S_BASE                 0x5F997000UL
 #define NRF_DPPIC133_NS_BASE              0x4F9A1000UL
@@ -357,6 +356,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_ATBFUNNEL211_NS               ((NRF_ATBFUNNEL_Type*)                NRF_ATBFUNNEL211_NS_BASE)
 #define NRF_ATBFUNNEL212_NS               ((NRF_ATBFUNNEL_Type*)                NRF_ATBFUNNEL212_NS_BASE)
 #define NRF_ATBFUNNEL213_NS               ((NRF_ATBFUNNEL_Type*)                NRF_ATBFUNNEL213_NS_BASE)
+#define NRF_GPR_NS                        ((NRF_GPR_Type*)                      NRF_GPR_NS_BASE)
 #define NRF_GPIOTE130_NS                  ((NRF_GPIOTE_Type*)                   NRF_GPIOTE130_NS_BASE)
 #define NRF_GPIOTE130_S                   ((NRF_GPIOTE_Type*)                   NRF_GPIOTE130_S_BASE)
 #define NRF_GRTC_NS                       ((NRF_GRTC_Type*)                     NRF_GRTC_NS_BASE)
@@ -463,8 +463,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_QDEC130_S                     ((NRF_QDEC_Type*)                     NRF_QDEC130_S_BASE)
 #define NRF_QDEC131_NS                    ((NRF_QDEC_Type*)                     NRF_QDEC131_NS_BASE)
 #define NRF_QDEC131_S                     ((NRF_QDEC_Type*)                     NRF_QDEC131_S_BASE)
-#define NRF_SIMIF130_NS                   ((NRF_SIMIF_Type*)                    NRF_SIMIF130_NS_BASE)
-#define NRF_SIMIF130_S                    ((NRF_SIMIF_Type*)                    NRF_SIMIF130_S_BASE)
 #define NRF_TDM131_NS                     ((NRF_TDM_Type*)                      NRF_TDM131_NS_BASE)
 #define NRF_TDM131_S                      ((NRF_TDM_Type*)                      NRF_TDM131_S_BASE)
 #define NRF_DPPIC133_NS                   ((NRF_DPPIC_Type*)                    NRF_DPPIC133_NS_BASE)
@@ -608,6 +606,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_ATBFUNNEL211                        NRF_ATBFUNNEL211_NS
   #define NRF_ATBFUNNEL212                        NRF_ATBFUNNEL212_NS
   #define NRF_ATBFUNNEL213                        NRF_ATBFUNNEL213_NS
+  #define NRF_GPR                                 NRF_GPR_NS
   #define NRF_GPIOTE130                           NRF_GPIOTE130_NS
   #define NRF_GRTC                                NRF_GRTC_NS
   #define NRF_TBM                                 NRF_TBM_NS
@@ -661,7 +660,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_PDM                                 NRF_PDM_NS
   #define NRF_QDEC130                             NRF_QDEC130_NS
   #define NRF_QDEC131                             NRF_QDEC131_NS
-  #define NRF_SIMIF130                            NRF_SIMIF130_NS
   #define NRF_TDM131                              NRF_TDM131_NS
   #define NRF_DPPIC133                            NRF_DPPIC133_NS
   #define NRF_TIMER130                            NRF_TIMER130_NS
@@ -743,6 +741,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_ATBFUNNEL211                        NRF_ATBFUNNEL211_NS
   #define NRF_ATBFUNNEL212                        NRF_ATBFUNNEL212_NS
   #define NRF_ATBFUNNEL213                        NRF_ATBFUNNEL213_NS
+  #define NRF_GPR                                 NRF_GPR_NS
   #define NRF_GPIOTE130                           NRF_GPIOTE130_S
   #define NRF_GRTC                                NRF_GRTC_S
   #define NRF_TBM                                 NRF_TBM_S
@@ -799,7 +798,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_PDM                                 NRF_PDM_S
   #define NRF_QDEC130                             NRF_QDEC130_S
   #define NRF_QDEC131                             NRF_QDEC131_S
-  #define NRF_SIMIF130                            NRF_SIMIF130_S
   #define NRF_TDM131                              NRF_TDM131_S
   #define NRF_DPPIC133                            NRF_DPPIC133_S
   #define NRF_TIMER130                            NRF_TIMER130_S

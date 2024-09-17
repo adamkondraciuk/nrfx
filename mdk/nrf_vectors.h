@@ -148,6 +148,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_BBPR)
         #include "nrf54h20_enga_bbpr_vectors.h"
     #endif
+#elif defined(NRF54H20_ENGB_XXAA)
+    #if defined(NRF_SECURE)
+        #include "nrf54h20_engb_secure_vectors.h"
+    #endif
+    #if defined(NRF_APPLICATION)
+        #include "nrf54h20_engb_application_vectors.h"
+    #endif
+    #if defined(NRF_RADIOCORE)
+        #include "nrf54h20_engb_radiocore_vectors.h"
+    #endif
+    #if defined(NRF_SYSCTRL)
+        #include "nrf54h20_engb_sysctrl_vectors.h"
+    #endif
+    #if defined(NRF_PPR)
+        #include "nrf54h20_engb_ppr_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54h20_engb_flpr_vectors.h"
+    #endif
+    #if defined(NRF_BBPR)
+        #include "nrf54h20_engb_bbpr_vectors.h"
+    #endif
 #elif defined(NRF7140_XXAA)
     #if defined(NRF_SECURE)
         #include "nrf7140_secure_vectors.h"

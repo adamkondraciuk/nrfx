@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   66 
+#define MDK_MINOR_VERSION   67 
 #define MDK_MICRO_VERSION   0 
 
 
@@ -154,7 +154,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF54H_SERIES for common use in nRF54H series devices */
-#if defined (NRF54H20_ENGA_XXAA) || defined (NRF54H20_XXAA)
+#if defined (NRF54H20_ENGA_XXAA) || defined (NRF54H20_ENGB_XXAA) || defined (NRF54H20_XXAA)
     #ifndef NRF54H_SERIES
         #define NRF54H_SERIES
     #endif
@@ -348,6 +348,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(EXCLUDE_PORTABILITY)
         #include "haltium_name_change.h"
         #include "nrf54h20_enga_name_change.h"
+    #endif
+
+#elif defined (NRF54H20_ENGB_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf54h20_engb.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
+        #include "nrf54h20_engb_name_change.h"
     #endif
 
 

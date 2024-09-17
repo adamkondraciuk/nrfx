@@ -49,7 +49,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
 #define MDK_SOURCE_VERSION_MINOR 2                   /*!< Minor version of product specification.                              */
-#define MDK_SOURCE_VERSION_MICRO 32                  /*!< Micro version of product specification.                              */
+#define MDK_SOURCE_VERSION_MICRO 34                  /*!< Micro version of product specification.                              */
 
 
 #ifdef __cplusplus

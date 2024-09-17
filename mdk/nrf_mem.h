@@ -146,6 +146,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_BBPR)
         #include "nrf54h20_enga_xxaa_bbpr_memory.h"
     #endif
+#elif defined(NRF54H20_ENGB_XXAA)
+    #if defined(NRF_SECURE)
+        #include "nrf54h20_engb_xxaa_secure_memory.h"
+    #endif
+    #if defined(NRF_APPLICATION)
+        #include "nrf54h20_engb_xxaa_application_memory.h"
+    #endif
+    #if defined(NRF_RADIOCORE)
+        #include "nrf54h20_engb_xxaa_radiocore_memory.h"
+    #endif
+    #if defined(NRF_SYSCTRL)
+        #include "nrf54h20_engb_xxaa_sysctrl_memory.h"
+    #endif
+    #if defined(NRF_PPR)
+        #include "nrf54h20_engb_xxaa_ppr_memory.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54h20_engb_xxaa_flpr_memory.h"
+    #endif
+    #if defined(NRF_BBPR)
+        #include "nrf54h20_engb_xxaa_bbpr_memory.h"
+    #endif
 #elif defined(NRF7140_XXAA)
     #if defined(NRF_SECURE)
         #include "nrf7140_xxaa_secure_memory.h"

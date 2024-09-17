@@ -140,7 +140,6 @@ typedef enum {
   PDM_IRQn                               = 403,      /*!< 403 PDM                                                              */
   QDEC130_IRQn                           = 404,      /*!< 404 QDEC130                                                          */
   QDEC131_IRQn                           = 405,      /*!< 405 QDEC131                                                          */
-  SIMIF130_IRQn                          = 406,      /*!< 406 SIMIF130                                                         */
   TDM131_IRQn                            = 407,      /*!< 407 TDM131                                                           */
   TIMER130_IRQn                          = 418,      /*!< 418 TIMER130                                                         */
   TIMER131_IRQn                          = 419,      /*!< 419 TIMER131                                                         */
@@ -390,7 +389,7 @@ typedef enum {
 #define NRF_SYSCTRL_VREGMRAM130_BASE      0x5F969000UL
 #define NRF_SYSCTRL_VREGMRAM131_BASE      0x5F96A000UL
 #define NRF_SYSCTRL_OSCRFR_BASE           0x5F96B000UL
-#define NRF_SYSCTRL_SWEXT_BASE            0x5F96C000UL
+#define NRF_SYSCTRL_SWEXT130_BASE         0x5F96C000UL
 #define NRF_SYSCTRL_MBIAS_BASE            0x5F96D000UL
 #define NRF_SYSCTRL_VDETAO1V8_BASE        0x5F970000UL
 #define NRF_SYSCTRL_VDETAO0V8_BASE        0x5F971000UL
@@ -494,7 +493,7 @@ typedef enum {
 #define NRF_SYSCTRL_VREGMRAM130           ((NRF_VREGMRAM_Type*)                 NRF_SYSCTRL_VREGMRAM130_BASE)
 #define NRF_SYSCTRL_VREGMRAM131           ((NRF_VREGMRAM_Type*)                 NRF_SYSCTRL_VREGMRAM131_BASE)
 #define NRF_SYSCTRL_OSCRFR                ((NRF_OSCRFR_Type*)                   NRF_SYSCTRL_OSCRFR_BASE)
-#define NRF_SYSCTRL_SWEXT                 ((NRF_SWEXT_Type*)                    NRF_SYSCTRL_SWEXT_BASE)
+#define NRF_SYSCTRL_SWEXT130              ((NRF_SWEXT_Type*)                    NRF_SYSCTRL_SWEXT130_BASE)
 #define NRF_SYSCTRL_MBIAS                 ((NRF_MBIAS_Type*)                    NRF_SYSCTRL_MBIAS_BASE)
 #define NRF_SYSCTRL_VDETAO1V8             ((NRF_VDETAO1V8_Type*)                NRF_SYSCTRL_VDETAO1V8_BASE)
 #define NRF_SYSCTRL_VDETAO0V8             ((NRF_VDETAO0V8_Type*)                NRF_SYSCTRL_VDETAO0V8_BASE)
@@ -599,7 +598,7 @@ typedef enum {
   #define NRF_VREGMRAM130                         NRF_SYSCTRL_VREGMRAM130
   #define NRF_VREGMRAM131                         NRF_SYSCTRL_VREGMRAM131
   #define NRF_OSCRFR                              NRF_SYSCTRL_OSCRFR
-  #define NRF_SWEXT                               NRF_SYSCTRL_SWEXT
+  #define NRF_SWEXT130                            NRF_SYSCTRL_SWEXT130
   #define NRF_MBIAS                               NRF_SYSCTRL_MBIAS
   #define NRF_VDETAO1V8                           NRF_SYSCTRL_VDETAO1V8
   #define NRF_VDETAO0V8                           NRF_SYSCTRL_VDETAO0V8

@@ -79,8 +79,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             #define GPIOTE_IRQ_GROUP       1
             #define GRTC_IRQ_GROUP         2
         #endif
-    #else
-        #error "Unknown core"
     #endif
 
     #define EASYVDMA_PRESENT
