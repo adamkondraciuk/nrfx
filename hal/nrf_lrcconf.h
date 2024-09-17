@@ -235,10 +235,12 @@ NRF_STATIC_INLINE bool nrf_lrcconf_clock_always_run_check(NRF_LRCCONF_Type const
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
  * @param[in] clock  Clock index.
  * @param[in] source Clock source to be set.
+ * @param[in] bypass True if clock source bypass is to be set, false otherwise.
  */
 NRF_STATIC_INLINE void nrf_lrcconf_clock_source_set(NRF_LRCCONF_Type *    p_reg,
                                                     uint8_t               clock,
-                                                    nrf_lrcconf_clk_src_t source);
+                                                    nrf_lrcconf_clk_src_t source,
+                                                    bool                  bypass);
 
 /**
  * @brief Function for checking the status of constant latency.
@@ -414,11 +416,16 @@ NRF_STATIC_INLINE bool nrf_lrcconf_clock_always_run_check(NRF_LRCCONF_Type const
 
 NRF_STATIC_INLINE void nrf_lrcconf_clock_source_set(NRF_LRCCONF_Type *    p_reg,
                                                     uint8_t               clock,
-                                                    nrf_lrcconf_clk_src_t source)
+                                                    nrf_lrcconf_clk_src_t source,
+                                                    bool                  bypass)
 {
     NRFX_ASSERT(clock < NRF_LRCCONF_CLK_COUNT);
-    p_reg->CLKCTRL[clock].SRC = ((p_reg->CLKCTRL[clock].SRC & ~LRCCONF_CLKCTRL_SRC_SRC_Msk) |
-                  ((source << LRCCONF_CLKCTRL_SRC_SRC_Pos) & LRCCONF_CLKCTRL_SRC_SRC_Msk));
+    p_reg->CLKCTRL[clock].SRC = (p_reg->CLKCTRL[clock].SRC &
+                          ~(LRCCONF_CLKCTRL_SRC_SRC_Msk | LRCCONF_CLKCTRL_SRC_BYPASS_Msk))        |
+                          ((source << LRCCONF_CLKCTRL_SRC_SRC_Pos) & LRCCONF_CLKCTRL_SRC_SRC_Msk) |
+                          ((bypass ? LRCCONF_CLKCTRL_SRC_BYPASS_Enable : 
+                                     LRCCONF_CLKCTRL_SRC_BYPASS_Disable)
+                                  << LRCCONF_CLKCTRL_SRC_BYPASS_Pos);
 }
 
 NRF_STATIC_INLINE bool nrf_lrcconf_constlatstat_check(NRF_LRCCONF_Type const * p_reg)
