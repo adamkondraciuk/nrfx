@@ -163,7 +163,8 @@ NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
 #else
     #if !defined(NRFX_DELAY_RISCV_SLOWDOWN)
         #if defined(NRF54L05_XXAA) || defined(NRF54L09_ENGA_XXAA) || defined(NRF54L10_XXAA) || \
-            defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA) || defined(NRF54L20_ENGA_XXAA)
+            defined(NRF54L15_XXAA) || defined(NRF54L15_ENGA_XXAA) || \
+            defined(NRF54L20_ENGA_XXAA) || defined(NRF7120_XXAA)
             #define NRFX_DELAY_RISCV_SLOWDOWN 15
         #else
             #define NRFX_DELAY_RISCV_SLOWDOWN 50

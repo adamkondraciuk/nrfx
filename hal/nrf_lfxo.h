@@ -144,7 +144,8 @@ NRF_STATIC_INLINE uint32_t nrf_lfxo_int_pending_get(NRF_LFXO_Type const * p_reg)
  * @param[in]  p_reg    Pointer to the structure of registers of the peripheral.
  * @param[out] p_status Pointer to the structure to be filled with LFXO status.
  */
-NRF_STATIC_INLINE void nrf_lfxo_status_get(NRF_LFXO_Type const * p_reg, nrf_lfxo_status_t * p_status);
+NRF_STATIC_INLINE void nrf_lfxo_status_get(NRF_LFXO_Type const * p_reg, 
+                                           nrf_lfxo_status_t *   p_status);
 
 /**
  * @brief Function for checking status of analog module READY signal.
@@ -260,7 +261,8 @@ NRF_STATIC_INLINE uint32_t nrf_lfxo_int_pending_get(NRF_LFXO_Type const * p_reg)
     return p_reg->INTPEND;
 }
 
-NRF_STATIC_INLINE void nrf_lfxo_status_get(NRF_LFXO_Type const * p_reg, nrf_lfxo_status_t * p_status)
+NRF_STATIC_INLINE void nrf_lfxo_status_get(NRF_LFXO_Type const * p_reg, 
+                                           nrf_lfxo_status_t *   p_status)
 {
     NRFX_ASSERT(p_status);
     p_status->oscmode = (p_reg->STATUS & LFXO_STATUS_MODE_Msk)    >> LFXO_STATUS_MODE_Pos;
