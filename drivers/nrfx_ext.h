@@ -198,6 +198,30 @@ extern "C" {
     #define NRFX_PRS_BOX_9_ADDR NRF_LPCOMP
 #endif
 
+#if defined(NRF7120_XXAA)
+    #define NRF_PRS_BOX_EXT
+    // SPIM00, UARTE00
+    #define NRFX_PRS_BOX_0_ADDR     NRF_UARTE00
+    // SPIM01
+    #define NRFX_PRS_BOX_1_ADDR     NRF_SPIM01
+    // SPIM02
+    #define NRFX_PRS_BOX_2_ADDR     NRF_SPIM02
+    // SPIM20, SPIS20, TWIM20, TWIS20, UARTE20
+    #define NRFX_PRS_BOX_3_ADDR     NRF_UARTE20
+    // SPIM21, SPIS21, TWIM21, TWIS21, UARTE21
+    #define NRFX_PRS_BOX_4_ADDR     NRF_UARTE21
+    // SPIM22, SPIS22, TWIM22, TWIS22, UARTE22
+    #define NRFX_PRS_BOX_5_ADDR     NRF_UARTE22
+    // SPIM23, SPIS23, TWIM23, TWIS23, UARTE23
+    #define NRFX_PRS_BOX_6_ADDR     NRF_UARTE23
+    // SPIM24, SPIS24, TWIM24, TWIS24, UARTE24
+    #define NRFX_PRS_BOX_7_ADDR     NRF_UARTE24
+    // SPIM30, SPIS30, TWIM30, TWIS30, UARTE30
+    #define NRFX_PRS_BOX_8_ADDR     NRF_UARTE30
+    // COMP, LPCOMP
+    #define NRFX_PRS_BOX_9_ADDR     NRF_COMP
+#endif
+
 /*------------------------------------------------------------------------------------------------*/
 /* End of PRS Extended section                                                                    */
 /*------------------------------------------------------------------------------------------------*/
@@ -299,6 +323,22 @@ extern "C" {
         #define NRFX_DELAY_DWT_PRESENT  0
     #endif
 #endif
+
+#if defined(NRF7120_XXAA)
+    #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
+    #define NRFX_DELAY_DWT_PRESENT  1
+
+    #if !defined(NRFX_COREDEP_VPR_LEGACY)
+        // Handled by nrfx_coredep.h
+    #else
+        #if !defined(NRFX_DELAY_RISCV_SLOWDOWN)
+                #define NRFX_DELAY_RISCV_SLOWDOWN 15
+            #else
+                #define NRFX_DELAY_RISCV_SLOWDOWN 50
+        #endif
+
+    #endif // !defined(NRFX_CONFIG_COREDEP_VPR_LEGACY)
+#endif // defined(NRF7120_XXAA)
 
 #if defined(NRF54L09_ENGA_XXAA) || defined(NRF54L15_ENGA_XXAA) || defined(NRF54L15_XXAA) || \
     defined(NRF54L20_ENGA_XXAA)
