@@ -232,6 +232,7 @@ void nrfx_grtc_rtcounter_cc_int_disable(void);
 #endif // NRF_GRTC_HAS_RTCOUNTER || defined(__NRFX_DOXYGEN__)
 
 #if NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
+#if NRFY_GRTC_HAS_SYSCOUNTERVALID || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for enabling the SYSCOUNTERVALID interrupt.
  *
@@ -243,6 +244,7 @@ void nrfx_grtc_syscountervalid_int_enable(nrfx_grtc_syscountervalid_handler_t ha
 
 /** @brief Function for disabling the SYSCOUNTERVALID interrupt. */
 void nrfx_grtc_syscountervalid_int_disable(void);
+#endif // NRFY_GRTC_HAS_SYSCOUNTERVALID || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for starting the 1 MHz SYSCOUNTER.

@@ -27,6 +27,8 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_grtc_events_process(NRF_GRTC_Type * 
 NRFY_STATIC_INLINE uint64_t __nrfy_internal_grtc_rt_counter_read(NRF_GRTC_Type const * p_reg);
 #endif
 
+NRFY_STATIC_INLINE bool __nrfy_internal_grtc_sys_counter_ready_check(NRF_GRTC_Type const * p_reg);
+
 /**
  * @defgroup nrfy_grtc GRTC HALY
  * @{
@@ -53,6 +55,20 @@ NRFY_STATIC_INLINE uint64_t __nrfy_internal_grtc_rt_counter_read(NRF_GRTC_Type c
 #define NRFY_GRTC_HAS_SYSCOUNTER_ARRAY 1
 #else
 #define NRFY_GRTC_HAS_SYSCOUNTER_ARRAY 0
+#endif
+
+#if NRF_GRTC_HAS_SYSCOUNTERVALID || defined(__NRFX_DOXYGEN__)
+/** @refhal{NRF_GRTC_HAS_SYSCOUNTERVALID} */
+#define NRFY_GRTC_HAS_SYSCOUNTERVALID 1
+#else
+#define NRFY_GRTC_HAS_SYSCOUNTERVALID 0
+#endif
+
+#if NRF_GRTC_HAS_KEEPRUNNING || defined(__NRFX_DOXYGEN__)
+/** @refhal{NRF_GRTC_HAS_KEEPRUNNING} */
+#define NRFY_GRTC_HAS_KEEPRUNNING 1
+#else
+#define NRFY_GRTC_HAS_KEEPRUNNING 0
 #endif
 
 #if NRF_GRTC_HAS_PWM || defined(__NRFX_DOXYGEN__)
@@ -234,7 +250,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_start(NRF_GRTC_Type * p_reg, bool 
             nrf_barrier_w();
         }
 #endif // NRFY_GRTC_HAS_SYSCOUNTER_ARRAY
-        while (!nrf_grtc_event_check(p_reg, NRF_GRTC_EVENT_SYSCOUNTERVALID))
+        while (!__nrfy_internal_grtc_sys_counter_ready_check(p_reg))
         {}
 
         if (!active)
@@ -277,18 +293,7 @@ NRFY_STATIC_INLINE uint64_t nrfy_grtc_sys_counter_get(NRF_GRTC_Type const * p_re
  */
 NRFY_STATIC_INLINE bool nrfy_grtc_sys_counter_ready_check(NRF_GRTC_Type const * p_reg)
 {
-#if NRFY_GRTC_HAS_SYSCOUNTER_ARRAY
-    nrf_grtc_sys_counter_low_get(p_reg); // Dummy read, required.
-    nrf_barrier_r();
-    bool check = ((nrf_grtc_sys_counter_high_get(p_reg) & GRTC_SYSCOUNTER_SYSCOUNTERH_BUSY_Msk)
-                 >> GRTC_SYSCOUNTER_SYSCOUNTERH_BUSY_Pos) == GRTC_SYSCOUNTER_SYSCOUNTERH_BUSY_Ready;
-    nrf_barrier_r();
-    return check;
-#else
-    bool check = nrf_grtc_event_check(p_reg, NRF_GRTC_EVENT_SYSCOUNTERVALID);
-    nrf_barrier_r();
-    return check;
-#endif
+    return __nrfy_internal_grtc_sys_counter_ready_check(p_reg);
 }
 
 #if NRFY_GRTC_HAS_RTCOUNTER
@@ -691,6 +696,7 @@ NRFY_STATIC_INLINE bool nrfy_grtc_sys_counter_check(NRF_GRTC_Type * p_reg)
     return nrf_grtc_sys_counter_check(p_reg);
 }
 
+#if NRFY_GRTC_HAS_KEEPRUNNING
 /** @refhal{nrf_grtc_sys_counter_active_state_request_set} */
 NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_active_state_request_set(NRF_GRTC_Type * p_reg,
                                                                        bool            enable)
@@ -719,6 +725,7 @@ uint32_t nrfy_grtc_sys_counter_active_state_request_get(NRF_GRTC_Type const * p_
     nrf_barrier_r();
     return request;
 }
+#endif // NRFY_GRTC_HAS_KEEPRUNNING
 
 #if NRFY_GRTC_HAS_EXTENDED
 /** @refhal{nrf_grtc_sys_counter_interval_set} */
@@ -909,6 +916,22 @@ NRFY_STATIC_INLINE uint64_t __nrfy_internal_grtc_rt_counter_read(NRF_GRTC_Type c
     return (uint64_t)counter_l | ((uint64_t)counter_h << 32);
 }
 #endif // NRFY_GRTC_HAS_RTCOUNTER
+
+NRFY_STATIC_INLINE bool __nrfy_internal_grtc_sys_counter_ready_check(NRF_GRTC_Type const * p_reg)
+{
+#if NRFY_GRTC_HAS_SYSCOUNTER_ARRAY
+    nrf_grtc_sys_counter_low_get(p_reg); // Dummy read, required.
+    nrf_barrier_r();
+    bool check = ((nrf_grtc_sys_counter_high_get(p_reg) & GRTC_SYSCOUNTER_SYSCOUNTERH_BUSY_Msk)
+                 >> GRTC_SYSCOUNTER_SYSCOUNTERH_BUSY_Pos) == GRTC_SYSCOUNTER_SYSCOUNTERH_BUSY_Ready;
+    nrf_barrier_r();
+    return check;
+#else
+    bool check = nrf_grtc_event_check(p_reg, NRF_GRTC_EVENT_SYSCOUNTERVALID);
+    nrf_barrier_r();
+    return check;
+#endif
+}
 
 #ifdef __cplusplus
 }

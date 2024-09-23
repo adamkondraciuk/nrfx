@@ -75,7 +75,7 @@ typedef struct
     nrfx_grtc_rtcomparesync_handler_t   rtcomparesync_handler;                                 /**< User handler corresponding to rtcomparesync event.*/
     void *                              rtcomparesync_context;                                 /**< User context for rtcomparesync event handler. */
 #endif
-#if NRFY_GRTC_HAS_EXTENDED
+#if NRFY_GRTC_HAS_EXTENDED && NRFY_GRTC_HAS_SYSCOUNTERVALID
     nrfx_grtc_syscountervalid_handler_t syscountervalid_handler;                               /**< User handler corresponding to syscountervalid event. */
     void *                              syscountervalid_context;                               /**< User context for syscountervalid event handler. */
 #endif
@@ -639,7 +639,7 @@ void nrfx_grtc_rtcounter_cc_int_disable(void)
 }
 #endif // NRF_GRTC_HAS_RTCOUNTER
 
-#if NRFY_GRTC_HAS_EXTENDED
+#if NRFY_GRTC_HAS_EXTENDED && NRFY_GRTC_HAS_SYSCOUNTERVALID
 void nrfx_grtc_syscountervalid_int_enable(nrfx_grtc_syscountervalid_handler_t handler,
                                           void *                              p_context)
 {
@@ -658,7 +658,7 @@ void nrfx_grtc_syscountervalid_int_disable(void)
     nrfy_grtc_int_disable(NRF_GRTC, NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
     NRFX_LOG_INFO("GRTC SYSCOUNTERVALID interrupt disabled.");
 }
-#endif // NRFY_GRTC_HAS_EXTENDED
+#endif // NRFY_GRTC_HAS_EXTENDED && NRFY_GRTC_HAS_SYSCOUNTERVALID
 
 nrfx_err_t nrfx_grtc_syscounter_cc_disable(uint8_t channel)
 {
@@ -914,7 +914,7 @@ static void grtc_irq_handler(void)
         }
     }
 #endif // NRF_GRTC_HAS_RTCOUNTER
-#if NRFY_GRTC_HAS_EXTENDED
+#if NRFY_GRTC_HAS_EXTENDED && NRFY_GRTC_HAS_SYSCOUNTERVALID
     /* The SYSCOUNTERVALID bit is automatically cleared when GRTC goes into sleep state and set
      * when returning from this state. It can't be cleared inside the ISR procedure because we rely
      * on it during SYSCOUNTER value reading procedure. */
@@ -927,7 +927,7 @@ static void grtc_irq_handler(void)
             m_cb.syscountervalid_handler(m_cb.syscountervalid_context);
         }
     }
-#endif // NRFY_GRTC_HAS_EXTENDED
+#endif // NRFY_GRTC_HAS_EXTENDED && NRFY_GRTC_HAS_SYSCOUNTERVALID
 }
 
 void nrfx_grtc_irq_handler(void)

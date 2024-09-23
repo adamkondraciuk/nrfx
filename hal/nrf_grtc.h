@@ -74,6 +74,21 @@ extern "C" {
 #define NRF_GRTC_HAS_SYSCOUNTER_ARRAY 0
 #endif
 
+#if defined(GRTC_EVENTS_SYSCOUNTERVALID_EVENTS_SYSCOUNTERVALID_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SYSCOUNTERVALID event is present. */
+#define NRF_GRTC_HAS_SYSCOUNTERVALID 1
+#else
+#define NRF_GRTC_HAS_SYSCOUNTERVALID 0
+#endif
+
+#if defined(GRTC_KEEPRUNNING_DOMAIN0_Msk) || defined(GRTC_KEEPRUNNING_REQUEST0_Msk) || \
+    defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether KEEPRUNNING register is present. */
+#define NRF_GRTC_HAS_KEEPRUNNING 1
+#else
+#define NRF_GRTC_HAS_KEEPRUNNING 0
+#endif
+
 #if defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether GRTC has RTCOUNTER. */
 #define NRF_GRTC_HAS_RTCOUNTER 1
@@ -281,7 +296,9 @@ typedef enum
     NRF_GRTC_EVENT_RTCOMPARE       = offsetof(NRF_GRTC_Type, EVENTS_RTCOMPARE),       /**< RTCOUNTER compare event. */
     NRF_GRTC_EVENT_RTCOMPARESYNC   = offsetof(NRF_GRTC_Type, EVENTS_RTCOMPARESYNC),   /**< RTCOUNTER synchronized compare event. */
 #endif
+#if NRF_GRTC_HAS_SYSCOUNTERVALID
     NRF_GRTC_EVENT_SYSCOUNTERVALID = offsetof(NRF_GRTC_Type, EVENTS_SYSCOUNTERVALID), /**< SYSCOUNTER value valid event. */
+#endif
 #if NRF_GRTC_HAS_PWM
     NRF_GRTC_EVENT_PWM_PERIOD_END  = offsetof(NRF_GRTC_Type, EVENTS_PWMPERIODEND),    /**< End of PWM period event. */
 #endif // NRF_GRTC_HAS_PWM
@@ -343,7 +360,9 @@ typedef enum
     NRF_GRTC_INT_RTCOMPARE_MASK       = GRTC_INTENSET0_RTCOMPARE_Msk,       /**< GRTC interrupt from RTCOUNTER compare event. */
     NRF_GRTC_INT_RTCOMPARESYNC_MASK   = GRTC_INTENSET0_RTCOMPARESYNC_Msk,   /**< GRTC interrupt from RTCOUNTER synchronized compare event. */
 #endif
+#if NRF_GRTC_HAS_EXTENDED && NRF_GRTC_HAS_SYSCOUNTERVALID
     NRF_GRTC_INT_SYSCOUNTERVALID_MASK = GRTC_INTENSET0_SYSCOUNTERVALID_Msk, /**< GRTC interrupt from SYSCOUNTER valid event. */
+#endif
 } nrf_grtc_int_mask_t;
 
 #if NRF_GRTC_HAS_CLKOUT
@@ -491,6 +510,9 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_int_pending_get(NRF_GRTC_Type const * p_reg)
 /**
  * @brief Function for enabling interrupts in the specified group.
  *
+ * @note Not all @p group_idx might be valid.
+ *       Refer to the Product Specification for more information.
+ *
  * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] group_idx Index of interrupt group to be enabled.
  * @param[in] mask      Mask of interrupts to be enabled.
@@ -503,6 +525,9 @@ NRF_STATIC_INLINE void nrf_grtc_int_group_enable(NRF_GRTC_Type * p_reg,
 /**
  * @brief Function for disabling interrupts in the specified group.
  *
+ * @note Not all @p group_idx might be valid.
+ *       Refer to the Product Specification for more information.
+ *
  * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] group_idx Index of interrupt group to be disabled.
  * @param[in] mask      Mask of interrupts to be disabled.
@@ -514,6 +539,9 @@ NRF_STATIC_INLINE void nrf_grtc_int_group_disable(NRF_GRTC_Type * p_reg,
 
 /**
  * @brief Function for checking if the specified interrupts from a given group are enabled.
+ *
+ * @note Not all @p group_idx might be valid.
+ *       Refer to the Product Specification for more information.
  *
  * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] group_idx Index of interrupt group to be checked.
@@ -729,6 +757,9 @@ NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const *
 /**
  * @brief Function for returning the 64-bit SYSCOUNTER value of the specified index.
  *
+ * @note Not all @p index might be valid.
+ *       Refer to the Product Specification for more information.
+ *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] index Index of SYSCOUNTER value to be read.
  *
@@ -880,6 +911,7 @@ NRF_STATIC_INLINE bool nrf_grtc_sys_counter_auto_mode_check(NRF_GRTC_Type * p_re
  */
 NRF_STATIC_INLINE bool nrf_grtc_sys_counter_check(NRF_GRTC_Type const * p_reg);
 
+#if NRF_GRTC_HAS_KEEPRUNNING
 /**
  * @brief Function for setting the request to keep the SYSCOUNTER active.
  *
@@ -913,6 +945,8 @@ bool nrf_grtc_sys_counter_active_state_request_check(NRF_GRTC_Type const * p_reg
 NRF_STATIC_INLINE
 uint32_t nrf_grtc_sys_counter_active_state_request_get(NRF_GRTC_Type const * p_reg,
                                                        uint32_t              mask);
+#endif // NRF_GRTC_HAS_KEEPRUNNING
+
 #if NRF_GRTC_HAS_EXTENDED
 /**
  * @brief Function for setting the periodic compare event for capture/compare channel 0.
@@ -1458,7 +1492,9 @@ NRF_STATIC_INLINE void nrf_grtc_publish_set(NRF_GRTC_Type *  p_reg,
                                             nrf_grtc_event_t event,
                                             uint8_t          channel)
 {
+#if NRF_GRTC_HAS_SYSCOUNTERVALID
     NRFX_ASSERT(event != NRF_GRTC_EVENT_SYSCOUNTERVALID);
+#endif
 #if NRF_GRTC_HAS_RTCOUNTER
     NRFX_ASSERT(event != NRF_GRTC_EVENT_RTCOMPARESYNC);
 #endif
@@ -1470,7 +1506,9 @@ NRF_STATIC_INLINE void nrf_grtc_publish_set(NRF_GRTC_Type *  p_reg,
 NRF_STATIC_INLINE void nrf_grtc_publish_clear(NRF_GRTC_Type *  p_reg,
                                               nrf_grtc_event_t event)
 {
+#if NRF_GRTC_HAS_SYSCOUNTERVALID
     NRFX_ASSERT(event != NRF_GRTC_EVENT_SYSCOUNTERVALID);
+#endif
 #if NRF_GRTC_HAS_RTCOUNTER
     NRFX_ASSERT(event != NRF_GRTC_EVENT_RTCOMPARESYNC);
 #endif
@@ -1485,7 +1523,9 @@ NRF_STATIC_INLINE bool nrf_grtc_event_check(NRF_GRTC_Type const * p_reg, nrf_grt
 
 NRF_STATIC_INLINE void nrf_grtc_event_clear(NRF_GRTC_Type * p_reg, nrf_grtc_event_t event)
 {
+#if NRF_GRTC_HAS_SYSCOUNTERVALID
     NRFX_ASSERT(event != NRF_GRTC_EVENT_SYSCOUNTERVALID);
+#endif
 
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event)) = 0x0UL;
     nrf_event_readback((uint8_t *)p_reg + (uint32_t)event);
@@ -1649,6 +1689,7 @@ NRF_STATIC_INLINE bool nrf_grtc_sys_counter_check(NRF_GRTC_Type const * p_reg)
     return (p_reg->MODE & GRTC_MODE_SYSCOUNTEREN_Msk) ? true : false;
 }
 
+#if NRF_GRTC_HAS_KEEPRUNNING
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_state_request_set(NRF_GRTC_Type * p_reg,
                                                                      bool            enable)
 {
@@ -1683,6 +1724,7 @@ uint32_t nrf_grtc_sys_counter_active_state_request_get(NRF_GRTC_Type const * p_r
 {
     return p_reg->KEEPRUNNING & mask;
 }
+#endif // NRF_GRTC_HAS_KEEPRUNNING
 
 #if NRF_GRTC_HAS_EXTENDED
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_interval_set(NRF_GRTC_Type * p_reg, uint32_t value)
