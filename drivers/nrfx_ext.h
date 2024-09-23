@@ -290,6 +290,29 @@ extern "C" {
          NRF_REGULATORS_ELV_ELVPDLP_MASK     = REGULATORS_TRIM_ELVPDLP_Msk,       \
          NRF_REGULATORS_ELV_ELVPDPERIPH_MASK = REGULATORS_TRIM_ELVPDPERIPH_Msk,), \
    ())
+
+#elif defined(NRF7120_XXAA)
+//TODO: Verify this is correct mask for 7120 (copied from 54L20 since trim reset was the same in mdk)
+#define NRF_REGULATORS_ELV_MODE_ALL_MASK (REGULATORS_TRIM_ELVPDMAIN_Msk   | \
+                                          REGULATORS_TRIM_ELVPDLP_Msk     | \
+                                          REGULATORS_TRIM_ELVPDPERIPH_Msk | \
+                                          REGULATORS_TRIM_ELVLFRC_Msk     | \
+                                          REGULATORS_TRIM_ELVLFXO_Msk     | \
+                                          REGULATORS_TRIM_ELVGRTC_Msk     | \
+                                          REGULATORS_TRIM_ELVGRTCPWM_Msk  | \
+                                          REGULATORS_TRIM_ELVGRTCCLKOUT_Msk)
+
+#define NRF_REGULATORS_ELV_MODE_ALLOW_MASK_EXT                                         \
+    NRFX_COND_CODE_1(NRF_REGULATORS_HAS_TRIM,                                          \
+        (NRF_REGULATORS_ELV_ELVPDMAIN_MASK      = REGULATORS_TRIM_ELVPDMAIN_Msk,       \
+         NRF_REGULATORS_ELV_ELVPDLP_MASK        = REGULATORS_TRIM_ELVPDLP_Msk,         \
+         NRF_REGULATORS_ELV_ELVPDPERIPH_MASK    = REGULATORS_TRIM_ELVPDPERIPH_Msk,     \
+         NRF_REGULATORS_ELV_ELVLFRC_MASK        = REGULATORS_TRIM_ELVLFRC_Msk,         \
+         NRF_REGULATORS_ELV_ELVLFXO_MASK        = REGULATORS_TRIM_ELVLFXO_Msk,         \
+         NRF_REGULATORS_ELV_ELVGRTC_MASK        = REGULATORS_TRIM_ELVGRTC_Msk,         \
+         NRF_REGULATORS_ELV_ELVGRTCPWM_MASK     = REGULATORS_TRIM_ELVGRTCPWM_Msk,      \
+         NRF_REGULATORS_ELV_ELVGRTCCLKOUT_MASK  = REGULATORS_TRIM_ELVGRTCCLKOUT_Msk,), \
+   ())
 #endif
 
 

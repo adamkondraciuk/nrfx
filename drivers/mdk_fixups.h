@@ -1140,6 +1140,200 @@
 /* End fixups section for NRF54L20_ENGA_XXAA                                                      */
 /**************************************************************************************************/
 
+
+/**************************************************************************************************/
+/* Start fixups section for NRF7120_XXAA                                                         */
+/**************************************************************************************************/
+
+#if defined(NRF7120_XXAA)
+
+
+    #define P1_FEATURE_PINS_PRESENT ((1<<P1_PIN_NUM_SIZE)-1)
+    #define P2_FEATURE_PINS_PRESENT ((1<<P2_PIN_NUM_SIZE)-1)
+    #define P3_FEATURE_PINS_PRESENT ((1<<P3_PIN_NUM_SIZE)-1)
+    #define P9_FEATURE_PINS_PRESENT ((1<<P9_PIN_NUM_SIZE)-1)
+    #define P0_FEATURE_PINS_PRESENT ((1<<P0_PIN_NUM_SIZE)-1)
+
+    #define EASYVDMA_PRESENT
+    #define VDMADESCRIPTOR_CONFIG_CNT_Pos (0UL)        /*!< Position of CNT field.                                               */
+    #define VDMADESCRIPTOR_CONFIG_CNT_Msk (0xFFFFFFUL << VDMADESCRIPTOR_CONFIG_CNT_Pos) /*!< Bit mask of CNT field.              */
+    #define VDMADESCRIPTOR_CONFIG_ATTRIBUTE_Pos (24UL) /*!< Position of ATTRIBUTE field.                                         */
+
+    #define EGU00_CH_NUM EGU00_CH_NUM_SIZE
+    #define EGU10_CH_NUM EGU10_CH_NUM_SIZE
+    #define EGU20_CH_NUM EGU20_CH_NUM_SIZE
+
+    #define TIMER00_CC_NUM TIMER00_CC_NUM_SIZE
+    #define TIMER10_CC_NUM TIMER10_CC_NUM_SIZE
+    #define TIMER20_CC_NUM TIMER20_CC_NUM_SIZE
+    #define TIMER21_CC_NUM TIMER21_CC_NUM_SIZE
+    #define TIMER22_CC_NUM TIMER22_CC_NUM_SIZE
+    #define TIMER23_CC_NUM TIMER23_CC_NUM_SIZE
+    #define TIMER24_CC_NUM TIMER24_CC_NUM_SIZE
+
+    #define TIMER00_MAX_SIZE TIMER00_MAX_SIZE_SIZE
+    #define TIMER10_MAX_SIZE TIMER10_MAX_SIZE_SIZE
+    #define TIMER20_MAX_SIZE TIMER20_MAX_SIZE_SIZE
+    #define TIMER21_MAX_SIZE TIMER21_MAX_SIZE_SIZE
+    #define TIMER22_MAX_SIZE TIMER22_MAX_SIZE_SIZE
+    #define TIMER23_MAX_SIZE TIMER23_MAX_SIZE_SIZE
+    #define TIMER24_MAX_SIZE TIMER24_MAX_SIZE_SIZE
+
+    #define LPCOMP_REFSEL_RESOLUTION 16
+
+    #define MPC_MASTER_PORTS_MaxCount (15UL) /*!< Max number of master ports. */
+
+    #define NRF_DOMAIN_COUNT (NRF_DOMAIN_NONE + 1)
+    #define SAADC_CH_NUM SAADC_CH_MaxCount
+
+    #define PPIB_CHANNEL_MAX_COUNT 24UL
+
+    #define PPIB00_CH_NUM 8
+    #define PPIB10_CH_NUM 8
+    #define PPIB11_CH_NUM 16
+    #define PPIB21_CH_NUM 16
+    #define PPIB22_CH_NUM 4
+    #define PPIB30_CH_NUM 4
+    #define PPIB20_CH_NUM 8
+    #define PPIB01_CH_NUM 8
+
+    #if defined(NRF_FLPR)
+        #define GRTC_IRQ_GROUP   0
+        #define GPIOTE_IRQ_GROUP 0
+    #elif defined(NRF_APPLICATION)
+        #if defined(NRF_TRUSTZONE_NONSECURE)
+            #define GPIOTE_IRQ_GROUP       0
+            #define GRTC_IRQ_GROUP         1 
+        #else
+            #define GPIOTE_IRQ_GROUP       1
+            #define GRTC_IRQ_GROUP         2
+        #endif
+    #else
+        #error "Unknown core"
+    #endif
+
+
+
+    #define GPIOTE20_CH_NUM GPIOTE20_GPIOTE_NCHANNELS_SIZE
+    #define GPIOTE30_CH_NUM GPIOTE30_GPIOTE_NCHANNELS_SIZE
+
+    #define GPIOTE_CH_NUM   8
+    #define GPIOTE20_AVAILABLE_GPIO_PORTS 0x2UL
+    #define GPIOTE30_AVAILABLE_GPIO_PORTS 0x1UL
+    #define GPIOTE_FEATURE_SET_PRESENT
+    #define GPIOTE_FEATURE_CLR_PRESENT
+    #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
+
+    #define DPPI_PRESENT DPPIC_PRESENT
+
+    #define DPPIC00_CH_NUM DPPIC00_CH_NUM_SIZE
+    #define DPPIC10_CH_NUM DPPIC10_CH_NUM_SIZE
+    #define DPPIC20_CH_NUM DPPIC20_CH_NUM_SIZE
+    #define DPPIC30_CH_NUM DPPIC30_CH_NUM_SIZE
+    
+    #define DPPIC00_GROUP_NUM DPPIC00_GROUP_NUM_SIZE
+    #define DPPIC10_GROUP_NUM DPPIC10_GROUP_NUM_SIZE
+    #define DPPIC20_GROUP_NUM DPPIC20_GROUP_NUM_SIZE
+    #define DPPIC30_GROUP_NUM DPPIC30_GROUP_NUM_SIZE
+
+
+    #define P0_PIN_NUM P0_PIN_NUM_SIZE
+    #define P1_PIN_NUM P1_PIN_NUM_SIZE
+    #define P2_PIN_NUM P2_PIN_NUM_SIZE
+    #define P3_PIN_NUM P3_PIN_NUM_SIZE
+    #define P9_PIN_NUM P9_PIN_NUM_SIZE
+
+
+    #define NRFX_GPPI_PROG_APP_CHANNELS_NUM  NRFX_BIT_SIZE(sizeof(uint32_t))
+
+    typedef enum
+    {
+        NRF_APB_INDEX_MCU   = 1,
+        NRF_APB_INDEX_RADIO = 2,
+        NRF_APB_INDEX_PERI  = 3,
+        NRF_APB_INDEX_LP    = 4
+    } nrf_apb_index_t;
+
+    /* MLT-8866 */
+    typedef struct {
+      __IOM uint32_t START;
+      __IM uint32_t RESERVED[1];
+    } NRF_PWM_SUBSCRIBE_DMA_SEQ_Type_fixed;
+
+    typedef struct {
+      __IOM NRF_PWM_SUBSCRIBE_DMA_SEQ_Type_fixed SEQ[2];
+    } NRF_PWM_SUBSCRIBE_DMA_Type_fixed;
+
+    typedef struct {
+      __OM  uint32_t START;
+      __IM uint32_t RESERVED[1];
+    } NRF_PWM_TASKS_DMA_SEQ_Type_fixed;
+
+    typedef struct {
+      __OM  NRF_PWM_TASKS_DMA_SEQ_Type_fixed SEQ[2];
+    } NRF_PWM_TASKS_DMA_Type_fixed;
+
+    typedef struct {
+      __OM uint32_t TASKS_START;
+      __OM uint32_t TASKS_STOP;
+      __OM uint32_t TASKS_NEXTSTEP;
+      __OM uint32_t TASKS_SEQABORT;
+      __OM NRF_PWM_TASKS_DMA_Type_fixed TASKS_DMA;
+      __IM uint32_t RESERVED[24];
+      __IOM uint32_t SUBSCRIBE_START;
+      __IOM uint32_t SUBSCRIBE_STOP;
+      __IOM uint32_t SUBSCRIBE_NEXTSTEP;
+      __IOM uint32_t SUBSCRIBE_SEQABORT;
+      __IOM NRF_PWM_SUBSCRIBE_DMA_Type_fixed SUBSCRIBE_DMA;
+      __IM uint32_t RESERVED1[24];
+      __IOM uint32_t EVENTS_STARTED;
+      __IOM uint32_t EVENTS_STOPPED;
+      __IOM uint32_t EVENTS_SEQSTARTED[2];
+      __IOM uint32_t EVENTS_SEQEND[2];
+      __IOM uint32_t EVENTS_PWMPERIODEND;
+      __IOM uint32_t EVENTS_LOOPSDONE;
+      __IOM uint32_t EVENTS_RAMUNDERFLOW;
+      __IOM NRF_PWM_EVENTS_DMA_Type EVENTS_DMA;
+      __IOM uint32_t EVENTS_COMPAREMATCH[4];
+      __IM uint32_t RESERVED2[13];
+      __IOM uint32_t PUBLISH_STARTED;
+      __IOM uint32_t PUBLISH_STOPPED;
+      __IOM uint32_t PUBLISH_SEQSTARTED[2];
+      __IOM uint32_t PUBLISH_SEQEND[2];
+      __IOM uint32_t PUBLISH_PWMPERIODEND;
+      __IOM uint32_t PUBLISH_LOOPSDONE;
+      __IOM uint32_t PUBLISH_RAMUNDERFLOW;
+      __IOM NRF_PWM_PUBLISH_DMA_Type PUBLISH_DMA;
+      __IOM uint32_t PUBLISH_COMPAREMATCH[4];
+      __IM uint32_t RESERVED3[13];
+      __IOM uint32_t SHORTS;
+      __IM uint32_t RESERVED4[63];
+      __IOM uint32_t INTEN;
+      __IOM uint32_t INTENSET;
+      __IOM uint32_t INTENCLR;
+      __IM uint32_t INTPEND;
+      __IM uint32_t RESERVED5[124];
+      __IOM uint32_t ENABLE;
+      __IOM uint32_t MODE;
+      __IOM uint32_t COUNTERTOP;
+      __IOM uint32_t PRESCALER;
+      __IOM uint32_t DECODER;
+      __IOM uint32_t LOOP;
+      __IOM uint32_t IDLEOUT;
+      __IM uint32_t RESERVED6;
+      __IOM NRF_PWM_SEQ_Type SEQ[2];
+      __IOM NRF_PWM_PSEL_Type PSEL;
+      __IM uint32_t RESERVED7[100];
+      __IOM NRF_PWM_DMA_Type DMA;
+    } NRF_PWM_Type_fixed;
+
+#endif
+
+/**************************************************************************************************/
+/* End fixups section for NRF7120_XXAA                                                           */
+/**************************************************************************************************/
+
+
 /**************************************************************************************************/
 /* Start fixups section for NRF7140_XXAA                                                          */
 /**************************************************************************************************/
