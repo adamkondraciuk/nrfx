@@ -63,7 +63,7 @@
 #define GRTC_SYSCOUNTERVALID_SETTLE_MAX_TIME_US 33
 
 /* The timeout for the SYSCOUNTER's ready state after starting it. */
-#define STARTUP_TIMEOUT (SystemCoreClock * GRTC_SYSCOUNTERVALID_SETTLE_MAX_TIME_US / 1000000)
+#define STARTUP_TIMEOUT ((SystemCoreClock / 1000000U) * GRTC_SYSCOUNTERVALID_SETTLE_MAX_TIME_US)
 
 typedef struct
 {
