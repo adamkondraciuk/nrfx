@@ -415,7 +415,7 @@ void nrfx_pdm_irq_handler(void);
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_PDM_INST_GET(\<instance_index\>)), \<priority\>,
- *             NRFX_GPDM_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_PDM_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(PDM, pdm)
 
