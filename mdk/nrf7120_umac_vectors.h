@@ -103,9 +103,6 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void UMACCLIC_21_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void UMACCLIC_22_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void UMACCLIC_23_IRQHandler                                      (void);
- __HANDLER("Default_Handler") void UMACCLIC_24_IRQHandler                                      (void);
- __HANDLER("Default_Handler") void UMACCLIC_25_IRQHandler                                      (void);
- __HANDLER("Default_Handler") void UMACCLIC_26_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void RPU_0_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void RPU_1_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void RPU_2_IRQHandler                                            (void);
@@ -170,11 +167,6 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    0,
-    0,
-    0,
-    0,
-    0,
     UMACCLIC_16_IRQHandler,
     UMACCLIC_17_IRQHandler,
     UMACCLIC_18_IRQHandler,
@@ -183,9 +175,14 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     UMACCLIC_21_IRQHandler,
     UMACCLIC_22_IRQHandler,
     UMACCLIC_23_IRQHandler,
-    UMACCLIC_24_IRQHandler,
-    UMACCLIC_25_IRQHandler,
-    UMACCLIC_26_IRQHandler,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     RPU_0_IRQHandler,
     RPU_1_IRQHandler,
     RPU_2_IRQHandler,

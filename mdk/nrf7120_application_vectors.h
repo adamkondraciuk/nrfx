@@ -114,16 +114,12 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void EGU00_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void CRACEN_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void USBHS_IRQHandler                                            (void);
- __HANDLER("Default_Handler") void QSPI00_IRQHandler                                           (void);
- __HANDLER("Default_Handler") void QSPI01_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void QSPI0_IRQHandler                                            (void);
+ __HANDLER("Default_Handler") void QSPI1_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void SERIAL01_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void SERIAL02_IRQHandler                                         (void);
- __HANDLER("Default_Handler") void BELLBOARDWIFI_0_IRQHandler                                  (void);
- __HANDLER("Default_Handler") void BELLBOARDWIFI_1_IRQHandler                                  (void);
- __HANDLER("Default_Handler") void BELLBOARDWIFI_2_IRQHandler                                  (void);
- __HANDLER("Default_Handler") void BELLBOARDWIFI_3_IRQHandler                                  (void);
- __HANDLER("Default_Handler") void BELLBOARDAPP_0_IRQHandler                                   (void);
- __HANDLER("Default_Handler") void BELLBOARDAPP_1_IRQHandler                                   (void);
+ __HANDLER("Default_Handler") void BELLBOARD_0_IRQHandler                                      (void);
+ __HANDLER("Default_Handler") void BELLBOARD_1_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void SPU10_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void TIMER10_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void EGU10_IRQHandler                                            (void);
@@ -160,6 +156,7 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void GRTC_4_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void GRTC_5_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void TDM_IRQHandler                                              (void);
+ __HANDLER("Default_Handler") void AUXPLL_AUXPM_IRQHandler                                     (void);
  __HANDLER("Default_Handler") void SERIAL23_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void SERIAL24_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void TAMPC_IRQHandler                                            (void);
@@ -172,6 +169,10 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void GPIOTE30_1_IRQHandler                                       (void);
  __HANDLER("Default_Handler") void CLOCK_POWER_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void USBREG_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void VREGMRAM_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void VREGAO1V8_IRQHandler                                        (void);
+ __HANDLER("Default_Handler") void VREGAO0V8B_IRQHandler                                       (void);
+ __HANDLER("Default_Handler") void VREGAO0V8A_IRQHandler                                       (void);
 
 /*----------------------------------------------------------------------------
   Exception / Interrupt Vector table
@@ -292,8 +293,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     EGU00_IRQHandler,
     CRACEN_IRQHandler,
     USBHS_IRQHandler,
-    QSPI00_IRQHandler,
-    QSPI01_IRQHandler,
+    QSPI0_IRQHandler,
+    QSPI1_IRQHandler,
     SERIAL01_IRQHandler,
     SERIAL02_IRQHandler,
     0,
@@ -317,12 +318,12 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    BELLBOARDWIFI_0_IRQHandler,
-    BELLBOARDWIFI_1_IRQHandler,
-    BELLBOARDWIFI_2_IRQHandler,
-    BELLBOARDWIFI_3_IRQHandler,
-    BELLBOARDAPP_0_IRQHandler,
-    BELLBOARDAPP_1_IRQHandler,
+    0,
+    0,
+    0,
+    0,
+    BELLBOARD_0_IRQHandler,
+    BELLBOARD_1_IRQHandler,
     0,
     0,
     0,
@@ -436,7 +437,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     TDM_IRQHandler,
     0,
     0,
-    0,
+    AUXPLL_AUXPM_IRQHandler,
     0,
     SERIAL23_IRQHandler,
     SERIAL24_IRQHandler,
@@ -491,6 +492,13 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     USBREG_IRQHandler,
+    0,
+    0,
+    0,
+    VREGMRAM_IRQHandler,
+    VREGAO1V8_IRQHandler,
+    VREGAO0V8B_IRQHandler,
+    VREGAO0V8A_IRQHandler,
 };
 
 #if defined(__GNUC__)

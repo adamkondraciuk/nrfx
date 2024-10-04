@@ -175,8 +175,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     EGU00_IRQHandler
                 DCD     CRACEN_IRQHandler
                 DCD     USBHS_IRQHandler
-                DCD     QSPI00_IRQHandler
-                DCD     QSPI01_IRQHandler
+                DCD     QSPI0_IRQHandler
+                DCD     QSPI1_IRQHandler
                 DCD     SERIAL01_IRQHandler
                 DCD     SERIAL02_IRQHandler
                 DCD     0                         ; Reserved
@@ -200,12 +200,12 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     BELLBOARDWIFI_0_IRQHandler
-                DCD     BELLBOARDWIFI_1_IRQHandler
-                DCD     BELLBOARDWIFI_2_IRQHandler
-                DCD     BELLBOARDWIFI_3_IRQHandler
-                DCD     BELLBOARDAPP_0_IRQHandler
-                DCD     BELLBOARDAPP_1_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     BELLBOARD_0_IRQHandler
+                DCD     BELLBOARD_1_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -319,7 +319,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     TDM_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     AUXPLL_AUXPM_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     SERIAL23_IRQHandler
                 DCD     SERIAL24_IRQHandler
@@ -374,6 +374,13 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     USBREG_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     VREGMRAM_IRQHandler
+                DCD     VREGAO1V8_IRQHandler
+                DCD     VREGAO0V8B_IRQHandler
+                DCD     VREGAO0V8A_IRQHandler
 
 __Vectors_End
 
@@ -465,16 +472,12 @@ Default_Handler PROC
                 EXPORT   EGU00_IRQHandler [WEAK]
                 EXPORT   CRACEN_IRQHandler [WEAK]
                 EXPORT   USBHS_IRQHandler [WEAK]
-                EXPORT   QSPI00_IRQHandler [WEAK]
-                EXPORT   QSPI01_IRQHandler [WEAK]
+                EXPORT   QSPI0_IRQHandler [WEAK]
+                EXPORT   QSPI1_IRQHandler [WEAK]
                 EXPORT   SERIAL01_IRQHandler [WEAK]
                 EXPORT   SERIAL02_IRQHandler [WEAK]
-                EXPORT   BELLBOARDWIFI_0_IRQHandler [WEAK]
-                EXPORT   BELLBOARDWIFI_1_IRQHandler [WEAK]
-                EXPORT   BELLBOARDWIFI_2_IRQHandler [WEAK]
-                EXPORT   BELLBOARDWIFI_3_IRQHandler [WEAK]
-                EXPORT   BELLBOARDAPP_0_IRQHandler [WEAK]
-                EXPORT   BELLBOARDAPP_1_IRQHandler [WEAK]
+                EXPORT   BELLBOARD_0_IRQHandler [WEAK]
+                EXPORT   BELLBOARD_1_IRQHandler [WEAK]
                 EXPORT   SPU10_IRQHandler [WEAK]
                 EXPORT   TIMER10_IRQHandler [WEAK]
                 EXPORT   EGU10_IRQHandler [WEAK]
@@ -511,6 +514,7 @@ Default_Handler PROC
                 EXPORT   GRTC_4_IRQHandler [WEAK]
                 EXPORT   GRTC_5_IRQHandler [WEAK]
                 EXPORT   TDM_IRQHandler [WEAK]
+                EXPORT   AUXPLL_AUXPM_IRQHandler [WEAK]
                 EXPORT   SERIAL23_IRQHandler [WEAK]
                 EXPORT   SERIAL24_IRQHandler [WEAK]
                 EXPORT   TAMPC_IRQHandler [WEAK]
@@ -523,6 +527,10 @@ Default_Handler PROC
                 EXPORT   GPIOTE30_1_IRQHandler [WEAK]
                 EXPORT   CLOCK_POWER_IRQHandler [WEAK]
                 EXPORT   USBREG_IRQHandler [WEAK]
+                EXPORT   VREGMRAM_IRQHandler [WEAK]
+                EXPORT   VREGAO1V8_IRQHandler [WEAK]
+                EXPORT   VREGAO0V8B_IRQHandler [WEAK]
+                EXPORT   VREGAO0V8A_IRQHandler [WEAK]
 SWI00_IRQHandler
 SWI01_IRQHandler
 SWI02_IRQHandler
@@ -541,16 +549,12 @@ AXONS_IRQHandler
 EGU00_IRQHandler
 CRACEN_IRQHandler
 USBHS_IRQHandler
-QSPI00_IRQHandler
-QSPI01_IRQHandler
+QSPI0_IRQHandler
+QSPI1_IRQHandler
 SERIAL01_IRQHandler
 SERIAL02_IRQHandler
-BELLBOARDWIFI_0_IRQHandler
-BELLBOARDWIFI_1_IRQHandler
-BELLBOARDWIFI_2_IRQHandler
-BELLBOARDWIFI_3_IRQHandler
-BELLBOARDAPP_0_IRQHandler
-BELLBOARDAPP_1_IRQHandler
+BELLBOARD_0_IRQHandler
+BELLBOARD_1_IRQHandler
 SPU10_IRQHandler
 TIMER10_IRQHandler
 EGU10_IRQHandler
@@ -587,6 +591,7 @@ GRTC_3_IRQHandler
 GRTC_4_IRQHandler
 GRTC_5_IRQHandler
 TDM_IRQHandler
+AUXPLL_AUXPM_IRQHandler
 SERIAL23_IRQHandler
 SERIAL24_IRQHandler
 TAMPC_IRQHandler
@@ -599,6 +604,10 @@ GPIOTE30_0_IRQHandler
 GPIOTE30_1_IRQHandler
 CLOCK_POWER_IRQHandler
 USBREG_IRQHandler
+VREGMRAM_IRQHandler
+VREGAO1V8_IRQHandler
+VREGAO0V8B_IRQHandler
+VREGAO0V8A_IRQHandler
                 B .
                 ENDP
                 ALIGN

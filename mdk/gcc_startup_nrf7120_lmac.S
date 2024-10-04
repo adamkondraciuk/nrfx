@@ -291,10 +291,6 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
     .long   LMACCLIC_16_IRQHandler
     .long   LMACCLIC_17_IRQHandler
     .long   LMACCLIC_18_IRQHandler
@@ -303,9 +299,13 @@ __isr_vector:
     .long   LMACCLIC_21_IRQHandler
     .long   LMACCLIC_22_IRQHandler
     .long   LMACCLIC_23_IRQHandler
-    .long   LMACCLIC_24_IRQHandler
-    .long   LMACCLIC_25_IRQHandler
-    .long   LMACCLIC_26_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   RPU_0_IRQHandler
     .long   RPU_1_IRQHandler
@@ -853,9 +853,6 @@ Default_Handler:
     IRQ  LMACCLIC_21_IRQHandler
     IRQ  LMACCLIC_22_IRQHandler
     IRQ  LMACCLIC_23_IRQHandler
-    IRQ  LMACCLIC_24_IRQHandler
-    IRQ  LMACCLIC_25_IRQHandler
-    IRQ  LMACCLIC_26_IRQHandler
     IRQ  RPU_0_IRQHandler
     IRQ  RPU_1_IRQHandler
     IRQ  RPU_2_IRQHandler

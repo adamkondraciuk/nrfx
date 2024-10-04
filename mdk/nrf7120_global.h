@@ -103,7 +103,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_UARTE00_NS_BASE               0x4004D000UL
 #define NRF_SPIM00_S_BASE                 0x5004D000UL
 #define NRF_UARTE00_S_BASE                0x5004D000UL
-#define NRF_GLITCHDET_S_BASE              0x5004E000UL
 #define NRF_MRAMC_S_BASE                  0x5004E000UL
 #define NRF_GPIOHSPADCTRL_NS_BASE         0x40050400UL
 #define NRF_P2_NS_BASE                    0x40050400UL
@@ -124,17 +123,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_CRACEN_S_BASE                 0x50059000UL
 #define NRF_USBHS_NS_BASE                 0x4005A000UL
 #define NRF_USBHS_S_BASE                  0x5005A000UL
-#define NRF_QSPI00_NS_BASE                0x4005B000UL
-#define NRF_QSPI00_S_BASE                 0x5005B000UL
-#define NRF_QSPI01_NS_BASE                0x4005C000UL
-#define NRF_QSPI01_S_BASE                 0x5005C000UL
+#define NRF_QSPI0_NS_BASE                 0x4005B000UL
+#define NRF_QSPI0_S_BASE                  0x5005B000UL
+#define NRF_QSPI1_NS_BASE                 0x4005C000UL
+#define NRF_QSPI1_S_BASE                  0x5005C000UL
 #define NRF_SPIM01_NS_BASE                0x4005D000UL
 #define NRF_SPIM01_S_BASE                 0x5005D000UL
 #define NRF_SPIM02_NS_BASE                0x4005E000UL
 #define NRF_SPIM02_S_BASE                 0x5005E000UL
 #define NRF_CPUCONF_S_BASE                0x50073000UL
-#define NRF_BELLBOARDWIFI_NS_BASE         0x40074000UL
-#define NRF_BELLBOARDAPP_NS_BASE          0x40078000UL
+#define NRF_BELLBOARD_NS_BASE             0x40078000UL
 #define NRF_PULSEDET00_S_BASE             0x5007A000UL
 #define NRF_PULSEDET01_S_BASE             0x5007B000UL
 #define NRF_SREGS00_NS_BASE               0x4007E000UL
@@ -230,10 +228,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_TEMP_S_BASE                   0x500D7000UL
 #define NRF_P1_NS_BASE                    0x400D8200UL
 #define NRF_P3_NS_BASE                    0x400D8600UL
-#define NRF_P9_NS_BASE                    0x400D8600UL
+#define NRF_P4_NS_BASE                    0x400D8800UL
 #define NRF_P1_S_BASE                     0x500D8200UL
 #define NRF_P3_S_BASE                     0x500D8600UL
-#define NRF_P9_S_BASE                     0x500D8600UL
+#define NRF_P4_S_BASE                     0x500D8800UL
 #define NRF_GPIOINTERNALP1_NS_BASE        0x400D9E00UL
 #define NRF_GPIOINTERNALP1_S_BASE         0x500D9E00UL
 #define NRF_GPIOTE20_NS_BASE              0x400DA000UL
@@ -249,6 +247,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_PCGCM20_S_BASE                0x500E7000UL
 #define NRF_TDM_NS_BASE                   0x400E8000UL
 #define NRF_TDM_S_BASE                    0x500E8000UL
+#define NRF_AUXPLL_NS_BASE                0x400EB000UL
+#define NRF_AUXPM_NS_BASE                 0x400EB000UL
+#define NRF_AUXPLL_S_BASE                 0x500EB000UL
+#define NRF_AUXPM_S_BASE                  0x500EB000UL
 #define NRF_PULSEDET20_S_BASE             0x500EC000UL
 #define NRF_SPIM23_NS_BASE                0x400ED000UL
 #define NRF_SPIS23_NS_BASE                0x400ED000UL
@@ -270,9 +272,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_TWIM24_S_BASE                 0x500EE000UL
 #define NRF_TWIS24_S_BASE                 0x500EE000UL
 #define NRF_UARTE24_S_BASE                0x500EE000UL
-#define NRF_MEMCONF_WIFI_S_BASE           0x500EF000UL
 #define NRF_TAMPC_S_BASE                  0x500EF000UL
-#define NRF_COEXC_S_BASE                  0x500F0000UL
+#define NRF_MEMCONF_WIFI_NS_BASE          0x400F0000UL
+#define NRF_MEMCONF_WIFI_S_BASE           0x500F0000UL
+#define NRF_COEXC_NS_BASE                 0x400F1000UL
+#define NRF_COEXC_S_BASE                  0x500F1000UL
 #define NRF_SUPPORT20_S_BASE              0x500FF000UL
 #define NRF_SPU30_S_BASE                  0x50100000UL
 #define NRF_DPPIC30_NS_BASE               0x40102000UL
@@ -311,6 +315,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SREGS30_NS_BASE               0x4010F000UL
 #define NRF_SREGS30_S_BASE                0x5010F000UL
 #define NRF_PULSEDET30_S_BASE             0x50110000UL
+#define NRF_GLITCHDET_S_BASE              0x50111000UL
 #define NRF_PCGCS30_S_BASE                0x5011E000UL
 #define NRF_SUPPORT30_S_BASE              0x5011F000UL
 #define NRF_OSCILLATORS_NS_BASE           0x40120000UL
@@ -319,6 +324,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_REGULATORS_S_BASE             0x50120000UL
 #define NRF_USBREG_NS_BASE                0x40121000UL
 #define NRF_USBREG_S_BASE                 0x50121000UL
+#define NRF_VREGMRAM_NS_BASE              0x40125000UL
+#define NRF_VREGMRAM_S_BASE               0x50125000UL
+#define NRF_VREGAO1V8_NS_BASE             0x40126000UL
+#define NRF_VREGAO1V8_S_BASE              0x50126000UL
+#define NRF_VREGAO0V8B_NS_BASE            0x40127000UL
+#define NRF_VREGAO0V8B_S_BASE             0x50127000UL
+#define NRF_VREGAO0V8A_NS_BASE            0x40128000UL
+#define NRF_VREGAO0V8A_S_BASE             0x50128000UL
+#define NRF_VREGSU_NS_BASE                0x40129000UL
+#define NRF_VREGSU_S_BASE                 0x50129000UL
 #define NRF_PCGCM30_S_BASE                0x5013F000UL
 
 /* =========================================================================================================================== */
@@ -350,7 +365,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_UARTE00_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE00_NS_BASE)
 #define NRF_SPIM00_S                      ((NRF_SPIM_Type*)                     NRF_SPIM00_S_BASE)
 #define NRF_UARTE00_S                     ((NRF_UARTE_Type*)                    NRF_UARTE00_S_BASE)
-#define NRF_GLITCHDET_S                   ((NRF_GLITCHDET_Type*)                NRF_GLITCHDET_S_BASE)
 #define NRF_MRAMC_S                       ((NRF_MRAMC_Type*)                    NRF_MRAMC_S_BASE)
 #define NRF_GPIOHSPADCTRL_NS              ((NRF_GPIOHSPADCTRL_Type*)            NRF_GPIOHSPADCTRL_NS_BASE)
 #define NRF_P2_NS                         ((NRF_GPIO_Type*)                     NRF_P2_NS_BASE)
@@ -371,17 +385,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_CRACEN_S                      ((NRF_CRACEN_Type*)                   NRF_CRACEN_S_BASE)
 #define NRF_USBHS_NS                      ((NRF_USBHS_Type*)                    NRF_USBHS_NS_BASE)
 #define NRF_USBHS_S                       ((NRF_USBHS_Type*)                    NRF_USBHS_S_BASE)
-#define NRF_QSPI00_NS                     ((NRF_QSPI_Type*)                     NRF_QSPI00_NS_BASE)
-#define NRF_QSPI00_S                      ((NRF_QSPI_Type*)                     NRF_QSPI00_S_BASE)
-#define NRF_QSPI01_NS                     ((NRF_QSPI_Type*)                     NRF_QSPI01_NS_BASE)
-#define NRF_QSPI01_S                      ((NRF_QSPI_Type*)                     NRF_QSPI01_S_BASE)
+#define NRF_QSPI0_NS                      ((NRF_QSPI_Type*)                     NRF_QSPI0_NS_BASE)
+#define NRF_QSPI0_S                       ((NRF_QSPI_Type*)                     NRF_QSPI0_S_BASE)
+#define NRF_QSPI1_NS                      ((NRF_QSPI_Type*)                     NRF_QSPI1_NS_BASE)
+#define NRF_QSPI1_S                       ((NRF_QSPI_Type*)                     NRF_QSPI1_S_BASE)
 #define NRF_SPIM01_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM01_NS_BASE)
 #define NRF_SPIM01_S                      ((NRF_SPIM_Type*)                     NRF_SPIM01_S_BASE)
 #define NRF_SPIM02_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM02_NS_BASE)
 #define NRF_SPIM02_S                      ((NRF_SPIM_Type*)                     NRF_SPIM02_S_BASE)
 #define NRF_CPUCONF_S                     ((NRF_CPUCONF_Type*)                  NRF_CPUCONF_S_BASE)
-#define NRF_BELLBOARDWIFI_NS              ((NRF_BELLBOARD_Type*)                NRF_BELLBOARDWIFI_NS_BASE)
-#define NRF_BELLBOARDAPP_NS               ((NRF_BELLBOARD_Type*)                NRF_BELLBOARDAPP_NS_BASE)
+#define NRF_BELLBOARD_NS                  ((NRF_BELLBOARD_Type*)                NRF_BELLBOARD_NS_BASE)
 #define NRF_PULSEDET00_S                  ((NRF_PULSEDET_Type*)                 NRF_PULSEDET00_S_BASE)
 #define NRF_PULSEDET01_S                  ((NRF_PULSEDET_Type*)                 NRF_PULSEDET01_S_BASE)
 #define NRF_SREGS00_NS                    ((NRF_SREGS_Type*)                    NRF_SREGS00_NS_BASE)
@@ -477,10 +490,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_TEMP_S                        ((NRF_TEMP_Type*)                     NRF_TEMP_S_BASE)
 #define NRF_P1_NS                         ((NRF_GPIO_Type*)                     NRF_P1_NS_BASE)
 #define NRF_P3_NS                         ((NRF_GPIO_Type*)                     NRF_P3_NS_BASE)
-#define NRF_P9_NS                         ((NRF_GPIO_Type*)                     NRF_P9_NS_BASE)
+#define NRF_P4_NS                         ((NRF_GPIO_Type*)                     NRF_P4_NS_BASE)
 #define NRF_P1_S                          ((NRF_GPIO_Type*)                     NRF_P1_S_BASE)
 #define NRF_P3_S                          ((NRF_GPIO_Type*)                     NRF_P3_S_BASE)
-#define NRF_P9_S                          ((NRF_GPIO_Type*)                     NRF_P9_S_BASE)
+#define NRF_P4_S                          ((NRF_GPIO_Type*)                     NRF_P4_S_BASE)
 #define NRF_GPIOINTERNALP1_NS             ((NRF_GPIOINTERNAL_Type*)             NRF_GPIOINTERNALP1_NS_BASE)
 #define NRF_GPIOINTERNALP1_S              ((NRF_GPIOINTERNAL_Type*)             NRF_GPIOINTERNALP1_S_BASE)
 #define NRF_GPIOTE20_NS                   ((NRF_GPIOTE_Type*)                   NRF_GPIOTE20_NS_BASE)
@@ -496,6 +509,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_PCGCM20_S                     ((NRF_PCGCMASTER_Type*)               NRF_PCGCM20_S_BASE)
 #define NRF_TDM_NS                        ((NRF_TDM_Type*)                      NRF_TDM_NS_BASE)
 #define NRF_TDM_S                         ((NRF_TDM_Type*)                      NRF_TDM_S_BASE)
+#define NRF_AUXPLL_NS                     ((NRF_AUXPLL_Type*)                   NRF_AUXPLL_NS_BASE)
+#define NRF_AUXPM_NS                      ((NRF_AUXPM_Type*)                    NRF_AUXPM_NS_BASE)
+#define NRF_AUXPLL_S                      ((NRF_AUXPLL_Type*)                   NRF_AUXPLL_S_BASE)
+#define NRF_AUXPM_S                       ((NRF_AUXPM_Type*)                    NRF_AUXPM_S_BASE)
 #define NRF_PULSEDET20_S                  ((NRF_PULSEDET_Type*)                 NRF_PULSEDET20_S_BASE)
 #define NRF_SPIM23_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM23_NS_BASE)
 #define NRF_SPIS23_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS23_NS_BASE)
@@ -517,8 +534,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_TWIM24_S                      ((NRF_TWIM_Type*)                     NRF_TWIM24_S_BASE)
 #define NRF_TWIS24_S                      ((NRF_TWIS_Type*)                     NRF_TWIS24_S_BASE)
 #define NRF_UARTE24_S                     ((NRF_UARTE_Type*)                    NRF_UARTE24_S_BASE)
-#define NRF_MEMCONF_WIFI_S                ((NRF_MEMCONF_Type*)                  NRF_MEMCONF_WIFI_S_BASE)
 #define NRF_TAMPC_S                       ((NRF_TAMPC_Type*)                    NRF_TAMPC_S_BASE)
+#define NRF_MEMCONF_WIFI_NS               ((NRF_MEMCONF_Type*)                  NRF_MEMCONF_WIFI_NS_BASE)
+#define NRF_MEMCONF_WIFI_S                ((NRF_MEMCONF_Type*)                  NRF_MEMCONF_WIFI_S_BASE)
+#define NRF_COEXC_NS                      ((NRF_COEXC_Type*)                    NRF_COEXC_NS_BASE)
 #define NRF_COEXC_S                       ((NRF_COEXC_Type*)                    NRF_COEXC_S_BASE)
 #define NRF_SUPPORT20_S                   ((NRF_PCGCSLAVE_Type*)                NRF_SUPPORT20_S_BASE)
 #define NRF_SPU30_S                       ((NRF_SPU_Type*)                      NRF_SPU30_S_BASE)
@@ -558,6 +577,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SREGS30_NS                    ((NRF_SREGS_Type*)                    NRF_SREGS30_NS_BASE)
 #define NRF_SREGS30_S                     ((NRF_SREGS_Type*)                    NRF_SREGS30_S_BASE)
 #define NRF_PULSEDET30_S                  ((NRF_PULSEDET_Type*)                 NRF_PULSEDET30_S_BASE)
+#define NRF_GLITCHDET_S                   ((NRF_GLITCHDET_Type*)                NRF_GLITCHDET_S_BASE)
 #define NRF_PCGCS30_S                     ((NRF_PCGCSLAVE_Type*)                NRF_PCGCS30_S_BASE)
 #define NRF_SUPPORT30_S                   ((NRF_PCGCSLAVE_Type*)                NRF_SUPPORT30_S_BASE)
 #define NRF_OSCILLATORS_NS                ((NRF_OSCILLATORS_Type*)              NRF_OSCILLATORS_NS_BASE)
@@ -566,6 +586,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_REGULATORS_S                  ((NRF_REGULATORS_Type*)               NRF_REGULATORS_S_BASE)
 #define NRF_USBREG_NS                     ((NRF_VREGUSB_Type*)                  NRF_USBREG_NS_BASE)
 #define NRF_USBREG_S                      ((NRF_VREGUSB_Type*)                  NRF_USBREG_S_BASE)
+#define NRF_VREGMRAM_NS                   ((NRF_VREGMRAM_Type*)                 NRF_VREGMRAM_NS_BASE)
+#define NRF_VREGMRAM_S                    ((NRF_VREGMRAM_Type*)                 NRF_VREGMRAM_S_BASE)
+#define NRF_VREGAO1V8_NS                  ((NRF_VREGAO1V8_Type*)                NRF_VREGAO1V8_NS_BASE)
+#define NRF_VREGAO1V8_S                   ((NRF_VREGAO1V8_Type*)                NRF_VREGAO1V8_S_BASE)
+#define NRF_VREGAO0V8B_NS                 ((NRF_VREGAO0V8_Type*)                NRF_VREGAO0V8B_NS_BASE)
+#define NRF_VREGAO0V8B_S                  ((NRF_VREGAO0V8_Type*)                NRF_VREGAO0V8B_S_BASE)
+#define NRF_VREGAO0V8A_NS                 ((NRF_VREGVS0V8_Type*)                NRF_VREGAO0V8A_NS_BASE)
+#define NRF_VREGAO0V8A_S                  ((NRF_VREGVS0V8_Type*)                NRF_VREGAO0V8A_S_BASE)
+#define NRF_VREGSU_NS                     ((NRF_VREGSU_Type*)                   NRF_VREGSU_NS_BASE)
+#define NRF_VREGSU_S                      ((NRF_VREGSU_Type*)                   NRF_VREGSU_S_BASE)
 #define NRF_PCGCM30_S                     ((NRF_PCGCMASTER_Type*)               NRF_PCGCM30_S_BASE)
 
 /* =========================================================================================================================== */
@@ -592,12 +622,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_AXONS                               NRF_AXONS_NS
   #define NRF_EGU00                               NRF_EGU00_NS
   #define NRF_USBHS                               NRF_USBHS_NS
-  #define NRF_QSPI00                              NRF_QSPI00_NS
-  #define NRF_QSPI01                              NRF_QSPI01_NS
+  #define NRF_QSPI0                               NRF_QSPI0_NS
+  #define NRF_QSPI1                               NRF_QSPI1_NS
   #define NRF_SPIM01                              NRF_SPIM01_NS
   #define NRF_SPIM02                              NRF_SPIM02_NS
-  #define NRF_BELLBOARDWIFI                       NRF_BELLBOARDWIFI_NS
-  #define NRF_BELLBOARDAPP                        NRF_BELLBOARDAPP_NS
+  #define NRF_BELLBOARD                           NRF_BELLBOARD_NS
   #define NRF_SREGS00                             NRF_SREGS00_NS
   #define NRF_DPPIC10                             NRF_DPPIC10_NS
   #define NRF_PPIB10                              NRF_PPIB10_NS
@@ -643,7 +672,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TEMP                                NRF_TEMP_NS
   #define NRF_P1                                  NRF_P1_NS
   #define NRF_P3                                  NRF_P3_NS
-  #define NRF_P9                                  NRF_P9_NS
+  #define NRF_P4                                  NRF_P4_NS
   #define NRF_GPIOINTERNALP1                      NRF_GPIOINTERNALP1_NS
   #define NRF_GPIOTE20                            NRF_GPIOTE20_NS
   #define NRF_QDEC20                              NRF_QDEC20_NS
@@ -651,6 +680,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_GRTC                                NRF_GRTC_NS
   #define NRF_SREGS20                             NRF_SREGS20_NS
   #define NRF_TDM                                 NRF_TDM_NS
+  #define NRF_AUXPLL                              NRF_AUXPLL_NS
+  #define NRF_AUXPM                               NRF_AUXPM_NS
   #define NRF_SPIM23                              NRF_SPIM23_NS
   #define NRF_SPIS23                              NRF_SPIS23_NS
   #define NRF_TWIM23                              NRF_TWIM23_NS
@@ -661,6 +692,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TWIM24                              NRF_TWIM24_NS
   #define NRF_TWIS24                              NRF_TWIS24_NS
   #define NRF_UARTE24                             NRF_UARTE24_NS
+  #define NRF_MEMCONF_WIFI                        NRF_MEMCONF_WIFI_NS
+  #define NRF_COEXC                               NRF_COEXC_NS
   #define NRF_DPPIC30                             NRF_DPPIC30_NS
   #define NRF_PPIB30                              NRF_PPIB30_NS
   #define NRF_SPIM30                              NRF_SPIM30_NS
@@ -681,6 +714,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_OSCILLATORS                         NRF_OSCILLATORS_NS
   #define NRF_REGULATORS                          NRF_REGULATORS_NS
   #define NRF_USBREG                              NRF_USBREG_NS
+  #define NRF_VREGMRAM                            NRF_VREGMRAM_NS
+  #define NRF_VREGAO1V8                           NRF_VREGAO1V8_NS
+  #define NRF_VREGAO0V8B                          NRF_VREGAO0V8B_NS
+  #define NRF_VREGAO0V8A                          NRF_VREGAO0V8A_NS
+  #define NRF_VREGSU                              NRF_VREGSU_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
   #define NRF_FICR                                NRF_FICR_NS
   #define NRF_UICR                                NRF_UICR_S
@@ -698,7 +736,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_VPR00                               NRF_VPR00_S
   #define NRF_SPIM00                              NRF_SPIM00_S
   #define NRF_UARTE00                             NRF_UARTE00_S
-  #define NRF_GLITCHDET                           NRF_GLITCHDET_S
   #define NRF_MRAMC                               NRF_MRAMC_S
   #define NRF_GPIOHSPADCTRL                       NRF_GPIOHSPADCTRL_S
   #define NRF_P2                                  NRF_P2_S
@@ -710,13 +747,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_EGU00                               NRF_EGU00_S
   #define NRF_CRACEN                              NRF_CRACEN_S
   #define NRF_USBHS                               NRF_USBHS_S
-  #define NRF_QSPI00                              NRF_QSPI00_S
-  #define NRF_QSPI01                              NRF_QSPI01_S
+  #define NRF_QSPI0                               NRF_QSPI0_S
+  #define NRF_QSPI1                               NRF_QSPI1_S
   #define NRF_SPIM01                              NRF_SPIM01_S
   #define NRF_SPIM02                              NRF_SPIM02_S
   #define NRF_CPUCONF                             NRF_CPUCONF_S
-  #define NRF_BELLBOARDWIFI                       NRF_BELLBOARDWIFI_NS
-  #define NRF_BELLBOARDAPP                        NRF_BELLBOARDAPP_NS
+  #define NRF_BELLBOARD                           NRF_BELLBOARD_NS
   #define NRF_PULSEDET00                          NRF_PULSEDET00_S
   #define NRF_PULSEDET01                          NRF_PULSEDET01_S
   #define NRF_SREGS00                             NRF_SREGS00_S
@@ -769,7 +805,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TEMP                                NRF_TEMP_S
   #define NRF_P1                                  NRF_P1_S
   #define NRF_P3                                  NRF_P3_S
-  #define NRF_P9                                  NRF_P9_S
+  #define NRF_P4                                  NRF_P4_S
   #define NRF_GPIOINTERNALP1                      NRF_GPIOINTERNALP1_S
   #define NRF_GPIOTE20                            NRF_GPIOTE20_S
   #define NRF_QDEC20                              NRF_QDEC20_S
@@ -778,6 +814,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_SREGS20                             NRF_SREGS20_S
   #define NRF_PCGCM20                             NRF_PCGCM20_S
   #define NRF_TDM                                 NRF_TDM_S
+  #define NRF_AUXPLL                              NRF_AUXPLL_S
+  #define NRF_AUXPM                               NRF_AUXPM_S
   #define NRF_PULSEDET20                          NRF_PULSEDET20_S
   #define NRF_SPIM23                              NRF_SPIM23_S
   #define NRF_SPIS23                              NRF_SPIS23_S
@@ -789,8 +827,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TWIM24                              NRF_TWIM24_S
   #define NRF_TWIS24                              NRF_TWIS24_S
   #define NRF_UARTE24                             NRF_UARTE24_S
-  #define NRF_MEMCONF_WIFI                        NRF_MEMCONF_WIFI_S
   #define NRF_TAMPC                               NRF_TAMPC_S
+  #define NRF_MEMCONF_WIFI                        NRF_MEMCONF_WIFI_S
   #define NRF_COEXC                               NRF_COEXC_S
   #define NRF_SUPPORT20                           NRF_SUPPORT20_S
   #define NRF_SPU30                               NRF_SPU30_S
@@ -813,11 +851,17 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_RESET                               NRF_RESET_S
   #define NRF_SREGS30                             NRF_SREGS30_S
   #define NRF_PULSEDET30                          NRF_PULSEDET30_S
+  #define NRF_GLITCHDET                           NRF_GLITCHDET_S
   #define NRF_PCGCS30                             NRF_PCGCS30_S
   #define NRF_SUPPORT30                           NRF_SUPPORT30_S
   #define NRF_OSCILLATORS                         NRF_OSCILLATORS_S
   #define NRF_REGULATORS                          NRF_REGULATORS_S
   #define NRF_USBREG                              NRF_USBREG_S
+  #define NRF_VREGMRAM                            NRF_VREGMRAM_S
+  #define NRF_VREGAO1V8                           NRF_VREGAO1V8_S
+  #define NRF_VREGAO0V8B                          NRF_VREGAO0V8B_S
+  #define NRF_VREGAO0V8A                          NRF_VREGAO0V8A_S
+  #define NRF_VREGSU                              NRF_VREGSU_S
   #define NRF_PCGCM30                             NRF_PCGCM30_S
 #endif                                               /*!< NRF_TRUSTZONE_NONSECURE                                              */
 

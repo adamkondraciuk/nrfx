@@ -178,8 +178,8 @@ __vector_table
         DCD     EGU00_IRQHandler
         DCD     CRACEN_IRQHandler
         DCD     USBHS_IRQHandler
-        DCD     QSPI00_IRQHandler
-        DCD     QSPI01_IRQHandler
+        DCD     QSPI0_IRQHandler
+        DCD     QSPI1_IRQHandler
         DCD     SERIAL01_IRQHandler
         DCD     SERIAL02_IRQHandler
         DCD     0                         ; Reserved
@@ -203,12 +203,12 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     BELLBOARDWIFI_0_IRQHandler
-        DCD     BELLBOARDWIFI_1_IRQHandler
-        DCD     BELLBOARDWIFI_2_IRQHandler
-        DCD     BELLBOARDWIFI_3_IRQHandler
-        DCD     BELLBOARDAPP_0_IRQHandler
-        DCD     BELLBOARDAPP_1_IRQHandler
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     BELLBOARD_0_IRQHandler
+        DCD     BELLBOARD_1_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -322,7 +322,7 @@ __vector_table
         DCD     TDM_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     AUXPLL_AUXPM_IRQHandler
         DCD     0                         ; Reserved
         DCD     SERIAL23_IRQHandler
         DCD     SERIAL24_IRQHandler
@@ -377,6 +377,13 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     USBREG_IRQHandler
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     VREGMRAM_IRQHandler
+        DCD     VREGAO1V8_IRQHandler
+        DCD     VREGAO0V8B_IRQHandler
+        DCD     VREGAO0V8A_IRQHandler
 
 __Vectors_End
 __Vectors                           EQU   __vector_table
@@ -547,14 +554,14 @@ CRACEN_IRQHandler
 USBHS_IRQHandler
         j .
 
-        PUBWEAK  QSPI00_IRQHandler
+        PUBWEAK  QSPI0_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-QSPI00_IRQHandler
+QSPI0_IRQHandler
         j .
 
-        PUBWEAK  QSPI01_IRQHandler
+        PUBWEAK  QSPI1_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-QSPI01_IRQHandler
+QSPI1_IRQHandler
         j .
 
         PUBWEAK  SERIAL01_IRQHandler
@@ -567,34 +574,14 @@ SERIAL01_IRQHandler
 SERIAL02_IRQHandler
         j .
 
-        PUBWEAK  BELLBOARDWIFI_0_IRQHandler
+        PUBWEAK  BELLBOARD_0_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-BELLBOARDWIFI_0_IRQHandler
+BELLBOARD_0_IRQHandler
         j .
 
-        PUBWEAK  BELLBOARDWIFI_1_IRQHandler
+        PUBWEAK  BELLBOARD_1_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-BELLBOARDWIFI_1_IRQHandler
-        j .
-
-        PUBWEAK  BELLBOARDWIFI_2_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-BELLBOARDWIFI_2_IRQHandler
-        j .
-
-        PUBWEAK  BELLBOARDWIFI_3_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-BELLBOARDWIFI_3_IRQHandler
-        j .
-
-        PUBWEAK  BELLBOARDAPP_0_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-BELLBOARDAPP_0_IRQHandler
-        j .
-
-        PUBWEAK  BELLBOARDAPP_1_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-BELLBOARDAPP_1_IRQHandler
+BELLBOARD_1_IRQHandler
         j .
 
         PUBWEAK  SPU10_IRQHandler
@@ -777,6 +764,11 @@ GRTC_5_IRQHandler
 TDM_IRQHandler
         j .
 
+        PUBWEAK  AUXPLL_AUXPM_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+AUXPLL_AUXPM_IRQHandler
+        j .
+
         PUBWEAK  SERIAL23_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 SERIAL23_IRQHandler
@@ -835,6 +827,26 @@ CLOCK_POWER_IRQHandler
         PUBWEAK  USBREG_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 USBREG_IRQHandler
+        j .
+
+        PUBWEAK  VREGMRAM_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+VREGMRAM_IRQHandler
+        j .
+
+        PUBWEAK  VREGAO1V8_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+VREGAO1V8_IRQHandler
+        j .
+
+        PUBWEAK  VREGAO0V8B_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+VREGAO0V8B_IRQHandler
+        j .
+
+        PUBWEAK  VREGAO0V8A_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+VREGAO0V8A_IRQHandler
         j .
 
         END

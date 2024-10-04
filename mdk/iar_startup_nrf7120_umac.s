@@ -103,11 +103,6 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
         DCD     UMACCLIC_16_IRQHandler
         DCD     UMACCLIC_17_IRQHandler
         DCD     UMACCLIC_18_IRQHandler
@@ -116,9 +111,14 @@ __vector_table
         DCD     UMACCLIC_21_IRQHandler
         DCD     UMACCLIC_22_IRQHandler
         DCD     UMACCLIC_23_IRQHandler
-        DCD     UMACCLIC_24_IRQHandler
-        DCD     UMACCLIC_25_IRQHandler
-        DCD     UMACCLIC_26_IRQHandler
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
         DCD     RPU_0_IRQHandler
         DCD     RPU_1_IRQHandler
         DCD     RPU_2_IRQHandler
@@ -675,21 +675,6 @@ UMACCLIC_22_IRQHandler
         PUBWEAK  UMACCLIC_23_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 UMACCLIC_23_IRQHandler
-        j .
-
-        PUBWEAK  UMACCLIC_24_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-UMACCLIC_24_IRQHandler
-        j .
-
-        PUBWEAK  UMACCLIC_25_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-UMACCLIC_25_IRQHandler
-        j .
-
-        PUBWEAK  UMACCLIC_26_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-UMACCLIC_26_IRQHandler
         j .
 
         PUBWEAK  RPU_0_IRQHandler

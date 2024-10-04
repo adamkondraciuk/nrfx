@@ -366,8 +366,8 @@ __isr_vector:
     .long   EGU00_IRQHandler
     .long   CRACEN_IRQHandler
     .long   USBHS_IRQHandler
-    .long   QSPI00_IRQHandler
-    .long   QSPI01_IRQHandler
+    .long   QSPI0_IRQHandler
+    .long   QSPI1_IRQHandler
     .long   SERIAL01_IRQHandler
     .long   SERIAL02_IRQHandler
     .long   0                           /*Reserved */
@@ -391,12 +391,12 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   BELLBOARDWIFI_0_IRQHandler
-    .long   BELLBOARDWIFI_1_IRQHandler
-    .long   BELLBOARDWIFI_2_IRQHandler
-    .long   BELLBOARDWIFI_3_IRQHandler
-    .long   BELLBOARDAPP_0_IRQHandler
-    .long   BELLBOARDAPP_1_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   BELLBOARD_0_IRQHandler
+    .long   BELLBOARD_1_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -510,7 +510,7 @@ __isr_vector:
     .long   TDM_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   AUXPLL_AUXPM_IRQHandler
     .long   0                           /*Reserved */
     .long   SERIAL23_IRQHandler
     .long   SERIAL24_IRQHandler
@@ -565,6 +565,13 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   USBREG_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   VREGMRAM_IRQHandler
+    .long   VREGAO1V8_IRQHandler
+    .long   VREGAO0V8B_IRQHandler
+    .long   VREGAO0V8A_IRQHandler
 
     .size __isr_vector, . - __isr_vector
 
@@ -675,16 +682,12 @@ Default_Handler:
     IRQ  EGU00_IRQHandler
     IRQ  CRACEN_IRQHandler
     IRQ  USBHS_IRQHandler
-    IRQ  QSPI00_IRQHandler
-    IRQ  QSPI01_IRQHandler
+    IRQ  QSPI0_IRQHandler
+    IRQ  QSPI1_IRQHandler
     IRQ  SERIAL01_IRQHandler
     IRQ  SERIAL02_IRQHandler
-    IRQ  BELLBOARDWIFI_0_IRQHandler
-    IRQ  BELLBOARDWIFI_1_IRQHandler
-    IRQ  BELLBOARDWIFI_2_IRQHandler
-    IRQ  BELLBOARDWIFI_3_IRQHandler
-    IRQ  BELLBOARDAPP_0_IRQHandler
-    IRQ  BELLBOARDAPP_1_IRQHandler
+    IRQ  BELLBOARD_0_IRQHandler
+    IRQ  BELLBOARD_1_IRQHandler
     IRQ  SPU10_IRQHandler
     IRQ  TIMER10_IRQHandler
     IRQ  EGU10_IRQHandler
@@ -721,6 +724,7 @@ Default_Handler:
     IRQ  GRTC_4_IRQHandler
     IRQ  GRTC_5_IRQHandler
     IRQ  TDM_IRQHandler
+    IRQ  AUXPLL_AUXPM_IRQHandler
     IRQ  SERIAL23_IRQHandler
     IRQ  SERIAL24_IRQHandler
     IRQ  TAMPC_IRQHandler
@@ -733,5 +737,9 @@ Default_Handler:
     IRQ  GPIOTE30_1_IRQHandler
     IRQ  CLOCK_POWER_IRQHandler
     IRQ  USBREG_IRQHandler
+    IRQ  VREGMRAM_IRQHandler
+    IRQ  VREGAO1V8_IRQHandler
+    IRQ  VREGAO0V8B_IRQHandler
+    IRQ  VREGAO0V8A_IRQHandler
 
   .end

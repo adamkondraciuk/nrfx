@@ -103,9 +103,6 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void LMACCLIC_21_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void LMACCLIC_22_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void LMACCLIC_23_IRQHandler                                      (void);
- __HANDLER("Default_Handler") void LMACCLIC_24_IRQHandler                                      (void);
- __HANDLER("Default_Handler") void LMACCLIC_25_IRQHandler                                      (void);
- __HANDLER("Default_Handler") void LMACCLIC_26_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void RPU_0_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void RPU_1_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void RPU_2_IRQHandler                                            (void);
@@ -170,10 +167,6 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    0,
-    0,
-    0,
-    0,
     LMACCLIC_16_IRQHandler,
     LMACCLIC_17_IRQHandler,
     LMACCLIC_18_IRQHandler,
@@ -182,9 +175,13 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     LMACCLIC_21_IRQHandler,
     LMACCLIC_22_IRQHandler,
     LMACCLIC_23_IRQHandler,
-    LMACCLIC_24_IRQHandler,
-    LMACCLIC_25_IRQHandler,
-    LMACCLIC_26_IRQHandler,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     0,
     RPU_0_IRQHandler,
     RPU_1_IRQHandler,

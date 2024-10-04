@@ -1148,11 +1148,11 @@
 #if defined(NRF7120_XXAA)
 
 
-    #define P1_FEATURE_PINS_PRESENT ((1<<P1_PIN_NUM_SIZE)-1)
-    #define P2_FEATURE_PINS_PRESENT ((1<<P2_PIN_NUM_SIZE)-1)
-    #define P3_FEATURE_PINS_PRESENT ((1<<P3_PIN_NUM_SIZE)-1)
-    #define P9_FEATURE_PINS_PRESENT ((1<<P9_PIN_NUM_SIZE)-1)
-    #define P0_FEATURE_PINS_PRESENT ((1<<P0_PIN_NUM_SIZE)-1)
+    // #define P1_FEATURE_PINS_PRESENT ((1<<P1_PIN_NUM_SIZE)-1)
+    // #define P2_FEATURE_PINS_PRESENT ((1<<P2_PIN_NUM_SIZE)-1)
+    // #define P3_FEATURE_PINS_PRESENT ((1<<P3_PIN_NUM_SIZE)-1)
+    // #define P9_FEATURE_PINS_PRESENT ((1<<P9_PIN_NUM_SIZE)-1)
+    // #define P0_FEATURE_PINS_PRESENT ((1<<P0_PIN_NUM_SIZE)-1)
 
     #define EASYVDMA_PRESENT
     #define VDMADESCRIPTOR_CONFIG_CNT_Pos (0UL)        /*!< Position of CNT field.                                               */
@@ -1181,9 +1181,9 @@
 
     #define LPCOMP_REFSEL_RESOLUTION 16
 
-    #define MPC_MASTER_PORTS_MaxCount (15UL) /*!< Max number of master ports. */
+    #define MPC_MASTER_PORTS_MaxCount (12UL) /*!< Max number of master ports. */
 
-    #define NRF_DOMAIN_COUNT (NRF_DOMAIN_NONE + 1)
+    #define NRF_DOMAIN_COUNT (NRF_DOMAIN_SYSTEM + 1)
     #define SAADC_CH_NUM SAADC_CH_MaxCount
 
     #define PPIB_CHANNEL_MAX_COUNT 24UL
@@ -1241,7 +1241,7 @@
     #define P1_PIN_NUM P1_PIN_NUM_SIZE
     #define P2_PIN_NUM P2_PIN_NUM_SIZE
     #define P3_PIN_NUM P3_PIN_NUM_SIZE
-    #define P9_PIN_NUM P9_PIN_NUM_SIZE
+    #define P4_PIN_NUM P4_PIN_NUM_SIZE
 
 
     #define NRFX_GPPI_PROG_APP_CHANNELS_NUM  NRFX_BIT_SIZE(sizeof(uint32_t))

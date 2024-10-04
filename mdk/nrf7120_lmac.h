@@ -57,17 +57,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 typedef enum {
 /* ===================================================== Core Interrupts ===================================================== */
 /* ============================================== Processor Specific Interrupts ============================================== */
-  LMACCLIC_16_IRQn                       = 20,       /*!< 20 LMACCLIC_16                                                       */
-  LMACCLIC_17_IRQn                       = 21,       /*!< 21 LMACCLIC_17                                                       */
-  LMACCLIC_18_IRQn                       = 22,       /*!< 22 LMACCLIC_18                                                       */
-  LMACCLIC_19_IRQn                       = 23,       /*!< 23 LMACCLIC_19                                                       */
-  LMACCLIC_20_IRQn                       = 24,       /*!< 24 LMACCLIC_20                                                       */
-  LMACCLIC_21_IRQn                       = 25,       /*!< 25 LMACCLIC_21                                                       */
-  LMACCLIC_22_IRQn                       = 26,       /*!< 26 LMACCLIC_22                                                       */
-  LMACCLIC_23_IRQn                       = 27,       /*!< 27 LMACCLIC_23                                                       */
-  LMACCLIC_24_IRQn                       = 28,       /*!< 28 LMACCLIC_24                                                       */
-  LMACCLIC_25_IRQn                       = 29,       /*!< 29 LMACCLIC_25                                                       */
-  LMACCLIC_26_IRQn                       = 30,       /*!< 30 LMACCLIC_26                                                       */
+  LMACCLIC_16_IRQn                       = 16,       /*!< 16 LMACCLIC_16                                                       */
+  LMACCLIC_17_IRQn                       = 17,       /*!< 17 LMACCLIC_17                                                       */
+  LMACCLIC_18_IRQn                       = 18,       /*!< 18 LMACCLIC_18                                                       */
+  LMACCLIC_19_IRQn                       = 19,       /*!< 19 LMACCLIC_19                                                       */
+  LMACCLIC_20_IRQn                       = 20,       /*!< 20 LMACCLIC_20                                                       */
+  LMACCLIC_21_IRQn                       = 21,       /*!< 21 LMACCLIC_21                                                       */
+  LMACCLIC_22_IRQn                       = 22,       /*!< 22 LMACCLIC_22                                                       */
+  LMACCLIC_23_IRQn                       = 23,       /*!< 23 LMACCLIC_23                                                       */
   RPU_0_IRQn                             = 32,       /*!< 32 RPU_0                                                             */
   RPU_1_IRQn                             = 33,       /*!< 33 RPU_1                                                             */
   RPU_2_IRQn                             = 34,       /*!< 34 RPU_2                                                             */

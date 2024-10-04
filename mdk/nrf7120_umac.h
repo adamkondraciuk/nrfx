@@ -57,17 +57,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 typedef enum {
 /* ===================================================== Core Interrupts ===================================================== */
 /* ============================================== Processor Specific Interrupts ============================================== */
-  UMACCLIC_16_IRQn                       = 21,       /*!< 21 UMACCLIC_16                                                       */
-  UMACCLIC_17_IRQn                       = 22,       /*!< 22 UMACCLIC_17                                                       */
-  UMACCLIC_18_IRQn                       = 23,       /*!< 23 UMACCLIC_18                                                       */
-  UMACCLIC_19_IRQn                       = 24,       /*!< 24 UMACCLIC_19                                                       */
-  UMACCLIC_20_IRQn                       = 25,       /*!< 25 UMACCLIC_20                                                       */
-  UMACCLIC_21_IRQn                       = 26,       /*!< 26 UMACCLIC_21                                                       */
-  UMACCLIC_22_IRQn                       = 27,       /*!< 27 UMACCLIC_22                                                       */
-  UMACCLIC_23_IRQn                       = 28,       /*!< 28 UMACCLIC_23                                                       */
-  UMACCLIC_24_IRQn                       = 29,       /*!< 29 UMACCLIC_24                                                       */
-  UMACCLIC_25_IRQn                       = 30,       /*!< 30 UMACCLIC_25                                                       */
-  UMACCLIC_26_IRQn                       = 31,       /*!< 31 UMACCLIC_26                                                       */
+  UMACCLIC_16_IRQn                       = 16,       /*!< 16 UMACCLIC_16                                                       */
+  UMACCLIC_17_IRQn                       = 17,       /*!< 17 UMACCLIC_17                                                       */
+  UMACCLIC_18_IRQn                       = 18,       /*!< 18 UMACCLIC_18                                                       */
+  UMACCLIC_19_IRQn                       = 19,       /*!< 19 UMACCLIC_19                                                       */
+  UMACCLIC_20_IRQn                       = 20,       /*!< 20 UMACCLIC_20                                                       */
+  UMACCLIC_21_IRQn                       = 21,       /*!< 21 UMACCLIC_21                                                       */
+  UMACCLIC_22_IRQn                       = 22,       /*!< 22 UMACCLIC_22                                                       */
+  UMACCLIC_23_IRQn                       = 23,       /*!< 23 UMACCLIC_23                                                       */
   RPU_0_IRQn                             = 32,       /*!< 32 RPU_0                                                             */
   RPU_1_IRQn                             = 33,       /*!< 33 RPU_1                                                             */
   RPU_2_IRQn                             = 34,       /*!< 34 RPU_2                                                             */

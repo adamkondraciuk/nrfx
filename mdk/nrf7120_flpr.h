@@ -77,16 +77,12 @@ typedef enum {
   EGU00_IRQn                             = 88,       /*!< 88 EGU00                                                             */
   CRACEN_IRQn                            = 89,       /*!< 89 CRACEN                                                            */
   USBHS_IRQn                             = 90,       /*!< 90 USBHS                                                             */
-  QSPI00_IRQn                            = 91,       /*!< 91 QSPI00                                                            */
-  QSPI01_IRQn                            = 92,       /*!< 92 QSPI01                                                            */
+  QSPI0_IRQn                             = 91,       /*!< 91 QSPI0                                                             */
+  QSPI1_IRQn                             = 92,       /*!< 92 QSPI1                                                             */
   SERIAL01_IRQn                          = 93,       /*!< 93 SERIAL01                                                          */
   SERIAL02_IRQn                          = 94,       /*!< 94 SERIAL02                                                          */
-  BELLBOARDWIFI_0_IRQn                   = 116,      /*!< 116 BELLBOARDWIFI_0                                                  */
-  BELLBOARDWIFI_1_IRQn                   = 117,      /*!< 117 BELLBOARDWIFI_1                                                  */
-  BELLBOARDWIFI_2_IRQn                   = 118,      /*!< 118 BELLBOARDWIFI_2                                                  */
-  BELLBOARDWIFI_3_IRQn                   = 119,      /*!< 119 BELLBOARDWIFI_3                                                  */
-  BELLBOARDAPP_0_IRQn                    = 120,      /*!< 120 BELLBOARDAPP_0                                                   */
-  BELLBOARDAPP_1_IRQn                    = 121,      /*!< 121 BELLBOARDAPP_1                                                   */
+  BELLBOARD_0_IRQn                       = 120,      /*!< 120 BELLBOARD_0                                                      */
+  BELLBOARD_1_IRQn                       = 121,      /*!< 121 BELLBOARD_1                                                      */
   SPU10_IRQn                             = 128,      /*!< 128 SPU10                                                            */
   TIMER10_IRQn                           = 133,      /*!< 133 TIMER10                                                          */
   EGU10_IRQn                             = 135,      /*!< 135 EGU10                                                            */
@@ -123,6 +119,7 @@ typedef enum {
   GRTC_4_IRQn                            = 230,      /*!< 230 GRTC_4                                                           */
   GRTC_5_IRQn                            = 231,      /*!< 231 GRTC_5                                                           */
   TDM_IRQn                               = 232,      /*!< 232 TDM                                                              */
+  AUXPLL_AUXPM_IRQn                      = 235,      /*!< 235 AUXPLL_AUXPM                                                     */
   SERIAL23_IRQn                          = 237,      /*!< 237 SERIAL23                                                         */
   SERIAL24_IRQn                          = 238,      /*!< 238 SERIAL24                                                         */
   TAMPC_IRQn                             = 239,      /*!< 239 TAMPC                                                            */
@@ -135,6 +132,10 @@ typedef enum {
   GPIOTE30_1_IRQn                        = 269,      /*!< 269 GPIOTE30_1                                                       */
   CLOCK_POWER_IRQn                       = 270,      /*!< 270 CLOCK_POWER                                                      */
   USBREG_IRQn                            = 289,      /*!< 289 USBREG                                                           */
+  VREGMRAM_IRQn                          = 293,      /*!< 293 VREGMRAM                                                         */
+  VREGAO1V8_IRQn                         = 294,      /*!< 294 VREGAO1V8                                                        */
+  VREGAO0V8B_IRQn                        = 295,      /*!< 295 VREGAO0V8B                                                       */
+  VREGAO0V8A_IRQn                        = 296,      /*!< 296 VREGAO0V8A                                                       */
 } IRQn_Type;
 
 /* ==================================================== Interrupt Aliases ==================================================== */
@@ -180,6 +181,10 @@ typedef enum {
 #define TWIS22_IRQHandler             SERIAL22_IRQHandler
 #define UARTE22_IRQn                  SERIAL22_IRQn
 #define UARTE22_IRQHandler            SERIAL22_IRQHandler
+#define AUXPLL_IRQn                   AUXPLL_AUXPM_IRQn
+#define AUXPLL_IRQHandler             AUXPLL_AUXPM_IRQHandler
+#define AUXPM_IRQn                    AUXPLL_AUXPM_IRQn
+#define AUXPM_IRQHandler              AUXPLL_AUXPM_IRQHandler
 #define SPIM23_IRQn                   SERIAL23_IRQn
 #define SPIM23_IRQHandler             SERIAL23_IRQHandler
 #define SPIS23_IRQn                   SERIAL23_IRQn
@@ -245,7 +250,7 @@ typedef enum {
 
 #ifdef NRF_FLPR
 
-  #define NRF_DOMAIN                    NRF_DOMAIN_NONE
+  #define NRF_DOMAIN                    NRF_DOMAIN_SYSTEM
   #define NRF_PROCESSOR                 NRF_PROCESSOR_VPR
 
 #endif                                               /*!< NRF_FLPR                                                             */
