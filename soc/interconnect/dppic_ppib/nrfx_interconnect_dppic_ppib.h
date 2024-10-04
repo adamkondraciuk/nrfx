@@ -3,7 +3,7 @@
 #ifndef NRFX_INTERCONNECT_DPPIC_PPIB_H__
 #define NRFX_INTERCONNECT_DPPIC_PPIB_H__
 
-#include <hal/nrf_dppi.h>
+#include <nrfx_dppi.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,8 +36,12 @@ typedef struct
 typedef struct
 {
     uint8_t          apb_index;                          ///< APB index to which DPPIC belongs.
+#if (NRFX_API_VER_AT_LEAST(3, 8, 0) && !defined(NRF54L15_ENGA_XXAA)) || defined(__NRFX_DOXYGEN__)
+    nrfx_dppi_t      dppic;                              ///< DPPIC peripheral that belongs to a given domain.
+#else
     NRF_DPPIC_Type * dppic;                              ///< DPPIC peripheral that belongs to a given domain.
     nrfx_atomic_t    channels_mask;                      ///< Mask of configurable DPPIC channels.
+#endif
     uint8_t          allocate_flag[NRF_DPPI_CH_NUM_MAX]; ///< Virtual channels assigned to each of DPPIC channels.
     uint32_t         apb_size;                           ///< Size of APB.
 } nrfx_interconnect_dppic_t;

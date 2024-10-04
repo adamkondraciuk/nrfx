@@ -20,6 +20,14 @@ extern "C" {
                                             NRFX_INTERCONNECT_PPIB_TASKS_GET(SECOND_PPIB_INDEX))), \
 }
 
+#if NRFX_API_VER_AT_LEAST(3, 8, 0) && !defined(NRF54L15_ENGA_XXAA)
+#define DPPI_INSTANCE(idx) .dppic = NRFX_DPPI_INSTANCE(idx)
+#else
+#define DPPI_INSTANCE(idx)                                          \
+    .dppic         = NRFX_CONCAT(NRF_DPPIC, idx),                   \
+    .channels_mask = NRFX_BIT_MASK(NRFX_CONCAT(DPPIC, idx, _CH_NUM))
+#endif
+
 #if (defined (NRF54L15_XXAA) || defined (NRF54L15_ENGA_XXAA))
 
 #define NRFX_INTERCONNECT_PPIB_MAP  \
@@ -66,32 +74,28 @@ extern "C" {
     },                                   \
 }
 
-#define NRFX_INTERCONNECT_DPPIC_MAP                     \
-{                                                       \
-    {                                                   \
-        .apb_index     = NRF_APB_INDEX_MCU,             \
-        .dppic         = NRF_DPPIC00,                   \
-        .channels_mask = NRFX_BIT_MASK(DPPIC00_CH_NUM), \
-        .apb_size      = 0x40000                        \
-    },                                                  \
-    {                                                   \
-        .apb_index     = NRF_APB_INDEX_RADIO,           \
-        .dppic         = NRF_DPPIC10,                   \
-        .channels_mask = NRFX_BIT_MASK(DPPIC10_CH_NUM), \
-        .apb_size      = 0x40000                        \
-    },                                                  \
-    {                                                   \
-        .apb_index     = NRF_APB_INDEX_PERI,            \
-        .dppic         = NRF_DPPIC20,                   \
-        .channels_mask = NRFX_BIT_MASK(DPPIC20_CH_NUM), \
-        .apb_size      = 0x40000                        \
-    },                                                  \
-    {                                                   \
-        .apb_index     = NRF_APB_INDEX_LP,              \
-        .dppic         = NRF_DPPIC30,                   \
-        .channels_mask = NRFX_BIT_MASK(DPPIC30_CH_NUM), \
-        .apb_size      = 0x40000                        \
-    },                                                  \
+#define NRFX_INTERCONNECT_DPPIC_MAP                        \
+{                                                          \
+    {                                                      \
+        .apb_index     = NRF_APB_INDEX_MCU,                \
+        DPPI_INSTANCE(00),                                 \
+        .apb_size      = 0x40000                           \
+    },                                                     \
+    {                                                      \
+        .apb_index     = NRF_APB_INDEX_RADIO,              \
+        DPPI_INSTANCE(10),                                 \
+        .apb_size      = 0x40000                           \
+    },                                                     \
+    {                                                      \
+        .apb_index     = NRF_APB_INDEX_PERI,               \
+        DPPI_INSTANCE(20),                                 \
+        .apb_size      = 0x40000                           \
+    },                                                     \
+    {                                                      \
+        .apb_index     = NRF_APB_INDEX_LP,                 \
+        DPPI_INSTANCE(30),                                 \
+        .apb_size      = 0x40000                           \
+    },                                                     \
 }
 
 #elif defined (NRF54L20_ENGA_XXAA)
@@ -158,38 +162,33 @@ extern "C" {
     },                                   \
 }
 
-#define NRFX_INTERCONNECT_DPPIC_MAP                     \
-{                                                       \
-    {                                                   \
-        .apb_index     = 0,                             \
-        .dppic         = NRF_DPPIC01,                   \
-        .channels_mask = NRFX_BIT_MASK(DPPIC01_CH_NUM), \
-        .apb_size      = 0x40000                        \
-    },                                                  \
-    {                                                   \
-        .apb_index     = NRF_APB_INDEX_MCU,             \
-        .dppic         = NRF_DPPIC00,                   \
-        .channels_mask = NRFX_BIT_MASK(DPPIC00_CH_NUM), \
-        .apb_size      = 0x40000                        \
-    },                                                  \
-    {                                                   \
-        .apb_index     = NRF_APB_INDEX_RADIO,           \
-        .dppic         = NRF_DPPIC10,                   \
-        .channels_mask = NRFX_BIT_MASK(DPPIC10_CH_NUM), \
-        .apb_size      = 0x40000                        \
-    },                                                  \
-    {                                                   \
-        .apb_index     = NRF_APB_INDEX_PERI,            \
-        .dppic         = NRF_DPPIC20,                   \
-        .channels_mask = NRFX_BIT_MASK(DPPIC20_CH_NUM), \
-        .apb_size      = 0x40000                        \
-    },                                                  \
-    {                                                   \
-        .apb_index     = NRF_APB_INDEX_LP,              \
-        .dppic         = NRF_DPPIC30,                   \
-        .channels_mask = NRFX_BIT_MASK(DPPIC30_CH_NUM), \
-        .apb_size      = 0x40000                        \
-    },                                                  \
+#define NRFX_INTERCONNECT_DPPIC_MAP                        \
+{                                                          \
+    {                                                      \
+        .apb_index     = 0,                                \
+        DPPI_INSTANCE(01),                                 \
+        .apb_size      = 0x40000                           \
+    },                                                     \
+    {                                                      \
+        .apb_index     = NRF_APB_INDEX_MCU,                \
+        DPPI_INSTANCE(00),                                 \
+        .apb_size      = 0x40000                           \
+    },                                                     \
+    {                                                      \
+        .apb_index     = NRF_APB_INDEX_RADIO,              \
+        DPPI_INSTANCE(10),                                 \
+        .apb_size      = 0x40000                           \
+    },                                                     \
+    {                                                      \
+        .apb_index     = NRF_APB_INDEX_PERI,               \
+        DPPI_INSTANCE(20),                                 \
+        .apb_size      = 0x40000                           \
+    },                                                     \
+    {                                                      \
+        .apb_index     = NRF_APB_INDEX_LP,                 \
+        DPPI_INSTANCE(30),                                 \
+        .apb_size      = 0x40000                           \
+    },                                                     \
 }
 
 #endif

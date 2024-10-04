@@ -50,12 +50,20 @@ static nrfx_err_t dppic_virtual_channel_set(nrfx_interconnect_dppic_t * p_dppic,
 
 static nrfx_err_t dppic_channel_alloc(nrfx_interconnect_dppic_t * p_dppic, uint8_t * p_channel)
 {
+#if NRFX_API_VER_AT_LEAST(3, 8, 0) && !defined(NRF54L15_ENGA_XXAA)
+    return nrfx_dppi_channel_alloc(&p_dppic->dppic, p_channel);
+#else
     return nrfx_flag32_alloc(&p_dppic->channels_mask, p_channel);
+#endif
 }
 
 static nrfx_err_t dppic_channel_free(nrfx_interconnect_dppic_t * p_dppic, uint8_t channel)
 {
+#if NRFX_API_VER_AT_LEAST(3, 8, 0) && !defined(NRF54L15_ENGA_XXAA)
+    return nrfx_dppi_channel_free(&p_dppic->dppic, channel);
+#else
     return nrfx_flag32_free(&p_dppic->channels_mask, channel);
+#endif
 }
 
 static nrfx_err_t ppib_channel_get(nrfx_interconnect_ppib_t * p_ppib,
@@ -105,7 +113,18 @@ static void virtual_channel_enable_set(uint8_t virtual_channel, bool enable)
         nrfx_err_t err = dppic_channel_get(dppic, virtual_channel, &dppi_channel);
         if (err == NRFX_SUCCESS)
         {
+#if NRFX_API_VER_AT_LEAST(3, 8, 0) && !defined(NRF54L15_ENGA_XXAA)
+            if (enable)
+            {
+                nrfx_dppi_channel_enable(&dppic->dppic, dppi_channel);
+            }
+            else
+            {
+                nrfx_dppi_channel_disable(&dppic->dppic, dppi_channel);
+            }
+#else
             nrfy_dppi_channels_set(dppic->dppic, NRFX_BIT((uint32_t)dppi_channel), enable);
+#endif
         }
     }
 }
@@ -185,7 +204,11 @@ static nrfx_err_t clear_virtual_channel_path(uint8_t virtual_channel)
         nrfx_err_t err = dppic_channel_get(dppic, virtual_channel, &dppi_channel);
         if (err == NRFX_SUCCESS)
         {
+#if NRFX_API_VER_AT_LEAST(3, 8, 0) && !defined(NRF54L15_ENGA_XXAA)
+            nrfx_dppi_channel_disable(&dppic->dppic, dppi_channel);
+#else
             nrfy_dppi_channels_set(dppic->dppic, NRFX_BIT((uint32_t)dppi_channel), false);
+#endif
 
             err = dppic_channel_free(dppic, dppi_channel);
             if (err != NRFX_SUCCESS)
@@ -550,7 +573,13 @@ bool nrfx_gppi_channel_check(uint8_t channel)
         nrfx_err_t err = dppic_channel_get(dppic, channel, &dppi_channel);
         if (err == NRFX_SUCCESS)
         {
-            if (nrf_dppi_channel_check(dppic->dppic, (uint32_t)dppi_channel) == false)
+            NRF_DPPIC_Type *p_reg;
+#if NRFX_API_VER_AT_LEAST(3, 8, 0) && !defined(NRF54L15_ENGA_XXAA)
+            p_reg = dppic->dppic.p_reg;
+#else
+            p_reg = dppic->dppic;
+#endif
+            if (nrf_dppi_channel_check(p_reg, (uint32_t)dppi_channel) == false)
             {
                 return false;
             }
