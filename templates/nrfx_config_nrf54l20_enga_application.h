@@ -133,6 +133,15 @@
 #endif
 
 /**
+ * @brief NRFX_DPPI_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_DPPI_ENABLED
+#define NRFX_DPPI_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_DPPI_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
@@ -154,6 +163,51 @@
  */
 #ifndef NRFX_DPPI_CONFIG_LOG_LEVEL
 #define NRFX_DPPI_CONFIG_LOG_LEVEL 3
+#endif
+
+/**
+ * @brief NRFX_DPPI00_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_DPPI00_ENABLED
+#define NRFX_DPPI00_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_DPPI01_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_DPPI01_ENABLED
+#define NRFX_DPPI01_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_DPPI10_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_DPPI10_ENABLED
+#define NRFX_DPPI10_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_DPPI20_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_DPPI20_ENABLED
+#define NRFX_DPPI20_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_DPPI30_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_DPPI30_ENABLED
+#define NRFX_DPPI30_ENABLED 0
 #endif
 
 /**
