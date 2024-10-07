@@ -798,6 +798,57 @@
 #endif
 
 /**
+ * @brief NRFX_PPIB_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB_ENABLED
+#define NRFX_PPIB_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB_CONFIG_LOG_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB_CONFIG_LOG_ENABLED
+#define NRFX_PPIB_CONFIG_LOG_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB_CONFIG_LOG_LEVEL
+ *
+ * Integer value.
+ * Supported values:
+ * - Off     = 0
+ * - Error   = 1
+ * - Warning = 2
+ * - Info    = 3
+ * - Debug   = 4
+ */
+#ifndef NRFX_PPIB_CONFIG_LOG_LEVEL
+#define NRFX_PPIB_CONFIG_LOG_LEVEL 3
+#endif
+
+/**
+ * @brief NRFX_PPIB020_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB020_ENABLED
+#define NRFX_PPIB020_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB030_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB030_ENABLED
+#define NRFX_PPIB030_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_PRS_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.

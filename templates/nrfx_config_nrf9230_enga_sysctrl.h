@@ -689,6 +689,138 @@
 #endif
 
 /**
+ * @brief NRFX_PPIB_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB_ENABLED
+#define NRFX_PPIB_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB_CONFIG_LOG_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB_CONFIG_LOG_ENABLED
+#define NRFX_PPIB_CONFIG_LOG_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB_CONFIG_LOG_LEVEL
+ *
+ * Integer value.
+ * Supported values:
+ * - Off     = 0
+ * - Error   = 1
+ * - Warning = 2
+ * - Info    = 3
+ * - Debug   = 4
+ */
+#ifndef NRFX_PPIB_CONFIG_LOG_LEVEL
+#define NRFX_PPIB_CONFIG_LOG_LEVEL 3
+#endif
+
+/**
+ * @brief NRFX_PPIB110_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB110_ENABLED
+#define NRFX_PPIB110_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB120_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB120_ENABLED
+#define NRFX_PPIB120_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB121_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB121_ENABLED
+#define NRFX_PPIB121_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB130_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB130_ENABLED
+#define NRFX_PPIB130_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB131_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB131_ENABLED
+#define NRFX_PPIB131_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB132_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB132_ENABLED
+#define NRFX_PPIB132_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB133_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB133_ENABLED
+#define NRFX_PPIB133_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB134_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB134_ENABLED
+#define NRFX_PPIB134_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB135_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB135_ENABLED
+#define NRFX_PPIB135_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB136_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB136_ENABLED
+#define NRFX_PPIB136_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB137_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB137_ENABLED
+#define NRFX_PPIB137_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_PRS_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.

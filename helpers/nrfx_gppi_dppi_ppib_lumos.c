@@ -373,7 +373,8 @@ void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t t
 #if !NRFX_GPPI_PPIB_HAS_DYNAMIC_CONFIG
             nrfx_atomic_t possible_mask = path.src_dppic->channels_mask;
             possible_mask &= path.dst_dppic->channels_mask;
-            possible_mask &= path.ppib->channels_mask;
+            possible_mask &=
+                NRFX_BIT_MASK(nrf_ppib_channel_number_get(path.ppib->ppib.left.p_reg));
 
             uint8_t common_channel;
             nrfx_flag32_alloc(&possible_mask, &common_channel);
@@ -386,7 +387,6 @@ void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t t
 
             path.src_dppic->channels_mask &= ~NRFX_BIT(common_channel);
             path.dst_dppic->channels_mask &= ~NRFX_BIT(common_channel);
-            path.ppib->channels_mask &= ~NRFX_BIT(common_channel);
 
             src_dppi_channel = common_channel;
             dst_dppi_channel = common_channel;
@@ -448,8 +448,10 @@ void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t t
                 nrfx_atomic_t possible_mask = p_src_dppic->channels_mask;
                 possible_mask &= p_main_dppic->channels_mask;
                 possible_mask &= p_dst_dppic->channels_mask;
-                possible_mask &= path_src_to_main.ppib->channels_mask;
-                possible_mask &= path_main_to_dst.ppib->channels_mask;
+                possible_mask &= NRFX_BIT_MASK(
+                    nrf_ppib_channel_number_get(path_src_to_main.ppib->ppib.left.p_reg));
+                possible_mask &= NRFX_BIT_MASK(
+                    nrf_ppib_channel_number_get(path_main_to_dst.ppib->ppib.left.p_reg));
 
                 uint8_t common_channel;
                 nrfx_flag32_alloc(&possible_mask, &common_channel);
@@ -463,8 +465,6 @@ void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t t
                 p_src_dppic->channels_mask &= ~NRFX_BIT(common_channel);
                 p_main_dppic->channels_mask &= ~NRFX_BIT(common_channel);
                 p_dst_dppic->channels_mask &= ~NRFX_BIT(common_channel);
-                path_src_to_main.ppib->channels_mask &= ~NRFX_BIT(common_channel);
-                path_main_to_dst.ppib->channels_mask &= ~NRFX_BIT(common_channel);
 
                 dppic_virtual_channel_set(p_src_dppic, common_channel, channel);
                 dppic_virtual_channel_set(p_main_dppic, common_channel, channel);
