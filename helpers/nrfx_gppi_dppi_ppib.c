@@ -728,4 +728,20 @@ void nrfx_gppi_channels_disable(uint32_t mask)
     }
 }
 
+nrfx_err_t nrfx_gppi_edge_connection_setup(uint8_t             channel,
+                                           nrfx_dppi_t const * p_src_dppi,
+                                           uint8_t             src_channel,
+                                           nrfx_dppi_t const * p_dst_dppi,
+                                           uint8_t             dst_channel)
+{
+    (void)channel;
+    (void)p_src_dppi;
+    (void)src_channel;
+    (void)p_dst_dppi;
+    (void)dst_channel;
+
+    /* Not supported because PPIB connections are configured through UICR. */
+    return NRFX_ERROR_NOT_SUPPORTED;
+}
+
 #endif // NRFX_DPPI_ENABLED && (DPPIC_COUNT > 1)

@@ -193,4 +193,20 @@ nrfx_err_t nrfx_gppi_group_free(nrfx_gppi_channel_group_t group)
     return NRFX_ERROR_NOT_SUPPORTED;
 #endif
 }
+
+nrfx_err_t nrfx_gppi_edge_connection_setup(uint8_t             channel,
+                                           nrfx_dppi_t const * p_src_dppi,
+                                           uint8_t             src_channel,
+                                           nrfx_dppi_t const * p_dst_dppi,
+                                           uint8_t             dst_channel)
+{
+    (void)channel;
+    (void)p_src_dppi;
+    (void)src_channel;
+    (void)p_dst_dppi;
+    (void)dst_channel;
+
+    return NRFX_SUCCESS; /* No operation as there is only one DPPIC instance. */
+}
+
 #endif // defined(DPPI_PRESENT) && (defined(NRF53_SERIES) || defined(NRF91_SERIES))
