@@ -407,6 +407,58 @@
     #elif defined(NRF_SYSCTRL)
         #define GRTC_IRQ_GROUP 6
         #define GPIOTE_IRQ_GROUP 6
+
+        #define PPIB110_NTASKSEVENTS_MIN 0
+        #define PPIB110_NTASKSEVENTS_MAX 3
+        #define PPIB110_NTASKSEVENTS_SIZE 4
+
+        #define PPIB120_NTASKSEVENTS_MIN 0
+        #define PPIB120_NTASKSEVENTS_MAX 3
+        #define PPIB120_NTASKSEVENTS_SIZE 4
+
+        #define PPIB121_NTASKSEVENTS_MIN 0
+        #define PPIB121_NTASKSEVENTS_MAX 7
+        #define PPIB121_NTASKSEVENTS_SIZE 8
+
+        #define PPIB130_NTASKSEVENTS_MIN 0
+        #define PPIB130_NTASKSEVENTS_MAX 31
+        #define PPIB130_NTASKSEVENTS_SIZE 32
+
+        #define PPIB131_NTASKSEVENTS_MIN 0
+        #define PPIB131_NTASKSEVENTS_MAX 23
+        #define PPIB131_NTASKSEVENTS_SIZE 24
+
+        #define PPIB132_NTASKSEVENTS_MIN 0
+        #define PPIB132_NTASKSEVENTS_MAX 7
+        #define PPIB132_NTASKSEVENTS_SIZE 8
+
+        #define PPIB133_NTASKSEVENTS_MIN 0
+        #define PPIB133_NTASKSEVENTS_MAX 7
+        #define PPIB133_NTASKSEVENTS_SIZE 8
+
+        #define PPIB134_NTASKSEVENTS_MIN 0
+        #define PPIB134_NTASKSEVENTS_MAX 7
+        #define PPIB134_NTASKSEVENTS_SIZE 8
+
+        #define PPIB135_NTASKSEVENTS_MIN 0
+        #define PPIB135_NTASKSEVENTS_MAX 7
+        #define PPIB135_NTASKSEVENTS_SIZE 8
+
+        #define PPIB136_NTASKSEVENTS_MIN 0
+        #define PPIB136_NTASKSEVENTS_MAX 7
+        #define PPIB136_NTASKSEVENTS_SIZE 8
+
+        #define PPIB137_NTASKSEVENTS_MIN 0
+        #define PPIB137_NTASKSEVENTS_MAX 7
+        #define PPIB137_NTASKSEVENTS_SIZE 8
+    #elif defined(NRF_RADIOCORE)
+        #define PPIB020_NTASKSEVENTS_MIN 0
+        #define PPIB020_NTASKSEVENTS_MAX 15
+        #define PPIB020_NTASKSEVENTS_SIZE 16
+
+        #define PPIB030_NTASKSEVENTS_MIN 0
+        #define PPIB030_NTASKSEVENTS_MAX 15
+        #define PPIB030_NTASKSEVENTS_SIZE 16
     #else
         #if defined(NRF_SECURE)
             #define GRTC_IRQ_GROUP 1
