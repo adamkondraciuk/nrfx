@@ -85,13 +85,13 @@ static nrfx_err_t ppib_channel_get(nrfx_interconnect_ppib_t * p_ppib,
 #if NRFX_GPPI_PPIB_HAS_DYNAMIC_CONFIG
 static nrfx_err_t ppib_channel_alloc(nrfx_interconnect_ppib_t * p_ppib, uint8_t * p_channel)
 {
-    return nrfx_flag32_alloc(&p_ppib->channels_mask, p_channel);
+    return nrfx_ppib_channel_alloc(&p_ppib->ppib, p_channel);
 }
 #endif
 
 static nrfx_err_t ppib_channel_free(nrfx_interconnect_ppib_t * p_ppib, uint8_t channel)
 {
-    return nrfx_flag32_free(&p_ppib->channels_mask, channel);
+    return nrfx_ppib_channel_free(&p_ppib->ppib, channel);
 }
 
 static nrfx_err_t ppib_virtual_channel_set(nrfx_interconnect_ppib_t * p_ppib,
@@ -179,17 +179,17 @@ static nrfx_err_t create_ppib_connection(uint8_t                                
 #endif
 
     ppib_virtual_channel_set(p_ppib, ppib_channel, virtual_channel);
-    nrf_ppib_task_t  task  = nrf_ppib_send_task_get(ppib_channel);
-    nrf_ppib_event_t event = nrf_ppib_receive_event_get(ppib_channel);
+    nrf_ppib_task_t  task  = nrfx_ppib_send_task_get(&p_ppib->ppib.left, ppib_channel);
+    nrf_ppib_event_t event = nrfx_ppib_receive_event_get(&p_ppib->ppib.right, ppib_channel);
     if (p_path->ppib_inverted == false)
     {
-        nrf_ppib_subscribe_set(p_ppib->p_ppib1, task, src_dppi_channel);
-        nrf_ppib_publish_set(p_ppib->p_ppib2, event, dst_dppi_channel);
+        nrfx_ppib_subscribe_set(&p_ppib->ppib.left, task, src_dppi_channel);
+        nrfx_ppib_publish_set(&p_ppib->ppib.right, event, dst_dppi_channel);
     }
     else
     {
-        nrf_ppib_subscribe_set(p_ppib->p_ppib2, task, src_dppi_channel);
-        nrf_ppib_publish_set(p_ppib->p_ppib1, event, dst_dppi_channel);
+        nrfx_ppib_subscribe_set(&p_ppib->ppib.right, task, src_dppi_channel);
+        nrfx_ppib_publish_set(&p_ppib->ppib.left, event, dst_dppi_channel);
     }
     return NRFX_SUCCESS;
 }
@@ -234,14 +234,15 @@ static nrfx_err_t clear_virtual_channel_path(uint8_t virtual_channel)
         nrfx_err_t err = ppib_channel_get(p_ppib, virtual_channel, &ppib_channel);
         if (err == NRFX_SUCCESS)
         {
-            nrf_ppib_task_t task   = nrf_ppib_send_task_get((uint32_t)ppib_channel);
-            nrf_ppib_event_t event = nrf_ppib_receive_event_get((uint32_t)ppib_channel);
+            nrf_ppib_task_t task   = nrfx_ppib_send_task_get(&p_ppib->ppib.left, ppib_channel);
+            nrf_ppib_event_t event = nrfx_ppib_receive_event_get(&p_ppib->ppib.right,
+                                                                 ppib_channel);
 
-            nrf_ppib_subscribe_clear(p_ppib->p_ppib1, task);
-            nrf_ppib_subscribe_clear(p_ppib->p_ppib2, task);
+            nrfx_ppib_subscribe_clear(&p_ppib->ppib.left, task);
+            nrfx_ppib_subscribe_clear(&p_ppib->ppib.right, task);
 
-            nrf_ppib_publish_clear(p_ppib->p_ppib1, event);
-            nrf_ppib_publish_clear(p_ppib->p_ppib2, event);
+            nrfx_ppib_publish_clear(&p_ppib->ppib.left, event);
+            nrfx_ppib_publish_clear(&p_ppib->ppib.right, event);
 
             err = ppib_channel_free(p_ppib, ppib_channel);
             if (err != NRFX_SUCCESS)

@@ -80,18 +80,18 @@ bool nrfx_interconnect_direct_connection_check(nrfx_interconnect_dppic_to_dppic_
         {
             NRF_PPIB_Type * p_dst_ppib = NULL;
 
-            if (interconnect_ppib[j].p_ppib1 == interconnect_dppic_ppib[i].ppib)
+            if (interconnect_ppib[j].ppib.left.p_reg == interconnect_dppic_ppib[i].ppib)
             {
                 p_path->ppib          = &interconnect_ppib[j];
                 p_path->ppib_inverted = false;
-                p_dst_ppib            = interconnect_ppib[j].p_ppib2;
+                p_dst_ppib            = interconnect_ppib[j].ppib.right.p_reg;
             }
 
-            if (interconnect_ppib[j].p_ppib2 == interconnect_dppic_ppib[i].ppib)
+            if (interconnect_ppib[j].ppib.right.p_reg == interconnect_dppic_ppib[i].ppib)
             {
                 p_path->ppib          = &interconnect_ppib[j];
                 p_path->ppib_inverted = true;
-                p_dst_ppib            = interconnect_ppib[j].p_ppib1;
+                p_dst_ppib            = interconnect_ppib[j].ppib.left.p_reg;
             }
 
             if (p_dst_ppib == NULL)

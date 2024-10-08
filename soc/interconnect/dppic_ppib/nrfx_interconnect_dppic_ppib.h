@@ -4,6 +4,7 @@
 #define NRFX_INTERCONNECT_DPPIC_PPIB_H__
 
 #include <nrfx_dppi.h>
+#include <nrfx_ppib.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -19,10 +20,8 @@ extern "C" {
 /** @brief PPIB interconnect properties structure. */
 typedef struct
 {
-    NRF_PPIB_Type * p_ppib1;                               ///< First PPIB peripheral.
-    NRF_PPIB_Type * p_ppib2;                               ///< Second PPIB peripheral.
-    nrfx_atomic_t   channels_mask;                         ///< Mask of configurable channels between the first and the second PPIB instance.
-    uint8_t         allocate_flag[PPIB_CHANNEL_MAX_COUNT]; ///< Virtual channels assigned to each of PPIB channels.
+    nrfx_ppib_interconnect_t ppib;                                  ///< Interconnect instance.
+    uint8_t                  allocate_flag[PPIB_CHANNEL_MAX_COUNT]; ///< Virtual channels assigned to each of PPIB channels.
 } nrfx_interconnect_ppib_t;
 
 /** @brief DPPIC and PPIB interconnect properties structure. */
@@ -91,7 +90,7 @@ nrfx_interconnect_ppib_t * nrfx_interconnect_ppib_at_index_get(uint8_t index);
 
 /**
  * @brief Function for checking if path from source DPPIC to destination DPPIC exists.
- * 
+ *
  * @param[in] p_path Pointer to path from source DPPIC to destination DPPIC.
  *                   When path exists, @p p_path is filled with PPIB information.
  *
@@ -101,7 +100,7 @@ bool nrfx_interconnect_direct_connection_check(nrfx_interconnect_dppic_to_dppic_
 
 /**
  * @brief Function for getting @p nrf_apb_index_t from memory address.
- * 
+ *
  * @param[in] addr Memory address.
  *
  * @return APB index.

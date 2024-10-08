@@ -4,6 +4,7 @@
 #define NRFX_INTERCONNECT_DPPIC_PPIB_LUMOS_H__
 
 #include <nrfx.h>
+#include <nrfx_ppib.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,10 +15,7 @@ extern "C" {
 
 #define NRFX_INTERCONNECT_PPIB(FIRST_PPIB_INDEX, SECOND_PPIB_INDEX)                                \
 {                                                                                                  \
-    .p_ppib1 = NRFX_CONCAT(NRF_PPIB, FIRST_PPIB_INDEX),                                            \
-    .p_ppib2 = NRFX_CONCAT(NRF_PPIB, SECOND_PPIB_INDEX),                                           \
-    .channels_mask = NRFX_BIT_MASK(NRFX_MIN(NRFX_INTERCONNECT_PPIB_TASKS_GET(FIRST_PPIB_INDEX),    \
-                                            NRFX_INTERCONNECT_PPIB_TASKS_GET(SECOND_PPIB_INDEX))), \
+    .ppib = NRFX_PPIB_INTERCONNECT_INSTANCE(FIRST_PPIB_INDEX, SECOND_PPIB_INDEX),                  \
 }
 
 #if NRFX_API_VER_AT_LEAST(3, 8, 0) && !defined(NRF54L15_ENGA_XXAA)
@@ -35,7 +33,7 @@ extern "C" {
     NRFX_INTERCONNECT_PPIB(00, 10), \
     NRFX_INTERCONNECT_PPIB(11, 21), \
     NRFX_INTERCONNECT_PPIB(22, 30), \
-    NRFX_INTERCONNECT_PPIB(20, 01), \
+    NRFX_INTERCONNECT_PPIB(01, 20), \
 }
 
 #define NRFX_INTERCONNECT_DPPIC_PPIB_MAP \
@@ -103,11 +101,11 @@ extern "C" {
 #define NRFX_INTERCONNECT_PPIB_MAP  \
 {                                   \
     NRFX_INTERCONNECT_PPIB(00, 10), \
-    NRFX_INTERCONNECT_PPIB(03, 02), \
+    NRFX_INTERCONNECT_PPIB(02, 03), \
     NRFX_INTERCONNECT_PPIB(04, 12), \
     NRFX_INTERCONNECT_PPIB(11, 21), \
     NRFX_INTERCONNECT_PPIB(22, 30), \
-    NRFX_INTERCONNECT_PPIB(20, 01), \
+    NRFX_INTERCONNECT_PPIB(01, 20), \
 }
 
 #define NRFX_INTERCONNECT_DPPIC_PPIB_MAP \
