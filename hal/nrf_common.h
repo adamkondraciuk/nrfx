@@ -16,7 +16,7 @@ extern "C" {
 #endif
 
 #ifndef NRFX_CONFIG_API_VER_MINOR
-#define NRFX_CONFIG_API_VER_MINOR 5
+#define NRFX_CONFIG_API_VER_MINOR 6
 #endif
 
 #ifndef NRFX_CONFIG_API_VER_MICRO
