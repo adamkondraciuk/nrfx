@@ -565,9 +565,9 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   USBREG_IRQHandler
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   LFXO_IRQHandler
+    .long   LFRC_IRQHandler
+    .long   HFXO64M_IRQHandler
     .long   VREGMRAM_IRQHandler
     .long   VREGAO1V8_IRQHandler
     .long   VREGAO0V8B_IRQHandler
@@ -737,6 +737,9 @@ Default_Handler:
     IRQ  GPIOTE30_1_IRQHandler
     IRQ  CLOCK_POWER_IRQHandler
     IRQ  USBREG_IRQHandler
+    IRQ  LFXO_IRQHandler
+    IRQ  LFRC_IRQHandler
+    IRQ  HFXO64M_IRQHandler
     IRQ  VREGMRAM_IRQHandler
     IRQ  VREGAO1V8_IRQHandler
     IRQ  VREGAO0V8B_IRQHandler

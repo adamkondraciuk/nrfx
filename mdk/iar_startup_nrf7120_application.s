@@ -375,9 +375,9 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     USBREG_IRQHandler
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     LFXO_IRQHandler
+        DCD     LFRC_IRQHandler
+        DCD     HFXO64M_IRQHandler
         DCD     VREGMRAM_IRQHandler
         DCD     VREGAO1V8_IRQHandler
         DCD     VREGAO0V8B_IRQHandler
@@ -819,6 +819,21 @@ CLOCK_POWER_IRQHandler
         PUBWEAK  USBREG_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 USBREG_IRQHandler
+        B .
+
+        PUBWEAK  LFXO_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+LFXO_IRQHandler
+        B .
+
+        PUBWEAK  LFRC_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+LFRC_IRQHandler
+        B .
+
+        PUBWEAK  HFXO64M_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+HFXO64M_IRQHandler
         B .
 
         PUBWEAK  VREGMRAM_IRQHandler

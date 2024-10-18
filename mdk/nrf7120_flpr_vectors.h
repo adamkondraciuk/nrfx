@@ -170,6 +170,9 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void GPIOTE30_1_IRQHandler                                       (void);
  __HANDLER("Default_Handler") void CLOCK_POWER_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void USBREG_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void LFXO_IRQHandler                                             (void);
+ __HANDLER("Default_Handler") void LFRC_IRQHandler                                             (void);
+ __HANDLER("Default_Handler") void HFXO64M_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void VREGMRAM_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void VREGAO1V8_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void VREGAO0V8B_IRQHandler                                       (void);
@@ -494,9 +497,9 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     USBREG_IRQHandler,
-    0,
-    0,
-    0,
+    LFXO_IRQHandler,
+    LFRC_IRQHandler,
+    HFXO64M_IRQHandler,
     VREGMRAM_IRQHandler,
     VREGAO1V8_IRQHandler,
     VREGAO0V8B_IRQHandler,

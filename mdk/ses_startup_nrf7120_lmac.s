@@ -157,10 +157,6 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   LMACCLIC_16_IRQHandler
   ISR_HANDLER   LMACCLIC_17_IRQHandler
   ISR_HANDLER   LMACCLIC_18_IRQHandler
@@ -169,9 +165,13 @@ _vectors:
   ISR_HANDLER   LMACCLIC_21_IRQHandler
   ISR_HANDLER   LMACCLIC_22_IRQHandler
   ISR_HANDLER   LMACCLIC_23_IRQHandler
-  ISR_HANDLER   LMACCLIC_24_IRQHandler
-  ISR_HANDLER   LMACCLIC_25_IRQHandler
-  ISR_HANDLER   LMACCLIC_26_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   RPU_0_IRQHandler
   ISR_HANDLER   RPU_1_IRQHandler
@@ -257,8 +257,8 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_HANDLER   BELLBOARD_WIFI_0_IRQHandler
-  ISR_HANDLER   BELLBOARD_WIFI_1_IRQHandler
+  ISR_HANDLER   BELLBOARD_0_IRQHandler
+  ISR_HANDLER   BELLBOARD_1_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */

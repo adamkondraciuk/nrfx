@@ -26716,6 +26716,1261 @@ typedef struct {
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
 /* =========================================================================================================================== */
+/* ================                                          HFXO64M                                          ================ */
+/* =========================================================================================================================== */
+
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
+
+/* =================================================== Struct HFXO64M_TRIM =================================================== */
+/**
+  * @brief TRIM [HFXO64M_TRIM] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  RTUNE;                             /*!< (@ 0x00000000) Voltage reference tuning control. 2's complement (MSB
+                                                                         bit is inverted). Tuning range is approximately
+                                                                         +/-50mV*/
+  __IOM uint32_t  CHIRPTUNE;                         /*!< (@ 0x00000004) This is a process compensation tuning for chirp
+                                                                         generator.*/
+  __IOM uint32_t  DOUBLERCOMP;                       /*!< (@ 0x00000008) Process compensation control for frequency doubler.   */
+} NRF_HFXO64M_TRIM_Type;                             /*!< Size = 12 (0x00C)                                                    */
+
+/* HFXO64M_TRIM_RTUNE: Voltage reference tuning control. 2's complement (MSB bit is inverted). Tuning range is approximately
+                        +/-50mV */
+
+  #define HFXO64M_TRIM_RTUNE_ResetValue (0x00000000UL) /*!< Reset value of RTUNE register.                                     */
+
+/* VAL @Bits 0..3 : (unspecified) */
+  #define HFXO64M_TRIM_RTUNE_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
+  #define HFXO64M_TRIM_RTUNE_VAL_Msk (0xFUL << HFXO64M_TRIM_RTUNE_VAL_Pos) /*!< Bit mask of VAL field.                         */
+
+
+/* HFXO64M_TRIM_CHIRPTUNE: This is a process compensation tuning for chirp generator. */
+  #define HFXO64M_TRIM_CHIRPTUNE_ResetValue (0x00000000UL) /*!< Reset value of CHIRPTUNE register.                             */
+
+/* VAL @Bits 0..1 : (unspecified) */
+  #define HFXO64M_TRIM_CHIRPTUNE_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
+  #define HFXO64M_TRIM_CHIRPTUNE_VAL_Msk (0x3UL << HFXO64M_TRIM_CHIRPTUNE_VAL_Pos) /*!< Bit mask of VAL field.                 */
+  #define HFXO64M_TRIM_CHIRPTUNE_VAL_Min (0x0UL)     /*!< Min enumerator value of VAL field.                                   */
+  #define HFXO64M_TRIM_CHIRPTUNE_VAL_Max (0x2UL)     /*!< Max enumerator value of VAL field.                                   */
+  #define HFXO64M_TRIM_CHIRPTUNE_VAL_Fast (0x0UL)    /*!< Fast process                                                         */
+  #define HFXO64M_TRIM_CHIRPTUNE_VAL_Typical (0x1UL) /*!< Typical process                                                      */
+  #define HFXO64M_TRIM_CHIRPTUNE_VAL_Slow (0x2UL)    /*!< Slow process                                                         */
+
+
+/* HFXO64M_TRIM_DOUBLERCOMP: Process compensation control for frequency doubler. */
+  #define HFXO64M_TRIM_DOUBLERCOMP_ResetValue (0x00000000UL) /*!< Reset value of DOUBLERCOMP register.                         */
+
+/* VAL @Bits 0..2 : (unspecified) */
+  #define HFXO64M_TRIM_DOUBLERCOMP_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
+  #define HFXO64M_TRIM_DOUBLERCOMP_VAL_Msk (0x7UL << HFXO64M_TRIM_DOUBLERCOMP_VAL_Pos) /*!< Bit mask of VAL field.             */
+  #define HFXO64M_TRIM_DOUBLERCOMP_VAL_Min (0x1UL)   /*!< Min enumerator value of VAL field.                                   */
+  #define HFXO64M_TRIM_DOUBLERCOMP_VAL_Max (0x7UL)   /*!< Max enumerator value of VAL field.                                   */
+  #define HFXO64M_TRIM_DOUBLERCOMP_VAL_Slow (0x1UL)  /*!< Slow process                                                         */
+  #define HFXO64M_TRIM_DOUBLERCOMP_VAL_Typical (0x3UL) /*!< Typical process                                                    */
+  #define HFXO64M_TRIM_DOUBLERCOMP_VAL_Fast (0x7UL)  /*!< Fast process                                                         */
+
+
+
+/* ==================================================== Struct HFXO64M_TS ==================================================== */
+/**
+  * @brief TS [HFXO64M_TS] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  CFG;                               /*!< (@ 0x00000000) Temperature sensor static configuration register.     */
+  __IOM uint32_t  ENSEL;                             /*!< (@ 0x00000004) Enable TS per clock request.                          */
+  __IOM uint32_t  DATAIN;                            /*!< (@ 0x00000008) TS test data input. Used only when debugging          */
+  __IOM uint32_t  DATAINLOAD;                        /*!< (@ 0x0000000C) TS test data latch pulse input. Used only when
+                                                                         debugging*/
+} NRF_HFXO64M_TS_Type;                               /*!< Size = 16 (0x010)                                                    */
+
+/* HFXO64M_TS_CFG: Temperature sensor static configuration register. */
+  #define HFXO64M_TS_CFG_ResetValue (0x00000000UL)   /*!< Reset value of CFG register.                                         */
+
+/* MEASMODE1 @Bits 0..7 : Measurement mode control for ch1. */
+  #define HFXO64M_TS_CFG_MEASMODE1_Pos (0UL)         /*!< Position of MEASMODE1 field.                                         */
+  #define HFXO64M_TS_CFG_MEASMODE1_Msk (0xFFUL << HFXO64M_TS_CFG_MEASMODE1_Pos) /*!< Bit mask of MEASMODE1 field.              */
+
+/* MEASMODE2 @Bits 8..15 : Measurement mode control for ch2. */
+  #define HFXO64M_TS_CFG_MEASMODE2_Pos (8UL)         /*!< Position of MEASMODE2 field.                                         */
+  #define HFXO64M_TS_CFG_MEASMODE2_Msk (0xFFUL << HFXO64M_TS_CFG_MEASMODE2_Pos) /*!< Bit mask of MEASMODE2 field.              */
+
+/* TIMERSEL @Bits 16..18 : Sets temperature measurement interval */
+  #define HFXO64M_TS_CFG_TIMERSEL_Pos (16UL)         /*!< Position of TIMERSEL field.                                          */
+  #define HFXO64M_TS_CFG_TIMERSEL_Msk (0x7UL << HFXO64M_TS_CFG_TIMERSEL_Pos) /*!< Bit mask of TIMERSEL field.                  */
+  #define HFXO64M_TS_CFG_TIMERSEL_Min (0x0UL)        /*!< Min enumerator value of TIMERSEL field.                              */
+  #define HFXO64M_TS_CFG_TIMERSEL_Max (0x7UL)        /*!< Max enumerator value of TIMERSEL field.                              */
+  #define HFXO64M_TS_CFG_TIMERSEL_Interval4us (0x0UL) /*!< 4 us                                                                */
+  #define HFXO64M_TS_CFG_TIMERSEL_Interval8us (0x1UL) /*!< 8 us                                                                */
+  #define HFXO64M_TS_CFG_TIMERSEL_Interval16us (0x2UL) /*!< 16 us                                                              */
+  #define HFXO64M_TS_CFG_TIMERSEL_Interval32us (0x3UL) /*!< 32 us                                                              */
+  #define HFXO64M_TS_CFG_TIMERSEL_Interval64us (0x4UL) /*!< 64 us                                                              */
+  #define HFXO64M_TS_CFG_TIMERSEL_Interval128us (0x5UL) /*!< 128 us                                                            */
+  #define HFXO64M_TS_CFG_TIMERSEL_Interval256us (0x6UL) /*!< 256 us                                                            */
+  #define HFXO64M_TS_CFG_TIMERSEL_Interval512us (0x7UL) /*!< 512 us                                                            */
+
+/* ENABLEFASTMODE @Bit 20 : Enables fast slew rate function. */
+  #define HFXO64M_TS_CFG_ENABLEFASTMODE_Pos (20UL)   /*!< Position of ENABLEFASTMODE field.                                    */
+  #define HFXO64M_TS_CFG_ENABLEFASTMODE_Msk (0x1UL << HFXO64M_TS_CFG_ENABLEFASTMODE_Pos) /*!< Bit mask of ENABLEFASTMODE field.*/
+  #define HFXO64M_TS_CFG_ENABLEFASTMODE_Min (0x0UL)  /*!< Min enumerator value of ENABLEFASTMODE field.                        */
+  #define HFXO64M_TS_CFG_ENABLEFASTMODE_Max (0x1UL)  /*!< Max enumerator value of ENABLEFASTMODE field.                        */
+  #define HFXO64M_TS_CFG_ENABLEFASTMODE_Disabled (0x0UL) /*!< Disabled                                                         */
+  #define HFXO64M_TS_CFG_ENABLEFASTMODE_Enabled (0x1UL) /*!< Enabled                                                           */
+
+/* ENABLEFILTER @Bit 21 : Enables continuous slow filter. */
+  #define HFXO64M_TS_CFG_ENABLEFILTER_Pos (21UL)     /*!< Position of ENABLEFILTER field.                                      */
+  #define HFXO64M_TS_CFG_ENABLEFILTER_Msk (0x1UL << HFXO64M_TS_CFG_ENABLEFILTER_Pos) /*!< Bit mask of ENABLEFILTER field.      */
+  #define HFXO64M_TS_CFG_ENABLEFILTER_Min (0x0UL)    /*!< Min enumerator value of ENABLEFILTER field.                          */
+  #define HFXO64M_TS_CFG_ENABLEFILTER_Max (0x1UL)    /*!< Max enumerator value of ENABLEFILTER field.                          */
+  #define HFXO64M_TS_CFG_ENABLEFILTER_Disabled (0x0UL) /*!< Disabled                                                           */
+  #define HFXO64M_TS_CFG_ENABLEFILTER_Enabled (0x1UL) /*!< Enabled                                                             */
+
+/* ENABLEGATING @Bit 22 : Enables continuous comparison/disables comparator current saving */
+  #define HFXO64M_TS_CFG_ENABLEGATING_Pos (22UL)     /*!< Position of ENABLEGATING field.                                      */
+  #define HFXO64M_TS_CFG_ENABLEGATING_Msk (0x1UL << HFXO64M_TS_CFG_ENABLEGATING_Pos) /*!< Bit mask of ENABLEGATING field.      */
+  #define HFXO64M_TS_CFG_ENABLEGATING_Min (0x0UL)    /*!< Min enumerator value of ENABLEGATING field.                          */
+  #define HFXO64M_TS_CFG_ENABLEGATING_Max (0x1UL)    /*!< Max enumerator value of ENABLEGATING field.                          */
+  #define HFXO64M_TS_CFG_ENABLEGATING_Disabled (0x0UL) /*!< Disabled                                                           */
+  #define HFXO64M_TS_CFG_ENABLEGATING_Enabled (0x1UL) /*!< Enabled                                                             */
+
+/* ENABLETOGGLEMODE @Bit 23 : Enables continuous toggle if both channels are on. */
+  #define HFXO64M_TS_CFG_ENABLETOGGLEMODE_Pos (23UL) /*!< Position of ENABLETOGGLEMODE field.                                  */
+  #define HFXO64M_TS_CFG_ENABLETOGGLEMODE_Msk (0x1UL << HFXO64M_TS_CFG_ENABLETOGGLEMODE_Pos) /*!< Bit mask of ENABLETOGGLEMODE
+                                                                            field.*/
+  #define HFXO64M_TS_CFG_ENABLETOGGLEMODE_Min (0x0UL) /*!< Min enumerator value of ENABLETOGGLEMODE field.                     */
+  #define HFXO64M_TS_CFG_ENABLETOGGLEMODE_Max (0x1UL) /*!< Max enumerator value of ENABLETOGGLEMODE field.                     */
+  #define HFXO64M_TS_CFG_ENABLETOGGLEMODE_Disabled (0x0UL) /*!< Disabled                                                       */
+  #define HFXO64M_TS_CFG_ENABLETOGGLEMODE_Enabled (0x1UL) /*!< Enabled                                                         */
+
+/* ENABLETEST @Bit 24 : Enables TS test mode. */
+  #define HFXO64M_TS_CFG_ENABLETEST_Pos (24UL)       /*!< Position of ENABLETEST field.                                        */
+  #define HFXO64M_TS_CFG_ENABLETEST_Msk (0x1UL << HFXO64M_TS_CFG_ENABLETEST_Pos) /*!< Bit mask of ENABLETEST field.            */
+  #define HFXO64M_TS_CFG_ENABLETEST_Min (0x0UL)      /*!< Min enumerator value of ENABLETEST field.                            */
+  #define HFXO64M_TS_CFG_ENABLETEST_Max (0x1UL)      /*!< Max enumerator value of ENABLETEST field.                            */
+  #define HFXO64M_TS_CFG_ENABLETEST_Disabled (0x0UL) /*!< Disabled                                                             */
+  #define HFXO64M_TS_CFG_ENABLETEST_Enabled (0x1UL)  /*!< Enabled                                                              */
+
+
+/* HFXO64M_TS_ENSEL: Enable TS per clock request. */
+  #define HFXO64M_TS_ENSEL_ResetValue (0x00000000UL) /*!< Reset value of ENSEL register.                                       */
+
+/* CMOS1 @Bit 0 : Enable TS when CMOS1 is requested. */
+  #define HFXO64M_TS_ENSEL_CMOS1_Pos (0UL)           /*!< Position of CMOS1 field.                                             */
+  #define HFXO64M_TS_ENSEL_CMOS1_Msk (0x1UL << HFXO64M_TS_ENSEL_CMOS1_Pos) /*!< Bit mask of CMOS1 field.                       */
+  #define HFXO64M_TS_ENSEL_CMOS1_Min (0x0UL)         /*!< Min enumerator value of CMOS1 field.                                 */
+  #define HFXO64M_TS_ENSEL_CMOS1_Max (0x1UL)         /*!< Max enumerator value of CMOS1 field.                                 */
+  #define HFXO64M_TS_ENSEL_CMOS1_Disabled (0x0UL)    /*!< Disabled                                                             */
+  #define HFXO64M_TS_ENSEL_CMOS1_Enabled (0x1UL)     /*!< Enabled                                                              */
+
+/* CMOS2 @Bit 1 : Enable TS when CMOS2 is requested. */
+  #define HFXO64M_TS_ENSEL_CMOS2_Pos (1UL)           /*!< Position of CMOS2 field.                                             */
+  #define HFXO64M_TS_ENSEL_CMOS2_Msk (0x1UL << HFXO64M_TS_ENSEL_CMOS2_Pos) /*!< Bit mask of CMOS2 field.                       */
+  #define HFXO64M_TS_ENSEL_CMOS2_Min (0x0UL)         /*!< Min enumerator value of CMOS2 field.                                 */
+  #define HFXO64M_TS_ENSEL_CMOS2_Max (0x1UL)         /*!< Max enumerator value of CMOS2 field.                                 */
+  #define HFXO64M_TS_ENSEL_CMOS2_Disabled (0x0UL)    /*!< Disabled                                                             */
+  #define HFXO64M_TS_ENSEL_CMOS2_Enabled (0x1UL)     /*!< Enabled                                                              */
+
+/* CMOS3 @Bit 2 : Enable TS when CMOS3 is requested. */
+  #define HFXO64M_TS_ENSEL_CMOS3_Pos (2UL)           /*!< Position of CMOS3 field.                                             */
+  #define HFXO64M_TS_ENSEL_CMOS3_Msk (0x1UL << HFXO64M_TS_ENSEL_CMOS3_Pos) /*!< Bit mask of CMOS3 field.                       */
+  #define HFXO64M_TS_ENSEL_CMOS3_Min (0x0UL)         /*!< Min enumerator value of CMOS3 field.                                 */
+  #define HFXO64M_TS_ENSEL_CMOS3_Max (0x1UL)         /*!< Max enumerator value of CMOS3 field.                                 */
+  #define HFXO64M_TS_ENSEL_CMOS3_Disabled (0x0UL)    /*!< Disabled                                                             */
+  #define HFXO64M_TS_ENSEL_CMOS3_Enabled (0x1UL)     /*!< Enabled                                                              */
+
+/* CMOS2X @Bit 3 : Enable TS when CMOS2X is requested. */
+  #define HFXO64M_TS_ENSEL_CMOS2X_Pos (3UL)          /*!< Position of CMOS2X field.                                            */
+  #define HFXO64M_TS_ENSEL_CMOS2X_Msk (0x1UL << HFXO64M_TS_ENSEL_CMOS2X_Pos) /*!< Bit mask of CMOS2X field.                    */
+  #define HFXO64M_TS_ENSEL_CMOS2X_Min (0x0UL)        /*!< Min enumerator value of CMOS2X field.                                */
+  #define HFXO64M_TS_ENSEL_CMOS2X_Max (0x1UL)        /*!< Max enumerator value of CMOS2X field.                                */
+  #define HFXO64M_TS_ENSEL_CMOS2X_Disabled (0x0UL)   /*!< Disabled                                                             */
+  #define HFXO64M_TS_ENSEL_CMOS2X_Enabled (0x1UL)    /*!< Enabled                                                              */
+
+/* SIN1 @Bit 4 : Enable TS when SIN1 is requested. */
+  #define HFXO64M_TS_ENSEL_SIN1_Pos (4UL)            /*!< Position of SIN1 field.                                              */
+  #define HFXO64M_TS_ENSEL_SIN1_Msk (0x1UL << HFXO64M_TS_ENSEL_SIN1_Pos) /*!< Bit mask of SIN1 field.                          */
+  #define HFXO64M_TS_ENSEL_SIN1_Min (0x0UL)          /*!< Min enumerator value of SIN1 field.                                  */
+  #define HFXO64M_TS_ENSEL_SIN1_Max (0x1UL)          /*!< Max enumerator value of SIN1 field.                                  */
+  #define HFXO64M_TS_ENSEL_SIN1_Disabled (0x0UL)     /*!< Disabled                                                             */
+  #define HFXO64M_TS_ENSEL_SIN1_Enabled (0x1UL)      /*!< Enabled                                                              */
+
+/* SIN2 @Bit 5 : Enable TS when SIN2 is requested. */
+  #define HFXO64M_TS_ENSEL_SIN2_Pos (5UL)            /*!< Position of SIN2 field.                                              */
+  #define HFXO64M_TS_ENSEL_SIN2_Msk (0x1UL << HFXO64M_TS_ENSEL_SIN2_Pos) /*!< Bit mask of SIN2 field.                          */
+  #define HFXO64M_TS_ENSEL_SIN2_Min (0x0UL)          /*!< Min enumerator value of SIN2 field.                                  */
+  #define HFXO64M_TS_ENSEL_SIN2_Max (0x1UL)          /*!< Max enumerator value of SIN2 field.                                  */
+  #define HFXO64M_TS_ENSEL_SIN2_Disabled (0x0UL)     /*!< Disabled                                                             */
+  #define HFXO64M_TS_ENSEL_SIN2_Enabled (0x1UL)      /*!< Enabled                                                              */
+
+/* SIN3 @Bit 6 : Enable TS when SIN3 is requested. */
+  #define HFXO64M_TS_ENSEL_SIN3_Pos (6UL)            /*!< Position of SIN3 field.                                              */
+  #define HFXO64M_TS_ENSEL_SIN3_Msk (0x1UL << HFXO64M_TS_ENSEL_SIN3_Pos) /*!< Bit mask of SIN3 field.                          */
+  #define HFXO64M_TS_ENSEL_SIN3_Min (0x0UL)          /*!< Min enumerator value of SIN3 field.                                  */
+  #define HFXO64M_TS_ENSEL_SIN3_Max (0x1UL)          /*!< Max enumerator value of SIN3 field.                                  */
+  #define HFXO64M_TS_ENSEL_SIN3_Disabled (0x0UL)     /*!< Disabled                                                             */
+  #define HFXO64M_TS_ENSEL_SIN3_Enabled (0x1UL)      /*!< Enabled                                                              */
+
+/* SIN4 @Bit 7 : Enable TS when SIN4 is requested. */
+  #define HFXO64M_TS_ENSEL_SIN4_Pos (7UL)            /*!< Position of SIN4 field.                                              */
+  #define HFXO64M_TS_ENSEL_SIN4_Msk (0x1UL << HFXO64M_TS_ENSEL_SIN4_Pos) /*!< Bit mask of SIN4 field.                          */
+  #define HFXO64M_TS_ENSEL_SIN4_Min (0x0UL)          /*!< Min enumerator value of SIN4 field.                                  */
+  #define HFXO64M_TS_ENSEL_SIN4_Max (0x1UL)          /*!< Max enumerator value of SIN4 field.                                  */
+  #define HFXO64M_TS_ENSEL_SIN4_Disabled (0x0UL)     /*!< Disabled                                                             */
+  #define HFXO64M_TS_ENSEL_SIN4_Enabled (0x1UL)      /*!< Enabled                                                              */
+
+/* FORCE @Bit 8 : Force TS on when HFXO64M is powered. */
+  #define HFXO64M_TS_ENSEL_FORCE_Pos (8UL)           /*!< Position of FORCE field.                                             */
+  #define HFXO64M_TS_ENSEL_FORCE_Msk (0x1UL << HFXO64M_TS_ENSEL_FORCE_Pos) /*!< Bit mask of FORCE field.                       */
+  #define HFXO64M_TS_ENSEL_FORCE_Min (0x0UL)         /*!< Min enumerator value of FORCE field.                                 */
+  #define HFXO64M_TS_ENSEL_FORCE_Max (0x1UL)         /*!< Max enumerator value of FORCE field.                                 */
+  #define HFXO64M_TS_ENSEL_FORCE_Disabled (0x0UL)    /*!< Disabled                                                             */
+  #define HFXO64M_TS_ENSEL_FORCE_Enabled (0x1UL)     /*!< Enabled                                                              */
+
+
+/* HFXO64M_TS_DATAIN: TS test data input. Used only when debugging */
+  #define HFXO64M_TS_DATAIN_ResetValue (0x00000000UL) /*!< Reset value of DATAIN register.                                     */
+
+/* VAL @Bits 0..15 : (unspecified) */
+  #define HFXO64M_TS_DATAIN_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
+  #define HFXO64M_TS_DATAIN_VAL_Msk (0xFFFFUL << HFXO64M_TS_DATAIN_VAL_Pos) /*!< Bit mask of VAL field.                        */
+
+
+/* HFXO64M_TS_DATAINLOAD: TS test data latch pulse input. Used only when debugging */
+  #define HFXO64M_TS_DATAINLOAD_ResetValue (0x00000000UL) /*!< Reset value of DATAINLOAD register.                             */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_TS_DATAINLOAD_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
+  #define HFXO64M_TS_DATAINLOAD_VAL_Msk (0x1UL << HFXO64M_TS_DATAINLOAD_VAL_Pos) /*!< Bit mask of VAL field.                   */
+
+
+
+/* ================================================= Struct HFXO64M_OVERRIDE ================================================= */
+/**
+  * @brief OVERRIDE [HFXO64M_OVERRIDE] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  PWRUP;                             /*!< (@ 0x00000000) PWRUP override                                        */
+  __IOM uint32_t  RETAIN;                            /*!< (@ 0x00000004) RETAIN override                                       */
+  __IOM uint32_t  BIAS;                              /*!< (@ 0x00000008) BIAS override                                         */
+  __IOM uint32_t  CHIRPCHARGE;                       /*!< (@ 0x0000000C) CHIRP_CHARGE override                                 */
+  __IOM uint32_t  ENABLEXTALDAMPING;                 /*!< (@ 0x00000010) ENABLE_XTAL_DAMPING override                          */
+  __IOM uint32_t  ENABLE0V8REGULATOR;                /*!< (@ 0x00000014) ENABLE_0V8_REGULATOR override                         */
+  __IOM uint32_t  ENABLE1V5REGULATOR;                /*!< (@ 0x00000018) ENABLE_1V5_REGULATOR override                         */
+  __IOM uint32_t  ENABLEAREG;                        /*!< (@ 0x0000001C) ENABLE_AREG override                                  */
+  __IOM uint32_t  ENABLEBIAS;                        /*!< (@ 0x00000020) ENABLE_BIAS override                                  */
+  __IOM uint32_t  ENABLEBOOST;                       /*!< (@ 0x00000024) ENABLE_BOOST override                                 */
+  __IOM uint32_t  ENABLEBUFFER;                      /*!< (@ 0x00000028) ENABLE_BUFFER override                                */
+  __IOM uint32_t  ENABLECHIRP;                       /*!< (@ 0x0000002C) ENABLE_CHIRP override                                 */
+  __IOM uint32_t  ENABLECORE;                        /*!< (@ 0x00000030) ENABLE_CORE override                                  */
+  __IOM uint32_t  ENABLECURRENTCOMPARISON;           /*!< (@ 0x00000034) ENABLE_CURRENT_COMPARISON override                    */
+  __IOM uint32_t  ENABLEDACOUT;                      /*!< (@ 0x00000038) ENABLE_DAC_OUT override                               */
+  __IOM uint32_t  ENABLEDETECTOR;                    /*!< (@ 0x0000003C) ENABLE_DETECTOR override                              */
+  __IOM uint32_t  CURRENTCOMPARISON;                 /*!< (@ 0x00000040) CURRENT_COMPARISON override                           */
+  __IOM uint32_t  DETECTOR1;                         /*!< (@ 0x00000044) DETECTOR1 override                                    */
+  __IOM uint32_t  DETECTOR2;                         /*!< (@ 0x00000048) DETECTOR2 override                                    */
+  __IOM uint32_t  ENABLEDOUBLER;                     /*!< (@ 0x0000004C) ENABLE_DOUBLER override                               */
+  __IOM uint32_t  ENABLEVREF;                        /*!< (@ 0x00000050) ENABLE_VREF override                                  */
+  __IOM uint32_t  TSENABLE;                          /*!< (@ 0x00000054) TSENABLE override                                     */
+  __IOM uint32_t  TSENABLERESET;                     /*!< (@ 0x00000058) TSENABLERESET override                                */
+} NRF_HFXO64M_OVERRIDE_Type;                         /*!< Size = 92 (0x05C)                                                    */
+
+/* HFXO64M_OVERRIDE_PWRUP: PWRUP override */
+  #define HFXO64M_OVERRIDE_PWRUP_ResetValue (0x00000000UL) /*!< Reset value of PWRUP register.                                 */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_PWRUP_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_PWRUP_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_PWRUP_VAL_Pos) /*!< Bit mask of VAL field.                 */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_PWRUP_EN_Pos (31UL)       /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_PWRUP_EN_Msk (0x1UL << HFXO64M_OVERRIDE_PWRUP_EN_Pos) /*!< Bit mask of EN field.                    */
+
+
+/* HFXO64M_OVERRIDE_RETAIN: RETAIN override */
+  #define HFXO64M_OVERRIDE_RETAIN_ResetValue (0x00000000UL) /*!< Reset value of RETAIN register.                               */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_RETAIN_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_RETAIN_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_RETAIN_VAL_Pos) /*!< Bit mask of VAL field.               */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_RETAIN_EN_Pos (31UL)      /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_RETAIN_EN_Msk (0x1UL << HFXO64M_OVERRIDE_RETAIN_EN_Pos) /*!< Bit mask of EN field.                  */
+
+
+/* HFXO64M_OVERRIDE_BIAS: BIAS override */
+  #define HFXO64M_OVERRIDE_BIAS_ResetValue (0x00000000UL) /*!< Reset value of BIAS register.                                   */
+
+/* VAL @Bits 0..3 : (unspecified) */
+  #define HFXO64M_OVERRIDE_BIAS_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_BIAS_VAL_Msk (0xFUL << HFXO64M_OVERRIDE_BIAS_VAL_Pos) /*!< Bit mask of VAL field.                   */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_BIAS_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_BIAS_EN_Msk (0x1UL << HFXO64M_OVERRIDE_BIAS_EN_Pos) /*!< Bit mask of EN field.                      */
+
+
+/* HFXO64M_OVERRIDE_CHIRPCHARGE: CHIRP_CHARGE override */
+  #define HFXO64M_OVERRIDE_CHIRPCHARGE_ResetValue (0x00000000UL) /*!< Reset value of CHIRPCHARGE register.                     */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_CHIRPCHARGE_VAL_Pos (0UL) /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_CHIRPCHARGE_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_CHIRPCHARGE_VAL_Pos) /*!< Bit mask of VAL field.     */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_CHIRPCHARGE_EN_Pos (31UL) /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_CHIRPCHARGE_EN_Msk (0x1UL << HFXO64M_OVERRIDE_CHIRPCHARGE_EN_Pos) /*!< Bit mask of EN field.        */
+
+
+/* HFXO64M_OVERRIDE_ENABLEXTALDAMPING: ENABLE_XTAL_DAMPING override */
+  #define HFXO64M_OVERRIDE_ENABLEXTALDAMPING_ResetValue (0x00000000UL) /*!< Reset value of ENABLEXTALDAMPING register.         */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEXTALDAMPING_VAL_Pos (0UL) /*!< Position of VAL field.                                         */
+  #define HFXO64M_OVERRIDE_ENABLEXTALDAMPING_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEXTALDAMPING_VAL_Pos) /*!< Bit mask of VAL
+                                                                            field.*/
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEXTALDAMPING_EN_Pos (31UL) /*!< Position of EN field.                                          */
+  #define HFXO64M_OVERRIDE_ENABLEXTALDAMPING_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEXTALDAMPING_EN_Pos) /*!< Bit mask of EN
+                                                                            field.*/
+
+
+/* HFXO64M_OVERRIDE_ENABLE0V8REGULATOR: ENABLE_0V8_REGULATOR override */
+  #define HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_ResetValue (0x00000000UL) /*!< Reset value of ENABLE0V8REGULATOR register.       */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_VAL_Pos (0UL) /*!< Position of VAL field.                                        */
+  #define HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_VAL_Pos) /*!< Bit mask of
+                                                                            VAL field.*/
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_EN_Pos (31UL) /*!< Position of EN field.                                         */
+  #define HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_EN_Pos) /*!< Bit mask of EN
+                                                                            field.*/
+
+
+/* HFXO64M_OVERRIDE_ENABLE1V5REGULATOR: ENABLE_1V5_REGULATOR override */
+  #define HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_ResetValue (0x00000000UL) /*!< Reset value of ENABLE1V5REGULATOR register.       */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_VAL_Pos (0UL) /*!< Position of VAL field.                                        */
+  #define HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_VAL_Pos) /*!< Bit mask of
+                                                                            VAL field.*/
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_EN_Pos (31UL) /*!< Position of EN field.                                         */
+  #define HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_EN_Pos) /*!< Bit mask of EN
+                                                                            field.*/
+
+
+/* HFXO64M_OVERRIDE_ENABLEAREG: ENABLE_AREG override */
+  #define HFXO64M_OVERRIDE_ENABLEAREG_ResetValue (0x00000000UL) /*!< Reset value of ENABLEAREG register.                       */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEAREG_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_ENABLEAREG_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEAREG_VAL_Pos) /*!< Bit mask of VAL field.       */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEAREG_EN_Pos (31UL)  /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_ENABLEAREG_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEAREG_EN_Pos) /*!< Bit mask of EN field.          */
+
+
+/* HFXO64M_OVERRIDE_ENABLEBIAS: ENABLE_BIAS override */
+  #define HFXO64M_OVERRIDE_ENABLEBIAS_ResetValue (0x00000000UL) /*!< Reset value of ENABLEBIAS register.                       */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEBIAS_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_ENABLEBIAS_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEBIAS_VAL_Pos) /*!< Bit mask of VAL field.       */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEBIAS_EN_Pos (31UL)  /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_ENABLEBIAS_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEBIAS_EN_Pos) /*!< Bit mask of EN field.          */
+
+
+/* HFXO64M_OVERRIDE_ENABLEBOOST: ENABLE_BOOST override */
+  #define HFXO64M_OVERRIDE_ENABLEBOOST_ResetValue (0x00000000UL) /*!< Reset value of ENABLEBOOST register.                     */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEBOOST_VAL_Pos (0UL) /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_ENABLEBOOST_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEBOOST_VAL_Pos) /*!< Bit mask of VAL field.     */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEBOOST_EN_Pos (31UL) /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_ENABLEBOOST_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEBOOST_EN_Pos) /*!< Bit mask of EN field.        */
+
+
+/* HFXO64M_OVERRIDE_ENABLEBUFFER: ENABLE_BUFFER override */
+  #define HFXO64M_OVERRIDE_ENABLEBUFFER_ResetValue (0x00000000UL) /*!< Reset value of ENABLEBUFFER register.                   */
+
+/* VAL @Bits 0..9 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEBUFFER_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
+  #define HFXO64M_OVERRIDE_ENABLEBUFFER_VAL_Msk (0x3FFUL << HFXO64M_OVERRIDE_ENABLEBUFFER_VAL_Pos) /*!< Bit mask of VAL field. */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEBUFFER_EN_Pos (31UL) /*!< Position of EN field.                                               */
+  #define HFXO64M_OVERRIDE_ENABLEBUFFER_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEBUFFER_EN_Pos) /*!< Bit mask of EN field.      */
+
+
+/* HFXO64M_OVERRIDE_ENABLECHIRP: ENABLE_CHIRP override */
+  #define HFXO64M_OVERRIDE_ENABLECHIRP_ResetValue (0x00000000UL) /*!< Reset value of ENABLECHIRP register.                     */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLECHIRP_VAL_Pos (0UL) /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_ENABLECHIRP_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLECHIRP_VAL_Pos) /*!< Bit mask of VAL field.     */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLECHIRP_EN_Pos (31UL) /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_ENABLECHIRP_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLECHIRP_EN_Pos) /*!< Bit mask of EN field.        */
+
+
+/* HFXO64M_OVERRIDE_ENABLECORE: ENABLE_CORE override */
+  #define HFXO64M_OVERRIDE_ENABLECORE_ResetValue (0x00000000UL) /*!< Reset value of ENABLECORE register.                       */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLECORE_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_ENABLECORE_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLECORE_VAL_Pos) /*!< Bit mask of VAL field.       */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLECORE_EN_Pos (31UL)  /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_ENABLECORE_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLECORE_EN_Pos) /*!< Bit mask of EN field.          */
+
+
+/* HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON: ENABLE_CURRENT_COMPARISON override */
+  #define HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_ResetValue (0x00000000UL) /*!< Reset value of ENABLECURRENTCOMPARISON
+                                                                            register.*/
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_VAL_Pos (0UL) /*!< Position of VAL field.                                   */
+  #define HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_VAL_Pos) /*!< Bit
+                                                                            mask of VAL field.*/
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_EN_Pos (31UL) /*!< Position of EN field.                                    */
+  #define HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_EN_Pos) /*!< Bit
+                                                                            mask of EN field.*/
+
+
+/* HFXO64M_OVERRIDE_ENABLEDACOUT: ENABLE_DAC_OUT override */
+  #define HFXO64M_OVERRIDE_ENABLEDACOUT_ResetValue (0x00000000UL) /*!< Reset value of ENABLEDACOUT register.                   */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEDACOUT_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
+  #define HFXO64M_OVERRIDE_ENABLEDACOUT_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEDACOUT_VAL_Pos) /*!< Bit mask of VAL field.   */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEDACOUT_EN_Pos (31UL) /*!< Position of EN field.                                               */
+  #define HFXO64M_OVERRIDE_ENABLEDACOUT_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEDACOUT_EN_Pos) /*!< Bit mask of EN field.      */
+
+
+/* HFXO64M_OVERRIDE_ENABLEDETECTOR: ENABLE_DETECTOR override */
+  #define HFXO64M_OVERRIDE_ENABLEDETECTOR_ResetValue (0x00000000UL) /*!< Reset value of ENABLEDETECTOR register.               */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEDETECTOR_VAL_Pos (0UL) /*!< Position of VAL field.                                            */
+  #define HFXO64M_OVERRIDE_ENABLEDETECTOR_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEDETECTOR_VAL_Pos) /*!< Bit mask of VAL
+                                                                            field.*/
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEDETECTOR_EN_Pos (31UL) /*!< Position of EN field.                                             */
+  #define HFXO64M_OVERRIDE_ENABLEDETECTOR_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEDETECTOR_EN_Pos) /*!< Bit mask of EN field.  */
+
+
+/* HFXO64M_OVERRIDE_CURRENTCOMPARISON: CURRENT_COMPARISON override */
+  #define HFXO64M_OVERRIDE_CURRENTCOMPARISON_ResetValue (0x00000000UL) /*!< Reset value of CURRENTCOMPARISON register.         */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_CURRENTCOMPARISON_VAL_Pos (0UL) /*!< Position of VAL field.                                         */
+  #define HFXO64M_OVERRIDE_CURRENTCOMPARISON_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_CURRENTCOMPARISON_VAL_Pos) /*!< Bit mask of VAL
+                                                                            field.*/
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_CURRENTCOMPARISON_EN_Pos (31UL) /*!< Position of EN field.                                          */
+  #define HFXO64M_OVERRIDE_CURRENTCOMPARISON_EN_Msk (0x1UL << HFXO64M_OVERRIDE_CURRENTCOMPARISON_EN_Pos) /*!< Bit mask of EN
+                                                                            field.*/
+
+
+/* HFXO64M_OVERRIDE_DETECTOR1: DETECTOR1 override */
+  #define HFXO64M_OVERRIDE_DETECTOR1_ResetValue (0x00000000UL) /*!< Reset value of DETECTOR1 register.                         */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_DETECTOR1_VAL_Pos (0UL)   /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_DETECTOR1_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_DETECTOR1_VAL_Pos) /*!< Bit mask of VAL field.         */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_DETECTOR1_EN_Pos (31UL)   /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_DETECTOR1_EN_Msk (0x1UL << HFXO64M_OVERRIDE_DETECTOR1_EN_Pos) /*!< Bit mask of EN field.            */
+
+
+/* HFXO64M_OVERRIDE_DETECTOR2: DETECTOR2 override */
+  #define HFXO64M_OVERRIDE_DETECTOR2_ResetValue (0x00000000UL) /*!< Reset value of DETECTOR2 register.                         */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_DETECTOR2_VAL_Pos (0UL)   /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_DETECTOR2_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_DETECTOR2_VAL_Pos) /*!< Bit mask of VAL field.         */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_DETECTOR2_EN_Pos (31UL)   /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_DETECTOR2_EN_Msk (0x1UL << HFXO64M_OVERRIDE_DETECTOR2_EN_Pos) /*!< Bit mask of EN field.            */
+
+
+/* HFXO64M_OVERRIDE_ENABLEDOUBLER: ENABLE_DOUBLER override */
+  #define HFXO64M_OVERRIDE_ENABLEDOUBLER_ResetValue (0x00000000UL) /*!< Reset value of ENABLEDOUBLER register.                 */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEDOUBLER_VAL_Pos (0UL) /*!< Position of VAL field.                                             */
+  #define HFXO64M_OVERRIDE_ENABLEDOUBLER_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEDOUBLER_VAL_Pos) /*!< Bit mask of VAL field. */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEDOUBLER_EN_Pos (31UL) /*!< Position of EN field.                                              */
+  #define HFXO64M_OVERRIDE_ENABLEDOUBLER_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEDOUBLER_EN_Pos) /*!< Bit mask of EN field.    */
+
+
+/* HFXO64M_OVERRIDE_ENABLEVREF: ENABLE_VREF override */
+  #define HFXO64M_OVERRIDE_ENABLEVREF_ResetValue (0x00000000UL) /*!< Reset value of ENABLEVREF register.                       */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEVREF_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_ENABLEVREF_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEVREF_VAL_Pos) /*!< Bit mask of VAL field.       */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_ENABLEVREF_EN_Pos (31UL)  /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_ENABLEVREF_EN_Msk (0x1UL << HFXO64M_OVERRIDE_ENABLEVREF_EN_Pos) /*!< Bit mask of EN field.          */
+
+
+/* HFXO64M_OVERRIDE_TSENABLE: TSENABLE override */
+  #define HFXO64M_OVERRIDE_TSENABLE_ResetValue (0x00000000UL) /*!< Reset value of TSENABLE register.                           */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_TSENABLE_VAL_Pos (0UL)    /*!< Position of VAL field.                                               */
+  #define HFXO64M_OVERRIDE_TSENABLE_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_TSENABLE_VAL_Pos) /*!< Bit mask of VAL field.           */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_TSENABLE_EN_Pos (31UL)    /*!< Position of EN field.                                                */
+  #define HFXO64M_OVERRIDE_TSENABLE_EN_Msk (0x1UL << HFXO64M_OVERRIDE_TSENABLE_EN_Pos) /*!< Bit mask of EN field.              */
+
+
+/* HFXO64M_OVERRIDE_TSENABLERESET: TSENABLERESET override */
+  #define HFXO64M_OVERRIDE_TSENABLERESET_ResetValue (0x00000000UL) /*!< Reset value of TSENABLERESET register.                 */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_OVERRIDE_TSENABLERESET_VAL_Pos (0UL) /*!< Position of VAL field.                                             */
+  #define HFXO64M_OVERRIDE_TSENABLERESET_VAL_Msk (0x1UL << HFXO64M_OVERRIDE_TSENABLERESET_VAL_Pos) /*!< Bit mask of VAL field. */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_OVERRIDE_TSENABLERESET_EN_Pos (31UL) /*!< Position of EN field.                                              */
+  #define HFXO64M_OVERRIDE_TSENABLERESET_EN_Msk (0x1UL << HFXO64M_OVERRIDE_TSENABLERESET_EN_Pos) /*!< Bit mask of EN field.    */
+
+
+
+/* =================================================== Struct HFXO64M_DFT ==================================================== */
+/**
+  * @brief DFT [HFXO64M_DFT] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  ATBCONFIG;                         /*!< (@ 0x00000000) ATB0 and ATB1 test mux control.                       */
+} NRF_HFXO64M_DFT_Type;                              /*!< Size = 4 (0x004)                                                     */
+
+/* HFXO64M_DFT_ATBCONFIG: ATB0 and ATB1 test mux control. */
+  #define HFXO64M_DFT_ATBCONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATBCONFIG register.                              */
+
+/* SELMUX0 @Bits 0..2 : Test mux control for ATB0. */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX0_Pos (0UL)    /*!< Position of SELMUX0 field.                                           */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX0_Msk (0x7UL << HFXO64M_DFT_ATBCONFIG_SELMUX0_Pos) /*!< Bit mask of SELMUX0 field.       */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX0_Min (0x0UL)  /*!< Min enumerator value of SELMUX0 field.                               */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX0_Max (0x4UL)  /*!< Max enumerator value of SELMUX0 field.                               */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX0_None (0x0UL) /*!< Nothing selected.                                                    */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX0_Vref (0x1UL) /*!< Voltage reference output. Approximately 0.76V                        */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX0_V1v5Reg (0x2UL) /*!< 1.5V regulator output voltage.                                    */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX0_V0V8Reg (0x3UL) /*!< 0.8V regulator output voltage.                                    */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX0_VPierce (0x4UL) /*!< IPIERCE voltage. XO core imminent supply voltage.                 */
+
+/* SELMUX1 @Bits 3..5 : Test mux control for ATB1. */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX1_Pos (3UL)    /*!< Position of SELMUX1 field.                                           */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX1_Msk (0x7UL << HFXO64M_DFT_ATBCONFIG_SELMUX1_Pos) /*!< Bit mask of SELMUX1 field.       */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX1_Min (0x0UL)  /*!< Min enumerator value of SELMUX1 field.                               */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX1_Max (0x4UL)  /*!< Max enumerator value of SELMUX1 field.                               */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX1_None (0x0UL) /*!< Nothing selected.                                                    */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX1_VAteg (0x1UL) /*!< AREG block test voltage. Xo level dependent.                        */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX1_VChirp (0x2UL) /*!< Chirp generator test voltage.                                      */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX1_VTS (0x3UL)  /*!< Temp Sensor test voltage.                                            */
+  #define HFXO64M_DFT_ATBCONFIG_SELMUX1_VGnd (0x4UL) /*!< Connected to XO VSS/ground. Use as reference voltage for GND.        */
+
+/* EN @Bit 31 : (unspecified) */
+  #define HFXO64M_DFT_ATBCONFIG_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define HFXO64M_DFT_ATBCONFIG_EN_Msk (0x1UL << HFXO64M_DFT_ATBCONFIG_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define HFXO64M_DFT_ATBCONFIG_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define HFXO64M_DFT_ATBCONFIG_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define HFXO64M_DFT_ATBCONFIG_EN_Disabled (0x0UL)  /*!< Analog test busses are disabled.                                     */
+  #define HFXO64M_DFT_ATBCONFIG_EN_Enabled (0x1UL)   /*!< Analog test busses are enabled.                                      */
+
+
+/* ===================================================== Struct HFXO64M ====================================================== */
+/**
+  * @brief HFXO64M peripheral
+  */
+  typedef struct {                                   /*!< HFXO64M Structure                                                    */
+    __IM uint32_t RESERVED[64];
+    __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000100) HFXO64M started                                       */
+    __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000104) HFXO64M stopped                                       */
+    __IOM uint32_t EVENTS_ERRORBIAS;                 /*!< (@ 0x00000108) Error with BIAS setup                                 */
+    __IOM uint32_t EVENTS_ERRORDETECTOR;             /*!< (@ 0x0000010C) Error with DETECTOR                                   */
+    __IOM uint32_t EVENTS_ERRORTCXO;                 /*!< (@ 0x00000110) Error with TCXO startup                               */
+    __IOM uint32_t EVENTS_STARTREQ;                  /*!< (@ 0x00000114) Clock start has been requested                        */
+    __IOM uint32_t EVENTS_STOPREQ;                   /*!< (@ 0x00000118) Clock stop has been requested                         */
+    __IM uint32_t RESERVED1[121];
+    __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
+    __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
+    __IM uint32_t RESERVED2[60];
+    __IM uint32_t STATUS;                            /*!< (@ 0x00000400) HFXO64M status                                        */
+    __IM uint32_t STATUSANA;                         /*!< (@ 0x00000404) Status of analog module output signals                */
+    __IM uint32_t STATUSMMI;                         /*!< (@ 0x00000408) MMI internal values for debug use.                    */
+    __IM uint32_t RESERVED3[13];
+    __IOM NRF_HFXO64M_TRIM_Type TRIM;                /*!< (@ 0x00000440) (unspecified)                                         */
+    __IM uint32_t RESERVED4[5];
+    __IOM NRF_HFXO64M_TS_Type TS;                    /*!< (@ 0x00000460) (unspecified)                                         */
+    __IM uint32_t RESERVED5[4];
+    __IOM uint32_t MIRROR;                           /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
+    __IOM uint32_t PWRUPCTRL;                        /*!< (@ 0x00000484) Power up control                                      */
+    __IOM uint32_t MODE;                             /*!< (@ 0x00000488) HFXO64M mode                                          */
+    __IOM uint32_t XTALSETTLETIME;                   /*!< (@ 0x0000048C) Settle time of the crystal. List of pre-coded times.  */
+    __IOM uint32_t CHIRPTIME;                        /*!< (@ 0x00000490) Chirp period length. List of pre-coded times.         */
+    __IOM uint32_t ENABLEDAMPING;                    /*!< (@ 0x00000494) Enables the MMI to do crystal damping when stopping the
+                                                                         oscillator.*/
+    __IOM uint32_t FORCEBUFF;                        /*!< (@ 0x00000498) Enables all clock buffers when sinOut4_ana buffer is
+                                                                         enabled.*/
+    __IOM uint32_t CFG;                              /*!< (@ 0x0000049C) Direct HFXO64M static configurations.                 */
+    __IOM uint32_t TCXOPOWERED;                      /*!< (@ 0x000004A0) SysCtrl writes here the current status of the TCXO
+                                                                         power.*/
+    __IM uint32_t RESERVED6[23];
+    __IOM NRF_HFXO64M_OVERRIDE_Type OVERRIDE;        /*!< (@ 0x00000500) (unspecified)                                         */
+    __IM uint32_t RESERVED7[41];
+    __IOM NRF_HFXO64M_DFT_Type DFT;                  /*!< (@ 0x00000600) (unspecified)                                         */
+  } NRF_HFXO64M_Type;                                /*!< Size = 1540 (0x604)                                                  */
+
+/* HFXO64M_EVENTS_STARTED: HFXO64M started */
+  #define HFXO64M_EVENTS_STARTED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_STARTED register.                        */
+
+/* EVENTS_STARTED @Bit 0 : HFXO64M started */
+  #define HFXO64M_EVENTS_STARTED_EVENTS_STARTED_Pos (0UL) /*!< Position of EVENTS_STARTED field.                               */
+  #define HFXO64M_EVENTS_STARTED_EVENTS_STARTED_Msk (0x1UL << HFXO64M_EVENTS_STARTED_EVENTS_STARTED_Pos) /*!< Bit mask of
+                                                                            EVENTS_STARTED field.*/
+  #define HFXO64M_EVENTS_STARTED_EVENTS_STARTED_Min (0x0UL) /*!< Min enumerator value of EVENTS_STARTED field.                 */
+  #define HFXO64M_EVENTS_STARTED_EVENTS_STARTED_Max (0x1UL) /*!< Max enumerator value of EVENTS_STARTED field.                 */
+  #define HFXO64M_EVENTS_STARTED_EVENTS_STARTED_NotGenerated (0x0UL) /*!< Event not generated                                  */
+  #define HFXO64M_EVENTS_STARTED_EVENTS_STARTED_Generated (0x1UL) /*!< Event generated                                         */
+
+
+/* HFXO64M_EVENTS_STOPPED: HFXO64M stopped */
+  #define HFXO64M_EVENTS_STOPPED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_STOPPED register.                        */
+
+/* EVENTS_STOPPED @Bit 0 : HFXO64M stopped */
+  #define HFXO64M_EVENTS_STOPPED_EVENTS_STOPPED_Pos (0UL) /*!< Position of EVENTS_STOPPED field.                               */
+  #define HFXO64M_EVENTS_STOPPED_EVENTS_STOPPED_Msk (0x1UL << HFXO64M_EVENTS_STOPPED_EVENTS_STOPPED_Pos) /*!< Bit mask of
+                                                                            EVENTS_STOPPED field.*/
+  #define HFXO64M_EVENTS_STOPPED_EVENTS_STOPPED_Min (0x0UL) /*!< Min enumerator value of EVENTS_STOPPED field.                 */
+  #define HFXO64M_EVENTS_STOPPED_EVENTS_STOPPED_Max (0x1UL) /*!< Max enumerator value of EVENTS_STOPPED field.                 */
+  #define HFXO64M_EVENTS_STOPPED_EVENTS_STOPPED_NotGenerated (0x0UL) /*!< Event not generated                                  */
+  #define HFXO64M_EVENTS_STOPPED_EVENTS_STOPPED_Generated (0x1UL) /*!< Event generated                                         */
+
+
+/* HFXO64M_EVENTS_ERRORBIAS: Error with BIAS setup */
+  #define HFXO64M_EVENTS_ERRORBIAS_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ERRORBIAS register.                    */
+
+/* EVENTS_ERRORBIAS @Bit 0 : Error with BIAS setup */
+  #define HFXO64M_EVENTS_ERRORBIAS_EVENTS_ERRORBIAS_Pos (0UL) /*!< Position of EVENTS_ERRORBIAS field.                         */
+  #define HFXO64M_EVENTS_ERRORBIAS_EVENTS_ERRORBIAS_Msk (0x1UL << HFXO64M_EVENTS_ERRORBIAS_EVENTS_ERRORBIAS_Pos) /*!< Bit mask
+                                                                            of EVENTS_ERRORBIAS field.*/
+  #define HFXO64M_EVENTS_ERRORBIAS_EVENTS_ERRORBIAS_Min (0x0UL) /*!< Min enumerator value of EVENTS_ERRORBIAS field.           */
+  #define HFXO64M_EVENTS_ERRORBIAS_EVENTS_ERRORBIAS_Max (0x1UL) /*!< Max enumerator value of EVENTS_ERRORBIAS field.           */
+  #define HFXO64M_EVENTS_ERRORBIAS_EVENTS_ERRORBIAS_NotGenerated (0x0UL) /*!< Event not generated                              */
+  #define HFXO64M_EVENTS_ERRORBIAS_EVENTS_ERRORBIAS_Generated (0x1UL) /*!< Event generated                                     */
+
+
+/* HFXO64M_EVENTS_ERRORDETECTOR: Error with DETECTOR */
+  #define HFXO64M_EVENTS_ERRORDETECTOR_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ERRORDETECTOR register.            */
+
+/* EVENTS_ERRORDETECTOR @Bit 0 : Error with DETECTOR */
+  #define HFXO64M_EVENTS_ERRORDETECTOR_EVENTS_ERRORDETECTOR_Pos (0UL) /*!< Position of EVENTS_ERRORDETECTOR field.             */
+  #define HFXO64M_EVENTS_ERRORDETECTOR_EVENTS_ERRORDETECTOR_Msk (0x1UL << HFXO64M_EVENTS_ERRORDETECTOR_EVENTS_ERRORDETECTOR_Pos)
+                                                                            /*!< Bit mask of EVENTS_ERRORDETECTOR field.*/
+  #define HFXO64M_EVENTS_ERRORDETECTOR_EVENTS_ERRORDETECTOR_Min (0x0UL) /*!< Min enumerator value of EVENTS_ERRORDETECTOR
+                                                                            field.*/
+  #define HFXO64M_EVENTS_ERRORDETECTOR_EVENTS_ERRORDETECTOR_Max (0x1UL) /*!< Max enumerator value of EVENTS_ERRORDETECTOR
+                                                                            field.*/
+  #define HFXO64M_EVENTS_ERRORDETECTOR_EVENTS_ERRORDETECTOR_NotGenerated (0x0UL) /*!< Event not generated                      */
+  #define HFXO64M_EVENTS_ERRORDETECTOR_EVENTS_ERRORDETECTOR_Generated (0x1UL) /*!< Event generated                             */
+
+
+/* HFXO64M_EVENTS_ERRORTCXO: Error with TCXO startup */
+  #define HFXO64M_EVENTS_ERRORTCXO_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ERRORTCXO register.                    */
+
+/* EVENTS_ERRORTCXO @Bit 0 : Error with TCXO startup */
+  #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Pos (0UL) /*!< Position of EVENTS_ERRORTCXO field.                         */
+  #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Msk (0x1UL << HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Pos) /*!< Bit mask
+                                                                            of EVENTS_ERRORTCXO field.*/
+  #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Min (0x0UL) /*!< Min enumerator value of EVENTS_ERRORTCXO field.           */
+  #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Max (0x1UL) /*!< Max enumerator value of EVENTS_ERRORTCXO field.           */
+  #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_NotGenerated (0x0UL) /*!< Event not generated                              */
+  #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Generated (0x1UL) /*!< Event generated                                     */
+
+
+/* HFXO64M_EVENTS_STARTREQ: Clock start has been requested */
+  #define HFXO64M_EVENTS_STARTREQ_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_STARTREQ register.                      */
+
+/* EVENTS_STARTREQ @Bit 0 : Clock start has been requested */
+  #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Pos (0UL) /*!< Position of EVENTS_STARTREQ field.                            */
+  #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Msk (0x1UL << HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Pos) /*!< Bit mask of
+                                                                            EVENTS_STARTREQ field.*/
+  #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Min (0x0UL) /*!< Min enumerator value of EVENTS_STARTREQ field.              */
+  #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Max (0x1UL) /*!< Max enumerator value of EVENTS_STARTREQ field.              */
+  #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_NotGenerated (0x0UL) /*!< Event not generated                                */
+  #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Generated (0x1UL) /*!< Event generated                                       */
+
+
+/* HFXO64M_EVENTS_STOPREQ: Clock stop has been requested */
+  #define HFXO64M_EVENTS_STOPREQ_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_STOPREQ register.                        */
+
+/* EVENTS_STOPREQ @Bit 0 : Clock stop has been requested */
+  #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Pos (0UL) /*!< Position of EVENTS_STOPREQ field.                               */
+  #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Msk (0x1UL << HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Pos) /*!< Bit mask of
+                                                                            EVENTS_STOPREQ field.*/
+  #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Min (0x0UL) /*!< Min enumerator value of EVENTS_STOPREQ field.                 */
+  #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Max (0x1UL) /*!< Max enumerator value of EVENTS_STOPREQ field.                 */
+  #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_NotGenerated (0x0UL) /*!< Event not generated                                  */
+  #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Generated (0x1UL) /*!< Event generated                                         */
+
+
+/* HFXO64M_INTEN: Enable or disable interrupt */
+  #define HFXO64M_INTEN_ResetValue (0x00000000UL)    /*!< Reset value of INTEN register.                                       */
+
+/* STARTED @Bit 0 : Enable or disable interrupt for event STARTED */
+  #define HFXO64M_INTEN_STARTED_Pos (0UL)            /*!< Position of STARTED field.                                           */
+  #define HFXO64M_INTEN_STARTED_Msk (0x1UL << HFXO64M_INTEN_STARTED_Pos) /*!< Bit mask of STARTED field.                       */
+  #define HFXO64M_INTEN_STARTED_Min (0x0UL)          /*!< Min enumerator value of STARTED field.                               */
+  #define HFXO64M_INTEN_STARTED_Max (0x1UL)          /*!< Max enumerator value of STARTED field.                               */
+  #define HFXO64M_INTEN_STARTED_Disabled (0x0UL)     /*!< Disable                                                              */
+  #define HFXO64M_INTEN_STARTED_Enabled (0x1UL)      /*!< Enable                                                               */
+
+/* STOPPED @Bit 1 : Enable or disable interrupt for event STOPPED */
+  #define HFXO64M_INTEN_STOPPED_Pos (1UL)            /*!< Position of STOPPED field.                                           */
+  #define HFXO64M_INTEN_STOPPED_Msk (0x1UL << HFXO64M_INTEN_STOPPED_Pos) /*!< Bit mask of STOPPED field.                       */
+  #define HFXO64M_INTEN_STOPPED_Min (0x0UL)          /*!< Min enumerator value of STOPPED field.                               */
+  #define HFXO64M_INTEN_STOPPED_Max (0x1UL)          /*!< Max enumerator value of STOPPED field.                               */
+  #define HFXO64M_INTEN_STOPPED_Disabled (0x0UL)     /*!< Disable                                                              */
+  #define HFXO64M_INTEN_STOPPED_Enabled (0x1UL)      /*!< Enable                                                               */
+
+/* ERRORBIAS @Bit 2 : Enable or disable interrupt for event ERRORBIAS */
+  #define HFXO64M_INTEN_ERRORBIAS_Pos (2UL)          /*!< Position of ERRORBIAS field.                                         */
+  #define HFXO64M_INTEN_ERRORBIAS_Msk (0x1UL << HFXO64M_INTEN_ERRORBIAS_Pos) /*!< Bit mask of ERRORBIAS field.                 */
+  #define HFXO64M_INTEN_ERRORBIAS_Min (0x0UL)        /*!< Min enumerator value of ERRORBIAS field.                             */
+  #define HFXO64M_INTEN_ERRORBIAS_Max (0x1UL)        /*!< Max enumerator value of ERRORBIAS field.                             */
+  #define HFXO64M_INTEN_ERRORBIAS_Disabled (0x0UL)   /*!< Disable                                                              */
+  #define HFXO64M_INTEN_ERRORBIAS_Enabled (0x1UL)    /*!< Enable                                                               */
+
+/* ERRORDETECTOR @Bit 3 : Enable or disable interrupt for event ERRORDETECTOR */
+  #define HFXO64M_INTEN_ERRORDETECTOR_Pos (3UL)      /*!< Position of ERRORDETECTOR field.                                     */
+  #define HFXO64M_INTEN_ERRORDETECTOR_Msk (0x1UL << HFXO64M_INTEN_ERRORDETECTOR_Pos) /*!< Bit mask of ERRORDETECTOR field.     */
+  #define HFXO64M_INTEN_ERRORDETECTOR_Min (0x0UL)    /*!< Min enumerator value of ERRORDETECTOR field.                         */
+  #define HFXO64M_INTEN_ERRORDETECTOR_Max (0x1UL)    /*!< Max enumerator value of ERRORDETECTOR field.                         */
+  #define HFXO64M_INTEN_ERRORDETECTOR_Disabled (0x0UL) /*!< Disable                                                            */
+  #define HFXO64M_INTEN_ERRORDETECTOR_Enabled (0x1UL) /*!< Enable                                                              */
+
+/* ERRORTCXO @Bit 4 : Enable or disable interrupt for event ERRORTCXO */
+  #define HFXO64M_INTEN_ERRORTCXO_Pos (4UL)          /*!< Position of ERRORTCXO field.                                         */
+  #define HFXO64M_INTEN_ERRORTCXO_Msk (0x1UL << HFXO64M_INTEN_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.                 */
+  #define HFXO64M_INTEN_ERRORTCXO_Min (0x0UL)        /*!< Min enumerator value of ERRORTCXO field.                             */
+  #define HFXO64M_INTEN_ERRORTCXO_Max (0x1UL)        /*!< Max enumerator value of ERRORTCXO field.                             */
+  #define HFXO64M_INTEN_ERRORTCXO_Disabled (0x0UL)   /*!< Disable                                                              */
+  #define HFXO64M_INTEN_ERRORTCXO_Enabled (0x1UL)    /*!< Enable                                                               */
+
+/* STARTREQ @Bit 5 : Enable or disable interrupt for event STARTREQ */
+  #define HFXO64M_INTEN_STARTREQ_Pos (5UL)           /*!< Position of STARTREQ field.                                          */
+  #define HFXO64M_INTEN_STARTREQ_Msk (0x1UL << HFXO64M_INTEN_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.                    */
+  #define HFXO64M_INTEN_STARTREQ_Min (0x0UL)         /*!< Min enumerator value of STARTREQ field.                              */
+  #define HFXO64M_INTEN_STARTREQ_Max (0x1UL)         /*!< Max enumerator value of STARTREQ field.                              */
+  #define HFXO64M_INTEN_STARTREQ_Disabled (0x0UL)    /*!< Disable                                                              */
+  #define HFXO64M_INTEN_STARTREQ_Enabled (0x1UL)     /*!< Enable                                                               */
+
+/* STOPREQ @Bit 6 : Enable or disable interrupt for event STOPREQ */
+  #define HFXO64M_INTEN_STOPREQ_Pos (6UL)            /*!< Position of STOPREQ field.                                           */
+  #define HFXO64M_INTEN_STOPREQ_Msk (0x1UL << HFXO64M_INTEN_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.                       */
+  #define HFXO64M_INTEN_STOPREQ_Min (0x0UL)          /*!< Min enumerator value of STOPREQ field.                               */
+  #define HFXO64M_INTEN_STOPREQ_Max (0x1UL)          /*!< Max enumerator value of STOPREQ field.                               */
+  #define HFXO64M_INTEN_STOPREQ_Disabled (0x0UL)     /*!< Disable                                                              */
+  #define HFXO64M_INTEN_STOPREQ_Enabled (0x1UL)      /*!< Enable                                                               */
+
+
+/* HFXO64M_INTENSET: Enable interrupt */
+  #define HFXO64M_INTENSET_ResetValue (0x00000000UL) /*!< Reset value of INTENSET register.                                    */
+
+/* STARTED @Bit 0 : Write '1' to enable interrupt for event STARTED */
+  #define HFXO64M_INTENSET_STARTED_Pos (0UL)         /*!< Position of STARTED field.                                           */
+  #define HFXO64M_INTENSET_STARTED_Msk (0x1UL << HFXO64M_INTENSET_STARTED_Pos) /*!< Bit mask of STARTED field.                 */
+  #define HFXO64M_INTENSET_STARTED_Min (0x0UL)       /*!< Min enumerator value of STARTED field.                               */
+  #define HFXO64M_INTENSET_STARTED_Max (0x1UL)       /*!< Max enumerator value of STARTED field.                               */
+  #define HFXO64M_INTENSET_STARTED_Set (0x1UL)       /*!< Enable                                                               */
+  #define HFXO64M_INTENSET_STARTED_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
+  #define HFXO64M_INTENSET_STARTED_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
+
+/* STOPPED @Bit 1 : Write '1' to enable interrupt for event STOPPED */
+  #define HFXO64M_INTENSET_STOPPED_Pos (1UL)         /*!< Position of STOPPED field.                                           */
+  #define HFXO64M_INTENSET_STOPPED_Msk (0x1UL << HFXO64M_INTENSET_STOPPED_Pos) /*!< Bit mask of STOPPED field.                 */
+  #define HFXO64M_INTENSET_STOPPED_Min (0x0UL)       /*!< Min enumerator value of STOPPED field.                               */
+  #define HFXO64M_INTENSET_STOPPED_Max (0x1UL)       /*!< Max enumerator value of STOPPED field.                               */
+  #define HFXO64M_INTENSET_STOPPED_Set (0x1UL)       /*!< Enable                                                               */
+  #define HFXO64M_INTENSET_STOPPED_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
+  #define HFXO64M_INTENSET_STOPPED_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
+
+/* ERRORBIAS @Bit 2 : Write '1' to enable interrupt for event ERRORBIAS */
+  #define HFXO64M_INTENSET_ERRORBIAS_Pos (2UL)       /*!< Position of ERRORBIAS field.                                         */
+  #define HFXO64M_INTENSET_ERRORBIAS_Msk (0x1UL << HFXO64M_INTENSET_ERRORBIAS_Pos) /*!< Bit mask of ERRORBIAS field.           */
+  #define HFXO64M_INTENSET_ERRORBIAS_Min (0x0UL)     /*!< Min enumerator value of ERRORBIAS field.                             */
+  #define HFXO64M_INTENSET_ERRORBIAS_Max (0x1UL)     /*!< Max enumerator value of ERRORBIAS field.                             */
+  #define HFXO64M_INTENSET_ERRORBIAS_Set (0x1UL)     /*!< Enable                                                               */
+  #define HFXO64M_INTENSET_ERRORBIAS_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define HFXO64M_INTENSET_ERRORBIAS_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* ERRORDETECTOR @Bit 3 : Write '1' to enable interrupt for event ERRORDETECTOR */
+  #define HFXO64M_INTENSET_ERRORDETECTOR_Pos (3UL)   /*!< Position of ERRORDETECTOR field.                                     */
+  #define HFXO64M_INTENSET_ERRORDETECTOR_Msk (0x1UL << HFXO64M_INTENSET_ERRORDETECTOR_Pos) /*!< Bit mask of ERRORDETECTOR
+                                                                            field.*/
+  #define HFXO64M_INTENSET_ERRORDETECTOR_Min (0x0UL) /*!< Min enumerator value of ERRORDETECTOR field.                         */
+  #define HFXO64M_INTENSET_ERRORDETECTOR_Max (0x1UL) /*!< Max enumerator value of ERRORDETECTOR field.                         */
+  #define HFXO64M_INTENSET_ERRORDETECTOR_Set (0x1UL) /*!< Enable                                                               */
+  #define HFXO64M_INTENSET_ERRORDETECTOR_Disabled (0x0UL) /*!< Read: Disabled                                                  */
+  #define HFXO64M_INTENSET_ERRORDETECTOR_Enabled (0x1UL) /*!< Read: Enabled                                                    */
+
+/* ERRORTCXO @Bit 4 : Write '1' to enable interrupt for event ERRORTCXO */
+  #define HFXO64M_INTENSET_ERRORTCXO_Pos (4UL)       /*!< Position of ERRORTCXO field.                                         */
+  #define HFXO64M_INTENSET_ERRORTCXO_Msk (0x1UL << HFXO64M_INTENSET_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.           */
+  #define HFXO64M_INTENSET_ERRORTCXO_Min (0x0UL)     /*!< Min enumerator value of ERRORTCXO field.                             */
+  #define HFXO64M_INTENSET_ERRORTCXO_Max (0x1UL)     /*!< Max enumerator value of ERRORTCXO field.                             */
+  #define HFXO64M_INTENSET_ERRORTCXO_Set (0x1UL)     /*!< Enable                                                               */
+  #define HFXO64M_INTENSET_ERRORTCXO_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define HFXO64M_INTENSET_ERRORTCXO_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* STARTREQ @Bit 5 : Write '1' to enable interrupt for event STARTREQ */
+  #define HFXO64M_INTENSET_STARTREQ_Pos (5UL)        /*!< Position of STARTREQ field.                                          */
+  #define HFXO64M_INTENSET_STARTREQ_Msk (0x1UL << HFXO64M_INTENSET_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.              */
+  #define HFXO64M_INTENSET_STARTREQ_Min (0x0UL)      /*!< Min enumerator value of STARTREQ field.                              */
+  #define HFXO64M_INTENSET_STARTREQ_Max (0x1UL)      /*!< Max enumerator value of STARTREQ field.                              */
+  #define HFXO64M_INTENSET_STARTREQ_Set (0x1UL)      /*!< Enable                                                               */
+  #define HFXO64M_INTENSET_STARTREQ_Disabled (0x0UL) /*!< Read: Disabled                                                       */
+  #define HFXO64M_INTENSET_STARTREQ_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
+
+/* STOPREQ @Bit 6 : Write '1' to enable interrupt for event STOPREQ */
+  #define HFXO64M_INTENSET_STOPREQ_Pos (6UL)         /*!< Position of STOPREQ field.                                           */
+  #define HFXO64M_INTENSET_STOPREQ_Msk (0x1UL << HFXO64M_INTENSET_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.                 */
+  #define HFXO64M_INTENSET_STOPREQ_Min (0x0UL)       /*!< Min enumerator value of STOPREQ field.                               */
+  #define HFXO64M_INTENSET_STOPREQ_Max (0x1UL)       /*!< Max enumerator value of STOPREQ field.                               */
+  #define HFXO64M_INTENSET_STOPREQ_Set (0x1UL)       /*!< Enable                                                               */
+  #define HFXO64M_INTENSET_STOPREQ_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
+  #define HFXO64M_INTENSET_STOPREQ_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
+
+
+/* HFXO64M_INTENCLR: Disable interrupt */
+  #define HFXO64M_INTENCLR_ResetValue (0x00000000UL) /*!< Reset value of INTENCLR register.                                    */
+
+/* STARTED @Bit 0 : Write '1' to disable interrupt for event STARTED */
+  #define HFXO64M_INTENCLR_STARTED_Pos (0UL)         /*!< Position of STARTED field.                                           */
+  #define HFXO64M_INTENCLR_STARTED_Msk (0x1UL << HFXO64M_INTENCLR_STARTED_Pos) /*!< Bit mask of STARTED field.                 */
+  #define HFXO64M_INTENCLR_STARTED_Min (0x0UL)       /*!< Min enumerator value of STARTED field.                               */
+  #define HFXO64M_INTENCLR_STARTED_Max (0x1UL)       /*!< Max enumerator value of STARTED field.                               */
+  #define HFXO64M_INTENCLR_STARTED_Clear (0x1UL)     /*!< Disable                                                              */
+  #define HFXO64M_INTENCLR_STARTED_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
+  #define HFXO64M_INTENCLR_STARTED_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
+
+/* STOPPED @Bit 1 : Write '1' to disable interrupt for event STOPPED */
+  #define HFXO64M_INTENCLR_STOPPED_Pos (1UL)         /*!< Position of STOPPED field.                                           */
+  #define HFXO64M_INTENCLR_STOPPED_Msk (0x1UL << HFXO64M_INTENCLR_STOPPED_Pos) /*!< Bit mask of STOPPED field.                 */
+  #define HFXO64M_INTENCLR_STOPPED_Min (0x0UL)       /*!< Min enumerator value of STOPPED field.                               */
+  #define HFXO64M_INTENCLR_STOPPED_Max (0x1UL)       /*!< Max enumerator value of STOPPED field.                               */
+  #define HFXO64M_INTENCLR_STOPPED_Clear (0x1UL)     /*!< Disable                                                              */
+  #define HFXO64M_INTENCLR_STOPPED_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
+  #define HFXO64M_INTENCLR_STOPPED_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
+
+/* ERRORBIAS @Bit 2 : Write '1' to disable interrupt for event ERRORBIAS */
+  #define HFXO64M_INTENCLR_ERRORBIAS_Pos (2UL)       /*!< Position of ERRORBIAS field.                                         */
+  #define HFXO64M_INTENCLR_ERRORBIAS_Msk (0x1UL << HFXO64M_INTENCLR_ERRORBIAS_Pos) /*!< Bit mask of ERRORBIAS field.           */
+  #define HFXO64M_INTENCLR_ERRORBIAS_Min (0x0UL)     /*!< Min enumerator value of ERRORBIAS field.                             */
+  #define HFXO64M_INTENCLR_ERRORBIAS_Max (0x1UL)     /*!< Max enumerator value of ERRORBIAS field.                             */
+  #define HFXO64M_INTENCLR_ERRORBIAS_Clear (0x1UL)   /*!< Disable                                                              */
+  #define HFXO64M_INTENCLR_ERRORBIAS_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define HFXO64M_INTENCLR_ERRORBIAS_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* ERRORDETECTOR @Bit 3 : Write '1' to disable interrupt for event ERRORDETECTOR */
+  #define HFXO64M_INTENCLR_ERRORDETECTOR_Pos (3UL)   /*!< Position of ERRORDETECTOR field.                                     */
+  #define HFXO64M_INTENCLR_ERRORDETECTOR_Msk (0x1UL << HFXO64M_INTENCLR_ERRORDETECTOR_Pos) /*!< Bit mask of ERRORDETECTOR
+                                                                            field.*/
+  #define HFXO64M_INTENCLR_ERRORDETECTOR_Min (0x0UL) /*!< Min enumerator value of ERRORDETECTOR field.                         */
+  #define HFXO64M_INTENCLR_ERRORDETECTOR_Max (0x1UL) /*!< Max enumerator value of ERRORDETECTOR field.                         */
+  #define HFXO64M_INTENCLR_ERRORDETECTOR_Clear (0x1UL) /*!< Disable                                                            */
+  #define HFXO64M_INTENCLR_ERRORDETECTOR_Disabled (0x0UL) /*!< Read: Disabled                                                  */
+  #define HFXO64M_INTENCLR_ERRORDETECTOR_Enabled (0x1UL) /*!< Read: Enabled                                                    */
+
+/* ERRORTCXO @Bit 4 : Write '1' to disable interrupt for event ERRORTCXO */
+  #define HFXO64M_INTENCLR_ERRORTCXO_Pos (4UL)       /*!< Position of ERRORTCXO field.                                         */
+  #define HFXO64M_INTENCLR_ERRORTCXO_Msk (0x1UL << HFXO64M_INTENCLR_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.           */
+  #define HFXO64M_INTENCLR_ERRORTCXO_Min (0x0UL)     /*!< Min enumerator value of ERRORTCXO field.                             */
+  #define HFXO64M_INTENCLR_ERRORTCXO_Max (0x1UL)     /*!< Max enumerator value of ERRORTCXO field.                             */
+  #define HFXO64M_INTENCLR_ERRORTCXO_Clear (0x1UL)   /*!< Disable                                                              */
+  #define HFXO64M_INTENCLR_ERRORTCXO_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define HFXO64M_INTENCLR_ERRORTCXO_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+/* STARTREQ @Bit 5 : Write '1' to disable interrupt for event STARTREQ */
+  #define HFXO64M_INTENCLR_STARTREQ_Pos (5UL)        /*!< Position of STARTREQ field.                                          */
+  #define HFXO64M_INTENCLR_STARTREQ_Msk (0x1UL << HFXO64M_INTENCLR_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.              */
+  #define HFXO64M_INTENCLR_STARTREQ_Min (0x0UL)      /*!< Min enumerator value of STARTREQ field.                              */
+  #define HFXO64M_INTENCLR_STARTREQ_Max (0x1UL)      /*!< Max enumerator value of STARTREQ field.                              */
+  #define HFXO64M_INTENCLR_STARTREQ_Clear (0x1UL)    /*!< Disable                                                              */
+  #define HFXO64M_INTENCLR_STARTREQ_Disabled (0x0UL) /*!< Read: Disabled                                                       */
+  #define HFXO64M_INTENCLR_STARTREQ_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
+
+/* STOPREQ @Bit 6 : Write '1' to disable interrupt for event STOPREQ */
+  #define HFXO64M_INTENCLR_STOPREQ_Pos (6UL)         /*!< Position of STOPREQ field.                                           */
+  #define HFXO64M_INTENCLR_STOPREQ_Msk (0x1UL << HFXO64M_INTENCLR_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.                 */
+  #define HFXO64M_INTENCLR_STOPREQ_Min (0x0UL)       /*!< Min enumerator value of STOPREQ field.                               */
+  #define HFXO64M_INTENCLR_STOPREQ_Max (0x1UL)       /*!< Max enumerator value of STOPREQ field.                               */
+  #define HFXO64M_INTENCLR_STOPREQ_Clear (0x1UL)     /*!< Disable                                                              */
+  #define HFXO64M_INTENCLR_STOPREQ_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
+  #define HFXO64M_INTENCLR_STOPREQ_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
+
+
+/* HFXO64M_INTPEND: Pending interrupts */
+  #define HFXO64M_INTPEND_ResetValue (0x00000000UL)  /*!< Reset value of INTPEND register.                                     */
+
+/* STARTED @Bit 0 : Read pending status of interrupt for event STARTED */
+  #define HFXO64M_INTPEND_STARTED_Pos (0UL)          /*!< Position of STARTED field.                                           */
+  #define HFXO64M_INTPEND_STARTED_Msk (0x1UL << HFXO64M_INTPEND_STARTED_Pos) /*!< Bit mask of STARTED field.                   */
+  #define HFXO64M_INTPEND_STARTED_Min (0x0UL)        /*!< Min enumerator value of STARTED field.                               */
+  #define HFXO64M_INTPEND_STARTED_Max (0x1UL)        /*!< Max enumerator value of STARTED field.                               */
+  #define HFXO64M_INTPEND_STARTED_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define HFXO64M_INTPEND_STARTED_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* STOPPED @Bit 1 : Read pending status of interrupt for event STOPPED */
+  #define HFXO64M_INTPEND_STOPPED_Pos (1UL)          /*!< Position of STOPPED field.                                           */
+  #define HFXO64M_INTPEND_STOPPED_Msk (0x1UL << HFXO64M_INTPEND_STOPPED_Pos) /*!< Bit mask of STOPPED field.                   */
+  #define HFXO64M_INTPEND_STOPPED_Min (0x0UL)        /*!< Min enumerator value of STOPPED field.                               */
+  #define HFXO64M_INTPEND_STOPPED_Max (0x1UL)        /*!< Max enumerator value of STOPPED field.                               */
+  #define HFXO64M_INTPEND_STOPPED_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define HFXO64M_INTPEND_STOPPED_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* ERRORBIAS @Bit 2 : Read pending status of interrupt for event ERRORBIAS */
+  #define HFXO64M_INTPEND_ERRORBIAS_Pos (2UL)        /*!< Position of ERRORBIAS field.                                         */
+  #define HFXO64M_INTPEND_ERRORBIAS_Msk (0x1UL << HFXO64M_INTPEND_ERRORBIAS_Pos) /*!< Bit mask of ERRORBIAS field.             */
+  #define HFXO64M_INTPEND_ERRORBIAS_Min (0x0UL)      /*!< Min enumerator value of ERRORBIAS field.                             */
+  #define HFXO64M_INTPEND_ERRORBIAS_Max (0x1UL)      /*!< Max enumerator value of ERRORBIAS field.                             */
+  #define HFXO64M_INTPEND_ERRORBIAS_NotPending (0x0UL) /*!< Read: Not pending                                                  */
+  #define HFXO64M_INTPEND_ERRORBIAS_Pending (0x1UL)  /*!< Read: Pending                                                        */
+
+/* ERRORDETECTOR @Bit 3 : Read pending status of interrupt for event ERRORDETECTOR */
+  #define HFXO64M_INTPEND_ERRORDETECTOR_Pos (3UL)    /*!< Position of ERRORDETECTOR field.                                     */
+  #define HFXO64M_INTPEND_ERRORDETECTOR_Msk (0x1UL << HFXO64M_INTPEND_ERRORDETECTOR_Pos) /*!< Bit mask of ERRORDETECTOR field. */
+  #define HFXO64M_INTPEND_ERRORDETECTOR_Min (0x0UL)  /*!< Min enumerator value of ERRORDETECTOR field.                         */
+  #define HFXO64M_INTPEND_ERRORDETECTOR_Max (0x1UL)  /*!< Max enumerator value of ERRORDETECTOR field.                         */
+  #define HFXO64M_INTPEND_ERRORDETECTOR_NotPending (0x0UL) /*!< Read: Not pending                                              */
+  #define HFXO64M_INTPEND_ERRORDETECTOR_Pending (0x1UL) /*!< Read: Pending                                                     */
+
+/* ERRORTCXO @Bit 4 : Read pending status of interrupt for event ERRORTCXO */
+  #define HFXO64M_INTPEND_ERRORTCXO_Pos (4UL)        /*!< Position of ERRORTCXO field.                                         */
+  #define HFXO64M_INTPEND_ERRORTCXO_Msk (0x1UL << HFXO64M_INTPEND_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.             */
+  #define HFXO64M_INTPEND_ERRORTCXO_Min (0x0UL)      /*!< Min enumerator value of ERRORTCXO field.                             */
+  #define HFXO64M_INTPEND_ERRORTCXO_Max (0x1UL)      /*!< Max enumerator value of ERRORTCXO field.                             */
+  #define HFXO64M_INTPEND_ERRORTCXO_NotPending (0x0UL) /*!< Read: Not pending                                                  */
+  #define HFXO64M_INTPEND_ERRORTCXO_Pending (0x1UL)  /*!< Read: Pending                                                        */
+
+/* STARTREQ @Bit 5 : Read pending status of interrupt for event STARTREQ */
+  #define HFXO64M_INTPEND_STARTREQ_Pos (5UL)         /*!< Position of STARTREQ field.                                          */
+  #define HFXO64M_INTPEND_STARTREQ_Msk (0x1UL << HFXO64M_INTPEND_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.                */
+  #define HFXO64M_INTPEND_STARTREQ_Min (0x0UL)       /*!< Min enumerator value of STARTREQ field.                              */
+  #define HFXO64M_INTPEND_STARTREQ_Max (0x1UL)       /*!< Max enumerator value of STARTREQ field.                              */
+  #define HFXO64M_INTPEND_STARTREQ_NotPending (0x0UL) /*!< Read: Not pending                                                   */
+  #define HFXO64M_INTPEND_STARTREQ_Pending (0x1UL)   /*!< Read: Pending                                                        */
+
+/* STOPREQ @Bit 6 : Read pending status of interrupt for event STOPREQ */
+  #define HFXO64M_INTPEND_STOPREQ_Pos (6UL)          /*!< Position of STOPREQ field.                                           */
+  #define HFXO64M_INTPEND_STOPREQ_Msk (0x1UL << HFXO64M_INTPEND_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.                   */
+  #define HFXO64M_INTPEND_STOPREQ_Min (0x0UL)        /*!< Min enumerator value of STOPREQ field.                               */
+  #define HFXO64M_INTPEND_STOPREQ_Max (0x1UL)        /*!< Max enumerator value of STOPREQ field.                               */
+  #define HFXO64M_INTPEND_STOPREQ_NotPending (0x0UL) /*!< Read: Not pending                                                    */
+  #define HFXO64M_INTPEND_STOPREQ_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+
+/* HFXO64M_STATUS: HFXO64M status */
+  #define HFXO64M_STATUS_ResetValue (0x00000000UL)   /*!< Reset value of STATUS register.                                      */
+
+/* MODE @Bit 0 : Current mode */
+  #define HFXO64M_STATUS_MODE_Pos (0UL)              /*!< Position of MODE field.                                              */
+  #define HFXO64M_STATUS_MODE_Msk (0x1UL << HFXO64M_STATUS_MODE_Pos) /*!< Bit mask of MODE field.                              */
+  #define HFXO64M_STATUS_MODE_Min (0x0UL)            /*!< Min enumerator value of MODE field.                                  */
+  #define HFXO64M_STATUS_MODE_Max (0x1UL)            /*!< Max enumerator value of MODE field.                                  */
+  #define HFXO64M_STATUS_MODE_Normal (0x0UL)         /*!< Normal HFXO64M mode                                                  */
+  #define HFXO64M_STATUS_MODE_TCXO (0x1UL)           /*!< External TCXO used, HFXO64M core is bypassed                         */
+
+/* RUNNING @Bit 4 : HFXO64M running status */
+  #define HFXO64M_STATUS_RUNNING_Pos (4UL)           /*!< Position of RUNNING field.                                           */
+  #define HFXO64M_STATUS_RUNNING_Msk (0x1UL << HFXO64M_STATUS_RUNNING_Pos) /*!< Bit mask of RUNNING field.                     */
+  #define HFXO64M_STATUS_RUNNING_Min (0x0UL)         /*!< Min enumerator value of RUNNING field.                               */
+  #define HFXO64M_STATUS_RUNNING_Max (0x1UL)         /*!< Max enumerator value of RUNNING field.                               */
+  #define HFXO64M_STATUS_RUNNING_NotRunning (0x0UL)  /*!< HFXO64M not running                                                  */
+  #define HFXO64M_STATUS_RUNNING_Running (0x1UL)     /*!< HFXO64M running                                                      */
+
+
+/* HFXO64M_STATUSANA: Status of analog module output signals */
+  #define HFXO64M_STATUSANA_ResetValue (0x00000000UL) /*!< Reset value of STATUSANA register.                                  */
+
+/* CURRENTCOMPARISON @Bit 0 : Current value of the CURRENT_COMPARISON from the analog module */
+  #define HFXO64M_STATUSANA_CURRENTCOMPARISON_Pos (0UL) /*!< Position of CURRENTCOMPARISON field.                              */
+  #define HFXO64M_STATUSANA_CURRENTCOMPARISON_Msk (0x1UL << HFXO64M_STATUSANA_CURRENTCOMPARISON_Pos) /*!< Bit mask of
+                                                                            CURRENTCOMPARISON field.*/
+
+/* DETECTOR1 @Bit 1 : Current value of the DETECTOR1 signal from the analog module */
+  #define HFXO64M_STATUSANA_DETECTOR1_Pos (1UL)      /*!< Position of DETECTOR1 field.                                         */
+  #define HFXO64M_STATUSANA_DETECTOR1_Msk (0x1UL << HFXO64M_STATUSANA_DETECTOR1_Pos) /*!< Bit mask of DETECTOR1 field.         */
+
+/* DETECTOR2 @Bit 2 : Current value of the DETECTOR2 signal from the analog module */
+  #define HFXO64M_STATUSANA_DETECTOR2_Pos (2UL)      /*!< Position of DETECTOR2 field.                                         */
+  #define HFXO64M_STATUSANA_DETECTOR2_Msk (0x1UL << HFXO64M_STATUSANA_DETECTOR2_Pos) /*!< Bit mask of DETECTOR2 field.         */
+
+
+/* HFXO64M_STATUSMMI: MMI internal values for debug use. */
+  #define HFXO64M_STATUSMMI_ResetValue (0x00000000UL) /*!< Reset value of STATUSMMI register.                                  */
+
+/* FSMSTATE @Bits 0..4 : FSM current state. Value must be checked against RTL. */
+  #define HFXO64M_STATUSMMI_FSMSTATE_Pos (0UL)       /*!< Position of FSMSTATE field.                                          */
+  #define HFXO64M_STATUSMMI_FSMSTATE_Msk (0x1FUL << HFXO64M_STATUSMMI_FSMSTATE_Pos) /*!< Bit mask of FSMSTATE field.           */
+
+/* TSENABLE @Bit 5 : TS_ENABLE analog IP pin status. Tells if TS is running. */
+  #define HFXO64M_STATUSMMI_TSENABLE_Pos (5UL)       /*!< Position of TSENABLE field.                                          */
+  #define HFXO64M_STATUSMMI_TSENABLE_Msk (0x1UL << HFXO64M_STATUSMMI_TSENABLE_Pos) /*!< Bit mask of TSENABLE field.            */
+
+
+/* HFXO64M_MIRROR: Enable LOCK for mirrored registers */
+  #define HFXO64M_MIRROR_ResetValue (0x00000001UL)   /*!< Reset value of MIRROR register.                                      */
+
+/* LOCK @Bit 0 : Lock for mirrored registers */
+  #define HFXO64M_MIRROR_LOCK_Pos (0UL)              /*!< Position of LOCK field.                                              */
+  #define HFXO64M_MIRROR_LOCK_Msk (0x1UL << HFXO64M_MIRROR_LOCK_Pos) /*!< Bit mask of LOCK field.                              */
+  #define HFXO64M_MIRROR_LOCK_Min (0x0UL)            /*!< Min enumerator value of LOCK field.                                  */
+  #define HFXO64M_MIRROR_LOCK_Max (0x1UL)            /*!< Max enumerator value of LOCK field.                                  */
+  #define HFXO64M_MIRROR_LOCK_Disabled (0x0UL)       /*!< Lock disabled                                                        */
+  #define HFXO64M_MIRROR_LOCK_Enabled (0x1UL)        /*!< Lock enabled                                                         */
+
+
+/* HFXO64M_PWRUPCTRL: Power up control */
+  #define HFXO64M_PWRUPCTRL_ResetValue (0x00000002UL) /*!< Reset value of PWRUPCTRL register.                                  */
+
+/* CTRL @Bits 0..1 : Power up control */
+  #define HFXO64M_PWRUPCTRL_CTRL_Pos (0UL)           /*!< Position of CTRL field.                                              */
+  #define HFXO64M_PWRUPCTRL_CTRL_Msk (0x3UL << HFXO64M_PWRUPCTRL_CTRL_Pos) /*!< Bit mask of CTRL field.                        */
+  #define HFXO64M_PWRUPCTRL_CTRL_Min (0x0UL)         /*!< Min enumerator value of CTRL field.                                  */
+  #define HFXO64M_PWRUPCTRL_CTRL_Max (0x2UL)         /*!< Max enumerator value of CTRL field.                                  */
+  #define HFXO64M_PWRUPCTRL_CTRL_Auto (0x0UL)        /*!< Automatically handled by the peripheral                              */
+  #define HFXO64M_PWRUPCTRL_CTRL_PowerUp (0x1UL)     /*!< Power up                                                             */
+  #define HFXO64M_PWRUPCTRL_CTRL_PowerDown (0x2UL)   /*!< Power down                                                           */
+
+
+/* HFXO64M_MODE: HFXO64M mode */
+  #define HFXO64M_MODE_ResetValue (0x00000000UL)     /*!< Reset value of MODE register.                                        */
+
+/* MODE @Bit 0 : Mode */
+  #define HFXO64M_MODE_MODE_Pos (0UL)                /*!< Position of MODE field.                                              */
+  #define HFXO64M_MODE_MODE_Msk (0x1UL << HFXO64M_MODE_MODE_Pos) /*!< Bit mask of MODE field.                                  */
+  #define HFXO64M_MODE_MODE_Min (0x0UL)              /*!< Min enumerator value of MODE field.                                  */
+  #define HFXO64M_MODE_MODE_Max (0x1UL)              /*!< Max enumerator value of MODE field.                                  */
+  #define HFXO64M_MODE_MODE_Normal (0x0UL)           /*!< Normal operating mode                                                */
+  #define HFXO64M_MODE_MODE_TCXO (0x1UL)             /*!< TCXO/bypass mode                                                     */
+
+
+/* HFXO64M_XTALSETTLETIME: Settle time of the crystal. List of pre-coded times. */
+  #define HFXO64M_XTALSETTLETIME_ResetValue (0x00000003UL) /*!< Reset value of XTALSETTLETIME register.                        */
+
+/* VAL @Bits 0..3 : (unspecified) */
+  #define HFXO64M_XTALSETTLETIME_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
+  #define HFXO64M_XTALSETTLETIME_VAL_Msk (0xFUL << HFXO64M_XTALSETTLETIME_VAL_Pos) /*!< Bit mask of VAL field.                 */
+  #define HFXO64M_XTALSETTLETIME_VAL_Min (0x0UL)     /*!< Min enumerator value of VAL field.                                   */
+  #define HFXO64M_XTALSETTLETIME_VAL_Max (0xFUL)     /*!< Max enumerator value of VAL field.                                   */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle250us (0x0UL) /*!< 250 us                                                           */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle300us (0x1UL) /*!< 300 us                                                           */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle350us (0x2UL) /*!< 350 us                                                           */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle400us (0x3UL) /*!< 400 us                                                           */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle500us (0x4UL) /*!< 500 us                                                           */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle600us (0x5UL) /*!< 600 us                                                           */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle700us (0x6UL) /*!< 700 us                                                           */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle800us (0x7UL) /*!< 800 us                                                           */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle1000us (0x8UL) /*!< 1000 us                                                         */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle2000us (0x9UL) /*!< 2000 us                                                         */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle3000us (0xAUL) /*!< 3000 us                                                         */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle4000us (0xBUL) /*!< 4000 us                                                         */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle5000us (0xCUL) /*!< 5000 us                                                         */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle6000us (0xDUL) /*!< 6000 us                                                         */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle7000us (0xEUL) /*!< 7000 us                                                         */
+  #define HFXO64M_XTALSETTLETIME_VAL_Settle8500us (0xFUL) /*!< 8500 us                                                         */
+
+
+/* HFXO64M_CHIRPTIME: Chirp period length. List of pre-coded times. */
+  #define HFXO64M_CHIRPTIME_ResetValue (0x00000003UL) /*!< Reset value of CHIRPTIME register.                                  */
+
+/* VAL @Bits 0..3 : (unspecified) */
+  #define HFXO64M_CHIRPTIME_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
+  #define HFXO64M_CHIRPTIME_VAL_Msk (0xFUL << HFXO64M_CHIRPTIME_VAL_Pos) /*!< Bit mask of VAL field.                           */
+  #define HFXO64M_CHIRPTIME_VAL_Min (0x0UL)          /*!< Min enumerator value of VAL field.                                   */
+  #define HFXO64M_CHIRPTIME_VAL_Max (0xFUL)          /*!< Max enumerator value of VAL field.                                   */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp32us (0x0UL)    /*!< 32.0 us                                                              */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp40us (0x1UL)    /*!< 40.3 us                                                              */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp48us (0x2UL)    /*!< 48.5 us                                                              */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp56us (0x3UL)    /*!< 56.8 us                                                              */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp65us (0x4UL)    /*!< 65.1 us                                                              */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp73us (0x5UL)    /*!< 73.3 us                                                              */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp81us (0x6UL)    /*!< 81.6 us                                                              */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp89us (0x7UL)    /*!< 89.9 us                                                              */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp98us (0x8UL)    /*!< 98.1 us                                                              */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp106us (0x9UL)   /*!< 106.4 us                                                             */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp114us (0xAUL)   /*!< 114.7 us                                                             */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp122us (0xBUL)   /*!< 122.9 us                                                             */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp131us (0xCUL)   /*!< 131.2 us                                                             */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp139us (0xDUL)   /*!< 139.5 us                                                             */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp147us (0xEUL)   /*!< 147.7 us                                                             */
+  #define HFXO64M_CHIRPTIME_VAL_Chirp156us (0xFUL)   /*!< 156.0 us                                                             */
+
+
+/* HFXO64M_ENABLEDAMPING: Enables the MMI to do crystal damping when stopping the oscillator. */
+  #define HFXO64M_ENABLEDAMPING_ResetValue (0x00000000UL) /*!< Reset value of ENABLEDAMPING register.                          */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_ENABLEDAMPING_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
+  #define HFXO64M_ENABLEDAMPING_VAL_Msk (0x1UL << HFXO64M_ENABLEDAMPING_VAL_Pos) /*!< Bit mask of VAL field.                   */
+  #define HFXO64M_ENABLEDAMPING_VAL_Min (0x0UL)      /*!< Min enumerator value of VAL field.                                   */
+  #define HFXO64M_ENABLEDAMPING_VAL_Max (0x1UL)      /*!< Max enumerator value of VAL field.                                   */
+  #define HFXO64M_ENABLEDAMPING_VAL_Disabled (0x0UL) /*!< Disabled                                                             */
+  #define HFXO64M_ENABLEDAMPING_VAL_Enabled (0x1UL)  /*!< Enabled                                                              */
+
+
+/* HFXO64M_FORCEBUFF: Enables all clock buffers when sinOut4_ana buffer is enabled. */
+  #define HFXO64M_FORCEBUFF_ResetValue (0x00000000UL) /*!< Reset value of FORCEBUFF register.                                  */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_FORCEBUFF_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
+  #define HFXO64M_FORCEBUFF_VAL_Msk (0x1UL << HFXO64M_FORCEBUFF_VAL_Pos) /*!< Bit mask of VAL field.                           */
+  #define HFXO64M_FORCEBUFF_VAL_Min (0x0UL)          /*!< Min enumerator value of VAL field.                                   */
+  #define HFXO64M_FORCEBUFF_VAL_Max (0x1UL)          /*!< Max enumerator value of VAL field.                                   */
+  #define HFXO64M_FORCEBUFF_VAL_Disabled (0x0UL)     /*!< Disabled                                                             */
+  #define HFXO64M_FORCEBUFF_VAL_Enabled (0x1UL)      /*!< Enabled                                                              */
+
+
+/* HFXO64M_CFG: Direct HFXO64M static configurations. */
+  #define HFXO64M_CFG_ResetValue (0x00010072UL)      /*!< Reset value of CFG register.                                         */
+
+/* LEVELSELECT @Bit 0 : Select for AREG level */
+  #define HFXO64M_CFG_LEVELSELECT_Pos (0UL)          /*!< Position of LEVELSELECT field.                                       */
+  #define HFXO64M_CFG_LEVELSELECT_Msk (0x1UL << HFXO64M_CFG_LEVELSELECT_Pos) /*!< Bit mask of LEVELSELECT field.               */
+  #define HFXO64M_CFG_LEVELSELECT_Min (0x0UL)        /*!< Min enumerator value of LEVELSELECT field.                           */
+  #define HFXO64M_CFG_LEVELSELECT_Max (0x1UL)        /*!< Max enumerator value of LEVELSELECT field.                           */
+  #define HFXO64M_CFG_LEVELSELECT_High (0x0UL)       /*!< Normal, high amplitude                                               */
+  #define HFXO64M_CFG_LEVELSELECT_Low (0x1UL)        /*!< Low power, low amplitude                                             */
+
+/* ENABLENORMALBIASMODE @Bit 1 : Enable for normal bias mode. */
+  #define HFXO64M_CFG_ENABLENORMALBIASMODE_Pos (1UL) /*!< Position of ENABLENORMALBIASMODE field.                              */
+  #define HFXO64M_CFG_ENABLENORMALBIASMODE_Msk (0x1UL << HFXO64M_CFG_ENABLENORMALBIASMODE_Pos) /*!< Bit mask of
+                                                                            ENABLENORMALBIASMODE field.*/
+  #define HFXO64M_CFG_ENABLENORMALBIASMODE_Min (0x0UL) /*!< Min enumerator value of ENABLENORMALBIASMODE field.                */
+  #define HFXO64M_CFG_ENABLENORMALBIASMODE_Max (0x1UL) /*!< Max enumerator value of ENABLENORMALBIASMODE field.                */
+  #define HFXO64M_CFG_ENABLENORMALBIASMODE_Low (0x0UL) /*!< Low power bias mode                                                */
+  #define HFXO64M_CFG_ENABLENORMALBIASMODE_Normal (0x1UL) /*!< Normal bias mode                                                */
+
+/* BYPASSREG0V8 @Bit 2 : 0V8 regulator bypass control. */
+  #define HFXO64M_CFG_BYPASSREG0V8_Pos (2UL)         /*!< Position of BYPASSREG0V8 field.                                      */
+  #define HFXO64M_CFG_BYPASSREG0V8_Msk (0x1UL << HFXO64M_CFG_BYPASSREG0V8_Pos) /*!< Bit mask of BYPASSREG0V8 field.            */
+  #define HFXO64M_CFG_BYPASSREG0V8_Min (0x0UL)       /*!< Min enumerator value of BYPASSREG0V8 field.                          */
+  #define HFXO64M_CFG_BYPASSREG0V8_Max (0x1UL)       /*!< Max enumerator value of BYPASSREG0V8 field.                          */
+  #define HFXO64M_CFG_BYPASSREG0V8_Normal (0x0UL)    /*!< Normal                                                               */
+  #define HFXO64M_CFG_BYPASSREG0V8_Bypass (0x1UL)    /*!< Bypass                                                               */
+
+/* BYPASSREG1V5 @Bit 3 : 1V5 regulator bypass control. */
+  #define HFXO64M_CFG_BYPASSREG1V5_Pos (3UL)         /*!< Position of BYPASSREG1V5 field.                                      */
+  #define HFXO64M_CFG_BYPASSREG1V5_Msk (0x1UL << HFXO64M_CFG_BYPASSREG1V5_Pos) /*!< Bit mask of BYPASSREG1V5 field.            */
+  #define HFXO64M_CFG_BYPASSREG1V5_Min (0x0UL)       /*!< Min enumerator value of BYPASSREG1V5 field.                          */
+  #define HFXO64M_CFG_BYPASSREG1V5_Max (0x1UL)       /*!< Max enumerator value of BYPASSREG1V5 field.                          */
+  #define HFXO64M_CFG_BYPASSREG1V5_Normal (0x0UL)    /*!< Normal                                                               */
+  #define HFXO64M_CFG_BYPASSREG1V5_Bypass (0x1UL)    /*!< Bypass                                                               */
+
+/* ENABLECMOS1DIVIDER @Bit 4 : CMOSOUT1 clock divider enable. */
+  #define HFXO64M_CFG_ENABLECMOS1DIVIDER_Pos (4UL)   /*!< Position of ENABLECMOS1DIVIDER field.                                */
+  #define HFXO64M_CFG_ENABLECMOS1DIVIDER_Msk (0x1UL << HFXO64M_CFG_ENABLECMOS1DIVIDER_Pos) /*!< Bit mask of ENABLECMOS1DIVIDER
+                                                                            field.*/
+  #define HFXO64M_CFG_ENABLECMOS1DIVIDER_Min (0x0UL) /*!< Min enumerator value of ENABLECMOS1DIVIDER field.                    */
+  #define HFXO64M_CFG_ENABLECMOS1DIVIDER_Max (0x1UL) /*!< Max enumerator value of ENABLECMOS1DIVIDER field.                    */
+  #define HFXO64M_CFG_ENABLECMOS1DIVIDER_Disabled (0x0UL) /*!< Disabled                                                        */
+  #define HFXO64M_CFG_ENABLECMOS1DIVIDER_Enabled (0x1UL) /*!< Enabled                                                          */
+
+/* ENABLECMOS2DIVIDER @Bit 5 : CMOSOUT2 clock divider enable. */
+  #define HFXO64M_CFG_ENABLECMOS2DIVIDER_Pos (5UL)   /*!< Position of ENABLECMOS2DIVIDER field.                                */
+  #define HFXO64M_CFG_ENABLECMOS2DIVIDER_Msk (0x1UL << HFXO64M_CFG_ENABLECMOS2DIVIDER_Pos) /*!< Bit mask of ENABLECMOS2DIVIDER
+                                                                            field.*/
+  #define HFXO64M_CFG_ENABLECMOS2DIVIDER_Min (0x0UL) /*!< Min enumerator value of ENABLECMOS2DIVIDER field.                    */
+  #define HFXO64M_CFG_ENABLECMOS2DIVIDER_Max (0x1UL) /*!< Max enumerator value of ENABLECMOS2DIVIDER field.                    */
+  #define HFXO64M_CFG_ENABLECMOS2DIVIDER_Disabled (0x0UL) /*!< Disabled                                                        */
+  #define HFXO64M_CFG_ENABLECMOS2DIVIDER_Enabled (0x1UL) /*!< Enabled                                                          */
+
+/* ENABLECMOS3DIVIDER @Bit 6 : CMOSOUT3 clock divider enable. */
+  #define HFXO64M_CFG_ENABLECMOS3DIVIDER_Pos (6UL)   /*!< Position of ENABLECMOS3DIVIDER field.                                */
+  #define HFXO64M_CFG_ENABLECMOS3DIVIDER_Msk (0x1UL << HFXO64M_CFG_ENABLECMOS3DIVIDER_Pos) /*!< Bit mask of ENABLECMOS3DIVIDER
+                                                                            field.*/
+  #define HFXO64M_CFG_ENABLECMOS3DIVIDER_Min (0x0UL) /*!< Min enumerator value of ENABLECMOS3DIVIDER field.                    */
+  #define HFXO64M_CFG_ENABLECMOS3DIVIDER_Max (0x1UL) /*!< Max enumerator value of ENABLECMOS3DIVIDER field.                    */
+  #define HFXO64M_CFG_ENABLECMOS3DIVIDER_Disabled (0x0UL) /*!< Disabled                                                        */
+  #define HFXO64M_CFG_ENABLECMOS3DIVIDER_Enabled (0x1UL) /*!< Enabled                                                          */
+
+/* ENABLETSDIVIDER @Bit 7 : TS clock divider enable. */
+  #define HFXO64M_CFG_ENABLETSDIVIDER_Pos (7UL)      /*!< Position of ENABLETSDIVIDER field.                                   */
+  #define HFXO64M_CFG_ENABLETSDIVIDER_Msk (0x1UL << HFXO64M_CFG_ENABLETSDIVIDER_Pos) /*!< Bit mask of ENABLETSDIVIDER field.   */
+  #define HFXO64M_CFG_ENABLETSDIVIDER_Min (0x0UL)    /*!< Min enumerator value of ENABLETSDIVIDER field.                       */
+  #define HFXO64M_CFG_ENABLETSDIVIDER_Max (0x1UL)    /*!< Max enumerator value of ENABLETSDIVIDER field.                       */
+  #define HFXO64M_CFG_ENABLETSDIVIDER_Disabled (0x0UL) /*!< Disabled                                                           */
+  #define HFXO64M_CFG_ENABLETSDIVIDER_Enabled (0x1UL) /*!< Enabled                                                             */
+
+/* BUFFDRIVECMOS1 @Bits 8..9 : Buffer drive configuration for CMOS_OUT1 */
+  #define HFXO64M_CFG_BUFFDRIVECMOS1_Pos (8UL)       /*!< Position of BUFFDRIVECMOS1 field.                                    */
+  #define HFXO64M_CFG_BUFFDRIVECMOS1_Msk (0x3UL << HFXO64M_CFG_BUFFDRIVECMOS1_Pos) /*!< Bit mask of BUFFDRIVECMOS1 field.      */
+
+/* BUFFDRIVECMOS2 @Bits 10..11 : Buffer drive configuration for CMOS_OUT2 */
+  #define HFXO64M_CFG_BUFFDRIVECMOS2_Pos (10UL)      /*!< Position of BUFFDRIVECMOS2 field.                                    */
+  #define HFXO64M_CFG_BUFFDRIVECMOS2_Msk (0x3UL << HFXO64M_CFG_BUFFDRIVECMOS2_Pos) /*!< Bit mask of BUFFDRIVECMOS2 field.      */
+
+/* BUFFDRIVECMOS3 @Bits 12..13 : Buffer drive configuration for CMOS_OUT3 */
+  #define HFXO64M_CFG_BUFFDRIVECMOS3_Pos (12UL)      /*!< Position of BUFFDRIVECMOS3 field.                                    */
+  #define HFXO64M_CFG_BUFFDRIVECMOS3_Msk (0x3UL << HFXO64M_CFG_BUFFDRIVECMOS3_Pos) /*!< Bit mask of BUFFDRIVECMOS3 field.      */
+
+/* BUFFDRIVETS @Bits 14..15 : Buffer drive configuration for TS clock */
+  #define HFXO64M_CFG_BUFFDRIVETS_Pos (14UL)         /*!< Position of BUFFDRIVETS field.                                       */
+  #define HFXO64M_CFG_BUFFDRIVETS_Msk (0x3UL << HFXO64M_CFG_BUFFDRIVETS_Pos) /*!< Bit mask of BUFFDRIVETS field.               */
+
+/* CHIRPEN @Bit 16 : Enable chirp during the HFXO64 startup. */
+  #define HFXO64M_CFG_CHIRPEN_Pos (16UL)             /*!< Position of CHIRPEN field.                                           */
+  #define HFXO64M_CFG_CHIRPEN_Msk (0x1UL << HFXO64M_CFG_CHIRPEN_Pos) /*!< Bit mask of CHIRPEN field.                           */
+  #define HFXO64M_CFG_CHIRPEN_Min (0x0UL)            /*!< Min enumerator value of CHIRPEN field.                               */
+  #define HFXO64M_CFG_CHIRPEN_Max (0x1UL)            /*!< Max enumerator value of CHIRPEN field.                               */
+  #define HFXO64M_CFG_CHIRPEN_Disabled (0x0UL)       /*!< Chirp disabled                                                       */
+  #define HFXO64M_CFG_CHIRPEN_Enabled (0x1UL)        /*!< Chirp enabled                                                        */
+
+
+/* HFXO64M_TCXOPOWERED: SysCtrl writes here the current status of the TCXO power. */
+  #define HFXO64M_TCXOPOWERED_ResetValue (0x00000000UL) /*!< Reset value of TCXOPOWERED register.                              */
+
+/* VAL @Bit 0 : (unspecified) */
+  #define HFXO64M_TCXOPOWERED_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
+  #define HFXO64M_TCXOPOWERED_VAL_Msk (0x1UL << HFXO64M_TCXOPOWERED_VAL_Pos) /*!< Bit mask of VAL field.                       */
+  #define HFXO64M_TCXOPOWERED_VAL_Min (0x0UL)        /*!< Min enumerator value of VAL field.                                   */
+  #define HFXO64M_TCXOPOWERED_VAL_Max (0x1UL)        /*!< Max enumerator value of VAL field.                                   */
+  #define HFXO64M_TCXOPOWERED_VAL_Off (0x0UL)        /*!< TCXO is powered off                                                  */
+  #define HFXO64M_TCXOPOWERED_VAL_On (0x1UL)         /*!< TCXO is powered on                                                   */
+
+
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
+
+/* =========================================================================================================================== */
 /* ================                                           IPCT                                           ================ */
 /* =========================================================================================================================== */
 
@@ -27469,6 +28724,1517 @@ typedef struct {
 /* METADATA @Bits 0..31 : Read metadata. */
   #define KMU_METADATA_METADATA_Pos (0UL)            /*!< Position of METADATA field.                                          */
   #define KMU_METADATA_METADATA_Msk (0xFFFFFFFFUL << KMU_METADATA_METADATA_Pos) /*!< Bit mask of METADATA field.               */
+
+
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
+
+/* =========================================================================================================================== */
+/* ================                                           LFRC                                           ================ */
+/* =========================================================================================================================== */
+
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
+
+/* =================================================== Struct LFRC_CONFIG ==================================================== */
+/**
+  * @brief CONFIG [LFRC_CONFIG] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  CFG;                               /*!< (@ 0x00000000) Override the configuration                            */
+} NRF_LFRC_CONFIG_Type;                              /*!< Size = 4 (0x004)                                                     */
+
+/* LFRC_CONFIG_CFG: Override the configuration */
+  #define LFRC_CONFIG_CFG_ResetValue (0x00000000UL)  /*!< Reset value of CFG register.                                         */
+
+/* DOUBLETAILCURRENT @Bit 0 : Double tail current in comparator CMPX_INT, only for debugging purposes. */
+  #define LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Pos (0UL) /*!< Position of DOUBLETAILCURRENT field.                                */
+  #define LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Msk (0x1UL << LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Pos) /*!< Bit mask of
+                                                                            DOUBLETAILCURRENT field.*/
+  #define LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Min (0x0UL) /*!< Min enumerator value of DOUBLETAILCURRENT field.                  */
+  #define LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Max (0x1UL) /*!< Max enumerator value of DOUBLETAILCURRENT field.                  */
+  #define LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Disabled (0x0UL) /*!< Disabled                                                     */
+  #define LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Enabled (0x1UL) /*!< Enabled                                                       */
+
+/* CONTINUOUSTAILBIAS @Bit 1 : Enable continuous tail bias in comparator CMPX_INT, only for debugging purposes. */
+  #define LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Pos (1UL) /*!< Position of CONTINUOUSTAILBIAS field.                              */
+  #define LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Msk (0x1UL << LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Pos) /*!< Bit mask of
+                                                                            CONTINUOUSTAILBIAS field.*/
+  #define LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Min (0x0UL) /*!< Min enumerator value of CONTINUOUSTAILBIAS field.                */
+  #define LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Max (0x1UL) /*!< Max enumerator value of CONTINUOUSTAILBIAS field.                */
+  #define LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Disabled (0x0UL) /*!< Disabled                                                    */
+  #define LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Enabled (0x1UL) /*!< Enabled                                                      */
+
+/* ENABLERETENTION @Bit 2 : Enable retention for CAL */
+  #define LFRC_CONFIG_CFG_ENABLERETENTION_Pos (2UL)  /*!< Position of ENABLERETENTION field.                                   */
+  #define LFRC_CONFIG_CFG_ENABLERETENTION_Msk (0x1UL << LFRC_CONFIG_CFG_ENABLERETENTION_Pos) /*!< Bit mask of ENABLERETENTION
+                                                                            field.*/
+  #define LFRC_CONFIG_CFG_ENABLERETENTION_Min (0x0UL) /*!< Min enumerator value of ENABLERETENTION field.                      */
+  #define LFRC_CONFIG_CFG_ENABLERETENTION_Max (0x1UL) /*!< Max enumerator value of ENABLERETENTION field.                      */
+  #define LFRC_CONFIG_CFG_ENABLERETENTION_Disabled (0x0UL) /*!< Disabled                                                       */
+  #define LFRC_CONFIG_CFG_ENABLERETENTION_Enabled (0x1UL) /*!< Enabled                                                         */
+
+/* SPARE @Bit 3 : Spare general purpose configuration bits. Register in NVM. */
+  #define LFRC_CONFIG_CFG_SPARE_Pos (3UL)            /*!< Position of SPARE field.                                             */
+  #define LFRC_CONFIG_CFG_SPARE_Msk (0x1UL << LFRC_CONFIG_CFG_SPARE_Pos) /*!< Bit mask of SPARE field.                         */
+  #define LFRC_CONFIG_CFG_SPARE_Min (0x0UL)          /*!< Min enumerator value of SPARE field.                                 */
+  #define LFRC_CONFIG_CFG_SPARE_Max (0x1UL)          /*!< Max enumerator value of SPARE field.                                 */
+  #define LFRC_CONFIG_CFG_SPARE_Disabled (0x0UL)     /*!< Disabled                                                             */
+  #define LFRC_CONFIG_CFG_SPARE_Enabled (0x1UL)      /*!< Enabled                                                              */
+
+
+
+/* ===================================================== Struct LFRC_CAL ===================================================== */
+/**
+  * @brief CAL [LFRC_CAL] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  LENGTH;                            /*!< (@ 0x00000000) Measurement cycle count length used while calibration */
+  __IOM uint32_t  TRIMLIMITLO;                       /*!< (@ 0x00000004) Lower trim limit                                      */
+  __IOM uint32_t  TRIMLIMITHI;                       /*!< (@ 0x00000008) Higher trim limit                                     */
+  __IM  uint32_t  RESULT[2];                         /*!< (@ 0x0000000C) Calibration result from CAL=n                         */
+  __IM  uint32_t  NHI;                               /*!< (@ 0x00000014) Number of cycles when the CAL signal is high          */
+  __IOM uint32_t  LFRCOSCTRIM;                       /*!< (@ 0x00000018) Initial coarse frequency trimming value for the
+                                                                         oscillator.*/
+} NRF_LFRC_CAL_Type;                                 /*!< Size = 28 (0x01C)                                                    */
+
+/* LFRC_CAL_LENGTH: Measurement cycle count length used while calibration */
+  #define LFRC_CAL_LENGTH_ResetValue (0x00000002UL)  /*!< Reset value of LENGTH register.                                      */
+
+/* LENGTH @Bits 0..2 : Number of cycles */
+  #define LFRC_CAL_LENGTH_LENGTH_Pos (0UL)           /*!< Position of LENGTH field.                                            */
+  #define LFRC_CAL_LENGTH_LENGTH_Msk (0x7UL << LFRC_CAL_LENGTH_LENGTH_Pos) /*!< Bit mask of LENGTH field.                      */
+  #define LFRC_CAL_LENGTH_LENGTH_Min (0x0UL)         /*!< Min enumerator value of LENGTH field.                                */
+  #define LFRC_CAL_LENGTH_LENGTH_Max (0x3UL)         /*!< Max enumerator value of LENGTH field.                                */
+  #define LFRC_CAL_LENGTH_LENGTH_N64 (0x0UL)         /*!< 64 cycles                                                            */
+  #define LFRC_CAL_LENGTH_LENGTH_N128 (0x1UL)        /*!< 128 cycles                                                           */
+  #define LFRC_CAL_LENGTH_LENGTH_N256 (0x2UL)        /*!< 256 cycles                                                           */
+  #define LFRC_CAL_LENGTH_LENGTH_N512 (0x3UL)        /*!< 512 cycles                                                           */
+
+
+/* LFRC_CAL_TRIMLIMITLO: Lower trim limit */
+  #define LFRC_CAL_TRIMLIMITLO_ResetValue (0x00000000UL) /*!< Reset value of TRIMLIMITLO register.                             */
+
+/* VALUE @Bits 0..17 : TRIM limit value. */
+  #define LFRC_CAL_TRIMLIMITLO_VALUE_Pos (0UL)       /*!< Position of VALUE field.                                             */
+  #define LFRC_CAL_TRIMLIMITLO_VALUE_Msk (0x3FFFFUL << LFRC_CAL_TRIMLIMITLO_VALUE_Pos) /*!< Bit mask of VALUE field.           */
+
+
+/* LFRC_CAL_TRIMLIMITHI: Higher trim limit */
+  #define LFRC_CAL_TRIMLIMITHI_ResetValue (0x0003FFFFUL) /*!< Reset value of TRIMLIMITHI register.                             */
+
+/* VALUE @Bits 0..17 : TRIM limit value */
+  #define LFRC_CAL_TRIMLIMITHI_VALUE_Pos (0UL)       /*!< Position of VALUE field.                                             */
+  #define LFRC_CAL_TRIMLIMITHI_VALUE_Msk (0x3FFFFUL << LFRC_CAL_TRIMLIMITHI_VALUE_Pos) /*!< Bit mask of VALUE field.           */
+
+
+/* LFRC_CAL_RESULT: Calibration result from CAL=n */
+  #define LFRC_CAL_RESULT_MaxCount (2UL)             /*!< Max size of RESULT[2] array.                                         */
+  #define LFRC_CAL_RESULT_MaxIndex (1UL)             /*!< Max index of RESULT[2] array.                                        */
+  #define LFRC_CAL_RESULT_MinIndex (0UL)             /*!< Min index of RESULT[2] array.                                        */
+  #define LFRC_CAL_RESULT_ResetValue (0x00000000UL)  /*!< Reset value of RESULT[2] register.                                   */
+
+/* RESULT @Bits 0..31 : The result in 16MHz clock cycles */
+  #define LFRC_CAL_RESULT_RESULT_Pos (0UL)           /*!< Position of RESULT field.                                            */
+  #define LFRC_CAL_RESULT_RESULT_Msk (0xFFFFFFFFUL << LFRC_CAL_RESULT_RESULT_Pos) /*!< Bit mask of RESULT field.               */
+
+
+/* LFRC_CAL_NHI: Number of cycles when the CAL signal is high */
+  #define LFRC_CAL_NHI_ResetValue (0x00000000UL)     /*!< Reset value of NHI register.                                         */
+
+/* NHI @Bits 0..11 : Number of cycles */
+  #define LFRC_CAL_NHI_NHI_Pos (0UL)                 /*!< Position of NHI field.                                               */
+  #define LFRC_CAL_NHI_NHI_Msk (0xFFFUL << LFRC_CAL_NHI_NHI_Pos) /*!< Bit mask of NHI field.                                   */
+
+
+/* LFRC_CAL_LFRCOSCTRIM: Initial coarse frequency trimming value for the oscillator. */
+  #define LFRC_CAL_LFRCOSCTRIM_ResetValue (0x0000002CUL) /*!< Reset value of LFRCOSCTRIM register.                             */
+
+/* VAL @Bits 0..5 : TRIM value */
+  #define LFRC_CAL_LFRCOSCTRIM_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
+  #define LFRC_CAL_LFRCOSCTRIM_VAL_Msk (0x3FUL << LFRC_CAL_LFRCOSCTRIM_VAL_Pos) /*!< Bit mask of VAL field.                    */
+
+
+
+/* ================================================== Struct LFRC_OVERRIDE =================================================== */
+/**
+  * @brief OVERRIDE [LFRC_OVERRIDE] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  SYNC;                              /*!< (@ 0x00000000) Override the SYNC signal to the LFRC32K analog module */
+  __IOM uint32_t  CAL;                               /*!< (@ 0x00000004) Override the CAL signal to the LFRC32K analog module  */
+  __IOM uint32_t  RETAIN;                            /*!< (@ 0x00000008) Override the RETAIN signal to the LFRC32K analog
+                                                                         module*/
+  __IOM uint32_t  PWRUP;                             /*!< (@ 0x0000000C) Override the PWRUP signal to the LFRC32K analog module*/
+  __IOM uint32_t  TRIM;                              /*!< (@ 0x00000010) Override the TRIM[5:0] signal to the LFRC32K analog
+                                                                         module*/
+  __IOM uint32_t  READY;                             /*!< (@ 0x00000014) Override the READY signal from the analog module      */
+  __IOM uint32_t  SETTLED;                           /*!< (@ 0x00000018) Override the SETTLED signal from the analog module    */
+} NRF_LFRC_OVERRIDE_Type;                            /*!< Size = 28 (0x01C)                                                    */
+
+/* LFRC_OVERRIDE_SYNC: Override the SYNC signal to the LFRC32K analog module */
+  #define LFRC_OVERRIDE_SYNC_ResetValue (0x00000000UL) /*!< Reset value of SYNC register.                                      */
+
+/* VAL @Bit 0 : Override value for the signal */
+  #define LFRC_OVERRIDE_SYNC_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
+  #define LFRC_OVERRIDE_SYNC_VAL_Msk (0x1UL << LFRC_OVERRIDE_SYNC_VAL_Pos) /*!< Bit mask of VAL field.                         */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFRC_OVERRIDE_SYNC_EN_Pos (31UL)           /*!< Position of EN field.                                                */
+  #define LFRC_OVERRIDE_SYNC_EN_Msk (0x1UL << LFRC_OVERRIDE_SYNC_EN_Pos) /*!< Bit mask of EN field.                            */
+  #define LFRC_OVERRIDE_SYNC_EN_Min (0x0UL)          /*!< Min enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_SYNC_EN_Max (0x1UL)          /*!< Max enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_SYNC_EN_Disabled (0x0UL)     /*!< Override is disabled                                                 */
+  #define LFRC_OVERRIDE_SYNC_EN_Enabled (0x1UL)      /*!< Override is enabled                                                  */
+
+
+/* LFRC_OVERRIDE_CAL: Override the CAL signal to the LFRC32K analog module */
+  #define LFRC_OVERRIDE_CAL_ResetValue (0x00000000UL) /*!< Reset value of CAL register.                                        */
+
+/* VAL @Bit 0 : Override value for the signal */
+  #define LFRC_OVERRIDE_CAL_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
+  #define LFRC_OVERRIDE_CAL_VAL_Msk (0x1UL << LFRC_OVERRIDE_CAL_VAL_Pos) /*!< Bit mask of VAL field.                           */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFRC_OVERRIDE_CAL_EN_Pos (31UL)            /*!< Position of EN field.                                                */
+  #define LFRC_OVERRIDE_CAL_EN_Msk (0x1UL << LFRC_OVERRIDE_CAL_EN_Pos) /*!< Bit mask of EN field.                              */
+  #define LFRC_OVERRIDE_CAL_EN_Min (0x0UL)           /*!< Min enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_CAL_EN_Max (0x1UL)           /*!< Max enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_CAL_EN_Disabled (0x0UL)      /*!< Override is disabled                                                 */
+  #define LFRC_OVERRIDE_CAL_EN_Enabled (0x1UL)       /*!< Override is enabled                                                  */
+
+
+/* LFRC_OVERRIDE_RETAIN: Override the RETAIN signal to the LFRC32K analog module */
+  #define LFRC_OVERRIDE_RETAIN_ResetValue (0x00000000UL) /*!< Reset value of RETAIN register.                                  */
+
+/* VAL @Bit 0 : Override value for the signal */
+  #define LFRC_OVERRIDE_RETAIN_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
+  #define LFRC_OVERRIDE_RETAIN_VAL_Msk (0x1UL << LFRC_OVERRIDE_RETAIN_VAL_Pos) /*!< Bit mask of VAL field.                     */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFRC_OVERRIDE_RETAIN_EN_Pos (31UL)         /*!< Position of EN field.                                                */
+  #define LFRC_OVERRIDE_RETAIN_EN_Msk (0x1UL << LFRC_OVERRIDE_RETAIN_EN_Pos) /*!< Bit mask of EN field.                        */
+  #define LFRC_OVERRIDE_RETAIN_EN_Min (0x0UL)        /*!< Min enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_RETAIN_EN_Max (0x1UL)        /*!< Max enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_RETAIN_EN_Disabled (0x0UL)   /*!< Override is disabled                                                 */
+  #define LFRC_OVERRIDE_RETAIN_EN_Enabled (0x1UL)    /*!< Override is enabled                                                  */
+
+
+/* LFRC_OVERRIDE_PWRUP: Override the PWRUP signal to the LFRC32K analog module */
+  #define LFRC_OVERRIDE_PWRUP_ResetValue (0x00000000UL) /*!< Reset value of PWRUP register.                                    */
+
+/* VAL @Bit 0 : Override value for the signal */
+  #define LFRC_OVERRIDE_PWRUP_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
+  #define LFRC_OVERRIDE_PWRUP_VAL_Msk (0x1UL << LFRC_OVERRIDE_PWRUP_VAL_Pos) /*!< Bit mask of VAL field.                       */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFRC_OVERRIDE_PWRUP_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFRC_OVERRIDE_PWRUP_EN_Msk (0x1UL << LFRC_OVERRIDE_PWRUP_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFRC_OVERRIDE_PWRUP_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_PWRUP_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_PWRUP_EN_Disabled (0x0UL)    /*!< Override is disabled                                                 */
+  #define LFRC_OVERRIDE_PWRUP_EN_Enabled (0x1UL)     /*!< Override is enabled                                                  */
+
+
+/* LFRC_OVERRIDE_TRIM: Override the TRIM[5:0] signal to the LFRC32K analog module */
+  #define LFRC_OVERRIDE_TRIM_ResetValue (0x00000000UL) /*!< Reset value of TRIM register.                                      */
+
+/* VAL @Bits 0..5 : TRIM value */
+  #define LFRC_OVERRIDE_TRIM_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
+  #define LFRC_OVERRIDE_TRIM_VAL_Msk (0x3FUL << LFRC_OVERRIDE_TRIM_VAL_Pos) /*!< Bit mask of VAL field.                        */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFRC_OVERRIDE_TRIM_EN_Pos (31UL)           /*!< Position of EN field.                                                */
+  #define LFRC_OVERRIDE_TRIM_EN_Msk (0x1UL << LFRC_OVERRIDE_TRIM_EN_Pos) /*!< Bit mask of EN field.                            */
+  #define LFRC_OVERRIDE_TRIM_EN_Min (0x0UL)          /*!< Min enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_TRIM_EN_Max (0x1UL)          /*!< Max enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_TRIM_EN_Disabled (0x0UL)     /*!< Override is disabled                                                 */
+  #define LFRC_OVERRIDE_TRIM_EN_Enabled (0x1UL)      /*!< Override is enabled                                                  */
+
+
+/* LFRC_OVERRIDE_READY: Override the READY signal from the analog module */
+  #define LFRC_OVERRIDE_READY_ResetValue (0x00000000UL) /*!< Reset value of READY register.                                    */
+
+/* VAL @Bit 0 : Current value of the signal */
+  #define LFRC_OVERRIDE_READY_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
+  #define LFRC_OVERRIDE_READY_VAL_Msk (0x1UL << LFRC_OVERRIDE_READY_VAL_Pos) /*!< Bit mask of VAL field.                       */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFRC_OVERRIDE_READY_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFRC_OVERRIDE_READY_EN_Msk (0x1UL << LFRC_OVERRIDE_READY_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFRC_OVERRIDE_READY_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_READY_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_READY_EN_Disabled (0x0UL)    /*!< Override is disabled                                                 */
+  #define LFRC_OVERRIDE_READY_EN_Enabled (0x1UL)     /*!< Override is enabled                                                  */
+
+
+/* LFRC_OVERRIDE_SETTLED: Override the SETTLED signal from the analog module */
+  #define LFRC_OVERRIDE_SETTLED_ResetValue (0x00000000UL) /*!< Reset value of SETTLED register.                                */
+
+/* VAL @Bit 0 : Current value of the signal */
+  #define LFRC_OVERRIDE_SETTLED_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
+  #define LFRC_OVERRIDE_SETTLED_VAL_Msk (0x1UL << LFRC_OVERRIDE_SETTLED_VAL_Pos) /*!< Bit mask of VAL field.                   */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFRC_OVERRIDE_SETTLED_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define LFRC_OVERRIDE_SETTLED_EN_Msk (0x1UL << LFRC_OVERRIDE_SETTLED_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define LFRC_OVERRIDE_SETTLED_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_SETTLED_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define LFRC_OVERRIDE_SETTLED_EN_Disabled (0x0UL)  /*!< Override is disabled                                                 */
+  #define LFRC_OVERRIDE_SETTLED_EN_Enabled (0x1UL)   /*!< Override is enabled                                                  */
+
+
+
+/* ===================================================== Struct LFRC_DFT ===================================================== */
+/**
+  * @brief DFT [LFRC_DFT] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  ATB0CONFIG;                        /*!< (@ 0x00000000) Analog Test Bus 0 (ATB0) configuration                */
+  __IOM uint32_t  ATB1CONFIG;                        /*!< (@ 0x00000004) Analog Test Bus 1 (ATB1) configuration                */
+  __IM  uint32_t  RESERVED[2];
+  __IOM uint32_t  DTBCONFIG;                         /*!< (@ 0x00000010) Digital Test Bus (DTB0-3) configuration               */
+  __IM  uint32_t  RESERVED1[7];
+  __IOM uint32_t  TCFG;                              /*!< (@ 0x00000030) Test mode configuration                               */
+} NRF_LFRC_DFT_Type;                                 /*!< Size = 52 (0x034)                                                    */
+
+/* LFRC_DFT_ATB0CONFIG: Analog Test Bus 0 (ATB0) configuration */
+  #define LFRC_DFT_ATB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB0CONFIG register.                               */
+
+/* EN @Bit 31 : Enable the analog test bus */
+  #define LFRC_DFT_ATB0CONFIG_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFRC_DFT_ATB0CONFIG_EN_Msk (0x1UL << LFRC_DFT_ATB0CONFIG_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFRC_DFT_ATB0CONFIG_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFRC_DFT_ATB0CONFIG_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFRC_DFT_ATB0CONFIG_EN_Disabled (0x0UL)    /*!< Analog test bus is disabled                                          */
+  #define LFRC_DFT_ATB0CONFIG_EN_Enabled (0x1UL)     /*!< Connect output from built-in ULP regulator to the analog test bus
+                                                          (ATB0)*/
+
+
+/* LFRC_DFT_ATB1CONFIG: Analog Test Bus 1 (ATB1) configuration */
+  #define LFRC_DFT_ATB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB1CONFIG register.                               */
+
+/* EN @Bit 31 : Enable the analog test bus */
+  #define LFRC_DFT_ATB1CONFIG_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFRC_DFT_ATB1CONFIG_EN_Msk (0x1UL << LFRC_DFT_ATB1CONFIG_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFRC_DFT_ATB1CONFIG_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFRC_DFT_ATB1CONFIG_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFRC_DFT_ATB1CONFIG_EN_Disabled (0x0UL)    /*!< Analog test bus is disabled                                          */
+  #define LFRC_DFT_ATB1CONFIG_EN_Enabled (0x1UL)     /*!< Connect 50nA bias current from reference current generator to the
+                                                          analog test bus (ATB1)*/
+
+
+/* LFRC_DFT_DTBCONFIG: Digital Test Bus (DTB0-3) configuration */
+  #define LFRC_DFT_DTBCONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTBCONFIG register.                                 */
+
+/* SELMUX @Bit 0 : Select multiplexer for DTB0 */
+  #define LFRC_DFT_DTBCONFIG_SELMUX_Pos (0UL)        /*!< Position of SELMUX field.                                            */
+  #define LFRC_DFT_DTBCONFIG_SELMUX_Msk (0x1UL << LFRC_DFT_DTBCONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.                */
+  #define LFRC_DFT_DTBCONFIG_SELMUX_Min (0x0UL)      /*!< Min enumerator value of SELMUX field.                                */
+  #define LFRC_DFT_DTBCONFIG_SELMUX_Max (0x1UL)      /*!< Max enumerator value of SELMUX field.                                */
+  #define LFRC_DFT_DTBCONFIG_SELMUX_CONFIG0 (0x0UL)  /*!< Configuration 0 selected                                             */
+  #define LFRC_DFT_DTBCONFIG_SELMUX_CONFIG1 (0x1UL)  /*!< Configuration 1 selected                                             */
+
+/* PWRUPDELTEST @Bit 27 : Enable the PWRUP delay test circuit on DTB3 */
+  #define LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Pos (27UL) /*!< Position of PWRUPDELTEST field.                                      */
+  #define LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Msk (0x1UL << LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Pos) /*!< Bit mask of PWRUPDELTEST
+                                                                            field.*/
+  #define LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Min (0x0UL) /*!< Min enumerator value of PWRUPDELTEST field.                         */
+  #define LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Max (0x1UL) /*!< Max enumerator value of PWRUPDELTEST field.                         */
+  #define LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Disabled (0x0UL) /*!< PWRUP delay test circuit is disabled                           */
+  #define LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Enabled (0x1UL) /*!< PWRUP delay test circuit is enabled                             */
+
+/* ENABLEDTB0 @Bit 28 : Enable the digital test bus 0 (DTB0) */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB0_Pos (28UL)   /*!< Position of ENABLEDTB0 field.                                        */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB0_Msk (0x1UL << LFRC_DFT_DTBCONFIG_ENABLEDTB0_Pos) /*!< Bit mask of ENABLEDTB0 field.    */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB0_Min (0x0UL)  /*!< Min enumerator value of ENABLEDTB0 field.                            */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB0_Max (0x1UL)  /*!< Max enumerator value of ENABLEDTB0 field.                            */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB0_Disabled (0x0UL) /*!< Digital test bus is disabled                                     */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB0_Enabled (0x1UL) /*!< Digital test bus is enabled                                       */
+
+/* ENABLEDTB1 @Bit 29 : Enable the digital test bus 1 (DTB1) */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB1_Pos (29UL)   /*!< Position of ENABLEDTB1 field.                                        */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB1_Msk (0x1UL << LFRC_DFT_DTBCONFIG_ENABLEDTB1_Pos) /*!< Bit mask of ENABLEDTB1 field.    */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB1_Min (0x0UL)  /*!< Min enumerator value of ENABLEDTB1 field.                            */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB1_Max (0x1UL)  /*!< Max enumerator value of ENABLEDTB1 field.                            */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB1_Disabled (0x0UL) /*!< Digital test bus is disabled                                     */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB1_Enabled (0x1UL) /*!< Digital test bus is enabled                                       */
+
+/* ENABLEDTB2 @Bit 30 : Enable the digital test bus 2 (DTB2) */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB2_Pos (30UL)   /*!< Position of ENABLEDTB2 field.                                        */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB2_Msk (0x1UL << LFRC_DFT_DTBCONFIG_ENABLEDTB2_Pos) /*!< Bit mask of ENABLEDTB2 field.    */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB2_Min (0x0UL)  /*!< Min enumerator value of ENABLEDTB2 field.                            */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB2_Max (0x1UL)  /*!< Max enumerator value of ENABLEDTB2 field.                            */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB2_Disabled (0x0UL) /*!< Digital test bus is disabled                                     */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB2_Enabled (0x1UL) /*!< Digital test bus is enabled                                       */
+
+/* ENABLEDTB3 @Bit 31 : Enable the digital test bus 3 (DTB3) */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB3_Pos (31UL)   /*!< Position of ENABLEDTB3 field.                                        */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB3_Msk (0x1UL << LFRC_DFT_DTBCONFIG_ENABLEDTB3_Pos) /*!< Bit mask of ENABLEDTB3 field.    */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB3_Min (0x0UL)  /*!< Min enumerator value of ENABLEDTB3 field.                            */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB3_Max (0x1UL)  /*!< Max enumerator value of ENABLEDTB3 field.                            */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB3_Disabled (0x0UL) /*!< Digital test bus is disabled                                     */
+  #define LFRC_DFT_DTBCONFIG_ENABLEDTB3_Enabled (0x1UL) /*!< Digital test bus is enabled                                       */
+
+
+/* LFRC_DFT_TCFG: Test mode configuration */
+  #define LFRC_DFT_TCFG_ResetValue (0x00000000UL)    /*!< Reset value of TCFG register.                                        */
+
+/* DOUBLETAILCURRCOMP @Bit 0 : Enable double tail current in comparator */
+  #define LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Pos (0UL) /*!< Position of DOUBLETAILCURRCOMP field.                                */
+  #define LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Msk (0x1UL << LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Pos) /*!< Bit mask of
+                                                                            DOUBLETAILCURRCOMP field.*/
+  #define LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Min (0x0UL) /*!< Min enumerator value of DOUBLETAILCURRCOMP field.                  */
+  #define LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Max (0x1UL) /*!< Max enumerator value of DOUBLETAILCURRCOMP field.                  */
+  #define LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Disabled (0x0UL) /*!< Normal mode                                                   */
+  #define LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Enabled (0x1UL) /*!< Double tail current in comparator enabled                      */
+
+/* CONTINUOUSTAILBIAS @Bit 1 : Enable continuous tail bias in comparator CMPX_INT, only for debugging purposes. */
+  #define LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Pos (1UL) /*!< Position of CONTINUOUSTAILBIAS field.                                */
+  #define LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Msk (0x1UL << LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Pos) /*!< Bit mask of
+                                                                            CONTINUOUSTAILBIAS field.*/
+  #define LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Min (0x0UL) /*!< Min enumerator value of CONTINUOUSTAILBIAS field.                  */
+  #define LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Max (0x1UL) /*!< Max enumerator value of CONTINUOUSTAILBIAS field.                  */
+  #define LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Disabled (0x0UL) /*!< Disabled                                                      */
+  #define LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Enabled (0x1UL) /*!< Enabled                                                        */
+
+
+/* ======================================================= Struct LFRC ======================================================= */
+/**
+  * @brief LFRC peripheral
+  */
+  typedef struct {                                   /*!< LFRC Structure                                                       */
+    __OM uint32_t TASKS_CAL;                         /*!< (@ 0x00000000) Start the calibration of RC oscillator                */
+    __OM uint32_t TASKS_CANCELCAL;                   /*!< (@ 0x00000004) Cancel the calibration                                */
+    __IM uint32_t RESERVED[62];
+    __IOM uint32_t EVENTS_CALDONE;                   /*!< (@ 0x00000100) Calibration done                                      */
+    __IOM uint32_t EVENTS_TRIMDONE;                  /*!< (@ 0x00000104) Trim done                                             */
+    __IOM uint32_t EVENTS_TRIMERROR;                 /*!< (@ 0x00000108) Trim error                                            */
+    __IM uint32_t RESERVED1[125];
+    __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
+    __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
+    __IM uint32_t RESERVED2[60];
+    __IM uint32_t STATUSTRIM;                        /*!< (@ 0x00000400) Current LFRCOSC trimming value.                       */
+    __IM uint32_t STATUSANA;                         /*!< (@ 0x00000404) Status of analog module output signals                */
+    __IM uint32_t RESERVED3[2];
+    __IOM NRF_LFRC_CONFIG_Type CONFIG;               /*!< (@ 0x00000410) (unspecified)                                         */
+    __IM uint32_t RESERVED4[3];
+    __IOM NRF_LFRC_CAL_Type CAL;                     /*!< (@ 0x00000420) (unspecified)                                         */
+    __IM uint32_t RESERVED5[17];
+    __IOM uint32_t MIRROR;                           /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
+    __IOM uint32_t PWRUPCTRL;                        /*!< (@ 0x00000484) Power up control                                      */
+    __IM uint32_t RESERVED6[30];
+    __IOM NRF_LFRC_OVERRIDE_Type OVERRIDE;           /*!< (@ 0x00000500) (unspecified)                                         */
+    __IM uint32_t RESERVED7[57];
+    __IOM NRF_LFRC_DFT_Type DFT;                     /*!< (@ 0x00000600) (unspecified)                                         */
+  } NRF_LFRC_Type;                                   /*!< Size = 1588 (0x634)                                                  */
+
+/* LFRC_TASKS_CAL: Start the calibration of RC oscillator */
+  #define LFRC_TASKS_CAL_ResetValue (0x00000000UL)   /*!< Reset value of TASKS_CAL register.                                   */
+
+/* TASKS_CAL @Bit 0 : Start the calibration of RC oscillator */
+  #define LFRC_TASKS_CAL_TASKS_CAL_Pos (0UL)         /*!< Position of TASKS_CAL field.                                         */
+  #define LFRC_TASKS_CAL_TASKS_CAL_Msk (0x1UL << LFRC_TASKS_CAL_TASKS_CAL_Pos) /*!< Bit mask of TASKS_CAL field.               */
+  #define LFRC_TASKS_CAL_TASKS_CAL_Min (0x1UL)       /*!< Min enumerator value of TASKS_CAL field.                             */
+  #define LFRC_TASKS_CAL_TASKS_CAL_Max (0x1UL)       /*!< Max enumerator value of TASKS_CAL field.                             */
+  #define LFRC_TASKS_CAL_TASKS_CAL_Trigger (0x1UL)   /*!< Trigger task                                                         */
+
+
+/* LFRC_TASKS_CANCELCAL: Cancel the calibration */
+  #define LFRC_TASKS_CANCELCAL_ResetValue (0x00000000UL) /*!< Reset value of TASKS_CANCELCAL register.                         */
+
+/* TASKS_CANCELCAL @Bit 0 : Cancel the calibration */
+  #define LFRC_TASKS_CANCELCAL_TASKS_CANCELCAL_Pos (0UL) /*!< Position of TASKS_CANCELCAL field.                               */
+  #define LFRC_TASKS_CANCELCAL_TASKS_CANCELCAL_Msk (0x1UL << LFRC_TASKS_CANCELCAL_TASKS_CANCELCAL_Pos) /*!< Bit mask of
+                                                                            TASKS_CANCELCAL field.*/
+  #define LFRC_TASKS_CANCELCAL_TASKS_CANCELCAL_Min (0x1UL) /*!< Min enumerator value of TASKS_CANCELCAL field.                 */
+  #define LFRC_TASKS_CANCELCAL_TASKS_CANCELCAL_Max (0x1UL) /*!< Max enumerator value of TASKS_CANCELCAL field.                 */
+  #define LFRC_TASKS_CANCELCAL_TASKS_CANCELCAL_Trigger (0x1UL) /*!< Trigger task                                               */
+
+
+/* LFRC_EVENTS_CALDONE: Calibration done */
+  #define LFRC_EVENTS_CALDONE_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_CALDONE register.                           */
+
+/* EVENTS_CALDONE @Bit 0 : Calibration done */
+  #define LFRC_EVENTS_CALDONE_EVENTS_CALDONE_Pos (0UL) /*!< Position of EVENTS_CALDONE field.                                  */
+  #define LFRC_EVENTS_CALDONE_EVENTS_CALDONE_Msk (0x1UL << LFRC_EVENTS_CALDONE_EVENTS_CALDONE_Pos) /*!< Bit mask of
+                                                                            EVENTS_CALDONE field.*/
+  #define LFRC_EVENTS_CALDONE_EVENTS_CALDONE_Min (0x0UL) /*!< Min enumerator value of EVENTS_CALDONE field.                    */
+  #define LFRC_EVENTS_CALDONE_EVENTS_CALDONE_Max (0x1UL) /*!< Max enumerator value of EVENTS_CALDONE field.                    */
+  #define LFRC_EVENTS_CALDONE_EVENTS_CALDONE_NotGenerated (0x0UL) /*!< Event not generated                                     */
+  #define LFRC_EVENTS_CALDONE_EVENTS_CALDONE_Generated (0x1UL) /*!< Event generated                                            */
+
+
+/* LFRC_EVENTS_TRIMDONE: Trim done */
+  #define LFRC_EVENTS_TRIMDONE_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_TRIMDONE register.                         */
+
+/* EVENTS_TRIMDONE @Bit 0 : Trim done */
+  #define LFRC_EVENTS_TRIMDONE_EVENTS_TRIMDONE_Pos (0UL) /*!< Position of EVENTS_TRIMDONE field.                               */
+  #define LFRC_EVENTS_TRIMDONE_EVENTS_TRIMDONE_Msk (0x1UL << LFRC_EVENTS_TRIMDONE_EVENTS_TRIMDONE_Pos) /*!< Bit mask of
+                                                                            EVENTS_TRIMDONE field.*/
+  #define LFRC_EVENTS_TRIMDONE_EVENTS_TRIMDONE_Min (0x0UL) /*!< Min enumerator value of EVENTS_TRIMDONE field.                 */
+  #define LFRC_EVENTS_TRIMDONE_EVENTS_TRIMDONE_Max (0x1UL) /*!< Max enumerator value of EVENTS_TRIMDONE field.                 */
+  #define LFRC_EVENTS_TRIMDONE_EVENTS_TRIMDONE_NotGenerated (0x0UL) /*!< Event not generated                                   */
+  #define LFRC_EVENTS_TRIMDONE_EVENTS_TRIMDONE_Generated (0x1UL) /*!< Event generated                                          */
+
+
+/* LFRC_EVENTS_TRIMERROR: Trim error */
+  #define LFRC_EVENTS_TRIMERROR_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_TRIMERROR register.                       */
+
+/* EVENTS_TRIMERROR @Bit 0 : Trim error */
+  #define LFRC_EVENTS_TRIMERROR_EVENTS_TRIMERROR_Pos (0UL) /*!< Position of EVENTS_TRIMERROR field.                            */
+  #define LFRC_EVENTS_TRIMERROR_EVENTS_TRIMERROR_Msk (0x1UL << LFRC_EVENTS_TRIMERROR_EVENTS_TRIMERROR_Pos) /*!< Bit mask of
+                                                                            EVENTS_TRIMERROR field.*/
+  #define LFRC_EVENTS_TRIMERROR_EVENTS_TRIMERROR_Min (0x0UL) /*!< Min enumerator value of EVENTS_TRIMERROR field.              */
+  #define LFRC_EVENTS_TRIMERROR_EVENTS_TRIMERROR_Max (0x1UL) /*!< Max enumerator value of EVENTS_TRIMERROR field.              */
+  #define LFRC_EVENTS_TRIMERROR_EVENTS_TRIMERROR_NotGenerated (0x0UL) /*!< Event not generated                                 */
+  #define LFRC_EVENTS_TRIMERROR_EVENTS_TRIMERROR_Generated (0x1UL) /*!< Event generated                                        */
+
+
+/* LFRC_INTEN: Enable or disable interrupt */
+  #define LFRC_INTEN_ResetValue (0x00000000UL)       /*!< Reset value of INTEN register.                                       */
+
+/* CALDONE @Bit 0 : Enable or disable interrupt for event CALDONE */
+  #define LFRC_INTEN_CALDONE_Pos (0UL)               /*!< Position of CALDONE field.                                           */
+  #define LFRC_INTEN_CALDONE_Msk (0x1UL << LFRC_INTEN_CALDONE_Pos) /*!< Bit mask of CALDONE field.                             */
+  #define LFRC_INTEN_CALDONE_Min (0x0UL)             /*!< Min enumerator value of CALDONE field.                               */
+  #define LFRC_INTEN_CALDONE_Max (0x1UL)             /*!< Max enumerator value of CALDONE field.                               */
+  #define LFRC_INTEN_CALDONE_Disabled (0x0UL)        /*!< Disable                                                              */
+  #define LFRC_INTEN_CALDONE_Enabled (0x1UL)         /*!< Enable                                                               */
+
+/* TRIMDONE @Bit 1 : Enable or disable interrupt for event TRIMDONE */
+  #define LFRC_INTEN_TRIMDONE_Pos (1UL)              /*!< Position of TRIMDONE field.                                          */
+  #define LFRC_INTEN_TRIMDONE_Msk (0x1UL << LFRC_INTEN_TRIMDONE_Pos) /*!< Bit mask of TRIMDONE field.                          */
+  #define LFRC_INTEN_TRIMDONE_Min (0x0UL)            /*!< Min enumerator value of TRIMDONE field.                              */
+  #define LFRC_INTEN_TRIMDONE_Max (0x1UL)            /*!< Max enumerator value of TRIMDONE field.                              */
+  #define LFRC_INTEN_TRIMDONE_Disabled (0x0UL)       /*!< Disable                                                              */
+  #define LFRC_INTEN_TRIMDONE_Enabled (0x1UL)        /*!< Enable                                                               */
+
+/* TRIMERROR @Bit 2 : Enable or disable interrupt for event TRIMERROR */
+  #define LFRC_INTEN_TRIMERROR_Pos (2UL)             /*!< Position of TRIMERROR field.                                         */
+  #define LFRC_INTEN_TRIMERROR_Msk (0x1UL << LFRC_INTEN_TRIMERROR_Pos) /*!< Bit mask of TRIMERROR field.                       */
+  #define LFRC_INTEN_TRIMERROR_Min (0x0UL)           /*!< Min enumerator value of TRIMERROR field.                             */
+  #define LFRC_INTEN_TRIMERROR_Max (0x1UL)           /*!< Max enumerator value of TRIMERROR field.                             */
+  #define LFRC_INTEN_TRIMERROR_Disabled (0x0UL)      /*!< Disable                                                              */
+  #define LFRC_INTEN_TRIMERROR_Enabled (0x1UL)       /*!< Enable                                                               */
+
+
+/* LFRC_INTENSET: Enable interrupt */
+  #define LFRC_INTENSET_ResetValue (0x00000000UL)    /*!< Reset value of INTENSET register.                                    */
+
+/* CALDONE @Bit 0 : Write '1' to enable interrupt for event CALDONE */
+  #define LFRC_INTENSET_CALDONE_Pos (0UL)            /*!< Position of CALDONE field.                                           */
+  #define LFRC_INTENSET_CALDONE_Msk (0x1UL << LFRC_INTENSET_CALDONE_Pos) /*!< Bit mask of CALDONE field.                       */
+  #define LFRC_INTENSET_CALDONE_Min (0x0UL)          /*!< Min enumerator value of CALDONE field.                               */
+  #define LFRC_INTENSET_CALDONE_Max (0x1UL)          /*!< Max enumerator value of CALDONE field.                               */
+  #define LFRC_INTENSET_CALDONE_Set (0x1UL)          /*!< Enable                                                               */
+  #define LFRC_INTENSET_CALDONE_Disabled (0x0UL)     /*!< Read: Disabled                                                       */
+  #define LFRC_INTENSET_CALDONE_Enabled (0x1UL)      /*!< Read: Enabled                                                        */
+
+/* TRIMDONE @Bit 1 : Write '1' to enable interrupt for event TRIMDONE */
+  #define LFRC_INTENSET_TRIMDONE_Pos (1UL)           /*!< Position of TRIMDONE field.                                          */
+  #define LFRC_INTENSET_TRIMDONE_Msk (0x1UL << LFRC_INTENSET_TRIMDONE_Pos) /*!< Bit mask of TRIMDONE field.                    */
+  #define LFRC_INTENSET_TRIMDONE_Min (0x0UL)         /*!< Min enumerator value of TRIMDONE field.                              */
+  #define LFRC_INTENSET_TRIMDONE_Max (0x1UL)         /*!< Max enumerator value of TRIMDONE field.                              */
+  #define LFRC_INTENSET_TRIMDONE_Set (0x1UL)         /*!< Enable                                                               */
+  #define LFRC_INTENSET_TRIMDONE_Disabled (0x0UL)    /*!< Read: Disabled                                                       */
+  #define LFRC_INTENSET_TRIMDONE_Enabled (0x1UL)     /*!< Read: Enabled                                                        */
+
+/* TRIMERROR @Bit 2 : Write '1' to enable interrupt for event TRIMERROR */
+  #define LFRC_INTENSET_TRIMERROR_Pos (2UL)          /*!< Position of TRIMERROR field.                                         */
+  #define LFRC_INTENSET_TRIMERROR_Msk (0x1UL << LFRC_INTENSET_TRIMERROR_Pos) /*!< Bit mask of TRIMERROR field.                 */
+  #define LFRC_INTENSET_TRIMERROR_Min (0x0UL)        /*!< Min enumerator value of TRIMERROR field.                             */
+  #define LFRC_INTENSET_TRIMERROR_Max (0x1UL)        /*!< Max enumerator value of TRIMERROR field.                             */
+  #define LFRC_INTENSET_TRIMERROR_Set (0x1UL)        /*!< Enable                                                               */
+  #define LFRC_INTENSET_TRIMERROR_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define LFRC_INTENSET_TRIMERROR_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
+
+
+/* LFRC_INTENCLR: Disable interrupt */
+  #define LFRC_INTENCLR_ResetValue (0x00000000UL)    /*!< Reset value of INTENCLR register.                                    */
+
+/* CALDONE @Bit 0 : Write '1' to disable interrupt for event CALDONE */
+  #define LFRC_INTENCLR_CALDONE_Pos (0UL)            /*!< Position of CALDONE field.                                           */
+  #define LFRC_INTENCLR_CALDONE_Msk (0x1UL << LFRC_INTENCLR_CALDONE_Pos) /*!< Bit mask of CALDONE field.                       */
+  #define LFRC_INTENCLR_CALDONE_Min (0x0UL)          /*!< Min enumerator value of CALDONE field.                               */
+  #define LFRC_INTENCLR_CALDONE_Max (0x1UL)          /*!< Max enumerator value of CALDONE field.                               */
+  #define LFRC_INTENCLR_CALDONE_Clear (0x1UL)        /*!< Disable                                                              */
+  #define LFRC_INTENCLR_CALDONE_Disabled (0x0UL)     /*!< Read: Disabled                                                       */
+  #define LFRC_INTENCLR_CALDONE_Enabled (0x1UL)      /*!< Read: Enabled                                                        */
+
+/* TRIMDONE @Bit 1 : Write '1' to disable interrupt for event TRIMDONE */
+  #define LFRC_INTENCLR_TRIMDONE_Pos (1UL)           /*!< Position of TRIMDONE field.                                          */
+  #define LFRC_INTENCLR_TRIMDONE_Msk (0x1UL << LFRC_INTENCLR_TRIMDONE_Pos) /*!< Bit mask of TRIMDONE field.                    */
+  #define LFRC_INTENCLR_TRIMDONE_Min (0x0UL)         /*!< Min enumerator value of TRIMDONE field.                              */
+  #define LFRC_INTENCLR_TRIMDONE_Max (0x1UL)         /*!< Max enumerator value of TRIMDONE field.                              */
+  #define LFRC_INTENCLR_TRIMDONE_Clear (0x1UL)       /*!< Disable                                                              */
+  #define LFRC_INTENCLR_TRIMDONE_Disabled (0x0UL)    /*!< Read: Disabled                                                       */
+  #define LFRC_INTENCLR_TRIMDONE_Enabled (0x1UL)     /*!< Read: Enabled                                                        */
+
+/* TRIMERROR @Bit 2 : Write '1' to disable interrupt for event TRIMERROR */
+  #define LFRC_INTENCLR_TRIMERROR_Pos (2UL)          /*!< Position of TRIMERROR field.                                         */
+  #define LFRC_INTENCLR_TRIMERROR_Msk (0x1UL << LFRC_INTENCLR_TRIMERROR_Pos) /*!< Bit mask of TRIMERROR field.                 */
+  #define LFRC_INTENCLR_TRIMERROR_Min (0x0UL)        /*!< Min enumerator value of TRIMERROR field.                             */
+  #define LFRC_INTENCLR_TRIMERROR_Max (0x1UL)        /*!< Max enumerator value of TRIMERROR field.                             */
+  #define LFRC_INTENCLR_TRIMERROR_Clear (0x1UL)      /*!< Disable                                                              */
+  #define LFRC_INTENCLR_TRIMERROR_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define LFRC_INTENCLR_TRIMERROR_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
+
+
+/* LFRC_INTPEND: Pending interrupts */
+  #define LFRC_INTPEND_ResetValue (0x00000000UL)     /*!< Reset value of INTPEND register.                                     */
+
+/* CALDONE @Bit 0 : Read pending status of interrupt for event CALDONE */
+  #define LFRC_INTPEND_CALDONE_Pos (0UL)             /*!< Position of CALDONE field.                                           */
+  #define LFRC_INTPEND_CALDONE_Msk (0x1UL << LFRC_INTPEND_CALDONE_Pos) /*!< Bit mask of CALDONE field.                         */
+  #define LFRC_INTPEND_CALDONE_Min (0x0UL)           /*!< Min enumerator value of CALDONE field.                               */
+  #define LFRC_INTPEND_CALDONE_Max (0x1UL)           /*!< Max enumerator value of CALDONE field.                               */
+  #define LFRC_INTPEND_CALDONE_NotPending (0x0UL)    /*!< Read: Not pending                                                    */
+  #define LFRC_INTPEND_CALDONE_Pending (0x1UL)       /*!< Read: Pending                                                        */
+
+/* TRIMDONE @Bit 1 : Read pending status of interrupt for event TRIMDONE */
+  #define LFRC_INTPEND_TRIMDONE_Pos (1UL)            /*!< Position of TRIMDONE field.                                          */
+  #define LFRC_INTPEND_TRIMDONE_Msk (0x1UL << LFRC_INTPEND_TRIMDONE_Pos) /*!< Bit mask of TRIMDONE field.                      */
+  #define LFRC_INTPEND_TRIMDONE_Min (0x0UL)          /*!< Min enumerator value of TRIMDONE field.                              */
+  #define LFRC_INTPEND_TRIMDONE_Max (0x1UL)          /*!< Max enumerator value of TRIMDONE field.                              */
+  #define LFRC_INTPEND_TRIMDONE_NotPending (0x0UL)   /*!< Read: Not pending                                                    */
+  #define LFRC_INTPEND_TRIMDONE_Pending (0x1UL)      /*!< Read: Pending                                                        */
+
+/* TRIMERROR @Bit 2 : Read pending status of interrupt for event TRIMERROR */
+  #define LFRC_INTPEND_TRIMERROR_Pos (2UL)           /*!< Position of TRIMERROR field.                                         */
+  #define LFRC_INTPEND_TRIMERROR_Msk (0x1UL << LFRC_INTPEND_TRIMERROR_Pos) /*!< Bit mask of TRIMERROR field.                   */
+  #define LFRC_INTPEND_TRIMERROR_Min (0x0UL)         /*!< Min enumerator value of TRIMERROR field.                             */
+  #define LFRC_INTPEND_TRIMERROR_Max (0x1UL)         /*!< Max enumerator value of TRIMERROR field.                             */
+  #define LFRC_INTPEND_TRIMERROR_NotPending (0x0UL)  /*!< Read: Not pending                                                    */
+  #define LFRC_INTPEND_TRIMERROR_Pending (0x1UL)     /*!< Read: Pending                                                        */
+
+
+/* LFRC_STATUSTRIM: Current LFRCOSC trimming value. */
+  #define LFRC_STATUSTRIM_ResetValue (0x0000000AUL)  /*!< Reset value of STATUSTRIM register.                                  */
+
+/* VAL @Bits 0..5 : TRIM value */
+  #define LFRC_STATUSTRIM_VAL_Pos (0UL)              /*!< Position of VAL field.                                               */
+  #define LFRC_STATUSTRIM_VAL_Msk (0x3FUL << LFRC_STATUSTRIM_VAL_Pos) /*!< Bit mask of VAL field.                              */
+
+
+/* LFRC_STATUSANA: Status of analog module output signals */
+  #define LFRC_STATUSANA_ResetValue (0x00000000UL)   /*!< Reset value of STATUSANA register.                                   */
+
+/* READY @Bit 0 : Current value of the READY signal from the analog module */
+  #define LFRC_STATUSANA_READY_Pos (0UL)             /*!< Position of READY field.                                             */
+  #define LFRC_STATUSANA_READY_Msk (0x1UL << LFRC_STATUSANA_READY_Pos) /*!< Bit mask of READY field.                           */
+
+/* SETTLED @Bit 1 : Current value of the SETTLED signal from the analog module */
+  #define LFRC_STATUSANA_SETTLED_Pos (1UL)           /*!< Position of SETTLED field.                                           */
+  #define LFRC_STATUSANA_SETTLED_Msk (0x1UL << LFRC_STATUSANA_SETTLED_Pos) /*!< Bit mask of SETTLED field.                     */
+
+
+/* LFRC_MIRROR: Enable LOCK for mirrored registers */
+  #define LFRC_MIRROR_ResetValue (0x00000001UL)      /*!< Reset value of MIRROR register.                                      */
+
+/* LOCK @Bit 0 : Lock for mirrored registers */
+  #define LFRC_MIRROR_LOCK_Pos (0UL)                 /*!< Position of LOCK field.                                              */
+  #define LFRC_MIRROR_LOCK_Msk (0x1UL << LFRC_MIRROR_LOCK_Pos) /*!< Bit mask of LOCK field.                                    */
+  #define LFRC_MIRROR_LOCK_Min (0x0UL)               /*!< Min enumerator value of LOCK field.                                  */
+  #define LFRC_MIRROR_LOCK_Max (0x1UL)               /*!< Max enumerator value of LOCK field.                                  */
+  #define LFRC_MIRROR_LOCK_Disabled (0x0UL)          /*!< Lock disabled                                                        */
+  #define LFRC_MIRROR_LOCK_Enabled (0x1UL)           /*!< Lock enabled                                                         */
+
+
+/* LFRC_PWRUPCTRL: Power up control */
+  #define LFRC_PWRUPCTRL_ResetValue (0x00000000UL)   /*!< Reset value of PWRUPCTRL register.                                   */
+
+/* CTRL @Bits 0..1 : Power up control */
+  #define LFRC_PWRUPCTRL_CTRL_Pos (0UL)              /*!< Position of CTRL field.                                              */
+  #define LFRC_PWRUPCTRL_CTRL_Msk (0x3UL << LFRC_PWRUPCTRL_CTRL_Pos) /*!< Bit mask of CTRL field.                              */
+  #define LFRC_PWRUPCTRL_CTRL_Min (0x0UL)            /*!< Min enumerator value of CTRL field.                                  */
+  #define LFRC_PWRUPCTRL_CTRL_Max (0x2UL)            /*!< Max enumerator value of CTRL field.                                  */
+  #define LFRC_PWRUPCTRL_CTRL_Auto (0x0UL)           /*!< Automatically handled by the peripheral                              */
+  #define LFRC_PWRUPCTRL_CTRL_PowerUp (0x1UL)        /*!< Power up                                                             */
+  #define LFRC_PWRUPCTRL_CTRL_PowerDown (0x2UL)      /*!< Power down                                                           */
+
+
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
+
+/* =========================================================================================================================== */
+/* ================                                           LFXO                                           ================ */
+/* =========================================================================================================================== */
+
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
+
+/* ==================================================== Struct LFXO_TRIM ===================================================== */
+/**
+  * @brief TRIM [LFXO_TRIM] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  PDLOWERTHR;                        /*!< (@ 0x00000000) Peak detector lower threshold trim                    */
+  __IOM uint32_t  PDUPPERTHR;                        /*!< (@ 0x00000004) Peak detector upper threshold trim                    */
+  __IOM uint32_t  BIAS;                              /*!< (@ 0x00000008) Internal bias generator trim                          */
+  __IOM uint32_t  PIXO;                              /*!< (@ 0x0000000C) PIXO high pulse supply trim                           */
+  __IOM uint32_t  TRIMBUS;                           /*!< (@ 0x00000010) Reserved trim bus                                     */
+} NRF_LFXO_TRIM_Type;                                /*!< Size = 20 (0x014)                                                    */
+
+/* LFXO_TRIM_PDLOWERTHR: Peak detector lower threshold trim */
+  #define LFXO_TRIM_PDLOWERTHR_ResetValue (0x00000000UL) /*!< Reset value of PDLOWERTHR register.                              */
+
+/* VAL @Bits 0..4 : Peak detector lower threshold trimming value */
+  #define LFXO_TRIM_PDLOWERTHR_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
+  #define LFXO_TRIM_PDLOWERTHR_VAL_Msk (0x1FUL << LFXO_TRIM_PDLOWERTHR_VAL_Pos) /*!< Bit mask of VAL field.                    */
+
+
+/* LFXO_TRIM_PDUPPERTHR: Peak detector upper threshold trim */
+  #define LFXO_TRIM_PDUPPERTHR_ResetValue (0x00000000UL) /*!< Reset value of PDUPPERTHR register.                              */
+
+/* VAL @Bits 0..4 : Peak detector upper threshold trimming value */
+  #define LFXO_TRIM_PDUPPERTHR_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
+  #define LFXO_TRIM_PDUPPERTHR_VAL_Msk (0x1FUL << LFXO_TRIM_PDUPPERTHR_VAL_Pos) /*!< Bit mask of VAL field.                    */
+
+
+/* LFXO_TRIM_BIAS: Internal bias generator trim */
+  #define LFXO_TRIM_BIAS_ResetValue (0x00000000UL)   /*!< Reset value of BIAS register.                                        */
+
+/* VAL @Bits 0..3 : Internal bias generator trim */
+  #define LFXO_TRIM_BIAS_VAL_Pos (0UL)               /*!< Position of VAL field.                                               */
+  #define LFXO_TRIM_BIAS_VAL_Msk (0xFUL << LFXO_TRIM_BIAS_VAL_Pos) /*!< Bit mask of VAL field.                                 */
+
+
+/* LFXO_TRIM_PIXO: PIXO high pulse supply trim */
+  #define LFXO_TRIM_PIXO_ResetValue (0x00000000UL)   /*!< Reset value of PIXO register.                                        */
+
+/* VAL @Bits 0..4 : PIXO high pulse supply trim */
+  #define LFXO_TRIM_PIXO_VAL_Pos (0UL)               /*!< Position of VAL field.                                               */
+  #define LFXO_TRIM_PIXO_VAL_Msk (0x1FUL << LFXO_TRIM_PIXO_VAL_Pos) /*!< Bit mask of VAL field.                                */
+
+
+/* LFXO_TRIM_TRIMBUS: Reserved trim bus */
+  #define LFXO_TRIM_TRIMBUS_ResetValue (0x00000000UL) /*!< Reset value of TRIMBUS register.                                    */
+
+/* VAL @Bits 0..2 : Value */
+  #define LFXO_TRIM_TRIMBUS_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
+  #define LFXO_TRIM_TRIMBUS_VAL_Msk (0x7UL << LFXO_TRIM_TRIMBUS_VAL_Pos) /*!< Bit mask of VAL field.                           */
+
+
+
+/* ================================================== Struct LFXO_OVERRIDE =================================================== */
+/**
+  * @brief OVERRIDE [LFXO_OVERRIDE] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  PWRUP;                             /*!< (@ 0x00000000) Override the PWRUP signal to the analog module        */
+  __IOM uint32_t  RETAIN;                            /*!< (@ 0x00000004) Override the RETAIN signal to the analog module       */
+  __IOM uint32_t  MODE;                              /*!< (@ 0x00000008) Override the MODE signal to the analog module         */
+  __IOM uint32_t  BYPASS;                            /*!< (@ 0x0000000C) Override the BYPASS signal to the analog module       */
+  __IOM uint32_t  OUTSEL;                            /*!< (@ 0x00000010) Override the OUTSEL[1:0] signal to the analog module  */
+  __IOM uint32_t  S2SHPMODE;                         /*!< (@ 0x00000014) Override the S2S_HPMODE signal to the analog module   */
+  __IOM uint32_t  PIXOPWRUP;                         /*!< (@ 0x00000018) Override the PIXO_PWRUP signal to the analog module   */
+  __IOM uint32_t  PIXOSTARTUP;                       /*!< (@ 0x0000001C) Override the PIXO_STARTUP signal to the analog module */
+  __IOM uint32_t  PIERCESTARTUP;                     /*!< (@ 0x00000020) Override the PIERCE_STARTUP signal to the analog
+                                                                         module*/
+  __IOM uint32_t  PIERCEIDAC;                        /*!< (@ 0x00000024) Override the PIERCE_IDAC signal to the analog module  */
+  __IOM uint32_t  PDEN;                              /*!< (@ 0x00000028) Override the PD_EN signal to the analog module        */
+  __IOM uint32_t  CLOAD;                             /*!< (@ 0x0000002C) Override the CLOAD signal to the analog module        */
+  __IOM uint32_t  READY;                             /*!< (@ 0x00000030) Override the READY signal from the analog module      */
+  __IOM uint32_t  SETTLED;                           /*!< (@ 0x00000034) Override the SETTLED signal from the analog module    */
+  __IOM uint32_t  PIXOACK;                           /*!< (@ 0x00000038) Override the PIXO_ACK signal from the analog module   */
+  __IOM uint32_t  PDSETTLED;                         /*!< (@ 0x0000003C) Override the PD_SETTLED signal from the analog module */
+  __IOM uint32_t  PDOUTLOWER;                        /*!< (@ 0x00000040) Override the PD_OUT_LOWER signal from the analog
+                                                                         module*/
+  __IOM uint32_t  PDOUTUPPER;                        /*!< (@ 0x00000044) Override the PD_OUT_UPPER signal from the analog
+                                                                         module*/
+} NRF_LFXO_OVERRIDE_Type;                            /*!< Size = 72 (0x048)                                                    */
+
+/* LFXO_OVERRIDE_PWRUP: Override the PWRUP signal to the analog module */
+  #define LFXO_OVERRIDE_PWRUP_ResetValue (0x00000000UL) /*!< Reset value of PWRUP register.                                    */
+
+/* VAL @Bit 0 : Override value for the signal */
+  #define LFXO_OVERRIDE_PWRUP_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_PWRUP_VAL_Msk (0x1UL << LFXO_OVERRIDE_PWRUP_VAL_Pos) /*!< Bit mask of VAL field.                       */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_PWRUP_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_PWRUP_EN_Msk (0x1UL << LFXO_OVERRIDE_PWRUP_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFXO_OVERRIDE_PWRUP_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PWRUP_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PWRUP_EN_Disabled (0x0UL)    /*!< Override is disabled                                                 */
+  #define LFXO_OVERRIDE_PWRUP_EN_Enabled (0x1UL)     /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_RETAIN: Override the RETAIN signal to the analog module */
+  #define LFXO_OVERRIDE_RETAIN_ResetValue (0x00000000UL) /*!< Reset value of RETAIN register.                                  */
+
+/* VAL @Bit 0 : Override value for the signal */
+  #define LFXO_OVERRIDE_RETAIN_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_RETAIN_VAL_Msk (0x1UL << LFXO_OVERRIDE_RETAIN_VAL_Pos) /*!< Bit mask of VAL field.                     */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_RETAIN_EN_Pos (31UL)         /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_RETAIN_EN_Msk (0x1UL << LFXO_OVERRIDE_RETAIN_EN_Pos) /*!< Bit mask of EN field.                        */
+  #define LFXO_OVERRIDE_RETAIN_EN_Min (0x0UL)        /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_RETAIN_EN_Max (0x1UL)        /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_RETAIN_EN_Disabled (0x0UL)   /*!< Override is disabled                                                 */
+  #define LFXO_OVERRIDE_RETAIN_EN_Enabled (0x1UL)    /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_MODE: Override the MODE signal to the analog module */
+  #define LFXO_OVERRIDE_MODE_ResetValue (0x00000000UL) /*!< Reset value of MODE register.                                      */
+
+/* VAL @Bit 0 : Value */
+  #define LFXO_OVERRIDE_MODE_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_MODE_VAL_Msk (0x1UL << LFXO_OVERRIDE_MODE_VAL_Pos) /*!< Bit mask of VAL field.                         */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_MODE_EN_Pos (31UL)           /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_MODE_EN_Msk (0x1UL << LFXO_OVERRIDE_MODE_EN_Pos) /*!< Bit mask of EN field.                            */
+  #define LFXO_OVERRIDE_MODE_EN_Min (0x0UL)          /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_MODE_EN_Max (0x1UL)          /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_MODE_EN_Disabled (0x0UL)     /*!< Override is disabled                                                 */
+  #define LFXO_OVERRIDE_MODE_EN_Enabled (0x1UL)      /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_BYPASS: Override the BYPASS signal to the analog module */
+  #define LFXO_OVERRIDE_BYPASS_ResetValue (0x00000000UL) /*!< Reset value of BYPASS register.                                  */
+
+/* VAL @Bit 0 : Value */
+  #define LFXO_OVERRIDE_BYPASS_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_BYPASS_VAL_Msk (0x1UL << LFXO_OVERRIDE_BYPASS_VAL_Pos) /*!< Bit mask of VAL field.                     */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_BYPASS_EN_Pos (31UL)         /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_BYPASS_EN_Msk (0x1UL << LFXO_OVERRIDE_BYPASS_EN_Pos) /*!< Bit mask of EN field.                        */
+  #define LFXO_OVERRIDE_BYPASS_EN_Min (0x0UL)        /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_BYPASS_EN_Max (0x1UL)        /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_BYPASS_EN_Disabled (0x0UL)   /*!< Override is disabled                                                 */
+  #define LFXO_OVERRIDE_BYPASS_EN_Enabled (0x1UL)    /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_OUTSEL: Override the OUTSEL[1:0] signal to the analog module */
+  #define LFXO_OVERRIDE_OUTSEL_ResetValue (0x00000000UL) /*!< Reset value of OUTSEL register.                                  */
+
+/* VAL @Bits 0..1 : Value */
+  #define LFXO_OVERRIDE_OUTSEL_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_OUTSEL_VAL_Msk (0x3UL << LFXO_OVERRIDE_OUTSEL_VAL_Pos) /*!< Bit mask of VAL field.                     */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_OUTSEL_EN_Pos (31UL)         /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_OUTSEL_EN_Msk (0x1UL << LFXO_OVERRIDE_OUTSEL_EN_Pos) /*!< Bit mask of EN field.                        */
+  #define LFXO_OVERRIDE_OUTSEL_EN_Min (0x0UL)        /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_OUTSEL_EN_Max (0x1UL)        /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_OUTSEL_EN_Disabled (0x0UL)   /*!< Override is disabled                                                 */
+  #define LFXO_OVERRIDE_OUTSEL_EN_Enabled (0x1UL)    /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_S2SHPMODE: Override the S2S_HPMODE signal to the analog module */
+  #define LFXO_OVERRIDE_S2SHPMODE_ResetValue (0x00000000UL) /*!< Reset value of S2SHPMODE register.                            */
+
+/* VAL @Bit 0 : Value */
+  #define LFXO_OVERRIDE_S2SHPMODE_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_S2SHPMODE_VAL_Msk (0x1UL << LFXO_OVERRIDE_S2SHPMODE_VAL_Pos) /*!< Bit mask of VAL field.               */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_S2SHPMODE_EN_Pos (31UL)      /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_S2SHPMODE_EN_Msk (0x1UL << LFXO_OVERRIDE_S2SHPMODE_EN_Pos) /*!< Bit mask of EN field.                  */
+  #define LFXO_OVERRIDE_S2SHPMODE_EN_Min (0x0UL)     /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_S2SHPMODE_EN_Max (0x1UL)     /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_S2SHPMODE_EN_Disabled (0x0UL) /*!< Override is disabled                                                */
+  #define LFXO_OVERRIDE_S2SHPMODE_EN_Enabled (0x1UL) /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_PIXOPWRUP: Override the PIXO_PWRUP signal to the analog module */
+  #define LFXO_OVERRIDE_PIXOPWRUP_ResetValue (0x00000000UL) /*!< Reset value of PIXOPWRUP register.                            */
+
+/* VAL @Bit 0 : Value */
+  #define LFXO_OVERRIDE_PIXOPWRUP_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_PIXOPWRUP_VAL_Msk (0x1UL << LFXO_OVERRIDE_PIXOPWRUP_VAL_Pos) /*!< Bit mask of VAL field.               */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_PIXOPWRUP_EN_Pos (31UL)      /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_PIXOPWRUP_EN_Msk (0x1UL << LFXO_OVERRIDE_PIXOPWRUP_EN_Pos) /*!< Bit mask of EN field.                  */
+  #define LFXO_OVERRIDE_PIXOPWRUP_EN_Min (0x0UL)     /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PIXOPWRUP_EN_Max (0x1UL)     /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PIXOPWRUP_EN_Disabled (0x0UL) /*!< Override is disabled                                                */
+  #define LFXO_OVERRIDE_PIXOPWRUP_EN_Enabled (0x1UL) /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_PIXOSTARTUP: Override the PIXO_STARTUP signal to the analog module */
+  #define LFXO_OVERRIDE_PIXOSTARTUP_ResetValue (0x00000000UL) /*!< Reset value of PIXOSTARTUP register.                        */
+
+/* VAL @Bit 0 : Value */
+  #define LFXO_OVERRIDE_PIXOSTARTUP_VAL_Pos (0UL)    /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_PIXOSTARTUP_VAL_Msk (0x1UL << LFXO_OVERRIDE_PIXOSTARTUP_VAL_Pos) /*!< Bit mask of VAL field.           */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_PIXOSTARTUP_EN_Pos (31UL)    /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_PIXOSTARTUP_EN_Msk (0x1UL << LFXO_OVERRIDE_PIXOSTARTUP_EN_Pos) /*!< Bit mask of EN field.              */
+  #define LFXO_OVERRIDE_PIXOSTARTUP_EN_Min (0x0UL)   /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PIXOSTARTUP_EN_Max (0x1UL)   /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PIXOSTARTUP_EN_Disabled (0x0UL) /*!< Override is disabled                                              */
+  #define LFXO_OVERRIDE_PIXOSTARTUP_EN_Enabled (0x1UL) /*!< Override is enabled                                                */
+
+
+/* LFXO_OVERRIDE_PIERCESTARTUP: Override the PIERCE_STARTUP signal to the analog module */
+  #define LFXO_OVERRIDE_PIERCESTARTUP_ResetValue (0x00000000UL) /*!< Reset value of PIERCESTARTUP register.                    */
+
+/* VAL @Bit 0 : Value */
+  #define LFXO_OVERRIDE_PIERCESTARTUP_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_PIERCESTARTUP_VAL_Msk (0x1UL << LFXO_OVERRIDE_PIERCESTARTUP_VAL_Pos) /*!< Bit mask of VAL field.       */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_PIERCESTARTUP_EN_Pos (31UL)  /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_PIERCESTARTUP_EN_Msk (0x1UL << LFXO_OVERRIDE_PIERCESTARTUP_EN_Pos) /*!< Bit mask of EN field.          */
+  #define LFXO_OVERRIDE_PIERCESTARTUP_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PIERCESTARTUP_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PIERCESTARTUP_EN_Disabled (0x0UL) /*!< Override is disabled                                            */
+  #define LFXO_OVERRIDE_PIERCESTARTUP_EN_Enabled (0x1UL) /*!< Override is enabled                                              */
+
+
+/* LFXO_OVERRIDE_PIERCEIDAC: Override the PIERCE_IDAC signal to the analog module */
+  #define LFXO_OVERRIDE_PIERCEIDAC_ResetValue (0x00000000UL) /*!< Reset value of PIERCEIDAC register.                          */
+
+/* VAL @Bits 0..4 : Value */
+  #define LFXO_OVERRIDE_PIERCEIDAC_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_PIERCEIDAC_VAL_Msk (0x1FUL << LFXO_OVERRIDE_PIERCEIDAC_VAL_Pos) /*!< Bit mask of VAL field.            */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_PIERCEIDAC_EN_Pos (31UL)     /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_PIERCEIDAC_EN_Msk (0x1UL << LFXO_OVERRIDE_PIERCEIDAC_EN_Pos) /*!< Bit mask of EN field.                */
+  #define LFXO_OVERRIDE_PIERCEIDAC_EN_Min (0x0UL)    /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PIERCEIDAC_EN_Max (0x1UL)    /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PIERCEIDAC_EN_Disabled (0x0UL) /*!< Override is disabled                                               */
+  #define LFXO_OVERRIDE_PIERCEIDAC_EN_Enabled (0x1UL) /*!< Override is enabled                                                 */
+
+
+/* LFXO_OVERRIDE_PDEN: Override the PD_EN signal to the analog module */
+  #define LFXO_OVERRIDE_PDEN_ResetValue (0x00000000UL) /*!< Reset value of PDEN register.                                      */
+
+/* VAL @Bit 0 : Value */
+  #define LFXO_OVERRIDE_PDEN_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_PDEN_VAL_Msk (0x1UL << LFXO_OVERRIDE_PDEN_VAL_Pos) /*!< Bit mask of VAL field.                         */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_PDEN_EN_Pos (31UL)           /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_PDEN_EN_Msk (0x1UL << LFXO_OVERRIDE_PDEN_EN_Pos) /*!< Bit mask of EN field.                            */
+  #define LFXO_OVERRIDE_PDEN_EN_Min (0x0UL)          /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PDEN_EN_Max (0x1UL)          /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PDEN_EN_Disabled (0x0UL)     /*!< Override is disabled                                                 */
+  #define LFXO_OVERRIDE_PDEN_EN_Enabled (0x1UL)      /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_CLOAD: Override the CLOAD signal to the analog module */
+  #define LFXO_OVERRIDE_CLOAD_ResetValue (0x00000000UL) /*!< Reset value of CLOAD register.                                    */
+
+/* VAL @Bits 0..4 : Value */
+  #define LFXO_OVERRIDE_CLOAD_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_CLOAD_VAL_Msk (0x1FUL << LFXO_OVERRIDE_CLOAD_VAL_Pos) /*!< Bit mask of VAL field.                      */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_CLOAD_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_CLOAD_EN_Msk (0x1UL << LFXO_OVERRIDE_CLOAD_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFXO_OVERRIDE_CLOAD_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_CLOAD_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_CLOAD_EN_Disabled (0x0UL)    /*!< Override is disabled                                                 */
+  #define LFXO_OVERRIDE_CLOAD_EN_Enabled (0x1UL)     /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_READY: Override the READY signal from the analog module */
+  #define LFXO_OVERRIDE_READY_ResetValue (0x00000000UL) /*!< Reset value of READY register.                                    */
+
+/* VAL @Bit 0 : Current value of the signal */
+  #define LFXO_OVERRIDE_READY_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_READY_VAL_Msk (0x1UL << LFXO_OVERRIDE_READY_VAL_Pos) /*!< Bit mask of VAL field.                       */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_READY_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_READY_EN_Msk (0x1UL << LFXO_OVERRIDE_READY_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFXO_OVERRIDE_READY_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_READY_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_READY_EN_Disabled (0x0UL)    /*!< Override is disabled                                                 */
+  #define LFXO_OVERRIDE_READY_EN_Enabled (0x1UL)     /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_SETTLED: Override the SETTLED signal from the analog module */
+  #define LFXO_OVERRIDE_SETTLED_ResetValue (0x00000000UL) /*!< Reset value of SETTLED register.                                */
+
+/* VAL @Bit 0 : Current value of the signal */
+  #define LFXO_OVERRIDE_SETTLED_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_SETTLED_VAL_Msk (0x1UL << LFXO_OVERRIDE_SETTLED_VAL_Pos) /*!< Bit mask of VAL field.                   */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_SETTLED_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_SETTLED_EN_Msk (0x1UL << LFXO_OVERRIDE_SETTLED_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define LFXO_OVERRIDE_SETTLED_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_SETTLED_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_SETTLED_EN_Disabled (0x0UL)  /*!< Override is disabled                                                 */
+  #define LFXO_OVERRIDE_SETTLED_EN_Enabled (0x1UL)   /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_PIXOACK: Override the PIXO_ACK signal from the analog module */
+  #define LFXO_OVERRIDE_PIXOACK_ResetValue (0x00000000UL) /*!< Reset value of PIXOACK register.                                */
+
+/* VAL @Bits 0..1 : Current value of the signal */
+  #define LFXO_OVERRIDE_PIXOACK_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_PIXOACK_VAL_Msk (0x3UL << LFXO_OVERRIDE_PIXOACK_VAL_Pos) /*!< Bit mask of VAL field.                   */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_PIXOACK_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_PIXOACK_EN_Msk (0x1UL << LFXO_OVERRIDE_PIXOACK_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define LFXO_OVERRIDE_PIXOACK_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PIXOACK_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PIXOACK_EN_Disabled (0x0UL)  /*!< Override is disabled                                                 */
+  #define LFXO_OVERRIDE_PIXOACK_EN_Enabled (0x1UL)   /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_PDSETTLED: Override the PD_SETTLED signal from the analog module */
+  #define LFXO_OVERRIDE_PDSETTLED_ResetValue (0x00000000UL) /*!< Reset value of PDSETTLED register.                            */
+
+/* VAL @Bit 0 : Current value of the signal */
+  #define LFXO_OVERRIDE_PDSETTLED_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_PDSETTLED_VAL_Msk (0x1UL << LFXO_OVERRIDE_PDSETTLED_VAL_Pos) /*!< Bit mask of VAL field.               */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_PDSETTLED_EN_Pos (31UL)      /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_PDSETTLED_EN_Msk (0x1UL << LFXO_OVERRIDE_PDSETTLED_EN_Pos) /*!< Bit mask of EN field.                  */
+  #define LFXO_OVERRIDE_PDSETTLED_EN_Min (0x0UL)     /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PDSETTLED_EN_Max (0x1UL)     /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PDSETTLED_EN_Disabled (0x0UL) /*!< Override is disabled                                                */
+  #define LFXO_OVERRIDE_PDSETTLED_EN_Enabled (0x1UL) /*!< Override is enabled                                                  */
+
+
+/* LFXO_OVERRIDE_PDOUTLOWER: Override the PD_OUT_LOWER signal from the analog module */
+  #define LFXO_OVERRIDE_PDOUTLOWER_ResetValue (0x00000000UL) /*!< Reset value of PDOUTLOWER register.                          */
+
+/* VAL @Bit 0 : Current value of the signal */
+  #define LFXO_OVERRIDE_PDOUTLOWER_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_PDOUTLOWER_VAL_Msk (0x1UL << LFXO_OVERRIDE_PDOUTLOWER_VAL_Pos) /*!< Bit mask of VAL field.             */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_PDOUTLOWER_EN_Pos (31UL)     /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_PDOUTLOWER_EN_Msk (0x1UL << LFXO_OVERRIDE_PDOUTLOWER_EN_Pos) /*!< Bit mask of EN field.                */
+  #define LFXO_OVERRIDE_PDOUTLOWER_EN_Min (0x0UL)    /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PDOUTLOWER_EN_Max (0x1UL)    /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PDOUTLOWER_EN_Disabled (0x0UL) /*!< Override is disabled                                               */
+  #define LFXO_OVERRIDE_PDOUTLOWER_EN_Enabled (0x1UL) /*!< Override is enabled                                                 */
+
+
+/* LFXO_OVERRIDE_PDOUTUPPER: Override the PD_OUT_UPPER signal from the analog module */
+  #define LFXO_OVERRIDE_PDOUTUPPER_ResetValue (0x00000000UL) /*!< Reset value of PDOUTUPPER register.                          */
+
+/* VAL @Bit 0 : Current value of the signal */
+  #define LFXO_OVERRIDE_PDOUTUPPER_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
+  #define LFXO_OVERRIDE_PDOUTUPPER_VAL_Msk (0x1UL << LFXO_OVERRIDE_PDOUTUPPER_VAL_Pos) /*!< Bit mask of VAL field.             */
+
+/* EN @Bit 31 : Enable the override */
+  #define LFXO_OVERRIDE_PDOUTUPPER_EN_Pos (31UL)     /*!< Position of EN field.                                                */
+  #define LFXO_OVERRIDE_PDOUTUPPER_EN_Msk (0x1UL << LFXO_OVERRIDE_PDOUTUPPER_EN_Pos) /*!< Bit mask of EN field.                */
+  #define LFXO_OVERRIDE_PDOUTUPPER_EN_Min (0x0UL)    /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PDOUTUPPER_EN_Max (0x1UL)    /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_OVERRIDE_PDOUTUPPER_EN_Disabled (0x0UL) /*!< Override is disabled                                               */
+  #define LFXO_OVERRIDE_PDOUTUPPER_EN_Enabled (0x1UL) /*!< Override is enabled                                                 */
+
+
+
+/* ===================================================== Struct LFXO_DFT ===================================================== */
+/**
+  * @brief DFT [LFXO_DFT] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  ATB0CONFIG;                        /*!< (@ 0x00000000) Analog Test Bus 0 (ATB0) configuration                */
+  __IOM uint32_t  ATB1CONFIG;                        /*!< (@ 0x00000004) Analog Test Bus 1 (ATB1) configuration                */
+  __IM  uint32_t  RESERVED[2];
+  __IOM uint32_t  DTB0CONFIG;                        /*!< (@ 0x00000010) Digital Test Bus 0 (DTB0) configuration               */
+  __IOM uint32_t  DTB1CONFIG;                        /*!< (@ 0x00000014) Digital Test Bus 1 (DTB1) configuration               */
+  __IOM uint32_t  DTB2CONFIG;                        /*!< (@ 0x00000018) Digital Test Bus 2 (DTB2) configuration               */
+  __IOM uint32_t  DTB3CONFIG;                        /*!< (@ 0x0000001C) Digital Test Bus 3 (DTB3) configuration               */
+  __IM  uint32_t  RESERVED1[4];
+  __IOM uint32_t  TCFG;                              /*!< (@ 0x00000030) Test mode configuration                               */
+} NRF_LFXO_DFT_Type;                                 /*!< Size = 52 (0x034)                                                    */
+
+/* LFXO_DFT_ATB0CONFIG: Analog Test Bus 0 (ATB0) configuration */
+  #define LFXO_DFT_ATB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB0CONFIG register.                               */
+
+/* SELMUX @Bits 0..2 : Select multiplexer for ATB0 */
+  #define LFXO_DFT_ATB0CONFIG_SELMUX_Pos (0UL)       /*!< Position of SELMUX field.                                            */
+  #define LFXO_DFT_ATB0CONFIG_SELMUX_Msk (0x7UL << LFXO_DFT_ATB0CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.              */
+  #define LFXO_DFT_ATB0CONFIG_SELMUX_Min (0x0UL)     /*!< Min enumerator value of SELMUX field.                                */
+  #define LFXO_DFT_ATB0CONFIG_SELMUX_Max (0x5UL)     /*!< Max enumerator value of SELMUX field.                                */
+  #define LFXO_DFT_ATB0CONFIG_SELMUX_XC1 (0x0UL)     /*!< Functional tests/main production test                                */
+  #define LFXO_DFT_ATB0CONFIG_SELMUX_XC2 (0x1UL)     /*!< Test/trim peak detector                                              */
+  #define LFXO_DFT_ATB0CONFIG_SELMUX_ITEST (0x2UL)   /*!< Test/trim current generator (or possibly IDAC).                      */
+  #define LFXO_DFT_ATB0CONFIG_SELMUX_VDDINT0V8 (0x4UL) /*!< Measure current consumption VDD_INT_0V8.                           */
+  #define LFXO_DFT_ATB0CONFIG_SELMUX_VDDINT1V8 (0x5UL) /*!< Measure current consumption VDD_INT_1V8.                           */
+
+/* EN @Bit 31 : Enable the analog test bus */
+  #define LFXO_DFT_ATB0CONFIG_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFXO_DFT_ATB0CONFIG_EN_Msk (0x1UL << LFXO_DFT_ATB0CONFIG_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFXO_DFT_ATB0CONFIG_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_DFT_ATB0CONFIG_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_DFT_ATB0CONFIG_EN_Disabled (0x0UL)    /*!< Analog test bus is disabled(HiZ)                                     */
+  #define LFXO_DFT_ATB0CONFIG_EN_Enabled (0x1UL)     /*!< Analog test bus is enabled                                           */
+
+
+/* LFXO_DFT_ATB1CONFIG: Analog Test Bus 1 (ATB1) configuration */
+  #define LFXO_DFT_ATB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB1CONFIG register.                               */
+
+/* SELMUX @Bits 0..2 : Select multiplexer for ATB1 */
+  #define LFXO_DFT_ATB1CONFIG_SELMUX_Pos (0UL)       /*!< Position of SELMUX field.                                            */
+  #define LFXO_DFT_ATB1CONFIG_SELMUX_Msk (0x7UL << LFXO_DFT_ATB1CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.              */
+  #define LFXO_DFT_ATB1CONFIG_SELMUX_Min (0x0UL)     /*!< Min enumerator value of SELMUX field.                                */
+  #define LFXO_DFT_ATB1CONFIG_SELMUX_Max (0x5UL)     /*!< Max enumerator value of SELMUX field.                                */
+  #define LFXO_DFT_ATB1CONFIG_SELMUX_XC2 (0x0UL)     /*!< Functional tests/main production test                                */
+  #define LFXO_DFT_ATB1CONFIG_SELMUX_VPIU (0x1UL)    /*!< Test/trim upper PIXO supply                                          */
+  #define LFXO_DFT_ATB1CONFIG_SELMUX_VDDINT0V8 (0x4UL) /*!< Measure current consumption VDD_INT_0V8.                           */
+  #define LFXO_DFT_ATB1CONFIG_SELMUX_VDDINT1V8 (0x5UL) /*!< Measure current consumption VDD_INT_1V8.                           */
+
+/* EN @Bit 31 : Enable the analog test bus */
+  #define LFXO_DFT_ATB1CONFIG_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFXO_DFT_ATB1CONFIG_EN_Msk (0x1UL << LFXO_DFT_ATB1CONFIG_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFXO_DFT_ATB1CONFIG_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_DFT_ATB1CONFIG_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_DFT_ATB1CONFIG_EN_Disabled (0x0UL)    /*!< Analog test bus is disabled(HiZ)                                     */
+  #define LFXO_DFT_ATB1CONFIG_EN_Enabled (0x1UL)     /*!< Analog test bus is enabled                                           */
+
+
+/* LFXO_DFT_DTB0CONFIG: Digital Test Bus 0 (DTB0) configuration */
+  #define LFXO_DFT_DTB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB0CONFIG register.                               */
+
+/* SELMUX @Bits 0..2 : Select multiplexer for DTB0 */
+  #define LFXO_DFT_DTB0CONFIG_SELMUX_Pos (0UL)       /*!< Position of SELMUX field.                                            */
+  #define LFXO_DFT_DTB0CONFIG_SELMUX_Msk (0x7UL << LFXO_DFT_DTB0CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.              */
+  #define LFXO_DFT_DTB0CONFIG_SELMUX_Min (0x0UL)     /*!< Min enumerator value of SELMUX field.                                */
+  #define LFXO_DFT_DTB0CONFIG_SELMUX_Max (0x5UL)     /*!< Max enumerator value of SELMUX field.                                */
+  #define LFXO_DFT_DTB0CONFIG_SELMUX_OSC32K (0x0UL)  /*!< OSC_32K                                                              */
+  #define LFXO_DFT_DTB0CONFIG_SELMUX_PDLOWER (0x1UL) /*!< PD_LOWER                                                             */
+  #define LFXO_DFT_DTB0CONFIG_SELMUX_PIXOPULSENEG (0x2UL) /*!< PIXO_PULSE_NEG                                                  */
+  #define LFXO_DFT_DTB0CONFIG_SELMUX_PIXOACK0 (0x3UL) /*!< PIXO_ACK[0]                                                         */
+  #define LFXO_DFT_DTB0CONFIG_SELMUX_IDAC3 (0x4UL)   /*!< Observe IDAC[3].                                                     */
+  #define LFXO_DFT_DTB0CONFIG_SELMUX_IDAC0 (0x5UL)   /*!< Observe IDAC[0].                                                     */
+
+/* EN @Bit 31 : Enable the digital test bus */
+  #define LFXO_DFT_DTB0CONFIG_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFXO_DFT_DTB0CONFIG_EN_Msk (0x1UL << LFXO_DFT_DTB0CONFIG_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFXO_DFT_DTB0CONFIG_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_DFT_DTB0CONFIG_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_DFT_DTB0CONFIG_EN_Disabled (0x0UL)    /*!< Digital test bus is disabled                                         */
+  #define LFXO_DFT_DTB0CONFIG_EN_Enabled (0x1UL)     /*!< Digital test bus is enabled                                          */
+
+
+/* LFXO_DFT_DTB1CONFIG: Digital Test Bus 1 (DTB1) configuration */
+  #define LFXO_DFT_DTB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB1CONFIG register.                               */
+
+/* SELMUX @Bits 0..2 : Select multiplexer for DTB1 */
+  #define LFXO_DFT_DTB1CONFIG_SELMUX_Pos (0UL)       /*!< Position of SELMUX field.                                            */
+  #define LFXO_DFT_DTB1CONFIG_SELMUX_Msk (0x7UL << LFXO_DFT_DTB1CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.              */
+  #define LFXO_DFT_DTB1CONFIG_SELMUX_Min (0x0UL)     /*!< Min enumerator value of SELMUX field.                                */
+  #define LFXO_DFT_DTB1CONFIG_SELMUX_Max (0x5UL)     /*!< Max enumerator value of SELMUX field.                                */
+  #define LFXO_DFT_DTB1CONFIG_SELMUX_READY (0x0UL)   /*!< Ready                                                                */
+  #define LFXO_DFT_DTB1CONFIG_SELMUX_PDUPPER (0x1UL) /*!< PD_UPPER                                                             */
+  #define LFXO_DFT_DTB1CONFIG_SELMUX_PIXOPULSEPOS (0x2UL) /*!< PIXO_PULSE_POS                                                  */
+  #define LFXO_DFT_DTB1CONFIG_SELMUX_PIXOACK1 (0x3UL) /*!< PIXO_ACK[1]                                                         */
+  #define LFXO_DFT_DTB1CONFIG_SELMUX_IDAC4 (0x4UL)   /*!< Observe IDAC[4].                                                     */
+  #define LFXO_DFT_DTB1CONFIG_SELMUX_IDAC1 (0x5UL)   /*!< Observe IDAC[1].                                                     */
+
+/* EN @Bit 31 : Enable the digital test bus */
+  #define LFXO_DFT_DTB1CONFIG_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFXO_DFT_DTB1CONFIG_EN_Msk (0x1UL << LFXO_DFT_DTB1CONFIG_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFXO_DFT_DTB1CONFIG_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_DFT_DTB1CONFIG_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_DFT_DTB1CONFIG_EN_Disabled (0x0UL)    /*!< Digital test bus is disabled                                         */
+  #define LFXO_DFT_DTB1CONFIG_EN_Enabled (0x1UL)     /*!< Digital test bus is enabled                                          */
+
+
+/* LFXO_DFT_DTB2CONFIG: Digital Test Bus 2 (DTB2) configuration */
+  #define LFXO_DFT_DTB2CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB2CONFIG register.                               */
+
+/* SELMUX @Bits 0..2 : Select multiplexer for DTB2 */
+  #define LFXO_DFT_DTB2CONFIG_SELMUX_Pos (0UL)       /*!< Position of SELMUX field.                                            */
+  #define LFXO_DFT_DTB2CONFIG_SELMUX_Msk (0x7UL << LFXO_DFT_DTB2CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.              */
+  #define LFXO_DFT_DTB2CONFIG_SELMUX_Min (0x0UL)     /*!< Min enumerator value of SELMUX field.                                */
+  #define LFXO_DFT_DTB2CONFIG_SELMUX_Max (0x5UL)     /*!< Max enumerator value of SELMUX field.                                */
+  #define LFXO_DFT_DTB2CONFIG_SELMUX_SETTLED (0x0UL) /*!< Settled                                                              */
+  #define LFXO_DFT_DTB2CONFIG_SELMUX_PIERCESTARTUP (0x4UL) /*!< Pierce startup                                                 */
+  #define LFXO_DFT_DTB2CONFIG_SELMUX_IDAC2 (0x5UL)   /*!< Observe IDAC[2].                                                     */
+
+/* EN @Bit 31 : Enable the digital test bus */
+  #define LFXO_DFT_DTB2CONFIG_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define LFXO_DFT_DTB2CONFIG_EN_Msk (0x1UL << LFXO_DFT_DTB2CONFIG_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define LFXO_DFT_DTB2CONFIG_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define LFXO_DFT_DTB2CONFIG_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define LFXO_DFT_DTB2CONFIG_EN_Disabled (0x0UL)    /*!< Digital test bus is disabled                                         */
+  #define LFXO_DFT_DTB2CONFIG_EN_Enabled (0x1UL)     /*!< Digital test bus is enabled                                          */
+
+
+/* LFXO_DFT_DTB3CONFIG: Digital Test Bus 3 (DTB3) configuration */
+  #define LFXO_DFT_DTB3CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB3CONFIG register.                               */
+
+/* PWRUPDELTEST @Bit 27 : Enable the PWRUP delay test circuit */
+  #define LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Pos (27UL) /*!< Position of PWRUPDELTEST field.                                     */
+  #define LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Msk (0x1UL << LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Pos) /*!< Bit mask of PWRUPDELTEST
+                                                                            field.*/
+  #define LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Min (0x0UL) /*!< Min enumerator value of PWRUPDELTEST field.                        */
+  #define LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Max (0x1UL) /*!< Max enumerator value of PWRUPDELTEST field.                        */
+  #define LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Disabled (0x0UL) /*!< PWRUP delay test circuit is disabled                          */
+  #define LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Enabled (0x1UL) /*!< PWRUP delay test circuit is enabled                            */
+
+
+/* LFXO_DFT_TCFG: Test mode configuration */
+  #define LFXO_DFT_TCFG_ResetValue (0x00000000UL)    /*!< Reset value of TCFG register.                                        */
+
+/* OSC32KAO0V8MUTE @Bit 0 : OSC_32K_AO_0V8 muted */
+  #define LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Pos (0UL)    /*!< Position of OSC32KAO0V8MUTE field.                                   */
+  #define LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Msk (0x1UL << LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Pos) /*!< Bit mask of OSC32KAO0V8MUTE
+                                                                            field.*/
+  #define LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Min (0x0UL)  /*!< Min enumerator value of OSC32KAO0V8MUTE field.                       */
+  #define LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Max (0x1UL)  /*!< Max enumerator value of OSC32KAO0V8MUTE field.                       */
+  #define LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Disabled (0x0UL) /*!< Override disabled                                                */
+  #define LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Enabled (0x1UL) /*!< Override enabled                                                  */
+
+/* PIERCEINV @Bit 1 : Disable PIERCE inverter */
+  #define LFXO_DFT_TCFG_PIERCEINV_Pos (1UL)          /*!< Position of PIERCEINV field.                                         */
+  #define LFXO_DFT_TCFG_PIERCEINV_Msk (0x1UL << LFXO_DFT_TCFG_PIERCEINV_Pos) /*!< Bit mask of PIERCEINV field.                 */
+  #define LFXO_DFT_TCFG_PIERCEINV_Min (0x0UL)        /*!< Min enumerator value of PIERCEINV field.                             */
+  #define LFXO_DFT_TCFG_PIERCEINV_Max (0x1UL)        /*!< Max enumerator value of PIERCEINV field.                             */
+  #define LFXO_DFT_TCFG_PIERCEINV_Enabled (0x0UL)    /*!< Pierce inverter enabled                                              */
+  #define LFXO_DFT_TCFG_PIERCEINV_Disabled (0x1UL)   /*!< Pierce inverter disabled                                             */
+
+/* SPARE @Bit 2 : Spare bit */
+  #define LFXO_DFT_TCFG_SPARE_Pos (2UL)              /*!< Position of SPARE field.                                             */
+  #define LFXO_DFT_TCFG_SPARE_Msk (0x1UL << LFXO_DFT_TCFG_SPARE_Pos) /*!< Bit mask of SPARE field.                             */
+
+
+/* ======================================================= Struct LFXO ======================================================= */
+/**
+  * @brief LFXO peripheral
+  */
+  typedef struct {                                   /*!< LFXO Structure                                                       */
+    __IM uint32_t RESERVED[64];
+    __IOM uint32_t EVENTS_MODECHANGED;               /*!< (@ 0x00000100) LFXO mode changed                                     */
+    __IOM uint32_t EVENTS_ERRORSTARTING;             /*!< (@ 0x00000104) Error while starting the LFXO in PIERCE mode          */
+    __IOM uint32_t EVENTS_ERRORRUNNING;              /*!< (@ 0x00000108) Error detected while LFXO was running                 */
+    __IM uint32_t RESERVED1[125];
+    __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
+    __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
+    __IM uint32_t RESERVED2[60];
+    __IM uint32_t STATUS;                            /*!< (@ 0x00000400) LFXO status                                           */
+    __IM uint32_t STATUSANA;                         /*!< (@ 0x00000404) Status of analog module output signals                */
+    __IM uint32_t RESERVED3[14];
+    __IOM NRF_LFXO_TRIM_Type TRIM;                   /*!< (@ 0x00000440) (unspecified)                                         */
+    __IM uint32_t RESERVED4[11];
+    __IOM uint32_t MIRROR;                           /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
+    __IOM uint32_t CLOAD;                            /*!< (@ 0x00000484) Internal capacitive load                              */
+    __IOM uint32_t AMPLITUDECTRL;                    /*!< (@ 0x00000488) Amplitude control                                     */
+    __IOM uint32_t PWRUPCTRL;                        /*!< (@ 0x0000048C) Power up control                                      */
+    __IOM uint32_t MODE;                             /*!< (@ 0x00000490) LFXO mode                                             */
+    __IM uint32_t RESERVED5[27];
+    __IOM NRF_LFXO_OVERRIDE_Type OVERRIDE;           /*!< (@ 0x00000500) (unspecified)                                         */
+    __IM uint32_t RESERVED6[46];
+    __IOM NRF_LFXO_DFT_Type DFT;                     /*!< (@ 0x00000600) (unspecified)                                         */
+  } NRF_LFXO_Type;                                   /*!< Size = 1588 (0x634)                                                  */
+
+/* LFXO_EVENTS_MODECHANGED: LFXO mode changed */
+  #define LFXO_EVENTS_MODECHANGED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_MODECHANGED register.                   */
+
+/* EVENTS_MODECHANGED @Bit 0 : LFXO mode changed */
+  #define LFXO_EVENTS_MODECHANGED_EVENTS_MODECHANGED_Pos (0UL) /*!< Position of EVENTS_MODECHANGED field.                      */
+  #define LFXO_EVENTS_MODECHANGED_EVENTS_MODECHANGED_Msk (0x1UL << LFXO_EVENTS_MODECHANGED_EVENTS_MODECHANGED_Pos) /*!< Bit mask
+                                                                            of EVENTS_MODECHANGED field.*/
+  #define LFXO_EVENTS_MODECHANGED_EVENTS_MODECHANGED_Min (0x0UL) /*!< Min enumerator value of EVENTS_MODECHANGED field.        */
+  #define LFXO_EVENTS_MODECHANGED_EVENTS_MODECHANGED_Max (0x1UL) /*!< Max enumerator value of EVENTS_MODECHANGED field.        */
+  #define LFXO_EVENTS_MODECHANGED_EVENTS_MODECHANGED_NotGenerated (0x0UL) /*!< Event not generated                             */
+  #define LFXO_EVENTS_MODECHANGED_EVENTS_MODECHANGED_Generated (0x1UL) /*!< Event generated                                    */
+
+
+/* LFXO_EVENTS_ERRORSTARTING: Error while starting the LFXO in PIERCE mode */
+  #define LFXO_EVENTS_ERRORSTARTING_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ERRORSTARTING register.               */
+
+/* EVENTS_ERRORSTARTING @Bit 0 : Error while starting the LFXO in PIERCE mode */
+  #define LFXO_EVENTS_ERRORSTARTING_EVENTS_ERRORSTARTING_Pos (0UL) /*!< Position of EVENTS_ERRORSTARTING field.                */
+  #define LFXO_EVENTS_ERRORSTARTING_EVENTS_ERRORSTARTING_Msk (0x1UL << LFXO_EVENTS_ERRORSTARTING_EVENTS_ERRORSTARTING_Pos) /*!<
+                                                                            Bit mask of EVENTS_ERRORSTARTING field.*/
+  #define LFXO_EVENTS_ERRORSTARTING_EVENTS_ERRORSTARTING_Min (0x0UL) /*!< Min enumerator value of EVENTS_ERRORSTARTING field.  */
+  #define LFXO_EVENTS_ERRORSTARTING_EVENTS_ERRORSTARTING_Max (0x1UL) /*!< Max enumerator value of EVENTS_ERRORSTARTING field.  */
+  #define LFXO_EVENTS_ERRORSTARTING_EVENTS_ERRORSTARTING_NotGenerated (0x0UL) /*!< Event not generated                         */
+  #define LFXO_EVENTS_ERRORSTARTING_EVENTS_ERRORSTARTING_Generated (0x1UL) /*!< Event generated                                */
+
+
+/* LFXO_EVENTS_ERRORRUNNING: Error detected while LFXO was running */
+  #define LFXO_EVENTS_ERRORRUNNING_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ERRORRUNNING register.                 */
+
+/* EVENTS_ERRORRUNNING @Bit 0 : Error detected while LFXO was running */
+  #define LFXO_EVENTS_ERRORRUNNING_EVENTS_ERRORRUNNING_Pos (0UL) /*!< Position of EVENTS_ERRORRUNNING field.                   */
+  #define LFXO_EVENTS_ERRORRUNNING_EVENTS_ERRORRUNNING_Msk (0x1UL << LFXO_EVENTS_ERRORRUNNING_EVENTS_ERRORRUNNING_Pos) /*!< Bit
+                                                                            mask of EVENTS_ERRORRUNNING field.*/
+  #define LFXO_EVENTS_ERRORRUNNING_EVENTS_ERRORRUNNING_Min (0x0UL) /*!< Min enumerator value of EVENTS_ERRORRUNNING field.     */
+  #define LFXO_EVENTS_ERRORRUNNING_EVENTS_ERRORRUNNING_Max (0x1UL) /*!< Max enumerator value of EVENTS_ERRORRUNNING field.     */
+  #define LFXO_EVENTS_ERRORRUNNING_EVENTS_ERRORRUNNING_NotGenerated (0x0UL) /*!< Event not generated                           */
+  #define LFXO_EVENTS_ERRORRUNNING_EVENTS_ERRORRUNNING_Generated (0x1UL) /*!< Event generated                                  */
+
+
+/* LFXO_INTEN: Enable or disable interrupt */
+  #define LFXO_INTEN_ResetValue (0x00000000UL)       /*!< Reset value of INTEN register.                                       */
+
+/* MODECHANGED @Bit 0 : Enable or disable interrupt for event MODECHANGED */
+  #define LFXO_INTEN_MODECHANGED_Pos (0UL)           /*!< Position of MODECHANGED field.                                       */
+  #define LFXO_INTEN_MODECHANGED_Msk (0x1UL << LFXO_INTEN_MODECHANGED_Pos) /*!< Bit mask of MODECHANGED field.                 */
+  #define LFXO_INTEN_MODECHANGED_Min (0x0UL)         /*!< Min enumerator value of MODECHANGED field.                           */
+  #define LFXO_INTEN_MODECHANGED_Max (0x1UL)         /*!< Max enumerator value of MODECHANGED field.                           */
+  #define LFXO_INTEN_MODECHANGED_Disabled (0x0UL)    /*!< Disable                                                              */
+  #define LFXO_INTEN_MODECHANGED_Enabled (0x1UL)     /*!< Enable                                                               */
+
+/* ERRORSTARTING @Bit 1 : Enable or disable interrupt for event ERRORSTARTING */
+  #define LFXO_INTEN_ERRORSTARTING_Pos (1UL)         /*!< Position of ERRORSTARTING field.                                     */
+  #define LFXO_INTEN_ERRORSTARTING_Msk (0x1UL << LFXO_INTEN_ERRORSTARTING_Pos) /*!< Bit mask of ERRORSTARTING field.           */
+  #define LFXO_INTEN_ERRORSTARTING_Min (0x0UL)       /*!< Min enumerator value of ERRORSTARTING field.                         */
+  #define LFXO_INTEN_ERRORSTARTING_Max (0x1UL)       /*!< Max enumerator value of ERRORSTARTING field.                         */
+  #define LFXO_INTEN_ERRORSTARTING_Disabled (0x0UL)  /*!< Disable                                                              */
+  #define LFXO_INTEN_ERRORSTARTING_Enabled (0x1UL)   /*!< Enable                                                               */
+
+/* ERRORRUNNING @Bit 2 : Enable or disable interrupt for event ERRORRUNNING */
+  #define LFXO_INTEN_ERRORRUNNING_Pos (2UL)          /*!< Position of ERRORRUNNING field.                                      */
+  #define LFXO_INTEN_ERRORRUNNING_Msk (0x1UL << LFXO_INTEN_ERRORRUNNING_Pos) /*!< Bit mask of ERRORRUNNING field.              */
+  #define LFXO_INTEN_ERRORRUNNING_Min (0x0UL)        /*!< Min enumerator value of ERRORRUNNING field.                          */
+  #define LFXO_INTEN_ERRORRUNNING_Max (0x1UL)        /*!< Max enumerator value of ERRORRUNNING field.                          */
+  #define LFXO_INTEN_ERRORRUNNING_Disabled (0x0UL)   /*!< Disable                                                              */
+  #define LFXO_INTEN_ERRORRUNNING_Enabled (0x1UL)    /*!< Enable                                                               */
+
+
+/* LFXO_INTENSET: Enable interrupt */
+  #define LFXO_INTENSET_ResetValue (0x00000000UL)    /*!< Reset value of INTENSET register.                                    */
+
+/* MODECHANGED @Bit 0 : Write '1' to enable interrupt for event MODECHANGED */
+  #define LFXO_INTENSET_MODECHANGED_Pos (0UL)        /*!< Position of MODECHANGED field.                                       */
+  #define LFXO_INTENSET_MODECHANGED_Msk (0x1UL << LFXO_INTENSET_MODECHANGED_Pos) /*!< Bit mask of MODECHANGED field.           */
+  #define LFXO_INTENSET_MODECHANGED_Min (0x0UL)      /*!< Min enumerator value of MODECHANGED field.                           */
+  #define LFXO_INTENSET_MODECHANGED_Max (0x1UL)      /*!< Max enumerator value of MODECHANGED field.                           */
+  #define LFXO_INTENSET_MODECHANGED_Set (0x1UL)      /*!< Enable                                                               */
+  #define LFXO_INTENSET_MODECHANGED_Disabled (0x0UL) /*!< Read: Disabled                                                       */
+  #define LFXO_INTENSET_MODECHANGED_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
+
+/* ERRORSTARTING @Bit 1 : Write '1' to enable interrupt for event ERRORSTARTING */
+  #define LFXO_INTENSET_ERRORSTARTING_Pos (1UL)      /*!< Position of ERRORSTARTING field.                                     */
+  #define LFXO_INTENSET_ERRORSTARTING_Msk (0x1UL << LFXO_INTENSET_ERRORSTARTING_Pos) /*!< Bit mask of ERRORSTARTING field.     */
+  #define LFXO_INTENSET_ERRORSTARTING_Min (0x0UL)    /*!< Min enumerator value of ERRORSTARTING field.                         */
+  #define LFXO_INTENSET_ERRORSTARTING_Max (0x1UL)    /*!< Max enumerator value of ERRORSTARTING field.                         */
+  #define LFXO_INTENSET_ERRORSTARTING_Set (0x1UL)    /*!< Enable                                                               */
+  #define LFXO_INTENSET_ERRORSTARTING_Disabled (0x0UL) /*!< Read: Disabled                                                     */
+  #define LFXO_INTENSET_ERRORSTARTING_Enabled (0x1UL) /*!< Read: Enabled                                                       */
+
+/* ERRORRUNNING @Bit 2 : Write '1' to enable interrupt for event ERRORRUNNING */
+  #define LFXO_INTENSET_ERRORRUNNING_Pos (2UL)       /*!< Position of ERRORRUNNING field.                                      */
+  #define LFXO_INTENSET_ERRORRUNNING_Msk (0x1UL << LFXO_INTENSET_ERRORRUNNING_Pos) /*!< Bit mask of ERRORRUNNING field.        */
+  #define LFXO_INTENSET_ERRORRUNNING_Min (0x0UL)     /*!< Min enumerator value of ERRORRUNNING field.                          */
+  #define LFXO_INTENSET_ERRORRUNNING_Max (0x1UL)     /*!< Max enumerator value of ERRORRUNNING field.                          */
+  #define LFXO_INTENSET_ERRORRUNNING_Set (0x1UL)     /*!< Enable                                                               */
+  #define LFXO_INTENSET_ERRORRUNNING_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define LFXO_INTENSET_ERRORRUNNING_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+
+/* LFXO_INTENCLR: Disable interrupt */
+  #define LFXO_INTENCLR_ResetValue (0x00000000UL)    /*!< Reset value of INTENCLR register.                                    */
+
+/* MODECHANGED @Bit 0 : Write '1' to disable interrupt for event MODECHANGED */
+  #define LFXO_INTENCLR_MODECHANGED_Pos (0UL)        /*!< Position of MODECHANGED field.                                       */
+  #define LFXO_INTENCLR_MODECHANGED_Msk (0x1UL << LFXO_INTENCLR_MODECHANGED_Pos) /*!< Bit mask of MODECHANGED field.           */
+  #define LFXO_INTENCLR_MODECHANGED_Min (0x0UL)      /*!< Min enumerator value of MODECHANGED field.                           */
+  #define LFXO_INTENCLR_MODECHANGED_Max (0x1UL)      /*!< Max enumerator value of MODECHANGED field.                           */
+  #define LFXO_INTENCLR_MODECHANGED_Clear (0x1UL)    /*!< Disable                                                              */
+  #define LFXO_INTENCLR_MODECHANGED_Disabled (0x0UL) /*!< Read: Disabled                                                       */
+  #define LFXO_INTENCLR_MODECHANGED_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
+
+/* ERRORSTARTING @Bit 1 : Write '1' to disable interrupt for event ERRORSTARTING */
+  #define LFXO_INTENCLR_ERRORSTARTING_Pos (1UL)      /*!< Position of ERRORSTARTING field.                                     */
+  #define LFXO_INTENCLR_ERRORSTARTING_Msk (0x1UL << LFXO_INTENCLR_ERRORSTARTING_Pos) /*!< Bit mask of ERRORSTARTING field.     */
+  #define LFXO_INTENCLR_ERRORSTARTING_Min (0x0UL)    /*!< Min enumerator value of ERRORSTARTING field.                         */
+  #define LFXO_INTENCLR_ERRORSTARTING_Max (0x1UL)    /*!< Max enumerator value of ERRORSTARTING field.                         */
+  #define LFXO_INTENCLR_ERRORSTARTING_Clear (0x1UL)  /*!< Disable                                                              */
+  #define LFXO_INTENCLR_ERRORSTARTING_Disabled (0x0UL) /*!< Read: Disabled                                                     */
+  #define LFXO_INTENCLR_ERRORSTARTING_Enabled (0x1UL) /*!< Read: Enabled                                                       */
+
+/* ERRORRUNNING @Bit 2 : Write '1' to disable interrupt for event ERRORRUNNING */
+  #define LFXO_INTENCLR_ERRORRUNNING_Pos (2UL)       /*!< Position of ERRORRUNNING field.                                      */
+  #define LFXO_INTENCLR_ERRORRUNNING_Msk (0x1UL << LFXO_INTENCLR_ERRORRUNNING_Pos) /*!< Bit mask of ERRORRUNNING field.        */
+  #define LFXO_INTENCLR_ERRORRUNNING_Min (0x0UL)     /*!< Min enumerator value of ERRORRUNNING field.                          */
+  #define LFXO_INTENCLR_ERRORRUNNING_Max (0x1UL)     /*!< Max enumerator value of ERRORRUNNING field.                          */
+  #define LFXO_INTENCLR_ERRORRUNNING_Clear (0x1UL)   /*!< Disable                                                              */
+  #define LFXO_INTENCLR_ERRORRUNNING_Disabled (0x0UL) /*!< Read: Disabled                                                      */
+  #define LFXO_INTENCLR_ERRORRUNNING_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+
+
+/* LFXO_INTPEND: Pending interrupts */
+  #define LFXO_INTPEND_ResetValue (0x00000000UL)     /*!< Reset value of INTPEND register.                                     */
+
+/* MODECHANGED @Bit 0 : Read pending status of interrupt for event MODECHANGED */
+  #define LFXO_INTPEND_MODECHANGED_Pos (0UL)         /*!< Position of MODECHANGED field.                                       */
+  #define LFXO_INTPEND_MODECHANGED_Msk (0x1UL << LFXO_INTPEND_MODECHANGED_Pos) /*!< Bit mask of MODECHANGED field.             */
+  #define LFXO_INTPEND_MODECHANGED_Min (0x0UL)       /*!< Min enumerator value of MODECHANGED field.                           */
+  #define LFXO_INTPEND_MODECHANGED_Max (0x1UL)       /*!< Max enumerator value of MODECHANGED field.                           */
+  #define LFXO_INTPEND_MODECHANGED_NotPending (0x0UL) /*!< Read: Not pending                                                   */
+  #define LFXO_INTPEND_MODECHANGED_Pending (0x1UL)   /*!< Read: Pending                                                        */
+
+/* ERRORSTARTING @Bit 1 : Read pending status of interrupt for event ERRORSTARTING */
+  #define LFXO_INTPEND_ERRORSTARTING_Pos (1UL)       /*!< Position of ERRORSTARTING field.                                     */
+  #define LFXO_INTPEND_ERRORSTARTING_Msk (0x1UL << LFXO_INTPEND_ERRORSTARTING_Pos) /*!< Bit mask of ERRORSTARTING field.       */
+  #define LFXO_INTPEND_ERRORSTARTING_Min (0x0UL)     /*!< Min enumerator value of ERRORSTARTING field.                         */
+  #define LFXO_INTPEND_ERRORSTARTING_Max (0x1UL)     /*!< Max enumerator value of ERRORSTARTING field.                         */
+  #define LFXO_INTPEND_ERRORSTARTING_NotPending (0x0UL) /*!< Read: Not pending                                                 */
+  #define LFXO_INTPEND_ERRORSTARTING_Pending (0x1UL) /*!< Read: Pending                                                        */
+
+/* ERRORRUNNING @Bit 2 : Read pending status of interrupt for event ERRORRUNNING */
+  #define LFXO_INTPEND_ERRORRUNNING_Pos (2UL)        /*!< Position of ERRORRUNNING field.                                      */
+  #define LFXO_INTPEND_ERRORRUNNING_Msk (0x1UL << LFXO_INTPEND_ERRORRUNNING_Pos) /*!< Bit mask of ERRORRUNNING field.          */
+  #define LFXO_INTPEND_ERRORRUNNING_Min (0x0UL)      /*!< Min enumerator value of ERRORRUNNING field.                          */
+  #define LFXO_INTPEND_ERRORRUNNING_Max (0x1UL)      /*!< Max enumerator value of ERRORRUNNING field.                          */
+  #define LFXO_INTPEND_ERRORRUNNING_NotPending (0x0UL) /*!< Read: Not pending                                                  */
+  #define LFXO_INTPEND_ERRORRUNNING_Pending (0x1UL)  /*!< Read: Pending                                                        */
+
+
+/* LFXO_STATUS: LFXO status */
+  #define LFXO_STATUS_ResetValue (0x00000000UL)      /*!< Reset value of STATUS register.                                      */
+
+/* MODE @Bits 0..1 : Current mode */
+  #define LFXO_STATUS_MODE_Pos (0UL)                 /*!< Position of MODE field.                                              */
+  #define LFXO_STATUS_MODE_Msk (0x3UL << LFXO_STATUS_MODE_Pos) /*!< Bit mask of MODE field.                                    */
+  #define LFXO_STATUS_MODE_Min (0x0UL)               /*!< Min enumerator value of MODE field.                                  */
+  #define LFXO_STATUS_MODE_Max (0x3UL)               /*!< Max enumerator value of MODE field.                                  */
+  #define LFXO_STATUS_MODE_Pierce (0x0UL)            /*!< Pierce mode                                                          */
+  #define LFXO_STATUS_MODE_Pixo (0x1UL)              /*!< PIXO mode                                                            */
+  #define LFXO_STATUS_MODE_ExternalSine (0x2UL)      /*!< External sine wave clock                                             */
+  #define LFXO_STATUS_MODE_ExternalSquare (0x3UL)    /*!< External square wave clock                                           */
+
+/* HPMODE @Bit 4 : High performance mode */
+  #define LFXO_STATUS_HPMODE_Pos (4UL)               /*!< Position of HPMODE field.                                            */
+  #define LFXO_STATUS_HPMODE_Msk (0x1UL << LFXO_STATUS_HPMODE_Pos) /*!< Bit mask of HPMODE field.                              */
+  #define LFXO_STATUS_HPMODE_Min (0x0UL)             /*!< Min enumerator value of HPMODE field.                                */
+  #define LFXO_STATUS_HPMODE_Max (0x1UL)             /*!< Max enumerator value of HPMODE field.                                */
+  #define LFXO_STATUS_HPMODE_Disabled (0x0UL)        /*!< High performance mode disabled                                       */
+  #define LFXO_STATUS_HPMODE_Enabled (0x1UL)         /*!< High performance mode enabled                                        */
+
+/* RUNNING @Bit 5 : LFXO running status */
+  #define LFXO_STATUS_RUNNING_Pos (5UL)              /*!< Position of RUNNING field.                                           */
+  #define LFXO_STATUS_RUNNING_Msk (0x1UL << LFXO_STATUS_RUNNING_Pos) /*!< Bit mask of RUNNING field.                           */
+  #define LFXO_STATUS_RUNNING_Min (0x0UL)            /*!< Min enumerator value of RUNNING field.                               */
+  #define LFXO_STATUS_RUNNING_Max (0x1UL)            /*!< Max enumerator value of RUNNING field.                               */
+  #define LFXO_STATUS_RUNNING_NotRunning (0x0UL)     /*!< LFXO not running                                                     */
+  #define LFXO_STATUS_RUNNING_Running (0x1UL)        /*!< LFXO running                                                         */
+
+
+/* LFXO_STATUSANA: Status of analog module output signals */
+  #define LFXO_STATUSANA_ResetValue (0x00000000UL)   /*!< Reset value of STATUSANA register.                                   */
+
+/* READY @Bit 0 : Current value of the READY signal from the analog module */
+  #define LFXO_STATUSANA_READY_Pos (0UL)             /*!< Position of READY field.                                             */
+  #define LFXO_STATUSANA_READY_Msk (0x1UL << LFXO_STATUSANA_READY_Pos) /*!< Bit mask of READY field.                           */
+
+/* SETTLED @Bit 1 : Current value of the SETTLED signal from the analog module */
+  #define LFXO_STATUSANA_SETTLED_Pos (1UL)           /*!< Position of SETTLED field.                                           */
+  #define LFXO_STATUSANA_SETTLED_Msk (0x1UL << LFXO_STATUSANA_SETTLED_Pos) /*!< Bit mask of SETTLED field.                     */
+
+/* PIXOACK @Bits 2..3 : Current value of the PIXO_ACK signal from the analog module */
+  #define LFXO_STATUSANA_PIXOACK_Pos (2UL)           /*!< Position of PIXOACK field.                                           */
+  #define LFXO_STATUSANA_PIXOACK_Msk (0x3UL << LFXO_STATUSANA_PIXOACK_Pos) /*!< Bit mask of PIXOACK field.                     */
+
+/* PDSETTLED @Bit 4 : Current value of the PD_SETTLED signal from the analog module */
+  #define LFXO_STATUSANA_PDSETTLED_Pos (4UL)         /*!< Position of PDSETTLED field.                                         */
+  #define LFXO_STATUSANA_PDSETTLED_Msk (0x1UL << LFXO_STATUSANA_PDSETTLED_Pos) /*!< Bit mask of PDSETTLED field.               */
+
+/* PDOUTLOWER @Bit 5 : Current value of the PD_OUT_LOWER signal from the analog module */
+  #define LFXO_STATUSANA_PDOUTLOWER_Pos (5UL)        /*!< Position of PDOUTLOWER field.                                        */
+  #define LFXO_STATUSANA_PDOUTLOWER_Msk (0x1UL << LFXO_STATUSANA_PDOUTLOWER_Pos) /*!< Bit mask of PDOUTLOWER field.            */
+
+/* PDOUTUPPER @Bit 6 : Current value of the PD_OUT_UPPER signal from the analog module */
+  #define LFXO_STATUSANA_PDOUTUPPER_Pos (6UL)        /*!< Position of PDOUTUPPER field.                                        */
+  #define LFXO_STATUSANA_PDOUTUPPER_Msk (0x1UL << LFXO_STATUSANA_PDOUTUPPER_Pos) /*!< Bit mask of PDOUTUPPER field.            */
+
+
+/* LFXO_MIRROR: Enable LOCK for mirrored registers */
+  #define LFXO_MIRROR_ResetValue (0x00000001UL)      /*!< Reset value of MIRROR register.                                      */
+
+/* LOCK @Bit 0 : Lock for mirrored registers */
+  #define LFXO_MIRROR_LOCK_Pos (0UL)                 /*!< Position of LOCK field.                                              */
+  #define LFXO_MIRROR_LOCK_Msk (0x1UL << LFXO_MIRROR_LOCK_Pos) /*!< Bit mask of LOCK field.                                    */
+  #define LFXO_MIRROR_LOCK_Min (0x0UL)               /*!< Min enumerator value of LOCK field.                                  */
+  #define LFXO_MIRROR_LOCK_Max (0x1UL)               /*!< Max enumerator value of LOCK field.                                  */
+  #define LFXO_MIRROR_LOCK_Disabled (0x0UL)          /*!< Lock disabled                                                        */
+  #define LFXO_MIRROR_LOCK_Enabled (0x1UL)           /*!< Lock enabled                                                         */
+
+
+/* LFXO_CLOAD: Internal capacitive load */
+  #define LFXO_CLOAD_ResetValue (0x00000000UL)       /*!< Reset value of CLOAD register.                                       */
+
+/* VAL0 @Bits 0..3 : Capacitive load value */
+  #define LFXO_CLOAD_VAL0_Pos (0UL)                  /*!< Position of VAL0 field.                                              */
+  #define LFXO_CLOAD_VAL0_Msk (0xFUL << LFXO_CLOAD_VAL0_Pos) /*!< Bit mask of VAL0 field.                                      */
+
+/* VAL1 @Bit 4 : Capacitive load value */
+  #define LFXO_CLOAD_VAL1_Pos (4UL)                  /*!< Position of VAL1 field.                                              */
+  #define LFXO_CLOAD_VAL1_Msk (0x1UL << LFXO_CLOAD_VAL1_Pos) /*!< Bit mask of VAL1 field.                                      */
+  #define LFXO_CLOAD_VAL1_Min (0x0UL)                /*!< Min value of VAL1 field.                                             */
+  #define LFXO_CLOAD_VAL1_Max (0x1UL)                /*!< Max size of VAL1 field.                                              */
+
+
+/* LFXO_AMPLITUDECTRL: Amplitude control */
+  #define LFXO_AMPLITUDECTRL_ResetValue (0x0110010AUL) /*!< Reset value of AMPLITUDECTRL register.                             */
+
+/* INTERVAL @Bits 0..4 : Amplitude check interval */
+  #define LFXO_AMPLITUDECTRL_INTERVAL_Pos (0UL)      /*!< Position of INTERVAL field.                                          */
+  #define LFXO_AMPLITUDECTRL_INTERVAL_Msk (0x1FUL << LFXO_AMPLITUDECTRL_INTERVAL_Pos) /*!< Bit mask of INTERVAL field.         */
+  #define LFXO_AMPLITUDECTRL_INTERVAL_Min (0x01UL)   /*!< Min value of INTERVAL field.                                         */
+  #define LFXO_AMPLITUDECTRL_INTERVAL_Max (0x1FUL)   /*!< Max size of INTERVAL field.                                          */
+
+/* STEP @Bits 8..10 : Step to adjust the IDAC when the peak detector triggers */
+  #define LFXO_AMPLITUDECTRL_STEP_Pos (8UL)          /*!< Position of STEP field.                                              */
+  #define LFXO_AMPLITUDECTRL_STEP_Msk (0x7UL << LFXO_AMPLITUDECTRL_STEP_Pos) /*!< Bit mask of STEP field.                      */
+  #define LFXO_AMPLITUDECTRL_STEP_Min (0x0UL)        /*!< Min value of STEP field.                                             */
+  #define LFXO_AMPLITUDECTRL_STEP_Max (0x7UL)        /*!< Max size of STEP field.                                              */
+
+/* IDACINIT @Bits 16..20 : Initial IDAC code for the pierce oscillator */
+  #define LFXO_AMPLITUDECTRL_IDACINIT_Pos (16UL)     /*!< Position of IDACINIT field.                                          */
+  #define LFXO_AMPLITUDECTRL_IDACINIT_Msk (0x1FUL << LFXO_AMPLITUDECTRL_IDACINIT_Pos) /*!< Bit mask of IDACINIT field.         */
+  #define LFXO_AMPLITUDECTRL_IDACINIT_Min (0x00UL)   /*!< Min value of IDACINIT field.                                         */
+  #define LFXO_AMPLITUDECTRL_IDACINIT_Max (0x1FUL)   /*!< Max size of IDACINIT field.                                          */
+
+/* PDCTRL @Bit 24 : Peak detector control */
+  #define LFXO_AMPLITUDECTRL_PDCTRL_Pos (24UL)       /*!< Position of PDCTRL field.                                            */
+  #define LFXO_AMPLITUDECTRL_PDCTRL_Msk (0x1UL << LFXO_AMPLITUDECTRL_PDCTRL_Pos) /*!< Bit mask of PDCTRL field.                */
+  #define LFXO_AMPLITUDECTRL_PDCTRL_Min (0x0UL)      /*!< Min enumerator value of PDCTRL field.                                */
+  #define LFXO_AMPLITUDECTRL_PDCTRL_Max (0x1UL)      /*!< Max enumerator value of PDCTRL field.                                */
+  #define LFXO_AMPLITUDECTRL_PDCTRL_Disabled (0x0UL) /*!< Peak detector disabled                                               */
+  #define LFXO_AMPLITUDECTRL_PDCTRL_Enabled (0x1UL)  /*!< Peak detector enabled                                                */
+
+
+/* LFXO_PWRUPCTRL: Power up control */
+  #define LFXO_PWRUPCTRL_ResetValue (0x00000000UL)   /*!< Reset value of PWRUPCTRL register.                                   */
+
+/* CTRL @Bits 0..1 : Power up control */
+  #define LFXO_PWRUPCTRL_CTRL_Pos (0UL)              /*!< Position of CTRL field.                                              */
+  #define LFXO_PWRUPCTRL_CTRL_Msk (0x3UL << LFXO_PWRUPCTRL_CTRL_Pos) /*!< Bit mask of CTRL field.                              */
+  #define LFXO_PWRUPCTRL_CTRL_Min (0x0UL)            /*!< Min enumerator value of CTRL field.                                  */
+  #define LFXO_PWRUPCTRL_CTRL_Max (0x2UL)            /*!< Max enumerator value of CTRL field.                                  */
+  #define LFXO_PWRUPCTRL_CTRL_Auto (0x0UL)           /*!< Automatically handled by the peripheral                              */
+  #define LFXO_PWRUPCTRL_CTRL_PowerUp (0x1UL)        /*!< Power up                                                             */
+  #define LFXO_PWRUPCTRL_CTRL_PowerDown (0x2UL)      /*!< Power down                                                           */
+
+
+/* LFXO_MODE: LFXO mode */
+  #define LFXO_MODE_ResetValue (0x00000000UL)        /*!< Reset value of MODE register.                                        */
+
+/* MODE @Bits 0..1 : Mode */
+  #define LFXO_MODE_MODE_Pos (0UL)                   /*!< Position of MODE field.                                              */
+  #define LFXO_MODE_MODE_Msk (0x3UL << LFXO_MODE_MODE_Pos) /*!< Bit mask of MODE field.                                        */
+  #define LFXO_MODE_MODE_Min (0x0UL)                 /*!< Min enumerator value of MODE field.                                  */
+  #define LFXO_MODE_MODE_Max (0x3UL)                 /*!< Max enumerator value of MODE field.                                  */
+  #define LFXO_MODE_MODE_Pierce (0x0UL)              /*!< Pierce mode                                                          */
+  #define LFXO_MODE_MODE_Pixo (0x1UL)                /*!< PIXO mode                                                            */
+  #define LFXO_MODE_MODE_ExternalSine (0x2UL)        /*!< External sine wave clock                                             */
+  #define LFXO_MODE_MODE_ExternalSquare (0x3UL)      /*!< External square wave clock                                           */
+
+/* HPMODE @Bit 4 : High performance mode */
+  #define LFXO_MODE_HPMODE_Pos (4UL)                 /*!< Position of HPMODE field.                                            */
+  #define LFXO_MODE_HPMODE_Msk (0x1UL << LFXO_MODE_HPMODE_Pos) /*!< Bit mask of HPMODE field.                                  */
+  #define LFXO_MODE_HPMODE_Min (0x0UL)               /*!< Min enumerator value of HPMODE field.                                */
+  #define LFXO_MODE_HPMODE_Max (0x1UL)               /*!< Max enumerator value of HPMODE field.                                */
+  #define LFXO_MODE_HPMODE_Disabled (0x0UL)          /*!< Disable high performance mode                                        */
+  #define LFXO_MODE_HPMODE_Enabled (0x1UL)           /*!< Enable high performance mode                                         */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -36899,2328 +39665,173 @@ typedef struct {
   #define OSCILLATORS_PLL_CURRENTFREQ_CURRENTFREQ_CK64M (0x3UL) /*!< 64 MHz                                                    */
 
 
-
-/* ============================================== Struct OSCILLATORS_LFXO_TRIM =============================================== */
+/* =================================================== Struct OSCILLATORS ==================================================== */
 /**
-  * @brief TRIM [OSCILLATORS_LFXO_TRIM] (unspecified)
+  * @brief Oscillator control
   */
-typedef struct {
-  __IOM uint32_t  PDLOWERTHR;                        /*!< (@ 0x00000000) Peak detector lower threshold trim                    */
-  __IOM uint32_t  PDUPPERTHR;                        /*!< (@ 0x00000004) Peak detector upper threshold trim                    */
-  __IOM uint32_t  BIAS;                              /*!< (@ 0x00000008) Internal bias generator trim                          */
-  __IOM uint32_t  PIXO;                              /*!< (@ 0x0000000C) PIXO high pulse supply trim                           */
-  __IOM uint32_t  TRIMBUS;                           /*!< (@ 0x00000010) Reserved trim bus                                     */
-} NRF_OSCILLATORS_LFXO_TRIM_Type;                    /*!< Size = 20 (0x014)                                                    */
+  typedef struct {                                   /*!< OSCILLATORS Structure                                                */
+    __IM uint32_t RESERVED[512];
+    __IOM NRF_OSCILLATORS_PLL_Type PLL;              /*!< (@ 0x00000800) Oscillator control                                    */
+  } NRF_OSCILLATORS_Type;                            /*!< Size = 2164 (0x874)                                                  */
 
-/* OSCILLATORS_LFXO_TRIM_PDLOWERTHR: Peak detector lower threshold trim */
-  #define OSCILLATORS_LFXO_TRIM_PDLOWERTHR_ResetValue (0x00000000UL) /*!< Reset value of PDLOWERTHR register.                  */
+#endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
-/* VAL @Bits 0..4 : Peak detector lower threshold trimming value */
-  #define OSCILLATORS_LFXO_TRIM_PDLOWERTHR_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
-  #define OSCILLATORS_LFXO_TRIM_PDLOWERTHR_VAL_Msk (0x1FUL << OSCILLATORS_LFXO_TRIM_PDLOWERTHR_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
+/* =========================================================================================================================== */
+/* ================                                          OSCRFR                                          ================ */
+/* =========================================================================================================================== */
 
+#if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
 
-/* OSCILLATORS_LFXO_TRIM_PDUPPERTHR: Peak detector upper threshold trim */
-  #define OSCILLATORS_LFXO_TRIM_PDUPPERTHR_ResetValue (0x00000000UL) /*!< Reset value of PDUPPERTHR register.                  */
-
-/* VAL @Bits 0..4 : Peak detector upper threshold trimming value */
-  #define OSCILLATORS_LFXO_TRIM_PDUPPERTHR_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
-  #define OSCILLATORS_LFXO_TRIM_PDUPPERTHR_VAL_Msk (0x1FUL << OSCILLATORS_LFXO_TRIM_PDUPPERTHR_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-
-/* OSCILLATORS_LFXO_TRIM_BIAS: Internal bias generator trim */
-  #define OSCILLATORS_LFXO_TRIM_BIAS_ResetValue (0x00000000UL) /*!< Reset value of BIAS register.                              */
-
-/* VAL @Bits 0..3 : Internal bias generator trim */
-  #define OSCILLATORS_LFXO_TRIM_BIAS_VAL_Pos (0UL)   /*!< Position of VAL field.                                               */
-  #define OSCILLATORS_LFXO_TRIM_BIAS_VAL_Msk (0xFUL << OSCILLATORS_LFXO_TRIM_BIAS_VAL_Pos) /*!< Bit mask of VAL field.         */
-
-
-/* OSCILLATORS_LFXO_TRIM_PIXO: PIXO high pulse supply trim */
-  #define OSCILLATORS_LFXO_TRIM_PIXO_ResetValue (0x00000000UL) /*!< Reset value of PIXO register.                              */
-
-/* VAL @Bits 0..4 : PIXO high pulse supply trim */
-  #define OSCILLATORS_LFXO_TRIM_PIXO_VAL_Pos (0UL)   /*!< Position of VAL field.                                               */
-  #define OSCILLATORS_LFXO_TRIM_PIXO_VAL_Msk (0x1FUL << OSCILLATORS_LFXO_TRIM_PIXO_VAL_Pos) /*!< Bit mask of VAL field.        */
-
-
-/* OSCILLATORS_LFXO_TRIM_TRIMBUS: Reserved trim bus */
-  #define OSCILLATORS_LFXO_TRIM_TRIMBUS_ResetValue (0x00000000UL) /*!< Reset value of TRIMBUS register.                        */
-
-/* VAL @Bits 0..2 : Value */
-  #define OSCILLATORS_LFXO_TRIM_TRIMBUS_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
-  #define OSCILLATORS_LFXO_TRIM_TRIMBUS_VAL_Msk (0x7UL << OSCILLATORS_LFXO_TRIM_TRIMBUS_VAL_Pos) /*!< Bit mask of VAL field.   */
-
-
-
-/* ============================================ Struct OSCILLATORS_LFXO_OVERRIDE ============================================= */
+/* ================================================== Struct OSCRFR_CONFIG =================================================== */
 /**
-  * @brief OVERRIDE [OSCILLATORS_LFXO_OVERRIDE] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  PWRUP;                             /*!< (@ 0x00000000) Override the PWRUP signal to the analog module        */
-  __IOM uint32_t  RETAIN;                            /*!< (@ 0x00000004) Override the RETAIN signal to the analog module       */
-  __IOM uint32_t  MODE;                              /*!< (@ 0x00000008) Override the MODE signal to the analog module         */
-  __IOM uint32_t  BYPASS;                            /*!< (@ 0x0000000C) Override the BYPASS signal to the analog module       */
-  __IOM uint32_t  OUTSEL;                            /*!< (@ 0x00000010) Override the OUTSEL[1:0] signal to the analog module  */
-  __IOM uint32_t  S2SHPMODE;                         /*!< (@ 0x00000014) Override the S2S_HPMODE signal to the analog module   */
-  __IOM uint32_t  PIXOPWRUP;                         /*!< (@ 0x00000018) Override the PIXO_PWRUP signal to the analog module   */
-  __IOM uint32_t  PIXOSTARTUP;                       /*!< (@ 0x0000001C) Override the PIXO_STARTUP signal to the analog module */
-  __IOM uint32_t  PIERCESTARTUP;                     /*!< (@ 0x00000020) Override the PIERCE_STARTUP signal to the analog
-                                                                         module*/
-  __IOM uint32_t  PIERCEIDAC;                        /*!< (@ 0x00000024) Override the PIERCE_IDAC signal to the analog module  */
-  __IOM uint32_t  PDEN;                              /*!< (@ 0x00000028) Override the PD_EN signal to the analog module        */
-  __IOM uint32_t  CLOAD;                             /*!< (@ 0x0000002C) Override the CLOAD signal to the analog module        */
-  __IOM uint32_t  READY;                             /*!< (@ 0x00000030) Override the READY signal from the analog module      */
-  __IOM uint32_t  SETTLED;                           /*!< (@ 0x00000034) Override the SETTLED signal from the analog module    */
-  __IOM uint32_t  PIXOACK;                           /*!< (@ 0x00000038) Override the PIXO_ACK signal from the analog module   */
-  __IOM uint32_t  PDSETTLED;                         /*!< (@ 0x0000003C) Override the PD_SETTLED signal from the analog module */
-  __IOM uint32_t  PDOUTLOWER;                        /*!< (@ 0x00000040) Override the PD_OUT_LOWER signal from the analog
-                                                                         module*/
-  __IOM uint32_t  PDOUTUPPER;                        /*!< (@ 0x00000044) Override the PD_OUT_UPPER signal from the analog
-                                                                         module*/
-} NRF_OSCILLATORS_LFXO_OVERRIDE_Type;                /*!< Size = 72 (0x048)                                                    */
-
-/* OSCILLATORS_LFXO_OVERRIDE_PWRUP: Override the PWRUP signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_PWRUP_ResetValue (0x00000000UL) /*!< Reset value of PWRUP register.                        */
-
-/* VAL @Bit 0 : Override value for the signal */
-  #define OSCILLATORS_LFXO_OVERRIDE_PWRUP_VAL_Pos (0UL) /*!< Position of VAL field.                                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_PWRUP_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PWRUP_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_PWRUP_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFXO_OVERRIDE_PWRUP_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PWRUP_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFXO_OVERRIDE_PWRUP_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_OVERRIDE_PWRUP_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_OVERRIDE_PWRUP_EN_Disabled (0x0UL) /*!< Override is disabled                                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_PWRUP_EN_Enabled (0x1UL) /*!< Override is enabled                                          */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_RETAIN: Override the RETAIN signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_RETAIN_ResetValue (0x00000000UL) /*!< Reset value of RETAIN register.                      */
-
-/* VAL @Bit 0 : Override value for the signal */
-  #define OSCILLATORS_LFXO_OVERRIDE_RETAIN_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_RETAIN_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_RETAIN_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_RETAIN_EN_Pos (31UL) /*!< Position of EN field.                                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_RETAIN_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_RETAIN_EN_Pos) /*!< Bit mask of EN field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_RETAIN_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                               */
-  #define OSCILLATORS_LFXO_OVERRIDE_RETAIN_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                               */
-  #define OSCILLATORS_LFXO_OVERRIDE_RETAIN_EN_Disabled (0x0UL) /*!< Override is disabled                                       */
-  #define OSCILLATORS_LFXO_OVERRIDE_RETAIN_EN_Enabled (0x1UL) /*!< Override is enabled                                         */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_MODE: Override the MODE signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_MODE_ResetValue (0x00000000UL) /*!< Reset value of MODE register.                          */
-
-/* VAL @Bit 0 : Value */
-  #define OSCILLATORS_LFXO_OVERRIDE_MODE_VAL_Pos (0UL) /*!< Position of VAL field.                                             */
-  #define OSCILLATORS_LFXO_OVERRIDE_MODE_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_MODE_VAL_Pos) /*!< Bit mask of VAL field. */
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_MODE_EN_Pos (31UL) /*!< Position of EN field.                                              */
-  #define OSCILLATORS_LFXO_OVERRIDE_MODE_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_MODE_EN_Pos) /*!< Bit mask of EN field.    */
-  #define OSCILLATORS_LFXO_OVERRIDE_MODE_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                 */
-  #define OSCILLATORS_LFXO_OVERRIDE_MODE_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                 */
-  #define OSCILLATORS_LFXO_OVERRIDE_MODE_EN_Disabled (0x0UL) /*!< Override is disabled                                         */
-  #define OSCILLATORS_LFXO_OVERRIDE_MODE_EN_Enabled (0x1UL) /*!< Override is enabled                                           */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_BYPASS: Override the BYPASS signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_BYPASS_ResetValue (0x00000000UL) /*!< Reset value of BYPASS register.                      */
-
-/* VAL @Bit 0 : Value */
-  #define OSCILLATORS_LFXO_OVERRIDE_BYPASS_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_BYPASS_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_BYPASS_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_BYPASS_EN_Pos (31UL) /*!< Position of EN field.                                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_BYPASS_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_BYPASS_EN_Pos) /*!< Bit mask of EN field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_BYPASS_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                               */
-  #define OSCILLATORS_LFXO_OVERRIDE_BYPASS_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                               */
-  #define OSCILLATORS_LFXO_OVERRIDE_BYPASS_EN_Disabled (0x0UL) /*!< Override is disabled                                       */
-  #define OSCILLATORS_LFXO_OVERRIDE_BYPASS_EN_Enabled (0x1UL) /*!< Override is enabled                                         */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_OUTSEL: Override the OUTSEL[1:0] signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_OUTSEL_ResetValue (0x00000000UL) /*!< Reset value of OUTSEL register.                      */
-
-/* VAL @Bits 0..1 : Value */
-  #define OSCILLATORS_LFXO_OVERRIDE_OUTSEL_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_OUTSEL_VAL_Msk (0x3UL << OSCILLATORS_LFXO_OVERRIDE_OUTSEL_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_OUTSEL_EN_Pos (31UL) /*!< Position of EN field.                                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_OUTSEL_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_OUTSEL_EN_Pos) /*!< Bit mask of EN field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_OUTSEL_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                               */
-  #define OSCILLATORS_LFXO_OVERRIDE_OUTSEL_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                               */
-  #define OSCILLATORS_LFXO_OVERRIDE_OUTSEL_EN_Disabled (0x0UL) /*!< Override is disabled                                       */
-  #define OSCILLATORS_LFXO_OVERRIDE_OUTSEL_EN_Enabled (0x1UL) /*!< Override is enabled                                         */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE: Override the S2S_HPMODE signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_ResetValue (0x00000000UL) /*!< Reset value of S2SHPMODE register.                */
-
-/* VAL @Bit 0 : Value */
-  #define OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_VAL_Pos (0UL) /*!< Position of VAL field.                                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_VAL_Pos) /*!< Bit mask of
-                                                                            VAL field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_EN_Pos (31UL) /*!< Position of EN field.                                         */
-  #define OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_EN_Disabled (0x0UL) /*!< Override is disabled                                    */
-  #define OSCILLATORS_LFXO_OVERRIDE_S2SHPMODE_EN_Enabled (0x1UL) /*!< Override is enabled                                      */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP: Override the PIXO_PWRUP signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_ResetValue (0x00000000UL) /*!< Reset value of PIXOPWRUP register.                */
-
-/* VAL @Bit 0 : Value */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_VAL_Pos (0UL) /*!< Position of VAL field.                                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_VAL_Pos) /*!< Bit mask of
-                                                                            VAL field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_EN_Pos (31UL) /*!< Position of EN field.                                         */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_EN_Disabled (0x0UL) /*!< Override is disabled                                    */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOPWRUP_EN_Enabled (0x1UL) /*!< Override is enabled                                      */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP: Override the PIXO_STARTUP signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_ResetValue (0x00000000UL) /*!< Reset value of PIXOSTARTUP register.            */
-
-/* VAL @Bit 0 : Value */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_VAL_Pos (0UL) /*!< Position of VAL field.                                      */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_VAL_Pos) /*!< Bit mask
-                                                                            of VAL field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_EN_Pos (31UL) /*!< Position of EN field.                                       */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_EN_Pos) /*!< Bit mask of
-                                                                            EN field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                          */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                          */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_EN_Disabled (0x0UL) /*!< Override is disabled                                  */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOSTARTUP_EN_Enabled (0x1UL) /*!< Override is enabled                                    */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP: Override the PIERCE_STARTUP signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_ResetValue (0x00000000UL) /*!< Reset value of PIERCESTARTUP register.        */
-
-/* VAL @Bit 0 : Value */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_VAL_Pos (0UL) /*!< Position of VAL field.                                    */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_VAL_Pos) /*!< Bit
-                                                                            mask of VAL field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_EN_Pos (31UL) /*!< Position of EN field.                                     */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_EN_Pos) /*!< Bit mask
-                                                                            of EN field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_EN_Disabled (0x0UL) /*!< Override is disabled                                */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCESTARTUP_EN_Enabled (0x1UL) /*!< Override is enabled                                  */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC: Override the PIERCE_IDAC signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_ResetValue (0x00000000UL) /*!< Reset value of PIERCEIDAC register.              */
-
-/* VAL @Bits 0..4 : Value */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_VAL_Pos (0UL) /*!< Position of VAL field.                                       */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_VAL_Msk (0x1FUL << OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_VAL_Pos) /*!< Bit mask of
-                                                                            VAL field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_EN_Pos (31UL) /*!< Position of EN field.                                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_EN_Disabled (0x0UL) /*!< Override is disabled                                   */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIERCEIDAC_EN_Enabled (0x1UL) /*!< Override is enabled                                     */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_PDEN: Override the PD_EN signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDEN_ResetValue (0x00000000UL) /*!< Reset value of PDEN register.                          */
-
-/* VAL @Bit 0 : Value */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDEN_VAL_Pos (0UL) /*!< Position of VAL field.                                             */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDEN_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PDEN_VAL_Pos) /*!< Bit mask of VAL field. */
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDEN_EN_Pos (31UL) /*!< Position of EN field.                                              */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDEN_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PDEN_EN_Pos) /*!< Bit mask of EN field.    */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDEN_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                 */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDEN_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                 */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDEN_EN_Disabled (0x0UL) /*!< Override is disabled                                         */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDEN_EN_Enabled (0x1UL) /*!< Override is enabled                                           */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_CLOAD: Override the CLOAD signal to the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_CLOAD_ResetValue (0x00000000UL) /*!< Reset value of CLOAD register.                        */
-
-/* VAL @Bits 0..4 : Value */
-  #define OSCILLATORS_LFXO_OVERRIDE_CLOAD_VAL_Pos (0UL) /*!< Position of VAL field.                                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_CLOAD_VAL_Msk (0x1FUL << OSCILLATORS_LFXO_OVERRIDE_CLOAD_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_CLOAD_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFXO_OVERRIDE_CLOAD_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_CLOAD_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFXO_OVERRIDE_CLOAD_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_OVERRIDE_CLOAD_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_OVERRIDE_CLOAD_EN_Disabled (0x0UL) /*!< Override is disabled                                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_CLOAD_EN_Enabled (0x1UL) /*!< Override is enabled                                          */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_READY: Override the READY signal from the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_READY_ResetValue (0x00000000UL) /*!< Reset value of READY register.                        */
-
-/* VAL @Bit 0 : Current value of the signal */
-  #define OSCILLATORS_LFXO_OVERRIDE_READY_VAL_Pos (0UL) /*!< Position of VAL field.                                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_READY_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_READY_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_READY_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFXO_OVERRIDE_READY_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_READY_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFXO_OVERRIDE_READY_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_OVERRIDE_READY_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_OVERRIDE_READY_EN_Disabled (0x0UL) /*!< Override is disabled                                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_READY_EN_Enabled (0x1UL) /*!< Override is enabled                                          */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_SETTLED: Override the SETTLED signal from the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_SETTLED_ResetValue (0x00000000UL) /*!< Reset value of SETTLED register.                    */
-
-/* VAL @Bit 0 : Current value of the signal */
-  #define OSCILLATORS_LFXO_OVERRIDE_SETTLED_VAL_Pos (0UL) /*!< Position of VAL field.                                          */
-  #define OSCILLATORS_LFXO_OVERRIDE_SETTLED_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_SETTLED_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_SETTLED_EN_Pos (31UL) /*!< Position of EN field.                                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_SETTLED_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_SETTLED_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_SETTLED_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                              */
-  #define OSCILLATORS_LFXO_OVERRIDE_SETTLED_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                              */
-  #define OSCILLATORS_LFXO_OVERRIDE_SETTLED_EN_Disabled (0x0UL) /*!< Override is disabled                                      */
-  #define OSCILLATORS_LFXO_OVERRIDE_SETTLED_EN_Enabled (0x1UL) /*!< Override is enabled                                        */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_PIXOACK: Override the PIXO_ACK signal from the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOACK_ResetValue (0x00000000UL) /*!< Reset value of PIXOACK register.                    */
-
-/* VAL @Bits 0..1 : Current value of the signal */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOACK_VAL_Pos (0UL) /*!< Position of VAL field.                                          */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOACK_VAL_Msk (0x3UL << OSCILLATORS_LFXO_OVERRIDE_PIXOACK_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOACK_EN_Pos (31UL) /*!< Position of EN field.                                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOACK_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PIXOACK_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOACK_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                              */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOACK_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                              */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOACK_EN_Disabled (0x0UL) /*!< Override is disabled                                      */
-  #define OSCILLATORS_LFXO_OVERRIDE_PIXOACK_EN_Enabled (0x1UL) /*!< Override is enabled                                        */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_PDSETTLED: Override the PD_SETTLED signal from the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_ResetValue (0x00000000UL) /*!< Reset value of PDSETTLED register.                */
-
-/* VAL @Bit 0 : Current value of the signal */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_VAL_Pos (0UL) /*!< Position of VAL field.                                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_VAL_Pos) /*!< Bit mask of
-                                                                            VAL field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_EN_Pos (31UL) /*!< Position of EN field.                                         */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                            */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_EN_Disabled (0x0UL) /*!< Override is disabled                                    */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDSETTLED_EN_Enabled (0x1UL) /*!< Override is enabled                                      */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER: Override the PD_OUT_LOWER signal from the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_ResetValue (0x00000000UL) /*!< Reset value of PDOUTLOWER register.              */
-
-/* VAL @Bit 0 : Current value of the signal */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_VAL_Pos (0UL) /*!< Position of VAL field.                                       */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_VAL_Pos) /*!< Bit mask of
-                                                                            VAL field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_EN_Pos (31UL) /*!< Position of EN field.                                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_EN_Disabled (0x0UL) /*!< Override is disabled                                   */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTLOWER_EN_Enabled (0x1UL) /*!< Override is enabled                                     */
-
-
-/* OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER: Override the PD_OUT_UPPER signal from the analog module */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_ResetValue (0x00000000UL) /*!< Reset value of PDOUTUPPER register.              */
-
-/* VAL @Bit 0 : Current value of the signal */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_VAL_Pos (0UL) /*!< Position of VAL field.                                       */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_VAL_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_VAL_Pos) /*!< Bit mask of
-                                                                            VAL field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_EN_Pos (31UL) /*!< Position of EN field.                                        */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_EN_Msk (0x1UL << OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                           */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_EN_Disabled (0x0UL) /*!< Override is disabled                                   */
-  #define OSCILLATORS_LFXO_OVERRIDE_PDOUTUPPER_EN_Enabled (0x1UL) /*!< Override is enabled                                     */
-
-
-
-/* =============================================== Struct OSCILLATORS_LFXO_DFT =============================================== */
-/**
-  * @brief DFT [OSCILLATORS_LFXO_DFT] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  ATB0CONFIG;                        /*!< (@ 0x00000000) Analog Test Bus 0 (ATB0) configuration                */
-  __IOM uint32_t  ATB1CONFIG;                        /*!< (@ 0x00000004) Analog Test Bus 1 (ATB1) configuration                */
-  __IM  uint32_t  RESERVED[2];
-  __IOM uint32_t  DTB0CONFIG;                        /*!< (@ 0x00000010) Digital Test Bus 0 (DTB0) configuration               */
-  __IOM uint32_t  DTB1CONFIG;                        /*!< (@ 0x00000014) Digital Test Bus 1 (DTB1) configuration               */
-  __IOM uint32_t  DTB2CONFIG;                        /*!< (@ 0x00000018) Digital Test Bus 2 (DTB2) configuration               */
-  __IOM uint32_t  DTB3CONFIG;                        /*!< (@ 0x0000001C) Digital Test Bus 3 (DTB3) configuration               */
-  __IM  uint32_t  RESERVED1[4];
-  __IOM uint32_t  TCFG;                              /*!< (@ 0x00000030) Test mode configuration                               */
-} NRF_OSCILLATORS_LFXO_DFT_Type;                     /*!< Size = 52 (0x034)                                                    */
-
-/* OSCILLATORS_LFXO_DFT_ATB0CONFIG: Analog Test Bus 0 (ATB0) configuration */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB0CONFIG register.                   */
-
-/* SELMUX @Bits 0..2 : Select multiplexer for ATB0 */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                                      */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_SELMUX_Msk (0x7UL << OSCILLATORS_LFXO_DFT_ATB0CONFIG_SELMUX_Pos) /*!< Bit mask of
-                                                                            SELMUX field.*/
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                        */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_SELMUX_Max (0x5UL) /*!< Max enumerator value of SELMUX field.                        */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_SELMUX_XC1 (0x0UL) /*!< Functional tests/main production test                        */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_SELMUX_XC2 (0x1UL) /*!< Test/trim peak detector                                      */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_SELMUX_ITEST (0x2UL) /*!< Test/trim current generator (or possibly IDAC).            */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_SELMUX_VDDINT0V8 (0x4UL) /*!< Measure current consumption VDD_INT_0V8.               */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_SELMUX_VDDINT1V8 (0x5UL) /*!< Measure current consumption VDD_INT_1V8.               */
-
-/* EN @Bit 31 : Enable the analog test bus */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_EN_Msk (0x1UL << OSCILLATORS_LFXO_DFT_ATB0CONFIG_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_EN_Disabled (0x0UL) /*!< Analog test bus is disabled(HiZ)                            */
-  #define OSCILLATORS_LFXO_DFT_ATB0CONFIG_EN_Enabled (0x1UL) /*!< Analog test bus is enabled                                   */
-
-
-/* OSCILLATORS_LFXO_DFT_ATB1CONFIG: Analog Test Bus 1 (ATB1) configuration */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB1CONFIG register.                   */
-
-/* SELMUX @Bits 0..2 : Select multiplexer for ATB1 */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                                      */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_SELMUX_Msk (0x7UL << OSCILLATORS_LFXO_DFT_ATB1CONFIG_SELMUX_Pos) /*!< Bit mask of
-                                                                            SELMUX field.*/
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                        */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_SELMUX_Max (0x5UL) /*!< Max enumerator value of SELMUX field.                        */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_SELMUX_XC2 (0x0UL) /*!< Functional tests/main production test                        */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_SELMUX_VPIU (0x1UL) /*!< Test/trim upper PIXO supply                                 */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_SELMUX_VDDINT0V8 (0x4UL) /*!< Measure current consumption VDD_INT_0V8.               */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_SELMUX_VDDINT1V8 (0x5UL) /*!< Measure current consumption VDD_INT_1V8.               */
-
-/* EN @Bit 31 : Enable the analog test bus */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_EN_Msk (0x1UL << OSCILLATORS_LFXO_DFT_ATB1CONFIG_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_EN_Disabled (0x0UL) /*!< Analog test bus is disabled(HiZ)                            */
-  #define OSCILLATORS_LFXO_DFT_ATB1CONFIG_EN_Enabled (0x1UL) /*!< Analog test bus is enabled                                   */
-
-
-/* OSCILLATORS_LFXO_DFT_DTB0CONFIG: Digital Test Bus 0 (DTB0) configuration */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB0CONFIG register.                   */
-
-/* SELMUX @Bits 0..2 : Select multiplexer for DTB0 */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                                      */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_Msk (0x7UL << OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_Pos) /*!< Bit mask of
-                                                                            SELMUX field.*/
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                        */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_Max (0x5UL) /*!< Max enumerator value of SELMUX field.                        */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_OSC32K (0x0UL) /*!< OSC_32K                                                   */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_PDLOWER (0x1UL) /*!< PD_LOWER                                                 */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_PIXOPULSENEG (0x2UL) /*!< PIXO_PULSE_NEG                                      */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_PIXOACK0 (0x3UL) /*!< PIXO_ACK[0]                                             */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_IDAC3 (0x4UL) /*!< Observe IDAC[3].                                           */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_SELMUX_IDAC0 (0x5UL) /*!< Observe IDAC[0].                                           */
-
-/* EN @Bit 31 : Enable the digital test bus */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_EN_Msk (0x1UL << OSCILLATORS_LFXO_DFT_DTB0CONFIG_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_EN_Disabled (0x0UL) /*!< Digital test bus is disabled                                */
-  #define OSCILLATORS_LFXO_DFT_DTB0CONFIG_EN_Enabled (0x1UL) /*!< Digital test bus is enabled                                  */
-
-
-/* OSCILLATORS_LFXO_DFT_DTB1CONFIG: Digital Test Bus 1 (DTB1) configuration */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB1CONFIG register.                   */
-
-/* SELMUX @Bits 0..2 : Select multiplexer for DTB1 */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                                      */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_Msk (0x7UL << OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_Pos) /*!< Bit mask of
-                                                                            SELMUX field.*/
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                        */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_Max (0x5UL) /*!< Max enumerator value of SELMUX field.                        */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_READY (0x0UL) /*!< Ready                                                      */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_PDUPPER (0x1UL) /*!< PD_UPPER                                                 */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_PIXOPULSEPOS (0x2UL) /*!< PIXO_PULSE_POS                                      */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_PIXOACK1 (0x3UL) /*!< PIXO_ACK[1]                                             */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_IDAC4 (0x4UL) /*!< Observe IDAC[4].                                           */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_SELMUX_IDAC1 (0x5UL) /*!< Observe IDAC[1].                                           */
-
-/* EN @Bit 31 : Enable the digital test bus */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_EN_Msk (0x1UL << OSCILLATORS_LFXO_DFT_DTB1CONFIG_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_EN_Disabled (0x0UL) /*!< Digital test bus is disabled                                */
-  #define OSCILLATORS_LFXO_DFT_DTB1CONFIG_EN_Enabled (0x1UL) /*!< Digital test bus is enabled                                  */
-
-
-/* OSCILLATORS_LFXO_DFT_DTB2CONFIG: Digital Test Bus 2 (DTB2) configuration */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB2CONFIG register.                   */
-
-/* SELMUX @Bits 0..2 : Select multiplexer for DTB2 */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                                      */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_SELMUX_Msk (0x7UL << OSCILLATORS_LFXO_DFT_DTB2CONFIG_SELMUX_Pos) /*!< Bit mask of
-                                                                            SELMUX field.*/
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                        */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_SELMUX_Max (0x5UL) /*!< Max enumerator value of SELMUX field.                        */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_SELMUX_SETTLED (0x0UL) /*!< Settled                                                  */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_SELMUX_PIERCESTARTUP (0x4UL) /*!< Pierce startup                                     */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_SELMUX_IDAC2 (0x5UL) /*!< Observe IDAC[2].                                           */
-
-/* EN @Bit 31 : Enable the digital test bus */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_EN_Msk (0x1UL << OSCILLATORS_LFXO_DFT_DTB2CONFIG_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_EN_Disabled (0x0UL) /*!< Digital test bus is disabled                                */
-  #define OSCILLATORS_LFXO_DFT_DTB2CONFIG_EN_Enabled (0x1UL) /*!< Digital test bus is enabled                                  */
-
-
-/* OSCILLATORS_LFXO_DFT_DTB3CONFIG: Digital Test Bus 3 (DTB3) configuration */
-  #define OSCILLATORS_LFXO_DFT_DTB3CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB3CONFIG register.                   */
-
-/* PWRUPDELTEST @Bit 27 : Enable the PWRUP delay test circuit */
-  #define OSCILLATORS_LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Pos (27UL) /*!< Position of PWRUPDELTEST field.                         */
-  #define OSCILLATORS_LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Msk (0x1UL << OSCILLATORS_LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Pos) /*!< Bit
-                                                                            mask of PWRUPDELTEST field.*/
-  #define OSCILLATORS_LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Min (0x0UL) /*!< Min enumerator value of PWRUPDELTEST field.            */
-  #define OSCILLATORS_LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Max (0x1UL) /*!< Max enumerator value of PWRUPDELTEST field.            */
-  #define OSCILLATORS_LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Disabled (0x0UL) /*!< PWRUP delay test circuit is disabled              */
-  #define OSCILLATORS_LFXO_DFT_DTB3CONFIG_PWRUPDELTEST_Enabled (0x1UL) /*!< PWRUP delay test circuit is enabled                */
-
-
-/* OSCILLATORS_LFXO_DFT_TCFG: Test mode configuration */
-  #define OSCILLATORS_LFXO_DFT_TCFG_ResetValue (0x00000000UL) /*!< Reset value of TCFG register.                               */
-
-/* OSC32KAO0V8MUTE @Bit 0 : OSC_32K_AO_0V8 muted */
-  #define OSCILLATORS_LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Pos (0UL) /*!< Position of OSC32KAO0V8MUTE field.                          */
-  #define OSCILLATORS_LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Msk (0x1UL << OSCILLATORS_LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Pos) /*!< Bit mask
-                                                                            of OSC32KAO0V8MUTE field.*/
-  #define OSCILLATORS_LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Min (0x0UL) /*!< Min enumerator value of OSC32KAO0V8MUTE field.            */
-  #define OSCILLATORS_LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Max (0x1UL) /*!< Max enumerator value of OSC32KAO0V8MUTE field.            */
-  #define OSCILLATORS_LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Disabled (0x0UL) /*!< Override disabled                                    */
-  #define OSCILLATORS_LFXO_DFT_TCFG_OSC32KAO0V8MUTE_Enabled (0x1UL) /*!< Override enabled                                      */
-
-/* PIERCEINV @Bit 1 : Disable PIERCE inverter */
-  #define OSCILLATORS_LFXO_DFT_TCFG_PIERCEINV_Pos (1UL) /*!< Position of PIERCEINV field.                                      */
-  #define OSCILLATORS_LFXO_DFT_TCFG_PIERCEINV_Msk (0x1UL << OSCILLATORS_LFXO_DFT_TCFG_PIERCEINV_Pos) /*!< Bit mask of PIERCEINV
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_DFT_TCFG_PIERCEINV_Min (0x0UL) /*!< Min enumerator value of PIERCEINV field.                        */
-  #define OSCILLATORS_LFXO_DFT_TCFG_PIERCEINV_Max (0x1UL) /*!< Max enumerator value of PIERCEINV field.                        */
-  #define OSCILLATORS_LFXO_DFT_TCFG_PIERCEINV_Enabled (0x0UL) /*!< Pierce inverter enabled                                     */
-  #define OSCILLATORS_LFXO_DFT_TCFG_PIERCEINV_Disabled (0x1UL) /*!< Pierce inverter disabled                                   */
-
-/* SPARE @Bit 2 : Spare bit */
-  #define OSCILLATORS_LFXO_DFT_TCFG_SPARE_Pos (2UL)  /*!< Position of SPARE field.                                             */
-  #define OSCILLATORS_LFXO_DFT_TCFG_SPARE_Msk (0x1UL << OSCILLATORS_LFXO_DFT_TCFG_SPARE_Pos) /*!< Bit mask of SPARE field.     */
-
-
-
-/* ================================================= Struct OSCILLATORS_LFXO ================================================= */
-/**
-  * @brief LFXO [OSCILLATORS_LFXO] LFXO peripheral
-  */
-typedef struct {
-  __IM  uint32_t  RESERVED[256];
-  __IM  uint32_t  STATUS;                            /*!< (@ 0x00000400) LFXO status                                           */
-  __IM  uint32_t  STATUSANA;                         /*!< (@ 0x00000404) Status of analog module output signals                */
-  __IM  uint32_t  RESERVED1[14];
-  __IOM NRF_OSCILLATORS_LFXO_TRIM_Type TRIM;         /*!< (@ 0x00000440) (unspecified)                                         */
-  __IM  uint32_t  RESERVED2[11];
-  __IOM uint32_t  MIRROR;                            /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
-  __IOM uint32_t  CLOAD;                             /*!< (@ 0x00000484) Internal capacitive load                              */
-  __IOM uint32_t  AMPLITUDECTRL;                     /*!< (@ 0x00000488) Amplitude control                                     */
-  __IOM uint32_t  PWRUPCTRL;                         /*!< (@ 0x0000048C) Power up control                                      */
-  __IOM uint32_t  MODE;                              /*!< (@ 0x00000490) LFXO mode                                             */
-  __IM  uint32_t  RESERVED3[27];
-  __IOM NRF_OSCILLATORS_LFXO_OVERRIDE_Type OVERRIDE; /*!< (@ 0x00000500) (unspecified)                                         */
-  __IM  uint32_t  RESERVED4[46];
-  __IOM NRF_OSCILLATORS_LFXO_DFT_Type DFT;           /*!< (@ 0x00000600) (unspecified)                                         */
-} NRF_OSCILLATORS_LFXO_Type;                         /*!< Size = 1588 (0x634)                                                  */
-
-/* OSCILLATORS_LFXO_STATUS: LFXO status */
-  #define OSCILLATORS_LFXO_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                               */
-
-/* MODE @Bits 0..1 : Current mode */
-  #define OSCILLATORS_LFXO_STATUS_MODE_Pos (0UL)     /*!< Position of MODE field.                                              */
-  #define OSCILLATORS_LFXO_STATUS_MODE_Msk (0x3UL << OSCILLATORS_LFXO_STATUS_MODE_Pos) /*!< Bit mask of MODE field.            */
-  #define OSCILLATORS_LFXO_STATUS_MODE_Min (0x0UL)   /*!< Min enumerator value of MODE field.                                  */
-  #define OSCILLATORS_LFXO_STATUS_MODE_Max (0x3UL)   /*!< Max enumerator value of MODE field.                                  */
-  #define OSCILLATORS_LFXO_STATUS_MODE_Pierce (0x0UL) /*!< Pierce mode                                                         */
-  #define OSCILLATORS_LFXO_STATUS_MODE_Pixo (0x1UL)  /*!< PIXO mode                                                            */
-  #define OSCILLATORS_LFXO_STATUS_MODE_ExternalSine (0x2UL) /*!< External sine wave clock                                      */
-  #define OSCILLATORS_LFXO_STATUS_MODE_ExternalSquare (0x3UL) /*!< External square wave clock                                  */
-
-/* HPMODE @Bit 4 : High performance mode */
-  #define OSCILLATORS_LFXO_STATUS_HPMODE_Pos (4UL)   /*!< Position of HPMODE field.                                            */
-  #define OSCILLATORS_LFXO_STATUS_HPMODE_Msk (0x1UL << OSCILLATORS_LFXO_STATUS_HPMODE_Pos) /*!< Bit mask of HPMODE field.      */
-  #define OSCILLATORS_LFXO_STATUS_HPMODE_Min (0x0UL) /*!< Min enumerator value of HPMODE field.                                */
-  #define OSCILLATORS_LFXO_STATUS_HPMODE_Max (0x1UL) /*!< Max enumerator value of HPMODE field.                                */
-  #define OSCILLATORS_LFXO_STATUS_HPMODE_Disabled (0x0UL) /*!< High performance mode disabled                                  */
-  #define OSCILLATORS_LFXO_STATUS_HPMODE_Enabled (0x1UL) /*!< High performance mode enabled                                    */
-
-/* RUNNING @Bit 5 : LFXO running status */
-  #define OSCILLATORS_LFXO_STATUS_RUNNING_Pos (5UL)  /*!< Position of RUNNING field.                                           */
-  #define OSCILLATORS_LFXO_STATUS_RUNNING_Msk (0x1UL << OSCILLATORS_LFXO_STATUS_RUNNING_Pos) /*!< Bit mask of RUNNING field.   */
-  #define OSCILLATORS_LFXO_STATUS_RUNNING_Min (0x0UL) /*!< Min enumerator value of RUNNING field.                              */
-  #define OSCILLATORS_LFXO_STATUS_RUNNING_Max (0x1UL) /*!< Max enumerator value of RUNNING field.                              */
-  #define OSCILLATORS_LFXO_STATUS_RUNNING_NotRunning (0x0UL) /*!< LFXO not running                                             */
-  #define OSCILLATORS_LFXO_STATUS_RUNNING_Running (0x1UL) /*!< LFXO running                                                    */
-
-
-/* OSCILLATORS_LFXO_STATUSANA: Status of analog module output signals */
-  #define OSCILLATORS_LFXO_STATUSANA_ResetValue (0x00000000UL) /*!< Reset value of STATUSANA register.                         */
-
-/* READY @Bit 0 : Current value of the READY signal from the analog module */
-  #define OSCILLATORS_LFXO_STATUSANA_READY_Pos (0UL) /*!< Position of READY field.                                             */
-  #define OSCILLATORS_LFXO_STATUSANA_READY_Msk (0x1UL << OSCILLATORS_LFXO_STATUSANA_READY_Pos) /*!< Bit mask of READY field.   */
-
-/* SETTLED @Bit 1 : Current value of the SETTLED signal from the analog module */
-  #define OSCILLATORS_LFXO_STATUSANA_SETTLED_Pos (1UL) /*!< Position of SETTLED field.                                         */
-  #define OSCILLATORS_LFXO_STATUSANA_SETTLED_Msk (0x1UL << OSCILLATORS_LFXO_STATUSANA_SETTLED_Pos) /*!< Bit mask of SETTLED
-                                                                            field.*/
-
-/* PIXOACK @Bits 2..3 : Current value of the PIXO_ACK signal from the analog module */
-  #define OSCILLATORS_LFXO_STATUSANA_PIXOACK_Pos (2UL) /*!< Position of PIXOACK field.                                         */
-  #define OSCILLATORS_LFXO_STATUSANA_PIXOACK_Msk (0x3UL << OSCILLATORS_LFXO_STATUSANA_PIXOACK_Pos) /*!< Bit mask of PIXOACK
-                                                                            field.*/
-
-/* PDSETTLED @Bit 4 : Current value of the PD_SETTLED signal from the analog module */
-  #define OSCILLATORS_LFXO_STATUSANA_PDSETTLED_Pos (4UL) /*!< Position of PDSETTLED field.                                     */
-  #define OSCILLATORS_LFXO_STATUSANA_PDSETTLED_Msk (0x1UL << OSCILLATORS_LFXO_STATUSANA_PDSETTLED_Pos) /*!< Bit mask of
-                                                                            PDSETTLED field.*/
-
-/* PDOUTLOWER @Bit 5 : Current value of the PD_OUT_LOWER signal from the analog module */
-  #define OSCILLATORS_LFXO_STATUSANA_PDOUTLOWER_Pos (5UL) /*!< Position of PDOUTLOWER field.                                   */
-  #define OSCILLATORS_LFXO_STATUSANA_PDOUTLOWER_Msk (0x1UL << OSCILLATORS_LFXO_STATUSANA_PDOUTLOWER_Pos) /*!< Bit mask of
-                                                                            PDOUTLOWER field.*/
-
-/* PDOUTUPPER @Bit 6 : Current value of the PD_OUT_UPPER signal from the analog module */
-  #define OSCILLATORS_LFXO_STATUSANA_PDOUTUPPER_Pos (6UL) /*!< Position of PDOUTUPPER field.                                   */
-  #define OSCILLATORS_LFXO_STATUSANA_PDOUTUPPER_Msk (0x1UL << OSCILLATORS_LFXO_STATUSANA_PDOUTUPPER_Pos) /*!< Bit mask of
-                                                                            PDOUTUPPER field.*/
-
-
-/* OSCILLATORS_LFXO_MIRROR: Enable LOCK for mirrored registers */
-  #define OSCILLATORS_LFXO_MIRROR_ResetValue (0x00000001UL) /*!< Reset value of MIRROR register.                               */
-
-/* LOCK @Bit 0 : Lock for mirrored registers */
-  #define OSCILLATORS_LFXO_MIRROR_LOCK_Pos (0UL)     /*!< Position of LOCK field.                                              */
-  #define OSCILLATORS_LFXO_MIRROR_LOCK_Msk (0x1UL << OSCILLATORS_LFXO_MIRROR_LOCK_Pos) /*!< Bit mask of LOCK field.            */
-  #define OSCILLATORS_LFXO_MIRROR_LOCK_Min (0x0UL)   /*!< Min enumerator value of LOCK field.                                  */
-  #define OSCILLATORS_LFXO_MIRROR_LOCK_Max (0x1UL)   /*!< Max enumerator value of LOCK field.                                  */
-  #define OSCILLATORS_LFXO_MIRROR_LOCK_Disabled (0x0UL) /*!< Lock disabled                                                     */
-  #define OSCILLATORS_LFXO_MIRROR_LOCK_Enabled (0x1UL) /*!< Lock enabled                                                       */
-
-
-/* OSCILLATORS_LFXO_CLOAD: Internal capacitive load */
-  #define OSCILLATORS_LFXO_CLOAD_ResetValue (0x00000000UL) /*!< Reset value of CLOAD register.                                 */
-
-/* VAL0 @Bits 0..3 : Capacitive load value */
-  #define OSCILLATORS_LFXO_CLOAD_VAL0_Pos (0UL)      /*!< Position of VAL0 field.                                              */
-  #define OSCILLATORS_LFXO_CLOAD_VAL0_Msk (0xFUL << OSCILLATORS_LFXO_CLOAD_VAL0_Pos) /*!< Bit mask of VAL0 field.              */
-
-/* VAL1 @Bit 4 : Capacitive load value */
-  #define OSCILLATORS_LFXO_CLOAD_VAL1_Pos (4UL)      /*!< Position of VAL1 field.                                              */
-  #define OSCILLATORS_LFXO_CLOAD_VAL1_Msk (0x1UL << OSCILLATORS_LFXO_CLOAD_VAL1_Pos) /*!< Bit mask of VAL1 field.              */
-  #define OSCILLATORS_LFXO_CLOAD_VAL1_Min (0x0UL)    /*!< Min value of VAL1 field.                                             */
-  #define OSCILLATORS_LFXO_CLOAD_VAL1_Max (0x1UL)    /*!< Max size of VAL1 field.                                              */
-
-
-/* OSCILLATORS_LFXO_AMPLITUDECTRL: Amplitude control */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_ResetValue (0x0110010AUL) /*!< Reset value of AMPLITUDECTRL register.                 */
-
-/* INTERVAL @Bits 0..4 : Amplitude check interval */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_INTERVAL_Pos (0UL) /*!< Position of INTERVAL field.                                   */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_INTERVAL_Msk (0x1FUL << OSCILLATORS_LFXO_AMPLITUDECTRL_INTERVAL_Pos) /*!< Bit mask of
-                                                                            INTERVAL field.*/
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_INTERVAL_Min (0x01UL) /*!< Min value of INTERVAL field.                               */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_INTERVAL_Max (0x1FUL) /*!< Max size of INTERVAL field.                                */
-
-/* STEP @Bits 8..10 : Step to adjust the IDAC when the peak detector triggers */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_STEP_Pos (8UL) /*!< Position of STEP field.                                           */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_STEP_Msk (0x7UL << OSCILLATORS_LFXO_AMPLITUDECTRL_STEP_Pos) /*!< Bit mask of STEP
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_STEP_Min (0x0UL) /*!< Min value of STEP field.                                        */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_STEP_Max (0x7UL) /*!< Max size of STEP field.                                         */
-
-/* IDACINIT @Bits 16..20 : Initial IDAC code for the pierce oscillator */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_IDACINIT_Pos (16UL) /*!< Position of IDACINIT field.                                  */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_IDACINIT_Msk (0x1FUL << OSCILLATORS_LFXO_AMPLITUDECTRL_IDACINIT_Pos) /*!< Bit mask of
-                                                                            IDACINIT field.*/
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_IDACINIT_Min (0x00UL) /*!< Min value of IDACINIT field.                               */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_IDACINIT_Max (0x1FUL) /*!< Max size of IDACINIT field.                                */
-
-/* PDCTRL @Bit 24 : Peak detector control */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_PDCTRL_Pos (24UL) /*!< Position of PDCTRL field.                                      */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_PDCTRL_Msk (0x1UL << OSCILLATORS_LFXO_AMPLITUDECTRL_PDCTRL_Pos) /*!< Bit mask of PDCTRL
-                                                                            field.*/
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_PDCTRL_Min (0x0UL) /*!< Min enumerator value of PDCTRL field.                         */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_PDCTRL_Max (0x1UL) /*!< Max enumerator value of PDCTRL field.                         */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_PDCTRL_Disabled (0x0UL) /*!< Peak detector disabled                                   */
-  #define OSCILLATORS_LFXO_AMPLITUDECTRL_PDCTRL_Enabled (0x1UL) /*!< Peak detector enabled                                     */
-
-
-/* OSCILLATORS_LFXO_PWRUPCTRL: Power up control */
-  #define OSCILLATORS_LFXO_PWRUPCTRL_ResetValue (0x00000000UL) /*!< Reset value of PWRUPCTRL register.                         */
-
-/* CTRL @Bits 0..1 : Power up control */
-  #define OSCILLATORS_LFXO_PWRUPCTRL_CTRL_Pos (0UL)  /*!< Position of CTRL field.                                              */
-  #define OSCILLATORS_LFXO_PWRUPCTRL_CTRL_Msk (0x3UL << OSCILLATORS_LFXO_PWRUPCTRL_CTRL_Pos) /*!< Bit mask of CTRL field.      */
-  #define OSCILLATORS_LFXO_PWRUPCTRL_CTRL_Min (0x0UL) /*!< Min enumerator value of CTRL field.                                 */
-  #define OSCILLATORS_LFXO_PWRUPCTRL_CTRL_Max (0x2UL) /*!< Max enumerator value of CTRL field.                                 */
-  #define OSCILLATORS_LFXO_PWRUPCTRL_CTRL_Auto (0x0UL) /*!< Automatically handled by the peripheral                            */
-  #define OSCILLATORS_LFXO_PWRUPCTRL_CTRL_PowerUp (0x1UL) /*!< Power up                                                        */
-  #define OSCILLATORS_LFXO_PWRUPCTRL_CTRL_PowerDown (0x2UL) /*!< Power down                                                    */
-
-
-/* OSCILLATORS_LFXO_MODE: LFXO mode */
-  #define OSCILLATORS_LFXO_MODE_ResetValue (0x00000000UL) /*!< Reset value of MODE register.                                   */
-
-/* MODE @Bits 0..1 : Mode */
-  #define OSCILLATORS_LFXO_MODE_MODE_Pos (0UL)       /*!< Position of MODE field.                                              */
-  #define OSCILLATORS_LFXO_MODE_MODE_Msk (0x3UL << OSCILLATORS_LFXO_MODE_MODE_Pos) /*!< Bit mask of MODE field.                */
-  #define OSCILLATORS_LFXO_MODE_MODE_Min (0x0UL)     /*!< Min enumerator value of MODE field.                                  */
-  #define OSCILLATORS_LFXO_MODE_MODE_Max (0x3UL)     /*!< Max enumerator value of MODE field.                                  */
-  #define OSCILLATORS_LFXO_MODE_MODE_Pierce (0x0UL)  /*!< Pierce mode                                                          */
-  #define OSCILLATORS_LFXO_MODE_MODE_Pixo (0x1UL)    /*!< PIXO mode                                                            */
-  #define OSCILLATORS_LFXO_MODE_MODE_ExternalSine (0x2UL) /*!< External sine wave clock                                        */
-  #define OSCILLATORS_LFXO_MODE_MODE_ExternalSquare (0x3UL) /*!< External square wave clock                                    */
-
-/* HPMODE @Bit 4 : High performance mode */
-  #define OSCILLATORS_LFXO_MODE_HPMODE_Pos (4UL)     /*!< Position of HPMODE field.                                            */
-  #define OSCILLATORS_LFXO_MODE_HPMODE_Msk (0x1UL << OSCILLATORS_LFXO_MODE_HPMODE_Pos) /*!< Bit mask of HPMODE field.          */
-  #define OSCILLATORS_LFXO_MODE_HPMODE_Min (0x0UL)   /*!< Min enumerator value of HPMODE field.                                */
-  #define OSCILLATORS_LFXO_MODE_HPMODE_Max (0x1UL)   /*!< Max enumerator value of HPMODE field.                                */
-  #define OSCILLATORS_LFXO_MODE_HPMODE_Disabled (0x0UL) /*!< Disable high performance mode                                     */
-  #define OSCILLATORS_LFXO_MODE_HPMODE_Enabled (0x1UL) /*!< Enable high performance mode                                       */
-
-
-
-/* ============================================= Struct OSCILLATORS_LFRC_CONFIG ============================================== */
-/**
-  * @brief CONFIG [OSCILLATORS_LFRC_CONFIG] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CFG;                               /*!< (@ 0x00000000) Override the configuration                            */
-} NRF_OSCILLATORS_LFRC_CONFIG_Type;                  /*!< Size = 4 (0x004)                                                     */
-
-/* OSCILLATORS_LFRC_CONFIG_CFG: Override the configuration */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_ResetValue (0x00000000UL) /*!< Reset value of CFG register.                              */
-
-/* DOUBLETAILCURRENT @Bit 0 : Double tail current in comparator CMPX_INT, only for debugging purposes. */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Pos (0UL) /*!< Position of DOUBLETAILCURRENT field.                    */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Msk (0x1UL << OSCILLATORS_LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Pos) /*!<
-                                                                            Bit mask of DOUBLETAILCURRENT field.*/
-  #define OSCILLATORS_LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Min (0x0UL) /*!< Min enumerator value of DOUBLETAILCURRENT field.      */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Max (0x1UL) /*!< Max enumerator value of DOUBLETAILCURRENT field.      */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Disabled (0x0UL) /*!< Disabled                                         */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Enabled (0x1UL) /*!< Enabled                                           */
-
-/* CONTINUOUSTAILBIAS @Bit 1 : Enable continuous tail bias in comparator CMPX_INT, only for debugging purposes. */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Pos (1UL) /*!< Position of CONTINUOUSTAILBIAS field.                  */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Msk (0x1UL << OSCILLATORS_LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Pos) /*!<
-                                                                            Bit mask of CONTINUOUSTAILBIAS field.*/
-  #define OSCILLATORS_LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Min (0x0UL) /*!< Min enumerator value of CONTINUOUSTAILBIAS field.    */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Max (0x1UL) /*!< Max enumerator value of CONTINUOUSTAILBIAS field.    */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Disabled (0x0UL) /*!< Disabled                                        */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Enabled (0x1UL) /*!< Enabled                                          */
-
-/* ENABLERETENTION @Bit 2 : Enable retention for CAL */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_ENABLERETENTION_Pos (2UL) /*!< Position of ENABLERETENTION field.                        */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_ENABLERETENTION_Msk (0x1UL << OSCILLATORS_LFRC_CONFIG_CFG_ENABLERETENTION_Pos) /*!< Bit
-                                                                            mask of ENABLERETENTION field.*/
-  #define OSCILLATORS_LFRC_CONFIG_CFG_ENABLERETENTION_Min (0x0UL) /*!< Min enumerator value of ENABLERETENTION field.          */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_ENABLERETENTION_Max (0x1UL) /*!< Max enumerator value of ENABLERETENTION field.          */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_ENABLERETENTION_Disabled (0x0UL) /*!< Disabled                                           */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_ENABLERETENTION_Enabled (0x1UL) /*!< Enabled                                             */
-
-/* SPARE @Bit 3 : Spare general purpose configuration bits. Register in NVM. */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_SPARE_Pos (3UL) /*!< Position of SPARE field.                                            */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_SPARE_Msk (0x1UL << OSCILLATORS_LFRC_CONFIG_CFG_SPARE_Pos) /*!< Bit mask of SPARE field. */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_SPARE_Min (0x0UL) /*!< Min enumerator value of SPARE field.                              */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_SPARE_Max (0x1UL) /*!< Max enumerator value of SPARE field.                              */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_SPARE_Disabled (0x0UL) /*!< Disabled                                                     */
-  #define OSCILLATORS_LFRC_CONFIG_CFG_SPARE_Enabled (0x1UL) /*!< Enabled                                                       */
-
-
-
-/* =============================================== Struct OSCILLATORS_LFRC_CAL =============================================== */
-/**
-  * @brief CAL [OSCILLATORS_LFRC_CAL] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  LENGTH;                            /*!< (@ 0x00000000) Measurement cycle count length used while calibration */
-  __IOM uint32_t  TRIMLIMITLO;                       /*!< (@ 0x00000004) Lower trim limit                                      */
-  __IOM uint32_t  TRIMLIMITHI;                       /*!< (@ 0x00000008) Higher trim limit                                     */
-  __IM  uint32_t  RESULT[2];                         /*!< (@ 0x0000000C) Calibration result from CAL=n                         */
-  __IM  uint32_t  NHI;                               /*!< (@ 0x00000014) Number of cycles when the CAL signal is high          */
-  __IOM uint32_t  LFRCOSCTRIM;                       /*!< (@ 0x00000018) Initial coarse frequency trimming value for the
-                                                                         oscillator.*/
-} NRF_OSCILLATORS_LFRC_CAL_Type;                     /*!< Size = 28 (0x01C)                                                    */
-
-/* OSCILLATORS_LFRC_CAL_LENGTH: Measurement cycle count length used while calibration */
-  #define OSCILLATORS_LFRC_CAL_LENGTH_ResetValue (0x00000002UL) /*!< Reset value of LENGTH register.                           */
-
-/* LENGTH @Bits 0..2 : Number of cycles */
-  #define OSCILLATORS_LFRC_CAL_LENGTH_LENGTH_Pos (0UL) /*!< Position of LENGTH field.                                          */
-  #define OSCILLATORS_LFRC_CAL_LENGTH_LENGTH_Msk (0x7UL << OSCILLATORS_LFRC_CAL_LENGTH_LENGTH_Pos) /*!< Bit mask of LENGTH
-                                                                            field.*/
-  #define OSCILLATORS_LFRC_CAL_LENGTH_LENGTH_Min (0x0UL) /*!< Min enumerator value of LENGTH field.                            */
-  #define OSCILLATORS_LFRC_CAL_LENGTH_LENGTH_Max (0x3UL) /*!< Max enumerator value of LENGTH field.                            */
-  #define OSCILLATORS_LFRC_CAL_LENGTH_LENGTH_N64 (0x0UL) /*!< 64 cycles                                                        */
-  #define OSCILLATORS_LFRC_CAL_LENGTH_LENGTH_N128 (0x1UL) /*!< 128 cycles                                                      */
-  #define OSCILLATORS_LFRC_CAL_LENGTH_LENGTH_N256 (0x2UL) /*!< 256 cycles                                                      */
-  #define OSCILLATORS_LFRC_CAL_LENGTH_LENGTH_N512 (0x3UL) /*!< 512 cycles                                                      */
-
-
-/* OSCILLATORS_LFRC_CAL_TRIMLIMITLO: Lower trim limit */
-  #define OSCILLATORS_LFRC_CAL_TRIMLIMITLO_ResetValue (0x00000000UL) /*!< Reset value of TRIMLIMITLO register.                 */
-
-/* VALUE @Bits 0..17 : TRIM limit value. */
-  #define OSCILLATORS_LFRC_CAL_TRIMLIMITLO_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
-  #define OSCILLATORS_LFRC_CAL_TRIMLIMITLO_VALUE_Msk (0x3FFFFUL << OSCILLATORS_LFRC_CAL_TRIMLIMITLO_VALUE_Pos) /*!< Bit mask of
-                                                                            VALUE field.*/
-
-
-/* OSCILLATORS_LFRC_CAL_TRIMLIMITHI: Higher trim limit */
-  #define OSCILLATORS_LFRC_CAL_TRIMLIMITHI_ResetValue (0x0003FFFFUL) /*!< Reset value of TRIMLIMITHI register.                 */
-
-/* VALUE @Bits 0..17 : TRIM limit value */
-  #define OSCILLATORS_LFRC_CAL_TRIMLIMITHI_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
-  #define OSCILLATORS_LFRC_CAL_TRIMLIMITHI_VALUE_Msk (0x3FFFFUL << OSCILLATORS_LFRC_CAL_TRIMLIMITHI_VALUE_Pos) /*!< Bit mask of
-                                                                            VALUE field.*/
-
-
-/* OSCILLATORS_LFRC_CAL_RESULT: Calibration result from CAL=n */
-  #define OSCILLATORS_LFRC_CAL_RESULT_MaxCount (2UL) /*!< Max size of RESULT[2] array.                                         */
-  #define OSCILLATORS_LFRC_CAL_RESULT_MaxIndex (1UL) /*!< Max index of RESULT[2] array.                                        */
-  #define OSCILLATORS_LFRC_CAL_RESULT_MinIndex (0UL) /*!< Min index of RESULT[2] array.                                        */
-  #define OSCILLATORS_LFRC_CAL_RESULT_ResetValue (0x00000000UL) /*!< Reset value of RESULT[2] register.                        */
-
-/* RESULT @Bits 0..31 : The result in 16MHz clock cycles */
-  #define OSCILLATORS_LFRC_CAL_RESULT_RESULT_Pos (0UL) /*!< Position of RESULT field.                                          */
-  #define OSCILLATORS_LFRC_CAL_RESULT_RESULT_Msk (0xFFFFFFFFUL << OSCILLATORS_LFRC_CAL_RESULT_RESULT_Pos) /*!< Bit mask of
-                                                                            RESULT field.*/
-
-
-/* OSCILLATORS_LFRC_CAL_NHI: Number of cycles when the CAL signal is high */
-  #define OSCILLATORS_LFRC_CAL_NHI_ResetValue (0x00000000UL) /*!< Reset value of NHI register.                                 */
-
-/* NHI @Bits 0..11 : Number of cycles */
-  #define OSCILLATORS_LFRC_CAL_NHI_NHI_Pos (0UL)     /*!< Position of NHI field.                                               */
-  #define OSCILLATORS_LFRC_CAL_NHI_NHI_Msk (0xFFFUL << OSCILLATORS_LFRC_CAL_NHI_NHI_Pos) /*!< Bit mask of NHI field.           */
-
-
-/* OSCILLATORS_LFRC_CAL_LFRCOSCTRIM: Initial coarse frequency trimming value for the oscillator. */
-  #define OSCILLATORS_LFRC_CAL_LFRCOSCTRIM_ResetValue (0x0000002CUL) /*!< Reset value of LFRCOSCTRIM register.                 */
-
-/* VAL @Bits 0..5 : TRIM value */
-  #define OSCILLATORS_LFRC_CAL_LFRCOSCTRIM_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
-  #define OSCILLATORS_LFRC_CAL_LFRCOSCTRIM_VAL_Msk (0x3FUL << OSCILLATORS_LFRC_CAL_LFRCOSCTRIM_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-
-
-/* ============================================ Struct OSCILLATORS_LFRC_OVERRIDE ============================================= */
-/**
-  * @brief OVERRIDE [OSCILLATORS_LFRC_OVERRIDE] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  SYNC;                              /*!< (@ 0x00000000) Override the SYNC signal to the LFRC32K analog module */
-  __IOM uint32_t  CAL;                               /*!< (@ 0x00000004) Override the CAL signal to the LFRC32K analog module  */
-  __IOM uint32_t  RETAIN;                            /*!< (@ 0x00000008) Override the RETAIN signal to the LFRC32K analog
-                                                                         module*/
-  __IOM uint32_t  PWRUP;                             /*!< (@ 0x0000000C) Override the PWRUP signal to the LFRC32K analog module*/
-  __IOM uint32_t  TRIM;                              /*!< (@ 0x00000010) Override the TRIM[5:0] signal to the LFRC32K analog
-                                                                         module*/
-  __IOM uint32_t  READY;                             /*!< (@ 0x00000014) Override the READY signal from the analog module      */
-  __IOM uint32_t  SETTLED;                           /*!< (@ 0x00000018) Override the SETTLED signal from the analog module    */
-} NRF_OSCILLATORS_LFRC_OVERRIDE_Type;                /*!< Size = 28 (0x01C)                                                    */
-
-/* OSCILLATORS_LFRC_OVERRIDE_SYNC: Override the SYNC signal to the LFRC32K analog module */
-  #define OSCILLATORS_LFRC_OVERRIDE_SYNC_ResetValue (0x00000000UL) /*!< Reset value of SYNC register.                          */
-
-/* VAL @Bit 0 : Override value for the signal */
-  #define OSCILLATORS_LFRC_OVERRIDE_SYNC_VAL_Pos (0UL) /*!< Position of VAL field.                                             */
-  #define OSCILLATORS_LFRC_OVERRIDE_SYNC_VAL_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_SYNC_VAL_Pos) /*!< Bit mask of VAL field. */
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFRC_OVERRIDE_SYNC_EN_Pos (31UL) /*!< Position of EN field.                                              */
-  #define OSCILLATORS_LFRC_OVERRIDE_SYNC_EN_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_SYNC_EN_Pos) /*!< Bit mask of EN field.    */
-  #define OSCILLATORS_LFRC_OVERRIDE_SYNC_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                 */
-  #define OSCILLATORS_LFRC_OVERRIDE_SYNC_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                 */
-  #define OSCILLATORS_LFRC_OVERRIDE_SYNC_EN_Disabled (0x0UL) /*!< Override is disabled                                         */
-  #define OSCILLATORS_LFRC_OVERRIDE_SYNC_EN_Enabled (0x1UL) /*!< Override is enabled                                           */
-
-
-/* OSCILLATORS_LFRC_OVERRIDE_CAL: Override the CAL signal to the LFRC32K analog module */
-  #define OSCILLATORS_LFRC_OVERRIDE_CAL_ResetValue (0x00000000UL) /*!< Reset value of CAL register.                            */
-
-/* VAL @Bit 0 : Override value for the signal */
-  #define OSCILLATORS_LFRC_OVERRIDE_CAL_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
-  #define OSCILLATORS_LFRC_OVERRIDE_CAL_VAL_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_CAL_VAL_Pos) /*!< Bit mask of VAL field.   */
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFRC_OVERRIDE_CAL_EN_Pos (31UL) /*!< Position of EN field.                                               */
-  #define OSCILLATORS_LFRC_OVERRIDE_CAL_EN_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_CAL_EN_Pos) /*!< Bit mask of EN field.      */
-  #define OSCILLATORS_LFRC_OVERRIDE_CAL_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                  */
-  #define OSCILLATORS_LFRC_OVERRIDE_CAL_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                  */
-  #define OSCILLATORS_LFRC_OVERRIDE_CAL_EN_Disabled (0x0UL) /*!< Override is disabled                                          */
-  #define OSCILLATORS_LFRC_OVERRIDE_CAL_EN_Enabled (0x1UL) /*!< Override is enabled                                            */
-
-
-/* OSCILLATORS_LFRC_OVERRIDE_RETAIN: Override the RETAIN signal to the LFRC32K analog module */
-  #define OSCILLATORS_LFRC_OVERRIDE_RETAIN_ResetValue (0x00000000UL) /*!< Reset value of RETAIN register.                      */
-
-/* VAL @Bit 0 : Override value for the signal */
-  #define OSCILLATORS_LFRC_OVERRIDE_RETAIN_VAL_Pos (0UL) /*!< Position of VAL field.                                           */
-  #define OSCILLATORS_LFRC_OVERRIDE_RETAIN_VAL_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_RETAIN_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFRC_OVERRIDE_RETAIN_EN_Pos (31UL) /*!< Position of EN field.                                            */
-  #define OSCILLATORS_LFRC_OVERRIDE_RETAIN_EN_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_RETAIN_EN_Pos) /*!< Bit mask of EN field.*/
-  #define OSCILLATORS_LFRC_OVERRIDE_RETAIN_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                               */
-  #define OSCILLATORS_LFRC_OVERRIDE_RETAIN_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                               */
-  #define OSCILLATORS_LFRC_OVERRIDE_RETAIN_EN_Disabled (0x0UL) /*!< Override is disabled                                       */
-  #define OSCILLATORS_LFRC_OVERRIDE_RETAIN_EN_Enabled (0x1UL) /*!< Override is enabled                                         */
-
-
-/* OSCILLATORS_LFRC_OVERRIDE_PWRUP: Override the PWRUP signal to the LFRC32K analog module */
-  #define OSCILLATORS_LFRC_OVERRIDE_PWRUP_ResetValue (0x00000000UL) /*!< Reset value of PWRUP register.                        */
-
-/* VAL @Bit 0 : Override value for the signal */
-  #define OSCILLATORS_LFRC_OVERRIDE_PWRUP_VAL_Pos (0UL) /*!< Position of VAL field.                                            */
-  #define OSCILLATORS_LFRC_OVERRIDE_PWRUP_VAL_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_PWRUP_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFRC_OVERRIDE_PWRUP_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFRC_OVERRIDE_PWRUP_EN_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_PWRUP_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFRC_OVERRIDE_PWRUP_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFRC_OVERRIDE_PWRUP_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFRC_OVERRIDE_PWRUP_EN_Disabled (0x0UL) /*!< Override is disabled                                        */
-  #define OSCILLATORS_LFRC_OVERRIDE_PWRUP_EN_Enabled (0x1UL) /*!< Override is enabled                                          */
-
-
-/* OSCILLATORS_LFRC_OVERRIDE_TRIM: Override the TRIM[5:0] signal to the LFRC32K analog module */
-  #define OSCILLATORS_LFRC_OVERRIDE_TRIM_ResetValue (0x00000000UL) /*!< Reset value of TRIM register.                          */
-
-/* VAL @Bits 0..5 : TRIM value */
-  #define OSCILLATORS_LFRC_OVERRIDE_TRIM_VAL_Pos (0UL) /*!< Position of VAL field.                                             */
-  #define OSCILLATORS_LFRC_OVERRIDE_TRIM_VAL_Msk (0x3FUL << OSCILLATORS_LFRC_OVERRIDE_TRIM_VAL_Pos) /*!< Bit mask of VAL field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFRC_OVERRIDE_TRIM_EN_Pos (31UL) /*!< Position of EN field.                                              */
-  #define OSCILLATORS_LFRC_OVERRIDE_TRIM_EN_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_TRIM_EN_Pos) /*!< Bit mask of EN field.    */
-  #define OSCILLATORS_LFRC_OVERRIDE_TRIM_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                 */
-  #define OSCILLATORS_LFRC_OVERRIDE_TRIM_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                 */
-  #define OSCILLATORS_LFRC_OVERRIDE_TRIM_EN_Disabled (0x0UL) /*!< Override is disabled                                         */
-  #define OSCILLATORS_LFRC_OVERRIDE_TRIM_EN_Enabled (0x1UL) /*!< Override is enabled                                           */
-
-
-/* OSCILLATORS_LFRC_OVERRIDE_READY: Override the READY signal from the analog module */
-  #define OSCILLATORS_LFRC_OVERRIDE_READY_ResetValue (0x00000000UL) /*!< Reset value of READY register.                        */
-
-/* VAL @Bit 0 : Current value of the signal */
-  #define OSCILLATORS_LFRC_OVERRIDE_READY_VAL_Pos (0UL) /*!< Position of VAL field.                                            */
-  #define OSCILLATORS_LFRC_OVERRIDE_READY_VAL_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_READY_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFRC_OVERRIDE_READY_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFRC_OVERRIDE_READY_EN_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_READY_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFRC_OVERRIDE_READY_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFRC_OVERRIDE_READY_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFRC_OVERRIDE_READY_EN_Disabled (0x0UL) /*!< Override is disabled                                        */
-  #define OSCILLATORS_LFRC_OVERRIDE_READY_EN_Enabled (0x1UL) /*!< Override is enabled                                          */
-
-
-/* OSCILLATORS_LFRC_OVERRIDE_SETTLED: Override the SETTLED signal from the analog module */
-  #define OSCILLATORS_LFRC_OVERRIDE_SETTLED_ResetValue (0x00000000UL) /*!< Reset value of SETTLED register.                    */
-
-/* VAL @Bit 0 : Current value of the signal */
-  #define OSCILLATORS_LFRC_OVERRIDE_SETTLED_VAL_Pos (0UL) /*!< Position of VAL field.                                          */
-  #define OSCILLATORS_LFRC_OVERRIDE_SETTLED_VAL_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_SETTLED_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_LFRC_OVERRIDE_SETTLED_EN_Pos (31UL) /*!< Position of EN field.                                           */
-  #define OSCILLATORS_LFRC_OVERRIDE_SETTLED_EN_Msk (0x1UL << OSCILLATORS_LFRC_OVERRIDE_SETTLED_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_LFRC_OVERRIDE_SETTLED_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                              */
-  #define OSCILLATORS_LFRC_OVERRIDE_SETTLED_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                              */
-  #define OSCILLATORS_LFRC_OVERRIDE_SETTLED_EN_Disabled (0x0UL) /*!< Override is disabled                                      */
-  #define OSCILLATORS_LFRC_OVERRIDE_SETTLED_EN_Enabled (0x1UL) /*!< Override is enabled                                        */
-
-
-
-/* =============================================== Struct OSCILLATORS_LFRC_DFT =============================================== */
-/**
-  * @brief DFT [OSCILLATORS_LFRC_DFT] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  ATB0CONFIG;                        /*!< (@ 0x00000000) Analog Test Bus 0 (ATB0) configuration                */
-  __IOM uint32_t  ATB1CONFIG;                        /*!< (@ 0x00000004) Analog Test Bus 1 (ATB1) configuration                */
-  __IM  uint32_t  RESERVED[2];
-  __IOM uint32_t  DTBCONFIG;                         /*!< (@ 0x00000010) Digital Test Bus (DTB0-3) configuration               */
-  __IM  uint32_t  RESERVED1[7];
-  __IOM uint32_t  TCFG;                              /*!< (@ 0x00000030) Test mode configuration                               */
-} NRF_OSCILLATORS_LFRC_DFT_Type;                     /*!< Size = 52 (0x034)                                                    */
-
-/* OSCILLATORS_LFRC_DFT_ATB0CONFIG: Analog Test Bus 0 (ATB0) configuration */
-  #define OSCILLATORS_LFRC_DFT_ATB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB0CONFIG register.                   */
-
-/* EN @Bit 31 : Enable the analog test bus */
-  #define OSCILLATORS_LFRC_DFT_ATB0CONFIG_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFRC_DFT_ATB0CONFIG_EN_Msk (0x1UL << OSCILLATORS_LFRC_DFT_ATB0CONFIG_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFRC_DFT_ATB0CONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFRC_DFT_ATB0CONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFRC_DFT_ATB0CONFIG_EN_Disabled (0x0UL) /*!< Analog test bus is disabled                                 */
-  #define OSCILLATORS_LFRC_DFT_ATB0CONFIG_EN_Enabled (0x1UL) /*!< Connect output from built-in ULP regulator to the analog test
-                                                                  bus (ATB0)*/
-
-
-/* OSCILLATORS_LFRC_DFT_ATB1CONFIG: Analog Test Bus 1 (ATB1) configuration */
-  #define OSCILLATORS_LFRC_DFT_ATB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB1CONFIG register.                   */
-
-/* EN @Bit 31 : Enable the analog test bus */
-  #define OSCILLATORS_LFRC_DFT_ATB1CONFIG_EN_Pos (31UL) /*!< Position of EN field.                                             */
-  #define OSCILLATORS_LFRC_DFT_ATB1CONFIG_EN_Msk (0x1UL << OSCILLATORS_LFRC_DFT_ATB1CONFIG_EN_Pos) /*!< Bit mask of EN field.  */
-  #define OSCILLATORS_LFRC_DFT_ATB1CONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                */
-  #define OSCILLATORS_LFRC_DFT_ATB1CONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                */
-  #define OSCILLATORS_LFRC_DFT_ATB1CONFIG_EN_Disabled (0x0UL) /*!< Analog test bus is disabled                                 */
-  #define OSCILLATORS_LFRC_DFT_ATB1CONFIG_EN_Enabled (0x1UL) /*!< Connect 50nA bias current from reference current generator to
-                                                                  the analog test bus (ATB1)*/
-
-
-/* OSCILLATORS_LFRC_DFT_DTBCONFIG: Digital Test Bus (DTB0-3) configuration */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTBCONFIG register.                     */
-
-/* SELMUX @Bit 0 : Select multiplexer for DTB0 */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                                       */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_SELMUX_Msk (0x1UL << OSCILLATORS_LFRC_DFT_DTBCONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX
-                                                                            field.*/
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                         */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_SELMUX_Max (0x1UL) /*!< Max enumerator value of SELMUX field.                         */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_SELMUX_CONFIG0 (0x0UL) /*!< Configuration 0 selected                                  */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_SELMUX_CONFIG1 (0x1UL) /*!< Configuration 1 selected                                  */
-
-/* PWRUPDELTEST @Bit 27 : Enable the PWRUP delay test circuit on DTB3 */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Pos (27UL) /*!< Position of PWRUPDELTEST field.                          */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Msk (0x1UL << OSCILLATORS_LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Pos) /*!< Bit
-                                                                            mask of PWRUPDELTEST field.*/
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Min (0x0UL) /*!< Min enumerator value of PWRUPDELTEST field.             */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Max (0x1UL) /*!< Max enumerator value of PWRUPDELTEST field.             */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Disabled (0x0UL) /*!< PWRUP delay test circuit is disabled               */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_PWRUPDELTEST_Enabled (0x1UL) /*!< PWRUP delay test circuit is enabled                 */
-
-/* ENABLEDTB0 @Bit 28 : Enable the digital test bus 0 (DTB0) */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB0_Pos (28UL) /*!< Position of ENABLEDTB0 field.                              */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB0_Msk (0x1UL << OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB0_Pos) /*!< Bit mask
-                                                                            of ENABLEDTB0 field.*/
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB0_Min (0x0UL) /*!< Min enumerator value of ENABLEDTB0 field.                 */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB0_Max (0x1UL) /*!< Max enumerator value of ENABLEDTB0 field.                 */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB0_Disabled (0x0UL) /*!< Digital test bus is disabled                         */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB0_Enabled (0x1UL) /*!< Digital test bus is enabled                           */
-
-/* ENABLEDTB1 @Bit 29 : Enable the digital test bus 1 (DTB1) */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB1_Pos (29UL) /*!< Position of ENABLEDTB1 field.                              */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB1_Msk (0x1UL << OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB1_Pos) /*!< Bit mask
-                                                                            of ENABLEDTB1 field.*/
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB1_Min (0x0UL) /*!< Min enumerator value of ENABLEDTB1 field.                 */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB1_Max (0x1UL) /*!< Max enumerator value of ENABLEDTB1 field.                 */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB1_Disabled (0x0UL) /*!< Digital test bus is disabled                         */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB1_Enabled (0x1UL) /*!< Digital test bus is enabled                           */
-
-/* ENABLEDTB2 @Bit 30 : Enable the digital test bus 2 (DTB2) */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB2_Pos (30UL) /*!< Position of ENABLEDTB2 field.                              */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB2_Msk (0x1UL << OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB2_Pos) /*!< Bit mask
-                                                                            of ENABLEDTB2 field.*/
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB2_Min (0x0UL) /*!< Min enumerator value of ENABLEDTB2 field.                 */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB2_Max (0x1UL) /*!< Max enumerator value of ENABLEDTB2 field.                 */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB2_Disabled (0x0UL) /*!< Digital test bus is disabled                         */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB2_Enabled (0x1UL) /*!< Digital test bus is enabled                           */
-
-/* ENABLEDTB3 @Bit 31 : Enable the digital test bus 3 (DTB3) */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB3_Pos (31UL) /*!< Position of ENABLEDTB3 field.                              */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB3_Msk (0x1UL << OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB3_Pos) /*!< Bit mask
-                                                                            of ENABLEDTB3 field.*/
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB3_Min (0x0UL) /*!< Min enumerator value of ENABLEDTB3 field.                 */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB3_Max (0x1UL) /*!< Max enumerator value of ENABLEDTB3 field.                 */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB3_Disabled (0x0UL) /*!< Digital test bus is disabled                         */
-  #define OSCILLATORS_LFRC_DFT_DTBCONFIG_ENABLEDTB3_Enabled (0x1UL) /*!< Digital test bus is enabled                           */
-
-
-/* OSCILLATORS_LFRC_DFT_TCFG: Test mode configuration */
-  #define OSCILLATORS_LFRC_DFT_TCFG_ResetValue (0x00000000UL) /*!< Reset value of TCFG register.                               */
-
-/* DOUBLETAILCURRCOMP @Bit 0 : Enable double tail current in comparator */
-  #define OSCILLATORS_LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Pos (0UL) /*!< Position of DOUBLETAILCURRCOMP field.                    */
-  #define OSCILLATORS_LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Msk (0x1UL << OSCILLATORS_LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Pos) /*!< Bit
-                                                                            mask of DOUBLETAILCURRCOMP field.*/
-  #define OSCILLATORS_LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Min (0x0UL) /*!< Min enumerator value of DOUBLETAILCURRCOMP field.      */
-  #define OSCILLATORS_LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Max (0x1UL) /*!< Max enumerator value of DOUBLETAILCURRCOMP field.      */
-  #define OSCILLATORS_LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Disabled (0x0UL) /*!< Normal mode                                       */
-  #define OSCILLATORS_LFRC_DFT_TCFG_DOUBLETAILCURRCOMP_Enabled (0x1UL) /*!< Double tail current in comparator enabled          */
-
-/* CONTINUOUSTAILBIAS @Bit 1 : Enable continuous tail bias in comparator CMPX_INT, only for debugging purposes. */
-  #define OSCILLATORS_LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Pos (1UL) /*!< Position of CONTINUOUSTAILBIAS field.                    */
-  #define OSCILLATORS_LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Msk (0x1UL << OSCILLATORS_LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Pos) /*!< Bit
-                                                                            mask of CONTINUOUSTAILBIAS field.*/
-  #define OSCILLATORS_LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Min (0x0UL) /*!< Min enumerator value of CONTINUOUSTAILBIAS field.      */
-  #define OSCILLATORS_LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Max (0x1UL) /*!< Max enumerator value of CONTINUOUSTAILBIAS field.      */
-  #define OSCILLATORS_LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Disabled (0x0UL) /*!< Disabled                                          */
-  #define OSCILLATORS_LFRC_DFT_TCFG_CONTINUOUSTAILBIAS_Enabled (0x1UL) /*!< Enabled                                            */
-
-
-
-/* ================================================= Struct OSCILLATORS_LFRC ================================================= */
-/**
-  * @brief LFRC [OSCILLATORS_LFRC] LFRC peripheral
-  */
-typedef struct {
-  __IM  uint32_t  RESERVED[256];
-  __IM  uint32_t  STATUSTRIM;                        /*!< (@ 0x00000400) Current LFRCOSC trimming value.                       */
-  __IM  uint32_t  STATUSANA;                         /*!< (@ 0x00000404) Status of analog module output signals                */
-  __IM  uint32_t  RESERVED1[2];
-  __IOM NRF_OSCILLATORS_LFRC_CONFIG_Type CONFIG;     /*!< (@ 0x00000410) (unspecified)                                         */
-  __IM  uint32_t  RESERVED2[3];
-  __IOM NRF_OSCILLATORS_LFRC_CAL_Type CAL;           /*!< (@ 0x00000420) (unspecified)                                         */
-  __IM  uint32_t  RESERVED3[17];
-  __IOM uint32_t  MIRROR;                            /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
-  __IOM uint32_t  PWRUPCTRL;                         /*!< (@ 0x00000484) Power up control                                      */
-  __IM  uint32_t  RESERVED4[30];
-  __IOM NRF_OSCILLATORS_LFRC_OVERRIDE_Type OVERRIDE; /*!< (@ 0x00000500) (unspecified)                                         */
-  __IM  uint32_t  RESERVED5[57];
-  __IOM NRF_OSCILLATORS_LFRC_DFT_Type DFT;           /*!< (@ 0x00000600) (unspecified)                                         */
-} NRF_OSCILLATORS_LFRC_Type;                         /*!< Size = 1588 (0x634)                                                  */
-
-/* OSCILLATORS_LFRC_STATUSTRIM: Current LFRCOSC trimming value. */
-  #define OSCILLATORS_LFRC_STATUSTRIM_ResetValue (0x0000000AUL) /*!< Reset value of STATUSTRIM register.                       */
-
-/* VAL @Bits 0..5 : TRIM value */
-  #define OSCILLATORS_LFRC_STATUSTRIM_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
-  #define OSCILLATORS_LFRC_STATUSTRIM_VAL_Msk (0x3FUL << OSCILLATORS_LFRC_STATUSTRIM_VAL_Pos) /*!< Bit mask of VAL field.      */
-
-
-/* OSCILLATORS_LFRC_STATUSANA: Status of analog module output signals */
-  #define OSCILLATORS_LFRC_STATUSANA_ResetValue (0x00000000UL) /*!< Reset value of STATUSANA register.                         */
-
-/* READY @Bit 0 : Current value of the READY signal from the analog module */
-  #define OSCILLATORS_LFRC_STATUSANA_READY_Pos (0UL) /*!< Position of READY field.                                             */
-  #define OSCILLATORS_LFRC_STATUSANA_READY_Msk (0x1UL << OSCILLATORS_LFRC_STATUSANA_READY_Pos) /*!< Bit mask of READY field.   */
-
-/* SETTLED @Bit 1 : Current value of the SETTLED signal from the analog module */
-  #define OSCILLATORS_LFRC_STATUSANA_SETTLED_Pos (1UL) /*!< Position of SETTLED field.                                         */
-  #define OSCILLATORS_LFRC_STATUSANA_SETTLED_Msk (0x1UL << OSCILLATORS_LFRC_STATUSANA_SETTLED_Pos) /*!< Bit mask of SETTLED
-                                                                            field.*/
-
-
-/* OSCILLATORS_LFRC_MIRROR: Enable LOCK for mirrored registers */
-  #define OSCILLATORS_LFRC_MIRROR_ResetValue (0x00000001UL) /*!< Reset value of MIRROR register.                               */
-
-/* LOCK @Bit 0 : Lock for mirrored registers */
-  #define OSCILLATORS_LFRC_MIRROR_LOCK_Pos (0UL)     /*!< Position of LOCK field.                                              */
-  #define OSCILLATORS_LFRC_MIRROR_LOCK_Msk (0x1UL << OSCILLATORS_LFRC_MIRROR_LOCK_Pos) /*!< Bit mask of LOCK field.            */
-  #define OSCILLATORS_LFRC_MIRROR_LOCK_Min (0x0UL)   /*!< Min enumerator value of LOCK field.                                  */
-  #define OSCILLATORS_LFRC_MIRROR_LOCK_Max (0x1UL)   /*!< Max enumerator value of LOCK field.                                  */
-  #define OSCILLATORS_LFRC_MIRROR_LOCK_Disabled (0x0UL) /*!< Lock disabled                                                     */
-  #define OSCILLATORS_LFRC_MIRROR_LOCK_Enabled (0x1UL) /*!< Lock enabled                                                       */
-
-
-/* OSCILLATORS_LFRC_PWRUPCTRL: Power up control */
-  #define OSCILLATORS_LFRC_PWRUPCTRL_ResetValue (0x00000000UL) /*!< Reset value of PWRUPCTRL register.                         */
-
-/* CTRL @Bits 0..1 : Power up control */
-  #define OSCILLATORS_LFRC_PWRUPCTRL_CTRL_Pos (0UL)  /*!< Position of CTRL field.                                              */
-  #define OSCILLATORS_LFRC_PWRUPCTRL_CTRL_Msk (0x3UL << OSCILLATORS_LFRC_PWRUPCTRL_CTRL_Pos) /*!< Bit mask of CTRL field.      */
-  #define OSCILLATORS_LFRC_PWRUPCTRL_CTRL_Min (0x0UL) /*!< Min enumerator value of CTRL field.                                 */
-  #define OSCILLATORS_LFRC_PWRUPCTRL_CTRL_Max (0x2UL) /*!< Max enumerator value of CTRL field.                                 */
-  #define OSCILLATORS_LFRC_PWRUPCTRL_CTRL_Auto (0x0UL) /*!< Automatically handled by the peripheral                            */
-  #define OSCILLATORS_LFRC_PWRUPCTRL_CTRL_PowerUp (0x1UL) /*!< Power up                                                        */
-  #define OSCILLATORS_LFRC_PWRUPCTRL_CTRL_PowerDown (0x2UL) /*!< Power down                                                    */
-
-
-
-/* ============================================= Struct OSCILLATORS_HFXO64M_TRIM ============================================= */
-/**
-  * @brief TRIM [OSCILLATORS_HFXO64M_TRIM] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  RTUNE;                             /*!< (@ 0x00000000) Voltage reference tuning control. 2's complement (MSB
-                                                                         bit is inverted). Tuning range is approximately
-                                                                         +/-50mV*/
-  __IOM uint32_t  CHIRPTUNE;                         /*!< (@ 0x00000004) This is a process compensation tuning for chirp
-                                                                         generator.*/
-  __IOM uint32_t  DOUBLERCOMP;                       /*!< (@ 0x00000008) Process compensation control for frequency doubler.   */
-} NRF_OSCILLATORS_HFXO64M_TRIM_Type;                 /*!< Size = 12 (0x00C)                                                    */
-
-/* OSCILLATORS_HFXO64M_TRIM_RTUNE: Voltage reference tuning control. 2's complement (MSB bit is inverted). Tuning range is
-                                    approximately +/-50mV */
-
-  #define OSCILLATORS_HFXO64M_TRIM_RTUNE_ResetValue (0x00000000UL) /*!< Reset value of RTUNE register.                         */
-
-/* VAL @Bits 0..3 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_TRIM_RTUNE_VAL_Pos (0UL) /*!< Position of VAL field.                                             */
-  #define OSCILLATORS_HFXO64M_TRIM_RTUNE_VAL_Msk (0xFUL << OSCILLATORS_HFXO64M_TRIM_RTUNE_VAL_Pos) /*!< Bit mask of VAL field. */
-
-
-/* OSCILLATORS_HFXO64M_TRIM_CHIRPTUNE: This is a process compensation tuning for chirp generator. */
-  #define OSCILLATORS_HFXO64M_TRIM_CHIRPTUNE_ResetValue (0x00000000UL) /*!< Reset value of CHIRPTUNE register.                 */
-
-/* VAL @Bits 0..1 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_TRIM_CHIRPTUNE_VAL_Pos (0UL) /*!< Position of VAL field.                                         */
-  #define OSCILLATORS_HFXO64M_TRIM_CHIRPTUNE_VAL_Msk (0x3UL << OSCILLATORS_HFXO64M_TRIM_CHIRPTUNE_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_TRIM_CHIRPTUNE_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                           */
-  #define OSCILLATORS_HFXO64M_TRIM_CHIRPTUNE_VAL_Max (0x2UL) /*!< Max enumerator value of VAL field.                           */
-  #define OSCILLATORS_HFXO64M_TRIM_CHIRPTUNE_VAL_Fast (0x0UL) /*!< Fast process                                                */
-  #define OSCILLATORS_HFXO64M_TRIM_CHIRPTUNE_VAL_Typical (0x1UL) /*!< Typical process                                          */
-  #define OSCILLATORS_HFXO64M_TRIM_CHIRPTUNE_VAL_Slow (0x2UL) /*!< Slow process                                                */
-
-
-/* OSCILLATORS_HFXO64M_TRIM_DOUBLERCOMP: Process compensation control for frequency doubler. */
-  #define OSCILLATORS_HFXO64M_TRIM_DOUBLERCOMP_ResetValue (0x00000000UL) /*!< Reset value of DOUBLERCOMP register.             */
-
-/* VAL @Bits 0..2 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_TRIM_DOUBLERCOMP_VAL_Pos (0UL) /*!< Position of VAL field.                                       */
-  #define OSCILLATORS_HFXO64M_TRIM_DOUBLERCOMP_VAL_Msk (0x7UL << OSCILLATORS_HFXO64M_TRIM_DOUBLERCOMP_VAL_Pos) /*!< Bit mask of
-                                                                            VAL field.*/
-  #define OSCILLATORS_HFXO64M_TRIM_DOUBLERCOMP_VAL_Min (0x1UL) /*!< Min enumerator value of VAL field.                         */
-  #define OSCILLATORS_HFXO64M_TRIM_DOUBLERCOMP_VAL_Max (0x7UL) /*!< Max enumerator value of VAL field.                         */
-  #define OSCILLATORS_HFXO64M_TRIM_DOUBLERCOMP_VAL_Slow (0x1UL) /*!< Slow process                                              */
-  #define OSCILLATORS_HFXO64M_TRIM_DOUBLERCOMP_VAL_Typical (0x3UL) /*!< Typical process                                        */
-  #define OSCILLATORS_HFXO64M_TRIM_DOUBLERCOMP_VAL_Fast (0x7UL) /*!< Fast process                                              */
-
-
-
-/* ============================================== Struct OSCILLATORS_HFXO64M_TS ============================================== */
-/**
-  * @brief TS [OSCILLATORS_HFXO64M_TS] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CFG;                               /*!< (@ 0x00000000) Temperature sensor static configuration register.     */
-  __IOM uint32_t  ENSEL;                             /*!< (@ 0x00000004) Enable TS per clock request.                          */
-  __IOM uint32_t  DATAIN;                            /*!< (@ 0x00000008) TS test data input. Used only when debugging          */
-  __IOM uint32_t  DATAINLOAD;                        /*!< (@ 0x0000000C) TS test data latch pulse input. Used only when
-                                                                         debugging*/
-} NRF_OSCILLATORS_HFXO64M_TS_Type;                   /*!< Size = 16 (0x010)                                                    */
-
-/* OSCILLATORS_HFXO64M_TS_CFG: Temperature sensor static configuration register. */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ResetValue (0x00000000UL) /*!< Reset value of CFG register.                               */
-
-/* MEASMODE1 @Bits 0..7 : Measurement mode control for ch1. */
-  #define OSCILLATORS_HFXO64M_TS_CFG_MEASMODE1_Pos (0UL) /*!< Position of MEASMODE1 field.                                     */
-  #define OSCILLATORS_HFXO64M_TS_CFG_MEASMODE1_Msk (0xFFUL << OSCILLATORS_HFXO64M_TS_CFG_MEASMODE1_Pos) /*!< Bit mask of
-                                                                            MEASMODE1 field.*/
-
-/* MEASMODE2 @Bits 8..15 : Measurement mode control for ch2. */
-  #define OSCILLATORS_HFXO64M_TS_CFG_MEASMODE2_Pos (8UL) /*!< Position of MEASMODE2 field.                                     */
-  #define OSCILLATORS_HFXO64M_TS_CFG_MEASMODE2_Msk (0xFFUL << OSCILLATORS_HFXO64M_TS_CFG_MEASMODE2_Pos) /*!< Bit mask of
-                                                                            MEASMODE2 field.*/
-
-/* TIMERSEL @Bits 16..18 : Sets temperature measurement interval */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Pos (16UL) /*!< Position of TIMERSEL field.                                      */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Msk (0x7UL << OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Pos) /*!< Bit mask of TIMERSEL
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Min (0x0UL) /*!< Min enumerator value of TIMERSEL field.                         */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Max (0x7UL) /*!< Max enumerator value of TIMERSEL field.                         */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Interval4us (0x0UL) /*!< 4 us                                                    */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Interval8us (0x1UL) /*!< 8 us                                                    */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Interval16us (0x2UL) /*!< 16 us                                                  */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Interval32us (0x3UL) /*!< 32 us                                                  */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Interval64us (0x4UL) /*!< 64 us                                                  */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Interval128us (0x5UL) /*!< 128 us                                                */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Interval256us (0x6UL) /*!< 256 us                                                */
-  #define OSCILLATORS_HFXO64M_TS_CFG_TIMERSEL_Interval512us (0x7UL) /*!< 512 us                                                */
-
-/* ENABLEFASTMODE @Bit 20 : Enables fast slew rate function. */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFASTMODE_Pos (20UL) /*!< Position of ENABLEFASTMODE field.                          */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFASTMODE_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_CFG_ENABLEFASTMODE_Pos) /*!< Bit mask
-                                                                            of ENABLEFASTMODE field.*/
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFASTMODE_Min (0x0UL) /*!< Min enumerator value of ENABLEFASTMODE field.             */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFASTMODE_Max (0x1UL) /*!< Max enumerator value of ENABLEFASTMODE field.             */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFASTMODE_Disabled (0x0UL) /*!< Disabled                                             */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFASTMODE_Enabled (0x1UL) /*!< Enabled                                               */
-
-/* ENABLEFILTER @Bit 21 : Enables continuous slow filter. */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFILTER_Pos (21UL) /*!< Position of ENABLEFILTER field.                              */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFILTER_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_CFG_ENABLEFILTER_Pos) /*!< Bit mask of
-                                                                            ENABLEFILTER field.*/
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFILTER_Min (0x0UL) /*!< Min enumerator value of ENABLEFILTER field.                 */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFILTER_Max (0x1UL) /*!< Max enumerator value of ENABLEFILTER field.                 */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFILTER_Disabled (0x0UL) /*!< Disabled                                               */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEFILTER_Enabled (0x1UL) /*!< Enabled                                                 */
-
-/* ENABLEGATING @Bit 22 : Enables continuous comparison/disables comparator current saving */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEGATING_Pos (22UL) /*!< Position of ENABLEGATING field.                              */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEGATING_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_CFG_ENABLEGATING_Pos) /*!< Bit mask of
-                                                                            ENABLEGATING field.*/
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEGATING_Min (0x0UL) /*!< Min enumerator value of ENABLEGATING field.                 */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEGATING_Max (0x1UL) /*!< Max enumerator value of ENABLEGATING field.                 */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEGATING_Disabled (0x0UL) /*!< Disabled                                               */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLEGATING_Enabled (0x1UL) /*!< Enabled                                                 */
-
-/* ENABLETOGGLEMODE @Bit 23 : Enables continuous toggle if both channels are on. */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETOGGLEMODE_Pos (23UL) /*!< Position of ENABLETOGGLEMODE field.                      */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETOGGLEMODE_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_CFG_ENABLETOGGLEMODE_Pos) /*!< Bit
-                                                                            mask of ENABLETOGGLEMODE field.*/
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETOGGLEMODE_Min (0x0UL) /*!< Min enumerator value of ENABLETOGGLEMODE field.         */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETOGGLEMODE_Max (0x1UL) /*!< Max enumerator value of ENABLETOGGLEMODE field.         */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETOGGLEMODE_Disabled (0x0UL) /*!< Disabled                                           */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETOGGLEMODE_Enabled (0x1UL) /*!< Enabled                                             */
-
-/* ENABLETEST @Bit 24 : Enables TS test mode. */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETEST_Pos (24UL) /*!< Position of ENABLETEST field.                                  */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETEST_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_CFG_ENABLETEST_Pos) /*!< Bit mask of
-                                                                            ENABLETEST field.*/
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETEST_Min (0x0UL) /*!< Min enumerator value of ENABLETEST field.                     */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETEST_Max (0x1UL) /*!< Max enumerator value of ENABLETEST field.                     */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETEST_Disabled (0x0UL) /*!< Disabled                                                 */
-  #define OSCILLATORS_HFXO64M_TS_CFG_ENABLETEST_Enabled (0x1UL) /*!< Enabled                                                   */
-
-
-/* OSCILLATORS_HFXO64M_TS_ENSEL: Enable TS per clock request. */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_ResetValue (0x00000000UL) /*!< Reset value of ENSEL register.                           */
-
-/* CMOS1 @Bit 0 : Enable TS when CMOS1 is requested. */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS1_Pos (0UL) /*!< Position of CMOS1 field.                                           */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS1_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_ENSEL_CMOS1_Pos) /*!< Bit mask of CMOS1
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS1_Min (0x0UL) /*!< Min enumerator value of CMOS1 field.                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS1_Max (0x1UL) /*!< Max enumerator value of CMOS1 field.                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS1_Disabled (0x0UL) /*!< Disabled                                                    */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS1_Enabled (0x1UL) /*!< Enabled                                                      */
-
-/* CMOS2 @Bit 1 : Enable TS when CMOS2 is requested. */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2_Pos (1UL) /*!< Position of CMOS2 field.                                           */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2_Pos) /*!< Bit mask of CMOS2
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2_Min (0x0UL) /*!< Min enumerator value of CMOS2 field.                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2_Max (0x1UL) /*!< Max enumerator value of CMOS2 field.                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2_Disabled (0x0UL) /*!< Disabled                                                    */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2_Enabled (0x1UL) /*!< Enabled                                                      */
-
-/* CMOS3 @Bit 2 : Enable TS when CMOS3 is requested. */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS3_Pos (2UL) /*!< Position of CMOS3 field.                                           */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS3_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_ENSEL_CMOS3_Pos) /*!< Bit mask of CMOS3
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS3_Min (0x0UL) /*!< Min enumerator value of CMOS3 field.                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS3_Max (0x1UL) /*!< Max enumerator value of CMOS3 field.                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS3_Disabled (0x0UL) /*!< Disabled                                                    */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS3_Enabled (0x1UL) /*!< Enabled                                                      */
-
-/* CMOS2X @Bit 3 : Enable TS when CMOS2X is requested. */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2X_Pos (3UL) /*!< Position of CMOS2X field.                                         */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2X_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2X_Pos) /*!< Bit mask of CMOS2X
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2X_Min (0x0UL) /*!< Min enumerator value of CMOS2X field.                           */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2X_Max (0x1UL) /*!< Max enumerator value of CMOS2X field.                           */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2X_Disabled (0x0UL) /*!< Disabled                                                   */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_CMOS2X_Enabled (0x1UL) /*!< Enabled                                                     */
-
-/* SIN1 @Bit 4 : Enable TS when SIN1 is requested. */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN1_Pos (4UL) /*!< Position of SIN1 field.                                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN1_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_ENSEL_SIN1_Pos) /*!< Bit mask of SIN1 field.  */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN1_Min (0x0UL) /*!< Min enumerator value of SIN1 field.                               */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN1_Max (0x1UL) /*!< Max enumerator value of SIN1 field.                               */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN1_Disabled (0x0UL) /*!< Disabled                                                     */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN1_Enabled (0x1UL) /*!< Enabled                                                       */
-
-/* SIN2 @Bit 5 : Enable TS when SIN2 is requested. */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN2_Pos (5UL) /*!< Position of SIN2 field.                                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN2_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_ENSEL_SIN2_Pos) /*!< Bit mask of SIN2 field.  */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN2_Min (0x0UL) /*!< Min enumerator value of SIN2 field.                               */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN2_Max (0x1UL) /*!< Max enumerator value of SIN2 field.                               */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN2_Disabled (0x0UL) /*!< Disabled                                                     */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN2_Enabled (0x1UL) /*!< Enabled                                                       */
-
-/* SIN3 @Bit 6 : Enable TS when SIN3 is requested. */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN3_Pos (6UL) /*!< Position of SIN3 field.                                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN3_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_ENSEL_SIN3_Pos) /*!< Bit mask of SIN3 field.  */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN3_Min (0x0UL) /*!< Min enumerator value of SIN3 field.                               */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN3_Max (0x1UL) /*!< Max enumerator value of SIN3 field.                               */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN3_Disabled (0x0UL) /*!< Disabled                                                     */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN3_Enabled (0x1UL) /*!< Enabled                                                       */
-
-/* SIN4 @Bit 7 : Enable TS when SIN4 is requested. */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN4_Pos (7UL) /*!< Position of SIN4 field.                                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN4_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_ENSEL_SIN4_Pos) /*!< Bit mask of SIN4 field.  */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN4_Min (0x0UL) /*!< Min enumerator value of SIN4 field.                               */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN4_Max (0x1UL) /*!< Max enumerator value of SIN4 field.                               */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN4_Disabled (0x0UL) /*!< Disabled                                                     */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_SIN4_Enabled (0x1UL) /*!< Enabled                                                       */
-
-/* FORCE @Bit 8 : Force TS on when HFXO64M is powered. */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_FORCE_Pos (8UL) /*!< Position of FORCE field.                                           */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_FORCE_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_ENSEL_FORCE_Pos) /*!< Bit mask of FORCE
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_FORCE_Min (0x0UL) /*!< Min enumerator value of FORCE field.                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_FORCE_Max (0x1UL) /*!< Max enumerator value of FORCE field.                             */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_FORCE_Disabled (0x0UL) /*!< Disabled                                                    */
-  #define OSCILLATORS_HFXO64M_TS_ENSEL_FORCE_Enabled (0x1UL) /*!< Enabled                                                      */
-
-
-/* OSCILLATORS_HFXO64M_TS_DATAIN: TS test data input. Used only when debugging */
-  #define OSCILLATORS_HFXO64M_TS_DATAIN_ResetValue (0x00000000UL) /*!< Reset value of DATAIN register.                         */
-
-/* VAL @Bits 0..15 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_TS_DATAIN_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
-  #define OSCILLATORS_HFXO64M_TS_DATAIN_VAL_Msk (0xFFFFUL << OSCILLATORS_HFXO64M_TS_DATAIN_VAL_Pos) /*!< Bit mask of VAL field.*/
-
-
-/* OSCILLATORS_HFXO64M_TS_DATAINLOAD: TS test data latch pulse input. Used only when debugging */
-  #define OSCILLATORS_HFXO64M_TS_DATAINLOAD_ResetValue (0x00000000UL) /*!< Reset value of DATAINLOAD register.                 */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_TS_DATAINLOAD_VAL_Pos (0UL) /*!< Position of VAL field.                                          */
-  #define OSCILLATORS_HFXO64M_TS_DATAINLOAD_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_TS_DATAINLOAD_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-
-
-/* =========================================== Struct OSCILLATORS_HFXO64M_OVERRIDE =========================================== */
-/**
-  * @brief OVERRIDE [OSCILLATORS_HFXO64M_OVERRIDE] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  PWRUP;                             /*!< (@ 0x00000000) PWRUP override                                        */
-  __IOM uint32_t  RETAIN;                            /*!< (@ 0x00000004) RETAIN override                                       */
-  __IOM uint32_t  BIAS;                              /*!< (@ 0x00000008) BIAS override                                         */
-  __IOM uint32_t  CHIRPCHARGE;                       /*!< (@ 0x0000000C) CHIRP_CHARGE override                                 */
-  __IOM uint32_t  ENABLEXTALDAMPING;                 /*!< (@ 0x00000010) ENABLE_XTAL_DAMPING override                          */
-  __IOM uint32_t  ENABLE0V8REGULATOR;                /*!< (@ 0x00000014) ENABLE_0V8_REGULATOR override                         */
-  __IOM uint32_t  ENABLE1V5REGULATOR;                /*!< (@ 0x00000018) ENABLE_1V5_REGULATOR override                         */
-  __IOM uint32_t  ENABLEAREG;                        /*!< (@ 0x0000001C) ENABLE_AREG override                                  */
-  __IOM uint32_t  ENABLEBIAS;                        /*!< (@ 0x00000020) ENABLE_BIAS override                                  */
-  __IOM uint32_t  ENABLEBOOST;                       /*!< (@ 0x00000024) ENABLE_BOOST override                                 */
-  __IOM uint32_t  ENABLEBUFFER;                      /*!< (@ 0x00000028) ENABLE_BUFFER override                                */
-  __IOM uint32_t  ENABLECHIRP;                       /*!< (@ 0x0000002C) ENABLE_CHIRP override                                 */
-  __IOM uint32_t  ENABLECORE;                        /*!< (@ 0x00000030) ENABLE_CORE override                                  */
-  __IOM uint32_t  ENABLECURRENTCOMPARISON;           /*!< (@ 0x00000034) ENABLE_CURRENT_COMPARISON override                    */
-  __IOM uint32_t  ENABLEDACOUT;                      /*!< (@ 0x00000038) ENABLE_DAC_OUT override                               */
-  __IOM uint32_t  ENABLEDETECTOR;                    /*!< (@ 0x0000003C) ENABLE_DETECTOR override                              */
-  __IOM uint32_t  CURRENTCOMPARISON;                 /*!< (@ 0x00000040) CURRENT_COMPARISON override                           */
-  __IOM uint32_t  DETECTOR1;                         /*!< (@ 0x00000044) DETECTOR1 override                                    */
-  __IOM uint32_t  DETECTOR2;                         /*!< (@ 0x00000048) DETECTOR2 override                                    */
-  __IOM uint32_t  ENABLEDOUBLER;                     /*!< (@ 0x0000004C) ENABLE_DOUBLER override                               */
-  __IOM uint32_t  ENABLEVREF;                        /*!< (@ 0x00000050) ENABLE_VREF override                                  */
-  __IOM uint32_t  TSENABLE;                          /*!< (@ 0x00000054) TSENABLE override                                     */
-  __IOM uint32_t  TSENABLERESET;                     /*!< (@ 0x00000058) TSENABLERESET override                                */
-} NRF_OSCILLATORS_HFXO64M_OVERRIDE_Type;             /*!< Size = 92 (0x05C)                                                    */
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_PWRUP: PWRUP override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_PWRUP_ResetValue (0x00000000UL) /*!< Reset value of PWRUP register.                     */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_PWRUP_VAL_Pos (0UL) /*!< Position of VAL field.                                         */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_PWRUP_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_PWRUP_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_PWRUP_EN_Pos (31UL) /*!< Position of EN field.                                          */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_PWRUP_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_PWRUP_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_RETAIN: RETAIN override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_RETAIN_ResetValue (0x00000000UL) /*!< Reset value of RETAIN register.                   */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_RETAIN_VAL_Pos (0UL) /*!< Position of VAL field.                                        */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_RETAIN_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_RETAIN_VAL_Pos) /*!< Bit mask of
-                                                                            VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_RETAIN_EN_Pos (31UL) /*!< Position of EN field.                                         */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_RETAIN_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_RETAIN_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_BIAS: BIAS override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_BIAS_ResetValue (0x00000000UL) /*!< Reset value of BIAS register.                       */
-
-/* VAL @Bits 0..3 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_BIAS_VAL_Pos (0UL) /*!< Position of VAL field.                                          */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_BIAS_VAL_Msk (0xFUL << OSCILLATORS_HFXO64M_OVERRIDE_BIAS_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_BIAS_EN_Pos (31UL) /*!< Position of EN field.                                           */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_BIAS_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_BIAS_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_CHIRPCHARGE: CHIRP_CHARGE override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_CHIRPCHARGE_ResetValue (0x00000000UL) /*!< Reset value of CHIRPCHARGE register.         */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_CHIRPCHARGE_VAL_Pos (0UL) /*!< Position of VAL field.                                   */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_CHIRPCHARGE_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_CHIRPCHARGE_VAL_Pos) /*!< Bit
-                                                                            mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_CHIRPCHARGE_EN_Pos (31UL) /*!< Position of EN field.                                    */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_CHIRPCHARGE_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_CHIRPCHARGE_EN_Pos) /*!< Bit
-                                                                            mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLEXTALDAMPING: ENABLE_XTAL_DAMPING override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEXTALDAMPING_ResetValue (0x00000000UL) /*!< Reset value of ENABLEXTALDAMPING
-                                                                            register.*/
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEXTALDAMPING_VAL_Pos (0UL) /*!< Position of VAL field.                             */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEXTALDAMPING_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEXTALDAMPING_VAL_Pos)
-                                                                            /*!< Bit mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEXTALDAMPING_EN_Pos (31UL) /*!< Position of EN field.                              */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEXTALDAMPING_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEXTALDAMPING_EN_Pos)
-                                                                            /*!< Bit mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLE0V8REGULATOR: ENABLE_0V8_REGULATOR override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_ResetValue (0x00000000UL) /*!< Reset value of ENABLE0V8REGULATOR
-                                                                            register.*/
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_VAL_Pos (0UL) /*!< Position of VAL field.                            */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_VAL_Pos)
-                                                                            /*!< Bit mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_EN_Pos (31UL) /*!< Position of EN field.                             */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLE0V8REGULATOR_EN_Pos)
-                                                                            /*!< Bit mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLE1V5REGULATOR: ENABLE_1V5_REGULATOR override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_ResetValue (0x00000000UL) /*!< Reset value of ENABLE1V5REGULATOR
-                                                                            register.*/
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_VAL_Pos (0UL) /*!< Position of VAL field.                            */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_VAL_Pos)
-                                                                            /*!< Bit mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_EN_Pos (31UL) /*!< Position of EN field.                             */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLE1V5REGULATOR_EN_Pos)
-                                                                            /*!< Bit mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLEAREG: ENABLE_AREG override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEAREG_ResetValue (0x00000000UL) /*!< Reset value of ENABLEAREG register.           */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEAREG_VAL_Pos (0UL) /*!< Position of VAL field.                                    */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEAREG_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEAREG_VAL_Pos) /*!< Bit
-                                                                            mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEAREG_EN_Pos (31UL) /*!< Position of EN field.                                     */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEAREG_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEAREG_EN_Pos) /*!< Bit mask
-                                                                            of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBIAS: ENABLE_BIAS override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBIAS_ResetValue (0x00000000UL) /*!< Reset value of ENABLEBIAS register.           */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBIAS_VAL_Pos (0UL) /*!< Position of VAL field.                                    */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBIAS_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBIAS_VAL_Pos) /*!< Bit
-                                                                            mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBIAS_EN_Pos (31UL) /*!< Position of EN field.                                     */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBIAS_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBIAS_EN_Pos) /*!< Bit mask
-                                                                            of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBOOST: ENABLE_BOOST override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBOOST_ResetValue (0x00000000UL) /*!< Reset value of ENABLEBOOST register.         */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBOOST_VAL_Pos (0UL) /*!< Position of VAL field.                                   */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBOOST_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBOOST_VAL_Pos) /*!< Bit
-                                                                            mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBOOST_EN_Pos (31UL) /*!< Position of EN field.                                    */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBOOST_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBOOST_EN_Pos) /*!< Bit
-                                                                            mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBUFFER: ENABLE_BUFFER override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBUFFER_ResetValue (0x00000000UL) /*!< Reset value of ENABLEBUFFER register.       */
-
-/* VAL @Bits 0..9 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBUFFER_VAL_Pos (0UL) /*!< Position of VAL field.                                  */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBUFFER_VAL_Msk (0x3FFUL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBUFFER_VAL_Pos) /*!<
-                                                                            Bit mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBUFFER_EN_Pos (31UL) /*!< Position of EN field.                                   */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBUFFER_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEBUFFER_EN_Pos) /*!< Bit
-                                                                            mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLECHIRP: ENABLE_CHIRP override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECHIRP_ResetValue (0x00000000UL) /*!< Reset value of ENABLECHIRP register.         */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECHIRP_VAL_Pos (0UL) /*!< Position of VAL field.                                   */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECHIRP_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLECHIRP_VAL_Pos) /*!< Bit
-                                                                            mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECHIRP_EN_Pos (31UL) /*!< Position of EN field.                                    */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECHIRP_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLECHIRP_EN_Pos) /*!< Bit
-                                                                            mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLECORE: ENABLE_CORE override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECORE_ResetValue (0x00000000UL) /*!< Reset value of ENABLECORE register.           */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECORE_VAL_Pos (0UL) /*!< Position of VAL field.                                    */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECORE_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLECORE_VAL_Pos) /*!< Bit
-                                                                            mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECORE_EN_Pos (31UL) /*!< Position of EN field.                                     */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECORE_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLECORE_EN_Pos) /*!< Bit mask
-                                                                            of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON: ENABLE_CURRENT_COMPARISON override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_ResetValue (0x00000000UL) /*!< Reset value of
-                                                                            ENABLECURRENTCOMPARISON register.*/
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_VAL_Pos (0UL) /*!< Position of VAL field.                       */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_VAL_Pos)
-                                                                            /*!< Bit mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_EN_Pos (31UL) /*!< Position of EN field.                        */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLECURRENTCOMPARISON_EN_Pos)
-                                                                            /*!< Bit mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDACOUT: ENABLE_DAC_OUT override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDACOUT_ResetValue (0x00000000UL) /*!< Reset value of ENABLEDACOUT register.       */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDACOUT_VAL_Pos (0UL) /*!< Position of VAL field.                                  */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDACOUT_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDACOUT_VAL_Pos) /*!<
-                                                                            Bit mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDACOUT_EN_Pos (31UL) /*!< Position of EN field.                                   */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDACOUT_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDACOUT_EN_Pos) /*!< Bit
-                                                                            mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDETECTOR: ENABLE_DETECTOR override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDETECTOR_ResetValue (0x00000000UL) /*!< Reset value of ENABLEDETECTOR register.   */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDETECTOR_VAL_Pos (0UL) /*!< Position of VAL field.                                */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDETECTOR_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDETECTOR_VAL_Pos)
-                                                                            /*!< Bit mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDETECTOR_EN_Pos (31UL) /*!< Position of EN field.                                 */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDETECTOR_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDETECTOR_EN_Pos) /*!<
-                                                                            Bit mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_CURRENTCOMPARISON: CURRENT_COMPARISON override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_CURRENTCOMPARISON_ResetValue (0x00000000UL) /*!< Reset value of CURRENTCOMPARISON
-                                                                            register.*/
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_CURRENTCOMPARISON_VAL_Pos (0UL) /*!< Position of VAL field.                             */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_CURRENTCOMPARISON_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_CURRENTCOMPARISON_VAL_Pos)
-                                                                            /*!< Bit mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_CURRENTCOMPARISON_EN_Pos (31UL) /*!< Position of EN field.                              */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_CURRENTCOMPARISON_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_CURRENTCOMPARISON_EN_Pos)
-                                                                            /*!< Bit mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR1: DETECTOR1 override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR1_ResetValue (0x00000000UL) /*!< Reset value of DETECTOR1 register.             */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR1_VAL_Pos (0UL) /*!< Position of VAL field.                                     */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR1_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR1_VAL_Pos) /*!< Bit mask
-                                                                            of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR1_EN_Pos (31UL) /*!< Position of EN field.                                      */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR1_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR1_EN_Pos) /*!< Bit mask
-                                                                            of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR2: DETECTOR2 override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR2_ResetValue (0x00000000UL) /*!< Reset value of DETECTOR2 register.             */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR2_VAL_Pos (0UL) /*!< Position of VAL field.                                     */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR2_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR2_VAL_Pos) /*!< Bit mask
-                                                                            of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR2_EN_Pos (31UL) /*!< Position of EN field.                                      */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR2_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_DETECTOR2_EN_Pos) /*!< Bit mask
-                                                                            of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDOUBLER: ENABLE_DOUBLER override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDOUBLER_ResetValue (0x00000000UL) /*!< Reset value of ENABLEDOUBLER register.     */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDOUBLER_VAL_Pos (0UL) /*!< Position of VAL field.                                 */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDOUBLER_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDOUBLER_VAL_Pos) /*!<
-                                                                            Bit mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDOUBLER_EN_Pos (31UL) /*!< Position of EN field.                                  */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDOUBLER_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEDOUBLER_EN_Pos) /*!<
-                                                                            Bit mask of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_ENABLEVREF: ENABLE_VREF override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEVREF_ResetValue (0x00000000UL) /*!< Reset value of ENABLEVREF register.           */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEVREF_VAL_Pos (0UL) /*!< Position of VAL field.                                    */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEVREF_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEVREF_VAL_Pos) /*!< Bit
-                                                                            mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEVREF_EN_Pos (31UL) /*!< Position of EN field.                                     */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_ENABLEVREF_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_ENABLEVREF_EN_Pos) /*!< Bit mask
-                                                                            of EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_TSENABLE: TSENABLE override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_TSENABLE_ResetValue (0x00000000UL) /*!< Reset value of TSENABLE register.               */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_TSENABLE_VAL_Pos (0UL) /*!< Position of VAL field.                                      */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_TSENABLE_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_TSENABLE_VAL_Pos) /*!< Bit mask
-                                                                            of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_TSENABLE_EN_Pos (31UL) /*!< Position of EN field.                                       */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_TSENABLE_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_TSENABLE_EN_Pos) /*!< Bit mask of
-                                                                            EN field.*/
-
-
-/* OSCILLATORS_HFXO64M_OVERRIDE_TSENABLERESET: TSENABLERESET override */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_TSENABLERESET_ResetValue (0x00000000UL) /*!< Reset value of TSENABLERESET register.     */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_TSENABLERESET_VAL_Pos (0UL) /*!< Position of VAL field.                                 */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_TSENABLERESET_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_TSENABLERESET_VAL_Pos) /*!<
-                                                                            Bit mask of VAL field.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_TSENABLERESET_EN_Pos (31UL) /*!< Position of EN field.                                  */
-  #define OSCILLATORS_HFXO64M_OVERRIDE_TSENABLERESET_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_OVERRIDE_TSENABLERESET_EN_Pos) /*!<
-                                                                            Bit mask of EN field.*/
-
-
-
-/* ============================================= Struct OSCILLATORS_HFXO64M_DFT ============================================== */
-/**
-  * @brief DFT [OSCILLATORS_HFXO64M_DFT] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  ATBCONFIG;                         /*!< (@ 0x00000000) ATB0 and ATB1 test mux control.                       */
-} NRF_OSCILLATORS_HFXO64M_DFT_Type;                  /*!< Size = 4 (0x004)                                                     */
-
-/* OSCILLATORS_HFXO64M_DFT_ATBCONFIG: ATB0 and ATB1 test mux control. */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATBCONFIG register.                  */
-
-/* SELMUX0 @Bits 0..2 : Test mux control for ATB0. */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX0_Pos (0UL) /*!< Position of SELMUX0 field.                                  */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX0_Msk (0x7UL << OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX0_Pos) /*!< Bit mask
-                                                                            of SELMUX0 field.*/
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX0_Min (0x0UL) /*!< Min enumerator value of SELMUX0 field.                    */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX0_Max (0x4UL) /*!< Max enumerator value of SELMUX0 field.                    */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX0_None (0x0UL) /*!< Nothing selected.                                        */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX0_Vref (0x1UL) /*!< Voltage reference output. Approximately 0.76V            */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX0_V1v5Reg (0x2UL) /*!< 1.5V regulator output voltage.                        */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX0_V0V8Reg (0x3UL) /*!< 0.8V regulator output voltage.                        */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX0_VPierce (0x4UL) /*!< IPIERCE voltage. XO core imminent supply voltage.     */
-
-/* SELMUX1 @Bits 3..5 : Test mux control for ATB1. */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX1_Pos (3UL) /*!< Position of SELMUX1 field.                                  */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX1_Msk (0x7UL << OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX1_Pos) /*!< Bit mask
-                                                                            of SELMUX1 field.*/
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX1_Min (0x0UL) /*!< Min enumerator value of SELMUX1 field.                    */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX1_Max (0x4UL) /*!< Max enumerator value of SELMUX1 field.                    */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX1_None (0x0UL) /*!< Nothing selected.                                        */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX1_VAteg (0x1UL) /*!< AREG block test voltage. Xo level dependent.            */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX1_VChirp (0x2UL) /*!< Chirp generator test voltage.                          */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX1_VTS (0x3UL) /*!< Temp Sensor test voltage.                                 */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_SELMUX1_VGnd (0x4UL) /*!< Connected to XO VSS/ground. Use as reference voltage for
-                                                                      GND.*/
-
-/* EN @Bit 31 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_EN_Pos (31UL) /*!< Position of EN field.                                           */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_EN_Msk (0x1UL << OSCILLATORS_HFXO64M_DFT_ATBCONFIG_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                              */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                              */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_EN_Disabled (0x0UL) /*!< Analog test busses are disabled.                          */
-  #define OSCILLATORS_HFXO64M_DFT_ATBCONFIG_EN_Enabled (0x1UL) /*!< Analog test busses are enabled.                            */
-
-
-
-/* =============================================== Struct OSCILLATORS_HFXO64M ================================================ */
-/**
-  * @brief HFXO64M [OSCILLATORS_HFXO64M] HFXO64M peripheral
-  */
-typedef struct {
-  __IM  uint32_t  RESERVED[256];
-  __IM  uint32_t  STATUS;                            /*!< (@ 0x00000400) HFXO64M status                                        */
-  __IM  uint32_t  STATUSANA;                         /*!< (@ 0x00000404) Status of analog module output signals                */
-  __IM  uint32_t  STATUSMMI;                         /*!< (@ 0x00000408) MMI internal values for debug use.                    */
-  __IM  uint32_t  RESERVED1[13];
-  __IOM NRF_OSCILLATORS_HFXO64M_TRIM_Type TRIM;      /*!< (@ 0x00000440) (unspecified)                                         */
-  __IM  uint32_t  RESERVED2[5];
-  __IOM NRF_OSCILLATORS_HFXO64M_TS_Type TS;          /*!< (@ 0x00000460) (unspecified)                                         */
-  __IM  uint32_t  RESERVED3[4];
-  __IOM uint32_t  MIRROR;                            /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
-  __IOM uint32_t  PWRUPCTRL;                         /*!< (@ 0x00000484) Power up control                                      */
-  __IOM uint32_t  MODE;                              /*!< (@ 0x00000488) HFXO64M mode                                          */
-  __IOM uint32_t  XTALSETTLETIME;                    /*!< (@ 0x0000048C) Settle time of the crystal. List of pre-coded times.  */
-  __IOM uint32_t  CHIRPTIME;                         /*!< (@ 0x00000490) Chirp period length. List of pre-coded times.         */
-  __IOM uint32_t  ENABLEDAMPING;                     /*!< (@ 0x00000494) Enables the MMI to do crystal damping when stopping the
-                                                                         oscillator.*/
-  __IOM uint32_t  FORCEBUFF;                         /*!< (@ 0x00000498) Enables all clock buffers when sinOut4_ana buffer is
-                                                                         enabled.*/
-  __IOM uint32_t  CFG;                               /*!< (@ 0x0000049C) Direct HFXO64M static configurations.                 */
-  __IOM uint32_t  TCXOPOWERED;                       /*!< (@ 0x000004A0) SysCtrl writes here the current status of the TCXO
-                                                                         power.*/
-  __IM  uint32_t  RESERVED4[23];
-  __IOM NRF_OSCILLATORS_HFXO64M_OVERRIDE_Type OVERRIDE; /*!< (@ 0x00000500) (unspecified)                                      */
-  __IM  uint32_t  RESERVED5[41];
-  __IOM NRF_OSCILLATORS_HFXO64M_DFT_Type DFT;        /*!< (@ 0x00000600) (unspecified)                                         */
-} NRF_OSCILLATORS_HFXO64M_Type;                      /*!< Size = 1540 (0x604)                                                  */
-
-/* OSCILLATORS_HFXO64M_STATUS: HFXO64M status */
-  #define OSCILLATORS_HFXO64M_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                            */
-
-/* MODE @Bit 0 : Current mode */
-  #define OSCILLATORS_HFXO64M_STATUS_MODE_Pos (0UL)  /*!< Position of MODE field.                                              */
-  #define OSCILLATORS_HFXO64M_STATUS_MODE_Msk (0x1UL << OSCILLATORS_HFXO64M_STATUS_MODE_Pos) /*!< Bit mask of MODE field.      */
-  #define OSCILLATORS_HFXO64M_STATUS_MODE_Min (0x0UL) /*!< Min enumerator value of MODE field.                                 */
-  #define OSCILLATORS_HFXO64M_STATUS_MODE_Max (0x1UL) /*!< Max enumerator value of MODE field.                                 */
-  #define OSCILLATORS_HFXO64M_STATUS_MODE_Normal (0x0UL) /*!< Normal HFXO64M mode                                              */
-  #define OSCILLATORS_HFXO64M_STATUS_MODE_TCXO (0x1UL) /*!< External TCXO used, HFXO64M core is bypassed                       */
-
-/* RUNNING @Bit 4 : HFXO64M running status */
-  #define OSCILLATORS_HFXO64M_STATUS_RUNNING_Pos (4UL) /*!< Position of RUNNING field.                                         */
-  #define OSCILLATORS_HFXO64M_STATUS_RUNNING_Msk (0x1UL << OSCILLATORS_HFXO64M_STATUS_RUNNING_Pos) /*!< Bit mask of RUNNING
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_STATUS_RUNNING_Min (0x0UL) /*!< Min enumerator value of RUNNING field.                           */
-  #define OSCILLATORS_HFXO64M_STATUS_RUNNING_Max (0x1UL) /*!< Max enumerator value of RUNNING field.                           */
-  #define OSCILLATORS_HFXO64M_STATUS_RUNNING_NotRunning (0x0UL) /*!< HFXO64M not running                                       */
-  #define OSCILLATORS_HFXO64M_STATUS_RUNNING_Running (0x1UL) /*!< HFXO64M running                                              */
-
-
-/* OSCILLATORS_HFXO64M_STATUSANA: Status of analog module output signals */
-  #define OSCILLATORS_HFXO64M_STATUSANA_ResetValue (0x00000000UL) /*!< Reset value of STATUSANA register.                      */
-
-/* CURRENTCOMPARISON @Bit 0 : Current value of the CURRENT_COMPARISON from the analog module */
-  #define OSCILLATORS_HFXO64M_STATUSANA_CURRENTCOMPARISON_Pos (0UL) /*!< Position of CURRENTCOMPARISON field.                  */
-  #define OSCILLATORS_HFXO64M_STATUSANA_CURRENTCOMPARISON_Msk (0x1UL << OSCILLATORS_HFXO64M_STATUSANA_CURRENTCOMPARISON_Pos)
-                                                                            /*!< Bit mask of CURRENTCOMPARISON field.*/
-
-/* DETECTOR1 @Bit 1 : Current value of the DETECTOR1 signal from the analog module */
-  #define OSCILLATORS_HFXO64M_STATUSANA_DETECTOR1_Pos (1UL) /*!< Position of DETECTOR1 field.                                  */
-  #define OSCILLATORS_HFXO64M_STATUSANA_DETECTOR1_Msk (0x1UL << OSCILLATORS_HFXO64M_STATUSANA_DETECTOR1_Pos) /*!< Bit mask of
-                                                                            DETECTOR1 field.*/
-
-/* DETECTOR2 @Bit 2 : Current value of the DETECTOR2 signal from the analog module */
-  #define OSCILLATORS_HFXO64M_STATUSANA_DETECTOR2_Pos (2UL) /*!< Position of DETECTOR2 field.                                  */
-  #define OSCILLATORS_HFXO64M_STATUSANA_DETECTOR2_Msk (0x1UL << OSCILLATORS_HFXO64M_STATUSANA_DETECTOR2_Pos) /*!< Bit mask of
-                                                                            DETECTOR2 field.*/
-
-
-/* OSCILLATORS_HFXO64M_STATUSMMI: MMI internal values for debug use. */
-  #define OSCILLATORS_HFXO64M_STATUSMMI_ResetValue (0x00000000UL) /*!< Reset value of STATUSMMI register.                      */
-
-/* FSMSTATE @Bits 0..4 : FSM current state. Value must be checked against RTL. */
-  #define OSCILLATORS_HFXO64M_STATUSMMI_FSMSTATE_Pos (0UL) /*!< Position of FSMSTATE field.                                    */
-  #define OSCILLATORS_HFXO64M_STATUSMMI_FSMSTATE_Msk (0x1FUL << OSCILLATORS_HFXO64M_STATUSMMI_FSMSTATE_Pos) /*!< Bit mask of
-                                                                            FSMSTATE field.*/
-
-/* TSENABLE @Bit 5 : TS_ENABLE analog IP pin status. Tells if TS is running. */
-  #define OSCILLATORS_HFXO64M_STATUSMMI_TSENABLE_Pos (5UL) /*!< Position of TSENABLE field.                                    */
-  #define OSCILLATORS_HFXO64M_STATUSMMI_TSENABLE_Msk (0x1UL << OSCILLATORS_HFXO64M_STATUSMMI_TSENABLE_Pos) /*!< Bit mask of
-                                                                            TSENABLE field.*/
-
-
-/* OSCILLATORS_HFXO64M_MIRROR: Enable LOCK for mirrored registers */
-  #define OSCILLATORS_HFXO64M_MIRROR_ResetValue (0x00000001UL) /*!< Reset value of MIRROR register.                            */
-
-/* LOCK @Bit 0 : Lock for mirrored registers */
-  #define OSCILLATORS_HFXO64M_MIRROR_LOCK_Pos (0UL)  /*!< Position of LOCK field.                                              */
-  #define OSCILLATORS_HFXO64M_MIRROR_LOCK_Msk (0x1UL << OSCILLATORS_HFXO64M_MIRROR_LOCK_Pos) /*!< Bit mask of LOCK field.      */
-  #define OSCILLATORS_HFXO64M_MIRROR_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                                 */
-  #define OSCILLATORS_HFXO64M_MIRROR_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                                 */
-  #define OSCILLATORS_HFXO64M_MIRROR_LOCK_Disabled (0x0UL) /*!< Lock disabled                                                  */
-  #define OSCILLATORS_HFXO64M_MIRROR_LOCK_Enabled (0x1UL) /*!< Lock enabled                                                    */
-
-
-/* OSCILLATORS_HFXO64M_PWRUPCTRL: Power up control */
-  #define OSCILLATORS_HFXO64M_PWRUPCTRL_ResetValue (0x00000002UL) /*!< Reset value of PWRUPCTRL register.                      */
-
-/* CTRL @Bits 0..1 : Power up control */
-  #define OSCILLATORS_HFXO64M_PWRUPCTRL_CTRL_Pos (0UL) /*!< Position of CTRL field.                                            */
-  #define OSCILLATORS_HFXO64M_PWRUPCTRL_CTRL_Msk (0x3UL << OSCILLATORS_HFXO64M_PWRUPCTRL_CTRL_Pos) /*!< Bit mask of CTRL field.*/
-  #define OSCILLATORS_HFXO64M_PWRUPCTRL_CTRL_Min (0x0UL) /*!< Min enumerator value of CTRL field.                              */
-  #define OSCILLATORS_HFXO64M_PWRUPCTRL_CTRL_Max (0x2UL) /*!< Max enumerator value of CTRL field.                              */
-  #define OSCILLATORS_HFXO64M_PWRUPCTRL_CTRL_Auto (0x0UL) /*!< Automatically handled by the peripheral                         */
-  #define OSCILLATORS_HFXO64M_PWRUPCTRL_CTRL_PowerUp (0x1UL) /*!< Power up                                                     */
-  #define OSCILLATORS_HFXO64M_PWRUPCTRL_CTRL_PowerDown (0x2UL) /*!< Power down                                                 */
-
-
-/* OSCILLATORS_HFXO64M_MODE: HFXO64M mode */
-  #define OSCILLATORS_HFXO64M_MODE_ResetValue (0x00000000UL) /*!< Reset value of MODE register.                                */
-
-/* MODE @Bit 0 : Mode */
-  #define OSCILLATORS_HFXO64M_MODE_MODE_Pos (0UL)    /*!< Position of MODE field.                                              */
-  #define OSCILLATORS_HFXO64M_MODE_MODE_Msk (0x1UL << OSCILLATORS_HFXO64M_MODE_MODE_Pos) /*!< Bit mask of MODE field.          */
-  #define OSCILLATORS_HFXO64M_MODE_MODE_Min (0x0UL)  /*!< Min enumerator value of MODE field.                                  */
-  #define OSCILLATORS_HFXO64M_MODE_MODE_Max (0x1UL)  /*!< Max enumerator value of MODE field.                                  */
-  #define OSCILLATORS_HFXO64M_MODE_MODE_Normal (0x0UL) /*!< Normal operating mode                                              */
-  #define OSCILLATORS_HFXO64M_MODE_MODE_TCXO (0x1UL) /*!< TCXO/bypass mode                                                     */
-
-
-/* OSCILLATORS_HFXO64M_XTALSETTLETIME: Settle time of the crystal. List of pre-coded times. */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_ResetValue (0x00000003UL) /*!< Reset value of XTALSETTLETIME register.            */
-
-/* VAL @Bits 0..3 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Pos (0UL) /*!< Position of VAL field.                                         */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Msk (0xFUL << OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                           */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Max (0xFUL) /*!< Max enumerator value of VAL field.                           */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle250us (0x0UL) /*!< 250 us                                               */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle300us (0x1UL) /*!< 300 us                                               */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle350us (0x2UL) /*!< 350 us                                               */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle400us (0x3UL) /*!< 400 us                                               */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle500us (0x4UL) /*!< 500 us                                               */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle600us (0x5UL) /*!< 600 us                                               */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle700us (0x6UL) /*!< 700 us                                               */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle800us (0x7UL) /*!< 800 us                                               */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle1000us (0x8UL) /*!< 1000 us                                             */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle2000us (0x9UL) /*!< 2000 us                                             */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle3000us (0xAUL) /*!< 3000 us                                             */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle4000us (0xBUL) /*!< 4000 us                                             */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle5000us (0xCUL) /*!< 5000 us                                             */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle6000us (0xDUL) /*!< 6000 us                                             */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle7000us (0xEUL) /*!< 7000 us                                             */
-  #define OSCILLATORS_HFXO64M_XTALSETTLETIME_VAL_Settle8500us (0xFUL) /*!< 8500 us                                             */
-
-
-/* OSCILLATORS_HFXO64M_CHIRPTIME: Chirp period length. List of pre-coded times. */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_ResetValue (0x00000003UL) /*!< Reset value of CHIRPTIME register.                      */
-
-/* VAL @Bits 0..3 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Msk (0xFUL << OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Pos) /*!< Bit mask of VAL field.   */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                                */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Max (0xFUL) /*!< Max enumerator value of VAL field.                                */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp32us (0x0UL) /*!< 32.0 us                                                     */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp40us (0x1UL) /*!< 40.3 us                                                     */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp48us (0x2UL) /*!< 48.5 us                                                     */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp56us (0x3UL) /*!< 56.8 us                                                     */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp65us (0x4UL) /*!< 65.1 us                                                     */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp73us (0x5UL) /*!< 73.3 us                                                     */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp81us (0x6UL) /*!< 81.6 us                                                     */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp89us (0x7UL) /*!< 89.9 us                                                     */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp98us (0x8UL) /*!< 98.1 us                                                     */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp106us (0x9UL) /*!< 106.4 us                                                   */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp114us (0xAUL) /*!< 114.7 us                                                   */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp122us (0xBUL) /*!< 122.9 us                                                   */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp131us (0xCUL) /*!< 131.2 us                                                   */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp139us (0xDUL) /*!< 139.5 us                                                   */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp147us (0xEUL) /*!< 147.7 us                                                   */
-  #define OSCILLATORS_HFXO64M_CHIRPTIME_VAL_Chirp156us (0xFUL) /*!< 156.0 us                                                   */
-
-
-/* OSCILLATORS_HFXO64M_ENABLEDAMPING: Enables the MMI to do crystal damping when stopping the oscillator. */
-  #define OSCILLATORS_HFXO64M_ENABLEDAMPING_ResetValue (0x00000000UL) /*!< Reset value of ENABLEDAMPING register.              */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_ENABLEDAMPING_VAL_Pos (0UL) /*!< Position of VAL field.                                          */
-  #define OSCILLATORS_HFXO64M_ENABLEDAMPING_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_ENABLEDAMPING_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_ENABLEDAMPING_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                            */
-  #define OSCILLATORS_HFXO64M_ENABLEDAMPING_VAL_Max (0x1UL) /*!< Max enumerator value of VAL field.                            */
-  #define OSCILLATORS_HFXO64M_ENABLEDAMPING_VAL_Disabled (0x0UL) /*!< Disabled                                                 */
-  #define OSCILLATORS_HFXO64M_ENABLEDAMPING_VAL_Enabled (0x1UL) /*!< Enabled                                                   */
-
-
-/* OSCILLATORS_HFXO64M_FORCEBUFF: Enables all clock buffers when sinOut4_ana buffer is enabled. */
-  #define OSCILLATORS_HFXO64M_FORCEBUFF_ResetValue (0x00000000UL) /*!< Reset value of FORCEBUFF register.                      */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_FORCEBUFF_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
-  #define OSCILLATORS_HFXO64M_FORCEBUFF_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_FORCEBUFF_VAL_Pos) /*!< Bit mask of VAL field.   */
-  #define OSCILLATORS_HFXO64M_FORCEBUFF_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                                */
-  #define OSCILLATORS_HFXO64M_FORCEBUFF_VAL_Max (0x1UL) /*!< Max enumerator value of VAL field.                                */
-  #define OSCILLATORS_HFXO64M_FORCEBUFF_VAL_Disabled (0x0UL) /*!< Disabled                                                     */
-  #define OSCILLATORS_HFXO64M_FORCEBUFF_VAL_Enabled (0x1UL) /*!< Enabled                                                       */
-
-
-/* OSCILLATORS_HFXO64M_CFG: Direct HFXO64M static configurations. */
-  #define OSCILLATORS_HFXO64M_CFG_ResetValue (0x00010072UL) /*!< Reset value of CFG register.                                  */
-
-/* LEVELSELECT @Bit 0 : Select for AREG level */
-  #define OSCILLATORS_HFXO64M_CFG_LEVELSELECT_Pos (0UL) /*!< Position of LEVELSELECT field.                                    */
-  #define OSCILLATORS_HFXO64M_CFG_LEVELSELECT_Msk (0x1UL << OSCILLATORS_HFXO64M_CFG_LEVELSELECT_Pos) /*!< Bit mask of
-                                                                            LEVELSELECT field.*/
-  #define OSCILLATORS_HFXO64M_CFG_LEVELSELECT_Min (0x0UL) /*!< Min enumerator value of LEVELSELECT field.                      */
-  #define OSCILLATORS_HFXO64M_CFG_LEVELSELECT_Max (0x1UL) /*!< Max enumerator value of LEVELSELECT field.                      */
-  #define OSCILLATORS_HFXO64M_CFG_LEVELSELECT_High (0x0UL) /*!< Normal, high amplitude                                         */
-  #define OSCILLATORS_HFXO64M_CFG_LEVELSELECT_Low (0x1UL) /*!< Low power, low amplitude                                        */
-
-/* ENABLENORMALBIASMODE @Bit 1 : Enable for normal bias mode. */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLENORMALBIASMODE_Pos (1UL) /*!< Position of ENABLENORMALBIASMODE field.                  */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLENORMALBIASMODE_Msk (0x1UL << OSCILLATORS_HFXO64M_CFG_ENABLENORMALBIASMODE_Pos) /*!< Bit
-                                                                            mask of ENABLENORMALBIASMODE field.*/
-  #define OSCILLATORS_HFXO64M_CFG_ENABLENORMALBIASMODE_Min (0x0UL) /*!< Min enumerator value of ENABLENORMALBIASMODE field.    */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLENORMALBIASMODE_Max (0x1UL) /*!< Max enumerator value of ENABLENORMALBIASMODE field.    */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLENORMALBIASMODE_Low (0x0UL) /*!< Low power bias mode                                    */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLENORMALBIASMODE_Normal (0x1UL) /*!< Normal bias mode                                    */
-
-/* BYPASSREG0V8 @Bit 2 : 0V8 regulator bypass control. */
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG0V8_Pos (2UL) /*!< Position of BYPASSREG0V8 field.                                  */
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG0V8_Msk (0x1UL << OSCILLATORS_HFXO64M_CFG_BYPASSREG0V8_Pos) /*!< Bit mask of
-                                                                            BYPASSREG0V8 field.*/
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG0V8_Min (0x0UL) /*!< Min enumerator value of BYPASSREG0V8 field.                    */
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG0V8_Max (0x1UL) /*!< Max enumerator value of BYPASSREG0V8 field.                    */
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG0V8_Normal (0x0UL) /*!< Normal                                                      */
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG0V8_Bypass (0x1UL) /*!< Bypass                                                      */
-
-/* BYPASSREG1V5 @Bit 3 : 1V5 regulator bypass control. */
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG1V5_Pos (3UL) /*!< Position of BYPASSREG1V5 field.                                  */
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG1V5_Msk (0x1UL << OSCILLATORS_HFXO64M_CFG_BYPASSREG1V5_Pos) /*!< Bit mask of
-                                                                            BYPASSREG1V5 field.*/
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG1V5_Min (0x0UL) /*!< Min enumerator value of BYPASSREG1V5 field.                    */
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG1V5_Max (0x1UL) /*!< Max enumerator value of BYPASSREG1V5 field.                    */
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG1V5_Normal (0x0UL) /*!< Normal                                                      */
-  #define OSCILLATORS_HFXO64M_CFG_BYPASSREG1V5_Bypass (0x1UL) /*!< Bypass                                                      */
-
-/* ENABLECMOS1DIVIDER @Bit 4 : CMOSOUT1 clock divider enable. */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS1DIVIDER_Pos (4UL) /*!< Position of ENABLECMOS1DIVIDER field.                      */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS1DIVIDER_Msk (0x1UL << OSCILLATORS_HFXO64M_CFG_ENABLECMOS1DIVIDER_Pos) /*!< Bit mask
-                                                                            of ENABLECMOS1DIVIDER field.*/
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS1DIVIDER_Min (0x0UL) /*!< Min enumerator value of ENABLECMOS1DIVIDER field.        */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS1DIVIDER_Max (0x1UL) /*!< Max enumerator value of ENABLECMOS1DIVIDER field.        */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS1DIVIDER_Disabled (0x0UL) /*!< Disabled                                            */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS1DIVIDER_Enabled (0x1UL) /*!< Enabled                                              */
-
-/* ENABLECMOS2DIVIDER @Bit 5 : CMOSOUT2 clock divider enable. */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS2DIVIDER_Pos (5UL) /*!< Position of ENABLECMOS2DIVIDER field.                      */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS2DIVIDER_Msk (0x1UL << OSCILLATORS_HFXO64M_CFG_ENABLECMOS2DIVIDER_Pos) /*!< Bit mask
-                                                                            of ENABLECMOS2DIVIDER field.*/
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS2DIVIDER_Min (0x0UL) /*!< Min enumerator value of ENABLECMOS2DIVIDER field.        */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS2DIVIDER_Max (0x1UL) /*!< Max enumerator value of ENABLECMOS2DIVIDER field.        */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS2DIVIDER_Disabled (0x0UL) /*!< Disabled                                            */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS2DIVIDER_Enabled (0x1UL) /*!< Enabled                                              */
-
-/* ENABLECMOS3DIVIDER @Bit 6 : CMOSOUT3 clock divider enable. */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS3DIVIDER_Pos (6UL) /*!< Position of ENABLECMOS3DIVIDER field.                      */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS3DIVIDER_Msk (0x1UL << OSCILLATORS_HFXO64M_CFG_ENABLECMOS3DIVIDER_Pos) /*!< Bit mask
-                                                                            of ENABLECMOS3DIVIDER field.*/
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS3DIVIDER_Min (0x0UL) /*!< Min enumerator value of ENABLECMOS3DIVIDER field.        */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS3DIVIDER_Max (0x1UL) /*!< Max enumerator value of ENABLECMOS3DIVIDER field.        */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS3DIVIDER_Disabled (0x0UL) /*!< Disabled                                            */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLECMOS3DIVIDER_Enabled (0x1UL) /*!< Enabled                                              */
-
-/* ENABLETSDIVIDER @Bit 7 : TS clock divider enable. */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLETSDIVIDER_Pos (7UL) /*!< Position of ENABLETSDIVIDER field.                            */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLETSDIVIDER_Msk (0x1UL << OSCILLATORS_HFXO64M_CFG_ENABLETSDIVIDER_Pos) /*!< Bit mask of
-                                                                            ENABLETSDIVIDER field.*/
-  #define OSCILLATORS_HFXO64M_CFG_ENABLETSDIVIDER_Min (0x0UL) /*!< Min enumerator value of ENABLETSDIVIDER field.              */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLETSDIVIDER_Max (0x1UL) /*!< Max enumerator value of ENABLETSDIVIDER field.              */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLETSDIVIDER_Disabled (0x0UL) /*!< Disabled                                               */
-  #define OSCILLATORS_HFXO64M_CFG_ENABLETSDIVIDER_Enabled (0x1UL) /*!< Enabled                                                 */
-
-/* BUFFDRIVECMOS1 @Bits 8..9 : Buffer drive configuration for CMOS_OUT1 */
-  #define OSCILLATORS_HFXO64M_CFG_BUFFDRIVECMOS1_Pos (8UL) /*!< Position of BUFFDRIVECMOS1 field.                              */
-  #define OSCILLATORS_HFXO64M_CFG_BUFFDRIVECMOS1_Msk (0x3UL << OSCILLATORS_HFXO64M_CFG_BUFFDRIVECMOS1_Pos) /*!< Bit mask of
-                                                                            BUFFDRIVECMOS1 field.*/
-
-/* BUFFDRIVECMOS2 @Bits 10..11 : Buffer drive configuration for CMOS_OUT2 */
-  #define OSCILLATORS_HFXO64M_CFG_BUFFDRIVECMOS2_Pos (10UL) /*!< Position of BUFFDRIVECMOS2 field.                             */
-  #define OSCILLATORS_HFXO64M_CFG_BUFFDRIVECMOS2_Msk (0x3UL << OSCILLATORS_HFXO64M_CFG_BUFFDRIVECMOS2_Pos) /*!< Bit mask of
-                                                                            BUFFDRIVECMOS2 field.*/
-
-/* BUFFDRIVECMOS3 @Bits 12..13 : Buffer drive configuration for CMOS_OUT3 */
-  #define OSCILLATORS_HFXO64M_CFG_BUFFDRIVECMOS3_Pos (12UL) /*!< Position of BUFFDRIVECMOS3 field.                             */
-  #define OSCILLATORS_HFXO64M_CFG_BUFFDRIVECMOS3_Msk (0x3UL << OSCILLATORS_HFXO64M_CFG_BUFFDRIVECMOS3_Pos) /*!< Bit mask of
-                                                                            BUFFDRIVECMOS3 field.*/
-
-/* BUFFDRIVETS @Bits 14..15 : Buffer drive configuration for TS clock */
-  #define OSCILLATORS_HFXO64M_CFG_BUFFDRIVETS_Pos (14UL) /*!< Position of BUFFDRIVETS field.                                   */
-  #define OSCILLATORS_HFXO64M_CFG_BUFFDRIVETS_Msk (0x3UL << OSCILLATORS_HFXO64M_CFG_BUFFDRIVETS_Pos) /*!< Bit mask of
-                                                                            BUFFDRIVETS field.*/
-
-/* CHIRPEN @Bit 16 : Enable chirp during the HFXO64 startup. */
-  #define OSCILLATORS_HFXO64M_CFG_CHIRPEN_Pos (16UL) /*!< Position of CHIRPEN field.                                           */
-  #define OSCILLATORS_HFXO64M_CFG_CHIRPEN_Msk (0x1UL << OSCILLATORS_HFXO64M_CFG_CHIRPEN_Pos) /*!< Bit mask of CHIRPEN field.   */
-  #define OSCILLATORS_HFXO64M_CFG_CHIRPEN_Min (0x0UL) /*!< Min enumerator value of CHIRPEN field.                              */
-  #define OSCILLATORS_HFXO64M_CFG_CHIRPEN_Max (0x1UL) /*!< Max enumerator value of CHIRPEN field.                              */
-  #define OSCILLATORS_HFXO64M_CFG_CHIRPEN_Disabled (0x0UL) /*!< Chirp disabled                                                 */
-  #define OSCILLATORS_HFXO64M_CFG_CHIRPEN_Enabled (0x1UL) /*!< Chirp enabled                                                   */
-
-
-/* OSCILLATORS_HFXO64M_TCXOPOWERED: SysCtrl writes here the current status of the TCXO power. */
-  #define OSCILLATORS_HFXO64M_TCXOPOWERED_ResetValue (0x00000000UL) /*!< Reset value of TCXOPOWERED register.                  */
-
-/* VAL @Bit 0 : (unspecified) */
-  #define OSCILLATORS_HFXO64M_TCXOPOWERED_VAL_Pos (0UL) /*!< Position of VAL field.                                            */
-  #define OSCILLATORS_HFXO64M_TCXOPOWERED_VAL_Msk (0x1UL << OSCILLATORS_HFXO64M_TCXOPOWERED_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-  #define OSCILLATORS_HFXO64M_TCXOPOWERED_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                              */
-  #define OSCILLATORS_HFXO64M_TCXOPOWERED_VAL_Max (0x1UL) /*!< Max enumerator value of VAL field.                              */
-  #define OSCILLATORS_HFXO64M_TCXOPOWERED_VAL_Off (0x0UL) /*!< TCXO is powered off                                             */
-  #define OSCILLATORS_HFXO64M_TCXOPOWERED_VAL_On (0x1UL) /*!< TCXO is powered on                                               */
-
-
-
-/* ============================================ Struct OSCILLATORS_OSCRFR_CONFIG ============================================= */
-/**
-  * @brief CONFIG [OSCILLATORS_OSCRFR_CONFIG] (unspecified)
+  * @brief CONFIG [OSCRFR_CONFIG] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  CFGSTATIC;                         /*!< (@ 0x00000000) OSCRFR static CFG configuration                       */
-} NRF_OSCILLATORS_OSCRFR_CONFIG_Type;                /*!< Size = 4 (0x004)                                                     */
+} NRF_OSCRFR_CONFIG_Type;                            /*!< Size = 4 (0x004)                                                     */
 
-/* OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC: OSCRFR static CFG configuration */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_ResetValue (0x00000000UL) /*!< Reset value of CFGSTATIC register.                */
+/* OSCRFR_CONFIG_CFGSTATIC: OSCRFR static CFG configuration */
+  #define OSCRFR_CONFIG_CFGSTATIC_ResetValue (0x00000000UL) /*!< Reset value of CFGSTATIC register.                            */
 
 /* DOUBLEBIAS @Bit 0 : Enable double bias */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Pos (0UL) /*!< Position of DOUBLEBIAS field.                          */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Msk (0x1UL << OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Pos) /*!<
-                                                                            Bit mask of DOUBLEBIAS field.*/
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Min (0x0UL) /*!< Min enumerator value of DOUBLEBIAS field.            */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Max (0x1UL) /*!< Max enumerator value of DOUBLEBIAS field.            */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Disabled (0x0UL) /*!< Disabled                                        */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Enabled (0x1UL) /*!< Enabled                                          */
+  #define OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Pos (0UL) /*!< Position of DOUBLEBIAS field.                                      */
+  #define OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Msk (0x1UL << OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Pos) /*!< Bit mask of DOUBLEBIAS
+                                                                            field.*/
+  #define OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Min (0x0UL) /*!< Min enumerator value of DOUBLEBIAS field.                        */
+  #define OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Max (0x1UL) /*!< Max enumerator value of DOUBLEBIAS field.                        */
+  #define OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Disabled (0x0UL) /*!< Disabled                                                    */
+  #define OSCRFR_CONFIG_CFGSTATIC_DOUBLEBIAS_Enabled (0x1UL) /*!< Enabled                                                      */
 
 /* TRIGDELAY @Bit 1 : Increase TRIG signal delay */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Pos (1UL) /*!< Position of TRIGDELAY field.                            */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Msk (0x1UL << OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Pos) /*!<
-                                                                            Bit mask of TRIGDELAY field.*/
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Min (0x0UL) /*!< Min enumerator value of TRIGDELAY field.              */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Max (0x1UL) /*!< Max enumerator value of TRIGDELAY field.              */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Disabled (0x0UL) /*!< Disabled                                         */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Enabled (0x1UL) /*!< Enabled                                           */
+  #define OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Pos (1UL) /*!< Position of TRIGDELAY field.                                        */
+  #define OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Msk (0x1UL << OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Pos) /*!< Bit mask of TRIGDELAY
+                                                                            field.*/
+  #define OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Min (0x0UL) /*!< Min enumerator value of TRIGDELAY field.                          */
+  #define OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Max (0x1UL) /*!< Max enumerator value of TRIGDELAY field.                          */
+  #define OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Disabled (0x0UL) /*!< Disabled                                                     */
+  #define OSCRFR_CONFIG_CFGSTATIC_TRIGDELAY_Enabled (0x1UL) /*!< Enabled                                                       */
 
 /* SPARE @Bit 2 : Spare */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_SPARE_Pos (2UL) /*!< Position of SPARE field.                                    */
-  #define OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_SPARE_Msk (0x1UL << OSCILLATORS_OSCRFR_CONFIG_CFGSTATIC_SPARE_Pos) /*!< Bit mask
-                                                                            of SPARE field.*/
+  #define OSCRFR_CONFIG_CFGSTATIC_SPARE_Pos (2UL)    /*!< Position of SPARE field.                                             */
+  #define OSCRFR_CONFIG_CFGSTATIC_SPARE_Msk (0x1UL << OSCRFR_CONFIG_CFGSTATIC_SPARE_Pos) /*!< Bit mask of SPARE field.         */
 
 
 
-/* ============================================= Struct OSCILLATORS_OSCRFR_TRIM ============================================== */
+/* =================================================== Struct OSCRFR_TRIM ==================================================== */
 /**
-  * @brief TRIM [OSCILLATORS_OSCRFR_TRIM] (unspecified)
+  * @brief TRIM [OSCRFR_TRIM] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  OSC;                               /*!< (@ 0x00000000) Oscillation period trimming                           */
   __IOM uint32_t  IBPSR;                             /*!< (@ 0x00000004) IBPSR current trimming                                */
-} NRF_OSCILLATORS_OSCRFR_TRIM_Type;                  /*!< Size = 8 (0x008)                                                     */
+} NRF_OSCRFR_TRIM_Type;                              /*!< Size = 8 (0x008)                                                     */
 
-/* OSCILLATORS_OSCRFR_TRIM_OSC: Oscillation period trimming */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_ResetValue (0x00000000UL) /*!< Reset value of OSC register.                              */
+/* OSCRFR_TRIM_OSC: Oscillation period trimming */
+  #define OSCRFR_TRIM_OSC_ResetValue (0x00000000UL)  /*!< Reset value of OSC register.                                         */
 
 /* VAL @Bits 0..2 : Oscillation period trimming value */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_Msk (0x7UL << OSCILLATORS_OSCRFR_TRIM_OSC_VAL_Pos) /*!< Bit mask of VAL field.       */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_Min (0x0UL) /*!< Min enumerator value of VAL field.                                  */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_Max (0x7UL) /*!< Max enumerator value of VAL field.                                  */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_Normal (0x0UL) /*!< Normal trim value                                                */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_Val35 (0x1UL) /*!< Oscillation period increases by 35 percent                        */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_Val154 (0x2UL) /*!< Oscillation period increases by 154 percent                      */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_Val670 (0x3UL) /*!< Oscillation period increases by 670 percent                      */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_ValNeg54 (0x4UL) /*!< Oscillation period decreases by 54 percent                     */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_ValNeg49 (0x5UL) /*!< Oscillation period decreases by 49 percent                     */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_ValNeg37 (0x6UL) /*!< Oscillation period decreases by 37 percent                     */
-  #define OSCILLATORS_OSCRFR_TRIM_OSC_VAL_ValNeg26 (0x7UL) /*!< Oscillation period decreases by 26 percent                     */
+  #define OSCRFR_TRIM_OSC_VAL_Pos (0UL)              /*!< Position of VAL field.                                               */
+  #define OSCRFR_TRIM_OSC_VAL_Msk (0x7UL << OSCRFR_TRIM_OSC_VAL_Pos) /*!< Bit mask of VAL field.                               */
+  #define OSCRFR_TRIM_OSC_VAL_Min (0x0UL)            /*!< Min enumerator value of VAL field.                                   */
+  #define OSCRFR_TRIM_OSC_VAL_Max (0x7UL)            /*!< Max enumerator value of VAL field.                                   */
+  #define OSCRFR_TRIM_OSC_VAL_Normal (0x0UL)         /*!< Normal trim value                                                    */
+  #define OSCRFR_TRIM_OSC_VAL_Val35 (0x1UL)          /*!< Oscillation period increases by 35 percent                           */
+  #define OSCRFR_TRIM_OSC_VAL_Val154 (0x2UL)         /*!< Oscillation period increases by 154 percent                          */
+  #define OSCRFR_TRIM_OSC_VAL_Val670 (0x3UL)         /*!< Oscillation period increases by 670 percent                          */
+  #define OSCRFR_TRIM_OSC_VAL_ValNeg54 (0x4UL)       /*!< Oscillation period decreases by 54 percent                           */
+  #define OSCRFR_TRIM_OSC_VAL_ValNeg49 (0x5UL)       /*!< Oscillation period decreases by 49 percent                           */
+  #define OSCRFR_TRIM_OSC_VAL_ValNeg37 (0x6UL)       /*!< Oscillation period decreases by 37 percent                           */
+  #define OSCRFR_TRIM_OSC_VAL_ValNeg26 (0x7UL)       /*!< Oscillation period decreases by 26 percent                           */
 
 
-/* OSCILLATORS_OSCRFR_TRIM_IBPSR: IBPSR current trimming */
-  #define OSCILLATORS_OSCRFR_TRIM_IBPSR_ResetValue (0x00000000UL) /*!< Reset value of IBPSR register.                          */
+/* OSCRFR_TRIM_IBPSR: IBPSR current trimming */
+  #define OSCRFR_TRIM_IBPSR_ResetValue (0x00000000UL) /*!< Reset value of IBPSR register.                                      */
 
 /* VAL @Bits 0..3 : IBPSR current and VREF voltage trimming value */
-  #define OSCILLATORS_OSCRFR_TRIM_IBPSR_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
-  #define OSCILLATORS_OSCRFR_TRIM_IBPSR_VAL_Msk (0xFUL << OSCILLATORS_OSCRFR_TRIM_IBPSR_VAL_Pos) /*!< Bit mask of VAL field.   */
+  #define OSCRFR_TRIM_IBPSR_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
+  #define OSCRFR_TRIM_IBPSR_VAL_Msk (0xFUL << OSCRFR_TRIM_IBPSR_VAL_Pos) /*!< Bit mask of VAL field.                           */
 
 
 
-/* =========================================== Struct OSCILLATORS_OSCRFR_OVERRIDE ============================================ */
+/* ================================================= Struct OSCRFR_OVERRIDE ================================================== */
 /**
-  * @brief OVERRIDE [OSCILLATORS_OSCRFR_OVERRIDE] (unspecified)
+  * @brief OVERRIDE [OSCRFR_OVERRIDE] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  PWRUP;                             /*!< (@ 0x00000000) Override the PWRUP signal to the analog module        */
   __IOM uint32_t  RETAIN;                            /*!< (@ 0x00000004) Override the RETAIN signal to the analog module       */
   __IOM uint32_t  READY;                             /*!< (@ 0x00000008) Override the READY signal from the analog module      */
   __IOM uint32_t  SETTLED;                           /*!< (@ 0x0000000C) Override the SETTLED signal from the analog module    */
-} NRF_OSCILLATORS_OSCRFR_OVERRIDE_Type;              /*!< Size = 16 (0x010)                                                    */
+} NRF_OSCRFR_OVERRIDE_Type;                          /*!< Size = 16 (0x010)                                                    */
 
-/* OSCILLATORS_OSCRFR_OVERRIDE_PWRUP: Override the PWRUP signal to the analog module */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_ResetValue (0x00000000UL) /*!< Reset value of PWRUP register.                      */
-
-/* VAL @Bit 0 : Override value for the signal */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_VAL_Pos (0UL) /*!< Position of VAL field.                                          */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_VAL_Msk (0x1UL << OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
-
-/* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_EN_Pos (31UL) /*!< Position of EN field.                                           */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_EN_Msk (0x1UL << OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                              */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                              */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_EN_Disabled (0x0UL) /*!< Override is disabled                                      */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_PWRUP_EN_Enabled (0x1UL) /*!< Override is enabled                                        */
-
-
-/* OSCILLATORS_OSCRFR_OVERRIDE_RETAIN: Override the RETAIN signal to the analog module */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_ResetValue (0x00000000UL) /*!< Reset value of RETAIN register.                    */
+/* OSCRFR_OVERRIDE_PWRUP: Override the PWRUP signal to the analog module */
+  #define OSCRFR_OVERRIDE_PWRUP_ResetValue (0x00000000UL) /*!< Reset value of PWRUP register.                                  */
 
 /* VAL @Bit 0 : Override value for the signal */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_VAL_Pos (0UL) /*!< Position of VAL field.                                         */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_VAL_Msk (0x1UL << OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
+  #define OSCRFR_OVERRIDE_PWRUP_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
+  #define OSCRFR_OVERRIDE_PWRUP_VAL_Msk (0x1UL << OSCRFR_OVERRIDE_PWRUP_VAL_Pos) /*!< Bit mask of VAL field.                   */
 
 /* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_EN_Pos (31UL) /*!< Position of EN field.                                          */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_EN_Msk (0x1UL << OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                             */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                             */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_EN_Disabled (0x0UL) /*!< Override is disabled                                     */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_RETAIN_EN_Enabled (0x1UL) /*!< Override is enabled                                       */
+  #define OSCRFR_OVERRIDE_PWRUP_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define OSCRFR_OVERRIDE_PWRUP_EN_Msk (0x1UL << OSCRFR_OVERRIDE_PWRUP_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define OSCRFR_OVERRIDE_PWRUP_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define OSCRFR_OVERRIDE_PWRUP_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define OSCRFR_OVERRIDE_PWRUP_EN_Disabled (0x0UL)  /*!< Override is disabled                                                 */
+  #define OSCRFR_OVERRIDE_PWRUP_EN_Enabled (0x1UL)   /*!< Override is enabled                                                  */
 
 
-/* OSCILLATORS_OSCRFR_OVERRIDE_READY: Override the READY signal from the analog module */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_READY_ResetValue (0x00000000UL) /*!< Reset value of READY register.                      */
+/* OSCRFR_OVERRIDE_RETAIN: Override the RETAIN signal to the analog module */
+  #define OSCRFR_OVERRIDE_RETAIN_ResetValue (0x00000000UL) /*!< Reset value of RETAIN register.                                */
+
+/* VAL @Bit 0 : Override value for the signal */
+  #define OSCRFR_OVERRIDE_RETAIN_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
+  #define OSCRFR_OVERRIDE_RETAIN_VAL_Msk (0x1UL << OSCRFR_OVERRIDE_RETAIN_VAL_Pos) /*!< Bit mask of VAL field.                 */
+
+/* EN @Bit 31 : Enable the override */
+  #define OSCRFR_OVERRIDE_RETAIN_EN_Pos (31UL)       /*!< Position of EN field.                                                */
+  #define OSCRFR_OVERRIDE_RETAIN_EN_Msk (0x1UL << OSCRFR_OVERRIDE_RETAIN_EN_Pos) /*!< Bit mask of EN field.                    */
+  #define OSCRFR_OVERRIDE_RETAIN_EN_Min (0x0UL)      /*!< Min enumerator value of EN field.                                    */
+  #define OSCRFR_OVERRIDE_RETAIN_EN_Max (0x1UL)      /*!< Max enumerator value of EN field.                                    */
+  #define OSCRFR_OVERRIDE_RETAIN_EN_Disabled (0x0UL) /*!< Override is disabled                                                 */
+  #define OSCRFR_OVERRIDE_RETAIN_EN_Enabled (0x1UL)  /*!< Override is enabled                                                  */
+
+
+/* OSCRFR_OVERRIDE_READY: Override the READY signal from the analog module */
+  #define OSCRFR_OVERRIDE_READY_ResetValue (0x00000000UL) /*!< Reset value of READY register.                                  */
 
 /* VAL @Bit 0 : Current value of the signal */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_READY_VAL_Pos (0UL) /*!< Position of VAL field.                                          */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_READY_VAL_Msk (0x1UL << OSCILLATORS_OSCRFR_OVERRIDE_READY_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/
+  #define OSCRFR_OVERRIDE_READY_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
+  #define OSCRFR_OVERRIDE_READY_VAL_Msk (0x1UL << OSCRFR_OVERRIDE_READY_VAL_Pos) /*!< Bit mask of VAL field.                   */
 
 /* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_READY_EN_Pos (31UL) /*!< Position of EN field.                                           */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_READY_EN_Msk (0x1UL << OSCILLATORS_OSCRFR_OVERRIDE_READY_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_OSCRFR_OVERRIDE_READY_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                              */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_READY_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                              */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_READY_EN_Disabled (0x0UL) /*!< Override is disabled                                      */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_READY_EN_Enabled (0x1UL) /*!< Override is enabled                                        */
+  #define OSCRFR_OVERRIDE_READY_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define OSCRFR_OVERRIDE_READY_EN_Msk (0x1UL << OSCRFR_OVERRIDE_READY_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define OSCRFR_OVERRIDE_READY_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define OSCRFR_OVERRIDE_READY_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define OSCRFR_OVERRIDE_READY_EN_Disabled (0x0UL)  /*!< Override is disabled                                                 */
+  #define OSCRFR_OVERRIDE_READY_EN_Enabled (0x1UL)   /*!< Override is enabled                                                  */
 
 
-/* OSCILLATORS_OSCRFR_OVERRIDE_SETTLED: Override the SETTLED signal from the analog module */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_ResetValue (0x00000000UL) /*!< Reset value of SETTLED register.                  */
+/* OSCRFR_OVERRIDE_SETTLED: Override the SETTLED signal from the analog module */
+  #define OSCRFR_OVERRIDE_SETTLED_ResetValue (0x00000000UL) /*!< Reset value of SETTLED register.                              */
 
 /* VAL @Bit 0 : Current value of the signal */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_VAL_Pos (0UL) /*!< Position of VAL field.                                        */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_VAL_Msk (0x1UL << OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_VAL_Pos) /*!< Bit mask of
-                                                                            VAL field.*/
+  #define OSCRFR_OVERRIDE_SETTLED_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
+  #define OSCRFR_OVERRIDE_SETTLED_VAL_Msk (0x1UL << OSCRFR_OVERRIDE_SETTLED_VAL_Pos) /*!< Bit mask of VAL field.               */
 
 /* EN @Bit 31 : Enable the override */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_EN_Pos (31UL) /*!< Position of EN field.                                         */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_EN_Msk (0x1UL << OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                            */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                            */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_EN_Disabled (0x0UL) /*!< Override is disabled                                    */
-  #define OSCILLATORS_OSCRFR_OVERRIDE_SETTLED_EN_Enabled (0x1UL) /*!< Override is enabled                                      */
+  #define OSCRFR_OVERRIDE_SETTLED_EN_Pos (31UL)      /*!< Position of EN field.                                                */
+  #define OSCRFR_OVERRIDE_SETTLED_EN_Msk (0x1UL << OSCRFR_OVERRIDE_SETTLED_EN_Pos) /*!< Bit mask of EN field.                  */
+  #define OSCRFR_OVERRIDE_SETTLED_EN_Min (0x0UL)     /*!< Min enumerator value of EN field.                                    */
+  #define OSCRFR_OVERRIDE_SETTLED_EN_Max (0x1UL)     /*!< Max enumerator value of EN field.                                    */
+  #define OSCRFR_OVERRIDE_SETTLED_EN_Disabled (0x0UL) /*!< Override is disabled                                                */
+  #define OSCRFR_OVERRIDE_SETTLED_EN_Enabled (0x1UL) /*!< Override is enabled                                                  */
 
 
 
-/* ============================================== Struct OSCILLATORS_OSCRFR_DFT ============================================== */
+/* ==================================================== Struct OSCRFR_DFT ==================================================== */
 /**
-  * @brief DFT [OSCILLATORS_OSCRFR_DFT] (unspecified)
+  * @brief DFT [OSCRFR_DFT] (unspecified)
   */
 typedef struct {
   __IOM uint32_t  ATB0CONFIG;                        /*!< (@ 0x00000000) Analog Test Bus 0 (ATB0) configuration                */
@@ -39231,184 +39842,156 @@ typedef struct {
   __IOM uint32_t  DTB3CONFIG;                        /*!< (@ 0x0000001C) Digital Test Bus 3 (DTB3) configuration               */
   __IM  uint32_t  RESERVED2[4];
   __IOM uint32_t  TCFG;                              /*!< (@ 0x00000030) Test mode configuration                               */
-} NRF_OSCILLATORS_OSCRFR_DFT_Type;                   /*!< Size = 52 (0x034)                                                    */
+} NRF_OSCRFR_DFT_Type;                               /*!< Size = 52 (0x034)                                                    */
 
-/* OSCILLATORS_OSCRFR_DFT_ATB0CONFIG: Analog Test Bus 0 (ATB0) configuration */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB0CONFIG register.                 */
+/* OSCRFR_DFT_ATB0CONFIG: Analog Test Bus 0 (ATB0) configuration */
+  #define OSCRFR_DFT_ATB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB0CONFIG register.                             */
 
 /* SELMUX @Bit 0 : Select multiplexer for ATB0 */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                                    */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_SELMUX_Msk (0x1UL << OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_SELMUX_Pos) /*!< Bit mask of
-                                                                            SELMUX field.*/
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                      */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_SELMUX_Max (0x1UL) /*!< Max enumerator value of SELMUX field.                      */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_SELMUX_IBPSR4U (0x0UL) /*!< IBPSR_4U signal selected                               */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_SELMUX_Spare (0x1UL) /*!< None selected                                            */
+  #define OSCRFR_DFT_ATB0CONFIG_SELMUX_Pos (0UL)     /*!< Position of SELMUX field.                                            */
+  #define OSCRFR_DFT_ATB0CONFIG_SELMUX_Msk (0x1UL << OSCRFR_DFT_ATB0CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.          */
+  #define OSCRFR_DFT_ATB0CONFIG_SELMUX_Min (0x0UL)   /*!< Min enumerator value of SELMUX field.                                */
+  #define OSCRFR_DFT_ATB0CONFIG_SELMUX_Max (0x1UL)   /*!< Max enumerator value of SELMUX field.                                */
+  #define OSCRFR_DFT_ATB0CONFIG_SELMUX_IBPSR4U (0x0UL) /*!< IBPSR_4U signal selected                                           */
+  #define OSCRFR_DFT_ATB0CONFIG_SELMUX_Spare (0x1UL) /*!< None selected                                                        */
 
 /* EN @Bit 31 : Enable the analog test bus */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_EN_Pos (31UL) /*!< Position of EN field.                                           */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_EN_Msk (0x1UL << OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                              */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                              */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_EN_Disabled (0x0UL) /*!< Analog test bus is disabled                               */
-  #define OSCILLATORS_OSCRFR_DFT_ATB0CONFIG_EN_Enabled (0x1UL) /*!< Analog test bus is enabled                                 */
+  #define OSCRFR_DFT_ATB0CONFIG_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define OSCRFR_DFT_ATB0CONFIG_EN_Msk (0x1UL << OSCRFR_DFT_ATB0CONFIG_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define OSCRFR_DFT_ATB0CONFIG_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define OSCRFR_DFT_ATB0CONFIG_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define OSCRFR_DFT_ATB0CONFIG_EN_Disabled (0x0UL)  /*!< Analog test bus is disabled                                          */
+  #define OSCRFR_DFT_ATB0CONFIG_EN_Enabled (0x1UL)   /*!< Analog test bus is enabled                                           */
 
 
-/* OSCILLATORS_OSCRFR_DFT_DTB0CONFIG: Digital Test Bus 0 (DTB0) configuration */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB0CONFIG register.                 */
+/* OSCRFR_DFT_DTB0CONFIG: Digital Test Bus 0 (DTB0) configuration */
+  #define OSCRFR_DFT_DTB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB0CONFIG register.                             */
 
 /* SELMUX @Bit 0 : Select multiplexer for DTB0 */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                                    */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_SELMUX_Msk (0x1UL << OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_SELMUX_Pos) /*!< Bit mask of
-                                                                            SELMUX field.*/
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                      */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_SELMUX_Max (0x1UL) /*!< Max enumerator value of SELMUX field.                      */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_SELMUX_READY (0x0UL) /*!< READY signal selected                                    */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_SELMUX_OSC (0x1UL) /*!< OSC_RFR_ANA_AO_0V8 signal selected                         */
+  #define OSCRFR_DFT_DTB0CONFIG_SELMUX_Pos (0UL)     /*!< Position of SELMUX field.                                            */
+  #define OSCRFR_DFT_DTB0CONFIG_SELMUX_Msk (0x1UL << OSCRFR_DFT_DTB0CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.          */
+  #define OSCRFR_DFT_DTB0CONFIG_SELMUX_Min (0x0UL)   /*!< Min enumerator value of SELMUX field.                                */
+  #define OSCRFR_DFT_DTB0CONFIG_SELMUX_Max (0x1UL)   /*!< Max enumerator value of SELMUX field.                                */
+  #define OSCRFR_DFT_DTB0CONFIG_SELMUX_READY (0x0UL) /*!< READY signal selected                                                */
+  #define OSCRFR_DFT_DTB0CONFIG_SELMUX_OSC (0x1UL)   /*!< OSC_RFR_ANA_AO_0V8 signal selected                                   */
 
 /* EN @Bit 31 : Enable the digital test bus */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_EN_Pos (31UL) /*!< Position of EN field.                                           */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_EN_Msk (0x1UL << OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                              */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                              */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_EN_Disabled (0x0UL) /*!< Digital test bus is disabled                              */
-  #define OSCILLATORS_OSCRFR_DFT_DTB0CONFIG_EN_Enabled (0x1UL) /*!< Digital test bus is enabled                                */
+  #define OSCRFR_DFT_DTB0CONFIG_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define OSCRFR_DFT_DTB0CONFIG_EN_Msk (0x1UL << OSCRFR_DFT_DTB0CONFIG_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define OSCRFR_DFT_DTB0CONFIG_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define OSCRFR_DFT_DTB0CONFIG_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define OSCRFR_DFT_DTB0CONFIG_EN_Disabled (0x0UL)  /*!< Digital test bus is disabled                                         */
+  #define OSCRFR_DFT_DTB0CONFIG_EN_Enabled (0x1UL)   /*!< Digital test bus is enabled                                          */
 
 
-/* OSCILLATORS_OSCRFR_DFT_DTB1CONFIG: Digital Test Bus 1 (DTB1) configuration */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB1CONFIG register.                 */
+/* OSCRFR_DFT_DTB1CONFIG: Digital Test Bus 1 (DTB1) configuration */
+  #define OSCRFR_DFT_DTB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB1CONFIG register.                             */
 
 /* SELMUX @Bit 0 : Select multiplexer for DTB1 */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_SELMUX_Pos (0UL) /*!< Position of SELMUX field.                                    */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_SELMUX_Msk (0x1UL << OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_SELMUX_Pos) /*!< Bit mask of
-                                                                            SELMUX field.*/
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_SELMUX_Min (0x0UL) /*!< Min enumerator value of SELMUX field.                      */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_SELMUX_Max (0x1UL) /*!< Max enumerator value of SELMUX field.                      */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_SELMUX_SETTLED (0x0UL) /*!< SETTLED signal selected                                */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_SELMUX_OSC (0x1UL) /*!< OSC_RFR_ANA_AO_0V8 signal selected                         */
+  #define OSCRFR_DFT_DTB1CONFIG_SELMUX_Pos (0UL)     /*!< Position of SELMUX field.                                            */
+  #define OSCRFR_DFT_DTB1CONFIG_SELMUX_Msk (0x1UL << OSCRFR_DFT_DTB1CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.          */
+  #define OSCRFR_DFT_DTB1CONFIG_SELMUX_Min (0x0UL)   /*!< Min enumerator value of SELMUX field.                                */
+  #define OSCRFR_DFT_DTB1CONFIG_SELMUX_Max (0x1UL)   /*!< Max enumerator value of SELMUX field.                                */
+  #define OSCRFR_DFT_DTB1CONFIG_SELMUX_SETTLED (0x0UL) /*!< SETTLED signal selected                                            */
+  #define OSCRFR_DFT_DTB1CONFIG_SELMUX_OSC (0x1UL)   /*!< OSC_RFR_ANA_AO_0V8 signal selected                                   */
 
 /* EN @Bit 31 : Enable the digital test bus */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_EN_Pos (31UL) /*!< Position of EN field.                                           */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_EN_Msk (0x1UL << OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_EN_Pos) /*!< Bit mask of EN
-                                                                            field.*/
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                              */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                              */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_EN_Disabled (0x0UL) /*!< Digital test bus is disabled                              */
-  #define OSCILLATORS_OSCRFR_DFT_DTB1CONFIG_EN_Enabled (0x1UL) /*!< Digital test bus is enabled                                */
+  #define OSCRFR_DFT_DTB1CONFIG_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define OSCRFR_DFT_DTB1CONFIG_EN_Msk (0x1UL << OSCRFR_DFT_DTB1CONFIG_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define OSCRFR_DFT_DTB1CONFIG_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define OSCRFR_DFT_DTB1CONFIG_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define OSCRFR_DFT_DTB1CONFIG_EN_Disabled (0x0UL)  /*!< Digital test bus is disabled                                         */
+  #define OSCRFR_DFT_DTB1CONFIG_EN_Enabled (0x1UL)   /*!< Digital test bus is enabled                                          */
 
 
-/* OSCILLATORS_OSCRFR_DFT_DTB3CONFIG: Digital Test Bus 3 (DTB3) configuration */
-  #define OSCILLATORS_OSCRFR_DFT_DTB3CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB3CONFIG register.                 */
+/* OSCRFR_DFT_DTB3CONFIG: Digital Test Bus 3 (DTB3) configuration */
+  #define OSCRFR_DFT_DTB3CONFIG_ResetValue (0x00000000UL) /*!< Reset value of DTB3CONFIG register.                             */
 
 /* PWRUPDELTEST @Bit 27 : Enable the PWRUP delay test circuit */
-  #define OSCILLATORS_OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Pos (27UL) /*!< Position of PWRUPDELTEST field.                       */
-  #define OSCILLATORS_OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Msk (0x1UL << OSCILLATORS_OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Pos) /*!<
-                                                                            Bit mask of PWRUPDELTEST field.*/
-  #define OSCILLATORS_OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Min (0x0UL) /*!< Min enumerator value of PWRUPDELTEST field.          */
-  #define OSCILLATORS_OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Max (0x1UL) /*!< Max enumerator value of PWRUPDELTEST field.          */
-  #define OSCILLATORS_OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Disabled (0x0UL) /*!< PWRUP delay test circuit is disabled            */
-  #define OSCILLATORS_OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Enabled (0x1UL) /*!< PWRUP delay test circuit is enabled              */
+  #define OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Pos (27UL) /*!< Position of PWRUPDELTEST field.                                   */
+  #define OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Msk (0x1UL << OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Pos) /*!< Bit mask of PWRUPDELTEST
+                                                                            field.*/
+  #define OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Min (0x0UL) /*!< Min enumerator value of PWRUPDELTEST field.                      */
+  #define OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Max (0x1UL) /*!< Max enumerator value of PWRUPDELTEST field.                      */
+  #define OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Disabled (0x0UL) /*!< PWRUP delay test circuit is disabled                        */
+  #define OSCRFR_DFT_DTB3CONFIG_PWRUPDELTEST_Enabled (0x1UL) /*!< PWRUP delay test circuit is enabled                          */
 
 
-/* OSCILLATORS_OSCRFR_DFT_TCFG: Test mode configuration */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_ResetValue (0x00000000UL) /*!< Reset value of TCFG register.                             */
+/* OSCRFR_DFT_TCFG: Test mode configuration */
+  #define OSCRFR_DFT_TCFG_ResetValue (0x00000000UL)  /*!< Reset value of TCFG register.                                        */
 
 /* BIASCURRENT @Bit 0 : Enable continuous mode for measuring bias current over ATB */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_BIASCURRENT_Pos (0UL) /*!< Position of BIASCURRENT field.                                */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_BIASCURRENT_Msk (0x1UL << OSCILLATORS_OSCRFR_DFT_TCFG_BIASCURRENT_Pos) /*!< Bit mask of
-                                                                            BIASCURRENT field.*/
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_BIASCURRENT_Min (0x0UL) /*!< Min enumerator value of BIASCURRENT field.                  */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_BIASCURRENT_Max (0x1UL) /*!< Max enumerator value of BIASCURRENT field.                  */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_BIASCURRENT_Disabled (0x0UL) /*!< Disabled                                               */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_BIASCURRENT_Enabled (0x1UL) /*!< Enabled                                                 */
+  #define OSCRFR_DFT_TCFG_BIASCURRENT_Pos (0UL)      /*!< Position of BIASCURRENT field.                                       */
+  #define OSCRFR_DFT_TCFG_BIASCURRENT_Msk (0x1UL << OSCRFR_DFT_TCFG_BIASCURRENT_Pos) /*!< Bit mask of BIASCURRENT field.       */
+  #define OSCRFR_DFT_TCFG_BIASCURRENT_Min (0x0UL)    /*!< Min enumerator value of BIASCURRENT field.                           */
+  #define OSCRFR_DFT_TCFG_BIASCURRENT_Max (0x1UL)    /*!< Max enumerator value of BIASCURRENT field.                           */
+  #define OSCRFR_DFT_TCFG_BIASCURRENT_Disabled (0x0UL) /*!< Disabled                                                           */
+  #define OSCRFR_DFT_TCFG_BIASCURRENT_Enabled (0x1UL) /*!< Enabled                                                             */
 
 /* OSCRFRDTBI @Bit 1 : Use DTBI input as refresh clock when in bypass mode */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_OSCRFRDTBI_Pos (1UL) /*!< Position of OSCRFRDTBI field.                                  */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_OSCRFRDTBI_Msk (0x1UL << OSCILLATORS_OSCRFR_DFT_TCFG_OSCRFRDTBI_Pos) /*!< Bit mask of
-                                                                            OSCRFRDTBI field.*/
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_OSCRFRDTBI_Min (0x0UL) /*!< Min enumerator value of OSCRFRDTBI field.                    */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_OSCRFRDTBI_Max (0x1UL) /*!< Max enumerator value of OSCRFRDTBI field.                    */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_OSCRFRDTBI_Disabled (0x0UL) /*!< Disabled                                                */
-  #define OSCILLATORS_OSCRFR_DFT_TCFG_OSCRFRDTBI_Enabled (0x1UL) /*!< Enabled                                                  */
+  #define OSCRFR_DFT_TCFG_OSCRFRDTBI_Pos (1UL)       /*!< Position of OSCRFRDTBI field.                                        */
+  #define OSCRFR_DFT_TCFG_OSCRFRDTBI_Msk (0x1UL << OSCRFR_DFT_TCFG_OSCRFRDTBI_Pos) /*!< Bit mask of OSCRFRDTBI field.          */
+  #define OSCRFR_DFT_TCFG_OSCRFRDTBI_Min (0x0UL)     /*!< Min enumerator value of OSCRFRDTBI field.                            */
+  #define OSCRFR_DFT_TCFG_OSCRFRDTBI_Max (0x1UL)     /*!< Max enumerator value of OSCRFRDTBI field.                            */
+  #define OSCRFR_DFT_TCFG_OSCRFRDTBI_Disabled (0x0UL) /*!< Disabled                                                            */
+  #define OSCRFR_DFT_TCFG_OSCRFRDTBI_Enabled (0x1UL) /*!< Enabled                                                              */
 
 
-
-/* ================================================ Struct OSCILLATORS_OSCRFR ================================================ */
+/* ====================================================== Struct OSCRFR ====================================================== */
 /**
-  * @brief OSCRFR [OSCILLATORS_OSCRFR] OSCRFR peripheral
+  * @brief OSCRFR peripheral
   */
-typedef struct {
-  __IM  uint32_t  RESERVED[256];
-  __IM  uint32_t  STATUSANA;                         /*!< (@ 0x00000400) Status of analog module output signals                */
-  __IM  uint32_t  RESERVED1[3];
-  __IOM NRF_OSCILLATORS_OSCRFR_CONFIG_Type CONFIG;   /*!< (@ 0x00000410) (unspecified)                                         */
-  __IM  uint32_t  RESERVED2[11];
-  __IOM NRF_OSCILLATORS_OSCRFR_TRIM_Type TRIM;       /*!< (@ 0x00000440) (unspecified)                                         */
-  __IM  uint32_t  RESERVED3[14];
-  __IOM uint32_t  MIRROR;                            /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
-  __IOM uint32_t  MODE;                              /*!< (@ 0x00000484) Oscillator mode                                       */
-  __IM  uint32_t  RESERVED4[30];
-  __IOM NRF_OSCILLATORS_OSCRFR_OVERRIDE_Type OVERRIDE; /*!< (@ 0x00000500) (unspecified)                                       */
-  __IM  uint32_t  RESERVED5[60];
-  __IOM NRF_OSCILLATORS_OSCRFR_DFT_Type DFT;         /*!< (@ 0x00000600) (unspecified)                                         */
-} NRF_OSCILLATORS_OSCRFR_Type;                       /*!< Size = 1588 (0x634)                                                  */
+  typedef struct {                                   /*!< OSCRFR Structure                                                     */
+    __IM uint32_t RESERVED[256];
+    __IM uint32_t STATUSANA;                         /*!< (@ 0x00000400) Status of analog module output signals                */
+    __IM uint32_t RESERVED1[3];
+    __IOM NRF_OSCRFR_CONFIG_Type CONFIG;             /*!< (@ 0x00000410) (unspecified)                                         */
+    __IM uint32_t RESERVED2[11];
+    __IOM NRF_OSCRFR_TRIM_Type TRIM;                 /*!< (@ 0x00000440) (unspecified)                                         */
+    __IM uint32_t RESERVED3[14];
+    __IOM uint32_t MIRROR;                           /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
+    __IOM uint32_t MODE;                             /*!< (@ 0x00000484) Oscillator mode                                       */
+    __IM uint32_t RESERVED4[30];
+    __IOM NRF_OSCRFR_OVERRIDE_Type OVERRIDE;         /*!< (@ 0x00000500) (unspecified)                                         */
+    __IM uint32_t RESERVED5[60];
+    __IOM NRF_OSCRFR_DFT_Type DFT;                   /*!< (@ 0x00000600) (unspecified)                                         */
+  } NRF_OSCRFR_Type;                                 /*!< Size = 1588 (0x634)                                                  */
 
-/* OSCILLATORS_OSCRFR_STATUSANA: Status of analog module output signals */
-  #define OSCILLATORS_OSCRFR_STATUSANA_ResetValue (0x00000000UL) /*!< Reset value of STATUSANA register.                       */
+/* OSCRFR_STATUSANA: Status of analog module output signals */
+  #define OSCRFR_STATUSANA_ResetValue (0x00000000UL) /*!< Reset value of STATUSANA register.                                   */
 
 /* READY @Bit 0 : Current value of the READY signal from the analog module */
-  #define OSCILLATORS_OSCRFR_STATUSANA_READY_Pos (0UL) /*!< Position of READY field.                                           */
-  #define OSCILLATORS_OSCRFR_STATUSANA_READY_Msk (0x1UL << OSCILLATORS_OSCRFR_STATUSANA_READY_Pos) /*!< Bit mask of READY
-                                                                            field.*/
+  #define OSCRFR_STATUSANA_READY_Pos (0UL)           /*!< Position of READY field.                                             */
+  #define OSCRFR_STATUSANA_READY_Msk (0x1UL << OSCRFR_STATUSANA_READY_Pos) /*!< Bit mask of READY field.                       */
 
 /* SETTLED @Bit 1 : Current value of the SETTLED signal from the analog module */
-  #define OSCILLATORS_OSCRFR_STATUSANA_SETTLED_Pos (1UL) /*!< Position of SETTLED field.                                       */
-  #define OSCILLATORS_OSCRFR_STATUSANA_SETTLED_Msk (0x1UL << OSCILLATORS_OSCRFR_STATUSANA_SETTLED_Pos) /*!< Bit mask of SETTLED
-                                                                            field.*/
+  #define OSCRFR_STATUSANA_SETTLED_Pos (1UL)         /*!< Position of SETTLED field.                                           */
+  #define OSCRFR_STATUSANA_SETTLED_Msk (0x1UL << OSCRFR_STATUSANA_SETTLED_Pos) /*!< Bit mask of SETTLED field.                 */
 
 
-/* OSCILLATORS_OSCRFR_MIRROR: Enable LOCK for mirrored registers */
-  #define OSCILLATORS_OSCRFR_MIRROR_ResetValue (0x00000001UL) /*!< Reset value of MIRROR register.                             */
+/* OSCRFR_MIRROR: Enable LOCK for mirrored registers */
+  #define OSCRFR_MIRROR_ResetValue (0x00000001UL)    /*!< Reset value of MIRROR register.                                      */
 
 /* LOCK @Bit 0 : Lock for mirrored registers */
-  #define OSCILLATORS_OSCRFR_MIRROR_LOCK_Pos (0UL)   /*!< Position of LOCK field.                                              */
-  #define OSCILLATORS_OSCRFR_MIRROR_LOCK_Msk (0x1UL << OSCILLATORS_OSCRFR_MIRROR_LOCK_Pos) /*!< Bit mask of LOCK field.        */
-  #define OSCILLATORS_OSCRFR_MIRROR_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                                  */
-  #define OSCILLATORS_OSCRFR_MIRROR_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                                  */
-  #define OSCILLATORS_OSCRFR_MIRROR_LOCK_Disabled (0x0UL) /*!< Lock disabled                                                   */
-  #define OSCILLATORS_OSCRFR_MIRROR_LOCK_Enabled (0x1UL) /*!< Lock enabled                                                     */
+  #define OSCRFR_MIRROR_LOCK_Pos (0UL)               /*!< Position of LOCK field.                                              */
+  #define OSCRFR_MIRROR_LOCK_Msk (0x1UL << OSCRFR_MIRROR_LOCK_Pos) /*!< Bit mask of LOCK field.                                */
+  #define OSCRFR_MIRROR_LOCK_Min (0x0UL)             /*!< Min enumerator value of LOCK field.                                  */
+  #define OSCRFR_MIRROR_LOCK_Max (0x1UL)             /*!< Max enumerator value of LOCK field.                                  */
+  #define OSCRFR_MIRROR_LOCK_Disabled (0x0UL)        /*!< Lock disabled                                                        */
+  #define OSCRFR_MIRROR_LOCK_Enabled (0x1UL)         /*!< Lock enabled                                                         */
 
 
-/* OSCILLATORS_OSCRFR_MODE: Oscillator mode */
-  #define OSCILLATORS_OSCRFR_MODE_ResetValue (0x00000000UL) /*!< Reset value of MODE register.                                 */
+/* OSCRFR_MODE: Oscillator mode */
+  #define OSCRFR_MODE_ResetValue (0x00000000UL)      /*!< Reset value of MODE register.                                        */
 
 /* MODE @Bit 0 : Mode */
-  #define OSCILLATORS_OSCRFR_MODE_MODE_Pos (0UL)     /*!< Position of MODE field.                                              */
-  #define OSCILLATORS_OSCRFR_MODE_MODE_Msk (0x1UL << OSCILLATORS_OSCRFR_MODE_MODE_Pos) /*!< Bit mask of MODE field.            */
-  #define OSCILLATORS_OSCRFR_MODE_MODE_Min (0x0UL)   /*!< Min enumerator value of MODE field.                                  */
-  #define OSCILLATORS_OSCRFR_MODE_MODE_Max (0x1UL)   /*!< Max enumerator value of MODE field.                                  */
-  #define OSCILLATORS_OSCRFR_MODE_MODE_Normal (0x0UL) /*!< Normal mode - Use internal oscillator                               */
-  #define OSCILLATORS_OSCRFR_MODE_MODE_Bypass (0x1UL) /*!< Bypass mode - Use OSC_RFR_DIG_AO_0V8 signal                         */
+  #define OSCRFR_MODE_MODE_Pos (0UL)                 /*!< Position of MODE field.                                              */
+  #define OSCRFR_MODE_MODE_Msk (0x1UL << OSCRFR_MODE_MODE_Pos) /*!< Bit mask of MODE field.                                    */
+  #define OSCRFR_MODE_MODE_Min (0x0UL)               /*!< Min enumerator value of MODE field.                                  */
+  #define OSCRFR_MODE_MODE_Max (0x1UL)               /*!< Max enumerator value of MODE field.                                  */
+  #define OSCRFR_MODE_MODE_Normal (0x0UL)            /*!< Normal mode - Use internal oscillator                                */
+  #define OSCRFR_MODE_MODE_Bypass (0x1UL)            /*!< Bypass mode - Use OSC_RFR_DIG_AO_0V8 signal                          */
 
-
-/* =================================================== Struct OSCILLATORS ==================================================== */
-/**
-  * @brief Oscillator control
-  */
-  typedef struct {                                   /*!< OSCILLATORS Structure                                                */
-    __IM uint32_t RESERVED[512];
-    __IOM NRF_OSCILLATORS_PLL_Type PLL;              /*!< (@ 0x00000800) Oscillator control                                    */
-    __IM uint32_t RESERVED1[1507];
-    __IOM NRF_OSCILLATORS_LFXO_Type LFXO;            /*!< (@ 0x00002000) LFXO peripheral                                       */
-    __IM uint32_t RESERVED2[627];
-    __IOM NRF_OSCILLATORS_LFRC_Type LFRC;            /*!< (@ 0x00003000) LFRC peripheral                                       */
-    __IM uint32_t RESERVED3[627];
-    __IOM NRF_OSCILLATORS_HFXO64M_Type HFXO64M;      /*!< (@ 0x00004000) HFXO64M peripheral                                    */
-    __IM uint32_t RESERVED4[5759];
-    __IOM NRF_OSCILLATORS_OSCRFR_Type OSCRFR;        /*!< (@ 0x0000A000) OSCRFR peripheral                                     */
-  } NRF_OSCILLATORS_Type;                            /*!< Size = 42548 (0xA634)                                                */
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
@@ -44098,6 +44681,10 @@ typedef struct {
   #define QSPI_CONFIG_AXIMODE_AXIMODE_Lite (0x0UL)   /*!< AXI Lite                                                             */
   #define QSPI_CONFIG_AXIMODE_AXIMODE_Full (0x1UL)   /*!< Full AXI                                                             */
 
+/* MODE @Bit 5 : (unspecified) */
+  #define QSPI_CONFIG_AXIMODE_MODE_Pos (5UL)         /*!< Position of MODE field.                                              */
+  #define QSPI_CONFIG_AXIMODE_MODE_Msk (0x1UL << QSPI_CONFIG_AXIMODE_MODE_Pos) /*!< Bit mask of MODE field.                    */
+
 
 
 /* =================================================== Struct QSPI_FORMAT ==================================================== */
@@ -44342,8 +44929,11 @@ typedef struct {
   __IOM uint32_t  DR[36];                            /*!< (@ 0x00000060) QSPI CORE Data Register                               */
   __IOM uint32_t  RXSAMPLEDELAY;                     /*!< (@ 0x000000F0) RX Sample Delay Register                              */
   __IOM uint32_t  SPICTRLR0;                         /*!< (@ 0x000000F4) SPI_CTRLR0 - SPI Control Register                     */
-  __IM  uint32_t  RESERVED[2];
-} NRF_QSPI_CORE_CORE_Type;                           /*!< Size = 256 (0x100)                                                   */
+  __IM  uint32_t  RESERVED[8];
+  __IOM uint32_t  SPICTRLR1;                         /*!< (@ 0x00000118) SPI Control 1 register                                */
+  __IOM uint32_t  SPITECR;                           /*!< (@ 0x0000011C) SPI Transmit Error Interrupt Clear Register           */
+  __IM  uint32_t  RESERVED1[56];
+} NRF_QSPI_CORE_CORE_Type;                           /*!< Size = 512 (0x200)                                                   */
 
 /* QSPI_CORE_CORE_CTRLR0: Control Register 0 */
   #define QSPI_CORE_CORE_CTRLR0_ResetValue (0x00000007UL) /*!< Reset value of CTRLR0 register.                                 */
@@ -45450,64 +46040,49 @@ typedef struct {
                                                                             RSVDSPICTRLR0 field.*/
 
 
-
-/* ========================================== Struct QSPI_CORE_DWCSSIADDRESSBLOCK2 =========================================== */
-/**
-  * @brief DWCSSIADDRESSBLOCK2 [QSPI_CORE_DWCSSIADDRESSBLOCK2] (unspecified)
-  */
-typedef struct {
-  __IM  uint32_t  RESERVED[6];
-  __IOM uint32_t  SPICTRLR1;                         /*!< (@ 0x00000018) SPI Control 1 register                                */
-  __IOM uint32_t  SPITECR;                           /*!< (@ 0x0000001C) SPI Transmit Error Interrupt Clear Register           */
-  __IM  uint32_t  RESERVED1[56];
-} NRF_QSPI_CORE_DWCSSIADDRESSBLOCK2_Type;            /*!< Size = 256 (0x100)                                                   */
-
-/* QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1: SPI Control 1 register */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_ResetValue (0x00000000UL) /*!< Reset value of SPICTRLR1 register.            */
+/* QSPI_CORE_CORE_SPICTRLR1: SPI Control 1 register */
+  #define QSPI_CORE_CORE_SPICTRLR1_ResetValue (0x00000000UL) /*!< Reset value of SPICTRLR1 register.                           */
 
 /* DYNWS @Bits 0..2 : SPI Dynamic Wait states field. */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_DYNWS_Pos (0UL) /*!< Position of DYNWS field.                                */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_DYNWS_Msk (0x7UL << QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_DYNWS_Pos) /*!<
-                                                                            Bit mask of DYNWS field.*/
+  #define QSPI_CORE_CORE_SPICTRLR1_DYNWS_Pos (0UL)   /*!< Position of DYNWS field.                                             */
+  #define QSPI_CORE_CORE_SPICTRLR1_DYNWS_Msk (0x7UL << QSPI_CORE_CORE_SPICTRLR1_DYNWS_Pos) /*!< Bit mask of DYNWS field.       */
 
 /* RSVDSPICTRLR137 @Bits 3..7 : (unspecified) */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_RSVDSPICTRLR137_Pos (3UL) /*!< Position of RSVDSPICTRLR137 field.            */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_RSVDSPICTRLR137_Msk (0x1FUL << QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_RSVDSPICTRLR137_Pos)
-                                                                            /*!< Bit mask of RSVDSPICTRLR137 field.*/
+  #define QSPI_CORE_CORE_SPICTRLR1_RSVDSPICTRLR137_Pos (3UL) /*!< Position of RSVDSPICTRLR137 field.                           */
+  #define QSPI_CORE_CORE_SPICTRLR1_RSVDSPICTRLR137_Msk (0x1FUL << QSPI_CORE_CORE_SPICTRLR1_RSVDSPICTRLR137_Pos) /*!< Bit mask of
+                                                                            RSVDSPICTRLR137 field.*/
 
 /* MAXWS @Bits 8..11 : Maximum wait cycles allowed per transaction. */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_MAXWS_Pos (8UL) /*!< Position of MAXWS field.                                */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_MAXWS_Msk (0xFUL << QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_MAXWS_Pos) /*!<
-                                                                            Bit mask of MAXWS field.*/
+  #define QSPI_CORE_CORE_SPICTRLR1_MAXWS_Pos (8UL)   /*!< Position of MAXWS field.                                             */
+  #define QSPI_CORE_CORE_SPICTRLR1_MAXWS_Msk (0xFUL << QSPI_CORE_CORE_SPICTRLR1_MAXWS_Pos) /*!< Bit mask of MAXWS field.       */
 
 /* RSVDSPICTRLR11215 @Bits 12..15 : (unspecified) */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_RSVDSPICTRLR11215_Pos (12UL) /*!< Position of RSVDSPICTRLR11215 field.       */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_RSVDSPICTRLR11215_Msk (0xFUL << QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_RSVDSPICTRLR11215_Pos)
-                                                                            /*!< Bit mask of RSVDSPICTRLR11215 field.*/
+  #define QSPI_CORE_CORE_SPICTRLR1_RSVDSPICTRLR11215_Pos (12UL) /*!< Position of RSVDSPICTRLR11215 field.                      */
+  #define QSPI_CORE_CORE_SPICTRLR1_RSVDSPICTRLR11215_Msk (0xFUL << QSPI_CORE_CORE_SPICTRLR1_RSVDSPICTRLR11215_Pos) /*!< Bit mask
+                                                                            of RSVDSPICTRLR11215 field.*/
 
 /* CSMINHIGH @Bits 16..19 : Chip-Select Minimum HIGH period. */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_CSMINHIGH_Pos (16UL) /*!< Position of CSMINHIGH field.                       */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_CSMINHIGH_Msk (0xFUL << QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_CSMINHIGH_Pos)
-                                                                            /*!< Bit mask of CSMINHIGH field.*/
+  #define QSPI_CORE_CORE_SPICTRLR1_CSMINHIGH_Pos (16UL) /*!< Position of CSMINHIGH field.                                      */
+  #define QSPI_CORE_CORE_SPICTRLR1_CSMINHIGH_Msk (0xFUL << QSPI_CORE_CORE_SPICTRLR1_CSMINHIGH_Pos) /*!< Bit mask of CSMINHIGH
+                                                                            field.*/
 
 /* RSVDSPICTRLR12031 @Bits 20..31 : (unspecified) */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_RSVDSPICTRLR12031_Pos (20UL) /*!< Position of RSVDSPICTRLR12031 field.       */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_RSVDSPICTRLR12031_Msk (0xFFFUL << QSPI_CORE_DWCSSIADDRESSBLOCK2_SPICTRLR1_RSVDSPICTRLR12031_Pos)
-                                                                            /*!< Bit mask of RSVDSPICTRLR12031 field.*/
+  #define QSPI_CORE_CORE_SPICTRLR1_RSVDSPICTRLR12031_Pos (20UL) /*!< Position of RSVDSPICTRLR12031 field.                      */
+  #define QSPI_CORE_CORE_SPICTRLR1_RSVDSPICTRLR12031_Msk (0xFFFUL << QSPI_CORE_CORE_SPICTRLR1_RSVDSPICTRLR12031_Pos) /*!< Bit
+                                                                            mask of RSVDSPICTRLR12031 field.*/
 
 
-/* QSPI_CORE_DWCSSIADDRESSBLOCK2_SPITECR: SPI Transmit Error Interrupt Clear Register */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPITECR_ResetValue (0x00000000UL) /*!< Reset value of SPITECR register.                */
+/* QSPI_CORE_CORE_SPITECR: SPI Transmit Error Interrupt Clear Register */
+  #define QSPI_CORE_CORE_SPITECR_ResetValue (0x00000000UL) /*!< Reset value of SPITECR register.                               */
 
 /* SPITECR @Bit 0 : Clear SPI Transmit Error interrupt. */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPITECR_SPITECR_Pos (0UL) /*!< Position of SPITECR field.                              */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPITECR_SPITECR_Msk (0x1UL << QSPI_CORE_DWCSSIADDRESSBLOCK2_SPITECR_SPITECR_Pos) /*!<
-                                                                            Bit mask of SPITECR field.*/
+  #define QSPI_CORE_CORE_SPITECR_SPITECR_Pos (0UL)   /*!< Position of SPITECR field.                                           */
+  #define QSPI_CORE_CORE_SPITECR_SPITECR_Msk (0x1UL << QSPI_CORE_CORE_SPITECR_SPITECR_Pos) /*!< Bit mask of SPITECR field.     */
 
 /* RSVDSPITECR @Bits 1..31 : (unspecified) */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPITECR_RSVDSPITECR_Pos (1UL) /*!< Position of RSVDSPITECR field.                      */
-  #define QSPI_CORE_DWCSSIADDRESSBLOCK2_SPITECR_RSVDSPITECR_Msk (0x7FFFFFFFUL << QSPI_CORE_DWCSSIADDRESSBLOCK2_SPITECR_RSVDSPITECR_Pos)
-                                                                            /*!< Bit mask of RSVDSPITECR field.*/
+  #define QSPI_CORE_CORE_SPITECR_RSVDSPITECR_Pos (1UL) /*!< Position of RSVDSPITECR field.                                     */
+  #define QSPI_CORE_CORE_SPITECR_RSVDSPITECR_Msk (0x7FFFFFFFUL << QSPI_CORE_CORE_SPITECR_RSVDSPITECR_Pos) /*!< Bit mask of
+                                                                            RSVDSPITECR field.*/
 
 
 
@@ -45517,7 +46092,6 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_QSPI_CORE_CORE_Type CORE;                /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_QSPI_CORE_DWCSSIADDRESSBLOCK2_Type DWCSSIADDRESSBLOCK2; /*!< (@ 0x00000100) (unspecified)                          */
 } NRF_QSPI_CORE_Type;                                /*!< Size = 512 (0x200)                                                   */
 
 
@@ -45531,28 +46105,29 @@ typedef struct {
     #pragma GCC diagnostic ignored "-Wpedantic"
   #endif
   union {
-    __IOM uint32_t PENALTY[1];                       /*!< (@ 0x00000000) Penalty level for power/clock pair n. When
+    __IOM uint32_t PENALTY[4];                       /*!< (@ 0x00000000) Penalty level for power/clock pair n. When
                                                                          FULL_PCP_ZERO feature is not supported, PENALTY[0]
                                                                          address overlaps the PENALTY0 address and register
                                                                          description for PENALTY[0] is not valid.*/
     __IOM uint32_t PENALTY0;                         /*!< (@ 0x00000000) Penalty level for power/clock pair 0. The register
                                                                          description is valid only when FULL_PCP_ZERO feature is
                                                                          not supported*/
+    __IM uint32_t RESERVED[4];
   };
   #if defined(_GNUC_)
     #pragma GCC diagnostic pop
   #endif
-  __IM  uint32_t  RESERVED[31];
-  __IOM uint32_t  FORCEOVERRIDE[1];                  /*!< (@ 0x00000080) Force override of power/clock pair n.                 */
-} NRF_QSPI_PCGCS_Type;                               /*!< Size = 132 (0x084)                                                   */
+  __IM  uint32_t  RESERVED1[28];
+  __IOM uint32_t  FORCEOVERRIDE[4];                  /*!< (@ 0x00000080) Force override of power/clock pair n.                 */
+} NRF_QSPI_PCGCS_Type;                               /*!< Size = 144 (0x090)                                                   */
 
 /* QSPI_PCGCS_PENALTY: Penalty level for power/clock pair n. When FULL_PCP_ZERO feature is not supported, PENALTY[0] address
                         overlaps the PENALTY0 address and register description for PENALTY[0] is not valid. */
 
-  #define QSPI_PCGCS_PENALTY_MaxCount (1UL)          /*!< Max size of PENALTY[1] array.                                        */
-  #define QSPI_PCGCS_PENALTY_MaxIndex (0UL)          /*!< Max index of PENALTY[1] array.                                       */
-  #define QSPI_PCGCS_PENALTY_MinIndex (0UL)          /*!< Min index of PENALTY[1] array.                                       */
-  #define QSPI_PCGCS_PENALTY_ResetValue (0xFFFFFFFCUL) /*!< Reset value of PENALTY[1] register.                                */
+  #define QSPI_PCGCS_PENALTY_MaxCount (4UL)          /*!< Max size of PENALTY[4] array.                                        */
+  #define QSPI_PCGCS_PENALTY_MaxIndex (3UL)          /*!< Max index of PENALTY[4] array.                                       */
+  #define QSPI_PCGCS_PENALTY_MinIndex (0UL)          /*!< Min index of PENALTY[4] array.                                       */
+  #define QSPI_PCGCS_PENALTY_ResetValue (0xFFFFFFFCUL) /*!< Reset value of PENALTY[4] register.                                */
 
 /* PENALTY @Bits 0..1 : Penalty level */
   #define QSPI_PCGCS_PENALTY_PENALTY_Pos (0UL)       /*!< Position of PENALTY field.                                           */
@@ -45570,10 +46145,10 @@ typedef struct {
 
 
 /* QSPI_PCGCS_FORCEOVERRIDE: Force override of power/clock pair n. */
-  #define QSPI_PCGCS_FORCEOVERRIDE_MaxCount (1UL)    /*!< Max size of FORCEOVERRIDE[1] array.                                  */
-  #define QSPI_PCGCS_FORCEOVERRIDE_MaxIndex (0UL)    /*!< Max index of FORCEOVERRIDE[1] array.                                 */
-  #define QSPI_PCGCS_FORCEOVERRIDE_MinIndex (0UL)    /*!< Min index of FORCEOVERRIDE[1] array.                                 */
-  #define QSPI_PCGCS_FORCEOVERRIDE_ResetValue (0x00000000UL) /*!< Reset value of FORCEOVERRIDE[1] register.                    */
+  #define QSPI_PCGCS_FORCEOVERRIDE_MaxCount (4UL)    /*!< Max size of FORCEOVERRIDE[4] array.                                  */
+  #define QSPI_PCGCS_FORCEOVERRIDE_MaxIndex (3UL)    /*!< Max index of FORCEOVERRIDE[4] array.                                 */
+  #define QSPI_PCGCS_FORCEOVERRIDE_MinIndex (0UL)    /*!< Min index of FORCEOVERRIDE[4] array.                                 */
+  #define QSPI_PCGCS_FORCEOVERRIDE_ResetValue (0x00000000UL) /*!< Reset value of FORCEOVERRIDE[4] register.                    */
 
 /* CLOCKFORCINGPRE @Bits 0..3 : CLOCKFORCINGPRE */
   #define QSPI_PCGCS_FORCEOVERRIDE_CLOCKFORCINGPRE_Pos (0UL) /*!< Position of CLOCKFORCINGPRE field.                           */
@@ -45602,10 +46177,13 @@ typedef struct {
   */
   typedef struct {                                   /*!< QSPI Structure                                                       */
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start operation.                                      */
-    __IM uint32_t RESERVED[63];
+    __OM uint32_t TASKS_RESET;                       /*!< (@ 0x00000004) Reset the QSPI                                        */
+    __IM uint32_t RESERVED[62];
     __IOM uint32_t EVENTS_CORE;                      /*!< (@ 0x00000100) Interrupt from the QSPI core                          */
     __IOM NRF_QSPI_EVENTS_DMA_Type EVENTS_DMA;       /*!< (@ 0x00000104) Peripheral events.                                    */
-    __IM uint32_t RESERVED1[51];
+    __IOM uint32_t EVENTS_IDLE;                      /*!< (@ 0x00000134) This event signifies that the QSPI core is no longer
+                                                                         busy*/
+    __IM uint32_t RESERVED1[50];
     __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
     __IM uint32_t RESERVED2[63];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
@@ -45622,7 +46200,7 @@ typedef struct {
     __IOM NRF_QSPI_CORE_Type CORE;                   /*!< (@ 0x00000900) (unspecified)                                         */
     __IM uint32_t RESERVED6[256];
     __IOM NRF_QSPI_PCGCS_Type PCGCS;                 /*!< (@ 0x00000F00) (unspecified)                                         */
-  } NRF_QSPI_Type;                                   /*!< Size = 3972 (0xF84)                                                  */
+  } NRF_QSPI_Type;                                   /*!< Size = 3984 (0xF90)                                                  */
 
 /* QSPI_TASKS_START: Start operation. */
   #define QSPI_TASKS_START_ResetValue (0x00000000UL) /*!< Reset value of TASKS_START register.                                 */
@@ -45635,6 +46213,17 @@ typedef struct {
   #define QSPI_TASKS_START_TASKS_START_Trigger (0x1UL) /*!< Trigger task                                                       */
 
 
+/* QSPI_TASKS_RESET: Reset the QSPI */
+  #define QSPI_TASKS_RESET_ResetValue (0x00000000UL) /*!< Reset value of TASKS_RESET register.                                 */
+
+/* TASKS_RESET @Bit 0 : Reset the QSPI */
+  #define QSPI_TASKS_RESET_TASKS_RESET_Pos (0UL)     /*!< Position of TASKS_RESET field.                                       */
+  #define QSPI_TASKS_RESET_TASKS_RESET_Msk (0x1UL << QSPI_TASKS_RESET_TASKS_RESET_Pos) /*!< Bit mask of TASKS_RESET field.     */
+  #define QSPI_TASKS_RESET_TASKS_RESET_Min (0x1UL)   /*!< Min enumerator value of TASKS_RESET field.                           */
+  #define QSPI_TASKS_RESET_TASKS_RESET_Max (0x1UL)   /*!< Max enumerator value of TASKS_RESET field.                           */
+  #define QSPI_TASKS_RESET_TASKS_RESET_Trigger (0x1UL) /*!< Trigger task                                                       */
+
+
 /* QSPI_EVENTS_CORE: Interrupt from the QSPI core */
   #define QSPI_EVENTS_CORE_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_CORE register.                                 */
 
@@ -45645,6 +46234,18 @@ typedef struct {
   #define QSPI_EVENTS_CORE_EVENTS_CORE_Max (0x1UL)   /*!< Max enumerator value of EVENTS_CORE field.                           */
   #define QSPI_EVENTS_CORE_EVENTS_CORE_NotGenerated (0x0UL) /*!< Event not generated                                           */
   #define QSPI_EVENTS_CORE_EVENTS_CORE_Generated (0x1UL) /*!< Event generated                                                  */
+
+
+/* QSPI_EVENTS_IDLE: This event signifies that the QSPI core is no longer busy */
+  #define QSPI_EVENTS_IDLE_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_IDLE register.                                 */
+
+/* EVENTS_IDLE @Bit 0 : This event signifies that the QSPI core is no longer busy */
+  #define QSPI_EVENTS_IDLE_EVENTS_IDLE_Pos (0UL)     /*!< Position of EVENTS_IDLE field.                                       */
+  #define QSPI_EVENTS_IDLE_EVENTS_IDLE_Msk (0x1UL << QSPI_EVENTS_IDLE_EVENTS_IDLE_Pos) /*!< Bit mask of EVENTS_IDLE field.     */
+  #define QSPI_EVENTS_IDLE_EVENTS_IDLE_Min (0x0UL)   /*!< Min enumerator value of EVENTS_IDLE field.                           */
+  #define QSPI_EVENTS_IDLE_EVENTS_IDLE_Max (0x1UL)   /*!< Max enumerator value of EVENTS_IDLE field.                           */
+  #define QSPI_EVENTS_IDLE_EVENTS_IDLE_NotGenerated (0x0UL) /*!< Event not generated                                           */
+  #define QSPI_EVENTS_IDLE_EVENTS_IDLE_Generated (0x1UL) /*!< Event generated                                                  */
 
 
 /* QSPI_SHORTS: Shortcuts between local events and tasks */
@@ -45767,6 +46368,14 @@ typedef struct {
   #define QSPI_INTEN_DMAABORTED_Max (0x1UL)          /*!< Max enumerator value of DMAABORTED field.                            */
   #define QSPI_INTEN_DMAABORTED_Disabled (0x0UL)     /*!< Disable                                                              */
   #define QSPI_INTEN_DMAABORTED_Enabled (0x1UL)      /*!< Enable                                                               */
+
+/* IDLE @Bit 13 : Enable or disable interrupt for event IDLE */
+  #define QSPI_INTEN_IDLE_Pos (13UL)                 /*!< Position of IDLE field.                                              */
+  #define QSPI_INTEN_IDLE_Msk (0x1UL << QSPI_INTEN_IDLE_Pos) /*!< Bit mask of IDLE field.                                      */
+  #define QSPI_INTEN_IDLE_Min (0x0UL)                /*!< Min enumerator value of IDLE field.                                  */
+  #define QSPI_INTEN_IDLE_Max (0x1UL)                /*!< Max enumerator value of IDLE field.                                  */
+  #define QSPI_INTEN_IDLE_Disabled (0x0UL)           /*!< Disable                                                              */
+  #define QSPI_INTEN_IDLE_Enabled (0x1UL)            /*!< Enable                                                               */
 
 
 /* QSPI_INTENSET: Enable interrupt */
@@ -45893,6 +46502,15 @@ typedef struct {
   #define QSPI_INTENSET_DMAABORTED_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define QSPI_INTENSET_DMAABORTED_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
+/* IDLE @Bit 13 : Write '1' to enable interrupt for event IDLE */
+  #define QSPI_INTENSET_IDLE_Pos (13UL)              /*!< Position of IDLE field.                                              */
+  #define QSPI_INTENSET_IDLE_Msk (0x1UL << QSPI_INTENSET_IDLE_Pos) /*!< Bit mask of IDLE field.                                */
+  #define QSPI_INTENSET_IDLE_Min (0x0UL)             /*!< Min enumerator value of IDLE field.                                  */
+  #define QSPI_INTENSET_IDLE_Max (0x1UL)             /*!< Max enumerator value of IDLE field.                                  */
+  #define QSPI_INTENSET_IDLE_Set (0x1UL)             /*!< Enable                                                               */
+  #define QSPI_INTENSET_IDLE_Disabled (0x0UL)        /*!< Read: Disabled                                                       */
+  #define QSPI_INTENSET_IDLE_Enabled (0x1UL)         /*!< Read: Enabled                                                        */
+
 
 /* QSPI_INTENCLR: Disable interrupt */
   #define QSPI_INTENCLR_ResetValue (0x00000000UL)    /*!< Reset value of INTENCLR register.                                    */
@@ -46018,6 +46636,15 @@ typedef struct {
   #define QSPI_INTENCLR_DMAABORTED_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define QSPI_INTENCLR_DMAABORTED_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
+/* IDLE @Bit 13 : Write '1' to disable interrupt for event IDLE */
+  #define QSPI_INTENCLR_IDLE_Pos (13UL)              /*!< Position of IDLE field.                                              */
+  #define QSPI_INTENCLR_IDLE_Msk (0x1UL << QSPI_INTENCLR_IDLE_Pos) /*!< Bit mask of IDLE field.                                */
+  #define QSPI_INTENCLR_IDLE_Min (0x0UL)             /*!< Min enumerator value of IDLE field.                                  */
+  #define QSPI_INTENCLR_IDLE_Max (0x1UL)             /*!< Max enumerator value of IDLE field.                                  */
+  #define QSPI_INTENCLR_IDLE_Clear (0x1UL)           /*!< Disable                                                              */
+  #define QSPI_INTENCLR_IDLE_Disabled (0x0UL)        /*!< Read: Disabled                                                       */
+  #define QSPI_INTENCLR_IDLE_Enabled (0x1UL)         /*!< Read: Enabled                                                        */
+
 
 /* QSPI_INTPEND: Pending interrupts */
   #define QSPI_INTPEND_ResetValue (0x00000000UL)     /*!< Reset value of INTPEND register.                                     */
@@ -46128,6 +46755,14 @@ typedef struct {
   #define QSPI_INTPEND_DMAABORTED_Max (0x1UL)        /*!< Max enumerator value of DMAABORTED field.                            */
   #define QSPI_INTPEND_DMAABORTED_NotPending (0x0UL) /*!< Read: Not pending                                                    */
   #define QSPI_INTPEND_DMAABORTED_Pending (0x1UL)    /*!< Read: Pending                                                        */
+
+/* IDLE @Bit 13 : Read pending status of interrupt for event IDLE */
+  #define QSPI_INTPEND_IDLE_Pos (13UL)               /*!< Position of IDLE field.                                              */
+  #define QSPI_INTPEND_IDLE_Msk (0x1UL << QSPI_INTPEND_IDLE_Pos) /*!< Bit mask of IDLE field.                                  */
+  #define QSPI_INTPEND_IDLE_Min (0x0UL)              /*!< Min enumerator value of IDLE field.                                  */
+  #define QSPI_INTPEND_IDLE_Max (0x1UL)              /*!< Max enumerator value of IDLE field.                                  */
+  #define QSPI_INTPEND_IDLE_NotPending (0x0UL)       /*!< Read: Not pending                                                    */
+  #define QSPI_INTPEND_IDLE_Pending (0x1UL)          /*!< Read: Pending                                                        */
 
 
 /* QSPI_ENABLE: Enables the QSPI This requests clock for the IP core */

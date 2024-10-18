@@ -157,11 +157,6 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   UMACCLIC_16_IRQHandler
   ISR_HANDLER   UMACCLIC_17_IRQHandler
   ISR_HANDLER   UMACCLIC_18_IRQHandler
@@ -170,9 +165,14 @@ _vectors:
   ISR_HANDLER   UMACCLIC_21_IRQHandler
   ISR_HANDLER   UMACCLIC_22_IRQHandler
   ISR_HANDLER   UMACCLIC_23_IRQHandler
-  ISR_HANDLER   UMACCLIC_24_IRQHandler
-  ISR_HANDLER   UMACCLIC_25_IRQHandler
-  ISR_HANDLER   UMACCLIC_26_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   RPU_0_IRQHandler
   ISR_HANDLER   RPU_1_IRQHandler
   ISR_HANDLER   RPU_2_IRQHandler
@@ -259,8 +259,8 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_HANDLER   BELLBOARD_WIFI_2_IRQHandler
-  ISR_HANDLER   BELLBOARD_WIFI_3_IRQHandler
+  ISR_HANDLER   BELLBOARD_2_IRQHandler
+  ISR_HANDLER   BELLBOARD_3_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */

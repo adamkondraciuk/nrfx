@@ -203,8 +203,8 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     BELLBOARD_WIFI_0_IRQHandler
-        DCD     BELLBOARD_WIFI_1_IRQHandler
+        DCD     BELLBOARD_0_IRQHandler
+        DCD     BELLBOARD_1_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -722,14 +722,14 @@ MVDMA_IRQHandler
 SERIAL00_IRQHandler
         j .
 
-        PUBWEAK  BELLBOARD_WIFI_0_IRQHandler
+        PUBWEAK  BELLBOARD_0_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-BELLBOARD_WIFI_0_IRQHandler
+BELLBOARD_0_IRQHandler
         j .
 
-        PUBWEAK  BELLBOARD_WIFI_1_IRQHandler
+        PUBWEAK  BELLBOARD_1_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-BELLBOARD_WIFI_1_IRQHandler
+BELLBOARD_1_IRQHandler
         j .
 
         PUBWEAK  SERIAL20_IRQHandler

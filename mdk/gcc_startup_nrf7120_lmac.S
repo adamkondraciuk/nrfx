@@ -391,8 +391,8 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   BELLBOARD_WIFI_0_IRQHandler
-    .long   BELLBOARD_WIFI_1_IRQHandler
+    .long   BELLBOARD_0_IRQHandler
+    .long   BELLBOARD_1_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -862,8 +862,8 @@ Default_Handler:
     IRQ  UMAC_VPR_IRQHandler
     IRQ  MVDMA_IRQHandler
     IRQ  SERIAL00_IRQHandler
-    IRQ  BELLBOARD_WIFI_0_IRQHandler
-    IRQ  BELLBOARD_WIFI_1_IRQHandler
+    IRQ  BELLBOARD_0_IRQHandler
+    IRQ  BELLBOARD_1_IRQHandler
     IRQ  SERIAL20_IRQHandler
     IRQ  SERIAL21_IRQHandler
     IRQ  SERIAL22_IRQHandler

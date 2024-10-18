@@ -112,8 +112,8 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void UMAC_VPR_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void MVDMA_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void SERIAL00_IRQHandler                                         (void);
- __HANDLER("Default_Handler") void BELLBOARD_WIFI_0_IRQHandler                                 (void);
- __HANDLER("Default_Handler") void BELLBOARD_WIFI_1_IRQHandler                                 (void);
+ __HANDLER("Default_Handler") void BELLBOARD_0_IRQHandler                                      (void);
+ __HANDLER("Default_Handler") void BELLBOARD_1_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void SERIAL20_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void SERIAL21_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void SERIAL22_IRQHandler                                         (void);
@@ -267,8 +267,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    BELLBOARD_WIFI_0_IRQHandler,
-    BELLBOARD_WIFI_1_IRQHandler,
+    BELLBOARD_0_IRQHandler,
+    BELLBOARD_1_IRQHandler,
     0,
     0,
     0,

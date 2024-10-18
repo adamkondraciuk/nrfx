@@ -74,8 +74,8 @@ typedef enum {
   LMAC_VPR_IRQn                          = 40,       /*!< 40 LMAC_VPR                                                          */
   MVDMA_IRQn                             = 48,       /*!< 48 MVDMA                                                             */
   SERIAL00_IRQn                          = 77,       /*!< 77 SERIAL00                                                          */
-  BELLBOARD_WIFI_2_IRQn                  = 118,      /*!< 118 BELLBOARD_WIFI_2                                                 */
-  BELLBOARD_WIFI_3_IRQn                  = 119,      /*!< 119 BELLBOARD_WIFI_3                                                 */
+  BELLBOARD_2_IRQn                       = 118,      /*!< 118 BELLBOARD_2                                                      */
+  BELLBOARD_3_IRQn                       = 119,      /*!< 119 BELLBOARD_3                                                      */
   SERIAL20_IRQn                          = 198,      /*!< 198 SERIAL20                                                         */
   SERIAL21_IRQn                          = 199,      /*!< 199 SERIAL21                                                         */
   SERIAL22_IRQn                          = 200,      /*!< 200 SERIAL22                                                         */

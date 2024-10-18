@@ -324,6 +324,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_REGULATORS_S_BASE             0x50120000UL
 #define NRF_USBREG_NS_BASE                0x40121000UL
 #define NRF_USBREG_S_BASE                 0x50121000UL
+#define NRF_LFXO_NS_BASE                  0x40122000UL
+#define NRF_LFXO_S_BASE                   0x50122000UL
+#define NRF_LFRC_NS_BASE                  0x40123000UL
+#define NRF_LFRC_S_BASE                   0x50123000UL
+#define NRF_HFXO64M_NS_BASE               0x40124000UL
+#define NRF_HFXO64M_S_BASE                0x50124000UL
 #define NRF_VREGMRAM_NS_BASE              0x40125000UL
 #define NRF_VREGMRAM_S_BASE               0x50125000UL
 #define NRF_VREGAO1V8_NS_BASE             0x40126000UL
@@ -334,6 +340,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_VREGAO0V8A_S_BASE             0x50128000UL
 #define NRF_VREGSU_NS_BASE                0x40129000UL
 #define NRF_VREGSU_S_BASE                 0x50129000UL
+#define NRF_OSCRFR_NS_BASE                0x4012A000UL
+#define NRF_OSCRFR_S_BASE                 0x5012A000UL
 #define NRF_PCGCM30_S_BASE                0x5013F000UL
 
 /* =========================================================================================================================== */
@@ -586,6 +594,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_REGULATORS_S                  ((NRF_REGULATORS_Type*)               NRF_REGULATORS_S_BASE)
 #define NRF_USBREG_NS                     ((NRF_VREGUSB_Type*)                  NRF_USBREG_NS_BASE)
 #define NRF_USBREG_S                      ((NRF_VREGUSB_Type*)                  NRF_USBREG_S_BASE)
+#define NRF_LFXO_NS                       ((NRF_LFXO_Type*)                     NRF_LFXO_NS_BASE)
+#define NRF_LFXO_S                        ((NRF_LFXO_Type*)                     NRF_LFXO_S_BASE)
+#define NRF_LFRC_NS                       ((NRF_LFRC_Type*)                     NRF_LFRC_NS_BASE)
+#define NRF_LFRC_S                        ((NRF_LFRC_Type*)                     NRF_LFRC_S_BASE)
+#define NRF_HFXO64M_NS                    ((NRF_HFXO64M_Type*)                  NRF_HFXO64M_NS_BASE)
+#define NRF_HFXO64M_S                     ((NRF_HFXO64M_Type*)                  NRF_HFXO64M_S_BASE)
 #define NRF_VREGMRAM_NS                   ((NRF_VREGMRAM_Type*)                 NRF_VREGMRAM_NS_BASE)
 #define NRF_VREGMRAM_S                    ((NRF_VREGMRAM_Type*)                 NRF_VREGMRAM_S_BASE)
 #define NRF_VREGAO1V8_NS                  ((NRF_VREGAO1V8_Type*)                NRF_VREGAO1V8_NS_BASE)
@@ -596,6 +610,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_VREGAO0V8A_S                  ((NRF_VREGVS0V8_Type*)                NRF_VREGAO0V8A_S_BASE)
 #define NRF_VREGSU_NS                     ((NRF_VREGSU_Type*)                   NRF_VREGSU_NS_BASE)
 #define NRF_VREGSU_S                      ((NRF_VREGSU_Type*)                   NRF_VREGSU_S_BASE)
+#define NRF_OSCRFR_NS                     ((NRF_OSCRFR_Type*)                   NRF_OSCRFR_NS_BASE)
+#define NRF_OSCRFR_S                      ((NRF_OSCRFR_Type*)                   NRF_OSCRFR_S_BASE)
 #define NRF_PCGCM30_S                     ((NRF_PCGCMASTER_Type*)               NRF_PCGCM30_S_BASE)
 
 /* =========================================================================================================================== */
@@ -714,11 +730,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_OSCILLATORS                         NRF_OSCILLATORS_NS
   #define NRF_REGULATORS                          NRF_REGULATORS_NS
   #define NRF_USBREG                              NRF_USBREG_NS
+  #define NRF_LFXO                                NRF_LFXO_NS
+  #define NRF_LFRC                                NRF_LFRC_NS
+  #define NRF_HFXO64M                             NRF_HFXO64M_NS
   #define NRF_VREGMRAM                            NRF_VREGMRAM_NS
   #define NRF_VREGAO1V8                           NRF_VREGAO1V8_NS
   #define NRF_VREGAO0V8B                          NRF_VREGAO0V8B_NS
   #define NRF_VREGAO0V8A                          NRF_VREGAO0V8A_NS
   #define NRF_VREGSU                              NRF_VREGSU_NS
+  #define NRF_OSCRFR                              NRF_OSCRFR_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
   #define NRF_FICR                                NRF_FICR_NS
   #define NRF_UICR                                NRF_UICR_S
@@ -857,11 +877,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_OSCILLATORS                         NRF_OSCILLATORS_S
   #define NRF_REGULATORS                          NRF_REGULATORS_S
   #define NRF_USBREG                              NRF_USBREG_S
+  #define NRF_LFXO                                NRF_LFXO_S
+  #define NRF_LFRC                                NRF_LFRC_S
+  #define NRF_HFXO64M                             NRF_HFXO64M_S
   #define NRF_VREGMRAM                            NRF_VREGMRAM_S
   #define NRF_VREGAO1V8                           NRF_VREGAO1V8_S
   #define NRF_VREGAO0V8B                          NRF_VREGAO0V8B_S
   #define NRF_VREGAO0V8A                          NRF_VREGAO0V8A_S
   #define NRF_VREGSU                              NRF_VREGSU_S
+  #define NRF_OSCRFR                              NRF_OSCRFR_S
   #define NRF_PCGCM30                             NRF_PCGCM30_S
 #endif                                               /*!< NRF_TRUSTZONE_NONSECURE                                              */
 

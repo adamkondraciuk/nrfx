@@ -374,9 +374,9 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     USBREG_IRQHandler
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     LFXO_IRQHandler
+                DCD     LFRC_IRQHandler
+                DCD     HFXO64M_IRQHandler
                 DCD     VREGMRAM_IRQHandler
                 DCD     VREGAO1V8_IRQHandler
                 DCD     VREGAO0V8B_IRQHandler
@@ -527,6 +527,9 @@ Default_Handler PROC
                 EXPORT   GPIOTE30_1_IRQHandler [WEAK]
                 EXPORT   CLOCK_POWER_IRQHandler [WEAK]
                 EXPORT   USBREG_IRQHandler [WEAK]
+                EXPORT   LFXO_IRQHandler [WEAK]
+                EXPORT   LFRC_IRQHandler [WEAK]
+                EXPORT   HFXO64M_IRQHandler [WEAK]
                 EXPORT   VREGMRAM_IRQHandler [WEAK]
                 EXPORT   VREGAO1V8_IRQHandler [WEAK]
                 EXPORT   VREGAO0V8B_IRQHandler [WEAK]
@@ -604,6 +607,9 @@ GPIOTE30_0_IRQHandler
 GPIOTE30_1_IRQHandler
 CLOCK_POWER_IRQHandler
 USBREG_IRQHandler
+LFXO_IRQHandler
+LFRC_IRQHandler
+HFXO64M_IRQHandler
 VREGMRAM_IRQHandler
 VREGAO1V8_IRQHandler
 VREGAO0V8B_IRQHandler

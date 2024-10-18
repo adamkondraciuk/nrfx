@@ -143,6 +143,9 @@ typedef enum {
   GPIOTE30_1_IRQn                        = 269,      /*!< 269 GPIOTE30_1                                                       */
   CLOCK_POWER_IRQn                       = 270,      /*!< 270 CLOCK_POWER                                                      */
   USBREG_IRQn                            = 289,      /*!< 289 USBREG                                                           */
+  LFXO_IRQn                              = 290,      /*!< 290 LFXO                                                             */
+  LFRC_IRQn                              = 291,      /*!< 291 LFRC                                                             */
+  HFXO64M_IRQn                           = 292,      /*!< 292 HFXO64M                                                          */
   VREGMRAM_IRQn                          = 293,      /*!< 293 VREGMRAM                                                         */
   VREGAO1V8_IRQn                         = 294,      /*!< 294 VREGAO1V8                                                        */
   VREGAO0V8B_IRQn                        = 295,      /*!< 295 VREGAO0V8B                                                       */

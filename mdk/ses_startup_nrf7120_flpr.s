@@ -232,8 +232,8 @@ _vectors:
   ISR_HANDLER   EGU00_IRQHandler
   ISR_HANDLER   CRACEN_IRQHandler
   ISR_HANDLER   USBHS_IRQHandler
-  ISR_HANDLER   QSPI00_IRQHandler
-  ISR_HANDLER   QSPI01_IRQHandler
+  ISR_HANDLER   QSPI0_IRQHandler
+  ISR_HANDLER   QSPI1_IRQHandler
   ISR_HANDLER   SERIAL01_IRQHandler
   ISR_HANDLER   SERIAL02_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
@@ -257,12 +257,12 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_HANDLER   BELLBOARDWIFI_0_IRQHandler
-  ISR_HANDLER   BELLBOARDWIFI_1_IRQHandler
-  ISR_HANDLER   BELLBOARDWIFI_2_IRQHandler
-  ISR_HANDLER   BELLBOARDWIFI_3_IRQHandler
-  ISR_HANDLER   BELLBOARDAPP_0_IRQHandler
-  ISR_HANDLER   BELLBOARDAPP_1_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_HANDLER   BELLBOARD_0_IRQHandler
+  ISR_HANDLER   BELLBOARD_1_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
@@ -376,7 +376,7 @@ _vectors:
   ISR_HANDLER   TDM_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_HANDLER   AUXPLL_AUXPM_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   SERIAL23_IRQHandler
   ISR_HANDLER   SERIAL24_IRQHandler
@@ -431,6 +431,13 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   USBREG_IRQHandler
+  ISR_HANDLER   LFXO_IRQHandler
+  ISR_HANDLER   LFRC_IRQHandler
+  ISR_HANDLER   HFXO64M_IRQHandler
+  ISR_HANDLER   VREGMRAM_IRQHandler
+  ISR_HANDLER   VREGAO1V8_IRQHandler
+  ISR_HANDLER   VREGAO0V8B_IRQHandler
+  ISR_HANDLER   VREGAO0V8A_IRQHandler
 _vectors_end:
 
 #ifdef VECTORS_IN_RAM

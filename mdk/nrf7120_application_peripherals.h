@@ -1196,13 +1196,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define QSPI0_EASYDMAPATTERNMATCHERINCLUDED 0        /*!< (unspecified)                                                        */
 #define QSPI0_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                    */
 #define QSPI0_EASYDMASTOPTASKINCLUDED 1              /*!< (unspecified)                                                        */
-#define QSPI0_NUM_CLOCK_POWER_PAIR_MIN 0             /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define QSPI0_NUM_CLOCK_POWER_PAIR_MAX 0             /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define QSPI0_NUM_CLOCK_POWER_PAIR_SIZE 1            /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define QSPI0_NOTFULLPCPZERO 1                       /*!< (unspecified)                                                        */
-#define QSPI0_PENALTYTASKS 0                         /*!< (unspecified)                                                        */
 #define QSPI0_AXI_LITE 0                             /*!< (unspecified)                                                        */
 #define QSPI0_FIFO_DEPTH 16                          /*!< Depth of the transmit and receive FIFOs is 16                        */
+#define QSPI0_QSPI_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI0_QSPI_NUM_CLOCK_POWER_PAIR_MAX 3        /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI0_QSPI_NUM_CLOCK_POWER_PAIR_SIZE 4       /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI0_QSPI_NOTFULLPCPZERO 1                  /*!< (unspecified)                                                        */
 
 #define QSPI1_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
 #define QSPI1_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
@@ -1210,13 +1209,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define QSPI1_EASYDMAPATTERNMATCHERINCLUDED 0        /*!< (unspecified)                                                        */
 #define QSPI1_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                    */
 #define QSPI1_EASYDMASTOPTASKINCLUDED 1              /*!< (unspecified)                                                        */
-#define QSPI1_NUM_CLOCK_POWER_PAIR_MIN 0             /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define QSPI1_NUM_CLOCK_POWER_PAIR_MAX 0             /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define QSPI1_NUM_CLOCK_POWER_PAIR_SIZE 1            /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define QSPI1_NOTFULLPCPZERO 1                       /*!< (unspecified)                                                        */
-#define QSPI1_PENALTYTASKS 0                         /*!< (unspecified)                                                        */
 #define QSPI1_AXI_LITE 0                             /*!< (unspecified)                                                        */
 #define QSPI1_FIFO_DEPTH 16                          /*!< Depth of the transmit and receive FIFOs is 16                        */
+#define QSPI1_QSPI_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI1_QSPI_NUM_CLOCK_POWER_PAIR_MAX 3        /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI1_QSPI_NUM_CLOCK_POWER_PAIR_SIZE 4       /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI1_QSPI_NOTFULLPCPZERO 1                  /*!< (unspecified)                                                        */
 
 /*CPU Configuration*/
 #define CPUCONF_PRESENT 1
@@ -2064,6 +2062,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define USBREG_PROLONGED_WAKEUP 0                    /*!< (unspecified)                                                        */
 
+/*LFXO peripheral*/
+#define LFXO_PRESENT 1
+#define LFXO_COUNT 1
+
+/*LFRC peripheral*/
+#define LFRC_PRESENT 1
+#define LFRC_COUNT 1
+
+/*HFXO64M peripheral*/
+#define HFXO64M_PRESENT 1
+#define HFXO64M_COUNT 1
+
 /*VREGMRAM peripheral*/
 #define VREGMRAM_PRESENT 1
 #define VREGMRAM_COUNT 1
@@ -2096,6 +2106,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*VREGSU peripheral*/
 #define VREGSU_PRESENT 1
 #define VREGSU_COUNT 1
+
+/*OSCRFR peripheral*/
+#define OSCRFR_PRESENT 1
+#define OSCRFR_COUNT 1
 
 /* ==================================================== Baudrate settings ==================================================== */
 /**
