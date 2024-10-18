@@ -26,13 +26,15 @@ extern "C" {
 
 /** @brief Number of send tasks. */
 #define NRF_IPCT_TASKS_SEND_COUNT IPCT_TASKS_SEND_MaxCount
+/** @brief Number of recieve tasks. */
+#define NRF_IPCT_EVENTS_RECEIVE_COUNT IPCT_EVENTS_RECEIVE_MaxCount
 
 /** @brief IPCT tasks. */
 typedef enum
 {
     NRF_IPCT_TASK_SEND_0  = offsetof(NRF_IPCT_Type, TASKS_SEND[0]),  /**< Send [0] task. */
     NRF_IPCT_TASK_SEND_1  = offsetof(NRF_IPCT_Type, TASKS_SEND[1]),  /**< Send [1] task. */
-    #if IPCT_TASKS_SEND_MaxCount > 2
+#if NRF_IPCT_TASKS_SEND_COUNT > 2
     NRF_IPCT_TASK_SEND_2  = offsetof(NRF_IPCT_Type, TASKS_SEND[2]),  /**< Send [2] task. */
     NRF_IPCT_TASK_SEND_3  = offsetof(NRF_IPCT_Type, TASKS_SEND[3]),  /**< Send [3] task. */
     NRF_IPCT_TASK_SEND_4  = offsetof(NRF_IPCT_Type, TASKS_SEND[4]),  /**< Send [4] task. */
@@ -73,7 +75,7 @@ typedef enum
 {
     NRF_IPCT_EVENT_RECEIVE_0  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[0]),  /**< Receive [0] event. */
     NRF_IPCT_EVENT_RECEIVE_1  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[1]),  /**< Receive [1] event. */
-#if IPCT_EVENTS_RECEIVE_MaxCount > 2
+#if NRF_IPCT_EVENTS_RECEIVE_COUNT > 2
     NRF_IPCT_EVENT_RECEIVE_2  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[2]),  /**< Receive [2] event. */
     NRF_IPCT_EVENT_RECEIVE_3  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[3]),  /**< Receive [3] event. */
     NRF_IPCT_EVENT_RECEIVE_4  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[4]),  /**< Receive [4] event. */
@@ -88,7 +90,7 @@ typedef enum
     NRF_IPCT_EVENT_RECEIVE_13 = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[13]), /**< Receive [13] event. */
     NRF_IPCT_EVENT_RECEIVE_14 = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[14]), /**< Receive [14] event. */
     NRF_IPCT_EVENT_RECEIVE_15 = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[15]), /**< Receive [15] event. */
-#endif //IPCT_TASKS_SEND_MaxCount > 2
+#endif // NRF_IPCT_EVENTS_RECEIVE_COUNT > 2
 #if NRF_IPCT_HAS_ACK
     NRF_IPCT_EVENT_ACKED_0    = offsetof(NRF_IPCT_Type, EVENTS_ACKED[0]),    /**< Acknowledged event for the SEND[0] task. */
     NRF_IPCT_EVENT_ACKED_1    = offsetof(NRF_IPCT_Type, EVENTS_ACKED[1]),    /**< Acknowledged event for the SEND[1] task. */
@@ -153,7 +155,7 @@ typedef enum
 {
     NRF_IPCT_INT_RECEIVE_0  = IPCT_INTEN0_RECEIVE0_Msk,  /**< Interrupt for event RECEIVE[0]. */
     NRF_IPCT_INT_RECEIVE_1  = IPCT_INTEN0_RECEIVE1_Msk,  /**< Interrupt for event RECEIVE[1]. */
-#if defined(IPCT_INTEN0_RECEIVE2_Msk)
+#if NRF_IPCT_EVENTS_RECEIVE_COUNT > 2
     NRF_IPCT_INT_RECEIVE_2  = IPCT_INTEN0_RECEIVE2_Msk,  /**< Interrupt for event RECEIVE[2]. */
     NRF_IPCT_INT_RECEIVE_3  = IPCT_INTEN0_RECEIVE3_Msk,  /**< Interrupt for event RECEIVE[3]. */
     NRF_IPCT_INT_RECEIVE_4  = IPCT_INTEN0_RECEIVE4_Msk,  /**< Interrupt for event RECEIVE[4]. */
@@ -168,7 +170,7 @@ typedef enum
     NRF_IPCT_INT_RECEIVE_13 = IPCT_INTEN0_RECEIVE13_Msk, /**< Interrupt for event RECEIVE[13]. */
     NRF_IPCT_INT_RECEIVE_14 = IPCT_INTEN0_RECEIVE14_Msk, /**< Interrupt for event RECEIVE[14]. */
     NRF_IPCT_INT_RECEIVE_15 = IPCT_INTEN0_RECEIVE15_Msk, /**< Interrupt for event RECEIVE[15]. */
-#endif //defined(IPCT_INTEN0_RECEIVE2_Msk)
+#endif // NRF_IPCT_EVENTS_RECEIVE_COUNT > 2
 #if NRF_IPCT_HAS_ACK
     NRF_IPCT_INT_ACKED_0    = IPCT_INTEN0_ACKED0_Msk,    /**< Interrupt for event ACKED[0]. */
     NRF_IPCT_INT_ACKED_1    = IPCT_INTEN0_ACKED1_Msk,    /**< Interrupt for event ACKED[1]. */
@@ -440,46 +442,46 @@ NRF_STATIC_INLINE void nrf_ipct_int_enable(NRF_IPCT_Type * p_reg,
 {
     switch (group_idx)
     {
-        #if defined(IPCT_INTENSET0_ResetValue)
+#if defined(IPCT_INTENSET0_ResetValue)
         case 0:
             p_reg->INTENSET0 = mask;
             break;
-        #if defined(IPCT_INTENSET1_ResetValue)
+#endif // IPCT_INTENSET0_ResetValue
+#if defined(IPCT_INTENSET1_ResetValue)
         case 1:
             p_reg->INTENSET1 = mask;
             break;
-        #if defined(IPCT_INTENSET2_ResetValue)
+#endif // IPCT_INTENSET1_ResetValue
+#if defined(IPCT_INTENSET2_ResetValue)
         case 2:
             p_reg->INTENSET2 = mask;
             break;
-        #if defined(IPCT_INTENSET3_ResetValue)
+#endif // IPCT_INTENSET2_ResetValue
+#if defined(IPCT_INTENSET3_ResetValue)
         case 3:
             p_reg->INTENSET3 = mask;
             break;
-        #if defined(IPCT_INTENSET4_ResetValue)
+#endif // IPCT_INTENSET3_ResetValue
+#if defined(IPCT_INTENSET4_ResetValue)
         case 4:
             p_reg->INTENSET4 = mask;
             break;
-        #if defined(IPCT_INTENSET5_ResetValue)
+#endif // IPCT_INTENSET4_ResetValue
+#if defined(IPCT_INTENSET5_ResetValue)
         case 5:
             p_reg->INTENSET5 = mask;
             break;
-        #if defined(IPCT_INTENSET6_ResetValue)
+#endif // IPCT_INTENSET5_ResetValue
+#if defined(IPCT_INTENSET6_ResetValue)
         case 6:
             p_reg->INTENSET6 = mask;
             break;
-        #if defined(IPCT_INTENSET7_ResetValue)
+#endif // IPCT_INTENSET6_ResetValue
+#if defined(IPCT_INTENSET7_ResetValue)
         case 7:
             p_reg->INTENSET7 = mask;
             break;
-        #endif // IPCT_INTENSET7_ResetValue
-        #endif // IPCT_INTENSET6_ResetValue
-        #endif // IPCT_INTENSET5_ResetValue
-        #endif // IPCT_INTENSET4_ResetValue
-        #endif // IPCT_INTENSET3_ResetValue
-        #endif // IPCT_INTENSET2_ResetValue
-        #endif // IPCT_INTENSET1_ResetValue
-        #endif // IPCT_INTENSET0_ResetValue
+#endif // IPCT_INTENSET7_ResetValue
         default:
             NRFX_ASSERT(false);
             break;
@@ -492,46 +494,46 @@ NRF_STATIC_INLINE void nrf_ipct_int_disable(NRF_IPCT_Type * p_reg,
 {
     switch (group_idx)
     {
-        #if defined(IPCT_INTENCLR0_ResetValue)
+#if defined(IPCT_INTENCLR0_ResetValue)
         case 0:
             p_reg->INTENCLR0 = mask;
             break;
-        #if defined(IPCT_INTENCLR1_ResetValue)
+#endif // IPCT_INTENCLR0_ResetValue
+#if defined(IPCT_INTENCLR1_ResetValue)
         case 1:
             p_reg->INTENCLR1 = mask;
             break;
-        #if defined(IPCT_INTENCLR2_ResetValue)
+#endif // IPCT_INTENCLR1_ResetValue
+#if defined(IPCT_INTENCLR2_ResetValue)
         case 2:
             p_reg->INTENCLR2 = mask;
             break;
-        #if defined(IPCT_INTENCLR3_ResetValue)
+#endif // IPCT_INTENCLR2_ResetValue
+#if defined(IPCT_INTENCLR3_ResetValue)
         case 3:
             p_reg->INTENCLR3 = mask;
             break;
-        #if defined(IPCT_INTENCLR4_ResetValue)
+#endif // IPCT_INTENCLR3_ResetValue
+#if defined(IPCT_INTENCLR4_ResetValue)
         case 4:
             p_reg->INTENCLR4 = mask;
             break;
-        #if defined(IPCT_INTENCLR5_ResetValue)
+#endif // IPCT_INTENCLR4_ResetValue
+#if defined(IPCT_INTENCLR5_ResetValue)
         case 5:
             p_reg->INTENCLR5 = mask;
             break;
+#endif // IPCT_INTENCLR5_ResetValue
         #if defined(IPCT_INTENCLR6_ResetValue)
         case 6:
             p_reg->INTENCLR6 = mask;
             break;
-        #if defined(IPCT_INTENCLR7_ResetValue)
+#endif // IPCT_INTENCLR6_ResetValue
+#if defined(IPCT_INTENCLR7_ResetValue)
         case 7:
             p_reg->INTENCLR7 = mask;
             break;
-        #endif // IPCT_INTENCLR7_ResetValue
-        #endif // IPCT_INTENCLR6_ResetValue
-        #endif // IPCT_INTENCLR5_ResetValue
-        #endif // IPCT_INTENCLR4_ResetValue
-        #endif // IPCT_INTENCLR3_ResetValue
-        #endif // IPCT_INTENCLR2_ResetValue
-        #endif // IPCT_INTENCLR1_ResetValue
-        #endif // IPCT_INTENCLR0_ResetValue
+#endif // IPCT_INTENCLR7_ResetValue
         default:
             NRFX_ASSERT(false);
             break;
@@ -544,38 +546,38 @@ NRF_STATIC_INLINE uint32_t nrf_ipct_int_enable_check(NRF_IPCT_Type const * p_reg
 {
     switch (group_idx)
     {
-        #if defined(IPCT_INTENSET0_ResetValue)
+#if defined(IPCT_INTENSET0_ResetValue)
         case 0:
             return p_reg->INTENSET0 & mask;
-        #if defined(IPCT_INTENSET1_ResetValue)
+#endif // IPCT_INTENSET0_ResetValue
+#if defined(IPCT_INTENSET1_ResetValue)
         case 1:
             return p_reg->INTENSET1 & mask;
-        #if defined(IPCT_INTENSET2_ResetValue)
+#endif // IPCT_INTENSET1_ResetValue
+#if defined(IPCT_INTENSET2_ResetValue)
         case 2:
             return p_reg->INTENSET2 & mask;
-        #if defined(IPCT_INTENSET3_ResetValue)
+#endif // IPCT_INTENSET2_ResetValue
+#if defined(IPCT_INTENSET3_ResetValue)
         case 3:
             return p_reg->INTENSET3 & mask;
-        #if defined(IPCT_INTENSET4_ResetValue)
+#endif // IPCT_INTENSET3_ResetValue
+#if defined(IPCT_INTENSET4_ResetValue)
         case 4:
             return p_reg->INTENSET4 & mask;
-        #if defined(IPCT_INTENSET5_ResetValue)
+#endif // IPCT_INTENSET4_ResetValue
+#if defined(IPCT_INTENSET5_ResetValue)
         case 5:
             return p_reg->INTENSET5 & mask;
-        #if defined(IPCT_INTENSET6_ResetValue)
+#endif // IPCT_INTENSET5_ResetValue
+#if defined(IPCT_INTENSET6_ResetValue)
         case 6:
             return p_reg->INTENSET6 & mask;
-        #if defined(IPCT_INTENSET7_ResetValue)
+#endif // IPCT_INTENSET6_ResetValue
+#if defined(IPCT_INTENSET7_ResetValue)
         case 7:
             return p_reg->INTENSET7 & mask;
-        #endif // IPCT_INTENSET7_ResetValue
-        #endif // IPCT_INTENSET6_ResetValue
-        #endif // IPCT_INTENSET5_ResetValue
-        #endif // IPCT_INTENSET4_ResetValue
-        #endif // IPCT_INTENSET3_ResetValue
-        #endif // IPCT_INTENSET2_ResetValue
-        #endif // IPCT_INTENSET1_ResetValue
-        #endif // IPCT_INTENSET0_ResetValue
+#endif // IPCT_INTENSET7_ResetValue
         default:
             NRFX_ASSERT(false);
             return 0;
@@ -587,38 +589,38 @@ NRF_STATIC_INLINE uint32_t nrf_ipct_int_pending_get(NRF_IPCT_Type const * p_reg,
 {
     switch (group_idx)
     {
-        #if defined(IPCT_INTENSET0_ResetValue)
+#if defined(IPCT_INTPEND0_ResetValue)
         case 0:
             return p_reg->INTPEND0;
-        #if defined(IPCT_INTENSET1_ResetValue)
+#endif // IPCT_INTPEND0_ResetValue
+#if defined(IPCT_INTPEND1_ResetValue)
         case 1:
             return p_reg->INTPEND1;
-        #if defined(IPCT_INTENSET2_ResetValue)
+#if defined(IPCT_INTPEND2_ResetValue)
         case 2:
             return p_reg->INTPEND2;
-        #if defined(IPCT_INTENSET3_ResetValue)
+#endif // IPCT_INTPEND1_ResetValue
+#endif // IPCT_INTPEND2_ResetValue
+#if defined(IPCT_INTPEND3_ResetValue)
         case 3:
             return p_reg->INTPEND3;
-        #if defined(IPCT_INTENSET4_ResetValue)
+#endif // IPCT_INTPEND3_ResetValue
+#if defined(IPCT_INTPEND4_ResetValue)
         case 4:
             return p_reg->INTPEND4;
-        #if defined(IPCT_INTENSET5_ResetValue)
+#endif // IPCT_INTPEND4_ResetValue
+#if defined(IPCT_INTPEND5_ResetValue)
         case 5:
             return p_reg->INTPEND5;
-        #if defined(IPCT_INTENSET6_ResetValue)
+#endif // IPCT_INTPEND5_ResetValue
+#if defined(IPCT_INTPEND6_ResetValue)
         case 6:
             return p_reg->INTPEND6;
-        #if defined(IPCT_INTENSET7_ResetValue)
+#endif // IPCT_INTPEND6_ResetValue
+#if defined(IPCT_INTPEND7_ResetValue)
         case 7:
             return p_reg->INTPEND7;
-        #endif // IPCT_INTENSET7_ResetValue
-        #endif // IPCT_INTENSET6_ResetValue
-        #endif // IPCT_INTENSET5_ResetValue
-        #endif // IPCT_INTENSET4_ResetValue
-        #endif // IPCT_INTENSET3_ResetValue
-        #endif // IPCT_INTENSET2_ResetValue
-        #endif // IPCT_INTENSET1_ResetValue
-        #endif // IPCT_INTENSET0_ResetValue
+#endif // IPCT_INTPEND7_ResetValue
         default:
             NRFX_ASSERT(false);
             return 0;
