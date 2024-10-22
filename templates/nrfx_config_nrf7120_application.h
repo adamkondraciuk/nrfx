@@ -166,6 +166,42 @@
 #endif
 
 /**
+ * @brief NRFX_DPPI00_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_DPPI00_ENABLED
+#define NRFX_DPPI00_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_DPPI10_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_DPPI10_ENABLED
+#define NRFX_DPPI10_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_DPPI20_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_DPPI20_ENABLED
+#define NRFX_DPPI20_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_DPPI30_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_DPPI30_ENABLED
+#define NRFX_DPPI30_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_EGU_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
@@ -289,21 +325,12 @@
 #endif
 
 /**
- * @brief NRFX_GRTC_CONFIG_SLEEP_ALLOWED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_GRTC_CONFIG_SLEEP_ALLOWED
-#define NRFX_GRTC_CONFIG_SLEEP_ALLOWED 0
-#endif
-
-/**
  * @brief NRFX_GRTC_CONFIG_AUTOEN
  *
  * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_GRTC_CONFIG_AUTOEN
-#define NRFX_GRTC_CONFIG_AUTOEN 0
+#define NRFX_GRTC_CONFIG_AUTOEN 1
 #endif
 
 /**
@@ -313,6 +340,15 @@
  */
 #ifndef NRFX_GRTC_CONFIG_AUTOSTART
 #define NRFX_GRTC_CONFIG_AUTOSTART 0
+#endif
+
+/**
+ * @brief NRFX_GRTC_CONFIG_CLEAR_AT_INIT
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_GRTC_CONFIG_CLEAR_AT_INIT
+#define NRFX_GRTC_CONFIG_CLEAR_AT_INIT 0
 #endif
 
 /**
@@ -557,6 +593,39 @@
  */
 #ifndef NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
+#endif
+
+/**
+ * @brief NRFX_PPIB_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB_ENABLED
+#define NRFX_PPIB_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB_CONFIG_LOG_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB_CONFIG_LOG_ENABLED
+#define NRFX_PPIB_CONFIG_LOG_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB_CONFIG_LOG_LEVEL
+ *
+ * Integer value.
+ * Supported values:
+ * - Off     = 0
+ * - Error   = 1
+ * - Warning = 2
+ * - Info    = 3
+ * - Debug   = 4
+ */
+#ifndef NRFX_PPIB_CONFIG_LOG_LEVEL
+#define NRFX_PPIB_CONFIG_LOG_LEVEL 3
 #endif
 
 /**
