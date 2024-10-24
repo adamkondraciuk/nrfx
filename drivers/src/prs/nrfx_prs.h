@@ -99,8 +99,7 @@ extern "C" {
     #define NRFX_PRS_BOX_2_ADDR     NRF_UARTE30
     // COMP, LPCOMP
     #define NRFX_PRS_BOX_3_ADDR     NRF_COMP
-#elif defined(NRF54L05_XXAA) || defined(NRF54L10_XXAA) || defined(NRF54L15_XXAA) || \
-    defined(NRF54L15_ENGA_XXAA)
+#elif defined(NRF54L05_XXAA) || defined(NRF54L10_XXAA) || defined(NRF54L15_XXAA)
     // SPIM00, SPIS00, UARTE00
     #define NRFX_PRS_BOX_0_ADDR     NRF_UARTE00
     // SPIM20, SPIS20, TWIM20, TWIS20, UARTE20

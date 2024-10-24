@@ -221,35 +221,8 @@ extern "C" {
 /* Start of REGULATORS Extended section                                                           */
 /*------------------------------------------------------------------------------------------------*/
 
-#if defined(NRF54L15_ENGA_XXAA)
-#define NRF_REGULATORS_ELV_MODE_ALL_MASK (REGULATORS_TRIM_ELVPDMAIN_Msk   | \
-                                          REGULATORS_TRIM_ELVPDLP_Msk     | \
-                                          REGULATORS_TRIM_ELVPDPERIPH_Msk | \
-                                          REGULATORS_TRIM_ELVPDMCU_Msk    | \
-                                          REGULATORS_TRIM_ELVPDRADIO_Msk  | \
-                                          REGULATORS_TRIM_ELVPDCRACEN_Msk | \
-                                          REGULATORS_TRIM_ELVLFCLK_Msk    | \
-                                          REGULATORS_TRIM_ELVXOSC32K_Msk  | \
-                                          REGULATORS_TRIM_ELVTAMPMON_Msk  | \
-                                          REGULATORS_TRIM_ELVGRTCLFXO_Msk | \
-                                          REGULATORS_TRIM_ELVDEBUGGER_Msk)
-
-#define NRF_REGULATORS_ELV_MODE_ALLOW_MASK_EXT                                    \
-    NRFX_COND_CODE_1(NRF_REGULATORS_HAS_TRIM,                                     \
-        (NRF_REGULATORS_ELV_ELVPDMAIN_MASK   = REGULATORS_TRIM_ELVPDMAIN_Msk,     \
-         NRF_REGULATORS_ELV_ELVPDLP_MASK     = REGULATORS_TRIM_ELVPDLP_Msk,       \
-         NRF_REGULATORS_ELV_ELVPDPERIPH_MASK = REGULATORS_TRIM_ELVPDPERIPH_Msk,   \
-         NRF_REGULATORS_ELV_ELVPDMCU_MASK    = REGULATORS_TRIM_ELVPDMCU_Msk,      \
-         NRF_REGULATORS_ELV_ELVPDRADIO_MASK  = REGULATORS_TRIM_ELVPDRADIO_Msk,    \
-         NRF_REGULATORS_ELV_ELVPDCRACEN_MASK = REGULATORS_TRIM_ELVPDCRACEN_Msk,   \
-         NRF_REGULATORS_ELV_ELVLFCLK_MASK    = REGULATORS_TRIM_ELVLFCLK_Msk,      \
-         NRF_REGULATORS_ELV_ELVXOSC32K_MASK  = REGULATORS_TRIM_ELVXOSC32K_Msk,    \
-         NRF_REGULATORS_ELV_ELVTAMPMON_MASK  = REGULATORS_TRIM_ELVTAMPMON_Msk,    \
-         NRF_REGULATORS_ELV_ELVGRTCLFXO_MASK = REGULATORS_TRIM_ELVGRTCLFXO_Msk,   \
-         NRF_REGULATORS_ELV_ELVDEBUGGER_MASK = REGULATORS_TRIM_ELVDEBUGGER_Msk,), \
-   ())
-#elif defined(NRF54L05_XXAA) || defined(NRF54L09_ENGA_XXAA) || defined(NRF54L10_XXAA) || \
-      defined(NRF54L15_XXAA)
+#if defined(NRF54L05_XXAA) || defined(NRF54L09_ENGA_XXAA) || defined(NRF54L10_XXAA) || \
+    defined(NRF54L15_XXAA)
 #define NRF_REGULATORS_ELV_MODE_ALL_MASK (REGULATORS_TRIM_ELVPDMAIN_Msk   | \
                                           REGULATORS_TRIM_ELVPDLP_Msk     | \
                                           REGULATORS_TRIM_ELVPDPERIPH_Msk | \
@@ -314,8 +287,7 @@ extern "C" {
     #endif
 #endif
 
-#if defined(NRF54L09_ENGA_XXAA) || defined(NRF54L15_ENGA_XXAA) || defined(NRF54L15_XXAA) || \
-    defined(NRF54L20_ENGA_XXAA)
+#if defined(NRF54L09_ENGA_XXAA) || defined(NRF54L15_XXAA) || defined(NRF54L20_ENGA_XXAA)
     #if defined(BOARD_FPGA)
         #define NRFX_DELAY_RISCV_SLOWDOWN 14
     #endif
