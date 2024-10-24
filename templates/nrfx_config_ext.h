@@ -3,19 +3,7 @@
 #ifndef NRFX_CONFIG_EXT_H__
 #define NRFX_CONFIG_EXT_H__
 
-#if defined(NRF54H20_ENGA_XXAA)
-    #if defined(NRF_SECURE)
-        #include <nrfx_config_nrf54h20_enga_secure.h>
-    #elif defined(NRF_SYSCTRL)
-        #include <nrfx_config_nrf54h20_enga_sysctrl.h>
-    #endif
-#elif defined(NRF54H20_ENGB_XXAA)
-    #if defined(NRF_SECURE)
-        #include <nrfx_config_nrf54h20_engb_secure.h>
-    #elif defined(NRF_SYSCTRL)
-        #include <nrfx_config_nrf54h20_engb_sysctrl.h>
-    #endif
-#elif defined(NRF54H20_XXAA)
+#if defined(NRF54H20_XXAA)
     #if defined(NRF_SECURE)
         #include <nrfx_config_nrf54h20_secure.h>
     #elif defined(NRF_SYSCTRL)

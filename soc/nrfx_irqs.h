@@ -31,22 +31,6 @@
     #include <soc/nrfx_irqs_nrf54h20_ppr.h>
 #elif defined(NRF54H20_XXAA) && defined(NRF_FLPR)
     #include <soc/nrfx_irqs_nrf54h20_flpr.h>
-#elif defined(NRF54H20_ENGA_XXAA) && defined(NRF_APPLICATION)
-    #include <soc/nrfx_irqs_nrf54h20_enga_application.h>
-#elif defined(NRF54H20_ENGA_XXAA) && defined(NRF_RADIOCORE)
-    #include <soc/nrfx_irqs_nrf54h20_enga_radiocore.h>
-#elif defined(NRF54H20_ENGA_XXAA) && defined(NRF_PPR)
-    #include <soc/nrfx_irqs_nrf54h20_enga_ppr.h>
-#elif defined(NRF54H20_ENGA_XXAA) && defined(NRF_FLPR)
-    #include <soc/nrfx_irqs_nrf54h20_enga_flpr.h>
-#elif defined(NRF54H20_ENGB_XXAA) && defined(NRF_APPLICATION)
-    #include <soc/nrfx_irqs_nrf54h20_engb_application.h>
-#elif defined(NRF54H20_ENGB_XXAA) && defined(NRF_RADIOCORE)
-    #include <soc/nrfx_irqs_nrf54h20_engb_radiocore.h>
-#elif defined(NRF54H20_ENGB_XXAA) && defined(NRF_PPR)
-    #include <soc/nrfx_irqs_nrf54h20_engb_ppr.h>
-#elif defined(NRF54H20_ENGB_XXAA) && defined(NRF_FLPR)
-    #include <soc/nrfx_irqs_nrf54h20_engb_flpr.h>
 #elif defined(NRF54L05_XXAA) && defined(NRF_APPLICATION)
     #include <soc/nrfx_irqs_nrf54l05_application.h>
 #elif defined(NRF54L05_XXAA) && defined(NRF_FLPR)

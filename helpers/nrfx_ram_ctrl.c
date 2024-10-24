@@ -91,17 +91,12 @@ typedef union
 #define RAM_UNIFORM_BLOCKS             4
 #define RAM_UNIFORM_SECTIONS_PER_BLOCK 4
 #define RAM_UNIFORM_SECTIONS_TOTAL     16
-#elif defined(NRF54H20_ENGA_XXAA)
+#elif defined(NRF54H20_XXAA) && defined(NRF_APPLICATION)
 #define RAM_SECTION_UNIT_SIZE          (32UL * 1024UL)
 #define RAM_UNIFORM_BLOCKS             1
 #define RAM_UNIFORM_SECTIONS_PER_BLOCK 1
 #define RAM_UNIFORM_SECTIONS_TOTAL     1
-#elif (defined(NRF54H20_ENGB_XXAA) || defined(NRF54H20_XXAA)) && defined(NRF_APPLICATION)
-#define RAM_SECTION_UNIT_SIZE          (32UL * 1024UL)
-#define RAM_UNIFORM_BLOCKS             1
-#define RAM_UNIFORM_SECTIONS_PER_BLOCK 1
-#define RAM_UNIFORM_SECTIONS_TOTAL     1
-#elif (defined(NRF54H20_ENGB_XXAA) || defined(NRF54H20_XXAA)) && defined(NRF_RADIOCORE)
+#elif defined(NRF54H20_XXAA) && defined(NRF_RADIOCORE)
 #define RAM_SECTION_UNIT_SIZE          (2UL * 16UL * 1024UL) /* Consider both banks as single unit */
 #define RAM_UNIFORM_BLOCKS             1
 #define RAM_UNIFORM_SECTIONS_PER_BLOCK 6

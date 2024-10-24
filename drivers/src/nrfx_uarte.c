@@ -188,9 +188,6 @@ static void uarte_configure(nrfx_uarte_t        const * p_instance,
         {
             nrfy_gpio_pin_set(p_config->rts_pin);
             nrfy_gpio_cfg_output(p_config->rts_pin);
-#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_UARTE_CLOCKPIN_RTS_NEEDED)
-                nrfy_gpio_pin_clock_set(p_config->rts_pin, true);
-#endif
         }
     }
 
