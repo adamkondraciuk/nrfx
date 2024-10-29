@@ -118,6 +118,14 @@ extern "C" {
 #define NRF_GPIO_HAS_RETENTION 0
 #endif
 
+#if (defined(GPIO_RETAINSET_ResetValue) && defined(GPIO_RETAINCLR_ResetValue)) || \
+    defined(__NRFX_DOXYGEN__)
+/** @brief Presence of register retention set/clear. */
+#define NRF_GPIO_HAS_RETENTION_SETCLEAR 1
+#else
+#define NRF_GPIO_HAS_RETENTION_SETCLEAR 0
+#endif
+
 #if defined(GPIO_DETECTMODE_DETECTMODE_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Presence of detect mode. */
 #define NRF_GPIO_HAS_DETECT_MODE 1
@@ -719,6 +727,25 @@ NRF_STATIC_INLINE void nrf_gpio_port_retain_set(NRF_GPIO_Type * p_reg, uint32_t 
 NRF_STATIC_INLINE uint32_t nrf_gpio_port_retain_get(NRF_GPIO_Type const * p_reg);
 #endif
 
+#if NRF_GPIO_HAS_RETENTION_SETCLEAR
+/**
+ * @brief Function for enabling the retention of the registers.
+ *
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param mask  Mask of pins to have retention enabled, created using @ref nrf_gpio_retain_mask_t.
+ */
+NRF_STATIC_INLINE void nrf_gpio_port_retain_enable(NRF_GPIO_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for disabling the retention of the registers.
+ *
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param mask  Mask of pins to have retention be disabled, created using @ref nrf_gpio_retain_mask_t.
+ */
+NRF_STATIC_INLINE void nrf_gpio_port_retain_disable(NRF_GPIO_Type * p_reg, uint32_t mask);
+#endif
+
+
 #if NRF_GPIO_HAS_DETECT_MODE
 /**
  * @brief Function for setting the latched detect behaviour.
@@ -1285,6 +1312,18 @@ NRF_STATIC_INLINE void nrf_gpio_port_retain_set(NRF_GPIO_Type * p_reg, uint32_t 
 NRF_STATIC_INLINE uint32_t nrf_gpio_port_retain_get(NRF_GPIO_Type const * p_reg)
 {
     return p_reg->RETAIN;
+}
+#endif
+
+#if NRF_GPIO_HAS_RETENTION_SETCLEAR
+NRF_STATIC_INLINE void nrf_gpio_port_retain_enable(NRF_GPIO_Type * p_reg, uint32_t mask)
+{
+    p_reg->RETAINSET = mask;
+}
+
+NRF_STATIC_INLINE void nrf_gpio_port_retain_disable(NRF_GPIO_Type * p_reg, uint32_t mask)
+{
+    p_reg->RETAINCLR = mask;
 }
 #endif
 
