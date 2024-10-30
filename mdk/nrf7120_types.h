@@ -74775,10 +74775,10 @@ typedef struct {
   #define SAADC_CH_PSELP_INTERNAL_Msk (0x3UL << SAADC_CH_PSELP_INTERNAL_Pos) /*!< Bit mask of INTERNAL field.                  */
   #define SAADC_CH_PSELP_INTERNAL_Min (0x0UL)        /*!< Min enumerator value of INTERNAL field.                              */
   #define SAADC_CH_PSELP_INTERNAL_Max (0x3UL)        /*!< Max enumerator value of INTERNAL field.                              */
-  #define SAADC_CH_PSELP_INTERNAL_Internal0 (0x0UL)  /*!< Connected to VDD_AO_1V8                                              */
-  #define SAADC_CH_PSELP_INTERNAL_Interna1 (0x1UL)   /*!< Connected to VDD_AO_0V8                                              */
-  #define SAADC_CH_PSELP_INTERNAL_Internal2 (0x2UL)  /*!< Connected to VDD_IO_1V2                                              */
-  #define SAADC_CH_PSELP_INTERNAL_Internal3 (0x3UL)  /*!< Reserved for future use                                              */
+  #define SAADC_CH_PSELP_INTERNAL_VDDAO1V8 (0x0UL)   /*!< Connected to VDD_AO_1V8                                              */
+  #define SAADC_CH_PSELP_INTERNAL_VDDAO0V8 (0x1UL)   /*!< Connected to VDD_AO_0V8                                              */
+  #define SAADC_CH_PSELP_INTERNAL_VDDRF (0x2UL)      /*!< VDDRF                                                                */
+  #define SAADC_CH_PSELP_INTERNAL_VBAT (0x3UL)       /*!< VBAT                                                                 */
 
 /* TEST @Bits 16..17 : Test input selection for Analog positive input when CH[n].PSELP.CONNECT = Test */
   #define SAADC_CH_PSELP_TEST_Pos (16UL)             /*!< Position of TEST field.                                              */
@@ -74874,7 +74874,7 @@ typedef struct {
   #define SAADC_CH_CONFIG_REFSEL_Msk (0x3UL << SAADC_CH_CONFIG_REFSEL_Pos) /*!< Bit mask of REFSEL field.                      */
   #define SAADC_CH_CONFIG_REFSEL_Min (0x0UL)         /*!< Min enumerator value of REFSEL field.                                */
   #define SAADC_CH_CONFIG_REFSEL_Max (0x1UL)         /*!< Max enumerator value of REFSEL field.                                */
-  #define SAADC_CH_CONFIG_REFSEL_Internal (0x0UL)    /*!< Internal reference (1.024 V)                                         */
+  #define SAADC_CH_CONFIG_REFSEL_Internal (0x0UL)    /*!< Internal reference (0.9 V)                                           */
   #define SAADC_CH_CONFIG_REFSEL_External (0x1UL)    /*!< External reference given at PADC_EXT_REF_1V2                         */
 
 /* MODE @Bit 15 : Enable differential mode */

@@ -157020,23 +157020,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>13</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Internal0</name>
+                    <name>VDDAO1V8</name>
                     <description>Connected to VDD_AO_1V8</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Interna1</name>
+                    <name>VDDAO0V8</name>
                     <description>Connected to VDD_AO_0V8</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Internal2</name>
-                    <description>Connected to VDD_IO_1V2</description>
+                    <name>VDDRF</name>
+                    <description>VDDRF</description>
                     <value>0x2</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Internal3</name>
-                    <description>Reserved for future use</description>
+                    <name>VBAT</name>
+                    <description>VBAT</description>
                     <value>0x3</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -157287,7 +157287,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Internal</name>
-                    <description>Internal reference (1.024 V)</description>
+                    <description>Internal reference (0.9 V)</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>

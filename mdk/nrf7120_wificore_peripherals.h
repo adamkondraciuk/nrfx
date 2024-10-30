@@ -1870,6 +1870,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SAADC_TCONV_VALUE_RANGE_MIN 1                /*!< (unspecified)                                                        */
 #define SAADC_TCONV_VALUE_RANGE_MAX 7                /*!< (unspecified)                                                        */
 #define SAADC_TCONV_VALUE_RANGE_SIZE 8               /*!< (unspecified)                                                        */
+#define SAADC_PADC_WIFI_SUPPLY_GF22 1                /*!< (unspecified)                                                        */
 #define SAADC_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
 #define SAADC_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
 #define SAADC_EASYDMAFULLLPMODEINCLUDED 0            /*!< (unspecified)                                                        */
