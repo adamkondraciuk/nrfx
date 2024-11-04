@@ -136,7 +136,7 @@ void SystemInit(void)
         #if !defined(NRF_TRUSTZONE_NONSECURE) && defined(__ARM_FEATURE_CMSE)
             #if defined(NRF_CONFIG_NFCT_PINS_AS_GPIOS)
                 NRF_NFCT_S->PADCONFIG = (NFCT_PADCONFIG_ENABLE_Disabled << NFCT_PADCONFIG_ENABLE_Pos);
-            #endif 
+            #endif
 
             /* Enable SWO trace functionality. If ENABLE_SWO is not defined, SWO pin will be used as GPIO (see Product
             Specification to see which one). */

@@ -39,8 +39,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L15_FLPR_PERIPHERALS_H
-#define NRF54L15_FLPR_PERIPHERALS_H
+#ifndef NRF54L05_FLPR_PERIPHERALS_H
+#define NRF54L05_FLPR_PERIPHERALS_H
 
 #ifdef __cplusplus
     extern "C" {
@@ -1980,5 +1980,5 @@ typedef enum {
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L15_FLPR_PERIPHERALS_H */
+#endif /* NRF54L05_FLPR_PERIPHERALS_H */
 

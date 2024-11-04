@@ -39,8 +39,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L15_TYPES_H
-#define NRF54L15_TYPES_H
+#ifndef NRF54L05_TYPES_H
+#define NRF54L05_TYPES_H
 
 #ifdef __cplusplus
     extern "C" {
@@ -73315,5 +73315,5 @@ typedef struct {
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L15_TYPES_H */
+#endif /* NRF54L05_TYPES_H */
 

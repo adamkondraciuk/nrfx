@@ -325,8 +325,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define KMU_KEYSLOTIDBITS_MIN 0                      /*!< Range of KEYSLOT.ID field (start and end bit position)               */
 #define KMU_KEYSLOTIDBITS_MAX 7                      /*!< Range of KEYSLOT.ID field (start and end bit position)               */
 #define KMU_KEYSLOTIDBITS_SIZE 8                     /*!< Range of KEYSLOT.ID field (start and end bit position)               */
-#define KMU_KEYSLOTNUM 256                           /*!< Number of keyslots is 256                                            */
+#define KMU_KEYSLOTNUM 250                           /*!< Number of keyslots is 250                                            */
 #define KMU_KEYSLOTBITS 128                          /*!< Number of bits per keyslot is 128                                    */
+#define KMU_PUSHBLOCK 1                              /*!< (unspecified)                                                        */
+#define KMU_BLOCK 0                                  /*!< (unspecified)                                                        */
 
 /*Accelerated Address Resolver*/
 #define AAR_PRESENT 1
@@ -1071,6 +1073,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER00_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER00_PCLK_MHZ 128                         /*!< Peripheral clock frequency (PCLK) is 128 MHz                         */
 #define TIMER00_PCLK_VARIABLE 1                      /*!< (unspecified)                                                        */
+#define TIMER00_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER10_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER10_CC_NUM_MAX 7                         /*!< (unspecified)                                                        */
@@ -1080,6 +1083,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER10_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER10_PCLK_MHZ 32                          /*!< Peripheral clock frequency (PCLK) is 32 MHz                          */
 #define TIMER10_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER10_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER20_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER20_CC_NUM_MAX 5                         /*!< (unspecified)                                                        */
@@ -1089,6 +1093,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER20_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER20_PCLK_MHZ 16                          /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER20_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER20_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER21_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER21_CC_NUM_MAX 5                         /*!< (unspecified)                                                        */
@@ -1098,6 +1103,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER21_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER21_PCLK_MHZ 16                          /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER21_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER21_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER22_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER22_CC_NUM_MAX 5                         /*!< (unspecified)                                                        */
@@ -1107,6 +1113,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER22_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER22_PCLK_MHZ 16                          /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER22_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER22_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER23_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER23_CC_NUM_MAX 5                         /*!< (unspecified)                                                        */
@@ -1116,6 +1123,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER23_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER23_PCLK_MHZ 16                          /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER23_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER23_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER24_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER24_CC_NUM_MAX 5                         /*!< (unspecified)                                                        */
@@ -1125,6 +1133,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER24_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER24_PCLK_MHZ 16                          /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER24_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER24_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 /*Spare registers*/
 #define SREGS_PRESENT 1
@@ -1567,6 +1576,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TEMP_COUNT 1
 
 #define TEMP_HAS_ATBCONFIG 0                         /*!< (unspecified)                                                        */
+#define TEMP_HAS_OVERRIDEPWR 0                       /*!< (unspecified)                                                        */
 
 /*GPIO Tasks and Events*/
 #define GPIOTE_PRESENT 1
@@ -1710,6 +1720,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_COUNT 1
 
 #define CLOCK_XOTUNE 1                               /*!< (unspecified)                                                        */
+#define CLOCK_PLL24M 0                               /*!< (unspecified)                                                        */
 
 /*Power control*/
 #define POWER_PRESENT 1

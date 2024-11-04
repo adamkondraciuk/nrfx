@@ -39,8 +39,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L15_FLPR_H
-#define NRF54L15_FLPR_H
+#ifndef NRF54L10_FLPR_H
+#define NRF54L10_FLPR_H
 
 #ifdef __cplusplus
     extern "C" {
@@ -232,7 +232,7 @@ typedef enum {
 
 #define NRF_VPR                NRF_VPR00             /*!< VPR instance name                                                    */
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
-#include "system_nrf.h"                              /*!< nrf54l15_flpr System Library                                         */
+#include "system_nrf.h"                              /*!< nrf54l10_flpr System Library                                         */
 
 #endif                                               /*!< NRF_FLPR                                                             */
 
@@ -328,5 +328,5 @@ typedef enum {
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L15_FLPR_H */
+#endif /* NRF54L10_FLPR_H */
 

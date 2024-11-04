@@ -39,21 +39,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L15_VERSION_H
-#define NRF54L15_VERSION_H
+#ifndef NRF54L10_H
+#define NRF54L10_H
 
 #ifdef __cplusplus
     extern "C" {
 #endif
 
+#include "nrf54l10_types.h"
 
-#define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
-#define MDK_SOURCE_VERSION_MINOR 7-rc1               /*!< Minor version of product specification.                              */
-#define MDK_SOURCE_VERSION_MICRO                     /*!< Micro version of product specification.                              */
-
+#include "nrf54l10_global.h"
+#include "nrf54l10_application.h"
+#include "nrf54l10_flpr.h"
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L15_VERSION_H */
+#endif /* NRF54L10_H */
 

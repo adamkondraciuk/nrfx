@@ -164,7 +164,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF54L_SERIES for common use in nRF54L series devices */
-#if defined (NRF54L09_ENGA_XXAA) || defined (NRF54L15_ENGA_XXAA) || defined (NRF54L15_XXAA) ||  defined (NRF54L20_ENGA_XXAA)
+#if defined (NRF54L05_XXAA) || defined (NRF54L09_ENGA_XXAA) || defined (NRF54L10_XXAA) || defined (NRF54L15_ENGA_XXAA) || defined (NRF54L15_XXAA) ||  defined (NRF54L20_ENGA_XXAA)
     #ifndef NRF54L_SERIES
         #define NRF54L_SERIES
     #endif
@@ -360,6 +360,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf54h20_engb_name_change.h"
     #endif
 
+#elif defined (NRF54L05_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf54l05.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf54l05_name_change.h"
+    #endif
 
 #elif defined (NRF54L09_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
@@ -367,6 +374,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
         #include "nrf54l09_enga_name_change.h"
+    #endif
+
+#elif defined (NRF54L10_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf54l10.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf54l10_name_change.h"
     #endif
 
 #elif defined (NRF54L15_XXAA)

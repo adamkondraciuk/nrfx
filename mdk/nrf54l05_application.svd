@@ -3,7 +3,7 @@
 <device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Nordic Semiconductor</vendor>
   <vendorID>Nordic</vendorID>
-  <name>nrf54l15_application</name>
+  <name>nrf54l05_application</name>
   <series>nrf54l</series>
   <version>1</version>
   <description>System-on-chip with a 32-bit Arm Cortex-M33 microcontroller</description>
@@ -62,7 +62,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <deviceNumInterrupts>270</deviceNumInterrupts>
     <sauNumRegions>4</sauNumRegions>
   </cpu>
-  <headerSystemFilename>system_nrf54l15_application</headerSystemFilename>
+  <headerSystemFilename>system_nrf54l05_application</headerSystemFilename>
   <vendorExtensions>
     <MaxInterrupts>480</MaxInterrupts>
   </vendorExtensions>

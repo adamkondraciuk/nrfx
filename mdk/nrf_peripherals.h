@@ -89,8 +89,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF54H20_ENGB_XXAA)
     #include "nrf54h20_engb_peripherals.h"
 
+#elif defined (NRF54L05_XXAA)
+    #include "nrf54l05_peripherals.h"    
+
 #elif defined (NRF54L09_ENGA_XXAA)
     #include "nrf54l09_enga_peripherals.h"
+
+#elif defined (NRF54L10_XXAA)
+    #include "nrf54l10_peripherals.h"
 
 #elif defined (NRF54L15_XXAA)
     #include "nrf54l15_peripherals.h"

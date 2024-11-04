@@ -134,9 +134,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>31</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Disable DFT and lock TAMPC PROTECT.DFT.ENABLE signal protector.</description>
-                    <value>0x50FA50FA</value>
+                    <name>Enable</name>
+                    <description>Allow DFT and unlock TAMPC PROTECT.DFT.ENABLE signal protector.</description>
+                    <value>0xDF7EDF7E</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -149,7 +149,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Description collection: DFT enable register o</description>
             <addressOffset>0x004</addressOffset>
             <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -173,7 +173,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Description collection: DFT enable register o</description>
             <addressOffset>0x010</addressOffset>
             <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -204,9 +204,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>31</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Disable DFT and lock TAMPC PROTECT.DFT.ENABLE signal protector.</description>
-                    <value>0x50FA50FA</value>
+                    <name>Enable</name>
+                    <description>Allow DFT and unlock TAMPC PROTECT.DFT.ENABLE signal protector.</description>
+                    <value>0xDF7EDF7E</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -291,6 +291,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <value>0x00054B15</value>
                   </enumeratedValue>
                   <enumeratedValue>
+                    <name>N54L10</name>
+                    <description>nRF54L10</description>
+                    <value>0x00054B10</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>N54L05</name>
+                    <description>nRF54L05</description>
+                    <value>0x00054B05</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
                     <name>Unspecified</name>
                     <description>Unspecified</description>
                     <value>0xFFFFFFFF</value>
@@ -365,6 +375,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <value>0x00000100</value>
                   </enumeratedValue>
                   <enumeratedValue>
+                    <name>K192</name>
+                    <description>192 kByte RAM</description>
+                    <value>0x000000C0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>K96</name>
+                    <description>96 kByte RAM</description>
+                    <value>0x00000060</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
                     <name>Unspecified</name>
                     <description>Unspecified</description>
                     <value>0xFFFFFFFF</value>
@@ -391,6 +411,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <name>K1524</name>
                     <description>1524 KByte RRAM</description>
                     <value>0x000005F4</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>K1012</name>
+                    <description>1012 KByte RRAM</description>
+                    <value>0x000003F4</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>K500</name>
+                    <description>500 KByte RRAM</description>
+                    <value>0x000001F4</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Unspecified</name>
@@ -515,6 +545,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <name>nRF54L15</name>
                     <description>nRF54L15</description>
                     <value>0x0000001C</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>nRF54L10</name>
+                    <description>nRF54L10</description>
+                    <value>0x0000002E</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>nRF54L05</name>
+                    <description>nRF54L05</description>
+                    <value>0x0000002F</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -1136,6 +1176,65 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
           </fields>
         </register>
+        <cluster>
+          <name>OTP</name>
+          <description>Unspecified</description>
+          <headerStructName>FICR_OTP</headerStructName>
+          <access>read-writeonce</access>
+          <addressOffset>0xC00</addressOffset>
+          <cluster>
+            <dim>2</dim>
+            <dimIncrement>0x010</dimIncrement>
+            <name>PRODUCTION1[%s]</name>
+            <description>OTP Production Registers</description>
+            <headerStructName>FICR_OTP_PRODUCTION1</headerStructName>
+            <access>read-writeonce</access>
+            <addressOffset>0x000</addressOffset>
+            <register>
+              <dim>0x4</dim>
+              <dimIncrement>0x4</dimIncrement>
+              <name>UNPROTECT[%s]</name>
+              <description>Description collection: OTP protection registers for DFT enabling/disabling</description>
+              <addressOffset>0x000</addressOffset>
+              <access>read-writeonce</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <size>0x20</size>
+              <fields>
+                <field>
+                  <name>PALL</name>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+          </cluster>
+          <cluster>
+            <dim>2</dim>
+            <dimIncrement>0x010</dimIncrement>
+            <name>PRODUCTION2[%s]</name>
+            <description>OTP Production Registers</description>
+            <headerStructName>FICR_OTP_PRODUCTION2</headerStructName>
+            <access>read-writeonce</access>
+            <addressOffset>0x020</addressOffset>
+            <register>
+              <dim>0x4</dim>
+              <dimIncrement>0x4</dimIncrement>
+              <name>UNPROTECT[%s]</name>
+              <description>Description collection: OTP protection registers for DFT enabling/disabling</description>
+              <addressOffset>0x000</addressOffset>
+              <access>read-writeonce</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <size>0x20</size>
+              <fields>
+                <field>
+                  <name>PALL</name>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+          </cluster>
+        </cluster>
       </registers>
     </peripheral>
     <peripheral>
@@ -1190,20 +1289,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Description collection: Access port protection</description>
             <addressOffset>0x004</addressOffset>
             <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
                 <name>PALL</name>
                 <lsb>0</lsb>
                 <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>TAMPC is locked for all other values than Unprotected.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -1214,20 +1306,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Description collection: Access port protection</description>
             <addressOffset>0x010</addressOffset>
             <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
                 <name>PALL</name>
                 <lsb>0</lsb>
                 <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>TAMPC is locked for all other values than Unprotected.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -1291,20 +1376,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Description collection: Access port protection register o</description>
             <addressOffset>0x004</addressOffset>
             <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
                 <name>PALL</name>
                 <lsb>0</lsb>
                 <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>TAMPC is locked for all other values than Unprotected.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -1315,20 +1393,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Description collection: Access port protection</description>
             <addressOffset>0x010</addressOffset>
             <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
                 <name>PALL</name>
                 <lsb>0</lsb>
                 <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>TAMPC is locked for all other values than Unprotected.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -1392,20 +1463,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Description collection: Access port protection register o</description>
             <addressOffset>0x004</addressOffset>
             <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
                 <name>PALL</name>
                 <lsb>0</lsb>
                 <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>TAMPC is locked for all other values than Unprotected.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -1416,20 +1480,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Description collection: Access port protection</description>
             <addressOffset>0x010</addressOffset>
             <access>read-writeonce</access>
-            <resetValue>0x50FA50FA</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
                 <name>PALL</name>
                 <lsb>0</lsb>
                 <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>TAMPC is locked for all other values than Unprotected.</description>
-                    <value>0x50FA50FA</value>
-                  </enumeratedValue>
-                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -1478,9 +1535,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>31</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Unprotected</name>
+                    <name>Protected</name>
                     <description>The device can be erased using the CTRL-AP Erase all function and TAMPC PROTECT.ERASEPROTECT signal protector is unlocked.</description>
-                    <value>0xFFFFFFFF</value>
+                    <value>0x50FA50FA</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -1520,9 +1577,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>31</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Unprotected</name>
-                    <description>The device canbe erased using the CTRL-AP Erase all function and TAMPC PROTECT.ERASEPROTECT signal protector is unlocked.</description>
-                    <value>0xFFFFFFFF</value>
+                    <name>Protected</name>
+                    <description>The device can be erased using the CTRL-AP Erase all function and TAMPC PROTECT.ERASEPROTECT signal protector is unlocked.</description>
+                    <value>0x50FA50FA</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -10583,7 +10640,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>TASKS_READMETADATA</name>
-          <description>Read key slot metedata into METADATA register</description>
+          <description>Read key slot metadata into METADATA register</description>
           <addressOffset>0x000C</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -10591,7 +10648,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>TASKS_READMETADATA</name>
-              <description>Read key slot metedata into METADATA register</description>
+              <description>Read key slot metadata into METADATA register</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -10606,7 +10663,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>TASKS_PUSHBLOCK</name>
-          <description>Block the PUSH operation of key slot, preventing the key slot being PUSH until next reset</description>
+          <description>Block only the PUSH operation of a key slot, preventing the key slot from being PUSHED until next reset. The task is kept for backwards compatibility.</description>
           <addressOffset>0x0010</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -10614,7 +10671,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>TASKS_PUSHBLOCK</name>
-              <description>Block the PUSH operation of key slot, preventing the key slot being PUSH until next reset</description>
+              <description>Block only the PUSH operation of a key slot, preventing the key slot from being PUSHED until next reset. The task is kept for backwards compatibility.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -10713,7 +10770,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_ERROR</name>
-          <description>Error during PROVISION, PUSH, or REVOKE operations</description>
+          <description>Error generated during PROVISION, PUSH, READMETADATA or REVOKE operations. Triggering the PROVISION, PUSH and REVOKE tasks on a BLOCKED keyslot will also generate this event.</description>
           <addressOffset>0x10C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -10721,7 +10778,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>EVENTS_ERROR</name>
-              <description>Error during PROVISION, PUSH, or REVOKE operations</description>
+              <description>Error generated during PROVISION, PUSH, READMETADATA or REVOKE operations. Triggering the PROVISION, PUSH and REVOKE tasks on a BLOCKED keyslot will also generate this event.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -10741,7 +10798,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_METADATAREAD</name>
-          <description>Key slot metedata has been read into METADATA register</description>
+          <description>Key slot metadata has been read into METADATA register</description>
           <addressOffset>0x110</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -10749,7 +10806,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>EVENTS_METADATAREAD</name>
-              <description>Key slot metedata has been read into METADATA register</description>
+              <description>Key slot metadata has been read into METADATA register</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -10769,7 +10826,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_PUSHBLOCKED</name>
-          <description>The PUSHBLOCK operation was succesful</description>
+          <description>The PUSHBLOCK operation was successful. The event is kept for backwards compatibility.</description>
           <addressOffset>0x114</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -10777,7 +10834,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>EVENTS_PUSHBLOCKED</name>
-              <description>The PUSHBLOCK operation was succesful</description>
+              <description>The PUSHBLOCK operation was successful. The event is kept for backwards compatibility.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -10833,8 +10890,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>ID</name>
-              <description>Select key slot ID to provision, read, or push when TASKS_PROVISION, TASKS_PUSH,
-                TASKS_READMETADATA, or TASKS_REVOKE, is triggered.</description>
+              <description>Select key slot ID to provision, push, read METADATA, revoke or block when the corresponding task is triggered.</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
@@ -37138,29 +37194,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>TASKS_SHUTDOWN</name>
-          <description>Deprecated register - Shut down timer</description>
-          <addressOffset>0x010</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_SHUTDOWN</name>
-              <description>Deprecated field -  Shut down timer</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
           <dim>0x8</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>TASKS_CAPTURE[%s]</name>
@@ -37295,39 +37328,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <field>
               <name>CHIDX</name>
               <description>DPPI channel that task CLEAR will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SUBSCRIBE_SHUTDOWN</name>
-          <description>Deprecated register - Subscribe configuration for task SHUTDOWN</description>
-          <addressOffset>0x090</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task SHUTDOWN will subscribe to</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
@@ -38847,23 +38847,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x7</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInExt</name>
-                  <description>VREGMAIN in Ext mode</description>
+                  <name>RequestPwrAboveElv</name>
+                  <description>System request for ELV mode (requestPwrAboveElv_a)</description>
                   <value>0x8</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInLdo</name>
-                  <description>VREGMAIN in Ldo mode</description>
+                  <name>VregMainPwrupLdo</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up LDO signal</description>
                   <value>0x9</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPfm</name>
-                  <description>VREGMAIN in Pfm mode</description>
+                  <name>VregMainPwrupPfm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PFM signal</description>
                   <value>0xA</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPwm</name>
-                  <description>VREGMAIN in PWm mode</description>
+                  <name>VregMainPwrupPwm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PWM signal</description>
                   <value>0xB</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -38915,23 +38915,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x7</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInExt</name>
-                  <description>VREGMAIN in Ext mode</description>
+                  <name>RequestPwrAboveElv</name>
+                  <description>System request for ELV mode (requestPwrAboveElv_a)</description>
                   <value>0x8</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInLdo</name>
-                  <description>VREGMAIN in Ldo mode</description>
+                  <name>VregMainPwrupLdo</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up LDO signal</description>
                   <value>0x9</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPfm</name>
-                  <description>VREGMAIN in Pfm mode</description>
+                  <name>VregMainPwrupPfm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PFM signal</description>
                   <value>0xA</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPwm</name>
-                  <description>VREGMAIN in PWm mode</description>
+                  <name>VregMainPwrupPwm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PWM signal</description>
                   <value>0xB</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -58126,6 +58126,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>IEEE 802.15.4 energy detect period, 4us resolution, no averaging except the IEEE 802.15.4 ED range 128us (32)</description>
               <lsb>24</lsb>
               <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Default</name>
+                  <description>Unspecified</description>
+                  <value>0x20</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
@@ -59097,6 +59104,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <msb>10</msb>
               <enumeratedValues>
                 <enumeratedValue>
+                  <name>MaxdBm</name>
+                  <description>+8 dBm</description>
+                  <value>0x03F</value>
+                </enumeratedValue>
+                <enumeratedValue>
                   <name>Pos8dBm</name>
                   <description>+8 dBm</description>
                   <value>0x03F</value>
@@ -59233,6 +59245,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Neg46dBm</name>
+                  <description>-46 dBm</description>
+                  <value>0x110</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>MindBm</name>
                   <description>-46 dBm</description>
                   <value>0x110</value>
                 </enumeratedValue>
@@ -72227,23 +72244,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x7</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInExt</name>
-                  <description>VREGMAIN in Ext mode</description>
+                  <name>RequestPwrAboveElv</name>
+                  <description>System request for ELV mode (requestPwrAboveElv_a)</description>
                   <value>0x8</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInLdo</name>
-                  <description>VREGMAIN in Ldo mode</description>
+                  <name>VregMainPwrupLdo</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up LDO signal</description>
                   <value>0x9</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPfm</name>
-                  <description>VREGMAIN in Pfm mode</description>
+                  <name>VregMainPwrupPfm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PFM signal</description>
                   <value>0xA</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPwm</name>
-                  <description>VREGMAIN in PWm mode</description>
+                  <name>VregMainPwrupPwm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PWM signal</description>
                   <value>0xB</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -72295,23 +72312,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x7</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInExt</name>
-                  <description>VREGMAIN in Ext mode</description>
+                  <name>RequestPwrAboveElv</name>
+                  <description>System request for ELV mode (requestPwrAboveElv_a)</description>
                   <value>0x8</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInLdo</name>
-                  <description>VREGMAIN in Ldo mode</description>
+                  <name>VregMainPwrupLdo</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up LDO signal</description>
                   <value>0x9</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPfm</name>
-                  <description>VREGMAIN in Pfm mode</description>
+                  <name>VregMainPwrupPfm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PFM signal</description>
                   <value>0xA</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPwm</name>
-                  <description>VREGMAIN in PWm mode</description>
+                  <name>VregMainPwrupPwm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PWM signal</description>
                   <value>0xB</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -84039,7 +84056,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>MAXCNT</name>
-            <description>Number of samples to allocate memory for in EasyDMA mode</description>
+            <description>Number of bytes to allocate memory for in EasyDMA mode</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -84047,7 +84064,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>BUFFSIZE</name>
-                <description>Length of DMA RAM allocation in number of samples</description>
+                <description>Length of DMA RAM allocation in number of bytes</description>
                 <lsb>0</lsb>
                 <msb>14</msb>
               </field>
@@ -116729,23 +116746,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x7</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInExt</name>
-                  <description>VREGMAIN in Ext mode</description>
+                  <name>RequestPwrAboveElv</name>
+                  <description>System request for ELV mode (requestPwrAboveElv_a)</description>
                   <value>0x8</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInLdo</name>
-                  <description>VREGMAIN in Ldo mode</description>
+                  <name>VregMainPwrupLdo</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up LDO signal</description>
                   <value>0x9</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPfm</name>
-                  <description>VREGMAIN in Pfm mode</description>
+                  <name>VregMainPwrupPfm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PFM signal</description>
                   <value>0xA</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPwm</name>
-                  <description>VREGMAIN in PWm mode</description>
+                  <name>VregMainPwrupPwm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PWM signal</description>
                   <value>0xB</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -116797,23 +116814,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x7</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInExt</name>
-                  <description>VREGMAIN in Ext mode</description>
+                  <name>RequestPwrAboveElv</name>
+                  <description>System request for ELV mode (requestPwrAboveElv_a)</description>
                   <value>0x8</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInLdo</name>
-                  <description>VREGMAIN in Ldo mode</description>
+                  <name>VregMainPwrupLdo</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up LDO signal</description>
                   <value>0x9</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPfm</name>
-                  <description>VREGMAIN in Pfm mode</description>
+                  <name>VregMainPwrupPfm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PFM signal</description>
                   <value>0xA</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPwm</name>
-                  <description>VREGMAIN in PWm mode</description>
+                  <name>VregMainPwrupPwm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PWM signal</description>
                   <value>0xB</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -117244,7 +117261,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>RTC30</name>
+        <name>CLOCK_POWER</name>
         <value>261</value>
       </interrupt>
     </peripheral>
@@ -117255,7 +117272,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>RTC30</name>
+        <name>CLOCK_POWER</name>
         <value>261</value>
       </interrupt>
     </peripheral>
@@ -121628,10 +121645,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>CLOCK_POWER</name>
-        <value>270</value>
-      </interrupt>
       <groupName>CLOCK</groupName>
       <size>0x20</size>
       <registers>
@@ -123421,7 +123434,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <description>Select which PLL source is started by the PLLSTART task</description>
                 <lsb>0</lsb>
                 <msb>1</msb>
-                <enumeratedValues />
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>HFINT</name>
+                    <description>Reserved for future use, do not use</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -123743,10 +123762,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>CLOCK_POWER</name>
-        <value>270</value>
-      </interrupt>
       <groupName>POWER</groupName>
       <size>0x20</size>
       <registers>
@@ -124629,10 +124644,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <baseAddress>0x5010E000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>CLOCK_POWER</name>
-        <value>270</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_POWER_NS">
       <name>GLOBAL_POWER_S</name>
@@ -124641,10 +124652,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <alternatePeripheral>GLOBAL_CLOCK_S</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
-      <interrupt>
-        <name>CLOCK_POWER</name>
-        <value>270</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_RESET_NS">
       <name>GLOBAL_RESET_S</name>
@@ -124971,23 +124978,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x7</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInExt</name>
-                  <description>VREGMAIN in Ext mode</description>
+                  <name>RequestPwrAboveElv</name>
+                  <description>System request for ELV mode (requestPwrAboveElv_a)</description>
                   <value>0x8</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInLdo</name>
-                  <description>VREGMAIN in Ldo mode</description>
+                  <name>VregMainPwrupLdo</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up LDO signal</description>
                   <value>0x9</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPfm</name>
-                  <description>VREGMAIN in Pfm mode</description>
+                  <name>VregMainPwrupPfm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PFM signal</description>
                   <value>0xA</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPwm</name>
-                  <description>VREGMAIN in PWm mode</description>
+                  <name>VregMainPwrupPwm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PWM signal</description>
                   <value>0xB</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -125039,23 +125046,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x7</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInExt</name>
-                  <description>VREGMAIN in Ext mode</description>
+                  <name>RequestPwrAboveElv</name>
+                  <description>System request for ELV mode (requestPwrAboveElv_a)</description>
                   <value>0x8</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInLdo</name>
-                  <description>VREGMAIN in Ldo mode</description>
+                  <name>VregMainPwrupLdo</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up LDO signal</description>
                   <value>0x9</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPfm</name>
-                  <description>VREGMAIN in Pfm mode</description>
+                  <name>VregMainPwrupPfm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PFM signal</description>
                   <value>0xA</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VregmainInPwm</name>
-                  <description>VREGMAIN in PWm mode</description>
+                  <name>VregMainPwrupPwm</name>
+                  <description>VREGMAIN (PwrDcdcLdo) power-up PWM signal</description>
                   <value>0xB</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -126872,6 +126879,34 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </field>
               </fields>
             </register>
+            <register>
+              <name>DTBCFG</name>
+              <description>Digital testbus configuration</description>
+              <addressOffset>0x14</addressOffset>
+              <access>read-write</access>
+              <resetValue>0x00000000</resetValue>
+              <size>0x20</size>
+              <fields>
+                <field>
+                  <name>DTB0OSC8M</name>
+                  <description>Enable 8 MHz clock (OSC_PLL_VHF_16M_0V9 divided by 2) on DTB0</description>
+                  <lsb>0</lsb>
+                  <msb>0</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Disabled</name>
+                      <description>Disable</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Enabled</name>
+                      <description>Enable 8 MHz clock (OSC_PLL_VHF_16M_0V9 divided by 2) on DTB0</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+              </fields>
+            </register>
           </cluster>
           <cluster>
             <name>DBG</name>
@@ -127611,12 +127646,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Disabled</name>
-                    <description>Disabled</description>
+                    <description>Normal mode. See anaip-tsmc22n_088 table 8 mode for details.</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Enabled</name>
-                    <description>Enabled</description>
+                    <description>CAPCAL mode. Power up comparator circuit for internal cap calibration.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -127628,13 +127663,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>1</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>NotInverted</name>
-                    <description>NotInverted</description>
+                    <name>Inverted</name>
+                    <description>Inverted CAPCAL mode. Comparator inputs are flipped to cancel offsets in 2nd measurement.</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Inverted</name>
-                    <description>Inverted</description>
+                    <name>NotInverted</name>
+                    <description>Normal CAPCAL mode</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -127646,31 +127681,31 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>2</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>DoNotStart</name>
-                    <description>DoNotStart</description>
+                    <name>Start</name>
+                    <description>CAPCAL measurement in progress. Comparator outputs active.</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Start</name>
-                    <description>Start</description>
+                    <name>DoNotStart</name>
+                    <description>Holding CAPCAL circuit in start position.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>AREGHPEN</name>
-                <description>Enable AREG_HP mode, 2x current in AREG</description>
+                <description>Enable AREG_HP mode, 2x current in AREG.</description>
                 <lsb>3</lsb>
                 <msb>3</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Disabled</name>
-                    <description>Disabled</description>
+                    <description>AREG_HP mode off</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Enabled</name>
-                    <description>Enabled</description>
+                    <description>AREG_HP mode on, 2x current in AREG CMFB circuit for almost doubling startup currents.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -127683,12 +127718,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>AregOn</name>
-                    <description>AregOn</description>
+                    <description>AREG on.</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>AregOff</name>
-                    <description>AregOff</description>
+                    <description>AREG off – only constant current source (IDAC) drving crystal.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
