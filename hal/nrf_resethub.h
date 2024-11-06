@@ -23,11 +23,28 @@ extern "C" {
 #define NRF_RESETHUB_HAS_CROSSDOMAIN 0
 #endif
 
-#if defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA) || defined(NRF9220_XXAA) || \
+    defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether cellular domain is present. */
 #define NRF_RESETHUB_HAS_CELLULAR 1
 #else
 #define NRF_RESETHUB_HAS_CELLULAR 0
+#endif
+
+#if defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether iSim domain is present. */
+#define NRF_RESETHUB_HAS_ISIM 1
+#else
+#define NRF_RESETHUB_HAS_ISIM 0
+#endif
+
+#if defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA) || defined(NRF9230_XXAA) || \
+    defined(NRF54H20_ENGA_XXAA) || defined(NRF54H20_ENGB_XXAA) || defined(NRF54H20_XXAA) || \
+    defined(NRF7140_XXAA) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether network domain is present. */
+#define NRF_RESETHUB_HAS_NETWORK 1
+#else
+#define NRF_RESETHUB_HAS_NETWORK 0
 #endif
 
 #if defined(NRF7140_XXAA) || defined(__NRFX_DOXYGEN__)
@@ -90,8 +107,10 @@ typedef enum
 
     NRF_RESETHUB_TASK_RESET_DOMAIN_APPLICATION =
         offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_DOMAIN_APPLICATION]),             /**< Reset Application domain. */
+#if NRF_RESETHUB_HAS_NETWORK
     NRF_RESETHUB_TASK_RESET_DOMAIN_NETWORK =
         offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_DOMAIN_RADIOCORE]),               /**< Reset Network domain. */
+#endif
 #if NRF_RESETHUB_HAS_CELLULAR
     NRF_RESETHUB_TASK_RESET_DOMAIN_CELLULAR =
         offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_DOMAIN_CELLCORE]),                /**< Reset Cellular domain. */
@@ -99,6 +118,8 @@ typedef enum
         offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_DOMAIN_CELLDSP]),                 /**< Reset Cellular DSP domain. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_CELL_RF =
         offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_DOMAIN_CELLRF]),                  /**< Reset Cellular RF domain. */
+#endif
+#if NRF_RESETHUB_HAS_ISIM
     NRF_RESETHUB_TASK_RESET_DOMAIN_ISIM =
         offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_DOMAIN_ISIMCORE]),                /**< Reset iSIM domain. */
 #endif
@@ -131,8 +152,10 @@ typedef enum
 #endif
     NRF_RESETHUB_EVENT_DOMAIN_RESET_APPLICATION =
         offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_DOMAIN_APPLICATION]),              /**< Application domain was reset. */
+#if NRF_RESETHUB_HAS_NETWORK
     NRF_RESETHUB_EVENT_DOMAIN_RESET_NETWORK =
         offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_DOMAIN_RADIOCORE]),                /**< Network domain was reset. */
+#endif
 #if NRF_RESETHUB_HAS_CELLULAR
     NRF_RESETHUB_EVENT_DOMAIN_RESET_CELLULAR =
         offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_DOMAIN_CELLCORE]),                 /**< Cellular domain was reset. */
@@ -140,6 +163,8 @@ typedef enum
         offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_DOMAIN_CELLDSP]),                  /**< Cellular DSP domain was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_CELL_RF =
         offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_DOMAIN_CELLRF]),                   /**< Cellular RF domain was reset. */
+#endif
+#if NRF_RESETHUB_HAS_ISIM
     NRF_RESETHUB_EVENT_DOMAIN_RESET_ISIM =
         offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_DOMAIN_ISIMCORE]),                 /**< iSIM domain was reset. */
 #endif
@@ -172,7 +197,9 @@ typedef enum
 #endif
 
     NRF_RESETHUB_INT_DOMAIN_RESET_APPLICATION_MASK = (1UL << NRF_DOMAIN_APPLICATION), /**< Interrupt on Application domain reset. */
+#if NRF_RESETHUB_HAS_NETWORK
     NRF_RESETHUB_INT_DOMAIN_RESET_NETWORK_MASK     = (1UL << NRF_DOMAIN_RADIOCORE),   /**< Interrupt on Network domain reset. */
+#endif
 #if NRF_RESETHUB_HAS_WIFI
     NRF_RESETHUB_INT_DOMAIN_RESET_WIFICORE_MASK    = (1UL << NRF_DOMAIN_WIFICORE),    /**< Interrupt on Wificore domain reset. */
 #endif
@@ -180,6 +207,8 @@ typedef enum
     NRF_RESETHUB_INT_DOMAIN_RESET_CELLULAR_MASK    = (1UL << NRF_DOMAIN_CELLCORE),    /**< Interrupt on Cellular domain reset. */
     NRF_RESETHUB_INT_DOMAIN_RESET_CELL_DSP_MASK    = (1UL << NRF_DOMAIN_CELLDSP),     /**< Interrupt on Cellular DSP domain reset. */
     NRF_RESETHUB_INT_DOMAIN_RESET_CELL_RF_MASK     = (1UL << NRF_DOMAIN_CELLRF),      /**< Interrupt on Cellular RF domain reset. */
+#endif
+#if NRF_RESETHUB_HAS_ISIM
     NRF_RESETHUB_INT_DOMAIN_RESET_ISIM_MASK        = (1UL << NRF_DOMAIN_ISIMCORE),    /**< Interrupt on iSIM domain reset. */
 #endif
 } nrf_resethub_int_mask_t;
@@ -211,11 +240,15 @@ typedef enum
 #endif
 
     NRF_RESETHUB_DOMAIN_APPLICATION_MASK = (1UL << NRF_DOMAIN_APPLICATION), /**< Application domain. */
+#if NRF_RESETHUB_HAS_NETWORK
     NRF_RESETHUB_DOMAIN_NETWORK_MASK     = (1UL << NRF_DOMAIN_RADIOCORE),   /**< Network domain. */
+#endif
 #if NRF_RESETHUB_HAS_CELLULAR
     NRF_RESETHUB_DOMAIN_CELLULAR_MASK    = (1UL << NRF_DOMAIN_CELLCORE),    /**< Cellular domain. */
     NRF_RESETHUB_DOMAIN_CELL_DSP_MASK    = (1UL << NRF_DOMAIN_CELLDSP),     /**< Cellular DSP domain. */
     NRF_RESETHUB_DOMAIN_CELL_RF_MASK     = (1UL << NRF_DOMAIN_CELLRF),      /**< Cellular RF domain. */
+#endif
+#if NRF_RESETHUB_HAS_ISIM
     NRF_RESETHUB_DOMAIN_ISIM_MASK        = (1UL << NRF_DOMAIN_ISIMCORE),    /**< iSIM domain. */
 #endif
 } nrf_resethub_domain_mask_t;

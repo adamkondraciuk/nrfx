@@ -243,6 +243,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_APPLICATION)
         #include "nrf9160_vectors.h"
     #endif
+#elif defined(NRF9220_XXAA)
+    #if defined(NRF_SECURE)
+        #include "nrf9220_secure_vectors.h"
+    #endif
+    #if defined(NRF_APPLICATION)
+        #include "nrf9220_application_vectors.h"
+    #endif
+    #if defined(NRF_CELLCORE)
+        #include "nrf9220_cellcore_vectors.h"
+    #endif
+    #if defined(NRF_CELLRF)
+        #include "nrf9220_cellrf_vectors.h"
+    #endif
+    #if defined(NRF_SYSCTRL)
+        #include "nrf9220_sysctrl_vectors.h"
+    #endif
+    #if defined(NRF_PPR)
+        #include "nrf9220_ppr_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf9220_flpr_vectors.h"
+    #endif
 #elif defined(NRF9230_ENGA_XXAA)
     #if defined(NRF_SECURE)
         #include "nrf9230_enga_secure_vectors.h"

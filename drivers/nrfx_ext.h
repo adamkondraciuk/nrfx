@@ -222,6 +222,20 @@ extern "C" {
     #define NRFX_PRS_BOX_9_ADDR     NRF_COMP
 #endif
 
+#if defined(NRF9220_XXAA)
+   #define NRF_PRS_BOX_EXT
+   // SPIM120, SPIS120, UARTE120
+   #define NRFX_PRS_BOX_0_ADDR     NRF_UARTE120
+   // SPIM130, SPIS130, TWIM130, TWIS130, UARTE130
+   #define NRFX_PRS_BOX_1_ADDR     NRF_UARTE130
+   // SPIM131, SPIS131, TWIM131, TWIS131, UARTE131
+   #define NRFX_PRS_BOX_2_ADDR     NRF_UARTE131
+   // SPIM132, SPIS132, TWIM132, TWIS132, UARTE132
+   #define NRFX_PRS_BOX_3_ADDR     NRF_UARTE132
+   // SPIM133, SPIS133, TWIM133, TWIS133, UARTE133
+   #define NRFX_PRS_BOX_4_ADDR     NRF_UARTE133
+#endif
+
 /*------------------------------------------------------------------------------------------------*/
 /* End of PRS Extended section                                                                    */
 /*------------------------------------------------------------------------------------------------*/
@@ -341,7 +355,7 @@ extern "C" {
     #elif defined(BOARD_FPGA)
         #define NRFX_DELAY_CPU_FREQ_MHZ ((SystemCoreClock / 1000000) / CONFIG_NRFX_SYS_CLOCK_DIV)
         #define NRFX_DELAY_DWT_PRESENT  1
-    #elif defined(NRF7140_XXAA) || defined(NRF9230_ENGA_XXAA)
+    #elif defined(NRF7140_XXAA) || defined(NRF9230_ENGA_XXAA) || defined(NRF9220_XXAA)
         #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
         #define NRFX_DELAY_DWT_PRESENT  0
     #endif

@@ -241,6 +241,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_APPLICATION)
         #include "nrf9160_xxaa_memory.h"
     #endif
+#elif defined(NRF9220_XXAA)
+    #if defined(NRF_SECURE)
+        #include "nrf9220_xxaa_secure_memory.h"
+    #endif
+    #if defined(NRF_APPLICATION)
+        #include "nrf9220_xxaa_application_memory.h"
+    #endif
+    #if defined(NRF_CELLCORE)
+        #include "nrf9220_xxaa_cellcore_memory.h"
+    #endif
+    #if defined(NRF_CELLRF)
+        #include "nrf9220_xxaa_cellrf_memory.h"
+    #endif
+    #if defined(NRF_SYSCTRL)
+        #include "nrf9220_xxaa_sysctrl_memory.h"
+    #endif
+    #if defined(NRF_PPR)
+        #include "nrf9220_xxaa_ppr_memory.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf9220_xxaa_flpr_memory.h"
+    #endif
 #elif defined(NRF9230_ENGA_XXAA)
     #if defined(NRF_SECURE)
         #include "nrf9230_enga_xxaa_secure_memory.h"

@@ -1413,6 +1413,65 @@
 /**************************************************************************************************/
 
 /**************************************************************************************************/
+/* Start fixups section for NRF9220_XXAA                                                          */
+/**************************************************************************************************/
+
+#if defined(NRF9220_XXAA)
+
+    /* Internal part */
+    #if defined(NRF_TRUSTZONE_NONSECURE)
+        #if defined(NRF_SECURE)
+            #define GRTC_IRQ_GROUP 0
+            #define GPIOTE_IRQ_GROUP 0
+        #elif defined(NRF_CELLCORE)
+            #define GRTC_IRQ_GROUP 5
+            #define GPIOTE_IRQ_GROUP 4
+        #endif
+    #elif defined(NRF_SYSCTRL)
+        #define GRTC_IRQ_GROUP 4
+        #define GPIOTE_IRQ_GROUP 6
+    #elif defined(NRF_PPR)
+        #define GRTC_IRQ_GROUP 7
+    #else
+        #if defined(NRF_SECURE)
+            #define GRTC_IRQ_GROUP 1
+            #define GPIOTE_IRQ_GROUP 1
+        #elif defined(NRF_CELLCORE)
+            #define GRTC_IRQ_GROUP 6
+            #define GPIOTE_IRQ_GROUP 5
+        #endif
+    #endif
+
+    #if !defined(GRTC_IRQ_GROUP)
+        #error Unknown core.
+    #endif
+
+    #define DPPIC020_CH_NUM (DPPIC020_CH_NUM_MAX + 1UL)
+    #define DPPIC030_CH_NUM (DPPIC030_CH_NUM_MAX + 1UL)
+    #define DPPIC120_CH_NUM (DPPIC120_CH_NUM_MAX + 1UL)
+    #define DPPIC130_CH_NUM (DPPIC130_CH_NUM_MAX + 1UL)
+    #define DPPIC131_CH_NUM (DPPIC131_CH_NUM_MAX + 1UL)
+    #define DPPIC132_CH_NUM (DPPIC132_CH_NUM_MAX + 1UL)
+    #define DPPIC133_CH_NUM (DPPIC133_CH_NUM_MAX + 1UL)
+    #define DPPIC134_CH_NUM (DPPIC134_CH_NUM_MAX + 1UL)
+
+    #define DPPIC020_GROUP_NUM (DPPIC020_GROUP_NUM_MAX + 1UL)
+    #define DPPIC030_GROUP_NUM (DPPIC030_GROUP_NUM_MAX + 1UL)
+    #define DPPIC120_GROUP_NUM (DPPIC120_GROUP_NUM_MAX + 1UL)
+    #define DPPIC130_GROUP_NUM (DPPIC130_GROUP_NUM_MAX + 1UL)
+    #define DPPIC131_GROUP_NUM (DPPIC131_GROUP_NUM_MAX + 1UL)
+    #define DPPIC132_GROUP_NUM (DPPIC132_GROUP_NUM_MAX + 1UL)
+    #define DPPIC133_GROUP_NUM (DPPIC133_GROUP_NUM_MAX + 1UL)
+    #define DPPIC134_GROUP_NUM (DPPIC134_GROUP_NUM_MAX + 1UL)
+
+    #define EGU130_CH_NUM (EGU130_CH_NUM_MAX + 1UL)
+
+#endif
+/**************************************************************************************************/
+/* End fixups section for NRF9220_XXAA                                                            */
+/**************************************************************************************************/
+
+/**************************************************************************************************/
 /* Start fixups section for NRF9230_ENGA_XXAA (HSOC 1)                                            */
 /**************************************************************************************************/
 

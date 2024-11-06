@@ -30,6 +30,21 @@
         #include <nrfx_config_nrf7120_lmac.h>
     #elif defined(NRF_UMAC)
         #include <nrfx_config_nrf7120_umac.h>
+#elif defined(NRF9220_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include <nrfx_config_nrf9220_application.h>
+    #elif defined(NRF_CELLCORE)
+        #include <nrfx_config_nrf9220_cellcore.h>
+    #elif defined(NRF_CELLRF)
+        #include <nrfx_config_nrf9220_cellrf.h>
+    #elif defined(NRF_SECURE)
+        #include <nrfx_config_nrf9220_secure.h>
+    #elif defined(NRF_FLPR)
+        #include <nrfx_config_nrf9220_flpr.h>
+    #elif defined(NRF_PPR)
+        #include <nrfx_config_nrf9220_ppr.h>
+    #elif defined(NRF_SYSCTRL)
+        #include <nrfx_config_nrf9220_sysctrl.h>
     #endif
 #elif defined(NRF9230_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
