@@ -84,6 +84,8 @@ extern "C" {
 #define NRF_CPU_FREQ_IS_64MHZ 1
 #elif defined(NRF_CONFIG_CPU_FREQ_MHZ) && (NRF_CONFIG_CPU_FREQ_MHZ == 128)
 #define NRF_CPU_FREQ_IS_128MHZ 1
+#elif defined(NRF_CONFIG_CPU_FREQ_MHZ) && (NRF_CONFIG_CPU_FREQ_MHZ == 256)
+#define NRF_CPU_FREQ_IS_256MHZ 1
 #elif !defined(NRF_CONFIG_CPU_FREQ_MHZ)
 #error "MCU frequency not specified"
 #else
@@ -101,6 +103,8 @@ extern "C" {
 /* If clock configuration is not skipped and frequency not specified,
  * SystemInit() applies 128 MHz setting. */
 #define NRF_CPU_FREQ_IS_128MHZ 1
+#elif defined(NRF_CONFIG_CPU_FREQ_MHZ) && (NRF_CONFIG_CPU_FREQ_MHZ == 256)
+#define NRF_CPU_FREQ_IS_256MHZ 1
 #else
 #error "Invalid MCU frequency"
 #endif
