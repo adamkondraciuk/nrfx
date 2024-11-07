@@ -68,9 +68,9 @@
 #elif defined(NRF54L15_ENGA_XXAA) && defined(NRF_FLPR)
     #include <soc/nrfx_irqs_nrf54l15_enga_flpr.h>
 #elif defined(NRF54L20_ENGA_XXAA) && defined(NRF_APPLICATION)
-    #include <soc/nrfx_irqs_nrf54l15_enga_application.h>
+    #include <soc/nrfx_irqs_nrf54l20_enga_application.h>
 #elif defined(NRF54L20_ENGA_XXAA) && defined(NRF_FLPR)
-    #include <soc/nrfx_irqs_nrf54l15_enga_flpr.h>
+    #include <soc/nrfx_irqs_nrf54l20_enga_flpr.h>
 #elif defined(NRF7120_ENGA_XXAA) && defined(NRF_APPLICATION)
     #include <soc/nrfx_irqs_nrf7120_enga_application.h>
 #elif defined(NRF7120_ENGA_XXAA) && defined(NRF_FLPR)

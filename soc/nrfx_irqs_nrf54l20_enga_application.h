@@ -203,8 +203,8 @@ extern "C" {
 #endif
 
 // COMP_LPCOMP_IRQHandler
-#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_5_ENABLED)
-#define nrfx_prs_box_5_irq_handler      COMP_LPCOMP_IRQHandler
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_7_ENABLED)
+#define nrfx_prs_box_7_irq_handler      COMP_LPCOMP_IRQHandler
 #else
 #define nrfx_comp_irq_handler           COMP_LPCOMP_IRQHandler
 #define nrfx_lpcomp_irq_handler         COMP_LPCOMP_IRQHandler
