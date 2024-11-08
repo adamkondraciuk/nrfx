@@ -80,6 +80,8 @@ typedef enum {
   TAMPC_IRQn                             = 22,       /*!< 22 TAMPC                                                             */
   IPCT_0_IRQn                            = 64,       /*!< 64 IPCT_0                                                            */
   IPCT_1_IRQn                            = 65,       /*!< 65 IPCT_1                                                            */
+  CTI_0_IRQn                             = 66,       /*!< 66 CTI_0                                                             */
+  CTI_1_IRQn                             = 67,       /*!< 67 CTI_1                                                             */
   SWI0_IRQn                              = 88,       /*!< 88 SWI0                                                              */
   SWI1_IRQn                              = 89,       /*!< 89 SWI1                                                              */
   SWI2_IRQn                              = 90,       /*!< 90 SWI2                                                              */
@@ -357,14 +359,14 @@ typedef enum {
 #define NRF_SECURE_CRACEN_S_BASE          0x51006000UL
 #define NRF_SECURE_RAMC001_NS_BASE        0x41007000UL
 #define NRF_SECURE_RAMC001_S_BASE         0x51007000UL
-#define NRF_SECURE_PCGCS000_NS_BASE       0x5100A000UL
+#define NRF_SECURE_PCGCS000_NS_BASE       0x4100A000UL
 #define NRF_SECURE_PCGCS000_S_BASE        0x5100A000UL
 #define NRF_SECURE_PCGCM000_S_BASE        0x5100B000UL
-#define NRF_SECURE_HSFLL_NS_BASE          0x5100D000UL
+#define NRF_SECURE_HSFLL_NS_BASE          0x4100D000UL
 #define NRF_SECURE_HSFLL_S_BASE           0x5100D000UL
-#define NRF_SECURE_LRCCONF000_NS_BASE     0x5100E000UL
+#define NRF_SECURE_LRCCONF000_NS_BASE     0x4100E000UL
 #define NRF_SECURE_LRCCONF000_S_BASE      0x5100E000UL
-#define NRF_SECURE_PCGCM001_NS_BASE       0x5100F000UL
+#define NRF_SECURE_PCGCM001_NS_BASE       0x4100F000UL
 #define NRF_SECURE_PCGCM001_S_BASE        0x5100F000UL
 #define NRF_SECURE_SPU010_S_BASE          0x51010000UL
 #define NRF_SECURE_CPUCONF_NS_BASE        0x41011000UL
@@ -378,15 +380,15 @@ typedef enum {
 #define NRF_SECURE_TAMPC_S_BASE           0x51016000UL
 #define NRF_SECURE_MUTEX_NS_BASE          0x41017000UL
 #define NRF_SECURE_MUTEX_S_BASE           0x51017000UL
-#define NRF_SECURE_PCGCS010_NS_BASE       0x5101A000UL
+#define NRF_SECURE_PCGCS010_NS_BASE       0x4101A000UL
 #define NRF_SECURE_PCGCS010_S_BASE        0x5101A000UL
 #define NRF_SECURE_PCGCM010_S_BASE        0x5101B000UL
-#define NRF_SECURE_ABB_NS_BASE            0x5101C000UL
+#define NRF_SECURE_ABB_NS_BASE            0x4101C000UL
 #define NRF_SECURE_ABB_S_BASE             0x5101C000UL
-#define NRF_SECURE_LRCCONF010_NS_BASE     0x5101E000UL
+#define NRF_SECURE_LRCCONF010_NS_BASE     0x4101E000UL
 #define NRF_SECURE_LRCCONF010_S_BASE      0x5101E000UL
 #define NRF_SECURE_RESETINFO_S_BASE       0x5101E000UL
-#define NRF_SECURE_PCGCM011_NS_BASE       0x5101F000UL
+#define NRF_SECURE_PCGCM011_NS_BASE       0x4101F000UL
 #define NRF_SECURE_PCGCM011_S_BASE        0x5101F000UL
 #define NRF_SECURE_IPCT_NS_BASE           0x41013000UL
 #define NRF_SECURE_IPCT_S_BASE            0x51013000UL

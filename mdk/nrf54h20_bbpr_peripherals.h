@@ -120,13 +120,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define I3CCORE_PRESENT 1
 #define I3CCORE_COUNT 2
 
-/*DMU*/
-#define DMU_PRESENT 1
-#define DMU_COUNT 1
-
 /*MCAN*/
 #define MCAN_PRESENT 1
 #define MCAN_COUNT 1
+
+/*DMU*/
+#define DMU_PRESENT 1
+#define DMU_COUNT 1
 
 /*System Trace Macrocell data buffer*/
 #define STMDATA_PRESENT 1
@@ -182,6 +182,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GPIOTE_COUNT 1
 
 #define GPIOTE130_IRQ_COUNT 2
+#define GPIOTE130_LATENCY 1                          /*!< (unspecified)                                                        */
 #define GPIOTE130_GPIOTE_NCHANNELS_MIN 0             /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE130_GPIOTE_NCHANNELS_MAX 7             /*!< Number of GPIOTE channels: 0..7                                      */
 #define GPIOTE130_GPIOTE_NCHANNELS_SIZE 8            /*!< Number of GPIOTE channels: 0..7                                      */
@@ -222,6 +223,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_CLKSELLFLPRC 1                          /*!< (unspecified)                                                        */
 #define GRTC_CCADD_WRITE_ONLY 1                      /*!< (unspecified)                                                        */
 #define GRTC_READY_STATUS_AND_EVENTS 0               /*!< (unspecified)                                                        */
+#define GRTC_SYSCOUNTER_LOADED_STATUS 0              /*!< (unspecified)                                                        */
+#define GRTC_CC_PAST_STATUS 0                        /*!< (unspecified)                                                        */
+#define GRTC_SYSCOUNTER_WRITEABLE 0                  /*!< (unspecified)                                                        */
 
 /*Trace buffer monitor*/
 #define TBM_PRESENT 1
@@ -231,7 +235,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define USBHS_PRESENT 1
 #define USBHS_COUNT 1
 
+#define USBHS_NUM_CLOCK_POWER_PAIR_MIN 0             /*!< Number of clock/power pairs used by PCGC Slave - [0..2]              */
+#define USBHS_NUM_CLOCK_POWER_PAIR_MAX 2             /*!< Number of clock/power pairs used by PCGC Slave - [0..2]              */
+#define USBHS_NUM_CLOCK_POWER_PAIR_SIZE 3            /*!< Number of clock/power pairs used by PCGC Slave - [0..2]              */
+#define USBHS_NOTFULLPCPZERO 1                       /*!< (unspecified)                                                        */
+#define USBHS_PENALTYTASKS 0                         /*!< (unspecified)                                                        */
 #define USBHS_SIMULATIONREGISTERS 0                  /*!< (unspecified)                                                        */
+#define USBHS_HAS_CORE_EVENT 1                       /*!< (unspecified)                                                        */
+#define USBHS_HAS_SOF_EVENT 0                        /*!< (unspecified)                                                        */
+#define USBHS_RTUNE_AVAILABLE 0                      /*!< (unspecified)                                                        */
+#define USBHS_HAS_BATTCHRG_EVENTS 0                  /*!< (unspecified)                                                        */
 
 /*MRAM controller*/
 #define MRAMC_PRESENT 1
@@ -429,9 +442,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define I3C_PRESENT 1
 #define I3C_COUNT 2
 
+#define I3C120_THIRDPARTY_REGISTERS_ON_APB 0         /*!< (unspecified)                                                        */
+
+#define I3C121_THIRDPARTY_REGISTERS_ON_APB 0         /*!< (unspecified)                                                        */
+
 /*Controller Area Network*/
 #define CAN_PRESENT 1
 #define CAN_COUNT 1
+
+#define CAN120_THIRDPARTY_REGISTERS_ON_APB 0         /*!< (unspecified)                                                        */
 
 /*MVDMA performs direct-memory-accesses between memories. Data is transferred according to job descriptor lists. Each transfer has corresponding source and sink descriptor lists with matching data amounts. The lists are in memory and they contain data buffer information, address pointers, buffer sizes and data type attributes.*/
 
@@ -529,6 +548,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER120_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 #define TIMER120_PCLK_MHZ 320                        /*!< Peripheral clock frequency (PCLK) is 320 MHz                         */
 #define TIMER120_PCLK_VARIABLE 0                     /*!< (unspecified)                                                        */
+#define TIMER120_SHUTDOWN_TASK 0                     /*!< (unspecified)                                                        */
 
 #define TIMER121_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER121_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
@@ -538,6 +558,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER121_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 #define TIMER121_PCLK_MHZ 320                        /*!< Peripheral clock frequency (PCLK) is 320 MHz                         */
 #define TIMER121_PCLK_VARIABLE 0                     /*!< (unspecified)                                                        */
+#define TIMER121_SHUTDOWN_TASK 0                     /*!< (unspecified)                                                        */
 
 #define TIMER130_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER130_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
@@ -547,6 +568,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER130_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 #define TIMER130_PCLK_MHZ 16                         /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER130_PCLK_VARIABLE 0                     /*!< (unspecified)                                                        */
+#define TIMER130_SHUTDOWN_TASK 0                     /*!< (unspecified)                                                        */
 
 #define TIMER131_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER131_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
@@ -556,6 +578,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER131_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 #define TIMER131_PCLK_MHZ 16                         /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER131_PCLK_VARIABLE 0                     /*!< (unspecified)                                                        */
+#define TIMER131_SHUTDOWN_TASK 0                     /*!< (unspecified)                                                        */
 
 #define TIMER132_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER132_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
@@ -565,6 +588,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER132_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 #define TIMER132_PCLK_MHZ 16                         /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER132_PCLK_VARIABLE 0                     /*!< (unspecified)                                                        */
+#define TIMER132_SHUTDOWN_TASK 0                     /*!< (unspecified)                                                        */
 
 #define TIMER133_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER133_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
@@ -574,6 +598,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER133_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 #define TIMER133_PCLK_MHZ 16                         /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER133_PCLK_VARIABLE 0                     /*!< (unspecified)                                                        */
+#define TIMER133_SHUTDOWN_TASK 0                     /*!< (unspecified)                                                        */
 
 #define TIMER134_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER134_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
@@ -583,6 +608,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER134_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 #define TIMER134_PCLK_MHZ 16                         /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER134_PCLK_VARIABLE 0                     /*!< (unspecified)                                                        */
+#define TIMER134_SHUTDOWN_TASK 0                     /*!< (unspecified)                                                        */
 
 #define TIMER135_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER135_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
@@ -592,6 +618,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER135_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 #define TIMER135_PCLK_MHZ 16                         /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER135_PCLK_VARIABLE 0                     /*!< (unspecified)                                                        */
+#define TIMER135_SHUTDOWN_TASK 0                     /*!< (unspecified)                                                        */
 
 #define TIMER136_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER136_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
@@ -601,6 +628,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER136_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 #define TIMER136_PCLK_MHZ 16                         /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER136_PCLK_VARIABLE 0                     /*!< (unspecified)                                                        */
+#define TIMER136_SHUTDOWN_TASK 0                     /*!< (unspecified)                                                        */
 
 #define TIMER137_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
 #define TIMER137_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
@@ -610,6 +638,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER137_MAX_SIZE_SIZE 32                    /*!< (unspecified)                                                        */
 #define TIMER137_PCLK_MHZ 16                         /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER137_PCLK_VARIABLE 0                     /*!< (unspecified)                                                        */
+#define TIMER137_SHUTDOWN_TASK 0                     /*!< (unspecified)                                                        */
 
 /*Pulse width modulation unit*/
 #define PWM_PRESENT 1
@@ -860,10 +889,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM120_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
 #define SPIM120_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM120_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
-#define SPIM120_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM120_STALL_STATUS_TX_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM120_HSSPI 0                              /*!< (unspecified)                                                        */
 #define SPIM120_HIGH_SPEED_DOMAIN 1                  /*!< (unspecified)                                                        */
-#define SPIM120_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM120_MULTIPLE_CHIPSELECT 0                /*!< (unspecified)                                                        */
 #define SPIM120_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM120_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM120_NUM_CHIPSELECT_SIZE 1                /*!< Peripheral supports 0..0 chip select signals.                        */
@@ -899,10 +928,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM121_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
 #define SPIM121_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM121_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
-#define SPIM121_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM121_STALL_STATUS_TX_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM121_HSSPI 0                              /*!< (unspecified)                                                        */
 #define SPIM121_HIGH_SPEED_DOMAIN 1                  /*!< (unspecified)                                                        */
-#define SPIM121_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM121_MULTIPLE_CHIPSELECT 0                /*!< (unspecified)                                                        */
 #define SPIM121_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM121_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM121_NUM_CHIPSELECT_SIZE 1                /*!< Peripheral supports 0..0 chip select signals.                        */
@@ -938,10 +967,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM130_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
 #define SPIM130_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM130_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
-#define SPIM130_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM130_STALL_STATUS_TX_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM130_HSSPI 0                              /*!< (unspecified)                                                        */
 #define SPIM130_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
-#define SPIM130_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM130_MULTIPLE_CHIPSELECT 0                /*!< (unspecified)                                                        */
 #define SPIM130_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM130_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM130_NUM_CHIPSELECT_SIZE 1                /*!< Peripheral supports 0..0 chip select signals.                        */
@@ -977,10 +1006,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM131_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
 #define SPIM131_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM131_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
-#define SPIM131_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM131_STALL_STATUS_TX_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM131_HSSPI 0                              /*!< (unspecified)                                                        */
 #define SPIM131_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
-#define SPIM131_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM131_MULTIPLE_CHIPSELECT 0                /*!< (unspecified)                                                        */
 #define SPIM131_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM131_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM131_NUM_CHIPSELECT_SIZE 1                /*!< Peripheral supports 0..0 chip select signals.                        */
@@ -1016,10 +1045,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM132_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
 #define SPIM132_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM132_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
-#define SPIM132_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM132_STALL_STATUS_TX_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM132_HSSPI 0                              /*!< (unspecified)                                                        */
 #define SPIM132_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
-#define SPIM132_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM132_MULTIPLE_CHIPSELECT 0                /*!< (unspecified)                                                        */
 #define SPIM132_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM132_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM132_NUM_CHIPSELECT_SIZE 1                /*!< Peripheral supports 0..0 chip select signals.                        */
@@ -1055,10 +1084,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM133_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
 #define SPIM133_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM133_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
-#define SPIM133_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM133_STALL_STATUS_TX_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM133_HSSPI 0                              /*!< (unspecified)                                                        */
 #define SPIM133_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
-#define SPIM133_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM133_MULTIPLE_CHIPSELECT 0                /*!< (unspecified)                                                        */
 #define SPIM133_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM133_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM133_NUM_CHIPSELECT_SIZE 1                /*!< Peripheral supports 0..0 chip select signals.                        */
@@ -1094,10 +1123,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM134_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
 #define SPIM134_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM134_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
-#define SPIM134_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM134_STALL_STATUS_TX_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM134_HSSPI 0                              /*!< (unspecified)                                                        */
 #define SPIM134_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
-#define SPIM134_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM134_MULTIPLE_CHIPSELECT 0                /*!< (unspecified)                                                        */
 #define SPIM134_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM134_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM134_NUM_CHIPSELECT_SIZE 1                /*!< Peripheral supports 0..0 chip select signals.                        */
@@ -1133,10 +1162,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM135_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
 #define SPIM135_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM135_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
-#define SPIM135_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM135_STALL_STATUS_TX_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM135_HSSPI 0                              /*!< (unspecified)                                                        */
 #define SPIM135_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
-#define SPIM135_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM135_MULTIPLE_CHIPSELECT 0                /*!< (unspecified)                                                        */
 #define SPIM135_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM135_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM135_NUM_CHIPSELECT_SIZE 1                /*!< Peripheral supports 0..0 chip select signals.                        */
@@ -1172,10 +1201,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM136_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
 #define SPIM136_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM136_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
-#define SPIM136_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM136_STALL_STATUS_TX_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM136_HSSPI 0                              /*!< (unspecified)                                                        */
 #define SPIM136_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
-#define SPIM136_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM136_MULTIPLE_CHIPSELECT 0                /*!< (unspecified)                                                        */
 #define SPIM136_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM136_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM136_NUM_CHIPSELECT_SIZE 1                /*!< Peripheral supports 0..0 chip select signals.                        */
@@ -1211,10 +1240,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM137_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
 #define SPIM137_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM137_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
-#define SPIM137_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM137_STALL_STATUS_TX_PRESENT 1            /*!< (unspecified)                                                        */
 #define SPIM137_HSSPI 0                              /*!< (unspecified)                                                        */
 #define SPIM137_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
-#define SPIM137_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM137_MULTIPLE_CHIPSELECT 0                /*!< (unspecified)                                                        */
 #define SPIM137_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM137_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
 #define SPIM137_NUM_CHIPSELECT_SIZE 1                /*!< Peripheral supports 0..0 chip select signals.                        */

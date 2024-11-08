@@ -15265,14 +15265,13 @@ typedef struct {
   * @brief DMU
   */
   typedef struct {                                   /*!< DMU Structure                                                        */
-    __IM uint32_t RESERVED[240];
-    __IM uint32_t DMUCR;                             /*!< (@ 0x000003C0) DMU Core Release                                      */
-    __IOM uint32_t DMUI;                             /*!< (@ 0x000003C4) DMU Internals                                         */
-    __IOM uint32_t DMUQC;                            /*!< (@ 0x000003C8) DMU Queueing Counter                                  */
-    __IOM uint32_t DMUIR;                            /*!< (@ 0x000003CC) DMU Interrupt Register                                */
-    __IOM uint32_t DMUIE;                            /*!< (@ 0x000003D0) DMU Interrupt Enable                                  */
-    __IOM uint32_t DMUC;                             /*!< (@ 0x000003D4) DMU Configuration                                     */
-  } NRF_DMU_Type;                                    /*!< Size = 984 (0x3D8)                                                   */
+    __IM uint32_t DMUCR;                             /*!< (@ 0x00000000) DMU Core Release                                      */
+    __IOM uint32_t DMUI;                             /*!< (@ 0x00000004) DMU Internals                                         */
+    __IOM uint32_t DMUQC;                            /*!< (@ 0x00000008) DMU Queueing Counter                                  */
+    __IOM uint32_t DMUIR;                            /*!< (@ 0x0000000C) DMU Interrupt Register                                */
+    __IOM uint32_t DMUIE;                            /*!< (@ 0x00000010) DMU Interrupt Enable                                  */
+    __IOM uint32_t DMUC;                             /*!< (@ 0x00000014) DMU Configuration                                     */
+  } NRF_DMU_Type;                                    /*!< Size = 24 (0x018)                                                    */
 
 /* DMU_DMUCR: DMU Core Release */
   #define DMU_DMUCR_ResetValue (0x00000000UL)        /*!< Reset value of DMUCR register.                                       */
@@ -24752,22 +24751,17 @@ typedef struct {
   typedef struct {                                   /*!< EXMIF Structure                                                      */
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start operation.                                      */
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop operation.                                       */
-    __IM uint32_t RESERVED[3];
-    __IOM uint32_t LOCKEDACCESS;                     /*!< (@ 0x00000014) Enable or disable locked APB access to serial memory
-                                                                         controller.*/
-    __IOM uint32_t PROGDELAY;                        /*!< (@ 0x00000018) Configures delay of the incoming data strobe.         */
-    __IOM uint32_t RESET;                            /*!< (@ 0x0000001C) Reset the external memory.                            */
-    __IM uint32_t RESERVED1[56];
+    __IM uint32_t RESERVED[62];
     __IOM uint32_t EVENTS_CORE;                      /*!< (@ 0x00000100) Event indicating that interrupt triggered at EXMIF
                                                                          core*/
     __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000104) Event indicating that the START task is completed and
                                                                          the EXMIF has started.*/
-    __IM uint32_t RESERVED2[126];
+    __IM uint32_t RESERVED1[126];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
     __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
     __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
     __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-    __IM uint32_t RESERVED3[60];
+    __IM uint32_t RESERVED2[60];
     #if defined(_GNUC_)
       #pragma GCC diagnostic push
       #pragma GCC diagnostic ignored "-Wpedantic"
@@ -24775,14 +24769,22 @@ typedef struct {
     union {
       __IOM NRF_EXMIF_EXTCONF1_Type EXTCONF1;        /*!< (@ 0x00000400) Configuration for external memory device 1.           */
       struct {
-        __IM uint32_t RESERVED4[2];
+        __IM uint32_t RESERVED3[2];
         __IOM NRF_EXMIF_EXTCONF2_Type EXTCONF2;      /*!< (@ 0x00000408) Configuration for external memory device 2.           */
       };
+      struct {
+      __IM uint32_t RESERVED4[5];
+        __IOM uint32_t LOCKEDACCESS;                 /*!< (@ 0x00000414) Enable or disable locked APB access to serial memory
+                                                                         controller.*/
+        __IOM uint32_t PROGDELAY;                    /*!< (@ 0x00000418) Configures delay of the incoming data strobe.         */
+        __IOM uint32_t RESET;                        /*!< (@ 0x0000041C) Reset the external memory.                            */
+      };
+      __IM uint32_t RESERVED5[9];
     };
     #if defined(_GNUC_)
       #pragma GCC diagnostic pop
     #endif
-    __IM uint32_t RESERVED5[55];
+    __IM uint32_t RESERVED6[55];
     __IOM NRF_EXMIF_CORE_Type CORE;                  /*!< (@ 0x00000500) (unspecified)                                         */
   } NRF_EXMIF_Type;                                  /*!< Size = 1612 (0x64C)                                                  */
 
@@ -24806,78 +24808,6 @@ typedef struct {
   #define EXMIF_TASKS_STOP_TASKS_STOP_Min (0x1UL)    /*!< Min enumerator value of TASKS_STOP field.                            */
   #define EXMIF_TASKS_STOP_TASKS_STOP_Max (0x1UL)    /*!< Max enumerator value of TASKS_STOP field.                            */
   #define EXMIF_TASKS_STOP_TASKS_STOP_Trigger (0x1UL) /*!< Trigger task                                                        */
-
-
-/* EXMIF_LOCKEDACCESS: Enable or disable locked APB access to serial memory controller. */
-  #define EXMIF_LOCKEDACCESS_ResetValue (0x00000000UL) /*!< Reset value of LOCKEDACCESS register.                              */
-
-/* ENABLE @Bit 0 : Enable or disable locked APB access to SSI. */
-  #define EXMIF_LOCKEDACCESS_ENABLE_Pos (0UL)        /*!< Position of ENABLE field.                                            */
-  #define EXMIF_LOCKEDACCESS_ENABLE_Msk (0x1UL << EXMIF_LOCKEDACCESS_ENABLE_Pos) /*!< Bit mask of ENABLE field.                */
-  #define EXMIF_LOCKEDACCESS_ENABLE_Min (0x0UL)      /*!< Min enumerator value of ENABLE field.                                */
-  #define EXMIF_LOCKEDACCESS_ENABLE_Max (0x1UL)      /*!< Max enumerator value of ENABLE field.                                */
-  #define EXMIF_LOCKEDACCESS_ENABLE_Disabled (0x0UL) /*!< Disable locked APB access.                                           */
-  #define EXMIF_LOCKEDACCESS_ENABLE_Enabled (0x1UL)  /*!< Enable locked APB access.                                            */
-
-
-/* EXMIF_PROGDELAY: Configures delay of the incoming data strobe. */
-  #define EXMIF_PROGDELAY_ResetValue (0x00000007UL)  /*!< Reset value of PROGDELAY register.                                   */
-
-/* DELAY @Bits 0..3 : Delay value. */
-  #define EXMIF_PROGDELAY_DELAY_Pos (0UL)            /*!< Position of DELAY field.                                             */
-  #define EXMIF_PROGDELAY_DELAY_Msk (0xFUL << EXMIF_PROGDELAY_DELAY_Pos) /*!< Bit mask of DELAY field.                         */
-  #define EXMIF_PROGDELAY_DELAY_Min (0x0UL)          /*!< Min value of DELAY field.                                            */
-  #define EXMIF_PROGDELAY_DELAY_Max (0xCUL)          /*!< Max size of DELAY field.                                             */
-  #define EXMIF_PROGDELAY_DELAY_NoDelay (0x0UL)      /*!< No delay.                                                            */
-  #define EXMIF_PROGDELAY_DELAY_Delay1 (0x1UL)       /*!< 1 delay element.                                                     */
-  #define EXMIF_PROGDELAY_DELAY_Delay2 (0x2UL)       /*!< 2 delay elements.                                                    */
-  #define EXMIF_PROGDELAY_DELAY_Delay3 (0x3UL)       /*!< 3 delay elements.                                                    */
-  #define EXMIF_PROGDELAY_DELAY_Delay4 (0x4UL)       /*!< 4 delay elements.                                                    */
-  #define EXMIF_PROGDELAY_DELAY_Delay5 (0x5UL)       /*!< 5 delay elements.                                                    */
-  #define EXMIF_PROGDELAY_DELAY_Delay6 (0x6UL)       /*!< 6 delay elements.                                                    */
-  #define EXMIF_PROGDELAY_DELAY_Delay7 (0x7UL)       /*!< 7 delay elements.                                                    */
-  #define EXMIF_PROGDELAY_DELAY_Delay8 (0x8UL)       /*!< 8 delay elements.                                                    */
-  #define EXMIF_PROGDELAY_DELAY_Delay9 (0x9UL)       /*!< 9 delay elements.                                                    */
-  #define EXMIF_PROGDELAY_DELAY_Delay10 (0xAUL)      /*!< 10 delay elements.                                                   */
-  #define EXMIF_PROGDELAY_DELAY_Delay11 (0xBUL)      /*!< 11 delay elements.                                                   */
-  #define EXMIF_PROGDELAY_DELAY_Delay12 (0xCUL)      /*!< 12 delay elements.                                                   */
-
-/* BYPASSDELAY @Bit 4 : Bypass delay calculated internally */
-  #define EXMIF_PROGDELAY_BYPASSDELAY_Pos (4UL)      /*!< Position of BYPASSDELAY field.                                       */
-  #define EXMIF_PROGDELAY_BYPASSDELAY_Msk (0x1UL << EXMIF_PROGDELAY_BYPASSDELAY_Pos) /*!< Bit mask of BYPASSDELAY field.       */
-  #define EXMIF_PROGDELAY_BYPASSDELAY_Min (0x0UL)    /*!< Min enumerator value of BYPASSDELAY field.                           */
-  #define EXMIF_PROGDELAY_BYPASSDELAY_Max (0x1UL)    /*!< Max enumerator value of BYPASSDELAY field.                           */
-  #define EXMIF_PROGDELAY_BYPASSDELAY_NotBypassed (0x0UL) /*!< Delay value calculated internally.                              */
-  #define EXMIF_PROGDELAY_BYPASSDELAY_Bypassed (0x1UL) /*!< Delay value used from the PROGDELAY register.                      */
-
-/* HOLD @Bit 5 : Hold the delay value */
-  #define EXMIF_PROGDELAY_HOLD_Pos (5UL)             /*!< Position of HOLD field.                                              */
-  #define EXMIF_PROGDELAY_HOLD_Msk (0x1UL << EXMIF_PROGDELAY_HOLD_Pos) /*!< Bit mask of HOLD field.                            */
-  #define EXMIF_PROGDELAY_HOLD_Min (0x0UL)           /*!< Min enumerator value of HOLD field.                                  */
-  #define EXMIF_PROGDELAY_HOLD_Max (0x1UL)           /*!< Max enumerator value of HOLD field.                                  */
-  #define EXMIF_PROGDELAY_HOLD_Disabled (0x0UL)      /*!< Outgoing delay setting is updated.                                   */
-  #define EXMIF_PROGDELAY_HOLD_Enabled (0x1UL)       /*!< Outgoing delay setting is not updated.                               */
-
-/* OFFSET @Bits 6..7 : Delay offset for automatic delay calculation */
-  #define EXMIF_PROGDELAY_OFFSET_Pos (6UL)           /*!< Position of OFFSET field.                                            */
-  #define EXMIF_PROGDELAY_OFFSET_Msk (0x3UL << EXMIF_PROGDELAY_OFFSET_Pos) /*!< Bit mask of OFFSET field.                      */
-  #define EXMIF_PROGDELAY_OFFSET_Min (0x0UL)         /*!< Min enumerator value of OFFSET field.                                */
-  #define EXMIF_PROGDELAY_OFFSET_Max (0x2UL)         /*!< Max enumerator value of OFFSET field.                                */
-  #define EXMIF_PROGDELAY_OFFSET_NoOffset (0x0UL)    /*!< No offset.                                                           */
-  #define EXMIF_PROGDELAY_OFFSET_OffsetPos1 (0x1UL)  /*!< Offset is +1.                                                        */
-  #define EXMIF_PROGDELAY_OFFSET_OffsetNeg1 (0x2UL)  /*!< Offset is -1.                                                        */
-
-
-/* EXMIF_RESET: Reset the external memory. */
-  #define EXMIF_RESET_ResetValue (0x00000000UL)      /*!< Reset value of RESET register.                                       */
-
-/* RESET @Bit 0 : (unspecified) */
-  #define EXMIF_RESET_RESET_Pos (0UL)                /*!< Position of RESET field.                                             */
-  #define EXMIF_RESET_RESET_Msk (0x1UL << EXMIF_RESET_RESET_Pos) /*!< Bit mask of RESET field.                                 */
-  #define EXMIF_RESET_RESET_Min (0x0UL)              /*!< Min enumerator value of RESET field.                                 */
-  #define EXMIF_RESET_RESET_Max (0x1UL)              /*!< Max enumerator value of RESET field.                                 */
-  #define EXMIF_RESET_RESET_Clear (0x0UL)            /*!< Reset is cleared.                                                    */
-  #define EXMIF_RESET_RESET_Set (0x1UL)              /*!< Reset is set.                                                        */
 
 
 /* EXMIF_EVENTS_CORE: Event indicating that interrupt triggered at EXMIF core */
@@ -24987,6 +24917,78 @@ typedef struct {
   #define EXMIF_INTPEND_STARTED_Max (0x1UL)          /*!< Max enumerator value of STARTED field.                               */
   #define EXMIF_INTPEND_STARTED_NotPending (0x0UL)   /*!< Read: Not pending                                                    */
   #define EXMIF_INTPEND_STARTED_Pending (0x1UL)      /*!< Read: Pending                                                        */
+
+
+/* EXMIF_LOCKEDACCESS: Enable or disable locked APB access to serial memory controller. */
+  #define EXMIF_LOCKEDACCESS_ResetValue (0x00000000UL) /*!< Reset value of LOCKEDACCESS register.                              */
+
+/* ENABLE @Bit 0 : Enable or disable locked APB access to SSI. */
+  #define EXMIF_LOCKEDACCESS_ENABLE_Pos (0UL)        /*!< Position of ENABLE field.                                            */
+  #define EXMIF_LOCKEDACCESS_ENABLE_Msk (0x1UL << EXMIF_LOCKEDACCESS_ENABLE_Pos) /*!< Bit mask of ENABLE field.                */
+  #define EXMIF_LOCKEDACCESS_ENABLE_Min (0x0UL)      /*!< Min enumerator value of ENABLE field.                                */
+  #define EXMIF_LOCKEDACCESS_ENABLE_Max (0x1UL)      /*!< Max enumerator value of ENABLE field.                                */
+  #define EXMIF_LOCKEDACCESS_ENABLE_Disabled (0x0UL) /*!< Disable locked APB access.                                           */
+  #define EXMIF_LOCKEDACCESS_ENABLE_Enabled (0x1UL)  /*!< Enable locked APB access.                                            */
+
+
+/* EXMIF_PROGDELAY: Configures delay of the incoming data strobe. */
+  #define EXMIF_PROGDELAY_ResetValue (0x00000007UL)  /*!< Reset value of PROGDELAY register.                                   */
+
+/* DELAY @Bits 0..3 : Delay value. */
+  #define EXMIF_PROGDELAY_DELAY_Pos (0UL)            /*!< Position of DELAY field.                                             */
+  #define EXMIF_PROGDELAY_DELAY_Msk (0xFUL << EXMIF_PROGDELAY_DELAY_Pos) /*!< Bit mask of DELAY field.                         */
+  #define EXMIF_PROGDELAY_DELAY_Min (0x0UL)          /*!< Min value of DELAY field.                                            */
+  #define EXMIF_PROGDELAY_DELAY_Max (0xCUL)          /*!< Max size of DELAY field.                                             */
+  #define EXMIF_PROGDELAY_DELAY_NoDelay (0x0UL)      /*!< No delay.                                                            */
+  #define EXMIF_PROGDELAY_DELAY_Delay1 (0x1UL)       /*!< 1 delay element.                                                     */
+  #define EXMIF_PROGDELAY_DELAY_Delay2 (0x2UL)       /*!< 2 delay elements.                                                    */
+  #define EXMIF_PROGDELAY_DELAY_Delay3 (0x3UL)       /*!< 3 delay elements.                                                    */
+  #define EXMIF_PROGDELAY_DELAY_Delay4 (0x4UL)       /*!< 4 delay elements.                                                    */
+  #define EXMIF_PROGDELAY_DELAY_Delay5 (0x5UL)       /*!< 5 delay elements.                                                    */
+  #define EXMIF_PROGDELAY_DELAY_Delay6 (0x6UL)       /*!< 6 delay elements.                                                    */
+  #define EXMIF_PROGDELAY_DELAY_Delay7 (0x7UL)       /*!< 7 delay elements.                                                    */
+  #define EXMIF_PROGDELAY_DELAY_Delay8 (0x8UL)       /*!< 8 delay elements.                                                    */
+  #define EXMIF_PROGDELAY_DELAY_Delay9 (0x9UL)       /*!< 9 delay elements.                                                    */
+  #define EXMIF_PROGDELAY_DELAY_Delay10 (0xAUL)      /*!< 10 delay elements.                                                   */
+  #define EXMIF_PROGDELAY_DELAY_Delay11 (0xBUL)      /*!< 11 delay elements.                                                   */
+  #define EXMIF_PROGDELAY_DELAY_Delay12 (0xCUL)      /*!< 12 delay elements.                                                   */
+
+/* BYPASSDELAY @Bit 4 : Bypass delay calculated internally */
+  #define EXMIF_PROGDELAY_BYPASSDELAY_Pos (4UL)      /*!< Position of BYPASSDELAY field.                                       */
+  #define EXMIF_PROGDELAY_BYPASSDELAY_Msk (0x1UL << EXMIF_PROGDELAY_BYPASSDELAY_Pos) /*!< Bit mask of BYPASSDELAY field.       */
+  #define EXMIF_PROGDELAY_BYPASSDELAY_Min (0x0UL)    /*!< Min enumerator value of BYPASSDELAY field.                           */
+  #define EXMIF_PROGDELAY_BYPASSDELAY_Max (0x1UL)    /*!< Max enumerator value of BYPASSDELAY field.                           */
+  #define EXMIF_PROGDELAY_BYPASSDELAY_NotBypassed (0x0UL) /*!< Delay value calculated internally.                              */
+  #define EXMIF_PROGDELAY_BYPASSDELAY_Bypassed (0x1UL) /*!< Delay value used from the PROGDELAY register.                      */
+
+/* HOLD @Bit 5 : Hold the delay value */
+  #define EXMIF_PROGDELAY_HOLD_Pos (5UL)             /*!< Position of HOLD field.                                              */
+  #define EXMIF_PROGDELAY_HOLD_Msk (0x1UL << EXMIF_PROGDELAY_HOLD_Pos) /*!< Bit mask of HOLD field.                            */
+  #define EXMIF_PROGDELAY_HOLD_Min (0x0UL)           /*!< Min enumerator value of HOLD field.                                  */
+  #define EXMIF_PROGDELAY_HOLD_Max (0x1UL)           /*!< Max enumerator value of HOLD field.                                  */
+  #define EXMIF_PROGDELAY_HOLD_Disabled (0x0UL)      /*!< Outgoing delay setting is updated.                                   */
+  #define EXMIF_PROGDELAY_HOLD_Enabled (0x1UL)       /*!< Outgoing delay setting is not updated.                               */
+
+/* OFFSET @Bits 6..7 : Delay offset for automatic delay calculation */
+  #define EXMIF_PROGDELAY_OFFSET_Pos (6UL)           /*!< Position of OFFSET field.                                            */
+  #define EXMIF_PROGDELAY_OFFSET_Msk (0x3UL << EXMIF_PROGDELAY_OFFSET_Pos) /*!< Bit mask of OFFSET field.                      */
+  #define EXMIF_PROGDELAY_OFFSET_Min (0x0UL)         /*!< Min enumerator value of OFFSET field.                                */
+  #define EXMIF_PROGDELAY_OFFSET_Max (0x2UL)         /*!< Max enumerator value of OFFSET field.                                */
+  #define EXMIF_PROGDELAY_OFFSET_NoOffset (0x0UL)    /*!< No offset.                                                           */
+  #define EXMIF_PROGDELAY_OFFSET_OffsetPos1 (0x1UL)  /*!< Offset is +1.                                                        */
+  #define EXMIF_PROGDELAY_OFFSET_OffsetNeg1 (0x2UL)  /*!< Offset is -1.                                                        */
+
+
+/* EXMIF_RESET: Reset the external memory. */
+  #define EXMIF_RESET_ResetValue (0x00000000UL)      /*!< Reset value of RESET register.                                       */
+
+/* RESET @Bit 0 : (unspecified) */
+  #define EXMIF_RESET_RESET_Pos (0UL)                /*!< Position of RESET field.                                             */
+  #define EXMIF_RESET_RESET_Msk (0x1UL << EXMIF_RESET_RESET_Pos) /*!< Bit mask of RESET field.                                 */
+  #define EXMIF_RESET_RESET_Min (0x0UL)              /*!< Min enumerator value of RESET field.                                 */
+  #define EXMIF_RESET_RESET_Max (0x1UL)              /*!< Max enumerator value of RESET field.                                 */
+  #define EXMIF_RESET_RESET_Clear (0x0UL)            /*!< Reset is cleared.                                                    */
+  #define EXMIF_RESET_RESET_Set (0x1UL)              /*!< Reset is set.                                                        */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -45686,9 +45688,9 @@ typedef struct {
                                                                          prevent going to sleep for index [n]*/
   __IM  uint32_t  RESERVED;
 } NRF_GRTC_SYSCOUNTER_Type;                          /*!< Size = 16 (0x010)                                                    */
-  #define GRTC_SYSCOUNTER_MaxCount (16UL)            /*!< Size of SYSCOUNTER[16] array.                                        */
-  #define GRTC_SYSCOUNTER_MaxIndex (15UL)            /*!< Max index of SYSCOUNTER[16] array.                                   */
-  #define GRTC_SYSCOUNTER_MinIndex (0UL)             /*!< Min index of SYSCOUNTER[16] array.                                   */
+  #define GRTC_SYSCOUNTER_MaxCount (11UL)            /*!< Size of SYSCOUNTER[11] array.                                        */
+  #define GRTC_SYSCOUNTER_MaxIndex (10UL)            /*!< Max index of SYSCOUNTER[11] array.                                   */
+  #define GRTC_SYSCOUNTER_MinIndex (0UL)             /*!< Min index of SYSCOUNTER[11] array.                                   */
 
 /* GRTC_SYSCOUNTER_SYSCOUNTERL: The lower 32-bits of the SYSCOUNTER for index [n] */
   #define GRTC_SYSCOUNTER_SYSCOUNTERL_ResetValue (0x00000000UL) /*!< Reset value of SYSCOUNTERL register.                      */
@@ -45756,7 +45758,8 @@ typedef struct {
     __IOM uint32_t EVENTS_COMPARE[16];               /*!< (@ 0x00000100) Compare event on CC[n] match                          */
     __IM uint32_t RESERVED3[8];
     __IOM uint32_t EVENTS_RTCOMPARE;                 /*!< (@ 0x00000160) Compare event on RTCOMPARE register match             */
-    __IOM uint32_t EVENTS_RTCOMPARESYNC;             /*!< (@ 0x00000164) Synchronize always-on LFCLK clock domain              */
+    __IOM uint32_t EVENTS_RTCOMPARESYNC;             /*!< (@ 0x00000164) The GRTC low frequency timer is synchronized with the
+                                                                         SYSCOUNTER*/
     __IOM uint32_t EVENTS_SYSCOUNTERVALID;           /*!< (@ 0x00000168) The SYSCOUNTER is in active state and value is valid  */
     __IOM uint32_t EVENTS_PWMPERIODEND;              /*!< (@ 0x0000016C) Event on end of each PWM period                       */
     __IM uint32_t RESERVED4[4];
@@ -45810,39 +45813,20 @@ typedef struct {
     __IOM uint32_t INTENSET10;                       /*!< (@ 0x000003A4) Enable interrupt                                      */
     __IOM uint32_t INTENCLR10;                       /*!< (@ 0x000003A8) Disable interrupt                                     */
     __IM uint32_t INTPEND10;                         /*!< (@ 0x000003AC) Pending interrupts                                    */
-    __IOM uint32_t INTEN11;                          /*!< (@ 0x000003B0) Enable or disable interrupt                           */
-    __IOM uint32_t INTENSET11;                       /*!< (@ 0x000003B4) Enable interrupt                                      */
-    __IOM uint32_t INTENCLR11;                       /*!< (@ 0x000003B8) Disable interrupt                                     */
-    __IM uint32_t INTPEND11;                         /*!< (@ 0x000003BC) Pending interrupts                                    */
-    __IOM uint32_t INTEN12;                          /*!< (@ 0x000003C0) Enable or disable interrupt                           */
-    __IOM uint32_t INTENSET12;                       /*!< (@ 0x000003C4) Enable interrupt                                      */
-    __IOM uint32_t INTENCLR12;                       /*!< (@ 0x000003C8) Disable interrupt                                     */
-    __IM uint32_t INTPEND12;                         /*!< (@ 0x000003CC) Pending interrupts                                    */
-    __IOM uint32_t INTEN13;                          /*!< (@ 0x000003D0) Enable or disable interrupt                           */
-    __IOM uint32_t INTENSET13;                       /*!< (@ 0x000003D4) Enable interrupt                                      */
-    __IOM uint32_t INTENCLR13;                       /*!< (@ 0x000003D8) Disable interrupt                                     */
-    __IM uint32_t INTPEND13;                         /*!< (@ 0x000003DC) Pending interrupts                                    */
-    __IOM uint32_t INTEN14;                          /*!< (@ 0x000003E0) Enable or disable interrupt                           */
-    __IOM uint32_t INTENSET14;                       /*!< (@ 0x000003E4) Enable interrupt                                      */
-    __IOM uint32_t INTENCLR14;                       /*!< (@ 0x000003E8) Disable interrupt                                     */
-    __IM uint32_t INTPEND14;                         /*!< (@ 0x000003EC) Pending interrupts                                    */
-    __IOM uint32_t INTEN15;                          /*!< (@ 0x000003F0) Enable or disable interrupt                           */
-    __IOM uint32_t INTENSET15;                       /*!< (@ 0x000003F4) Enable interrupt                                      */
-    __IOM uint32_t INTENCLR15;                       /*!< (@ 0x000003F8) Disable interrupt                                     */
-    __IM uint32_t INTPEND15;                         /*!< (@ 0x000003FC) Pending interrupts                                    */
+    __IM uint32_t RESERVED8[20];
     __IOM uint32_t EVTEN;                            /*!< (@ 0x00000400) Enable or disable event routing                       */
     __IOM uint32_t EVTENSET;                         /*!< (@ 0x00000404) Enable event routing                                  */
     __IOM uint32_t EVTENCLR;                         /*!< (@ 0x00000408) Disable event routing                                 */
-    __IM uint32_t RESERVED8[61];
+    __IM uint32_t RESERVED9[61];
     __IM uint32_t RTCOUNTERL;                        /*!< (@ 0x00000500) The lower 32-bits of the RTCOUNTER counter.           */
     __IM uint32_t RTCOUNTERH;                        /*!< (@ 0x00000504) The most significant bits of the RTCOUNTER counter.   */
-    __IM uint32_t RESERVED9[2];
+    __IM uint32_t RESERVED10[2];
     __IOM uint32_t MODE;                             /*!< (@ 0x00000510) Counter mode selection                                */
-    __IM uint32_t SYSCOUNTERL;                       /*!< (@ 0x00000514) The lower 32-bits of the SYSCOUNTER                   */
-    __IM uint32_t SYSCOUNTERH;                       /*!< (@ 0x00000518) The higher 20-bits of the SYSCOUNTER                  */
-    __IM uint32_t RESERVED10;
+    __IOM uint32_t SYSCOUNTERL;                      /*!< (@ 0x00000514) The lower 32-bits of the SYSCOUNTER                   */
+    __IOM uint32_t SYSCOUNTERH;                      /*!< (@ 0x00000518) The higher 20-bits of the SYSCOUNTER                  */
+    __IM uint32_t RESERVED11;
     __IOM NRF_GRTC_CC_Type CC[16];                   /*!< (@ 0x00000520) (unspecified)                                         */
-    __IM uint32_t RESERVED11[32];
+    __IM uint32_t RESERVED12[32];
     __IOM uint32_t KEEPRUNNING;                      /*!< (@ 0x000006A0) Request to keep the SYSCOUNTER in the active state and
                                                                          prevent going to sleep*/
     __IOM uint32_t TIMEOUT;                          /*!< (@ 0x000006A4) Timeout after all CPUs gone into sleep state to stop
@@ -45850,7 +45834,7 @@ typedef struct {
     __IOM uint32_t INTERVAL;                         /*!< (@ 0x000006A8) Count to add to CC[0] when the event EVENTS_COMPARE[0]
                                                                          triggers.*/
     __IOM uint32_t WAKETIME;                         /*!< (@ 0x000006AC) GRTC wake up time.                                    */
-    __IM uint32_t RESERVED12[20];
+    __IM uint32_t RESERVED13[20];
     __IOM uint32_t RTCOMPAREL;                       /*!< (@ 0x00000700) The lower 32-bits of the RTCOMPARE register.          */
     __IOM uint32_t RTCOMPAREH;                       /*!< (@ 0x00000704) The most significant bits of the RTCOMPARE register.  */
     __IOM uint32_t RTCOMPARESYNCL;                   /*!< (@ 0x00000708) The lower 32-bits of the RTCOMPARESYNC register.      */
@@ -45859,9 +45843,9 @@ typedef struct {
     __IOM uint32_t PWMCONFIG;                        /*!< (@ 0x00000710) PWM configuration.                                    */
     __IOM uint32_t CLKOUT;                           /*!< (@ 0x00000714) Configuration of clock output                         */
     __IOM uint32_t CLKCFG;                           /*!< (@ 0x00000718) Clock Configuration                                   */
-    __IM uint32_t RESERVED13;
-    __IOM NRF_GRTC_SYSCOUNTER_Type SYSCOUNTER[16];   /*!< (@ 0x00000720) (unspecified)                                         */
-  } NRF_GRTC_Type;                                   /*!< Size = 2080 (0x820)                                                  */
+    __IM uint32_t RESERVED14;
+    __IOM NRF_GRTC_SYSCOUNTER_Type SYSCOUNTER[11];   /*!< (@ 0x00000720) (unspecified)                                         */
+  } NRF_GRTC_Type;                                   /*!< Size = 2000 (0x7D0)                                                  */
 
 /* GRTC_TASKS_CAPTURE: Capture the counter value to CC[n] register */
   #define GRTC_TASKS_CAPTURE_MaxCount (16UL)         /*!< Max size of TASKS_CAPTURE[16] array.                                 */
@@ -45985,10 +45969,10 @@ typedef struct {
   #define GRTC_EVENTS_RTCOMPARE_EVENTS_RTCOMPARE_Generated (0x1UL) /*!< Event generated                                        */
 
 
-/* GRTC_EVENTS_RTCOMPARESYNC: Synchronize always-on LFCLK clock domain */
+/* GRTC_EVENTS_RTCOMPARESYNC: The GRTC low frequency timer is synchronized with the SYSCOUNTER */
   #define GRTC_EVENTS_RTCOMPARESYNC_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_RTCOMPARESYNC register.               */
 
-/* EVENTS_RTCOMPARESYNC @Bit 0 : Synchronize always-on LFCLK clock domain */
+/* EVENTS_RTCOMPARESYNC @Bit 0 : The GRTC low frequency timer is synchronized with the SYSCOUNTER */
   #define GRTC_EVENTS_RTCOMPARESYNC_EVENTS_RTCOMPARESYNC_Pos (0UL) /*!< Position of EVENTS_RTCOMPARESYNC field.                */
   #define GRTC_EVENTS_RTCOMPARESYNC_EVENTS_RTCOMPARESYNC_Msk (0x1UL << GRTC_EVENTS_RTCOMPARESYNC_EVENTS_RTCOMPARESYNC_Pos) /*!<
                                                                             Bit mask of EVENTS_RTCOMPARESYNC field.*/
@@ -53766,3501 +53750,6 @@ typedef struct {
   #define GRTC_INTPEND10_PWMPERIODEND_Pending (0x1UL) /*!< Read: Pending                                                       */
 
 
-/* GRTC_INTEN11: Enable or disable interrupt */
-  #define GRTC_INTEN11_ResetValue (0x00000000UL)     /*!< Reset value of INTEN11 register.                                     */
-
-/* COMPARE0 @Bit 0 : Enable or disable interrupt for event COMPARE[0] */
-  #define GRTC_INTEN11_COMPARE0_Pos (0UL)            /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTEN11_COMPARE0_Msk (0x1UL << GRTC_INTEN11_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                      */
-  #define GRTC_INTEN11_COMPARE0_Min (0x0UL)          /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTEN11_COMPARE0_Max (0x1UL)          /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTEN11_COMPARE0_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE0_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE1 @Bit 1 : Enable or disable interrupt for event COMPARE[1] */
-  #define GRTC_INTEN11_COMPARE1_Pos (1UL)            /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTEN11_COMPARE1_Msk (0x1UL << GRTC_INTEN11_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                      */
-  #define GRTC_INTEN11_COMPARE1_Min (0x0UL)          /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTEN11_COMPARE1_Max (0x1UL)          /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTEN11_COMPARE1_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE1_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE2 @Bit 2 : Enable or disable interrupt for event COMPARE[2] */
-  #define GRTC_INTEN11_COMPARE2_Pos (2UL)            /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTEN11_COMPARE2_Msk (0x1UL << GRTC_INTEN11_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                      */
-  #define GRTC_INTEN11_COMPARE2_Min (0x0UL)          /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTEN11_COMPARE2_Max (0x1UL)          /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTEN11_COMPARE2_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE2_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE3 @Bit 3 : Enable or disable interrupt for event COMPARE[3] */
-  #define GRTC_INTEN11_COMPARE3_Pos (3UL)            /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTEN11_COMPARE3_Msk (0x1UL << GRTC_INTEN11_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                      */
-  #define GRTC_INTEN11_COMPARE3_Min (0x0UL)          /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTEN11_COMPARE3_Max (0x1UL)          /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTEN11_COMPARE3_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE3_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE4 @Bit 4 : Enable or disable interrupt for event COMPARE[4] */
-  #define GRTC_INTEN11_COMPARE4_Pos (4UL)            /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTEN11_COMPARE4_Msk (0x1UL << GRTC_INTEN11_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                      */
-  #define GRTC_INTEN11_COMPARE4_Min (0x0UL)          /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTEN11_COMPARE4_Max (0x1UL)          /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTEN11_COMPARE4_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE4_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE5 @Bit 5 : Enable or disable interrupt for event COMPARE[5] */
-  #define GRTC_INTEN11_COMPARE5_Pos (5UL)            /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTEN11_COMPARE5_Msk (0x1UL << GRTC_INTEN11_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                      */
-  #define GRTC_INTEN11_COMPARE5_Min (0x0UL)          /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTEN11_COMPARE5_Max (0x1UL)          /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTEN11_COMPARE5_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE5_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE6 @Bit 6 : Enable or disable interrupt for event COMPARE[6] */
-  #define GRTC_INTEN11_COMPARE6_Pos (6UL)            /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTEN11_COMPARE6_Msk (0x1UL << GRTC_INTEN11_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                      */
-  #define GRTC_INTEN11_COMPARE6_Min (0x0UL)          /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTEN11_COMPARE6_Max (0x1UL)          /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTEN11_COMPARE6_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE6_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE7 @Bit 7 : Enable or disable interrupt for event COMPARE[7] */
-  #define GRTC_INTEN11_COMPARE7_Pos (7UL)            /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTEN11_COMPARE7_Msk (0x1UL << GRTC_INTEN11_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                      */
-  #define GRTC_INTEN11_COMPARE7_Min (0x0UL)          /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTEN11_COMPARE7_Max (0x1UL)          /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTEN11_COMPARE7_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE7_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE8 @Bit 8 : Enable or disable interrupt for event COMPARE[8] */
-  #define GRTC_INTEN11_COMPARE8_Pos (8UL)            /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTEN11_COMPARE8_Msk (0x1UL << GRTC_INTEN11_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                      */
-  #define GRTC_INTEN11_COMPARE8_Min (0x0UL)          /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTEN11_COMPARE8_Max (0x1UL)          /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTEN11_COMPARE8_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE8_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE9 @Bit 9 : Enable or disable interrupt for event COMPARE[9] */
-  #define GRTC_INTEN11_COMPARE9_Pos (9UL)            /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTEN11_COMPARE9_Msk (0x1UL << GRTC_INTEN11_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                      */
-  #define GRTC_INTEN11_COMPARE9_Min (0x0UL)          /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTEN11_COMPARE9_Max (0x1UL)          /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTEN11_COMPARE9_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE9_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE10 @Bit 10 : Enable or disable interrupt for event COMPARE[10] */
-  #define GRTC_INTEN11_COMPARE10_Pos (10UL)          /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTEN11_COMPARE10_Msk (0x1UL << GRTC_INTEN11_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.                   */
-  #define GRTC_INTEN11_COMPARE10_Min (0x0UL)         /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTEN11_COMPARE10_Max (0x1UL)         /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTEN11_COMPARE10_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE10_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE11 @Bit 11 : Enable or disable interrupt for event COMPARE[11] */
-  #define GRTC_INTEN11_COMPARE11_Pos (11UL)          /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTEN11_COMPARE11_Msk (0x1UL << GRTC_INTEN11_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.                   */
-  #define GRTC_INTEN11_COMPARE11_Min (0x0UL)         /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTEN11_COMPARE11_Max (0x1UL)         /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTEN11_COMPARE11_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE11_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE12 @Bit 12 : Enable or disable interrupt for event COMPARE[12] */
-  #define GRTC_INTEN11_COMPARE12_Pos (12UL)          /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTEN11_COMPARE12_Msk (0x1UL << GRTC_INTEN11_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.                   */
-  #define GRTC_INTEN11_COMPARE12_Min (0x0UL)         /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTEN11_COMPARE12_Max (0x1UL)         /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTEN11_COMPARE12_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE12_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE13 @Bit 13 : Enable or disable interrupt for event COMPARE[13] */
-  #define GRTC_INTEN11_COMPARE13_Pos (13UL)          /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTEN11_COMPARE13_Msk (0x1UL << GRTC_INTEN11_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.                   */
-  #define GRTC_INTEN11_COMPARE13_Min (0x0UL)         /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTEN11_COMPARE13_Max (0x1UL)         /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTEN11_COMPARE13_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE13_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE14 @Bit 14 : Enable or disable interrupt for event COMPARE[14] */
-  #define GRTC_INTEN11_COMPARE14_Pos (14UL)          /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTEN11_COMPARE14_Msk (0x1UL << GRTC_INTEN11_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.                   */
-  #define GRTC_INTEN11_COMPARE14_Min (0x0UL)         /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTEN11_COMPARE14_Max (0x1UL)         /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTEN11_COMPARE14_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE14_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE15 @Bit 15 : Enable or disable interrupt for event COMPARE[15] */
-  #define GRTC_INTEN11_COMPARE15_Pos (15UL)          /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTEN11_COMPARE15_Msk (0x1UL << GRTC_INTEN11_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.                   */
-  #define GRTC_INTEN11_COMPARE15_Min (0x0UL)         /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTEN11_COMPARE15_Max (0x1UL)         /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTEN11_COMPARE15_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN11_COMPARE15_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* RTCOMPARE @Bit 24 : Enable or disable interrupt for event RTCOMPARE */
-  #define GRTC_INTEN11_RTCOMPARE_Pos (24UL)          /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTEN11_RTCOMPARE_Msk (0x1UL << GRTC_INTEN11_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.                   */
-  #define GRTC_INTEN11_RTCOMPARE_Min (0x0UL)         /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTEN11_RTCOMPARE_Max (0x1UL)         /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTEN11_RTCOMPARE_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN11_RTCOMPARE_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* RTCOMPARESYNC @Bit 25 : Enable or disable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTEN11_RTCOMPARESYNC_Pos (25UL)      /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTEN11_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTEN11_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field.       */
-  #define GRTC_INTEN11_RTCOMPARESYNC_Min (0x0UL)     /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTEN11_RTCOMPARESYNC_Max (0x1UL)     /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTEN11_RTCOMPARESYNC_Disabled (0x0UL) /*!< Disable                                                             */
-  #define GRTC_INTEN11_RTCOMPARESYNC_Enabled (0x1UL) /*!< Enable                                                               */
-
-/* SYSCOUNTERVALID @Bit 26 : Enable or disable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTEN11_SYSCOUNTERVALID_Pos (26UL)    /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTEN11_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTEN11_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID field. */
-  #define GRTC_INTEN11_SYSCOUNTERVALID_Min (0x0UL)   /*!< Min enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTEN11_SYSCOUNTERVALID_Max (0x1UL)   /*!< Max enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTEN11_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Disable                                                           */
-  #define GRTC_INTEN11_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Enable                                                             */
-
-/* PWMPERIODEND @Bit 27 : Enable or disable interrupt for event PWMPERIODEND */
-  #define GRTC_INTEN11_PWMPERIODEND_Pos (27UL)       /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTEN11_PWMPERIODEND_Msk (0x1UL << GRTC_INTEN11_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.          */
-  #define GRTC_INTEN11_PWMPERIODEND_Min (0x0UL)      /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTEN11_PWMPERIODEND_Max (0x1UL)      /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTEN11_PWMPERIODEND_Disabled (0x0UL) /*!< Disable                                                              */
-  #define GRTC_INTEN11_PWMPERIODEND_Enabled (0x1UL)  /*!< Enable                                                               */
-
-
-/* GRTC_INTENSET11: Enable interrupt */
-  #define GRTC_INTENSET11_ResetValue (0x00000000UL)  /*!< Reset value of INTENSET11 register.                                  */
-
-/* COMPARE0 @Bit 0 : Write '1' to enable interrupt for event COMPARE[0] */
-  #define GRTC_INTENSET11_COMPARE0_Pos (0UL)         /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTENSET11_COMPARE0_Msk (0x1UL << GRTC_INTENSET11_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                */
-  #define GRTC_INTENSET11_COMPARE0_Min (0x0UL)       /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENSET11_COMPARE0_Max (0x1UL)       /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENSET11_COMPARE0_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE0_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE0_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE1 @Bit 1 : Write '1' to enable interrupt for event COMPARE[1] */
-  #define GRTC_INTENSET11_COMPARE1_Pos (1UL)         /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTENSET11_COMPARE1_Msk (0x1UL << GRTC_INTENSET11_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                */
-  #define GRTC_INTENSET11_COMPARE1_Min (0x0UL)       /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENSET11_COMPARE1_Max (0x1UL)       /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENSET11_COMPARE1_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE1_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE1_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE2 @Bit 2 : Write '1' to enable interrupt for event COMPARE[2] */
-  #define GRTC_INTENSET11_COMPARE2_Pos (2UL)         /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTENSET11_COMPARE2_Msk (0x1UL << GRTC_INTENSET11_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                */
-  #define GRTC_INTENSET11_COMPARE2_Min (0x0UL)       /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENSET11_COMPARE2_Max (0x1UL)       /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENSET11_COMPARE2_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE2_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE2_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE3 @Bit 3 : Write '1' to enable interrupt for event COMPARE[3] */
-  #define GRTC_INTENSET11_COMPARE3_Pos (3UL)         /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTENSET11_COMPARE3_Msk (0x1UL << GRTC_INTENSET11_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                */
-  #define GRTC_INTENSET11_COMPARE3_Min (0x0UL)       /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENSET11_COMPARE3_Max (0x1UL)       /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENSET11_COMPARE3_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE3_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE3_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE4 @Bit 4 : Write '1' to enable interrupt for event COMPARE[4] */
-  #define GRTC_INTENSET11_COMPARE4_Pos (4UL)         /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTENSET11_COMPARE4_Msk (0x1UL << GRTC_INTENSET11_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                */
-  #define GRTC_INTENSET11_COMPARE4_Min (0x0UL)       /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENSET11_COMPARE4_Max (0x1UL)       /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENSET11_COMPARE4_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE4_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE4_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE5 @Bit 5 : Write '1' to enable interrupt for event COMPARE[5] */
-  #define GRTC_INTENSET11_COMPARE5_Pos (5UL)         /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTENSET11_COMPARE5_Msk (0x1UL << GRTC_INTENSET11_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                */
-  #define GRTC_INTENSET11_COMPARE5_Min (0x0UL)       /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENSET11_COMPARE5_Max (0x1UL)       /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENSET11_COMPARE5_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE5_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE5_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE6 @Bit 6 : Write '1' to enable interrupt for event COMPARE[6] */
-  #define GRTC_INTENSET11_COMPARE6_Pos (6UL)         /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTENSET11_COMPARE6_Msk (0x1UL << GRTC_INTENSET11_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                */
-  #define GRTC_INTENSET11_COMPARE6_Min (0x0UL)       /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENSET11_COMPARE6_Max (0x1UL)       /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENSET11_COMPARE6_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE6_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE6_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE7 @Bit 7 : Write '1' to enable interrupt for event COMPARE[7] */
-  #define GRTC_INTENSET11_COMPARE7_Pos (7UL)         /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTENSET11_COMPARE7_Msk (0x1UL << GRTC_INTENSET11_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                */
-  #define GRTC_INTENSET11_COMPARE7_Min (0x0UL)       /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENSET11_COMPARE7_Max (0x1UL)       /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENSET11_COMPARE7_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE7_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE7_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE8 @Bit 8 : Write '1' to enable interrupt for event COMPARE[8] */
-  #define GRTC_INTENSET11_COMPARE8_Pos (8UL)         /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTENSET11_COMPARE8_Msk (0x1UL << GRTC_INTENSET11_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                */
-  #define GRTC_INTENSET11_COMPARE8_Min (0x0UL)       /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENSET11_COMPARE8_Max (0x1UL)       /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENSET11_COMPARE8_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE8_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE8_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE9 @Bit 9 : Write '1' to enable interrupt for event COMPARE[9] */
-  #define GRTC_INTENSET11_COMPARE9_Pos (9UL)         /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTENSET11_COMPARE9_Msk (0x1UL << GRTC_INTENSET11_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                */
-  #define GRTC_INTENSET11_COMPARE9_Min (0x0UL)       /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENSET11_COMPARE9_Max (0x1UL)       /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENSET11_COMPARE9_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE9_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE9_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE10 @Bit 10 : Write '1' to enable interrupt for event COMPARE[10] */
-  #define GRTC_INTENSET11_COMPARE10_Pos (10UL)       /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTENSET11_COMPARE10_Msk (0x1UL << GRTC_INTENSET11_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.             */
-  #define GRTC_INTENSET11_COMPARE10_Min (0x0UL)      /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENSET11_COMPARE10_Max (0x1UL)      /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENSET11_COMPARE10_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE10_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE10_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE11 @Bit 11 : Write '1' to enable interrupt for event COMPARE[11] */
-  #define GRTC_INTENSET11_COMPARE11_Pos (11UL)       /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTENSET11_COMPARE11_Msk (0x1UL << GRTC_INTENSET11_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.             */
-  #define GRTC_INTENSET11_COMPARE11_Min (0x0UL)      /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENSET11_COMPARE11_Max (0x1UL)      /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENSET11_COMPARE11_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE11_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE11_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE12 @Bit 12 : Write '1' to enable interrupt for event COMPARE[12] */
-  #define GRTC_INTENSET11_COMPARE12_Pos (12UL)       /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTENSET11_COMPARE12_Msk (0x1UL << GRTC_INTENSET11_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.             */
-  #define GRTC_INTENSET11_COMPARE12_Min (0x0UL)      /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENSET11_COMPARE12_Max (0x1UL)      /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENSET11_COMPARE12_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE12_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE12_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE13 @Bit 13 : Write '1' to enable interrupt for event COMPARE[13] */
-  #define GRTC_INTENSET11_COMPARE13_Pos (13UL)       /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTENSET11_COMPARE13_Msk (0x1UL << GRTC_INTENSET11_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.             */
-  #define GRTC_INTENSET11_COMPARE13_Min (0x0UL)      /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENSET11_COMPARE13_Max (0x1UL)      /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENSET11_COMPARE13_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE13_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE13_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE14 @Bit 14 : Write '1' to enable interrupt for event COMPARE[14] */
-  #define GRTC_INTENSET11_COMPARE14_Pos (14UL)       /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTENSET11_COMPARE14_Msk (0x1UL << GRTC_INTENSET11_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.             */
-  #define GRTC_INTENSET11_COMPARE14_Min (0x0UL)      /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENSET11_COMPARE14_Max (0x1UL)      /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENSET11_COMPARE14_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE14_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE14_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE15 @Bit 15 : Write '1' to enable interrupt for event COMPARE[15] */
-  #define GRTC_INTENSET11_COMPARE15_Pos (15UL)       /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTENSET11_COMPARE15_Msk (0x1UL << GRTC_INTENSET11_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.             */
-  #define GRTC_INTENSET11_COMPARE15_Min (0x0UL)      /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENSET11_COMPARE15_Max (0x1UL)      /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENSET11_COMPARE15_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET11_COMPARE15_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_COMPARE15_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARE @Bit 24 : Write '1' to enable interrupt for event RTCOMPARE */
-  #define GRTC_INTENSET11_RTCOMPARE_Pos (24UL)       /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTENSET11_RTCOMPARE_Msk (0x1UL << GRTC_INTENSET11_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.             */
-  #define GRTC_INTENSET11_RTCOMPARE_Min (0x0UL)      /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENSET11_RTCOMPARE_Max (0x1UL)      /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENSET11_RTCOMPARE_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET11_RTCOMPARE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET11_RTCOMPARE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Write '1' to enable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTENSET11_RTCOMPARESYNC_Pos (25UL)   /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTENSET11_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTENSET11_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field. */
-  #define GRTC_INTENSET11_RTCOMPARESYNC_Min (0x0UL)  /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENSET11_RTCOMPARESYNC_Max (0x1UL)  /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENSET11_RTCOMPARESYNC_Set (0x1UL)  /*!< Enable                                                               */
-  #define GRTC_INTENSET11_RTCOMPARESYNC_Disabled (0x0UL) /*!< Read: Disabled                                                   */
-  #define GRTC_INTENSET11_RTCOMPARESYNC_Enabled (0x1UL) /*!< Read: Enabled                                                     */
-
-/* SYSCOUNTERVALID @Bit 26 : Write '1' to enable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTENSET11_SYSCOUNTERVALID_Pos (26UL) /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTENSET11_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTENSET11_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTENSET11_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENSET11_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENSET11_SYSCOUNTERVALID_Set (0x1UL) /*!< Enable                                                              */
-  #define GRTC_INTENSET11_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-  #define GRTC_INTENSET11_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-/* PWMPERIODEND @Bit 27 : Write '1' to enable interrupt for event PWMPERIODEND */
-  #define GRTC_INTENSET11_PWMPERIODEND_Pos (27UL)    /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTENSET11_PWMPERIODEND_Msk (0x1UL << GRTC_INTENSET11_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.    */
-  #define GRTC_INTENSET11_PWMPERIODEND_Min (0x0UL)   /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENSET11_PWMPERIODEND_Max (0x1UL)   /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENSET11_PWMPERIODEND_Set (0x1UL)   /*!< Enable                                                               */
-  #define GRTC_INTENSET11_PWMPERIODEND_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-  #define GRTC_INTENSET11_PWMPERIODEND_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-
-/* GRTC_INTENCLR11: Disable interrupt */
-  #define GRTC_INTENCLR11_ResetValue (0x00000000UL)  /*!< Reset value of INTENCLR11 register.                                  */
-
-/* COMPARE0 @Bit 0 : Write '1' to disable interrupt for event COMPARE[0] */
-  #define GRTC_INTENCLR11_COMPARE0_Pos (0UL)         /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTENCLR11_COMPARE0_Msk (0x1UL << GRTC_INTENCLR11_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                */
-  #define GRTC_INTENCLR11_COMPARE0_Min (0x0UL)       /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENCLR11_COMPARE0_Max (0x1UL)       /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENCLR11_COMPARE0_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE0_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE0_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE1 @Bit 1 : Write '1' to disable interrupt for event COMPARE[1] */
-  #define GRTC_INTENCLR11_COMPARE1_Pos (1UL)         /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTENCLR11_COMPARE1_Msk (0x1UL << GRTC_INTENCLR11_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                */
-  #define GRTC_INTENCLR11_COMPARE1_Min (0x0UL)       /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENCLR11_COMPARE1_Max (0x1UL)       /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENCLR11_COMPARE1_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE1_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE1_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE2 @Bit 2 : Write '1' to disable interrupt for event COMPARE[2] */
-  #define GRTC_INTENCLR11_COMPARE2_Pos (2UL)         /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTENCLR11_COMPARE2_Msk (0x1UL << GRTC_INTENCLR11_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                */
-  #define GRTC_INTENCLR11_COMPARE2_Min (0x0UL)       /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENCLR11_COMPARE2_Max (0x1UL)       /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENCLR11_COMPARE2_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE2_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE2_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE3 @Bit 3 : Write '1' to disable interrupt for event COMPARE[3] */
-  #define GRTC_INTENCLR11_COMPARE3_Pos (3UL)         /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTENCLR11_COMPARE3_Msk (0x1UL << GRTC_INTENCLR11_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                */
-  #define GRTC_INTENCLR11_COMPARE3_Min (0x0UL)       /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENCLR11_COMPARE3_Max (0x1UL)       /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENCLR11_COMPARE3_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE3_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE3_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE4 @Bit 4 : Write '1' to disable interrupt for event COMPARE[4] */
-  #define GRTC_INTENCLR11_COMPARE4_Pos (4UL)         /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTENCLR11_COMPARE4_Msk (0x1UL << GRTC_INTENCLR11_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                */
-  #define GRTC_INTENCLR11_COMPARE4_Min (0x0UL)       /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENCLR11_COMPARE4_Max (0x1UL)       /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENCLR11_COMPARE4_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE4_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE4_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE5 @Bit 5 : Write '1' to disable interrupt for event COMPARE[5] */
-  #define GRTC_INTENCLR11_COMPARE5_Pos (5UL)         /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTENCLR11_COMPARE5_Msk (0x1UL << GRTC_INTENCLR11_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                */
-  #define GRTC_INTENCLR11_COMPARE5_Min (0x0UL)       /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENCLR11_COMPARE5_Max (0x1UL)       /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENCLR11_COMPARE5_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE5_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE5_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE6 @Bit 6 : Write '1' to disable interrupt for event COMPARE[6] */
-  #define GRTC_INTENCLR11_COMPARE6_Pos (6UL)         /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTENCLR11_COMPARE6_Msk (0x1UL << GRTC_INTENCLR11_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                */
-  #define GRTC_INTENCLR11_COMPARE6_Min (0x0UL)       /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENCLR11_COMPARE6_Max (0x1UL)       /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENCLR11_COMPARE6_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE6_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE6_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE7 @Bit 7 : Write '1' to disable interrupt for event COMPARE[7] */
-  #define GRTC_INTENCLR11_COMPARE7_Pos (7UL)         /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTENCLR11_COMPARE7_Msk (0x1UL << GRTC_INTENCLR11_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                */
-  #define GRTC_INTENCLR11_COMPARE7_Min (0x0UL)       /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENCLR11_COMPARE7_Max (0x1UL)       /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENCLR11_COMPARE7_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE7_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE7_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE8 @Bit 8 : Write '1' to disable interrupt for event COMPARE[8] */
-  #define GRTC_INTENCLR11_COMPARE8_Pos (8UL)         /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTENCLR11_COMPARE8_Msk (0x1UL << GRTC_INTENCLR11_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                */
-  #define GRTC_INTENCLR11_COMPARE8_Min (0x0UL)       /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENCLR11_COMPARE8_Max (0x1UL)       /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENCLR11_COMPARE8_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE8_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE8_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE9 @Bit 9 : Write '1' to disable interrupt for event COMPARE[9] */
-  #define GRTC_INTENCLR11_COMPARE9_Pos (9UL)         /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTENCLR11_COMPARE9_Msk (0x1UL << GRTC_INTENCLR11_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                */
-  #define GRTC_INTENCLR11_COMPARE9_Min (0x0UL)       /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENCLR11_COMPARE9_Max (0x1UL)       /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENCLR11_COMPARE9_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE9_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE9_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE10 @Bit 10 : Write '1' to disable interrupt for event COMPARE[10] */
-  #define GRTC_INTENCLR11_COMPARE10_Pos (10UL)       /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTENCLR11_COMPARE10_Msk (0x1UL << GRTC_INTENCLR11_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.             */
-  #define GRTC_INTENCLR11_COMPARE10_Min (0x0UL)      /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENCLR11_COMPARE10_Max (0x1UL)      /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENCLR11_COMPARE10_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE10_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE10_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE11 @Bit 11 : Write '1' to disable interrupt for event COMPARE[11] */
-  #define GRTC_INTENCLR11_COMPARE11_Pos (11UL)       /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTENCLR11_COMPARE11_Msk (0x1UL << GRTC_INTENCLR11_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.             */
-  #define GRTC_INTENCLR11_COMPARE11_Min (0x0UL)      /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENCLR11_COMPARE11_Max (0x1UL)      /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENCLR11_COMPARE11_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE11_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE11_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE12 @Bit 12 : Write '1' to disable interrupt for event COMPARE[12] */
-  #define GRTC_INTENCLR11_COMPARE12_Pos (12UL)       /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTENCLR11_COMPARE12_Msk (0x1UL << GRTC_INTENCLR11_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.             */
-  #define GRTC_INTENCLR11_COMPARE12_Min (0x0UL)      /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENCLR11_COMPARE12_Max (0x1UL)      /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENCLR11_COMPARE12_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE12_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE12_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE13 @Bit 13 : Write '1' to disable interrupt for event COMPARE[13] */
-  #define GRTC_INTENCLR11_COMPARE13_Pos (13UL)       /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTENCLR11_COMPARE13_Msk (0x1UL << GRTC_INTENCLR11_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.             */
-  #define GRTC_INTENCLR11_COMPARE13_Min (0x0UL)      /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENCLR11_COMPARE13_Max (0x1UL)      /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENCLR11_COMPARE13_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE13_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE13_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE14 @Bit 14 : Write '1' to disable interrupt for event COMPARE[14] */
-  #define GRTC_INTENCLR11_COMPARE14_Pos (14UL)       /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTENCLR11_COMPARE14_Msk (0x1UL << GRTC_INTENCLR11_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.             */
-  #define GRTC_INTENCLR11_COMPARE14_Min (0x0UL)      /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENCLR11_COMPARE14_Max (0x1UL)      /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENCLR11_COMPARE14_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE14_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE14_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE15 @Bit 15 : Write '1' to disable interrupt for event COMPARE[15] */
-  #define GRTC_INTENCLR11_COMPARE15_Pos (15UL)       /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTENCLR11_COMPARE15_Msk (0x1UL << GRTC_INTENCLR11_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.             */
-  #define GRTC_INTENCLR11_COMPARE15_Min (0x0UL)      /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENCLR11_COMPARE15_Max (0x1UL)      /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENCLR11_COMPARE15_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_COMPARE15_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_COMPARE15_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARE @Bit 24 : Write '1' to disable interrupt for event RTCOMPARE */
-  #define GRTC_INTENCLR11_RTCOMPARE_Pos (24UL)       /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTENCLR11_RTCOMPARE_Msk (0x1UL << GRTC_INTENCLR11_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.             */
-  #define GRTC_INTENCLR11_RTCOMPARE_Min (0x0UL)      /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENCLR11_RTCOMPARE_Max (0x1UL)      /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENCLR11_RTCOMPARE_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_RTCOMPARE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR11_RTCOMPARE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Write '1' to disable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTENCLR11_RTCOMPARESYNC_Pos (25UL)   /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTENCLR11_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTENCLR11_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field. */
-  #define GRTC_INTENCLR11_RTCOMPARESYNC_Min (0x0UL)  /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENCLR11_RTCOMPARESYNC_Max (0x1UL)  /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENCLR11_RTCOMPARESYNC_Clear (0x1UL) /*!< Disable                                                             */
-  #define GRTC_INTENCLR11_RTCOMPARESYNC_Disabled (0x0UL) /*!< Read: Disabled                                                   */
-  #define GRTC_INTENCLR11_RTCOMPARESYNC_Enabled (0x1UL) /*!< Read: Enabled                                                     */
-
-/* SYSCOUNTERVALID @Bit 26 : Write '1' to disable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTENCLR11_SYSCOUNTERVALID_Pos (26UL) /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTENCLR11_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTENCLR11_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTENCLR11_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENCLR11_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENCLR11_SYSCOUNTERVALID_Clear (0x1UL) /*!< Disable                                                           */
-  #define GRTC_INTENCLR11_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-  #define GRTC_INTENCLR11_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-/* PWMPERIODEND @Bit 27 : Write '1' to disable interrupt for event PWMPERIODEND */
-  #define GRTC_INTENCLR11_PWMPERIODEND_Pos (27UL)    /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTENCLR11_PWMPERIODEND_Msk (0x1UL << GRTC_INTENCLR11_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.    */
-  #define GRTC_INTENCLR11_PWMPERIODEND_Min (0x0UL)   /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENCLR11_PWMPERIODEND_Max (0x1UL)   /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENCLR11_PWMPERIODEND_Clear (0x1UL) /*!< Disable                                                              */
-  #define GRTC_INTENCLR11_PWMPERIODEND_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-  #define GRTC_INTENCLR11_PWMPERIODEND_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-
-/* GRTC_INTPEND11: Pending interrupts */
-  #define GRTC_INTPEND11_ResetValue (0x00000000UL)   /*!< Reset value of INTPEND11 register.                                   */
-
-/* COMPARE0 @Bit 0 : Read pending status of interrupt for event COMPARE[0] */
-  #define GRTC_INTPEND11_COMPARE0_Pos (0UL)          /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTPEND11_COMPARE0_Msk (0x1UL << GRTC_INTPEND11_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                  */
-  #define GRTC_INTPEND11_COMPARE0_Min (0x0UL)        /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTPEND11_COMPARE0_Max (0x1UL)        /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTPEND11_COMPARE0_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND11_COMPARE0_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE1 @Bit 1 : Read pending status of interrupt for event COMPARE[1] */
-  #define GRTC_INTPEND11_COMPARE1_Pos (1UL)          /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTPEND11_COMPARE1_Msk (0x1UL << GRTC_INTPEND11_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                  */
-  #define GRTC_INTPEND11_COMPARE1_Min (0x0UL)        /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTPEND11_COMPARE1_Max (0x1UL)        /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTPEND11_COMPARE1_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND11_COMPARE1_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE2 @Bit 2 : Read pending status of interrupt for event COMPARE[2] */
-  #define GRTC_INTPEND11_COMPARE2_Pos (2UL)          /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTPEND11_COMPARE2_Msk (0x1UL << GRTC_INTPEND11_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                  */
-  #define GRTC_INTPEND11_COMPARE2_Min (0x0UL)        /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTPEND11_COMPARE2_Max (0x1UL)        /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTPEND11_COMPARE2_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND11_COMPARE2_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE3 @Bit 3 : Read pending status of interrupt for event COMPARE[3] */
-  #define GRTC_INTPEND11_COMPARE3_Pos (3UL)          /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTPEND11_COMPARE3_Msk (0x1UL << GRTC_INTPEND11_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                  */
-  #define GRTC_INTPEND11_COMPARE3_Min (0x0UL)        /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTPEND11_COMPARE3_Max (0x1UL)        /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTPEND11_COMPARE3_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND11_COMPARE3_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE4 @Bit 4 : Read pending status of interrupt for event COMPARE[4] */
-  #define GRTC_INTPEND11_COMPARE4_Pos (4UL)          /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTPEND11_COMPARE4_Msk (0x1UL << GRTC_INTPEND11_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                  */
-  #define GRTC_INTPEND11_COMPARE4_Min (0x0UL)        /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTPEND11_COMPARE4_Max (0x1UL)        /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTPEND11_COMPARE4_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND11_COMPARE4_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE5 @Bit 5 : Read pending status of interrupt for event COMPARE[5] */
-  #define GRTC_INTPEND11_COMPARE5_Pos (5UL)          /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTPEND11_COMPARE5_Msk (0x1UL << GRTC_INTPEND11_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                  */
-  #define GRTC_INTPEND11_COMPARE5_Min (0x0UL)        /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTPEND11_COMPARE5_Max (0x1UL)        /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTPEND11_COMPARE5_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND11_COMPARE5_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE6 @Bit 6 : Read pending status of interrupt for event COMPARE[6] */
-  #define GRTC_INTPEND11_COMPARE6_Pos (6UL)          /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTPEND11_COMPARE6_Msk (0x1UL << GRTC_INTPEND11_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                  */
-  #define GRTC_INTPEND11_COMPARE6_Min (0x0UL)        /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTPEND11_COMPARE6_Max (0x1UL)        /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTPEND11_COMPARE6_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND11_COMPARE6_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE7 @Bit 7 : Read pending status of interrupt for event COMPARE[7] */
-  #define GRTC_INTPEND11_COMPARE7_Pos (7UL)          /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTPEND11_COMPARE7_Msk (0x1UL << GRTC_INTPEND11_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                  */
-  #define GRTC_INTPEND11_COMPARE7_Min (0x0UL)        /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTPEND11_COMPARE7_Max (0x1UL)        /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTPEND11_COMPARE7_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND11_COMPARE7_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE8 @Bit 8 : Read pending status of interrupt for event COMPARE[8] */
-  #define GRTC_INTPEND11_COMPARE8_Pos (8UL)          /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTPEND11_COMPARE8_Msk (0x1UL << GRTC_INTPEND11_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                  */
-  #define GRTC_INTPEND11_COMPARE8_Min (0x0UL)        /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTPEND11_COMPARE8_Max (0x1UL)        /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTPEND11_COMPARE8_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND11_COMPARE8_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE9 @Bit 9 : Read pending status of interrupt for event COMPARE[9] */
-  #define GRTC_INTPEND11_COMPARE9_Pos (9UL)          /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTPEND11_COMPARE9_Msk (0x1UL << GRTC_INTPEND11_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                  */
-  #define GRTC_INTPEND11_COMPARE9_Min (0x0UL)        /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTPEND11_COMPARE9_Max (0x1UL)        /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTPEND11_COMPARE9_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND11_COMPARE9_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE10 @Bit 10 : Read pending status of interrupt for event COMPARE[10] */
-  #define GRTC_INTPEND11_COMPARE10_Pos (10UL)        /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTPEND11_COMPARE10_Msk (0x1UL << GRTC_INTPEND11_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.               */
-  #define GRTC_INTPEND11_COMPARE10_Min (0x0UL)       /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTPEND11_COMPARE10_Max (0x1UL)       /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTPEND11_COMPARE10_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND11_COMPARE10_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE11 @Bit 11 : Read pending status of interrupt for event COMPARE[11] */
-  #define GRTC_INTPEND11_COMPARE11_Pos (11UL)        /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTPEND11_COMPARE11_Msk (0x1UL << GRTC_INTPEND11_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.               */
-  #define GRTC_INTPEND11_COMPARE11_Min (0x0UL)       /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTPEND11_COMPARE11_Max (0x1UL)       /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTPEND11_COMPARE11_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND11_COMPARE11_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE12 @Bit 12 : Read pending status of interrupt for event COMPARE[12] */
-  #define GRTC_INTPEND11_COMPARE12_Pos (12UL)        /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTPEND11_COMPARE12_Msk (0x1UL << GRTC_INTPEND11_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.               */
-  #define GRTC_INTPEND11_COMPARE12_Min (0x0UL)       /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTPEND11_COMPARE12_Max (0x1UL)       /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTPEND11_COMPARE12_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND11_COMPARE12_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE13 @Bit 13 : Read pending status of interrupt for event COMPARE[13] */
-  #define GRTC_INTPEND11_COMPARE13_Pos (13UL)        /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTPEND11_COMPARE13_Msk (0x1UL << GRTC_INTPEND11_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.               */
-  #define GRTC_INTPEND11_COMPARE13_Min (0x0UL)       /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTPEND11_COMPARE13_Max (0x1UL)       /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTPEND11_COMPARE13_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND11_COMPARE13_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE14 @Bit 14 : Read pending status of interrupt for event COMPARE[14] */
-  #define GRTC_INTPEND11_COMPARE14_Pos (14UL)        /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTPEND11_COMPARE14_Msk (0x1UL << GRTC_INTPEND11_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.               */
-  #define GRTC_INTPEND11_COMPARE14_Min (0x0UL)       /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTPEND11_COMPARE14_Max (0x1UL)       /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTPEND11_COMPARE14_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND11_COMPARE14_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE15 @Bit 15 : Read pending status of interrupt for event COMPARE[15] */
-  #define GRTC_INTPEND11_COMPARE15_Pos (15UL)        /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTPEND11_COMPARE15_Msk (0x1UL << GRTC_INTPEND11_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.               */
-  #define GRTC_INTPEND11_COMPARE15_Min (0x0UL)       /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTPEND11_COMPARE15_Max (0x1UL)       /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTPEND11_COMPARE15_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND11_COMPARE15_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* RTCOMPARE @Bit 24 : Read pending status of interrupt for event RTCOMPARE */
-  #define GRTC_INTPEND11_RTCOMPARE_Pos (24UL)        /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTPEND11_RTCOMPARE_Msk (0x1UL << GRTC_INTPEND11_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.               */
-  #define GRTC_INTPEND11_RTCOMPARE_Min (0x0UL)       /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTPEND11_RTCOMPARE_Max (0x1UL)       /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTPEND11_RTCOMPARE_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND11_RTCOMPARE_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Read pending status of interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTPEND11_RTCOMPARESYNC_Pos (25UL)    /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTPEND11_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTPEND11_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field.   */
-  #define GRTC_INTPEND11_RTCOMPARESYNC_Min (0x0UL)   /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTPEND11_RTCOMPARESYNC_Max (0x1UL)   /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTPEND11_RTCOMPARESYNC_NotPending (0x0UL) /*!< Read: Not pending                                               */
-  #define GRTC_INTPEND11_RTCOMPARESYNC_Pending (0x1UL) /*!< Read: Pending                                                      */
-
-/* SYSCOUNTERVALID @Bit 26 : Read pending status of interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTPEND11_SYSCOUNTERVALID_Pos (26UL)  /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTPEND11_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTPEND11_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTPEND11_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTPEND11_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTPEND11_SYSCOUNTERVALID_NotPending (0x0UL) /*!< Read: Not pending                                             */
-  #define GRTC_INTPEND11_SYSCOUNTERVALID_Pending (0x1UL) /*!< Read: Pending                                                    */
-
-/* PWMPERIODEND @Bit 27 : Read pending status of interrupt for event PWMPERIODEND */
-  #define GRTC_INTPEND11_PWMPERIODEND_Pos (27UL)     /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTPEND11_PWMPERIODEND_Msk (0x1UL << GRTC_INTPEND11_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.      */
-  #define GRTC_INTPEND11_PWMPERIODEND_Min (0x0UL)    /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTPEND11_PWMPERIODEND_Max (0x1UL)    /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTPEND11_PWMPERIODEND_NotPending (0x0UL) /*!< Read: Not pending                                                */
-  #define GRTC_INTPEND11_PWMPERIODEND_Pending (0x1UL) /*!< Read: Pending                                                       */
-
-
-/* GRTC_INTEN12: Enable or disable interrupt */
-  #define GRTC_INTEN12_ResetValue (0x00000000UL)     /*!< Reset value of INTEN12 register.                                     */
-
-/* COMPARE0 @Bit 0 : Enable or disable interrupt for event COMPARE[0] */
-  #define GRTC_INTEN12_COMPARE0_Pos (0UL)            /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTEN12_COMPARE0_Msk (0x1UL << GRTC_INTEN12_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                      */
-  #define GRTC_INTEN12_COMPARE0_Min (0x0UL)          /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTEN12_COMPARE0_Max (0x1UL)          /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTEN12_COMPARE0_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE0_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE1 @Bit 1 : Enable or disable interrupt for event COMPARE[1] */
-  #define GRTC_INTEN12_COMPARE1_Pos (1UL)            /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTEN12_COMPARE1_Msk (0x1UL << GRTC_INTEN12_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                      */
-  #define GRTC_INTEN12_COMPARE1_Min (0x0UL)          /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTEN12_COMPARE1_Max (0x1UL)          /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTEN12_COMPARE1_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE1_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE2 @Bit 2 : Enable or disable interrupt for event COMPARE[2] */
-  #define GRTC_INTEN12_COMPARE2_Pos (2UL)            /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTEN12_COMPARE2_Msk (0x1UL << GRTC_INTEN12_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                      */
-  #define GRTC_INTEN12_COMPARE2_Min (0x0UL)          /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTEN12_COMPARE2_Max (0x1UL)          /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTEN12_COMPARE2_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE2_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE3 @Bit 3 : Enable or disable interrupt for event COMPARE[3] */
-  #define GRTC_INTEN12_COMPARE3_Pos (3UL)            /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTEN12_COMPARE3_Msk (0x1UL << GRTC_INTEN12_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                      */
-  #define GRTC_INTEN12_COMPARE3_Min (0x0UL)          /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTEN12_COMPARE3_Max (0x1UL)          /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTEN12_COMPARE3_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE3_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE4 @Bit 4 : Enable or disable interrupt for event COMPARE[4] */
-  #define GRTC_INTEN12_COMPARE4_Pos (4UL)            /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTEN12_COMPARE4_Msk (0x1UL << GRTC_INTEN12_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                      */
-  #define GRTC_INTEN12_COMPARE4_Min (0x0UL)          /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTEN12_COMPARE4_Max (0x1UL)          /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTEN12_COMPARE4_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE4_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE5 @Bit 5 : Enable or disable interrupt for event COMPARE[5] */
-  #define GRTC_INTEN12_COMPARE5_Pos (5UL)            /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTEN12_COMPARE5_Msk (0x1UL << GRTC_INTEN12_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                      */
-  #define GRTC_INTEN12_COMPARE5_Min (0x0UL)          /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTEN12_COMPARE5_Max (0x1UL)          /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTEN12_COMPARE5_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE5_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE6 @Bit 6 : Enable or disable interrupt for event COMPARE[6] */
-  #define GRTC_INTEN12_COMPARE6_Pos (6UL)            /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTEN12_COMPARE6_Msk (0x1UL << GRTC_INTEN12_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                      */
-  #define GRTC_INTEN12_COMPARE6_Min (0x0UL)          /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTEN12_COMPARE6_Max (0x1UL)          /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTEN12_COMPARE6_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE6_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE7 @Bit 7 : Enable or disable interrupt for event COMPARE[7] */
-  #define GRTC_INTEN12_COMPARE7_Pos (7UL)            /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTEN12_COMPARE7_Msk (0x1UL << GRTC_INTEN12_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                      */
-  #define GRTC_INTEN12_COMPARE7_Min (0x0UL)          /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTEN12_COMPARE7_Max (0x1UL)          /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTEN12_COMPARE7_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE7_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE8 @Bit 8 : Enable or disable interrupt for event COMPARE[8] */
-  #define GRTC_INTEN12_COMPARE8_Pos (8UL)            /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTEN12_COMPARE8_Msk (0x1UL << GRTC_INTEN12_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                      */
-  #define GRTC_INTEN12_COMPARE8_Min (0x0UL)          /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTEN12_COMPARE8_Max (0x1UL)          /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTEN12_COMPARE8_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE8_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE9 @Bit 9 : Enable or disable interrupt for event COMPARE[9] */
-  #define GRTC_INTEN12_COMPARE9_Pos (9UL)            /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTEN12_COMPARE9_Msk (0x1UL << GRTC_INTEN12_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                      */
-  #define GRTC_INTEN12_COMPARE9_Min (0x0UL)          /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTEN12_COMPARE9_Max (0x1UL)          /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTEN12_COMPARE9_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE9_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE10 @Bit 10 : Enable or disable interrupt for event COMPARE[10] */
-  #define GRTC_INTEN12_COMPARE10_Pos (10UL)          /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTEN12_COMPARE10_Msk (0x1UL << GRTC_INTEN12_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.                   */
-  #define GRTC_INTEN12_COMPARE10_Min (0x0UL)         /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTEN12_COMPARE10_Max (0x1UL)         /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTEN12_COMPARE10_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE10_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE11 @Bit 11 : Enable or disable interrupt for event COMPARE[11] */
-  #define GRTC_INTEN12_COMPARE11_Pos (11UL)          /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTEN12_COMPARE11_Msk (0x1UL << GRTC_INTEN12_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.                   */
-  #define GRTC_INTEN12_COMPARE11_Min (0x0UL)         /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTEN12_COMPARE11_Max (0x1UL)         /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTEN12_COMPARE11_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE11_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE12 @Bit 12 : Enable or disable interrupt for event COMPARE[12] */
-  #define GRTC_INTEN12_COMPARE12_Pos (12UL)          /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTEN12_COMPARE12_Msk (0x1UL << GRTC_INTEN12_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.                   */
-  #define GRTC_INTEN12_COMPARE12_Min (0x0UL)         /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTEN12_COMPARE12_Max (0x1UL)         /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTEN12_COMPARE12_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE12_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE13 @Bit 13 : Enable or disable interrupt for event COMPARE[13] */
-  #define GRTC_INTEN12_COMPARE13_Pos (13UL)          /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTEN12_COMPARE13_Msk (0x1UL << GRTC_INTEN12_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.                   */
-  #define GRTC_INTEN12_COMPARE13_Min (0x0UL)         /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTEN12_COMPARE13_Max (0x1UL)         /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTEN12_COMPARE13_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE13_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE14 @Bit 14 : Enable or disable interrupt for event COMPARE[14] */
-  #define GRTC_INTEN12_COMPARE14_Pos (14UL)          /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTEN12_COMPARE14_Msk (0x1UL << GRTC_INTEN12_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.                   */
-  #define GRTC_INTEN12_COMPARE14_Min (0x0UL)         /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTEN12_COMPARE14_Max (0x1UL)         /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTEN12_COMPARE14_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE14_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE15 @Bit 15 : Enable or disable interrupt for event COMPARE[15] */
-  #define GRTC_INTEN12_COMPARE15_Pos (15UL)          /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTEN12_COMPARE15_Msk (0x1UL << GRTC_INTEN12_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.                   */
-  #define GRTC_INTEN12_COMPARE15_Min (0x0UL)         /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTEN12_COMPARE15_Max (0x1UL)         /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTEN12_COMPARE15_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN12_COMPARE15_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* RTCOMPARE @Bit 24 : Enable or disable interrupt for event RTCOMPARE */
-  #define GRTC_INTEN12_RTCOMPARE_Pos (24UL)          /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTEN12_RTCOMPARE_Msk (0x1UL << GRTC_INTEN12_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.                   */
-  #define GRTC_INTEN12_RTCOMPARE_Min (0x0UL)         /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTEN12_RTCOMPARE_Max (0x1UL)         /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTEN12_RTCOMPARE_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN12_RTCOMPARE_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* RTCOMPARESYNC @Bit 25 : Enable or disable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTEN12_RTCOMPARESYNC_Pos (25UL)      /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTEN12_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTEN12_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field.       */
-  #define GRTC_INTEN12_RTCOMPARESYNC_Min (0x0UL)     /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTEN12_RTCOMPARESYNC_Max (0x1UL)     /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTEN12_RTCOMPARESYNC_Disabled (0x0UL) /*!< Disable                                                             */
-  #define GRTC_INTEN12_RTCOMPARESYNC_Enabled (0x1UL) /*!< Enable                                                               */
-
-/* SYSCOUNTERVALID @Bit 26 : Enable or disable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTEN12_SYSCOUNTERVALID_Pos (26UL)    /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTEN12_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTEN12_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID field. */
-  #define GRTC_INTEN12_SYSCOUNTERVALID_Min (0x0UL)   /*!< Min enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTEN12_SYSCOUNTERVALID_Max (0x1UL)   /*!< Max enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTEN12_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Disable                                                           */
-  #define GRTC_INTEN12_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Enable                                                             */
-
-/* PWMPERIODEND @Bit 27 : Enable or disable interrupt for event PWMPERIODEND */
-  #define GRTC_INTEN12_PWMPERIODEND_Pos (27UL)       /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTEN12_PWMPERIODEND_Msk (0x1UL << GRTC_INTEN12_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.          */
-  #define GRTC_INTEN12_PWMPERIODEND_Min (0x0UL)      /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTEN12_PWMPERIODEND_Max (0x1UL)      /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTEN12_PWMPERIODEND_Disabled (0x0UL) /*!< Disable                                                              */
-  #define GRTC_INTEN12_PWMPERIODEND_Enabled (0x1UL)  /*!< Enable                                                               */
-
-
-/* GRTC_INTENSET12: Enable interrupt */
-  #define GRTC_INTENSET12_ResetValue (0x00000000UL)  /*!< Reset value of INTENSET12 register.                                  */
-
-/* COMPARE0 @Bit 0 : Write '1' to enable interrupt for event COMPARE[0] */
-  #define GRTC_INTENSET12_COMPARE0_Pos (0UL)         /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTENSET12_COMPARE0_Msk (0x1UL << GRTC_INTENSET12_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                */
-  #define GRTC_INTENSET12_COMPARE0_Min (0x0UL)       /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENSET12_COMPARE0_Max (0x1UL)       /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENSET12_COMPARE0_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE0_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE0_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE1 @Bit 1 : Write '1' to enable interrupt for event COMPARE[1] */
-  #define GRTC_INTENSET12_COMPARE1_Pos (1UL)         /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTENSET12_COMPARE1_Msk (0x1UL << GRTC_INTENSET12_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                */
-  #define GRTC_INTENSET12_COMPARE1_Min (0x0UL)       /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENSET12_COMPARE1_Max (0x1UL)       /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENSET12_COMPARE1_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE1_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE1_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE2 @Bit 2 : Write '1' to enable interrupt for event COMPARE[2] */
-  #define GRTC_INTENSET12_COMPARE2_Pos (2UL)         /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTENSET12_COMPARE2_Msk (0x1UL << GRTC_INTENSET12_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                */
-  #define GRTC_INTENSET12_COMPARE2_Min (0x0UL)       /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENSET12_COMPARE2_Max (0x1UL)       /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENSET12_COMPARE2_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE2_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE2_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE3 @Bit 3 : Write '1' to enable interrupt for event COMPARE[3] */
-  #define GRTC_INTENSET12_COMPARE3_Pos (3UL)         /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTENSET12_COMPARE3_Msk (0x1UL << GRTC_INTENSET12_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                */
-  #define GRTC_INTENSET12_COMPARE3_Min (0x0UL)       /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENSET12_COMPARE3_Max (0x1UL)       /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENSET12_COMPARE3_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE3_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE3_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE4 @Bit 4 : Write '1' to enable interrupt for event COMPARE[4] */
-  #define GRTC_INTENSET12_COMPARE4_Pos (4UL)         /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTENSET12_COMPARE4_Msk (0x1UL << GRTC_INTENSET12_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                */
-  #define GRTC_INTENSET12_COMPARE4_Min (0x0UL)       /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENSET12_COMPARE4_Max (0x1UL)       /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENSET12_COMPARE4_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE4_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE4_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE5 @Bit 5 : Write '1' to enable interrupt for event COMPARE[5] */
-  #define GRTC_INTENSET12_COMPARE5_Pos (5UL)         /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTENSET12_COMPARE5_Msk (0x1UL << GRTC_INTENSET12_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                */
-  #define GRTC_INTENSET12_COMPARE5_Min (0x0UL)       /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENSET12_COMPARE5_Max (0x1UL)       /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENSET12_COMPARE5_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE5_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE5_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE6 @Bit 6 : Write '1' to enable interrupt for event COMPARE[6] */
-  #define GRTC_INTENSET12_COMPARE6_Pos (6UL)         /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTENSET12_COMPARE6_Msk (0x1UL << GRTC_INTENSET12_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                */
-  #define GRTC_INTENSET12_COMPARE6_Min (0x0UL)       /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENSET12_COMPARE6_Max (0x1UL)       /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENSET12_COMPARE6_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE6_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE6_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE7 @Bit 7 : Write '1' to enable interrupt for event COMPARE[7] */
-  #define GRTC_INTENSET12_COMPARE7_Pos (7UL)         /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTENSET12_COMPARE7_Msk (0x1UL << GRTC_INTENSET12_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                */
-  #define GRTC_INTENSET12_COMPARE7_Min (0x0UL)       /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENSET12_COMPARE7_Max (0x1UL)       /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENSET12_COMPARE7_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE7_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE7_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE8 @Bit 8 : Write '1' to enable interrupt for event COMPARE[8] */
-  #define GRTC_INTENSET12_COMPARE8_Pos (8UL)         /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTENSET12_COMPARE8_Msk (0x1UL << GRTC_INTENSET12_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                */
-  #define GRTC_INTENSET12_COMPARE8_Min (0x0UL)       /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENSET12_COMPARE8_Max (0x1UL)       /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENSET12_COMPARE8_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE8_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE8_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE9 @Bit 9 : Write '1' to enable interrupt for event COMPARE[9] */
-  #define GRTC_INTENSET12_COMPARE9_Pos (9UL)         /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTENSET12_COMPARE9_Msk (0x1UL << GRTC_INTENSET12_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                */
-  #define GRTC_INTENSET12_COMPARE9_Min (0x0UL)       /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENSET12_COMPARE9_Max (0x1UL)       /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENSET12_COMPARE9_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE9_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE9_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE10 @Bit 10 : Write '1' to enable interrupt for event COMPARE[10] */
-  #define GRTC_INTENSET12_COMPARE10_Pos (10UL)       /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTENSET12_COMPARE10_Msk (0x1UL << GRTC_INTENSET12_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.             */
-  #define GRTC_INTENSET12_COMPARE10_Min (0x0UL)      /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENSET12_COMPARE10_Max (0x1UL)      /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENSET12_COMPARE10_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE10_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE10_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE11 @Bit 11 : Write '1' to enable interrupt for event COMPARE[11] */
-  #define GRTC_INTENSET12_COMPARE11_Pos (11UL)       /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTENSET12_COMPARE11_Msk (0x1UL << GRTC_INTENSET12_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.             */
-  #define GRTC_INTENSET12_COMPARE11_Min (0x0UL)      /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENSET12_COMPARE11_Max (0x1UL)      /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENSET12_COMPARE11_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE11_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE11_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE12 @Bit 12 : Write '1' to enable interrupt for event COMPARE[12] */
-  #define GRTC_INTENSET12_COMPARE12_Pos (12UL)       /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTENSET12_COMPARE12_Msk (0x1UL << GRTC_INTENSET12_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.             */
-  #define GRTC_INTENSET12_COMPARE12_Min (0x0UL)      /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENSET12_COMPARE12_Max (0x1UL)      /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENSET12_COMPARE12_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE12_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE12_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE13 @Bit 13 : Write '1' to enable interrupt for event COMPARE[13] */
-  #define GRTC_INTENSET12_COMPARE13_Pos (13UL)       /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTENSET12_COMPARE13_Msk (0x1UL << GRTC_INTENSET12_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.             */
-  #define GRTC_INTENSET12_COMPARE13_Min (0x0UL)      /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENSET12_COMPARE13_Max (0x1UL)      /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENSET12_COMPARE13_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE13_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE13_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE14 @Bit 14 : Write '1' to enable interrupt for event COMPARE[14] */
-  #define GRTC_INTENSET12_COMPARE14_Pos (14UL)       /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTENSET12_COMPARE14_Msk (0x1UL << GRTC_INTENSET12_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.             */
-  #define GRTC_INTENSET12_COMPARE14_Min (0x0UL)      /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENSET12_COMPARE14_Max (0x1UL)      /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENSET12_COMPARE14_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE14_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE14_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE15 @Bit 15 : Write '1' to enable interrupt for event COMPARE[15] */
-  #define GRTC_INTENSET12_COMPARE15_Pos (15UL)       /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTENSET12_COMPARE15_Msk (0x1UL << GRTC_INTENSET12_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.             */
-  #define GRTC_INTENSET12_COMPARE15_Min (0x0UL)      /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENSET12_COMPARE15_Max (0x1UL)      /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENSET12_COMPARE15_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET12_COMPARE15_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_COMPARE15_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARE @Bit 24 : Write '1' to enable interrupt for event RTCOMPARE */
-  #define GRTC_INTENSET12_RTCOMPARE_Pos (24UL)       /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTENSET12_RTCOMPARE_Msk (0x1UL << GRTC_INTENSET12_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.             */
-  #define GRTC_INTENSET12_RTCOMPARE_Min (0x0UL)      /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENSET12_RTCOMPARE_Max (0x1UL)      /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENSET12_RTCOMPARE_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET12_RTCOMPARE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET12_RTCOMPARE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Write '1' to enable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTENSET12_RTCOMPARESYNC_Pos (25UL)   /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTENSET12_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTENSET12_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field. */
-  #define GRTC_INTENSET12_RTCOMPARESYNC_Min (0x0UL)  /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENSET12_RTCOMPARESYNC_Max (0x1UL)  /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENSET12_RTCOMPARESYNC_Set (0x1UL)  /*!< Enable                                                               */
-  #define GRTC_INTENSET12_RTCOMPARESYNC_Disabled (0x0UL) /*!< Read: Disabled                                                   */
-  #define GRTC_INTENSET12_RTCOMPARESYNC_Enabled (0x1UL) /*!< Read: Enabled                                                     */
-
-/* SYSCOUNTERVALID @Bit 26 : Write '1' to enable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTENSET12_SYSCOUNTERVALID_Pos (26UL) /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTENSET12_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTENSET12_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTENSET12_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENSET12_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENSET12_SYSCOUNTERVALID_Set (0x1UL) /*!< Enable                                                              */
-  #define GRTC_INTENSET12_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-  #define GRTC_INTENSET12_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-/* PWMPERIODEND @Bit 27 : Write '1' to enable interrupt for event PWMPERIODEND */
-  #define GRTC_INTENSET12_PWMPERIODEND_Pos (27UL)    /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTENSET12_PWMPERIODEND_Msk (0x1UL << GRTC_INTENSET12_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.    */
-  #define GRTC_INTENSET12_PWMPERIODEND_Min (0x0UL)   /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENSET12_PWMPERIODEND_Max (0x1UL)   /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENSET12_PWMPERIODEND_Set (0x1UL)   /*!< Enable                                                               */
-  #define GRTC_INTENSET12_PWMPERIODEND_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-  #define GRTC_INTENSET12_PWMPERIODEND_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-
-/* GRTC_INTENCLR12: Disable interrupt */
-  #define GRTC_INTENCLR12_ResetValue (0x00000000UL)  /*!< Reset value of INTENCLR12 register.                                  */
-
-/* COMPARE0 @Bit 0 : Write '1' to disable interrupt for event COMPARE[0] */
-  #define GRTC_INTENCLR12_COMPARE0_Pos (0UL)         /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTENCLR12_COMPARE0_Msk (0x1UL << GRTC_INTENCLR12_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                */
-  #define GRTC_INTENCLR12_COMPARE0_Min (0x0UL)       /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENCLR12_COMPARE0_Max (0x1UL)       /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENCLR12_COMPARE0_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE0_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE0_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE1 @Bit 1 : Write '1' to disable interrupt for event COMPARE[1] */
-  #define GRTC_INTENCLR12_COMPARE1_Pos (1UL)         /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTENCLR12_COMPARE1_Msk (0x1UL << GRTC_INTENCLR12_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                */
-  #define GRTC_INTENCLR12_COMPARE1_Min (0x0UL)       /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENCLR12_COMPARE1_Max (0x1UL)       /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENCLR12_COMPARE1_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE1_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE1_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE2 @Bit 2 : Write '1' to disable interrupt for event COMPARE[2] */
-  #define GRTC_INTENCLR12_COMPARE2_Pos (2UL)         /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTENCLR12_COMPARE2_Msk (0x1UL << GRTC_INTENCLR12_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                */
-  #define GRTC_INTENCLR12_COMPARE2_Min (0x0UL)       /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENCLR12_COMPARE2_Max (0x1UL)       /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENCLR12_COMPARE2_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE2_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE2_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE3 @Bit 3 : Write '1' to disable interrupt for event COMPARE[3] */
-  #define GRTC_INTENCLR12_COMPARE3_Pos (3UL)         /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTENCLR12_COMPARE3_Msk (0x1UL << GRTC_INTENCLR12_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                */
-  #define GRTC_INTENCLR12_COMPARE3_Min (0x0UL)       /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENCLR12_COMPARE3_Max (0x1UL)       /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENCLR12_COMPARE3_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE3_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE3_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE4 @Bit 4 : Write '1' to disable interrupt for event COMPARE[4] */
-  #define GRTC_INTENCLR12_COMPARE4_Pos (4UL)         /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTENCLR12_COMPARE4_Msk (0x1UL << GRTC_INTENCLR12_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                */
-  #define GRTC_INTENCLR12_COMPARE4_Min (0x0UL)       /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENCLR12_COMPARE4_Max (0x1UL)       /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENCLR12_COMPARE4_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE4_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE4_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE5 @Bit 5 : Write '1' to disable interrupt for event COMPARE[5] */
-  #define GRTC_INTENCLR12_COMPARE5_Pos (5UL)         /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTENCLR12_COMPARE5_Msk (0x1UL << GRTC_INTENCLR12_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                */
-  #define GRTC_INTENCLR12_COMPARE5_Min (0x0UL)       /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENCLR12_COMPARE5_Max (0x1UL)       /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENCLR12_COMPARE5_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE5_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE5_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE6 @Bit 6 : Write '1' to disable interrupt for event COMPARE[6] */
-  #define GRTC_INTENCLR12_COMPARE6_Pos (6UL)         /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTENCLR12_COMPARE6_Msk (0x1UL << GRTC_INTENCLR12_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                */
-  #define GRTC_INTENCLR12_COMPARE6_Min (0x0UL)       /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENCLR12_COMPARE6_Max (0x1UL)       /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENCLR12_COMPARE6_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE6_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE6_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE7 @Bit 7 : Write '1' to disable interrupt for event COMPARE[7] */
-  #define GRTC_INTENCLR12_COMPARE7_Pos (7UL)         /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTENCLR12_COMPARE7_Msk (0x1UL << GRTC_INTENCLR12_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                */
-  #define GRTC_INTENCLR12_COMPARE7_Min (0x0UL)       /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENCLR12_COMPARE7_Max (0x1UL)       /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENCLR12_COMPARE7_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE7_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE7_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE8 @Bit 8 : Write '1' to disable interrupt for event COMPARE[8] */
-  #define GRTC_INTENCLR12_COMPARE8_Pos (8UL)         /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTENCLR12_COMPARE8_Msk (0x1UL << GRTC_INTENCLR12_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                */
-  #define GRTC_INTENCLR12_COMPARE8_Min (0x0UL)       /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENCLR12_COMPARE8_Max (0x1UL)       /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENCLR12_COMPARE8_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE8_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE8_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE9 @Bit 9 : Write '1' to disable interrupt for event COMPARE[9] */
-  #define GRTC_INTENCLR12_COMPARE9_Pos (9UL)         /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTENCLR12_COMPARE9_Msk (0x1UL << GRTC_INTENCLR12_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                */
-  #define GRTC_INTENCLR12_COMPARE9_Min (0x0UL)       /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENCLR12_COMPARE9_Max (0x1UL)       /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENCLR12_COMPARE9_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE9_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE9_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE10 @Bit 10 : Write '1' to disable interrupt for event COMPARE[10] */
-  #define GRTC_INTENCLR12_COMPARE10_Pos (10UL)       /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTENCLR12_COMPARE10_Msk (0x1UL << GRTC_INTENCLR12_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.             */
-  #define GRTC_INTENCLR12_COMPARE10_Min (0x0UL)      /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENCLR12_COMPARE10_Max (0x1UL)      /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENCLR12_COMPARE10_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE10_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE10_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE11 @Bit 11 : Write '1' to disable interrupt for event COMPARE[11] */
-  #define GRTC_INTENCLR12_COMPARE11_Pos (11UL)       /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTENCLR12_COMPARE11_Msk (0x1UL << GRTC_INTENCLR12_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.             */
-  #define GRTC_INTENCLR12_COMPARE11_Min (0x0UL)      /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENCLR12_COMPARE11_Max (0x1UL)      /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENCLR12_COMPARE11_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE11_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE11_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE12 @Bit 12 : Write '1' to disable interrupt for event COMPARE[12] */
-  #define GRTC_INTENCLR12_COMPARE12_Pos (12UL)       /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTENCLR12_COMPARE12_Msk (0x1UL << GRTC_INTENCLR12_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.             */
-  #define GRTC_INTENCLR12_COMPARE12_Min (0x0UL)      /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENCLR12_COMPARE12_Max (0x1UL)      /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENCLR12_COMPARE12_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE12_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE12_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE13 @Bit 13 : Write '1' to disable interrupt for event COMPARE[13] */
-  #define GRTC_INTENCLR12_COMPARE13_Pos (13UL)       /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTENCLR12_COMPARE13_Msk (0x1UL << GRTC_INTENCLR12_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.             */
-  #define GRTC_INTENCLR12_COMPARE13_Min (0x0UL)      /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENCLR12_COMPARE13_Max (0x1UL)      /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENCLR12_COMPARE13_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE13_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE13_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE14 @Bit 14 : Write '1' to disable interrupt for event COMPARE[14] */
-  #define GRTC_INTENCLR12_COMPARE14_Pos (14UL)       /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTENCLR12_COMPARE14_Msk (0x1UL << GRTC_INTENCLR12_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.             */
-  #define GRTC_INTENCLR12_COMPARE14_Min (0x0UL)      /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENCLR12_COMPARE14_Max (0x1UL)      /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENCLR12_COMPARE14_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE14_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE14_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE15 @Bit 15 : Write '1' to disable interrupt for event COMPARE[15] */
-  #define GRTC_INTENCLR12_COMPARE15_Pos (15UL)       /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTENCLR12_COMPARE15_Msk (0x1UL << GRTC_INTENCLR12_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.             */
-  #define GRTC_INTENCLR12_COMPARE15_Min (0x0UL)      /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENCLR12_COMPARE15_Max (0x1UL)      /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENCLR12_COMPARE15_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_COMPARE15_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_COMPARE15_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARE @Bit 24 : Write '1' to disable interrupt for event RTCOMPARE */
-  #define GRTC_INTENCLR12_RTCOMPARE_Pos (24UL)       /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTENCLR12_RTCOMPARE_Msk (0x1UL << GRTC_INTENCLR12_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.             */
-  #define GRTC_INTENCLR12_RTCOMPARE_Min (0x0UL)      /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENCLR12_RTCOMPARE_Max (0x1UL)      /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENCLR12_RTCOMPARE_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_RTCOMPARE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR12_RTCOMPARE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Write '1' to disable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTENCLR12_RTCOMPARESYNC_Pos (25UL)   /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTENCLR12_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTENCLR12_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field. */
-  #define GRTC_INTENCLR12_RTCOMPARESYNC_Min (0x0UL)  /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENCLR12_RTCOMPARESYNC_Max (0x1UL)  /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENCLR12_RTCOMPARESYNC_Clear (0x1UL) /*!< Disable                                                             */
-  #define GRTC_INTENCLR12_RTCOMPARESYNC_Disabled (0x0UL) /*!< Read: Disabled                                                   */
-  #define GRTC_INTENCLR12_RTCOMPARESYNC_Enabled (0x1UL) /*!< Read: Enabled                                                     */
-
-/* SYSCOUNTERVALID @Bit 26 : Write '1' to disable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTENCLR12_SYSCOUNTERVALID_Pos (26UL) /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTENCLR12_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTENCLR12_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTENCLR12_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENCLR12_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENCLR12_SYSCOUNTERVALID_Clear (0x1UL) /*!< Disable                                                           */
-  #define GRTC_INTENCLR12_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-  #define GRTC_INTENCLR12_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-/* PWMPERIODEND @Bit 27 : Write '1' to disable interrupt for event PWMPERIODEND */
-  #define GRTC_INTENCLR12_PWMPERIODEND_Pos (27UL)    /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTENCLR12_PWMPERIODEND_Msk (0x1UL << GRTC_INTENCLR12_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.    */
-  #define GRTC_INTENCLR12_PWMPERIODEND_Min (0x0UL)   /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENCLR12_PWMPERIODEND_Max (0x1UL)   /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENCLR12_PWMPERIODEND_Clear (0x1UL) /*!< Disable                                                              */
-  #define GRTC_INTENCLR12_PWMPERIODEND_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-  #define GRTC_INTENCLR12_PWMPERIODEND_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-
-/* GRTC_INTPEND12: Pending interrupts */
-  #define GRTC_INTPEND12_ResetValue (0x00000000UL)   /*!< Reset value of INTPEND12 register.                                   */
-
-/* COMPARE0 @Bit 0 : Read pending status of interrupt for event COMPARE[0] */
-  #define GRTC_INTPEND12_COMPARE0_Pos (0UL)          /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTPEND12_COMPARE0_Msk (0x1UL << GRTC_INTPEND12_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                  */
-  #define GRTC_INTPEND12_COMPARE0_Min (0x0UL)        /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTPEND12_COMPARE0_Max (0x1UL)        /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTPEND12_COMPARE0_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND12_COMPARE0_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE1 @Bit 1 : Read pending status of interrupt for event COMPARE[1] */
-  #define GRTC_INTPEND12_COMPARE1_Pos (1UL)          /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTPEND12_COMPARE1_Msk (0x1UL << GRTC_INTPEND12_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                  */
-  #define GRTC_INTPEND12_COMPARE1_Min (0x0UL)        /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTPEND12_COMPARE1_Max (0x1UL)        /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTPEND12_COMPARE1_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND12_COMPARE1_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE2 @Bit 2 : Read pending status of interrupt for event COMPARE[2] */
-  #define GRTC_INTPEND12_COMPARE2_Pos (2UL)          /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTPEND12_COMPARE2_Msk (0x1UL << GRTC_INTPEND12_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                  */
-  #define GRTC_INTPEND12_COMPARE2_Min (0x0UL)        /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTPEND12_COMPARE2_Max (0x1UL)        /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTPEND12_COMPARE2_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND12_COMPARE2_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE3 @Bit 3 : Read pending status of interrupt for event COMPARE[3] */
-  #define GRTC_INTPEND12_COMPARE3_Pos (3UL)          /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTPEND12_COMPARE3_Msk (0x1UL << GRTC_INTPEND12_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                  */
-  #define GRTC_INTPEND12_COMPARE3_Min (0x0UL)        /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTPEND12_COMPARE3_Max (0x1UL)        /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTPEND12_COMPARE3_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND12_COMPARE3_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE4 @Bit 4 : Read pending status of interrupt for event COMPARE[4] */
-  #define GRTC_INTPEND12_COMPARE4_Pos (4UL)          /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTPEND12_COMPARE4_Msk (0x1UL << GRTC_INTPEND12_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                  */
-  #define GRTC_INTPEND12_COMPARE4_Min (0x0UL)        /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTPEND12_COMPARE4_Max (0x1UL)        /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTPEND12_COMPARE4_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND12_COMPARE4_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE5 @Bit 5 : Read pending status of interrupt for event COMPARE[5] */
-  #define GRTC_INTPEND12_COMPARE5_Pos (5UL)          /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTPEND12_COMPARE5_Msk (0x1UL << GRTC_INTPEND12_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                  */
-  #define GRTC_INTPEND12_COMPARE5_Min (0x0UL)        /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTPEND12_COMPARE5_Max (0x1UL)        /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTPEND12_COMPARE5_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND12_COMPARE5_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE6 @Bit 6 : Read pending status of interrupt for event COMPARE[6] */
-  #define GRTC_INTPEND12_COMPARE6_Pos (6UL)          /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTPEND12_COMPARE6_Msk (0x1UL << GRTC_INTPEND12_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                  */
-  #define GRTC_INTPEND12_COMPARE6_Min (0x0UL)        /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTPEND12_COMPARE6_Max (0x1UL)        /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTPEND12_COMPARE6_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND12_COMPARE6_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE7 @Bit 7 : Read pending status of interrupt for event COMPARE[7] */
-  #define GRTC_INTPEND12_COMPARE7_Pos (7UL)          /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTPEND12_COMPARE7_Msk (0x1UL << GRTC_INTPEND12_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                  */
-  #define GRTC_INTPEND12_COMPARE7_Min (0x0UL)        /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTPEND12_COMPARE7_Max (0x1UL)        /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTPEND12_COMPARE7_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND12_COMPARE7_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE8 @Bit 8 : Read pending status of interrupt for event COMPARE[8] */
-  #define GRTC_INTPEND12_COMPARE8_Pos (8UL)          /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTPEND12_COMPARE8_Msk (0x1UL << GRTC_INTPEND12_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                  */
-  #define GRTC_INTPEND12_COMPARE8_Min (0x0UL)        /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTPEND12_COMPARE8_Max (0x1UL)        /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTPEND12_COMPARE8_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND12_COMPARE8_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE9 @Bit 9 : Read pending status of interrupt for event COMPARE[9] */
-  #define GRTC_INTPEND12_COMPARE9_Pos (9UL)          /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTPEND12_COMPARE9_Msk (0x1UL << GRTC_INTPEND12_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                  */
-  #define GRTC_INTPEND12_COMPARE9_Min (0x0UL)        /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTPEND12_COMPARE9_Max (0x1UL)        /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTPEND12_COMPARE9_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND12_COMPARE9_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE10 @Bit 10 : Read pending status of interrupt for event COMPARE[10] */
-  #define GRTC_INTPEND12_COMPARE10_Pos (10UL)        /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTPEND12_COMPARE10_Msk (0x1UL << GRTC_INTPEND12_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.               */
-  #define GRTC_INTPEND12_COMPARE10_Min (0x0UL)       /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTPEND12_COMPARE10_Max (0x1UL)       /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTPEND12_COMPARE10_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND12_COMPARE10_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE11 @Bit 11 : Read pending status of interrupt for event COMPARE[11] */
-  #define GRTC_INTPEND12_COMPARE11_Pos (11UL)        /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTPEND12_COMPARE11_Msk (0x1UL << GRTC_INTPEND12_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.               */
-  #define GRTC_INTPEND12_COMPARE11_Min (0x0UL)       /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTPEND12_COMPARE11_Max (0x1UL)       /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTPEND12_COMPARE11_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND12_COMPARE11_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE12 @Bit 12 : Read pending status of interrupt for event COMPARE[12] */
-  #define GRTC_INTPEND12_COMPARE12_Pos (12UL)        /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTPEND12_COMPARE12_Msk (0x1UL << GRTC_INTPEND12_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.               */
-  #define GRTC_INTPEND12_COMPARE12_Min (0x0UL)       /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTPEND12_COMPARE12_Max (0x1UL)       /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTPEND12_COMPARE12_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND12_COMPARE12_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE13 @Bit 13 : Read pending status of interrupt for event COMPARE[13] */
-  #define GRTC_INTPEND12_COMPARE13_Pos (13UL)        /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTPEND12_COMPARE13_Msk (0x1UL << GRTC_INTPEND12_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.               */
-  #define GRTC_INTPEND12_COMPARE13_Min (0x0UL)       /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTPEND12_COMPARE13_Max (0x1UL)       /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTPEND12_COMPARE13_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND12_COMPARE13_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE14 @Bit 14 : Read pending status of interrupt for event COMPARE[14] */
-  #define GRTC_INTPEND12_COMPARE14_Pos (14UL)        /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTPEND12_COMPARE14_Msk (0x1UL << GRTC_INTPEND12_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.               */
-  #define GRTC_INTPEND12_COMPARE14_Min (0x0UL)       /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTPEND12_COMPARE14_Max (0x1UL)       /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTPEND12_COMPARE14_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND12_COMPARE14_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE15 @Bit 15 : Read pending status of interrupt for event COMPARE[15] */
-  #define GRTC_INTPEND12_COMPARE15_Pos (15UL)        /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTPEND12_COMPARE15_Msk (0x1UL << GRTC_INTPEND12_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.               */
-  #define GRTC_INTPEND12_COMPARE15_Min (0x0UL)       /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTPEND12_COMPARE15_Max (0x1UL)       /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTPEND12_COMPARE15_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND12_COMPARE15_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* RTCOMPARE @Bit 24 : Read pending status of interrupt for event RTCOMPARE */
-  #define GRTC_INTPEND12_RTCOMPARE_Pos (24UL)        /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTPEND12_RTCOMPARE_Msk (0x1UL << GRTC_INTPEND12_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.               */
-  #define GRTC_INTPEND12_RTCOMPARE_Min (0x0UL)       /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTPEND12_RTCOMPARE_Max (0x1UL)       /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTPEND12_RTCOMPARE_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND12_RTCOMPARE_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Read pending status of interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTPEND12_RTCOMPARESYNC_Pos (25UL)    /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTPEND12_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTPEND12_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field.   */
-  #define GRTC_INTPEND12_RTCOMPARESYNC_Min (0x0UL)   /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTPEND12_RTCOMPARESYNC_Max (0x1UL)   /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTPEND12_RTCOMPARESYNC_NotPending (0x0UL) /*!< Read: Not pending                                               */
-  #define GRTC_INTPEND12_RTCOMPARESYNC_Pending (0x1UL) /*!< Read: Pending                                                      */
-
-/* SYSCOUNTERVALID @Bit 26 : Read pending status of interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTPEND12_SYSCOUNTERVALID_Pos (26UL)  /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTPEND12_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTPEND12_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTPEND12_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTPEND12_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTPEND12_SYSCOUNTERVALID_NotPending (0x0UL) /*!< Read: Not pending                                             */
-  #define GRTC_INTPEND12_SYSCOUNTERVALID_Pending (0x1UL) /*!< Read: Pending                                                    */
-
-/* PWMPERIODEND @Bit 27 : Read pending status of interrupt for event PWMPERIODEND */
-  #define GRTC_INTPEND12_PWMPERIODEND_Pos (27UL)     /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTPEND12_PWMPERIODEND_Msk (0x1UL << GRTC_INTPEND12_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.      */
-  #define GRTC_INTPEND12_PWMPERIODEND_Min (0x0UL)    /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTPEND12_PWMPERIODEND_Max (0x1UL)    /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTPEND12_PWMPERIODEND_NotPending (0x0UL) /*!< Read: Not pending                                                */
-  #define GRTC_INTPEND12_PWMPERIODEND_Pending (0x1UL) /*!< Read: Pending                                                       */
-
-
-/* GRTC_INTEN13: Enable or disable interrupt */
-  #define GRTC_INTEN13_ResetValue (0x00000000UL)     /*!< Reset value of INTEN13 register.                                     */
-
-/* COMPARE0 @Bit 0 : Enable or disable interrupt for event COMPARE[0] */
-  #define GRTC_INTEN13_COMPARE0_Pos (0UL)            /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTEN13_COMPARE0_Msk (0x1UL << GRTC_INTEN13_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                      */
-  #define GRTC_INTEN13_COMPARE0_Min (0x0UL)          /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTEN13_COMPARE0_Max (0x1UL)          /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTEN13_COMPARE0_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE0_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE1 @Bit 1 : Enable or disable interrupt for event COMPARE[1] */
-  #define GRTC_INTEN13_COMPARE1_Pos (1UL)            /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTEN13_COMPARE1_Msk (0x1UL << GRTC_INTEN13_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                      */
-  #define GRTC_INTEN13_COMPARE1_Min (0x0UL)          /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTEN13_COMPARE1_Max (0x1UL)          /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTEN13_COMPARE1_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE1_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE2 @Bit 2 : Enable or disable interrupt for event COMPARE[2] */
-  #define GRTC_INTEN13_COMPARE2_Pos (2UL)            /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTEN13_COMPARE2_Msk (0x1UL << GRTC_INTEN13_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                      */
-  #define GRTC_INTEN13_COMPARE2_Min (0x0UL)          /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTEN13_COMPARE2_Max (0x1UL)          /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTEN13_COMPARE2_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE2_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE3 @Bit 3 : Enable or disable interrupt for event COMPARE[3] */
-  #define GRTC_INTEN13_COMPARE3_Pos (3UL)            /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTEN13_COMPARE3_Msk (0x1UL << GRTC_INTEN13_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                      */
-  #define GRTC_INTEN13_COMPARE3_Min (0x0UL)          /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTEN13_COMPARE3_Max (0x1UL)          /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTEN13_COMPARE3_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE3_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE4 @Bit 4 : Enable or disable interrupt for event COMPARE[4] */
-  #define GRTC_INTEN13_COMPARE4_Pos (4UL)            /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTEN13_COMPARE4_Msk (0x1UL << GRTC_INTEN13_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                      */
-  #define GRTC_INTEN13_COMPARE4_Min (0x0UL)          /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTEN13_COMPARE4_Max (0x1UL)          /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTEN13_COMPARE4_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE4_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE5 @Bit 5 : Enable or disable interrupt for event COMPARE[5] */
-  #define GRTC_INTEN13_COMPARE5_Pos (5UL)            /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTEN13_COMPARE5_Msk (0x1UL << GRTC_INTEN13_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                      */
-  #define GRTC_INTEN13_COMPARE5_Min (0x0UL)          /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTEN13_COMPARE5_Max (0x1UL)          /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTEN13_COMPARE5_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE5_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE6 @Bit 6 : Enable or disable interrupt for event COMPARE[6] */
-  #define GRTC_INTEN13_COMPARE6_Pos (6UL)            /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTEN13_COMPARE6_Msk (0x1UL << GRTC_INTEN13_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                      */
-  #define GRTC_INTEN13_COMPARE6_Min (0x0UL)          /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTEN13_COMPARE6_Max (0x1UL)          /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTEN13_COMPARE6_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE6_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE7 @Bit 7 : Enable or disable interrupt for event COMPARE[7] */
-  #define GRTC_INTEN13_COMPARE7_Pos (7UL)            /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTEN13_COMPARE7_Msk (0x1UL << GRTC_INTEN13_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                      */
-  #define GRTC_INTEN13_COMPARE7_Min (0x0UL)          /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTEN13_COMPARE7_Max (0x1UL)          /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTEN13_COMPARE7_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE7_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE8 @Bit 8 : Enable or disable interrupt for event COMPARE[8] */
-  #define GRTC_INTEN13_COMPARE8_Pos (8UL)            /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTEN13_COMPARE8_Msk (0x1UL << GRTC_INTEN13_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                      */
-  #define GRTC_INTEN13_COMPARE8_Min (0x0UL)          /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTEN13_COMPARE8_Max (0x1UL)          /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTEN13_COMPARE8_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE8_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE9 @Bit 9 : Enable or disable interrupt for event COMPARE[9] */
-  #define GRTC_INTEN13_COMPARE9_Pos (9UL)            /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTEN13_COMPARE9_Msk (0x1UL << GRTC_INTEN13_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                      */
-  #define GRTC_INTEN13_COMPARE9_Min (0x0UL)          /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTEN13_COMPARE9_Max (0x1UL)          /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTEN13_COMPARE9_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE9_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE10 @Bit 10 : Enable or disable interrupt for event COMPARE[10] */
-  #define GRTC_INTEN13_COMPARE10_Pos (10UL)          /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTEN13_COMPARE10_Msk (0x1UL << GRTC_INTEN13_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.                   */
-  #define GRTC_INTEN13_COMPARE10_Min (0x0UL)         /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTEN13_COMPARE10_Max (0x1UL)         /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTEN13_COMPARE10_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE10_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE11 @Bit 11 : Enable or disable interrupt for event COMPARE[11] */
-  #define GRTC_INTEN13_COMPARE11_Pos (11UL)          /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTEN13_COMPARE11_Msk (0x1UL << GRTC_INTEN13_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.                   */
-  #define GRTC_INTEN13_COMPARE11_Min (0x0UL)         /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTEN13_COMPARE11_Max (0x1UL)         /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTEN13_COMPARE11_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE11_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE12 @Bit 12 : Enable or disable interrupt for event COMPARE[12] */
-  #define GRTC_INTEN13_COMPARE12_Pos (12UL)          /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTEN13_COMPARE12_Msk (0x1UL << GRTC_INTEN13_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.                   */
-  #define GRTC_INTEN13_COMPARE12_Min (0x0UL)         /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTEN13_COMPARE12_Max (0x1UL)         /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTEN13_COMPARE12_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE12_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE13 @Bit 13 : Enable or disable interrupt for event COMPARE[13] */
-  #define GRTC_INTEN13_COMPARE13_Pos (13UL)          /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTEN13_COMPARE13_Msk (0x1UL << GRTC_INTEN13_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.                   */
-  #define GRTC_INTEN13_COMPARE13_Min (0x0UL)         /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTEN13_COMPARE13_Max (0x1UL)         /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTEN13_COMPARE13_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE13_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE14 @Bit 14 : Enable or disable interrupt for event COMPARE[14] */
-  #define GRTC_INTEN13_COMPARE14_Pos (14UL)          /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTEN13_COMPARE14_Msk (0x1UL << GRTC_INTEN13_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.                   */
-  #define GRTC_INTEN13_COMPARE14_Min (0x0UL)         /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTEN13_COMPARE14_Max (0x1UL)         /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTEN13_COMPARE14_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE14_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE15 @Bit 15 : Enable or disable interrupt for event COMPARE[15] */
-  #define GRTC_INTEN13_COMPARE15_Pos (15UL)          /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTEN13_COMPARE15_Msk (0x1UL << GRTC_INTEN13_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.                   */
-  #define GRTC_INTEN13_COMPARE15_Min (0x0UL)         /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTEN13_COMPARE15_Max (0x1UL)         /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTEN13_COMPARE15_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN13_COMPARE15_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* RTCOMPARE @Bit 24 : Enable or disable interrupt for event RTCOMPARE */
-  #define GRTC_INTEN13_RTCOMPARE_Pos (24UL)          /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTEN13_RTCOMPARE_Msk (0x1UL << GRTC_INTEN13_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.                   */
-  #define GRTC_INTEN13_RTCOMPARE_Min (0x0UL)         /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTEN13_RTCOMPARE_Max (0x1UL)         /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTEN13_RTCOMPARE_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN13_RTCOMPARE_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* RTCOMPARESYNC @Bit 25 : Enable or disable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTEN13_RTCOMPARESYNC_Pos (25UL)      /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTEN13_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTEN13_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field.       */
-  #define GRTC_INTEN13_RTCOMPARESYNC_Min (0x0UL)     /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTEN13_RTCOMPARESYNC_Max (0x1UL)     /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTEN13_RTCOMPARESYNC_Disabled (0x0UL) /*!< Disable                                                             */
-  #define GRTC_INTEN13_RTCOMPARESYNC_Enabled (0x1UL) /*!< Enable                                                               */
-
-/* SYSCOUNTERVALID @Bit 26 : Enable or disable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTEN13_SYSCOUNTERVALID_Pos (26UL)    /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTEN13_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTEN13_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID field. */
-  #define GRTC_INTEN13_SYSCOUNTERVALID_Min (0x0UL)   /*!< Min enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTEN13_SYSCOUNTERVALID_Max (0x1UL)   /*!< Max enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTEN13_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Disable                                                           */
-  #define GRTC_INTEN13_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Enable                                                             */
-
-/* PWMPERIODEND @Bit 27 : Enable or disable interrupt for event PWMPERIODEND */
-  #define GRTC_INTEN13_PWMPERIODEND_Pos (27UL)       /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTEN13_PWMPERIODEND_Msk (0x1UL << GRTC_INTEN13_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.          */
-  #define GRTC_INTEN13_PWMPERIODEND_Min (0x0UL)      /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTEN13_PWMPERIODEND_Max (0x1UL)      /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTEN13_PWMPERIODEND_Disabled (0x0UL) /*!< Disable                                                              */
-  #define GRTC_INTEN13_PWMPERIODEND_Enabled (0x1UL)  /*!< Enable                                                               */
-
-
-/* GRTC_INTENSET13: Enable interrupt */
-  #define GRTC_INTENSET13_ResetValue (0x00000000UL)  /*!< Reset value of INTENSET13 register.                                  */
-
-/* COMPARE0 @Bit 0 : Write '1' to enable interrupt for event COMPARE[0] */
-  #define GRTC_INTENSET13_COMPARE0_Pos (0UL)         /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTENSET13_COMPARE0_Msk (0x1UL << GRTC_INTENSET13_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                */
-  #define GRTC_INTENSET13_COMPARE0_Min (0x0UL)       /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENSET13_COMPARE0_Max (0x1UL)       /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENSET13_COMPARE0_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE0_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE0_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE1 @Bit 1 : Write '1' to enable interrupt for event COMPARE[1] */
-  #define GRTC_INTENSET13_COMPARE1_Pos (1UL)         /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTENSET13_COMPARE1_Msk (0x1UL << GRTC_INTENSET13_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                */
-  #define GRTC_INTENSET13_COMPARE1_Min (0x0UL)       /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENSET13_COMPARE1_Max (0x1UL)       /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENSET13_COMPARE1_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE1_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE1_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE2 @Bit 2 : Write '1' to enable interrupt for event COMPARE[2] */
-  #define GRTC_INTENSET13_COMPARE2_Pos (2UL)         /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTENSET13_COMPARE2_Msk (0x1UL << GRTC_INTENSET13_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                */
-  #define GRTC_INTENSET13_COMPARE2_Min (0x0UL)       /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENSET13_COMPARE2_Max (0x1UL)       /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENSET13_COMPARE2_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE2_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE2_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE3 @Bit 3 : Write '1' to enable interrupt for event COMPARE[3] */
-  #define GRTC_INTENSET13_COMPARE3_Pos (3UL)         /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTENSET13_COMPARE3_Msk (0x1UL << GRTC_INTENSET13_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                */
-  #define GRTC_INTENSET13_COMPARE3_Min (0x0UL)       /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENSET13_COMPARE3_Max (0x1UL)       /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENSET13_COMPARE3_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE3_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE3_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE4 @Bit 4 : Write '1' to enable interrupt for event COMPARE[4] */
-  #define GRTC_INTENSET13_COMPARE4_Pos (4UL)         /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTENSET13_COMPARE4_Msk (0x1UL << GRTC_INTENSET13_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                */
-  #define GRTC_INTENSET13_COMPARE4_Min (0x0UL)       /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENSET13_COMPARE4_Max (0x1UL)       /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENSET13_COMPARE4_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE4_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE4_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE5 @Bit 5 : Write '1' to enable interrupt for event COMPARE[5] */
-  #define GRTC_INTENSET13_COMPARE5_Pos (5UL)         /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTENSET13_COMPARE5_Msk (0x1UL << GRTC_INTENSET13_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                */
-  #define GRTC_INTENSET13_COMPARE5_Min (0x0UL)       /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENSET13_COMPARE5_Max (0x1UL)       /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENSET13_COMPARE5_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE5_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE5_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE6 @Bit 6 : Write '1' to enable interrupt for event COMPARE[6] */
-  #define GRTC_INTENSET13_COMPARE6_Pos (6UL)         /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTENSET13_COMPARE6_Msk (0x1UL << GRTC_INTENSET13_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                */
-  #define GRTC_INTENSET13_COMPARE6_Min (0x0UL)       /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENSET13_COMPARE6_Max (0x1UL)       /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENSET13_COMPARE6_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE6_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE6_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE7 @Bit 7 : Write '1' to enable interrupt for event COMPARE[7] */
-  #define GRTC_INTENSET13_COMPARE7_Pos (7UL)         /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTENSET13_COMPARE7_Msk (0x1UL << GRTC_INTENSET13_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                */
-  #define GRTC_INTENSET13_COMPARE7_Min (0x0UL)       /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENSET13_COMPARE7_Max (0x1UL)       /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENSET13_COMPARE7_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE7_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE7_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE8 @Bit 8 : Write '1' to enable interrupt for event COMPARE[8] */
-  #define GRTC_INTENSET13_COMPARE8_Pos (8UL)         /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTENSET13_COMPARE8_Msk (0x1UL << GRTC_INTENSET13_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                */
-  #define GRTC_INTENSET13_COMPARE8_Min (0x0UL)       /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENSET13_COMPARE8_Max (0x1UL)       /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENSET13_COMPARE8_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE8_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE8_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE9 @Bit 9 : Write '1' to enable interrupt for event COMPARE[9] */
-  #define GRTC_INTENSET13_COMPARE9_Pos (9UL)         /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTENSET13_COMPARE9_Msk (0x1UL << GRTC_INTENSET13_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                */
-  #define GRTC_INTENSET13_COMPARE9_Min (0x0UL)       /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENSET13_COMPARE9_Max (0x1UL)       /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENSET13_COMPARE9_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE9_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE9_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE10 @Bit 10 : Write '1' to enable interrupt for event COMPARE[10] */
-  #define GRTC_INTENSET13_COMPARE10_Pos (10UL)       /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTENSET13_COMPARE10_Msk (0x1UL << GRTC_INTENSET13_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.             */
-  #define GRTC_INTENSET13_COMPARE10_Min (0x0UL)      /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENSET13_COMPARE10_Max (0x1UL)      /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENSET13_COMPARE10_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE10_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE10_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE11 @Bit 11 : Write '1' to enable interrupt for event COMPARE[11] */
-  #define GRTC_INTENSET13_COMPARE11_Pos (11UL)       /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTENSET13_COMPARE11_Msk (0x1UL << GRTC_INTENSET13_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.             */
-  #define GRTC_INTENSET13_COMPARE11_Min (0x0UL)      /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENSET13_COMPARE11_Max (0x1UL)      /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENSET13_COMPARE11_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE11_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE11_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE12 @Bit 12 : Write '1' to enable interrupt for event COMPARE[12] */
-  #define GRTC_INTENSET13_COMPARE12_Pos (12UL)       /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTENSET13_COMPARE12_Msk (0x1UL << GRTC_INTENSET13_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.             */
-  #define GRTC_INTENSET13_COMPARE12_Min (0x0UL)      /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENSET13_COMPARE12_Max (0x1UL)      /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENSET13_COMPARE12_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE12_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE12_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE13 @Bit 13 : Write '1' to enable interrupt for event COMPARE[13] */
-  #define GRTC_INTENSET13_COMPARE13_Pos (13UL)       /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTENSET13_COMPARE13_Msk (0x1UL << GRTC_INTENSET13_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.             */
-  #define GRTC_INTENSET13_COMPARE13_Min (0x0UL)      /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENSET13_COMPARE13_Max (0x1UL)      /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENSET13_COMPARE13_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE13_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE13_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE14 @Bit 14 : Write '1' to enable interrupt for event COMPARE[14] */
-  #define GRTC_INTENSET13_COMPARE14_Pos (14UL)       /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTENSET13_COMPARE14_Msk (0x1UL << GRTC_INTENSET13_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.             */
-  #define GRTC_INTENSET13_COMPARE14_Min (0x0UL)      /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENSET13_COMPARE14_Max (0x1UL)      /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENSET13_COMPARE14_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE14_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE14_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE15 @Bit 15 : Write '1' to enable interrupt for event COMPARE[15] */
-  #define GRTC_INTENSET13_COMPARE15_Pos (15UL)       /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTENSET13_COMPARE15_Msk (0x1UL << GRTC_INTENSET13_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.             */
-  #define GRTC_INTENSET13_COMPARE15_Min (0x0UL)      /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENSET13_COMPARE15_Max (0x1UL)      /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENSET13_COMPARE15_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET13_COMPARE15_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_COMPARE15_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARE @Bit 24 : Write '1' to enable interrupt for event RTCOMPARE */
-  #define GRTC_INTENSET13_RTCOMPARE_Pos (24UL)       /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTENSET13_RTCOMPARE_Msk (0x1UL << GRTC_INTENSET13_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.             */
-  #define GRTC_INTENSET13_RTCOMPARE_Min (0x0UL)      /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENSET13_RTCOMPARE_Max (0x1UL)      /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENSET13_RTCOMPARE_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET13_RTCOMPARE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET13_RTCOMPARE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Write '1' to enable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTENSET13_RTCOMPARESYNC_Pos (25UL)   /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTENSET13_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTENSET13_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field. */
-  #define GRTC_INTENSET13_RTCOMPARESYNC_Min (0x0UL)  /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENSET13_RTCOMPARESYNC_Max (0x1UL)  /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENSET13_RTCOMPARESYNC_Set (0x1UL)  /*!< Enable                                                               */
-  #define GRTC_INTENSET13_RTCOMPARESYNC_Disabled (0x0UL) /*!< Read: Disabled                                                   */
-  #define GRTC_INTENSET13_RTCOMPARESYNC_Enabled (0x1UL) /*!< Read: Enabled                                                     */
-
-/* SYSCOUNTERVALID @Bit 26 : Write '1' to enable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTENSET13_SYSCOUNTERVALID_Pos (26UL) /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTENSET13_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTENSET13_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTENSET13_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENSET13_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENSET13_SYSCOUNTERVALID_Set (0x1UL) /*!< Enable                                                              */
-  #define GRTC_INTENSET13_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-  #define GRTC_INTENSET13_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-/* PWMPERIODEND @Bit 27 : Write '1' to enable interrupt for event PWMPERIODEND */
-  #define GRTC_INTENSET13_PWMPERIODEND_Pos (27UL)    /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTENSET13_PWMPERIODEND_Msk (0x1UL << GRTC_INTENSET13_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.    */
-  #define GRTC_INTENSET13_PWMPERIODEND_Min (0x0UL)   /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENSET13_PWMPERIODEND_Max (0x1UL)   /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENSET13_PWMPERIODEND_Set (0x1UL)   /*!< Enable                                                               */
-  #define GRTC_INTENSET13_PWMPERIODEND_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-  #define GRTC_INTENSET13_PWMPERIODEND_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-
-/* GRTC_INTENCLR13: Disable interrupt */
-  #define GRTC_INTENCLR13_ResetValue (0x00000000UL)  /*!< Reset value of INTENCLR13 register.                                  */
-
-/* COMPARE0 @Bit 0 : Write '1' to disable interrupt for event COMPARE[0] */
-  #define GRTC_INTENCLR13_COMPARE0_Pos (0UL)         /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTENCLR13_COMPARE0_Msk (0x1UL << GRTC_INTENCLR13_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                */
-  #define GRTC_INTENCLR13_COMPARE0_Min (0x0UL)       /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENCLR13_COMPARE0_Max (0x1UL)       /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENCLR13_COMPARE0_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE0_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE0_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE1 @Bit 1 : Write '1' to disable interrupt for event COMPARE[1] */
-  #define GRTC_INTENCLR13_COMPARE1_Pos (1UL)         /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTENCLR13_COMPARE1_Msk (0x1UL << GRTC_INTENCLR13_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                */
-  #define GRTC_INTENCLR13_COMPARE1_Min (0x0UL)       /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENCLR13_COMPARE1_Max (0x1UL)       /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENCLR13_COMPARE1_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE1_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE1_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE2 @Bit 2 : Write '1' to disable interrupt for event COMPARE[2] */
-  #define GRTC_INTENCLR13_COMPARE2_Pos (2UL)         /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTENCLR13_COMPARE2_Msk (0x1UL << GRTC_INTENCLR13_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                */
-  #define GRTC_INTENCLR13_COMPARE2_Min (0x0UL)       /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENCLR13_COMPARE2_Max (0x1UL)       /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENCLR13_COMPARE2_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE2_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE2_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE3 @Bit 3 : Write '1' to disable interrupt for event COMPARE[3] */
-  #define GRTC_INTENCLR13_COMPARE3_Pos (3UL)         /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTENCLR13_COMPARE3_Msk (0x1UL << GRTC_INTENCLR13_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                */
-  #define GRTC_INTENCLR13_COMPARE3_Min (0x0UL)       /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENCLR13_COMPARE3_Max (0x1UL)       /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENCLR13_COMPARE3_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE3_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE3_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE4 @Bit 4 : Write '1' to disable interrupt for event COMPARE[4] */
-  #define GRTC_INTENCLR13_COMPARE4_Pos (4UL)         /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTENCLR13_COMPARE4_Msk (0x1UL << GRTC_INTENCLR13_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                */
-  #define GRTC_INTENCLR13_COMPARE4_Min (0x0UL)       /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENCLR13_COMPARE4_Max (0x1UL)       /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENCLR13_COMPARE4_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE4_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE4_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE5 @Bit 5 : Write '1' to disable interrupt for event COMPARE[5] */
-  #define GRTC_INTENCLR13_COMPARE5_Pos (5UL)         /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTENCLR13_COMPARE5_Msk (0x1UL << GRTC_INTENCLR13_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                */
-  #define GRTC_INTENCLR13_COMPARE5_Min (0x0UL)       /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENCLR13_COMPARE5_Max (0x1UL)       /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENCLR13_COMPARE5_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE5_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE5_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE6 @Bit 6 : Write '1' to disable interrupt for event COMPARE[6] */
-  #define GRTC_INTENCLR13_COMPARE6_Pos (6UL)         /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTENCLR13_COMPARE6_Msk (0x1UL << GRTC_INTENCLR13_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                */
-  #define GRTC_INTENCLR13_COMPARE6_Min (0x0UL)       /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENCLR13_COMPARE6_Max (0x1UL)       /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENCLR13_COMPARE6_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE6_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE6_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE7 @Bit 7 : Write '1' to disable interrupt for event COMPARE[7] */
-  #define GRTC_INTENCLR13_COMPARE7_Pos (7UL)         /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTENCLR13_COMPARE7_Msk (0x1UL << GRTC_INTENCLR13_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                */
-  #define GRTC_INTENCLR13_COMPARE7_Min (0x0UL)       /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENCLR13_COMPARE7_Max (0x1UL)       /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENCLR13_COMPARE7_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE7_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE7_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE8 @Bit 8 : Write '1' to disable interrupt for event COMPARE[8] */
-  #define GRTC_INTENCLR13_COMPARE8_Pos (8UL)         /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTENCLR13_COMPARE8_Msk (0x1UL << GRTC_INTENCLR13_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                */
-  #define GRTC_INTENCLR13_COMPARE8_Min (0x0UL)       /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENCLR13_COMPARE8_Max (0x1UL)       /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENCLR13_COMPARE8_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE8_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE8_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE9 @Bit 9 : Write '1' to disable interrupt for event COMPARE[9] */
-  #define GRTC_INTENCLR13_COMPARE9_Pos (9UL)         /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTENCLR13_COMPARE9_Msk (0x1UL << GRTC_INTENCLR13_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                */
-  #define GRTC_INTENCLR13_COMPARE9_Min (0x0UL)       /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENCLR13_COMPARE9_Max (0x1UL)       /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENCLR13_COMPARE9_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE9_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE9_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE10 @Bit 10 : Write '1' to disable interrupt for event COMPARE[10] */
-  #define GRTC_INTENCLR13_COMPARE10_Pos (10UL)       /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTENCLR13_COMPARE10_Msk (0x1UL << GRTC_INTENCLR13_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.             */
-  #define GRTC_INTENCLR13_COMPARE10_Min (0x0UL)      /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENCLR13_COMPARE10_Max (0x1UL)      /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENCLR13_COMPARE10_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE10_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE10_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE11 @Bit 11 : Write '1' to disable interrupt for event COMPARE[11] */
-  #define GRTC_INTENCLR13_COMPARE11_Pos (11UL)       /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTENCLR13_COMPARE11_Msk (0x1UL << GRTC_INTENCLR13_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.             */
-  #define GRTC_INTENCLR13_COMPARE11_Min (0x0UL)      /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENCLR13_COMPARE11_Max (0x1UL)      /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENCLR13_COMPARE11_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE11_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE11_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE12 @Bit 12 : Write '1' to disable interrupt for event COMPARE[12] */
-  #define GRTC_INTENCLR13_COMPARE12_Pos (12UL)       /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTENCLR13_COMPARE12_Msk (0x1UL << GRTC_INTENCLR13_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.             */
-  #define GRTC_INTENCLR13_COMPARE12_Min (0x0UL)      /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENCLR13_COMPARE12_Max (0x1UL)      /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENCLR13_COMPARE12_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE12_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE12_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE13 @Bit 13 : Write '1' to disable interrupt for event COMPARE[13] */
-  #define GRTC_INTENCLR13_COMPARE13_Pos (13UL)       /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTENCLR13_COMPARE13_Msk (0x1UL << GRTC_INTENCLR13_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.             */
-  #define GRTC_INTENCLR13_COMPARE13_Min (0x0UL)      /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENCLR13_COMPARE13_Max (0x1UL)      /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENCLR13_COMPARE13_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE13_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE13_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE14 @Bit 14 : Write '1' to disable interrupt for event COMPARE[14] */
-  #define GRTC_INTENCLR13_COMPARE14_Pos (14UL)       /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTENCLR13_COMPARE14_Msk (0x1UL << GRTC_INTENCLR13_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.             */
-  #define GRTC_INTENCLR13_COMPARE14_Min (0x0UL)      /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENCLR13_COMPARE14_Max (0x1UL)      /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENCLR13_COMPARE14_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE14_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE14_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE15 @Bit 15 : Write '1' to disable interrupt for event COMPARE[15] */
-  #define GRTC_INTENCLR13_COMPARE15_Pos (15UL)       /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTENCLR13_COMPARE15_Msk (0x1UL << GRTC_INTENCLR13_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.             */
-  #define GRTC_INTENCLR13_COMPARE15_Min (0x0UL)      /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENCLR13_COMPARE15_Max (0x1UL)      /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENCLR13_COMPARE15_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_COMPARE15_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_COMPARE15_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARE @Bit 24 : Write '1' to disable interrupt for event RTCOMPARE */
-  #define GRTC_INTENCLR13_RTCOMPARE_Pos (24UL)       /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTENCLR13_RTCOMPARE_Msk (0x1UL << GRTC_INTENCLR13_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.             */
-  #define GRTC_INTENCLR13_RTCOMPARE_Min (0x0UL)      /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENCLR13_RTCOMPARE_Max (0x1UL)      /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENCLR13_RTCOMPARE_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_RTCOMPARE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR13_RTCOMPARE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Write '1' to disable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTENCLR13_RTCOMPARESYNC_Pos (25UL)   /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTENCLR13_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTENCLR13_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field. */
-  #define GRTC_INTENCLR13_RTCOMPARESYNC_Min (0x0UL)  /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENCLR13_RTCOMPARESYNC_Max (0x1UL)  /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENCLR13_RTCOMPARESYNC_Clear (0x1UL) /*!< Disable                                                             */
-  #define GRTC_INTENCLR13_RTCOMPARESYNC_Disabled (0x0UL) /*!< Read: Disabled                                                   */
-  #define GRTC_INTENCLR13_RTCOMPARESYNC_Enabled (0x1UL) /*!< Read: Enabled                                                     */
-
-/* SYSCOUNTERVALID @Bit 26 : Write '1' to disable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTENCLR13_SYSCOUNTERVALID_Pos (26UL) /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTENCLR13_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTENCLR13_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTENCLR13_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENCLR13_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENCLR13_SYSCOUNTERVALID_Clear (0x1UL) /*!< Disable                                                           */
-  #define GRTC_INTENCLR13_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-  #define GRTC_INTENCLR13_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-/* PWMPERIODEND @Bit 27 : Write '1' to disable interrupt for event PWMPERIODEND */
-  #define GRTC_INTENCLR13_PWMPERIODEND_Pos (27UL)    /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTENCLR13_PWMPERIODEND_Msk (0x1UL << GRTC_INTENCLR13_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.    */
-  #define GRTC_INTENCLR13_PWMPERIODEND_Min (0x0UL)   /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENCLR13_PWMPERIODEND_Max (0x1UL)   /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENCLR13_PWMPERIODEND_Clear (0x1UL) /*!< Disable                                                              */
-  #define GRTC_INTENCLR13_PWMPERIODEND_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-  #define GRTC_INTENCLR13_PWMPERIODEND_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-
-/* GRTC_INTPEND13: Pending interrupts */
-  #define GRTC_INTPEND13_ResetValue (0x00000000UL)   /*!< Reset value of INTPEND13 register.                                   */
-
-/* COMPARE0 @Bit 0 : Read pending status of interrupt for event COMPARE[0] */
-  #define GRTC_INTPEND13_COMPARE0_Pos (0UL)          /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTPEND13_COMPARE0_Msk (0x1UL << GRTC_INTPEND13_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                  */
-  #define GRTC_INTPEND13_COMPARE0_Min (0x0UL)        /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTPEND13_COMPARE0_Max (0x1UL)        /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTPEND13_COMPARE0_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND13_COMPARE0_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE1 @Bit 1 : Read pending status of interrupt for event COMPARE[1] */
-  #define GRTC_INTPEND13_COMPARE1_Pos (1UL)          /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTPEND13_COMPARE1_Msk (0x1UL << GRTC_INTPEND13_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                  */
-  #define GRTC_INTPEND13_COMPARE1_Min (0x0UL)        /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTPEND13_COMPARE1_Max (0x1UL)        /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTPEND13_COMPARE1_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND13_COMPARE1_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE2 @Bit 2 : Read pending status of interrupt for event COMPARE[2] */
-  #define GRTC_INTPEND13_COMPARE2_Pos (2UL)          /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTPEND13_COMPARE2_Msk (0x1UL << GRTC_INTPEND13_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                  */
-  #define GRTC_INTPEND13_COMPARE2_Min (0x0UL)        /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTPEND13_COMPARE2_Max (0x1UL)        /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTPEND13_COMPARE2_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND13_COMPARE2_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE3 @Bit 3 : Read pending status of interrupt for event COMPARE[3] */
-  #define GRTC_INTPEND13_COMPARE3_Pos (3UL)          /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTPEND13_COMPARE3_Msk (0x1UL << GRTC_INTPEND13_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                  */
-  #define GRTC_INTPEND13_COMPARE3_Min (0x0UL)        /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTPEND13_COMPARE3_Max (0x1UL)        /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTPEND13_COMPARE3_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND13_COMPARE3_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE4 @Bit 4 : Read pending status of interrupt for event COMPARE[4] */
-  #define GRTC_INTPEND13_COMPARE4_Pos (4UL)          /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTPEND13_COMPARE4_Msk (0x1UL << GRTC_INTPEND13_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                  */
-  #define GRTC_INTPEND13_COMPARE4_Min (0x0UL)        /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTPEND13_COMPARE4_Max (0x1UL)        /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTPEND13_COMPARE4_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND13_COMPARE4_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE5 @Bit 5 : Read pending status of interrupt for event COMPARE[5] */
-  #define GRTC_INTPEND13_COMPARE5_Pos (5UL)          /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTPEND13_COMPARE5_Msk (0x1UL << GRTC_INTPEND13_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                  */
-  #define GRTC_INTPEND13_COMPARE5_Min (0x0UL)        /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTPEND13_COMPARE5_Max (0x1UL)        /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTPEND13_COMPARE5_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND13_COMPARE5_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE6 @Bit 6 : Read pending status of interrupt for event COMPARE[6] */
-  #define GRTC_INTPEND13_COMPARE6_Pos (6UL)          /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTPEND13_COMPARE6_Msk (0x1UL << GRTC_INTPEND13_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                  */
-  #define GRTC_INTPEND13_COMPARE6_Min (0x0UL)        /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTPEND13_COMPARE6_Max (0x1UL)        /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTPEND13_COMPARE6_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND13_COMPARE6_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE7 @Bit 7 : Read pending status of interrupt for event COMPARE[7] */
-  #define GRTC_INTPEND13_COMPARE7_Pos (7UL)          /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTPEND13_COMPARE7_Msk (0x1UL << GRTC_INTPEND13_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                  */
-  #define GRTC_INTPEND13_COMPARE7_Min (0x0UL)        /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTPEND13_COMPARE7_Max (0x1UL)        /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTPEND13_COMPARE7_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND13_COMPARE7_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE8 @Bit 8 : Read pending status of interrupt for event COMPARE[8] */
-  #define GRTC_INTPEND13_COMPARE8_Pos (8UL)          /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTPEND13_COMPARE8_Msk (0x1UL << GRTC_INTPEND13_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                  */
-  #define GRTC_INTPEND13_COMPARE8_Min (0x0UL)        /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTPEND13_COMPARE8_Max (0x1UL)        /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTPEND13_COMPARE8_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND13_COMPARE8_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE9 @Bit 9 : Read pending status of interrupt for event COMPARE[9] */
-  #define GRTC_INTPEND13_COMPARE9_Pos (9UL)          /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTPEND13_COMPARE9_Msk (0x1UL << GRTC_INTPEND13_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                  */
-  #define GRTC_INTPEND13_COMPARE9_Min (0x0UL)        /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTPEND13_COMPARE9_Max (0x1UL)        /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTPEND13_COMPARE9_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND13_COMPARE9_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE10 @Bit 10 : Read pending status of interrupt for event COMPARE[10] */
-  #define GRTC_INTPEND13_COMPARE10_Pos (10UL)        /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTPEND13_COMPARE10_Msk (0x1UL << GRTC_INTPEND13_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.               */
-  #define GRTC_INTPEND13_COMPARE10_Min (0x0UL)       /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTPEND13_COMPARE10_Max (0x1UL)       /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTPEND13_COMPARE10_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND13_COMPARE10_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE11 @Bit 11 : Read pending status of interrupt for event COMPARE[11] */
-  #define GRTC_INTPEND13_COMPARE11_Pos (11UL)        /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTPEND13_COMPARE11_Msk (0x1UL << GRTC_INTPEND13_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.               */
-  #define GRTC_INTPEND13_COMPARE11_Min (0x0UL)       /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTPEND13_COMPARE11_Max (0x1UL)       /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTPEND13_COMPARE11_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND13_COMPARE11_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE12 @Bit 12 : Read pending status of interrupt for event COMPARE[12] */
-  #define GRTC_INTPEND13_COMPARE12_Pos (12UL)        /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTPEND13_COMPARE12_Msk (0x1UL << GRTC_INTPEND13_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.               */
-  #define GRTC_INTPEND13_COMPARE12_Min (0x0UL)       /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTPEND13_COMPARE12_Max (0x1UL)       /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTPEND13_COMPARE12_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND13_COMPARE12_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE13 @Bit 13 : Read pending status of interrupt for event COMPARE[13] */
-  #define GRTC_INTPEND13_COMPARE13_Pos (13UL)        /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTPEND13_COMPARE13_Msk (0x1UL << GRTC_INTPEND13_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.               */
-  #define GRTC_INTPEND13_COMPARE13_Min (0x0UL)       /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTPEND13_COMPARE13_Max (0x1UL)       /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTPEND13_COMPARE13_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND13_COMPARE13_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE14 @Bit 14 : Read pending status of interrupt for event COMPARE[14] */
-  #define GRTC_INTPEND13_COMPARE14_Pos (14UL)        /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTPEND13_COMPARE14_Msk (0x1UL << GRTC_INTPEND13_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.               */
-  #define GRTC_INTPEND13_COMPARE14_Min (0x0UL)       /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTPEND13_COMPARE14_Max (0x1UL)       /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTPEND13_COMPARE14_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND13_COMPARE14_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE15 @Bit 15 : Read pending status of interrupt for event COMPARE[15] */
-  #define GRTC_INTPEND13_COMPARE15_Pos (15UL)        /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTPEND13_COMPARE15_Msk (0x1UL << GRTC_INTPEND13_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.               */
-  #define GRTC_INTPEND13_COMPARE15_Min (0x0UL)       /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTPEND13_COMPARE15_Max (0x1UL)       /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTPEND13_COMPARE15_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND13_COMPARE15_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* RTCOMPARE @Bit 24 : Read pending status of interrupt for event RTCOMPARE */
-  #define GRTC_INTPEND13_RTCOMPARE_Pos (24UL)        /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTPEND13_RTCOMPARE_Msk (0x1UL << GRTC_INTPEND13_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.               */
-  #define GRTC_INTPEND13_RTCOMPARE_Min (0x0UL)       /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTPEND13_RTCOMPARE_Max (0x1UL)       /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTPEND13_RTCOMPARE_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND13_RTCOMPARE_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Read pending status of interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTPEND13_RTCOMPARESYNC_Pos (25UL)    /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTPEND13_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTPEND13_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field.   */
-  #define GRTC_INTPEND13_RTCOMPARESYNC_Min (0x0UL)   /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTPEND13_RTCOMPARESYNC_Max (0x1UL)   /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTPEND13_RTCOMPARESYNC_NotPending (0x0UL) /*!< Read: Not pending                                               */
-  #define GRTC_INTPEND13_RTCOMPARESYNC_Pending (0x1UL) /*!< Read: Pending                                                      */
-
-/* SYSCOUNTERVALID @Bit 26 : Read pending status of interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTPEND13_SYSCOUNTERVALID_Pos (26UL)  /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTPEND13_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTPEND13_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTPEND13_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTPEND13_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTPEND13_SYSCOUNTERVALID_NotPending (0x0UL) /*!< Read: Not pending                                             */
-  #define GRTC_INTPEND13_SYSCOUNTERVALID_Pending (0x1UL) /*!< Read: Pending                                                    */
-
-/* PWMPERIODEND @Bit 27 : Read pending status of interrupt for event PWMPERIODEND */
-  #define GRTC_INTPEND13_PWMPERIODEND_Pos (27UL)     /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTPEND13_PWMPERIODEND_Msk (0x1UL << GRTC_INTPEND13_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.      */
-  #define GRTC_INTPEND13_PWMPERIODEND_Min (0x0UL)    /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTPEND13_PWMPERIODEND_Max (0x1UL)    /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTPEND13_PWMPERIODEND_NotPending (0x0UL) /*!< Read: Not pending                                                */
-  #define GRTC_INTPEND13_PWMPERIODEND_Pending (0x1UL) /*!< Read: Pending                                                       */
-
-
-/* GRTC_INTEN14: Enable or disable interrupt */
-  #define GRTC_INTEN14_ResetValue (0x00000000UL)     /*!< Reset value of INTEN14 register.                                     */
-
-/* COMPARE0 @Bit 0 : Enable or disable interrupt for event COMPARE[0] */
-  #define GRTC_INTEN14_COMPARE0_Pos (0UL)            /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTEN14_COMPARE0_Msk (0x1UL << GRTC_INTEN14_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                      */
-  #define GRTC_INTEN14_COMPARE0_Min (0x0UL)          /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTEN14_COMPARE0_Max (0x1UL)          /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTEN14_COMPARE0_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE0_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE1 @Bit 1 : Enable or disable interrupt for event COMPARE[1] */
-  #define GRTC_INTEN14_COMPARE1_Pos (1UL)            /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTEN14_COMPARE1_Msk (0x1UL << GRTC_INTEN14_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                      */
-  #define GRTC_INTEN14_COMPARE1_Min (0x0UL)          /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTEN14_COMPARE1_Max (0x1UL)          /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTEN14_COMPARE1_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE1_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE2 @Bit 2 : Enable or disable interrupt for event COMPARE[2] */
-  #define GRTC_INTEN14_COMPARE2_Pos (2UL)            /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTEN14_COMPARE2_Msk (0x1UL << GRTC_INTEN14_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                      */
-  #define GRTC_INTEN14_COMPARE2_Min (0x0UL)          /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTEN14_COMPARE2_Max (0x1UL)          /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTEN14_COMPARE2_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE2_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE3 @Bit 3 : Enable or disable interrupt for event COMPARE[3] */
-  #define GRTC_INTEN14_COMPARE3_Pos (3UL)            /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTEN14_COMPARE3_Msk (0x1UL << GRTC_INTEN14_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                      */
-  #define GRTC_INTEN14_COMPARE3_Min (0x0UL)          /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTEN14_COMPARE3_Max (0x1UL)          /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTEN14_COMPARE3_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE3_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE4 @Bit 4 : Enable or disable interrupt for event COMPARE[4] */
-  #define GRTC_INTEN14_COMPARE4_Pos (4UL)            /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTEN14_COMPARE4_Msk (0x1UL << GRTC_INTEN14_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                      */
-  #define GRTC_INTEN14_COMPARE4_Min (0x0UL)          /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTEN14_COMPARE4_Max (0x1UL)          /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTEN14_COMPARE4_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE4_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE5 @Bit 5 : Enable or disable interrupt for event COMPARE[5] */
-  #define GRTC_INTEN14_COMPARE5_Pos (5UL)            /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTEN14_COMPARE5_Msk (0x1UL << GRTC_INTEN14_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                      */
-  #define GRTC_INTEN14_COMPARE5_Min (0x0UL)          /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTEN14_COMPARE5_Max (0x1UL)          /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTEN14_COMPARE5_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE5_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE6 @Bit 6 : Enable or disable interrupt for event COMPARE[6] */
-  #define GRTC_INTEN14_COMPARE6_Pos (6UL)            /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTEN14_COMPARE6_Msk (0x1UL << GRTC_INTEN14_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                      */
-  #define GRTC_INTEN14_COMPARE6_Min (0x0UL)          /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTEN14_COMPARE6_Max (0x1UL)          /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTEN14_COMPARE6_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE6_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE7 @Bit 7 : Enable or disable interrupt for event COMPARE[7] */
-  #define GRTC_INTEN14_COMPARE7_Pos (7UL)            /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTEN14_COMPARE7_Msk (0x1UL << GRTC_INTEN14_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                      */
-  #define GRTC_INTEN14_COMPARE7_Min (0x0UL)          /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTEN14_COMPARE7_Max (0x1UL)          /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTEN14_COMPARE7_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE7_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE8 @Bit 8 : Enable or disable interrupt for event COMPARE[8] */
-  #define GRTC_INTEN14_COMPARE8_Pos (8UL)            /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTEN14_COMPARE8_Msk (0x1UL << GRTC_INTEN14_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                      */
-  #define GRTC_INTEN14_COMPARE8_Min (0x0UL)          /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTEN14_COMPARE8_Max (0x1UL)          /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTEN14_COMPARE8_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE8_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE9 @Bit 9 : Enable or disable interrupt for event COMPARE[9] */
-  #define GRTC_INTEN14_COMPARE9_Pos (9UL)            /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTEN14_COMPARE9_Msk (0x1UL << GRTC_INTEN14_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                      */
-  #define GRTC_INTEN14_COMPARE9_Min (0x0UL)          /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTEN14_COMPARE9_Max (0x1UL)          /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTEN14_COMPARE9_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE9_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE10 @Bit 10 : Enable or disable interrupt for event COMPARE[10] */
-  #define GRTC_INTEN14_COMPARE10_Pos (10UL)          /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTEN14_COMPARE10_Msk (0x1UL << GRTC_INTEN14_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.                   */
-  #define GRTC_INTEN14_COMPARE10_Min (0x0UL)         /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTEN14_COMPARE10_Max (0x1UL)         /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTEN14_COMPARE10_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE10_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE11 @Bit 11 : Enable or disable interrupt for event COMPARE[11] */
-  #define GRTC_INTEN14_COMPARE11_Pos (11UL)          /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTEN14_COMPARE11_Msk (0x1UL << GRTC_INTEN14_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.                   */
-  #define GRTC_INTEN14_COMPARE11_Min (0x0UL)         /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTEN14_COMPARE11_Max (0x1UL)         /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTEN14_COMPARE11_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE11_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE12 @Bit 12 : Enable or disable interrupt for event COMPARE[12] */
-  #define GRTC_INTEN14_COMPARE12_Pos (12UL)          /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTEN14_COMPARE12_Msk (0x1UL << GRTC_INTEN14_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.                   */
-  #define GRTC_INTEN14_COMPARE12_Min (0x0UL)         /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTEN14_COMPARE12_Max (0x1UL)         /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTEN14_COMPARE12_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE12_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE13 @Bit 13 : Enable or disable interrupt for event COMPARE[13] */
-  #define GRTC_INTEN14_COMPARE13_Pos (13UL)          /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTEN14_COMPARE13_Msk (0x1UL << GRTC_INTEN14_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.                   */
-  #define GRTC_INTEN14_COMPARE13_Min (0x0UL)         /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTEN14_COMPARE13_Max (0x1UL)         /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTEN14_COMPARE13_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE13_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE14 @Bit 14 : Enable or disable interrupt for event COMPARE[14] */
-  #define GRTC_INTEN14_COMPARE14_Pos (14UL)          /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTEN14_COMPARE14_Msk (0x1UL << GRTC_INTEN14_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.                   */
-  #define GRTC_INTEN14_COMPARE14_Min (0x0UL)         /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTEN14_COMPARE14_Max (0x1UL)         /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTEN14_COMPARE14_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE14_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE15 @Bit 15 : Enable or disable interrupt for event COMPARE[15] */
-  #define GRTC_INTEN14_COMPARE15_Pos (15UL)          /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTEN14_COMPARE15_Msk (0x1UL << GRTC_INTEN14_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.                   */
-  #define GRTC_INTEN14_COMPARE15_Min (0x0UL)         /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTEN14_COMPARE15_Max (0x1UL)         /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTEN14_COMPARE15_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN14_COMPARE15_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* RTCOMPARE @Bit 24 : Enable or disable interrupt for event RTCOMPARE */
-  #define GRTC_INTEN14_RTCOMPARE_Pos (24UL)          /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTEN14_RTCOMPARE_Msk (0x1UL << GRTC_INTEN14_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.                   */
-  #define GRTC_INTEN14_RTCOMPARE_Min (0x0UL)         /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTEN14_RTCOMPARE_Max (0x1UL)         /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTEN14_RTCOMPARE_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN14_RTCOMPARE_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* RTCOMPARESYNC @Bit 25 : Enable or disable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTEN14_RTCOMPARESYNC_Pos (25UL)      /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTEN14_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTEN14_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field.       */
-  #define GRTC_INTEN14_RTCOMPARESYNC_Min (0x0UL)     /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTEN14_RTCOMPARESYNC_Max (0x1UL)     /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTEN14_RTCOMPARESYNC_Disabled (0x0UL) /*!< Disable                                                             */
-  #define GRTC_INTEN14_RTCOMPARESYNC_Enabled (0x1UL) /*!< Enable                                                               */
-
-/* SYSCOUNTERVALID @Bit 26 : Enable or disable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTEN14_SYSCOUNTERVALID_Pos (26UL)    /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTEN14_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTEN14_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID field. */
-  #define GRTC_INTEN14_SYSCOUNTERVALID_Min (0x0UL)   /*!< Min enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTEN14_SYSCOUNTERVALID_Max (0x1UL)   /*!< Max enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTEN14_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Disable                                                           */
-  #define GRTC_INTEN14_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Enable                                                             */
-
-/* PWMPERIODEND @Bit 27 : Enable or disable interrupt for event PWMPERIODEND */
-  #define GRTC_INTEN14_PWMPERIODEND_Pos (27UL)       /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTEN14_PWMPERIODEND_Msk (0x1UL << GRTC_INTEN14_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.          */
-  #define GRTC_INTEN14_PWMPERIODEND_Min (0x0UL)      /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTEN14_PWMPERIODEND_Max (0x1UL)      /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTEN14_PWMPERIODEND_Disabled (0x0UL) /*!< Disable                                                              */
-  #define GRTC_INTEN14_PWMPERIODEND_Enabled (0x1UL)  /*!< Enable                                                               */
-
-
-/* GRTC_INTENSET14: Enable interrupt */
-  #define GRTC_INTENSET14_ResetValue (0x00000000UL)  /*!< Reset value of INTENSET14 register.                                  */
-
-/* COMPARE0 @Bit 0 : Write '1' to enable interrupt for event COMPARE[0] */
-  #define GRTC_INTENSET14_COMPARE0_Pos (0UL)         /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTENSET14_COMPARE0_Msk (0x1UL << GRTC_INTENSET14_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                */
-  #define GRTC_INTENSET14_COMPARE0_Min (0x0UL)       /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENSET14_COMPARE0_Max (0x1UL)       /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENSET14_COMPARE0_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE0_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE0_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE1 @Bit 1 : Write '1' to enable interrupt for event COMPARE[1] */
-  #define GRTC_INTENSET14_COMPARE1_Pos (1UL)         /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTENSET14_COMPARE1_Msk (0x1UL << GRTC_INTENSET14_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                */
-  #define GRTC_INTENSET14_COMPARE1_Min (0x0UL)       /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENSET14_COMPARE1_Max (0x1UL)       /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENSET14_COMPARE1_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE1_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE1_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE2 @Bit 2 : Write '1' to enable interrupt for event COMPARE[2] */
-  #define GRTC_INTENSET14_COMPARE2_Pos (2UL)         /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTENSET14_COMPARE2_Msk (0x1UL << GRTC_INTENSET14_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                */
-  #define GRTC_INTENSET14_COMPARE2_Min (0x0UL)       /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENSET14_COMPARE2_Max (0x1UL)       /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENSET14_COMPARE2_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE2_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE2_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE3 @Bit 3 : Write '1' to enable interrupt for event COMPARE[3] */
-  #define GRTC_INTENSET14_COMPARE3_Pos (3UL)         /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTENSET14_COMPARE3_Msk (0x1UL << GRTC_INTENSET14_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                */
-  #define GRTC_INTENSET14_COMPARE3_Min (0x0UL)       /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENSET14_COMPARE3_Max (0x1UL)       /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENSET14_COMPARE3_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE3_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE3_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE4 @Bit 4 : Write '1' to enable interrupt for event COMPARE[4] */
-  #define GRTC_INTENSET14_COMPARE4_Pos (4UL)         /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTENSET14_COMPARE4_Msk (0x1UL << GRTC_INTENSET14_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                */
-  #define GRTC_INTENSET14_COMPARE4_Min (0x0UL)       /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENSET14_COMPARE4_Max (0x1UL)       /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENSET14_COMPARE4_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE4_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE4_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE5 @Bit 5 : Write '1' to enable interrupt for event COMPARE[5] */
-  #define GRTC_INTENSET14_COMPARE5_Pos (5UL)         /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTENSET14_COMPARE5_Msk (0x1UL << GRTC_INTENSET14_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                */
-  #define GRTC_INTENSET14_COMPARE5_Min (0x0UL)       /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENSET14_COMPARE5_Max (0x1UL)       /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENSET14_COMPARE5_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE5_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE5_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE6 @Bit 6 : Write '1' to enable interrupt for event COMPARE[6] */
-  #define GRTC_INTENSET14_COMPARE6_Pos (6UL)         /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTENSET14_COMPARE6_Msk (0x1UL << GRTC_INTENSET14_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                */
-  #define GRTC_INTENSET14_COMPARE6_Min (0x0UL)       /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENSET14_COMPARE6_Max (0x1UL)       /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENSET14_COMPARE6_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE6_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE6_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE7 @Bit 7 : Write '1' to enable interrupt for event COMPARE[7] */
-  #define GRTC_INTENSET14_COMPARE7_Pos (7UL)         /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTENSET14_COMPARE7_Msk (0x1UL << GRTC_INTENSET14_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                */
-  #define GRTC_INTENSET14_COMPARE7_Min (0x0UL)       /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENSET14_COMPARE7_Max (0x1UL)       /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENSET14_COMPARE7_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE7_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE7_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE8 @Bit 8 : Write '1' to enable interrupt for event COMPARE[8] */
-  #define GRTC_INTENSET14_COMPARE8_Pos (8UL)         /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTENSET14_COMPARE8_Msk (0x1UL << GRTC_INTENSET14_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                */
-  #define GRTC_INTENSET14_COMPARE8_Min (0x0UL)       /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENSET14_COMPARE8_Max (0x1UL)       /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENSET14_COMPARE8_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE8_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE8_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE9 @Bit 9 : Write '1' to enable interrupt for event COMPARE[9] */
-  #define GRTC_INTENSET14_COMPARE9_Pos (9UL)         /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTENSET14_COMPARE9_Msk (0x1UL << GRTC_INTENSET14_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                */
-  #define GRTC_INTENSET14_COMPARE9_Min (0x0UL)       /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENSET14_COMPARE9_Max (0x1UL)       /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENSET14_COMPARE9_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE9_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE9_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE10 @Bit 10 : Write '1' to enable interrupt for event COMPARE[10] */
-  #define GRTC_INTENSET14_COMPARE10_Pos (10UL)       /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTENSET14_COMPARE10_Msk (0x1UL << GRTC_INTENSET14_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.             */
-  #define GRTC_INTENSET14_COMPARE10_Min (0x0UL)      /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENSET14_COMPARE10_Max (0x1UL)      /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENSET14_COMPARE10_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE10_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE10_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE11 @Bit 11 : Write '1' to enable interrupt for event COMPARE[11] */
-  #define GRTC_INTENSET14_COMPARE11_Pos (11UL)       /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTENSET14_COMPARE11_Msk (0x1UL << GRTC_INTENSET14_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.             */
-  #define GRTC_INTENSET14_COMPARE11_Min (0x0UL)      /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENSET14_COMPARE11_Max (0x1UL)      /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENSET14_COMPARE11_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE11_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE11_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE12 @Bit 12 : Write '1' to enable interrupt for event COMPARE[12] */
-  #define GRTC_INTENSET14_COMPARE12_Pos (12UL)       /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTENSET14_COMPARE12_Msk (0x1UL << GRTC_INTENSET14_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.             */
-  #define GRTC_INTENSET14_COMPARE12_Min (0x0UL)      /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENSET14_COMPARE12_Max (0x1UL)      /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENSET14_COMPARE12_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE12_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE12_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE13 @Bit 13 : Write '1' to enable interrupt for event COMPARE[13] */
-  #define GRTC_INTENSET14_COMPARE13_Pos (13UL)       /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTENSET14_COMPARE13_Msk (0x1UL << GRTC_INTENSET14_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.             */
-  #define GRTC_INTENSET14_COMPARE13_Min (0x0UL)      /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENSET14_COMPARE13_Max (0x1UL)      /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENSET14_COMPARE13_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE13_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE13_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE14 @Bit 14 : Write '1' to enable interrupt for event COMPARE[14] */
-  #define GRTC_INTENSET14_COMPARE14_Pos (14UL)       /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTENSET14_COMPARE14_Msk (0x1UL << GRTC_INTENSET14_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.             */
-  #define GRTC_INTENSET14_COMPARE14_Min (0x0UL)      /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENSET14_COMPARE14_Max (0x1UL)      /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENSET14_COMPARE14_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE14_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE14_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE15 @Bit 15 : Write '1' to enable interrupt for event COMPARE[15] */
-  #define GRTC_INTENSET14_COMPARE15_Pos (15UL)       /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTENSET14_COMPARE15_Msk (0x1UL << GRTC_INTENSET14_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.             */
-  #define GRTC_INTENSET14_COMPARE15_Min (0x0UL)      /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENSET14_COMPARE15_Max (0x1UL)      /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENSET14_COMPARE15_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET14_COMPARE15_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_COMPARE15_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARE @Bit 24 : Write '1' to enable interrupt for event RTCOMPARE */
-  #define GRTC_INTENSET14_RTCOMPARE_Pos (24UL)       /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTENSET14_RTCOMPARE_Msk (0x1UL << GRTC_INTENSET14_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.             */
-  #define GRTC_INTENSET14_RTCOMPARE_Min (0x0UL)      /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENSET14_RTCOMPARE_Max (0x1UL)      /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENSET14_RTCOMPARE_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET14_RTCOMPARE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET14_RTCOMPARE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Write '1' to enable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTENSET14_RTCOMPARESYNC_Pos (25UL)   /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTENSET14_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTENSET14_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field. */
-  #define GRTC_INTENSET14_RTCOMPARESYNC_Min (0x0UL)  /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENSET14_RTCOMPARESYNC_Max (0x1UL)  /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENSET14_RTCOMPARESYNC_Set (0x1UL)  /*!< Enable                                                               */
-  #define GRTC_INTENSET14_RTCOMPARESYNC_Disabled (0x0UL) /*!< Read: Disabled                                                   */
-  #define GRTC_INTENSET14_RTCOMPARESYNC_Enabled (0x1UL) /*!< Read: Enabled                                                     */
-
-/* SYSCOUNTERVALID @Bit 26 : Write '1' to enable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTENSET14_SYSCOUNTERVALID_Pos (26UL) /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTENSET14_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTENSET14_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTENSET14_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENSET14_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENSET14_SYSCOUNTERVALID_Set (0x1UL) /*!< Enable                                                              */
-  #define GRTC_INTENSET14_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-  #define GRTC_INTENSET14_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-/* PWMPERIODEND @Bit 27 : Write '1' to enable interrupt for event PWMPERIODEND */
-  #define GRTC_INTENSET14_PWMPERIODEND_Pos (27UL)    /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTENSET14_PWMPERIODEND_Msk (0x1UL << GRTC_INTENSET14_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.    */
-  #define GRTC_INTENSET14_PWMPERIODEND_Min (0x0UL)   /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENSET14_PWMPERIODEND_Max (0x1UL)   /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENSET14_PWMPERIODEND_Set (0x1UL)   /*!< Enable                                                               */
-  #define GRTC_INTENSET14_PWMPERIODEND_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-  #define GRTC_INTENSET14_PWMPERIODEND_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-
-/* GRTC_INTENCLR14: Disable interrupt */
-  #define GRTC_INTENCLR14_ResetValue (0x00000000UL)  /*!< Reset value of INTENCLR14 register.                                  */
-
-/* COMPARE0 @Bit 0 : Write '1' to disable interrupt for event COMPARE[0] */
-  #define GRTC_INTENCLR14_COMPARE0_Pos (0UL)         /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTENCLR14_COMPARE0_Msk (0x1UL << GRTC_INTENCLR14_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                */
-  #define GRTC_INTENCLR14_COMPARE0_Min (0x0UL)       /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENCLR14_COMPARE0_Max (0x1UL)       /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENCLR14_COMPARE0_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE0_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE0_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE1 @Bit 1 : Write '1' to disable interrupt for event COMPARE[1] */
-  #define GRTC_INTENCLR14_COMPARE1_Pos (1UL)         /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTENCLR14_COMPARE1_Msk (0x1UL << GRTC_INTENCLR14_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                */
-  #define GRTC_INTENCLR14_COMPARE1_Min (0x0UL)       /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENCLR14_COMPARE1_Max (0x1UL)       /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENCLR14_COMPARE1_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE1_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE1_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE2 @Bit 2 : Write '1' to disable interrupt for event COMPARE[2] */
-  #define GRTC_INTENCLR14_COMPARE2_Pos (2UL)         /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTENCLR14_COMPARE2_Msk (0x1UL << GRTC_INTENCLR14_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                */
-  #define GRTC_INTENCLR14_COMPARE2_Min (0x0UL)       /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENCLR14_COMPARE2_Max (0x1UL)       /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENCLR14_COMPARE2_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE2_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE2_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE3 @Bit 3 : Write '1' to disable interrupt for event COMPARE[3] */
-  #define GRTC_INTENCLR14_COMPARE3_Pos (3UL)         /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTENCLR14_COMPARE3_Msk (0x1UL << GRTC_INTENCLR14_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                */
-  #define GRTC_INTENCLR14_COMPARE3_Min (0x0UL)       /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENCLR14_COMPARE3_Max (0x1UL)       /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENCLR14_COMPARE3_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE3_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE3_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE4 @Bit 4 : Write '1' to disable interrupt for event COMPARE[4] */
-  #define GRTC_INTENCLR14_COMPARE4_Pos (4UL)         /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTENCLR14_COMPARE4_Msk (0x1UL << GRTC_INTENCLR14_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                */
-  #define GRTC_INTENCLR14_COMPARE4_Min (0x0UL)       /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENCLR14_COMPARE4_Max (0x1UL)       /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENCLR14_COMPARE4_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE4_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE4_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE5 @Bit 5 : Write '1' to disable interrupt for event COMPARE[5] */
-  #define GRTC_INTENCLR14_COMPARE5_Pos (5UL)         /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTENCLR14_COMPARE5_Msk (0x1UL << GRTC_INTENCLR14_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                */
-  #define GRTC_INTENCLR14_COMPARE5_Min (0x0UL)       /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENCLR14_COMPARE5_Max (0x1UL)       /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENCLR14_COMPARE5_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE5_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE5_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE6 @Bit 6 : Write '1' to disable interrupt for event COMPARE[6] */
-  #define GRTC_INTENCLR14_COMPARE6_Pos (6UL)         /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTENCLR14_COMPARE6_Msk (0x1UL << GRTC_INTENCLR14_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                */
-  #define GRTC_INTENCLR14_COMPARE6_Min (0x0UL)       /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENCLR14_COMPARE6_Max (0x1UL)       /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENCLR14_COMPARE6_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE6_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE6_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE7 @Bit 7 : Write '1' to disable interrupt for event COMPARE[7] */
-  #define GRTC_INTENCLR14_COMPARE7_Pos (7UL)         /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTENCLR14_COMPARE7_Msk (0x1UL << GRTC_INTENCLR14_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                */
-  #define GRTC_INTENCLR14_COMPARE7_Min (0x0UL)       /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENCLR14_COMPARE7_Max (0x1UL)       /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENCLR14_COMPARE7_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE7_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE7_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE8 @Bit 8 : Write '1' to disable interrupt for event COMPARE[8] */
-  #define GRTC_INTENCLR14_COMPARE8_Pos (8UL)         /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTENCLR14_COMPARE8_Msk (0x1UL << GRTC_INTENCLR14_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                */
-  #define GRTC_INTENCLR14_COMPARE8_Min (0x0UL)       /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENCLR14_COMPARE8_Max (0x1UL)       /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENCLR14_COMPARE8_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE8_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE8_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE9 @Bit 9 : Write '1' to disable interrupt for event COMPARE[9] */
-  #define GRTC_INTENCLR14_COMPARE9_Pos (9UL)         /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTENCLR14_COMPARE9_Msk (0x1UL << GRTC_INTENCLR14_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                */
-  #define GRTC_INTENCLR14_COMPARE9_Min (0x0UL)       /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENCLR14_COMPARE9_Max (0x1UL)       /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENCLR14_COMPARE9_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE9_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE9_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE10 @Bit 10 : Write '1' to disable interrupt for event COMPARE[10] */
-  #define GRTC_INTENCLR14_COMPARE10_Pos (10UL)       /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTENCLR14_COMPARE10_Msk (0x1UL << GRTC_INTENCLR14_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.             */
-  #define GRTC_INTENCLR14_COMPARE10_Min (0x0UL)      /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENCLR14_COMPARE10_Max (0x1UL)      /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENCLR14_COMPARE10_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE10_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE10_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE11 @Bit 11 : Write '1' to disable interrupt for event COMPARE[11] */
-  #define GRTC_INTENCLR14_COMPARE11_Pos (11UL)       /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTENCLR14_COMPARE11_Msk (0x1UL << GRTC_INTENCLR14_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.             */
-  #define GRTC_INTENCLR14_COMPARE11_Min (0x0UL)      /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENCLR14_COMPARE11_Max (0x1UL)      /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENCLR14_COMPARE11_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE11_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE11_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE12 @Bit 12 : Write '1' to disable interrupt for event COMPARE[12] */
-  #define GRTC_INTENCLR14_COMPARE12_Pos (12UL)       /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTENCLR14_COMPARE12_Msk (0x1UL << GRTC_INTENCLR14_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.             */
-  #define GRTC_INTENCLR14_COMPARE12_Min (0x0UL)      /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENCLR14_COMPARE12_Max (0x1UL)      /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENCLR14_COMPARE12_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE12_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE12_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE13 @Bit 13 : Write '1' to disable interrupt for event COMPARE[13] */
-  #define GRTC_INTENCLR14_COMPARE13_Pos (13UL)       /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTENCLR14_COMPARE13_Msk (0x1UL << GRTC_INTENCLR14_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.             */
-  #define GRTC_INTENCLR14_COMPARE13_Min (0x0UL)      /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENCLR14_COMPARE13_Max (0x1UL)      /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENCLR14_COMPARE13_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE13_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE13_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE14 @Bit 14 : Write '1' to disable interrupt for event COMPARE[14] */
-  #define GRTC_INTENCLR14_COMPARE14_Pos (14UL)       /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTENCLR14_COMPARE14_Msk (0x1UL << GRTC_INTENCLR14_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.             */
-  #define GRTC_INTENCLR14_COMPARE14_Min (0x0UL)      /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENCLR14_COMPARE14_Max (0x1UL)      /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENCLR14_COMPARE14_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE14_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE14_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE15 @Bit 15 : Write '1' to disable interrupt for event COMPARE[15] */
-  #define GRTC_INTENCLR14_COMPARE15_Pos (15UL)       /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTENCLR14_COMPARE15_Msk (0x1UL << GRTC_INTENCLR14_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.             */
-  #define GRTC_INTENCLR14_COMPARE15_Min (0x0UL)      /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENCLR14_COMPARE15_Max (0x1UL)      /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENCLR14_COMPARE15_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_COMPARE15_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_COMPARE15_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARE @Bit 24 : Write '1' to disable interrupt for event RTCOMPARE */
-  #define GRTC_INTENCLR14_RTCOMPARE_Pos (24UL)       /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTENCLR14_RTCOMPARE_Msk (0x1UL << GRTC_INTENCLR14_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.             */
-  #define GRTC_INTENCLR14_RTCOMPARE_Min (0x0UL)      /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENCLR14_RTCOMPARE_Max (0x1UL)      /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENCLR14_RTCOMPARE_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_RTCOMPARE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR14_RTCOMPARE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Write '1' to disable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTENCLR14_RTCOMPARESYNC_Pos (25UL)   /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTENCLR14_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTENCLR14_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field. */
-  #define GRTC_INTENCLR14_RTCOMPARESYNC_Min (0x0UL)  /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENCLR14_RTCOMPARESYNC_Max (0x1UL)  /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENCLR14_RTCOMPARESYNC_Clear (0x1UL) /*!< Disable                                                             */
-  #define GRTC_INTENCLR14_RTCOMPARESYNC_Disabled (0x0UL) /*!< Read: Disabled                                                   */
-  #define GRTC_INTENCLR14_RTCOMPARESYNC_Enabled (0x1UL) /*!< Read: Enabled                                                     */
-
-/* SYSCOUNTERVALID @Bit 26 : Write '1' to disable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTENCLR14_SYSCOUNTERVALID_Pos (26UL) /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTENCLR14_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTENCLR14_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTENCLR14_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENCLR14_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENCLR14_SYSCOUNTERVALID_Clear (0x1UL) /*!< Disable                                                           */
-  #define GRTC_INTENCLR14_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-  #define GRTC_INTENCLR14_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-/* PWMPERIODEND @Bit 27 : Write '1' to disable interrupt for event PWMPERIODEND */
-  #define GRTC_INTENCLR14_PWMPERIODEND_Pos (27UL)    /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTENCLR14_PWMPERIODEND_Msk (0x1UL << GRTC_INTENCLR14_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.    */
-  #define GRTC_INTENCLR14_PWMPERIODEND_Min (0x0UL)   /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENCLR14_PWMPERIODEND_Max (0x1UL)   /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENCLR14_PWMPERIODEND_Clear (0x1UL) /*!< Disable                                                              */
-  #define GRTC_INTENCLR14_PWMPERIODEND_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-  #define GRTC_INTENCLR14_PWMPERIODEND_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-
-/* GRTC_INTPEND14: Pending interrupts */
-  #define GRTC_INTPEND14_ResetValue (0x00000000UL)   /*!< Reset value of INTPEND14 register.                                   */
-
-/* COMPARE0 @Bit 0 : Read pending status of interrupt for event COMPARE[0] */
-  #define GRTC_INTPEND14_COMPARE0_Pos (0UL)          /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTPEND14_COMPARE0_Msk (0x1UL << GRTC_INTPEND14_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                  */
-  #define GRTC_INTPEND14_COMPARE0_Min (0x0UL)        /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTPEND14_COMPARE0_Max (0x1UL)        /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTPEND14_COMPARE0_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND14_COMPARE0_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE1 @Bit 1 : Read pending status of interrupt for event COMPARE[1] */
-  #define GRTC_INTPEND14_COMPARE1_Pos (1UL)          /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTPEND14_COMPARE1_Msk (0x1UL << GRTC_INTPEND14_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                  */
-  #define GRTC_INTPEND14_COMPARE1_Min (0x0UL)        /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTPEND14_COMPARE1_Max (0x1UL)        /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTPEND14_COMPARE1_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND14_COMPARE1_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE2 @Bit 2 : Read pending status of interrupt for event COMPARE[2] */
-  #define GRTC_INTPEND14_COMPARE2_Pos (2UL)          /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTPEND14_COMPARE2_Msk (0x1UL << GRTC_INTPEND14_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                  */
-  #define GRTC_INTPEND14_COMPARE2_Min (0x0UL)        /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTPEND14_COMPARE2_Max (0x1UL)        /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTPEND14_COMPARE2_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND14_COMPARE2_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE3 @Bit 3 : Read pending status of interrupt for event COMPARE[3] */
-  #define GRTC_INTPEND14_COMPARE3_Pos (3UL)          /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTPEND14_COMPARE3_Msk (0x1UL << GRTC_INTPEND14_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                  */
-  #define GRTC_INTPEND14_COMPARE3_Min (0x0UL)        /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTPEND14_COMPARE3_Max (0x1UL)        /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTPEND14_COMPARE3_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND14_COMPARE3_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE4 @Bit 4 : Read pending status of interrupt for event COMPARE[4] */
-  #define GRTC_INTPEND14_COMPARE4_Pos (4UL)          /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTPEND14_COMPARE4_Msk (0x1UL << GRTC_INTPEND14_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                  */
-  #define GRTC_INTPEND14_COMPARE4_Min (0x0UL)        /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTPEND14_COMPARE4_Max (0x1UL)        /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTPEND14_COMPARE4_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND14_COMPARE4_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE5 @Bit 5 : Read pending status of interrupt for event COMPARE[5] */
-  #define GRTC_INTPEND14_COMPARE5_Pos (5UL)          /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTPEND14_COMPARE5_Msk (0x1UL << GRTC_INTPEND14_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                  */
-  #define GRTC_INTPEND14_COMPARE5_Min (0x0UL)        /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTPEND14_COMPARE5_Max (0x1UL)        /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTPEND14_COMPARE5_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND14_COMPARE5_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE6 @Bit 6 : Read pending status of interrupt for event COMPARE[6] */
-  #define GRTC_INTPEND14_COMPARE6_Pos (6UL)          /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTPEND14_COMPARE6_Msk (0x1UL << GRTC_INTPEND14_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                  */
-  #define GRTC_INTPEND14_COMPARE6_Min (0x0UL)        /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTPEND14_COMPARE6_Max (0x1UL)        /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTPEND14_COMPARE6_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND14_COMPARE6_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE7 @Bit 7 : Read pending status of interrupt for event COMPARE[7] */
-  #define GRTC_INTPEND14_COMPARE7_Pos (7UL)          /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTPEND14_COMPARE7_Msk (0x1UL << GRTC_INTPEND14_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                  */
-  #define GRTC_INTPEND14_COMPARE7_Min (0x0UL)        /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTPEND14_COMPARE7_Max (0x1UL)        /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTPEND14_COMPARE7_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND14_COMPARE7_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE8 @Bit 8 : Read pending status of interrupt for event COMPARE[8] */
-  #define GRTC_INTPEND14_COMPARE8_Pos (8UL)          /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTPEND14_COMPARE8_Msk (0x1UL << GRTC_INTPEND14_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                  */
-  #define GRTC_INTPEND14_COMPARE8_Min (0x0UL)        /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTPEND14_COMPARE8_Max (0x1UL)        /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTPEND14_COMPARE8_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND14_COMPARE8_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE9 @Bit 9 : Read pending status of interrupt for event COMPARE[9] */
-  #define GRTC_INTPEND14_COMPARE9_Pos (9UL)          /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTPEND14_COMPARE9_Msk (0x1UL << GRTC_INTPEND14_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                  */
-  #define GRTC_INTPEND14_COMPARE9_Min (0x0UL)        /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTPEND14_COMPARE9_Max (0x1UL)        /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTPEND14_COMPARE9_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND14_COMPARE9_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE10 @Bit 10 : Read pending status of interrupt for event COMPARE[10] */
-  #define GRTC_INTPEND14_COMPARE10_Pos (10UL)        /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTPEND14_COMPARE10_Msk (0x1UL << GRTC_INTPEND14_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.               */
-  #define GRTC_INTPEND14_COMPARE10_Min (0x0UL)       /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTPEND14_COMPARE10_Max (0x1UL)       /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTPEND14_COMPARE10_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND14_COMPARE10_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE11 @Bit 11 : Read pending status of interrupt for event COMPARE[11] */
-  #define GRTC_INTPEND14_COMPARE11_Pos (11UL)        /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTPEND14_COMPARE11_Msk (0x1UL << GRTC_INTPEND14_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.               */
-  #define GRTC_INTPEND14_COMPARE11_Min (0x0UL)       /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTPEND14_COMPARE11_Max (0x1UL)       /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTPEND14_COMPARE11_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND14_COMPARE11_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE12 @Bit 12 : Read pending status of interrupt for event COMPARE[12] */
-  #define GRTC_INTPEND14_COMPARE12_Pos (12UL)        /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTPEND14_COMPARE12_Msk (0x1UL << GRTC_INTPEND14_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.               */
-  #define GRTC_INTPEND14_COMPARE12_Min (0x0UL)       /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTPEND14_COMPARE12_Max (0x1UL)       /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTPEND14_COMPARE12_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND14_COMPARE12_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE13 @Bit 13 : Read pending status of interrupt for event COMPARE[13] */
-  #define GRTC_INTPEND14_COMPARE13_Pos (13UL)        /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTPEND14_COMPARE13_Msk (0x1UL << GRTC_INTPEND14_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.               */
-  #define GRTC_INTPEND14_COMPARE13_Min (0x0UL)       /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTPEND14_COMPARE13_Max (0x1UL)       /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTPEND14_COMPARE13_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND14_COMPARE13_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE14 @Bit 14 : Read pending status of interrupt for event COMPARE[14] */
-  #define GRTC_INTPEND14_COMPARE14_Pos (14UL)        /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTPEND14_COMPARE14_Msk (0x1UL << GRTC_INTPEND14_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.               */
-  #define GRTC_INTPEND14_COMPARE14_Min (0x0UL)       /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTPEND14_COMPARE14_Max (0x1UL)       /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTPEND14_COMPARE14_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND14_COMPARE14_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE15 @Bit 15 : Read pending status of interrupt for event COMPARE[15] */
-  #define GRTC_INTPEND14_COMPARE15_Pos (15UL)        /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTPEND14_COMPARE15_Msk (0x1UL << GRTC_INTPEND14_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.               */
-  #define GRTC_INTPEND14_COMPARE15_Min (0x0UL)       /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTPEND14_COMPARE15_Max (0x1UL)       /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTPEND14_COMPARE15_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND14_COMPARE15_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* RTCOMPARE @Bit 24 : Read pending status of interrupt for event RTCOMPARE */
-  #define GRTC_INTPEND14_RTCOMPARE_Pos (24UL)        /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTPEND14_RTCOMPARE_Msk (0x1UL << GRTC_INTPEND14_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.               */
-  #define GRTC_INTPEND14_RTCOMPARE_Min (0x0UL)       /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTPEND14_RTCOMPARE_Max (0x1UL)       /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTPEND14_RTCOMPARE_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND14_RTCOMPARE_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Read pending status of interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTPEND14_RTCOMPARESYNC_Pos (25UL)    /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTPEND14_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTPEND14_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field.   */
-  #define GRTC_INTPEND14_RTCOMPARESYNC_Min (0x0UL)   /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTPEND14_RTCOMPARESYNC_Max (0x1UL)   /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTPEND14_RTCOMPARESYNC_NotPending (0x0UL) /*!< Read: Not pending                                               */
-  #define GRTC_INTPEND14_RTCOMPARESYNC_Pending (0x1UL) /*!< Read: Pending                                                      */
-
-/* SYSCOUNTERVALID @Bit 26 : Read pending status of interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTPEND14_SYSCOUNTERVALID_Pos (26UL)  /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTPEND14_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTPEND14_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTPEND14_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTPEND14_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTPEND14_SYSCOUNTERVALID_NotPending (0x0UL) /*!< Read: Not pending                                             */
-  #define GRTC_INTPEND14_SYSCOUNTERVALID_Pending (0x1UL) /*!< Read: Pending                                                    */
-
-/* PWMPERIODEND @Bit 27 : Read pending status of interrupt for event PWMPERIODEND */
-  #define GRTC_INTPEND14_PWMPERIODEND_Pos (27UL)     /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTPEND14_PWMPERIODEND_Msk (0x1UL << GRTC_INTPEND14_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.      */
-  #define GRTC_INTPEND14_PWMPERIODEND_Min (0x0UL)    /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTPEND14_PWMPERIODEND_Max (0x1UL)    /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTPEND14_PWMPERIODEND_NotPending (0x0UL) /*!< Read: Not pending                                                */
-  #define GRTC_INTPEND14_PWMPERIODEND_Pending (0x1UL) /*!< Read: Pending                                                       */
-
-
-/* GRTC_INTEN15: Enable or disable interrupt */
-  #define GRTC_INTEN15_ResetValue (0x00000000UL)     /*!< Reset value of INTEN15 register.                                     */
-
-/* COMPARE0 @Bit 0 : Enable or disable interrupt for event COMPARE[0] */
-  #define GRTC_INTEN15_COMPARE0_Pos (0UL)            /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTEN15_COMPARE0_Msk (0x1UL << GRTC_INTEN15_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                      */
-  #define GRTC_INTEN15_COMPARE0_Min (0x0UL)          /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTEN15_COMPARE0_Max (0x1UL)          /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTEN15_COMPARE0_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE0_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE1 @Bit 1 : Enable or disable interrupt for event COMPARE[1] */
-  #define GRTC_INTEN15_COMPARE1_Pos (1UL)            /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTEN15_COMPARE1_Msk (0x1UL << GRTC_INTEN15_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                      */
-  #define GRTC_INTEN15_COMPARE1_Min (0x0UL)          /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTEN15_COMPARE1_Max (0x1UL)          /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTEN15_COMPARE1_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE1_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE2 @Bit 2 : Enable or disable interrupt for event COMPARE[2] */
-  #define GRTC_INTEN15_COMPARE2_Pos (2UL)            /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTEN15_COMPARE2_Msk (0x1UL << GRTC_INTEN15_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                      */
-  #define GRTC_INTEN15_COMPARE2_Min (0x0UL)          /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTEN15_COMPARE2_Max (0x1UL)          /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTEN15_COMPARE2_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE2_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE3 @Bit 3 : Enable or disable interrupt for event COMPARE[3] */
-  #define GRTC_INTEN15_COMPARE3_Pos (3UL)            /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTEN15_COMPARE3_Msk (0x1UL << GRTC_INTEN15_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                      */
-  #define GRTC_INTEN15_COMPARE3_Min (0x0UL)          /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTEN15_COMPARE3_Max (0x1UL)          /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTEN15_COMPARE3_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE3_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE4 @Bit 4 : Enable or disable interrupt for event COMPARE[4] */
-  #define GRTC_INTEN15_COMPARE4_Pos (4UL)            /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTEN15_COMPARE4_Msk (0x1UL << GRTC_INTEN15_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                      */
-  #define GRTC_INTEN15_COMPARE4_Min (0x0UL)          /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTEN15_COMPARE4_Max (0x1UL)          /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTEN15_COMPARE4_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE4_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE5 @Bit 5 : Enable or disable interrupt for event COMPARE[5] */
-  #define GRTC_INTEN15_COMPARE5_Pos (5UL)            /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTEN15_COMPARE5_Msk (0x1UL << GRTC_INTEN15_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                      */
-  #define GRTC_INTEN15_COMPARE5_Min (0x0UL)          /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTEN15_COMPARE5_Max (0x1UL)          /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTEN15_COMPARE5_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE5_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE6 @Bit 6 : Enable or disable interrupt for event COMPARE[6] */
-  #define GRTC_INTEN15_COMPARE6_Pos (6UL)            /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTEN15_COMPARE6_Msk (0x1UL << GRTC_INTEN15_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                      */
-  #define GRTC_INTEN15_COMPARE6_Min (0x0UL)          /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTEN15_COMPARE6_Max (0x1UL)          /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTEN15_COMPARE6_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE6_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE7 @Bit 7 : Enable or disable interrupt for event COMPARE[7] */
-  #define GRTC_INTEN15_COMPARE7_Pos (7UL)            /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTEN15_COMPARE7_Msk (0x1UL << GRTC_INTEN15_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                      */
-  #define GRTC_INTEN15_COMPARE7_Min (0x0UL)          /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTEN15_COMPARE7_Max (0x1UL)          /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTEN15_COMPARE7_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE7_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE8 @Bit 8 : Enable or disable interrupt for event COMPARE[8] */
-  #define GRTC_INTEN15_COMPARE8_Pos (8UL)            /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTEN15_COMPARE8_Msk (0x1UL << GRTC_INTEN15_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                      */
-  #define GRTC_INTEN15_COMPARE8_Min (0x0UL)          /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTEN15_COMPARE8_Max (0x1UL)          /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTEN15_COMPARE8_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE8_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE9 @Bit 9 : Enable or disable interrupt for event COMPARE[9] */
-  #define GRTC_INTEN15_COMPARE9_Pos (9UL)            /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTEN15_COMPARE9_Msk (0x1UL << GRTC_INTEN15_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                      */
-  #define GRTC_INTEN15_COMPARE9_Min (0x0UL)          /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTEN15_COMPARE9_Max (0x1UL)          /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTEN15_COMPARE9_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE9_Enabled (0x1UL)      /*!< Enable                                                               */
-
-/* COMPARE10 @Bit 10 : Enable or disable interrupt for event COMPARE[10] */
-  #define GRTC_INTEN15_COMPARE10_Pos (10UL)          /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTEN15_COMPARE10_Msk (0x1UL << GRTC_INTEN15_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.                   */
-  #define GRTC_INTEN15_COMPARE10_Min (0x0UL)         /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTEN15_COMPARE10_Max (0x1UL)         /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTEN15_COMPARE10_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE10_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE11 @Bit 11 : Enable or disable interrupt for event COMPARE[11] */
-  #define GRTC_INTEN15_COMPARE11_Pos (11UL)          /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTEN15_COMPARE11_Msk (0x1UL << GRTC_INTEN15_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.                   */
-  #define GRTC_INTEN15_COMPARE11_Min (0x0UL)         /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTEN15_COMPARE11_Max (0x1UL)         /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTEN15_COMPARE11_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE11_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE12 @Bit 12 : Enable or disable interrupt for event COMPARE[12] */
-  #define GRTC_INTEN15_COMPARE12_Pos (12UL)          /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTEN15_COMPARE12_Msk (0x1UL << GRTC_INTEN15_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.                   */
-  #define GRTC_INTEN15_COMPARE12_Min (0x0UL)         /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTEN15_COMPARE12_Max (0x1UL)         /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTEN15_COMPARE12_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE12_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE13 @Bit 13 : Enable or disable interrupt for event COMPARE[13] */
-  #define GRTC_INTEN15_COMPARE13_Pos (13UL)          /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTEN15_COMPARE13_Msk (0x1UL << GRTC_INTEN15_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.                   */
-  #define GRTC_INTEN15_COMPARE13_Min (0x0UL)         /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTEN15_COMPARE13_Max (0x1UL)         /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTEN15_COMPARE13_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE13_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE14 @Bit 14 : Enable or disable interrupt for event COMPARE[14] */
-  #define GRTC_INTEN15_COMPARE14_Pos (14UL)          /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTEN15_COMPARE14_Msk (0x1UL << GRTC_INTEN15_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.                   */
-  #define GRTC_INTEN15_COMPARE14_Min (0x0UL)         /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTEN15_COMPARE14_Max (0x1UL)         /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTEN15_COMPARE14_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE14_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* COMPARE15 @Bit 15 : Enable or disable interrupt for event COMPARE[15] */
-  #define GRTC_INTEN15_COMPARE15_Pos (15UL)          /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTEN15_COMPARE15_Msk (0x1UL << GRTC_INTEN15_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.                   */
-  #define GRTC_INTEN15_COMPARE15_Min (0x0UL)         /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTEN15_COMPARE15_Max (0x1UL)         /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTEN15_COMPARE15_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN15_COMPARE15_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* RTCOMPARE @Bit 24 : Enable or disable interrupt for event RTCOMPARE */
-  #define GRTC_INTEN15_RTCOMPARE_Pos (24UL)          /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTEN15_RTCOMPARE_Msk (0x1UL << GRTC_INTEN15_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.                   */
-  #define GRTC_INTEN15_RTCOMPARE_Min (0x0UL)         /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTEN15_RTCOMPARE_Max (0x1UL)         /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTEN15_RTCOMPARE_Disabled (0x0UL)    /*!< Disable                                                              */
-  #define GRTC_INTEN15_RTCOMPARE_Enabled (0x1UL)     /*!< Enable                                                               */
-
-/* RTCOMPARESYNC @Bit 25 : Enable or disable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTEN15_RTCOMPARESYNC_Pos (25UL)      /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTEN15_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTEN15_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field.       */
-  #define GRTC_INTEN15_RTCOMPARESYNC_Min (0x0UL)     /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTEN15_RTCOMPARESYNC_Max (0x1UL)     /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTEN15_RTCOMPARESYNC_Disabled (0x0UL) /*!< Disable                                                             */
-  #define GRTC_INTEN15_RTCOMPARESYNC_Enabled (0x1UL) /*!< Enable                                                               */
-
-/* SYSCOUNTERVALID @Bit 26 : Enable or disable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTEN15_SYSCOUNTERVALID_Pos (26UL)    /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTEN15_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTEN15_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID field. */
-  #define GRTC_INTEN15_SYSCOUNTERVALID_Min (0x0UL)   /*!< Min enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTEN15_SYSCOUNTERVALID_Max (0x1UL)   /*!< Max enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTEN15_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Disable                                                           */
-  #define GRTC_INTEN15_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Enable                                                             */
-
-/* PWMPERIODEND @Bit 27 : Enable or disable interrupt for event PWMPERIODEND */
-  #define GRTC_INTEN15_PWMPERIODEND_Pos (27UL)       /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTEN15_PWMPERIODEND_Msk (0x1UL << GRTC_INTEN15_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.          */
-  #define GRTC_INTEN15_PWMPERIODEND_Min (0x0UL)      /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTEN15_PWMPERIODEND_Max (0x1UL)      /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTEN15_PWMPERIODEND_Disabled (0x0UL) /*!< Disable                                                              */
-  #define GRTC_INTEN15_PWMPERIODEND_Enabled (0x1UL)  /*!< Enable                                                               */
-
-
-/* GRTC_INTENSET15: Enable interrupt */
-  #define GRTC_INTENSET15_ResetValue (0x00000000UL)  /*!< Reset value of INTENSET15 register.                                  */
-
-/* COMPARE0 @Bit 0 : Write '1' to enable interrupt for event COMPARE[0] */
-  #define GRTC_INTENSET15_COMPARE0_Pos (0UL)         /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTENSET15_COMPARE0_Msk (0x1UL << GRTC_INTENSET15_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                */
-  #define GRTC_INTENSET15_COMPARE0_Min (0x0UL)       /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENSET15_COMPARE0_Max (0x1UL)       /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENSET15_COMPARE0_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE0_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE0_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE1 @Bit 1 : Write '1' to enable interrupt for event COMPARE[1] */
-  #define GRTC_INTENSET15_COMPARE1_Pos (1UL)         /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTENSET15_COMPARE1_Msk (0x1UL << GRTC_INTENSET15_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                */
-  #define GRTC_INTENSET15_COMPARE1_Min (0x0UL)       /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENSET15_COMPARE1_Max (0x1UL)       /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENSET15_COMPARE1_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE1_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE1_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE2 @Bit 2 : Write '1' to enable interrupt for event COMPARE[2] */
-  #define GRTC_INTENSET15_COMPARE2_Pos (2UL)         /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTENSET15_COMPARE2_Msk (0x1UL << GRTC_INTENSET15_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                */
-  #define GRTC_INTENSET15_COMPARE2_Min (0x0UL)       /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENSET15_COMPARE2_Max (0x1UL)       /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENSET15_COMPARE2_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE2_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE2_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE3 @Bit 3 : Write '1' to enable interrupt for event COMPARE[3] */
-  #define GRTC_INTENSET15_COMPARE3_Pos (3UL)         /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTENSET15_COMPARE3_Msk (0x1UL << GRTC_INTENSET15_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                */
-  #define GRTC_INTENSET15_COMPARE3_Min (0x0UL)       /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENSET15_COMPARE3_Max (0x1UL)       /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENSET15_COMPARE3_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE3_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE3_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE4 @Bit 4 : Write '1' to enable interrupt for event COMPARE[4] */
-  #define GRTC_INTENSET15_COMPARE4_Pos (4UL)         /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTENSET15_COMPARE4_Msk (0x1UL << GRTC_INTENSET15_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                */
-  #define GRTC_INTENSET15_COMPARE4_Min (0x0UL)       /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENSET15_COMPARE4_Max (0x1UL)       /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENSET15_COMPARE4_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE4_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE4_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE5 @Bit 5 : Write '1' to enable interrupt for event COMPARE[5] */
-  #define GRTC_INTENSET15_COMPARE5_Pos (5UL)         /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTENSET15_COMPARE5_Msk (0x1UL << GRTC_INTENSET15_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                */
-  #define GRTC_INTENSET15_COMPARE5_Min (0x0UL)       /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENSET15_COMPARE5_Max (0x1UL)       /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENSET15_COMPARE5_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE5_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE5_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE6 @Bit 6 : Write '1' to enable interrupt for event COMPARE[6] */
-  #define GRTC_INTENSET15_COMPARE6_Pos (6UL)         /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTENSET15_COMPARE6_Msk (0x1UL << GRTC_INTENSET15_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                */
-  #define GRTC_INTENSET15_COMPARE6_Min (0x0UL)       /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENSET15_COMPARE6_Max (0x1UL)       /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENSET15_COMPARE6_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE6_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE6_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE7 @Bit 7 : Write '1' to enable interrupt for event COMPARE[7] */
-  #define GRTC_INTENSET15_COMPARE7_Pos (7UL)         /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTENSET15_COMPARE7_Msk (0x1UL << GRTC_INTENSET15_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                */
-  #define GRTC_INTENSET15_COMPARE7_Min (0x0UL)       /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENSET15_COMPARE7_Max (0x1UL)       /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENSET15_COMPARE7_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE7_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE7_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE8 @Bit 8 : Write '1' to enable interrupt for event COMPARE[8] */
-  #define GRTC_INTENSET15_COMPARE8_Pos (8UL)         /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTENSET15_COMPARE8_Msk (0x1UL << GRTC_INTENSET15_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                */
-  #define GRTC_INTENSET15_COMPARE8_Min (0x0UL)       /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENSET15_COMPARE8_Max (0x1UL)       /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENSET15_COMPARE8_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE8_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE8_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE9 @Bit 9 : Write '1' to enable interrupt for event COMPARE[9] */
-  #define GRTC_INTENSET15_COMPARE9_Pos (9UL)         /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTENSET15_COMPARE9_Msk (0x1UL << GRTC_INTENSET15_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                */
-  #define GRTC_INTENSET15_COMPARE9_Min (0x0UL)       /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENSET15_COMPARE9_Max (0x1UL)       /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENSET15_COMPARE9_Set (0x1UL)       /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE9_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE9_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE10 @Bit 10 : Write '1' to enable interrupt for event COMPARE[10] */
-  #define GRTC_INTENSET15_COMPARE10_Pos (10UL)       /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTENSET15_COMPARE10_Msk (0x1UL << GRTC_INTENSET15_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.             */
-  #define GRTC_INTENSET15_COMPARE10_Min (0x0UL)      /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENSET15_COMPARE10_Max (0x1UL)      /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENSET15_COMPARE10_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE10_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE10_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE11 @Bit 11 : Write '1' to enable interrupt for event COMPARE[11] */
-  #define GRTC_INTENSET15_COMPARE11_Pos (11UL)       /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTENSET15_COMPARE11_Msk (0x1UL << GRTC_INTENSET15_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.             */
-  #define GRTC_INTENSET15_COMPARE11_Min (0x0UL)      /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENSET15_COMPARE11_Max (0x1UL)      /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENSET15_COMPARE11_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE11_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE11_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE12 @Bit 12 : Write '1' to enable interrupt for event COMPARE[12] */
-  #define GRTC_INTENSET15_COMPARE12_Pos (12UL)       /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTENSET15_COMPARE12_Msk (0x1UL << GRTC_INTENSET15_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.             */
-  #define GRTC_INTENSET15_COMPARE12_Min (0x0UL)      /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENSET15_COMPARE12_Max (0x1UL)      /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENSET15_COMPARE12_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE12_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE12_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE13 @Bit 13 : Write '1' to enable interrupt for event COMPARE[13] */
-  #define GRTC_INTENSET15_COMPARE13_Pos (13UL)       /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTENSET15_COMPARE13_Msk (0x1UL << GRTC_INTENSET15_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.             */
-  #define GRTC_INTENSET15_COMPARE13_Min (0x0UL)      /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENSET15_COMPARE13_Max (0x1UL)      /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENSET15_COMPARE13_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE13_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE13_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE14 @Bit 14 : Write '1' to enable interrupt for event COMPARE[14] */
-  #define GRTC_INTENSET15_COMPARE14_Pos (14UL)       /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTENSET15_COMPARE14_Msk (0x1UL << GRTC_INTENSET15_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.             */
-  #define GRTC_INTENSET15_COMPARE14_Min (0x0UL)      /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENSET15_COMPARE14_Max (0x1UL)      /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENSET15_COMPARE14_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE14_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE14_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE15 @Bit 15 : Write '1' to enable interrupt for event COMPARE[15] */
-  #define GRTC_INTENSET15_COMPARE15_Pos (15UL)       /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTENSET15_COMPARE15_Msk (0x1UL << GRTC_INTENSET15_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.             */
-  #define GRTC_INTENSET15_COMPARE15_Min (0x0UL)      /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENSET15_COMPARE15_Max (0x1UL)      /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENSET15_COMPARE15_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET15_COMPARE15_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_COMPARE15_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARE @Bit 24 : Write '1' to enable interrupt for event RTCOMPARE */
-  #define GRTC_INTENSET15_RTCOMPARE_Pos (24UL)       /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTENSET15_RTCOMPARE_Msk (0x1UL << GRTC_INTENSET15_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.             */
-  #define GRTC_INTENSET15_RTCOMPARE_Min (0x0UL)      /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENSET15_RTCOMPARE_Max (0x1UL)      /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENSET15_RTCOMPARE_Set (0x1UL)      /*!< Enable                                                               */
-  #define GRTC_INTENSET15_RTCOMPARE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENSET15_RTCOMPARE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Write '1' to enable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTENSET15_RTCOMPARESYNC_Pos (25UL)   /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTENSET15_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTENSET15_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field. */
-  #define GRTC_INTENSET15_RTCOMPARESYNC_Min (0x0UL)  /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENSET15_RTCOMPARESYNC_Max (0x1UL)  /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENSET15_RTCOMPARESYNC_Set (0x1UL)  /*!< Enable                                                               */
-  #define GRTC_INTENSET15_RTCOMPARESYNC_Disabled (0x0UL) /*!< Read: Disabled                                                   */
-  #define GRTC_INTENSET15_RTCOMPARESYNC_Enabled (0x1UL) /*!< Read: Enabled                                                     */
-
-/* SYSCOUNTERVALID @Bit 26 : Write '1' to enable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTENSET15_SYSCOUNTERVALID_Pos (26UL) /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTENSET15_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTENSET15_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTENSET15_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENSET15_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENSET15_SYSCOUNTERVALID_Set (0x1UL) /*!< Enable                                                              */
-  #define GRTC_INTENSET15_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-  #define GRTC_INTENSET15_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-/* PWMPERIODEND @Bit 27 : Write '1' to enable interrupt for event PWMPERIODEND */
-  #define GRTC_INTENSET15_PWMPERIODEND_Pos (27UL)    /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTENSET15_PWMPERIODEND_Msk (0x1UL << GRTC_INTENSET15_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.    */
-  #define GRTC_INTENSET15_PWMPERIODEND_Min (0x0UL)   /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENSET15_PWMPERIODEND_Max (0x1UL)   /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENSET15_PWMPERIODEND_Set (0x1UL)   /*!< Enable                                                               */
-  #define GRTC_INTENSET15_PWMPERIODEND_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-  #define GRTC_INTENSET15_PWMPERIODEND_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-
-/* GRTC_INTENCLR15: Disable interrupt */
-  #define GRTC_INTENCLR15_ResetValue (0x00000000UL)  /*!< Reset value of INTENCLR15 register.                                  */
-
-/* COMPARE0 @Bit 0 : Write '1' to disable interrupt for event COMPARE[0] */
-  #define GRTC_INTENCLR15_COMPARE0_Pos (0UL)         /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTENCLR15_COMPARE0_Msk (0x1UL << GRTC_INTENCLR15_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                */
-  #define GRTC_INTENCLR15_COMPARE0_Min (0x0UL)       /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENCLR15_COMPARE0_Max (0x1UL)       /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTENCLR15_COMPARE0_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE0_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE0_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE1 @Bit 1 : Write '1' to disable interrupt for event COMPARE[1] */
-  #define GRTC_INTENCLR15_COMPARE1_Pos (1UL)         /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTENCLR15_COMPARE1_Msk (0x1UL << GRTC_INTENCLR15_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                */
-  #define GRTC_INTENCLR15_COMPARE1_Min (0x0UL)       /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENCLR15_COMPARE1_Max (0x1UL)       /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTENCLR15_COMPARE1_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE1_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE1_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE2 @Bit 2 : Write '1' to disable interrupt for event COMPARE[2] */
-  #define GRTC_INTENCLR15_COMPARE2_Pos (2UL)         /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTENCLR15_COMPARE2_Msk (0x1UL << GRTC_INTENCLR15_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                */
-  #define GRTC_INTENCLR15_COMPARE2_Min (0x0UL)       /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENCLR15_COMPARE2_Max (0x1UL)       /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTENCLR15_COMPARE2_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE2_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE2_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE3 @Bit 3 : Write '1' to disable interrupt for event COMPARE[3] */
-  #define GRTC_INTENCLR15_COMPARE3_Pos (3UL)         /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTENCLR15_COMPARE3_Msk (0x1UL << GRTC_INTENCLR15_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                */
-  #define GRTC_INTENCLR15_COMPARE3_Min (0x0UL)       /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENCLR15_COMPARE3_Max (0x1UL)       /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTENCLR15_COMPARE3_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE3_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE3_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE4 @Bit 4 : Write '1' to disable interrupt for event COMPARE[4] */
-  #define GRTC_INTENCLR15_COMPARE4_Pos (4UL)         /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTENCLR15_COMPARE4_Msk (0x1UL << GRTC_INTENCLR15_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                */
-  #define GRTC_INTENCLR15_COMPARE4_Min (0x0UL)       /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENCLR15_COMPARE4_Max (0x1UL)       /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTENCLR15_COMPARE4_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE4_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE4_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE5 @Bit 5 : Write '1' to disable interrupt for event COMPARE[5] */
-  #define GRTC_INTENCLR15_COMPARE5_Pos (5UL)         /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTENCLR15_COMPARE5_Msk (0x1UL << GRTC_INTENCLR15_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                */
-  #define GRTC_INTENCLR15_COMPARE5_Min (0x0UL)       /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENCLR15_COMPARE5_Max (0x1UL)       /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTENCLR15_COMPARE5_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE5_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE5_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE6 @Bit 6 : Write '1' to disable interrupt for event COMPARE[6] */
-  #define GRTC_INTENCLR15_COMPARE6_Pos (6UL)         /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTENCLR15_COMPARE6_Msk (0x1UL << GRTC_INTENCLR15_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                */
-  #define GRTC_INTENCLR15_COMPARE6_Min (0x0UL)       /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENCLR15_COMPARE6_Max (0x1UL)       /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTENCLR15_COMPARE6_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE6_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE6_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE7 @Bit 7 : Write '1' to disable interrupt for event COMPARE[7] */
-  #define GRTC_INTENCLR15_COMPARE7_Pos (7UL)         /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTENCLR15_COMPARE7_Msk (0x1UL << GRTC_INTENCLR15_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                */
-  #define GRTC_INTENCLR15_COMPARE7_Min (0x0UL)       /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENCLR15_COMPARE7_Max (0x1UL)       /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTENCLR15_COMPARE7_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE7_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE7_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE8 @Bit 8 : Write '1' to disable interrupt for event COMPARE[8] */
-  #define GRTC_INTENCLR15_COMPARE8_Pos (8UL)         /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTENCLR15_COMPARE8_Msk (0x1UL << GRTC_INTENCLR15_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                */
-  #define GRTC_INTENCLR15_COMPARE8_Min (0x0UL)       /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENCLR15_COMPARE8_Max (0x1UL)       /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTENCLR15_COMPARE8_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE8_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE8_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE9 @Bit 9 : Write '1' to disable interrupt for event COMPARE[9] */
-  #define GRTC_INTENCLR15_COMPARE9_Pos (9UL)         /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTENCLR15_COMPARE9_Msk (0x1UL << GRTC_INTENCLR15_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                */
-  #define GRTC_INTENCLR15_COMPARE9_Min (0x0UL)       /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENCLR15_COMPARE9_Max (0x1UL)       /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTENCLR15_COMPARE9_Clear (0x1UL)     /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE9_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE9_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
-
-/* COMPARE10 @Bit 10 : Write '1' to disable interrupt for event COMPARE[10] */
-  #define GRTC_INTENCLR15_COMPARE10_Pos (10UL)       /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTENCLR15_COMPARE10_Msk (0x1UL << GRTC_INTENCLR15_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.             */
-  #define GRTC_INTENCLR15_COMPARE10_Min (0x0UL)      /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENCLR15_COMPARE10_Max (0x1UL)      /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTENCLR15_COMPARE10_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE10_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE10_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE11 @Bit 11 : Write '1' to disable interrupt for event COMPARE[11] */
-  #define GRTC_INTENCLR15_COMPARE11_Pos (11UL)       /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTENCLR15_COMPARE11_Msk (0x1UL << GRTC_INTENCLR15_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.             */
-  #define GRTC_INTENCLR15_COMPARE11_Min (0x0UL)      /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENCLR15_COMPARE11_Max (0x1UL)      /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTENCLR15_COMPARE11_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE11_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE11_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE12 @Bit 12 : Write '1' to disable interrupt for event COMPARE[12] */
-  #define GRTC_INTENCLR15_COMPARE12_Pos (12UL)       /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTENCLR15_COMPARE12_Msk (0x1UL << GRTC_INTENCLR15_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.             */
-  #define GRTC_INTENCLR15_COMPARE12_Min (0x0UL)      /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENCLR15_COMPARE12_Max (0x1UL)      /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTENCLR15_COMPARE12_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE12_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE12_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE13 @Bit 13 : Write '1' to disable interrupt for event COMPARE[13] */
-  #define GRTC_INTENCLR15_COMPARE13_Pos (13UL)       /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTENCLR15_COMPARE13_Msk (0x1UL << GRTC_INTENCLR15_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.             */
-  #define GRTC_INTENCLR15_COMPARE13_Min (0x0UL)      /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENCLR15_COMPARE13_Max (0x1UL)      /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTENCLR15_COMPARE13_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE13_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE13_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE14 @Bit 14 : Write '1' to disable interrupt for event COMPARE[14] */
-  #define GRTC_INTENCLR15_COMPARE14_Pos (14UL)       /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTENCLR15_COMPARE14_Msk (0x1UL << GRTC_INTENCLR15_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.             */
-  #define GRTC_INTENCLR15_COMPARE14_Min (0x0UL)      /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENCLR15_COMPARE14_Max (0x1UL)      /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTENCLR15_COMPARE14_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE14_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE14_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* COMPARE15 @Bit 15 : Write '1' to disable interrupt for event COMPARE[15] */
-  #define GRTC_INTENCLR15_COMPARE15_Pos (15UL)       /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTENCLR15_COMPARE15_Msk (0x1UL << GRTC_INTENCLR15_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.             */
-  #define GRTC_INTENCLR15_COMPARE15_Min (0x0UL)      /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENCLR15_COMPARE15_Max (0x1UL)      /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTENCLR15_COMPARE15_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_COMPARE15_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_COMPARE15_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARE @Bit 24 : Write '1' to disable interrupt for event RTCOMPARE */
-  #define GRTC_INTENCLR15_RTCOMPARE_Pos (24UL)       /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTENCLR15_RTCOMPARE_Msk (0x1UL << GRTC_INTENCLR15_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.             */
-  #define GRTC_INTENCLR15_RTCOMPARE_Min (0x0UL)      /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENCLR15_RTCOMPARE_Max (0x1UL)      /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTENCLR15_RTCOMPARE_Clear (0x1UL)    /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_RTCOMPARE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
-  #define GRTC_INTENCLR15_RTCOMPARE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Write '1' to disable interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTENCLR15_RTCOMPARESYNC_Pos (25UL)   /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTENCLR15_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTENCLR15_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field. */
-  #define GRTC_INTENCLR15_RTCOMPARESYNC_Min (0x0UL)  /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENCLR15_RTCOMPARESYNC_Max (0x1UL)  /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTENCLR15_RTCOMPARESYNC_Clear (0x1UL) /*!< Disable                                                             */
-  #define GRTC_INTENCLR15_RTCOMPARESYNC_Disabled (0x0UL) /*!< Read: Disabled                                                   */
-  #define GRTC_INTENCLR15_RTCOMPARESYNC_Enabled (0x1UL) /*!< Read: Enabled                                                     */
-
-/* SYSCOUNTERVALID @Bit 26 : Write '1' to disable interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTENCLR15_SYSCOUNTERVALID_Pos (26UL) /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTENCLR15_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTENCLR15_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTENCLR15_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENCLR15_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                      */
-  #define GRTC_INTENCLR15_SYSCOUNTERVALID_Clear (0x1UL) /*!< Disable                                                           */
-  #define GRTC_INTENCLR15_SYSCOUNTERVALID_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-  #define GRTC_INTENCLR15_SYSCOUNTERVALID_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-/* PWMPERIODEND @Bit 27 : Write '1' to disable interrupt for event PWMPERIODEND */
-  #define GRTC_INTENCLR15_PWMPERIODEND_Pos (27UL)    /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTENCLR15_PWMPERIODEND_Msk (0x1UL << GRTC_INTENCLR15_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.    */
-  #define GRTC_INTENCLR15_PWMPERIODEND_Min (0x0UL)   /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENCLR15_PWMPERIODEND_Max (0x1UL)   /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTENCLR15_PWMPERIODEND_Clear (0x1UL) /*!< Disable                                                              */
-  #define GRTC_INTENCLR15_PWMPERIODEND_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-  #define GRTC_INTENCLR15_PWMPERIODEND_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-
-/* GRTC_INTPEND15: Pending interrupts */
-  #define GRTC_INTPEND15_ResetValue (0x00000000UL)   /*!< Reset value of INTPEND15 register.                                   */
-
-/* COMPARE0 @Bit 0 : Read pending status of interrupt for event COMPARE[0] */
-  #define GRTC_INTPEND15_COMPARE0_Pos (0UL)          /*!< Position of COMPARE0 field.                                          */
-  #define GRTC_INTPEND15_COMPARE0_Msk (0x1UL << GRTC_INTPEND15_COMPARE0_Pos) /*!< Bit mask of COMPARE0 field.                  */
-  #define GRTC_INTPEND15_COMPARE0_Min (0x0UL)        /*!< Min enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTPEND15_COMPARE0_Max (0x1UL)        /*!< Max enumerator value of COMPARE0 field.                              */
-  #define GRTC_INTPEND15_COMPARE0_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND15_COMPARE0_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE1 @Bit 1 : Read pending status of interrupt for event COMPARE[1] */
-  #define GRTC_INTPEND15_COMPARE1_Pos (1UL)          /*!< Position of COMPARE1 field.                                          */
-  #define GRTC_INTPEND15_COMPARE1_Msk (0x1UL << GRTC_INTPEND15_COMPARE1_Pos) /*!< Bit mask of COMPARE1 field.                  */
-  #define GRTC_INTPEND15_COMPARE1_Min (0x0UL)        /*!< Min enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTPEND15_COMPARE1_Max (0x1UL)        /*!< Max enumerator value of COMPARE1 field.                              */
-  #define GRTC_INTPEND15_COMPARE1_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND15_COMPARE1_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE2 @Bit 2 : Read pending status of interrupt for event COMPARE[2] */
-  #define GRTC_INTPEND15_COMPARE2_Pos (2UL)          /*!< Position of COMPARE2 field.                                          */
-  #define GRTC_INTPEND15_COMPARE2_Msk (0x1UL << GRTC_INTPEND15_COMPARE2_Pos) /*!< Bit mask of COMPARE2 field.                  */
-  #define GRTC_INTPEND15_COMPARE2_Min (0x0UL)        /*!< Min enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTPEND15_COMPARE2_Max (0x1UL)        /*!< Max enumerator value of COMPARE2 field.                              */
-  #define GRTC_INTPEND15_COMPARE2_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND15_COMPARE2_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE3 @Bit 3 : Read pending status of interrupt for event COMPARE[3] */
-  #define GRTC_INTPEND15_COMPARE3_Pos (3UL)          /*!< Position of COMPARE3 field.                                          */
-  #define GRTC_INTPEND15_COMPARE3_Msk (0x1UL << GRTC_INTPEND15_COMPARE3_Pos) /*!< Bit mask of COMPARE3 field.                  */
-  #define GRTC_INTPEND15_COMPARE3_Min (0x0UL)        /*!< Min enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTPEND15_COMPARE3_Max (0x1UL)        /*!< Max enumerator value of COMPARE3 field.                              */
-  #define GRTC_INTPEND15_COMPARE3_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND15_COMPARE3_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE4 @Bit 4 : Read pending status of interrupt for event COMPARE[4] */
-  #define GRTC_INTPEND15_COMPARE4_Pos (4UL)          /*!< Position of COMPARE4 field.                                          */
-  #define GRTC_INTPEND15_COMPARE4_Msk (0x1UL << GRTC_INTPEND15_COMPARE4_Pos) /*!< Bit mask of COMPARE4 field.                  */
-  #define GRTC_INTPEND15_COMPARE4_Min (0x0UL)        /*!< Min enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTPEND15_COMPARE4_Max (0x1UL)        /*!< Max enumerator value of COMPARE4 field.                              */
-  #define GRTC_INTPEND15_COMPARE4_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND15_COMPARE4_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE5 @Bit 5 : Read pending status of interrupt for event COMPARE[5] */
-  #define GRTC_INTPEND15_COMPARE5_Pos (5UL)          /*!< Position of COMPARE5 field.                                          */
-  #define GRTC_INTPEND15_COMPARE5_Msk (0x1UL << GRTC_INTPEND15_COMPARE5_Pos) /*!< Bit mask of COMPARE5 field.                  */
-  #define GRTC_INTPEND15_COMPARE5_Min (0x0UL)        /*!< Min enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTPEND15_COMPARE5_Max (0x1UL)        /*!< Max enumerator value of COMPARE5 field.                              */
-  #define GRTC_INTPEND15_COMPARE5_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND15_COMPARE5_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE6 @Bit 6 : Read pending status of interrupt for event COMPARE[6] */
-  #define GRTC_INTPEND15_COMPARE6_Pos (6UL)          /*!< Position of COMPARE6 field.                                          */
-  #define GRTC_INTPEND15_COMPARE6_Msk (0x1UL << GRTC_INTPEND15_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                  */
-  #define GRTC_INTPEND15_COMPARE6_Min (0x0UL)        /*!< Min enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTPEND15_COMPARE6_Max (0x1UL)        /*!< Max enumerator value of COMPARE6 field.                              */
-  #define GRTC_INTPEND15_COMPARE6_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND15_COMPARE6_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE7 @Bit 7 : Read pending status of interrupt for event COMPARE[7] */
-  #define GRTC_INTPEND15_COMPARE7_Pos (7UL)          /*!< Position of COMPARE7 field.                                          */
-  #define GRTC_INTPEND15_COMPARE7_Msk (0x1UL << GRTC_INTPEND15_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                  */
-  #define GRTC_INTPEND15_COMPARE7_Min (0x0UL)        /*!< Min enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTPEND15_COMPARE7_Max (0x1UL)        /*!< Max enumerator value of COMPARE7 field.                              */
-  #define GRTC_INTPEND15_COMPARE7_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND15_COMPARE7_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE8 @Bit 8 : Read pending status of interrupt for event COMPARE[8] */
-  #define GRTC_INTPEND15_COMPARE8_Pos (8UL)          /*!< Position of COMPARE8 field.                                          */
-  #define GRTC_INTPEND15_COMPARE8_Msk (0x1UL << GRTC_INTPEND15_COMPARE8_Pos) /*!< Bit mask of COMPARE8 field.                  */
-  #define GRTC_INTPEND15_COMPARE8_Min (0x0UL)        /*!< Min enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTPEND15_COMPARE8_Max (0x1UL)        /*!< Max enumerator value of COMPARE8 field.                              */
-  #define GRTC_INTPEND15_COMPARE8_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND15_COMPARE8_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE9 @Bit 9 : Read pending status of interrupt for event COMPARE[9] */
-  #define GRTC_INTPEND15_COMPARE9_Pos (9UL)          /*!< Position of COMPARE9 field.                                          */
-  #define GRTC_INTPEND15_COMPARE9_Msk (0x1UL << GRTC_INTPEND15_COMPARE9_Pos) /*!< Bit mask of COMPARE9 field.                  */
-  #define GRTC_INTPEND15_COMPARE9_Min (0x0UL)        /*!< Min enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTPEND15_COMPARE9_Max (0x1UL)        /*!< Max enumerator value of COMPARE9 field.                              */
-  #define GRTC_INTPEND15_COMPARE9_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define GRTC_INTPEND15_COMPARE9_Pending (0x1UL)    /*!< Read: Pending                                                        */
-
-/* COMPARE10 @Bit 10 : Read pending status of interrupt for event COMPARE[10] */
-  #define GRTC_INTPEND15_COMPARE10_Pos (10UL)        /*!< Position of COMPARE10 field.                                         */
-  #define GRTC_INTPEND15_COMPARE10_Msk (0x1UL << GRTC_INTPEND15_COMPARE10_Pos) /*!< Bit mask of COMPARE10 field.               */
-  #define GRTC_INTPEND15_COMPARE10_Min (0x0UL)       /*!< Min enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTPEND15_COMPARE10_Max (0x1UL)       /*!< Max enumerator value of COMPARE10 field.                             */
-  #define GRTC_INTPEND15_COMPARE10_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND15_COMPARE10_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE11 @Bit 11 : Read pending status of interrupt for event COMPARE[11] */
-  #define GRTC_INTPEND15_COMPARE11_Pos (11UL)        /*!< Position of COMPARE11 field.                                         */
-  #define GRTC_INTPEND15_COMPARE11_Msk (0x1UL << GRTC_INTPEND15_COMPARE11_Pos) /*!< Bit mask of COMPARE11 field.               */
-  #define GRTC_INTPEND15_COMPARE11_Min (0x0UL)       /*!< Min enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTPEND15_COMPARE11_Max (0x1UL)       /*!< Max enumerator value of COMPARE11 field.                             */
-  #define GRTC_INTPEND15_COMPARE11_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND15_COMPARE11_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE12 @Bit 12 : Read pending status of interrupt for event COMPARE[12] */
-  #define GRTC_INTPEND15_COMPARE12_Pos (12UL)        /*!< Position of COMPARE12 field.                                         */
-  #define GRTC_INTPEND15_COMPARE12_Msk (0x1UL << GRTC_INTPEND15_COMPARE12_Pos) /*!< Bit mask of COMPARE12 field.               */
-  #define GRTC_INTPEND15_COMPARE12_Min (0x0UL)       /*!< Min enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTPEND15_COMPARE12_Max (0x1UL)       /*!< Max enumerator value of COMPARE12 field.                             */
-  #define GRTC_INTPEND15_COMPARE12_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND15_COMPARE12_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE13 @Bit 13 : Read pending status of interrupt for event COMPARE[13] */
-  #define GRTC_INTPEND15_COMPARE13_Pos (13UL)        /*!< Position of COMPARE13 field.                                         */
-  #define GRTC_INTPEND15_COMPARE13_Msk (0x1UL << GRTC_INTPEND15_COMPARE13_Pos) /*!< Bit mask of COMPARE13 field.               */
-  #define GRTC_INTPEND15_COMPARE13_Min (0x0UL)       /*!< Min enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTPEND15_COMPARE13_Max (0x1UL)       /*!< Max enumerator value of COMPARE13 field.                             */
-  #define GRTC_INTPEND15_COMPARE13_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND15_COMPARE13_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE14 @Bit 14 : Read pending status of interrupt for event COMPARE[14] */
-  #define GRTC_INTPEND15_COMPARE14_Pos (14UL)        /*!< Position of COMPARE14 field.                                         */
-  #define GRTC_INTPEND15_COMPARE14_Msk (0x1UL << GRTC_INTPEND15_COMPARE14_Pos) /*!< Bit mask of COMPARE14 field.               */
-  #define GRTC_INTPEND15_COMPARE14_Min (0x0UL)       /*!< Min enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTPEND15_COMPARE14_Max (0x1UL)       /*!< Max enumerator value of COMPARE14 field.                             */
-  #define GRTC_INTPEND15_COMPARE14_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND15_COMPARE14_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* COMPARE15 @Bit 15 : Read pending status of interrupt for event COMPARE[15] */
-  #define GRTC_INTPEND15_COMPARE15_Pos (15UL)        /*!< Position of COMPARE15 field.                                         */
-  #define GRTC_INTPEND15_COMPARE15_Msk (0x1UL << GRTC_INTPEND15_COMPARE15_Pos) /*!< Bit mask of COMPARE15 field.               */
-  #define GRTC_INTPEND15_COMPARE15_Min (0x0UL)       /*!< Min enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTPEND15_COMPARE15_Max (0x1UL)       /*!< Max enumerator value of COMPARE15 field.                             */
-  #define GRTC_INTPEND15_COMPARE15_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND15_COMPARE15_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* RTCOMPARE @Bit 24 : Read pending status of interrupt for event RTCOMPARE */
-  #define GRTC_INTPEND15_RTCOMPARE_Pos (24UL)        /*!< Position of RTCOMPARE field.                                         */
-  #define GRTC_INTPEND15_RTCOMPARE_Msk (0x1UL << GRTC_INTPEND15_RTCOMPARE_Pos) /*!< Bit mask of RTCOMPARE field.               */
-  #define GRTC_INTPEND15_RTCOMPARE_Min (0x0UL)       /*!< Min enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTPEND15_RTCOMPARE_Max (0x1UL)       /*!< Max enumerator value of RTCOMPARE field.                             */
-  #define GRTC_INTPEND15_RTCOMPARE_NotPending (0x0UL) /*!< Read: Not pending                                                   */
-  #define GRTC_INTPEND15_RTCOMPARE_Pending (0x1UL)   /*!< Read: Pending                                                        */
-
-/* RTCOMPARESYNC @Bit 25 : Read pending status of interrupt for event RTCOMPARESYNC */
-  #define GRTC_INTPEND15_RTCOMPARESYNC_Pos (25UL)    /*!< Position of RTCOMPARESYNC field.                                     */
-  #define GRTC_INTPEND15_RTCOMPARESYNC_Msk (0x1UL << GRTC_INTPEND15_RTCOMPARESYNC_Pos) /*!< Bit mask of RTCOMPARESYNC field.   */
-  #define GRTC_INTPEND15_RTCOMPARESYNC_Min (0x0UL)   /*!< Min enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTPEND15_RTCOMPARESYNC_Max (0x1UL)   /*!< Max enumerator value of RTCOMPARESYNC field.                         */
-  #define GRTC_INTPEND15_RTCOMPARESYNC_NotPending (0x0UL) /*!< Read: Not pending                                               */
-  #define GRTC_INTPEND15_RTCOMPARESYNC_Pending (0x1UL) /*!< Read: Pending                                                      */
-
-/* SYSCOUNTERVALID @Bit 26 : Read pending status of interrupt for event SYSCOUNTERVALID */
-  #define GRTC_INTPEND15_SYSCOUNTERVALID_Pos (26UL)  /*!< Position of SYSCOUNTERVALID field.                                   */
-  #define GRTC_INTPEND15_SYSCOUNTERVALID_Msk (0x1UL << GRTC_INTPEND15_SYSCOUNTERVALID_Pos) /*!< Bit mask of SYSCOUNTERVALID
-                                                                            field.*/
-  #define GRTC_INTPEND15_SYSCOUNTERVALID_Min (0x0UL) /*!< Min enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTPEND15_SYSCOUNTERVALID_Max (0x1UL) /*!< Max enumerator value of SYSCOUNTERVALID field.                       */
-  #define GRTC_INTPEND15_SYSCOUNTERVALID_NotPending (0x0UL) /*!< Read: Not pending                                             */
-  #define GRTC_INTPEND15_SYSCOUNTERVALID_Pending (0x1UL) /*!< Read: Pending                                                    */
-
-/* PWMPERIODEND @Bit 27 : Read pending status of interrupt for event PWMPERIODEND */
-  #define GRTC_INTPEND15_PWMPERIODEND_Pos (27UL)     /*!< Position of PWMPERIODEND field.                                      */
-  #define GRTC_INTPEND15_PWMPERIODEND_Msk (0x1UL << GRTC_INTPEND15_PWMPERIODEND_Pos) /*!< Bit mask of PWMPERIODEND field.      */
-  #define GRTC_INTPEND15_PWMPERIODEND_Min (0x0UL)    /*!< Min enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTPEND15_PWMPERIODEND_Max (0x1UL)    /*!< Max enumerator value of PWMPERIODEND field.                          */
-  #define GRTC_INTPEND15_PWMPERIODEND_NotPending (0x0UL) /*!< Read: Not pending                                                */
-  #define GRTC_INTPEND15_PWMPERIODEND_Pending (0x1UL) /*!< Read: Pending                                                       */
-
-
 /* GRTC_EVTEN: Enable or disable event routing */
   #define GRTC_EVTEN_ResetValue (0x00000000UL)       /*!< Reset value of EVTEN register.                                       */
 
@@ -57587,46 +54076,6 @@ typedef struct {
   #define GRTC_KEEPRUNNING_REQUEST10_Max (0x1UL)     /*!< Max enumerator value of REQUEST10 field.                             */
   #define GRTC_KEEPRUNNING_REQUEST10_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                    */
   #define GRTC_KEEPRUNNING_REQUEST10_Active (0x1UL)  /*!< Keep SYSCOUNTER active                                               */
-
-/* REQUEST11 @Bit 11 : Request from index [11] */
-  #define GRTC_KEEPRUNNING_REQUEST11_Pos (11UL)      /*!< Position of REQUEST11 field.                                         */
-  #define GRTC_KEEPRUNNING_REQUEST11_Msk (0x1UL << GRTC_KEEPRUNNING_REQUEST11_Pos) /*!< Bit mask of REQUEST11 field.           */
-  #define GRTC_KEEPRUNNING_REQUEST11_Min (0x0UL)     /*!< Min enumerator value of REQUEST11 field.                             */
-  #define GRTC_KEEPRUNNING_REQUEST11_Max (0x1UL)     /*!< Max enumerator value of REQUEST11 field.                             */
-  #define GRTC_KEEPRUNNING_REQUEST11_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                    */
-  #define GRTC_KEEPRUNNING_REQUEST11_Active (0x1UL)  /*!< Keep SYSCOUNTER active                                               */
-
-/* REQUEST12 @Bit 12 : Request from index [12] */
-  #define GRTC_KEEPRUNNING_REQUEST12_Pos (12UL)      /*!< Position of REQUEST12 field.                                         */
-  #define GRTC_KEEPRUNNING_REQUEST12_Msk (0x1UL << GRTC_KEEPRUNNING_REQUEST12_Pos) /*!< Bit mask of REQUEST12 field.           */
-  #define GRTC_KEEPRUNNING_REQUEST12_Min (0x0UL)     /*!< Min enumerator value of REQUEST12 field.                             */
-  #define GRTC_KEEPRUNNING_REQUEST12_Max (0x1UL)     /*!< Max enumerator value of REQUEST12 field.                             */
-  #define GRTC_KEEPRUNNING_REQUEST12_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                    */
-  #define GRTC_KEEPRUNNING_REQUEST12_Active (0x1UL)  /*!< Keep SYSCOUNTER active                                               */
-
-/* REQUEST13 @Bit 13 : Request from index [13] */
-  #define GRTC_KEEPRUNNING_REQUEST13_Pos (13UL)      /*!< Position of REQUEST13 field.                                         */
-  #define GRTC_KEEPRUNNING_REQUEST13_Msk (0x1UL << GRTC_KEEPRUNNING_REQUEST13_Pos) /*!< Bit mask of REQUEST13 field.           */
-  #define GRTC_KEEPRUNNING_REQUEST13_Min (0x0UL)     /*!< Min enumerator value of REQUEST13 field.                             */
-  #define GRTC_KEEPRUNNING_REQUEST13_Max (0x1UL)     /*!< Max enumerator value of REQUEST13 field.                             */
-  #define GRTC_KEEPRUNNING_REQUEST13_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                    */
-  #define GRTC_KEEPRUNNING_REQUEST13_Active (0x1UL)  /*!< Keep SYSCOUNTER active                                               */
-
-/* REQUEST14 @Bit 14 : Request from index [14] */
-  #define GRTC_KEEPRUNNING_REQUEST14_Pos (14UL)      /*!< Position of REQUEST14 field.                                         */
-  #define GRTC_KEEPRUNNING_REQUEST14_Msk (0x1UL << GRTC_KEEPRUNNING_REQUEST14_Pos) /*!< Bit mask of REQUEST14 field.           */
-  #define GRTC_KEEPRUNNING_REQUEST14_Min (0x0UL)     /*!< Min enumerator value of REQUEST14 field.                             */
-  #define GRTC_KEEPRUNNING_REQUEST14_Max (0x1UL)     /*!< Max enumerator value of REQUEST14 field.                             */
-  #define GRTC_KEEPRUNNING_REQUEST14_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                    */
-  #define GRTC_KEEPRUNNING_REQUEST14_Active (0x1UL)  /*!< Keep SYSCOUNTER active                                               */
-
-/* REQUEST15 @Bit 15 : Request from index [15] */
-  #define GRTC_KEEPRUNNING_REQUEST15_Pos (15UL)      /*!< Position of REQUEST15 field.                                         */
-  #define GRTC_KEEPRUNNING_REQUEST15_Msk (0x1UL << GRTC_KEEPRUNNING_REQUEST15_Pos) /*!< Bit mask of REQUEST15 field.           */
-  #define GRTC_KEEPRUNNING_REQUEST15_Min (0x0UL)     /*!< Min enumerator value of REQUEST15 field.                             */
-  #define GRTC_KEEPRUNNING_REQUEST15_Max (0x1UL)     /*!< Max enumerator value of REQUEST15 field.                             */
-  #define GRTC_KEEPRUNNING_REQUEST15_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                    */
-  #define GRTC_KEEPRUNNING_REQUEST15_Active (0x1UL)  /*!< Keep SYSCOUNTER active                                               */
 
 
 /* GRTC_TIMEOUT: Timeout after all CPUs gone into sleep state to stop the SYSCOUNTER */
@@ -76831,7 +73280,8 @@ typedef struct {
   typedef struct {                                   /*!< LPCOMP Structure                                                     */
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start comparator                                      */
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop comparator                                       */
-    __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000008) Sample comparator value                               */
+    __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000008) Sample comparator value. This task requires that LPCOMP
+                                                                         has been started by the START task.*/
     __IM uint32_t RESERVED[29];
     __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
     __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
@@ -76893,10 +73343,10 @@ typedef struct {
   #define LPCOMP_TASKS_STOP_TASKS_STOP_Trigger (0x1UL) /*!< Trigger task                                                       */
 
 
-/* LPCOMP_TASKS_SAMPLE: Sample comparator value */
+/* LPCOMP_TASKS_SAMPLE: Sample comparator value. This task requires that LPCOMP has been started by the START task. */
   #define LPCOMP_TASKS_SAMPLE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_SAMPLE register.                             */
 
-/* TASKS_SAMPLE @Bit 0 : Sample comparator value */
+/* TASKS_SAMPLE @Bit 0 : Sample comparator value. This task requires that LPCOMP has been started by the START task. */
   #define LPCOMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos (0UL) /*!< Position of TASKS_SAMPLE field.                                      */
   #define LPCOMP_TASKS_SAMPLE_TASKS_SAMPLE_Msk (0x1UL << LPCOMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos) /*!< Bit mask of TASKS_SAMPLE
                                                                             field.*/
@@ -77368,7 +73818,7 @@ typedef struct {
 /* LPCOMP_RETAIN: Retain signal */
   #define LPCOMP_RETAIN_ResetValue (0x00000000UL)    /*!< Reset value of RETAIN register.                                      */
 
-/* RETAIN @Bit 0 : Retain signal */
+/* RETAIN @Bit 0 : Retain signal, shared for both COMP and LPCOMP */
   #define LPCOMP_RETAIN_RETAIN_Pos (0UL)             /*!< Position of RETAIN field.                                            */
   #define LPCOMP_RETAIN_RETAIN_Msk (0x1UL << LPCOMP_RETAIN_RETAIN_Pos) /*!< Bit mask of RETAIN field.                          */
   #define LPCOMP_RETAIN_RETAIN_Min (0x0UL)           /*!< Min enumerator value of RETAIN field.                                */
@@ -104965,7 +101415,7 @@ typedef struct {
     __IOM uint32_t EVENTS_ADDRESS;                   /*!< (@ 0x0000020C) Address sent or received                              */
     __IOM uint32_t EVENTS_FRAMESTART;                /*!< (@ 0x00000210) IEEE 802.15.4 length field received                   */
     __IOM uint32_t EVENTS_PAYLOAD;                   /*!< (@ 0x00000214) Packet payload sent or received                       */
-    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000218) Packet sent or received                               */
+    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000218) Memory access for packet data has been completed      */
     __IOM uint32_t EVENTS_PHYEND;                    /*!< (@ 0x0000021C) The last bit is sent on air or last bit is received   */
     __IOM uint32_t EVENTS_DISABLED;                  /*!< (@ 0x00000220) RADIO has been disabled                               */
     __IOM uint32_t EVENTS_DEVMATCH;                  /*!< (@ 0x00000224) A device address match occurred on the last received
@@ -106253,10 +102703,10 @@ typedef struct {
   #define RADIO_EVENTS_PAYLOAD_EVENTS_PAYLOAD_Generated (0x1UL) /*!< Event generated                                           */
 
 
-/* RADIO_EVENTS_END: Packet sent or received */
+/* RADIO_EVENTS_END: Memory access for packet data has been completed */
   #define RADIO_EVENTS_END_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_END register.                                  */
 
-/* EVENTS_END @Bit 0 : Packet sent or received */
+/* EVENTS_END @Bit 0 : Memory access for packet data has been completed */
   #define RADIO_EVENTS_END_EVENTS_END_Pos (0UL)      /*!< Position of EVENTS_END field.                                        */
   #define RADIO_EVENTS_END_EVENTS_END_Msk (0x1UL << RADIO_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field.        */
   #define RADIO_EVENTS_END_EVENTS_END_Min (0x0UL)    /*!< Min enumerator value of EVENTS_END field.                            */
@@ -110349,9 +106799,10 @@ typedef struct {
   #define RADIO_MODE_MODE_Ble_2Mbit (0x4UL)          /*!< 2 Mbps BLE                                                           */
   #define RADIO_MODE_MODE_Ble_LR125Kbit (0x5UL)      /*!< Long range 125 kbps TX, 125 kbps and 500 kbps RX                     */
   #define RADIO_MODE_MODE_Ble_LR500Kbit (0x6UL)      /*!< Long range 500 kbps TX, 125 kbps and 500 kbps RX                     */
-  #define RADIO_MODE_MODE_Nrf_4Mbit0_5 (0x9UL)       /*!< 4 Mbps Nordic proprietary radio mode (BT=0.5/h=0.5)                  */
-  #define RADIO_MODE_MODE_Nrf_4Mbit0_25 (0xAUL)      /*!< 4 Mbps Nordic proprietary radio mode (BT=0.5/h=0.25)                 */
-  #define RADIO_MODE_MODE_Ieee802154_250Kbit (0xFUL) /*!< IEEE 802.15.4-2006 250 kbps                                          */
+  #define RADIO_MODE_MODE_Nrf_4Mbit_0BT6 (0x9UL)     /*!< 4 Mbps Nordic proprietary radio mode (BT=0.6/h=0.5)                  */
+  #define RADIO_MODE_MODE_Nrf_4Mbit_0BT4 (0xAUL)     /*!< 4 Mbps Nordic proprietary radio mode (BT=0.4/h=0.5)                  */
+  #define RADIO_MODE_MODE_Test_Ble_1Mbit (0xCUL)     /*!< Production test mode based on 1 Mbps BLE                             */
+  #define RADIO_MODE_MODE_Ieee802154_250Kbit (0xFUL) /*!< IEEE 802.15.4-2015 250 kbps                                          */
 
 
 /* RADIO_MODEINTERNAL: Internal mode setting, active only when MODEPROGENABLE==1 */
@@ -110394,8 +106845,8 @@ typedef struct {
   #define RADIO_MODECNF_SSEL_High (0x1UL)            /*!< High-side LO                                                         */
 
 /* DTX @Bits 3..4 : Default TX value. Specifies what the RADIO will transmit when it is not started, i.e. between:
-                    RADIO.EVENTS_READY and RADIO.TASKS_START RADIO.EVENTS_END and RADIO.TASKS_START RADIO.EVENTS_END and
-                    RADIO.EVENTS_DISABLED) */
+                    RADIO.EVENTS_READY and RADIO.TASKS_START RADIO.EVENTS_PHYEND and RADIO.TASKS_START RADIO.EVENTS_PHYEND and
+                    RADIO.EVENTS_DISABLED */
 
   #define RADIO_MODECNF_DTX_Pos (3UL)                /*!< Position of DTX field.                                               */
   #define RADIO_MODECNF_DTX_Msk (0x3UL << RADIO_MODECNF_DTX_Pos) /*!< Bit mask of DTX field.                                   */
@@ -110535,9 +106986,11 @@ typedef struct {
 /* RADIO_DATAWHITEIV: Data whitening initial value */
   #define RADIO_DATAWHITEIV_ResetValue (0x00000040UL) /*!< Reset value of DATAWHITEIV register.                                */
 
-/* DATAWHITEIV @Bits 0..5 : (unspecified) */
+/* DATAWHITEIV @Bits 0..6 : Data whitening initial value. Bit 6 is hardwired to '1', writing '0' to it has no effect, and it
+                            will always be read back and used by the device as '1'. */
+
   #define RADIO_DATAWHITEIV_DATAWHITEIV_Pos (0UL)    /*!< Position of DATAWHITEIV field.                                       */
-  #define RADIO_DATAWHITEIV_DATAWHITEIV_Msk (0x3FUL << RADIO_DATAWHITEIV_DATAWHITEIV_Pos) /*!< Bit mask of DATAWHITEIV field.  */
+  #define RADIO_DATAWHITEIV_DATAWHITEIV_Msk (0x7FUL << RADIO_DATAWHITEIV_DATAWHITEIV_Pos) /*!< Bit mask of DATAWHITEIV field.  */
 
 
 /* RADIO_GAINOUT: Gain readout (LNA_OUT_SPI for nrf52/53) */
@@ -110626,9 +107079,13 @@ typedef struct {
 /* RADIO_TIMING: Timing */
   #define RADIO_TIMING_ResetValue (0x00000001UL)     /*!< Reset value of TIMING register.                                      */
 
-/* RU @Bit 0 : 0: Legacy ramp-up time, compatible with 180nm radio. 1: Default fast ramp-up. */
+/* RU @Bit 0 : Ramp-up time */
   #define RADIO_TIMING_RU_Pos (0UL)                  /*!< Position of RU field.                                                */
   #define RADIO_TIMING_RU_Msk (0x1UL << RADIO_TIMING_RU_Pos) /*!< Bit mask of RU field.                                        */
+  #define RADIO_TIMING_RU_Min (0x0UL)                /*!< Min enumerator value of RU field.                                    */
+  #define RADIO_TIMING_RU_Max (0x1UL)                /*!< Max enumerator value of RU field.                                    */
+  #define RADIO_TIMING_RU_Legacy (0x0UL)             /*!< Legacy ramp-up time                                                  */
+  #define RADIO_TIMING_RU_Fast (0x1UL)               /*!< Fast ramp-up (default)                                               */
 
 
 /* RADIO_FREQUENCY: Frequency */
@@ -116139,21 +112596,21 @@ typedef struct {
   #define RESETHUB_RESETREAS_DOMAIN_MinIndex (0UL)   /*!< Min index of DOMAIN[4] array.                                        */
   #define RESETHUB_RESETREAS_DOMAIN_ResetValue (0x00000000UL) /*!< Reset value of DOMAIN[4] register.                          */
 
-/* DOG @Bit 0 : Reset from the local watchdog timer detected */
-  #define RESETHUB_RESETREAS_DOMAIN_DOG_Pos (0UL)    /*!< Position of DOG field.                                               */
-  #define RESETHUB_RESETREAS_DOMAIN_DOG_Msk (0x1UL << RESETHUB_RESETREAS_DOMAIN_DOG_Pos) /*!< Bit mask of DOG field.           */
-  #define RESETHUB_RESETREAS_DOMAIN_DOG_Min (0x0UL)  /*!< Min enumerator value of DOG field.                                   */
-  #define RESETHUB_RESETREAS_DOMAIN_DOG_Max (0x1UL)  /*!< Max enumerator value of DOG field.                                   */
-  #define RESETHUB_RESETREAS_DOMAIN_DOG_NotDetected (0x0UL) /*!< Not detected                                                  */
-  #define RESETHUB_RESETREAS_DOMAIN_DOG_Detected (0x1UL) /*!< Detected                                                         */
+/* WDT0 @Bit 0 : Reset from the local watchdog timer 0 detected */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT0_Pos (0UL)   /*!< Position of WDT0 field.                                              */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT0_Msk (0x1UL << RESETHUB_RESETREAS_DOMAIN_WDT0_Pos) /*!< Bit mask of WDT0 field.        */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT0_Min (0x0UL) /*!< Min enumerator value of WDT0 field.                                  */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT0_Max (0x1UL) /*!< Max enumerator value of WDT0 field.                                  */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT0_NotDetected (0x0UL) /*!< Not detected                                                 */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT0_Detected (0x1UL) /*!< Detected                                                        */
 
-/* DOGNS @Bit 1 : Reset from the local non-secure watchdog timer detected */
-  #define RESETHUB_RESETREAS_DOMAIN_DOGNS_Pos (1UL)  /*!< Position of DOGNS field.                                             */
-  #define RESETHUB_RESETREAS_DOMAIN_DOGNS_Msk (0x1UL << RESETHUB_RESETREAS_DOMAIN_DOGNS_Pos) /*!< Bit mask of DOGNS field.     */
-  #define RESETHUB_RESETREAS_DOMAIN_DOGNS_Min (0x0UL) /*!< Min enumerator value of DOGNS field.                                */
-  #define RESETHUB_RESETREAS_DOMAIN_DOGNS_Max (0x1UL) /*!< Max enumerator value of DOGNS field.                                */
-  #define RESETHUB_RESETREAS_DOMAIN_DOGNS_NotDetected (0x0UL) /*!< Not detected                                                */
-  #define RESETHUB_RESETREAS_DOMAIN_DOGNS_Detected (0x1UL) /*!< Detected                                                       */
+/* WDT1 @Bit 1 : Reset from the local watchdog timer 1 detected */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT1_Pos (1UL)   /*!< Position of WDT1 field.                                              */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT1_Msk (0x1UL << RESETHUB_RESETREAS_DOMAIN_WDT1_Pos) /*!< Bit mask of WDT1 field.        */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT1_Min (0x0UL) /*!< Min enumerator value of WDT1 field.                                  */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT1_Max (0x1UL) /*!< Max enumerator value of WDT1 field.                                  */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT1_NotDetected (0x0UL) /*!< Not detected                                                 */
+  #define RESETHUB_RESETREAS_DOMAIN_WDT1_Detected (0x1UL) /*!< Detected                                                        */
 
 /* SREQ @Bit 2 : Reset from the local soft reset request detected. */
   #define RESETHUB_RESETREAS_DOMAIN_SREQ_Pos (2UL)   /*!< Position of SREQ field.                                              */
@@ -116580,21 +113037,21 @@ typedef struct {
 /* RESETINFO_RESETREAS_LOCAL: Local reset reason. */
   #define RESETINFO_RESETREAS_LOCAL_ResetValue (0x00000000UL) /*!< Reset value of LOCAL register.                              */
 
-/* DOG @Bit 0 : Reset from the local watchdog timer detected */
-  #define RESETINFO_RESETREAS_LOCAL_DOG_Pos (0UL)    /*!< Position of DOG field.                                               */
-  #define RESETINFO_RESETREAS_LOCAL_DOG_Msk (0x1UL << RESETINFO_RESETREAS_LOCAL_DOG_Pos) /*!< Bit mask of DOG field.           */
-  #define RESETINFO_RESETREAS_LOCAL_DOG_Min (0x0UL)  /*!< Min enumerator value of DOG field.                                   */
-  #define RESETINFO_RESETREAS_LOCAL_DOG_Max (0x1UL)  /*!< Max enumerator value of DOG field.                                   */
-  #define RESETINFO_RESETREAS_LOCAL_DOG_NotDetected (0x0UL) /*!< Not detected                                                  */
-  #define RESETINFO_RESETREAS_LOCAL_DOG_Detected (0x1UL) /*!< Detected                                                         */
+/* WDT0 @Bit 0 : Reset from the local watchdog timer 0 detected */
+  #define RESETINFO_RESETREAS_LOCAL_WDT0_Pos (0UL)   /*!< Position of WDT0 field.                                              */
+  #define RESETINFO_RESETREAS_LOCAL_WDT0_Msk (0x1UL << RESETINFO_RESETREAS_LOCAL_WDT0_Pos) /*!< Bit mask of WDT0 field.        */
+  #define RESETINFO_RESETREAS_LOCAL_WDT0_Min (0x0UL) /*!< Min enumerator value of WDT0 field.                                  */
+  #define RESETINFO_RESETREAS_LOCAL_WDT0_Max (0x1UL) /*!< Max enumerator value of WDT0 field.                                  */
+  #define RESETINFO_RESETREAS_LOCAL_WDT0_NotDetected (0x0UL) /*!< Not detected                                                 */
+  #define RESETINFO_RESETREAS_LOCAL_WDT0_Detected (0x1UL) /*!< Detected                                                        */
 
-/* DOGNS @Bit 1 : Reset from the local non-secure watchdog timer detected */
-  #define RESETINFO_RESETREAS_LOCAL_DOGNS_Pos (1UL)  /*!< Position of DOGNS field.                                             */
-  #define RESETINFO_RESETREAS_LOCAL_DOGNS_Msk (0x1UL << RESETINFO_RESETREAS_LOCAL_DOGNS_Pos) /*!< Bit mask of DOGNS field.     */
-  #define RESETINFO_RESETREAS_LOCAL_DOGNS_Min (0x0UL) /*!< Min enumerator value of DOGNS field.                                */
-  #define RESETINFO_RESETREAS_LOCAL_DOGNS_Max (0x1UL) /*!< Max enumerator value of DOGNS field.                                */
-  #define RESETINFO_RESETREAS_LOCAL_DOGNS_NotDetected (0x0UL) /*!< Not detected                                                */
-  #define RESETINFO_RESETREAS_LOCAL_DOGNS_Detected (0x1UL) /*!< Detected                                                       */
+/* WDT1 @Bit 1 : Reset from the local watchdog timer 1 detected */
+  #define RESETINFO_RESETREAS_LOCAL_WDT1_Pos (1UL)   /*!< Position of WDT1 field.                                              */
+  #define RESETINFO_RESETREAS_LOCAL_WDT1_Msk (0x1UL << RESETINFO_RESETREAS_LOCAL_WDT1_Pos) /*!< Bit mask of WDT1 field.        */
+  #define RESETINFO_RESETREAS_LOCAL_WDT1_Min (0x0UL) /*!< Min enumerator value of WDT1 field.                                  */
+  #define RESETINFO_RESETREAS_LOCAL_WDT1_Max (0x1UL) /*!< Max enumerator value of WDT1 field.                                  */
+  #define RESETINFO_RESETREAS_LOCAL_WDT1_NotDetected (0x0UL) /*!< Not detected                                                 */
+  #define RESETINFO_RESETREAS_LOCAL_WDT1_Detected (0x1UL) /*!< Detected                                                        */
 
 /* SREQ @Bit 2 : Reset from the local soft reset request detected. */
   #define RESETINFO_RESETREAS_LOCAL_SREQ_Pos (2UL)   /*!< Position of SREQ field.                                              */
@@ -118346,7 +114803,7 @@ typedef struct {
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start RTC counter                                     */
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop RTC counter                                      */
     __OM uint32_t TASKS_CLEAR;                       /*!< (@ 0x00000008) Clear RTC counter                                     */
-    __OM uint32_t TASKS_TRIGOVRFLW;                  /*!< (@ 0x0000000C) Set counter to 0xFFFFF0                               */
+    __OM uint32_t TASKS_TRIGOVRFLW;                  /*!< (@ 0x0000000C) Set counter to: maximum value - 0xF                   */
     __IM uint32_t RESERVED[12];
     __OM uint32_t TASKS_CAPTURE[8];                  /*!< (@ 0x00000040) Capture RTC counter to CC[n] register                 */
     __IM uint32_t RESERVED1[8];
@@ -118417,10 +114874,10 @@ typedef struct {
   #define RTC_TASKS_CLEAR_TASKS_CLEAR_Trigger (0x1UL) /*!< Trigger task                                                        */
 
 
-/* RTC_TASKS_TRIGOVRFLW: Set counter to 0xFFFFF0 */
+/* RTC_TASKS_TRIGOVRFLW: Set counter to: maximum value - 0xF */
   #define RTC_TASKS_TRIGOVRFLW_ResetValue (0x00000000UL) /*!< Reset value of TASKS_TRIGOVRFLW register.                        */
 
-/* TASKS_TRIGOVRFLW @Bit 0 : Set counter to 0xFFFFF0 */
+/* TASKS_TRIGOVRFLW @Bit 0 : Set counter to: maximum value - 0xF */
   #define RTC_TASKS_TRIGOVRFLW_TASKS_TRIGOVRFLW_Pos (0UL) /*!< Position of TASKS_TRIGOVRFLW field.                             */
   #define RTC_TASKS_TRIGOVRFLW_TASKS_TRIGOVRFLW_Msk (0x1UL << RTC_TASKS_TRIGOVRFLW_TASKS_TRIGOVRFLW_Pos) /*!< Bit mask of
                                                                             TASKS_TRIGOVRFLW field.*/
@@ -125911,7 +122368,7 @@ typedef struct {
   __IOM uint32_t  MOSI;                              /*!< (@ 0x00000004) Pin select for MOSI signal                            */
   __IOM uint32_t  MISO;                              /*!< (@ 0x00000008) Pin select for MISO signal                            */
   __IOM uint32_t  DCX;                               /*!< (@ 0x0000000C) Pin select for DCX signal                             */
-  __IOM uint32_t  CSN[1];                            /*!< (@ 0x00000010) Pin select for CSN                                    */
+  __IOM uint32_t  CSN;                               /*!< (@ 0x00000010) Pin select for CSN                                    */
 } NRF_SPIM_PSEL_Type;                                /*!< Size = 20 (0x014)                                                    */
 
 /* SPIM_PSEL_SCK: Pin select for SCK */
@@ -126011,10 +122468,7 @@ typedef struct {
 
 
 /* SPIM_PSEL_CSN: Pin select for CSN */
-  #define SPIM_PSEL_CSN_MaxCount (1UL)               /*!< Max size of CSN[1] array.                                            */
-  #define SPIM_PSEL_CSN_MaxIndex (0UL)               /*!< Max index of CSN[1] array.                                           */
-  #define SPIM_PSEL_CSN_MinIndex (0UL)               /*!< Min index of CSN[1] array.                                           */
-  #define SPIM_PSEL_CSN_ResetValue (0xFFFFFFFFUL)    /*!< Reset value of CSN[1] register.                                      */
+  #define SPIM_PSEL_CSN_ResetValue (0xFFFFFFFFUL)    /*!< Reset value of CSN register.                                         */
 
 /* PIN @Bits 0..4 : Pin number */
   #define SPIM_PSEL_CSN_PIN_Pos (0UL)                /*!< Position of PIN field.                                               */
@@ -126413,19 +122867,21 @@ typedef struct {
     __IOM uint32_t PRESCALER;                        /*!< (@ 0x0000052C) The prescaler is used to set the SPI frequency.       */
     __IM uint32_t RESERVED14[9];
     __IOM uint32_t CONFIG;                           /*!< (@ 0x00000554) Configuration register                                */
-    __IM uint32_t RESERVED15[21];
+    __IM uint32_t RESERVED15[20];
+    __IOM uint32_t STALLSTAT;                        /*!< (@ 0x000005A8) Stall status for EasyDMA RAM accesses. The fields in
+                                                                         this register are set to STALL by hardware whenever a
+                                                                         stall occurres and can be cleared (set to NOSTALL) by
+                                                                         the CPU.*/
     __IOM NRF_SPIM_IFTIMING_Type IFTIMING;           /*!< (@ 0x000005AC) (unspecified)                                         */
     __IOM uint32_t DCXCNT;                           /*!< (@ 0x000005B4) DCX configuration                                     */
     __IOM uint32_t CSNPOL;                           /*!< (@ 0x000005B8) Polarity of CSN output                                */
-    __IOM uint32_t CSNCONTROL;                       /*!< (@ 0x000005BC) Selects which CSN is used, only one CSN can be active
-                                                                         at one time. This register can be safely written during
-                                                                         an ongoing SPI transaction.*/
+    __IM uint32_t RESERVED16;
     __IOM uint32_t ORC;                              /*!< (@ 0x000005C0) Byte transmitted after TXD.MAXCNT bytes have been
                                                                          transmitted in the case when RXD.MAXCNT is greater than
                                                                          TXD.MAXCNT*/
-    __IM uint32_t RESERVED16[15];
+    __IM uint32_t RESERVED17[15];
     __IOM NRF_SPIM_PSEL_Type PSEL;                   /*!< (@ 0x00000600) (unspecified)                                         */
-    __IM uint32_t RESERVED17[59];
+    __IM uint32_t RESERVED18[59];
     __IOM NRF_SPIM_DMA_Type DMA;                     /*!< (@ 0x00000700) (unspecified)                                         */
   } NRF_SPIM_Type;                                   /*!< Size = 1884 (0x75C)                                                  */
 
@@ -127192,6 +123648,20 @@ typedef struct {
   #define SPIM_CONFIG_CPOL_ActiveLow (0x1UL)         /*!< Active low                                                           */
 
 
+/* SPIM_STALLSTAT: Stall status for EasyDMA RAM accesses. The fields in this register are set to STALL by hardware whenever a
+                    stall occurres and can be cleared (set to NOSTALL) by the CPU. */
+
+  #define SPIM_STALLSTAT_ResetValue (0x00000000UL)   /*!< Reset value of STALLSTAT register.                                   */
+
+/* TX @Bit 0 : Stall status for EasyDMA RAM reads */
+  #define SPIM_STALLSTAT_TX_Pos (0UL)                /*!< Position of TX field.                                                */
+  #define SPIM_STALLSTAT_TX_Msk (0x1UL << SPIM_STALLSTAT_TX_Pos) /*!< Bit mask of TX field.                                    */
+  #define SPIM_STALLSTAT_TX_Min (0x0UL)              /*!< Min value of TX field.                                               */
+  #define SPIM_STALLSTAT_TX_Max (0x1UL)              /*!< Max size of TX field.                                                */
+  #define SPIM_STALLSTAT_TX_NOSTALL (0x0UL)          /*!< No stall                                                             */
+  #define SPIM_STALLSTAT_TX_STALL (0x1UL)            /*!< A stall has occurred                                                 */
+
+
 /* SPIM_DCXCNT: DCX configuration */
   #define SPIM_DCXCNT_ResetValue (0x00000000UL)      /*!< Reset value of DCXCNT register.                                      */
 
@@ -127215,16 +123685,6 @@ typedef struct {
   #define SPIM_CSNPOL_CSNPOL0_Max (0x1UL)            /*!< Max enumerator value of CSNPOL0 field.                               */
   #define SPIM_CSNPOL_CSNPOL0_LOW (0x0UL)            /*!< Active low (idle state high)                                         */
   #define SPIM_CSNPOL_CSNPOL0_HIGH (0x1UL)           /*!< Active high (idle state low)                                         */
-
-
-/* SPIM_CSNCONTROL: Selects which CSN is used, only one CSN can be active at one time. This register can be safely written
-                     during an ongoing SPI transaction. */
-
-  #define SPIM_CSNCONTROL_ResetValue (0x00000000UL)  /*!< Reset value of CSNCONTROL register.                                  */
-
-/* CSN @Bit 0 : CSN Number. */
-  #define SPIM_CSNCONTROL_CSN_Pos (0UL)              /*!< Position of CSN field.                                               */
-  #define SPIM_CSNCONTROL_CSN_Msk (0x1UL << SPIM_CSNCONTROL_CSN_Pos) /*!< Bit mask of CSN field.                               */
 
 
 /* SPIM_ORC: Byte transmitted after TXD.MAXCNT bytes have been transmitted in the case when RXD.MAXCNT is greater than
@@ -136410,16 +132870,14 @@ typedef struct {
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop Timer                                            */
     __OM uint32_t TASKS_COUNT;                       /*!< (@ 0x00000008) Increment Timer (Counter mode only)                   */
     __OM uint32_t TASKS_CLEAR;                       /*!< (@ 0x0000000C) Clear time                                            */
-    __OM uint32_t TASKS_SHUTDOWN;                    /*!< (@ 0x00000010) Shut down timer                                       */
-    __IM uint32_t RESERVED[11];
+    __IM uint32_t RESERVED[12];
     __OM uint32_t TASKS_CAPTURE[8];                  /*!< (@ 0x00000040) Capture Timer value to CC[n] register                 */
     __IM uint32_t RESERVED1[8];
     __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
     __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
     __IOM uint32_t SUBSCRIBE_COUNT;                  /*!< (@ 0x00000088) Subscribe configuration for task COUNT                */
     __IOM uint32_t SUBSCRIBE_CLEAR;                  /*!< (@ 0x0000008C) Subscribe configuration for task CLEAR                */
-    __IOM uint32_t SUBSCRIBE_SHUTDOWN;               /*!< (@ 0x00000090) Subscribe configuration for task SHUTDOWN             */
-    __IM uint32_t RESERVED2[11];
+    __IM uint32_t RESERVED2[12];
     __IOM uint32_t SUBSCRIBE_CAPTURE[8];             /*!< (@ 0x000000C0) Subscribe configuration for task CAPTURE[n]           */
     __IM uint32_t RESERVED3[24];
     __IOM uint32_t EVENTS_COMPARE[8];                /*!< (@ 0x00000140) Compare event on CC[n] match                          */
@@ -136487,18 +132945,6 @@ typedef struct {
   #define TIMER_TASKS_CLEAR_TASKS_CLEAR_Min (0x1UL)  /*!< Min enumerator value of TASKS_CLEAR field.                           */
   #define TIMER_TASKS_CLEAR_TASKS_CLEAR_Max (0x1UL)  /*!< Max enumerator value of TASKS_CLEAR field.                           */
   #define TIMER_TASKS_CLEAR_TASKS_CLEAR_Trigger (0x1UL) /*!< Trigger task                                                      */
-
-
-/* TIMER_TASKS_SHUTDOWN: Shut down timer */
-  #define TIMER_TASKS_SHUTDOWN_ResetValue (0x00000000UL) /*!< Reset value of TASKS_SHUTDOWN register.                          */
-
-/* TASKS_SHUTDOWN @Bit 0 : Shut down timer */
-  #define TIMER_TASKS_SHUTDOWN_TASKS_SHUTDOWN_Pos (0UL) /*!< Position of TASKS_SHUTDOWN field.                                 */
-  #define TIMER_TASKS_SHUTDOWN_TASKS_SHUTDOWN_Msk (0x1UL << TIMER_TASKS_SHUTDOWN_TASKS_SHUTDOWN_Pos) /*!< Bit mask of
-                                                                            TASKS_SHUTDOWN field.*/
-  #define TIMER_TASKS_SHUTDOWN_TASKS_SHUTDOWN_Min (0x1UL) /*!< Min enumerator value of TASKS_SHUTDOWN field.                   */
-  #define TIMER_TASKS_SHUTDOWN_TASKS_SHUTDOWN_Max (0x1UL) /*!< Max enumerator value of TASKS_SHUTDOWN field.                   */
-  #define TIMER_TASKS_SHUTDOWN_TASKS_SHUTDOWN_Trigger (0x1UL) /*!< Trigger task                                                */
 
 
 /* TIMER_TASKS_CAPTURE: Capture Timer value to CC[n] register */
@@ -136586,24 +133032,6 @@ typedef struct {
   #define TIMER_SUBSCRIBE_CLEAR_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
   #define TIMER_SUBSCRIBE_CLEAR_EN_Disabled (0x0UL)  /*!< Disable subscription                                                 */
   #define TIMER_SUBSCRIBE_CLEAR_EN_Enabled (0x1UL)   /*!< Enable subscription                                                  */
-
-
-/* TIMER_SUBSCRIBE_SHUTDOWN: Subscribe configuration for task SHUTDOWN */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_SHUTDOWN register.                  */
-
-/* CHIDX @Bits 0..7 : DPPI channel that task SHUTDOWN will subscribe to */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Msk (0xFFUL << TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Min (0x00UL) /*!< Min value of CHIDX field.                                           */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
-
-/* EN @Bit 31 : (unspecified) */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_EN_Pos (31UL)     /*!< Position of EN field.                                                */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_EN_Msk (0x1UL << TIMER_SUBSCRIBE_SHUTDOWN_EN_Pos) /*!< Bit mask of EN field.                */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_EN_Min (0x0UL)    /*!< Min enumerator value of EN field.                                    */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_EN_Max (0x1UL)    /*!< Max enumerator value of EN field.                                    */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_EN_Disabled (0x0UL) /*!< Disable subscription                                               */
-  #define TIMER_SUBSCRIBE_SHUTDOWN_EN_Enabled (0x1UL) /*!< Enable subscription                                                 */
 
 
 /* TIMER_SUBSCRIBE_CAPTURE: Subscribe configuration for task CAPTURE[n] */
@@ -145308,24 +141736,39 @@ typedef struct {
   #define UARTE_BAUDRATE_BAUDRATE_Msk (0xFFFFFFFFUL << UARTE_BAUDRATE_BAUDRATE_Pos) /*!< Bit mask of BAUDRATE field.           */
   #define UARTE_BAUDRATE_BAUDRATE_Min (0x4F000UL)    /*!< Min enumerator value of BAUDRATE field.                              */
   #define UARTE_BAUDRATE_BAUDRATE_Max (0x10000000UL) /*!< Max enumerator value of BAUDRATE field.                              */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud1200 (0x0004F000UL) /*!< 1200 baud (actual rate: 1205)                                   */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud2400 (0x0009D000UL) /*!< 2400 baud (actual rate: 2396)                                   */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud4800 (0x0013B000UL) /*!< 4800 baud (actual rate: 4808)                                   */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud9600 (0x00275000UL) /*!< 9600 baud (actual rate: 9598)                                   */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud14400 (0x003AF000UL) /*!< 14400 baud (actual rate: 14401)                                */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud19200 (0x004EA000UL) /*!< 19200 baud (actual rate: 19208)                                */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud28800 (0x0075C000UL) /*!< 28800 baud (actual rate: 28777)                                */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud31250 (0x00800000UL) /*!< 31250 baud                                                     */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud38400 (0x009D0000UL) /*!< 38400 baud (actual rate: 38369)                                */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud56000 (0x00E50000UL) /*!< 56000 baud (actual rate: 55944)                                */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud57600 (0x00EB0000UL) /*!< 57600 baud (actual rate: 57554)                                */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud76800 (0x013A9000UL) /*!< 76800 baud (actual rate: 76923)                                */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud115200 (0x01D60000UL) /*!< 115200 baud (actual rate: 115108)                             */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud230400 (0x03B00000UL) /*!< 230400 baud (actual rate: 231884)                             */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud250000 (0x04000000UL) /*!< 250000 baud                                                   */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud460800 (0x07400000UL) /*!< 460800 baud (actual rate: 457143)                             */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud921600 (0x0F000000UL) /*!< 921600 baud (actual rate: 941176)                             */
-  #define UARTE_BAUDRATE_BAUDRATE_Baud1M (0x10000000UL) /*!< 1 megabaud                                                        */
+  #define UARTE_BAUDRATE_BAUDRATE_Baud1200 (0x0004F000UL) /*!< 1200 baud (actual rate: 1205) when UARTE has 16 MHz peripheral
+                                                               clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud2400 (0x0009D000UL) /*!< 2400 baud (actual rate: 2396) when UARTE has 16 MHz peripheral
+                                                               clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud4800 (0x0013B000UL) /*!< 4800 baud (actual rate: 4808) when UARTE has 16 MHz peripheral
+                                                               clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud9600 (0x00275000UL) /*!< 9600 baud (actual rate: 9598) when UARTE has 16 MHz peripheral
+                                                               clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud14400 (0x003AF000UL) /*!< 14400 baud (actual rate: 14401) when UARTE has 16 MHz peripheral
+                                                                clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud19200 (0x004EA000UL) /*!< 19200 baud (actual rate: 19208) when UARTE has 16 MHz peripheral
+                                                                clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud28800 (0x0075C000UL) /*!< 28800 baud (actual rate: 28777) when UARTE has 16 MHz peripheral
+                                                                clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud31250 (0x00800000UL) /*!< 31250 baud when UARTE has 16 MHz peripheral clock frequency    */
+  #define UARTE_BAUDRATE_BAUDRATE_Baud38400 (0x009D0000UL) /*!< 38400 baud (actual rate: 38369) when UARTE has 16 MHz peripheral
+                                                                clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud56000 (0x00E50000UL) /*!< 56000 baud (actual rate: 55944) when UARTE has 16 MHz peripheral
+                                                                clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud57600 (0x00EB0000UL) /*!< 57600 baud (actual rate: 57554) when UARTE has 16 MHz peripheral
+                                                                clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud76800 (0x013A9000UL) /*!< 76800 baud (actual rate: 76923) when UARTE has 16 MHz peripheral
+                                                                clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud115200 (0x01D60000UL) /*!< 115200 baud (actual rate: 115108) when UARTE has 16 MHz
+                                                                 peripheral clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud230400 (0x03B00000UL) /*!< 230400 baud (actual rate: 231884) when UARTE has 16 MHz
+                                                                 peripheral clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud250000 (0x04000000UL) /*!< 250000 baud when UARTE has 16 MHz peripheral clock frequency  */
+  #define UARTE_BAUDRATE_BAUDRATE_Baud460800 (0x07400000UL) /*!< 460800 baud (actual rate: 457143) when UARTE has 16 MHz
+                                                                 peripheral clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud921600 (0x0F000000UL) /*!< 921600 baud (actual rate: 941176) when UARTE has 16 MHz
+                                                                 peripheral clock frequency*/
+  #define UARTE_BAUDRATE_BAUDRATE_Baud1M (0x10000000UL) /*!< 1 megabaud when UARTE has 16 MHz peripheral clock frequency       */
 
 
 /* UARTE_CONFIG: Configuration of parity, hardware flow control, framesize, and packet timeout. */
@@ -152189,10 +148632,6 @@ typedef struct {
 /* ENABLE @Bit 0 : Enable or disable overriding of PHY input signals. */
   #define USBHS_PHY_INPUTOVERRIDE_ENABLE_Pos (0UL)   /*!< Position of ENABLE field.                                            */
   #define USBHS_PHY_INPUTOVERRIDE_ENABLE_Msk (0x1UL << USBHS_PHY_INPUTOVERRIDE_ENABLE_Pos) /*!< Bit mask of ENABLE field.      */
-  #define USBHS_PHY_INPUTOVERRIDE_ENABLE_Min (0x0UL) /*!< Min enumerator value of ENABLE field.                                */
-  #define USBHS_PHY_INPUTOVERRIDE_ENABLE_Max (0x1UL) /*!< Max enumerator value of ENABLE field.                                */
-  #define USBHS_PHY_INPUTOVERRIDE_ENABLE_Disabled (0x0UL) /*!< Disable                                                         */
-  #define USBHS_PHY_INPUTOVERRIDE_ENABLE_Enabled (0x1UL) /*!< Enable                                                           */
 
 
 /* USBHS_PHY_OVERRIDEVALUES: Values that are used to override the input signals to the PHY. */
@@ -152231,15 +148670,23 @@ typedef struct {
   #define USBHS_PHY_OVERRIDEVALUES_TERMSEL0_Msk (0x1UL << USBHS_PHY_OVERRIDEVALUES_TERMSEL0_Pos) /*!< Bit mask of TERMSEL0
                                                                             field.*/
 
-/* DPPULLDOWN0 @Bit 23 : (unspecified) */
-  #define USBHS_PHY_OVERRIDEVALUES_DPPULLDOWN0_Pos (23UL) /*!< Position of DPPULLDOWN0 field.                                  */
-  #define USBHS_PHY_OVERRIDEVALUES_DPPULLDOWN0_Msk (0x1UL << USBHS_PHY_OVERRIDEVALUES_DPPULLDOWN0_Pos) /*!< Bit mask of
-                                                                            DPPULLDOWN0 field.*/
+/* DPPULLDOWN @Bit 23 : This field controls the pull-down resistor on D+ */
+  #define USBHS_PHY_OVERRIDEVALUES_DPPULLDOWN_Pos (23UL) /*!< Position of DPPULLDOWN field.                                    */
+  #define USBHS_PHY_OVERRIDEVALUES_DPPULLDOWN_Msk (0x1UL << USBHS_PHY_OVERRIDEVALUES_DPPULLDOWN_Pos) /*!< Bit mask of DPPULLDOWN
+                                                                            field.*/
+  #define USBHS_PHY_OVERRIDEVALUES_DPPULLDOWN_Min (0x0UL) /*!< Min enumerator value of DPPULLDOWN field.                       */
+  #define USBHS_PHY_OVERRIDEVALUES_DPPULLDOWN_Max (0x1UL) /*!< Max enumerator value of DPPULLDOWN field.                       */
+  #define USBHS_PHY_OVERRIDEVALUES_DPPULLDOWN_Enable (0x1UL) /*!< The pull-down resistor on D+ is enabled                      */
+  #define USBHS_PHY_OVERRIDEVALUES_DPPULLDOWN_Disable (0x0UL) /*!< The pull-down resistor on D+ is disabled                    */
 
-/* DMPULLDOWN0 @Bit 24 : (unspecified) */
-  #define USBHS_PHY_OVERRIDEVALUES_DMPULLDOWN0_Pos (24UL) /*!< Position of DMPULLDOWN0 field.                                  */
-  #define USBHS_PHY_OVERRIDEVALUES_DMPULLDOWN0_Msk (0x1UL << USBHS_PHY_OVERRIDEVALUES_DMPULLDOWN0_Pos) /*!< Bit mask of
-                                                                            DMPULLDOWN0 field.*/
+/* DMPULLDOWN @Bit 24 : This field controls the pull-down resistor on D- */
+  #define USBHS_PHY_OVERRIDEVALUES_DMPULLDOWN_Pos (24UL) /*!< Position of DMPULLDOWN field.                                    */
+  #define USBHS_PHY_OVERRIDEVALUES_DMPULLDOWN_Msk (0x1UL << USBHS_PHY_OVERRIDEVALUES_DMPULLDOWN_Pos) /*!< Bit mask of DMPULLDOWN
+                                                                            field.*/
+  #define USBHS_PHY_OVERRIDEVALUES_DMPULLDOWN_Min (0x0UL) /*!< Min enumerator value of DMPULLDOWN field.                       */
+  #define USBHS_PHY_OVERRIDEVALUES_DMPULLDOWN_Max (0x1UL) /*!< Max enumerator value of DMPULLDOWN field.                       */
+  #define USBHS_PHY_OVERRIDEVALUES_DMPULLDOWN_Enable (0x1UL) /*!< The pull-down resistor on D+ is enabled                      */
+  #define USBHS_PHY_OVERRIDEVALUES_DMPULLDOWN_Disable (0x0UL) /*!< The pull-down resistor on D+ is disabled                    */
 
 /* SUSPENDM0 @Bit 25 : (unspecified) */
   #define USBHS_PHY_OVERRIDEVALUES_SUSPENDM0_Pos (25UL) /*!< Position of SUSPENDM0 field.                                      */
@@ -152447,6 +148894,83 @@ typedef struct {
   #define USBHS_DFT_TLATCH_TESTCLK0_Msk (0x1UL << USBHS_DFT_TLATCH_TESTCLK0_Pos) /*!< Bit mask of TESTCLK0 field.              */
 
 
+
+/* =================================================== Struct USBHS_PCGCS ==================================================== */
+/**
+  * @brief PCGCS [USBHS_PCGCS] (unspecified)
+  */
+typedef struct {
+  #if defined(_GNUC_)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wpedantic"
+  #endif
+  union {
+    __IOM uint32_t PENALTY[2];                       /*!< (@ 0x00000000) Penalty level for power/clock pair n. When
+                                                                         FULL_PCP_ZERO feature is not supported, PENALTY[0]
+                                                                         address overlaps the PENALTY0 address and register
+                                                                         description for PENALTY[0] is not valid.*/
+    __IOM uint32_t PENALTY0;                         /*!< (@ 0x00000000) Penalty level for power/clock pair 0. The register
+                                                                         description is valid only when FULL_PCP_ZERO feature is
+                                                                         not supported*/
+    __IM uint32_t RESERVED[2];
+  };
+  #if defined(_GNUC_)
+    #pragma GCC diagnostic pop
+  #endif
+  __IM  uint32_t  RESERVED1[30];
+  __IOM uint32_t  FORCEOVERRIDE[4];                  /*!< (@ 0x00000080) Force override of power/clock pair n.                 */
+} NRF_USBHS_PCGCS_Type;                              /*!< Size = 144 (0x090)                                                   */
+
+/* USBHS_PCGCS_PENALTY: Penalty level for power/clock pair n. When FULL_PCP_ZERO feature is not supported, PENALTY[0] address
+                         overlaps the PENALTY0 address and register description for PENALTY[0] is not valid. */
+
+  #define USBHS_PCGCS_PENALTY_MaxCount (2UL)         /*!< Max size of PENALTY[2] array.                                        */
+  #define USBHS_PCGCS_PENALTY_MaxIndex (1UL)         /*!< Max index of PENALTY[2] array.                                       */
+  #define USBHS_PCGCS_PENALTY_MinIndex (0UL)         /*!< Min index of PENALTY[2] array.                                       */
+  #define USBHS_PCGCS_PENALTY_ResetValue (0xFFFFFFFCUL) /*!< Reset value of PENALTY[2] register.                               */
+
+/* PENALTY @Bits 0..1 : Penalty level */
+  #define USBHS_PCGCS_PENALTY_PENALTY_Pos (0UL)      /*!< Position of PENALTY field.                                           */
+  #define USBHS_PCGCS_PENALTY_PENALTY_Msk (0x3UL << USBHS_PCGCS_PENALTY_PENALTY_Pos) /*!< Bit mask of PENALTY field.           */
+
+
+/* USBHS_PCGCS_PENALTY0: Penalty level for power/clock pair 0. The register description is valid only when FULL_PCP_ZERO feature
+                          is not supported */
+
+  #define USBHS_PCGCS_PENALTY0_ResetValue (0x00000000UL) /*!< Reset value of PENALTY0 register.                                */
+
+/* PENALTY @Bits 0..1 : Penalty level */
+  #define USBHS_PCGCS_PENALTY0_PENALTY_Pos (0UL)     /*!< Position of PENALTY field.                                           */
+  #define USBHS_PCGCS_PENALTY0_PENALTY_Msk (0x3UL << USBHS_PCGCS_PENALTY0_PENALTY_Pos) /*!< Bit mask of PENALTY field.         */
+
+
+/* USBHS_PCGCS_FORCEOVERRIDE: Force override of power/clock pair n. */
+  #define USBHS_PCGCS_FORCEOVERRIDE_MaxCount (4UL)   /*!< Max size of FORCEOVERRIDE[4] array.                                  */
+  #define USBHS_PCGCS_FORCEOVERRIDE_MaxIndex (3UL)   /*!< Max index of FORCEOVERRIDE[4] array.                                 */
+  #define USBHS_PCGCS_FORCEOVERRIDE_MinIndex (0UL)   /*!< Min index of FORCEOVERRIDE[4] array.                                 */
+  #define USBHS_PCGCS_FORCEOVERRIDE_ResetValue (0x00000000UL) /*!< Reset value of FORCEOVERRIDE[4] register.                   */
+
+/* CLOCKFORCINGPRE @Bits 0..3 : CLOCKFORCINGPRE */
+  #define USBHS_PCGCS_FORCEOVERRIDE_CLOCKFORCINGPRE_Pos (0UL) /*!< Position of CLOCKFORCINGPRE field.                          */
+  #define USBHS_PCGCS_FORCEOVERRIDE_CLOCKFORCINGPRE_Msk (0xFUL << USBHS_PCGCS_FORCEOVERRIDE_CLOCKFORCINGPRE_Pos) /*!< Bit mask
+                                                                            of CLOCKFORCINGPRE field.*/
+
+/* DOFORCECLOCKPRE @Bit 7 : DOFORCECLOCKPRE */
+  #define USBHS_PCGCS_FORCEOVERRIDE_DOFORCECLOCKPRE_Pos (7UL) /*!< Position of DOFORCECLOCKPRE field.                          */
+  #define USBHS_PCGCS_FORCEOVERRIDE_DOFORCECLOCKPRE_Msk (0x1UL << USBHS_PCGCS_FORCEOVERRIDE_DOFORCECLOCKPRE_Pos) /*!< Bit mask
+                                                                            of DOFORCECLOCKPRE field.*/
+
+/* POWERFORCINGPRE @Bits 8..9 : POWERFORCINGPRE */
+  #define USBHS_PCGCS_FORCEOVERRIDE_POWERFORCINGPRE_Pos (8UL) /*!< Position of POWERFORCINGPRE field.                          */
+  #define USBHS_PCGCS_FORCEOVERRIDE_POWERFORCINGPRE_Msk (0x3UL << USBHS_PCGCS_FORCEOVERRIDE_POWERFORCINGPRE_Pos) /*!< Bit mask
+                                                                            of POWERFORCINGPRE field.*/
+
+/* DOFORCEPOWERPRE @Bit 15 : DOFORCEPOWERPRE */
+  #define USBHS_PCGCS_FORCEOVERRIDE_DOFORCEPOWERPRE_Pos (15UL) /*!< Position of DOFORCEPOWERPRE field.                         */
+  #define USBHS_PCGCS_FORCEOVERRIDE_DOFORCEPOWERPRE_Msk (0x1UL << USBHS_PCGCS_FORCEOVERRIDE_DOFORCEPOWERPRE_Pos) /*!< Bit mask
+                                                                            of DOFORCEPOWERPRE field.*/
+
+
 /* ====================================================== Struct USBHS ======================================================= */
 /**
   * @brief USBHS
@@ -152454,23 +148978,30 @@ typedef struct {
   typedef struct {                                   /*!< USBHS Structure                                                      */
     __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start the USB peripheral.                             */
     __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop the USB peripheral                               */
-    __IM uint32_t RESERVED[62];
+    __IM uint32_t RESERVED[30];
+    __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
+    __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
+    __IM uint32_t RESERVED1[30];
     __IOM uint32_t EVENTS_CORE;                      /*!< (@ 0x00000100) Event indicating that interrupt triggered at USBHS
                                                                          core*/
-    __IM uint32_t RESERVED1[127];
+    __IM uint32_t RESERVED2[31];
+    __IOM uint32_t PUBLISH_CORE;                     /*!< (@ 0x00000180) Publish configuration for event CORE                  */
+    __IM uint32_t RESERVED3[95];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
     __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
     __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
     __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-    __IM uint32_t RESERVED2[60];
+    __IM uint32_t RESERVED4[60];
     __IOM uint32_t ENABLE;                           /*!< (@ 0x00000400) Enable USB peripheral.                                */
     __IOM uint32_t DEBOUNCEFILTER;                   /*!< (@ 0x00000404) Configuration of debounce filters for avalid, bvalid,
                                                                          vbusvalid, sessend and iddig signals*/
-    __IM uint32_t RESERVED3[14];
+    __IM uint32_t RESERVED5[14];
     __IOM NRF_USBHS_PHY_Type PHY;                    /*!< (@ 0x00000440) (unspecified)                                         */
-    __IM uint32_t RESERVED4[105];
+    __IM uint32_t RESERVED6[105];
     __IOM NRF_USBHS_DFT_Type DFT;                    /*!< (@ 0x00000600) (unspecified)                                         */
-  } NRF_USBHS_Type;                                  /*!< Size = 1608 (0x648)                                                  */
+    __IM uint32_t RESERVED7[366];
+    __IOM NRF_USBHS_PCGCS_Type PCGCS;                /*!< (@ 0x00000C00) (unspecified)                                         */
+  } NRF_USBHS_Type;                                  /*!< Size = 3216 (0xC90)                                                  */
 
 /* USBHS_TASKS_START: Start the USB peripheral. */
   #define USBHS_TASKS_START_ResetValue (0x00000000UL) /*!< Reset value of TASKS_START register.                                */
@@ -152494,6 +149025,42 @@ typedef struct {
   #define USBHS_TASKS_STOP_TASKS_STOP_Trigger (0x1UL) /*!< Trigger task                                                        */
 
 
+/* USBHS_SUBSCRIBE_START: Subscribe configuration for task START */
+  #define USBHS_SUBSCRIBE_START_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_START register.                        */
+
+/* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
+  #define USBHS_SUBSCRIBE_START_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
+  #define USBHS_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << USBHS_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
+  #define USBHS_SUBSCRIBE_START_CHIDX_Min (0x00UL)   /*!< Min value of CHIDX field.                                            */
+  #define USBHS_SUBSCRIBE_START_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define USBHS_SUBSCRIBE_START_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define USBHS_SUBSCRIBE_START_EN_Msk (0x1UL << USBHS_SUBSCRIBE_START_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define USBHS_SUBSCRIBE_START_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define USBHS_SUBSCRIBE_START_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define USBHS_SUBSCRIBE_START_EN_Disabled (0x0UL)  /*!< Disable subscription                                                 */
+  #define USBHS_SUBSCRIBE_START_EN_Enabled (0x1UL)   /*!< Enable subscription                                                  */
+
+
+/* USBHS_SUBSCRIBE_STOP: Subscribe configuration for task STOP */
+  #define USBHS_SUBSCRIBE_STOP_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_STOP register.                          */
+
+/* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
+  #define USBHS_SUBSCRIBE_STOP_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
+  #define USBHS_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << USBHS_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
+  #define USBHS_SUBSCRIBE_STOP_CHIDX_Min (0x00UL)    /*!< Min value of CHIDX field.                                            */
+  #define USBHS_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define USBHS_SUBSCRIBE_STOP_EN_Pos (31UL)         /*!< Position of EN field.                                                */
+  #define USBHS_SUBSCRIBE_STOP_EN_Msk (0x1UL << USBHS_SUBSCRIBE_STOP_EN_Pos) /*!< Bit mask of EN field.                        */
+  #define USBHS_SUBSCRIBE_STOP_EN_Min (0x0UL)        /*!< Min enumerator value of EN field.                                    */
+  #define USBHS_SUBSCRIBE_STOP_EN_Max (0x1UL)        /*!< Max enumerator value of EN field.                                    */
+  #define USBHS_SUBSCRIBE_STOP_EN_Disabled (0x0UL)   /*!< Disable subscription                                                 */
+  #define USBHS_SUBSCRIBE_STOP_EN_Enabled (0x1UL)    /*!< Enable subscription                                                  */
+
+
 /* USBHS_EVENTS_CORE: Event indicating that interrupt triggered at USBHS core */
   #define USBHS_EVENTS_CORE_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_CORE register.                                */
 
@@ -152504,6 +149071,24 @@ typedef struct {
   #define USBHS_EVENTS_CORE_EVENTS_CORE_Max (0x1UL)  /*!< Max enumerator value of EVENTS_CORE field.                           */
   #define USBHS_EVENTS_CORE_EVENTS_CORE_NotGenerated (0x0UL) /*!< Event not generated                                          */
   #define USBHS_EVENTS_CORE_EVENTS_CORE_Generated (0x1UL) /*!< Event generated                                                 */
+
+
+/* USBHS_PUBLISH_CORE: Publish configuration for event CORE */
+  #define USBHS_PUBLISH_CORE_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_CORE register.                              */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event CORE will publish to */
+  #define USBHS_PUBLISH_CORE_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
+  #define USBHS_PUBLISH_CORE_CHIDX_Msk (0xFFUL << USBHS_PUBLISH_CORE_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
+  #define USBHS_PUBLISH_CORE_CHIDX_Min (0x00UL)      /*!< Min value of CHIDX field.                                            */
+  #define USBHS_PUBLISH_CORE_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define USBHS_PUBLISH_CORE_EN_Pos (31UL)           /*!< Position of EN field.                                                */
+  #define USBHS_PUBLISH_CORE_EN_Msk (0x1UL << USBHS_PUBLISH_CORE_EN_Pos) /*!< Bit mask of EN field.                            */
+  #define USBHS_PUBLISH_CORE_EN_Min (0x0UL)          /*!< Min enumerator value of EN field.                                    */
+  #define USBHS_PUBLISH_CORE_EN_Max (0x1UL)          /*!< Max enumerator value of EN field.                                    */
+  #define USBHS_PUBLISH_CORE_EN_Disabled (0x0UL)     /*!< Disable publishing                                                   */
+  #define USBHS_PUBLISH_CORE_EN_Enabled (0x1UL)      /*!< Enable publishing                                                    */
 
 
 /* USBHS_INTEN: Enable or disable interrupt */
