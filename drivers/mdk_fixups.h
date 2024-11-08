@@ -1249,6 +1249,9 @@
         #endif
     #endif
 
+    #define RADIO_TIMING_RU_Legacy 0
+    #define RADIO_TIMING_RU_Fast   1
+
     /* Internal part */
     #if defined(NRF_SECURE)
         #define NRF_DOMAIN NRF_DOMAIN_SECURE
@@ -1838,6 +1841,9 @@
 
     #define GPIOTE131_CH_NUM (GPIOTE131_GPIOTE_NCHANNELS_MAX + 1UL)
     #define GPIOTE131_AVAILABLE_GPIO_PORTS 0x3A07UL
+
+    #define RADIO_TIMING_RU_Legacy 0
+    #define RADIO_TIMING_RU_Fast   1
 
     /* Internal part */
     #if defined(NRF_TRUSTZONE_NONSECURE)
