@@ -37,6 +37,21 @@ extern "C" {
 #define NRF_RESETHUB_HAS_WIFI 0
 #endif
 
+#if defined(RESETHUB_RESETREAS_DOMAIN_DOG_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether DOG domain reset reason is present. */
+#define NRF_RESETHUB_HAS_DOG_RESET 1
+#else
+#define NRF_RESETHUB_HAS_DOG_RESET 0
+#endif
+
+#if defined(RESETHUB_RESETREAS_DOMAIN_WDT0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether WDT reset reason is present. */
+#define NRF_RESETHUB_HAS_WDT_RESET 1
+#else
+#define NRF_RESETHUB_HAS_WDT_RESET 0
+#endif
+
+
 /** @brief Symbol specifying maximum number of available reset domain tasks. */
 #define NRF_RESETHUB_TASKS_RESETDOMAIN_COUNT RESETHUB_TASKS_RESETDOMAIN_MaxCount
 
@@ -208,8 +223,14 @@ typedef enum
 /** @brief Local reset reason mask. */
 typedef enum
 {
+#if NRF_RESETHUB_HAS_WDT_RESET
+    NRF_RESETHUB_RESETREAS_LOCAL_WDT0_MASK   = RESETHUB_RESETREAS_DOMAIN_WDT0_Msk,        /**< Reset from the local watchdog 0. */
+    NRF_RESETHUB_RESETREAS_LOCAL_WDT1_MASK   = RESETHUB_RESETREAS_DOMAIN_WDT1_Msk,        /**< Reset from the local watchdog 1. */
+#endif
+#if NRF_RESETHUB_HAS_DOG_RESET
     NRF_RESETHUB_RESETREAS_LOCAL_DOG_MASK    = RESETHUB_RESETREAS_DOMAIN_DOG_Msk,         /**< Reset from the local watchdog. */
     NRF_RESETHUB_RESETREAS_LOCAL_DOGNS_MASK  = RESETHUB_RESETREAS_DOMAIN_DOGNS_Msk,       /**< Reset from the local non-secure watchdog. */
+#endif
     NRF_RESETHUB_RESETREAS_LOCAL_SREQ_MASK   = RESETHUB_RESETREAS_DOMAIN_SREQ_Msk,        /**< Reset from the local soft reset request. */
     NRF_RESETHUB_RESETREAS_LOCAL_LOCKUP_MASK = RESETHUB_RESETREAS_DOMAIN_LOCKUP_Msk,      /**< Reset from local CPU lockup. */
 #if NRF_RESETHUB_HAS_CROSSDOMAIN
