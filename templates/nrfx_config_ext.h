@@ -10,16 +10,26 @@
         #include <nrfx_config_nrf54h20_enga_sysctrl.h>
     #endif
 #elif defined(NRF54H20_ENGB_XXAA)
-    #elif defined(NRF_SECURE)
+    #if defined(NRF_SECURE)
         #include <nrfx_config_nrf54h20_engb_secure.h>
     #elif defined(NRF_SYSCTRL)
         #include <nrfx_config_nrf54h20_engb_sysctrl.h>
     #endif
 #elif defined(NRF54H20_XXAA)
-    #elif defined(NRF_SECURE)
+    #if defined(NRF_SECURE)
         #include <nrfx_config_nrf54h20_secure.h>
     #elif defined(NRF_SYSCTRL)
         #include <nrfx_config_nrf54h20_sysctrl.h>
+    #endif
+#elif defined(NRF7120_XXAA) 
+    #if defined(NRF_APPLICATION)
+        #include <nrfx_config_nrf7120_application.h>
+    #elif defined(NRF_FLPR)
+        #include <nrfx_config_nrf7120_flpr.h>
+    #elif defined(NRF_LMAC)
+        #include <nrfx_config_nrf7120_lmac.h>
+    #elif defined(NRF_UMAC)
+        #include <nrfx_config_nrf7120_umac.h>
     #endif
 #elif defined(NRF9230_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
