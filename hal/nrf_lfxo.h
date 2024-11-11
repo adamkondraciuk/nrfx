@@ -265,7 +265,8 @@ NRF_STATIC_INLINE void nrf_lfxo_status_get(NRF_LFXO_Type const * p_reg,
                                            nrf_lfxo_status_t *   p_status)
 {
     NRFX_ASSERT(p_status);
-    p_status->oscmode = (nrf_lfxo_oscillator_mode_t)((p_reg->STATUS & LFXO_STATUS_MODE_Msk)    >> LFXO_STATUS_MODE_Pos);
+    p_status->oscmode = (nrf_lfxo_oscillator_mode_t)((p_reg->STATUS & LFXO_STATUS_MODE_Msk) 
+                                                    >> LFXO_STATUS_MODE_Pos);
     p_status->hpmode  = (p_reg->STATUS & LFXO_STATUS_HPMODE_Msk)  >> LFXO_STATUS_HPMODE_Pos;
     p_status->running = (p_reg->STATUS & LFXO_STATUS_RUNNING_Msk) >> LFXO_STATUS_RUNNING_Pos;
 }

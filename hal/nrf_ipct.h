@@ -26,6 +26,7 @@ extern "C" {
 
 /** @brief Number of send tasks. */
 #define NRF_IPCT_TASKS_SEND_COUNT IPCT_TASKS_SEND_MaxCount
+
 /** @brief Number of recieve tasks. */
 #define NRF_IPCT_EVENTS_RECEIVE_COUNT IPCT_EVENTS_RECEIVE_MaxCount
 
@@ -49,7 +50,7 @@ typedef enum
     NRF_IPCT_TASK_SEND_13 = offsetof(NRF_IPCT_Type, TASKS_SEND[13]), /**< Send [13] task. */
     NRF_IPCT_TASK_SEND_14 = offsetof(NRF_IPCT_Type, TASKS_SEND[14]), /**< Send [14] task. */
     NRF_IPCT_TASK_SEND_15 = offsetof(NRF_IPCT_Type, TASKS_SEND[15]), /**< Send [15] task. */
-#endif //IPCT_TASKS_SEND_MaxCount > 2
+#endif // IPCT_TASKS_SEND_MaxCount > 2
 #if NRF_IPCT_HAS_ACK
     NRF_IPCT_TASK_ACK_0   = offsetof(NRF_IPCT_Type, TASKS_ACK[0]),   /**< Acknowledge the RECEIVE[0] task. */
     NRF_IPCT_TASK_ACK_1   = offsetof(NRF_IPCT_Type, TASKS_ACK[1]),   /**< Acknowledge the RECEIVE[1] task. */
@@ -108,7 +109,7 @@ typedef enum
     NRF_IPCT_EVENT_ACKED_13   = offsetof(NRF_IPCT_Type, EVENTS_ACKED[13]),   /**< Acknowledged event for the SEND[13] task. */
     NRF_IPCT_EVENT_ACKED_14   = offsetof(NRF_IPCT_Type, EVENTS_ACKED[14]),   /**< Acknowledged event for the SEND[14] task. */
     NRF_IPCT_EVENT_ACKED_15   = offsetof(NRF_IPCT_Type, EVENTS_ACKED[15]),   /**< Acknowledged event for the SEND[15] task. */
-#endif //NRF_IPCT_HAS_ACK
+#endif // NRF_IPCT_HAS_ACK
 } nrf_ipct_event_t;
 
 #if NRF_IPCT_HAS_ACK
@@ -596,10 +597,10 @@ NRF_STATIC_INLINE uint32_t nrf_ipct_int_pending_get(NRF_IPCT_Type const * p_reg,
 #if defined(IPCT_INTPEND1_ResetValue)
         case 1:
             return p_reg->INTPEND1;
+#endif // IPCT_INTPEND1_ResetValue
 #if defined(IPCT_INTPEND2_ResetValue)
         case 2:
             return p_reg->INTPEND2;
-#endif // IPCT_INTPEND1_ResetValue
 #endif // IPCT_INTPEND2_ResetValue
 #if defined(IPCT_INTPEND3_ResetValue)
         case 3:

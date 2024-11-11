@@ -542,7 +542,8 @@ NRF_STATIC_INLINE void nrf_hfxo64m_status_get(NRF_HFXO64M_Type const * p_reg,
                                               nrf_hfxo64m_status_t *   p_status)
 {
     NRFX_ASSERT(p_status);
-    p_status->oscmode = (nrf_hfxo64m_status_mode_t)((p_reg->STATUS & HFXO64M_STATUS_MODE_Msk)    >> HFXO64M_STATUS_MODE_Pos);
+    p_status->oscmode = (nrf_hfxo64m_status_mode_t)((p_reg->STATUS & HFXO64M_STATUS_MODE_Msk)
+                                                    >> HFXO64M_STATUS_MODE_Pos);
     p_status->running = (p_reg->STATUS & HFXO64M_STATUS_RUNNING_Msk) >> HFXO64M_STATUS_RUNNING_Pos;
 }
 
@@ -584,7 +585,7 @@ nrf_hfxo64m_process_t nrf_hfxo64m_trim_chirptune_get(NRF_HFXO64M_Type const * p_
             return NRF_HFXO64M_PROCESS_SLOW;
         default:
             NRFX_ASSERT(false);
-            return NRF_HFXO64M_PROCESS_TYPICAL; // Must be of type nrf_hfxo64m_process_t
+            return (nrf_hfxo64m_process_t )0;
     }
 }
 
@@ -626,7 +627,7 @@ nrf_hfxo64m_process_t nrf_hfxo64m_trim_doublercomp_get(NRF_HFXO64M_Type const * 
             return NRF_HFXO64M_PROCESS_FAST;
         default:
             NRFX_ASSERT(false);
-            return NRF_HFXO64M_PROCESS_TYPICAL; // Must be of type nrf_hfxo64m_process_t
+            return (nrf_hfxo64m_process_t )0;
     }
 }
 
@@ -664,7 +665,8 @@ NRF_STATIC_INLINE void nrf_hfxo64m_ts_cfg_get(NRF_HFXO64M_Type const * p_reg,
     p_cfg->meas_mode2 =
         (reg & HFXO64M_TS_CFG_MEASMODE2_Msk) >> HFXO64M_TS_CFG_MEASMODE2_Pos;
     p_cfg->meas_interval =
-        (nrf_hfxo64m_ts_interval_t)((reg & HFXO64M_TS_CFG_TIMERSEL_Msk) >> HFXO64M_TS_CFG_TIMERSEL_Pos);
+        (nrf_hfxo64m_ts_interval_t)((reg & HFXO64M_TS_CFG_TIMERSEL_Msk)
+                                    >> HFXO64M_TS_CFG_TIMERSEL_Pos);
     p_cfg->fast_mode =
         (reg & HFXO64M_TS_CFG_ENABLEFASTMODE_Msk) >> HFXO64M_TS_CFG_ENABLEFASTMODE_Pos;
     p_cfg->filter =
@@ -776,7 +778,8 @@ NRF_STATIC_INLINE void nrf_hfxo64m_cfg_get(NRF_HFXO64M_Type const *  p_reg,
     uint32_t reg = p_reg->CFG;
 
     p_cfg->areg_level =
-        (nrf_hfxo64m_levelselect_t)((reg & HFXO64M_CFG_LEVELSELECT_Msk) >> HFXO64M_CFG_LEVELSELECT_Pos);
+        (nrf_hfxo64m_levelselect_t)((reg & HFXO64M_CFG_LEVELSELECT_Msk)
+                                    >> HFXO64M_CFG_LEVELSELECT_Pos);
     p_cfg->normal_bias_mode =
         (reg & HFXO64M_CFG_ENABLENORMALBIASMODE_Msk) >> HFXO64M_CFG_ENABLENORMALBIASMODE_Pos;
     p_cfg->reg0v8_bypass =
