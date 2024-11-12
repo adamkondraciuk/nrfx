@@ -132,12 +132,14 @@ typedef uint32_t nrf_saadc_input_t;
 
 #if defined(SAADC_CH_PSELP_INTERNAL_VDDAO1V8) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol specifying AVDD_AO_1V8 as input. */
-#define NRF_SAADC_INPUT_VDDAO1V8 ((SAADC_CH_PSELP_INTERNAL_VDDAO1V8 + 1) << SAADC_CH_PSELP_INTERNAL_Pos)
+#define NRF_SAADC_INPUT_VDDAO1V8 ((SAADC_CH_PSELP_INTERNAL_VDDAO1V8 + 1) \
+                                    << SAADC_CH_PSELP_INTERNAL_Pos)
 #endif
 
 #if defined(SAADC_CH_PSELP_INTERNAL_VDDAO0V8) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol specifying VDD_AO_0V8 as input. */
-#define NRF_SAADC_INPUT_VDDAO0V8 ((SAADC_CH_PSELP_INTERNAL_VDDAO0V8 + 1) << SAADC_CH_PSELP_INTERNAL_Pos)
+#define NRF_SAADC_INPUT_VDDAO0V8 ((SAADC_CH_PSELP_INTERNAL_VDDAO0V8 + 1) \
+                                    << SAADC_CH_PSELP_INTERNAL_Pos)
 #endif
 
 #if defined(SAADC_CH_PSELP_INTERNAL_VDDRF) || defined(__NRFX_DOXYGEN__)
