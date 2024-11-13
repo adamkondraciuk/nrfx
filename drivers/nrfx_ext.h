@@ -233,7 +233,7 @@ extern "C" {
          NRF_REGULATORS_ELV_ELVGRTCLFXO_MASK = REGULATORS_TRIM_ELVGRTCLFXO_Msk,   \
          NRF_REGULATORS_ELV_ELVDEBUGGER_MASK = REGULATORS_TRIM_ELVDEBUGGER_Msk,), \
    ())
-#elif defined(NRF54L15_XXAA)
+#elif defined(NRF54L05_XXAA)|| defined(NRF54L10_XXAA) || defined(NRF54L15_XXAA)
 #define NRF_REGULATORS_ELV_MODE_ALL_MASK (REGULATORS_TRIM_ELVPDMAIN_Msk   | \
                                           REGULATORS_TRIM_ELVPDLP_Msk     | \
                                           REGULATORS_TRIM_ELVPDPERIPH_Msk | \

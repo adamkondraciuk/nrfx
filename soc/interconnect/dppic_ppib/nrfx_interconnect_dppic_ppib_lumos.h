@@ -26,7 +26,8 @@ extern "C" {
     .channels_mask = NRFX_BIT_MASK(NRFX_CONCAT(DPPIC, idx, _CH_NUM))
 #endif
 
-#if (defined (NRF54L15_XXAA) || defined (NRF54L15_ENGA_XXAA))
+#if (defined(NRF54L05_XXAA) || defined(NRF54L10_XXAA) || defined(NRF54L15_XXAA) || \
+     defined(NRF54L15_ENGA_XXAA))
 
 #define NRFX_INTERCONNECT_PPIB_MAP  \
 {                                   \
