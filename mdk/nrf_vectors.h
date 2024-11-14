@@ -83,6 +83,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_NETWORK)
         #include "nrf5340_network_vectors.h"
     #endif
+#elif defined(NRF54L09_ENGA_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "nrf54l09_enga_application_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "nrf54l09_enga_flpr_vectors.h"
+    #endif
 #elif defined(NRF54L05_XXAA)
     #if defined(NRF_APPLICATION)
         #include "nrf54l05_application_vectors.h"
