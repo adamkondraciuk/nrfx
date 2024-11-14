@@ -26,6 +26,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #include <stdint.h>
 #include <stdbool.h>
 #include "nrf.h"
+#include "nrf54l_erratas.h"
 #include "system_nrf54l.h"
 #include "system_nrf54l_approtect.h"
 #include "system_config_sau.h"
@@ -117,6 +118,17 @@ void SystemInit(void)
                     *((volatile uint32_t *)0x50120440) = 0xC8ul;
                 }
             #endif
+
+            #if NRF54L_ERRATA_32_ENABLE_WORKAROUND
+               /* Workaround for Errata 32 */
+                if (nrf54l_errata_32())
+                {
+                    if (*((volatile uint32_t *)0x00FFC334ul) <= 0x180A1D00ul){
+                        *((volatile uint32_t *)0x50120640ul) = 0x1EA9E040ul;
+                    }
+                }
+            #endif
+
         #endif
 
         /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
