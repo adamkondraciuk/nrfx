@@ -20,9 +20,13 @@ extern "C" {
 #define NRF_SAADC_LIMITS_INT_OFFSET \
     NRFX_MIN(SAADC_INTENSET_CH0LIMITH_Pos, SAADC_INTENSET_CH0LIMITL_Pos)
 
+/** @brief Symbol specifying number of LIMIT events per channel. */
+#define NRF_SAADC_LIMITS_PER_CHANNEL (2)
+
 /** @brief Symbol specifying the interrupt bitmask for limits of all channels. */
-#define NRF_SAADC_ALL_CHANNELS_LIMITS_INT_MASK \
-    ((uint32_t)(((1 << SAADC_CH_NUM) - 1) << NRF_SAADC_LIMITS_INT_OFFSET))
+#define NRF_SAADC_ALL_CHANNELS_LIMITS_INT_MASK                             \
+    ((uint32_t)(NRFX_BIT_MASK(SAADC_CH_NUM * NRF_SAADC_LIMITS_PER_CHANNEL) \
+                << NRF_SAADC_LIMITS_INT_OFFSET))
 
 #if defined(SAADC_CH_CONFIG_TACQ_3us) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether the configuration of acquisition time using predefined values is present. */
