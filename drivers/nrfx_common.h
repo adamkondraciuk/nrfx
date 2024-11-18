@@ -94,9 +94,10 @@ extern "C" {
  * @retval false Current nrfx version is smaller than the specified version.
  */
 #define NRFX_RELEASE_VER_AT_LEAST(major, minor, micro) \
-    ((NRFX_RELEASE_VER_MAJOR >= (major)) &&            \
-     (NRFX_RELEASE_VER_MINOR >= (minor)) &&            \
-     (NRFX_RELEASE_VER_MICRO >= (micro)))
+    (((NRFX_RELEASE_VER_MAJOR > (major))) ||                                      \
+     ((NRFX_RELEASE_VER_MAJOR == major) && (NRFX_RELEASE_VER_MINOR > (minor))) || \
+     ((NRFX_RELEASE_VER_MAJOR == major) && (NRFX_RELEASE_VER_MINOR == minor) &&   \
+      (NRFX_RELEASE_VER_MICRO >= (micro))))
 
 /**
  * @brief Macro for checking if the configured API version is greater than or equal
@@ -115,9 +116,10 @@ extern "C" {
  * @retval false Configured API version is smaller than the specified API version.
  */
 #define NRFX_API_VER_AT_LEAST(major, minor, micro) \
-    ((NRFX_CONFIG_API_VER_MAJOR >= (major)) &&     \
-     (NRFX_CONFIG_API_VER_MINOR >= (minor)) &&     \
-     (NRFX_CONFIG_API_VER_MICRO >= (micro)))
+    (((NRFX_CONFIG_API_VER_MAJOR > (major))) ||                                         \
+     ((NRFX_CONFIG_API_VER_MAJOR == major) && (NRFX_CONFIG_API_VER_MINOR > (minor))) || \
+     ((NRFX_CONFIG_API_VER_MAJOR == major) && (NRFX_CONFIG_API_VER_MINOR == minor) &&   \
+      (NRFX_CONFIG_API_VER_MICRO >= (micro))))
 
 /**
  * @brief Macro for creating unsigned integer with bit position @p x set.
