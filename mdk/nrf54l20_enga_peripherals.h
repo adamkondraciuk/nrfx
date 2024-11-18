@@ -51,7 +51,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined(NRF_FLPR)
   #include "nrf54l20_enga_flpr_peripherals.h"
 #else
-  #error No processor selected
+  #error "No processor selected"
 #endif
 
 #ifdef __cplusplus

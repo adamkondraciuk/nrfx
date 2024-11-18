@@ -176,6 +176,7 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void TDM_IRQHandler                                              (void);
  __HANDLER("Default_Handler") void SERIAL23_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void SERIAL24_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void TAMPC_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void SPU30_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void SERIAL30_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void COMP_LPCOMP_IRQHandler                                      (void);
@@ -184,8 +185,7 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void GPIOTE30_0_IRQHandler                                       (void);
  __HANDLER("Default_Handler") void GPIOTE30_1_IRQHandler                                       (void);
  __HANDLER("Default_Handler") void CLOCK_POWER_IRQHandler                                      (void);
- __HANDLER("Default_Handler") void TAMPC_IRQHandler                                            (void);
- __HANDLER("Default_Handler") void USBREG_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void VREGUSB_IRQHandler                                          (void);
 
 /*----------------------------------------------------------------------------
   Exception / Interrupt Vector table
@@ -455,7 +455,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     SERIAL23_IRQHandler,
     SERIAL24_IRQHandler,
-    0,
+    TAMPC_IRQHandler,
     0,
     0,
     0,
@@ -489,7 +489,6 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     CLOCK_POWER_IRQHandler,
     0,
     0,
-    TAMPC_IRQHandler,
     0,
     0,
     0,
@@ -505,7 +504,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    USBREG_IRQHandler,
+    0,
+    VREGUSB_IRQHandler,
 };
 
 #if defined(__GNUC__)
