@@ -348,7 +348,7 @@
  * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_GRTC_CONFIG_AUTOSTART
-#define NRFX_GRTC_CONFIG_AUTOSTART 1
+#define NRFX_GRTC_CONFIG_AUTOSTART 0
 #endif
 
 /**
