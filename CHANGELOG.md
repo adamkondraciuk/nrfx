@@ -3,7 +3,7 @@ All notable changes to this project are documented in this file.
 
 ## [3.9.0] - 2024-11-19
 ### Added
-- Added support for nRF54L05, nRF54L09, and nRF54L10.
+- Added support for nRF54L05, nRF54L09 Eng A, and nRF54L10.
 - Added NRFX_RELEASE_VER_AT_LEAST() macro for conditional statements based on current nrfx release version.
 - Added functions for handling pin retention in the GPIO HAL.
 - Added HAL for the BICR peripheral.
