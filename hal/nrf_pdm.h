@@ -406,6 +406,22 @@ NRF_STATIC_INLINE void nrf_pdm_psel_connect(NRF_PDM_Type * p_reg,
                                             uint32_t       psel_din);
 
 /**
+ * @brief Function for setting the CLK pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   CLK pin number.
+ */
+NRF_STATIC_INLINE void nrf_pdm_clk_pin_set(NRF_PDM_Type * p_reg, uint32_t pin);
+
+/**
+ * @brief Function for setting the DIN pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   DIN pin number.
+ */
+NRF_STATIC_INLINE void nrf_pdm_din_pin_set(NRF_PDM_Type * p_reg, uint32_t pin);
+
+/**
  * @brief Function for getting the CLK pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -630,6 +646,16 @@ NRF_STATIC_INLINE void nrf_pdm_psel_connect(NRF_PDM_Type * p_reg,
 {
     p_reg->PSEL.CLK = psel_clk;
     p_reg->PSEL.DIN = psel_din;
+}
+
+NRF_STATIC_INLINE void nrf_pdm_clk_pin_set(NRF_PDM_Type * p_reg, uint32_t pin)
+{
+    p_reg->PSEL.CLK = pin;
+}
+
+NRF_STATIC_INLINE void nrf_pdm_din_pin_set(NRF_PDM_Type * p_reg, uint32_t pin)
+{
+    p_reg->PSEL.DIN = pin;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_pdm_clk_pin_get(NRF_PDM_Type const * p_reg)

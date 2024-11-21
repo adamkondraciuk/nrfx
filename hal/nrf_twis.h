@@ -359,6 +359,14 @@ NRF_STATIC_INLINE bool nrf_twis_enable_check(NRF_TWIS_Type const * p_reg);
 NRF_STATIC_INLINE void nrf_twis_pins_set(NRF_TWIS_Type * p_reg, uint32_t scl, uint32_t sda);
 
 /**
+ * @brief Function for setting the SCL pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   SCL pin number.
+ */
+NRF_STATIC_INLINE void nrf_twis_scl_pin_set(NRF_TWIS_Type * p_reg, uint32_t pin);
+
+/**
  * @brief Function for retrieving the SCL pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -366,6 +374,14 @@ NRF_STATIC_INLINE void nrf_twis_pins_set(NRF_TWIS_Type * p_reg, uint32_t scl, ui
  * @return SCL pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_twis_scl_pin_get(NRF_TWIS_Type const * p_reg);
+
+/**
+ * @brief Function for setting the SDA pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   SDA pin number.
+ */
+NRF_STATIC_INLINE void nrf_twis_sda_pin_set(NRF_TWIS_Type * p_reg, uint32_t pin);
 
 /**
  * @brief Function for retrieving the SDA pin selection.
@@ -738,9 +754,19 @@ NRF_STATIC_INLINE void nrf_twis_pins_set(NRF_TWIS_Type * p_reg, uint32_t scl, ui
     p_reg->PSEL.SDA = sda;
 }
 
+NRF_STATIC_INLINE void nrf_twis_scl_pin_set(NRF_TWIS_Type * p_reg, uint32_t pin)
+{
+    p_reg->PSEL.SCL = pin;
+}
+
 NRF_STATIC_INLINE uint32_t nrf_twis_scl_pin_get(NRF_TWIS_Type const * p_reg)
 {
     return p_reg->PSEL.SCL;
+}
+
+NRF_STATIC_INLINE void nrf_twis_sda_pin_set(NRF_TWIS_Type * p_reg, uint32_t pin)
+{
+    p_reg->PSEL.SDA = pin;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_twis_sda_pin_get(NRF_TWIS_Type const * p_reg)

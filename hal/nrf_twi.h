@@ -218,6 +218,22 @@ NRF_STATIC_INLINE void nrf_twi_pins_set(NRF_TWI_Type * p_reg,
                                         uint32_t       sda_pin);
 
 /**
+ * @brief Function for setting the SCL pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   SCL pin number.
+ */
+NRF_STATIC_INLINE void nrf_twi_scl_pin_set(NRF_TWI_Type * p_reg, uint32_t pin);
+
+/**
+ * @brief Function for setting the SDA pin
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   SDA pin number.
+ */
+NRF_STATIC_INLINE void nrf_twi_sda_pin_set(NRF_TWI_Type * p_reg, uint32_t pin);
+
+/**
  * @brief Function for retrieving the SCL pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -375,6 +391,24 @@ NRF_STATIC_INLINE void nrf_twi_pins_set(NRF_TWI_Type * p_reg,
     p_reg->PSEL.SDA = sda_pin;
 #else
     p_reg->PSELSDA = sda_pin;
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_twi_scl_pin_set(NRF_TWI_Type * p_reg, uint32_t pin)
+{
+#if defined(TWI_PSEL_SCL_CONNECT_Pos)
+    p_reg->PSEL.SCL = pin;
+#else
+    p_reg->PSELSCL = pin;
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_twi_sda_pin_set(NRF_TWI_Type * p_reg, uint32_t pin)
+{
+#if defined(TWI_PSEL_SDA_CONNECT_Pos)
+    p_reg->PSEL.SDA = pin;
+#else
+    p_reg->PSELSDA = pin;
 #endif
 }
 

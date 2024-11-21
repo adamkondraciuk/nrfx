@@ -469,6 +469,15 @@ NRF_STATIC_INLINE void nrf_pwm_pins_set(NRF_PWM_Type * p_reg,
                                         uint32_t const out_pins[NRF_PWM_CHANNEL_COUNT]);
 
 /**
+ * @brief Function for setting pin associated with specified PWM output channel.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] channel PWM output channel.
+ * @param[in] pin     PWM output pin associated with specified PWM output channel.
+ */
+NRF_STATIC_INLINE void nrf_pwm_pin_set(NRF_PWM_Type * p_reg, uint8_t channel, uint32_t pin);
+
+/**
  * @brief Function for getting pin selection associated with specified PWM output channel.
  *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
@@ -740,6 +749,12 @@ NRF_STATIC_INLINE void nrf_pwm_pins_set(NRF_PWM_Type * p_reg,
     {
         p_reg->PSEL.OUT[i] = out_pins[i];
     }
+}
+
+NRF_STATIC_INLINE void nrf_pwm_pin_set(NRF_PWM_Type * p_reg, uint8_t channel, uint32_t pin)
+{
+    NRFX_ASSERT(channel < NRF_PWM_CHANNEL_COUNT);
+    p_reg->PSEL.OUT[channel] = pin;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_pwm_pin_get(NRF_PWM_Type const * p_reg, uint8_t channel)

@@ -433,6 +433,22 @@ NRF_STATIC_INLINE void nrf_twim_pins_set(NRF_TWIM_Type * p_reg,
                                          uint32_t        sda_pin);
 
 /**
+ * @brief Function for setting the SCL pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   SCL pin number.
+ */
+NRF_STATIC_INLINE void nrf_twim_scl_pin_set(NRF_TWIM_Type * p_reg, uint32_t pin);
+
+/**
+ * @brief Function for setting the SDA pin
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   SDA pin number.
+ */
+NRF_STATIC_INLINE void nrf_twim_sda_pin_set(NRF_TWIM_Type * p_reg, uint32_t pin);
+
+/**
  * @brief Function for retrieving the SCL pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -834,6 +850,16 @@ NRF_STATIC_INLINE void nrf_twim_pins_set(NRF_TWIM_Type * p_reg,
 {
     p_reg->PSEL.SCL = scl_pin;
     p_reg->PSEL.SDA = sda_pin;
+}
+
+NRF_STATIC_INLINE void nrf_twim_scl_pin_set(NRF_TWIM_Type * p_reg, uint32_t pin)
+{
+    p_reg->PSEL.SCL = pin;
+}
+
+NRF_STATIC_INLINE void nrf_twim_sda_pin_set(NRF_TWIM_Type * p_reg, uint32_t pin)
+{
+    p_reg->PSEL.SDA = pin;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_twim_scl_pin_get(NRF_TWIM_Type const * p_reg)

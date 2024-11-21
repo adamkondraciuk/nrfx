@@ -398,6 +398,38 @@ NRF_STATIC_INLINE void nrf_spis_pins_set(NRF_SPIS_Type * p_reg,
                                          uint32_t        csn_pin);
 
 /**
+ * @brief Function for setting the SCK pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   SCK pin number.
+ */
+NRF_STATIC_INLINE void nrf_spis_sck_pin_set(NRF_SPIS_Type * p_reg, uint32_t pin);
+
+/**
+ * @brief Function for setting the MOSI pin
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   MOSI pin number.
+ */
+NRF_STATIC_INLINE void nrf_spis_mosi_pin_set(NRF_SPIS_Type * p_reg, uint32_t pin);
+
+/**
+ * @brief Function for setting the MISO pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   MISO pin number.
+ */
+NRF_STATIC_INLINE void nrf_spis_miso_pin_set(NRF_SPIS_Type * p_reg, uint32_t pin);
+
+/**
+ * @brief Function for setting the CSN pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   CSN pin number.
+ */
+NRF_STATIC_INLINE void nrf_spis_csn_pin_set(NRF_SPIS_Type * p_reg, uint32_t pin);
+
+/**
  * @brief Function for getting the SCK pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -800,6 +832,42 @@ NRF_STATIC_INLINE void nrf_spis_pins_set(NRF_SPIS_Type * p_reg,
     p_reg->PSEL.MOSI = mosi_pin;
     p_reg->PSEL.MISO = miso_pin;
     p_reg->PSEL.CSN  = csn_pin;
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_spis_sck_pin_set(NRF_SPIS_Type * p_reg, uint32_t pin)
+{
+#if defined (NRF51)
+    p_reg->PSELSCK = pin;
+#else
+    p_reg->PSEL.SCK = pin;
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_spis_mosi_pin_set(NRF_SPIS_Type * p_reg, uint32_t pin)
+{
+#if defined (NRF51)
+    p_reg->PSELMOSI = pin;
+#else
+    p_reg->PSEL.MOSI = pin;
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_spis_miso_pin_set(NRF_SPIS_Type * p_reg, uint32_t pin)
+{
+#if defined (NRF51)
+    p_reg->PSELMISO = pin;
+#else
+    p_reg->PSEL.MISO = pin;
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_spis_csn_pin_set(NRF_SPIS_Type * p_reg, uint32_t pin)
+{
+#if defined (NRF51)
+    p_reg->PSELCSN = pin;
+#else
+    p_reg->PSEL.CSN = pin;
 #endif
 }
 

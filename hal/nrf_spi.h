@@ -171,6 +171,30 @@ NRF_STATIC_INLINE void nrf_spi_pins_set(NRF_SPI_Type * p_reg,
                                         uint32_t       miso_pin);
 
 /**
+ * @brief Function for setting the SCK pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   SCK pin number.
+ */
+NRF_STATIC_INLINE void nrf_spi_sck_pin_set(NRF_SPI_Type * p_reg, uint32_t pin);
+
+/**
+ * @brief Function for setting the MOSI pin
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   MOSI pin number.
+ */
+NRF_STATIC_INLINE void nrf_spi_mosi_pin_set(NRF_SPI_Type * p_reg, uint32_t pin);
+
+/**
+ * @brief Function for setting the MISO pin.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] pin   MISO pin number.
+ */
+NRF_STATIC_INLINE void nrf_spi_miso_pin_set(NRF_SPI_Type * p_reg, uint32_t pin);
+
+/**
  * @brief Function for getting the SCK pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -304,6 +328,33 @@ NRF_STATIC_INLINE void nrf_spi_pins_set(NRF_SPI_Type * p_reg,
     p_reg->PSEL.MISO = miso_pin;
 #else
     p_reg->PSELMISO = miso_pin;
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_spi_sck_pin_set(NRF_SPI_Type * p_reg, uint32_t pin)
+{
+#if defined(SPI_PSEL_SCK_CONNECT_Pos)
+    p_reg->PSEL.SCK = pin;
+#else
+    p_reg->PSELSCK  = pin;
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_spi_mosi_pin_set(NRF_SPI_Type * p_reg, uint32_t pin)
+{
+#if defined(SPI_PSEL_MOSI_CONNECT_Pos)
+    p_reg->PSEL.MOSI = pin;
+#else
+    p_reg->PSELMOSI = pin;
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_spi_miso_pin_set(NRF_SPI_Type * p_reg, uint32_t pin)
+{
+#if defined(SPI_PSEL_MISO_CONNECT_Pos)
+    p_reg->PSEL.MISO = pin;
+#else
+    p_reg->PSELMISO = pin;
 #endif
 }
 
