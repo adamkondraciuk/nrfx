@@ -350,17 +350,23 @@ extern "C" {
 #if defined(NRF7120_XXAA)
     #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
     #define NRFX_DELAY_DWT_PRESENT  1
-
-    #if !defined(NRFX_COREDEP_VPR_LEGACY)
-        // Handled by nrfx_coredep.h
-    #else
-        #if !defined(NRFX_DELAY_RISCV_SLOWDOWN)
-                #define NRFX_DELAY_RISCV_SLOWDOWN 15
-            #else
-                #define NRFX_DELAY_RISCV_SLOWDOWN 50
-        #endif
-
-    #endif // !defined(NRFX_CONFIG_COREDEP_VPR_LEGACY)
+    // Equivalent to !NRFX_CHECK(ISA_RISCV)
+    #if defined(ISA_RISCV)
+        #if(ISA_RISCV)
+            // Equivalent to !NRFX_CHECK(NRFX_COREDEP_VPR_LEGACY)
+            #if defined(NRFX_COREDEP_VPR_LEGACY)
+                #if !(NRFX_COREDEP_VPR_LEGACY)
+                    // Handled by nrfx_coredep.h
+                #else
+                    #if !defined(NRFX_DELAY_RISCV_SLOWDOWN)
+                            #define NRFX_DELAY_RISCV_SLOWDOWN 15
+                        #else
+                            #define NRFX_DELAY_RISCV_SLOWDOWN 50
+                    #endif
+                #endif // !(NRFX_COREDEP_VPR_LEGACY)
+            #endif //defined(NRFX_COREDEP_VPR_LEGACY)
+        #endif // ISA_RISCV
+    #endif // defined(ISA_RISCV)
 #endif // defined(NRF7120_XXAA)
 
 #if defined(NRF54L09_ENGA_XXAA) || defined(NRF54L15_ENGA_XXAA) || defined(NRF54L15_XXAA) || \
