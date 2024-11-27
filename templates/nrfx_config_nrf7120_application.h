@@ -339,7 +339,7 @@
  * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_GRTC_CONFIG_AUTOSTART
-#define NRFX_GRTC_CONFIG_AUTOSTART 0
+#define NRFX_GRTC_CONFIG_AUTOSTART 1
 #endif
 
 /**
@@ -357,14 +357,14 @@
  * Integer value.
  */
 #ifndef NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS
-#define NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS 4
+#define NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS 12
 #endif
 
 /**
  * @brief NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK
  */
 #ifndef NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK
-#define NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK 0x000000f0
+#define NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK 0x0000ff0f
 #endif
 
 /**
@@ -578,6 +578,24 @@
 #endif
 
 /**
+ * @brief NRFX_PDM20_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PDM20_ENABLED
+#define NRFX_PDM20_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PDM21_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PDM21_ENABLED
+#define NRFX_PDM21_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_POWER_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
@@ -626,6 +644,78 @@
  */
 #ifndef NRFX_PPIB_CONFIG_LOG_LEVEL
 #define NRFX_PPIB_CONFIG_LOG_LEVEL 3
+#endif
+
+/**
+ * @brief NRFX_PPIB00_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB00_ENABLED
+#define NRFX_PPIB00_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB01_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB01_ENABLED
+#define NRFX_PPIB01_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB10_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB10_ENABLED
+#define NRFX_PPIB10_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB11_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB11_ENABLED
+#define NRFX_PPIB11_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB20_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB20_ENABLED
+#define NRFX_PPIB20_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB21_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB21_ENABLED
+#define NRFX_PPIB21_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB22_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB22_ENABLED
+#define NRFX_PPIB22_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB30_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB30_ENABLED
+#define NRFX_PPIB30_ENABLED 0
 #endif
 
 /**
@@ -944,15 +1034,6 @@
  */
 #ifndef NRFX_SPIM01_ENABLED
 #define NRFX_SPIM01_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_SPIM02_ENABLED
- *
- * Boolean. Accepted values: 0 and 1.
- */
-#ifndef NRFX_SPIM02_ENABLED
-#define NRFX_SPIM02_ENABLED 0
 #endif
 
 /**
