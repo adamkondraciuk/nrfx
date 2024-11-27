@@ -35,10 +35,10 @@ typedef enum
 {
     NRF_IPCT_TASK_SEND_0  = offsetof(NRF_IPCT_Type, TASKS_SEND[0]),  /**< Send [0] task. */
     NRF_IPCT_TASK_SEND_1  = offsetof(NRF_IPCT_Type, TASKS_SEND[1]),  /**< Send [1] task. */
-#if NRF_IPCT_TASKS_SEND_COUNT > 2
     NRF_IPCT_TASK_SEND_2  = offsetof(NRF_IPCT_Type, TASKS_SEND[2]),  /**< Send [2] task. */
     NRF_IPCT_TASK_SEND_3  = offsetof(NRF_IPCT_Type, TASKS_SEND[3]),  /**< Send [3] task. */
     NRF_IPCT_TASK_SEND_4  = offsetof(NRF_IPCT_Type, TASKS_SEND[4]),  /**< Send [4] task. */
+#if NRF_IPCT_TASKS_SEND_COUNT > 5
     NRF_IPCT_TASK_SEND_5  = offsetof(NRF_IPCT_Type, TASKS_SEND[5]),  /**< Send [5] task. */
     NRF_IPCT_TASK_SEND_6  = offsetof(NRF_IPCT_Type, TASKS_SEND[6]),  /**< Send [6] task. */
     NRF_IPCT_TASK_SEND_7  = offsetof(NRF_IPCT_Type, TASKS_SEND[7]),  /**< Send [7] task. */
@@ -50,7 +50,7 @@ typedef enum
     NRF_IPCT_TASK_SEND_13 = offsetof(NRF_IPCT_Type, TASKS_SEND[13]), /**< Send [13] task. */
     NRF_IPCT_TASK_SEND_14 = offsetof(NRF_IPCT_Type, TASKS_SEND[14]), /**< Send [14] task. */
     NRF_IPCT_TASK_SEND_15 = offsetof(NRF_IPCT_Type, TASKS_SEND[15]), /**< Send [15] task. */
-#endif // IPCT_TASKS_SEND_MaxCount > 2
+#endif
 #if NRF_IPCT_HAS_ACK
     NRF_IPCT_TASK_ACK_0   = offsetof(NRF_IPCT_Type, TASKS_ACK[0]),   /**< Acknowledge the RECEIVE[0] task. */
     NRF_IPCT_TASK_ACK_1   = offsetof(NRF_IPCT_Type, TASKS_ACK[1]),   /**< Acknowledge the RECEIVE[1] task. */
@@ -76,10 +76,10 @@ typedef enum
 {
     NRF_IPCT_EVENT_RECEIVE_0  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[0]),  /**< Receive [0] event. */
     NRF_IPCT_EVENT_RECEIVE_1  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[1]),  /**< Receive [1] event. */
-#if NRF_IPCT_EVENTS_RECEIVE_COUNT > 2
     NRF_IPCT_EVENT_RECEIVE_2  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[2]),  /**< Receive [2] event. */
     NRF_IPCT_EVENT_RECEIVE_3  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[3]),  /**< Receive [3] event. */
     NRF_IPCT_EVENT_RECEIVE_4  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[4]),  /**< Receive [4] event. */
+#if NRF_IPCT_EVENTS_RECEIVE_COUNT > 5
     NRF_IPCT_EVENT_RECEIVE_5  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[5]),  /**< Receive [5] event. */
     NRF_IPCT_EVENT_RECEIVE_6  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[6]),  /**< Receive [6] event. */
     NRF_IPCT_EVENT_RECEIVE_7  = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[7]),  /**< Receive [7] event. */
@@ -91,7 +91,7 @@ typedef enum
     NRF_IPCT_EVENT_RECEIVE_13 = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[13]), /**< Receive [13] event. */
     NRF_IPCT_EVENT_RECEIVE_14 = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[14]), /**< Receive [14] event. */
     NRF_IPCT_EVENT_RECEIVE_15 = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[15]), /**< Receive [15] event. */
-#endif // NRF_IPCT_EVENTS_RECEIVE_COUNT > 2
+#endif
 #if NRF_IPCT_HAS_ACK
     NRF_IPCT_EVENT_ACKED_0    = offsetof(NRF_IPCT_Type, EVENTS_ACKED[0]),    /**< Acknowledged event for the SEND[0] task. */
     NRF_IPCT_EVENT_ACKED_1    = offsetof(NRF_IPCT_Type, EVENTS_ACKED[1]),    /**< Acknowledged event for the SEND[1] task. */
@@ -156,9 +156,9 @@ typedef enum
 {
     NRF_IPCT_INT_RECEIVE_0  = IPCT_INTEN0_RECEIVE0_Msk,  /**< Interrupt for event RECEIVE[0]. */
     NRF_IPCT_INT_RECEIVE_1  = IPCT_INTEN0_RECEIVE1_Msk,  /**< Interrupt for event RECEIVE[1]. */
-#if NRF_IPCT_EVENTS_RECEIVE_COUNT > 2
     NRF_IPCT_INT_RECEIVE_2  = IPCT_INTEN0_RECEIVE2_Msk,  /**< Interrupt for event RECEIVE[2]. */
     NRF_IPCT_INT_RECEIVE_3  = IPCT_INTEN0_RECEIVE3_Msk,  /**< Interrupt for event RECEIVE[3]. */
+#if NRF_IPCT_EVENTS_RECEIVE_COUNT > 4
     NRF_IPCT_INT_RECEIVE_4  = IPCT_INTEN0_RECEIVE4_Msk,  /**< Interrupt for event RECEIVE[4]. */
     NRF_IPCT_INT_RECEIVE_5  = IPCT_INTEN0_RECEIVE5_Msk,  /**< Interrupt for event RECEIVE[5]. */
     NRF_IPCT_INT_RECEIVE_6  = IPCT_INTEN0_RECEIVE6_Msk,  /**< Interrupt for event RECEIVE[6]. */
@@ -171,7 +171,7 @@ typedef enum
     NRF_IPCT_INT_RECEIVE_13 = IPCT_INTEN0_RECEIVE13_Msk, /**< Interrupt for event RECEIVE[13]. */
     NRF_IPCT_INT_RECEIVE_14 = IPCT_INTEN0_RECEIVE14_Msk, /**< Interrupt for event RECEIVE[14]. */
     NRF_IPCT_INT_RECEIVE_15 = IPCT_INTEN0_RECEIVE15_Msk, /**< Interrupt for event RECEIVE[15]. */
-#endif // NRF_IPCT_EVENTS_RECEIVE_COUNT > 2
+#endif
 #if NRF_IPCT_HAS_ACK
     NRF_IPCT_INT_ACKED_0    = IPCT_INTEN0_ACKED0_Msk,    /**< Interrupt for event ACKED[0]. */
     NRF_IPCT_INT_ACKED_1    = IPCT_INTEN0_ACKED1_Msk,    /**< Interrupt for event ACKED[1]. */
