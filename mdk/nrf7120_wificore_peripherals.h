@@ -75,6 +75,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define LMAC_VPR_VEVIF_NEVENTS_SIZE 1                /*!< VEVIF events: 0..0                                                   */
 #define LMAC_VPR_VEVIF_EVENTS_MASK 0x01000000        /*!< Mask of supported VEVIF events: 0x01000000                           */
 #define LMAC_VPR_DEBUGGER_OFFSET 1024                /*!< Debugger interface register offset: 0x48000400                       */
+#define LMAC_VPR_RTP_ATHERIS 0                       /*!< (unspecified)                                                        */
 
 #define UMAC_VPR_INIT_PC_RESET_VALUE 0x28180000      /*!< Boot vector (INIT_PC_RESET_VALUE): 0x28180000                        */
 #define UMAC_VPR_VPR_START_RESET_VALUE 0             /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
@@ -100,6 +101,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UMAC_VPR_VEVIF_NEVENTS_SIZE 1                /*!< VEVIF events: 0..0                                                   */
 #define UMAC_VPR_VEVIF_EVENTS_MASK 0x01000000        /*!< Mask of supported VEVIF events: 0x01000000                           */
 #define UMAC_VPR_DEBUGGER_OFFSET 1024                /*!< Debugger interface register offset: 0x48004400                       */
+#define UMAC_VPR_RTP_ATHERIS 0                       /*!< (unspecified)                                                        */
 
 #define VPR00_INIT_PC_RESET_VALUE 0x00E00000         /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00E00000                        */
 #define VPR00_VPR_START_RESET_VALUE 1                /*!< Self-booting (VPR_START_RESET_VALUE): 1                              */
@@ -125,6 +127,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR00_VEVIF_NEVENTS_SIZE 23                  /*!< VEVIF events: 16..22                                                 */
 #define VPR00_VEVIF_EVENTS_MASK 0x00100000           /*!< Mask of supported VEVIF events: 0x00100000                           */
 #define VPR00_DEBUGGER_OFFSET 1024                   /*!< Debugger interface register offset: 0x5004C400                       */
+#define VPR00_RTP_ATHERIS 0                          /*!< (unspecified)                                                        */
 
 /*MVDMA performs direct-memory-accesses between memories. Data is transferred according to job descriptor lists. Each transfer has corresponding source and sink descriptor lists with matching data amounts. The lists are in memory and they contain data buffer information, address pointers, buffer sizes and data type attributes.*/
 
@@ -205,11 +208,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*BELLBOARD APB registers*/
 #define BELLBOARD_PRESENT 1
-#define BELLBOARD_COUNT 2
+#define BELLBOARD_COUNT 1
 
 #define BELLBOARD_IRQ_COUNT 4
-
-#define BELLBOARD_IRQ_COUNT 2
 
 /*WIFICore RPU MAC peripherals*/
 #define WIFIMAC_PRESENT 1
@@ -256,14 +257,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CRACENCORE_PKREGS 1                          /*!< (unspecified)                                                        */
 #define CRACENCORE_IKGREGS 1                         /*!< (unspecified)                                                        */
 #define CRACENCORE_RNGDATAREGS 1                     /*!< (unspecified)                                                        */
-#define CRACENCORE_PKDATAMEMORYREGS 1                /*!< (unspecified)                                                        */
-#define CRACENCORE_PKUCODEREGS 1                     /*!< (unspecified)                                                        */
+#define CRACENCORE_EXTPRIVKEYSREGS 0                 /*!< (unspecified)                                                        */
+#define CRACENCORE_LITESMALLRESETVALUES 0            /*!< (unspecified)                                                        */
+#define CRACENCORE_LITEMEDIUMRESETVALUES 1           /*!< (unspecified)                                                        */
+#define CRACENCORE_FULLRESETVALUES 0                 /*!< (unspecified)                                                        */
 #define CRACENCORE_CRACENRESETVALUES 1               /*!< (unspecified)                                                        */
 #define CRACENCORE_SHA3RESETVALUES 0                 /*!< (unspecified)                                                        */
 #define CRACENCORE_PKE_DATA_MEMORY 0x50018000        /*!< (unspecified)                                                        */
 #define CRACENCORE_PKE_DATA_MEMORY_SIZE 16384        /*!< (unspecified)                                                        */
 #define CRACENCORE_PKE_CODE_MEMORY 0x5001C000        /*!< (unspecified)                                                        */
 #define CRACENCORE_PKE_CODE_MEMORY_SIZE 8192         /*!< (unspecified)                                                        */
+
+/*USBHSCORE*/
+#define USBHSCORE_PRESENT 1
+#define USBHSCORE_COUNT 1
 
 /*System protection unit*/
 #define SPU_PRESENT 1
@@ -278,7 +285,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPU00_GPIOTE 0                               /*!< (unspecified)                                                        */
 #define SPU00_GRTC 0                                 /*!< (unspecified)                                                        */
 #define SPU00_GPIO 1                                 /*!< (unspecified)                                                        */
-#define SPU00_CRACEN 1                               /*!< (unspecified)                                                        */
+#define SPU00_CRACEN 0                               /*!< (unspecified)                                                        */
 #define SPU00_MRAMC 0                                /*!< (unspecified)                                                        */
 #define SPU00_COEXC 0                                /*!< (unspecified)                                                        */
 #define SPU00_ANTSWC 0                               /*!< (unspecified)                                                        */
@@ -444,8 +451,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define KMU_KEYSLOTIDBITS_MIN 0                      /*!< Range of KEYSLOT.ID field (start and end bit position)               */
 #define KMU_KEYSLOTIDBITS_MAX 7                      /*!< Range of KEYSLOT.ID field (start and end bit position)               */
 #define KMU_KEYSLOTIDBITS_SIZE 8                     /*!< Range of KEYSLOT.ID field (start and end bit position)               */
-#define KMU_KEYSLOTNUM 256                           /*!< Number of keyslots is 256                                            */
+#define KMU_KEYSLOTNUM 250                           /*!< Number of keyslots is 250                                            */
 #define KMU_KEYSLOTBITS 128                          /*!< Number of bits per keyslot is 128                                    */
+#define KMU_PUSHBLOCK 1                              /*!< (unspecified)                                                        */
+#define KMU_BLOCK 1                                  /*!< (unspecified)                                                        */
 
 /*Accelerated Address Resolver*/
 #define AAR_PRESENT 1
@@ -469,10 +478,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define ECB00_AMOUNTREG 0                            /*!< (unspecified)                                                        */
 #define ECB00_DMAERROR 1                             /*!< (unspecified)                                                        */
+#define ECB00_ERRORSTATUS 1                          /*!< (unspecified)                                                        */
 
 /*Serial Peripheral Interface Master with EasyDMA*/
 #define SPIM_PRESENT 1
-#define SPIM_COUNT 9
+#define SPIM_COUNT 8
 
 #define SPIM00_EASYDMA5 1                            /*!< (unspecified)                                                        */
 #define SPIM00_EASYDMATEMP 0                         /*!< (unspecified)                                                        */
@@ -551,45 +561,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIM01_RXDELAY_FIELD_WIDTH_MIN 0             /*!< (unspecified)                                                        */
 #define SPIM01_RXDELAY_FIELD_WIDTH_MAX 2             /*!< (unspecified)                                                        */
 #define SPIM01_RXDELAY_FIELD_WIDTH_SIZE 3            /*!< (unspecified)                                                        */
-
-#define SPIM02_EASYDMA5 1                            /*!< (unspecified)                                                        */
-#define SPIM02_EASYDMATEMP 0                         /*!< (unspecified)                                                        */
-#define SPIM02_EASYDMALISTINCLUDED 1                 /*!< (unspecified)                                                        */
-#define SPIM02_EASYDMAMODEINCLUDED 0                 /*!< (unspecified)                                                        */
-#define SPIM02_EASYDMAFULLLPMODEINCLUDED 0           /*!< (unspecified)                                                        */
-#define SPIM02_EASYDMAPATTERNMATCHERINCLUDED 1       /*!< (unspecified)                                                        */
-#define SPIM02_EASYDMANUMMATCHCHANNELS_MIN 0         /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM02_EASYDMANUMMATCHCHANNELS_MAX 3         /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM02_EASYDMANUMMATCHCHANNELS_SIZE 4        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM02_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                   */
-#define SPIM02_EASYDMASTOPTASKINCLUDED 1             /*!< (unspecified)                                                        */
-#define SPIM02_MAX_DATARATE 32                       /*!< (unspecified)                                                        */
-#define SPIM02_EASYDMA_MAXCNT_MIN 0                  /*!< (unspecified)                                                        */
-#define SPIM02_EASYDMA_MAXCNT_MAX 15                 /*!< (unspecified)                                                        */
-#define SPIM02_EASYDMA_MAXCNT_SIZE 16                /*!< (unspecified)                                                        */
-#define SPIM02_FEATURE_HARDWARE_CSN_PRESENT 1        /*!< (unspecified)                                                        */
-#define SPIM02_FEATURE_HARDWARE_DCX_PRESENT 1        /*!< (unspecified)                                                        */
-#define SPIM02_FEATURE_RXDELAY_PRESENT 1             /*!< (unspecified)                                                        */
-#define SPIM02_STALL_STATUS_PRESENT 0                /*!< (unspecified)                                                        */
-#define SPIM02_STALL_STATUS_TX_PRESENT 1             /*!< (unspecified)                                                        */
-#define SPIM02_HSSPI 0                               /*!< (unspecified)                                                        */
-#define SPIM02_HIGH_SPEED_DOMAIN 0                   /*!< (unspecified)                                                        */
-#define SPIM02_MULTIPLE_CHIPSELECT 0                 /*!< (unspecified)                                                        */
-#define SPIM02_NUM_CHIPSELECT_MIN 0                  /*!< Peripheral supports 0..0 chip select signals.                        */
-#define SPIM02_NUM_CHIPSELECT_MAX 0                  /*!< Peripheral supports 0..0 chip select signals.                        */
-#define SPIM02_NUM_CHIPSELECT_SIZE 1                 /*!< Peripheral supports 0..0 chip select signals.                        */
-#define SPIM02_CORE_FREQUENCY 256                    /*!< Peripheral core frequency is 256 MHz.                                */
-#define SPIM02_PRESCALER_PRESENT 1                   /*!< (unspecified)                                                        */
-#define SPIM02_PRESCALER_DIVISOR_RANGE_MIN 4         /*!< (unspecified)                                                        */
-#define SPIM02_PRESCALER_DIVISOR_RANGE_MAX 126       /*!< (unspecified)                                                        */
-#define SPIM02_PRESCALER_DIVISOR_RANGE_SIZE 127      /*!< (unspecified)                                                        */
-#define SPIM02_RXDELAY_VALUE_RANGE_MIN 0             /*!< (unspecified)                                                        */
-#define SPIM02_RXDELAY_VALUE_RANGE_MAX 7             /*!< (unspecified)                                                        */
-#define SPIM02_RXDELAY_VALUE_RANGE_SIZE 8            /*!< (unspecified)                                                        */
-#define SPIM02_RXDELAY_RESET_VALUE 2                 /*!< (unspecified)                                                        */
-#define SPIM02_RXDELAY_FIELD_WIDTH_MIN 0             /*!< (unspecified)                                                        */
-#define SPIM02_RXDELAY_FIELD_WIDTH_MAX 2             /*!< (unspecified)                                                        */
-#define SPIM02_RXDELAY_FIELD_WIDTH_SIZE 3            /*!< (unspecified)                                                        */
 
 #define SPIM20_EASYDMA5 1                            /*!< (unspecified)                                                        */
 #define SPIM20_EASYDMATEMP 0                         /*!< (unspecified)                                                        */
@@ -1020,6 +991,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P2_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
 #define P2_FEATURE_PINS_PRESENT 4095                 /*!< (unspecified)                                                        */
+#define P2_PIN_SENSE_MECHANISM 0                     /*!< (unspecified)                                                        */
 #define P2_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P2_RETAIN 0                                  /*!< (unspecified)                                                        */
 #define P2_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1038,6 +1010,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P1_PIN_NUM_MAX 19                            /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_SIZE 20                           /*!< (unspecified)                                                        */
 #define P1_FEATURE_PINS_PRESENT 1048575              /*!< (unspecified)                                                        */
+#define P1_PIN_SENSE_MECHANISM 1                     /*!< (unspecified)                                                        */
 #define P1_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P1_RETAIN 0                                  /*!< (unspecified)                                                        */
 #define P1_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1056,6 +1029,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P3_PIN_NUM_MAX 12                            /*!< (unspecified)                                                        */
 #define P3_PIN_NUM_SIZE 13                           /*!< (unspecified)                                                        */
 #define P3_FEATURE_PINS_PRESENT 8191                 /*!< (unspecified)                                                        */
+#define P3_PIN_SENSE_MECHANISM 1                     /*!< (unspecified)                                                        */
 #define P3_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P3_RETAIN 0                                  /*!< (unspecified)                                                        */
 #define P3_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1074,6 +1048,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P4_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
 #define P4_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
 #define P4_FEATURE_PINS_PRESENT 4095                 /*!< (unspecified)                                                        */
+#define P4_PIN_SENSE_MECHANISM 1                     /*!< (unspecified)                                                        */
 #define P4_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P4_RETAIN 0                                  /*!< (unspecified)                                                        */
 #define P4_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1092,6 +1067,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P0_PIN_NUM_MAX 9                             /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_SIZE 10                           /*!< (unspecified)                                                        */
 #define P0_FEATURE_PINS_PRESENT 1023                 /*!< (unspecified)                                                        */
+#define P0_PIN_SENSE_MECHANISM 1                     /*!< (unspecified)                                                        */
 #define P0_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P0_RETAIN 0                                  /*!< (unspecified)                                                        */
 #define P0_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1152,6 +1128,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER00_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER00_PCLK_MHZ 256                         /*!< Peripheral clock frequency (PCLK) is 256 MHz                         */
 #define TIMER00_PCLK_VARIABLE 1                      /*!< (unspecified)                                                        */
+#define TIMER00_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER10_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER10_CC_NUM_MAX 7                         /*!< (unspecified)                                                        */
@@ -1161,6 +1138,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER10_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER10_PCLK_MHZ 32                          /*!< Peripheral clock frequency (PCLK) is 32 MHz                          */
 #define TIMER10_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER10_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER20_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER20_CC_NUM_MAX 5                         /*!< (unspecified)                                                        */
@@ -1170,6 +1148,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER20_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER20_PCLK_MHZ 16                          /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER20_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER20_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER21_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER21_CC_NUM_MAX 5                         /*!< (unspecified)                                                        */
@@ -1179,6 +1158,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER21_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER21_PCLK_MHZ 16                          /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER21_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER21_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER22_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER22_CC_NUM_MAX 5                         /*!< (unspecified)                                                        */
@@ -1188,6 +1168,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER22_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER22_PCLK_MHZ 16                          /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER22_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER22_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER23_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER23_CC_NUM_MAX 5                         /*!< (unspecified)                                                        */
@@ -1197,6 +1178,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER23_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER23_PCLK_MHZ 16                          /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER23_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER23_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 #define TIMER24_CC_NUM_MIN 0                         /*!< (unspecified)                                                        */
 #define TIMER24_CC_NUM_MAX 5                         /*!< (unspecified)                                                        */
@@ -1206,11 +1188,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER24_MAX_SIZE_SIZE 32                     /*!< (unspecified)                                                        */
 #define TIMER24_PCLK_MHZ 16                          /*!< Peripheral clock frequency (PCLK) is 16 MHz                          */
 #define TIMER24_PCLK_VARIABLE 0                      /*!< (unspecified)                                                        */
+#define TIMER24_SHUTDOWN_TASK 0                      /*!< (unspecified)                                                        */
 
 /*Axon wrapper*/
 #define AXONS_PRESENT 1
 #define AXONS_COUNT 1
 
+#define AXONS_AXON_NN_BASE_OFFSET 0x500              /*!< AxonNN base offset 0x500. (Core renamed: AxonPro = AxonNN)           */
+#define AXONS_AXON_DSP_BASE_OFFSET 0x700             /*!< AxonDSP base offset 0x700. (Core renamed: Axon = AxonDsp)            */
 #define AXONS_NUM_CLOCK_POWER_PAIR_MIN 0             /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
 #define AXONS_NUM_CLOCK_POWER_PAIR_MAX 1             /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
 #define AXONS_NUM_CLOCK_POWER_PAIR_SIZE 2            /*!< Number of clock/power pairs used by PCGC Slave - [0..1]              */
@@ -1273,37 +1258,49 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define USBHS_PRESENT 1
 #define USBHS_COUNT 1
 
+#define USBHS_NUM_CLOCK_POWER_PAIR_MIN 0             /*!< Number of clock/power pairs used by PCGC Slave - [0..2]              */
+#define USBHS_NUM_CLOCK_POWER_PAIR_MAX 2             /*!< Number of clock/power pairs used by PCGC Slave - [0..2]              */
+#define USBHS_NUM_CLOCK_POWER_PAIR_SIZE 3            /*!< Number of clock/power pairs used by PCGC Slave - [0..2]              */
+#define USBHS_NOTFULLPCPZERO 1                       /*!< (unspecified)                                                        */
+#define USBHS_PENALTYTASKS 0                         /*!< (unspecified)                                                        */
 #define USBHS_SIMULATIONREGISTERS 0                  /*!< (unspecified)                                                        */
+#define USBHS_HAS_SOF_EVENT 1                        /*!< (unspecified)                                                        */
+#define USBHS_RTUNE_AVAILABLE 1                      /*!< (unspecified)                                                        */
+#define USBHS_HAS_BATTCHRG_EVENTS 1                  /*!< (unspecified)                                                        */
 
 /*Quad serial peripheral interface*/
 #define QSPI_PRESENT 1
 #define QSPI_COUNT 2
 
-#define QSPI0_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
-#define QSPI0_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
-#define QSPI0_EASYDMAFULLLPMODEINCLUDED 0            /*!< (unspecified)                                                        */
-#define QSPI0_EASYDMAPATTERNMATCHERINCLUDED 0        /*!< (unspecified)                                                        */
-#define QSPI0_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                    */
-#define QSPI0_EASYDMASTOPTASKINCLUDED 1              /*!< (unspecified)                                                        */
-#define QSPI0_AXI_LITE 0                             /*!< (unspecified)                                                        */
-#define QSPI0_FIFO_DEPTH 16                          /*!< Depth of the transmit and receive FIFOs is 16                        */
-#define QSPI0_QSPI_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
-#define QSPI0_QSPI_NUM_CLOCK_POWER_PAIR_MAX 3        /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
-#define QSPI0_QSPI_NUM_CLOCK_POWER_PAIR_SIZE 4       /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
-#define QSPI0_QSPI_NOTFULLPCPZERO 1                  /*!< (unspecified)                                                        */
+#define QSPI00_EASYDMALISTINCLUDED 0                 /*!< (unspecified)                                                        */
+#define QSPI00_EASYDMAMODEINCLUDED 0                 /*!< (unspecified)                                                        */
+#define QSPI00_EASYDMAFULLLPMODEINCLUDED 0           /*!< (unspecified)                                                        */
+#define QSPI00_EASYDMAPATTERNMATCHERINCLUDED 0       /*!< (unspecified)                                                        */
+#define QSPI00_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                   */
+#define QSPI00_EASYDMASTOPTASKINCLUDED 1             /*!< (unspecified)                                                        */
+#define QSPI00_AXI_LITE 0                            /*!< (unspecified)                                                        */
+#define QSPI00_FIFO_DEPTH 16                         /*!< Depth of the transmit and receive FIFOs is 16                        */
+#define QSPI00_QSPI_NUM_CLOCK_POWER_PAIR_MIN 0       /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI00_QSPI_NUM_CLOCK_POWER_PAIR_MAX 3       /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI00_QSPI_NUM_CLOCK_POWER_PAIR_SIZE 4      /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI00_QSPI_NOTFULLPCPZERO 1                 /*!< (unspecified)                                                        */
 
-#define QSPI1_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
-#define QSPI1_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
-#define QSPI1_EASYDMAFULLLPMODEINCLUDED 0            /*!< (unspecified)                                                        */
-#define QSPI1_EASYDMAPATTERNMATCHERINCLUDED 0        /*!< (unspecified)                                                        */
-#define QSPI1_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                    */
-#define QSPI1_EASYDMASTOPTASKINCLUDED 1              /*!< (unspecified)                                                        */
-#define QSPI1_AXI_LITE 0                             /*!< (unspecified)                                                        */
-#define QSPI1_FIFO_DEPTH 16                          /*!< Depth of the transmit and receive FIFOs is 16                        */
-#define QSPI1_QSPI_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
-#define QSPI1_QSPI_NUM_CLOCK_POWER_PAIR_MAX 3        /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
-#define QSPI1_QSPI_NUM_CLOCK_POWER_PAIR_SIZE 4       /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
-#define QSPI1_QSPI_NOTFULLPCPZERO 1                  /*!< (unspecified)                                                        */
+#define QSPI01_EASYDMALISTINCLUDED 0                 /*!< (unspecified)                                                        */
+#define QSPI01_EASYDMAMODEINCLUDED 0                 /*!< (unspecified)                                                        */
+#define QSPI01_EASYDMAFULLLPMODEINCLUDED 0           /*!< (unspecified)                                                        */
+#define QSPI01_EASYDMAPATTERNMATCHERINCLUDED 0       /*!< (unspecified)                                                        */
+#define QSPI01_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                   */
+#define QSPI01_EASYDMASTOPTASKINCLUDED 1             /*!< (unspecified)                                                        */
+#define QSPI01_AXI_LITE 0                            /*!< (unspecified)                                                        */
+#define QSPI01_FIFO_DEPTH 16                         /*!< Depth of the transmit and receive FIFOs is 16                        */
+#define QSPI01_QSPI_NUM_CLOCK_POWER_PAIR_MIN 0       /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI01_QSPI_NUM_CLOCK_POWER_PAIR_MAX 3       /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI01_QSPI_NUM_CLOCK_POWER_PAIR_SIZE 4      /*!< Number of clock/power pairs used by PCGC Slave - [0..3]              */
+#define QSPI01_QSPI_NOTFULLPCPZERO 1                 /*!< (unspecified)                                                        */
+
+/*FUSE controller*/
+#define FUSE_PRESENT 1
+#define FUSE_COUNT 1
 
 /*CPU Configuration*/
 #define CPUCONF_PRESENT 1
@@ -1467,7 +1464,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define IPCT_PRESENT 1
 #define IPCT_COUNT 1
 
-#define IPCT10_IRQ_COUNT 2
+#define IPCT10_IRQ_COUNT 4
 
 /*SPI Slave*/
 #define SPIS_PRESENT 1
@@ -1892,6 +1889,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TEMP_COUNT 1
 
 #define TEMP_HAS_ATBCONFIG 0                         /*!< (unspecified)                                                        */
+#define TEMP_HAS_OVERRIDEPWR 0                       /*!< (unspecified)                                                        */
 
 /*GPIO Tasks and Events*/
 #define GPIOTE_PRESENT 1
@@ -1959,6 +1957,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_CLKSELREG 1                             /*!< (unspecified)                                                        */
 #define GRTC_CLKSELLFLPRC 1                          /*!< (unspecified)                                                        */
 #define GRTC_CCADD_WRITE_ONLY 0                      /*!< (unspecified)                                                        */
+#define GRTC_READY_STATUS_AND_EVENTS 0               /*!< (unspecified)                                                        */
+#define GRTC_SYSCOUNTER_LOADED_STATUS 1              /*!< (unspecified)                                                        */
+#define GRTC_CC_PAST_STATUS 1                        /*!< (unspecified)                                                        */
+#define GRTC_SYSCOUNTER_WRITEABLE 1                  /*!< (unspecified)                                                        */
 
 /*Time division multiplexed audio interface*/
 #define TDM_PRESENT 1
@@ -2034,9 +2036,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define COEXC_PRESENT 1
 #define COEXC_COUNT 1
 
-#define COEXC_NCLIENTS_MIN 0                         /*!< Number of clients supported : 0..5                                   */
-#define COEXC_NCLIENTS_MAX 5                         /*!< Number of clients supported : 0..5                                   */
-#define COEXC_NCLIENTS_SIZE 6                        /*!< Number of clients supported : 0..5                                   */
+#define COEXC_NCLIENTS_MIN 0                         /*!< Number of clients supported : 0..7                                   */
+#define COEXC_NCLIENTS_MAX 7                         /*!< Number of clients supported : 0..7                                   */
+#define COEXC_NCLIENTS_SIZE 8                        /*!< Number of clients supported : 0..7                                   */
 #define COEXC_NMODES_MIN 0                           /*!< Number of modes per client: 0..1                                     */
 #define COEXC_NMODES_MAX 1                           /*!< Number of modes per client: 0..1                                     */
 #define COEXC_NMODES_SIZE 2                          /*!< Number of modes per client: 0..1                                     */
@@ -2089,6 +2091,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_COUNT 1
 
 #define CLOCK_XOTUNE 1                               /*!< (unspecified)                                                        */
+#define CLOCK_PLL24M 1                               /*!< (unspecified)                                                        */
 
 /*Power control*/
 #define POWER_PRESENT 1
@@ -2116,7 +2119,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VREGUSB_PRESENT 1
 #define VREGUSB_COUNT 1
 
-#define USBREG_PROLONGED_WAKEUP 0                    /*!< (unspecified)                                                        */
+#define VREGUSB_PROLONGED_WAKEUP 0                   /*!< (unspecified)                                                        */
 
 /*LFXO peripheral*/
 #define LFXO_PRESENT 1

@@ -57,7 +57,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined(NRF_WIFICORE)
   #include "nrf7120_wificore_peripherals.h"
 #else
-  #error No processor selected
+  #error "No processor selected"
 #endif
 
 #ifdef __cplusplus

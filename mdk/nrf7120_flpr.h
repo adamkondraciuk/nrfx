@@ -72,17 +72,15 @@ typedef enum {
   SERIAL00_IRQn                          = 77,       /*!< 77 SERIAL00                                                          */
   MRAMC_IRQn                             = 78,       /*!< 78 MRAMC                                                             */
   CTRLAP_IRQn                            = 82,       /*!< 82 CTRLAP                                                            */
+  CM33SS_IRQn                            = 84,       /*!< 84 CM33SS                                                            */
   TIMER00_IRQn                           = 85,       /*!< 85 TIMER00                                                           */
   AXONS_IRQn                             = 86,       /*!< 86 AXONS                                                             */
   EGU00_IRQn                             = 88,       /*!< 88 EGU00                                                             */
   CRACEN_IRQn                            = 89,       /*!< 89 CRACEN                                                            */
   USBHS_IRQn                             = 90,       /*!< 90 USBHS                                                             */
-  QSPI0_IRQn                             = 91,       /*!< 91 QSPI0                                                             */
-  QSPI1_IRQn                             = 92,       /*!< 92 QSPI1                                                             */
+  QSPI00_IRQn                            = 91,       /*!< 91 QSPI00                                                            */
+  QSPI01_IRQn                            = 92,       /*!< 92 QSPI01                                                            */
   SERIAL01_IRQn                          = 93,       /*!< 93 SERIAL01                                                          */
-  SERIAL02_IRQn                          = 94,       /*!< 94 SERIAL02                                                          */
-  BELLBOARD_0_IRQn                       = 120,      /*!< 120 BELLBOARD_0                                                      */
-  BELLBOARD_1_IRQn                       = 121,      /*!< 121 BELLBOARD_1                                                      */
   SPU10_IRQn                             = 128,      /*!< 128 SPU10                                                            */
   TIMER10_IRQn                           = 133,      /*!< 133 TIMER10                                                          */
   EGU10_IRQn                             = 135,      /*!< 135 EGU10                                                            */
@@ -90,6 +88,8 @@ typedef enum {
   RADIO_1_IRQn                           = 139,      /*!< 139 RADIO_1                                                          */
   IPCT10_0_IRQn                          = 141,      /*!< 141 IPCT10_0                                                         */
   IPCT10_1_IRQn                          = 142,      /*!< 142 IPCT10_1                                                         */
+  IPCT10_2_IRQn                          = 143,      /*!< 143 IPCT10_2                                                         */
+  IPCT10_3_IRQn                          = 144,      /*!< 144 IPCT10_3                                                         */
   SPU20_IRQn                             = 192,      /*!< 192 SPU20                                                            */
   SERIAL20_IRQn                          = 198,      /*!< 198 SERIAL20                                                         */
   SERIAL21_IRQn                          = 199,      /*!< 199 SERIAL21                                                         */
@@ -131,7 +131,7 @@ typedef enum {
   GPIOTE30_0_IRQn                        = 268,      /*!< 268 GPIOTE30_0                                                       */
   GPIOTE30_1_IRQn                        = 269,      /*!< 269 GPIOTE30_1                                                       */
   CLOCK_POWER_IRQn                       = 270,      /*!< 270 CLOCK_POWER                                                      */
-  USBREG_IRQn                            = 289,      /*!< 289 USBREG                                                           */
+  VREGUSB_IRQn                           = 289,      /*!< 289 VREGUSB                                                          */
   LFXO_IRQn                              = 290,      /*!< 290 LFXO                                                             */
   LFRC_IRQn                              = 291,      /*!< 291 LFRC                                                             */
   HFXO64M_IRQn                           = 292,      /*!< 292 HFXO64M                                                          */
@@ -150,10 +150,10 @@ typedef enum {
 #define SPIM00_IRQHandler             SERIAL00_IRQHandler
 #define UARTE00_IRQn                  SERIAL00_IRQn
 #define UARTE00_IRQHandler            SERIAL00_IRQHandler
+#define CPUC_IRQn                     CM33SS_IRQn
+#define CPUC_IRQHandler               CM33SS_IRQHandler
 #define SPIM01_IRQn                   SERIAL01_IRQn
 #define SPIM01_IRQHandler             SERIAL01_IRQHandler
-#define SPIM02_IRQn                   SERIAL02_IRQn
-#define SPIM02_IRQHandler             SERIAL02_IRQHandler
 #define SPIM20_IRQn                   SERIAL20_IRQn
 #define SPIM20_IRQHandler             SERIAL20_IRQHandler
 #define SPIS20_IRQn                   SERIAL20_IRQn

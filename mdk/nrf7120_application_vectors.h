@@ -114,10 +114,9 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void EGU00_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void CRACEN_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void USBHS_IRQHandler                                            (void);
- __HANDLER("Default_Handler") void QSPI0_IRQHandler                                            (void);
- __HANDLER("Default_Handler") void QSPI1_IRQHandler                                            (void);
+ __HANDLER("Default_Handler") void QSPI00_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void QSPI01_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void SERIAL01_IRQHandler                                         (void);
- __HANDLER("Default_Handler") void SERIAL02_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void BELLBOARD_0_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void BELLBOARD_1_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void SPU10_IRQHandler                                            (void);
@@ -127,6 +126,8 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void RADIO_1_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void IPCT10_0_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void IPCT10_1_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void IPCT10_2_IRQHandler                                         (void);
+ __HANDLER("Default_Handler") void IPCT10_3_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void SPU20_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void SERIAL20_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void SERIAL21_IRQHandler                                         (void);
@@ -168,7 +169,7 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void GPIOTE30_0_IRQHandler                                       (void);
  __HANDLER("Default_Handler") void GPIOTE30_1_IRQHandler                                       (void);
  __HANDLER("Default_Handler") void CLOCK_POWER_IRQHandler                                      (void);
- __HANDLER("Default_Handler") void USBREG_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void VREGUSB_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void LFXO_IRQHandler                                             (void);
  __HANDLER("Default_Handler") void LFRC_IRQHandler                                             (void);
  __HANDLER("Default_Handler") void HFXO64M_IRQHandler                                          (void);
@@ -288,18 +289,18 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     CTRLAP_IRQHandler,
-    CM33SS_IRQHandler,
     0,
+    CM33SS_IRQHandler,
     TIMER00_IRQHandler,
     AXONS_IRQHandler,
     0,
     EGU00_IRQHandler,
     CRACEN_IRQHandler,
     USBHS_IRQHandler,
-    QSPI0_IRQHandler,
-    QSPI1_IRQHandler,
+    QSPI00_IRQHandler,
+    QSPI01_IRQHandler,
     SERIAL01_IRQHandler,
-    SERIAL02_IRQHandler,
+    0,
     0,
     0,
     0,
@@ -348,8 +349,8 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     IPCT10_0_IRQHandler,
     IPCT10_1_IRQHandler,
-    0,
-    0,
+    IPCT10_2_IRQHandler,
+    IPCT10_3_IRQHandler,
     0,
     0,
     0,
@@ -494,7 +495,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    USBREG_IRQHandler,
+    VREGUSB_IRQHandler,
     LFXO_IRQHandler,
     LFRC_IRQHandler,
     HFXO64M_IRQHandler,

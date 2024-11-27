@@ -359,17 +359,16 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   CTRLAP_IRQHandler
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   CM33SS_IRQHandler
     .long   TIMER00_IRQHandler
     .long   AXONS_IRQHandler
     .long   0                           /*Reserved */
     .long   EGU00_IRQHandler
     .long   CRACEN_IRQHandler
     .long   USBHS_IRQHandler
-    .long   QSPI0_IRQHandler
-    .long   QSPI1_IRQHandler
+    .long   QSPI00_IRQHandler
+    .long   QSPI01_IRQHandler
     .long   SERIAL01_IRQHandler
-    .long   SERIAL02_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -395,8 +394,9 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   BELLBOARD_0_IRQHandler
-    .long   BELLBOARD_1_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -418,8 +418,8 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   IPCT10_0_IRQHandler
     .long   IPCT10_1_IRQHandler
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   IPCT10_2_IRQHandler
+    .long   IPCT10_3_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -564,7 +564,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   USBREG_IRQHandler
+    .long   VREGUSB_IRQHandler
     .long   LFXO_IRQHandler
     .long   LFRC_IRQHandler
     .long   HFXO64M_IRQHandler
@@ -677,17 +677,15 @@ Default_Handler:
     IRQ  SERIAL00_IRQHandler
     IRQ  MRAMC_IRQHandler
     IRQ  CTRLAP_IRQHandler
+    IRQ  CM33SS_IRQHandler
     IRQ  TIMER00_IRQHandler
     IRQ  AXONS_IRQHandler
     IRQ  EGU00_IRQHandler
     IRQ  CRACEN_IRQHandler
     IRQ  USBHS_IRQHandler
-    IRQ  QSPI0_IRQHandler
-    IRQ  QSPI1_IRQHandler
+    IRQ  QSPI00_IRQHandler
+    IRQ  QSPI01_IRQHandler
     IRQ  SERIAL01_IRQHandler
-    IRQ  SERIAL02_IRQHandler
-    IRQ  BELLBOARD_0_IRQHandler
-    IRQ  BELLBOARD_1_IRQHandler
     IRQ  SPU10_IRQHandler
     IRQ  TIMER10_IRQHandler
     IRQ  EGU10_IRQHandler
@@ -695,6 +693,8 @@ Default_Handler:
     IRQ  RADIO_1_IRQHandler
     IRQ  IPCT10_0_IRQHandler
     IRQ  IPCT10_1_IRQHandler
+    IRQ  IPCT10_2_IRQHandler
+    IRQ  IPCT10_3_IRQHandler
     IRQ  SPU20_IRQHandler
     IRQ  SERIAL20_IRQHandler
     IRQ  SERIAL21_IRQHandler
@@ -736,7 +736,7 @@ Default_Handler:
     IRQ  GPIOTE30_0_IRQHandler
     IRQ  GPIOTE30_1_IRQHandler
     IRQ  CLOCK_POWER_IRQHandler
-    IRQ  USBREG_IRQHandler
+    IRQ  VREGUSB_IRQHandler
     IRQ  LFXO_IRQHandler
     IRQ  LFRC_IRQHandler
     IRQ  HFXO64M_IRQHandler
