@@ -1711,6 +1711,8 @@
     #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
     #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
 
+    #define BELLBOARD_IRQ_COUNT 4
+
 #endif
 /**************************************************************************************************/
 /* Start fixups section for NRF9230_ENGB_XXAA                                                          */
