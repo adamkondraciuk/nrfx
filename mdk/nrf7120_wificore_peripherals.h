@@ -103,7 +103,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UMAC_VPR_DEBUGGER_OFFSET 1024                /*!< Debugger interface register offset: 0x48004400                       */
 #define UMAC_VPR_RTP_ATHERIS 0                       /*!< (unspecified)                                                        */
 
-#define VPR00_INIT_PC_RESET_VALUE 0x00E00000         /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00E00000                        */
+#define VPR00_INIT_PC_RESET_VALUE 0x01000000         /*!< Boot vector (INIT_PC_RESET_VALUE): 0x01000000                        */
 #define VPR00_VPR_START_RESET_VALUE 1                /*!< Self-booting (VPR_START_RESET_VALUE): 1                              */
 #define VPR00_RAM_BASE_ADDR 0x20000000               /*!< VPR RAM base address (RAM_BASE_ADDR): 0x20000000                     */
 #define VPR00_RAM_SZ 20                              /*!< VPR RAM size (RAM_SZ): 20 (Value in bytes is computed as 2^(RAM
@@ -201,6 +201,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PCGCM30_SETPWRCONTHRESHOLDBASE 1             /*!< (unspecified)                                                        */
 #define PCGCM30_CLOCKFORCEREG 1                      /*!< (unspecified)                                                        */
 #define PCGCM30_MASTERFORCEREG 1                     /*!< (unspecified)                                                        */
+
+/*Antenna switch controller*/
+#define ANTSWC_PRESENT 1
+#define ANTSWC_COUNT 1
+
+#define ANTSWC_NRADIOS 2                             /*!< Number of radio ports : 2                                            */
+#define ANTSWC_NANTSWBITS 1                          /*!< Number of antenna switch control bits: 1                             */
+#define ANTSWC_ANTSWC_NUM_CLOCK_POWER_PAIR_MIN 0     /*!< Number of clock/power pairs used by the instance of PCGC Slave -
+                                                          [0..1]*/
+#define ANTSWC_ANTSWC_NUM_CLOCK_POWER_PAIR_MAX 1     /*!< Number of clock/power pairs used by the instance of PCGC Slave -
+                                                          [0..1]*/
+#define ANTSWC_ANTSWC_NUM_CLOCK_POWER_PAIR_SIZE 2    /*!< Number of clock/power pairs used by the instance of PCGC Slave -
+                                                          [0..1]*/
+#define ANTSWC_ANTSWC_NOTFULLPCPZERO 1               /*!< (unspecified)                                                        */
+#define ANTSWC_DPPI_ENABLE_REGISTERS 0               /*!< (unspecified)                                                        */
 
 /*RPURFBUS*/
 #define RPURFBUS_PRESENT 1

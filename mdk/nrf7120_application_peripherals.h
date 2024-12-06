@@ -371,7 +371,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR_PRESENT 1
 #define VPR_COUNT 1
 
-#define VPR00_INIT_PC_RESET_VALUE 0x00E00000         /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00E00000                        */
+#define VPR00_INIT_PC_RESET_VALUE 0x01000000         /*!< Boot vector (INIT_PC_RESET_VALUE): 0x01000000                        */
 #define VPR00_VPR_START_RESET_VALUE 1                /*!< Self-booting (VPR_START_RESET_VALUE): 1                              */
 #define VPR00_RAM_BASE_ADDR 0x20000000               /*!< VPR RAM base address (RAM_BASE_ADDR): 0x20000000                     */
 #define VPR00_RAM_SZ 20                              /*!< VPR RAM size (RAM_SZ): 20 (Value in bytes is computed as 2^(RAM
