@@ -165,6 +165,8 @@ extern "C" {
         (((p_reg == NRF_TIMER022) && TIMER_BIT_WIDTH_MAX(022, bit_width))), (false)) || \
      NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(TIMER120),                                  \
         (((p_reg == NRF_TIMER120) && TIMER_BIT_WIDTH_MAX(120, bit_width))), (false)) || \
+     NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(TIMER121),                                  \
+        (((p_reg == NRF_TIMER121) && TIMER_BIT_WIDTH_MAX(121, bit_width))), (false)) || \
      NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(TIMER130),                                  \
         (((p_reg == NRF_TIMER130) && TIMER_BIT_WIDTH_MAX(130, bit_width))), (false)) || \
      NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(TIMER131),                                  \
