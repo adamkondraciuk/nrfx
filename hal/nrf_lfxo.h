@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer for managing the Low Frequency Crystal Oscillator (LFXO).
  */
 
+#if defined(LFXO_STATUSANA_READY_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the STATUSANA register is present. */
+#define NRF_LFXO_HAS_STATUSANA 1
+#else
+#define NRF_LFXO_HAS_STATUSANA 0
+#endif
+
 /** @brief LFXO events. */
 typedef enum
 {
@@ -147,6 +154,7 @@ NRF_STATIC_INLINE uint32_t nrf_lfxo_int_pending_get(NRF_LFXO_Type const * p_reg)
 NRF_STATIC_INLINE void nrf_lfxo_status_get(NRF_LFXO_Type const * p_reg, 
                                            nrf_lfxo_status_t *   p_status);
 
+#if NRF_LFXO_HAS_STATUSANA
 /**
  * @brief Function for checking status of analog module READY signal.
  *
@@ -166,6 +174,7 @@ NRF_STATIC_INLINE bool nrf_lfxo_statusana_ready_check(NRF_LFXO_Type const * p_re
  * @retval false The signal is logic 0.
  */
 NRF_STATIC_INLINE bool nrf_lfxo_statusana_settled_check(NRF_LFXO_Type const * p_reg);
+#endif
 
 /**
  * @brief Function for getting internal capacitive load value.
@@ -271,6 +280,7 @@ NRF_STATIC_INLINE void nrf_lfxo_status_get(NRF_LFXO_Type const * p_reg,
     p_status->running = (p_reg->STATUS & LFXO_STATUS_RUNNING_Msk) >> LFXO_STATUS_RUNNING_Pos;
 }
 
+#if NRF_LFXO_HAS_STATUSANA
 NRF_STATIC_INLINE bool nrf_lfxo_statusana_ready_check(NRF_LFXO_Type const * p_reg)
 {
     return p_reg->STATUSANA & LFXO_STATUSANA_READY_Msk;
@@ -280,6 +290,7 @@ NRF_STATIC_INLINE bool nrf_lfxo_statusana_settled_check(NRF_LFXO_Type const * p_
 {
     return p_reg->STATUSANA & LFXO_STATUSANA_SETTLED_Msk;
 }
+#endif
 
 NRF_STATIC_INLINE uint8_t nrf_lfxo_cload_get(NRF_LFXO_Type const * p_reg)
 {
