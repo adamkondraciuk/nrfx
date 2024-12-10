@@ -76,6 +76,8 @@ extern "C" {
 
 /** @brief Base frequency value 320 MHz for TIMER. */
 #define NRF_TIMER_BASE_FREQUENCY_320MHZ (NRFX_MHZ_TO_HZ(320UL))
+/** @brief Base frequency value 256 MHz for TIMER. */
+#define NRF_TIMER_BASE_FREQUENCY_256MHZ (NRFX_MHZ_TO_HZ(256UL))
 /** @brief Base frequency value 128 MHz for TIMER. */
 #define NRF_TIMER_BASE_FREQUENCY_128MHZ (NRFX_MHZ_TO_HZ(128UL))
 /** @brief Base frequency value 64 MHz for TIMER. */
@@ -191,6 +193,14 @@ extern "C" {
      NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(TIMER121), (p_reg == NRF_TIMER121), (false)))
 #endif
 
+#if !defined(NRF_TIMER_IS_256MHZ_TIMER)
+/** @brief Macro for checking whether the base frequency for the specified timer is 256 MHz. */
+#define NRF_TIMER_IS_256MHZ_TIMER(p_reg)                                                     \
+    (NRFX_COND_CODE_1(NRFX_IS_ENABLED(NRF_CPU_FREQ_IS_256MHZ),                               \
+        (NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(TIMER00), (p_reg == NRF_TIMER00), (false))), \
+        (false)))
+#endif
+
 #if !defined(NRF_TIMER_IS_128MHZ_TIMER)
 /** @brief Macro for checking whether the base frequency for the specified timer is 128 MHz. */
 #define NRF_TIMER_IS_128MHZ_TIMER(p_reg)                                                     \
@@ -223,10 +233,11 @@ extern "C" {
  */
 #define NRF_TIMER_BASE_FREQUENCY_GET(p_reg)                                  \
     ((NRF_TIMER_IS_320MHZ_TIMER(p_reg)) ? (NRF_TIMER_BASE_FREQUENCY_320MHZ): \
+    ((NRF_TIMER_IS_256MHZ_TIMER(p_reg)) ? (NRF_TIMER_BASE_FREQUENCY_256MHZ): \
     ((NRF_TIMER_IS_128MHZ_TIMER(p_reg)) ? (NRF_TIMER_BASE_FREQUENCY_128MHZ): \
     ((NRF_TIMER_IS_64MHZ_TIMER(p_reg))  ? (NRF_TIMER_BASE_FREQUENCY_64MHZ) : \
     ((NRF_TIMER_IS_32MHZ_TIMER(p_reg))  ? (NRF_TIMER_BASE_FREQUENCY_32MHZ) : \
-    (NRF_TIMER_BASE_FREQUENCY_16MHZ)))))
+    (NRF_TIMER_BASE_FREQUENCY_16MHZ))))))
 
 /**
  * @brief Macro for computing prescaler value for given base frequency and desired frequency.
