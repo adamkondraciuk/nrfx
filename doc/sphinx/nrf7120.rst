@@ -1,0 +1,5 @@
+nRF7120 drivers
+================
+
+.. doxygenpage:: nrf7120_drivers
+    :content-only:
