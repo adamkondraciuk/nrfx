@@ -21,15 +21,6 @@
     #elif defined(NRF_SYSCTRL)
         #include <nrfx_config_nrf54h20_sysctrl.h>
     #endif
-#elif defined(NRF7120_XXAA) 
-    #if defined(NRF_APPLICATION)
-        #include <nrfx_config_nrf7120_application.h>
-    #elif defined(NRF_FLPR)
-        #include <nrfx_config_nrf7120_flpr.h>
-    #elif defined(NRF_LMAC)
-        #include <nrfx_config_nrf7120_lmac.h>
-    #elif defined(NRF_UMAC)
-        #include <nrfx_config_nrf7120_umac.h>
 #elif defined(NRF9220_XXAA)
     #if defined(NRF_APPLICATION)
         #include <nrfx_config_nrf9220_application.h>

@@ -8,10 +8,6 @@
     #include <soc/nrfx_irqs_haltium.h>
 #elif defined(NRF9230_ENGA_XXAA) || defined(NRF9230_ENGB_XXAA) || defined(NRF9230_XXAA)
     #include <soc/nrfx_irqs_nrf9230.h>
-#elif defined(NRF7120_XXAA) && defined(NRF_APPLICATION)
-    #include <soc/nrfx_irqs_nrf7120_application.h>
-#elif defined(NRF7120_XXAA) && defined(NRF_FLPR)
-    #include <soc/nrfx_irqs_nrf7120_flpr.h>
 #else
     #error "Unknown device."
 #endif

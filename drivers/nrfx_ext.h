@@ -198,29 +198,6 @@ extern "C" {
     #define NRFX_PRS_BOX_9_ADDR NRF_LPCOMP
 #endif
 
-#if defined(NRF7120_XXAA)
-    #define NRF_PRS_BOX_EXT
-    // SPIM00, UARTE00
-    #define NRFX_PRS_BOX_0_ADDR     NRF_UARTE00
-    // SPIM01
-    #define NRFX_PRS_BOX_1_ADDR     NRF_SPIM01
-    // SPIM02
-    #define NRFX_PRS_BOX_2_ADDR     NRF_SPIM02
-    // SPIM20, SPIS20, TWIM20, TWIS20, UARTE20
-    #define NRFX_PRS_BOX_3_ADDR     NRF_UARTE20
-    // SPIM21, SPIS21, TWIM21, TWIS21, UARTE21
-    #define NRFX_PRS_BOX_4_ADDR     NRF_UARTE21
-    // SPIM22, SPIS22, TWIM22, TWIS22, UARTE22
-    #define NRFX_PRS_BOX_5_ADDR     NRF_UARTE22
-    // SPIM23, SPIS23, TWIM23, TWIS23, UARTE23
-    #define NRFX_PRS_BOX_6_ADDR     NRF_UARTE23
-    // SPIM24, SPIS24, TWIM24, TWIS24, UARTE24
-    #define NRFX_PRS_BOX_7_ADDR     NRF_UARTE24
-    // SPIM30, SPIS30, TWIM30, TWIS30, UARTE30
-    #define NRFX_PRS_BOX_8_ADDR     NRF_UARTE30
-    // COMP, LPCOMP
-    #define NRFX_PRS_BOX_9_ADDR     NRF_COMP
-#endif
 
 #if defined(NRF9220_XXAA)
    #define NRF_PRS_BOX_EXT
@@ -305,31 +282,7 @@ extern "C" {
          NRF_REGULATORS_ELV_ELVPDPERIPH_MASK = REGULATORS_TRIM_ELVPDPERIPH_Msk,), \
    ())
 
-#elif defined(NRF7120_XXAA)
-//TODO: Verify this is correct mask for 7120 (copied from 54L20 since trim reset was the same in mdk)
-#define NRF_REGULATORS_ELV_MODE_ALL_MASK (REGULATORS_TRIM_ELVPDMAIN_Msk   | \
-                                          REGULATORS_TRIM_ELVPDLP_Msk     | \
-                                          REGULATORS_TRIM_ELVPDPERIPH_Msk | \
-                                          REGULATORS_TRIM_ELVLFRC_Msk     | \
-                                          REGULATORS_TRIM_ELVLFXO_Msk     | \
-                                          REGULATORS_TRIM_ELVGRTC_Msk     | \
-                                          REGULATORS_TRIM_ELVGRTCPWM_Msk  | \
-                                          REGULATORS_TRIM_ELVGRTCCLKOUT_Msk)
-
-#define NRF_REGULATORS_ELV_MODE_ALLOW_MASK_EXT                                         \
-    NRFX_COND_CODE_1(NRF_REGULATORS_HAS_TRIM,                                          \
-        (NRF_REGULATORS_ELV_ELVPDMAIN_MASK      = REGULATORS_TRIM_ELVPDMAIN_Msk,       \
-         NRF_REGULATORS_ELV_ELVPDLP_MASK        = REGULATORS_TRIM_ELVPDLP_Msk,         \
-         NRF_REGULATORS_ELV_ELVPDPERIPH_MASK    = REGULATORS_TRIM_ELVPDPERIPH_Msk,     \
-         NRF_REGULATORS_ELV_ELVLFRC_MASK        = REGULATORS_TRIM_ELVLFRC_Msk,         \
-         NRF_REGULATORS_ELV_ELVLFXO_MASK        = REGULATORS_TRIM_ELVLFXO_Msk,         \
-         NRF_REGULATORS_ELV_ELVGRTC_MASK        = REGULATORS_TRIM_ELVGRTC_Msk,         \
-         NRF_REGULATORS_ELV_ELVGRTCPWM_MASK     = REGULATORS_TRIM_ELVGRTCPWM_Msk,      \
-         NRF_REGULATORS_ELV_ELVGRTCCLKOUT_MASK  = REGULATORS_TRIM_ELVGRTCCLKOUT_Msk,), \
-   ())
 #endif
-
-
 
 /*------------------------------------------------------------------------------------------------*/
 /* End of REGULATORS Extended section                                                             */
@@ -360,28 +313,6 @@ extern "C" {
         #define NRFX_DELAY_DWT_PRESENT  0
     #endif
 #endif
-
-#if defined(NRF7120_XXAA)
-    #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
-    #define NRFX_DELAY_DWT_PRESENT  1
-    // Equivalent to !NRFX_CHECK(ISA_RISCV)
-    #if defined(ISA_RISCV)
-        #if(ISA_RISCV)
-            // Equivalent to !NRFX_CHECK(NRFX_COREDEP_VPR_LEGACY)
-            #if defined(NRFX_COREDEP_VPR_LEGACY)
-                #if !(NRFX_COREDEP_VPR_LEGACY)
-                    // Handled by nrfx_coredep.h
-                #else
-                    #if !defined(NRFX_DELAY_RISCV_SLOWDOWN)
-                            #define NRFX_DELAY_RISCV_SLOWDOWN 15
-                        #else
-                            #define NRFX_DELAY_RISCV_SLOWDOWN 50
-                    #endif
-                #endif // !(NRFX_COREDEP_VPR_LEGACY)
-            #endif //defined(NRFX_COREDEP_VPR_LEGACY)
-        #endif // ISA_RISCV
-    #endif // defined(ISA_RISCV)
-#endif // defined(NRF7120_XXAA)
 
 #if defined(NRF54L09_ENGA_XXAA) || defined(NRF54L15_ENGA_XXAA) || defined(NRF54L15_XXAA) || \
     defined(NRF54L20_ENGA_XXAA)
