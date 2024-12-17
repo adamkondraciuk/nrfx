@@ -62,8 +62,6 @@ extern "C" {
 // TIMER00_IRQHandler
 #define nrfx_timer_00_irq_handler       TIMER00_IRQHandler
 
-// AXONS_IRQHandler
-
 // EGU00_IRQHandler
 #define nrfx_egu_00_irq_handler         EGU00_IRQHandler
 // CRACEN_IRQHandler
