@@ -47,11 +47,32 @@ extern "C" {
 #define NRF_MRAMC_HAS_CONFIGNVR_PAGE_LOWER_PROTECT 0
 #endif
 
-/** @brief Symbol indicating whether the POWER_MASK register has a joined VREFVPR field. */
+/** @brief Symbol indicating whether the CONFIG register has a DISABLEECC field. */
+#if defined(MRAMC_CONFIG_DISABLEECC_Msk)
+#define NRF_MRAMC_HAS_CONFIG_DISABLEECC 1
+#else
+#define NRF_MRAMC_HAS_CONFIG_DISABLEECC 0
+#endif
+
+/** @brief Symbol indicating whether the POWER_MASK register has a VREFVPR field. */
 #if defined(MRAMC_POWER_MASK_VREFVPR_Msk)
 #define NRF_MRAMC_HAS_POWER_VREFVPR 1
 #else
 #define NRF_MRAMC_HAS_POWER_VREFVPR 0
+#endif
+
+/** @brief Symbol indicating whether the WAITSTATES register has a RDY field. */
+#if defined(MRAMC_WAITSTATES_RDY_Msk)
+#define NRF_MRAMC_HAS_WAITSTATES_RDY 1
+#else
+#define NRF_MRAMC_HAS_WAITSTATES_RDY 0
+#endif
+
+/** @brief Symbol indicating whether the POWER_MASK register is present. */
+#if defined(MRAMC_POWER_MASK_ResetValue)
+#define NRF_MRAMC_HAS_POWER_MASK 1
+#else
+#define NRF_MRAMC_HAS_POWER_MASK 0
 #endif
 
 /** @brief MRAMC events. */
@@ -135,15 +156,21 @@ typedef struct
 {
     nrf_mramc_mode_write_t mode_write;  ///< Write enable settings.
     nrf_mramc_mode_erase_t mode_erase;  ///< Erase enable settings.
+#if NRF_MRAMC_HAS_CONFIG_DISABLEECC
     bool                   disable_ecc; ///< Disable ECC. It is enabled by default.
+#endif
 } nrf_mramc_config_t;
+
 
 /** @brief Waitstates for MRAM read access.*/
 typedef struct
 {
     uint8_t  waitstate; ///< Register to read the current number of waitstate for the MRAM access and set a new value.
+#if NRF_MRAMC_HAS_WAITSTATES_RDY
     bool     ready;     ///< Use RDY (ready) signal from the MRAM macro in addiiton to waitstates.
+#endif
 } nrf_mramc_waitstates_t;
+
 
 /** @brief Preload timeout value for waiting for a next write. */
 typedef struct
@@ -168,6 +195,7 @@ typedef struct
     uint16_t timeout_value;  ///< Timeout value for the power-down.
 } nrf_mramc_power_autopowerdown_t;
 
+#if NRF_MRAMC_HAS_POWER_MASK
 /** @brief Mask for the various voltages supplies when initiating power-up/down. */
 typedef struct
 {
@@ -181,6 +209,7 @@ typedef struct
     bool vref;    ///< Mask VREF.
 #endif
 } nrf_mramc_power_conf_t;
+#endif
 
 /** @brief Configuration structure for NVR page n. */
 typedef struct
@@ -463,6 +492,7 @@ NRF_STATIC_INLINE
 void nrf_mramc_power_autopowerdown_get(NRF_MRAMC_Type const *            p_reg,
                                        nrf_mramc_power_autopowerdown_t * p_data);
 
+#if NRF_MRAMC_HAS_POWER_MASK
 /**
  * @brief Function for setting mask for the various voltages supplies when initiating power-up/down.
  *
@@ -487,6 +517,7 @@ NRF_STATIC_INLINE void nrf_mramc_power_mask_set(NRF_MRAMC_Type *               p
  */
 NRF_STATIC_INLINE void nrf_mramc_power_mask_get(NRF_MRAMC_Type const *   p_reg,
                                                 nrf_mramc_power_conf_t * p_data);
+#endif
 
 /**
  * @brief Function for getting the power mode status.
@@ -497,6 +528,7 @@ NRF_STATIC_INLINE void nrf_mramc_power_mask_get(NRF_MRAMC_Type const *   p_reg,
  */
 NRF_STATIC_INLINE nrf_mramc_power_status_t nrf_mramc_power_status_get(NRF_MRAMC_Type const * p_reg);
 
+#if NRF_MRAMC_HAS_POWER_MASK
 /**
  * @brief Function for getting status of the power control signals acknowledgement
  *        during power-up sequence.
@@ -558,6 +590,7 @@ NRF_STATIC_INLINE void nrf_mramc_power_force_off_set(NRF_MRAMC_Type *           
  */
 NRF_STATIC_INLINE void nrf_mramc_power_force_off_get(NRF_MRAMC_Type const *   p_reg,
                                                      nrf_mramc_power_conf_t * p_data);
+#endif
 
 /**
  * @brief Function for setting data to be written to the MRAM trim configuration.
@@ -869,8 +902,10 @@ NRF_STATIC_INLINE void nrf_mramc_config_set(NRF_MRAMC_Type *           p_reg,
                                             nrf_mramc_config_t const * p_config)
 {
     p_reg->CONFIG = ((uint32_t)p_config->mode_write  << MRAMC_CONFIG_WEN_Pos) |
-                    ((uint32_t)p_config->mode_erase  << MRAMC_CONFIG_EEN_Pos) |
-                    ((uint32_t)p_config->disable_ecc << MRAMC_CONFIG_DISABLEECC_Pos);
+#if NRF_MRAMC_HAS_CONFIG_DISABLEECC
+                    ((uint32_t)p_config->disable_ecc << MRAMC_CONFIG_DISABLEECC_Pos) |
+#endif
+                    ((uint32_t)p_config->mode_erase  << MRAMC_CONFIG_EEN_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_mramc_config_get(NRF_MRAMC_Type const * p_reg,
@@ -880,7 +915,9 @@ NRF_STATIC_INLINE void nrf_mramc_config_get(NRF_MRAMC_Type const * p_reg,
                                                      MRAMC_CONFIG_WEN_Pos);
     p_config->mode_erase  = (nrf_mramc_mode_erase_t)((p_reg->CONFIG & MRAMC_CONFIG_EEN_Msk) >>
                                                      MRAMC_CONFIG_EEN_Pos);
+#if NRF_MRAMC_HAS_CONFIG_DISABLEECC
     p_config->disable_ecc = (bool)(p_reg->CONFIG & MRAMC_CONFIG_DISABLEECC_Msk);
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_mramc_autoreadmode_set(NRF_MRAMC_Type * p_reg, uint16_t timeout)
@@ -898,9 +935,10 @@ NRF_STATIC_INLINE void nrf_mramc_waitstates_set(NRF_MRAMC_Type *               p
                                                 nrf_mramc_waitstates_t const * p_data)
 {
     NRFX_ASSERT(p_data->waitstate <= NRF_MRAMC_WAITSTATENUM_MAX);
-
     p_reg->WAITSTATES = ((uint32_t)MRAMC_WAITSTATES_KEY_Enable << MRAMC_WAITSTATES_KEY_Pos) |
+#if NRF_MRAMC_HAS_WAITSTATES_RDY
                         ((uint32_t)p_data->ready     	       << MRAMC_WAITSTATES_RDY_Pos) |
+#endif
                         ((uint32_t)p_data->waitstate           <<
                          MRAMC_WAITSTATES_WAITSTATENUM_Pos);
 }
@@ -908,7 +946,9 @@ NRF_STATIC_INLINE void nrf_mramc_waitstates_set(NRF_MRAMC_Type *               p
 NRF_STATIC_INLINE void nrf_mramc_waitstates_get(NRF_MRAMC_Type const *   p_reg,
                                                 nrf_mramc_waitstates_t * p_data)
 {
+#if NRF_MRAMC_HAS_WAITSTATES_RDY
     p_data->ready     = (bool)(p_reg->WAITSTATES & MRAMC_WAITSTATES_RDY_Msk);
+#endif
     p_data->waitstate = (uint8_t)((p_reg->WAITSTATES & MRAMC_WAITSTATES_WAITSTATENUM_Msk) >>
                                   MRAMC_WAITSTATES_WAITSTATENUM_Pos);
 }
@@ -986,6 +1026,7 @@ void nrf_mramc_power_autopowerdown_get(NRF_MRAMC_Type const *            p_reg,
         (bool)(p_reg->POWER.AUTOPOWERDOWN & MRAMC_POWER_AUTOPOWERDOWN_ENABLE_Msk);
 }
 
+#if NRF_MRAMC_HAS_POWER_MASK
 NRF_STATIC_INLINE void nrf_mramc_power_mask_set(NRF_MRAMC_Type *               p_reg,
                                                 nrf_mramc_power_conf_t const * p_data)
 {
@@ -1015,12 +1056,14 @@ NRF_STATIC_INLINE void nrf_mramc_power_mask_get(NRF_MRAMC_Type const *   p_reg,
     p_data->vref    = (bool)(p_reg->POWER.MASK & MRAMC_POWER_MASK_VREF_Msk);
 #endif
 }
+#endif
 
 NRF_STATIC_INLINE nrf_mramc_power_status_t nrf_mramc_power_status_get(NRF_MRAMC_Type const * p_reg)
 {
     return (nrf_mramc_power_status_t)p_reg->POWER.STATUS;
 }
 
+#if NRF_MRAMC_HAS_POWER_MASK
 NRF_STATIC_INLINE void nrf_mramc_powerup_ack_get(NRF_MRAMC_Type const *   p_reg,
                                                  nrf_mramc_power_conf_t * p_data)
 {
@@ -1108,6 +1151,7 @@ NRF_STATIC_INLINE void nrf_mramc_power_force_off_get(NRF_MRAMC_Type const *   p_
     p_data->vref    = (bool)(p_reg->POWER.FORCEOFF & MRAMC_POWER_FORCEOFF_VREF_Msk);
 #endif
 }
+#endif
 
 NRF_STATIC_INLINE void nrf_mramc_trim_datain_set(NRF_MRAMC_Type * p_reg, uint32_t data)
 {
