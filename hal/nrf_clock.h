@@ -99,6 +99,13 @@ extern "C" {
 #define NRF_CLOCK_HAS_XO 0
 #endif
 
+#if defined(CLOCK_TASKS_XOTUNE_TASKS_XOTUNE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether XOTUNE registers are present. */
+#define NRF_CLOCK_HAS_XO_TUNE 1
+#else
+#define NRF_CLOCK_HAS_XO_TUNE 0
+#endif
+
 #if defined(CLOCK_LFCLK_SRC_SRC_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether the CLOCK type contains LFCLK subtype. */
 #define NRF_CLOCK_HAS_LFCLK_TYPE 1
@@ -408,6 +415,11 @@ typedef enum
 #if NRF_CLOCK_HAS_HFCLK192M
     NRF_CLOCK_INT_HF192M_STARTED_MASK  = CLOCK_INTENSET_HFCLK192MSTARTED_Msk,  /**< Interrupt on HFCLK192MSTARTED event. */
 #endif
+#if NRF_CLOCK_HAS_XO_TUNE
+     NRF_CLOCK_INT_XOTUNED_MASK        = CLOCK_INTENSET_XOTUNED_Msk,          /**< HFXO tuning is done. */
+     NRF_CLOCK_INT_XOTUNEERROR_MASK    = CLOCK_INTENSET_XOTUNEERROR_Msk,      /**< HFXO quality issue detected, XOTUNE is needed. */
+     NRF_CLOCK_INT_XOTUNEFAILED_MASK   = CLOCK_INTENSET_XOTUNEFAILED_Msk,     /**< HFXO tuning could not be completed. */
+#endif
 } nrf_clock_int_mask_t;
 
 /**
@@ -448,6 +460,10 @@ typedef enum
     NRF_CLOCK_TASK_HFCLK192MSTART  = offsetof(NRF_CLOCK_Type, TASKS_HFCLK192MSTART),  /**< Start HFCLK192M clock source. */
     NRF_CLOCK_TASK_HFCLK192MSTOP   = offsetof(NRF_CLOCK_Type, TASKS_HFCLK192MSTOP),   /**< Stop HFCLK192M clock source. */
 #endif
+#if NRF_CLOCK_HAS_XO_TUNE
+    NRF_CLOCK_TASK_XOTUNE          = offsetof(NRF_CLOCK_Type, TASKS_XOTUNE),          /**< Start tuning for HFXO. */
+    NRF_CLOCK_TASK_XOTUNEABORT     = offsetof(NRF_CLOCK_Type, TASKS_XOTUNEABORT),     /**< Stop tuning for HFXO. */
+#endif
 } nrf_clock_task_t;
 
 /** @brief Events. */
@@ -482,6 +498,11 @@ typedef enum
 #endif
 #if NRF_CLOCK_HAS_HFCLK192M
     NRF_CLOCK_EVENT_HFCLK192MSTARTED  = offsetof(NRF_CLOCK_Type, EVENTS_HFCLK192MSTARTED),  /**< HFCLK192M oscillator started. */
+#endif
+#if NRF_CLOCK_HAS_XO_TUNE
+    NRF_CLOCK_EVENT_XOTUNED           = offsetof(NRF_CLOCK_Type, EVENTS_XOTUNED),           /**< HFXO tuning is done. */
+    NRF_CLOCK_EVENT_XOTUNEERROR       = offsetof(NRF_CLOCK_Type, EVENTS_XOTUNEERROR),       /**< HFXO quality issue detected, XOTUNE is needed. */
+    NRF_CLOCK_EVENT_XOTUNEFAILED      = offsetof(NRF_CLOCK_Type, EVENTS_XOTUNEFAILED),      /**< HFXO tuning could not be completed. */
 #endif
 } nrf_clock_event_t;
 

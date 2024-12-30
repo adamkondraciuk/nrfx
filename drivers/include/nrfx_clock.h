@@ -28,6 +28,11 @@ typedef enum
     NRFX_CLOCK_EVT_CAL_DONE,           ///< Calibration has been done.
     NRFX_CLOCK_EVT_HFCLKAUDIO_STARTED, ///< HFCLKAUDIO has been started.
     NRFX_CLOCK_EVT_HFCLK192M_STARTED,  ///< HFCLK192M has been started.
+#if NRF_CLOCK_HAS_XO_TUNE
+    NRFX_CLOCK_EVT_XO_TUNED,           ///< XO tune has been done.
+    NRFX_CLOCK_EVT_XO_TUNE_ERROR,      ///< XO is not tuned.
+    NRFX_CLOCK_EVT_XO_TUNE_FAILED,     ///< XO tune operation failed.
+#endif
 } nrfx_clock_evt_type_t;
 
 /**
@@ -212,6 +217,41 @@ NRFX_STATIC_INLINE uint16_t nrfx_clock_hfclkaudio_config_get(void);
  * @retval NRFX_ERROR_BUSY          Clock is in the calibration phase.
  */
 nrfx_err_t nrfx_clock_calibration_start(void);
+
+#if NRF_CLOCK_HAS_XO_TUNE
+
+/**
+ * @brief Function for starting tune of crystal HFCLK.
+ *
+ * This function starts tuning process of the HFCLK.
+ *
+ * @retval NRFX_SUCCESS             The procedure is successful.
+ * @retval NRFX_ERROR_INVALID_STATE The high-frequency XO clock is off or operation is in progress.
+ * @retval NRFX_ERROR_INTERNAL      XO tune operation failed.
+ */
+nrfx_err_t nrfx_clock_xo_tune_start(void);
+
+/**
+ * @brief Function for aborting tune of crystal HFCLK.
+ *
+ * This function aborts tuning process. 
+ *
+ * @retval NRFX_SUCCESS             The procedure is successful.
+ * @retval NRFX_ERROR_INVALID_STATE The high-frequency XO clock is off or operation is not in progress.
+ */
+nrfx_err_t nrfx_clock_xo_tune_abort(void);
+
+/**
+ * @brief Function for checking if XO tune error occurred.
+ *
+ * @note Must be used only if @p event_handler was not provided during driver initialization.
+ * 
+ * @retval true  XO tune procedure failed.
+ * @retval false No error.
+ */
+bool nrfx_clock_xo_tune_error_check(void);
+
+#endif
 
 /**
  * @brief Function for checking if calibration is in progress.
