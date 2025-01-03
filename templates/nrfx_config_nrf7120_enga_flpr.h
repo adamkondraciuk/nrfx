@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2024>$$$*/
 
-#ifndef NRFX_CONFIG_NRF7120_UMAC_H__
-#define NRFX_CONFIG_NRF7120_UMAC_H__
+#ifndef NRFX_CONFIG_NRF7120_ENGA_FLPR_H__
+#define NRFX_CONFIG_NRF7120_ENGA_FLPR_H__
 
 #ifndef NRFX_CONFIG_H__
 #error "This file should not be included directly. Include nrfx_config.h instead."
@@ -298,6 +298,24 @@
 #endif
 
 /**
+ * @brief NRFX_GPIOTE20_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_GPIOTE20_ENABLED
+#define NRFX_GPIOTE20_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_GPIOTE30_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_GPIOTE30_ENABLED
+#define NRFX_GPIOTE30_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_GRTC_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
@@ -334,10 +352,19 @@
 #endif
 
 /**
+ * @brief NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS
+ *
+ * Integer value.
+ */
+#ifndef NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS
+#define NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS 4
+#endif
+
+/**
  * @brief NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK
  */
 #ifndef NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK
-#define NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK 0
+#define NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK 0x000000f0
 #endif
 
 /**
@@ -377,7 +404,7 @@
  * @brief NRFX_IPCT_PUB_CONFIG_ALLOWED_CHANNELS_MASK
  */
 #ifndef NRFX_IPCT_PUB_CONFIG_ALLOWED_CHANNELS_MASK
-#define NRFX_IPCT_PUB_CONFIG_ALLOWED_CHANNELS_MASK 0
+#define NRFX_IPCT_PUB_CONFIG_ALLOWED_CHANNELS_MASK 0x00000030
 #endif
 
 /**
@@ -398,7 +425,7 @@
  * @brief NRFX_IPCT_SUB_CONFIG_ALLOWED_CHANNELS_MASK
  */
 #ifndef NRFX_IPCT_SUB_CONFIG_ALLOWED_CHANNELS_MASK
-#define NRFX_IPCT_SUB_CONFIG_ALLOWED_CHANNELS_MASK 0
+#define NRFX_IPCT_SUB_CONFIG_ALLOWED_CHANNELS_MASK 0x000000c0
 #endif
 
 /**
@@ -551,6 +578,24 @@
 #endif
 
 /**
+ * @brief NRFX_PDM20_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PDM20_ENABLED
+#define NRFX_PDM20_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PDM21_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PDM21_ENABLED
+#define NRFX_PDM21_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_POWER_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
@@ -599,6 +644,78 @@
  */
 #ifndef NRFX_PPIB_CONFIG_LOG_LEVEL
 #define NRFX_PPIB_CONFIG_LOG_LEVEL 3
+#endif
+
+/**
+ * @brief NRFX_PPIB00_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB00_ENABLED
+#define NRFX_PPIB00_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB01_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB01_ENABLED
+#define NRFX_PPIB01_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB10_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB10_ENABLED
+#define NRFX_PPIB10_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB11_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB11_ENABLED
+#define NRFX_PPIB11_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB20_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB20_ENABLED
+#define NRFX_PPIB20_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB21_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB21_ENABLED
+#define NRFX_PPIB21_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB22_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB22_ENABLED
+#define NRFX_PPIB22_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PPIB30_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PPIB30_ENABLED
+#define NRFX_PPIB30_ENABLED 0
 #endif
 
 /**
@@ -677,6 +794,15 @@
  */
 #ifndef NRFX_PRS_BOX_4_ENABLED
 #define NRFX_PRS_BOX_4_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PRS_BOX_9_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PRS_BOX_9_ENABLED
+#define NRFX_PRS_BOX_9_ENABLED 0
 #endif
 
 /**
@@ -1627,4 +1753,4 @@
 #define NRFX_WDT31_ENABLED 0
 #endif
 
-#endif // NRFX_CONFIG_NRF7120_UMAC_H__
+#endif // NRFX_CONFIG_NRF7120_ENGA_FLPR_H__

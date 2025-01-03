@@ -1,11 +1,32 @@
 /*$$$LICENCE_NORDIC_STANDARD<2024>$$$*/
 
-#ifndef NRFX_IRQS_NRF7120_APPLICATION_H__
-#define NRFX_IRQS_NRF7120_APPLICATION_H__
+#ifndef NRFX_IRQS_NRF7120_ENGA_FLPR_H__
+#define NRFX_IRQS_NRF7120_ENGA_FLPR_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+// VPRCLIC_16_IRQHandler
+#define nrfx_vevif_16_irq_handler        VPRCLIC_16_IRQHandler
+
+// VPRCLIC_17_IRQHandler
+#define nrfx_vevif_17_irq_handler        VPRCLIC_17_IRQHandler
+
+// VPRCLIC_18_IRQHandler
+#define nrfx_vevif_18_irq_handler        VPRCLIC_18_IRQHandler
+
+// VPRCLIC_19_IRQHandler
+#define nrfx_vevif_19_irq_handler        VPRCLIC_19_IRQHandler
+
+// VPRCLIC_20_IRQHandler
+#define nrfx_vevif_20_irq_handler        VPRCLIC_20_IRQHandler
+
+// VPRCLIC_21_IRQHandler
+#define nrfx_vevif_21_irq_handler        VPRCLIC_21_IRQHandler
+
+// VPRCLIC_22_IRQHandler
+#define nrfx_vevif_22_irq_handler        VPRCLIC_22_IRQHandler
 
 // SWI00_IRQHandler
 
@@ -34,24 +55,22 @@ extern "C" {
 #endif
 
 // MRAMC_IRQHandler
+#define nrfx_rramc_irq_handler          RRAMC_IRQHandler
 
 // CTRLAP_IRQHandler
-
-// CM33SS_IRQHandler
 
 // TIMER00_IRQHandler
 #define nrfx_timer_00_irq_handler       TIMER00_IRQHandler
 
 // EGU00_IRQHandler
-#define nrfx_egu_00_irq_handler EGU00_IRQHandler
-
+#define nrfx_egu_00_irq_handler         EGU00_IRQHandler
 // CRACEN_IRQHandler
 
 // USBHS_IRQHandler
 
 /*TODO: assumed notation for nrfx_qspi_*_irq_handler 
 - no current support in nrfx for these*/
-// QSPI00_IRQHandler 
+// QSPI00_IRQHandler
 #define nrfx_qspi_00_irq_handler QSPI00_IRQHandler
 
 // QSPI01_IRQHandler
@@ -82,7 +101,7 @@ extern "C" {
 
 // BELLBOARDAPP_0_IRQHandler
 
-// BELLBOARDAPP_1_IRQHandler 
+// BELLBOARDAPP_1_IRQHandler
 
 // SPU10_IRQHandler
 
@@ -95,10 +114,6 @@ extern "C" {
 // RADIO_0_IRQHandler
 
 // RADIO_1_IRQHandler
-
-// IPCT10_0_IRQHandler
-
-// IPCT10_1_IRQHandler
 
 // SPU20_IRQHandler
 
@@ -261,9 +276,8 @@ extern "C" {
 
 // USBREG_IRQHandler
 #define nrfx_usbreg_irq_handler         USBREG_IRQHandler
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif // NRFX_IRQS_NRF7120_APPLICATION_H___
+#endif // NRFX_IRQS_NRF7120_ENGA_FLPR_H___

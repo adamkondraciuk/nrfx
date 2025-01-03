@@ -72,13 +72,13 @@
     #include <nrfx_config_nrf54l20_enga_application.h>
 #elif defined(NRF54L20_ENGA_XXAA) && defined(NRF_FLPR)
     #include <nrfx_config_nrf54l20_enga_flpr.h>
-#elif defined(NRF7120_XXAA) && defined(NRF_APPLICATION)
+#elif defined(NRF7120_ENGA_XXAA) && defined(NRF_APPLICATION)
     #include <nrfx_config_nrf7120_application.h>
-#elif defined(NRF7120_XXAA) && defined(NRF_FLPR)
+#elif defined(NRF7120_ENGA_XXAA) && defined(NRF_FLPR)
     #include <nrfx_config_nrf7120_flpr.h>
-#elif defined(NRF7120_XXAA) && defined(NRF_LMAC)
+#elif defined(NRF7120_ENGA_XXAA) && defined(NRF_LMAC)
     #include <nrfx_config_nrf7120_lmac.h>
-#elif defined(NRF7120_XXAA) && defined(NRF_UMAC)
+#elif defined(NRF7120_ENGA_XXAA) && defined(NRF_UMAC)
     #include <nrfx_config_nrf7120_umac.h>
 #elif defined(NRF9120_XXAA) || defined(NRF9160_XXAA)
     #include <nrfx_config_nrf91.h>

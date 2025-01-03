@@ -130,7 +130,7 @@ extern "C" {
     #define NRFX_PRS_BOX_6_ADDR     NRF_UARTE30
     // COMP, LPCOMP
     #define NRFX_PRS_BOX_7_ADDR     NRF_COMP
-#elif defined(NRF7120_XXAA)
+#elif defined(NRF7120_ENGA_XXAA)
     // SPIM00, UARTE00
     #define NRFX_PRS_BOX_0_ADDR     NRF_UARTE00
     // SPIM01
