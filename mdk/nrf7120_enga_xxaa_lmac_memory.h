@@ -1,5 +1,4 @@
 /*
-
 Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
@@ -36,26 +35,46 @@ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
 HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
 OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
-*/
+#ifndef NRF_DEVICE_MEM_H_
+#define NRF_DEVICE_MEM_H_
 
-#ifndef NRF_ERRATAS_H
-#define NRF_ERRATAS_H
+#ifndef __DEFAULT_STACK_SIZE
+    #define __DEFAULT_STACK_SIZE 8192
+#endif
+#ifndef __DEFAULT_HEAP_SIZE
+    #define __DEFAULT_HEAP_SIZE 8192
+#endif
 
-#include "nrf.h"
+/* Device memory Flash: */
+#define NRF_MEMORY_FLASH_BASE 0x002E0000
+#define NRF_MEMORY_FLASH_SIZE 0x00010000
 
-/* Check MDK version to make sure we have the required macros */
-NRF_MDK_VERSION_ASSERT_AT_LEAST(8,34,0);
+/* Device memory RAM: */
+#define NRF_MEMORY_RAM_BASE 0x28000000
+#define NRF_MEMORY_RAM_SIZE 0x00020000
 
-/*lint ++flb "Enter library region */
+/* Device memory ROM: */
+#define NRF_MEMORY_ROM_BASE 0x28080000
+#define NRF_MEMORY_ROM_SIZE 0x00040000
 
-#include "nrf51_erratas.h"
-#include "nrf52_erratas.h"
-#include "nrf53_erratas.h"
-#include "nrf54l_erratas.h"
-#include "nrf54h_erratas.h"
-#include "nrf91_erratas.h"
+/* Device memory PeripheralsAPBS: */
+#define NRF_MEMORY_PERIPHERALSAPBS_BASE 0x58000000
+#define NRF_MEMORY_PERIPHERALSAPBS_SIZE 0x00200000
 
-/*lint --flb "Leave library region" */
+/* Device memory PeripheralsAPBNS: */
+#define NRF_MEMORY_PERIPHERALSAPBNS_BASE 0x48000000
+#define NRF_MEMORY_PERIPHERALSAPBNS_SIZE 0x00200000
 
-#endif // NRF_ERRATAS_H
+/* Device memory PeripheralsAHB: */
+#define NRF_MEMORY_PERIPHERALSAHB_BASE 0x58840000
+#define NRF_MEMORY_PERIPHERALSAHB_SIZE 0x00003000
+
+/* Device memory SystemSFR: */
+#define NRF_MEMORY_SYSTEMSFR_BASE 0xE0000000
+#define NRF_MEMORY_SYSTEMSFR_SIZE 0x00100000
+
+
+
+#endif

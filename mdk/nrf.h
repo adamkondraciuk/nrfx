@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   68 
+#define MDK_MINOR_VERSION   69 
 #define MDK_MICRO_VERSION   1 
 
 
@@ -182,8 +182,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #define HALTIUM_XXAA
     #endif
 #endif
+
 /* Define NRF71_SERIES for common use in nRF71 series devices. */
-#if defined (NRF7120_XXAA)
+#if defined (NRF7120_ENGA_XXAA)
     #ifndef NRF71_SERIES
         #define NRF71_SERIES
     #endif
@@ -495,12 +496,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "haltium_name_change.h"
     #endif
 
-#elif defined (NRF7120_XXAA)
+#elif defined (NRF7120_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
-        #include "nrf7120.h"
+        #include "nrf7120_enga.h"
+        #include "nrf7120_enga_interim.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
-        #include "nrf7120_name_change.h"
+        #include "nrf7120_enga_name_change.h"
     #endif
 
 #else

@@ -39,23 +39,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF_ERRATAS_H
-#define NRF_ERRATAS_H
+#ifndef NRF7120_ENGA_VERSION_H
+#define NRF7120_ENGA_VERSION_H
 
-#include "nrf.h"
+#ifdef __cplusplus
+    extern "C" {
+#endif
 
-/* Check MDK version to make sure we have the required macros */
-NRF_MDK_VERSION_ASSERT_AT_LEAST(8,34,0);
 
-/*lint ++flb "Enter library region */
+#define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
+#define MDK_SOURCE_VERSION_MINOR 4                   /*!< Minor version of product specification.                              */
+#define MDK_SOURCE_VERSION_MICRO 0                   /*!< Micro version of product specification.                              */
 
-#include "nrf51_erratas.h"
-#include "nrf52_erratas.h"
-#include "nrf53_erratas.h"
-#include "nrf54l_erratas.h"
-#include "nrf54h_erratas.h"
-#include "nrf91_erratas.h"
 
-/*lint --flb "Leave library region" */
+#ifdef __cplusplus
+}
+#endif
+#endif /* NRF7120_ENGA_VERSION_H */
 
-#endif // NRF_ERRATAS_H

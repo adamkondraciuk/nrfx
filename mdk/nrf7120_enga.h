@@ -39,23 +39,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF_ERRATAS_H
-#define NRF_ERRATAS_H
+#ifndef NRF7120_ENGA_H
+#define NRF7120_ENGA_H
 
-#include "nrf.h"
+#ifdef __cplusplus
+    extern "C" {
+#endif
 
-/* Check MDK version to make sure we have the required macros */
-NRF_MDK_VERSION_ASSERT_AT_LEAST(8,34,0);
+#include "nrf7120_enga_types.h"
 
-/*lint ++flb "Enter library region */
+#include "nrf7120_enga_global.h"
+#include "nrf7120_enga_application.h"
+#include "nrf7120_enga_flpr.h"
+#include "nrf7120_enga_lmac.h"
+#include "nrf7120_enga_umac.h"
+#include "nrf7120_enga_wificore.h"
 
-#include "nrf51_erratas.h"
-#include "nrf52_erratas.h"
-#include "nrf53_erratas.h"
-#include "nrf54l_erratas.h"
-#include "nrf54h_erratas.h"
-#include "nrf91_erratas.h"
+#ifdef __cplusplus
+}
+#endif
+#endif /* NRF7120_ENGA_H */
 
-/*lint --flb "Leave library region" */
-
-#endif // NRF_ERRATAS_H

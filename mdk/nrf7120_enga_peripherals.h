@@ -39,23 +39,29 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF_ERRATAS_H
-#define NRF_ERRATAS_H
+#ifndef NRF7120_ENGA_PERIPHERALS_H
+#define NRF7120_ENGA_PERIPHERALS_H
 
-#include "nrf.h"
+#ifdef __cplusplus
+    extern "C" {
+#endif
 
-/* Check MDK version to make sure we have the required macros */
-NRF_MDK_VERSION_ASSERT_AT_LEAST(8,34,0);
+#if defined(NRF_APPLICATION)
+  #include "nrf7120_enga_application_peripherals.h"
+#elif defined(NRF_FLPR)
+  #include "nrf7120_enga_flpr_peripherals.h"
+#elif defined(NRF_LMAC)
+  #include "nrf7120_enga_lmac_peripherals.h"
+#elif defined(NRF_UMAC)
+  #include "nrf7120_enga_umac_peripherals.h"
+#elif defined(NRF_WIFICORE)
+  #include "nrf7120_enga_wificore_peripherals.h"
+#else
+  #error "No processor selected"
+#endif
 
-/*lint ++flb "Enter library region */
+#ifdef __cplusplus
+}
+#endif
+#endif /* NRF7120_ENGA_PERIPHERALS_H */
 
-#include "nrf51_erratas.h"
-#include "nrf52_erratas.h"
-#include "nrf53_erratas.h"
-#include "nrf54l_erratas.h"
-#include "nrf54h_erratas.h"
-#include "nrf91_erratas.h"
-
-/*lint --flb "Leave library region" */
-
-#endif // NRF_ERRATAS_H

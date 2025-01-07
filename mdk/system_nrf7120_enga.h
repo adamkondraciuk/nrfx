@@ -20,8 +20,8 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 
 */
 
-#ifndef SYSTEM_NRF_H
-#define SYSTEM_NRF_H
+#ifndef SYSTEM_NRF7120_ENGA_H
+#define SYSTEM_NRF7120_ENGA_H
 #ifndef __ASSEMBLY__
 #ifdef __cplusplus
 extern "C" {
@@ -52,9 +52,10 @@ extern void SystemInit (void);
  */
 extern void SystemCoreClockUpdate (void);
 
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __ASSEMBLY__ */
-#endif /* SYSTEM_NRF_H */
+#endif /* SYSTEM_NRF7120_ENGA_H */
