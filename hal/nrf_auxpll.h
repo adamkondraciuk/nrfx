@@ -12,6 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_auxpll_hal Auxiliary PLL HAL
  * @{
+ * @ingroup nrf_auxpll
  * @ingroup nrf_clock
  * @brief   Hardware access layer for managing the Auxiliary Phase Locked Loop (AUXPLL) peripheral.
  */
