@@ -90,6 +90,13 @@ extern "C" {
 #define NRF_AAR_HAS_MAXRESOLVED 0
 #endif
 
+#if defined(AAR_ERRORSTATUS_ERRORSTATUS_PrematureOutptrEnd) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the error signalling premature end of the output pointer. */
+#define NRF_AAR_HAS_PREMATUREOUTPTREND 1
+#else
+#define NRF_AAR_HAS_PREMATUREOUTPTREND 0
+#endif
+
 /** @brief AAR events. */
 typedef enum
 {
@@ -118,7 +125,9 @@ typedef enum
 {
     NRF_AAR_ERROR_NO_ERROR             = AAR_ERRORSTATUS_ERRORSTATUS_NoError,            ///< No errors have occurred.
     NRF_AAR_ERROR_PREMATURE_INPTR_END  = AAR_ERRORSTATUS_ERRORSTATUS_PrematureInptrEnd,  ///< End of INPTR job list before data structure was read.
+#if NRF_AAR_HAS_PREMATUREOUTPTREND
     NRF_AAR_ERROR_PREMATURE_OUTPTR_END = AAR_ERRORSTATUS_ERRORSTATUS_PrematureOutptrEnd, ///< End of OUTPTR job list before data structure was read.
+#endif
     NRF_AAR_ERROR_DMA_ERROR            = AAR_ERRORSTATUS_ERRORSTATUS_DmaError,           ///< Bus error during DMA access.
 } nrf_aar_error_t;
 #endif
