@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -8012,14 +8012,13 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  POWER0;                            /*!< (@ 0x00000000) Power configuration for P0 to P7 IO ports. Note: P0 is
                                                                          not included in the fields of this register because it
-                                                                         is always internally supplied and therefore considered
-                                                                         'Shorted'.*/
+                                                                         is always internally supplied.*/
   __IOM uint32_t  POWER1;                            /*!< (@ 0x00000004) Power configuration for P8 to P15 IO ports.           */
   __IOM uint32_t  DRIVECTRL0;                        /*!< (@ 0x00000008) Drive control configuration for P0 to P7 IO ports.    */
 } NRF_BICR_IOPORT_Type;                              /*!< Size = 12 (0x00C)                                                    */
 
 /* BICR_IOPORT_POWER0: Power configuration for P0 to P7 IO ports. Note: P0 is not included in the fields of this register
-                        because it is always internally supplied and therefore considered 'Shorted'. */
+                        because it is always internally supplied. */
 
   #define BICR_IOPORT_POWER0_ResetValue (0xFFFFFFFFUL) /*!< Reset value of POWER0 register.                                    */
 
@@ -8030,7 +8029,7 @@ typedef struct {
   #define BICR_IOPORT_POWER0_P1_Max (0xFUL)          /*!< Max enumerator value of P1 field.                                    */
   #define BICR_IOPORT_POWER0_P1_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
   #define BICR_IOPORT_POWER0_P1_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_IOPORT_POWER0_P1_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER0_P1_Shorted (0x1UL)      /*!< Port supply is shorted on the PCB to VDD_AO_1V8.                     */
   #define BICR_IOPORT_POWER0_P1_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V. Use this option if the
                                                           port is supplied through SWEXT.*/
 
@@ -8041,7 +8040,7 @@ typedef struct {
   #define BICR_IOPORT_POWER0_P2_Max (0xFUL)          /*!< Max enumerator value of P2 field.                                    */
   #define BICR_IOPORT_POWER0_P2_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
   #define BICR_IOPORT_POWER0_P2_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_IOPORT_POWER0_P2_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER0_P2_Shorted (0x1UL)      /*!< Port supply is shorted on the PCB to VDD_AO_1V8.                     */
   #define BICR_IOPORT_POWER0_P2_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V. Use this option if the
                                                           port is supplied through SWEXT.*/
 
@@ -8052,7 +8051,7 @@ typedef struct {
   #define BICR_IOPORT_POWER0_P6_Max (0xFUL)          /*!< Max enumerator value of P6 field.                                    */
   #define BICR_IOPORT_POWER0_P6_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
   #define BICR_IOPORT_POWER0_P6_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_IOPORT_POWER0_P6_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER0_P6_Shorted (0x1UL)      /*!< Port supply is shorted on the PCB to VDD_AO_1V8.                     */
   #define BICR_IOPORT_POWER0_P6_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V. Use this option if the
                                                           port is supplied through SWEXT.*/
 
@@ -8063,7 +8062,7 @@ typedef struct {
   #define BICR_IOPORT_POWER0_P7_Max (0xFUL)          /*!< Max enumerator value of P7 field.                                    */
   #define BICR_IOPORT_POWER0_P7_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
   #define BICR_IOPORT_POWER0_P7_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_IOPORT_POWER0_P7_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER0_P7_Shorted (0x1UL)      /*!< Port supply is shorted on the PCB to VDD_AO_1V8.                     */
   #define BICR_IOPORT_POWER0_P7_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V. Use this option if the
                                                           port is supplied through SWEXT.*/
 
@@ -8078,7 +8077,7 @@ typedef struct {
   #define BICR_IOPORT_POWER1_P9_Max (0xFUL)          /*!< Max enumerator value of P9 field.                                    */
   #define BICR_IOPORT_POWER1_P9_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
   #define BICR_IOPORT_POWER1_P9_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_IOPORT_POWER1_P9_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER1_P9_Shorted (0x1UL)      /*!< Port supply is shorted on the PCB to VDD_AO_1V8.                     */
   #define BICR_IOPORT_POWER1_P9_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V. Use this option if the
                                                           port is supplied through SWEXT.*/
   #define BICR_IOPORT_POWER1_P9_ExternalFull (0x4UL) /*!< Port supply is provided externally with a full range of values, from 3
@@ -78036,7 +78035,7 @@ typedef struct {
 
 
 /* MEMCONF_POWER_RET: RAM retention for RAM [n]. */
-  #define MEMCONF_POWER_RET_ResetValue (0x00000000UL) /*!< Reset value of RET register.                                        */
+  #define MEMCONF_POWER_RET_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RET register.                                        */
 
 /* MEM0 @Bit 0 : Keep the RAM block MEM[0] retained when the parent power domain of the RAM is off. */
   #define MEMCONF_POWER_RET_MEM0_Pos (0UL)           /*!< Position of MEM0 field.                                              */
@@ -78561,13 +78560,13 @@ typedef struct {
   * @brief REPAIR [MEMCONF_REPAIR] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  BITLINE;                           /*!< (@ 0x00000000) Repair configuration for RAM blocks.                  */
+  __IOM uint32_t  BITLINE;                           /*!< (@ 0x00000000) Repair configuration for RAM.                         */
 } NRF_MEMCONF_REPAIR_Type;                           /*!< Size = 4 (0x004)                                                     */
   #define MEMCONF_REPAIR_MaxCount (192UL)            /*!< Size of REPAIR[192] array.                                           */
   #define MEMCONF_REPAIR_MaxIndex (191UL)            /*!< Max index of REPAIR[192] array.                                      */
   #define MEMCONF_REPAIR_MinIndex (0UL)              /*!< Min index of REPAIR[192] array.                                      */
 
-/* MEMCONF_REPAIR_BITLINE: Repair configuration for RAM blocks. */
+/* MEMCONF_REPAIR_BITLINE: Repair configuration for RAM. */
   #define MEMCONF_REPAIR_BITLINE_ResetValue (0x00000000UL) /*!< Reset value of BITLINE register.                               */
 
 /* ADDR @Bits 0..6 : Repair address of the bitline */
@@ -92337,34 +92336,33 @@ typedef struct {
   */
 typedef struct {
   __IOM uint32_t  PTR;                               /*!< (@ 0x00000000) RAM address pointer to write samples to with EasyDMA  */
-  __IOM uint32_t  MAXCNT;                            /*!< (@ 0x00000004) Number of samples to allocate memory for in EasyDMA
-                                                                         mode*/
-  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x00000008) Number of samples transferred into Data RAM since last
-                                                                         START task*/
+  __IOM uint32_t  MAXCNT;                            /*!< (@ 0x00000004) Number of bytes to allocate memory for in EasyDMA mode*/
+  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x00000008) Number of bytes transferred in the last transaction,
+                                                                         updated after the END event.*/
 } NRF_PDM_SAMPLE_Type;                               /*!< Size = 12 (0x00C)                                                    */
 
 /* PDM_SAMPLE_PTR: RAM address pointer to write samples to with EasyDMA */
   #define PDM_SAMPLE_PTR_ResetValue (0x00000000UL)   /*!< Reset value of PTR register.                                         */
 
-/* SAMPLEPTR @Bits 0..31 : Address to write PDM samples to over DMA */
+/* SAMPLEPTR @Bits 0..31 : Address to write PCM samples to over DMA */
   #define PDM_SAMPLE_PTR_SAMPLEPTR_Pos (0UL)         /*!< Position of SAMPLEPTR field.                                         */
   #define PDM_SAMPLE_PTR_SAMPLEPTR_Msk (0xFFFFFFFFUL << PDM_SAMPLE_PTR_SAMPLEPTR_Pos) /*!< Bit mask of SAMPLEPTR field.        */
 
 
-/* PDM_SAMPLE_MAXCNT: Number of samples to allocate memory for in EasyDMA mode */
+/* PDM_SAMPLE_MAXCNT: Number of bytes to allocate memory for in EasyDMA mode */
   #define PDM_SAMPLE_MAXCNT_ResetValue (0x00000000UL) /*!< Reset value of MAXCNT register.                                     */
 
-/* BUFFSIZE @Bits 0..14 : Length of DMA RAM allocation in number of samples */
+/* BUFFSIZE @Bits 0..14 : Length of DMA RAM allocation in number of bytes */
   #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Pos (0UL)       /*!< Position of BUFFSIZE field.                                          */
   #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Msk (0x7FFFUL << PDM_SAMPLE_MAXCNT_BUFFSIZE_Pos) /*!< Bit mask of BUFFSIZE field.         */
   #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Min (0x0000UL)  /*!< Min value of BUFFSIZE field.                                         */
   #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Max (0x7FFFUL)  /*!< Max size of BUFFSIZE field.                                          */
 
 
-/* PDM_SAMPLE_AMOUNT: Number of samples transferred into Data RAM since last START task */
+/* PDM_SAMPLE_AMOUNT: Number of bytes transferred in the last transaction, updated after the END event. */
   #define PDM_SAMPLE_AMOUNT_ResetValue (0x00000000UL) /*!< Reset value of AMOUNT register.                                     */
 
-/* AMOUNT @Bits 0..14 : Number of samples transferred into Data RAM since last START task */
+/* AMOUNT @Bits 0..14 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte */
   #define PDM_SAMPLE_AMOUNT_AMOUNT_Pos (0UL)         /*!< Position of AMOUNT field.                                            */
   #define PDM_SAMPLE_AMOUNT_AMOUNT_Msk (0x7FFFUL << PDM_SAMPLE_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.               */
 
@@ -92377,7 +92375,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x00000000) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/
-  __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000004) Address of transaction that generated the last BUSERROR
+  __IM  uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000004) Address of transaction that generated the last BUSERROR
                                                                          event.*/
 } NRF_PDM_DMA_Type;                                  /*!< Size = 8 (0x008)                                                     */
 
@@ -92419,7 +92417,7 @@ typedef struct {
     __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000108) The PDM has written the last sample specified by
                                                                          SAMPLE.MAXCNT (or the last sample after a STOP task has
                                                                          been received) to Data RAM*/
-    __IOM uint32_t EVENTS_OVERRUN;                   /*!< (@ 0x0000010C) PDM samples lost due to DMA destination not available */
+    __IOM uint32_t EVENTS_OVERRUN;                   /*!< (@ 0x0000010C) Samples lost due to DMA destination not available     */
     __IOM NRF_PDM_EVENTS_DMA_Type EVENTS_DMA;        /*!< (@ 0x00000110) Peripheral events.                                    */
     __IM uint32_t RESERVED2[27];
     __IOM uint32_t PUBLISH_STARTED;                  /*!< (@ 0x00000180) Publish configuration for event STARTED               */
@@ -92427,20 +92425,17 @@ typedef struct {
     __IOM uint32_t PUBLISH_END;                      /*!< (@ 0x00000188) Publish configuration for event END                   */
     __IOM uint32_t PUBLISH_OVERRUN;                  /*!< (@ 0x0000018C) Publish configuration for event OVERRUN               */
     __IOM NRF_PDM_PUBLISH_DMA_Type PUBLISH_DMA;      /*!< (@ 0x00000190) Publish configuration for events                      */
-    __IM uint32_t RESERVED3[27];
-    __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
-    __IM uint32_t RESERVED4[63];
+    __IM uint32_t RESERVED3[91];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
     __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
     __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
     __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-    __IM uint32_t RESERVED5[124];
+    __IM uint32_t RESERVED4[124];
     __IOM uint32_t ENABLE;                           /*!< (@ 0x00000500) PDM module enable register                            */
     __IOM uint32_t PDMCLKCTRL;                       /*!< (@ 0x00000504) PDM clock generator control                           */
-    __IOM uint32_t MODE;                             /*!< (@ 0x00000508) Defines the routing of the connected PDM microphones'
+    __IOM uint32_t MODE;                             /*!< (@ 0x00000508) Defines the routing of the connected PDM microphone
                                                                          signals*/
-    __IOM uint32_t FDBYPASS;                         /*!< (@ 0x0000050C) Bypass the frequency doubler in the PDM clock
-                                                                         generation*/
+    __IM uint32_t RESERVED5;
     __IM uint32_t RXDLDATA;                          /*!< (@ 0x00000510) Left sample from filter output                        */
     __IM uint32_t RXDRDATA;                          /*!< (@ 0x00000514) Right sample from filter output                       */
     __IOM uint32_t GAINL;                            /*!< (@ 0x00000518) Left output gain adjustment                           */
@@ -92559,10 +92554,10 @@ typedef struct {
   #define PDM_EVENTS_END_EVENTS_END_Generated (0x1UL) /*!< Event generated                                                     */
 
 
-/* PDM_EVENTS_OVERRUN: PDM samples lost due to DMA destination not available */
+/* PDM_EVENTS_OVERRUN: Samples lost due to DMA destination not available */
   #define PDM_EVENTS_OVERRUN_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_OVERRUN register.                            */
 
-/* EVENTS_OVERRUN @Bit 0 : PDM samples lost due to DMA destination not available */
+/* EVENTS_OVERRUN @Bit 0 : Samples lost due to DMA destination not available */
   #define PDM_EVENTS_OVERRUN_EVENTS_OVERRUN_Pos (0UL) /*!< Position of EVENTS_OVERRUN field.                                   */
   #define PDM_EVENTS_OVERRUN_EVENTS_OVERRUN_Msk (0x1UL << PDM_EVENTS_OVERRUN_EVENTS_OVERRUN_Pos) /*!< Bit mask of EVENTS_OVERRUN
                                                                             field.*/
@@ -92642,19 +92637,6 @@ typedef struct {
   #define PDM_PUBLISH_OVERRUN_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
   #define PDM_PUBLISH_OVERRUN_EN_Disabled (0x0UL)    /*!< Disable publishing                                                   */
   #define PDM_PUBLISH_OVERRUN_EN_Enabled (0x1UL)     /*!< Enable publishing                                                    */
-
-
-/* PDM_SHORTS: Shortcuts between local events and tasks */
-  #define PDM_SHORTS_ResetValue (0x00000000UL)       /*!< Reset value of SHORTS register.                                      */
-
-/* DMA_BUSERROR_STOP @Bit 0 : Shortcut between event DMA.BUSERROR and task STOP */
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Pos (0UL)     /*!< Position of DMA_BUSERROR_STOP field.                                 */
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Msk (0x1UL << PDM_SHORTS_DMA_BUSERROR_STOP_Pos) /*!< Bit mask of DMA_BUSERROR_STOP
-                                                                            field.*/
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Min (0x0UL)   /*!< Min enumerator value of DMA_BUSERROR_STOP field.                     */
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Max (0x1UL)   /*!< Max enumerator value of DMA_BUSERROR_STOP field.                     */
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Disabled (0x0UL) /*!< Disable shortcut                                                  */
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                    */
 
 
 /* PDM_INTEN: Enable or disable interrupt */
@@ -92878,7 +92860,7 @@ typedef struct {
   #define PDM_PDMCLKCTRL_FREQ_1333K (0x0A800000UL)   /*!< PDM_CLK = 32 MHz / 24 = 1.333 MHz                                    */
 
 
-/* PDM_MODE: Defines the routing of the connected PDM microphones' signals */
+/* PDM_MODE: Defines the routing of the connected PDM microphone signals */
   #define PDM_MODE_ResetValue (0x00000000UL)         /*!< Reset value of MODE register.                                        */
 
 /* OPERATION @Bit 0 : Mono or stereo operation Mono also disables the gated clock to the right filter bank */
@@ -92898,22 +92880,6 @@ typedef struct {
   #define PDM_MODE_EDGE_Max (0x1UL)                  /*!< Max enumerator value of EDGE field.                                  */
   #define PDM_MODE_EDGE_LeftFalling (0x0UL)          /*!< Left (or mono) is sampled on falling edge of PDM_CLK                 */
   #define PDM_MODE_EDGE_LeftRising (0x1UL)           /*!< Left (or mono) is sampled on rising edge of PDM_CLK                  */
-
-
-/* PDM_FDBYPASS: Bypass the frequency doubler in the PDM clock generation */
-  #define PDM_FDBYPASS_ResetValue (0x00000000UL)     /*!< Reset value of FDBYPASS register.                                    */
-
-/* BYPASS @Bit 0 : Bypass the frequency doubler in the PDM clock generation, and revert to a simple divider structure. */
-  #define PDM_FDBYPASS_BYPASS_Pos (0UL)              /*!< Position of BYPASS field.                                            */
-  #define PDM_FDBYPASS_BYPASS_Msk (0x1UL << PDM_FDBYPASS_BYPASS_Pos) /*!< Bit mask of BYPASS field.                            */
-  #define PDM_FDBYPASS_BYPASS_Min (0x0UL)            /*!< Min enumerator value of BYPASS field.                                */
-  #define PDM_FDBYPASS_BYPASS_Max (0x1UL)            /*!< Max enumerator value of BYPASS field.                                */
-  #define PDM_FDBYPASS_BYPASS_DoublerActive (0x0UL)  /*!< PDMCLKCTRL determines directly the PDM_CLK frequency. A doubler is
-                                                          used to provide twice that clock to the filters. This allows better
-                                                          accuracy on PDM_CLK.*/
-  #define PDM_FDBYPASS_BYPASS_DividerActive (0x1UL)  /*!< PDMCLKCTRL determines the clock provided to the filters, PDM_CLK is
-                                                          generated by dividing that clock by two. This results in less accuracy
-                                                          on PDM_CLK.*/
 
 
 /* PDM_RXDLDATA: Left sample from filter output */
@@ -92937,8 +92903,7 @@ typedef struct {
 
 /* GAINL @Bits 0..6 : Left output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters)
                       0x00 -20 dB gain adjust 0x01 -19.5 dB gain adjust (...) 0x27 -0.5 dB gain adjust 0x28 0 dB gain adjust
-                      0x29 +0.5 dB gain adjust (...) 0x4F +19.5 dB gain adjust 0x50 +20 dB gain adjust 0x51 +20 dB gain adjust
-                      0x52 +20 dB gain adjust (...) */
+                      0x29 +0.5 dB gain adjust (...) 0x4F +19.5 dB gain adjust 0x50 +20 dB gain adjust */
 
   #define PDM_GAINL_GAINL_Pos (0UL)                  /*!< Position of GAINL field.                                             */
   #define PDM_GAINL_GAINL_Msk (0x7FUL << PDM_GAINL_GAINL_Pos) /*!< Bit mask of GAINL field.                                    */
@@ -140268,7 +140233,7 @@ typedef struct {
   #define UARTE_DMA_RX_MATCH_CONFIG_ENABLE3_Disabled (0x0UL) /*!< Match filter disabled                                        */
   #define UARTE_DMA_RX_MATCH_CONFIG_ENABLE3_Enabled (0x1UL) /*!< Match filter enabled                                          */
 
-/* ONESHOT0 @Bit 16 : Configure match filter 0 as one-shot or sticky */
+/* ONESHOT0 @Bit 16 : Configure match filter 0 as one-shot or continous */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT0_Pos (16UL) /*!< Position of ONESHOT0 field.                                       */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT0_Msk (0x1UL << UARTE_DMA_RX_MATCH_CONFIG_ONESHOT0_Pos) /*!< Bit mask of ONESHOT0
                                                                             field.*/
@@ -140277,7 +140242,7 @@ typedef struct {
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT0_Continuous (0x0UL) /*!< Match filter stays enabled until disabled by task         */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT0_Oneshot (0x1UL) /*!< Match filter stays enabled until next data word is received  */
 
-/* ONESHOT1 @Bit 17 : Configure match filter 1 as one-shot or sticky */
+/* ONESHOT1 @Bit 17 : Configure match filter 1 as one-shot or continous */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT1_Pos (17UL) /*!< Position of ONESHOT1 field.                                       */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT1_Msk (0x1UL << UARTE_DMA_RX_MATCH_CONFIG_ONESHOT1_Pos) /*!< Bit mask of ONESHOT1
                                                                             field.*/
@@ -140286,7 +140251,7 @@ typedef struct {
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT1_Continuous (0x0UL) /*!< Match filter stays enabled until disabled by task         */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT1_Oneshot (0x1UL) /*!< Match filter stays enabled until next data word is received  */
 
-/* ONESHOT2 @Bit 18 : Configure match filter 2 as one-shot or sticky */
+/* ONESHOT2 @Bit 18 : Configure match filter 2 as one-shot or continous */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT2_Pos (18UL) /*!< Position of ONESHOT2 field.                                       */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT2_Msk (0x1UL << UARTE_DMA_RX_MATCH_CONFIG_ONESHOT2_Pos) /*!< Bit mask of ONESHOT2
                                                                             field.*/
@@ -140295,7 +140260,7 @@ typedef struct {
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT2_Continuous (0x0UL) /*!< Match filter stays enabled until disabled by task         */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT2_Oneshot (0x1UL) /*!< Match filter stays enabled until next data word is received  */
 
-/* ONESHOT3 @Bit 19 : Configure match filter 3 as one-shot or sticky */
+/* ONESHOT3 @Bit 19 : Configure match filter 3 as one-shot or continous */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT3_Pos (19UL) /*!< Position of ONESHOT3 field.                                       */
   #define UARTE_DMA_RX_MATCH_CONFIG_ONESHOT3_Msk (0x1UL << UARTE_DMA_RX_MATCH_CONFIG_ONESHOT3_Pos) /*!< Bit mask of ONESHOT3
                                                                             field.*/
@@ -140311,10 +140276,9 @@ typedef struct {
   #define UARTE_DMA_RX_MATCH_CANDIDATE_MinIndex (0UL) /*!< Min index of CANDIDATE[4] array.                                    */
   #define UARTE_DMA_RX_MATCH_CANDIDATE_ResetValue (0x00000000UL) /*!< Reset value of CANDIDATE[4] register.                    */
 
-/* DATA @Bits 0..31 : Data to look for */
+/* DATA @Bits 0..7 : Data to look for */
   #define UARTE_DMA_RX_MATCH_CANDIDATE_DATA_Pos (0UL) /*!< Position of DATA field.                                             */
-  #define UARTE_DMA_RX_MATCH_CANDIDATE_DATA_Msk (0xFFFFFFFFUL << UARTE_DMA_RX_MATCH_CANDIDATE_DATA_Pos) /*!< Bit mask of DATA
-                                                                            field.*/
+  #define UARTE_DMA_RX_MATCH_CANDIDATE_DATA_Msk (0xFFUL << UARTE_DMA_RX_MATCH_CANDIDATE_DATA_Pos) /*!< Bit mask of DATA field. */
 
 
 
@@ -141833,6 +141797,8 @@ typedef struct {
   #define UARTE_CONFIG_FRAMETIMEOUT_Max (0x1UL)      /*!< Max enumerator value of FRAMETIMEOUT field.                          */
   #define UARTE_CONFIG_FRAMETIMEOUT_DISABLED (0x0UL) /*!< Packet timeout is disabled.                                          */
   #define UARTE_CONFIG_FRAMETIMEOUT_ENABLED (0x1UL)  /*!< Packet timeout is enabled.                                           */
+  #define UARTE_CONFIG_FRAMETIMEOUT_Disabled (0x0UL) /*!< Packet timeout is disabled.                                          */
+  #define UARTE_CONFIG_FRAMETIMEOUT_Enabled (0x1UL)  /*!< Packet timeout is enabled.                                           */
 
 
 /* UARTE_ADDRESS: Set the address of the UARTE for RX when used in 9 bit data frame mode. */
@@ -149192,7 +149158,8 @@ typedef struct {
   __IOM uint32_t  INTMSK;                            /*!< (@ 0x0000000C) Host Channel Interrupt Mask Register                  */
   __IOM uint32_t  TSIZ;                              /*!< (@ 0x00000010) Host Channel Transfer Size Register                   */
   __IOM uint32_t  DMA;                               /*!< (@ 0x00000014) Host Channel DMA Address Register                     */
-} NRF_USBHSCORE_HC_Type;                             /*!< Size = 24 (0x018)                                                    */
+  __IM  uint32_t  RESERVED1;
+} NRF_USBHSCORE_HC_Type;                             /*!< Size = 28 (0x01C)                                                    */
   #define USBHSCORE_HC_MaxCount (16UL)               /*!< Size of HC[16] array.                                                */
   #define USBHSCORE_HC_MaxIndex (15UL)               /*!< Max index of HC[16] array.                                           */
   #define USBHSCORE_HC_MinIndex (0UL)                /*!< Min index of HC[16] array.                                           */
@@ -149586,7 +149553,7 @@ typedef struct {
     __IOM uint32_t HPRT;                             /*!< (@ 0x00000440) Host Port Control and Status Register                 */
     __IM uint32_t RESERVED6[47];
     __IOM NRF_USBHSCORE_HC_Type HC[16];              /*!< (@ 0x00000500) (unspecified)                                         */
-    __IM uint32_t RESERVED7[96];
+    __IM uint32_t RESERVED7[80];
     __IOM uint32_t DCFG;                             /*!< (@ 0x00000800) Device Configuration Register                         */
     __IOM uint32_t DCTL;                             /*!< (@ 0x00000804) Device Control Register                               */
     __IOM uint32_t DSTS;                             /*!< (@ 0x00000808) Device Status Register                                */

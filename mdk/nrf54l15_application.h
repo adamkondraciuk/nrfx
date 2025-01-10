@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -83,13 +83,11 @@ typedef enum {
   RRAMC_IRQn                             = 75,       /*!< 75 RRAMC                                                             */
   VPR00_IRQn                             = 76,       /*!< 76 VPR00                                                             */
   CTRLAP_IRQn                            = 82,       /*!< 82 CTRLAP                                                            */
-  CM33SS_IRQn                            = 83,       /*!< 83 CM33SS                                                            */
+  CM33SS_IRQn                            = 84,       /*!< 84 CM33SS                                                            */
   TIMER00_IRQn                           = 85,       /*!< 85 TIMER00                                                           */
-  VREGRLDO_IRQn                          = 87,       /*!< 87 VREGRLDO                                                          */
   ECCRAMC_IRQn                           = 88,       /*!< 88 ECCRAMC                                                           */
   SPU10_IRQn                             = 128,      /*!< 128 SPU10                                                            */
   TIMER10_IRQn                           = 133,      /*!< 133 TIMER10                                                          */
-  RTC10_IRQn                             = 134,      /*!< 134 RTC10                                                            */
   EGU10_IRQn                             = 135,      /*!< 135 EGU10                                                            */
   AAR10_CCM10_IRQn                       = 136,      /*!< 136 AAR10_CCM10                                                      */
   ECB10_IRQn                             = 137,      /*!< 137 ECB10                                                            */
@@ -144,6 +142,8 @@ typedef enum {
 #define SPIS00_IRQHandler             SERIAL00_IRQHandler
 #define UARTE00_IRQn                  SERIAL00_IRQn
 #define UARTE00_IRQHandler            SERIAL00_IRQHandler
+#define CPUC_IRQn                     CM33SS_IRQn
+#define CPUC_IRQHandler               CM33SS_IRQHandler
 #define AAR10_IRQn                    AAR10_CCM10_IRQn
 #define AAR10_IRQHandler              AAR10_CCM10_IRQHandler
 #define CCM10_IRQn                    AAR10_CCM10_IRQn
@@ -192,8 +192,6 @@ typedef enum {
 #define CLOCK_IRQHandler              CLOCK_POWER_IRQHandler
 #define POWER_IRQn                    CLOCK_POWER_IRQn
 #define POWER_IRQHandler              CLOCK_POWER_IRQHandler
-#define RTC30_IRQn                    CLOCK_POWER_IRQn
-#define RTC30_IRQHandler              CLOCK_POWER_IRQHandler
 #define COMP_IRQn                     COMP_LPCOMP_IRQn
 #define COMP_IRQHandler               COMP_LPCOMP_IRQHandler
 #define LPCOMP_IRQn                   COMP_LPCOMP_IRQn

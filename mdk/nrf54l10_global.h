@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -134,8 +134,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_PPIB11_S_BASE                 0x50084000UL
 #define NRF_TIMER10_NS_BASE               0x40085000UL
 #define NRF_TIMER10_S_BASE                0x50085000UL
-#define NRF_RTC10_NS_BASE                 0x40086000UL
-#define NRF_RTC10_S_BASE                  0x50086000UL
 #define NRF_EGU10_NS_BASE                 0x40087000UL
 #define NRF_EGU10_S_BASE                  0x50087000UL
 #define NRF_AAR10_NS_BASE                 0x40088000UL
@@ -252,8 +250,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_TWIM30_S_BASE                 0x50104000UL
 #define NRF_TWIS30_S_BASE                 0x50104000UL
 #define NRF_UARTE30_S_BASE                0x50104000UL
-#define NRF_RTC30_NS_BASE                 0x40105000UL
-#define NRF_RTC30_S_BASE                  0x50105000UL
 #define NRF_COMP_NS_BASE                  0x40106000UL
 #define NRF_LPCOMP_NS_BASE                0x40106000UL
 #define NRF_COMP_S_BASE                   0x50106000UL
@@ -343,8 +339,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_PPIB11_S                      ((NRF_PPIB_Type*)                     NRF_PPIB11_S_BASE)
 #define NRF_TIMER10_NS                    ((NRF_TIMER_Type*)                    NRF_TIMER10_NS_BASE)
 #define NRF_TIMER10_S                     ((NRF_TIMER_Type*)                    NRF_TIMER10_S_BASE)
-#define NRF_RTC10_NS                      ((NRF_RTC_Type*)                      NRF_RTC10_NS_BASE)
-#define NRF_RTC10_S                       ((NRF_RTC_Type*)                      NRF_RTC10_S_BASE)
 #define NRF_EGU10_NS                      ((NRF_EGU_Type*)                      NRF_EGU10_NS_BASE)
 #define NRF_EGU10_S                       ((NRF_EGU_Type*)                      NRF_EGU10_S_BASE)
 #define NRF_AAR10_NS                      ((NRF_AAR_Type*)                      NRF_AAR10_NS_BASE)
@@ -461,8 +455,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_TWIM30_S                      ((NRF_TWIM_Type*)                     NRF_TWIM30_S_BASE)
 #define NRF_TWIS30_S                      ((NRF_TWIS_Type*)                     NRF_TWIS30_S_BASE)
 #define NRF_UARTE30_S                     ((NRF_UARTE_Type*)                    NRF_UARTE30_S_BASE)
-#define NRF_RTC30_NS                      ((NRF_RTC_Type*)                      NRF_RTC30_NS_BASE)
-#define NRF_RTC30_S                       ((NRF_RTC_Type*)                      NRF_RTC30_S_BASE)
 #define NRF_COMP_NS                       ((NRF_COMP_Type*)                     NRF_COMP_NS_BASE)
 #define NRF_LPCOMP_NS                     ((NRF_LPCOMP_Type*)                   NRF_LPCOMP_NS_BASE)
 #define NRF_COMP_S                        ((NRF_COMP_Type*)                     NRF_COMP_S_BASE)
@@ -519,7 +511,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_PPIB10                              NRF_PPIB10_NS
   #define NRF_PPIB11                              NRF_PPIB11_NS
   #define NRF_TIMER10                             NRF_TIMER10_NS
-  #define NRF_RTC10                               NRF_RTC10_NS
   #define NRF_EGU10                               NRF_EGU10_NS
   #define NRF_AAR10                               NRF_AAR10_NS
   #define NRF_CCM10                               NRF_CCM10_NS
@@ -575,7 +566,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TWIM30                              NRF_TWIM30_NS
   #define NRF_TWIS30                              NRF_TWIS30_NS
   #define NRF_UARTE30                             NRF_UARTE30_NS
-  #define NRF_RTC30                               NRF_RTC30_NS
   #define NRF_COMP                                NRF_COMP_NS
   #define NRF_LPCOMP                              NRF_LPCOMP_NS
   #define NRF_WDT31                               NRF_WDT31_NS
@@ -624,7 +614,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_PPIB10                              NRF_PPIB10_S
   #define NRF_PPIB11                              NRF_PPIB11_S
   #define NRF_TIMER10                             NRF_TIMER10_S
-  #define NRF_RTC10                               NRF_RTC10_S
   #define NRF_EGU10                               NRF_EGU10_S
   #define NRF_AAR10                               NRF_AAR10_S
   #define NRF_CCM10                               NRF_CCM10_S
@@ -686,7 +675,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TWIM30                              NRF_TWIM30_S
   #define NRF_TWIS30                              NRF_TWIS30_S
   #define NRF_UARTE30                             NRF_UARTE30_S
-  #define NRF_RTC30                               NRF_RTC30_S
   #define NRF_COMP                                NRF_COMP_S
   #define NRF_LPCOMP                              NRF_LPCOMP_S
   #define NRF_WDT30                               NRF_WDT30_S

@@ -8,7 +8,7 @@
   <version>1</version>
   <description>System-on-chip with a 32-bit Arm Cortex-M33 microcontroller</description>
   <licenseText>
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -1449,7 +1449,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unprotected</name>
-                    <description>Leaves TAMPC PROTECT.AP DBGEN and SPIDEN signal protectors unlocked and under CPU control.</description>
+                    <description>Leaves TAMPC PROTECT.AP DBGEN signal protector unlocked and under CPU control.</description>
                     <value>0xFFFFFFFF</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -1505,7 +1505,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unprotected</name>
-                    <description>Leaves TAMPC PROTECT.AP DBGEN and SPIDEN signal protectors unlocked and under CPU control.</description>
+                    <description>Leaves TAMPC PROTECT.AP DBGEN signal protector unlocked and under CPU control.</description>
                     <value>0xFFFFFFFF</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -2757,7 +2757,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>FIFOLEVEL</name>
-                <description>Number of 32 bits words of random available in the FIFO.</description>
+                <description>Number of 32 bits words of random values available in the FIFO.</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -6088,7 +6088,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Slave</name>
-                    <description>Error was triggered by an AXI slave</description>
+                    <description>Error was triggered by a Subordinate</description>
                     <value>0x0</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -6864,7 +6864,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
         </cluster>
         <cluster>
-          <dim>7</dim>
+          <dim>5</dim>
           <dimIncrement>0x020</dimIncrement>
           <name>OVERRIDE[%s]</name>
           <description>Special privilege tables</description>
@@ -11147,7 +11147,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_ERROR</name>
-          <description>Operation aborted because of a STOP task or due to an error</description>
+          <description>Operation aborted because of a STOP task or due to an error This event does not generate an interrupt</description>
           <addressOffset>0x10C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -11155,7 +11155,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>EVENTS_ERROR</name>
-              <description>Operation aborted because of a STOP task or due to an error</description>
+              <description>Operation aborted because of a STOP task or due to an error This event does not generate an interrupt</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -11646,11 +11646,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>PrematureInptrEnd</name>
                   <description>End of INPTR job list before data structure was read.</description>
                   <value>0x1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>PrematureOutptrEnd</name>
-                  <description>End of OUTPTR job list before data structure was read.</description>
-                  <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>DmaError</name>
@@ -13245,8 +13240,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <access>read-write</access>
           <addressOffset>0x53C</addressOffset>
           <register>
-            <name>INITIATOR</name>
-            <description>Selected initiator for Channel Sounding Access Address</description>
+            <name>REFLECTOR</name>
+            <description>Selected Channel Sounding Access Address used in the CS SYNC from Reflector to Initiator</description>
             <addressOffset>0x000</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -13260,8 +13255,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
           <register>
-            <name>REFLECTOR</name>
-            <description>Selected initiator for Channel Sounding Access Address</description>
+            <name>INITIATOR</name>
+            <description>Selected Channel Sounding Access Address used in the CS SYNC from Initiator to Reflector</description>
             <addressOffset>0x004</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -13798,7 +13793,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>SEEDVALID</name>
-          <description>Marks the SEED register as valid</description>
+          <description>Marks the SEED register as valid.</description>
           <addressOffset>0x404</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -16269,7 +16264,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <addressOffset>0x5AC</addressOffset>
           <register>
             <name>RXDELAY</name>
-            <description>Sample delay for input serial data on MISO</description>
+            <description>Sample delay for input serial data on SDI</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000002</resetValue>
@@ -16277,7 +16272,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>RXDELAY</name>
-                <description>Sample delay for input serial data on MISO. The value specifies the number of SPIM core clock cycles delay from the the sampling edge of SCK (leading edge for CONFIG.CPHA = 0, trailing edge for CONFIG.CPHA = 1) until the input serial data is sampled. As en example, if RXDELAY = 0 and CONFIG.CPHA = 0, the input serial data is sampled on the rising edge of SCK.</description>
+                <description>Sample delay for input serial data on SDI. The value specifies the number of SPIM core clock cycles delay from the the sampling edge of SCK (leading edge for CONFIG.CPHA = 0, trailing edge for CONFIG.CPHA = 1) until the input serial data is sampled. As en example, if RXDELAY = 0 and CONFIG.CPHA = 0, the input serial data is sampled on the rising edge of SCK.</description>
                 <lsb>0</lsb>
                 <msb>2</msb>
               </field>
@@ -16408,7 +16403,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
+            <description>Pin select for SDO signal</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -16448,7 +16443,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>MISO</name>
-            <description>Pin select for MISO signal</description>
+            <description>Pin select for SDI signal</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -19409,7 +19404,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>MISO</name>
-            <description>Pin select for MISO signal</description>
+            <description>Pin select for SDO signal</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -19449,7 +19444,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
+            <description>Pin select for SDI signal</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -23633,6 +23628,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <description>Packet timeout is enabled.</description>
                   <value>0x1</value>
                 </enumeratedValue>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Packet timeout is disabled.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Packet timeout is enabled.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
               </enumeratedValues>
             </field>
           </fields>
@@ -24054,7 +24059,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                   <field>
                     <name>ONESHOT_0</name>
-                    <description>Configure match filter 0 as one-shot or sticky</description>
+                    <description>Configure match filter 0 as one-shot or continous</description>
                     <lsb>16</lsb>
                     <msb>16</msb>
                     <enumeratedValues>
@@ -24072,7 +24077,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                   <field>
                     <name>ONESHOT_1</name>
-                    <description>Configure match filter 1 as one-shot or sticky</description>
+                    <description>Configure match filter 1 as one-shot or continous</description>
                     <lsb>17</lsb>
                     <msb>17</msb>
                     <enumeratedValues>
@@ -24090,7 +24095,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                   <field>
                     <name>ONESHOT_2</name>
-                    <description>Configure match filter 2 as one-shot or sticky</description>
+                    <description>Configure match filter 2 as one-shot or continous</description>
                     <lsb>18</lsb>
                     <msb>18</msb>
                     <enumeratedValues>
@@ -24108,7 +24113,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                   <field>
                     <name>ONESHOT_3</name>
-                    <description>Configure match filter 3 as one-shot or sticky</description>
+                    <description>Configure match filter 3 as one-shot or continous</description>
                     <lsb>19</lsb>
                     <msb>19</msb>
                     <enumeratedValues>
@@ -24140,7 +24145,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <name>DATA</name>
                     <description>Data to look for</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>7</msb>
                   </field>
                 </fields>
               </register>
@@ -25011,34 +25016,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>EVENTS_ECCERROR</name>
-          <description>Uncorrectable ECC error detected</description>
-          <addressOffset>0x110</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_ECCERROR</name>
-              <description>Uncorrectable ECC error detected</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>EVENTS_ECCERRORCORR</name>
           <description>ECC error detected and corrected</description>
           <addressOffset>0x114</addressOffset>
@@ -25180,24 +25157,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
-              <name>ECCERROR</name>
-              <description>Enable or disable interrupt for event ECCERROR</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
               <name>ECCERRORCORR</name>
               <description>Enable or disable interrupt for event ECCERRORCORR</description>
               <lsb>5</lsb>
@@ -25311,33 +25270,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Write '1' to enable interrupt for event ACCESSERROR</description>
               <lsb>3</lsb>
               <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ECCERROR</name>
-              <description>Write '1' to enable interrupt for event ECCERROR</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -25506,33 +25438,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
-              <name>ECCERROR</name>
-              <description>Write '1' to disable interrupt for event ECCERROR</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
               <name>ECCERRORCORR</name>
               <description>Write '1' to disable interrupt for event ECCERRORCORR</description>
               <lsb>5</lsb>
@@ -25631,25 +25536,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Read pending status of interrupt for event ACCESSERROR</description>
               <lsb>3</lsb>
               <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ECCERROR</name>
-              <description>Read pending status of interrupt for event ECCERROR</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -29017,8 +28903,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Busy</name>
-                    <description>An abstract command was executing while command, 
-                abstractcs, or abstractauto was written, or when one of the data or progbuf registers was read 
+                    <description>An abstract command was executing while command,
+                abstractcs, or abstractauto was written, or when one of the data or progbuf registers was read
                 or written. This status is only written if cmderr contains 0</description>
                     <value>0x1</value>
                   </enumeratedValue>
@@ -29030,19 +28916,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Exception</name>
-                    <description>An exception occurred while executing the 
+                    <description>An exception occurred while executing the
                 command  (e.g. while executing theProgram Buffer).</description>
                     <value>0x3</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>HaltResume</name>
-                    <description>The abstract command couldn't execute 
+                    <description>The abstract command couldn't execute
                 because the hart wasn't in the required state (running/halted). or unavailable.</description>
                     <value>0x4</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Bus</name>
-                    <description>The abstract command failed due to abus 
+                    <description>The abstract command failed due to abus
                 error (e.g. alignment, access size, or timeout).</description>
                     <value>0x5</value>
                   </enumeratedValue>
@@ -38992,10 +38878,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>VREGRLDO</name>
-        <value>87</value>
-      </interrupt>
       <groupName>VREGRLDO</groupName>
       <size>0x20</size>
       <registers>
@@ -40329,1565 +40211,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <interrupt>
         <name>TIMER10</name>
         <value>133</value>
-      </interrupt>
-    </peripheral>
-    <peripheral>
-      <name>GLOBAL_RTC10_NS</name>
-      <description>Real-time counter 0</description>
-      <baseAddress>0x40086000</baseAddress>
-      <headerStructName>RTC</headerStructName>
-      <!--Security dma=NA-->
-      <!--Security securemapping=US-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>RTC10</name>
-        <value>134</value>
-      </interrupt>
-      <groupName>RTC</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>TASKS_START</name>
-          <description>Start RTC counter</description>
-          <addressOffset>0x000</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_START</name>
-              <description>Start RTC counter</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_STOP</name>
-          <description>Stop RTC counter</description>
-          <addressOffset>0x004</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_STOP</name>
-              <description>Stop RTC counter</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_CLEAR</name>
-          <description>Clear RTC counter</description>
-          <addressOffset>0x008</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_CLEAR</name>
-              <description>Clear RTC counter</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_TRIGOVRFLW</name>
-          <description>Set counter to 0xFFFFF0</description>
-          <addressOffset>0x00C</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_TRIGOVRFLW</name>
-              <description>Set counter to 0xFFFFF0</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <dim>0x4</dim>
-          <dimIncrement>0x4</dimIncrement>
-          <name>TASKS_CAPTURE[%s]</name>
-          <description>Description collection: Capture RTC counter to CC[n] register</description>
-          <addressOffset>0x040</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_CAPTURE</name>
-              <description>Capture RTC counter to CC[n] register</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SUBSCRIBE_START</name>
-          <description>Subscribe configuration for task START</description>
-          <addressOffset>0x080</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task START will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SUBSCRIBE_STOP</name>
-          <description>Subscribe configuration for task STOP</description>
-          <addressOffset>0x084</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task STOP will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SUBSCRIBE_CLEAR</name>
-          <description>Subscribe configuration for task CLEAR</description>
-          <addressOffset>0x088</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task CLEAR will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SUBSCRIBE_TRIGOVRFLW</name>
-          <description>Subscribe configuration for task TRIGOVRFLW</description>
-          <addressOffset>0x08C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task TRIGOVRFLW will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <dim>0x4</dim>
-          <dimIncrement>0x4</dimIncrement>
-          <name>SUBSCRIBE_CAPTURE[%s]</name>
-          <description>Description collection: Subscribe configuration for task CAPTURE[n]</description>
-          <addressOffset>0x0C0</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task CAPTURE[n] will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_TICK</name>
-          <description>Event on counter increment</description>
-          <addressOffset>0x100</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_TICK</name>
-              <description>Event on counter increment</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_OVRFLW</name>
-          <description>Event on counter overflow</description>
-          <addressOffset>0x104</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_OVRFLW</name>
-              <description>Event on counter overflow</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <dim>0x4</dim>
-          <dimIncrement>0x4</dimIncrement>
-          <name>EVENTS_COMPARE[%s]</name>
-          <description>Description collection: Compare event on CC[n] match</description>
-          <addressOffset>0x140</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_COMPARE</name>
-              <description>Compare event on CC[n] match</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_TICK</name>
-          <description>Publish configuration for event TICK</description>
-          <addressOffset>0x180</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event TICK will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_OVRFLW</name>
-          <description>Publish configuration for event OVRFLW</description>
-          <addressOffset>0x184</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event OVRFLW will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <dim>0x4</dim>
-          <dimIncrement>0x4</dimIncrement>
-          <name>PUBLISH_COMPARE[%s]</name>
-          <description>Description collection: Publish configuration for event COMPARE[n]</description>
-          <addressOffset>0x1C0</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event COMPARE[n] will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHORTS</name>
-          <description>Shortcuts between local events and tasks</description>
-          <addressOffset>0x200</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>COMPARE0_CLEAR</name>
-              <description>Shortcut between event COMPARE[0] and task CLEAR</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE1_CLEAR</name>
-              <description>Shortcut between event COMPARE[1] and task CLEAR</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE2_CLEAR</name>
-              <description>Shortcut between event COMPARE[2] and task CLEAR</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE3_CLEAR</name>
-              <description>Shortcut between event COMPARE[3] and task CLEAR</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TICK</name>
-              <description>Enable or disable interrupt for event TICK</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>OVRFLW</name>
-              <description>Enable or disable interrupt for event OVRFLW</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE0</name>
-              <description>Enable or disable interrupt for event COMPARE[0]</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE1</name>
-              <description>Enable or disable interrupt for event COMPARE[1]</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE2</name>
-              <description>Enable or disable interrupt for event COMPARE[2]</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE3</name>
-              <description>Enable or disable interrupt for event COMPARE[3]</description>
-              <lsb>19</lsb>
-              <msb>19</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TICK</name>
-              <description>Write '1' to enable interrupt for event TICK</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>OVRFLW</name>
-              <description>Write '1' to enable interrupt for event OVRFLW</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE0</name>
-              <description>Write '1' to enable interrupt for event COMPARE[0]</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE1</name>
-              <description>Write '1' to enable interrupt for event COMPARE[1]</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE2</name>
-              <description>Write '1' to enable interrupt for event COMPARE[2]</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE3</name>
-              <description>Write '1' to enable interrupt for event COMPARE[3]</description>
-              <lsb>19</lsb>
-              <msb>19</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TICK</name>
-              <description>Write '1' to disable interrupt for event TICK</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>OVRFLW</name>
-              <description>Write '1' to disable interrupt for event OVRFLW</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE0</name>
-              <description>Write '1' to disable interrupt for event COMPARE[0]</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE1</name>
-              <description>Write '1' to disable interrupt for event COMPARE[1]</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE2</name>
-              <description>Write '1' to disable interrupt for event COMPARE[2]</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE3</name>
-              <description>Write '1' to disable interrupt for event COMPARE[3]</description>
-              <lsb>19</lsb>
-              <msb>19</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVTEN</name>
-          <description>Enable or disable event routing</description>
-          <addressOffset>0x340</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TICK</name>
-              <description>Enable or disable event routing for event TICK</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>OVRFLW</name>
-              <description>Enable or disable event routing for event OVRFLW</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE0</name>
-              <description>Enable or disable event routing for event COMPARE[0]</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE1</name>
-              <description>Enable or disable event routing for event COMPARE[1]</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE2</name>
-              <description>Enable or disable event routing for event COMPARE[2]</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE3</name>
-              <description>Enable or disable event routing for event COMPARE[3]</description>
-              <lsb>19</lsb>
-              <msb>19</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVTENSET</name>
-          <description>Enable event routing</description>
-          <addressOffset>0x344</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TICK</name>
-              <description>Write '1' to enable event routing for event TICK</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>OVRFLW</name>
-              <description>Write '1' to enable event routing for event OVRFLW</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE0</name>
-              <description>Write '1' to enable event routing for event COMPARE[0]</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE1</name>
-              <description>Write '1' to enable event routing for event COMPARE[1]</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE2</name>
-              <description>Write '1' to enable event routing for event COMPARE[2]</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE3</name>
-              <description>Write '1' to enable event routing for event COMPARE[3]</description>
-              <lsb>19</lsb>
-              <msb>19</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVTENCLR</name>
-          <description>Disable event routing</description>
-          <addressOffset>0x348</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TICK</name>
-              <description>Write '1' to disable event routing for event TICK</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>OVRFLW</name>
-              <description>Write '1' to disable event routing for event OVRFLW</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE0</name>
-              <description>Write '1' to disable event routing for event COMPARE[0]</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE1</name>
-              <description>Write '1' to disable event routing for event COMPARE[1]</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE2</name>
-              <description>Write '1' to disable event routing for event COMPARE[2]</description>
-              <lsb>18</lsb>
-              <msb>18</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COMPARE3</name>
-              <description>Write '1' to disable event routing for event COMPARE[3]</description>
-              <lsb>19</lsb>
-              <msb>19</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>COUNTER</name>
-          <description>Current counter value</description>
-          <addressOffset>0x504</addressOffset>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>COUNTER</name>
-              <description>Counter value</description>
-              <lsb>0</lsb>
-              <msb>23</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PRESCALER</name>
-          <description>12-bit prescaler for counter frequency (32768 / (PRESCALER + 1)). Must be written when RTC is stopped.</description>
-          <addressOffset>0x508</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>PRESCALER</name>
-              <description>Prescaler value</description>
-              <lsb>0</lsb>
-              <msb>11</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <dim>0x4</dim>
-          <dimIncrement>0x4</dimIncrement>
-          <name>CC[%s]</name>
-          <description>Description collection: Compare register n</description>
-          <addressOffset>0x540</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>COMPARE</name>
-              <description>Compare value</description>
-              <lsb>0</lsb>
-              <msb>23</msb>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_RTC10_NS">
-      <name>GLOBAL_RTC10_S</name>
-      <description>Real-time counter 1</description>
-      <baseAddress>0x50086000</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>RTC10</name>
-        <value>134</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -43446,7 +41769,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_ERROR</name>
-          <description>Operation aborted because of a STOP task or due to an error</description>
+          <description>Operation aborted because of a STOP task or due to an error This event does not generate an interrupt</description>
           <addressOffset>0x10C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -43454,7 +41777,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>EVENTS_ERROR</name>
-              <description>Operation aborted because of a STOP task or due to an error</description>
+              <description>Operation aborted because of a STOP task or due to an error This event does not generate an interrupt</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -43945,11 +42268,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>PrematureInptrEnd</name>
                   <description>End of INPTR job list before data structure was read.</description>
                   <value>0x1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>PrematureOutptrEnd</name>
-                  <description>End of OUTPTR job list before data structure was read.</description>
-                  <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>DmaError</name>
@@ -45654,8 +43972,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <access>read-write</access>
           <addressOffset>0x53C</addressOffset>
           <register>
-            <name>INITIATOR</name>
-            <description>Selected initiator for Channel Sounding Access Address</description>
+            <name>REFLECTOR</name>
+            <description>Selected Channel Sounding Access Address used in the CS SYNC from Reflector to Initiator</description>
             <addressOffset>0x000</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -45669,8 +43987,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
           <register>
-            <name>REFLECTOR</name>
-            <description>Selected initiator for Channel Sounding Access Address</description>
+            <name>INITIATOR</name>
+            <description>Selected Channel Sounding Access Address used in the CS SYNC from Initiator to Reflector</description>
             <addressOffset>0x004</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -82657,7 +80975,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_OVERRUN</name>
-          <description>PDM samples lost due to DMA destination not available</description>
+          <description>Samples lost due to DMA destination not available</description>
           <addressOffset>0x10C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -82665,7 +80983,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>EVENTS_OVERRUN</name>
-              <description>PDM samples lost due to DMA destination not available</description>
+              <description>Samples lost due to DMA destination not available</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -82890,34 +81208,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
         </cluster>
-        <register>
-          <name>SHORTS</name>
-          <description>Shortcuts between local events and tasks</description>
-          <addressOffset>0x200</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMA_BUSERROR_STOP</name>
-              <description>Shortcut between event DMA.BUSERROR and task STOP</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
         <register>
           <name>INTEN</name>
           <description>Enable or disable interrupt</description>
@@ -83476,40 +81766,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValue>
                   <name>LeftFalling</name>
                   <description>Left (or mono) is sampled on falling edge of PDM_CLK</description>
-                  <value>0x0</value>
+                  <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>LeftRising</name>
                   <description>Left (or mono) is sampled on rising edge of PDM_CLK</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>FDBYPASS</name>
-          <description>Bypass the frequency doubler in the PDM clock generation</description>
-          <addressOffset>0x50C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>BYPASS</name>
-              <description>Bypass the frequency doubler in the PDM clock generation, and revert to a simple divider structure.</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>DoublerActive</name>
-                  <description>PDMCLKCTRL determines directly the PDM_CLK frequency. A doubler is used to provide twice that clock to the filters. This allows better accuracy on PDM_CLK.</description>
                   <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DividerActive</name>
-                  <description>PDMCLKCTRL determines the clock provided to the filters, PDM_CLK is generated by dividing that clock by two. This results in less accuracy on PDM_CLK.</description>
-                  <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -83557,7 +81819,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>GAINL</name>
-              <description>Left output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters) 0x00    -20 dB gain adjust 0x01  -19.5 dB gain adjust (...) 0x27   -0.5 dB gain adjust 0x28      0 dB gain adjust 0x29   +0.5 dB gain adjust (...) 0x4F  +19.5 dB gain adjust 0x50    +20 dB gain adjust 0x51    +20 dB gain adjust 0x52    +20 dB gain adjust (...)</description>
+              <description>Left output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters) 0x00    -20 dB gain adjust 0x01  -19.5 dB gain adjust (...) 0x27   -0.5 dB gain adjust 0x28      0 dB gain adjust 0x29   +0.5 dB gain adjust (...) 0x4F  +19.5 dB gain adjust 0x50    +20 dB gain adjust</description>
               <lsb>0</lsb>
               <msb>6</msb>
               <enumeratedValues>
@@ -84048,7 +82310,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>SAMPLEPTR</name>
-                <description>Address to write PDM samples to over DMA</description>
+                <description>Address to write PCM samples to over DMA</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -84072,7 +82334,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>AMOUNT</name>
-            <description>Number of samples transferred into Data RAM since last START task</description>
+            <description>Number of bytes transferred in the last transaction, updated after the END event.</description>
             <addressOffset>0x008</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -84080,7 +82342,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>AMOUNT</name>
-                <description>Number of samples transferred into Data RAM since last START task</description>
+                <description>Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte</description>
                 <lsb>0</lsb>
                 <msb>14</msb>
               </field>
@@ -84099,7 +82361,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <name>DIVISOR</name>
               <description>Core clock to PDM divisor</description>
               <lsb>0</lsb>
-              <msb>31</msb>
+              <msb>7</msb>
             </field>
           </fields>
         </register>
@@ -84140,7 +82402,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <name>BUSERRORADDRESS</name>
             <description>Address of transaction that generated the last BUSERROR event.</description>
             <addressOffset>0x004</addressOffset>
-            <access>read-write</access>
+            <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
             <fields>
@@ -87622,7 +85884,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>MAXCNT</name>
                   <description>Maximum number of bytes in channel buffer</description>
                   <lsb>0</lsb>
-                  <msb>15</msb>
+                  <msb>14</msb>
                 </field>
               </fields>
             </register>
@@ -87638,7 +85900,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>AMOUNT</name>
                   <description>Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte.</description>
                   <lsb>0</lsb>
-                  <msb>15</msb>
+                  <msb>14</msb>
                 </field>
               </fields>
             </register>
@@ -87654,7 +85916,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>AMOUNT</name>
                   <description>Number of bytes transferred in the current transaction. Continuously updated. Updated when data leaves the internal FIFO and is transferred to the destination.</description>
                   <lsb>0</lsb>
-                  <msb>15</msb>
+                  <msb>14</msb>
                 </field>
               </fields>
             </register>
@@ -91372,7 +89634,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Internal</name>
-                    <description>Internal reference (1.024 V)</description>
+                    <description>Internal reference (0.9 V)</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
@@ -117254,28 +115516,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <value>260</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_RTC10_NS">
-      <name>GLOBAL_RTC30_NS</name>
-      <description>Real-time counter 2</description>
-      <baseAddress>0x40105000</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>CLOCK_POWER</name>
-        <value>261</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_RTC10_NS">
-      <name>GLOBAL_RTC30_S</name>
-      <description>Real-time counter 3</description>
-      <baseAddress>0x50105000</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>CLOCK_POWER</name>
-        <value>261</value>
-      </interrupt>
-    </peripheral>
     <peripheral>
       <name>GLOBAL_COMP_NS</name>
       <description>Comparator 0</description>
@@ -122087,72 +120327,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>SUBSCRIBE_XOTUNE</name>
-          <description>Subscribe configuration for task XOTUNE</description>
-          <addressOffset>0x09C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task XOTUNE will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SUBSCRIBE_XOTUNEABORT</name>
-          <description>Subscribe configuration for task XOTUNEABORT</description>
-          <addressOffset>0x0A0</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task XOTUNEABORT will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>EVENTS_XOSTARTED</name>
           <description>Crystal oscillator has started</description>
           <addressOffset>0x100</addressOffset>
@@ -122347,245 +120521,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
           </fields>
-        </register>
-        <register>
-          <name>PUBLISH_XOSTARTED</name>
-          <description>Publish configuration for event XOSTARTED</description>
-          <addressOffset>0x180</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event XOSTARTED will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_PLLSTARTED</name>
-          <description>Publish configuration for event PLLSTARTED</description>
-          <addressOffset>0x184</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event PLLSTARTED will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_LFCLKSTARTED</name>
-          <description>Publish configuration for event LFCLKSTARTED</description>
-          <addressOffset>0x188</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event LFCLKSTARTED will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_DONE</name>
-          <description>Publish configuration for event DONE</description>
-          <addressOffset>0x18C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event DONE will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_XOTUNED</name>
-          <description>Publish configuration for event XOTUNED</description>
-          <addressOffset>0x190</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event XOTUNED will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_XOTUNEERROR</name>
-          <description>Publish configuration for event XOTUNEERROR</description>
-          <addressOffset>0x194</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event XOTUNEERROR will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_XOTUNEFAILED</name>
-          <description>Publish configuration for event XOTUNEFAILED</description>
-          <addressOffset>0x198</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event XOTUNEFAILED will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHORTS</name>
-          <description>Shortcuts between local events and tasks</description>
-          <addressOffset>0x200</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
         </register>
         <register>
           <name>INTEN</name>
@@ -123966,39 +121901,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>PUBLISH_POFWARN</name>
-          <description>Publish configuration for event POFWARN</description>
-          <addressOffset>0x1B0</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event POFWARN will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>PUBLISH_SLEEPENTER</name>
           <description>Publish configuration for event SLEEPENTER</description>
           <addressOffset>0x1B4</addressOffset>
@@ -124331,7 +122233,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <register>
           <name>CONSTLATSTAT</name>
           <description>Status of constant latency</description>
-          <addressOffset>0x510</addressOffset>
+          <addressOffset>0x520</addressOffset>
           <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -126771,7 +124673,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </register>
             <register>
               <name>TRIM</name>
-              <description>VCO trim values for the 192 MHz PLL</description>
+              <description>Trim values and production configurations</description>
               <addressOffset>0x10</addressOffset>
               <access>read-write</access>
               <resetValue>0x001E6515</resetValue>
@@ -126785,7 +124687,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </field>
                 <field>
                   <name>VCOTRIM192MHZ</name>
-                  <description>VCO_TRIM for 128 MHz mode</description>
+                  <description>VCO_TRIM for 192 MHz mode</description>
                   <lsb>6</lsb>
                   <msb>11</msb>
                 </field>
@@ -126926,7 +124828,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>STATE</name>
                   <description>Current state of the MMI state machine</description>
                   <lsb>0</lsb>
-                  <msb>7</msb>
+                  <msb>14</msb>
                 </field>
               </fields>
             </register>
@@ -129371,13 +127273,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>AvddDiv2</name>
-                  <description>AVDD_DIV2 connected to ATB0</description>
+                  <name>VrefUlp</name>
+                  <description>VREF_ULP connected to ATB0</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VrefUlp</name>
-                  <description>VREF_ULP connected to ATB0</description>
+                  <name>AvddDiv2</name>
+                  <description>AVDD_DIV2 connected to ATB0</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>

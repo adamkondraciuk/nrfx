@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -280,10 +280,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MVDMA_COMPLETED_EVENT 1                      /*!< (unspecified)                                                        */
 #define MVDMA_DPPI_DISCONNECTED 0                    /*!< (unspecified)                                                        */
 #define MVDMA_INSTANCE_IN_WRAPPER 0                  /*!< (unspecified)                                                        */
+#define MVDMA_MVDMA_JOBLISTCNT_MIN 0                 /*!< Number of MVDMA job lists : 0..7                                     */
+#define MVDMA_MVDMA_JOBLISTCNT_MAX 7                 /*!< Number of MVDMA job lists : 0..7                                     */
+#define MVDMA_MVDMA_JOBLISTCNT_SIZE 8                /*!< Number of MVDMA job lists : 0..7                                     */
 
 #define MVDMA120_COMPLETED_EVENT 1                   /*!< (unspecified)                                                        */
 #define MVDMA120_DPPI_DISCONNECTED 1                 /*!< (unspecified)                                                        */
 #define MVDMA120_INSTANCE_IN_WRAPPER 1               /*!< (unspecified)                                                        */
+#define MVDMA120_MVDMA_JOBLISTCNT_MIN 0              /*!< Number of MVDMA job lists : 0..7                                     */
+#define MVDMA120_MVDMA_JOBLISTCNT_MAX 7              /*!< Number of MVDMA job lists : 0..7                                     */
+#define MVDMA120_MVDMA_JOBLISTCNT_SIZE 8             /*!< Number of MVDMA job lists : 0..7                                     */
 
 /*RAM Controller*/
 #define RAMC_PRESENT 1
@@ -406,9 +412,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MEMCONF_REPAIR_INTERNAL_DOC 0                /*!< (unspecified)                                                        */
 #define MEMCONF_POWER 1                              /*!< (unspecified)                                                        */
 #define MEMCONF_RET2 1                               /*!< (unspecified)                                                        */
-#define MEMCONF_RETAIN_PUBLIC_DOC 1                  /*!< (unspecified)                                                        */
-#define MEMCONF_RETAIN_INTERNAL_DOC 0                /*!< (unspecified)                                                        */
 #define MEMCONF_TRIM_INTERNAL_DOC 0                  /*!< (unspecified)                                                        */
+#define MEMCONF_NUMADDRBITS_MIN 0                    /*!< Number of bits in repair address at MEMCONF.REPAIR.BITLINE.ADDR :
+                                                          [0..6]*/
+#define MEMCONF_NUMADDRBITS_MAX 6                    /*!< Number of bits in repair address at MEMCONF.REPAIR.BITLINE.ADDR :
+                                                          [0..6]*/
+#define MEMCONF_NUMADDRBITS_SIZE 7                   /*!< Number of bits in repair address at MEMCONF.REPAIR.BITLINE.ADDR :
+                                                          [0..6]*/
 
 /*Watchdog Timer*/
 #define WDT_PRESENT 1
@@ -470,12 +480,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FICR_COUNT 1
 
 #define FICR_LTE_ON 0                                /*!< (unspecified)                                                        */
+#define FICR_SAANA_LTE_ON 0                          /*!< (unspecified)                                                        */
 #define FICR_WIFI_ON 0                               /*!< (unspecified)                                                        */
 #define FICR_NFC_ON 1                                /*!< (unspecified)                                                        */
 #define FICR_ML_ON 0                                 /*!< (unspecified)                                                        */
 #define FICR_SDCARD_ON 0                             /*!< (unspecified)                                                        */
 #define FICR_VREG_1V8_0V8 0                          /*!< (unspecified)                                                        */
 #define FICR_AUDIO_USB_PROGRAMMABLE_OWNER 0          /*!< (unspecified)                                                        */
+#define FICR_ISIM_ON 0                               /*!< (unspecified)                                                        */
 
 /*USBHSCORE*/
 #define USBHSCORE_PRESENT 1
@@ -1821,6 +1833,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P0_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
 #define P0_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
 #define P0_FEATURE_PINS_PRESENT 0x00000FFFUL         /*!< (unspecified)                                                        */
+#define P0_PIN_SENSE_MECHANISM 1                     /*!< (unspecified)                                                        */
 #define P0_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P0_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P0_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1839,6 +1852,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P1_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
 #define P1_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
 #define P1_FEATURE_PINS_PRESENT 0x00000FFFUL         /*!< (unspecified)                                                        */
+#define P1_PIN_SENSE_MECHANISM 1                     /*!< (unspecified)                                                        */
 #define P1_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P1_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P1_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1857,6 +1871,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P2_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
 #define P2_PIN_NUM_SIZE 12                           /*!< (unspecified)                                                        */
 #define P2_FEATURE_PINS_PRESENT 0x00000FFFUL         /*!< (unspecified)                                                        */
+#define P2_PIN_SENSE_MECHANISM 1                     /*!< (unspecified)                                                        */
 #define P2_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P2_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P2_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1875,6 +1890,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P6_PIN_NUM_MAX 13                            /*!< (unspecified)                                                        */
 #define P6_PIN_NUM_SIZE 14                           /*!< (unspecified)                                                        */
 #define P6_FEATURE_PINS_PRESENT 0x00003FFFUL         /*!< (unspecified)                                                        */
+#define P6_PIN_SENSE_MECHANISM 1                     /*!< (unspecified)                                                        */
 #define P6_DRIVECTRL 1                               /*!< (unspecified)                                                        */
 #define P6_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P6_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1893,6 +1909,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P7_PIN_NUM_MAX 7                             /*!< (unspecified)                                                        */
 #define P7_PIN_NUM_SIZE 8                            /*!< (unspecified)                                                        */
 #define P7_FEATURE_PINS_PRESENT 0x000000FFUL         /*!< (unspecified)                                                        */
+#define P7_PIN_SENSE_MECHANISM 1                     /*!< (unspecified)                                                        */
 #define P7_DRIVECTRL 1                               /*!< (unspecified)                                                        */
 #define P7_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P7_PWRCTRL 0                                 /*!< (unspecified)                                                        */
@@ -1911,6 +1928,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P9_PIN_NUM_MAX 5                             /*!< (unspecified)                                                        */
 #define P9_PIN_NUM_SIZE 6                            /*!< (unspecified)                                                        */
 #define P9_FEATURE_PINS_PRESENT 0x0000003FUL         /*!< (unspecified)                                                        */
+#define P9_PIN_SENSE_MECHANISM 1                     /*!< (unspecified)                                                        */
 #define P9_DRIVECTRL 0                               /*!< (unspecified)                                                        */
 #define P9_RETAIN 1                                  /*!< (unspecified)                                                        */
 #define P9_PWRCTRL 1                                 /*!< (unspecified)                                                        */
@@ -2099,10 +2117,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PDM_PRESENT 1
 #define PDM_COUNT 1
 
+#define PDM_EDGENORMAL 1                             /*!< (unspecified)                                                        */
 #define PDM_EASYDMA5 0                               /*!< (unspecified)                                                        */
 #define PDM_EASYDMATEMP 1                            /*!< (unspecified)                                                        */
 #define PDM_SAMPLE16 0                               /*!< (unspecified)                                                        */
 #define PDM_SAMPLE48 1                               /*!< (unspecified)                                                        */
+#define PDM_PRESCALER_PRESENT 0                      /*!< (unspecified)                                                        */
+#define PDM_PDMV2 0                                  /*!< (unspecified)                                                        */
+#define PDM_PCLK24M 0                                /*!< (unspecified)                                                        */
+#define PDM_AUDIOPLL 1                               /*!< (unspecified)                                                        */
 #define PDM_EASYDMALISTINCLUDED 0                    /*!< (unspecified)                                                        */
 #define PDM_EASYDMAMODEINCLUDED 0                    /*!< (unspecified)                                                        */
 #define PDM_EASYDMAFULLLPMODEINCLUDED 0              /*!< (unspecified)                                                        */

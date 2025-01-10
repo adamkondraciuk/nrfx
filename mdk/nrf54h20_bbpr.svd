@@ -3,12 +3,12 @@
 <device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Nordic Semiconductor</vendor>
   <vendorID>Nordic</vendorID>
-  <name>nrf54h20_bbpr</name>
+  <name>nRF54h20_bbpr</name>
   <series>nRF54h</series>
   <version>1</version>
   <description>nRF54H20 reference description for system-on-chip with many ARM 32-bit Cortex-M33 microcontrollers</description>
   <licenseText>
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -9845,7 +9845,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <cluster>
           <dim>16</dim>
-          <dimIncrement>0x018</dimIncrement>
+          <dimIncrement>0x01C</dimIncrement>
           <name>HC[%s]</name>
           <description>Unspecified</description>
           <headerStructName>USBHSCORE_HC</headerStructName>
@@ -120665,6 +120665,16 @@ A write outputs the value to atbytesm.</description>
                   <description>Packet timeout is enabled.</description>
                   <value>0x1</value>
                 </enumeratedValue>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Packet timeout is disabled.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Packet timeout is enabled.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
               </enumeratedValues>
             </field>
           </fields>
@@ -121130,7 +121140,7 @@ A write outputs the value to atbytesm.</description>
                   </field>
                   <field>
                     <name>ONESHOT_0</name>
-                    <description>Configure match filter 0 as one-shot or sticky</description>
+                    <description>Configure match filter 0 as one-shot or continous</description>
                     <lsb>16</lsb>
                     <msb>16</msb>
                     <enumeratedValues>
@@ -121148,7 +121158,7 @@ A write outputs the value to atbytesm.</description>
                   </field>
                   <field>
                     <name>ONESHOT_1</name>
-                    <description>Configure match filter 1 as one-shot or sticky</description>
+                    <description>Configure match filter 1 as one-shot or continous</description>
                     <lsb>17</lsb>
                     <msb>17</msb>
                     <enumeratedValues>
@@ -121166,7 +121176,7 @@ A write outputs the value to atbytesm.</description>
                   </field>
                   <field>
                     <name>ONESHOT_2</name>
-                    <description>Configure match filter 2 as one-shot or sticky</description>
+                    <description>Configure match filter 2 as one-shot or continous</description>
                     <lsb>18</lsb>
                     <msb>18</msb>
                     <enumeratedValues>
@@ -121184,7 +121194,7 @@ A write outputs the value to atbytesm.</description>
                   </field>
                   <field>
                     <name>ONESHOT_3</name>
-                    <description>Configure match filter 3 as one-shot or sticky</description>
+                    <description>Configure match filter 3 as one-shot or continous</description>
                     <lsb>19</lsb>
                     <msb>19</msb>
                     <enumeratedValues>
@@ -121216,7 +121226,7 @@ A write outputs the value to atbytesm.</description>
                     <name>DATA</name>
                     <description>Data to look for</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>7</msb>
                   </field>
                 </fields>
               </register>
@@ -155295,7 +155305,7 @@ A write outputs the value to atbytesm.</description>
         </register>
         <register>
           <name>EVENTS_OVERRUN</name>
-          <description>PDM samples lost due to DMA destination not available</description>
+          <description>Samples lost due to DMA destination not available</description>
           <addressOffset>0x10C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -155303,7 +155313,7 @@ A write outputs the value to atbytesm.</description>
           <fields>
             <field>
               <name>EVENTS_OVERRUN</name>
-              <description>PDM samples lost due to DMA destination not available</description>
+              <description>Samples lost due to DMA destination not available</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -155528,34 +155538,6 @@ A write outputs the value to atbytesm.</description>
             </fields>
           </register>
         </cluster>
-        <register>
-          <name>SHORTS</name>
-          <description>Shortcuts between local events and tasks</description>
-          <addressOffset>0x200</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>DMA_BUSERROR_STOP</name>
-              <description>Shortcut between event DMA.BUSERROR and task STOP</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
         <register>
           <name>INTEN</name>
           <description>Enable or disable interrupt</description>
@@ -156131,7 +156113,7 @@ A write outputs the value to atbytesm.</description>
         </register>
         <register>
           <name>MODE</name>
-          <description>Defines the routing of the connected PDM microphones' signals</description>
+          <description>Defines the routing of the connected PDM microphone signals</description>
           <addressOffset>0x508</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -156169,34 +156151,6 @@ A write outputs the value to atbytesm.</description>
                 <enumeratedValue>
                   <name>LeftRising</name>
                   <description>Left (or mono) is sampled on rising edge of PDM_CLK</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>FDBYPASS</name>
-          <description>Bypass the frequency doubler in the PDM clock generation</description>
-          <addressOffset>0x50C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>BYPASS</name>
-              <description>Bypass the frequency doubler in the PDM clock generation, and revert to a simple divider structure.</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>DoublerActive</name>
-                  <description>PDMCLKCTRL determines directly the PDM_CLK frequency. A doubler is used to provide twice that clock to the filters. This allows better accuracy on PDM_CLK.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DividerActive</name>
-                  <description>PDMCLKCTRL determines the clock provided to the filters, PDM_CLK is generated by dividing that clock by two. This results in less accuracy on PDM_CLK.</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -156245,7 +156199,7 @@ A write outputs the value to atbytesm.</description>
           <fields>
             <field>
               <name>GAINL</name>
-              <description>Left output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters) 0x00    -20 dB gain adjust 0x01  -19.5 dB gain adjust (...) 0x27   -0.5 dB gain adjust 0x28      0 dB gain adjust 0x29   +0.5 dB gain adjust (...) 0x4F  +19.5 dB gain adjust 0x50    +20 dB gain adjust 0x51    +20 dB gain adjust 0x52    +20 dB gain adjust (...)</description>
+              <description>Left output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters) 0x00    -20 dB gain adjust 0x01  -19.5 dB gain adjust (...) 0x27   -0.5 dB gain adjust 0x28      0 dB gain adjust 0x29   +0.5 dB gain adjust (...) 0x4F  +19.5 dB gain adjust 0x50    +20 dB gain adjust</description>
               <lsb>0</lsb>
               <msb>6</msb>
               <enumeratedValues>
@@ -156782,7 +156736,7 @@ A write outputs the value to atbytesm.</description>
             <fields>
               <field>
                 <name>SAMPLEPTR</name>
-                <description>Address to write PDM samples to over DMA</description>
+                <description>Address to write PCM samples to over DMA</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -156790,7 +156744,7 @@ A write outputs the value to atbytesm.</description>
           </register>
           <register>
             <name>MAXCNT</name>
-            <description>Number of samples to allocate memory for in EasyDMA mode</description>
+            <description>Number of bytes to allocate memory for in EasyDMA mode</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -156798,7 +156752,7 @@ A write outputs the value to atbytesm.</description>
             <fields>
               <field>
                 <name>BUFFSIZE</name>
-                <description>Length of DMA RAM allocation in number of samples</description>
+                <description>Length of DMA RAM allocation in number of bytes</description>
                 <lsb>0</lsb>
                 <msb>14</msb>
               </field>
@@ -156806,7 +156760,7 @@ A write outputs the value to atbytesm.</description>
           </register>
           <register>
             <name>AMOUNT</name>
-            <description>Number of samples transferred into Data RAM since last START task</description>
+            <description>Number of bytes transferred in the last transaction, updated after the END event.</description>
             <addressOffset>0x008</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -156814,7 +156768,7 @@ A write outputs the value to atbytesm.</description>
             <fields>
               <field>
                 <name>AMOUNT</name>
-                <description>Number of samples transferred into Data RAM since last START task</description>
+                <description>Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte</description>
                 <lsb>0</lsb>
                 <msb>14</msb>
               </field>
@@ -156858,7 +156812,7 @@ A write outputs the value to atbytesm.</description>
             <name>BUSERRORADDRESS</name>
             <description>Address of transaction that generated the last BUSERROR event.</description>
             <addressOffset>0x004</addressOffset>
-            <access>read-write</access>
+            <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
             <fields>
