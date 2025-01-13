@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -134,10 +134,10 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void VPR00_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void RRAMC_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void CTRLAP_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void CM33SS_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void TIMER00_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void EGU00_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void CRACEN_IRQHandler                                           (void);
- __HANDLER("Default_Handler") void VREGRLDO_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void ECCRAMC_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void SPU10_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void TIMER10_IRQHandler                                          (void);
@@ -284,7 +284,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     CTRLAP_IRQHandler,
     0,
-    0,
+    CM33SS_IRQHandler,
     TIMER00_IRQHandler,
     0,
     0,
@@ -324,7 +324,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    VREGRLDO_IRQHandler,
+    0,
     ECCRAMC_IRQHandler,
     0,
     0,

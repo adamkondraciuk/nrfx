@@ -8,7 +8,7 @@
   <version>1</version>
   <description>System-on-chip with a 32-bit Arm Cortex-M33 microcontroller</description>
   <licenseText>
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -1397,7 +1397,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unprotected</name>
-                    <description>Leaves TAMPC PROTECT.AP DBGEN and SPIDEN signal protectors unlocked and under CPU control.</description>
+                    <description>Leaves TAMPC PROTECT.AP DBGEN signal protector unlocked and under CPU control.</description>
                     <value>0xFFFFFFFF</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -1453,7 +1453,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unprotected</name>
-                    <description>Leaves TAMPC PROTECT.AP DBGEN and SPIDEN signal protectors unlocked and under CPU control.</description>
+                    <description>Leaves TAMPC PROTECT.AP DBGEN signal protector unlocked and under CPU control.</description>
                     <value>0xFFFFFFFF</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -2262,7 +2262,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Incuded IPs Hardware configuration</description>
             <addressOffset>0x00</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000771</resetValue>
+            <resetValue>0x00000671</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -2363,6 +2363,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>13</msb>
                 <access>read-only</access>
               </field>
+              <field>
+                <name>BA422ARIAINCLUDED</name>
+                <description>Generic g_IncludeAria  value.</description>
+                <lsb>14</lsb>
+                <msb>14</msb>
+                <access>read-only</access>
+              </field>
             </fields>
           </register>
           <register>
@@ -2370,7 +2377,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Generic g_AesModesPoss value.</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
-            <resetValue>0x070301FF</resetValue>
+            <resetValue>0x05020167</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -2401,6 +2408,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>26</msb>
                 <access>read-only</access>
               </field>
+              <field>
+                <name>CONTEXTEN</name>
+                <description>Generic g_CxSwitch value.</description>
+                <lsb>27</lsb>
+                <msb>27</msb>
+                <access>read-only</access>
+              </field>
+              <field>
+                <name>GLITCHPROT</name>
+                <description>Generic g_GlitchProtection value.</description>
+                <lsb>28</lsb>
+                <msb>28</msb>
+                <access>read-only</access>
+              </field>
             </fields>
           </register>
           <register>
@@ -2408,7 +2429,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Generic g_CtrSize value.</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000080</resetValue>
+            <resetValue>0x02000010</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -2418,6 +2439,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>15</msb>
                 <access>read-only</access>
               </field>
+              <field>
+                <name>NBEXTAESKEYS</name>
+                <description>Generic g_Ext_nb_AES_keys value.</description>
+                <lsb>20</lsb>
+                <msb>23</msb>
+                <access>read-only</access>
+              </field>
+              <field>
+                <name>NBIKGAESKEYS</name>
+                <description>Generic g_IKG_nb_AES_keys value.</description>
+                <lsb>24</lsb>
+                <msb>27</msb>
+                <access>read-only</access>
+              </field>
             </fields>
           </register>
           <register>
@@ -2425,7 +2460,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Generic g_Hash value</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-write</access>
-            <resetValue>0x0003003F</resetValue>
+            <resetValue>0x0001003E</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -2456,6 +2491,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>18</msb>
                 <access>read-only</access>
               </field>
+              <field>
+                <name>NBEXTHASHKEYS</name>
+                <description>Generic g_Ext_nb_Hash_keys value.</description>
+                <lsb>20</lsb>
+                <msb>23</msb>
+                <access>read-only</access>
+              </field>
+              <field>
+                <name>NBIKGHASHKEYS</name>
+                <description>Generic g_IKG_nb_Hash_keys value.</description>
+                <lsb>24</lsb>
+                <msb>27</msb>
+                <access>read-only</access>
+              </field>
             </fields>
           </register>
           <register>
@@ -2473,6 +2522,34 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>0</msb>
                 <access>read-only</access>
               </field>
+              <field>
+                <name>HMAC</name>
+                <description>HMAC enabled.</description>
+                <lsb>17</lsb>
+                <msb>17</msb>
+                <access>read-only</access>
+              </field>
+              <field>
+                <name>VERIFYDIGEST</name>
+                <description>Support to digest verification.</description>
+                <lsb>18</lsb>
+                <msb>18</msb>
+                <access>read-only</access>
+              </field>
+              <field>
+                <name>NBEXTHASHKEYS</name>
+                <description>Number of SHA3 HW keys.</description>
+                <lsb>20</lsb>
+                <msb>23</msb>
+                <access>read-only</access>
+              </field>
+              <field>
+                <name>NBIKGHASHKEYS</name>
+                <description>Number of SHA3 IKG keys.</description>
+                <lsb>24</lsb>
+                <msb>27</msb>
+                <access>read-only</access>
+              </field>
             </fields>
           </register>
           <register>
@@ -2480,14 +2557,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Generic g_SM4ModesPoss value.</description>
             <addressOffset>0x014</addressOffset>
             <access>read-write</access>
-            <resetValue>0x000201FF</resetValue>
+            <resetValue>0x00000000</resetValue>
             <size>0x20</size>
             <fields>
               <field>
                 <name>BA419SM4HWCFG</name>
                 <description>Generic g_SM4ModesPoss value.</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>8</msb>
                 <access>read-only</access>
               </field>
               <field>
@@ -2504,7 +2581,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Generic g_aria_modePoss value.</description>
             <addressOffset>0x018</addressOffset>
             <access>read-write</access>
-            <resetValue>0x0000017F</resetValue>
+            <resetValue>0x00000000</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -2533,7 +2610,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>ENABLE</name>
-                <description>Enable the NDRNG.</description>
+                <description>Start/enable the NDRNG.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
               </field>
@@ -2581,51 +2658,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>INTENREP</name>
-                <description>Interrupt enable for Repetition Count Test failure.</description>
+                <description>Enable interrupt if any of the health test fails.</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
               </field>
               <field>
-                <name>INTENPROP</name>
-                <description>Interrupt enable for Adaptive Proportion Test failure (1024-sample window).</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
                 <name>INTENFULL</name>
-                <description>Interrupt enable for FIFO full.</description>
+                <description>Enable interrupt if FIFO is full.</description>
                 <lsb>7</lsb>
                 <msb>7</msb>
               </field>
               <field>
                 <name>SOFTRST</name>
-                <description>Software reset:</description>
+                <description>Datapath content flush and control FSM</description>
                 <lsb>8</lsb>
                 <msb>8</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>NORMAL</name>
-                    <description>Normal mode.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>CTEST</name>
-                    <description>The continuous test, the conditioning function and the FIFO are reset.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>INTENPRE</name>
-                <description>Interrupt enable for AIS31 preliminary noise alarm.</description>
-                <lsb>9</lsb>
-                <msb>9</msb>
-              </field>
-              <field>
-                <name>INTENALM</name>
-                <description>Interrupt enable for AIS31 noise alarm.</description>
-                <lsb>10</lsb>
-                <msb>10</msb>
               </field>
               <field>
                 <name>FORCEACTIVEROS</name>
@@ -2634,56 +2681,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>11</msb>
               </field>
               <field>
-                <name>HEALTHTESTBYPASS</name>
-                <description>Bypass NIST tests such that the results of the start-up and online test do not affect the FSM state.</description>
+                <name>IGNOREHEALTHTESTSFAILFORFSM</name>
+                <description>Results of the health tests during start-up and online test do not affect the control FSM state.</description>
                 <lsb>12</lsb>
                 <msb>12</msb>
               </field>
               <field>
-                <name>AIS31BYPASS</name>
-                <description>Bypass AIS31 tests such that the results of the start-up and online tests do not affect the FSM state.</description>
-                <lsb>13</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>HEALTHTESTSEL</name>
-                <description>Select input to health test module:</description>
-                <lsb>14</lsb>
-                <msb>14</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>BEFORE</name>
-                    <description>Before conditioning.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>AFTER</name>
-                    <description>After conditioning.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>AIS31TESTSEL</name>
-                <description>Select input to the AIS31 test module:</description>
-                <lsb>15</lsb>
-                <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>BEFORE</name>
-                    <description>Before conditioning.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>AFTER</name>
-                    <description>After conditioning.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
                 <name>NB128BITBLOCKS</name>
-                <description>Number of 128 bit blocks used in AES-CBCMAC post-processing.</description>
+                <description>Number of 128 bit blocks used in conditioning (AES-CBC-MAC) post-processing.</description>
                 <lsb>16</lsb>
                 <msb>19</msb>
               </field>
@@ -2692,6 +2697,58 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <description>Enable write of the samples in the FIFO during start-up.</description>
                 <lsb>20</lsb>
                 <msb>20</msb>
+              </field>
+              <field>
+                <name>DISREPETTESTS</name>
+                <description>All repetition tests (each share) are disabled via this single bit.</description>
+                <lsb>21</lsb>
+                <msb>21</msb>
+              </field>
+              <field>
+                <name>DISPROPTESTS</name>
+                <description>All proportion tests (each share) are disabled via this single bit.</description>
+                <lsb>22</lsb>
+                <msb>22</msb>
+              </field>
+              <field>
+                <name>DISAUTOCORRTESTS</name>
+                <description>Disable specific delay(s) check in auto-correlation test - same RO:</description>
+                <lsb>23</lsb>
+                <msb>24</msb>
+              </field>
+              <field>
+                <name>DISCORRTESTS</name>
+                <description>Disable specific delay(s) check in correlation test - different ROs:</description>
+                <lsb>27</lsb>
+                <msb>29</msb>
+              </field>
+              <field>
+                <name>BLENDINGMETHOD</name>
+                <description>Select blending method</description>
+                <lsb>30</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>CONCATENATION</name>
+                    <description>Concatenation</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>XORLEVEL1</name>
+                    <description>XOR level 1</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>XORLEVEL2</name>
+                    <description>XOR level 2</description>
+                    <value>0x2</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VONNEUMANN</name>
+                    <description>VON-NEUMANN debiasing</description>
+                    <value>0x3</value>
+                  </enumeratedValue>
+                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -2705,7 +2762,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>FIFOLEVEL</name>
-                <description>Number of 32 bits words of random available in the FIFO.</description>
+                <description>Number of 32 bits words of random values available in the FIFO.</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -2723,7 +2780,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <name>FIFOTHRESHOLD</name>
                 <description>FIFO level below which the module leaves the idle state to refill the FIFO, expressed in number of 128bit blocks.</description>
                 <lsb>0</lsb>
-                <msb>2</msb>
+                <msb>31</msb>
               </field>
             </fields>
           </register>
@@ -2737,7 +2794,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>FIFODEPTH</name>
-                <description>Maximum number of 32 bits words that can be stored in the FIFO: 2**g_fifodepth.</description>
+                <description>Maximum number of 32 bits words that can be stored in the FIFO.</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
                 <access>read-only</access>
@@ -2781,33 +2838,56 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>REPEATTHRESHOLD</name>
-            <description>Repetition Test Count Cut-Off value.</description>
+            <description>Repetition test cut-off register.</description>
             <addressOffset>0x024</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000029</resetValue>
+            <resetValue>0x00000004</resetValue>
             <size>0x20</size>
             <fields>
               <field>
                 <name>REPEATTHRESHOLD</name>
-                <description>Repetition Test Count Cut-Off value.</description>
+                <description>Repetition Test cut-off value.</description>
                 <lsb>0</lsb>
                 <msb>5</msb>
               </field>
             </fields>
           </register>
           <register>
-            <name>PROPTHRESHOLD</name>
-            <description>Adaptive Proportion Test (1024-sample window) Cut-Off value.</description>
+            <name>PROPTESTCUTOFF</name>
+            <description>Proportion test cut-off register.</description>
             <addressOffset>0x028</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000319</resetValue>
+            <resetValue>0x0000000D</resetValue>
             <size>0x20</size>
             <fields>
               <field>
-                <name>PROPTHRESHOLD</name>
-                <description>Adaptive Proportion Test (1024-sample window) Cut-Off value.</description>
+                <name>PROPTESTCUTOFF</name>
+                <description>Proportion test cut-off value.</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>8</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>LFSRSEED</name>
+            <description>LFSR seed register.</description>
+            <addressOffset>0x02C</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00FFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>LFSRSEED</name>
+                <description>LFSR initialization value.</description>
+                <lsb>0</lsb>
+                <msb>23</msb>
+              </field>
+              <field>
+                <name>LFSRSSELECTION</name>
+                <description>Share index for which initialization value should be used.</description>
+                <lsb>24</lsb>
+                <msb>25</msb>
+                <access>write-only</access>
               </field>
             </fields>
           </register>
@@ -2845,13 +2925,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>IDLERON</name>
-                    <description>Idle (Rings On)</description>
+                    <description>Idle / FIFO full</description>
                     <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>IDLEROFF</name>
-                    <description>Idle (Rings Off)</description>
-                    <value>0x3</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>FILLFIFO</name>
@@ -2867,15 +2942,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>REPFAIL</name>
-                <description>NIST-800-90B repetition Count Test interrupt status.</description>
+                <description>NIST repetition test(s) failure.</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
               </field>
               <field>
                 <name>PROPFAIL</name>
-                <description>NIST-800-90B adaptive Proportion Test (1024-sample window) interrupt status.</description>
+                <description>NIST proportion test(s) failure.</description>
                 <lsb>5</lsb>
                 <msb>5</msb>
+              </field>
+              <field>
+                <name>ANYHEALTHTESTFAIL</name>
+                <description>Any of the enabled health tests is failing.</description>
+                <lsb>6</lsb>
+                <msb>6</msb>
               </field>
               <field>
                 <name>FULLINT</name>
@@ -2884,53 +2965,52 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>7</msb>
               </field>
               <field>
-                <name>PREINT</name>
-                <description>AIS31 preliminary noise alarm interrupt status.</description>
-                <lsb>8</lsb>
-                <msb>8</msb>
-              </field>
-              <field>
-                <name>ALMINT</name>
-                <description>AIS31 noise alarm interrupt status.</description>
-                <lsb>9</lsb>
-                <msb>9</msb>
-              </field>
-              <field>
                 <name>STARTUPFAIL</name>
-                <description>Start-up test failure.</description>
+                <description>Start-up test(s) failure.</description>
                 <lsb>10</lsb>
                 <msb>10</msb>
+              </field>
+              <field>
+                <name>REPTESTFAILPERSHARE</name>
+                <description>NIST Repetition test failure per share.</description>
+                <lsb>12</lsb>
+                <msb>15</msb>
                 <access>read-only</access>
               </field>
               <field>
-                <name>FIFOACCFAIL</name>
-                <description>Set when a FIFO data read is performed while the NDRNG is disabled AND has its FIFO empty (FIFOLevel = 0).</description>
-                <lsb>11</lsb>
+                <name>PROPTESTFAILPERSHARE</name>
+                <description>NIST Proportion test failure per share.</description>
+                <lsb>16</lsb>
+                <msb>19</msb>
+                <access>read-only</access>
+              </field>
+              <field>
+                <name>CONDITIONINGISTOOSLOW</name>
+                <description>Conditioning consumes data slower than they are provided to it.</description>
+                <lsb>20</lsb>
+                <msb>20</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>WARMUPPERIOD</name>
+            <description>Number of clock cycles in warm-up sequence.</description>
+            <addressOffset>0x034</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000200</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>WARMUPPERIOD</name>
+                <description>Number of clock cycles in warm-up sequence.</description>
+                <lsb>0</lsb>
                 <msb>11</msb>
               </field>
             </fields>
           </register>
           <register>
-            <name>INITWAITVAL</name>
-            <description>Initial wait counter value.</description>
-            <addressOffset>0x034</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x0000FFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>INITWAITVAL</name>
-                <description>Number of clock cycles to wait before sampling data from the noise source.</description>
-                <lsb>0</lsb>
-                <msb>15</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <dim>0x2</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>DISABLEOSC[%s]</name>
-            <description>Description collection: Disable oscillator rings #n*32 to #((n+1)*32)-1.</description>
+            <name>DISABLEOSC</name>
+            <description>DisableOsc register.</description>
             <addressOffset>0x038</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -2938,135 +3018,25 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>DISABLEOSC</name>
-                <description>Disable oscillator rings #n*32 to #((n+1)*32)-1.</description>
-                <lsb>0</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>SWOFFTMRVAL</name>
-            <description>Switch off timer value.</description>
-            <addressOffset>0x040</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x0000FFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>SWOFFTMRVAL</name>
-                <description>Number of clk cycles to wait before stopping the rings after the FIFO is full.</description>
-                <lsb>0</lsb>
-                <msb>15</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>CLKDIV</name>
-            <description>Sample clock divider.</description>
-            <addressOffset>0x044</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>CLKDIV</name>
-                <description>Sample clock divider.</description>
+                <description>Disable oscillator rings 0 to 7.</description>
                 <lsb>0</lsb>
                 <msb>7</msb>
               </field>
             </fields>
           </register>
           <register>
-            <name>AIS31CONF0</name>
-            <description>AIS31 configuration register 0.</description>
-            <addressOffset>0x048</addressOffset>
+            <name>SAMPLINGPERIOD</name>
+            <description>Number of clock cycles between sampling moments.</description>
+            <addressOffset>0x044</addressOffset>
             <access>read-write</access>
-            <resetValue>0x43401040</resetValue>
+            <resetValue>0x00000FFF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
-                <name>STARTUPTHRESHOLD</name>
-                <description>Start-up test threshold.</description>
+                <name>SAMPLINGPERIOD</name>
+                <description>Number of clock cycles between sampling moments.</description>
                 <lsb>0</lsb>
-                <msb>14</msb>
-              </field>
-              <field>
-                <name>ONLINETHRESHOLD</name>
-                <description>Online threshold.</description>
-                <lsb>16</lsb>
-                <msb>30</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>AIS31CONF1</name>
-            <description>AIS31 configuration register 1.</description>
-            <addressOffset>0x04C</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x03C00680</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>ONLINEREPTHRESHOLD</name>
-                <description>Online repeat threshold.</description>
-                <lsb>0</lsb>
-                <msb>14</msb>
-              </field>
-              <field>
-                <name>HEXPECTEDVALUE</name>
-                <description>Expected history value.</description>
-                <lsb>16</lsb>
-                <msb>30</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>AIS31CONF2</name>
-            <description>AIS31 configuration register 2.</description>
-            <addressOffset>0x050</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x04400340</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>HMIN</name>
-                <description>Minimum allowed history value.</description>
-                <lsb>0</lsb>
-                <msb>14</msb>
-              </field>
-              <field>
-                <name>HMAX</name>
-                <description>Maximum allowed history value.</description>
-                <lsb>16</lsb>
-                <msb>30</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>AIS31STATUS</name>
-            <description>AIS31 status register.</description>
-            <addressOffset>0x054</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>NUMPRELIMALARMS</name>
-                <description>Number of preliminary noise alarms since counter was last cleared.</description>
-                <lsb>0</lsb>
-                <msb>15</msb>
-              </field>
-              <field>
-                <name>PRELIMNOISEALARMRNG</name>
-                <description>Last preliminary noise alarm occurred due to history value out of range.</description>
-                <lsb>16</lsb>
-                <msb>16</msb>
-              </field>
-              <field>
-                <name>PRELIMNOISEALARMREP</name>
-                <description>Last preliminary noise alarm occurred due to consecutive high Χ**2.</description>
-                <lsb>17</lsb>
-                <msb>17</msb>
+                <msb>11</msb>
               </field>
             </fields>
           </register>
@@ -3075,47 +3045,191 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Hardware configuration register.</description>
             <addressOffset>0x058</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000337</resetValue>
+            <resetValue>0x0002410F</resetValue>
             <size>0x20</size>
             <fields>
               <field>
-                <name>NUMBOFRINGS</name>
-                <description>Generic g_NumRings value.</description>
+                <name>NBOFINV</name>
+                <description>Generic g_NbOfInverters value.</description>
                 <lsb>0</lsb>
                 <msb>7</msb>
                 <access>read-only</access>
               </field>
               <field>
-                <name>AIS31</name>
-                <description>Generic g_AIS31 value.</description>
+                <name>LOG2NBOFAUTOCORRTESTSPERSHARE</name>
+                <description>Generic g_Log2NbOfAutoCorrTestsPerShare value.</description>
                 <lsb>8</lsb>
-                <msb>8</msb>
+                <msb>11</msb>
                 <access>read-only</access>
               </field>
               <field>
-                <name>AIS31FULL</name>
-                <description>Generic g_AIS31Full value.</description>
-                <lsb>9</lsb>
-                <msb>9</msb>
+                <name>LOG2FIFODEPTH</name>
+                <description>Generic g_Log2FifoDepth value.</description>
+                <lsb>12</lsb>
+                <msb>15</msb>
+                <access>read-only</access>
+              </field>
+              <field>
+                <name>LOG2NBOFSHARES</name>
+                <description>Generic g_Log2NbOfShares value.</description>
+                <lsb>16</lsb>
+                <msb>17</msb>
                 <access>read-only</access>
               </field>
             </fields>
           </register>
           <register>
-            <dim>0x10</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>FIFO[%s]</name>
-            <description>Description collection: FIFO data</description>
-            <addressOffset>0x080</addressOffset>
-            <access>read-only</access>
+            <name>COOLDOWNPERIOD</name>
+            <description>Number of clock cycles in cool-down sequence.</description>
+            <addressOffset>0x05C</addressOffset>
+            <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
             <fields>
               <field>
-                <name>DATA</name>
-                <description>FIFO data</description>
+                <name>COOLDOWNPERIOD</name>
+                <description>Number of clock cycles in cool-down sequence.</description>
+                <lsb>0</lsb>
+                <msb>11</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>AUTOCORRTESTCUTOFF0</name>
+            <description>AutoCorrTestCutoff register 0</description>
+            <addressOffset>0x060</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x007F007F</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>DLYZEROCUTOFF</name>
+                <description>Auto-correlation test cut-off value for delay of 0 samples.</description>
+                <lsb>0</lsb>
+                <msb>15</msb>
+              </field>
+              <field>
+                <name>DLYONECUTOFF</name>
+                <description>Auto-correlation test cut-off value for delay of +1 sample.</description>
+                <lsb>16</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>AUTOCORRTESTCUTOFF1</name>
+            <description>AutoCorrTestCutoff register 1</description>
+            <addressOffset>0x064</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x007F007F</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>DLYTWOCUTOFF</name>
+                <description>Auto-correlation test cut-off value for delay of +2 samples.</description>
+                <lsb>0</lsb>
+                <msb>15</msb>
+              </field>
+              <field>
+                <name>DLYTHREECUTOFF</name>
+                <description>Auto-correlation test cut-off value for delay of +3 samples.</description>
+                <lsb>16</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>CORRTESTCUTOFF0</name>
+            <description>CorrTestCutoff register 0</description>
+            <addressOffset>0x068</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x007F007F</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>DLYZEROCUTOFF</name>
+                <description>Correlation test cut-off value for delay of 0 samples.</description>
+                <lsb>0</lsb>
+                <msb>15</msb>
+              </field>
+              <field>
+                <name>DLYONECUTOFF</name>
+                <description>Correlation test cut-off value for delay of +/-1 sample.</description>
+                <lsb>16</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>CORRTESTCUTOFF1</name>
+            <description>CorrTestCutoff register 1</description>
+            <addressOffset>0x06C</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x007F007F</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>DLYTWOCUTOFF</name>
+                <description>Correlation test cut-off value for delay of +/- 2 samples.</description>
+                <lsb>0</lsb>
+                <msb>15</msb>
+              </field>
+              <field>
+                <name>DLYTHREECUTOFF</name>
+                <description>Correlation test cut-off value for delay of +/- 3 samples.</description>
+                <lsb>16</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>AUTOCORRTESTFAILED</name>
+            <description>Auto-correlation test failing ring(s).</description>
+            <addressOffset>0x070</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>AUTOCORRTESTFAILED</name>
+                <description>Auto-correlation test failing ring(s).</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
+                <access>read-only</access>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>CORRTESTFAILED</name>
+            <description>Correlation test failing ring.</description>
+            <addressOffset>0x074</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>CORRTESTFAILED</name>
+                <description>Correlation test failing ring.</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+                <access>read-only</access>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>HWVERSION</name>
+            <description>Fixed to 1 for this version.</description>
+            <addressOffset>0x07C</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000001</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>HWVERSION</name>
+                <description>Fixed to 1 for this version.</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+                <access>read-only</access>
               </field>
             </fields>
           </register>
@@ -3375,8 +3489,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>TIMER</name>
-                <description>Number of core clock cycles.</description>
-                <lsb>0</lsb>
+                <description>Number of clock cycles (as the number of core cycles is always even, register bit 0 is tied to zero.</description>
+                <lsb>1</lsb>
                 <msb>31</msb>
               </field>
             </fields>
@@ -3386,7 +3500,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Hardware configuration register.</description>
             <addressOffset>0x018</addressOffset>
             <access>read-write</access>
-            <resetValue>0x01F72200</resetValue>
+            <resetValue>0x01F30000</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -3445,10 +3559,17 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <access>read-only</access>
               </field>
               <field>
-                <name>ECC</name>
-                <description>Support error correction.</description>
+                <name>DATAMEMECC</name>
+                <description>Support data memory error correction.</description>
                 <lsb>18</lsb>
                 <msb>18</msb>
+                <access>read-only</access>
+              </field>
+              <field>
+                <name>CODEMEMECC</name>
+                <description>Support code memory error correction.</description>
+                <lsb>19</lsb>
+                <msb>19</msb>
                 <access>read-only</access>
               </field>
               <field>
@@ -3501,6 +3622,25 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <enumeratedValue>
                     <name>MASTER</name>
                     <description>Memory access through AHB Master, outside the PKE.</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>CODERAM</name>
+                <description>Code memory</description>
+                <lsb>26</lsb>
+                <msb>26</msb>
+                <access>read-only</access>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>ROM</name>
+                    <description>Code memory is a ROM.</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>RAM</name>
+                    <description>Code memory is a RAM.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -3559,11 +3699,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <value>0x0800</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>OPSIZE3072</name>
-                    <description>3072 bytes.</description>
-                    <value>0x0C00</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
                     <name>OPSIZE4096</name>
                     <description>4096 bytes.</description>
                     <value>0x1000</value>
@@ -3605,47 +3740,102 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
           <register>
-            <name>RAMERRORINJECT</name>
-            <description>RAM error injection register.</description>
+            <name>ECCERRORBITPOS</name>
+            <description>ECC Error bit position register.</description>
             <addressOffset>0x040</addressOffset>
             <access>read-write</access>
             <resetValue>0x03FF03FF</resetValue>
             <size>0x20</size>
             <fields>
               <field>
-                <name>BITERROR1</name>
-                <description>Bit position of first error</description>
+                <name>ERRORBITPOS1</name>
+                <description>Position of error bit 1</description>
                 <lsb>0</lsb>
                 <msb>9</msb>
               </field>
               <field>
-                <name>BITERROR2</name>
-                <description>Bit position of second error</description>
+                <name>ERRORBITPOS2</name>
+                <description>Position of error bit 2</description>
                 <lsb>16</lsb>
                 <msb>25</msb>
               </field>
             </fields>
           </register>
           <register>
-            <name>RAMERRORSTATUS</name>
-            <description>RAM error status register.</description>
+            <name>ECCCONTROLSTATUSREG</name>
+            <description>ECC Control and Status register.</description>
             <addressOffset>0x044</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
             <fields>
               <field>
-                <name>RAMCORRECTION</name>
-                <description>This bit indicates that a 1-bit error has been detected and corrected on RAM interface</description>
+                <name>DATAMEMCORRECTION</name>
+                <description>Data Memory Correction flag, clear on write</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
+                <modifiedWriteValues>oneToClear</modifiedWriteValues>
+              </field>
+              <field>
+                <name>DATAMEMFAILURE</name>
+                <description>Data Memory Failure flag, clear on write</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+                <modifiedWriteValues>oneToClear</modifiedWriteValues>
+              </field>
+              <field>
+                <name>CODEMEMCORRECTION</name>
+                <description>Code Memory Correction flag, clear on write</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+                <modifiedWriteValues>oneToClear</modifiedWriteValues>
+              </field>
+              <field>
+                <name>CODEMEMFAILURE</name>
+                <description>Code Memory Failure flag, clear on write</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+                <modifiedWriteValues>oneToClear</modifiedWriteValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>MICROCODEFORMAT</name>
+            <description>Microcode Format register.</description>
+            <addressOffset>0x078</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xD4B79DDA</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>MICROCODEFORMAT</name>
+                <description>Microcode format number.</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+                <access>read-only</access>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>HWVERSION</name>
+            <description>Hardware Version register.</description>
+            <addressOffset>0x07C</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00010001</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>MINOR</name>
+                <description>Minor version number.</description>
+                <lsb>0</lsb>
+                <msb>15</msb>
                 <access>read-only</access>
               </field>
               <field>
-                <name>RAMFAILURE</name>
-                <description>This bit indicates that an uncorrectable error has been detected on the data RAM interface</description>
-                <lsb>1</lsb>
-                <msb>1</msb>
+                <name>MAJOR</name>
+                <description>Major version number.</description>
+                <lsb>16</lsb>
+                <msb>31</msb>
                 <access>read-only</access>
               </field>
             </fields>
@@ -5167,7 +5357,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <dimIncrement>0x080</dimIncrement>
             <name>GPIO[%s]</name>
             <description>Unspecified</description>
-            <headerStructName>GPIO</headerStructName>
+            <headerStructName>SPU_FEATURE_GPIO</headerStructName>
             <access>read-write</access>
             <addressOffset>0x200</addressOffset>
             <register>
@@ -5178,86 +5368,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <addressOffset>0x000</addressOffset>
               <access>read-write</access>
               <resetValue>0x00100010</resetValue>
-              <size>0x20</size>
-              <fields>
-                <field>
-                  <name>SECATTR</name>
-                  <description>SECATTR feature</description>
-                  <lsb>4</lsb>
-                  <msb>4</msb>
-                  <enumeratedValues>
-                    <enumeratedValue>
-                      <name>NonSecure</name>
-                      <description>Feature is available for non-secure usage</description>
-                      <value>0x0</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>Secure</name>
-                      <description>Feature is reserved for secure usage</description>
-                      <value>0x1</value>
-                    </enumeratedValue>
-                  </enumeratedValues>
-                </field>
-                <field>
-                  <name>LOCK</name>
-                  <description>LOCK feature</description>
-                  <lsb>8</lsb>
-                  <msb>8</msb>
-                  <modifiedWriteValues>oneToSet</modifiedWriteValues>
-                  <enumeratedValues>
-                    <enumeratedValue>
-                      <name>Unlocked</name>
-                      <description>Feature permissions can be updated</description>
-                      <value>0x0</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>Locked</name>
-                      <description>Feature permissions can not be changed until the next reset</description>
-                      <value>0x1</value>
-                    </enumeratedValue>
-                  </enumeratedValues>
-                </field>
-                <field>
-                  <name>BLOCK</name>
-                  <description>BLOCK feature</description>
-                  <lsb>12</lsb>
-                  <msb>12</msb>
-                  <modifiedWriteValues>oneToSet</modifiedWriteValues>
-                  <enumeratedValues>
-                    <enumeratedValue>
-                      <name>Available</name>
-                      <description>Feature is accessible</description>
-                      <value>0x0</value>
-                    </enumeratedValue>
-                    <enumeratedValue>
-                      <name>Blocked</name>
-                      <description>Feature cannot be accessed until next reset</description>
-                      <value>0x1</value>
-                    </enumeratedValue>
-                  </enumeratedValues>
-                </field>
-                <field>
-                  <name>OWNERID</name>
-                  <description>Feature owner ID</description>
-                  <lsb>16</lsb>
-                  <msb>19</msb>
-                </field>
-              </fields>
-            </register>
-          </cluster>
-          <cluster>
-            <name>CRACEN</name>
-            <description>Unspecified</description>
-            <headerStructName>CRACEN</headerStructName>
-            <alternateCluster>GPIO[%s]</alternateCluster>
-            <access>read-write</access>
-            <addressOffset>0x200</addressOffset>
-            <register>
-              <name>SEED</name>
-              <description>Configuration for CRACEN SEED</description>
-              <addressOffset>0x180</addressOffset>
-              <access>read-write</access>
-              <resetValue>0x00020010</resetValue>
               <size>0x20</size>
               <fields>
                 <field>
@@ -6036,7 +6146,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Slave</name>
-                    <description>Error was triggered by an AXI slave</description>
+                    <description>Error was triggered by a Subordinate</description>
                     <value>0x0</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -6812,7 +6922,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
         </cluster>
         <cluster>
-          <dim>7</dim>
+          <dim>12</dim>
           <dimIncrement>0x020</dimIncrement>
           <name>OVERRIDE[%s]</name>
           <description>Special privilege tables</description>
@@ -13244,8 +13354,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <access>read-write</access>
           <addressOffset>0x53C</addressOffset>
           <register>
-            <name>INITIATOR</name>
-            <description>Selected initiator for Channel Sounding Access Address</description>
+            <name>REFLECTOR</name>
+            <description>Selected Channel Sounding Access Address used in the CS SYNC from Reflector to Initiator</description>
             <addressOffset>0x000</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -13259,8 +13369,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
           <register>
-            <name>REFLECTOR</name>
-            <description>Selected initiator for Channel Sounding Access Address</description>
+            <name>INITIATOR</name>
+            <description>Selected Channel Sounding Access Address used in the CS SYNC from Initiator to Reflector</description>
             <addressOffset>0x004</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -14847,8 +14957,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Busy</name>
-                    <description>An abstract command was executing while command, 
-                abstractcs, or abstractauto was written, or when one of the data or progbuf registers was read 
+                    <description>An abstract command was executing while command,
+                abstractcs, or abstractauto was written, or when one of the data or progbuf registers was read
                 or written. This status is only written if cmderr contains 0</description>
                     <value>0x1</value>
                   </enumeratedValue>
@@ -14860,19 +14970,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Exception</name>
-                    <description>An exception occurred while executing the 
+                    <description>An exception occurred while executing the
                 command  (e.g. while executing theProgram Buffer).</description>
                     <value>0x3</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>HaltResume</name>
-                    <description>The abstract command couldn't execute 
+                    <description>The abstract command couldn't execute
                 because the hart wasn't in the required state (running/halted). or unavailable.</description>
                     <value>0x4</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Bus</name>
-                    <description>The abstract command failed due to abus 
+                    <description>The abstract command failed due to abus
                 error (e.g. alignment, access size, or timeout).</description>
                     <value>0x5</value>
                   </enumeratedValue>
@@ -15523,6 +15633,95 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>VPRSTATUS</name>
+          <description>VPR state information.</description>
+          <addressOffset>0x804</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CPUSTATUS</name>
+              <lsb>0</lsb>
+              <msb>3</msb>
+              <access>read-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>WAITING</name>
+                  <description>WAITING (not yet started)</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RUNNING</name>
+                  <description>RUNNING</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SLEEPING</name>
+                  <description>SLEEPING</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>INTERRUPT</name>
+                  <description>INTERRUPT (in handler)</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EXCEPTION_TRAP</name>
+                  <description>EXCEPTION/TRAP (in handler)</description>
+                  <value>0x4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ONGOING_RESET</name>
+                  <description>ONGOING_RESET</description>
+                  <value>0x5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HALTED</name>
+                  <description>HALTED</description>
+                  <value>0x6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ERROR</name>
+                  <description>ERROR (lockup, needs debugging or reset)</description>
+                  <value>0xE</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>INVALID</name>
+                  <description>INVALID (internal value for debugging use only)</description>
+                  <value>0xF</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTPENABLED</name>
+              <description>Mirrors the ENABLERTPERIPH bit in the NORDIC.VPRNORDICCTRL CSR</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <access>read-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Real-time peripherals disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Real-time peripherals enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTPSTALL</name>
+              <description>Stalled waiting for real-time peripheral blocking CSR access, for example WAIT, OUTB with dirty status</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <access>read-only</access>
             </field>
           </fields>
         </register>
@@ -16385,34 +16584,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>EVENTS_ECCERROR</name>
-          <description>Uncorrectable ECC error detected</description>
-          <addressOffset>0x110</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>EVENTS_ECCERROR</name>
-              <description>Uncorrectable ECC error detected</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>EVENTS_ECCERRORCORR</name>
           <description>ECC error detected and corrected</description>
           <addressOffset>0x114</addressOffset>
@@ -16554,24 +16725,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
-              <name>ECCERROR</name>
-              <description>Enable or disable interrupt for event ECCERROR</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
               <name>ECCERRORCORR</name>
               <description>Enable or disable interrupt for event ECCERRORCORR</description>
               <lsb>5</lsb>
@@ -16685,33 +16838,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Write '1' to enable interrupt for event ACCESSERROR</description>
               <lsb>3</lsb>
               <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ECCERROR</name>
-              <description>Write '1' to enable interrupt for event ECCERROR</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -16880,33 +17006,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
-              <name>ECCERROR</name>
-              <description>Write '1' to disable interrupt for event ECCERROR</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
               <name>ECCERRORCORR</name>
               <description>Write '1' to disable interrupt for event ECCERRORCORR</description>
               <lsb>5</lsb>
@@ -17005,25 +17104,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Read pending status of interrupt for event ACCESSERROR</description>
               <lsb>3</lsb>
               <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ECCERROR</name>
-              <description>Read pending status of interrupt for event ECCERROR</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -18417,7 +18497,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
         </cluster>
         <cluster>
-          <dim>5</dim>
+          <dim>6</dim>
           <dimIncrement>0x008</dimIncrement>
           <name>REGION[%s]</name>
           <description>Unspecified</description>
@@ -22846,7 +22926,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>SEEDVALID</name>
-          <description>Marks the SEED register as valid</description>
+          <description>Indicates the SEED register is valid. Writing this register has no effect.</description>
           <addressOffset>0x404</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -22892,7 +22972,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>SEEDLOCK</name>
-          <description>Lock the access to the SEED register.</description>
+          <description>Indicates the access to the SEED register is locked. Writing this register has no effect.</description>
           <addressOffset>0x440</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -23052,10 +23132,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>VREGRLDO</name>
-        <value>124</value>
-      </interrupt>
       <groupName>VREGRLDO</groupName>
       <size>0x20</size>
       <registers>
@@ -53967,7 +54043,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <addressOffset>0x5AC</addressOffset>
           <register>
             <name>RXDELAY</name>
-            <description>Sample delay for input serial data on MISO</description>
+            <description>Sample delay for input serial data on SDI</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000002</resetValue>
@@ -53975,7 +54051,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>RXDELAY</name>
-                <description>Sample delay for input serial data on MISO. The value specifies the number of SPIM core clock cycles delay from the the sampling edge of SCK (leading edge for CONFIG.CPHA = 0, trailing edge for CONFIG.CPHA = 1) until the input serial data is sampled. As en example, if RXDELAY = 0 and CONFIG.CPHA = 0, the input serial data is sampled on the rising edge of SCK.</description>
+                <description>Sample delay for input serial data on SDI. The value specifies the number of SPIM core clock cycles delay from the the sampling edge of SCK (leading edge for CONFIG.CPHA = 0, trailing edge for CONFIG.CPHA = 1) until the input serial data is sampled. As en example, if RXDELAY = 0 and CONFIG.CPHA = 0, the input serial data is sampled on the rising edge of SCK.</description>
                 <lsb>0</lsb>
                 <msb>2</msb>
               </field>
@@ -54106,7 +54182,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
+            <description>Pin select for SDO signal</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -54146,7 +54222,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>MISO</name>
-            <description>Pin select for MISO signal</description>
+            <description>Pin select for SDI signal</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -57107,7 +57183,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>MISO</name>
-            <description>Pin select for MISO signal</description>
+            <description>Pin select for SDO signal</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -57147,7 +57223,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>MOSI</name>
-            <description>Pin select for MOSI signal</description>
+            <description>Pin select for SDI signal</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -68854,6 +68930,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <description>Packet timeout is enabled.</description>
                   <value>0x1</value>
                 </enumeratedValue>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Packet timeout is disabled.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Packet timeout is enabled.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
               </enumeratedValues>
             </field>
           </fields>
@@ -69275,7 +69361,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                   <field>
                     <name>ONESHOT_0</name>
-                    <description>Configure match filter 0 as one-shot or sticky</description>
+                    <description>Configure match filter 0 as one-shot or continous</description>
                     <lsb>16</lsb>
                     <msb>16</msb>
                     <enumeratedValues>
@@ -69293,7 +69379,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                   <field>
                     <name>ONESHOT_1</name>
-                    <description>Configure match filter 1 as one-shot or sticky</description>
+                    <description>Configure match filter 1 as one-shot or continous</description>
                     <lsb>17</lsb>
                     <msb>17</msb>
                     <enumeratedValues>
@@ -69311,7 +69397,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                   <field>
                     <name>ONESHOT_2</name>
-                    <description>Configure match filter 2 as one-shot or sticky</description>
+                    <description>Configure match filter 2 as one-shot or continous</description>
                     <lsb>18</lsb>
                     <msb>18</msb>
                     <enumeratedValues>
@@ -69329,7 +69415,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                   <field>
                     <name>ONESHOT_3</name>
-                    <description>Configure match filter 3 as one-shot or sticky</description>
+                    <description>Configure match filter 3 as one-shot or continous</description>
                     <lsb>19</lsb>
                     <msb>19</msb>
                     <enumeratedValues>
@@ -69361,7 +69447,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <name>DATA</name>
                     <description>Data to look for</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>7</msb>
                   </field>
                 </fields>
               </register>
@@ -70982,592 +71068,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <field>
                 <name>MEM31</name>
                 <description>Keep the RAM block MEM[31] retained when in System OFF mode.</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>RET2</name>
-            <description>Description cluster: RAM retention for the second bank in the RAM block</description>
-            <addressOffset>0x00C</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>MEM0</name>
-                <description>Keep the second bank in RAM block MEM[0] retained when in System OFF mode.</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM1</name>
-                <description>Keep the second bank in RAM block MEM[1] retained when in System OFF mode.</description>
-                <lsb>1</lsb>
-                <msb>1</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM2</name>
-                <description>Keep the second bank in RAM block MEM[2] retained when in System OFF mode.</description>
-                <lsb>2</lsb>
-                <msb>2</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM3</name>
-                <description>Keep the second bank in RAM block MEM[3] retained when in System OFF mode.</description>
-                <lsb>3</lsb>
-                <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM4</name>
-                <description>Keep the second bank in RAM block MEM[4] retained when in System OFF mode.</description>
-                <lsb>4</lsb>
-                <msb>4</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM5</name>
-                <description>Keep the second bank in RAM block MEM[5] retained when in System OFF mode.</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM6</name>
-                <description>Keep the second bank in RAM block MEM[6] retained when in System OFF mode.</description>
-                <lsb>6</lsb>
-                <msb>6</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM7</name>
-                <description>Keep the second bank in RAM block MEM[7] retained when in System OFF mode.</description>
-                <lsb>7</lsb>
-                <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM8</name>
-                <description>Keep the second bank in RAM block MEM[8] retained when in System OFF mode.</description>
-                <lsb>8</lsb>
-                <msb>8</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM9</name>
-                <description>Keep the second bank in RAM block MEM[9] retained when in System OFF mode.</description>
-                <lsb>9</lsb>
-                <msb>9</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM10</name>
-                <description>Keep the second bank in RAM block MEM[10] retained when in System OFF mode.</description>
-                <lsb>10</lsb>
-                <msb>10</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM11</name>
-                <description>Keep the second bank in RAM block MEM[11] retained when in System OFF mode.</description>
-                <lsb>11</lsb>
-                <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM12</name>
-                <description>Keep the second bank in RAM block MEM[12] retained when in System OFF mode.</description>
-                <lsb>12</lsb>
-                <msb>12</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM13</name>
-                <description>Keep the second bank in RAM block MEM[13] retained when in System OFF mode.</description>
-                <lsb>13</lsb>
-                <msb>13</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM14</name>
-                <description>Keep the second bank in RAM block MEM[14] retained when in System OFF mode.</description>
-                <lsb>14</lsb>
-                <msb>14</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM15</name>
-                <description>Keep the second bank in RAM block MEM[15] retained when in System OFF mode.</description>
-                <lsb>15</lsb>
-                <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM16</name>
-                <description>Keep the second bank in RAM block MEM[16] retained when in System OFF mode.</description>
-                <lsb>16</lsb>
-                <msb>16</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM17</name>
-                <description>Keep the second bank in RAM block MEM[17] retained when in System OFF mode.</description>
-                <lsb>17</lsb>
-                <msb>17</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM18</name>
-                <description>Keep the second bank in RAM block MEM[18] retained when in System OFF mode.</description>
-                <lsb>18</lsb>
-                <msb>18</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM19</name>
-                <description>Keep the second bank in RAM block MEM[19] retained when in System OFF mode.</description>
-                <lsb>19</lsb>
-                <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM20</name>
-                <description>Keep the second bank in RAM block MEM[20] retained when in System OFF mode.</description>
-                <lsb>20</lsb>
-                <msb>20</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM21</name>
-                <description>Keep the second bank in RAM block MEM[21] retained when in System OFF mode.</description>
-                <lsb>21</lsb>
-                <msb>21</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM22</name>
-                <description>Keep the second bank in RAM block MEM[22] retained when in System OFF mode.</description>
-                <lsb>22</lsb>
-                <msb>22</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM23</name>
-                <description>Keep the second bank in RAM block MEM[23] retained when in System OFF mode.</description>
-                <lsb>23</lsb>
-                <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM24</name>
-                <description>Keep the second bank in RAM block MEM[24] retained when in System OFF mode.</description>
-                <lsb>24</lsb>
-                <msb>24</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM25</name>
-                <description>Keep the second bank in RAM block MEM[25] retained when in System OFF mode.</description>
-                <lsb>25</lsb>
-                <msb>25</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM26</name>
-                <description>Keep the second bank in RAM block MEM[26] retained when in System OFF mode.</description>
-                <lsb>26</lsb>
-                <msb>26</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM27</name>
-                <description>Keep the second bank in RAM block MEM[27] retained when in System OFF mode.</description>
-                <lsb>27</lsb>
-                <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM28</name>
-                <description>Keep the second bank in RAM block MEM[28] retained when in System OFF mode.</description>
-                <lsb>28</lsb>
-                <msb>28</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM29</name>
-                <description>Keep the second bank in RAM block MEM[29] retained when in System OFF mode.</description>
-                <lsb>29</lsb>
-                <msb>29</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM30</name>
-                <description>Keep the second bank in RAM block MEM[30] retained when in System OFF mode.</description>
-                <lsb>30</lsb>
-                <msb>30</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Off</name>
-                    <description>Retention off</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>On</name>
-                    <description>Retention on</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>MEM31</name>
-                <description>Keep the second bank in RAM block MEM[31] retained when in System OFF mode.</description>
                 <lsb>31</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
@@ -75419,7 +74919,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Internal</name>
-                    <description>Internal reference (1.024 V)</description>
+                    <description>Internal reference (0.9 V)</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
@@ -92353,7 +91853,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>The lower 32-bits of the SYSCOUNTER value.</description>
               <lsb>0</lsb>
               <msb>31</msb>
-              <access>read-only</access>
             </field>
           </fields>
         </register>
@@ -92362,7 +91861,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <description>The higher 20-bits of the SYSCOUNTER</description>
           <addressOffset>0x518</addressOffset>
           <access>read-write</access>
-          <resetValue>0x40000000</resetValue>
+          <resetValue>0x60000000</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -92370,7 +91869,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>The higher 20-bits of the SYSCOUNTER value.</description>
               <lsb>0</lsb>
               <msb>19</msb>
-              <access>read-only</access>
+            </field>
+            <field>
+              <name>LOADED</name>
+              <description>SYSCOUNTER loaded status</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotLoaded</name>
+                  <description>SYSCOUNTER is not loaded</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Loaded</name>
+                  <description>SYSCOUNTER is loaded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
               <name>BUSY</name>
@@ -92508,6 +92024,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <enumeratedValue>
                     <name>Enable</name>
                     <description>Capture/Compare register CC[n] enabled.</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>PASTCC</name>
+                <description>Status of event EVENTS_COMPARE[n] caused by the configured CC value is in past</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Inactive</name>
+                    <description>Inactive</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Active</name>
+                    <description>Active</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -93128,7 +92662,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Description cluster: The higher 20-bits of the SYSCOUNTER for index [n]</description>
             <addressOffset>0x004</addressOffset>
             <access>read-only</access>
-            <resetValue>0x40000000</resetValue>
+            <resetValue>0x60000000</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -93136,6 +92670,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <description>The higher 20-bits of the SYSCOUNTER value.</description>
                 <lsb>0</lsb>
                 <msb>19</msb>
+              </field>
+              <field>
+                <name>LOADED</name>
+                <description>SYSCOUNTER loaded status</description>
+                <lsb>29</lsb>
+                <msb>29</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotLoaded</name>
+                    <description>SYSCOUNTER is not loaded</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Loaded</name>
+                    <description>SYSCOUNTER is loaded</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
               </field>
               <field>
                 <name>BUSY</name>
@@ -94398,42 +93950,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
-              <field>
-                <name>CH_2</name>
-                <description>Enable or disable active shield channel 2.</description>
-                <lsb>2</lsb>
-                <msb>2</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Disable channel.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Enable channel.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>CH_3</name>
-                <description>Enable or disable active shield channel 3.</description>
-                <lsb>3</lsb>
-                <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Disable channel.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Enable channel.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
             </fields>
           </register>
         </cluster>
@@ -95324,145 +94840,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <register>
                   <name>STATUS</name>
                   <description>Status register for the AES DPA counter-measures disable signal in CRACEN.</description>
-                  <addressOffset>0x004</addressOffset>
-                  <access>read-write</access>
-                  <resetValue>0x00000000</resetValue>
-                  <modifiedWriteValues>oneToClear</modifiedWriteValues>
-                  <size>0x20</size>
-                  <fields>
-                    <field>
-                      <name>ERROR</name>
-                      <description>Error detection status.</description>
-                      <lsb>0</lsb>
-                      <msb>0</msb>
-                      <enumeratedValues>
-                        <enumeratedValue>
-                          <name>NoError</name>
-                          <description>No error detected.</description>
-                          <value>0x0</value>
-                        </enumeratedValue>
-                        <enumeratedValue>
-                          <name>Error</name>
-                          <description>Error detected.</description>
-                          <value>0x1</value>
-                        </enumeratedValue>
-                      </enumeratedValues>
-                    </field>
-                  </fields>
-                </register>
-              </cluster>
-              <cluster>
-                <name>SM4DISABLECM</name>
-                <description>Unspecified</description>
-                <headerStructName>TAMPC_PROTECT_STRUCT0_CRACEN_SM4DISABLECM</headerStructName>
-                <access>read-write</access>
-                <addressOffset>0x008</addressOffset>
-                <register>
-                  <name>CTRL</name>
-                  <description>Control register to disable SM4 in CRACEN.</description>
-                  <addressOffset>0x000</addressOffset>
-                  <access>read-write</access>
-                  <resetValue>0x00000010</resetValue>
-                  <size>0x20</size>
-                  <fields>
-                    <field>
-                      <name>VALUE</name>
-                      <description>Set value of SM4 DPA counter-measures disable signal.</description>
-                      <lsb>0</lsb>
-                      <msb>0</msb>
-                      <enumeratedValues>
-                        <enumeratedValue>
-                          <name>Low</name>
-                          <description>Signal is logic 0.</description>
-                          <value>0x0</value>
-                        </enumeratedValue>
-                        <enumeratedValue>
-                          <name>High</name>
-                          <description>Signal is logic 1.</description>
-                          <value>0x1</value>
-                        </enumeratedValue>
-                      </enumeratedValues>
-                    </field>
-                    <field>
-                      <name>LOCK</name>
-                      <description>Lock this register to prevent changes to the VALUE field until next reset.</description>
-                      <lsb>1</lsb>
-                      <msb>1</msb>
-                      <access>writeonce</access>
-                      <modifiedWriteValues>oneToSet</modifiedWriteValues>
-                      <enumeratedValues>
-                        <enumeratedValue>
-                          <name>Disabled</name>
-                          <description>Lock disabled.</description>
-                          <value>0x0</value>
-                        </enumeratedValue>
-                        <enumeratedValue>
-                          <name>Enabled</name>
-                          <description>Lock enabled.</description>
-                          <value>0x1</value>
-                        </enumeratedValue>
-                      </enumeratedValues>
-                    </field>
-                    <field>
-                      <name>FAULTTEST</name>
-                      <description>Injects a fault in the protected signal.</description>
-                      <lsb>2</lsb>
-                      <msb>2</msb>
-                      <enumeratedValues>
-                        <enumeratedValue>
-                          <name>NoOperation</name>
-                          <description>No operation.</description>
-                          <value>0x0</value>
-                        </enumeratedValue>
-                        <enumeratedValue>
-                          <name>Trigger</name>
-                          <description>Trigger fault.</description>
-                          <value>0x1</value>
-                        </enumeratedValue>
-                      </enumeratedValues>
-                    </field>
-                    <field>
-                      <name>WRITEPROTECTION</name>
-                      <description>The write protection must be cleared to allow updates to the VALUE field.</description>
-                      <lsb>4</lsb>
-                      <msb>7</msb>
-                      <enumeratedValues>
-                        <enumeratedValue>
-                          <name>Disabled</name>
-                          <description>Read: Write protection is disabled.</description>
-                          <value>0x0</value>
-                        </enumeratedValue>
-                        <enumeratedValue>
-                          <name>Enabled</name>
-                          <description>Read: Write protection is enabled.</description>
-                          <value>0x1</value>
-                        </enumeratedValue>
-                        <enumeratedValue>
-                          <name>Clear</name>
-                          <description>Write: Value to clear write protection.</description>
-                          <value>0xF</value>
-                        </enumeratedValue>
-                      </enumeratedValues>
-                    </field>
-                    <field>
-                      <name>KEY</name>
-                      <description>Required write key for upper 16 bits. Must be included in all register write operations.</description>
-                      <lsb>16</lsb>
-                      <msb>31</msb>
-                      <access>write-only</access>
-                      <enumeratedValues>
-                        <enumeratedValue>
-                          <name>KEY</name>
-                          <description>Write key value.</description>
-                          <value>0x50FA</value>
-                        </enumeratedValue>
-                      </enumeratedValues>
-                    </field>
-                  </fields>
-                </register>
-                <register>
-                  <name>STATUS</name>
-                  <description>Status register for the SM4 DPA counter-measures disable signal in CRACEN.</description>
                   <addressOffset>0x004</addressOffset>
                   <access>read-write</access>
                   <resetValue>0x00000000</resetValue>
@@ -102488,14 +101865,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>SHORTS</name>
-          <description>Shortcuts between local events and tasks</description>
-          <addressOffset>0x200</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-        </register>
-        <register>
           <name>INTEN</name>
           <description>Enable or disable interrupt</description>
           <addressOffset>0x300</addressOffset>
@@ -103878,39 +103247,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>PUBLISH_POFWARN</name>
-          <description>Publish configuration for event POFWARN</description>
-          <addressOffset>0x1B0</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event POFWARN will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>PUBLISH_SLEEPENTER</name>
           <description>Publish configuration for event SLEEPENTER</description>
           <addressOffset>0x1B4</addressOffset>
@@ -104243,7 +103579,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <register>
           <name>CONSTLATSTAT</name>
           <description>Status of constant latency</description>
-          <addressOffset>0x510</addressOffset>
+          <addressOffset>0x520</addressOffset>
           <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -106716,7 +106052,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </register>
             <register>
               <name>TRIM</name>
-              <description>VCO trim values for the 192 MHz PLL</description>
+              <description>Trim values and production configurations</description>
               <addressOffset>0x10</addressOffset>
               <access>read-write</access>
               <resetValue>0x001E6515</resetValue>
@@ -106730,7 +106066,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </field>
                 <field>
                   <name>VCOTRIM192MHZ</name>
-                  <description>VCO_TRIM for 128 MHz mode</description>
+                  <description>VCO_TRIM for 192 MHz mode</description>
                   <lsb>6</lsb>
                   <msb>11</msb>
                 </field>
@@ -106852,6 +106188,70 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </field>
               </fields>
             </register>
+            <register>
+              <name>FSMCONFIG</name>
+              <description>Configure FSM behavior</description>
+              <addressOffset>0x18</addressOffset>
+              <access>read-write</access>
+              <resetValue>0x00000000</resetValue>
+              <size>0x20</size>
+              <fields>
+                <field>
+                  <name>BYPASSDISABLE</name>
+                  <description>Disables BYPASS mode</description>
+                  <lsb>0</lsb>
+                  <msb>0</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Enabled</name>
+                      <description>Enable BYPASS mode upon request.</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Disabled</name>
+                      <description>Disable BYPASS mode. LOCKED mode will be used instead.</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>PATAUTODISABLE</name>
+                  <description>Automatically disable PAT when starting up in LOCKED mode (from BYPASS mode).</description>
+                  <lsb>1</lsb>
+                  <msb>1</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Default</name>
+                      <description>PAT disable configured in CONFIG.CTRL</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Autodisable</name>
+                      <description>PAT disabled when starting PLL in LOCKED mode (from BYPASS mode).</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>LOCKTIME</name>
+                  <description>Modify lock time</description>
+                  <lsb>2</lsb>
+                  <msb>2</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>Default</name>
+                      <description>Use default lock times (FREERUN to LOCKED: 3 us, BYPASS to LOCKED: 6us)</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Conservative</name>
+                      <description>Use extended lock times (FREERUN to LOCKED: 5 us, BYPASS to LOCKED: 8us)</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+              </fields>
+            </register>
           </cluster>
           <cluster>
             <name>DBG</name>
@@ -106871,7 +106271,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>STATE</name>
                   <description>Current state of the MMI state machine</description>
                   <lsb>0</lsb>
-                  <msb>7</msb>
+                  <msb>14</msb>
                 </field>
               </fields>
             </register>
@@ -108540,7 +107940,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <name>STATEFSM</name>
                 <description>Current Hibernator FSM state. See DD digip_1330 for details.</description>
                 <lsb>0</lsb>
-                <msb>5</msb>
+                <msb>7</msb>
               </field>
               <field>
                 <name>WAKEREAS</name>
@@ -108777,7 +108177,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>ENABLE</name>
             <description>Enable the regulator</description>
-            <addressOffset>0x000</addressOffset>
+            <addressOffset>0x00</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000001</resetValue>
             <size>0x20</size>
@@ -108805,7 +108205,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>FORCEMODE</name>
             <description>Force the MMI into a certain mode.</description>
-            <addressOffset>0x010</addressOffset>
+            <addressOffset>0x04</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -108828,20 +108228,50 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
+              <field>
+                <name>PWMENABLE</name>
+                <description>PWM mode override enable</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disable</name>
+                    <description>Do not allow override for PWM</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enable</name>
+                    <description>Allow override for PWM</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
             </fields>
           </register>
           <register>
-            <name>VOLT</name>
-            <description>Set output voltage</description>
-            <addressOffset>0x020</addressOffset>
+            <name>TRIM</name>
+            <description>Trim register</description>
+            <addressOffset>0x08</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
+            <resetValue>0x00008000</resetValue>
             <size>0x20</size>
             <fields>
               <field>
-                <name>VOLT</name>
+                <name>VREF</name>
+                <description>MBIAS IBPSR generated VREF trim</description>
                 <lsb>0</lsb>
-                <msb>0</msb>
+                <msb>3</msb>
+              </field>
+              <field>
+                <name>VIN</name>
+                <description>Input voltage regulation trim</description>
+                <lsb>4</lsb>
+                <msb>11</msb>
+              </field>
+              <field>
+                <name>VOLT</name>
+                <lsb>12</lsb>
+                <msb>12</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Default</name>
@@ -108850,7 +108280,31 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>2V6</name>
-                    <description>2.6 V</description>
+                    <description>Regulate output voltage up to 2.6 V</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>CFG</name>
+                <description>Configuration</description>
+                <lsb>13</lsb>
+                <msb>20</msb>
+              </field>
+              <field>
+                <name>CLOCKPHASEOSCPWM8M</name>
+                <description>Configure the phase of the clock (for PWM mode) with respect to the system clock, 0 in phase and 1 is out of phase</description>
+                <lsb>21</lsb>
+                <msb>21</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>InPhase</name>
+                    <description>In Phase</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>OutOfPhase</name>
+                    <description>Out of phase</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -108858,25 +108312,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
           <register>
-            <name>TRIMVREFRET</name>
-            <description>MBIAS reference trim Mbias reference trim</description>
-            <addressOffset>0x024</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>VREF</name>
-                <description>VFREFMBIAS</description>
-                <lsb>0</lsb>
-                <msb>3</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
             <name>READY</name>
             <description>Unspecified</description>
-            <addressOffset>0x030</addressOffset>
+            <addressOffset>0x16</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -108892,7 +108330,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>RETAIN</name>
             <description>Override the retention control signal to the regulator for testing.</description>
-            <addressOffset>0x040</addressOffset>
+            <addressOffset>0x1A</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -108908,7 +108346,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <register>
             <name>DTBCFG</name>
             <description>Unspecified</description>
-            <addressOffset>0x050</addressOffset>
+            <addressOffset>0x1E</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -108921,42 +108359,42 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>VOUTCOMPA</name>
-                    <description>Unspecified</description>
+                    <description>Test VOUTCMPA</description>
                     <value>0x8</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>VOUTCOMPB</name>
-                    <description>Unspecified</description>
+                    <description>Test VOUTCMPB</description>
                     <value>0x9</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>VINCOMP</name>
-                    <description>Unspecified</description>
+                    <description>Test VINCMP</description>
                     <value>0xA</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>VDET</name>
-                    <description>Unspecified</description>
+                    <description>Test VDET</description>
                     <value>0xB</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>VDD_READY</name>
-                    <description>Unspecified</description>
+                    <description>Test VDD_READY</description>
                     <value>0xC</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>DRVH</name>
-                    <description>Unspecified</description>
+                    <description>Test DRVH</description>
                     <value>0xD</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>DRVL</name>
-                    <description>Unspecified</description>
+                    <description>Test DRVL</description>
                     <value>0xE</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>READY_BIAS</name>
-                    <description>Unspecified</description>
+                    <description>Test READY_BIAS</description>
                     <value>0xF</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -108964,61 +108402,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
           <register>
-            <name>CFG0V9</name>
-            <description>Unspecified</description>
-            <addressOffset>0x060</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>VOLTREG</name>
-                <description>Proportional voltage regulation target from 1.75*Vin to 1.85*Vin</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-              </field>
-              <field>
-                <name>DUTYTIMER</name>
-                <description>Duty timer speed up from nominal 500ns to 300ns</description>
-                <lsb>1</lsb>
-                <msb>1</msb>
-              </field>
-              <field>
-                <name>VINCOMP</name>
-                <description>Enable VIN comparator</description>
-                <lsb>2</lsb>
-                <msb>2</msb>
-              </field>
-              <field>
-                <name>DISABLEBOOSTDRIVE</name>
-                <description>Disable Boosted drive in P_CAP2X</description>
-                <lsb>3</lsb>
-                <msb>3</msb>
-              </field>
-              <field>
-                <name>PWMFREQ</name>
-                <description>PWM freq from 2MHz to 1MHz</description>
-                <lsb>4</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>BLOCKPWM</name>
-                <description>Block PWM</description>
-                <lsb>5</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>SPARE</name>
-                <description>Spare bits - not currently used</description>
-                <lsb>7</lsb>
-                <msb>8</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
             <name>TCFG</name>
             <description>Unspecified</description>
-            <addressOffset>0x070</addressOffset>
+            <addressOffset>0x22</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -109333,6 +108719,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>PSEL</name>
+              <description>Power-fail comparator input selector</description>
+              <lsb>16</lsb>
+              <msb>16</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>vddAo3v0Connected</name>
+                  <description>POF input connected to VDD_AO_3V0</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>vinLvBatConnected</name>
+                  <description>POF input  connected to VIN_LVBATT</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -109551,6 +108955,140 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>RSTVDDLTRIM</name>
+              <description>VDDL reset threshold trim</description>
+              <lsb>25</lsb>
+              <msb>28</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DTBENABLERESETGEN</name>
+          <description>Enabling dtb bus for Resetgen_Mmi</description>
+          <addressOffset>0x560</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>DTB0ENABLERESETGEN</name>
+              <description>Enable or disable BOR_N_0V9 on DTB0</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable BOR_N_0V9 on DTB0</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable BOR_N_0V9 on DTB0</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DTB1ENABLERESETGEN</name>
+              <description>Enable or disable OSC_1K_0V9 on DTB1</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable OSC_1K_0V9 on DTB1</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable OSC_1K_0V9 on DTB1</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DTBENABLEBIASGEN</name>
+          <description>Enabling dtb bus for BiasGen_Mmi</description>
+          <addressOffset>0x564</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>DTB0ENABLEBIASGEN</name>
+              <description>Enable or disable BIAS_READY_0V9 on DTB0</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable BIAS_READY_0V9 on DTB0</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable BIAS_READY_0V9 on DTB0</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DTB1ENABLEBIASGEN</name>
+              <description>Enable or disable BIAS_READY_0V9 on DTB1</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable BIAS_READY_0V9 on DTB1</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable BIAS_READY_0V9 on DTB1</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DTB2ENABLEBIASGEN</name>
+              <description>Enable or disable BIAS_READY_0V9 on DTB2</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable BIAS_READY_0V9 on DTB2</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable BIAS_READY_0V9 on DTB2</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DTB3ENABLEBIASGEN</name>
+              <description>Enable or disable BIAS_READY_0V9 on DT30</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable BIAS_READY_0V9 on DTB3</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable BIAS_READY_0V9 on DTB3</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -109654,8 +109192,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <field>
               <name>RSTATB1CFG</name>
               <description>Configure connection of RST to analog test bus</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
+              <lsb>8</lsb>
+              <msb>8</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disconnect</name>
@@ -109672,8 +109210,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <field>
               <name>RSTATB0CFG</name>
               <description>Configure connection of RST to analog test bus</description>
-              <lsb>10</lsb>
-              <msb>11</msb>
+              <lsb>12</lsb>
+              <msb>14</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disconnect</name>
@@ -109681,13 +109219,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>AvddDiv2</name>
-                  <description>AVDD_DIV2 connected to ATB0</description>
+                  <name>VrefUlp</name>
+                  <description>VREF_ULP connected to ATB0</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>VrefUlp</name>
-                  <description>VREF_ULP connected to ATB0</description>
+                  <name>AvddDiv2</name>
+                  <description>AVDD_DIV2 connected to ATB0</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -109695,13 +109233,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <description>VBG_RST connected to ATB0</description>
                   <value>0x3</value>
                 </enumeratedValue>
+                <enumeratedValue>
+                  <name>VddlDiv2</name>
+                  <description>VDDL buffered voltage divider output connected to ATB0 (for RST variants supporting 3 bits atb0cfg otherwise unused)</description>
+                  <value>0x4</value>
+                </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>BIASATB0CFG</name>
               <description>Connect or disconnect MBIAS to analog test bus</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
+              <lsb>16</lsb>
+              <msb>16</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disconnect</name>
@@ -109718,8 +109261,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <field>
               <name>BIASATB1CFG</name>
               <description>Connect or disconnect MBIAS to analog test bus</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
+              <lsb>20</lsb>
+              <msb>20</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disconnect</name>
@@ -110675,7 +110218,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <addressOffset>0x04</addressOffset>
               <access>read-write</access>
-              <resetValue>0x1F0F7BC2</resetValue>
+              <resetValue>0x1F0F7BC0</resetValue>
               <size>0x20</size>
               <fields>
                 <field>
