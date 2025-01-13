@@ -43,8 +43,8 @@ typedef enum
  * @param[in] p_reg Pointer to the structure of registers of the RNG peripheral.
  * @param[in] p_config Configuration to be written in the register.
  */
-NRF_STATIC_INLINE void nrf_cracen_rng_control_set(NRF_CRACENCORE_Type *      p_reg,
-                                                  nrf_cracen_rng_control_t * p_config);
+NRF_STATIC_INLINE void nrf_cracen_rng_control_set(NRF_CRACENCORE_Type *            p_reg,
+                                                  nrf_cracen_rng_control_t const * p_config);
 
 /**
  * @brief Function for getting the FIFO level
@@ -119,8 +119,8 @@ NRF_STATIC_INLINE uint32_t nrf_cracen_rng_fifo_get(NRF_CRACENCORE_Type const * p
 
 #ifndef NRF_DECLARE_ONLY
 
-NRF_STATIC_INLINE void nrf_cracen_rng_control_set(NRF_CRACENCORE_Type *      p_reg,
-                                                  nrf_cracen_rng_control_t * p_config)
+NRF_STATIC_INLINE void nrf_cracen_rng_control_set(NRF_CRACENCORE_Type *            p_reg,
+                                                  nrf_cracen_rng_control_t const * p_config)
 {
     p_reg->RNGCONTROL.CONTROL =
           ((p_config->enable << CRACENCORE_RNGCONTROL_CONTROL_ENABLE_Pos)
