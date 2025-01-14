@@ -270,13 +270,22 @@ __STATIC_INLINE void nrfx_reset_reason_clear(uint32_t mask)
 #if defined(NRF_RESETINFO)
     uint32_t resetreas;
 
-    resetreas = nrf_resetinfo_resetreas_global_get(NRF_RESETINFO);
-    resetreas &= ~(mask & NRFX_BIT_MASK(NRFX_RESET_REASON_LOCAL_OFFSET));
-    nrf_resetinfo_resetreas_global_set(NRF_RESETINFO, resetreas);
+    // Contrary to NRF_RESET clearing is done by writing expected value to the register and
+    // not by writing '1'.
+    // Check if there are any global reasons to clear.
+    resetreas = mask & NRFX_BIT_MASK(NRFX_RESET_REASON_LOCAL_OFFSET);
+    if (resetreas) {
+        resetreas = ~resetreas & nrf_resetinfo_resetreas_global_get(NRF_RESETINFO);
+        nrf_resetinfo_resetreas_global_set(NRF_RESETINFO, resetreas);
+    }
 
-    resetreas = nrf_resetinfo_resetreas_local_get(NRF_RESETINFO);
-    resetreas &= ~(mask & ~NRFX_BIT_MASK(NRFX_RESET_REASON_LOCAL_OFFSET));
-    nrf_resetinfo_resetreas_local_set(NRF_RESETINFO, resetreas);
+    // Check if there are any local reasons to clear.
+    resetreas = mask >> NRFX_RESET_REASON_LOCAL_OFFSET;
+    if (resetreas) {
+        resetreas = ~resetreas & nrf_resetinfo_resetreas_local_get(NRF_RESETINFO);
+        nrf_resetinfo_resetreas_local_set(NRF_RESETINFO, resetreas);
+    }
+
 #elif defined(NRF_RESET)
     nrf_reset_resetreas_clear(NRF_RESET, mask);
 #elif defined(NRF_POWER)
