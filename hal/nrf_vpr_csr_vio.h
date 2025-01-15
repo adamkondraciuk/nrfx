@@ -49,6 +49,15 @@ typedef enum
     NRF_VPR_CSR_VIO_MODE_IN_SHIFT      = VPRCSR_NORDIC_INMODE_MODE_SHIFT,      ///< Sampling and shifting on Counter 1 event.
 } nrf_vpr_csr_vio_mode_in_t;
 
+/** @brief Shift control configuration. */
+typedef struct
+{
+    uint8_t                   shift_count; ///< Number of frames to be shifted to OUTB or from INB before new data is required.
+    nrf_vpr_csr_vio_shift_t   out_mode;    ///< Buffered output shifting mode.
+    uint8_t                   frame_width; ///< Output frame width, bits.
+    nrf_vpr_csr_vio_mode_in_t in_mode;     ///< Buffered input shifting mode.
+} nrf_vpr_csr_vio_shift_ctrl_t;
+
 /** @brief VIO configuration. */
 typedef struct
 {
@@ -426,7 +435,24 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_buffered_get(nrf_vpr_csr_vio_mod
  *
  * @param[in] p_mode Pointer to the structure with buffered output mode to be set.
  */
-NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_buffered_set(nrf_vpr_csr_vio_mode_out_t const * p_mode);
+NRF_STATIC_INLINE
+void nrf_vpr_csr_vio_mode_out_buffered_set(nrf_vpr_csr_vio_mode_out_t const * p_mode);
+
+/**
+ * @brief Function for setting the buffered shift control register configuration.
+ *
+ * @param[in] p_shift_ctrl Pointer to the structure with buffered shift control configuration to be set.
+ */
+NRF_STATIC_INLINE
+void nrf_vpr_csr_vio_shift_ctrl_buffered_set(nrf_vpr_csr_vio_shift_ctrl_t const * p_shift_ctrl);
+
+/**
+ * @brief Function for getting the buffered shift control register configuration.
+ *
+ * @param[out] p_shift_ctrl Pointer to the structure to be filled with buffered shift control configuration.
+ */
+NRF_STATIC_INLINE
+void nrf_vpr_csr_vio_shift_ctrl_buffered_get(nrf_vpr_csr_vio_shift_ctrl_t * p_shift_ctrl);
 
 /**
  * @brief Function for getting the VIO configuration.
@@ -844,13 +870,44 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_buffered_get(nrf_vpr_csr_vio_mod
                           >> VPRCSR_NORDIC_OUTMODEB_FRAMEWIDTH_Pos;
 }
 
-NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_buffered_set(nrf_vpr_csr_vio_mode_out_t const * p_mode)
+NRF_STATIC_INLINE
+void nrf_vpr_csr_vio_mode_out_buffered_set(nrf_vpr_csr_vio_mode_out_t const * p_mode)
 {
     uint32_t reg = ((uint32_t)p_mode->mode << VPRCSR_NORDIC_OUTMODEB_MODE_Pos) |
                    (((uint32_t)p_mode->frame_width << VPRCSR_NORDIC_OUTMODEB_FRAMEWIDTH_Pos)
                     & VPRCSR_NORDIC_OUTMODEB_FRAMEWIDTH_Msk);
 
     nrf_csr_write(VPRCSR_NORDIC_OUTMODE, reg);
+}
+
+NRF_STATIC_INLINE
+void nrf_vpr_csr_vio_shift_ctrl_buffered_set(nrf_vpr_csr_vio_shift_ctrl_t const * p_shift_ctrl)
+{
+    uint32_t reg = ((p_shift_ctrl->shift_count << VPRCSR_NORDIC_SHIFTCTRLB_SHIFTCNTB_VALUE_Pos)
+                    & VPRCSR_NORDIC_SHIFTCTRLB_SHIFTCNTB_VALUE_Msk) | 
+                   ((p_shift_ctrl->out_mode << VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_MODE_Pos)
+		    & VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_MODE_Msk) | 
+                   ((p_shift_ctrl->frame_width << VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_FRAMEWIDTH_Pos)
+		    & VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_FRAMEWIDTH_Msk) |
+                   ((p_shift_ctrl->in_mode << VPRCSR_NORDIC_SHIFTCTRLB_INMODEB_MODE_Pos)
+		    & VPRCSR_NORDIC_SHIFTCTRLB_INMODEB_MODE_Msk);
+    
+    nrf_csr_write(VPRCSR_NORDIC_SHIFTCTRLB, reg);
+}
+
+NRF_STATIC_INLINE
+void nrf_vpr_csr_vio_shift_ctrl_buffered_get(nrf_vpr_csr_vio_shift_ctrl_t * p_shift_ctrl)
+{	
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_SHIFTCTRLB);
+    
+    p_shift_ctrl->shift_count = (reg & VPRCSR_NORDIC_SHIFTCTRLB_SHIFTCNTB_VALUE_Msk)
+                                >> VPRCSR_NORDIC_SHIFTCTRLB_SHIFTCNTB_VALUE_Pos;
+    p_shift_ctrl->out_mode    = (reg & VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_MODE_Msk)
+                                >> VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_MODE_Pos;
+    p_shift_ctrl->frame_width = (reg & VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_FRAMEWIDTH_Msk)
+                                >> VPRCSR_NORDIC_SHIFTCTRLB_OUTMODEB_FRAMEWIDTH_Pos;
+    p_shift_ctrl->in_mode     = (reg & VPRCSR_NORDIC_SHIFTCTRLB_INMODEB_MODE_Msk)
+                                >> VPRCSR_NORDIC_SHIFTCTRLB_INMODEB_MODE_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_config_get(nrf_vpr_csr_vio_config_t * p_config)
