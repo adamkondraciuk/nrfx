@@ -37,6 +37,9 @@ typedef enum
     NRF_CRACEN_RNG_FSM_STATE_ERROR        = CRACENCORE_RNGCONTROL_STATUS_STATE_ERROR,    /**< RNG has halted on an error. Reset is needed */
 } nrf_cracen_rng_fsm_state_t;
 
+/** Size of the RNG FIFO in bytes */
+#define NRF_CRACEN_RNG_FIFO_SIZE ((CRACENCORE_RNGCONTROL_FIFOTHRESHOLD_ResetValue + 1) * 16)
+
 /**
  * @brief Function for setting the control register
  *
