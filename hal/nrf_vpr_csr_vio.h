@@ -53,9 +53,9 @@ typedef enum
 typedef struct
 {
     uint8_t                   shift_count; ///< Number of frames to be shifted to OUTB or from INB before new data is required.
-    nrf_vpr_csr_vio_shift_t   out_mode;    ///< Buffered output shifting mode.
-    uint8_t                   frame_width; ///< Output frame width, bits.
-    nrf_vpr_csr_vio_mode_in_t in_mode;     ///< Buffered input shifting mode.
+    nrf_vpr_csr_vio_shift_t   out_mode;    ///< Buffered output mode.
+    uint8_t                   frame_width; ///< Output frame width in bits.
+    nrf_vpr_csr_vio_mode_in_t in_mode;     ///< Buffered input mode.
 } nrf_vpr_csr_vio_shift_ctrl_t;
 
 /** @brief VIO configuration. */
@@ -168,14 +168,14 @@ NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_get(void);
  *
  * @return Mask of input states. 0 is low, 1 is high.
  */
-NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_buffered_get(void);
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vio_in_buffered_get(void);
 
 /**
  * @brief Function for getting the buffered input values, reversed in each byte.
  *
  * @return Mask of input states. 0 is low, 1 is high.
  */
-NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_buffered_reversed_byte_get(void);
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vio_in_buffered_reversed_byte_get(void);
 
 /**
  * @brief Function for getting the input mode.
@@ -689,14 +689,14 @@ NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_get(void)
     return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_IN);
 }
 
-NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_buffered_get(void)
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vio_in_buffered_get(void)
 {
-    return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_INB);
+    return nrf_csr_read(VPRCSR_NORDIC_INB);
 }
 
-NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_buffered_reversed_byte_get(void)
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vio_in_buffered_reversed_byte_get(void)
 {
-    return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_INBRB);
+    return nrf_csr_read(VPRCSR_NORDIC_INBRB);
 }
 
 NRF_STATIC_INLINE nrf_vpr_csr_vio_mode_in_t nrf_vpr_csr_vio_mode_in_get(void)
