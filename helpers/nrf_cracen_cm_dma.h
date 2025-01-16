@@ -28,7 +28,7 @@ typedef struct __PACKED nrf_cracen_cm_dma_desc {
  * @brief This value can be used as a DMA descriptor next address to indicate there is no next
  *        descriptor, and therefore the DMA should stop with current one.
  */
-#define NRF_CRACEN_CM_DMA_DESC_STOP ((void *)0x1)
+#define NRF_CRACEN_CM_DMA_DESC_STOP ((struct nrf_cracen_cm_dma_desc *)0x1)
 
 /**
  * @brief When this value is OR'ed with a descriptor length field, the DMA will read from/write into
