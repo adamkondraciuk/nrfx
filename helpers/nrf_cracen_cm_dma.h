@@ -17,7 +17,7 @@ extern "C" {
  */
 
 /** @brief CRACEN CryptoMaster DMA descriptor. */
-typedef struct __PACKED nrf_cracen_cm_dma_desc {
+typedef struct __PACKED __ALIGN(4) nrf_cracen_cm_dma_desc {
     uint8_t *                       p_addr; /**< Address of the data block. */
     struct nrf_cracen_cm_dma_desc * p_next; /**< Pointer to a possibly chained descriptor. */
     uint32_t                        length; /**< Number of bytes in the data block. */
