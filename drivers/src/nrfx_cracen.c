@@ -1,6 +1,9 @@
 /*$$$LICENCE_NORDIC_STANDARD<2025>$$$*/
 
 #include <nrfx.h>
+
+#if NRFX_CHECK(NRFX_CRACEN_ENABLED)
+
 #include <hal/nrf_cracen.h>
 #include <hal/nrf_cracen_rng.h>
 #include <hal/nrf_cracen_cm.h>
@@ -509,3 +512,5 @@ nrfx_err_t nrfx_cracen_ctr_drbg_random_get(uint8_t * p_buf, size_t size)
 
     return NRFX_SUCCESS;
 }
+
+#endif // NRFX_CHECK(NRFX_CRACEN_ENABLED)
