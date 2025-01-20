@@ -99,4 +99,9 @@ website:
 
 -  <a href="https://github.com/ARM-software/CMSIS"> ARM® CMSIS repository</a>
 (CMSIS/Include directory)
+
+@section nrfx_samples nrfx samples
+
+You can refer to the <a href="https://docs.nordicsemi.com/bundle/nrfx_samples_3.8.0/page/index.html">latest release of nrfx samples</a> for the usage examples of nrfx drivers within Zephyr RTOS.
+
 */
