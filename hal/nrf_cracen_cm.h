@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_cracen_cm_hal CRACEN CryptoMaster HAL
  * @{
- * @ingroup nrf_cracen_cm
+ * @ingroup nrf_cracen
  * @brief   Hardware access layer for managing the Crypto Accelerator Engine (CRACEN)
  *          CryptoMaster (CM) peripheral.
  */

@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_cracen_cm_dma_hal CRACEN CryptoMaster DMA layer.
  * @{
- * @ingroup nrf_cracen_cm_dma
+ * @ingroup nrf_cracen
  * @brief   Helper layer that provides common functionality for the CRACEN Cryptmaster DMA.
  */
 

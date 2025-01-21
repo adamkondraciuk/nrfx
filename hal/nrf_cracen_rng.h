@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_cracen_rng_hal CRACEN RNG HAL
  * @{
- * @ingroup nrf_cracen_rng
+ * @ingroup nrf_cracen
  * @brief   Hardware access layer for managing the Crypto Accelerator Engine (CRACEN)
  *          Random Generator (RNG) peripheral.
  */
