@@ -346,7 +346,7 @@ static nrfx_err_t local_connection_create(nrfx_interconnect_apb_t const * p_src_
         {
             /* The path does not go through the main APB,
                however the destination endpoint belongs to it. */
-            chan_mask_to_exclude = p_src_apb->dppi_pub_channels_mask;
+            chan_mask_to_exclude = p_dst_apb->dppi_pub_channels_mask;
         }
         if (chan_mask & ~chan_mask_to_exclude)
         {
