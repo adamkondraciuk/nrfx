@@ -672,11 +672,54 @@
 
 #if defined(NRF9220_XXAA)
 
+    #if defined(NRF_APPLICATION_UICR_NS_BASE)
+        #undef NRF_APPLICATION_UICR_NS_BASE
+        #define NRF_APPLICATION_UICR_NS_BASE 0x0FFF0000UL
+    #endif
+
+    #if defined(NRF_APPLICATION_UICR_NS)
+        #undef NRF_APPLICATION_UICR_NS
+        #define NRF_APPLICATION_UICR_NS ((NRF_UICR_Type*) NRF_APPLICATION_UICR_NS_BASE)
+    #endif
+
+    #if defined(NRF_APPLICATION_UICR)
+        #undef NRF_APPLICATION_UICR
+        #define NRF_APPLICATION_UICR NRF_APPLICATION_UICR_NS
+    #endif
+
+    #if defined(NRF_UICR)
+        #undef NRF_UICR
+        #define NRF_UICR NRF_APPLICATION_UICR
+    #endif
+
+    #if defined(NRF_APPLICATION_BICR_NS_BASE)
+        #undef NRF_APPLICATION_BICR_NS_BASE
+        #define NRF_APPLICATION_BICR_NS_BASE 0x0FFF0800UL
+    #endif
+
+    #if defined(NRF_APPLICATION_BICR_NS)
+        #undef NRF_APPLICATION_BICR_NS
+        #define NRF_APPLICATION_BICR_NS ((NRF_BICR_Type*) NRF_APPLICATION_BICR_NS_BASE)
+    #endif
+
+    #if defined(NRF_APPLICATION_BICR)
+        #undef NRF_APPLICATION_BICR
+        #define NRF_APPLICATION_BICR NRF_APPLICATION_BICR_NS
+    #endif
+
+    #if defined(NRF_BICR)
+        #undef NRF_BICR
+        #define NRF_BICR NRF_APPLICATION_BICR
+    #endif
+
     /* Internal part */
     #if defined(NRF_TRUSTZONE_NONSECURE)
         #if defined(NRF_SECURE)
             #define GRTC_IRQ_GROUP 0
             #define GPIOTE_IRQ_GROUP 0
+        #elif defined(NRF_APPLICATION)
+            #define GRTC_IRQ_GROUP 2
+            #define GPIOTE_IRQ_GROUP 2
         #elif defined(NRF_CELLCORE)
             #define GRTC_IRQ_GROUP 5
             #define GPIOTE_IRQ_GROUP 4
@@ -690,6 +733,9 @@
         #if defined(NRF_SECURE)
             #define GRTC_IRQ_GROUP 1
             #define GPIOTE_IRQ_GROUP 1
+        #elif defined(NRF_APPLICATION)
+            #define GRTC_IRQ_GROUP 3
+            #define GPIOTE_IRQ_GROUP 3
         #elif defined(NRF_CELLCORE)
             #define GRTC_IRQ_GROUP 6
             #define GPIOTE_IRQ_GROUP 5
@@ -720,6 +766,12 @@
 
     #define EGU130_CH_NUM (EGU130_CH_NUM_MAX + 1UL)
 
+    #define P0_PIN_NUM P0_PIN_NUM_SIZE
+    #define P1_PIN_NUM P1_PIN_NUM_SIZE
+    #define P2_PIN_NUM P2_PIN_NUM_SIZE
+    #define P5_PIN_NUM P5_PIN_NUM_SIZE
+    #define P10_PIN_NUM P10_PIN_NUM_SIZE
+    #define P12_PIN_NUM P12_PIN_NUM_SIZE
 #endif
 /**************************************************************************************************/
 /* End fixups section for NRF9220_XXAA                                                            */
