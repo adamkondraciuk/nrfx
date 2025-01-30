@@ -97,7 +97,6 @@ typedef enum {
   GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE130_1                                                      */
   GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
-  GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
   AXONS_IRQn                             = 138,      /*!< 138 AXONS                                                            */
   MRAMC110_IRQn                          = 146,      /*!< 146 MRAMC110                                                         */
   MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
@@ -108,6 +107,8 @@ typedef enum {
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   SPIM120_SPIS120_UARTE120_IRQn          = 230,      /*!< 230 SPIM120_SPIS120_UARTE120                                         */
   VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
+  AHBBUFFER_APP_IRQn                     = 266,      /*!< 266 AHBBUFFER_APP                                                    */
+  AHBBUFFER_CELL_IRQn                    = 268,      /*!< 268 AHBBUFFER_CELL                                                   */
   IPCT130_0_IRQn                         = 289,      /*!< 289 IPCT130_0                                                        */
   RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
   WDT131_IRQn                            = 299,      /*!< 299 WDT131                                                           */
@@ -252,8 +253,8 @@ typedef enum {
 #define NRF_APPLICATION_UICREXTENDED_NS_BASE 0x00000000UL
 #define NRF_APPLICATION_ICACHEDATA_S_BASE 0x02F00000UL
 #define NRF_APPLICATION_ICACHEINFO_S_BASE 0x02F10000UL
+#define NRF_APPLICATION_BICR_NS_BASE      0x0FFF0800UL
 #define NRF_APPLICATION_UICR_NS_BASE      0x0FFF8000UL
-#define NRF_APPLICATION_BICR_NS_BASE      0x0FFF8800UL
 #define NRF_APPLICATION_DCACHEDATA_S_BASE 0x22F00000UL
 #define NRF_APPLICATION_DCACHEINFO_S_BASE 0x22F10000UL
 #define NRF_APPLICATION_ETM_NS_BASE       0xE0041000UL
@@ -297,6 +298,8 @@ typedef enum {
 #define NRF_APPLICATION_SWI7_NS_BASE      0x4205F000UL
 #define NRF_APPLICATION_BELLBOARD_NS_BASE 0x4F09A000UL
 #define NRF_APPLICATION_BELLBOARD_S_BASE  0x5F09A000UL
+#define NRF_APPLICATION_AXONS_NS_BASE     0x4F08A000UL
+#define NRF_APPLICATION_AXONS_S_BASE      0x5F08A000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
@@ -305,8 +308,8 @@ typedef enum {
 #define NRF_APPLICATION_UICREXTENDED_NS   ((NRF_UICREXTENDED_Type*)             NRF_APPLICATION_UICREXTENDED_NS_BASE)
 #define NRF_APPLICATION_ICACHEDATA_S      ((NRF_ICACHEDATA_Type*)               NRF_APPLICATION_ICACHEDATA_S_BASE)
 #define NRF_APPLICATION_ICACHEINFO_S      ((NRF_ICACHEINFO_Type*)               NRF_APPLICATION_ICACHEINFO_S_BASE)
-#define NRF_APPLICATION_UICR_NS           ((NRF_UICR_Type*)                     NRF_APPLICATION_UICR_NS_BASE)
 #define NRF_APPLICATION_BICR_NS           ((NRF_BICR_Type*)                     NRF_APPLICATION_BICR_NS_BASE)
+#define NRF_APPLICATION_UICR_NS           ((NRF_UICR_Type*)                     NRF_APPLICATION_UICR_NS_BASE)
 #define NRF_APPLICATION_DCACHEDATA_S      ((NRF_DCACHEDATA_Type*)               NRF_APPLICATION_DCACHEDATA_S_BASE)
 #define NRF_APPLICATION_DCACHEINFO_S      ((NRF_DCACHEINFO_Type*)               NRF_APPLICATION_DCACHEINFO_S_BASE)
 #define NRF_APPLICATION_ETM_NS            ((NRF_ETM_Type*)                      NRF_APPLICATION_ETM_NS_BASE)
@@ -350,6 +353,8 @@ typedef enum {
 #define NRF_APPLICATION_SWI7_NS           ((NRF_SWI_Type*)                      NRF_APPLICATION_SWI7_NS_BASE)
 #define NRF_APPLICATION_BELLBOARD_NS      ((NRF_BELLBOARD_Type*)                NRF_APPLICATION_BELLBOARD_NS_BASE)
 #define NRF_APPLICATION_BELLBOARD_S       ((NRF_BELLBOARD_Type*)                NRF_APPLICATION_BELLBOARD_S_BASE)
+#define NRF_APPLICATION_AXONS_NS          ((NRF_AXONS_Type*)                    NRF_APPLICATION_AXONS_NS_BASE)
+#define NRF_APPLICATION_AXONS_S           ((NRF_AXONS_Type*)                    NRF_APPLICATION_AXONS_S_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                    TrustZone Remapping                                    ================ */
@@ -357,8 +362,8 @@ typedef enum {
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_APPLICATION_UICREXTENDED            NRF_APPLICATION_UICREXTENDED_NS
-  #define NRF_APPLICATION_UICR                    NRF_APPLICATION_UICR_NS
   #define NRF_APPLICATION_BICR                    NRF_APPLICATION_BICR_NS
+  #define NRF_APPLICATION_UICR                    NRF_APPLICATION_UICR_NS
   #define NRF_APPLICATION_ETM                     NRF_APPLICATION_ETM_NS
   #define NRF_APPLICATION_MVDMA                   NRF_APPLICATION_MVDMA_NS
   #define NRF_APPLICATION_RAMC                    NRF_APPLICATION_RAMC_NS
@@ -376,12 +381,13 @@ typedef enum {
   #define NRF_APPLICATION_SWI6                    NRF_APPLICATION_SWI6_NS
   #define NRF_APPLICATION_SWI7                    NRF_APPLICATION_SWI7_NS
   #define NRF_APPLICATION_BELLBOARD               NRF_APPLICATION_BELLBOARD_NS
+  #define NRF_APPLICATION_AXONS                   NRF_APPLICATION_AXONS_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
   #define NRF_APPLICATION_UICREXTENDED            NRF_APPLICATION_UICREXTENDED_NS
   #define NRF_APPLICATION_ICACHEDATA              NRF_APPLICATION_ICACHEDATA_S
   #define NRF_APPLICATION_ICACHEINFO              NRF_APPLICATION_ICACHEINFO_S
-  #define NRF_APPLICATION_UICR                    NRF_APPLICATION_UICR_NS
   #define NRF_APPLICATION_BICR                    NRF_APPLICATION_BICR_NS
+  #define NRF_APPLICATION_UICR                    NRF_APPLICATION_UICR_NS
   #define NRF_APPLICATION_DCACHEDATA              NRF_APPLICATION_DCACHEDATA_S
   #define NRF_APPLICATION_DCACHEINFO              NRF_APPLICATION_DCACHEINFO_S
   #define NRF_APPLICATION_ETM                     NRF_APPLICATION_ETM_NS
@@ -417,6 +423,7 @@ typedef enum {
   #define NRF_APPLICATION_SWI6                    NRF_APPLICATION_SWI6_NS
   #define NRF_APPLICATION_SWI7                    NRF_APPLICATION_SWI7_NS
   #define NRF_APPLICATION_BELLBOARD               NRF_APPLICATION_BELLBOARD_S
+  #define NRF_APPLICATION_AXONS                   NRF_APPLICATION_AXONS_S
 #endif                                               /*!< NRF_TRUSTZONE_NONSECURE                                              */
 
 /* =========================================================================================================================== */
@@ -426,8 +433,8 @@ typedef enum {
 #ifdef NRF_APPLICATION                               /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
   #ifdef NRF_TRUSTZONE_NONSECURE                     /*!< Remap only nonsecure instances.                                      */
     #define NRF_UICREXTENDED                      NRF_APPLICATION_UICREXTENDED
-    #define NRF_UICR                              NRF_APPLICATION_UICR
     #define NRF_BICR                              NRF_APPLICATION_BICR
+    #define NRF_UICR                              NRF_APPLICATION_UICR
     #define NRF_ETM                               NRF_APPLICATION_ETM
     #define NRF_MVDMA                             NRF_APPLICATION_MVDMA
     #define NRF_RAMC                              NRF_APPLICATION_RAMC
@@ -445,12 +452,13 @@ typedef enum {
     #define NRF_SWI6                              NRF_APPLICATION_SWI6
     #define NRF_SWI7                              NRF_APPLICATION_SWI7
     #define NRF_BELLBOARD                         NRF_APPLICATION_BELLBOARD
+    #define NRF_AXONS                             NRF_APPLICATION_AXONS
   #else                                              /*!< Remap all instances.                                                 */
     #define NRF_UICREXTENDED                      NRF_APPLICATION_UICREXTENDED
     #define NRF_ICACHEDATA                        NRF_APPLICATION_ICACHEDATA
     #define NRF_ICACHEINFO                        NRF_APPLICATION_ICACHEINFO
-    #define NRF_UICR                              NRF_APPLICATION_UICR
     #define NRF_BICR                              NRF_APPLICATION_BICR
+    #define NRF_UICR                              NRF_APPLICATION_UICR
     #define NRF_DCACHEDATA                        NRF_APPLICATION_DCACHEDATA
     #define NRF_DCACHEINFO                        NRF_APPLICATION_DCACHEINFO
     #define NRF_ETM                               NRF_APPLICATION_ETM
@@ -486,6 +494,7 @@ typedef enum {
     #define NRF_SWI6                              NRF_APPLICATION_SWI6
     #define NRF_SWI7                              NRF_APPLICATION_SWI7
     #define NRF_BELLBOARD                         NRF_APPLICATION_BELLBOARD
+    #define NRF_AXONS                             NRF_APPLICATION_AXONS
   #endif                                             /*!< NRF_TRUSTZONE_NONSECURE                                              */
 #endif                                               /*!< NRF_APPLICATION                                                      */
 

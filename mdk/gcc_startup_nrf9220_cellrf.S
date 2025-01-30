@@ -105,7 +105,7 @@ __isr_vector:
     .long   SENSORADC_IRQHandler
     .long   RFTIMERSTC_IRQHandler
     .long   MIPIRFFE0_IRQHandler
-    .long   MIPIRFFE1_IRQHandler
+    .long   SX_IRQHandler
     .long   RFSERVICES_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -319,7 +319,7 @@ Default_Handler:
     IRQ  SENSORADC_IRQHandler
     IRQ  RFTIMERSTC_IRQHandler
     IRQ  MIPIRFFE0_IRQHandler
-    IRQ  MIPIRFFE1_IRQHandler
+    IRQ  SX_IRQHandler
     IRQ  RFSERVICES_IRQHandler
     IRQ  RFCORESERVICES_IRQHandler
     IRQ  GPIOTE131_IRQHandler

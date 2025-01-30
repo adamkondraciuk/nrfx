@@ -385,7 +385,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   GRTC_0_IRQHandler
     .long   GRTC_1_IRQHandler
-    .long   GRTC_2_IRQHandler
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -541,9 +541,9 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   VPR130_IRQHandler
     .long   0                           /*Reserved */
+    .long   AHBBUFFER_APP_IRQHandler
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   AHBBUFFER_CELL_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -866,7 +866,6 @@ Default_Handler:
     IRQ  GPIOTE130_1_IRQHandler
     IRQ  GRTC_0_IRQHandler
     IRQ  GRTC_1_IRQHandler
-    IRQ  GRTC_2_IRQHandler
     IRQ  MRAMC110_IRQHandler
     IRQ  MRAMC111_IRQHandler
     IRQ  OTPC_IRQHandler
@@ -876,6 +875,8 @@ Default_Handler:
     IRQ  TIMER120_IRQHandler
     IRQ  SPIM120_SPIS120_UARTE120_IRQHandler
     IRQ  VPR130_IRQHandler
+    IRQ  AHBBUFFER_APP_IRQHandler
+    IRQ  AHBBUFFER_CELL_IRQHandler
     IRQ  IPCT130_0_IRQHandler
     IRQ  RTC130_IRQHandler
     IRQ  WDT131_IRQHandler

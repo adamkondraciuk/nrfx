@@ -80,6 +80,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_MICR_NS_BASE                  0x0FFF6000UL
 #define NRF_FICR_NS_BASE                  0x0FFFE000UL
 #define NRF_STMDATA_NS_BASE               0xA0000000UL
 #define NRF_STMDATA_S_BASE                0xA0000000UL
@@ -105,8 +106,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_GPIOTE130_S_BASE              0x5F934000UL
 #define NRF_GRTC_NS_BASE                  0x4F99C000UL
 #define NRF_GRTC_S_BASE                   0x5F99C000UL
-#define NRF_AXONS_NS_BASE                 0x4F08A000UL
-#define NRF_AXONS_S_BASE                  0x5F08A000UL
 #define NRF_MRAMC110_NS_BASE              0x4F092000UL
 #define NRF_MRAMC110_S_BASE               0x5F092000UL
 #define NRF_MRAMC111_NS_BASE              0x4F093000UL
@@ -132,6 +131,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_UARTE120_S_BASE               0x5F8E6000UL
 #define NRF_VPR130_NS_BASE                0x4F908000UL
 #define NRF_VPR130_S_BASE                 0x5F908000UL
+#define NRF_AHBBUFFER_APP_NS_BASE         0x4F90A000UL
+#define NRF_AHBBUFFER_APP_S_BASE          0x5F90A000UL
+#define NRF_AHBBUFFER_CELL_NS_BASE        0x4F90C000UL
+#define NRF_AHBBUFFER_CELL_S_BASE         0x5F90C000UL
 #define NRF_IPCT130_NS_BASE               0x4F921000UL
 #define NRF_IPCT130_S_BASE                0x5F921000UL
 #define NRF_DPPIC130_NS_BASE              0x4F922000UL
@@ -241,6 +244,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_MICR_NS                       ((NRF_MICR_Type*)                     NRF_MICR_NS_BASE)
 #define NRF_FICR_NS                       ((NRF_FICR_Type*)                     NRF_FICR_NS_BASE)
 #define NRF_STMDATA_NS                    ((NRF_STMDATA_Type*)                  NRF_STMDATA_NS_BASE)
 #define NRF_STMDATA_S                     ((NRF_STMDATA_Type*)                  NRF_STMDATA_S_BASE)
@@ -266,8 +270,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_GPIOTE130_S                   ((NRF_GPIOTE_Type*)                   NRF_GPIOTE130_S_BASE)
 #define NRF_GRTC_NS                       ((NRF_GRTC_Type*)                     NRF_GRTC_NS_BASE)
 #define NRF_GRTC_S                        ((NRF_GRTC_Type*)                     NRF_GRTC_S_BASE)
-#define NRF_AXONS_NS                      ((NRF_AXONS_Type*)                    NRF_AXONS_NS_BASE)
-#define NRF_AXONS_S                       ((NRF_AXONS_Type*)                    NRF_AXONS_S_BASE)
 #define NRF_MRAMC110_NS                   ((NRF_MRAMC_Type*)                    NRF_MRAMC110_NS_BASE)
 #define NRF_MRAMC110_S                    ((NRF_MRAMC_Type*)                    NRF_MRAMC110_S_BASE)
 #define NRF_MRAMC111_NS                   ((NRF_MRAMC_Type*)                    NRF_MRAMC111_NS_BASE)
@@ -293,6 +295,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_UARTE120_S                    ((NRF_UARTE_Type*)                    NRF_UARTE120_S_BASE)
 #define NRF_VPR130_NS                     ((NRF_VPR_Type*)                      NRF_VPR130_NS_BASE)
 #define NRF_VPR130_S                      ((NRF_VPR_Type*)                      NRF_VPR130_S_BASE)
+#define NRF_AHBBUFFER_APP_NS              ((NRF_AHBBUFFER_Type*)                NRF_AHBBUFFER_APP_NS_BASE)
+#define NRF_AHBBUFFER_APP_S               ((NRF_AHBBUFFER_Type*)                NRF_AHBBUFFER_APP_S_BASE)
+#define NRF_AHBBUFFER_CELL_NS             ((NRF_AHBBUFFER_Type*)                NRF_AHBBUFFER_CELL_NS_BASE)
+#define NRF_AHBBUFFER_CELL_S              ((NRF_AHBBUFFER_Type*)                NRF_AHBBUFFER_CELL_S_BASE)
 #define NRF_IPCT130_NS                    ((NRF_IPCT_Type*)                     NRF_IPCT130_NS_BASE)
 #define NRF_IPCT130_S                     ((NRF_IPCT_Type*)                     NRF_IPCT130_S_BASE)
 #define NRF_DPPIC130_NS                   ((NRF_DPPIC_Type*)                    NRF_DPPIC130_NS_BASE)
@@ -403,6 +409,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* =========================================================================================================================== */
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
+  #define NRF_MICR                                NRF_MICR_NS
   #define NRF_FICR                                NRF_FICR_NS
   #define NRF_STMDATA                             NRF_STMDATA_NS
   #define NRF_TDDCONF                             NRF_TDDCONF_NS
@@ -424,7 +431,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_GPR                                 NRF_GPR_NS
   #define NRF_GPIOTE130                           NRF_GPIOTE130_NS
   #define NRF_GRTC                                NRF_GRTC_NS
-  #define NRF_AXONS                               NRF_AXONS_NS
   #define NRF_MRAMC110                            NRF_MRAMC110_NS
   #define NRF_MRAMC111                            NRF_MRAMC111_NS
   #define NRF_VPR120                              NRF_VPR120_NS
@@ -438,6 +444,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_SPIS120                             NRF_SPIS120_NS
   #define NRF_UARTE120                            NRF_UARTE120_NS
   #define NRF_VPR130                              NRF_VPR130_NS
+  #define NRF_AHBBUFFER_APP                       NRF_AHBBUFFER_APP_NS
+  #define NRF_AHBBUFFER_CELL                      NRF_AHBBUFFER_CELL_NS
   #define NRF_IPCT130                             NRF_IPCT130_NS
   #define NRF_DPPIC130                            NRF_DPPIC130_NS
   #define NRF_MUTEX130                            NRF_MUTEX130_NS
@@ -491,6 +499,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TWIS133                             NRF_TWIS133_NS
   #define NRF_UARTE133                            NRF_UARTE133_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
+  #define NRF_MICR                                NRF_MICR_NS
   #define NRF_FICR                                NRF_FICR_NS
   #define NRF_STMDATA                             NRF_STMDATA_S
   #define NRF_TDDCONF                             NRF_TDDCONF_S
@@ -512,7 +521,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_GPR                                 NRF_GPR_NS
   #define NRF_GPIOTE130                           NRF_GPIOTE130_S
   #define NRF_GRTC                                NRF_GRTC_S
-  #define NRF_AXONS                               NRF_AXONS_S
   #define NRF_MRAMC110                            NRF_MRAMC110_S
   #define NRF_MRAMC111                            NRF_MRAMC111_S
   #define NRF_OTPC                                NRF_OTPC_S
@@ -527,6 +535,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_SPIS120                             NRF_SPIS120_S
   #define NRF_UARTE120                            NRF_UARTE120_S
   #define NRF_VPR130                              NRF_VPR130_S
+  #define NRF_AHBBUFFER_APP                       NRF_AHBBUFFER_APP_S
+  #define NRF_AHBBUFFER_CELL                      NRF_AHBBUFFER_CELL_S
   #define NRF_IPCT130                             NRF_IPCT130_S
   #define NRF_DPPIC130                            NRF_DPPIC130_S
   #define NRF_MUTEX130                            NRF_MUTEX130_NS

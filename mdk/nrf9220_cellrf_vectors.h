@@ -84,7 +84,7 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void SENSORADC_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void RFTIMERSTC_IRQHandler                                       (void);
  __HANDLER("Default_Handler") void MIPIRFFE0_IRQHandler                                        (void);
- __HANDLER("Default_Handler") void MIPIRFFE1_IRQHandler                                        (void);
+ __HANDLER("Default_Handler") void SX_IRQHandler                                               (void);
  __HANDLER("Default_Handler") void RFSERVICES_IRQHandler                                       (void);
  __HANDLER("Default_Handler") void RFCORESERVICES_IRQHandler                                   (void);
  __HANDLER("Default_Handler") void GPIOTE131_IRQHandler                                        (void);
@@ -143,7 +143,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     SENSORADC_IRQHandler,
     RFTIMERSTC_IRQHandler,
     MIPIRFFE0_IRQHandler,
-    MIPIRFFE1_IRQHandler,
+    SX_IRQHandler,
     RFSERVICES_IRQHandler,
     0,
     0,

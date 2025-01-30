@@ -98,7 +98,6 @@ typedef enum {
   GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE130_1                                                      */
   GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
-  GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
   MPC200_IRQn                            = 124,      /*!< 124 MPC200                                                           */
   SPU200_SPU210_IRQn                     = 125,      /*!< 125 SPU200_SPU210                                                    */
   CTRLAP_IRQn                            = 126,      /*!< 126 CTRLAP                                                           */
@@ -121,6 +120,9 @@ typedef enum {
   SPU130_IRQn                            = 256,      /*!< 256 SPU130                                                           */
   MPC130_IRQn                            = 257,      /*!< 257 MPC130                                                           */
   VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
+  AHBBUFFER_SEC_IRQn                     = 265,      /*!< 265 AHBBUFFER_SEC                                                    */
+  AHBBUFFER_APP_IRQn                     = 266,      /*!< 266 AHBBUFFER_APP                                                    */
+  AHBBUFFER_CELL_IRQn                    = 268,      /*!< 268 AHBBUFFER_CELL                                                   */
   SPU131_IRQn                            = 288,      /*!< 288 SPU131                                                           */
   IPCT130_0_IRQn                         = 289,      /*!< 289 IPCT130_0                                                        */
   RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
@@ -278,7 +280,7 @@ typedef enum {
 #define NRF_SECURE_ICACHEDATA_S_BASE      0x01F00000UL
 #define NRF_SECURE_ICACHEINFO_S_BASE      0x01F10000UL
 #define NRF_SECURE_SICR_S_BASE            0x0E000000UL
-#define NRF_SECURE_RICR_S_BASE            0x0FFFC000UL
+#define NRF_SECURE_RICR_S_BASE            0x0FFFA000UL
 #define NRF_SECURE_DCACHEDATA_S_BASE      0x21F00000UL
 #define NRF_SECURE_DCACHEINFO_S_BASE      0x21F10000UL
 #define NRF_SECURE_CRACENCORE_S_BASE      0x51800000UL
@@ -355,6 +357,7 @@ typedef enum {
 #define NRF_SECURE_SPU122_S_BASE          0x5F8E0000UL
 #define NRF_SECURE_SPU130_S_BASE          0x5F900000UL
 #define NRF_SECURE_MPC130_S_BASE          0x5F901000UL
+#define NRF_SECURE_AHBBUFFER_SEC_NS_BASE  0x5F909000UL
 #define NRF_SECURE_SPU131_S_BASE          0x5F920000UL
 #define NRF_SECURE_IPCMAP_S_BASE          0x5F923000UL
 #define NRF_SECURE_IRQMAP_S_BASE          0x5F924000UL
@@ -449,6 +452,7 @@ typedef enum {
 #define NRF_SECURE_SPU122_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU122_S_BASE)
 #define NRF_SECURE_SPU130_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU130_S_BASE)
 #define NRF_SECURE_MPC130_S               ((NRF_MPC_Type*)                      NRF_SECURE_MPC130_S_BASE)
+#define NRF_SECURE_AHBBUFFER_SEC_NS       ((NRF_AHBBUFFER_Type*)                NRF_SECURE_AHBBUFFER_SEC_NS_BASE)
 #define NRF_SECURE_SPU131_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU131_S_BASE)
 #define NRF_SECURE_IPCMAP_S               ((NRF_IPCMAP_Type*)                   NRF_SECURE_IPCMAP_S_BASE)
 #define NRF_SECURE_IRQMAP_S               ((NRF_IRQMAP_Type*)                   NRF_SECURE_IRQMAP_S_BASE)
@@ -496,6 +500,7 @@ typedef enum {
   #define NRF_SECURE_SPU200                       NRF_SECURE_SPU200_NS
   #define NRF_SECURE_SPU210                       NRF_SECURE_SPU210_NS
   #define NRF_SECURE_CTRLAP                       NRF_SECURE_CTRLAP_NS
+  #define NRF_SECURE_AHBBUFFER_SEC                NRF_SECURE_AHBBUFFER_SEC_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
   #define NRF_SECURE_ICACHEDATA                   NRF_SECURE_ICACHEDATA_S
   #define NRF_SECURE_ICACHEINFO                   NRF_SECURE_ICACHEINFO_S
@@ -559,6 +564,7 @@ typedef enum {
   #define NRF_SECURE_SPU122                       NRF_SECURE_SPU122_S
   #define NRF_SECURE_SPU130                       NRF_SECURE_SPU130_S
   #define NRF_SECURE_MPC130                       NRF_SECURE_MPC130_S
+  #define NRF_SECURE_AHBBUFFER_SEC                NRF_SECURE_AHBBUFFER_SEC_NS
   #define NRF_SECURE_SPU131                       NRF_SECURE_SPU131_S
   #define NRF_SECURE_IPCMAP                       NRF_SECURE_IPCMAP_S
   #define NRF_SECURE_IRQMAP                       NRF_SECURE_IRQMAP_S
@@ -608,6 +614,7 @@ typedef enum {
     #define NRF_SPU200                            NRF_SECURE_SPU200
     #define NRF_SPU210                            NRF_SECURE_SPU210
     #define NRF_CTRLAP                            NRF_SECURE_CTRLAP
+    #define NRF_AHBBUFFER_SEC                     NRF_SECURE_AHBBUFFER_SEC
   #else                                              /*!< Remap all instances.                                                 */
     #define NRF_ICACHEDATA                        NRF_SECURE_ICACHEDATA
     #define NRF_ICACHEINFO                        NRF_SECURE_ICACHEINFO
@@ -671,6 +678,7 @@ typedef enum {
     #define NRF_SPU122                            NRF_SECURE_SPU122
     #define NRF_SPU130                            NRF_SECURE_SPU130
     #define NRF_MPC130                            NRF_SECURE_MPC130
+    #define NRF_AHBBUFFER_SEC                     NRF_SECURE_AHBBUFFER_SEC
     #define NRF_SPU131                            NRF_SECURE_SPU131
     #define NRF_IPCMAP                            NRF_SECURE_IPCMAP
     #define NRF_IRQMAP                            NRF_SECURE_IRQMAP

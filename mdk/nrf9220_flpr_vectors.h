@@ -132,7 +132,6 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void GPIOTE130_1_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void GRTC_0_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void GRTC_1_IRQHandler                                           (void);
- __HANDLER("Default_Handler") void GRTC_2_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void AXONS_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void MRAMC110_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void MRAMC111_IRQHandler                                         (void);
@@ -143,6 +142,8 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void TIMER120_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void SPIM120_SPIS120_UARTE120_IRQHandler                         (void);
  __HANDLER("Default_Handler") void VPR130_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void AHBBUFFER_APP_IRQHandler                                    (void);
+ __HANDLER("Default_Handler") void AHBBUFFER_CELL_IRQHandler                                   (void);
  __HANDLER("Default_Handler") void IPCT130_0_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void RTC130_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void WDT131_IRQHandler                                           (void);
@@ -311,7 +312,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     GRTC_0_IRQHandler,
     GRTC_1_IRQHandler,
-    GRTC_2_IRQHandler,
+    0,
     0,
     0,
     0,
@@ -467,9 +468,9 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     VPR130_IRQHandler,
     0,
+    AHBBUFFER_APP_IRQHandler,
     0,
-    0,
-    0,
+    AHBBUFFER_CELL_IRQHandler,
     0,
     0,
     0,

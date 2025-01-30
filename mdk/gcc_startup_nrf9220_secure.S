@@ -200,7 +200,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   GRTC_0_IRQHandler
     .long   GRTC_1_IRQHandler
-    .long   GRTC_2_IRQHandler
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -355,10 +355,10 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   VPR130_IRQHandler
+    .long   AHBBUFFER_SEC_IRQHandler
+    .long   AHBBUFFER_APP_IRQHandler
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   AHBBUFFER_CELL_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -816,7 +816,6 @@ Default_Handler:
     IRQ  GPIOTE130_1_IRQHandler
     IRQ  GRTC_0_IRQHandler
     IRQ  GRTC_1_IRQHandler
-    IRQ  GRTC_2_IRQHandler
     IRQ  MPC200_IRQHandler
     IRQ  SPU200_SPU210_IRQHandler
     IRQ  CTRLAP_IRQHandler
@@ -839,6 +838,9 @@ Default_Handler:
     IRQ  SPU130_IRQHandler
     IRQ  MPC130_IRQHandler
     IRQ  VPR130_IRQHandler
+    IRQ  AHBBUFFER_SEC_IRQHandler
+    IRQ  AHBBUFFER_APP_IRQHandler
+    IRQ  AHBBUFFER_CELL_IRQHandler
     IRQ  SPU131_IRQHandler
     IRQ  IPCT130_0_IRQHandler
     IRQ  RTC130_IRQHandler

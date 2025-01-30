@@ -124,7 +124,6 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void GPIOTE130_1_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void GRTC_0_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void GRTC_1_IRQHandler                                           (void);
- __HANDLER("Default_Handler") void GRTC_2_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void MPC200_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void SPU200_SPU210_IRQHandler                                    (void);
  __HANDLER("Default_Handler") void CTRLAP_IRQHandler                                           (void);
@@ -147,6 +146,9 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void SPU130_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void MPC130_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void VPR130_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void AHBBUFFER_SEC_IRQHandler                                    (void);
+ __HANDLER("Default_Handler") void AHBBUFFER_APP_IRQHandler                                    (void);
+ __HANDLER("Default_Handler") void AHBBUFFER_CELL_IRQHandler                                   (void);
  __HANDLER("Default_Handler") void SPU131_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void IPCT130_0_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void RTC130_IRQHandler                                           (void);
@@ -321,7 +323,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     GRTC_0_IRQHandler,
     GRTC_1_IRQHandler,
-    GRTC_2_IRQHandler,
+    0,
     0,
     0,
     0,
@@ -476,10 +478,10 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     VPR130_IRQHandler,
+    AHBBUFFER_SEC_IRQHandler,
+    AHBBUFFER_APP_IRQHandler,
     0,
-    0,
-    0,
-    0,
+    AHBBUFFER_CELL_IRQHandler,
     0,
     0,
     0,

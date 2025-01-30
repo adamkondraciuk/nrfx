@@ -76,7 +76,7 @@ typedef enum {
   SENSORADC_IRQn                         = 12,       /*!< 12 SENSORADC                                                         */
   RFTIMERSTC_IRQn                        = 13,       /*!< 13 RFTIMERSTC                                                        */
   MIPIRFFE0_IRQn                         = 14,       /*!< 14 MIPIRFFE0                                                         */
-  MIPIRFFE1_IRQn                         = 15,       /*!< 15 MIPIRFFE1                                                         */
+  SX_IRQn                                = 15,       /*!< 15 SX                                                                */
   RFSERVICES_IRQn                        = 16,       /*!< 16 RFSERVICES                                                        */
   RFCORESERVICES_IRQn                    = 19,       /*!< 19 RFCORESERVICES                                                    */
   GPIOTE131_IRQn                         = 21,       /*!< 21 GPIOTE131                                                         */
@@ -162,7 +162,6 @@ typedef enum {
 
 #define NRF_CELLRF_PCGCS0_BASE            0x46000000UL
 #define NRF_CELLRF_RAMCM0_BASE            0x46001000UL
-#define NRF_CELLRF_RAMCDATA_BASE          0x46002000UL
 #define NRF_CELLRF_RAMCIPC_BASE           0x46003000UL
 #define NRF_CELLRF_PCGCS1_BASE            0x46004000UL
 #define NRF_CELLRF_MUTEX_BASE             0x46005000UL
@@ -176,7 +175,6 @@ typedef enum {
 #define NRF_CELLRF_MEMCONF_BASE           0x46014000UL
 #define NRF_CELLRF_RFTIMERTX_BASE         0x46121000UL
 #define NRF_CELLRF_RFTIMERRX_BASE         0x46132000UL
-#define NRF_CELLRF_RFPLL_BASE             0x46147000UL
 #define NRF_CELLRF_DPPIC_BASE             0x46150000UL
 #define NRF_CELLRF_RAMCTX_BASE            0x46151000UL
 #define NRF_CELLRF_RAMCRX_BASE            0x46152000UL
@@ -195,7 +193,7 @@ typedef enum {
 #define NRF_CELLRF_SENSORADC_BASE         0x46146000UL
 #define NRF_CELLRF_RFTIMERSTC_BASE        0x46148000UL
 #define NRF_CELLRF_MIPIRFFE0_BASE         0x46149000UL
-#define NRF_CELLRF_MIPIRFFE1_BASE         0x4614A000UL
+#define NRF_CELLRF_SX_BASE                0x46147000UL
 #define NRF_CELLRF_RFSERVICES_BASE        0x46145000UL
 #define NRF_CELLRF_RFCORESERVICES_BASE    0x46009000UL
 #define NRF_CELLRF_BELLBOARD_BASE         0x4F09E000UL
@@ -207,7 +205,6 @@ typedef enum {
 
 #define NRF_CELLRF_PCGCS0                 ((NRF_PCGCSLAVE_Type*)                NRF_CELLRF_PCGCS0_BASE)
 #define NRF_CELLRF_RAMCM0                 ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCM0_BASE)
-#define NRF_CELLRF_RAMCDATA               ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCDATA_BASE)
 #define NRF_CELLRF_RAMCIPC                ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCIPC_BASE)
 #define NRF_CELLRF_PCGCS1                 ((NRF_PCGCSLAVE_Type*)                NRF_CELLRF_PCGCS1_BASE)
 #define NRF_CELLRF_MUTEX                  ((NRF_MUTEX_Type*)                    NRF_CELLRF_MUTEX_BASE)
@@ -221,7 +218,6 @@ typedef enum {
 #define NRF_CELLRF_MEMCONF                ((NRF_MEMCONF_Type*)                  NRF_CELLRF_MEMCONF_BASE)
 #define NRF_CELLRF_RFTIMERTX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERTX_BASE)
 #define NRF_CELLRF_RFTIMERRX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERRX_BASE)
-#define NRF_CELLRF_RFPLL                  ((NRF_RFPLL_Type*)                    NRF_CELLRF_RFPLL_BASE)
 #define NRF_CELLRF_DPPIC                  ((NRF_DPPIC_Type*)                    NRF_CELLRF_DPPIC_BASE)
 #define NRF_CELLRF_RAMCTX                 ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCTX_BASE)
 #define NRF_CELLRF_RAMCRX                 ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCRX_BASE)
@@ -240,7 +236,7 @@ typedef enum {
 #define NRF_CELLRF_SENSORADC              ((NRF_SENSORADC_Type*)                NRF_CELLRF_SENSORADC_BASE)
 #define NRF_CELLRF_RFTIMERSTC             ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERSTC_BASE)
 #define NRF_CELLRF_MIPIRFFE0              ((NRF_MIPIRFFE_Type*)                 NRF_CELLRF_MIPIRFFE0_BASE)
-#define NRF_CELLRF_MIPIRFFE1              ((NRF_MIPIRFFE_Type*)                 NRF_CELLRF_MIPIRFFE1_BASE)
+#define NRF_CELLRF_SX                     ((NRF_SX_Type*)                       NRF_CELLRF_SX_BASE)
 #define NRF_CELLRF_RFSERVICES             ((NRF_RFSERVICES_Type*)               NRF_CELLRF_RFSERVICES_BASE)
 #define NRF_CELLRF_RFCORESERVICES         ((NRF_RFCORESERVICES_Type*)           NRF_CELLRF_RFCORESERVICES_BASE)
 #define NRF_CELLRF_BELLBOARD              ((NRF_BELLBOARD_Type*)                NRF_CELLRF_BELLBOARD_BASE)
@@ -253,7 +249,6 @@ typedef enum {
 #ifdef NRF_CELLRF                                    /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
   #define NRF_PCGCS0                              NRF_CELLRF_PCGCS0
   #define NRF_RAMCM0                              NRF_CELLRF_RAMCM0
-  #define NRF_RAMCDATA                            NRF_CELLRF_RAMCDATA
   #define NRF_RAMCIPC                             NRF_CELLRF_RAMCIPC
   #define NRF_PCGCS1                              NRF_CELLRF_PCGCS1
   #define NRF_MUTEX                               NRF_CELLRF_MUTEX
@@ -267,7 +262,6 @@ typedef enum {
   #define NRF_MEMCONF                             NRF_CELLRF_MEMCONF
   #define NRF_RFTIMERTX                           NRF_CELLRF_RFTIMERTX
   #define NRF_RFTIMERRX                           NRF_CELLRF_RFTIMERRX
-  #define NRF_RFPLL                               NRF_CELLRF_RFPLL
   #define NRF_DPPIC                               NRF_CELLRF_DPPIC
   #define NRF_RAMCTX                              NRF_CELLRF_RAMCTX
   #define NRF_RAMCRX                              NRF_CELLRF_RAMCRX
@@ -286,7 +280,7 @@ typedef enum {
   #define NRF_SENSORADC                           NRF_CELLRF_SENSORADC
   #define NRF_RFTIMERSTC                          NRF_CELLRF_RFTIMERSTC
   #define NRF_MIPIRFFE0                           NRF_CELLRF_MIPIRFFE0
-  #define NRF_MIPIRFFE1                           NRF_CELLRF_MIPIRFFE1
+  #define NRF_SX                                  NRF_CELLRF_SX
   #define NRF_RFSERVICES                          NRF_CELLRF_RFSERVICES
   #define NRF_RFCORESERVICES                      NRF_CELLRF_RFCORESERVICES
   #define NRF_BELLBOARD                           NRF_CELLRF_BELLBOARD

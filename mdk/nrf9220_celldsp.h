@@ -89,7 +89,6 @@ typedef enum {
   GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE130_1                                                      */
   GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
-  GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
   MRAMC110_IRQn                          = 146,      /*!< 146 MRAMC110                                                         */
   MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
   OTPC_IRQn                              = 197,      /*!< 197 OTPC                                                             */
@@ -99,6 +98,8 @@ typedef enum {
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   SPIM120_SPIS120_UARTE120_IRQn          = 230,      /*!< 230 SPIM120_SPIS120_UARTE120                                         */
   VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
+  AHBBUFFER_APP_IRQn                     = 266,      /*!< 266 AHBBUFFER_APP                                                    */
+  AHBBUFFER_CELL_IRQn                    = 268,      /*!< 268 AHBBUFFER_CELL                                                   */
   IPCT130_0_IRQn                         = 289,      /*!< 289 IPCT130_0                                                        */
   RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
   WDT131_IRQn                            = 299,      /*!< 299 WDT131                                                           */
