@@ -719,26 +719,27 @@
             #define GPIOTE_IRQ_GROUP 0
         #elif defined(NRF_APPLICATION)
             #define GRTC_IRQ_GROUP 2
-            #define GPIOTE_IRQ_GROUP 2
+            #define GPIOTE_IRQ_GROUP 0
         #elif defined(NRF_CELLCORE)
             #define GRTC_IRQ_GROUP 5
-            #define GPIOTE_IRQ_GROUP 4
+            #define GPIOTE_IRQ_GROUP 0
         #endif
     #elif defined(NRF_SYSCTRL)
         #define GRTC_IRQ_GROUP 4
-        #define GPIOTE_IRQ_GROUP 6
+        #define GPIOTE_IRQ_GROUP 0
     #elif defined(NRF_PPR)
         #define GRTC_IRQ_GROUP 7
+        #define GPIOTE_IRQ_GROUP 0
     #else
         #if defined(NRF_SECURE)
             #define GRTC_IRQ_GROUP 1
             #define GPIOTE_IRQ_GROUP 1
         #elif defined(NRF_APPLICATION)
             #define GRTC_IRQ_GROUP 3
-            #define GPIOTE_IRQ_GROUP 3
+            #define GPIOTE_IRQ_GROUP 1
         #elif defined(NRF_CELLCORE)
             #define GRTC_IRQ_GROUP 6
-            #define GPIOTE_IRQ_GROUP 5
+            #define GPIOTE_IRQ_GROUP 1
         #endif
     #endif
 
