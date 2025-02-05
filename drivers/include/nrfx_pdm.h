@@ -389,12 +389,12 @@ nrfx_err_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length);
 #ifndef NRFX_DECLARE_ONLY
 NRFX_STATIC_INLINE uint32_t nrfx_pdm_task_address_get(nrf_pdm_task_t task)
 {
-    return nrf_pdm_task_address_get(NRF_PDM0, task);
+    return nrf_pdm_task_address_get(NRFX_CONCAT(NRF_PDM, NRF_PDM_INDEX), task);
 }
 
 NRFX_STATIC_INLINE bool nrfx_pdm_enable_check(void)
 {
-    return nrf_pdm_enable_check(NRF_PDM0);
+    return nrf_pdm_enable_check(NRFX_CONCAT(NRF_PDM, NRF_PDM_INDEX));
 }
 #endif // NRFX_DECLARE_ONLY
 
