@@ -416,9 +416,9 @@ typedef enum
     NRF_CLOCK_INT_HF192M_STARTED_MASK  = CLOCK_INTENSET_HFCLK192MSTARTED_Msk,  /**< Interrupt on HFCLK192MSTARTED event. */
 #endif
 #if NRF_CLOCK_HAS_XO_TUNE
-     NRF_CLOCK_INT_XOTUNED_MASK        = CLOCK_INTENSET_XOTUNED_Msk,          /**< HFXO tuning is done. */
-     NRF_CLOCK_INT_XOTUNEERROR_MASK    = CLOCK_INTENSET_XOTUNEERROR_Msk,      /**< HFXO quality issue detected, XOTUNE is needed. */
-     NRF_CLOCK_INT_XOTUNEFAILED_MASK   = CLOCK_INTENSET_XOTUNEFAILED_Msk,     /**< HFXO tuning could not be completed. */
+     NRF_CLOCK_INT_XOTUNED_MASK        = CLOCK_INTENSET_XOTUNED_Msk,           /**< HFXO tuning is done. */
+     NRF_CLOCK_INT_XOTUNEERROR_MASK    = CLOCK_INTENSET_XOTUNEERROR_Msk,       /**< HFXO quality issue detected, XOTUNE is needed. */
+     NRF_CLOCK_INT_XOTUNEFAILED_MASK   = CLOCK_INTENSET_XOTUNEFAILED_Msk,      /**< HFXO tuning could not be completed. */
 #endif
 } nrf_clock_int_mask_t;
 

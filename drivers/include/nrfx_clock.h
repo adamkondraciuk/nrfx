@@ -234,7 +234,7 @@ nrfx_err_t nrfx_clock_xo_tune_start(void);
 /**
  * @brief Function for aborting tune of crystal HFCLK.
  *
- * This function aborts tuning process. 
+ * This function aborts tuning process.
  *
  * @retval NRFX_SUCCESS             The procedure is successful.
  * @retval NRFX_ERROR_INVALID_STATE The high-frequency XO clock is off or operation is not in progress.

@@ -418,8 +418,8 @@ void nrfx_clock_start(nrf_clock_domain_t domain)
             event    = NRF_CLOCK_EVENT_HFCLKSTARTED;
             int_mask = NRF_CLOCK_INT_HF_STARTED_MASK |
 #if NRF_CLOCK_HAS_XO_TUNE
-                       NRF_CLOCK_INT_XOTUNED_MASK | 
-                       NRF_CLOCK_INT_XOTUNEERROR_MASK | 
+                       NRF_CLOCK_INT_XOTUNED_MASK |
+                       NRF_CLOCK_INT_XOTUNEERROR_MASK |
                        NRF_CLOCK_INT_XOTUNEFAILED_MASK |
 #endif
                        0;
@@ -564,11 +564,11 @@ nrfx_err_t nrfx_clock_xo_tune_start(void)
     if (!m_clock_cb.event_handler)
     {
         bool evt_xotuned;
-        bool evt_xotunefailed; 
+        bool evt_xotunefailed;
         do
         {
             evt_xotuned = nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_XOTUNED);
-            evt_xotunefailed = nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_XOTUNEFAILED); 
+            evt_xotunefailed = nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_XOTUNEFAILED);
         } while (!(evt_xotuned | evt_xotunefailed));
         m_clock_cb.xo_tune_in_progress = false;
 
@@ -836,7 +836,7 @@ void nrfx_clock_irq_handler(void)
         m_clock_cb.event_handler(NRFX_CLOCK_EVT_XO_TUNED);
     }
 
-    if (nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_XOTUNEERROR) && 
+    if (nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_XOTUNEERROR) &&
         nrf_clock_int_enable_check(NRF_CLOCK, NRF_CLOCK_INT_XOTUNEERROR_MASK))
     {
         nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_XOTUNEERROR);
