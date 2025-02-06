@@ -80,8 +80,8 @@ typedef struct
 #if NRF_PDM_HAS_RATIO_CONFIG
     nrf_pdm_ratio_t   ratio;              ///< Ratio between PDM_CLK and output sample rate.
 #endif
-#if NRF_PDM_HAS_MCLKCONFIG
-    nrf_pdm_mclksrc_t mclksrc;            ///< Master clock source selection.
+#if NRF_PDM_HAS_SELECTABLE_CLOCK
+    nrf_pdm_mclksrc_t mclksrc;            ///< Clock source selection.
 #endif
     bool              skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
                                           /**< When set to true, the driver does not modify
@@ -126,7 +126,7 @@ typedef struct
     .interrupt_priority = NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY, \
     NRFX_COND_CODE_1(NRF_PDM_HAS_RATIO_CONFIG,                  \
                      (.ratio = NRF_PDM_RATIO_64X,), ())         \
-    NRFX_COND_CODE_1(NRF_PDM_HAS_MCLKCONFIG,                    \
+    NRFX_COND_CODE_1(NRF_PDM_HAS_SELECTABLE_CLOCK,              \
                      (.mclksrc = NRF_PDM_MCLKSRC_PCLK32M,), ()) \
 }
 
