@@ -545,6 +545,24 @@
 #endif
 
 /**
+ * @brief NRFX_PDM20_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PDM20_ENABLED
+#define NRFX_PDM20_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PDM21_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_PDM21_ENABLED
+#define NRFX_PDM21_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_POWER_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
