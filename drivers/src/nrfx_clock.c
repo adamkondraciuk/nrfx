@@ -768,7 +768,7 @@ void nrfx_clock_irq_handler(void)
     {
         nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_PLLSTARTED);
         NRFX_LOG_DEBUG("Event: NRF_CLOCK_EVENT_PLLSTARTED");
-        nrf_clock_int_disable(NRF_CLOCK, NRFX_CLOCK_INT_PLL_STARTED_MASK);
+        nrf_clock_int_disable(NRF_CLOCK, NRF_CLOCK_INT_PLL_STARTED_MASK);
         m_clock_cb.event_handler(NRFX_CLOCK_EVT_PLL_STARTED);
     }
 #endif
