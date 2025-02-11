@@ -206,6 +206,12 @@ static void clock_stop(nrf_clock_domain_t domain)
     nrf_clock_int_disable(NRF_CLOCK, int_mask);
     nrf_clock_task_trigger(NRF_CLOCK, task);
     nrf_clock_event_clear(NRF_CLOCK, event);
+#if NRFX_CHECK(NRF54L_ERRATA_39_ENABLE_WORKAROUND)
+    if (nrf54l_errata_39() && (domain == NRF_CLOCK_DOMAIN_HFCLK))
+    {
+        nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_PLLSTOP);
+    }
+#endif
 
     bool stopped;
     nrf_clock_hfclk_t clk_src = NRF_CLOCK_HFCLK_HIGH_ACCURACY;
@@ -424,6 +430,12 @@ void nrfx_clock_start(nrf_clock_domain_t domain)
 #endif
                        0;
             task     = NRF_CLOCK_TASK_HFCLKSTART;
+#if NRFX_CHECK(NRF54L_ERRATA_39_ENABLE_WORKAROUND)
+            if (nrf54l_errata_39())
+            {
+                nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_PLLSTART);
+            }
+#endif
             break;
 #if NRF_CLOCK_HAS_HFCLK192M
         case NRF_CLOCK_DOMAIN_HFCLK192M:
