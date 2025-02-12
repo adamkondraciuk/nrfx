@@ -574,6 +574,33 @@ nrfx_err_t nrfx_clock_is_calibrating(void)
     return NRFX_SUCCESS;
 }
 
+#if NRF_CLOCK_HAS_CALIBRATION_TIMER && NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED)
+void nrfx_clock_calibration_timer_start(uint8_t interval)
+{
+    nrf_clock_cal_timer_timeout_set(NRF_CLOCK, interval);
+    nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO);
+
+    nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_CTSTART);
+    if (m_clock_cb.event_handler)
+    {
+        nrf_clock_int_enable(NRF_CLOCK, NRF_CLOCK_INT_CTTO_MASK);
+    }
+    else
+    {
+        while (!nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO))
+        {}
+        nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO);
+    }
+}
+
+void nrfx_clock_calibration_timer_stop(void)
+{
+    nrf_clock_int_disable(NRF_CLOCK, NRF_CLOCK_INT_CTTO_MASK);
+    nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_CTSTOP);
+}
+#endif // NRF_CLOCK_HAS_CALIBRATION_TIMER && NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED)
+#endif // NRF_CLOCK_HAS_CALIBRATION && NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
+
 #if NRF_CLOCK_HAS_XO_TUNE
 nrfx_err_t nrfx_clock_xo_tune_start(void)
 {
@@ -652,33 +679,6 @@ bool nrfx_clock_xo_tune_error_check(void)
 }
 
 #endif // NRF_CLOCK_HAS_XO
-
-#if NRF_CLOCK_HAS_CALIBRATION_TIMER && NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED)
-void nrfx_clock_calibration_timer_start(uint8_t interval)
-{
-    nrf_clock_cal_timer_timeout_set(NRF_CLOCK, interval);
-    nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO);
-
-    nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_CTSTART);
-    if (m_clock_cb.event_handler)
-    {
-        nrf_clock_int_enable(NRF_CLOCK, NRF_CLOCK_INT_CTTO_MASK);
-    }
-    else
-    {
-        while (!nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO))
-        {}
-        nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO);
-    }
-}
-
-void nrfx_clock_calibration_timer_stop(void)
-{
-    nrf_clock_int_disable(NRF_CLOCK, NRF_CLOCK_INT_CTTO_MASK);
-    nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_CTSTOP);
-}
-#endif // NRF_CLOCK_HAS_CALIBRATION_TIMER && NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED)
-#endif // NRF_CLOCK_HAS_CALIBRATION && NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
 
 #if defined(CLOCK_FEATURE_HFCLK_DIVIDE_PRESENT) || NRF_CLOCK_HAS_HFCLK192M
 nrfx_err_t nrfx_clock_divider_set(nrf_clock_domain_t domain,

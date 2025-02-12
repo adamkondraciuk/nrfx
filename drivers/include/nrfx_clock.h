@@ -214,20 +214,6 @@ NRFX_STATIC_INLINE void nrfx_clock_hfclkaudio_config_set(uint16_t freq_value);
 NRFX_STATIC_INLINE uint16_t nrfx_clock_hfclkaudio_config_get(void);
 #endif
 
-#if (NRF_CLOCK_HAS_CALIBRATION && NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)) || \
-     defined(__NRFX_DOXYGEN__)
-/**
- * @brief Function for starting the calibration of internal LFCLK.
- *
- * This function starts the calibration process. The process cannot be aborted. LFCLK and HFCLK
- * must be running before this function is called.
- *
- * @retval NRFX_SUCCESS             The procedure is successful.
- * @retval NRFX_ERROR_INVALID_STATE The low-frequency of high-frequency clock is off.
- * @retval NRFX_ERROR_BUSY          Clock is in the calibration phase.
- */
-nrfx_err_t nrfx_clock_calibration_start(void);
-
 #if NRF_CLOCK_HAS_XO_TUNE
 
 /**
@@ -255,13 +241,27 @@ nrfx_err_t nrfx_clock_xo_tune_abort(void);
  * @brief Function for checking if XO tune error occurred.
  *
  * @note Must be used only if @p event_handler was not provided during driver initialization.
- * 
+ *
  * @retval true  XO tune procedure failed.
  * @retval false No error.
  */
 bool nrfx_clock_xo_tune_error_check(void);
 
 #endif
+
+#if (NRF_CLOCK_HAS_CALIBRATION && NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)) || \
+     defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for starting the calibration of internal LFCLK.
+ *
+ * This function starts the calibration process. The process cannot be aborted. LFCLK and HFCLK
+ * must be running before this function is called.
+ *
+ * @retval NRFX_SUCCESS             The procedure is successful.
+ * @retval NRFX_ERROR_INVALID_STATE The low-frequency of high-frequency clock is off.
+ * @retval NRFX_ERROR_BUSY          Clock is in the calibration phase.
+ */
+nrfx_err_t nrfx_clock_calibration_start(void);
 
 /**
  * @brief Function for checking if calibration is in progress.
