@@ -1,7 +1,7 @@
-/*$$$LICENCE_NORDIC_STANDARD<2024>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2025>$$$*/
 
-#ifndef NRFX_IRQS_NRF54L09_ENGA_FLPR_H__
-#define NRFX_IRQS_NRF54L09_ENGA_FLPR_H__
+#ifndef NRFX_IRQS_NRF54LV10A_ENGA_FLPR_H__
+#define NRFX_IRQS_NRF54LV10A_ENGA_FLPR_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -244,4 +244,4 @@ extern "C" {
 }
 #endif
 
-#endif // NRFX_IRQS_NRF54L09_ENGA_FLPR_H___
+#endif // NRFX_IRQS_NRF54LV10A_ENGA_FLPR_H___

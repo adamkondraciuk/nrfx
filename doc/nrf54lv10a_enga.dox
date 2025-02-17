@@ -1,7 +1,7 @@
 /**
-@page nrf54l09_enga_drivers nRF54L09 Eng A drivers
+@page nrf54lv10a_enga_drivers nRF54LV10A Eng A drivers
 
-This page lists nrfx driver components supported by the nRF54L09 Eng A SoC.
+This page lists nrfx driver components supported by the nRF54LV10A Eng A SoC.
 For a complete overview, see @ref nrfx_drv_supp_matrix.
 
 @{
