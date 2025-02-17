@@ -39,21 +39,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L20_ENGA_H
-#define NRF54L20_ENGA_H
+#ifndef NRF54LV10A_ENGA_H
+#define NRF54LV10A_ENGA_H
 
 #ifdef __cplusplus
     extern "C" {
 #endif
 
-#include "nrf54l20_enga_types.h"
+#include "nrf54lv10a_enga_types.h"
 
-#include "nrf54l20_enga_global.h"
-#include "nrf54l20_enga_application.h"
-#include "nrf54l20_enga_flpr.h"
+#include "nrf54lv10a_enga_global.h"
+#include "nrf54lv10a_enga_application.h"
+#include "nrf54lv10a_enga_flpr.h"
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L20_ENGA_H */
+#endif /* NRF54LV10A_ENGA_H */
 

@@ -81,12 +81,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_NETWORK)
         #include "nrf5340_xxaa_network_memory.h"
     #endif
-#elif defined(NRF54L09_ENGA_XXAA)
+#elif defined(NRF54LV10A_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
-        #include "nrf54l09_enga_xxaa_application_memory.h"
+        #include "nrf54lv10a_enga_xxaa_application_memory.h"
     #endif
     #if defined(NRF_FLPR)
-        #include "nrf54l09_enga_xxaa_flpr_memory.h"
+        #include "nrf54lv10a_enga_xxaa_flpr_memory.h"
     #endif
 #elif defined(NRF54L05_XXAA)
     #if defined(NRF_APPLICATION)
@@ -109,19 +109,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_FLPR)
         #include "nrf54l15_xxaa_flpr_memory.h"
     #endif
-#elif defined(NRF54L15_ENGA_XXAA)
+#elif defined(NRF54LM20A_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
-        #include "nrf54l15_enga_xxaa_application_memory.h"
+        #include "nrf54lm20a_enga_xxaa_application_memory.h"
     #endif
     #if defined(NRF_FLPR)
-        #include "nrf54l15_enga_xxaa_flpr_memory.h"
-    #endif
-#elif defined(NRF54L20_ENGA_XXAA)
-    #if defined(NRF_APPLICATION)
-        #include "nrf54l20_enga_xxaa_application_memory.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54l20_enga_xxaa_flpr_memory.h"
+        #include "nrf54lm20a_enga_xxaa_flpr_memory.h"
     #endif
 #elif defined(NRF54H20_XXAA)
     #if defined(NRF_SECURE)
@@ -144,50 +137,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
     #if defined(NRF_BBPR)
         #include "nrf54h20_xxaa_bbpr_memory.h"
-    #endif
-#elif defined(NRF54H20_ENGA_XXAA)
-    #if defined(NRF_SECURE)
-        #include "nrf54h20_enga_xxaa_secure_memory.h"
-    #endif
-    #if defined(NRF_APPLICATION)
-        #include "nrf54h20_enga_xxaa_application_memory.h"
-    #endif
-    #if defined(NRF_RADIOCORE)
-        #include "nrf54h20_enga_xxaa_radiocore_memory.h"
-    #endif
-    #if defined(NRF_SYSCTRL)
-        #include "nrf54h20_enga_xxaa_sysctrl_memory.h"
-    #endif
-    #if defined(NRF_PPR)
-        #include "nrf54h20_enga_xxaa_ppr_memory.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54h20_enga_xxaa_flpr_memory.h"
-    #endif
-    #if defined(NRF_BBPR)
-        #include "nrf54h20_enga_xxaa_bbpr_memory.h"
-    #endif
-#elif defined(NRF54H20_ENGB_XXAA)
-    #if defined(NRF_SECURE)
-        #include "nrf54h20_engb_xxaa_secure_memory.h"
-    #endif
-    #if defined(NRF_APPLICATION)
-        #include "nrf54h20_engb_xxaa_application_memory.h"
-    #endif
-    #if defined(NRF_RADIOCORE)
-        #include "nrf54h20_engb_xxaa_radiocore_memory.h"
-    #endif
-    #if defined(NRF_SYSCTRL)
-        #include "nrf54h20_engb_xxaa_sysctrl_memory.h"
-    #endif
-    #if defined(NRF_PPR)
-        #include "nrf54h20_engb_xxaa_ppr_memory.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54h20_engb_xxaa_flpr_memory.h"
-    #endif
-    #if defined(NRF_BBPR)
-        #include "nrf54h20_engb_xxaa_bbpr_memory.h"
     #endif
 #elif defined(NRF7120_ENGA_XXAA)
     #if defined(NRF_APPLICATION)

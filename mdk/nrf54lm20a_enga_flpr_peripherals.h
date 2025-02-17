@@ -39,79 +39,70 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L20_ENGA_APPLICATION_PERIPHERALS_H
-#define NRF54L20_ENGA_APPLICATION_PERIPHERALS_H
+#ifndef NRF54LM20A_ENGA_FLPR_PERIPHERALS_H
+#define NRF54LM20A_ENGA_FLPR_PERIPHERALS_H
 
 #ifdef __cplusplus
     extern "C" {
 #endif
 
 #include <stdbool.h>
-/*CACHEDATA*/
-#define CACHEDATA_PRESENT 1
-#define CACHEDATA_COUNT 1
+/*VPR CSR registers*/
+#define VPRCSR_PRESENT 1
+#define VPRCSR_COUNT 1
 
-#define ICACHEDATA_NUMSETS_MIN 0                     /*!< Number of sets : 0..127                                              */
-#define ICACHEDATA_NUMSETS_MAX 127                   /*!< Number of sets : 0..127                                              */
-#define ICACHEDATA_NUMSETS_SIZE 128                  /*!< Number of sets : 0..127                                              */
-#define ICACHEDATA_NUMWAYS_MIN 0                     /*!< Number of ways : 0..1                                                */
-#define ICACHEDATA_NUMWAYS_MAX 1                     /*!< Number of ways : 0..1                                                */
-#define ICACHEDATA_NUMWAYS_SIZE 2                    /*!< Number of ways : 0..1                                                */
-#define ICACHEDATA_NUMDATAUNIT_MIN 0                 /*!< Number of data units : 0..3                                          */
-#define ICACHEDATA_NUMDATAUNIT_MAX 3                 /*!< Number of data units : 0..3                                          */
-#define ICACHEDATA_NUMDATAUNIT_SIZE 4                /*!< Number of data units : 0..3                                          */
-#define ICACHEDATA_DATAWIDTH_MIN 0                   /*!< Data width of a data unit : 0..1 words                               */
-#define ICACHEDATA_DATAWIDTH_MAX 1                   /*!< Data width of a data unit : 0..1 words                               */
-#define ICACHEDATA_DATAWIDTH_SIZE 2                  /*!< Data width of a data unit : 0..1 words                               */
+#define VPRCSR_HARTNUM 14                            /*!< HARTNUM: 14                                                          */
+#define VPRCSR_MCLICBASERESET 0xF0000000             /*!< MCLICBASE: 0xF0000000                                                */
+#define VPRCSR_MULDIV 2                              /*!< MULDIV: 2                                                            */
+#define VPRCSR_HIBERNATE 1                           /*!< HIBERNATE: 1                                                         */
+#define VPRCSR_DBG 1                                 /*!< DBG: 1                                                               */
+#define VPRCSR_REMAP 0                               /*!< Code patching (REMAP): 0                                             */
+#define VPRCSR_BUSWIDTH 64                           /*!< BUSWIDTH: 64                                                         */
+#define VPRCSR_BKPT 1                                /*!< BKPT: 1                                                              */
+#define VPRCSR_RETAINED 1                            /*!< (unspecified)                                                        */
+#define VPRCSR_VIOPINS 0x00007FFF                    /*!< CSR VIOPINS value: 0x00007FFF                                        */
+#define VPRCSR_RT_SPLIT_SEC 0                        /*!< RT_SPLIT_SEC: 0                                                      */
+#define VPRCSR_RT_SHIFT_PRESENT 1                    /*!< RT_SHIFT_PRESENT: 1                                                  */
+#define VPRCSR_RT_SHIFT_START 0                      /*!< RT_SHIFT_START: 0                                                    */
+#define VPRCSR_RT_SHIFT_LENGTH 32                    /*!< RT_SHIFT_LENGTH: rt_shift_length                                     */
+#define VPRCSR_WAKE_PIN_RESET_VALUE_MIN 0            /*!< Reset value for RTPERIPHCTRL.EVPINSEL. Supported values: 0..15       */
+#define VPRCSR_WAKE_PIN_RESET_VALUE_MAX 15           /*!< Reset value for RTPERIPHCTRL.EVPINSEL. Supported values: 0..15       */
+#define VPRCSR_WAKE_PIN_RESET_VALUE_SIZE 16          /*!< Reset value for RTPERIPHCTRL.EVPINSEL. Supported values: 0..15       */
+#define VPRCSR_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..31                                                   */
+#define VPRCSR_VEVIF_NTASKS_MAX 31                   /*!< VEVIF tasks: 0..31                                                   */
+#define VPRCSR_VEVIF_NTASKS_SIZE 32                  /*!< VEVIF tasks: 0..31                                                   */
+#define VPRCSR_VEVIF_TASKS_MASK 0xFFFFFFFF           /*!< Mask of supported VEVIF tasks: 0xFFFFFFFF                            */
+#define VPRCSR_VEVIF_NDPPI_MIN 0                     /*!< VEVIF DPPI channels: 0..3                                            */
+#define VPRCSR_VEVIF_NDPPI_MAX 3                     /*!< VEVIF DPPI channels: 0..3                                            */
+#define VPRCSR_VEVIF_NDPPI_SIZE 4                    /*!< VEVIF DPPI channels: 0..3                                            */
+#define VPRCSR_VEVIF_NEVENTS_MIN 0                   /*!< VEVIF events: 0..31                                                  */
+#define VPRCSR_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 0..31                                                  */
+#define VPRCSR_VEVIF_NEVENTS_SIZE 32                 /*!< VEVIF events: 0..31                                                  */
+#define VPRCSR_RST_UNRECOV 0                         /*!< Unrecoverable state forces syncronous reset: 0                       */
+#define VPRCSR_BEXT 1                                /*!< Bit-Manipulation extension: 1                                        */
+#define VPRCSR_CACHE_EN 1                            /*!< (unspecified)                                                        */
+#define VPRCSR_CACHEEXTRATAGBUF 0                    /*!< CACHEEXTRATAGBUF: 0                                                  */
+#define VPRCSR_OUTMODE_VPR1_2 1                      /*!< (unspecified)                                                        */
+#define VPRCSR_VPR_BUS_PRIO 1                        /*!< (unspecified)                                                        */
+#define VPRCSR_NMIMPID_VPR1_3_3 0                    /*!< (unspecified)                                                        */
+#define VPRCSR_PERIPHERALBLOCKINGACCESS 0            /*!< (unspecified)                                                        */
+#define VPRCSR_BRANCHPREDECODING 0                   /*!< (unspecified)                                                        */
+#define VPRCSR_RTP_VPR_1_5 1                         /*!< (unspecified)                                                        */
 
-/*CACHEINFO*/
-#define CACHEINFO_PRESENT 1
-#define CACHEINFO_COUNT 1
+/*VPR CLIC registers*/
+#define CLIC_PRESENT 1
+#define CLIC_COUNT 1
 
-#define ICACHEINFO_NUMSETS_MIN 0                     /*!< Number of sets : 0..127                                              */
-#define ICACHEINFO_NUMSETS_MAX 127                   /*!< Number of sets : 0..127                                              */
-#define ICACHEINFO_NUMSETS_SIZE 128                  /*!< Number of sets : 0..127                                              */
-#define ICACHEINFO_NUMWAYS_MIN 0                     /*!< Number of ways : 0..1                                                */
-#define ICACHEINFO_NUMWAYS_MAX 1                     /*!< Number of ways : 0..1                                                */
-#define ICACHEINFO_NUMWAYS_SIZE 2                    /*!< Number of ways : 0..1                                                */
-#define ICACHEINFO_NUMDATAUNIT_MIN 0                 /*!< Number of data units : 0..7                                          */
-#define ICACHEINFO_NUMDATAUNIT_MAX 7                 /*!< Number of data units : 0..7                                          */
-#define ICACHEINFO_NUMDATAUNIT_SIZE 8                /*!< Number of data units : 0..7                                          */
-#define ICACHEINFO_DATAWIDTH_MIN 0                   /*!< Data width of a data unit : 0..3 words                               */
-#define ICACHEINFO_DATAWIDTH_MAX 3                   /*!< Data width of a data unit : 0..3 words                               */
-#define ICACHEINFO_DATAWIDTH_SIZE 4                  /*!< Data width of a data unit : 0..3 words                               */
-#define ICACHEINFO_TAGWIDTH_MIN 0                    /*!< TAG width : 0..23                                                    */
-#define ICACHEINFO_TAGWIDTH_MAX 23                   /*!< TAG width : 0..23                                                    */
-#define ICACHEINFO_TAGWIDTH_SIZE 24                  /*!< TAG width : 0..23                                                    */
-#define ICACHEINFO_DU_EXTENSION 0                    /*!< (unspecified)                                                        */
-
-/*Trace Port Interface Unit*/
-#define TPIU_PRESENT 1
-#define TPIU_COUNT 1
-
-/*Embedded Trace Macrocell*/
-#define ETM_PRESENT 1
-#define ETM_COUNT 1
-
-/*CPU control*/
-#define CPUC_PRESENT 1
-#define CPUC_COUNT 1
-
-/*Cache*/
-#define CACHE_PRESENT 1
-#define CACHE_COUNT 1
-
-#define ICACHE_VIRTUALCACHE 0                        /*!< (unspecified)                                                        */
-#define ICACHE_FLUSH 0                               /*!< (unspecified)                                                        */
-#define ICACHE_CLEAN 0                               /*!< (unspecified)                                                        */
-#define ICACHE_NONCACHEABLEMISS 0                    /*!< (unspecified)                                                        */
-#define ICACHE_BUSWIDTH_MIN 0                        /*!< Data bus width : 0..63                                               */
-#define ICACHE_BUSWIDTH_MAX 63                       /*!< Data bus width : 0..63                                               */
-#define ICACHE_BUSWIDTH_SIZE 64                      /*!< Data bus width : 0..63                                               */
-
-/*Software interrupt*/
-#define SWI_PRESENT 1
-#define SWI_COUNT 4
+#define VPRCLIC_IRQ_COUNT 32
+#define VPRCLIC_IRQNUM_MIN 0                         /*!< Supported interrupts (IRQNUM): 0..270                                */
+#define VPRCLIC_IRQNUM_MAX 270                       /*!< Supported interrupts (IRQNUM): 0..270                                */
+#define VPRCLIC_IRQNUM_SIZE 271                      /*!< Supported interrupts (IRQNUM): 0..270                                */
+#define VPRCLIC_CLIC_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..31                                                   */
+#define VPRCLIC_CLIC_NTASKS_MAX 31                   /*!< VEVIF tasks: 0..31                                                   */
+#define VPRCLIC_CLIC_NTASKS_SIZE 32                  /*!< VEVIF tasks: 0..31                                                   */
+#define VPRCLIC_CLIC_TASKS_MASK 0xFFFFFFFF           /*!< Mask of supported VEVIF tasks: 0xFFFFFFFF                            */
+#define VPRCLIC_COUNTER_IRQ_NUM 31                   /*!< VPR counter (CNT0) interrupt handler number (COUNTER_IRQ_NUM): 31    */
+#define VPRCLIC_CLIC_VPR_1_2 1                       /*!< (unspecified)                                                        */
 
 /*Factory Information Configuration Registers*/
 #define FICR_PRESENT 1
@@ -2397,5 +2388,5 @@ typedef enum {
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L20_ENGA_APPLICATION_PERIPHERALS_H */
+#endif /* NRF54LM20A_ENGA_FLPR_PERIPHERALS_H */
 

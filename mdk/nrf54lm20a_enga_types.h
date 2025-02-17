@@ -39,8 +39,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L20_ENGA_TYPES_H
-#define NRF54L20_ENGA_TYPES_H
+#ifndef NRF54LM20A_ENGA_TYPES_H
+#define NRF54LM20A_ENGA_TYPES_H
 
 #ifdef __cplusplus
     extern "C" {
@@ -88394,5 +88394,5 @@ typedef struct {
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L20_ENGA_TYPES_H */
+#endif /* NRF54LM20A_ENGA_TYPES_H */
 

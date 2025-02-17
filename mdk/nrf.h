@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   69 
+#define MDK_MINOR_VERSION   70
 #define MDK_MICRO_VERSION   0 
 
 
@@ -154,7 +154,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF54H_SERIES for common use in nRF54H series devices */
-#if defined (NRF54H20_ENGA_XXAA) || defined (NRF54H20_ENGB_XXAA) || defined (NRF54H20_XXAA)
+#if defined (NRF54H20_XXAA)
     #ifndef NRF54H_SERIES
         #define NRF54H_SERIES
     #endif
@@ -164,7 +164,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF54L_SERIES for common use in nRF54L series devices */
-#if defined (NRF54L05_XXAA) || defined (NRF54L09_ENGA_XXAA) || defined (NRF54L10_XXAA) || defined (NRF54L15_ENGA_XXAA) || defined (NRF54L15_XXAA) ||  defined (NRF54L20_ENGA_XXAA)
+#if defined (NRF54L05_XXAA) || defined (NRF54LV10A_ENGA_XXAA) || defined (NRF54L10_XXAA) || defined (NRF54L15_XXAA) ||  defined (NRF54LM20A_ENGA_XXAA)
     #ifndef NRF54L_SERIES
         #define NRF54L_SERIES
     #endif
@@ -352,24 +352,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf54h20_name_change.h"
     #endif
 
-#elif defined (NRF54H20_ENGA_XXAA)
-    #if !defined(EXCLUDE_HEADER)
-        #include "nrf54h20_enga.h"
-    #endif
-    #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
-        #include "nrf54h20_enga_name_change.h"
-    #endif
-
-#elif defined (NRF54H20_ENGB_XXAA)
-    #if !defined(EXCLUDE_HEADER)
-        #include "nrf54h20_engb.h"
-    #endif
-    #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
-        #include "nrf54h20_engb_name_change.h"
-    #endif
-
 #elif defined (NRF54L05_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf54l05.h"
@@ -378,12 +360,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf54l05_name_change.h"
     #endif
 
-#elif defined (NRF54L09_ENGA_XXAA)
+#elif defined (NRF54LV10A_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
-        #include "nrf54l09_enga.h"
+        #include "nrf54lv10a_enga.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
-        #include "nrf54l09_enga_name_change.h"
+        #include "nrf54lv10a_enga_name_change.h"
     #endif
 
 #elif defined (NRF54L10_XXAA)
@@ -402,21 +384,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf54l15_name_change.h"
     #endif
 
-
-#elif defined (NRF54L15_ENGA_XXAA)
+#elif defined (NRF54LM20A_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
-        #include "nrf54l15_enga.h"
+        #include "nrf54lm20a_enga.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
-        #include "nrf54l15_enga_name_change.h"
-    #endif
-
-#elif defined (NRF54L20_ENGA_XXAA)
-    #if !defined(EXCLUDE_HEADER)
-        #include "nrf54l20_enga.h"
-    #endif
-    #if !defined(EXCLUDE_PORTABILITY)
-        #include "nrf54l20_enga_name_change.h"
+        #include "nrf54lm20a_enga_name_change.h"
     #endif
 
 #elif defined (NRF9120_XXAA)

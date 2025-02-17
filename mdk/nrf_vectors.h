@@ -83,12 +83,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_NETWORK)
         #include "nrf5340_network_vectors.h"
     #endif
-#elif defined(NRF54L09_ENGA_XXAA)
+#elif defined(NRF54LV10A_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
-        #include "nrf54l09_enga_application_vectors.h"
+        #include "nrf54lv10a_enga_application_vectors.h"
     #endif
     #if defined(NRF_FLPR)
-        #include "nrf54l09_enga_flpr_vectors.h"
+        #include "nrf54lv10a_enga_flpr_vectors.h"
     #endif
 #elif defined(NRF54L05_XXAA)
     #if defined(NRF_APPLICATION)
@@ -111,19 +111,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_FLPR)
         #include "nrf54l15_flpr_vectors.h"
     #endif
-#elif defined(NRF54L15_ENGA_XXAA)
+#elif defined(NRF54LM20A_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
-        #include "nrf54l15_enga_application_vectors.h"
+        #include "nrf54lm20a_enga_application_vectors.h"
     #endif
     #if defined(NRF_FLPR)
-        #include "nrf54l15_enga_flpr_vectors.h"
-    #endif
-#elif defined(NRF54L20_ENGA_XXAA)
-    #if defined(NRF_APPLICATION)
-        #include "nrf54l20_enga_application_vectors.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54l20_enga_flpr_vectors.h"
+        #include "nrf54lm20a_enga_flpr_vectors.h"
     #endif
 #elif defined(NRF54H20_XXAA)
     #if defined(NRF_SECURE)
@@ -146,50 +139,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
     #if defined(NRF_BBPR)
         #include "nrf54h20_bbpr_vectors.h"
-    #endif
-#elif defined(NRF54H20_ENGA_XXAA)
-    #if defined(NRF_SECURE)
-        #include "nrf54h20_enga_secure_vectors.h"
-    #endif
-    #if defined(NRF_APPLICATION)
-        #include "nrf54h20_enga_application_vectors.h"
-    #endif
-    #if defined(NRF_RADIOCORE)
-        #include "nrf54h20_enga_radiocore_vectors.h"
-    #endif
-    #if defined(NRF_SYSCTRL)
-        #include "nrf54h20_enga_sysctrl_vectors.h"
-    #endif
-    #if defined(NRF_PPR)
-        #include "nrf54h20_enga_ppr_vectors.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54h20_enga_flpr_vectors.h"
-    #endif
-    #if defined(NRF_BBPR)
-        #include "nrf54h20_enga_bbpr_vectors.h"
-    #endif
-#elif defined(NRF54H20_ENGB_XXAA)
-    #if defined(NRF_SECURE)
-        #include "nrf54h20_engb_secure_vectors.h"
-    #endif
-    #if defined(NRF_APPLICATION)
-        #include "nrf54h20_engb_application_vectors.h"
-    #endif
-    #if defined(NRF_RADIOCORE)
-        #include "nrf54h20_engb_radiocore_vectors.h"
-    #endif
-    #if defined(NRF_SYSCTRL)
-        #include "nrf54h20_engb_sysctrl_vectors.h"
-    #endif
-    #if defined(NRF_PPR)
-        #include "nrf54h20_engb_ppr_vectors.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf54h20_engb_flpr_vectors.h"
-    #endif
-    #if defined(NRF_BBPR)
-        #include "nrf54h20_engb_bbpr_vectors.h"
     #endif
 #elif defined(NRF7120_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
@@ -264,37 +213,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
     #if defined(NRF_FLPR)
         #include "nrf9220_flpr_vectors.h"
-    #endif
-#elif defined(NRF9230_ENGA_XXAA)
-    #if defined(NRF_SECURE)
-        #include "nrf9230_enga_secure_vectors.h"
-    #endif
-    #if defined(NRF_APPLICATION)
-        #include "nrf9230_enga_application_vectors.h"
-    #endif
-    #if defined(NRF_RADIOCORE)
-        #include "nrf9230_enga_radiocore_vectors.h"
-    #endif
-    #if defined(NRF_CELLCORE)
-        #include "nrf9230_enga_cellcore_vectors.h"
-    #endif
-    #if defined(NRF_CELLRF)
-        #include "nrf9230_enga_cellrf_vectors.h"
-    #endif
-    #if defined(NRF_ISIMCORE)
-        #include "nrf9230_enga_isimcore_vectors.h"
-    #endif
-    #if defined(NRF_SYSCTRL)
-        #include "nrf9230_enga_sysctrl_vectors.h"
-    #endif
-    #if defined(NRF_PPR)
-        #include "nrf9230_enga_ppr_vectors.h"
-    #endif
-    #if defined(NRF_FLPR)
-        #include "nrf9230_enga_flpr_vectors.h"
-    #endif
-    #if defined(NRF_BBPR)
-        #include "nrf9230_enga_bbpr_vectors.h"
     #endif
 #elif defined(NRF9230_ENGB_XXAA)
     #if defined(NRF_SECURE)

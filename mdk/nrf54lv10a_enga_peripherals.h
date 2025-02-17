@@ -39,21 +39,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF54L09_ENGA_VERSION_H
-#define NRF54L09_ENGA_VERSION_H
+#ifndef NRF54LV10A_ENGA_PERIPHERALS_H
+#define NRF54LV10A_ENGA_PERIPHERALS_H
 
 #ifdef __cplusplus
     extern "C" {
 #endif
 
-
-#define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
-#define MDK_SOURCE_VERSION_MINOR 2                   /*!< Minor version of product specification.                              */
-#define MDK_SOURCE_VERSION_MICRO 3                   /*!< Micro version of product specification.                              */
-
+#if defined(NRF_APPLICATION)
+  #include "nrf54lv10a_enga_application_peripherals.h"
+#elif defined(NRF_FLPR)
+  #include "nrf54lv10a_enga_flpr_peripherals.h"
+#else
+  #error "No processor selected"
+#endif
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* NRF54L09_ENGA_VERSION_H */
+#endif /* NRF54LV10A_ENGA_PERIPHERALS_H */
 
