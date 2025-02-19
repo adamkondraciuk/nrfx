@@ -30,6 +30,20 @@ extern "C" {
 #define NRF_CTRLAP_HAS_READY 0
 #endif
 
+#if defined(CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the ERASEPROTECT register is present. */
+#define NRF_CTRLAP_HAS_ERASEPROTECT 1
+#else
+#define NRF_CTRLAP_HAS_ERASEPROTECT 0
+#endif
+
+#if defined(CTRLAPPERI_RESET_RESET_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the RESET register is present. */
+#define NRF_CTRLAP_HAS_RESET 1
+#else
+#define NRF_CTRLAP_HAS_RESET 0
+#endif
+
 /** @brief CTRLAP events. */
 typedef enum
 {
@@ -61,6 +75,17 @@ typedef enum
     NRF_CTRLAP_MODE_NORMAL        = CTRLAPPERI_MAILBOX_BOOTMODE_MODE_Normal,       ///< Normal mode of operation.
     NRF_CTRLAP_MODE_ROM_OPERATION = CTRLAPPERI_MAILBOX_BOOTMODE_MODE_ROMOperation, ///< ROM operation mode.
 } nrf_ctrlap_bootmode_t;
+#endif
+
+#if NRF_CTRLAP_HAS_RESET
+/** @brief CTRLAP reset types. */
+typedef enum
+{
+    NRF_CTRLAP_RESET_NONE = CTRLAPPERI_RESET_RESET_NoReset,   ///< No reset is performed.
+    NRF_CTRLAP_RESET_SOFT = CTRLAPPERI_RESET_RESET_SoftReset, ///< Soft reset is performed.
+    NRF_CTRLAP_RESET_HARD = CTRLAPPERI_RESET_RESET_HardReset, ///< Hard reset is performed.
+    NRF_CTRLAP_RESET_PIN  = CTRLAPPERI_RESET_RESET_PinReset,  ///< Pin reset is performed.
+} nrf_ctrlap_reset_t;
 #endif
 
 /**
@@ -221,6 +246,48 @@ NRF_STATIC_INLINE void nrf_ctrlap_info_set(NRF_CTRLAPPERI_Type  *    p_reg,
 NRF_STATIC_INLINE void nrf_ctrlap_info_get(NRF_CTRLAPPERI_Type const * p_reg,
                                            nrf_ctrlap_info_t *         p_data);
 
+#if NRF_CTRLAP_HAS_ERASEPROTECT
+/**
+ * @brief Function for locking erase operation in CTRLAP until next reset.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] enable True if erase is to be locked, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_ctrlap_erase_lock_set(NRF_CTRLAPPERI_Type * p_reg, bool enable);
+
+/**
+ * @brief Function for reading lock of the CTRLAP erase protection.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return true  Erase is locked.
+ * @return false Erase is unlocked.
+ */
+NRF_STATIC_INLINE bool nrf_ctrlap_erase_lock_get(NRF_CTRLAPPERI_Type const * p_reg);
+
+/**
+ * @brief Function for performing a secure erase of the device.
+ *
+ * @note To perform a secure erase, the value of key needs to be non-zero and match with the key
+ *       on the debugger side.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] key   Key for performing a secure erase.
+ */
+NRF_STATIC_INLINE void nrf_ctrlap_erase_all(NRF_CTRLAPPERI_Type * p_reg, uint32_t key);
+#endif
+
+#if NRF_CTRLAP_HAS_RESET
+/**
+ * @brief Function for triggering a reset of requested type.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] reset Requested reset type.
+ */
+NRF_STATIC_INLINE void nrf_ctrlap_reset_trigger(NRF_CTRLAPPERI_Type * p_reg,
+                                                nrf_ctrlap_reset_t    reset);
+#endif
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_ctrlap_event_clear(NRF_CTRLAPPERI_Type * p_reg, nrf_ctrlap_event_t event)
@@ -315,6 +382,34 @@ NRF_STATIC_INLINE void nrf_ctrlap_info_get(NRF_CTRLAPPERI_Type const * p_reg,
     p_data->ready       = !p_reg->INFO.READY;
 #endif
 }
+
+#if NRF_CTRLAP_HAS_ERASEPROTECT
+NRF_STATIC_INLINE void nrf_ctrlap_erase_lock_set(NRF_CTRLAPPERI_Type * p_reg, bool enable)
+{
+    p_reg->ERASEPROTECT.LOCK = ((enable ? CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Locked
+                                        : CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Unlocked)
+                                       << CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Pos);
+}
+
+NRF_STATIC_INLINE bool nrf_ctrlap_erase_lock_get(NRF_CTRLAPPERI_Type const * p_reg)
+{
+    return (p_reg->ERASEPROTECT.LOCK == (CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Locked
+                                      << CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Pos));
+}
+
+NRF_STATIC_INLINE void nrf_ctrlap_erase_all(NRF_CTRLAPPERI_Type * p_reg, uint32_t key)
+{
+    p_reg->ERASEPROTECT.DISABLE = key;
+}
+#endif
+
+#if NRF_CTRLAP_HAS_RESET
+NRF_STATIC_INLINE void nrf_ctrlap_reset_trigger(NRF_CTRLAPPERI_Type * p_reg,
+                                                nrf_ctrlap_reset_t    reset)
+{
+    p_reg->RESET = (uint32_t)reset;
+}
+#endif
 
 #endif // NRF_DECLARE_ONLY
 
