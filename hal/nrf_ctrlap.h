@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer for managing the Control Access Port (CTRL-AP) peripheral.
  */
 
+#if defined(CTRLAPPERI_INFO_PARTNO_PARTNO_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the INFO register is present. */
+#define NRF_CTRLAP_HAS_INFO 1
+#else
+#define NRF_CTRLAP_HAS_INFO 0
+#endif
+
 #if defined(CTRLAPPERI_MAILBOX_BOOTMODE_MODE_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether the BOOTMODE register is present. */
 #define NRF_CTRLAP_HAS_BOOTMODE 1
@@ -58,6 +65,7 @@ typedef enum
     NRF_CTRLAP_INT_TXDONE_MASK  = CTRLAPPERI_INTENSET_TXDONE_Msk,  ///< Interrupt on TXDONE event.
 } nrf_ctrlap_int_mask_t;
 
+#if NRF_CTRLAP_HAS_INFO
 /** @brief CTRLAP device information. */
 typedef struct
 {
@@ -67,6 +75,7 @@ typedef struct
     bool     ready;       ///< Set when INFO registers update is completed.
 #endif
 } nrf_ctrlap_info_t;
+#endif
 
 #if NRF_CTRLAP_HAS_BOOTMODE
 /** @brief CTRLAP secure domain boot mode. */
@@ -228,6 +237,7 @@ NRF_STATIC_INLINE nrf_ctrlap_bootmode_t
 nrf_ctrlap_mailbox_bootmode_get(NRF_CTRLAPPERI_Type const * p_reg);
 #endif
 
+#if NRF_CTRLAP_HAS_INFO
 /**
  * @brief Function for setting the CTRLAP device information.
  *
@@ -245,6 +255,7 @@ NRF_STATIC_INLINE void nrf_ctrlap_info_set(NRF_CTRLAPPERI_Type  *    p_reg,
  */
 NRF_STATIC_INLINE void nrf_ctrlap_info_get(NRF_CTRLAPPERI_Type const * p_reg,
                                            nrf_ctrlap_info_t *         p_data);
+#endif
 
 #if NRF_CTRLAP_HAS_ERASEPROTECT
 /**
@@ -363,6 +374,7 @@ nrf_ctrlap_mailbox_bootmode_get(NRF_CTRLAPPERI_Type const * p_reg)
 }
 #endif
 
+#if NRF_CTRLAP_HAS_INFO
 NRF_STATIC_INLINE void nrf_ctrlap_info_set(NRF_CTRLAPPERI_Type *     p_reg,
                                            nrf_ctrlap_info_t const * p_data)
 {
@@ -382,6 +394,7 @@ NRF_STATIC_INLINE void nrf_ctrlap_info_get(NRF_CTRLAPPERI_Type const * p_reg,
     p_data->ready       = !p_reg->INFO.READY;
 #endif
 }
+#endif
 
 #if NRF_CTRLAP_HAS_ERASEPROTECT
 NRF_STATIC_INLINE void nrf_ctrlap_erase_lock_set(NRF_CTRLAPPERI_Type * p_reg, bool enable)
