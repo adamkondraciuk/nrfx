@@ -3,7 +3,7 @@ All notable changes to this project are documented in this file.
 
 ## [3.11.0] - 2025-02-24
 ### Added
-- Added the workaround for nRF54L anomaly 39 in the CLOCK driver.
+- Added the workaround for nRF54L Series anomaly 39 in the CLOCK driver.
 - Added the optional workarounds for nRF52 Series anomaly 219 and nRF53 Series anomaly 47 in the TWIM driver.
 - Added support for nRF54LM20A Eng A in the PDM driver.
 - Added support for trimming in the COMP HAL and driver for supported devices.
