@@ -492,6 +492,10 @@ typedef enum
 /** @brief Position of retention configuration bits for RAM section 0. */
 #define NRF_POWER_RAMPOWER_S0RETENTION_POS POWER_RAM_POWER_S0RETENTION_Pos
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpedantic"
+#endif
 /**
  * @brief Bit masks for RAMPOWER register
  *
@@ -589,6 +593,9 @@ typedef enum
     NRF_POWER_RAMPOWER_S15RETENTION_MASK = POWER_RAM_POWER_S15RETENTION_Msk,
 #endif
 } nrf_power_rampower_mask_t;
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 #endif // defined(POWER_RAM_POWER_S0POWER_Msk) || defined(__NRFX_DOXYGEN__)
 
 #if NRF_POWER_HAS_VREG_CONFIG
