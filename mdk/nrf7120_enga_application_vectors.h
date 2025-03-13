@@ -179,6 +179,7 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void LDOHLP0V8_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void VDETAO1V8_IRQHandler                                        (void);
  __HANDLER("Default_Handler") void VDETAO0V8_IRQHandler                                        (void);
+ __HANDLER("Default_Handler") void HVBUCK_IRQHandler                                           (void);
 
 /*----------------------------------------------------------------------------
   Exception / Interrupt Vector table
@@ -509,6 +510,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     VDETAO1V8_IRQHandler,
     VDETAO0V8_IRQHandler,
+    HVBUCK_IRQHandler,
 };
 
 #if defined(__GNUC__)
