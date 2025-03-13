@@ -116,6 +116,7 @@ __WEAK void CLICSoftware_Handler(void)
  __HANDLER("Default_Handler") void GPIOTE130_1_IRQHandler                                      (void);
  __HANDLER("Default_Handler") void GRTC_0_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void GRTC_1_IRQHandler                                           (void);
+ __HANDLER("Default_Handler") void AXONS_IRQHandler                                            (void);
  __HANDLER("Default_Handler") void MRAMC110_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void MRAMC111_IRQHandler                                         (void);
  __HANDLER("Default_Handler") void OTPC_IRQHandler                                             (void);
@@ -323,7 +324,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    0,
+    AXONS_IRQHandler,
     0,
     0,
     0,

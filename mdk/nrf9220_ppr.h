@@ -78,6 +78,7 @@ typedef enum {
   GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE130_1                                                      */
   GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
+  AXONS_IRQn                             = 138,      /*!< 138 AXONS                                                            */
   MRAMC110_IRQn                          = 146,      /*!< 146 MRAMC110                                                         */
   MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
   OTPC_IRQn                              = 197,      /*!< 197 OTPC                                                             */

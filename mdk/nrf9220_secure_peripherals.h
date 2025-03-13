@@ -184,7 +184,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*System protection unit*/
 #define SPU_PRESENT 1
-#define SPU_COUNT 17
+#define SPU_COUNT 15
 
 #define SPU000_FLATFEATURES 1                        /*!< (unspecified)                                                        */
 #define SPU000_NESTEDFEATURES 1                      /*!< (unspecified)                                                        */
@@ -516,50 +516,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPU135_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU135_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
-#define SPU136_FLATFEATURES 1                        /*!< (unspecified)                                                        */
-#define SPU136_NESTEDFEATURES 1                      /*!< (unspecified)                                                        */
-#define SPU136_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
-#define SPU136_BELLS 0                               /*!< (unspecified)                                                        */
-#define SPU136_IPCT 0                                /*!< (unspecified)                                                        */
-#define SPU136_DPPI 1                                /*!< (unspecified)                                                        */
-#define SPU136_GPIOTE 0                              /*!< (unspecified)                                                        */
-#define SPU136_GRTC 0                                /*!< (unspecified)                                                        */
-#define SPU136_GPIO 0                                /*!< (unspecified)                                                        */
-#define SPU136_CRACEN 0                              /*!< (unspecified)                                                        */
-#define SPU136_MRAMC 0                               /*!< (unspecified)                                                        */
-#define SPU136_COEXC 0                               /*!< (unspecified)                                                        */
-#define SPU136_ANTSWC 0                              /*!< (unspecified)                                                        */
-#define SPU136_TDD 0                                 /*!< (unspecified)                                                        */
-#define SPU136_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
-                                                          peripheral slave index)*/
-#define SPU136_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define SPU136_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define SPU136_SPU_NUM_CLOCK_POWER_PAIR_SIZE 1       /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define SPU136_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
-#define SPU136_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
-
-#define SPU137_FLATFEATURES 1                        /*!< (unspecified)                                                        */
-#define SPU137_NESTEDFEATURES 1                      /*!< (unspecified)                                                        */
-#define SPU137_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
-#define SPU137_BELLS 0                               /*!< (unspecified)                                                        */
-#define SPU137_IPCT 0                                /*!< (unspecified)                                                        */
-#define SPU137_DPPI 1                                /*!< (unspecified)                                                        */
-#define SPU137_GPIOTE 0                              /*!< (unspecified)                                                        */
-#define SPU137_GRTC 0                                /*!< (unspecified)                                                        */
-#define SPU137_GPIO 0                                /*!< (unspecified)                                                        */
-#define SPU137_CRACEN 0                              /*!< (unspecified)                                                        */
-#define SPU137_MRAMC 0                               /*!< (unspecified)                                                        */
-#define SPU137_COEXC 0                               /*!< (unspecified)                                                        */
-#define SPU137_ANTSWC 0                              /*!< (unspecified)                                                        */
-#define SPU137_TDD 0                                 /*!< (unspecified)                                                        */
-#define SPU137_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
-                                                          peripheral slave index)*/
-#define SPU137_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define SPU137_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define SPU137_SPU_NUM_CLOCK_POWER_PAIR_SIZE 1       /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
-#define SPU137_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
-#define SPU137_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
-
 /*Memory Privilege Controller*/
 #define MPC_PRESENT 1
 #define MPC_COUNT 6
@@ -854,6 +810,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define FICR_LTE_ON 0                                /*!< (unspecified)                                                        */
 #define FICR_SAANA_LTE_ON 1                          /*!< (unspecified)                                                        */
+#define FICR_KARHU_TESTCHIP_REGS 0                   /*!< (unspecified)                                                        */
 #define FICR_WIFI_ON 0                               /*!< (unspecified)                                                        */
 #define FICR_NFC_ON 1                                /*!< (unspecified)                                                        */
 #define FICR_ML_ON 0                                 /*!< (unspecified)                                                        */
@@ -1070,10 +1027,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR120_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR120_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR120_VEVIF_NDPPI_SIZE 28                   /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR120_VEVIF_DPPI_MASK 0x0F000000            /*!< Mask of supported VEVIF DPPI channels: 0x0F000000                    */
 #define VPR120_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
 #define VPR120_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 28..31                                                 */
 #define VPR120_VEVIF_NEVENTS_SIZE 32                 /*!< VEVIF events: 28..31                                                 */
+#define VPR120_VEVIF_EVENTS_MASK 0xF0000000          /*!< Mask of supported VEVIF events: 0xF0000000                           */
 #define VPR120_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F8C8400                       */
+#define VPR120_RTP_VPR_1_5 1                         /*!< (unspecified)                                                        */
 
 #define VPR121_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
 #define VPR121_VPR_START_RESET_VALUE 0               /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
@@ -1093,10 +1053,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR121_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR121_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR121_VEVIF_NDPPI_SIZE 28                   /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR121_VEVIF_DPPI_MASK 0x0F000000            /*!< Mask of supported VEVIF DPPI channels: 0x0F000000                    */
 #define VPR121_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
 #define VPR121_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 28..31                                                 */
 #define VPR121_VEVIF_NEVENTS_SIZE 32                 /*!< VEVIF events: 28..31                                                 */
+#define VPR121_VEVIF_EVENTS_MASK 0xF0000000          /*!< Mask of supported VEVIF events: 0xF0000000                           */
 #define VPR121_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F8D4400                       */
+#define VPR121_RTP_VPR_1_5 1                         /*!< (unspecified)                                                        */
 
 #define VPR130_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
 #define VPR130_VPR_START_RESET_VALUE 0               /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
@@ -1116,10 +1079,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR130_VEVIF_NDPPI_MIN 8                     /*!< VEVIF DPPI channels: 8..11                                           */
 #define VPR130_VEVIF_NDPPI_MAX 11                    /*!< VEVIF DPPI channels: 8..11                                           */
 #define VPR130_VEVIF_NDPPI_SIZE 12                   /*!< VEVIF DPPI channels: 8..11                                           */
+#define VPR130_VEVIF_DPPI_MASK 0x00000F00            /*!< Mask of supported VEVIF DPPI channels: 0x00000F00                    */
 #define VPR130_VEVIF_NEVENTS_MIN 12                  /*!< VEVIF events: 12..15                                                 */
 #define VPR130_VEVIF_NEVENTS_MAX 15                  /*!< VEVIF events: 12..15                                                 */
 #define VPR130_VEVIF_NEVENTS_SIZE 16                 /*!< VEVIF events: 12..15                                                 */
+#define VPR130_VEVIF_EVENTS_MASK 0x0000F000          /*!< Mask of supported VEVIF events: 0x0000F000                           */
 #define VPR130_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F908400                       */
+#define VPR130_RTP_VPR_1_5 1                         /*!< (unspecified)                                                        */
 
 /*Prototype HW information registers.*/
 #define PROTOTYPEINFO_PRESENT 1

@@ -152,10 +152,8 @@ typedef enum {
   PWM131_IRQn                            = 436,      /*!< 436 PWM131                                                           */
   SERIAL2_IRQn                           = 437,      /*!< 437 SERIAL2                                                          */
   SERIAL3_IRQn                           = 438,      /*!< 438 SERIAL3                                                          */
-  SPU136_IRQn                            = 448,      /*!< 448 SPU136                                                           */
   SERIAL4_IRQn                           = 453,      /*!< 453 SERIAL4                                                          */
   SERIAL5_IRQn                           = 454,      /*!< 454 SERIAL5                                                          */
-  SPU137_IRQn                            = 464,      /*!< 464 SPU137                                                           */
   SERIAL6_IRQn                           = 469,      /*!< 469 SERIAL6                                                          */
   SERIAL7_IRQn                           = 470,      /*!< 470 SERIAL7                                                          */
 } IRQn_Type;
@@ -365,8 +363,6 @@ typedef enum {
 #define NRF_SECURE_SPU133_S_BASE          0x5F990000UL
 #define NRF_SECURE_SPU134_S_BASE          0x5F9A0000UL
 #define NRF_SECURE_SPU135_S_BASE          0x5F9B0000UL
-#define NRF_SECURE_SPU136_S_BASE          0x5F9C0000UL
-#define NRF_SECURE_SPU137_S_BASE          0x5F9D0000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
@@ -460,8 +456,6 @@ typedef enum {
 #define NRF_SECURE_SPU133_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU133_S_BASE)
 #define NRF_SECURE_SPU134_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU134_S_BASE)
 #define NRF_SECURE_SPU135_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU135_S_BASE)
-#define NRF_SECURE_SPU136_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU136_S_BASE)
-#define NRF_SECURE_SPU137_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU137_S_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                    TrustZone Remapping                                    ================ */
@@ -572,8 +566,6 @@ typedef enum {
   #define NRF_SECURE_SPU133                       NRF_SECURE_SPU133_S
   #define NRF_SECURE_SPU134                       NRF_SECURE_SPU134_S
   #define NRF_SECURE_SPU135                       NRF_SECURE_SPU135_S
-  #define NRF_SECURE_SPU136                       NRF_SECURE_SPU136_S
-  #define NRF_SECURE_SPU137                       NRF_SECURE_SPU137_S
 #endif                                               /*!< NRF_TRUSTZONE_NONSECURE                                              */
 
 /* =========================================================================================================================== */
@@ -686,8 +678,6 @@ typedef enum {
     #define NRF_SPU133                            NRF_SECURE_SPU133
     #define NRF_SPU134                            NRF_SECURE_SPU134
     #define NRF_SPU135                            NRF_SECURE_SPU135
-    #define NRF_SPU136                            NRF_SECURE_SPU136
-    #define NRF_SPU137                            NRF_SECURE_SPU137
   #endif                                             /*!< NRF_TRUSTZONE_NONSECURE                                              */
 #endif                                               /*!< NRF_SECURE                                                           */
 

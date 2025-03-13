@@ -8,7 +8,7 @@
   <version>1</version>
   <description>nRF9220 reference description for system-on-chip with many ARM 32-bit Cortex-M33 microcontrollers</description>
   <licenseText>
-Copyright (c) 2010 - 2024, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2025, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -1836,149 +1836,228 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <headerStructName>FICR_TRIM_SYSCTRL_HVBUCK1V1</headerStructName>
               <access>read-write</access>
               <addressOffset>0x94</addressOffset>
-              <register>
-                <name>TRIM0</name>
-                <description>TRIM0 register for HVBUCK1V1</description>
+              <cluster>
+                <name>TRIM</name>
+                <description>Unspecified</description>
+                <headerStructName>FICR_TRIM_SYSCTRL_HVBUCK1V1_TRIM</headerStructName>
+                <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>BIASIBPP</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.BIASIBPP</description>
-                    <lsb>0</lsb>
-                    <msb>7</msb>
-                  </field>
-                  <field>
-                    <name>BIASIBPSR</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.BIASIBPSR</description>
-                    <lsb>8</lsb>
-                    <msb>15</msb>
-                  </field>
-                  <field>
-                    <name>VOUTHYST</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.VOUTHYST</description>
-                    <lsb>16</lsb>
-                    <msb>23</msb>
-                  </field>
-                  <field>
-                    <name>VOUTOFFSET</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.VOUTOFFSET</description>
-                    <lsb>24</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>TRIM1</name>
-                <description>TRIM1 register for HVBUCK1V1</description>
-                <addressOffset>0x4</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>ZCROSS</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.ZCROSS</description>
-                    <lsb>0</lsb>
-                    <msb>7</msb>
-                  </field>
-                  <field>
-                    <name>HSILIM</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.HSILIM</description>
-                    <lsb>8</lsb>
-                    <msb>15</msb>
-                  </field>
-                  <field>
-                    <name>VGND</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.VGND</description>
-                    <lsb>16</lsb>
-                    <msb>23</msb>
-                  </field>
-                  <field>
-                    <name>RESERVED0</name>
-                    <description>Reserved for HVBUCK1V1 config</description>
-                    <lsb>24</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>TRIM2</name>
-                <description>TRIM2 register for HVBUCK1V1</description>
-                <addressOffset>0x8</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>COTTIMER</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.COTTIMER</description>
-                    <lsb>0</lsb>
-                    <msb>7</msb>
-                  </field>
-                  <field>
-                    <name>FSMOSC</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.FSMOSC</description>
-                    <lsb>8</lsb>
-                    <msb>15</msb>
-                  </field>
-                  <field>
-                    <name>RESERVED0</name>
-                    <description>Reserved for HVBUCK1V1 config</description>
-                    <lsb>16</lsb>
-                    <msb>23</msb>
-                  </field>
-                  <field>
-                    <name>RESERVED1</name>
-                    <description>Reserved for HVBUCK1V1 config</description>
-                    <lsb>24</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>TRIM3</name>
-                <description>TRIM3 register for HVBUCK1V1</description>
-                <addressOffset>0xC</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>DCOVOUT</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.DCOVOUT</description>
-                    <lsb>0</lsb>
-                    <msb>7</msb>
-                  </field>
-                  <field>
-                    <name>DCOCOARSE</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.DCOCOARSE</description>
-                    <lsb>8</lsb>
-                    <msb>15</msb>
-                  </field>
-                  <field>
-                    <name>DCOFINE</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.DCOFINE</description>
-                    <lsb>16</lsb>
-                    <msb>23</msb>
-                  </field>
-                  <field>
-                    <name>VOUTPWM</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V1.VOUTPWM</description>
-                    <lsb>24</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
+                <register>
+                  <name>BIASIBPP</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.BIASIBPP</description>
+                  <addressOffset>0x0</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>2</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>BIASIBPSR</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.BIASIBPSR</description>
+                  <addressOffset>0x4</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>VOUTHYST</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.VOUTHYST</description>
+                  <addressOffset>0x8</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>VOUTOFFSET</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.VOUTOFFSET</description>
+                  <addressOffset>0xC</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>ZCROSS</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.ZCROSS</description>
+                  <addressOffset>0x10</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>3</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>HSILIM</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.HSILIM</description>
+                  <addressOffset>0x14</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>2</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>VGND</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.VGND</description>
+                  <addressOffset>0x18</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>1</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>COTTIMER</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.COTTIMER</description>
+                  <addressOffset>0x1C</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>FSMOSC</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.FSMOSC</description>
+                  <addressOffset>0x20</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>DCOVOUT</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.DCOVOUT</description>
+                  <addressOffset>0x24</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>2</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>DCOCOARSE</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.DCOCOARSE</description>
+                  <addressOffset>0x28</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>0</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>DCOFINE</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.DCOFINE</description>
+                  <addressOffset>0x2C</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>VOUTPWM</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V1.TRIM.VOUTPWM</description>
+                  <addressOffset>0x30</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>5</msb>
+                    </field>
+                  </fields>
+                </register>
+              </cluster>
             </cluster>
             <cluster>
               <name>VREGAO0V8</name>
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_VREGAO0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xA8</addressOffset>
+              <addressOffset>0xC8</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2072,150 +2151,229 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_HVBUCK1V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xBC</addressOffset>
-              <register>
-                <name>TRIM0</name>
-                <description>TRIM0 register for HVBUCK1V8</description>
+              <addressOffset>0xDC</addressOffset>
+              <cluster>
+                <name>TRIM</name>
+                <description>Unspecified</description>
+                <headerStructName>FICR_TRIM_SYSCTRL_HVBUCK1V8_TRIM</headerStructName>
+                <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>BIASIBPP</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.BIASIBPP</description>
-                    <lsb>0</lsb>
-                    <msb>7</msb>
-                  </field>
-                  <field>
-                    <name>BIASIBPSR</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.BIASIBPSR</description>
-                    <lsb>8</lsb>
-                    <msb>15</msb>
-                  </field>
-                  <field>
-                    <name>VOUTHYST</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.VOUTHYST</description>
-                    <lsb>16</lsb>
-                    <msb>23</msb>
-                  </field>
-                  <field>
-                    <name>VOUTOFFSET</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.VOUTOFFSET</description>
-                    <lsb>24</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>TRIM1</name>
-                <description>TRIM1 register for HVBUCK1V8</description>
-                <addressOffset>0x4</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>ZCROSS</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.ZCROSS</description>
-                    <lsb>0</lsb>
-                    <msb>7</msb>
-                  </field>
-                  <field>
-                    <name>HSILIM</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.HSILIM</description>
-                    <lsb>8</lsb>
-                    <msb>15</msb>
-                  </field>
-                  <field>
-                    <name>VGND</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.VGND</description>
-                    <lsb>16</lsb>
-                    <msb>23</msb>
-                  </field>
-                  <field>
-                    <name>RESERVED0</name>
-                    <description>Reserved for HVBUCK1V8 config</description>
-                    <lsb>24</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>TRIM2</name>
-                <description>TRIM2 register for HVBUCK1V8</description>
-                <addressOffset>0x8</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>COTTIMER</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.COTTIMER</description>
-                    <lsb>0</lsb>
-                    <msb>7</msb>
-                  </field>
-                  <field>
-                    <name>FSMOSC</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.FSMOSC</description>
-                    <lsb>8</lsb>
-                    <msb>15</msb>
-                  </field>
-                  <field>
-                    <name>RESERVED0</name>
-                    <description>Reserved for HVBUCK1V8 config</description>
-                    <lsb>16</lsb>
-                    <msb>23</msb>
-                  </field>
-                  <field>
-                    <name>RESERVED1</name>
-                    <description>Reserved for HVBUCK1V8 config</description>
-                    <lsb>24</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>TRIM3</name>
-                <description>TRIM3 register for HVBUCK1V8</description>
-                <addressOffset>0xC</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>DCOVOUT</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.DCOVOUT</description>
-                    <lsb>0</lsb>
-                    <msb>7</msb>
-                  </field>
-                  <field>
-                    <name>DCOCOARSE</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.DCOCOARSE</description>
-                    <lsb>8</lsb>
-                    <msb>15</msb>
-                  </field>
-                  <field>
-                    <name>DCOFINE</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.DCOFINE</description>
-                    <lsb>16</lsb>
-                    <msb>23</msb>
-                  </field>
-                  <field>
-                    <name>VOUTPWM</name>
-                    <description>Trim value for SYSCTRL.HVBUCK1V8.VOUTPWM</description>
-                    <lsb>24</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
+                <register>
+                  <name>BIASIBPP</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.BIASIBPP</description>
+                  <addressOffset>0x0</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>2</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>BIASIBPSR</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.BIASIBPSR</description>
+                  <addressOffset>0x4</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>VOUTHYST</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.VOUTHYST</description>
+                  <addressOffset>0x8</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>VOUTOFFSET</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.VOUTOFFSET</description>
+                  <addressOffset>0xC</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>ZCROSS</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.ZCROSS</description>
+                  <addressOffset>0x10</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>3</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>HSILIM</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.HSILIM</description>
+                  <addressOffset>0x14</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>2</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>VGND</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.VGND</description>
+                  <addressOffset>0x18</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>1</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>COTTIMER</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.COTTIMER</description>
+                  <addressOffset>0x1C</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>FSMOSC</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.FSMOSC</description>
+                  <addressOffset>0x20</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>DCOVOUT</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.DCOVOUT</description>
+                  <addressOffset>0x24</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>2</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>DCOCOARSE</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.DCOCOARSE</description>
+                  <addressOffset>0x28</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>0</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>DCOFINE</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.DCOFINE</description>
+                  <addressOffset>0x2C</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>4</msb>
+                    </field>
+                  </fields>
+                </register>
+                <register>
+                  <name>VOUTPWM</name>
+                  <description>Trim value for SYSCTRL.HVBUCK1V8.TRIM.VOUTPWM</description>
+                  <addressOffset>0x30</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <size>0x20</size>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>5</msb>
+                    </field>
+                  </fields>
+                </register>
+              </cluster>
             </cluster>
             <cluster>
               <name>VREGMRAM130</name>
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_VREGMRAM130</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x104</addressOffset>
+              <addressOffset>0x148</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2293,7 +2451,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_VREGMRAM131</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x114</addressOffset>
+              <addressOffset>0x158</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2371,7 +2529,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_VDETAO0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x144</addressOffset>
+              <addressOffset>0x188</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2440,7 +2598,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_VDETAO1V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x150</addressOffset>
+              <addressOffset>0x194</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2486,7 +2644,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_VDETAO5V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x160</addressOffset>
+              <addressOffset>0x1A4</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2516,7 +2674,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_VDET1V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x164</addressOffset>
+              <addressOffset>0x1A8</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2546,7 +2704,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_HSFLL120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x168</addressOffset>
+              <addressOffset>0x1AC</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2628,7 +2786,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_MEMCONF120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x210</addressOffset>
+              <addressOffset>0x254</addressOffset>
               <cluster>
                 <dim>4</dim>
                 <dimIncrement>0x004</dimIncrement>
@@ -2735,7 +2893,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_SYSCTRL_MEMCONF130</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x278</addressOffset>
+              <addressOffset>0x2BC</addressOffset>
               <cluster>
                 <dim>1</dim>
                 <dimIncrement>0x004</dimIncrement>
@@ -2793,7 +2951,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>FICR_TRIM_GLOBAL</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x288</addressOffset>
+            <addressOffset>0x2CC</addressOffset>
             <cluster>
               <name>SAADC</name>
               <description>Unspecified</description>
@@ -2905,7 +3063,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>FICR_TRIM_APPLICATION</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x2C8</addressOffset>
+            <addressOffset>0x30C</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
@@ -3634,18 +3792,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <access>read-write</access>
               <addressOffset>0x020</addressOffset>
               <register>
-                <name>RTUNE</name>
-                <description>Trim value for CELLCORE.MCPLL.RTUNE</description>
+                <name>TRIM</name>
+                <description>Trim value for CELLCORE.MCPLL.TRIM</description>
                 <addressOffset>0x000</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <size>0x20</size>
                 <fields>
                   <field>
-                    <name>VALUE</name>
+                    <name>LDO_RTUNE</name>
                     <description>Trim value</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>3</msb>
                   </field>
                 </fields>
               </register>
@@ -4003,10 +4161,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <size>0x20</size>
                 <fields>
                   <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
+                    <name>TX_LDOCT_IBPSRTRIM</name>
+                    <description>Resistor tuning word</description>
+                    <lsb>8</lsb>
+                    <msb>11</msb>
+                  </field>
+                  <field>
+                    <name>TX_DACLDO0V8_IBPSRTRIM</name>
+                    <description>Resistor tuning word (not used)</description>
+                    <lsb>12</lsb>
+                    <msb>15</msb>
+                  </field>
+                  <field>
+                    <name>TX_DACLDO1V2_IBPSRTRIM</name>
+                    <description>Resistor tuning word</description>
+                    <lsb>16</lsb>
+                    <msb>19</msb>
+                  </field>
+                  <field>
+                    <name>TX_ICGMPPA_RTRIM</name>
+                    <description>Resistor tuning word</description>
+                    <lsb>20</lsb>
+                    <msb>23</msb>
                   </field>
                 </fields>
               </register>
@@ -4019,10 +4195,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <size>0x20</size>
                 <fields>
                   <field>
-                    <name>VALUE</name>
+                    <name>TX_CALIB_CGMRTRIM</name>
                     <description>Trim value</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>3</msb>
                   </field>
                 </fields>
               </register>
@@ -4080,7 +4256,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dim>0x6</dim>
                 <dimIncrement>0x4</dimIncrement>
                 <name>TX_DC_COMP_B13[%s]</name>
-                <description>Description collection: Trim values for CELLRF.TXDFE.ID for BAND13. (4db, 2DB, 0DB, N1DB, N3DB, N6DB)</description>
+                <description>Description collection: Trim values for CELLRF.TXDFE.TX_DC_COMP_B13 for BAND13. (4db, 2DB, 0DB, N1DB, N3DB, N6DB)</description>
                 <addressOffset>0x028</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -4139,18 +4315,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <size>0x20</size>
                 <fields>
                   <field>
-                    <name>VALUE</name>
+                    <name>TX_TMEAS_IBPS_TRIM</name>
                     <description>Trim value</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>3</msb>
+                  </field>
+                  <field>
+                    <name>TX_TMEAS_NTCVREF_TRIM</name>
+                    <description>Trim value</description>
+                    <lsb>4</lsb>
+                    <msb>7</msb>
+                  </field>
+                  <field>
+                    <name>TX_TMEAS_NTCTSPA_TRIM</name>
+                    <description>Trim value</description>
+                    <lsb>8</lsb>
+                    <msb>13</msb>
                   </field>
                 </fields>
               </register>
               <register>
-                <dim>0x4</dim>
-                <dimIncrement>0x4</dimIncrement>
-                <name>TRIMSPARE[%s]</name>
-                <description>Description collection: Trim value for CELLRF.TXDFE.TRIMSPARE[n]</description>
+                <name>TX_PPA_LDO_TRIM</name>
+                <description>Trim value for CELLRF.TXDFE.TX_PPA_LDO_TRIM</description>
                 <addressOffset>0x074</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
@@ -4159,6 +4345,86 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <field>
                     <name>VALUE</name>
                     <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>2</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>TX_PA_LDO_TRIM</name>
+                <description>Trim value for CELLRF.TXDFE.TX_PA_LDO_TRIM</description>
+                <addressOffset>0x078</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>2</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>TX_PA_BIAS_LDO_TRIM</name>
+                <description>Trim value for CELLRF.TXDFE.TX_PA_BIAS_LDO_TRIM</description>
+                <addressOffset>0x07C</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>2</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>TX_LOBPF_C_TRIM_B11</name>
+                <description>Trim value for CELLRF.TXDFE.TX_LOBPF_C_TRIM for BAND11</description>
+                <addressOffset>0x080</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>TX_TXLO_BPF_CTUNE</name>
+                    <description>Trim value for TXLO BPF resonance capacitance</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>TX_LOBPF_C_TRIM_B2</name>
+                <description>Trim value for CELLRF.TXDFE.TX_LOBPF_C_TRIM for BAND2</description>
+                <addressOffset>0x084</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>TX_TXLO_BPF_CTUNE</name>
+                    <description>Trim value TXLO BPF resonance capacitanc</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>TX_LOBPF_C_TRIM_B41</name>
+                <description>Trim value for CELLRF.TXDFE.TX_LOBPF_C_TRIM for BAND41</description>
+                <addressOffset>0x088</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>TX_TXLO_BPF_CTUNE</name>
+                    <description>Trim value TXLO BPF resonance capacitanc</description>
                     <lsb>0</lsb>
                     <msb>31</msb>
                   </field>
@@ -4170,7 +4436,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_CELLRF_RXDFE</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x0BC</addressOffset>
+              <addressOffset>0x0C4</addressOffset>
               <register>
                 <name>RX_R_TRIM</name>
                 <description>Trim value for CELLRF.RXDFE.RX_R_TRIM</description>
@@ -4180,10 +4446,40 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <size>0x20</size>
                 <fields>
                   <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
+                    <name>RX_ABB_CGM_R_TRIM</name>
+                    <description>Resistor tuning word 2 s complement</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>3</msb>
+                  </field>
+                  <field>
+                    <name>RX_ABB_IBPS_R_TRIM</name>
+                    <description>Resistor tuning word 2 s complement</description>
+                    <lsb>4</lsb>
+                    <msb>7</msb>
+                  </field>
+                  <field>
+                    <name>RX_ADC_CGM_R_TRIM</name>
+                    <description>Resistor tuning word 2 s complement</description>
+                    <lsb>8</lsb>
+                    <msb>11</msb>
+                  </field>
+                  <field>
+                    <name>RX_ADC_IBPS_R_TRIM</name>
+                    <description>Resistor tuning word 2 s complement</description>
+                    <lsb>12</lsb>
+                    <msb>15</msb>
+                  </field>
+                  <field>
+                    <name>RX_FE_CGM_R_TRIM</name>
+                    <description>Resistor tuning word 2 s complement</description>
+                    <lsb>16</lsb>
+                    <msb>19</msb>
+                  </field>
+                  <field>
+                    <name>RX_FE_LNA_LDO_IBPS_R_TRIM</name>
+                    <description>Resistor tuning word 2 s complement</description>
+                    <lsb>20</lsb>
+                    <msb>23</msb>
                   </field>
                 </fields>
               </register>
@@ -4196,10 +4492,22 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <size>0x20</size>
                 <fields>
                   <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
+                    <name>RX_ABB_TUNE_BQ</name>
+                    <description>Resistor tuning word</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>4</msb>
+                  </field>
+                  <field>
+                    <name>RX_ABB_TUNE_RI</name>
+                    <description>Resistor tuning word</description>
+                    <lsb>8</lsb>
+                    <msb>12</msb>
+                  </field>
+                  <field>
+                    <name>RX_ABB_TUNE_TIA</name>
+                    <description>Resistor tuning word</description>
+                    <lsb>16</lsb>
+                    <msb>20</msb>
                   </field>
                 </fields>
               </register>
@@ -4223,64 +4531,34 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
             </cluster>
             <cluster>
-              <name>RFPLL</name>
+              <name>SX</name>
               <description>Unspecified</description>
-              <headerStructName>FICR_TRIM_CELLRF_RFPLL</headerStructName>
+              <headerStructName>FICR_TRIM_CELLRF_SX</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x0D4</addressOffset>
+              <addressOffset>0x0DC</addressOffset>
               <register>
                 <name>SX_R_TRIM</name>
-                <description>Trim value for CELLRF.RFPLL.SX_R_TRIM</description>
+                <description>Trim value for CELLRF.SX.SX_R_TRIM</description>
                 <addressOffset>0x000</addressOffset>
                 <access>read-write</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <size>0x20</size>
                 <fields>
                   <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
+                    <name>SX_IBPS_R_TRIM</name>
+                    <description>Trim code for the 10 uA current from KARHU_SX_BIAS</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>3</msb>
                   </field>
                 </fields>
               </register>
               <register>
-                <name>SX_DLLCTRL1_B11</name>
-                <description>Trim value for CELLRF.RFPLL.SX_DLLCTRL1. BPF_TRIM for BAND11.</description>
+                <dim>0x3</dim>
+                <dimIncrement>0x4</dimIncrement>
+                <name>TRIMSPARE[%s]</name>
+                <description>Description collection: Trim value for CELLRF.SX.TRIMSPARE[n]</description>
                 <addressOffset>0x004</addressOffset>
-                <access>read-write</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>SX_DLLCTRL1_B2</name>
-                <description>Trim value for CELLRF.RFPLL.SX_DLLCTRL1. BPF_TRIM for BAND11.</description>
-                <addressOffset>0x008</addressOffset>
-                <access>read-write</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <size>0x20</size>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>SX_DLLCTRL1_B41</name>
-                <description>Trim value for CELLRF.RFPLL.SX_DLLCTRL1 BPF_TRIM for BAND41.</description>
-                <addressOffset>0x00C</addressOffset>
-                <access>read-write</access>
+                <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <size>0x20</size>
                 <fields>
@@ -4294,35 +4572,163 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </register>
               <register>
                 <name>SX_LDOCTRL</name>
-                <description>Trim value for CELLRF.RFPLL.SX_LDO_CTRL</description>
+                <description>Trim value for CELLRF.SX.SX_LDO_CTRL</description>
                 <addressOffset>0x010</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <size>0x20</size>
                 <fields>
                   <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
+                    <name>SX_PRG_LDO_TDC_VOUT</name>
+                    <description>Trim code for the REGTDC_0V8 supply domain LDO</description>
+                    <lsb>4</lsb>
+                    <msb>6</msb>
+                  </field>
+                  <field>
+                    <name>SX_PRG_LDO_DIG_VOUT</name>
+                    <description>Trim code for the REGDIG_0V8 supply domain LDO</description>
+                    <lsb>8</lsb>
+                    <msb>10</msb>
+                  </field>
+                  <field>
+                    <name>SX_PRG_LDO_LO_VOUT</name>
+                    <description>Trim code for the LO_0V8 supply domain LDO</description>
+                    <lsb>12</lsb>
+                    <msb>14</msb>
+                  </field>
+                  <field>
+                    <name>SX_LDO_VCO_VREF_PRG</name>
+                    <description>Trim code for the REGDCO_0V8 supply domain LDO</description>
+                    <lsb>16</lsb>
+                    <msb>18</msb>
+                  </field>
+                  <field>
+                    <name>SX_PRG_LDO_DTC_VOUT</name>
+                    <description>Trim code for the REGDTC_0V8 supply domain LDO</description>
+                    <lsb>20</lsb>
+                    <msb>22</msb>
                   </field>
                 </fields>
               </register>
               <register>
-                <dim>0x4</dim>
-                <dimIncrement>0x4</dimIncrement>
-                <name>TRIMSPARE[%s]</name>
-                <description>Description collection: Trim value for CELLRF.RFPLL.TRIMSPARE[n]</description>
+                <name>SX_GPSCTRL1_L1</name>
+                <description>Trim value for CELLRF.SX.SX_GPSCTRL1 - L1 band</description>
                 <addressOffset>0x014</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <size>0x20</size>
                 <fields>
                   <field>
+                    <name>GPSLCVCO_RES_COARSE</name>
+                    <description>Trim value for amplitude CTRL coarse tuning</description>
+                    <lsb>4</lsb>
+                    <msb>11</msb>
+                  </field>
+                  <field>
+                    <name>GPSLCVCO_RES_FINE</name>
+                    <description>Trim value for amplitude CTRL fine tuning</description>
+                    <lsb>12</lsb>
+                    <msb>20</msb>
+                  </field>
+                  <field>
+                    <name>GPSLCVCO_VSW_SMALL</name>
+                    <description>Trim value for GPSLCVCO small capacitance tuning bank control</description>
+                    <lsb>25</lsb>
+                    <msb>29</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>SX_GPSCTRL1_L5</name>
+                <description>Trim value for CELLRF.SX.SX_GPSCTRL1 - L5 band</description>
+                <addressOffset>0x018</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>GPSLCVCO_RES_COARSE</name>
+                    <description>Trim value for amplitude CTRL coarse tuning</description>
+                    <lsb>4</lsb>
+                    <msb>11</msb>
+                  </field>
+                  <field>
+                    <name>GPSLCVCO_RES_FINE</name>
+                    <description>Trim value for amplitude CTRL fine tuning</description>
+                    <lsb>12</lsb>
+                    <msb>20</msb>
+                  </field>
+                  <field>
+                    <name>GPSLCVCO_VSW_SMALL</name>
+                    <description>Trim value for GPSLCVCO small capacitance tuning bank control</description>
+                    <lsb>25</lsb>
+                    <msb>29</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>CPVT</name>
+                <description>Trim value for CELLRF.RFPLL.SX.CPVT</description>
+                <addressOffset>0x01C</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
                     <name>VALUE</name>
-                    <description>Trim value</description>
+                    <description>PVT bank LSB capacitor size</description>
                     <lsb>0</lsb>
+                    <msb>23</msb>
+                  </field>
+                  <field>
+                    <name>Q</name>
+                    <description>Q Value</description>
+                    <lsb>24</lsb>
                     <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>CACQ</name>
+                <description>Trim value for CELLRF.RFPLL.SX.CACQ</description>
+                <addressOffset>0x020</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>ACQ bank LSB capacitor size</description>
+                    <lsb>0</lsb>
+                    <msb>23</msb>
+                  </field>
+                  <field>
+                    <name>Q</name>
+                    <description>Q Value</description>
+                    <lsb>24</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>ADPLL</name>
+                <description>Trim value for CELLRF.RFPLL.SX.ADPLL</description>
+                <addressOffset>0x024</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <size>0x20</size>
+                <fields>
+                  <field>
+                    <name>PVT_TO_FIX_RATIO</name>
+                    <description>The ratio between one step in the PVT capacitor bank vs the value when all capacitors are off.</description>
+                    <lsb>0</lsb>
+                    <msb>10</msb>
+                  </field>
+                  <field>
+                    <name>NR_TRK_PER_ACQ</name>
+                    <description>ACQ/TRK capacitor size ratio. Needed for knowing how many TRK steps to change when ACQ is changed by one step</description>
+                    <lsb>16</lsb>
+                    <msb>21</msb>
                   </field>
                 </fields>
               </register>
@@ -4332,7 +4738,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_CELLRF_SENSORADC</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x0F8</addressOffset>
+              <addressOffset>0x104</addressOffset>
               <register>
                 <name>RD</name>
                 <description>Trim value for CELLRF.SENSORADC.RD</description>
@@ -4521,7 +4927,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>FICR_TRIM_CELLRF_COMMONTRIM</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x128</addressOffset>
+              <addressOffset>0x134</addressOffset>
               <cluster>
                 <name>TX</name>
                 <description>Unspecified</description>
@@ -35612,6 +36018,24 @@ A write outputs the value to atbytesm.</description>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>TX_TXLO_DIV_SEL</name>
+              <description>Power up</description>
+              <lsb>12</lsb>
+              <msb>12</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>activate</name>
+                  <description>Unspecified</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>no_effect</name>
+                  <description>Unspecified</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -35826,6 +36250,24 @@ A write outputs the value to atbytesm.</description>
               <description>Power down</description>
               <lsb>11</lsb>
               <msb>11</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>disable</name>
+                  <description>Unspecified</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>no_effect</name>
+                  <description>Unspecified</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>TX_TXLO_DIV_SEL</name>
+              <description>Power down</description>
+              <lsb>12</lsb>
+              <msb>12</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>disable</name>
@@ -36945,24 +37387,34 @@ A write outputs the value to atbytesm.</description>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+          </fields>
+        </register>
+        <register>
+          <name>TX_R_TRIM</name>
+          <description>TX R trimming control</description>
+          <addressOffset>0x808</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
             <field>
               <name>TX_LDOCT_IBPSRTRIM</name>
               <description>Resistor tuning word</description>
-              <lsb>14</lsb>
-              <msb>17</msb>
+              <lsb>8</lsb>
+              <msb>11</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
                   <description>Unspecified</description>
-                  <value>0x8</value>
+                  <value>0x0</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>TX_DACLDO0V8_IBPSRTRIM</name>
               <description>Resistor tuning word (not used)</description>
-              <lsb>18</lsb>
-              <msb>21</msb>
+              <lsb>12</lsb>
+              <msb>15</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
@@ -36974,8 +37426,8 @@ A write outputs the value to atbytesm.</description>
             <field>
               <name>TX_DACLDO1V2_IBPSRTRIM</name>
               <description>Resistor tuning word</description>
-              <lsb>22</lsb>
-              <msb>25</msb>
+              <lsb>16</lsb>
+              <msb>19</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
@@ -36987,13 +37439,41 @@ A write outputs the value to atbytesm.</description>
             <field>
               <name>TX_ICGMPPA_RTRIM</name>
               <description>Resistor tuning word</description>
-              <lsb>26</lsb>
-              <msb>29</msb>
+              <lsb>20</lsb>
+              <msb>23</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
                   <description>Unspecified</description>
                   <value>0x0</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TX_LOBPF_C_TRIM</name>
+          <description>TX LOBPF C trimming control</description>
+          <addressOffset>0x80C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>TX_TXLO_BPF_CTUNE</name>
+              <description>TXLO BPF resonance capacitance tuning. Depends on used band</description>
+              <lsb>0</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>max_capacitance</name>
+                  <description>Minimum TXLO frequency</description>
+                  <value>0x00</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>min_capacitance</name>
+                  <description>Maximum TXLO frequency</description>
+                  <value>0x7F</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -37473,7 +37953,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
             </field>
             <field>
               <name>TX_TXABB_IBIAS_TUNE</name>
-              <description>ABB main bias current to  IQ channel OTAs and VI converters (default 1)</description>
+              <description>ABB main bias current to  IQ channel OTAs and V-I converters (default 1)</description>
               <lsb>4</lsb>
               <msb>5</msb>
               <enumeratedValues>
@@ -37573,17 +38053,17 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
                   <value>0x3</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>WB_DECT</name>
+                  <name>WBmode_DECT6p912M</name>
                   <description>Unspecified</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>NNB_LTE1p4</name>
+                  <name>NNBmode_LTE1p4_NBIoT</name>
                   <description>Unspecified</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>NB_LTE5</name>
+                  <name>NBmode_LTE5_DECT3p456M</name>
                   <description>Unspecified</description>
                   <value>0x0</value>
                 </enumeratedValue>
@@ -37687,8 +38167,8 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
           </fields>
         </register>
         <register>
-          <name>TX_PA_PPA_LDO_TRIM</name>
-          <description>TX PA PPA LDO Trim</description>
+          <name>TX_PPA_LDO_TRIM</name>
+          <description>TX PPA LDO Trim</description>
           <addressOffset>0x848</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -37701,44 +38181,169 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
               <msb>2</msb>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>Default</name>
-                  <description>Unspecified</description>
+                  <name>m5p2perc</name>
+                  <description>000: -5.2 percent</description>
                   <value>0x0</value>
                 </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>TX_PA_LDO_TRIM</name>
-              <description>PA LDO output voltage trim</description>
-              <lsb>4</lsb>
-              <msb>6</msb>
-              <enumeratedValues>
                 <enumeratedValue>
-                  <name>Default</name>
-                  <description>Unspecified</description>
-                  <value>0x0</value>
+                  <name>m3p9perc</name>
+                  <description>...</description>
+                  <value>0x1</value>
                 </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>TX_PA_BIAS_LDO_TRIM</name>
-              <description>PA BIAS LDO output voltage trim</description>
-              <lsb>8</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
                 <enumeratedValue>
-                  <name>Default</name>
+                  <name>m2p6perc</name>
+                  <description>011: -1.3 percent</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>m1p3perc</name>
+                  <description>100: +0.0 percent  (default)</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>0perc</name>
+                  <description>101: +1.3 percent</description>
+                  <value>0x4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>1p3perc</name>
+                  <description>...</description>
+                  <value>0x5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>2p6perc</name>
+                  <description>111: +3.9 percent</description>
+                  <value>0x6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>3p9perc</name>
                   <description>Unspecified</description>
-                  <value>0x0</value>
+                  <value>0x7</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>TX_PA_PPA_LDO_PRG</name>
-          <description>TX PA PPA LDO Prg</description>
+          <name>TX_PA_LDO_TRIM</name>
+          <description>TX PA LDO Trim</description>
           <addressOffset>0x84C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>TX_PA_LDO_TRIM</name>
+              <description>PA LDO output voltage trim</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>0mV</name>
+                  <description>011:	+123mV</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>41mV</name>
+                  <description>010:	+82mV</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>82mV</name>
+                  <description>001:	+41mV</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>123mV</name>
+                  <description>000:	0mV (default)</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>m164mV</name>
+                  <description>111:	-41mV</description>
+                  <value>0x4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>m123mV</name>
+                  <description>110:	-82mV</description>
+                  <value>0x5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>m82mV</name>
+                  <description>101:	-123mV</description>
+                  <value>0x6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>m41mV</name>
+                  <description>100:	-164mV</description>
+                  <value>0x7</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TX_PA_BIAS_LDO_TRIM</name>
+          <description>TX PA_BIAS LDO Trim</description>
+          <addressOffset>0x850</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>TX_PA_BIAS_LDO_TRIM</name>
+              <description>PA BIAS LDO output voltage trim</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>m10p4perc</name>
+                  <description>000: -10.4 percent</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>m7p8perc</name>
+                  <description>...</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>m5p2perc</name>
+                  <description>011: -2.6 percent</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>m2p6perc</name>
+                  <description>100: +0.0 percent  (default)</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>0perc</name>
+                  <description>101: +2.6 percent</description>
+                  <value>0x4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>2p6perc</name>
+                  <description>...</description>
+                  <value>0x5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>5p2perc</name>
+                  <description>111: +7.8 percent</description>
+                  <value>0x6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>7p8perc</name>
+                  <description>Unspecified</description>
+                  <value>0x7</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TX_PPA_LDO_PRG</name>
+          <description>TX PPA LDO Prg</description>
+          <addressOffset>0x854</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -37750,44 +38355,94 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
               <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>Default</name>
-                  <description>Unspecified</description>
+                  <name>1p8V</name>
+                  <description>0: 1.8 V (default)</description>
                   <value>0x0</value>
                 </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>TX_TXPA_LDO_PRG</name>
-              <description>PA LDO out V selection</description>
-              <lsb>4</lsb>
-              <msb>7</msb>
-              <enumeratedValues>
                 <enumeratedValue>
-                  <name>Default</name>
-                  <description>Unspecified</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>TX_TXPA_BIAS_LDO_PRG</name>
-              <description>PABIAS LDO out V selection</description>
-              <lsb>8</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Default</name>
-                  <description>Unspecified</description>
-                  <value>0x0</value>
+                  <name>1p6V</name>
+                  <description>1: 1.6 V</description>
+                  <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>TX_PA_PPA_LDO_PULLD</name>
-          <description>TX PA PPA LDO Pulld</description>
-          <addressOffset>0x850</addressOffset>
+          <name>TX_PA_LDO_PRG</name>
+          <description>TX PA LDO Prg</description>
+          <addressOffset>0x858</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>TX_TXPA_LDO_PRG</name>
+              <description>PA LDO out V selection</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>1p8V</name>
+                  <description>Unspecified</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>2p8V</name>
+                  <description>Unspecified</description>
+                  <value>0x8</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>4p1V</name>
+                  <description>Unspecified</description>
+                  <value>0xF</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TX_PA_BIAS_LDO_PRG</name>
+          <description>TX PA_BIAS LDO Prg</description>
+          <addressOffset>0x85C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>TX_TXPA_BIAS_LDO_PRG</name>
+              <description>PABIAS LDO out V selection</description>
+              <lsb>0</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>1p8V</name>
+                  <description>00: 1.8 V</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>2p0V</name>
+                  <description>01: 2.0 V (default)</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>2p5V</name>
+                  <description>10: 2.5 V</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>3p0V</name>
+                  <description>11: 3.0 V</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TX_PPA_LDO_PULLD</name>
+          <description>TX PPA LDO Pulld</description>
+          <addressOffset>0x860</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -37805,11 +38460,21 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+          </fields>
+        </register>
+        <register>
+          <name>TX_PA_LDO_PULLD</name>
+          <description>TX PA LDO Pulld</description>
+          <addressOffset>0x864</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
             <field>
               <name>TX_TXPA_LDO_PULL_DWN_N_AO</name>
               <description>PA LDO out V pulldown</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
+              <lsb>0</lsb>
+              <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
@@ -37818,11 +38483,21 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+          </fields>
+        </register>
+        <register>
+          <name>TX_PA_BIAS_LDO_PULLD</name>
+          <description>TX PA PPA LDO Pulld</description>
+          <addressOffset>0x868</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
             <field>
               <name>TX_TXPA_BIAS_LDO_PULL_DWN_N_AO</name>
               <description>PA BIAS LDO out V pulldown</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
+              <lsb>0</lsb>
+              <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
@@ -37836,7 +38511,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         <register>
           <name>TX_IQMOD_CTRL1</name>
           <description>TX IQMOD Control</description>
-          <addressOffset>0x858</addressOffset>
+          <addressOffset>0x86C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -37986,7 +38661,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         <register>
           <name>TX_IQMOD_CTRL2</name>
           <description>TX IQMOD Control</description>
-          <addressOffset>0x85C</addressOffset>
+          <addressOffset>0x870</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -38009,48 +38684,12 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
                 </enumeratedValue>
               </enumeratedValues>
             </field>
-            <field>
-              <name>TX_TXLO_BPF_CTUNE</name>
-              <description>TXLO BPF resonance capacitance tuning. Depends on used band</description>
-              <lsb>4</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>max_capacitance</name>
-                  <description>Minimum TXLO frequency</description>
-                  <value>0x00</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>min_capacitance</name>
-                  <description>Maximum TXLO frequency</description>
-                  <value>0x7F</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>TX_TXLO_DIV_SEL</name>
-              <description>TXLO divider enable (default 1 for all modes)</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>disabled</name>
-                  <description>Divider disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>active</name>
-                  <description>Divider enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
           </fields>
         </register>
         <register>
           <name>TX_IQMOD_OFFSET</name>
           <description>TX IQMOD Offset Measurement</description>
-          <addressOffset>0x860</addressOffset>
+          <addressOffset>0x874</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -38180,7 +38819,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         <register>
           <name>TX_PPA_SEL</name>
           <description>TX Front End configure</description>
-          <addressOffset>0x870</addressOffset>
+          <addressOffset>0x878</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -38364,7 +39003,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         <register>
           <name>TX_PPA_LMB_CTRL</name>
           <description>TX PPA Low and Mid Band PPA control</description>
-          <addressOffset>0x874</addressOffset>
+          <addressOffset>0x87C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -38458,7 +39097,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         <register>
           <name>TX_PPA_LMB_GAIN</name>
           <description>TX PPA Low and Mid Band PPA gain</description>
-          <addressOffset>0x878</addressOffset>
+          <addressOffset>0x880</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -38522,7 +39161,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         <register>
           <name>TX_PPA_LMB_SPARE</name>
           <description>TX PPA Low and Mid Band PPA control</description>
-          <addressOffset>0x87C</addressOffset>
+          <addressOffset>0x884</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -38543,8 +39182,8 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         </register>
         <register>
           <name>TX_PPA_RESOTUNE_LB</name>
-          <description>TX PPA Resonators' tuning at low band</description>
-          <addressOffset>0x880</addressOffset>
+          <description>TX PPA Resonators tuning at low band</description>
+          <addressOffset>0x888</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -38572,7 +39211,7 @@ Affects both input and output latch. Separate control for I and Q DACs.</descrip
         <register>
           <name>TX_PPA_RESOTUNE_MHB</name>
           <description>TX PPA Resonators' tuning at high band</description>
-          <addressOffset>0x884</addressOffset>
+          <addressOffset>0x88C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <size>0x20</size>
@@ -81564,6 +82203,230 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           </fields>
         </register>
         <register>
+          <name>EVENTS_ACKLOAD1V8PE</name>
+          <description>Rising edge on ack detected for the REQLOAD1V8 request</description>
+          <addressOffset>0x10C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ACKLOAD1V8PE</name>
+              <description>Rising edge on ack detected for the REQLOAD1V8 request</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ACKLOAD1V8NE</name>
+          <description>Falling edge on ack detected for the REQLOAD1V8 request</description>
+          <addressOffset>0x110</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ACKLOAD1V8NE</name>
+              <description>Falling edge on ack detected for the REQLOAD1V8 request</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ACKCLEAN1V8PE</name>
+          <description>Rising edge on ack detected for the REQCLEAN1V8 request</description>
+          <addressOffset>0x114</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ACKCLEAN1V8PE</name>
+              <description>Rising edge on ack detected for the REQCLEAN1V8 request</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ACKCLEAN1V8NE</name>
+          <description>Falling edge on ack detected for the REQCLEAN1V8 request</description>
+          <addressOffset>0x118</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ACKCLEAN1V8NE</name>
+              <description>Falling edge on ack detected for the REQCLEAN1V8 request</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ACKUPSCALE0V8PE</name>
+          <description>Rising edge on ack detected for the REQUPSCALE0V8 request</description>
+          <addressOffset>0x11C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ACKUPSCALE0V8PE</name>
+              <description>Rising edge on ack detected for the REQUPSCALE0V8 request</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ACKUPSCALE0V8NE</name>
+          <description>Falling edge on ack detected for the REQUPSCALE0V8 request</description>
+          <addressOffset>0x120</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ACKUPSCALE0V8NE</name>
+              <description>Falling edge on ack detected for the REQUPSCALE0V8 request</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ACKCLEAN0V8PE</name>
+          <description>Rising edge on ack detected for the REQCLEAN0V8 request</description>
+          <addressOffset>0x124</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ACKCLEAN0V8PE</name>
+              <description>Rising edge on ack detected for the REQCLEAN0V8 request</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ACKCLEAN0V8NE</name>
+          <description>Falling edge on ack detected for the REQCLEAN0V8 request</description>
+          <addressOffset>0x128</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_ACKCLEAN0V8NE</name>
+              <description>Falling edge on ack detected for the REQCLEAN0V8 request</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>PUBLISH_COLDBOOT</name>
           <description>Publish configuration for event COLDBOOT</description>
           <addressOffset>0x180</addressOffset>
@@ -81663,6 +82526,270 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           </fields>
         </register>
         <register>
+          <name>PUBLISH_ACKLOAD1V8PE</name>
+          <description>Publish configuration for event ACKLOAD1V8PE</description>
+          <addressOffset>0x18C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ACKLOAD1V8PE will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_ACKLOAD1V8NE</name>
+          <description>Publish configuration for event ACKLOAD1V8NE</description>
+          <addressOffset>0x190</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ACKLOAD1V8NE will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_ACKCLEAN1V8PE</name>
+          <description>Publish configuration for event ACKCLEAN1V8PE</description>
+          <addressOffset>0x194</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ACKCLEAN1V8PE will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_ACKCLEAN1V8NE</name>
+          <description>Publish configuration for event ACKCLEAN1V8NE</description>
+          <addressOffset>0x198</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ACKCLEAN1V8NE will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_ACKUPSCALE0V8PE</name>
+          <description>Publish configuration for event ACKUPSCALE0V8PE</description>
+          <addressOffset>0x19C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ACKUPSCALE0V8PE will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_ACKUPSCALE0V8NE</name>
+          <description>Publish configuration for event ACKUPSCALE0V8NE</description>
+          <addressOffset>0x1A0</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ACKUPSCALE0V8NE will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_ACKCLEAN0V8PE</name>
+          <description>Publish configuration for event ACKCLEAN0V8PE</description>
+          <addressOffset>0x1A4</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ACKCLEAN0V8PE will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_ACKCLEAN0V8NE</name>
+          <description>Publish configuration for event ACKCLEAN0V8NE</description>
+          <addressOffset>0x1A8</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event ACKCLEAN0V8NE will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>INTEN</name>
           <description>Enable or disable interrupt</description>
           <addressOffset>0x300</addressOffset>
@@ -81711,6 +82838,150 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               <description>Enable or disable interrupt for event DEBUGBOOT</description>
               <lsb>2</lsb>
               <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKLOAD1V8PE</name>
+              <description>Enable or disable interrupt for event ACKLOAD1V8PE</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKLOAD1V8NE</name>
+              <description>Enable or disable interrupt for event ACKLOAD1V8NE</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN1V8PE</name>
+              <description>Enable or disable interrupt for event ACKCLEAN1V8PE</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN1V8NE</name>
+              <description>Enable or disable interrupt for event ACKCLEAN1V8NE</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKUPSCALE0V8PE</name>
+              <description>Enable or disable interrupt for event ACKUPSCALE0V8PE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKUPSCALE0V8NE</name>
+              <description>Enable or disable interrupt for event ACKUPSCALE0V8NE</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN0V8PE</name>
+              <description>Enable or disable interrupt for event ACKCLEAN0V8PE</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN0V8NE</name>
+              <description>Enable or disable interrupt for event ACKCLEAN0V8NE</description>
+              <lsb>10</lsb>
+              <msb>10</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -81793,6 +83064,222 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               <description>Write '1' to enable interrupt for event DEBUGBOOT</description>
               <lsb>2</lsb>
               <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKLOAD1V8PE</name>
+              <description>Write '1' to enable interrupt for event ACKLOAD1V8PE</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKLOAD1V8NE</name>
+              <description>Write '1' to enable interrupt for event ACKLOAD1V8NE</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN1V8PE</name>
+              <description>Write '1' to enable interrupt for event ACKCLEAN1V8PE</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN1V8NE</name>
+              <description>Write '1' to enable interrupt for event ACKCLEAN1V8NE</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKUPSCALE0V8PE</name>
+              <description>Write '1' to enable interrupt for event ACKUPSCALE0V8PE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKUPSCALE0V8NE</name>
+              <description>Write '1' to enable interrupt for event ACKUPSCALE0V8NE</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN0V8PE</name>
+              <description>Write '1' to enable interrupt for event ACKCLEAN0V8PE</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN0V8NE</name>
+              <description>Write '1' to enable interrupt for event ACKCLEAN0V8NE</description>
+              <lsb>10</lsb>
+              <msb>10</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -81906,6 +83393,222 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>ACKLOAD1V8PE</name>
+              <description>Write '1' to disable interrupt for event ACKLOAD1V8PE</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKLOAD1V8NE</name>
+              <description>Write '1' to disable interrupt for event ACKLOAD1V8NE</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN1V8PE</name>
+              <description>Write '1' to disable interrupt for event ACKCLEAN1V8PE</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN1V8NE</name>
+              <description>Write '1' to disable interrupt for event ACKCLEAN1V8NE</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKUPSCALE0V8PE</name>
+              <description>Write '1' to disable interrupt for event ACKUPSCALE0V8PE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKUPSCALE0V8NE</name>
+              <description>Write '1' to disable interrupt for event ACKUPSCALE0V8NE</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN0V8PE</name>
+              <description>Write '1' to disable interrupt for event ACKCLEAN0V8PE</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN0V8NE</name>
+              <description>Write '1' to disable interrupt for event ACKCLEAN0V8NE</description>
+              <lsb>10</lsb>
+              <msb>10</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -81959,6 +83662,158 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               <description>Read pending status of interrupt for event DEBUGBOOT</description>
               <lsb>2</lsb>
               <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKLOAD1V8PE</name>
+              <description>Read pending status of interrupt for event ACKLOAD1V8PE</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKLOAD1V8NE</name>
+              <description>Read pending status of interrupt for event ACKLOAD1V8NE</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN1V8PE</name>
+              <description>Read pending status of interrupt for event ACKCLEAN1V8PE</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN1V8NE</name>
+              <description>Read pending status of interrupt for event ACKCLEAN1V8NE</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKUPSCALE0V8PE</name>
+              <description>Read pending status of interrupt for event ACKUPSCALE0V8PE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKUPSCALE0V8NE</name>
+              <description>Read pending status of interrupt for event ACKUPSCALE0V8NE</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN0V8PE</name>
+              <description>Read pending status of interrupt for event ACKCLEAN0V8PE</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ACKCLEAN0V8NE</name>
+              <description>Read pending status of interrupt for event ACKCLEAN0V8NE</description>
+              <lsb>10</lsb>
+              <msb>10</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -82245,6 +84100,118 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                 <enumeratedValue>
                   <name>32ClockCycles</name>
                   <description>Local reset request is generated 32 clock cycles after the LOCALRESETREQ bit is written.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>REQLOAD1V8</name>
+          <description>Request load current estimate increase for VDD_AO_1V8 rail. The current estimate value is stored in PCRM CONFIG.LOAD register</description>
+          <addressOffset>0x514</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>REQLOAD1V8</name>
+              <description>Request load current for VDD_AO_1V8 rail.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotRequested</name>
+                  <description>Load current not requested.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Requested</name>
+                  <description>Load current requested.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>REQCLEAN1V8</name>
+          <description>Request clean power for VDD_AO_1V8 rail</description>
+          <addressOffset>0x518</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>REQCLEAN1V8</name>
+              <description>Request clean power for VDD_AO_1V8 rail.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotRequested</name>
+                  <description>Clean power not requested.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Requested</name>
+                  <description>Clean power requested.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>REQUPSCALE0V8</name>
+          <description>Request voltage level upscaling for VDD_AO_0V8 rail</description>
+          <addressOffset>0x51C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>REQUPSCALE0V8</name>
+              <description>Request voltage level upscaling for VDD_AO_0V8 rail.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotRequested</name>
+                  <description>Voltage upscaling not requested.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Requested</name>
+                  <description>Voltage upscaling requested.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>REQCLEAN0V8</name>
+          <description>Request clean power for VDD_AO_0V8 rail</description>
+          <addressOffset>0x520</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>REQCLEAN0V8</name>
+              <description>Request clean power for VDD_AO_0V8 rail.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotRequested</name>
+                  <description>Clean power not requested.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Requested</name>
+                  <description>Clean power requested.</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -134449,8 +136416,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Busy</name>
-                    <description>An abstract command was executing while command, 
-                abstractcs, or abstractauto was written, or when one of the data or progbuf registers was read 
+                    <description>An abstract command was executing while command,
+                abstractcs, or abstractauto was written, or when one of the data or progbuf registers was read
                 or written. This status is only written if cmderr contains 0</description>
                     <value>0x1</value>
                   </enumeratedValue>
@@ -134462,19 +136429,19 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Exception</name>
-                    <description>An exception occurred while executing the 
+                    <description>An exception occurred while executing the
                 command  (e.g. while executing theProgram Buffer).</description>
                     <value>0x3</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>HaltResume</name>
-                    <description>The abstract command couldn't execute 
+                    <description>The abstract command couldn't execute
                 because the hart wasn't in the required state (running/halted). or unavailable.</description>
                     <value>0x4</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Bus</name>
-                    <description>The abstract command failed due to abus 
+                    <description>The abstract command failed due to abus
                 error (e.g. alignment, access size, or timeout).</description>
                     <value>0x5</value>
                   </enumeratedValue>
@@ -135125,6 +137092,95 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>VPRSTATUS</name>
+          <description>VPR state information.</description>
+          <addressOffset>0x804</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CPUSTATUS</name>
+              <lsb>0</lsb>
+              <msb>3</msb>
+              <access>read-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>WAITING</name>
+                  <description>WAITING (not yet started)</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RUNNING</name>
+                  <description>RUNNING</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SLEEPING</name>
+                  <description>SLEEPING</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>INTERRUPT</name>
+                  <description>INTERRUPT (in handler)</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EXCEPTION_TRAP</name>
+                  <description>EXCEPTION/TRAP (in handler)</description>
+                  <value>0x4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ONGOING_RESET</name>
+                  <description>ONGOING_RESET</description>
+                  <value>0x5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HALTED</name>
+                  <description>HALTED</description>
+                  <value>0x6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ERROR</name>
+                  <description>ERROR (lockup, needs debugging or reset)</description>
+                  <value>0xE</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>INVALID</name>
+                  <description>INVALID (internal value for debugging use only)</description>
+                  <value>0xF</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTPENABLED</name>
+              <description>Mirrors the ENABLERTPERIPH bit in the NORDIC.VPRNORDICCTRL CSR</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <access>read-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Real-time peripherals disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Real-time peripherals enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTPSTALL</name>
+              <description>Stalled waiting for real-time peripheral blocking CSR access, for example WAIT, OUTB with dirty status</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <access>read-only</access>
             </field>
           </fields>
         </register>
@@ -151056,7 +153112,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Included</name>
-                  <description>Include even parity bit</description>
+                  <description>Include parity bit</description>
                   <value>0x7</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -151166,6 +153222,16 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>ENABLED</name>
+                  <description>Packet timeout is enabled.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Packet timeout is disabled.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
                   <description>Packet timeout is enabled.</description>
                   <value>0x1</value>
                 </enumeratedValue>
@@ -151634,7 +153700,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                   </field>
                   <field>
                     <name>ONESHOT_0</name>
-                    <description>Configure match filter 0 as one-shot or sticky</description>
+                    <description>Configure match filter 0 as one-shot or continous</description>
                     <lsb>16</lsb>
                     <msb>16</msb>
                     <enumeratedValues>
@@ -151652,7 +153718,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                   </field>
                   <field>
                     <name>ONESHOT_1</name>
-                    <description>Configure match filter 1 as one-shot or sticky</description>
+                    <description>Configure match filter 1 as one-shot or continous</description>
                     <lsb>17</lsb>
                     <msb>17</msb>
                     <enumeratedValues>
@@ -151670,7 +153736,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                   </field>
                   <field>
                     <name>ONESHOT_2</name>
-                    <description>Configure match filter 2 as one-shot or sticky</description>
+                    <description>Configure match filter 2 as one-shot or continous</description>
                     <lsb>18</lsb>
                     <msb>18</msb>
                     <enumeratedValues>
@@ -151688,7 +153754,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                   </field>
                   <field>
                     <name>ONESHOT_3</name>
-                    <description>Configure match filter 3 as one-shot or sticky</description>
+                    <description>Configure match filter 3 as one-shot or continous</description>
                     <lsb>19</lsb>
                     <msb>19</msb>
                     <enumeratedValues>
@@ -151720,7 +153786,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                     <name>DATA</name>
                     <description>Data to look for</description>
                     <lsb>0</lsb>
-                    <msb>31</msb>
+                    <msb>7</msb>
                   </field>
                 </fields>
               </register>
@@ -152122,6 +154188,50 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                   <value>0x3</value>
                 </enumeratedValue>
               </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ERRORADDRENABLE</name>
+          <description>Enable bit for error address tracking</description>
+          <addressOffset>0x504</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ERRORADDRENABLE</name>
+              <description>Tracking must be enabled when it is needed. Detected error response for posted write (EVENT BUSERROR) will halt tracking and change the value of this register to 0.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>e0</name>
+                  <description>Error address is not tracked</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>e1</name>
+                  <description>Error address is tracked</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ERRORADDR</name>
+          <description>Address for posted write error response</description>
+          <addressOffset>0x508</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ERRORADDR</name>
+              <description>First address that caused error response for posted write. Valid only when EVENT BUSERROR is 1.</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
             </field>
           </fields>
         </register>
@@ -183810,7 +185920,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
       <registers>
         <register>
           <name>TASKS_DMASTARTRX</name>
-          <description>start DMA transfer from SIM card to memory</description>
+          <description>Start DMA transfer from SIM card to memory</description>
           <addressOffset>0x000</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -183818,7 +185928,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>TASKS_DMASTARTRX</name>
-              <description>start DMA transfer from SIM card to memory</description>
+              <description>Start DMA transfer from SIM card to memory</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -183833,7 +185943,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>TASKS_DMASTOPRX</name>
-          <description>stop DMA transfer from SIM card to memory</description>
+          <description>Stop DMA transfer from SIM card to memory</description>
           <addressOffset>0x004</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -183841,7 +185951,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>TASKS_DMASTOPRX</name>
-              <description>stop DMA transfer from SIM card to memory</description>
+              <description>Stop DMA transfer from SIM card to memory</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -183856,7 +185966,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>TASKS_DMASTARTTX</name>
-          <description>start DMA transfer from memory  to SIM card</description>
+          <description>Start DMA transfer from memory to SIM card</description>
           <addressOffset>0x008</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -183864,7 +185974,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>TASKS_DMASTARTTX</name>
-              <description>start DMA transfer from memory  to SIM card</description>
+              <description>Start DMA transfer from memory to SIM card</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -183879,7 +185989,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>TASKS_DMASTOPTX</name>
-          <description>start DMA transfer from memory  to SIM card</description>
+          <description>Stop DMA transfer from memory to SIM card</description>
           <addressOffset>0x00C</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -183887,7 +185997,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>TASKS_DMASTOPTX</name>
-              <description>start DMA transfer from memory  to SIM card</description>
+              <description>Stop DMA transfer from memory to SIM card</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -184306,7 +186416,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <addressOffset>0x100</addressOffset>
           <register>
             <name>RXSTARTED</name>
-            <description>DMA Rx  operation started</description>
+            <description>DMA Rx operation started</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -184314,7 +186424,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
             <fields>
               <field>
                 <name>RXSTARTED</name>
-                <description>DMA Rx  operation started</description>
+                <description>DMA Rx operation started</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -184334,7 +186444,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           </register>
           <register>
             <name>RXDONE</name>
-            <description>DMA Tx  operation finished</description>
+            <description>DMA Tx operation finished</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -184342,7 +186452,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
             <fields>
               <field>
                 <name>RXDONE</name>
-                <description>DMA Tx  operation finished</description>
+                <description>DMA Tx operation finished</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -184531,7 +186641,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>EVENTS_BWTIMEOUT</name>
-          <description>Block Wait timeout</description>
+          <description>T=1 block wait timeout or T=0 wait timeout</description>
           <addressOffset>0x120</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -184539,7 +186649,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>EVENTS_BWTIMEOUT</name>
-              <description>Block Wait timeout</description>
+              <description>T=1 block wait timeout or T=0 wait timeout</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -184559,7 +186669,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>EVENTS_SW1SW2</name>
-          <description>SW1 and SW2 bytes  received</description>
+          <description>SW1 and SW2 bytes received</description>
           <addressOffset>0x124</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -184567,7 +186677,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>EVENTS_SW1SW2</name>
-              <description>SW1 and SW2 bytes  received</description>
+              <description>SW1 and SW2 bytes received</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -184615,7 +186725,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>EVENTS_INS</name>
-          <description>T=0 procedure byte  INS received</description>
+          <description>T=0 procedure byte INS received</description>
           <addressOffset>0x12C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -184623,7 +186733,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>EVENTS_INS</name>
-              <description>T=0 procedure byte  INS received</description>
+              <description>T=0 procedure byte INS received</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -184643,7 +186753,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>EVENTS_NINS</name>
-          <description>T=0 procedure byte  !INS received</description>
+          <description>T=0 procedure byte !INS received</description>
           <addressOffset>0x130</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -184651,7 +186761,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>EVENTS_NINS</name>
-              <description>T=0 procedure byte  !INS received</description>
+              <description>T=0 procedure byte !INS received</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -184783,7 +186893,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>EVENTS_T1TXABORTED</name>
-          <description>T=1 card responded with S(ABORT request)</description>
+          <description>T=1 card responded with S (ABORT request)</description>
           <addressOffset>0x144</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -184791,7 +186901,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>EVENTS_T1TXABORTED</name>
-              <description>T=1 card responded with S(ABORT request)</description>
+              <description>T=1 card responded with S (ABORT request)</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -184923,7 +187033,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>EVENTS_ERRORCOUNTMAX</name>
-          <description>number of unsuccessful rx or tx operations equals max value</description>
+          <description>number of unsuccessful Rx or Tx operations equals max value</description>
           <addressOffset>0x158</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -184931,7 +187041,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>EVENTS_ERRORCOUNTMAX</name>
-              <description>number of unsuccessful rx or tx operations equals max value</description>
+              <description>number of unsuccessful Rx or Tx operations equals max value</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -187422,7 +189532,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>SW1SW2</name>
-          <description>Sw1 and Sw2 bytes received from Sim card in T=1 mode</description>
+          <description>Sw1 and Sw2 bytes received from SIM card in T=1 mode</description>
           <addressOffset>0x400</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -187528,7 +189638,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>CLOCKRATE</name>
-              <description>Divider for setting the clock frequency to the SIM card clock (clock  = input clock / ClockRate</description>
+              <description>Divider for setting the clock frequency to the SIM card clock (SIM card clock = input clock / ClockRate)</description>
               <lsb>0</lsb>
               <msb>6</msb>
             </field>
@@ -187536,7 +189646,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>BAUDRATE</name>
-          <description>Divider value for setting the baud rate to the SIM card.</description>
+          <description>Number of clock cycles per serial data bit. Equal to ISO standard F/D (clock rate conversion integer divided by baud rate adjustment integer).</description>
           <addressOffset>0x504</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000174</resetValue>
@@ -187544,7 +189654,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>BAUDRATE</name>
-              <description>Divider for setting the baud rate to the SIM card.(Baud rate  = Sim card clock/BaudRate).</description>
+              <description>Number of clock cycles per serial data bit. Equal to ISO standard F/D (clock rate conversion integer divided by baud rate adjustment integer).</description>
               <lsb>0</lsb>
               <msb>8</msb>
             </field>
@@ -187552,7 +189662,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>CHARACTERGUARDTIME</name>
-          <description>Character Guard time</description>
+          <description>Character guard time</description>
           <addressOffset>0x508</addressOffset>
           <access>read-write</access>
           <resetValue>0x0000000C</resetValue>
@@ -187568,7 +189678,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>CHARACTERWAITTIME</name>
-          <description>Character Wait time</description>
+          <description>Character wait time</description>
           <addressOffset>0x50C</addressOffset>
           <access>read-write</access>
           <resetValue>0x0000000D</resetValue>
@@ -187578,13 +189688,13 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
               <name>CHARACTERWAITTIME</name>
               <description>T=1 character Rx wait time in ETU</description>
               <lsb>0</lsb>
-              <msb>7</msb>
+              <msb>15</msb>
             </field>
           </fields>
         </register>
         <register>
           <name>BLOCKWAITTIME</name>
-          <description>Block Wait time</description>
+          <description>Block wait time</description>
           <addressOffset>0x510</addressOffset>
           <access>read-write</access>
           <resetValue>0x00002580</resetValue>
@@ -187592,9 +189702,9 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>BLOCKWAITTIME</name>
-              <description>Block wait time in ETU, default 9600</description>
+              <description>T=1 block wait time. T=0 wait time. Unit is ETU. Default 9600</description>
               <lsb>0</lsb>
-              <msb>15</msb>
+              <msb>26</msb>
             </field>
           </fields>
         </register>
@@ -187647,7 +189757,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>LowImpedance</name>
-                  <description>use 		low impedance drivers</description>
+                  <description>use low impedance drivers</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -187736,7 +189846,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>VOLTAGE</name>
-          <description>Sim card operating voltage</description>
+          <description>SIM card operating voltage</description>
           <addressOffset>0x524</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000001</resetValue>
@@ -187744,7 +189854,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>VOLTAGE</name>
-              <description>Sim card operating voltage</description>
+              <description>SIM card operating voltage</description>
               <lsb>0</lsb>
               <msb>1</msb>
               <enumeratedValues>
@@ -187788,7 +189898,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enable</name>
-                  <description>LRC 			calculation enabled</description>
+                  <description>LRC calculation enabled</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -187861,7 +189971,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>AHBTESTWRITE</name>
-          <description>Test data to write through AHB RX bus</description>
+          <description>Test data to write through Ahb Rx bus</description>
           <addressOffset>0x53C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -187883,7 +189993,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>AHBTESTREAD</name>
-          <description>Test data to read through AHB TX bus</description>
+          <description>Test data to read through Ahb TX bus</description>
           <addressOffset>0x540</addressOffset>
           <access>read-only</access>
           <resetValue>0x00000000</resetValue>
@@ -187940,14 +190050,68 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <size>0x20</size>
           <fields>
             <field>
-              <name>ENABLE</name>
+              <name>ENABLE_SERIALDATAOUT</name>
               <description>Enable for the override</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NormalOperation</name>
-                  <description>Outputs controlled by the hardware. Overrides do not have effect.</description>
+                  <description>Outputs controlled by the hardware. Override does not have effect.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Override</name>
+                  <description>Outputs controlled from the registers</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ENABLE_SERIALDATADIR</name>
+              <description>Enable for the override</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NormalOperation</name>
+                  <description>Outputs controlled by the hardware. Override does not have effect.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Override</name>
+                  <description>Outputs controlled from the registers</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ENABLE_CLOCK</name>
+              <description>Enable for the override</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NormalOperation</name>
+                  <description>Outputs controlled by the hardware. Override does not have effect.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Override</name>
+                  <description>Outputs controlled from the registers</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ENABLE_RESET</name>
+              <description>Enable for the override</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NormalOperation</name>
+                  <description>Outputs controlled by the hardware. Override does not have effect.</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -187960,8 +190124,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
             <field>
               <name>SERIALDATAOUT</name>
               <description>Control for SerialDataOut</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
+              <lsb>16</lsb>
+              <msb>16</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Low</name>
@@ -187978,8 +190142,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
             <field>
               <name>SERIALDATADIR</name>
               <description>Control for SerialDataDir</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
+              <lsb>17</lsb>
+              <msb>17</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>InputMode</name>
@@ -187996,8 +190160,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
             <field>
               <name>CLOCK</name>
               <description>Control for clock</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
+              <lsb>18</lsb>
+              <msb>18</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Low</name>
@@ -188014,8 +190178,8 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
             <field>
               <name>RESET</name>
               <description>Control for reset</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
+              <lsb>19</lsb>
+              <msb>19</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Low</name>
@@ -188081,7 +190245,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>UARTADDRESS</name>
-          <description>Set address for RX (when UART frame size is 9)</description>
+          <description>Set address for Rx (when UART frame size is 9)</description>
           <addressOffset>0x580</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -188113,7 +190277,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>DMARXADDR</name>
-          <description>DMA access  buffer RAM start address</description>
+          <description>DMA access buffer RAM start address</description>
           <addressOffset>0x600</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -188121,7 +190285,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>DMARXSTARTADDRESS</name>
-              <description>DMA access  buffer RAM start address</description>
+              <description>DMA access buffer RAM start address</description>
               <lsb>0</lsb>
               <msb>31</msb>
             </field>
@@ -188161,7 +190325,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>DMARXENABLE</name>
-          <description>Enable for rx dma</description>
+          <description>Enable for Rx dma</description>
           <addressOffset>0x60C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -188169,7 +190333,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>DMARXENABLE</name>
-              <description>Enable for rx dma</description>
+              <description>Enable for Rx dma</description>
               <lsb>0</lsb>
               <msb>0</msb>
             </field>
@@ -188241,7 +190405,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
         </register>
         <register>
           <name>DMATXENABLE</name>
-          <description>Enable for rx dma</description>
+          <description>Enable for Rx dma</description>
           <addressOffset>0x70C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -188249,7 +190413,7 @@ Debug2[7]: SX_FCOMPMEAS_OUT</description>
           <fields>
             <field>
               <name>DMATXENABLE</name>
-              <description>Enable for rx dma</description>
+              <description>Enable for Rx dma</description>
               <lsb>0</lsb>
               <msb>0</msb>
             </field>

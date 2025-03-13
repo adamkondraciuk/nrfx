@@ -253,8 +253,8 @@ typedef enum {
 #define NRF_APPLICATION_UICREXTENDED_NS_BASE 0x00000000UL
 #define NRF_APPLICATION_ICACHEDATA_S_BASE 0x02F00000UL
 #define NRF_APPLICATION_ICACHEINFO_S_BASE 0x02F10000UL
+#define NRF_APPLICATION_UICR_NS_BASE      0x0FFF0000UL
 #define NRF_APPLICATION_BICR_NS_BASE      0x0FFF0800UL
-#define NRF_APPLICATION_UICR_NS_BASE      0x0FFF8000UL
 #define NRF_APPLICATION_DCACHEDATA_S_BASE 0x22F00000UL
 #define NRF_APPLICATION_DCACHEINFO_S_BASE 0x22F10000UL
 #define NRF_APPLICATION_ETM_NS_BASE       0xE0041000UL
@@ -308,8 +308,8 @@ typedef enum {
 #define NRF_APPLICATION_UICREXTENDED_NS   ((NRF_UICREXTENDED_Type*)             NRF_APPLICATION_UICREXTENDED_NS_BASE)
 #define NRF_APPLICATION_ICACHEDATA_S      ((NRF_ICACHEDATA_Type*)               NRF_APPLICATION_ICACHEDATA_S_BASE)
 #define NRF_APPLICATION_ICACHEINFO_S      ((NRF_ICACHEINFO_Type*)               NRF_APPLICATION_ICACHEINFO_S_BASE)
-#define NRF_APPLICATION_BICR_NS           ((NRF_BICR_Type*)                     NRF_APPLICATION_BICR_NS_BASE)
 #define NRF_APPLICATION_UICR_NS           ((NRF_UICR_Type*)                     NRF_APPLICATION_UICR_NS_BASE)
+#define NRF_APPLICATION_BICR_NS           ((NRF_BICR_Type*)                     NRF_APPLICATION_BICR_NS_BASE)
 #define NRF_APPLICATION_DCACHEDATA_S      ((NRF_DCACHEDATA_Type*)               NRF_APPLICATION_DCACHEDATA_S_BASE)
 #define NRF_APPLICATION_DCACHEINFO_S      ((NRF_DCACHEINFO_Type*)               NRF_APPLICATION_DCACHEINFO_S_BASE)
 #define NRF_APPLICATION_ETM_NS            ((NRF_ETM_Type*)                      NRF_APPLICATION_ETM_NS_BASE)
@@ -362,8 +362,8 @@ typedef enum {
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_APPLICATION_UICREXTENDED            NRF_APPLICATION_UICREXTENDED_NS
-  #define NRF_APPLICATION_BICR                    NRF_APPLICATION_BICR_NS
   #define NRF_APPLICATION_UICR                    NRF_APPLICATION_UICR_NS
+  #define NRF_APPLICATION_BICR                    NRF_APPLICATION_BICR_NS
   #define NRF_APPLICATION_ETM                     NRF_APPLICATION_ETM_NS
   #define NRF_APPLICATION_MVDMA                   NRF_APPLICATION_MVDMA_NS
   #define NRF_APPLICATION_RAMC                    NRF_APPLICATION_RAMC_NS
@@ -386,8 +386,8 @@ typedef enum {
   #define NRF_APPLICATION_UICREXTENDED            NRF_APPLICATION_UICREXTENDED_NS
   #define NRF_APPLICATION_ICACHEDATA              NRF_APPLICATION_ICACHEDATA_S
   #define NRF_APPLICATION_ICACHEINFO              NRF_APPLICATION_ICACHEINFO_S
-  #define NRF_APPLICATION_BICR                    NRF_APPLICATION_BICR_NS
   #define NRF_APPLICATION_UICR                    NRF_APPLICATION_UICR_NS
+  #define NRF_APPLICATION_BICR                    NRF_APPLICATION_BICR_NS
   #define NRF_APPLICATION_DCACHEDATA              NRF_APPLICATION_DCACHEDATA_S
   #define NRF_APPLICATION_DCACHEINFO              NRF_APPLICATION_DCACHEINFO_S
   #define NRF_APPLICATION_ETM                     NRF_APPLICATION_ETM_NS
@@ -433,8 +433,8 @@ typedef enum {
 #ifdef NRF_APPLICATION                               /*!< Remap NRF_DOMAIN_X instances to NRF_X symbol for ease of use.        */
   #ifdef NRF_TRUSTZONE_NONSECURE                     /*!< Remap only nonsecure instances.                                      */
     #define NRF_UICREXTENDED                      NRF_APPLICATION_UICREXTENDED
-    #define NRF_BICR                              NRF_APPLICATION_BICR
     #define NRF_UICR                              NRF_APPLICATION_UICR
+    #define NRF_BICR                              NRF_APPLICATION_BICR
     #define NRF_ETM                               NRF_APPLICATION_ETM
     #define NRF_MVDMA                             NRF_APPLICATION_MVDMA
     #define NRF_RAMC                              NRF_APPLICATION_RAMC
@@ -457,8 +457,8 @@ typedef enum {
     #define NRF_UICREXTENDED                      NRF_APPLICATION_UICREXTENDED
     #define NRF_ICACHEDATA                        NRF_APPLICATION_ICACHEDATA
     #define NRF_ICACHEINFO                        NRF_APPLICATION_ICACHEINFO
-    #define NRF_BICR                              NRF_APPLICATION_BICR
     #define NRF_UICR                              NRF_APPLICATION_UICR
+    #define NRF_BICR                              NRF_APPLICATION_BICR
     #define NRF_DCACHEDATA                        NRF_APPLICATION_DCACHEDATA
     #define NRF_DCACHEINFO                        NRF_APPLICATION_DCACHEINFO
     #define NRF_ETM                               NRF_APPLICATION_ETM

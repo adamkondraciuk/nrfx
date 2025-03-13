@@ -178,10 +178,8 @@ __WEAK void SysTick_Handler(void)
  __HANDLER("Default_Handler") void PWM131_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void SERIAL2_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void SERIAL3_IRQHandler                                          (void);
- __HANDLER("Default_Handler") void SPU136_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void SERIAL4_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void SERIAL5_IRQHandler                                          (void);
- __HANDLER("Default_Handler") void SPU137_IRQHandler                                           (void);
  __HANDLER("Default_Handler") void SERIAL6_IRQHandler                                          (void);
  __HANDLER("Default_Handler") void SERIAL7_IRQHandler                                          (void);
 
@@ -661,7 +659,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    SPU136_IRQHandler,
+    0,
     0,
     0,
     0,
@@ -677,7 +675,7 @@ __VECTOR_TABLE_ATTRIBUTE const VECTOR_TABLE_Type __VECTOR_TABLE[] = {
     0,
     0,
     0,
-    SPU137_IRQHandler,
+    0,
     0,
     0,
     0,

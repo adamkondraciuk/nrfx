@@ -51,7 +51,7 @@ This file was modified by Nordic Semiconductor to support RISC-V devices.
     .equ    Stack_Size, __STACK_SIZE
 #else
     .align 3
-    .equ    Stack_Size, 2048
+    .equ    Stack_Size, 4096
 #endif
     .globl __StackTop
     .globl __StackLimit
@@ -72,7 +72,7 @@ __StackTop:
 #elif defined(__HEAP_SIZE)
     .equ Heap_Size, __HEAP_SIZE
 #else
-    .equ Heap_Size, 2048
+    .equ Heap_Size, 4096
 #endif
     .globl __HeapBase
     .globl __HeapLimit
@@ -413,7 +413,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   AXONS_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -866,6 +866,7 @@ Default_Handler:
     IRQ  GPIOTE130_1_IRQHandler
     IRQ  GRTC_0_IRQHandler
     IRQ  GRTC_1_IRQHandler
+    IRQ  AXONS_IRQHandler
     IRQ  MRAMC110_IRQHandler
     IRQ  MRAMC111_IRQHandler
     IRQ  OTPC_IRQHandler

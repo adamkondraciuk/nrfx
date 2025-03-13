@@ -59,11 +59,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPRCSR_REMAP 0                               /*!< Code patching (REMAP): 0                                             */
 #define VPRCSR_BUSWIDTH 32                           /*!< BUSWIDTH: 32                                                         */
 #define VPRCSR_BKPT 1                                /*!< BKPT: 1                                                              */
+#define VPRCSR_RETAINED 1                            /*!< (unspecified)                                                        */
 #define VPRCSR_VIOPINS 0x0000000F                    /*!< CSR VIOPINS value: 0x0000000F                                        */
 #define VPRCSR_RT_SPLIT_SEC 0                        /*!< RT_SPLIT_SEC: 0                                                      */
 #define VPRCSR_RT_SHIFT_PRESENT 0                    /*!< RT_SHIFT_PRESENT: 0                                                  */
 #define VPRCSR_RT_SHIFT_START 0                      /*!< RT_SHIFT_START: 0                                                    */
 #define VPRCSR_RT_SHIFT_LENGTH 32                    /*!< RT_SHIFT_LENGTH: rt_shift_length                                     */
+#define VPRCSR_WAKE_PIN_RESET_VALUE_MIN 0            /*!< Reset value for RTPERIPHCTRL.EVPINSEL. Supported values: 0..15       */
+#define VPRCSR_WAKE_PIN_RESET_VALUE_MAX 15           /*!< Reset value for RTPERIPHCTRL.EVPINSEL. Supported values: 0..15       */
+#define VPRCSR_WAKE_PIN_RESET_VALUE_SIZE 16          /*!< Reset value for RTPERIPHCTRL.EVPINSEL. Supported values: 0..15       */
 #define VPRCSR_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..15                                                   */
 #define VPRCSR_VEVIF_NTASKS_MAX 15                   /*!< VEVIF tasks: 0..15                                                   */
 #define VPRCSR_VEVIF_NTASKS_SIZE 16                  /*!< VEVIF tasks: 0..15                                                   */
@@ -77,9 +81,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPRCSR_RST_UNRECOV 0                         /*!< Unrecoverable state forces syncronous reset: 0                       */
 #define VPRCSR_BEXT 0                                /*!< Bit-Manipulation extension: 0                                        */
 #define VPRCSR_CACHE_EN 0                            /*!< (unspecified)                                                        */
+#define VPRCSR_CACHEEXTRATAGBUF 0                    /*!< CACHEEXTRATAGBUF: 0                                                  */
 #define VPRCSR_OUTMODE_VPR1_2 1                      /*!< (unspecified)                                                        */
 #define VPRCSR_VPR_BUS_PRIO 0                        /*!< (unspecified)                                                        */
 #define VPRCSR_NMIMPID_VPR1_3_3 0                    /*!< (unspecified)                                                        */
+#define VPRCSR_PERIPHERALBLOCKINGACCESS 0            /*!< (unspecified)                                                        */
+#define VPRCSR_BRANCHPREDECODING 0                   /*!< (unspecified)                                                        */
+#define VPRCSR_RTP_VPR_1_5 1                         /*!< (unspecified)                                                        */
 
 /*VPR CLIC registers*/
 #define CLIC_PRESENT 1
@@ -113,6 +121,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define FICR_LTE_ON 0                                /*!< (unspecified)                                                        */
 #define FICR_SAANA_LTE_ON 1                          /*!< (unspecified)                                                        */
+#define FICR_KARHU_TESTCHIP_REGS 0                   /*!< (unspecified)                                                        */
 #define FICR_WIFI_ON 0                               /*!< (unspecified)                                                        */
 #define FICR_NFC_ON 1                                /*!< (unspecified)                                                        */
 #define FICR_ML_ON 0                                 /*!< (unspecified)                                                        */
@@ -333,10 +342,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR120_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR120_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR120_VEVIF_NDPPI_SIZE 28                   /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR120_VEVIF_DPPI_MASK 0x0F000000            /*!< Mask of supported VEVIF DPPI channels: 0x0F000000                    */
 #define VPR120_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
 #define VPR120_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 28..31                                                 */
 #define VPR120_VEVIF_NEVENTS_SIZE 32                 /*!< VEVIF events: 28..31                                                 */
+#define VPR120_VEVIF_EVENTS_MASK 0xF0000000          /*!< Mask of supported VEVIF events: 0xF0000000                           */
 #define VPR120_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F8C8400                       */
+#define VPR120_RTP_VPR_1_5 1                         /*!< (unspecified)                                                        */
 
 #define VPR121_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
 #define VPR121_VPR_START_RESET_VALUE 0               /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
@@ -356,10 +368,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR121_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR121_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
 #define VPR121_VEVIF_NDPPI_SIZE 28                   /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR121_VEVIF_DPPI_MASK 0x0F000000            /*!< Mask of supported VEVIF DPPI channels: 0x0F000000                    */
 #define VPR121_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
 #define VPR121_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 28..31                                                 */
 #define VPR121_VEVIF_NEVENTS_SIZE 32                 /*!< VEVIF events: 28..31                                                 */
+#define VPR121_VEVIF_EVENTS_MASK 0xF0000000          /*!< Mask of supported VEVIF events: 0xF0000000                           */
 #define VPR121_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F8D4400                       */
+#define VPR121_RTP_VPR_1_5 1                         /*!< (unspecified)                                                        */
 
 #define VPR130_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
 #define VPR130_VPR_START_RESET_VALUE 0               /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
@@ -379,10 +394,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR130_VEVIF_NDPPI_MIN 8                     /*!< VEVIF DPPI channels: 8..11                                           */
 #define VPR130_VEVIF_NDPPI_MAX 11                    /*!< VEVIF DPPI channels: 8..11                                           */
 #define VPR130_VEVIF_NDPPI_SIZE 12                   /*!< VEVIF DPPI channels: 8..11                                           */
+#define VPR130_VEVIF_DPPI_MASK 0x00000F00            /*!< Mask of supported VEVIF DPPI channels: 0x00000F00                    */
 #define VPR130_VEVIF_NEVENTS_MIN 12                  /*!< VEVIF events: 12..15                                                 */
 #define VPR130_VEVIF_NEVENTS_MAX 15                  /*!< VEVIF events: 12..15                                                 */
 #define VPR130_VEVIF_NEVENTS_SIZE 16                 /*!< VEVIF events: 12..15                                                 */
+#define VPR130_VEVIF_EVENTS_MASK 0x0000F000          /*!< Mask of supported VEVIF events: 0x0000F000                           */
 #define VPR130_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F908400                       */
+#define VPR130_RTP_VPR_1_5 1                         /*!< (unspecified)                                                        */
 
 /*IPCT APB registers*/
 #define IPCT_PRESENT 1

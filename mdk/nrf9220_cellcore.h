@@ -323,7 +323,7 @@ typedef enum {
 #define NRF_CELLCORE_PCGCM1_S_BASE        0x54019000UL
 #define NRF_CELLCORE_PPIB0_NS_BASE        0x4401A000UL
 #define NRF_CELLCORE_PPIB0_S_BASE         0x5401A000UL
-#define NRF_CELLCORE_SPU2_S_BASE          0x54020000UL
+#define NRF_CELLCORE_SPU2_NS_BASE         0x44020000UL
 #define NRF_CELLCORE_DPPIC0_NS_BASE       0x44021000UL
 #define NRF_CELLCORE_DPPIC0_S_BASE        0x54021000UL
 #define NRF_CELLCORE_LFCLKCALIBMEAS_NS_BASE 0x44023000UL
@@ -336,7 +336,7 @@ typedef enum {
 #define NRF_CELLCORE_PPIB1_S_BASE         0x54026000UL
 #define NRF_CELLCORE_PCGCS2_NS_BASE       0x44027000UL
 #define NRF_CELLCORE_PCGCS2_S_BASE        0x54027000UL
-#define NRF_CELLCORE_SPU3_S_BASE          0x54030000UL
+#define NRF_CELLCORE_SPU3_NS_BASE         0x44030000UL
 #define NRF_CELLCORE_LRCCONF3_NS_BASE     0x44031000UL
 #define NRF_CELLCORE_LRCCONF3_S_BASE      0x54031000UL
 #define NRF_CELLCORE_DPPIC1_NS_BASE       0x44032000UL
@@ -430,7 +430,7 @@ typedef enum {
 #define NRF_CELLCORE_PCGCM1_S             ((NRF_PCGCMASTER_Type*)               NRF_CELLCORE_PCGCM1_S_BASE)
 #define NRF_CELLCORE_PPIB0_NS             ((NRF_PPIB_Type*)                     NRF_CELLCORE_PPIB0_NS_BASE)
 #define NRF_CELLCORE_PPIB0_S              ((NRF_PPIB_Type*)                     NRF_CELLCORE_PPIB0_S_BASE)
-#define NRF_CELLCORE_SPU2_S               ((NRF_SPU_Type*)                      NRF_CELLCORE_SPU2_S_BASE)
+#define NRF_CELLCORE_SPU2_NS              ((NRF_SPU_Type*)                      NRF_CELLCORE_SPU2_NS_BASE)
 #define NRF_CELLCORE_DPPIC0_NS            ((NRF_DPPIC_Type*)                    NRF_CELLCORE_DPPIC0_NS_BASE)
 #define NRF_CELLCORE_DPPIC0_S             ((NRF_DPPIC_Type*)                    NRF_CELLCORE_DPPIC0_S_BASE)
 #define NRF_CELLCORE_LFCLKCALIBMEAS_NS    ((NRF_LFCLKCALIBMEAS_Type*)           NRF_CELLCORE_LFCLKCALIBMEAS_NS_BASE)
@@ -443,7 +443,7 @@ typedef enum {
 #define NRF_CELLCORE_PPIB1_S              ((NRF_PPIB_Type*)                     NRF_CELLCORE_PPIB1_S_BASE)
 #define NRF_CELLCORE_PCGCS2_NS            ((NRF_PCGCSLAVE_Type*)                NRF_CELLCORE_PCGCS2_NS_BASE)
 #define NRF_CELLCORE_PCGCS2_S             ((NRF_PCGCSLAVE_Type*)                NRF_CELLCORE_PCGCS2_S_BASE)
-#define NRF_CELLCORE_SPU3_S               ((NRF_SPU_Type*)                      NRF_CELLCORE_SPU3_S_BASE)
+#define NRF_CELLCORE_SPU3_NS              ((NRF_SPU_Type*)                      NRF_CELLCORE_SPU3_NS_BASE)
 #define NRF_CELLCORE_LRCCONF3_NS          ((NRF_LRCCONF_Type*)                  NRF_CELLCORE_LRCCONF3_NS_BASE)
 #define NRF_CELLCORE_LRCCONF3_S           ((NRF_LRCCONF_Type*)                  NRF_CELLCORE_LRCCONF3_S_BASE)
 #define NRF_CELLCORE_DPPIC1_NS            ((NRF_DPPIC_Type*)                    NRF_CELLCORE_DPPIC1_NS_BASE)
@@ -509,12 +509,14 @@ typedef enum {
   #define NRF_CELLCORE_CELLCORELSPDCTRL           NRF_CELLCORE_CELLCORELSPDCTRL_NS
   #define NRF_CELLCORE_PCGCM1                     NRF_CELLCORE_PCGCM1_NS
   #define NRF_CELLCORE_PPIB0                      NRF_CELLCORE_PPIB0_NS
+  #define NRF_CELLCORE_SPU2                       NRF_CELLCORE_SPU2_NS
   #define NRF_CELLCORE_DPPIC0                     NRF_CELLCORE_DPPIC0_NS
   #define NRF_CELLCORE_LFCLKCALIBMEAS             NRF_CELLCORE_LFCLKCALIBMEAS_NS
   #define NRF_CELLCORE_TIMEREVENTSYNCH            NRF_CELLCORE_TIMEREVENTSYNCH_NS
   #define NRF_CELLCORE_TIMEMARKMUX0               NRF_CELLCORE_TIMEMARKMUX0_NS
   #define NRF_CELLCORE_PPIB1                      NRF_CELLCORE_PPIB1_NS
   #define NRF_CELLCORE_PCGCS2                     NRF_CELLCORE_PCGCS2_NS
+  #define NRF_CELLCORE_SPU3                       NRF_CELLCORE_SPU3_NS
   #define NRF_CELLCORE_LRCCONF3                   NRF_CELLCORE_LRCCONF3_NS
   #define NRF_CELLCORE_DPPIC1                     NRF_CELLCORE_DPPIC1_NS
   #define NRF_CELLCORE_TIMEMARKMUX1               NRF_CELLCORE_TIMEMARKMUX1_NS
@@ -571,14 +573,14 @@ typedef enum {
   #define NRF_CELLCORE_CELLCORELSPDCTRL           NRF_CELLCORE_CELLCORELSPDCTRL_NS
   #define NRF_CELLCORE_PCGCM1                     NRF_CELLCORE_PCGCM1_S
   #define NRF_CELLCORE_PPIB0                      NRF_CELLCORE_PPIB0_S
-  #define NRF_CELLCORE_SPU2                       NRF_CELLCORE_SPU2_S
+  #define NRF_CELLCORE_SPU2                       NRF_CELLCORE_SPU2_NS
   #define NRF_CELLCORE_DPPIC0                     NRF_CELLCORE_DPPIC0_S
   #define NRF_CELLCORE_LFCLKCALIBMEAS             NRF_CELLCORE_LFCLKCALIBMEAS_S
   #define NRF_CELLCORE_TIMEREVENTSYNCH            NRF_CELLCORE_TIMEREVENTSYNCH_S
   #define NRF_CELLCORE_TIMEMARKMUX0               NRF_CELLCORE_TIMEMARKMUX0_S
   #define NRF_CELLCORE_PPIB1                      NRF_CELLCORE_PPIB1_S
   #define NRF_CELLCORE_PCGCS2                     NRF_CELLCORE_PCGCS2_S
-  #define NRF_CELLCORE_SPU3                       NRF_CELLCORE_SPU3_S
+  #define NRF_CELLCORE_SPU3                       NRF_CELLCORE_SPU3_NS
   #define NRF_CELLCORE_LRCCONF3                   NRF_CELLCORE_LRCCONF3_S
   #define NRF_CELLCORE_DPPIC1                     NRF_CELLCORE_DPPIC1_S
   #define NRF_CELLCORE_TIMEMARKMUX1               NRF_CELLCORE_TIMEMARKMUX1_S
@@ -633,12 +635,14 @@ typedef enum {
     #define NRF_CELLCORELSPDCTRL                  NRF_CELLCORE_CELLCORELSPDCTRL
     #define NRF_PCGCM1                            NRF_CELLCORE_PCGCM1
     #define NRF_PPIB0                             NRF_CELLCORE_PPIB0
+    #define NRF_SPU2                              NRF_CELLCORE_SPU2
     #define NRF_DPPIC0                            NRF_CELLCORE_DPPIC0
     #define NRF_LFCLKCALIBMEAS                    NRF_CELLCORE_LFCLKCALIBMEAS
     #define NRF_TIMEREVENTSYNCH                   NRF_CELLCORE_TIMEREVENTSYNCH
     #define NRF_TIMEMARKMUX0                      NRF_CELLCORE_TIMEMARKMUX0
     #define NRF_PPIB1                             NRF_CELLCORE_PPIB1
     #define NRF_PCGCS2                            NRF_CELLCORE_PCGCS2
+    #define NRF_SPU3                              NRF_CELLCORE_SPU3
     #define NRF_LRCCONF3                          NRF_CELLCORE_LRCCONF3
     #define NRF_DPPIC1                            NRF_CELLCORE_DPPIC1
     #define NRF_TIMEMARKMUX1                      NRF_CELLCORE_TIMEMARKMUX1

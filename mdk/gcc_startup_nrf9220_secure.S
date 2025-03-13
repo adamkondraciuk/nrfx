@@ -39,7 +39,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
     .equ    Stack_Size, __STACK_SIZE
 #else
     .align 3
-    .equ    Stack_Size, 2048
+    .equ    Stack_Size, 8192
 #endif
     .globl __StackTop
     .globl __StackLimit
@@ -56,7 +56,7 @@ __StackTop:
 #elif defined(__HEAP_SIZE)
     .equ Heap_Size, __HEAP_SIZE
 #else
-    .equ Heap_Size, 2048
+    .equ Heap_Size, 8192
 #endif
     .globl __HeapBase
     .globl __HeapLimit
@@ -538,7 +538,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   SPU136_IRQHandler
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -554,7 +554,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   SPU137_IRQHandler
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -870,10 +870,8 @@ Default_Handler:
     IRQ  PWM131_IRQHandler
     IRQ  SERIAL2_IRQHandler
     IRQ  SERIAL3_IRQHandler
-    IRQ  SPU136_IRQHandler
     IRQ  SERIAL4_IRQHandler
     IRQ  SERIAL5_IRQHandler
-    IRQ  SPU137_IRQHandler
     IRQ  SERIAL6_IRQHandler
     IRQ  SERIAL7_IRQHandler
 
