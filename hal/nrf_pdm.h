@@ -969,7 +969,6 @@ NRF_STATIC_INLINE void nrf_pdm_custom_ratio_set(NRF_PDM_Type * p_reg, uint8_t ra
 {
     NRFX_ASSERT(ratio >= PDM_FILTER_CTRL_DECRATIO_Min);
     NRFX_ASSERT(ratio <= PDM_FILTER_CTRL_DECRATIO_Max);
-    NRFX_ASSERT(ratio % 2 == 0);
     p_reg->FILTER.CTRL = (p_reg->FILTER.CTRL & ~PDM_FILTER_CTRL_DECRATIO_Msk) |
                           (((uint32_t)ratio << PDM_FILTER_CTRL_DECRATIO_Pos)
                                              & PDM_FILTER_CTRL_DECRATIO_Msk);
