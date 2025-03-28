@@ -737,6 +737,7 @@
     #elif defined(NRF_PPR)
         #define GRTC_IRQ_GROUP 7
         #define GPIOTE_IRQ_GROUP 0
+        #define RTC130_CC_NUM RTC130_CC_NUM_SIZE
     #else
         #if defined(NRF_SECURE)
             #define GRTC_IRQ_GROUP 1
