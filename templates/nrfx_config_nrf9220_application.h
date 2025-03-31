@@ -309,6 +309,15 @@
 #endif
 
 /**
+ * @brief NRFX_GPIOTE130_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_GPIOTE130_ENABLED
+#define NRFX_GPIOTE130_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_GRTC_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
