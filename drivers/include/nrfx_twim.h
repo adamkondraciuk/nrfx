@@ -224,13 +224,20 @@ void nrfx_twim_callback_get(nrfx_twim_t const *       p_instance,
  * parameters passed to the @ref nrfx_twim_init function. To be able to restore previous event handler
  * you can use the @ref nrfx_twim_callback_get .
  *
+ * @warning This function can be used only for reconfiguring handler in the non-blocking mode.
+ *          Use @ref nrfx_twim_uninit and @ref nrfx_twim_init to reconfigure driver in the blocking mode.
+ *
  * @param[in] p_instance    Pointer to the driver instance structure.
- * @param[in] event_handler Event handler provided by the user. If NULL, blocking mode is enabled.
+ * @param[in] event_handler Event handler provided by the user. Cannot be NULL.
  * @param[in] p_context     Context passed to event handler.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          The driver is performing transaction.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is configured in blocking mode.
  */
-void nrfx_twim_callback_set(nrfx_twim_t const *     p_instance,
-                            nrfx_twim_evt_handler_t event_handler,
-                            void *                  p_context);
+nrfx_err_t nrfx_twim_callback_set(nrfx_twim_t const *     p_instance,
+                                  nrfx_twim_evt_handler_t event_handler,
+                                  void *                  p_context);
 
 /**
  * @brief Function for uninitializing the TWIM instance.
