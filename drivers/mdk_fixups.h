@@ -737,7 +737,6 @@
     #elif defined(NRF_PPR)
         #define GRTC_IRQ_GROUP 7
         #define GPIOTE_IRQ_GROUP 0
-        #define RTC130_CC_NUM RTC130_CC_NUM_SIZE
     #else
         #if defined(NRF_SECURE)
             #define GRTC_IRQ_GROUP 1
@@ -774,6 +773,17 @@
     #define DPPIC134_GROUP_NUM (DPPIC134_GROUP_NUM_MAX + 1UL)
 
     #define EGU130_CH_NUM (EGU130_CH_NUM_MAX + 1UL)
+    #define TIMER120_CC_NUM (TIMER120_CC_NUM_MAX + 1UL)
+    #define TIMER130_CC_NUM (TIMER130_CC_NUM_MAX + 1UL)
+    #define TIMER131_CC_NUM (TIMER131_CC_NUM_MAX + 1UL)
+    #define TIMER132_CC_NUM (TIMER132_CC_NUM_MAX + 1UL)
+    #define TIMER133_CC_NUM (TIMER133_CC_NUM_MAX + 1UL)
+
+    #define TIMER120_MAX_SIZE TIMER120_MAX_SIZE_SIZE
+    #define TIMER130_MAX_SIZE TIMER130_MAX_SIZE_SIZE
+    #define TIMER131_MAX_SIZE TIMER131_MAX_SIZE_SIZE
+    #define TIMER132_MAX_SIZE TIMER132_MAX_SIZE_SIZE
+    #define TIMER133_MAX_SIZE TIMER133_MAX_SIZE_SIZE
 
     #define P0_PIN_NUM P0_PIN_NUM_SIZE
     #define P1_PIN_NUM P1_PIN_NUM_SIZE
@@ -781,6 +791,7 @@
     #define P5_PIN_NUM P5_PIN_NUM_SIZE
     #define P10_PIN_NUM P10_PIN_NUM_SIZE
     #define P12_PIN_NUM P12_PIN_NUM_SIZE
+    #define RTC130_CC_NUM RTC130_CC_NUM_SIZE
 #endif
 /**************************************************************************************************/
 /* End fixups section for NRF9220_XXAA                                                            */
