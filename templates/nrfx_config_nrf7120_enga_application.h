@@ -1163,6 +1163,24 @@
 #endif
 
 /**
+ * @brief NRFX_SPIS00_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_SPIS00_ENABLED
+#define NRFX_SPIS00_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_SPIS01_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_SPIS01_ENABLED
+#define NRFX_SPIS01_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_SPIS20_ENABLED
  *
  * Boolean. Accepted values: 0 and 1.
