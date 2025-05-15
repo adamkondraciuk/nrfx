@@ -468,15 +468,6 @@
 
 #if defined(NRF54LM20A_ENGA_XXAA)
     #include "nrf54lm20a_enga_interim.h"
-
-    #ifdef VPRCSR_MINTTHRESH_ResetValue
-        #undef VPRCSR_MINTTHRESH_ResetValue
-        #define VPRCSR_MINTTHRESH_ResetValue (0x0000001FUL)
-    #endif
-    #ifdef VPRCSR_MINTTHRESH_TH_DISABLED
-        #undef VPRCSR_MINTTHRESH_TH_DISABLED
-        #define VPRCSR_MINTTHRESH_TH_DISABLED (0x1FUL)
-    #endif
 #endif
 
 /**************************************************************************************************/
