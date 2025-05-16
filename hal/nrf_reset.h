@@ -31,6 +31,13 @@ extern "C" {
 #define NRF_RESET_HAS_APPLICATION 0
 #endif
 
+#if defined(RESET_RESETREAS_NFC_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether NFC reset is present. */
+#define NRF_RESET_HAS_NFC_RESET 1
+#else
+#define NRF_RESET_HAS_NFC_RESET 0
+#endif
+
 #if defined(RESET_RESETREAS_VBUS_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether VBUS reset is present. */
 #define NRF_RESET_HAS_VBUS_RESET 1
@@ -117,7 +124,9 @@ typedef enum
     NRF_RESET_RESETREAS_LOCKUP_MASK     = RESET_RESETREAS_LOCKUP_Msk,     ///< Bit mask of LOCKUP field.
     NRF_RESET_RESETREAS_OFF_MASK        = RESET_RESETREAS_OFF_Msk,        ///< Bit mask of OFF field.
     NRF_RESET_RESETREAS_DIF_MASK        = RESET_RESETREAS_DIF_Msk,        ///< Bit mask of DIF field.
+#if NRF_RESET_HAS_NFC_RESET
     NRF_RESET_RESETREAS_NFC_MASK        = RESET_RESETREAS_NFC_Msk,        ///< Bit mask of NFC field.
+#endif
     NRF_RESET_RESETREAS_DOG1_MASK       = RESET_RESETREAS_DOG1_Msk,       ///< Bit mask of DOG1 field.
 #if NRF_RESET_HAS_CTRLAPSOFT_RESET
     NRF_RESET_RESETREAS_CTRLAPSOFT_MASK = RESET_RESETREAS_CTRLAPSOFT_Msk, ///< Bit mask of CTRLAPSOFT field.
