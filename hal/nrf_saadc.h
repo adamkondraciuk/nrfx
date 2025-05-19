@@ -77,7 +77,7 @@ extern "C" {
 #define NRF_SAADC_HAS_CH_PSELN_INTERNAL 0
 #endif
 
-#if !NRF_SAADC_HAS_ACQTIME_ENUM
+#if !NRF_SAADC_HAS_ACQTIME_ENUM || defined(__NRFX_DOXYGEN__)
 /** @brief Maximum value of acquire time. */
 #define NRF_SAADC_ACQTIME_MAX SAADC_CH_CONFIG_TACQ_Max
 #endif
