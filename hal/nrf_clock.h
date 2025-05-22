@@ -16,8 +16,8 @@ extern "C" {
  * @brief   Hardware access layer for managing the CLOCK peripheral.
  *
  * This code can be used to manage low-frequency clock (LFCLK), high-frequency clock (HFCLK),
- * high-frequency 192 MHz clock (HFCLK192M) and high-frequency audio clock (HFCLKAUDIO)
- * settings.
+ * high-frequency 192 MHz clock (HFCLK192M), high-frequency audio clock (HFCLKAUDIO) and
+ * high-frequency 24 MHz clock (HFCLK24M) settings.
  */
 
 #if defined(CLOCK_LFCLKSRC_BYPASS_Msk) && defined(CLOCK_LFCLKSRC_EXTERNAL_Msk)
@@ -53,6 +53,13 @@ extern "C" {
 #define NRF_CLOCK_HAS_HFCLKAUDIO 1
 #else
 #define NRF_CLOCK_HAS_HFCLKAUDIO 0
+#endif
+
+#if defined(CLOCK_INTENSET_XO24MSTARTED_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the 24 MHz clock is present. */
+#define NRF_CLOCK_HAS_HFCLK24M 1
+#else
+#define NRF_CLOCK_HAS_HFCLK24M 0
 #endif
 
 #if (defined(CLOCK_HFCLKCTRL_HCLK_Div1) && !defined(NRF5340_XXAA_NETWORK)) \
@@ -355,6 +362,9 @@ typedef enum
 #if NRF_CLOCK_HAS_HFCLKAUDIO
     NRF_CLOCK_DOMAIN_HFCLKAUDIO,
 #endif
+#if NRF_CLOCK_HAS_HFCLK24M
+    NRF_CLOCK_DOMAIN_HFCLK24M,
+#endif
 } nrf_clock_domain_t;
 
 #if defined(CLOCK_FEATURE_HFCLK_DIVIDE_PRESENT) || NRF_CLOCK_HAS_HFCLK192M
@@ -389,36 +399,38 @@ typedef enum
 typedef enum
 {
 #if NRF_CLOCK_HAS_HFDOMAIN
-    NRF_CLOCK_INT_HF_STARTED_MASK      = NRF_CLOCK_INTENSET_HFCLKSTARTED_Msk,  /**< Interrupt on HFCLKSTARTED event. */
+    NRF_CLOCK_INT_HF_STARTED_MASK       = NRF_CLOCK_INTENSET_HFCLKSTARTED_Msk,  /**< Interrupt on HFCLKSTARTED event. */
 #endif
-    NRF_CLOCK_INT_LF_STARTED_MASK      = NRF_CLOCK_INTENSET_LFCLKSTARTED_Msk,  /**< Interrupt on LFCLKSTARTED event. */
+    NRF_CLOCK_INT_LF_STARTED_MASK       = NRF_CLOCK_INTENSET_LFCLKSTARTED_Msk,  /**< Interrupt on LFCLKSTARTED event. */
 #if NRF_CLOCK_HAS_LFCLK_SRC_CHANGED
-    NRF_CLOCK_INT_LF_SRC_CHANGED_MASK  = CLOCK_INTENSET_LFCLKSRCCHANGED_Msk,   /**< Interrupt on LFCLKCHANGED event. */
+    NRF_CLOCK_INT_LF_SRC_CHANGED_MASK   = CLOCK_INTENSET_LFCLKSRCCHANGED_Msk,   /**< Interrupt on LFCLKCHANGED event. */
 #endif
 #if NRF_CLOCK_HAS_PLL
-    NRF_CLOCK_INT_PLL_STARTED_MASK     = CLOCK_INTENSET_PLLSTARTED_Msk,        /**< Interrupt on PLLSTARTED event. */
+    NRF_CLOCK_INT_PLL_STARTED_MASK      = CLOCK_INTENSET_PLLSTARTED_Msk,        /**< Interrupt on PLLSTARTED event. */
 #endif
 #if NRF_CLOCK_HAS_CALIBRATION
-    NRF_CLOCK_INT_DONE_MASK            = CLOCK_INTENSET_DONE_Msk,              /**< Interrupt on DONE event. */
+    NRF_CLOCK_INT_DONE_MASK             = CLOCK_INTENSET_DONE_Msk,              /**< Interrupt on DONE event. */
 #endif
 #if NRF_CLOCK_HAS_CALIBRATION_TIMER
-    NRF_CLOCK_INT_CTTO_MASK            = CLOCK_INTENSET_CTTO_Msk,              /**< Interrupt on CTTO event. */
+    NRF_CLOCK_INT_CTTO_MASK             = CLOCK_INTENSET_CTTO_Msk,              /**< Interrupt on CTTO event. */
 #endif
 #if defined(CLOCK_INTENSET_CTSTARTED_Msk) || defined(__NRFX_DOXYGEN__)
-    NRF_CLOCK_INT_CTSTARTED_MASK       = CLOCK_INTENSET_CTSTARTED_Msk,         /**< Interrupt on CTSTARTED event. */
-    NRF_CLOCK_INT_CTSTOPPED_MASK       = CLOCK_INTENSET_CTSTOPPED_Msk          /**< Interrupt on CTSTOPPED event. */
+    NRF_CLOCK_INT_CTSTARTED_MASK        = CLOCK_INTENSET_CTSTARTED_Msk,         /**< Interrupt on CTSTARTED event. */
+    NRF_CLOCK_INT_CTSTOPPED_MASK        = CLOCK_INTENSET_CTSTOPPED_Msk          /**< Interrupt on CTSTOPPED event. */
 #endif
 #if NRF_CLOCK_HAS_HFCLKAUDIO
-    NRF_CLOCK_INT_HFAUDIO_STARTED_MASK = CLOCK_INTENSET_HFCLKAUDIOSTARTED_Msk, /**< Interrupt on HFCLKAUDIOSTARTED event. */
+    NRF_CLOCK_INT_HFAUDIO_STARTED_MASK  = CLOCK_INTENSET_HFCLKAUDIOSTARTED_Msk, /**< Interrupt on HFCLKAUDIOSTARTED event. */
 #endif
-
+#if NRF_CLOCK_HAS_HFCLK24M
+    NRF_CLOCK_INT_HFCLK24M_STARTED_MASK = CLOCK_INTENSET_XO24MSTARTED_Msk,      /**< Interrupt on XO24MSTARTED event. */
+#endif
 #if NRF_CLOCK_HAS_HFCLK192M
-    NRF_CLOCK_INT_HF192M_STARTED_MASK  = CLOCK_INTENSET_HFCLK192MSTARTED_Msk,  /**< Interrupt on HFCLK192MSTARTED event. */
+    NRF_CLOCK_INT_HF192M_STARTED_MASK   = CLOCK_INTENSET_HFCLK192MSTARTED_Msk,  /**< Interrupt on HFCLK192MSTARTED event. */
 #endif
 #if NRF_CLOCK_HAS_XO_TUNE
-     NRF_CLOCK_INT_XOTUNED_MASK        = CLOCK_INTENSET_XOTUNED_Msk,           /**< HFXO tuning is done. */
-     NRF_CLOCK_INT_XOTUNEERROR_MASK    = CLOCK_INTENSET_XOTUNEERROR_Msk,       /**< HFXO quality issue detected, XOTUNE is needed. */
-     NRF_CLOCK_INT_XOTUNEFAILED_MASK   = CLOCK_INTENSET_XOTUNEFAILED_Msk,      /**< HFXO tuning could not be completed. */
+     NRF_CLOCK_INT_XOTUNED_MASK         = CLOCK_INTENSET_XOTUNED_Msk,           /**< HFXO tuning is done. */
+     NRF_CLOCK_INT_XOTUNEERROR_MASK     = CLOCK_INTENSET_XOTUNEERROR_Msk,       /**< HFXO quality issue detected, XOTUNE is needed. */
+     NRF_CLOCK_INT_XOTUNEFAILED_MASK    = CLOCK_INTENSET_XOTUNEFAILED_Msk,      /**< HFXO tuning could not be completed. */
 #endif
 } nrf_clock_int_mask_t;
 
@@ -455,6 +467,10 @@ typedef enum
 #if NRF_CLOCK_HAS_HFCLKAUDIO
     NRF_CLOCK_TASK_HFCLKAUDIOSTART = offsetof(NRF_CLOCK_Type, TASKS_HFCLKAUDIOSTART), /**< Start HFCLKAUDIO clock source. */
     NRF_CLOCK_TASK_HFCLKAUDIOSTOP  = offsetof(NRF_CLOCK_Type, TASKS_HFCLKAUDIOSTOP),  /**< Stop HFCLKAUDIO clock source. */
+#endif
+#if NRF_CLOCK_HAS_HFCLK24M
+    NRF_CLOCK_TASK_HFCLK24MSTART   = offsetof(NRF_CLOCK_Type, TASKS_XO24MSTART),      /**< Start HFCLK24M clock source. */
+    NRF_CLOCK_TASK_HFCLK24MSTOP    = offsetof(NRF_CLOCK_Type, TASKS_XO24MSTOP),       /**< Stop HFCLK24M clock source. */
 #endif
 #if NRF_CLOCK_HAS_HFCLK192M
     NRF_CLOCK_TASK_HFCLK192MSTART  = offsetof(NRF_CLOCK_Type, TASKS_HFCLK192MSTART),  /**< Start HFCLK192M clock source. */
@@ -495,6 +511,9 @@ typedef enum
 #endif
 #if NRF_CLOCK_HAS_HFCLKAUDIO
     NRF_CLOCK_EVENT_HFCLKAUDIOSTARTED = offsetof(NRF_CLOCK_Type, EVENTS_HFCLKAUDIOSTARTED), /**< HFCLKAUDIO oscillator started. */
+#endif
+#if NRF_CLOCK_HAS_HFCLK24M
+    NRF_CLOCK_EVENT_HFCLK24MSTARTED   = offsetof(NRF_CLOCK_Type, EVENTS_XO24MSTARTED),      /**< HFCLK24M oscillator started. */
 #endif
 #if NRF_CLOCK_HAS_HFCLK192M
     NRF_CLOCK_EVENT_HFCLK192MSTARTED  = offsetof(NRF_CLOCK_Type, EVENTS_HFCLK192MSTARTED),  /**< HFCLK192M oscillator started. */
@@ -870,7 +889,7 @@ NRF_STATIC_INLINE nrf_clock_hfclk_t nrf_clock_hfclk192m_src_get(NRF_CLOCK_Type c
 #endif // NRF_CLOCK_HAS_HFCLK192M
 
 #if (NRF_CLOCK_HAS_LFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK192M || \
-     NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL)
+     NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL || NRF_CLOCK_HAS_HFCLK24M)
 /**
  * @brief Function for setting the clock domain to always run.
  *
@@ -907,7 +926,8 @@ NRF_STATIC_INLINE bool nrf_clock_alwaysrun_active_get(NRF_CLOCK_Type const * p_r
                                                       nrf_clock_domain_t     domain);
 #endif
 #endif /* (NRF_CLOCK_HAS_LFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK_ALWAYSRUN ||
-           NRF_CLOCK_HAS_HFCLK192M || NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL) */
+           NRF_CLOCK_HAS_HFCLK192M || NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL ||
+           NRF_CLOCK_HAS_HFCLK24M) */
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -1080,6 +1100,11 @@ NRF_STATIC_INLINE bool nrf_clock_start_task_check(NRF_CLOCK_Type const * p_reg,
             return ((p_reg->HFCLKAUDIORUN & CLOCK_HFCLKAUDIORUN_STATUS_Msk)
                     >> CLOCK_HFCLKAUDIORUN_STATUS_Pos);
 #endif
+#if NRF_CLOCK_HAS_HFCLK24M
+        case NRF_CLOCK_DOMAIN_HFCLK24M:
+            return ((p_reg->PLL24M.RUN & CLOCK_PLL24M_RUN_STATUS_Msk)
+                    >> CLOCK_PLL24M_RUN_STATUS_Pos);
+#endif
         default:
             NRFX_ASSERT(0);
             return false;
@@ -1154,6 +1179,11 @@ NRF_STATIC_INLINE bool nrf_clock_is_running(NRF_CLOCK_Type const * p_reg,
 #if NRF_CLOCK_HAS_HFCLKAUDIO
         case NRF_CLOCK_DOMAIN_HFCLKAUDIO:
             clock_running = p_reg->HFCLKAUDIOSTAT & CLOCK_HFCLKAUDIOSTAT_STATE_Msk;
+            break;
+#endif
+#if NRF_CLOCK_HAS_HFCLK24M
+        case NRF_CLOCK_DOMAIN_HFCLK24M:
+            clock_running = p_reg->PLL24M.STAT & CLOCK_PLL24M_STAT_STATE_Msk;
             break;
 #endif
         default:
@@ -1313,7 +1343,7 @@ NRF_STATIC_INLINE void nrf_clock_cal_timer_timeout_set(NRF_CLOCK_Type * p_reg, u
 #endif
 
 #if (NRF_CLOCK_HAS_LFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK192M || \
-     NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL)
+     NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL || NRF_CLOCK_HAS_HFCLK24M)
 NRF_STATIC_INLINE void nrf_clock_alwaysrun_set(NRF_CLOCK_Type *   p_reg,
                                                nrf_clock_domain_t domain,
                                                bool               alwaysrun)
@@ -1348,6 +1378,13 @@ NRF_STATIC_INLINE void nrf_clock_alwaysrun_set(NRF_CLOCK_Type *   p_reg,
                  & CLOCK_HFCLKAUDIOALWAYSRUN_ALWAYSRUN_Msk);
             break;
 #endif
+#if NRF_CLOCK_HAS_HFCLK24M
+        case NRF_CLOCK_DOMAIN_HFCLK24M:
+            p_reg->PLL24M.ALWAYSRUN =
+                ((alwaysrun << CLOCK_PLL24M_ALWAYSRUN_ALWAYSRUN_Pos)
+                 & CLOCK_PLL24M_ALWAYSRUN_ALWAYSRUN_Msk);
+            break;
+#endif
         default:
             NRFX_ASSERT(0);
             break;
@@ -1378,6 +1415,11 @@ NRF_STATIC_INLINE bool nrf_clock_alwaysrun_get(NRF_CLOCK_Type const * p_reg,
         case NRF_CLOCK_DOMAIN_HFCLKAUDIO:
             return ((p_reg->HFCLKAUDIOALWAYSRUN & CLOCK_HFCLKAUDIOALWAYSRUN_ALWAYSRUN_Msk)
                     >> CLOCK_HFCLKAUDIOALWAYSRUN_ALWAYSRUN_Pos);
+#endif
+#if NRF_CLOCK_HAS_HFCLK24M
+        case NRF_CLOCK_DOMAIN_HFCLK24M:
+            return ((p_reg->PLL24M.ALWAYSRUN & CLOCK_PLL24M_ALWAYSRUN_ALWAYSRUN_Msk)
+                    >> CLOCK_PLL24M_ALWAYSRUN_ALWAYSRUN_Pos);
 #endif
         default:
             NRFX_ASSERT(0);
@@ -1411,6 +1453,11 @@ NRF_STATIC_INLINE bool nrf_clock_alwaysrun_active_get(NRF_CLOCK_Type const * p_r
             return ((p_reg->HFCLKAUDIOSTAT & CLOCK_HFCLKAUDIOSTAT_ALWAYSRUNNING_Msk)
                     >> CLOCK_HFCLKAUDIOSTAT_ALWAYSRUNNING_Pos);
 #endif
+#if NRF_CLOCK_HAS_HFCLK24M
+        case NRF_CLOCK_DOMAIN_HFCLK24M:
+            return ((p_reg->PLL24M.STAT & CLOCK_PLL24M_STAT_ALWAYSRUNNING_Msk)
+                    >> CLOCK_PLL24M_STAT_ALWAYSRUNNING_Pos);
+#endif
         default:
             NRFX_ASSERT(0);
             return false;
@@ -1418,7 +1465,8 @@ NRF_STATIC_INLINE bool nrf_clock_alwaysrun_active_get(NRF_CLOCK_Type const * p_r
 }
 #endif
 #endif /* (NRF_CLOCK_HAS_LFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK_ALWAYSRUN ||
-           NRF_CLOCK_HAS_HFCLK192M || NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL) */
+           NRF_CLOCK_HAS_HFCLK192M || NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL ||
+           NRF_CLOCK_HAS_HFCLK24M) */
 
 #if defined(DPPI_PRESENT)
 NRF_STATIC_INLINE void nrf_clock_subscribe_set(NRF_CLOCK_Type * p_reg,
