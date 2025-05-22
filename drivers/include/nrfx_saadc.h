@@ -52,14 +52,24 @@ extern "C" {
                          (.resistor_p = NRF_SAADC_RESISTOR_DISABLED,   \
                           .resistor_n = NRF_SAADC_RESISTOR_DISABLED,), \
                          ())                                           \
-        .gain       = NRF_SAADC_GAIN1,                                 \
+        NRFX_COND_CODE_1(NRF_SAADC_HAS_CH_GAIN,                        \
+                         (.gain = NRF_SAADC_GAIN1,),                   \
+                         ())                                           \
         .reference  = NRF_SAADC_REFERENCE_INTERNAL,                    \
         .acq_time   = NRFX_SAADC_DEFAULT_ACQTIME,                      \
+        .mode       = NRF_SAADC_MODE_SINGLE_ENDED,                     \
+        NRFX_COND_CODE_1(NRF_SAADC_HAS_CH_BURST,                       \
+                         (.burst = NRF_SAADC_BURST_DISABLED,),         \
+                         ())                                           \
+        NRFX_COND_CODE_1(NRF_SAADC_HAS_CH_CHOPPING,                    \
+                         (.chopping = NRF_SAADC_CHOPPING_DISABLED,),   \
+                         ())                                           \
+        NRFX_COND_CODE_1(NRF_SAADC_HAS_CH_HIGHSPEED,                   \
+                         (.highspeed = NRF_SAADC_HIGHSPEED_DISABLED,), \
+                         ())                                           \
         NRFX_COND_CODE_1(NRF_SAADC_HAS_CONV_TIME,                      \
                          (.conv_time = NRFX_SAADC_DEFAULT_CONV_TIME,), \
                          ())                                           \
-        .mode       = NRF_SAADC_MODE_SINGLE_ENDED,                     \
-        .burst      = NRF_SAADC_BURST_DISABLED,                        \
     },                                                                 \
     .pin_p          = (nrf_saadc_input_t)_pin_p,                       \
     .pin_n          = NRF_SAADC_INPUT_DISABLED,                        \
@@ -90,14 +100,24 @@ extern "C" {
                          (.resistor_p = NRF_SAADC_RESISTOR_DISABLED,    \
                           .resistor_n = NRF_SAADC_RESISTOR_DISABLED,),  \
                          ())                                            \
-        .gain       = NRF_SAADC_GAIN1,                                  \
+        NRFX_COND_CODE_1(NRF_SAADC_HAS_CH_GAIN,                         \
+                         (.gain = NRF_SAADC_GAIN1,),                    \
+                         ())                                            \
         .reference  = NRF_SAADC_REFERENCE_INTERNAL,                     \
         .acq_time   = NRFX_SAADC_DEFAULT_ACQTIME,                       \
+        .mode       = NRF_SAADC_MODE_DIFFERENTIAL,                      \
+        NRFX_COND_CODE_1(NRF_SAADC_HAS_CH_BURST,                        \
+                         (.burst = NRF_SAADC_BURST_DISABLED,),          \
+                         ())                                            \
+        NRFX_COND_CODE_1(NRF_SAADC_HAS_CH_CHOPPING,                     \
+                         (.chopping = NRF_SAADC_CHOPPING_DISABLED,),    \
+                         ())                                            \
+        NRFX_COND_CODE_1(NRF_SAADC_HAS_CH_HIGHSPEED,                    \
+                         (.highspeed = NRF_SAADC_HIGHSPEED_DISABLED,),  \
+                         ())                                            \
         NRFX_COND_CODE_1(NRF_SAADC_HAS_CONV_TIME,                       \
                          (.conv_time = NRFX_SAADC_DEFAULT_CONV_TIME,),  \
                          ())                                            \
-        .mode       = NRF_SAADC_MODE_DIFFERENTIAL,                      \
-        .burst      = NRF_SAADC_BURST_DISABLED,                         \
     },                                                                  \
     .pin_p          = (nrf_saadc_input_t)_pin_p,                        \
     .pin_n          = (nrf_saadc_input_t)_pin_n,                        \
@@ -449,4 +469,3 @@ void nrfx_saadc_irq_handler(void);
 #endif
 
 #endif // NRFX_SAADC_H__
-

@@ -63,18 +63,53 @@ extern "C" {
 #define NRF_SAADC_HAS_CH_CONFIG_RES 0
 #endif
 
-#if defined(SAADC_CH_PSELP_INTERNAL_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(SAADC_CH_PSELP_CONNECT_Internal) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether SAADC positive internal inputs for pin number configurations are present. */
 #define NRF_SAADC_HAS_CH_PSELP_INTERNAL 1
 #else
 #define NRF_SAADC_HAS_CH_PSELP_INTERNAL 0
 #endif
 
-#if defined(SAADC_CH_PSELN_INTERNAL_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(SAADC_CH_PSELN_CONNECT_Internal) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether SAADC negative internal inputs for pin number configurations are present. */
 #define NRF_SAADC_HAS_CH_PSELN_INTERNAL 1
 #else
 #define NRF_SAADC_HAS_CH_PSELN_INTERNAL 0
+#endif
+
+#if defined(SAADC_CH_CONFIG_BURST_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SAADC channel specific burst mode configuration is present. */
+#define NRF_SAADC_HAS_CH_BURST 1
+#else
+#define NRF_SAADC_HAS_CH_BURST 0
+#endif
+
+#if defined(SAADC_BURST_BURST_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SAADC peripheral burst mode configuration is present. */
+#define NRF_SAADC_HAS_BURST 1
+#else
+#define NRF_SAADC_HAS_BURST 0
+#endif
+
+#if defined(SAADC_CH_CONFIG_CHOPPING_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SAADC channel specific chopping mode configuration is present. */
+#define NRF_SAADC_HAS_CH_CHOPPING 1
+#else
+#define NRF_SAADC_HAS_CH_CHOPPING 0
+#endif
+
+#if defined(SAADC_CH_CONFIG_GAIN_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SAADC channel specific gain configuration is present. */
+#define NRF_SAADC_HAS_CH_GAIN 1
+#else
+#define NRF_SAADC_HAS_CH_GAIN 0
+#endif
+
+#if defined(SAADC_CH_CONFIG_HIGHSPEED_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SAADC channel specific highspeed mode configuration is present. */
+#define NRF_SAADC_HAS_CH_HIGHSPEED 1
+#else
+#define NRF_SAADC_HAS_CH_HIGHSPEED 0
 #endif
 
 #if !NRF_SAADC_HAS_ACQTIME_ENUM || defined(__NRFX_DOXYGEN__)
@@ -220,6 +255,7 @@ typedef enum
 } nrf_saadc_resistor_t;
 #endif
 
+#if NRF_SAADC_HAS_CH_GAIN
 /** @brief Gain factor of the analog-to-digital converter input. */
 typedef enum
 {
@@ -259,6 +295,7 @@ typedef enum
     NRF_SAADC_GAIN4   = SAADC_CH_CONFIG_GAIN_Gain4,   ///< Gain factor 4.
 #endif
 } nrf_saadc_gain_t;
+#endif
 
 /** @brief Reference selection for the analog-to-digital converter. */
 typedef enum
@@ -296,12 +333,35 @@ typedef enum
     NRF_SAADC_MODE_DIFFERENTIAL = SAADC_CH_CONFIG_MODE_Diff ///< Differential mode.
 } nrf_saadc_mode_t;
 
-/** @brief Analog-to-digital converter channel burst mode. */
+/** @brief Analog-to-digital converter burst mode. */
 typedef enum
 {
+#if NRF_SAADC_HAS_CH_BURST
     NRF_SAADC_BURST_DISABLED = SAADC_CH_CONFIG_BURST_Disabled, ///< Burst mode is disabled (normal operation).
     NRF_SAADC_BURST_ENABLED  = SAADC_CH_CONFIG_BURST_Enabled   ///< Burst mode is enabled. SAADC takes 2^OVERSAMPLE number of samples as fast as it can, and sends the average to Data RAM.
+#elif NRF_SAADC_HAS_BURST
+    NRF_SAADC_BURST_DISABLED = SAADC_BURST_BURST_Disabled,     ///< Burst mode is disabled (normal operation).
+    NRF_SAADC_BURST_ENABLED  = SAADC_BURST_BURST_Enabled       ///< Burst mode is enabled. SAADC takes 2^OVERSAMPLE number of samples as fast as it can, and sends the average to Data RAM.
+#endif
 } nrf_saadc_burst_t;
+
+#if NRF_SAADC_HAS_CH_CHOPPING
+/** @brief Analog-to-digital converter chopping mode. */
+typedef enum
+{
+    NRF_SAADC_CHOPPING_DISABLED = SAADC_CH_CONFIG_CHOPPING_Disabled, ///< Chopping mode is disabled.
+    NRF_SAADC_CHOPPING_ENABLED  = SAADC_CH_CONFIG_CHOPPING_Enabled   ///< Chopping mode is enabled, inputs will be switched on every second sample.
+} nrf_saadc_chopping_t;
+#endif
+
+#if NRF_SAADC_HAS_CH_HIGHSPEED
+/** @brief Analog-to-digital converter highspeed mode. */
+typedef enum
+{
+    NRF_SAADC_HIGHSPEED_DISABLED = SAADC_CH_CONFIG_HIGHSPEED_Disabled, ///< Highspeed mode is disabled.
+    NRF_SAADC_HIGHSPEED_ENABLED  = SAADC_CH_CONFIG_HIGHSPEED_Enabled   ///< Highspeed mode is enabled.
+} nrf_saadc_highspeed_t;
+#endif
 
 /** @brief Analog-to-digital converter tasks. */
 typedef enum
@@ -397,11 +457,21 @@ typedef struct
     nrf_saadc_resistor_t  resistor_p; ///< Resistor value on positive input.
     nrf_saadc_resistor_t  resistor_n; ///< Resistor value on negative input.
 #endif
+#if NRF_SAADC_HAS_CH_GAIN
     nrf_saadc_gain_t      gain;       ///< Gain control value.
+#endif
     nrf_saadc_reference_t reference;  ///< Reference control value.
     nrf_saadc_acqtime_t   acq_time;   ///< Acquisition time.
     nrf_saadc_mode_t      mode;       ///< SAADC mode. Single-ended or differential.
+#if NRF_SAADC_HAS_CH_BURST
     nrf_saadc_burst_t     burst;      ///< Burst mode configuration.
+#endif
+#if NRF_SAADC_HAS_CH_CHOPPING
+    nrf_saadc_chopping_t  chopping;   ///< Chopping mode configuration.
+#endif
+#if NRF_SAADC_HAS_CH_HIGHSPEED
+    nrf_saadc_highspeed_t highspeed;  ///< Highspeed mode configuration.
+#endif
 #if NRF_SAADC_HAS_CONVTIME
     uint8_t               conv_time;  ///< Conversion time.
 #endif
@@ -806,7 +876,7 @@ NRF_STATIC_INLINE uint32_t nrf_saadc_linearity_calibration_coeff_get(NRF_SAADC_T
 NRF_STATIC_INLINE void nrf_saadc_channel_init(NRF_SAADC_Type *                   p_reg,
                                               uint8_t                            channel,
                                               nrf_saadc_channel_config_t const * config);
-
+#if NRF_SAADC_HAS_CH_BURST
 /**
  * @brief Function for configuring the burst mode for the specified channel.
  *
@@ -814,9 +884,21 @@ NRF_STATIC_INLINE void nrf_saadc_channel_init(NRF_SAADC_Type *                  
  * @param[in] channel Channel number.
  * @param[in] burst   Burst mode setting.
  */
+NRF_STATIC_INLINE void nrf_saadc_channel_burst_set(NRF_SAADC_Type *  p_reg,
+                                                   uint8_t           channel,
+                                                   nrf_saadc_burst_t burst);
+#endif
+
+#if NRF_SAADC_HAS_BURST
+/**
+ * @brief Function for configuring peripheral burst mode.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] burst Burst mode setting.
+ */
 NRF_STATIC_INLINE void nrf_saadc_burst_set(NRF_SAADC_Type *  p_reg,
-                                           uint8_t           channel,
                                            nrf_saadc_burst_t burst);
+#endif
 
 /**
  * @brief Function for getting the minimum value of the conversion result.
@@ -1143,8 +1225,10 @@ NRF_STATIC_INLINE void nrf_saadc_channel_init(NRF_SAADC_Type *                  
     NRFX_ASSERT(config->conv_time <= NRF_SAADC_CONVTIME_MAX);
 #endif
     p_reg->CH[channel].CONFIG =
-            ((config->gain         << SAADC_CH_CONFIG_GAIN_Pos)   & SAADC_CH_CONFIG_GAIN_Msk)
-            | ((config->reference  << SAADC_CH_CONFIG_REFSEL_Pos) & SAADC_CH_CONFIG_REFSEL_Msk)
+            ((config->reference    << SAADC_CH_CONFIG_REFSEL_Pos) & SAADC_CH_CONFIG_REFSEL_Msk)
+#if NRF_SAADC_HAS_CH_GAIN
+            | ((config->gain       << SAADC_CH_CONFIG_GAIN_Pos)   & SAADC_CH_CONFIG_GAIN_Msk)
+#endif
             | ((config->acq_time   << SAADC_CH_CONFIG_TACQ_Pos)   & SAADC_CH_CONFIG_TACQ_Msk)
 #if NRF_SAADC_HAS_CH_CONFIG_RES
             | ((config->resistor_p << SAADC_CH_CONFIG_RESP_Pos)   & SAADC_CH_CONFIG_RESP_Msk)
@@ -1153,17 +1237,36 @@ NRF_STATIC_INLINE void nrf_saadc_channel_init(NRF_SAADC_Type *                  
 #if NRF_SAADC_HAS_CONVTIME
             | ((config->conv_time  << SAADC_CH_CONFIG_TCONV_Pos)  & SAADC_CH_CONFIG_TCONV_Msk)
 #endif
-            | ((config->mode       << SAADC_CH_CONFIG_MODE_Pos)   & SAADC_CH_CONFIG_MODE_Msk)
-            | ((config->burst      << SAADC_CH_CONFIG_BURST_Pos)  & SAADC_CH_CONFIG_BURST_Msk);
+#if NRF_SAADC_HAS_CH_BURST
+            | ((config->burst      << SAADC_CH_CONFIG_BURST_Pos)  & SAADC_CH_CONFIG_BURST_Msk)
+#endif
+#if NRF_SAADC_HAS_CH_CHOPPING
+            | ((config->chopping   << SAADC_CH_CONFIG_CHOPPING_Pos) & SAADC_CH_CONFIG_CHOPPING_Msk)
+#endif
+#if NRF_SAADC_HAS_CH_HIGHSPEED
+            | ((config->highspeed  << SAADC_CH_CONFIG_HIGHSPEED_Pos) &
+                                      SAADC_CH_CONFIG_HIGHSPEED_Msk)
+#endif
+            | ((config->mode       << SAADC_CH_CONFIG_MODE_Pos)   & SAADC_CH_CONFIG_MODE_Msk);
 }
 
-NRF_STATIC_INLINE void nrf_saadc_burst_set(NRF_SAADC_Type *  p_reg,
-                                           uint8_t           channel,
-                                           nrf_saadc_burst_t burst)
+#if NRF_SAADC_HAS_CH_BURST
+NRF_STATIC_INLINE void nrf_saadc_channel_burst_set(NRF_SAADC_Type *  p_reg,
+                                                   uint8_t           channel,
+                                                   nrf_saadc_burst_t burst)
 {
     p_reg->CH[channel].CONFIG = (p_reg->CH[channel].CONFIG & ~SAADC_CH_CONFIG_BURST_Msk) |
                                 (burst << SAADC_CH_CONFIG_BURST_Pos);
 }
+#endif
+
+#if NRF_SAADC_HAS_BURST
+NRF_STATIC_INLINE void nrf_saadc_burst_set(NRF_SAADC_Type *  p_reg,
+                                           nrf_saadc_burst_t burst)
+{
+    p_reg->BURST = burst;
+}
+#endif
 
 NRF_STATIC_INLINE int16_t nrf_saadc_value_min_get(nrf_saadc_resolution_t resolution)
 {

@@ -186,7 +186,11 @@ static void saadc_generic_mode_set(uint32_t                   ch_to_activate_mas
     m_cb.channels_activated        = (uint8_t)ch_to_activate_mask;
     m_cb.samples_converted         = 0;
 
-    nrfy_saadc_config_t config = {.resolution = resolution, .oversampling = oversampling};
+    nrfy_saadc_config_t config = {.resolution = resolution,
+                                  .oversampling = oversampling,
+                                   NRFX_COND_CODE_1(NRF_SAADC_HAS_BURST,
+                                 (.burst = burst), ())};
+
     nrfy_saadc_periph_configure(NRF_SAADC, &config);
     if (event_handler)
     {
@@ -202,16 +206,22 @@ static void saadc_generic_mode_set(uint32_t                   ch_to_activate_mas
 
     for (uint32_t ch_pos = 0; ch_pos < SAADC_CH_NUM; ch_pos++)
     {
-        nrf_saadc_burst_t burst_to_set = NRF_SAADC_BURST_DISABLED;
         nrfy_saadc_channel_input_t input = {.input_p = NRF_SAADC_INPUT_DISABLED,
                                             .input_n = NRF_SAADC_INPUT_DISABLED};
         if (ch_to_activate_mask & (1 << ch_pos))
         {
             input = m_cb.channels_input[ch_pos];
+        }
+        nrfy_saadc_channel_configure(NRF_SAADC, (uint8_t)ch_pos, NULL, &input);
+
+#if NRF_SAADC_HAS_CH_BURST
+        nrf_saadc_burst_t burst_to_set = NRF_SAADC_BURST_DISABLED;
+        if (ch_to_activate_mask & (1 << ch_pos))
+        {
             burst_to_set = burst;
         }
-        nrfy_saadc_burst_set(NRF_SAADC, (uint8_t)ch_pos, burst_to_set);
-        nrfy_saadc_channel_configure(NRF_SAADC, (uint8_t)ch_pos, NULL, &input);
+        nrfy_saadc_channel_burst_set(NRF_SAADC, (uint8_t)ch_pos, burst_to_set);
+#endif
     }
 }
 
