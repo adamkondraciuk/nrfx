@@ -1128,6 +1128,8 @@ NRF_STATIC_INLINE bool nrf_power_abb_force_lock_check(NRF_POWER_Type const * p_r
 #if NRF_POWER_HAS_VREG_CONFIG
 /**
  * @brief Function for enabling specified voltage regulator.
+ * 
+ * @deprecated Use @ref nrf_power_vreg_set instead.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of voltage regulators to be enabled.
@@ -1137,6 +1139,8 @@ NRF_STATIC_INLINE void nrf_power_vreg_enable(NRF_POWER_Type * p_reg, uint32_t ma
 
 /**
  * @brief Function for disabling specified voltage regulator.
+ * 
+ * @deprecated Use @ref nrf_power_vreg_set instead. 
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of voltage regulators to be disabled.
@@ -1146,6 +1150,8 @@ NRF_STATIC_INLINE void nrf_power_vreg_disable(NRF_POWER_Type * p_reg, uint32_t m
 
 /**
  * @brief Function for checking if the specified voltage regulator is enabled.
+ * 
+ * @deprecated Use @ref nrf_power_vreg_get instead. 
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of voltage regulator to be checked.
@@ -1154,6 +1160,42 @@ NRF_STATIC_INLINE void nrf_power_vreg_disable(NRF_POWER_Type * p_reg, uint32_t m
  * @return Mask of enabled voltage regulators.
  */
 NRF_STATIC_INLINE uint32_t nrf_power_vreg_enable_check(NRF_POWER_Type const * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for setting the enabled voltage regulators.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of enabled voltage regulators to be set.
+ *                  Use @ref nrf_power_vreg_mask_t values for bit masking.
+ */
+NRF_STATIC_INLINE void nrf_power_vreg_set(NRF_POWER_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for getting mask of enabled voltage regulators.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Mask of enabled voltage regulators.
+ */
+NRF_STATIC_INLINE uint32_t nrf_power_vreg_get(NRF_POWER_Type const * p_reg);
+
+/**
+ * @brief Function for enabling the specified voltage regulators.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of voltage regulators to be enabled.
+ *                  Use @ref nrf_power_vreg_mask_t values for bit masking.
+ */
+NRF_STATIC_INLINE void nrf_power_vreg_or_set(NRF_POWER_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for disabling the specified voltage regulators.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of voltage regulators to be disabled.
+ *                  Use @ref nrf_power_vreg_mask_t values for bit masking.
+ */
+NRF_STATIC_INLINE void nrf_power_vreg_clear_set(NRF_POWER_Type * p_reg, uint32_t mask);
 #endif // NRF_POWER_HAS_VREG_CONFIG
 
 #if NRF_POWER_HAS_BLOCK_MODES
@@ -1661,6 +1703,27 @@ NRF_STATIC_INLINE uint32_t nrf_power_vreg_enable_check(NRF_POWER_Type const * p_
 {
     return p_reg->REGCONFIG & mask;
 }
+
+NRF_STATIC_INLINE void nrf_power_vreg_set(NRF_POWER_Type * p_reg, uint32_t mask)
+{
+    p_reg->REGCONFIG = mask;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_power_vreg_get(NRF_POWER_Type const * p_reg)
+{
+    return p_reg->REGCONFIG;
+}
+
+NRF_STATIC_INLINE void nrf_power_vreg_or_set(NRF_POWER_Type * p_reg, uint32_t mask)
+{
+    p_reg->REGCONFIG |= mask;
+}
+
+NRF_STATIC_INLINE void nrf_power_vreg_clear_set(NRF_POWER_Type * p_reg, uint32_t mask)
+{
+    p_reg->REGCONFIG &= (~mask);
+}
+
 #endif // NRF_POWER_HAS_VREG_CONFIG
 
 #if NRF_POWER_HAS_BLOCK_MODES
