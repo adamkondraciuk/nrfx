@@ -78,7 +78,8 @@ extern "C" {
 #define NRF_SPIM_HAS_PRESCALER 0
 #endif
 
-#if defined(SPIM_TXD_LIST_LIST_ArrayList) || defined(__NRFX_DOXYGEN__)
+#if defined(SPIM_TXD_LIST_LIST_ArrayList) || defined(SPIM_DMA_TX_LIST_TYPE_ArrayList) || \
+    defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether EasyDMA array list feature is present. */
 #define NRF_SPIM_HAS_ARRAY_LIST 1
 #else
@@ -1501,22 +1502,38 @@ NRF_STATIC_INLINE void nrf_spim_orc_set(NRF_SPIM_Type * p_reg,
 #if NRF_SPIM_HAS_ARRAY_LIST
 NRF_STATIC_INLINE void nrf_spim_tx_list_enable(NRF_SPIM_Type * p_reg)
 {
+#if NRF_SPIM_HAS_DMA_REG
+    p_reg->DMA.TX.LIST = SPIM_DMA_TX_LIST_TYPE_ArrayList << SPIM_DMA_TX_LIST_TYPE_Pos;
+#else
     p_reg->TXD.LIST = SPIM_TXD_LIST_LIST_ArrayList << SPIM_TXD_LIST_LIST_Pos;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_spim_tx_list_disable(NRF_SPIM_Type * p_reg)
 {
+#if NRF_SPIM_HAS_DMA_REG
+    p_reg->DMA.TX.LIST = SPIM_DMA_TX_LIST_TYPE_Disabled << SPIM_DMA_TX_LIST_TYPE_Pos;
+#else
     p_reg->TXD.LIST = SPIM_TXD_LIST_LIST_Disabled << SPIM_TXD_LIST_LIST_Pos;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_spim_rx_list_enable(NRF_SPIM_Type * p_reg)
 {
+#if NRF_SPIM_HAS_DMA_REG
+    p_reg->DMA.RX.LIST = SPIM_DMA_RX_LIST_TYPE_ArrayList << SPIM_DMA_RX_LIST_TYPE_Pos;
+#else
     p_reg->RXD.LIST = SPIM_RXD_LIST_LIST_ArrayList << SPIM_RXD_LIST_LIST_Pos;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_spim_rx_list_disable(NRF_SPIM_Type * p_reg)
 {
+#if NRF_SPIM_HAS_DMA_REG
+    p_reg->DMA.RX.LIST = SPIM_DMA_RX_LIST_TYPE_Disabled << SPIM_DMA_RX_LIST_TYPE_Pos;
+#else
     p_reg->RXD.LIST = SPIM_RXD_LIST_LIST_Disabled << SPIM_RXD_LIST_LIST_Pos;
+#endif
 }
 #endif
 
