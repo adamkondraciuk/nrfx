@@ -516,6 +516,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <name>PARTNO</name>
                 <lsb>0</lsb>
                 <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>nRF54L09</name>
+                    <description>nRF54L05</description>
+                    <value>0x00000027</value>
+                  </enumeratedValue>
+                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -948,149 +955,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
         </cluster>
-        <cluster>
-          <name>NFC</name>
-          <description>Unspecified</description>
-          <headerStructName>FICR_NFC</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x600</addressOffset>
-          <register>
-            <name>TAGHEADER0</name>
-            <description>Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-only</access>
-            <resetValue>0xFFFFFF5F</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>MFGID</name>
-                <description>Default Manufacturer ID: Nordic Semiconductor ASA has ICM 0x5F</description>
-                <lsb>0</lsb>
-                <msb>7</msb>
-              </field>
-              <field>
-                <name>UD1</name>
-                <description>Unique identifier byte 1</description>
-                <lsb>8</lsb>
-                <msb>15</msb>
-              </field>
-              <field>
-                <name>UD2</name>
-                <description>Unique identifier byte 2</description>
-                <lsb>16</lsb>
-                <msb>23</msb>
-              </field>
-              <field>
-                <name>UD3</name>
-                <description>Unique identifier byte 3</description>
-                <lsb>24</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>TAGHEADER1</name>
-            <description>Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-only</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>UD4</name>
-                <description>Unique identifier byte 4</description>
-                <lsb>0</lsb>
-                <msb>7</msb>
-              </field>
-              <field>
-                <name>UD5</name>
-                <description>Unique identifier byte 5</description>
-                <lsb>8</lsb>
-                <msb>15</msb>
-              </field>
-              <field>
-                <name>UD6</name>
-                <description>Unique identifier byte 6</description>
-                <lsb>16</lsb>
-                <msb>23</msb>
-              </field>
-              <field>
-                <name>UD7</name>
-                <description>Unique identifier byte 7</description>
-                <lsb>24</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>TAGHEADER2</name>
-            <description>Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.</description>
-            <addressOffset>0x008</addressOffset>
-            <access>read-only</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>UD8</name>
-                <description>Unique identifier byte 8</description>
-                <lsb>0</lsb>
-                <msb>7</msb>
-              </field>
-              <field>
-                <name>UD9</name>
-                <description>Unique identifier byte 9</description>
-                <lsb>8</lsb>
-                <msb>15</msb>
-              </field>
-              <field>
-                <name>UD10</name>
-                <description>Unique identifier byte 10</description>
-                <lsb>16</lsb>
-                <msb>23</msb>
-              </field>
-              <field>
-                <name>UD11</name>
-                <description>Unique identifier byte 11</description>
-                <lsb>24</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>TAGHEADER3</name>
-            <description>Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.</description>
-            <addressOffset>0x00C</addressOffset>
-            <access>read-only</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>UD12</name>
-                <description>Unique identifier byte 12</description>
-                <lsb>0</lsb>
-                <msb>7</msb>
-              </field>
-              <field>
-                <name>UD13</name>
-                <description>Unique identifier byte 13</description>
-                <lsb>8</lsb>
-                <msb>15</msb>
-              </field>
-              <field>
-                <name>UD14</name>
-                <description>Unique identifier byte 14</description>
-                <lsb>16</lsb>
-                <msb>23</msb>
-              </field>
-              <field>
-                <name>UD15</name>
-                <description>Unique identifier byte 15</description>
-                <lsb>24</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-        </cluster>
         <register>
           <name>XOSC32MTRIM</name>
           <description>XOSC32M capacitor selection trim values</description>
@@ -1495,7 +1359,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Protected</name>
-                    <description>The device can be erased using the CTRL-AP Erase all function and TAMPC PROTECT.ERASEPROTECT signal protector is unlocked.</description>
+                    <description>Erase protection is enabled and the signal protector is locked.</description>
                     <value>0x50FA50FA</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -1537,7 +1401,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Protected</name>
-                    <description>The device can be erased using the CTRL-AP Erase all function and TAMPC PROTECT.ERASEPROTECT signal protector is unlocked.</description>
+                    <description>Erase protection is enabled and the signal protector is locked.</description>
                     <value>0x50FA50FA</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -2013,7 +1877,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>TAG</name>
                   <description>Cache tag.</description>
                   <lsb>0</lsb>
-                  <msb>23</msb>
+                  <msb>19</msb>
                   <access>read-only</access>
                 </field>
                 <field>
@@ -2159,7 +2023,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <addressOffset>0x000</addressOffset>
           <register>
             <name>FETCHADDRLSB</name>
-            <description>Fetch Address Least Significant Bit</description>
+            <description>Fetch Address Least Significant Word</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -2167,6 +2031,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>FETCHADDRLSB</name>
+                <description>Address</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -2174,7 +2039,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>FETCHADDRMSB</name>
-            <description>Fetch Address Most Significant Bit</description>
+            <description>Fetch Address Most Significant Word</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -2189,7 +2054,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>FETCHLEN</name>
-            <description>Fetch Length</description>
+            <description>Fetch DMA Length (only used in direct mode)</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -2197,16 +2062,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>FETCHLEN</name>
+                <description>Length of data block</description>
                 <lsb>0</lsb>
                 <msb>27</msb>
               </field>
               <field>
                 <name>FETCHCSTADDR</name>
+                <description>Constant address</description>
                 <lsb>28</lsb>
                 <msb>28</msb>
               </field>
               <field>
                 <name>FETCHREALIGN</name>
+                <description>Realign length</description>
                 <lsb>29</lsb>
                 <msb>29</msb>
               </field>
@@ -2219,7 +2087,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>FETCHTAG</name>
-            <description>Fetch Tag</description>
+            <description>Fetch User Tag (only used in direct mode)</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -2227,6 +2095,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>FETCHTAG</name>
+                <description>User tag</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -2234,7 +2103,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>PUSHADDRLSB</name>
-            <description>Push Address Least Significant Bit</description>
+            <description>Push Address Least Significant Word</description>
             <addressOffset>0x010</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -2242,6 +2111,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>PUSHADDRLSB</name>
+                <description>Address</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -2249,7 +2119,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>PUSHADDRMSB</name>
-            <description>Push Address Most Significant Bit</description>
+            <description>Push Address Most Significant Word</description>
             <addressOffset>0x014</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -2264,7 +2134,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>PUSHLEN</name>
-            <description>Push Length</description>
+            <description>Push Length (only used in direct mode)</description>
             <addressOffset>0x018</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -2272,21 +2142,25 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>PUSHLEN</name>
+                <description>Length of data block</description>
                 <lsb>0</lsb>
                 <msb>27</msb>
               </field>
               <field>
                 <name>PUSHCSTADDR</name>
+                <description>Constant address</description>
                 <lsb>28</lsb>
                 <msb>28</msb>
               </field>
               <field>
                 <name>PUSHREALIGN</name>
+                <description>Realign length</description>
                 <lsb>29</lsb>
                 <msb>29</msb>
               </field>
               <field>
                 <name>PUSHDISCARD</name>
+                <description>Discard data</description>
                 <lsb>30</lsb>
                 <msb>30</msb>
               </field>
@@ -2294,15 +2168,46 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>INTEN</name>
-            <description>Interrupt Enable</description>
+            <description>Interrupt Enable mask</description>
             <addressOffset>0x01C</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
             <fields>
               <field>
-                <name>INTEN</name>
+                <name>FETCHERBLOCKEND</name>
+                <description>Fetcher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
                 <lsb>0</lsb>
+                <msb>0</msb>
+              </field>
+              <field>
+                <name>FETCHERSTOPPED</name>
+                <description>Fetcher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+              </field>
+              <field>
+                <name>FETCHERERROR</name>
+                <description>Bus error during fetcher DMA access</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+              </field>
+              <field>
+                <name>PUSHERBLOCKEND</name>
+                <description>Pusher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+              </field>
+              <field>
+                <name>PUSHERSTOPPED</name>
+                <description>Pusher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+              </field>
+              <field>
+                <name>PUSHERERROR</name>
+                <description>Bus error during pusher DMA access</description>
+                <lsb>5</lsb>
                 <msb>5</msb>
               </field>
             </fields>
@@ -2316,10 +2221,40 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <size>0x20</size>
             <fields>
               <field>
-                <name>INTENSET</name>
+                <name>FETCHERBLOCKEND</name>
+                <description>Fetcher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
                 <lsb>0</lsb>
+                <msb>0</msb>
+              </field>
+              <field>
+                <name>FETCHERSTOPPED</name>
+                <description>Fetcher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+              </field>
+              <field>
+                <name>FETCHERERROR</name>
+                <description>Bus error during fetcher DMA access</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+              </field>
+              <field>
+                <name>PUSHERBLOCKEND</name>
+                <description>Pusher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+              </field>
+              <field>
+                <name>PUSHERSTOPPED</name>
+                <description>Pusher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+              </field>
+              <field>
+                <name>PUSHERERROR</name>
+                <description>Bus error during pusher DMA access</description>
+                <lsb>5</lsb>
                 <msb>5</msb>
-                <access>write-only</access>
               </field>
             </fields>
           </register>
@@ -2332,10 +2267,40 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <size>0x20</size>
             <fields>
               <field>
-                <name>INTENCLR</name>
+                <name>FETCHERBLOCKEND</name>
+                <description>Fetcher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
                 <lsb>0</lsb>
+                <msb>0</msb>
+              </field>
+              <field>
+                <name>FETCHERSTOPPED</name>
+                <description>Fetcher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+              </field>
+              <field>
+                <name>FETCHERERROR</name>
+                <description>Bus error during fetcher DMA access</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+              </field>
+              <field>
+                <name>PUSHERBLOCKEND</name>
+                <description>Pusher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+              </field>
+              <field>
+                <name>PUSHERSTOPPED</name>
+                <description>Pusher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+              </field>
+              <field>
+                <name>PUSHERERROR</name>
+                <description>Bus error during pusher DMA access</description>
+                <lsb>5</lsb>
                 <msb>5</msb>
-                <access>write-only</access>
               </field>
             </fields>
           </register>
@@ -2348,10 +2313,40 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <size>0x20</size>
             <fields>
               <field>
-                <name>INTSTATRAW</name>
+                <name>FETCHERBLOCKEND</name>
+                <description>Fetcher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
                 <lsb>0</lsb>
-                <msb>31</msb>
-                <access>read-only</access>
+                <msb>0</msb>
+              </field>
+              <field>
+                <name>FETCHERSTOPPED</name>
+                <description>Fetcher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+              </field>
+              <field>
+                <name>FETCHERERROR</name>
+                <description>Bus error during fetcher DMA access</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+              </field>
+              <field>
+                <name>PUSHERBLOCKEND</name>
+                <description>Pusher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+              </field>
+              <field>
+                <name>PUSHERSTOPPED</name>
+                <description>Pusher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+              </field>
+              <field>
+                <name>PUSHERERROR</name>
+                <description>Bus error during pusher DMA access</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
               </field>
             </fields>
           </register>
@@ -2364,10 +2359,40 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <size>0x20</size>
             <fields>
               <field>
-                <name>INTSTAT</name>
+                <name>FETCHERBLOCKEND</name>
+                <description>Fetcher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
                 <lsb>0</lsb>
-                <msb>31</msb>
-                <access>read-only</access>
+                <msb>0</msb>
+              </field>
+              <field>
+                <name>FETCHERSTOPPED</name>
+                <description>Fetcher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+              </field>
+              <field>
+                <name>FETCHERERROR</name>
+                <description>Bus error during fetcher DMA access</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+              </field>
+              <field>
+                <name>PUSHERBLOCKEND</name>
+                <description>Pusher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+              </field>
+              <field>
+                <name>PUSHERSTOPPED</name>
+                <description>Pusher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+              </field>
+              <field>
+                <name>PUSHERERROR</name>
+                <description>Bus error during pusher DMA access</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
               </field>
             </fields>
           </register>
@@ -2380,16 +2405,46 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <size>0x20</size>
             <fields>
               <field>
-                <name>INTSTATCLR</name>
+                <name>FETCHERBLOCKEND</name>
+                <description>Fetcher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
                 <lsb>0</lsb>
-                <msb>31</msb>
-                <access>write-only</access>
+                <msb>0</msb>
+              </field>
+              <field>
+                <name>FETCHERSTOPPED</name>
+                <description>Fetcher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+              </field>
+              <field>
+                <name>FETCHERERROR</name>
+                <description>Bus error during fetcher DMA access</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+              </field>
+              <field>
+                <name>PUSHERBLOCKEND</name>
+                <description>Pusher DMA reached the end of a block (if enabled in the descriptor; scatter-gather only)</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+              </field>
+              <field>
+                <name>PUSHERSTOPPED</name>
+                <description>Pusher DMA reached the end of a block with Stop=1, or end of direct transfer</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+              </field>
+              <field>
+                <name>PUSHERERROR</name>
+                <description>Bus error during pusher DMA access</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
               </field>
             </fields>
           </register>
           <register>
             <name>CONFIG</name>
-            <description>Configuration</description>
+            <description>Cryptomaster configuration</description>
             <addressOffset>0x034</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -2397,26 +2452,31 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>FETCHCTRLINDIRECT</name>
+                <description>Fetcher scatter/gather.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
               </field>
               <field>
                 <name>PUSHCTRLINDIRECT</name>
+                <description>Pusher scatter/gather.</description>
                 <lsb>1</lsb>
                 <msb>1</msb>
               </field>
               <field>
                 <name>FETCHSTOP</name>
+                <description>Stop fetcher.</description>
                 <lsb>2</lsb>
                 <msb>2</msb>
               </field>
               <field>
                 <name>PUSHSTOP</name>
+                <description>Stop pusher DMA.</description>
                 <lsb>3</lsb>
                 <msb>3</msb>
               </field>
               <field>
                 <name>SOFTRST</name>
+                <description>Soft reset the cryptomaster.</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
               </field>
@@ -2432,12 +2492,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>STARTFETCH</name>
+                <description>Writing a '1' starts the fetcher DMA. Writing a '0' has no effect.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <access>write-only</access>
               </field>
               <field>
                 <name>STARTPUSH</name>
+                <description>Writing a '1' starts the pusher DMA. Writing a '0' has no effect.</description>
                 <lsb>1</lsb>
                 <msb>1</msb>
                 <access>write-only</access>
@@ -2454,36 +2516,42 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>FETCHBUSY</name>
+                <description>This bit is high as long as the fetcher DMA is busy.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <access>read-only</access>
               </field>
               <field>
                 <name>PUSHBUSY</name>
+                <description>This bit is high as long as the pusher DMA is busy.</description>
                 <lsb>1</lsb>
                 <msb>1</msb>
                 <access>read-only</access>
               </field>
               <field>
                 <name>FETCHNOTEMPTY</name>
+                <description>Not empty flag for fetcher DMA input FIFO</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
                 <access>read-only</access>
               </field>
               <field>
                 <name>PUSHWAITINGFIFO</name>
+                <description>Pusher DMA Waiting FIFO. This bit is high when the pusher is waiting for more data in output FIFO.</description>
                 <lsb>5</lsb>
                 <msb>5</msb>
                 <access>read-only</access>
               </field>
               <field>
                 <name>SOFTRSTBUSY</name>
+                <description>This bit is high when the soft reset is on going</description>
                 <lsb>6</lsb>
                 <msb>6</msb>
                 <access>read-only</access>
               </field>
               <field>
                 <name>PUSHNBDATA</name>
+                <description>Amount of data in the pusher DMA output FIFO</description>
                 <lsb>16</lsb>
                 <msb>31</msb>
                 <access>read-only</access>
@@ -2617,7 +2685,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Generic g_AesModesPoss value.</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
-            <resetValue>0x05020167</resetValue>
+            <resetValue>0x1D020167</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -3473,6 +3541,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
             </fields>
           </register>
+          <register>
+            <dim>0x20</dim>
+            <dimIncrement>0x4</dimIncrement>
+            <name>FIFO[%s]</name>
+            <description>Description collection: FIFO data</description>
+            <addressOffset>0x080</addressOffset>
+            <access>read-only</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>DATA</name>
+                <description>FIFO data</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
         </cluster>
         <cluster>
           <name>PK</name>
@@ -3740,7 +3826,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Hardware configuration register.</description>
             <addressOffset>0x018</addressOffset>
             <access>read-write</access>
-            <resetValue>0x01F30000</resetValue>
+            <resetValue>0x01F30200</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -10387,7 +10473,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <description>Description cluster: Get and set the applicable access permissions for the peripheral slave index n</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
-            <resetValue>0x8000000A</resetValue>
+            <resetValue>0x8000002A</resetValue>
             <size>0x20</size>
             <fields>
               <field>
@@ -11842,132 +11928,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
-              <field>
-                <name>CONNECTION_8</name>
-                <description>Global slave connection information for master port</description>
-                <lsb>8</lsb>
-                <msb>8</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Master port 8 connection to global slave is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Master port 8 connection to global slave is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>CONNECTION_9</name>
-                <description>Global slave connection information for master port</description>
-                <lsb>9</lsb>
-                <msb>9</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Master port 9 connection to global slave is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Master port 9 connection to global slave is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>CONNECTION_10</name>
-                <description>Global slave connection information for master port</description>
-                <lsb>10</lsb>
-                <msb>10</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Master port 10 connection to global slave is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Master port 10 connection to global slave is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>CONNECTION_11</name>
-                <description>Global slave connection information for master port</description>
-                <lsb>11</lsb>
-                <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Master port 11 connection to global slave is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Master port 11 connection to global slave is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>CONNECTION_12</name>
-                <description>Global slave connection information for master port</description>
-                <lsb>12</lsb>
-                <msb>12</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Master port 12 connection to global slave is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Master port 12 connection to global slave is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>CONNECTION_13</name>
-                <description>Global slave connection information for master port</description>
-                <lsb>13</lsb>
-                <msb>13</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Master port 13 connection to global slave is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Master port 13 connection to global slave is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>CONNECTION_14</name>
-                <description>Global slave connection information for master port</description>
-                <lsb>14</lsb>
-                <msb>14</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Master port 14 connection to global slave is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Master port 14 connection to global slave is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
             </fields>
           </register>
           <register>
@@ -12318,132 +12278,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <enumeratedValue>
                     <name>Enable</name>
                     <description>Region n is enabled for master port 7</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE8</name>
-                <description>Enable region n for master port 8</description>
-                <lsb>8</lsb>
-                <msb>8</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Region n is disabled for master port 8</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Region n is enabled for master port 8</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE9</name>
-                <description>Enable region n for master port 9</description>
-                <lsb>9</lsb>
-                <msb>9</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Region n is disabled for master port 9</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Region n is enabled for master port 9</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE10</name>
-                <description>Enable region n for master port 10</description>
-                <lsb>10</lsb>
-                <msb>10</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Region n is disabled for master port 10</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Region n is enabled for master port 10</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE11</name>
-                <description>Enable region n for master port 11</description>
-                <lsb>11</lsb>
-                <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Region n is disabled for master port 11</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Region n is enabled for master port 11</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE12</name>
-                <description>Enable region n for master port 12</description>
-                <lsb>12</lsb>
-                <msb>12</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Region n is disabled for master port 12</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Region n is enabled for master port 12</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE13</name>
-                <description>Enable region n for master port 13</description>
-                <lsb>13</lsb>
-                <msb>13</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Region n is disabled for master port 13</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Region n is enabled for master port 13</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE14</name>
-                <description>Enable region n for master port 14</description>
-                <lsb>14</lsb>
-                <msb>14</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Region n is disabled for master port 14</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Region n is enabled for master port 14</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -12891,132 +12725,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <enumeratedValue>
                     <name>Enable</name>
                     <description>Override region n is enabled for master port 7</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE8</name>
-                <description>Enable override</description>
-                <lsb>8</lsb>
-                <msb>8</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Override region n is disabled for master port 8</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Override region n is enabled for master port 8</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE9</name>
-                <description>Enable override</description>
-                <lsb>9</lsb>
-                <msb>9</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Override region n is disabled for master port 9</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Override region n is enabled for master port 9</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE10</name>
-                <description>Enable override</description>
-                <lsb>10</lsb>
-                <msb>10</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Override region n is disabled for master port 10</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Override region n is enabled for master port 10</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE11</name>
-                <description>Enable override</description>
-                <lsb>11</lsb>
-                <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Override region n is disabled for master port 11</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Override region n is enabled for master port 11</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE12</name>
-                <description>Enable override</description>
-                <lsb>12</lsb>
-                <msb>12</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Override region n is disabled for master port 12</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Override region n is enabled for master port 12</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE13</name>
-                <description>Enable override</description>
-                <lsb>13</lsb>
-                <msb>13</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Override region n is disabled for master port 13</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Override region n is enabled for master port 13</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>ENABLE14</name>
-                <description>Enable override</description>
-                <lsb>14</lsb>
-                <msb>14</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disable</name>
-                    <description>Override region n is disabled for master port 14</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enable</name>
-                    <description>Override region n is enabled for master port 14</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -24030,7 +23738,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <dim>6</dim>
           <dimIncrement>0x008</dimIncrement>
           <name>REGION[%s]</name>
-          <description>Unspecified</description>
+          <description>RRAMC can apply access privileges to regions of the RRAM. Some regions are dedicated for system use and are not available for configuration - refer to the instantiation table for details.</description>
           <headerStructName>RRAMC_REGION</headerStructName>
           <access>read-write</access>
           <addressOffset>0x550</addressOffset>
@@ -25163,18 +24871,30 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
-          <name>TINSTANCE</name>
-          <description>SW-DP Target instance</description>
-          <addressOffset>0x520</addressOffset>
+          <name>DBGWAKEUPREQ</name>
+          <description>Debug wakeup request configuration</description>
+          <addressOffset>0x600</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <resetValue>0x00000001</resetValue>
           <size>0x20</size>
           <fields>
             <field>
-              <name>TINSTANCE</name>
-              <description>TINSTANCE bits are used in the SW-DP DLPIDR.TINSTANCE field.</description>
+              <name>TIMEOUT</name>
+              <description>Debug wakeup request timeout.</description>
               <lsb>0</lsb>
-              <msb>3</msb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Timeout disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Maximum</name>
+                  <description>Timeout value is maximum, i.e., 0x400</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
@@ -51514,7 +51234,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <access>read-write</access>
           <addressOffset>0xD30</addressOffset>
           <register>
-            <dim>0x8</dim>
+            <dim>0x7</dim>
             <dimIncrement>0x4</dimIncrement>
             <name>DFEGPIO[%s]</name>
             <description>Description collection: Pin select for DFE pin n</description>
@@ -74304,6 +74024,16 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <description>1 megabaud when UARTE has 16 MHz peripheral clock frequency</description>
                   <value>0x10000000</value>
                 </enumeratedValue>
+                <enumeratedValue>
+                  <name>Baud2M</name>
+                  <description>2 megabaud when UARTE has 16 MHz peripheral clock frequency</description>
+                  <value>0x20000000</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Baud4M</name>
+                  <description>4 megabaud when UARTE has 16 MHz peripheral clock frequency</description>
+                  <value>0x40000000</value>
+                </enumeratedValue>
               </enumeratedValues>
             </field>
           </fields>
@@ -74347,7 +74077,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Included</name>
-                  <description>Include even parity bit</description>
+                  <description>Include parity bit</description>
                   <value>0x7</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -76926,7 +76656,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>TASKS_CALIBRATEOFFSET</name>
-          <description>Starts offset auto-calibration Noise shaping should be disabled</description>
+          <description>Starts offset auto-calibration</description>
           <addressOffset>0x00C</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
@@ -76934,53 +76664,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>TASKS_CALIBRATEOFFSET</name>
-              <description>Starts offset auto-calibration Noise shaping should be disabled</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_CALIBRATELINEARITY</name>
-          <description>Starts linearity auto-calibration. Resolution must be 10 bit. TESTCTRL field LIN_CAL_ENABLE must be low. Noise shaping must be disabled.</description>
-          <addressOffset>0x010</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_CALIBRATELINEARITY</name>
-              <description>Starts linearity auto-calibration. Resolution must be 10 bit. TESTCTRL field LIN_CAL_ENABLE must be low. Noise shaping must be disabled.</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_CALIBRATEGAIN</name>
-          <description>Starts gain auto-calibration</description>
-          <addressOffset>0x014</addressOffset>
-          <access>write-only</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>TASKS_CALIBRATEGAIN</name>
-              <description>Starts gain auto-calibration</description>
+              <description>Starts offset auto-calibration</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -77126,72 +76810,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <field>
               <name>CHIDX</name>
               <description>DPPI channel that task CALIBRATEOFFSET will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SUBSCRIBE_CALIBRATELINEARITY</name>
-          <description>Subscribe configuration for task CALIBRATELINEARITY</description>
-          <addressOffset>0x090</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task CALIBRATELINEARITY will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SUBSCRIBE_CALIBRATEGAIN</name>
-          <description>Subscribe configuration for task CALIBRATEGAIN</description>
-          <addressOffset>0x094</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task CALIBRATEGAIN will subscribe to</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
@@ -80022,8 +79640,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
-          <name>PCRMSTATUS</name>
-          <description>PCRM Status</description>
+          <name>CLEANPOWERSTATUS</name>
+          <description>Clean power status</description>
           <addressOffset>0x404</addressOffset>
           <access>read-only</access>
           <resetValue>0x00000000</resetValue>
@@ -80031,7 +79649,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>ACK</name>
-              <description>PCRM Ack Status for the PCRM clean power request</description>
+              <description>Ack Status for the clean power request</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -80076,31 +79694,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </field>
           </fields>
         </register>
-        <cluster>
-          <name>TRIM</name>
-          <description>Unspecified</description>
-          <headerStructName>SAADC_TRIM</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x440</addressOffset>
-          <register>
-            <dim>0x6</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>LINCALCOEFF[%s]</name>
-            <description>Description collection: Linearity calibration coefficient</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>VAL</name>
-                <description>value</description>
-                <lsb>0</lsb>
-                <msb>15</msb>
-              </field>
-            </fields>
-          </register>
-        </cluster>
         <register>
           <name>ENABLE</name>
           <description>Enable or disable ADC</description>
@@ -80158,7 +79751,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>PSELP</name>
             <description>Description cluster: Input positive pin selection for CH[n]</description>
-            <addressOffset>0x0</addressOffset>
+            <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -80179,16 +79772,16 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>INTERNAL</name>
                 <description>Internal input selection for analog positive input when CH[n].PSELP.CONNECT = Internal</description>
                 <lsb>12</lsb>
-                <msb>13</msb>
+                <msb>14</msb>
                 <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Avdd</name>
-                    <description>Connected to the internal 0.9V analog supply rail</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
                   <enumeratedValue>
                     <name>Dvdd</name>
                     <description>Connected to the internal 0.9V digital supply rail</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VddL</name>
+                    <description>Connected to VDDL</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
@@ -80197,9 +79790,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                     <value>0x2</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Internal3</name>
-                    <description>Reserved for future use</description>
+                    <name>VddMeas3V0</name>
+                    <description>VDD_MEAS_AO_3V0</description>
                     <value>0x3</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Vss</name>
+                    <description>Unspecified</description>
+                    <value>0x4</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -80264,7 +79862,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>PSELN</name>
             <description>Description cluster: Input negative pin selection for CH[n]</description>
-            <addressOffset>0x4</addressOffset>
+            <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -80285,27 +79883,32 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>INTERNAL</name>
                 <description>Internal input selection for Analog negative input when CH[n].PSELN.CONNECT = Internal</description>
                 <lsb>12</lsb>
-                <msb>13</msb>
+                <msb>14</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Internal4</name>
-                    <description>Connected to VDD_ANA_0V9</description>
+                    <name>Dvdd</name>
+                    <description>Connected to the internal 0.9V digital supply rail</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Internal5</name>
-                    <description>Connected to VDD_DIG_0V9</description>
+                    <name>VddL</name>
+                    <description>Connected to VDDL</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Internal6</name>
-                    <description>Connected to VDD_AO_3V0</description>
+                    <name>Vdd</name>
+                    <description>Connected to VDD</description>
                     <value>0x2</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Internal7</name>
-                    <description>Reserved for future use</description>
+                    <name>VddMeas3V0</name>
+                    <description>VDD_MEAS_AO_3V0</description>
                     <value>0x3</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Vss</name>
+                    <description>Unspecified</description>
+                    <value>0x4</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -80376,67 +79979,43 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <size>0x20</size>
             <fields>
               <field>
-                <name>GAIN</name>
-                <description>Gain control</description>
-                <lsb>8</lsb>
-                <msb>10</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Gain2</name>
-                    <description>2</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Gain1</name>
-                    <description>1</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Gain2_3</name>
-                    <description>2/3</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Gain2_4</name>
-                    <description>2/4</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Gain2_5</name>
-                    <description>2/5</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Gain2_6</name>
-                    <description>2/6</description>
-                    <value>0x5</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Gain2_7</name>
-                    <description>2/7</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Gain2_8</name>
-                    <description>2/8</description>
-                    <value>0x7</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>BURST</name>
-                <description>Enable burst mode</description>
-                <lsb>11</lsb>
-                <msb>11</msb>
+                <name>CHOPPING</name>
+                <description>Enable chopping</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Disabled</name>
-                    <description>Burst mode is disabled (normal operation)</description>
+                    <description>Chopping is disabled</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Enabled</name>
-                    <description>Burst mode is enabled. SAADC takes 2^OVERSAMPLE number of samples as fast as it can, and sends the average to Data RAM.</description>
+                    <description>Chopping is enabled</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>VREFPLPFDISABLE</name>
+                <description>Disable internal reference low pass filter</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+              </field>
+              <field>
+                <name>HIGHSPEED</name>
+                <description>Use bootstrapped switches to enable high speed on input</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>High speed is disabled</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enabled</name>
+                    <description>High speed is enabled</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -80445,17 +80024,37 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>REFSEL</name>
                 <description>Reference control</description>
                 <lsb>12</lsb>
-                <msb>13</msb>
+                <msb>14</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Internal</name>
-                    <description>Internal reference (0.9 V)</description>
+                    <description>Internal 1.3 V reference</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>External</name>
-                    <description>External reference given at PADC_EXT_REF_1V2</description>
+                    <description>External reference voltage Reference given at ADC_LP10B_EXT</description>
                     <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VddL</name>
+                    <description>Reference given at VDDL VDD_AO_1V5</description>
+                    <value>0x2</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Vdd</name>
+                    <description>Reference given at VDD VDD_AO_3V0</description>
+                    <value>0x3</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>ExternalNoRefBuf</name>
+                    <description>External reference voltage with reference buffer disabled Reference given at ADC_LP10B_EXT with reference buffer disabled</description>
+                    <value>0x4</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VddLNoRefBuf</name>
+                    <description>Reference given at VDDL with reference buffer disabled &amp;gt;Reference given at VDD_AO_1V5 with reference buffer disabled</description>
+                    <value>0x5</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -80483,12 +80082,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <lsb>16</lsb>
                 <msb>24</msb>
               </field>
-              <field>
-                <name>TCONV</name>
-                <description>Conversion time. Resulting conversion time is ((TCONV+1) x 250 ns)</description>
-                <lsb>28</lsb>
-                <msb>30</msb>
-              </field>
             </fields>
           </register>
           <register>
@@ -80514,6 +80107,34 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </fields>
           </register>
         </cluster>
+        <register>
+          <name>BURST</name>
+          <description>Enable burst mode</description>
+          <addressOffset>0x5E8</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>BURST</name>
+              <description>Enable burst mode</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Burst mode is disabled (normal operation)</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Burst mode is enabled. SAADC takes 2^OVERSAMPLE number of samples and sends the average to Data RAM.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
         <register>
           <name>REGRESULT</name>
           <description>Last conversion result</description>
@@ -80691,8 +80312,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
-          <name>PCRMREQ</name>
-          <description>PCRM request for clean power</description>
+          <name>CLEANPOWERREQ</name>
+          <description>Request for clean power</description>
           <addressOffset>0x5FC</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -80752,7 +80373,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>PTR</name>
                 <description>Data pointer</description>
                 <lsb>0</lsb>
-                <msb>31</msb>
+                <msb>15</msb>
               </field>
             </fields>
           </register>
@@ -80814,16 +80435,16 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <size>0x20</size>
           <fields>
             <field>
-              <name>ICTRL</name>
-              <description>Current control. See design description for coding</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-            </field>
-            <field>
               <name>SWITCH</name>
               <description>Swap positive and negative input. See design description for coding</description>
               <lsb>4</lsb>
               <msb>4</msb>
+            </field>
+            <field>
+              <name>BYPASSBIASREQ</name>
+              <description>Bypass bias request, go directly to powerup without waiting for bias current acq</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
             </field>
             <field>
               <name>SHORT</name>
@@ -80832,16 +80453,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <msb>8</msb>
             </field>
             <field>
-              <name>TST</name>
-              <description>Test bus for ADC core. See design description for coding</description>
-              <lsb>12</lsb>
-              <msb>16</msb>
-            </field>
-            <field>
-              <name>ENINMUX</name>
-              <description>Will enable the input mux in the ADC, so the resistor strings can be connected even when the analog core is powered down. See design description for coding</description>
-              <lsb>24</lsb>
-              <msb>24</msb>
+              <name>DISBUF</name>
+              <description>Turn off the VCM buffer inside the SAR-ADC</description>
+              <lsb>9</lsb>
+              <msb>9</msb>
             </field>
             <field>
               <name>PWRUP</name>
@@ -80889,24 +80504,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
-            <field>
-              <name>LINCALEN</name>
-              <description>Enables the use of linear calibration values TRIM.LINCALCOEFF[n]</description>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Use of linear calibration is disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Use of linear calibration is enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
           </fields>
         </register>
         <register>
@@ -80921,7 +80518,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <name>CALOFFSET</name>
               <description>Calibration control for offset error. Sign-magnitude coding</description>
               <lsb>0</lsb>
-              <msb>5</msb>
+              <msb>6</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
@@ -80940,33 +80537,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
-            <field>
-              <name>CALGAIN</name>
-              <description>Offset binary coding</description>
-              <lsb>8</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Default</name>
-                  <description>Default gain, for +1/2 input (assume full-scale = +-1) the output will be 1024</description>
-                  <value>0x00</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>High</name>
-                  <description>High gain setting</description>
-                  <value>0x3F</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Low</name>
-                  <description>Low gain setting</description>
-                  <value>0x40</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
           </fields>
         </register>
         <register>
-          <name>CALREF</name>
+          <name>TRIM</name>
           <description>Calibration control for reference voltage</description>
           <addressOffset>0x644</addressOffset>
           <access>read-write</access>
@@ -80974,111 +80548,45 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <size>0x20</size>
           <fields>
             <field>
-              <name>VREF</name>
-              <description>Offset binary coding</description>
+              <name>VREFP</name>
+              <description>Trim bits to calibrate the internal VREFP to 1.3V</description>
               <lsb>0</lsb>
-              <msb>5</msb>
+              <msb>6</msb>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>Default</name>
-                  <description>Default vref, in typical corner VREF=0.9V</description>
-                  <value>0x00</value>
-                </enumeratedValue>
-                <enumeratedValue>
                   <name>High</name>
-                  <description>Low output code (high reference voltage)</description>
+                  <description>Max trim</description>
                   <value>0x3F</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>Low</name>
-                  <description>High output code (low reference voltage)</description>
+                  <name>Default</name>
+                  <description>Default trim</description>
                   <value>0x00</value>
                 </enumeratedValue>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Min trim</description>
+                  <value>0x40</value>
+                </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
-              <name>VREFLPFDISABLE</name>
-              <description>Disable the internal reference low pass filter</description>
-              <lsb>6</lsb>
-              <msb>6</msb>
-            </field>
-            <field>
-              <name>IREF</name>
-              <description>Calibration control for reference current. See design description for coding</description>
+              <name>IBUFF</name>
+              <description>To program the current for the VCM buffer insdie ADC core. 2s complement</description>
               <lsb>8</lsb>
-              <msb>11</msb>
+              <msb>10</msb>
             </field>
             <field>
-              <name>VREFTC</name>
-              <description>Calibration code for reference temperature coefficient. See design description for coding</description>
+              <name>IDLY</name>
+              <description>Trim bias current for delay cells. 2s complement</description>
               <lsb>16</lsb>
-              <msb>18</msb>
+              <msb>19</msb>
             </field>
             <field>
-              <name>LDO</name>
-              <description>Calibration code for LDO VREF. See design description for coding</description>
+              <name>IBIAS</name>
+              <description>Trim bias current for the ADC core. 2s complement</description>
               <lsb>24</lsb>
-              <msb>25</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>LDO</name>
-          <description>Internal LDO output voltage control</description>
-          <addressOffset>0x648</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000101</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>VOUT1</name>
-              <description>Primary LDO output voltage control. See design description for coding</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-            </field>
-            <field>
-              <name>VOUT2</name>
-              <description>Secontary LDO output voltage control. See design description for coding</description>
-              <lsb>8</lsb>
-              <msb>11</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NOISESHAPE</name>
-          <description>Enable noise shaping</description>
-          <addressOffset>0x654</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>NOISESHAPE</name>
-              <description>Enable noise shaping</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disable</name>
-                  <description>Disable noiseshaping. Oversampling based on accumulate and average.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Audio</name>
-                  <description>Noiseshaping and decimating. Larger passband. Provides a 50kS/s cut off frequency, 8x the oversampling ratio. See design description for more information</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Accuracy</name>
-                  <description>Noiseshaping and decimating. Smaller passband. Recommended resolution setting is 14 bits. Provides a 5kS/s cut off frequency, 32x the oversampling ratio. See design description for more information</description>
-                  <value>0x2</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Stage1</name>
-                  <description>Result from common 1st stage filter. For debugging only</description>
-                  <value>0x3</value>
-                </enumeratedValue>
-              </enumeratedValues>
+              <msb>27</msb>
             </field>
           </fields>
         </register>
@@ -81194,40 +80702,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
             </fields>
           </register>
-          <register>
-            <name>CALCDAC</name>
-            <description>Override the CAL_CDAC signal to the analog module</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>VAL</name>
-                <description>Override value for the signal</description>
-                <lsb>0</lsb>
-                <msb>6</msb>
-              </field>
-              <field>
-                <name>EN</name>
-                <description>Enable the override</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Override is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Override is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
         </cluster>
         <cluster>
           <name>DFT</name>
@@ -81247,47 +80721,22 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>SELMUX</name>
                 <description>Select multiplexer for ATB0</description>
                 <lsb>0</lsb>
-                <msb>2</msb>
+                <msb>1</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>InMux</name>
-                    <description>ATB0 connected to PADC_INMUX, available on PADC_IN</description>
+                    <name>HighImpedance</name>
+                    <description>Unspecified</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Vref</name>
-                    <description>ATB0 connected to VREF</description>
+                    <name>Dcmux</name>
+                    <description>ATB0 connected to DC input MUX</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VrefBuff</name>
-                    <description>ATB0 connected to VREF_BUFF</description>
+                    <name>Bias</name>
+                    <description>ATB0 connected to 1uA bias current</description>
                     <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>VrefIbpsr10U</name>
-                    <description>ATB0 connected to ATB_PADC_VREF_IBPSR_10U for current measurement</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>VrefIbps3U</name>
-                    <description>ATB0 connected to ATB_PADC_VREF_IBPS_3U</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>VrefLpfDisabled</name>
-                    <description>ATB0 connected to VREF, internal reference with LPF bypassed.</description>
-                    <value>0x5</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Spare1</name>
-                    <description>Spare pin</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Spare2</name>
-                    <description>Spare pin</description>
-                    <value>0x7</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -81323,47 +80772,22 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>SELMUX</name>
                 <description>Select multiplexer for ATB1</description>
                 <lsb>0</lsb>
-                <msb>2</msb>
+                <msb>1</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Inmux</name>
-                    <description>ATB1 connected to PADC_INMUX, available on both PADC_IP and PADC_IN</description>
+                    <name>HighImpedance</name>
+                    <description>ATB1 is high impedance</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VrefViaAtbuf</name>
-                    <description>ATB1 connected to VREF via ATBBUF</description>
+                    <name>Dcmux</name>
+                    <description>ATB1 connected to DC input MUX</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VrefBuffViaAtbuf</name>
-                    <description>ATB1 connected to VREF_BUFF via ATBUF</description>
+                    <name>VrefP</name>
+                    <description>ATB1 connected to VREFP</description>
                     <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Ldo</name>
-                    <description>ATB1 connected to PADC_LDO to measure 1.5V via ATBUF</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Spare0</name>
-                    <description>Unspecified</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>VrefLdo</name>
-                    <description>ATB1 connected to VREF_LDO to measure 1.5V via ATBUF</description>
-                    <value>0x5</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Spare1</name>
-                    <description>Spare pin</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Spare2</name>
-                    <description>Spare pin</description>
-                    <value>0x7</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -81388,34 +80812,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </fields>
           </register>
           <register>
-            <name>ATB2CONFIG</name>
-            <description>Analog Test Bus 2 (ATB2) configuration</description>
-            <addressOffset>0x008</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>EN</name>
-                <description>Enable the analog test bus</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Analog test bus is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Analog test bus is enabled and connected to PADC_INMUX available on PADC_IP</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
             <name>DTB0CONFIG</name>
             <description>Digital Test Bus 0 (DTB0) configuration</description>
             <addressOffset>0x10</addressOffset>
@@ -81430,119 +80826,43 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <msb>2</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>READY</name>
-                    <description>READY_PADC_AO_0V8</description>
+                    <name>UNKNOWN0</name>
+                    <description>unknown</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>READYVREF</name>
-                    <description>READY_PADC_VREF_AO_0V8</description>
+                    <name>UNKNOWN1</name>
+                    <description>unknown</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>SETTLED</name>
-                    <description>SETTLED_VDD_INT_AO_0V8</description>
+                    <name>UNKNOWN2</name>
+                    <description>unknown</description>
                     <value>0x2</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>INTCONVERT</name>
-                    <description>INT_CONVERT_0V8</description>
+                    <name>UNKNOWN3</name>
+                    <description>unknown</description>
                     <value>0x3</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>INTDONE</name>
-                    <description>INT_DONE_0V8</description>
+                    <name>UNKNOWN4</name>
+                    <description>unknown</description>
                     <value>0x4</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>INTAMPLFIY</name>
-                    <description>INT_AMPLFIY_0V8</description>
+                    <name>UNKNOWN5</name>
+                    <description>unknown</description>
                     <value>0x5</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Spare0</name>
-                    <description>Spare pin</description>
+                    <name>UNKNOWN6</name>
+                    <description>unknown</description>
                     <value>0x6</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Spare1</name>
-                    <description>Spare pin</description>
-                    <value>0x7</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>EN</name>
-                <description>Enable the digital test bus</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Digital test bus is disabled</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Digital test bus is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>DTB1CONFIG</name>
-            <description>Digital Test Bus 1 (DTB1) configuration</description>
-            <addressOffset>0x14</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <size>0x20</size>
-            <fields>
-              <field>
-                <name>SELMUX</name>
-                <description>Select multiplexer for DTB1</description>
-                <lsb>0</lsb>
-                <msb>2</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>INTIDLE</name>
-                    <description>INT_IDLE_0V8</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>INTSAMPLE</name>
-                    <description>INT_SAMPLE_0V8</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>INTAMPLFIY</name>
-                    <description>INT_AMPLFIY_0V8</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>INTCONVERT</name>
-                    <description>INT_CONVERT_0V8</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>INTDONE</name>
-                    <description>INT_DONE_0V8</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>ENNSERRFEEDBACK</name>
-                    <description>EN_NS_ERR_FEEDBACK_0V8</description>
-                    <value>0x5</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Spare0</name>
-                    <description>Spare pin</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Spare1</name>
-                    <description>Spare pin</description>
+                    <name>UNKNOWN7</name>
+                    <description>unknown</description>
                     <value>0x7</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -91111,6 +90431,90 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
+          <name>EVENTS_RTCOUNTERREADY</name>
+          <description>Event on STATUS.RTCOUNTER.READY status changed to ready</description>
+          <addressOffset>0x170</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_RTCOUNTERREADY</name>
+              <description>Event on STATUS.RTCOUNTER.READY status changed to ready</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_PWMREADY</name>
+          <description>Event on STATUS.PWM.READY status changed to ready</description>
+          <addressOffset>0x174</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_PWMREADY</name>
+              <description>Event on STATUS.PWM.READY status changed to ready</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_CLKOUTREADY</name>
+          <description>Event on STATUS.CLKOUT.READY status changed to ready</description>
+          <addressOffset>0x178</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EVENTS_CLKOUTREADY</name>
+              <description>Event on STATUS.CLKOUT.READY status changed to ready</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <dim>0xC</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>PUBLISH_COMPARE[%s]</name>
@@ -91156,6 +90560,105 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <field>
               <name>CHIDX</name>
               <description>DPPI channel that event RTCOMPARE will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_RTCOUNTERREADY</name>
+          <description>Publish configuration for event RTCOUNTERREADY</description>
+          <addressOffset>0x1F0</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event RTCOUNTERREADY will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_PWMREADY</name>
+          <description>Publish configuration for event PWMREADY</description>
+          <addressOffset>0x1F4</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event PWMREADY will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_CLKOUTREADY</name>
+          <description>Publish configuration for event CLKOUTREADY</description>
+          <addressOffset>0x1F8</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event CLKOUTREADY will publish to</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
@@ -91489,6 +90992,60 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Enable or disable interrupt for event PWMPERIODEND</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Enable or disable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Enable or disable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Enable or disable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -91922,6 +91479,87 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Write '1' to enable interrupt for event PWMPERIODEND</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Write '1' to enable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Write '1' to enable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Write '1' to enable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -92386,6 +92024,87 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Write '1' to disable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Write '1' to disable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Write '1' to disable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -92700,6 +92419,63 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Read pending status of interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Read pending status of interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Read pending status of interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -92985,6 +92761,60 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Enable or disable interrupt for event PWMPERIODEND</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Enable or disable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Enable or disable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Enable or disable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -93418,6 +93248,87 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Write '1' to enable interrupt for event PWMPERIODEND</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Write '1' to enable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Write '1' to enable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Write '1' to enable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -93882,6 +93793,87 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Write '1' to disable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Write '1' to disable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Write '1' to disable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -94196,6 +94188,63 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Read pending status of interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Read pending status of interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Read pending status of interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -94481,6 +94530,60 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Enable or disable interrupt for event PWMPERIODEND</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Enable or disable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Enable or disable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Enable or disable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -94914,6 +95017,87 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Write '1' to enable interrupt for event PWMPERIODEND</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Write '1' to enable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Write '1' to enable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Write '1' to enable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -95378,6 +95562,87 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Write '1' to disable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Write '1' to disable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Write '1' to disable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -95692,6 +95957,63 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Read pending status of interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Read pending status of interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Read pending status of interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -95977,6 +96299,60 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Enable or disable interrupt for event PWMPERIODEND</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Enable or disable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Enable or disable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Enable or disable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -96410,6 +96786,87 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Write '1' to enable interrupt for event PWMPERIODEND</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Write '1' to enable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Write '1' to enable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Write '1' to enable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -96874,6 +97331,87 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Write '1' to disable interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Write '1' to disable interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Write '1' to disable interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -97174,6 +97712,63 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Read pending status of interrupt for event PWMPERIODEND</description>
               <lsb>27</lsb>
               <msb>27</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTCOUNTERREADY</name>
+              <description>Read pending status of interrupt for event RTCOUNTERREADY</description>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PWMREADY</name>
+              <description>Read pending status of interrupt for event PWMREADY</description>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLKOUTREADY</name>
+              <description>Read pending status of interrupt for event CLKOUTREADY</description>
+              <lsb>30</lsb>
+              <msb>30</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -97997,6 +98592,130 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </field>
           </fields>
         </register>
+        <cluster>
+          <name>STATUS</name>
+          <description>Unspecified</description>
+          <headerStructName>GRTC_STATUS</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x6B0</addressOffset>
+          <register>
+            <name>LFTIMER</name>
+            <description>Low frequency timer status.</description>
+            <addressOffset>0x0</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000001</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>READY</name>
+                <description>Low frequency timer is ready or busy.</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <access>read-only</access>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Busy</name>
+                    <description>Busy</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ready</name>
+                    <description>Ready</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>RTCOUNTER</name>
+            <description>RTCOUNTER status.</description>
+            <addressOffset>0x0</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000001</resetValue>
+            <alternateRegister>LFTIMER</alternateRegister>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>READY</name>
+                <description>RTCOUNTER is ready or busy.</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <access>read-only</access>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Busy</name>
+                    <description>Busy</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ready</name>
+                    <description>Ready</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>PWM</name>
+            <description>PWM status.</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000001</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>READY</name>
+                <description>PWM is ready or busy.</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <access>read-only</access>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Busy</name>
+                    <description>Busy</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ready</name>
+                    <description>Ready</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>CLKOUT</name>
+            <description>CLKOUT configuration status.</description>
+            <addressOffset>0x008</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000001</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>READY</name>
+                <description>CLKOUT is ready or busy.</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <access>read-only</access>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Busy</name>
+                    <description>Busy</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ready</name>
+                    <description>Ready</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+        </cluster>
         <register>
           <name>RTCOMPAREL</name>
           <description>The lower 32-bits of the RTCOMPARE register.</description>
@@ -108174,12 +108893,17 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>SRC</name>
                 <description>Which XO settings were selected when triggering START task</description>
                 <lsb>0</lsb>
-                <msb>0</msb>
+                <msb>1</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>HFXO</name>
-                    <description>High frequency crystal oscillator</description>
+                    <name>HFINT</name>
+                    <description>Reserved for future use, do not use</description>
                     <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>HFXO</name>
+                    <description>HFXO</description>
+                    <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -109363,24 +110087,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Reset due to wakeup from GRTC</description>
               <lsb>11</lsb>
               <msb>11</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotDetected</name>
-                  <description>Not detected</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Detected</name>
-                  <description>Detected</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NFC</name>
-              <description>Reset after wakeup from System OFF mode due to NFC field being detected</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotDetected</name>
@@ -113707,7 +114413,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>ENABLE</name>
             <description>Enable the regulator</description>
-            <addressOffset>0x00</addressOffset>
+            <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000001</resetValue>
             <size>0x20</size>
@@ -113735,7 +114441,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>FORCEMODE</name>
             <description>Force the MMI into a certain mode.</description>
-            <addressOffset>0x04</addressOffset>
+            <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -113781,7 +114487,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>TRIM</name>
             <description>Trim register</description>
-            <addressOffset>0x08</addressOffset>
+            <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0x00008000</resetValue>
             <size>0x20</size>
@@ -113844,7 +114550,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>READY</name>
             <description>Unspecified</description>
-            <addressOffset>0x16</addressOffset>
+            <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -113860,7 +114566,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>RETAIN</name>
             <description>Override the retention control signal to the regulator for testing.</description>
-            <addressOffset>0x1A</addressOffset>
+            <addressOffset>0x010</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -113876,7 +114582,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>DTBCFG</name>
             <description>Unspecified</description>
-            <addressOffset>0x1E</addressOffset>
+            <addressOffset>0x014</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -113934,7 +114640,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <register>
             <name>TCFG</name>
             <description>Unspecified</description>
-            <addressOffset>0x22</addressOffset>
+            <addressOffset>0x018</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <size>0x20</size>
@@ -113988,6 +114694,34 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                     <name>short</name>
                     <description>Set SHORT on</description>
                     <value>0x7</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>PMICDET</name>
+            <description>Unspecified</description>
+            <addressOffset>0x01C</addressOffset>
+            <access>read-only</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>PMICDET</name>
+                <description>PMIC mode detected.</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>NotDetected</name>
+                    <description>Not detected</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Detected</name>
+                    <description>Detected</description>
+                    <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -114153,63 +114887,163 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>V17</name>
-                  <description>Set threshold to 1.7 V</description>
+                  <description>Set threshold to 1.7 V for VDD</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V090</name>
+                  <description>Set threshold to 0.90 V for VDDL</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V18</name>
-                  <description>Set threshold to 1.8 V</description>
+                  <description>Set threshold to 1.8 V for VDD</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V095</name>
+                  <description>Set threshold to 0.95 V for VDDL</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V19</name>
-                  <description>Set threshold to 1.9 V</description>
+                  <description>Set threshold to 1.9 V for VDD</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V100</name>
+                  <description>Set threshold to 1.00 V for VDDL</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V20</name>
-                  <description>Set threshold to 2.0 V</description>
+                  <description>Set threshold to 2.0 V for VDD</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V105</name>
+                  <description>Set threshold to 1.05 V for VDDL</description>
                   <value>0x3</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V21</name>
-                  <description>Set threshold to 2.1 V</description>
+                  <description>Set threshold to 2.1 V for VDD</description>
+                  <value>0x4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V110</name>
+                  <description>Set threshold to 1.10 V for VDDL</description>
                   <value>0x4</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V22</name>
-                  <description>Set threshold to 2.2 V</description>
+                  <description>Set threshold to 2.2 V for VDD</description>
+                  <value>0x5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V115</name>
+                  <description>Set threshold to 1.15 V for VDDL</description>
                   <value>0x5</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V23</name>
-                  <description>Set threshold to 2.3 V</description>
+                  <description>Set threshold to 2.3 V for VDD</description>
+                  <value>0x6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V120</name>
+                  <description>Set threshold to 1.20 V for VDDL</description>
                   <value>0x6</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V24</name>
-                  <description>Set threshold to 2.4 V</description>
+                  <description>Set threshold to 2.4 V for VDD</description>
+                  <value>0x7</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V125</name>
+                  <description>Set threshold to 1.25 V for VDDL</description>
                   <value>0x7</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V25</name>
-                  <description>Set threshold to 2.5 V</description>
+                  <description>Set threshold to 2.5 V for VDD</description>
+                  <value>0x8</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V130</name>
+                  <description>Set threshold to 1.30 V for VDDL</description>
                   <value>0x8</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V26</name>
-                  <description>Set threshold to 2.6 V</description>
+                  <description>Set threshold to 2.6 V for VDD</description>
+                  <value>0x9</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V135</name>
+                  <description>Set threshold to 1.35 V for VDDL</description>
                   <value>0x9</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V27</name>
-                  <description>Set threshold to 2.7 V</description>
+                  <description>Set threshold to 2.7 V for VDD</description>
+                  <value>0xA</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V140</name>
+                  <description>Set threshold to 1.40 V for VDDL</description>
                   <value>0xA</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>V28</name>
-                  <description>Set threshold to 2.8 V</description>
+                  <description>Set threshold to 2.8 V for VDD</description>
                   <value>0xB</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V145</name>
+                  <description>Set threshold to 1.45 V for VDDL</description>
+                  <value>0xB</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V29</name>
+                  <description>Set threshold to 2.9 V for VDD</description>
+                  <value>0xC</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V150</name>
+                  <description>Set threshold to 1.50 V for VDDL</description>
+                  <value>0xC</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V30</name>
+                  <description>Set threshold to 3.0 V for VDD</description>
+                  <value>0xD</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V155</name>
+                  <description>Set threshold to 1.55 V for VDDL</description>
+                  <value>0xD</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V31</name>
+                  <description>Set threshold to 3.1 V for VDD</description>
+                  <value>0xE</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V160</name>
+                  <description>Set threshold to 1.60 V for VDDL</description>
+                  <value>0xE</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V32</name>
+                  <description>Set threshold to 3.2 V for VDD</description>
+                  <value>0xF</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>V165</name>
+                  <description>Set threshold to 1.65 V for VDDL</description>
+                  <value>0xF</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -114256,13 +115090,13 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <msb>16</msb>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>vddAo3v0Connected</name>
-                  <description>POF input connected to VDD_AO_3V0</description>
+                  <name>Vdd</name>
+                  <description>POF input connected to VDD</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>vinLvBatConnected</name>
-                  <description>POF input  connected to VIN_LVBATT</description>
+                  <name>VddL</name>
+                  <description>POF input  connected to VDDL</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -114302,7 +115136,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>TRIM values</description>
           <addressOffset>0x550</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00C60A78</resetValue>
+          <resetValue>0x10C60A75</resetValue>
           <size>0x20</size>
           <fields>
             <field>
@@ -114926,6 +115760,52 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </field>
           </fields>
         </register>
+        <register>
+          <name>BOOSTPWMCONFIG</name>
+          <description>Enable or disable the bespoke request (PWM mode) for the Boost (PwrBoostCap2x)</description>
+          <addressOffset>0x5A0</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000003</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>BOOSTPWMCONFIGRADIO</name>
+              <description>Enable or disable the bespoke request (PWM mode) from Radio to the Boost (PwrBoostCap2x)</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable bespoke radio request</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable bespoke radio request</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>BOOSTPWMCONFIGADC</name>
+              <description>Enable or disable the bespoke request (PWM mode) from ADC to the Boost (PwrBoostCap2x)</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable bespoke ADC request</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable bespoke ADC request</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
         <cluster>
           <name>VREGMAIN</name>
           <description>Register interface for main voltage regulator.</description>
@@ -114999,27 +115879,27 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>MODE</name>
                 <description>Current voltage regulator mode</description>
                 <lsb>0</lsb>
-                <msb>5</msb>
+                <msb>6</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Ldo</name>
                     <description>Linear low drop output mode - a high power, low efficiency mode</description>
-                    <value>0x09</value>
+                    <value>0x49</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Pfm</name>
                     <description>Pulse frequency modulation mode - a low power, high efficiency mode</description>
-                    <value>0x0A</value>
+                    <value>0x4A</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Pwm</name>
                     <description>Pulse width modulation mode - a high power, high efficiency, and clean power (low noise) mode</description>
-                    <value>0x0C</value>
+                    <value>0x6C</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Ext</name>
                     <description>External supply mode</description>
-                    <value>0x08</value>
+                    <value>0x48</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Reset</name>
@@ -115029,7 +115909,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <enumeratedValue>
                     <name>ExtLdo</name>
                     <description>Transition state between EXT to LDO</description>
-                    <value>0x29</value>
+                    <value>0x09</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>PfmLdo</name>
@@ -115054,7 +115934,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <enumeratedValue>
                     <name>PwmIcmp</name>
                     <description>Transition state between PWM to PWM_PFM, where the FSM waits for the PWM ICMP</description>
-                    <value>0x1C</value>
+                    <value>0x3C</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -115303,12 +116183,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                     </enumeratedValue>
                     <enumeratedValue>
                       <name>Bit5</name>
-                      <description>Disable LDO current limiter in all helper modes.</description>
+                      <description>Disable gain limiting of DCCONV_EAMP.</description>
                       <value>0x05</value>
                     </enumeratedValue>
                     <enumeratedValue>
                       <name>Bit6</name>
-                      <description>Disable fast discharge in ELV-exit.</description>
+                      <description>Turn off HP_BUF in BUCK_LP_REF_DIV.</description>
                       <value>0x06</value>
                     </enumeratedValue>
                     <enumeratedValue>
@@ -115478,13 +116358,13 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                       <value>0x3</value>
                     </enumeratedValue>
                     <enumeratedValue>
-                      <name>Dtb0Low4</name>
-                      <description>Reserved, allow other IPs to use DTB0</description>
+                      <name>BuckPadSwitch</name>
+                      <description>BUCK_PAD_SWITCH</description>
                       <value>0x4</value>
                     </enumeratedValue>
                     <enumeratedValue>
-                      <name>Dtb0Low5</name>
-                      <description>Reserved, allow other IPs to use DTB0</description>
+                      <name>Osc1kHzRst</name>
+                      <description>1kHz refresh oscillator from RESET</description>
                       <value>0x5</value>
                     </enumeratedValue>
                     <enumeratedValue>
@@ -115535,8 +116415,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                       <value>0x3</value>
                     </enumeratedValue>
                     <enumeratedValue>
-                      <name>Dtb1Low4</name>
-                      <description>Reserved, allow other IPs to use DTB1</description>
+                      <name>PowerupBuckPad</name>
+                      <description>PWRUP_BUCK_PAD</description>
                       <value>0x4</value>
                     </enumeratedValue>
                     <enumeratedValue>
@@ -115593,13 +116473,13 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </field>
                 <field>
                   <name>PFMICMPTIMERSEL</name>
-                  <description>Configure the time to stay in PWM mode after a PFM ICMP request. The timer has a minimum value of 32us and maximum value of 4ms (t = 32*(2^n) us), with exponential increments (32us, 64us, 128us, etc..) with 3 bits to select the timer value</description>
+                  <description>Configure the time to stay in PWM mode after a PFM ICMP request. The timer has a minimum value of 32us and maximum value of 2ms, with exponential increments (32us, 64us, 128us, etc..). The timer has 3 bits to select the time value (n), where time = 32*(2^n) us. The value n=7, is not a valid configuration.</description>
                   <lsb>8</lsb>
                   <msb>10</msb>
                 </field>
                 <field>
                   <name>PWMMINTIMERSEL</name>
-                  <description>Configure the minimum time to stay in PWM mode after a PWM mode request. The timer has a minimum value of 32us and maximum value of 256us (t = 32*(n + 1) us), with linear increments of 32us (32us, 64us, 96us, etc..) with 3 bits to select the timer value</description>
+                  <description>Configure the minimum time to stay in PWM mode after a PWM mode request. The timer has a minimum value of 32us and maximum value of 256us, with linear increments of 32us (32us, 64us, 96us, etc..). The timer has 3 bits to select the timer value (n), where time = 32*(n + 1) us.</description>
                   <lsb>11</lsb>
                   <msb>13</msb>
                 </field>
@@ -115731,7 +116611,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </field>
                 <field>
                   <name>PWMICMPPULSESSEL</name>
-                  <description>Configure the number of PWM ICMP pulses to count before switching back to PFM. The counter be configured with 32 (4us), 64 (8us), and 128 (16us) pulse count for n=1,2,3, respectively. The counter can disabled with n=0</description>
+                  <description>Configure the number of PWM ICMP pulses to count before switching back to PFM. The counter can be configured with 32 (4us) and 64 (8us) pulse count for n=1,2 respectively. The counter can disabled with n=0. The value n=3, is not a valid configuration.</description>
                   <lsb>21</lsb>
                   <msb>22</msb>
                 </field>

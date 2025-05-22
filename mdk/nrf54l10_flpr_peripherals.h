@@ -155,6 +155,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPU00_COEXC 0                                /*!< (unspecified)                                                        */
 #define SPU00_ANTSWC 0                               /*!< (unspecified)                                                        */
 #define SPU00_TDD 0                                  /*!< (unspecified)                                                        */
+#define SPU00_RADIOPAPERSPIN 0                       /*!< (unspecified)                                                        */
 #define SPU00_SLAVE_BITS 4                           /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
 #define SPU00_SPU_NUM_CLOCK_POWER_PAIR_MIN 0         /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
@@ -177,6 +178,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPU10_COEXC 0                                /*!< (unspecified)                                                        */
 #define SPU10_ANTSWC 0                               /*!< (unspecified)                                                        */
 #define SPU10_TDD 0                                  /*!< (unspecified)                                                        */
+#define SPU10_RADIOPAPERSPIN 0                       /*!< (unspecified)                                                        */
 #define SPU10_SLAVE_BITS 4                           /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
 #define SPU10_SPU_NUM_CLOCK_POWER_PAIR_MIN 0         /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
@@ -199,6 +201,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPU20_COEXC 0                                /*!< (unspecified)                                                        */
 #define SPU20_ANTSWC 0                               /*!< (unspecified)                                                        */
 #define SPU20_TDD 0                                  /*!< (unspecified)                                                        */
+#define SPU20_RADIOPAPERSPIN 0                       /*!< (unspecified)                                                        */
 #define SPU20_SLAVE_BITS 4                           /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
 #define SPU20_SPU_NUM_CLOCK_POWER_PAIR_MIN 0         /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
@@ -221,6 +224,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPU30_COEXC 0                                /*!< (unspecified)                                                        */
 #define SPU30_ANTSWC 0                               /*!< (unspecified)                                                        */
 #define SPU30_TDD 0                                  /*!< (unspecified)                                                        */
+#define SPU30_RADIOPAPERSPIN 0                       /*!< (unspecified)                                                        */
 #define SPU30_SLAVE_BITS 4                           /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
 #define SPU30_SPU_NUM_CLOCK_POWER_PAIR_MIN 0         /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
@@ -369,6 +373,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CRACEN_SEEDRAMLOCK 0                         /*!< (unspecified)                                                        */
 #define CRACEN_SPLITKEYRAMLOCK 1                     /*!< (unspecified)                                                        */
 #define CRACEN_SEEDALIGNED 1                         /*!< (unspecified)                                                        */
+#define CRACEN_ONLYPROTECTEDRAMLOCK 0                /*!< (unspecified)                                                        */
 #define CRACEN_PROTECTED_RAM_SEED 0x51810000         /*!< (unspecified)                                                        */
 #define CRACEN_PROTECTED_RAM_SEED_SIZE 64            /*!< (unspecified)                                                        */
 #define CRACEN_PROTECTED_RAM_AES_KEY0 0x51810040     /*!< (unspecified)                                                        */
@@ -805,6 +810,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RRAMC_NREGIONS_MIN 0                         /*!< Number of supported regions at REGION register group : 0..4          */
 #define RRAMC_NREGIONS_MAX 4                         /*!< Number of supported regions at REGION register group : 0..4          */
 #define RRAMC_NREGIONS_SIZE 5                        /*!< Number of supported regions at REGION register group : 0..4          */
+#define RRAMC_REGION5AVAILABLE 0                     /*!< (unspecified)                                                        */
 #define RRAMC_ECCCORRADDR 1                          /*!< (unspecified)                                                        */
 #define RRAMC_ECCERROR 1                             /*!< (unspecified)                                                        */
 #define RRAMC_EVENTS_ECCERROR 0                      /*!< (unspecified)                                                        */
@@ -812,6 +818,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RRAMC_WRITEBUFSIZE8EN 0                      /*!< (unspecified)                                                        */
 #define RRAMC_WRITEBUFSIZE16EN 0                     /*!< (unspecified)                                                        */
 #define RRAMC_WRITEBUFSIZE32EN 1                     /*!< (unspecified)                                                        */
+#define RRAMC_LOWPOWERCONFIGOPTION2 0                /*!< (unspecified)                                                        */
 #define RRAMC_REGION0ADDR 16760832                   /*!< REGION[0].ADDRESS : 16760832, WRITABLE : 0 REGION[0].CONFIG.SIZE: 4
                                                           Kbytes, WRITABLE: 0 REGION[0].CONFIG.READ: 1, WRITABLE: 1
                                                           REGION[0].CONFIG.WRITE: 1, WRITABLE: 1 REGION[0].CONFIG.EXECUTE: 0,
@@ -1060,6 +1067,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TAD_TADFORCEON 0                             /*!< (unspecified)                                                        */
 #define TAD_TAD_HAS_TASKS 0                          /*!< (unspecified)                                                        */
 #define TAD_PDREQCLR 1                               /*!< (unspecified)                                                        */
+#define TAD_TAD_HAS_DBGWAKEUPREQ 1                   /*!< (unspecified)                                                        */
 
 /*Timer/Counter*/
 #define TIMER_PRESENT 1
@@ -1551,6 +1559,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SAADC_TCONV_VALUE_RANGE_MIN 1                /*!< (unspecified)                                                        */
 #define SAADC_TCONV_VALUE_RANGE_MAX 7                /*!< (unspecified)                                                        */
 #define SAADC_TCONV_VALUE_RANGE_SIZE 8               /*!< (unspecified)                                                        */
+#define SAADC_PADC_WIFI_SUPPLY_GF22 0                /*!< (unspecified)                                                        */
 #define SAADC_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
 #define SAADC_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
 #define SAADC_EASYDMAFULLLPMODEINCLUDED 0            /*!< (unspecified)                                                        */
@@ -1615,6 +1624,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TAMPC_PROTECT_INTRESETEN_CTRL_VALUE_RESET 1  /*!< Reset value of field VALUE in register PROTECT.INTRESETEN.CTRL: 1    */
 #define TAMPC_TAMPERSWITCH 0                         /*!< (unspecified)                                                        */
 #define TAMPC_SM4DISABLECM 1                         /*!< (unspecified)                                                        */
+#define TAMPC_PROTECTRESETBEHAVIOR 0                 /*!< (unspecified)                                                        */
 
 /*Inter-IC Sound*/
 #define I2S_PRESENT 1
@@ -1663,7 +1673,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_CLKSELREG 1                             /*!< (unspecified)                                                        */
 #define GRTC_CLKSELLFLPRC 1                          /*!< (unspecified)                                                        */
 #define GRTC_CCADD_WRITE_ONLY 0                      /*!< (unspecified)                                                        */
-#define GRTC_READY_STATUS_AND_EVENTS 0               /*!< (unspecified)                                                        */
+#define GRTC_READY_STATUS_AND_EVENTS 1               /*!< (unspecified)                                                        */
 #define GRTC_SYSCOUNTER_LOADED_STATUS 0              /*!< (unspecified)                                                        */
 #define GRTC_CC_PAST_STATUS 0                        /*!< (unspecified)                                                        */
 #define GRTC_SYSCOUNTER_WRITEABLE 0                  /*!< (unspecified)                                                        */
@@ -1747,78 +1757,86 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   * @brief UARTE.BAUDRATE register values for combinations of baudrate and core frequency
   */
 typedef enum {
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud1200Core64M = 77824, /*!< 1200 baud (actual rate: 1161, -3.2 percent error), 64 MHz core
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud1200Core64M = 77824, /*!< 1200 baud (actual rate: 1159, -3.4 percent error), 64 MHz core
                                                               frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud2400Core64M = 159744, /*!< 2400 baud (actual rate: 2384, -0.7 percent error), 64 MHz core
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud2400Core64M = 159744, /*!< 2400 baud (actual rate: 2380, -0.8 percent error), 64 MHz core
                                                                frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud4800Core64M = 319488, /*!< 4800 baud (actual rate: 4768, -0.7 percent error), 64 MHz core
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud4800Core64M = 319488, /*!< 4800 baud (actual rate: 4760, -0.8 percent error), 64 MHz core
                                                                frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud9600Core64M = 643072, /*!< 9600 baud (actual rate: 9598, -0.0 percent error), 64 MHz core
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud9600Core64M = 643072, /*!< 9600 baud (actual rate: 9583, -0.2 percent error), 64 MHz core
                                                                frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud14400Core64M = 962560, /*!< 14400 baud (actual rate: 14366, -0.2 percent error), 64 MHz core
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud14400Core64M = 962560, /*!< 14400 baud (actual rate: 14343, -0.4 percent error), 64 MHz core
                                                                 frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud19200Core64M = 1286144, /*!< 19200 baud (actual rate: 19196, -0.0 percent error), 64 MHz
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud19200Core64M = 1286144, /*!< 19200 baud (actual rate: 19167, -0.2 percent error), 64 MHz
                                                                  core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud28800Core64M = 1929216, /*!< 28800 baud (actual rate: 28794, -0.0 percent error), 64 MHz
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud28800Core64M = 1929216, /*!< 28800 baud (actual rate: 28751, -0.2 percent error), 64 MHz
                                                                  core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud31250Core64M = 2097152, /*!< 31250 baud (actual rate: 31300, 0.2 percent error), 64 MHz core
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud31250Core64M = 2097152, /*!< 31250 baud (actual rate: 31250, 0.0 percent error), 64 MHz core
                                                                  frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud38400Core64M = 2576384, /*!< 38400 baud (actual rate: 38453, 0.1 percent error), 64 MHz core
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud38400Core64M = 2576384, /*!< 38400 baud (actual rate: 38392, -0.0 percent error), 64 MHz
+                                                                 core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud56000Core64M = 3756032, /*!< 56000 baud (actual rate: 55993, -0.0 percent error), 64 MHz
+                                                                 core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud57600Core64M = 3862528, /*!< 57600 baud (actual rate: 57605, 0.0 percent error), 64 MHz core
                                                                  frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud56000Core64M = 3756032, /*!< 56000 baud (actual rate: 56060, 0.1 percent error), 64 MHz core
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud76800Core64M = 5152768, /*!< 76800 baud (actual rate: 76830, 0.0 percent error), 64 MHz core
                                                                  frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud57600Core64M = 3862528, /*!< 57600 baud (actual rate: 57649, 0.1 percent error), 64 MHz core
-                                                                 frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud76800Core64M = 5152768, /*!< 76800 baud (actual rate: 76906, 0.1 percent error), 64 MHz core
-                                                                 frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud115200Core64M = 7720960, /*!< 115200 baud (actual rate: 115238, 0.0 percent error), 64 MHz
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud115200Core64M = 7720960, /*!< 115200 baud (actual rate: 115107, -0.1 percent error), 64 MHz
                                                                   core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud230400Core64M = 15446016, /*!< 230400 baud (actual rate: 230537, 0.1 percent error), 64 MHz
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud230400Core64M = 15446016, /*!< 230400 baud (actual rate: 230215, -0.1 percent error), 64 MHz
                                                                    core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud250000Core64M = 16777216, /*!< 250000 baud (actual rate: 250406, 0.2 percent error), 64 MHz
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud250000Core64M = 16777216, /*!< 250000 baud (actual rate: 250000, 0.0 percent error), 64 MHz
                                                                    core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud460800Core64M = 30896128, /*!< 460800 baud (actual rate: 461136, 0.1 percent error), 64 MHz
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud460800Core64M = 30896128, /*!< 460800 baud (actual rate: 460431, -0.1 percent error), 64 MHz
                                                                    core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud921600Core64M = 62242816, /*!< 921600 baud (actual rate: 928997, 0.8 percent error), 64 MHz
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud921600Core64M = 62242816, /*!< 921600 baud (actual rate: 927536, 0.6 percent error), 64 MHz
                                                                    core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud1000000Core64M = 67108864, /*!< 1000000 baud (actual rate: 1001624, 0.2 percent error), 64
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud1000000Core64M = 67108864, /*!< 1000000 baud (actual rate: 1000000, 0.0 percent error), 64
                                                                     MHz core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud1200Core128M = 36864, /*!< 1200 baud (actual rate: 1117, -6.9 percent error), 128 MHz core
-                                                               frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud2400Core128M = 77824, /*!< 2400 baud (actual rate: 2358, -1.7 percent error), 128 MHz core
-                                                               frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud4800Core128M = 159744, /*!< 4800 baud (actual rate: 4840, 0.8 percent error), 128 MHz core
-                                                                frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud9600Core128M = 319488, /*!< 9600 baud (actual rate: 9681, 0.8 percent error), 128 MHz core
-                                                                frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud14400Core128M = 479232, /*!< 14400 baud (actual rate: 14522, 0.8 percent error), 128 MHz
-                                                                 core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud19200Core128M = 643072, /*!< 19200 baud (actual rate: 19487, 1.5 percent error), 128 MHz
-                                                                 core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud28800Core128M = 962560, /*!< 28800 baud (actual rate: 29168, 1.3 percent error), 128 MHz
-                                                                 core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud31250Core128M = 1048576, /*!< 31250 baud (actual rate: 31775, 1.7 percent error), 128 MHz
-                                                                  core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud38400Core128M = 1286144, /*!< 38400 baud (actual rate: 38974, 1.5 percent error), 128 MHz
-                                                                  core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud56000Core128M = 1875968, /*!< 56000 baud (actual rate: 56847, 1.5 percent error), 128 MHz
-                                                                  core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud57600Core128M = 1929216, /*!< 57600 baud (actual rate: 58461, 1.5 percent error), 128 MHz
-                                                                  core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud76800Core128M = 2576384, /*!< 76800 baud (actual rate: 78072, 1.7 percent error), 128 MHz
-                                                                  core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud115200Core128M = 3862528, /*!< 115200 baud (actual rate: 117046, 1.6 percent error), 128 MHz
-                                                                   core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud230400Core128M = 7720960, /*!< 230400 baud (actual rate: 233968, 1.5 percent error), 128 MHz
-                                                                   core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud250000Core128M = 8388608, /*!< 250000 baud (actual rate: 254200, 1.7 percent error), 128 MHz
-                                                                   core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud460800Core128M = 15446016, /*!< 460800 baud (actual rate: 468061, 1.6 percent error), 128
-                                                                    MHz core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud921600Core128M = 30896128, /*!< 921600 baud (actual rate: 936246, 1.6 percent error), 128
-                                                                    MHz core frequency*/
-  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud1000000Core128M = 33554432, /*!< 1000000 baud (actual rate: 1016800, 1.7 percent error), 128
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud2000000Core64M = 134217728, /*!< 2000000 baud (actual rate: 2000000, 0.0 percent error), 64
                                                                      MHz core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud4000000Core64M = 268435456, /*!< 4000000 baud (actual rate: 4000000, 0.0 percent error), 64
+                                                                     MHz core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud1200Core128M = 36864, /*!< 1200 baud (actual rate: 1098, -8.4 percent error), 128 MHz core
+                                                               frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud2400Core128M = 77824, /*!< 2400 baud (actual rate: 2319, -3.4 percent error), 128 MHz core
+                                                               frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud4800Core128M = 159744, /*!< 4800 baud (actual rate: 4760, -0.8 percent error), 128 MHz core
+                                                                frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud9600Core128M = 319488, /*!< 9600 baud (actual rate: 9521, -0.8 percent error), 128 MHz core
+                                                                frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud14400Core128M = 479232, /*!< 14400 baud (actual rate: 14282, -0.8 percent error), 128 MHz
+                                                                 core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud19200Core128M = 643072, /*!< 19200 baud (actual rate: 19167, -0.2 percent error), 128 MHz
+                                                                 core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud28800Core128M = 962560, /*!< 28800 baud (actual rate: 28686, -0.4 percent error), 128 MHz
+                                                                 core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud31250Core128M = 1048576, /*!< 31250 baud (actual rate: 31250, 0.0 percent error), 128 MHz
+                                                                  core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud38400Core128M = 1286144, /*!< 38400 baud (actual rate: 38334, -0.2 percent error), 128 MHz
+                                                                  core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud56000Core128M = 1875968, /*!< 56000 baud (actual rate: 55919, -0.1 percent error), 128 MHz
+                                                                  core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud57600Core128M = 1929216, /*!< 57600 baud (actual rate: 57502, -0.2 percent error), 128 MHz
+                                                                  core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud76800Core128M = 2576384, /*!< 76800 baud (actual rate: 76784, -0.0 percent error), 128 MHz
+                                                                  core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud115200Core128M = 3862528, /*!< 115200 baud (actual rate: 115211, 0.0 percent error), 128 MHz
+                                                                   core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud230400Core128M = 7720960, /*!< 230400 baud (actual rate: 230215, -0.1 percent error), 128
+                                                                   MHz core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud250000Core128M = 8388608, /*!< 250000 baud (actual rate: 250000, 0.0 percent error), 128 MHz
+                                                                   core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud460800Core128M = 15446016, /*!< 460800 baud (actual rate: 460431, -0.1 percent error), 128
+                                                                    MHz core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud921600Core128M = 30896128, /*!< 921600 baud (actual rate: 920863, -0.1 percent error), 128
+                                                                    MHz core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud1000000Core128M = 33554432, /*!< 1000000 baud (actual rate: 1000000, 0.0 percent error), 128
+                                                                     MHz core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud2000000Core128M = 67108864, /*!< 2000000 baud (actual rate: 2000000, 0.0 percent error), 128
+                                                                     MHz core frequency*/
+  NRF_UARTE00_BAUDRATE_BAUDRATE_Baud4000000Core128M = 134217728, /*!< 4000000 baud (actual rate: 4000000, 0.0 percent error),
+                                                                      128 MHz core frequency*/
 } NRF_UARTE00_BAUDRATE_BAUDRATE_ENUM_t;
 
 /* ==================================================== Baudrate settings ==================================================== */
@@ -1826,41 +1844,41 @@ typedef enum {
   * @brief UARTE.BAUDRATE register values for combinations of baudrate and core frequency
   */
 typedef enum {
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud1200Core16M = 319488, /*!< 1200 baud (actual rate: 1192, -0.7 percent error), 16 MHz core
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud1200Core16M = 319488, /*!< 1200 baud (actual rate: 1190, -0.8 percent error), 16 MHz core
                                                                frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud2400Core16M = 643072, /*!< 2400 baud (actual rate: 2399, -0.0 percent error), 16 MHz core
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud2400Core16M = 643072, /*!< 2400 baud (actual rate: 2395, -0.2 percent error), 16 MHz core
                                                                frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud4800Core16M = 1286144, /*!< 4800 baud (actual rate: 4799, -0.0 percent error), 16 MHz core
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud4800Core16M = 1286144, /*!< 4800 baud (actual rate: 4791, -0.2 percent error), 16 MHz core
                                                                 frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud9600Core16M = 2576384, /*!< 9600 baud (actual rate: 9613, 0.1 percent error), 16 MHz core
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud9600Core16M = 2576384, /*!< 9600 baud (actual rate: 9598, -0.0 percent error), 16 MHz core
                                                                 frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud14400Core16M = 3862528, /*!< 14400 baud (actual rate: 14412, 0.1 percent error), 16 MHz core
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud14400Core16M = 3862528, /*!< 14400 baud (actual rate: 14401, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud19200Core16M = 5152768, /*!< 19200 baud (actual rate: 19226, 0.1 percent error), 16 MHz core
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud19200Core16M = 5152768, /*!< 19200 baud (actual rate: 19207, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud28800Core16M = 7720960, /*!< 28800 baud (actual rate: 28809, 0.0 percent error), 16 MHz core
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud28800Core16M = 7720960, /*!< 28800 baud (actual rate: 28776, -0.1 percent error), 16 MHz
+                                                                 core frequency*/
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud31250Core16M = 8388608, /*!< 31250 baud (actual rate: 31250, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud31250Core16M = 8388608, /*!< 31250 baud (actual rate: 31300, 0.2 percent error), 16 MHz core
-                                                                 frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud38400Core16M = 10297344, /*!< 38400 baud (actual rate: 38422, 0.1 percent error), 16 MHz
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud38400Core16M = 10297344, /*!< 38400 baud (actual rate: 38369, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud56000Core16M = 15015936, /*!< 56000 baud (actual rate: 56029, 0.1 percent error), 16 MHz
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud56000Core16M = 15015936, /*!< 56000 baud (actual rate: 55944, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud57600Core16M = 15446016, /*!< 57600 baud (actual rate: 57634, 0.1 percent error), 16 MHz
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud57600Core16M = 15446016, /*!< 57600 baud (actual rate: 57553, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud76800Core16M = 20647936, /*!< 76800 baud (actual rate: 77044, 0.3 percent error), 16 MHz
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud76800Core16M = 20647936, /*!< 76800 baud (actual rate: 76923, 0.2 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud115200Core16M = 30896128, /*!< 115200 baud (actual rate: 115284, 0.1 percent error), 16 MHz
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud115200Core16M = 30896128, /*!< 115200 baud (actual rate: 115107, -0.1 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud230400Core16M = 62242816, /*!< 230400 baud (actual rate: 232249, 0.8 percent error), 16 MHz
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud230400Core16M = 62242816, /*!< 230400 baud (actual rate: 231884, 0.6 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud250000Core16M = 67108864, /*!< 250000 baud (actual rate: 250406, 0.2 percent error), 16 MHz
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud250000Core16M = 67108864, /*!< 250000 baud (actual rate: 250000, 0.0 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud460800Core16M = 122712064, /*!< 460800 baud (actual rate: 457880, -0.6 percent error), 16
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud460800Core16M = 122712064, /*!< 460800 baud (actual rate: 457142, -0.8 percent error), 16
                                                                     MHz core frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud921600Core16M = 252641280, /*!< 921600 baud (actual rate: 942691, 2.3 percent error), 16 MHz
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud921600Core16M = 252641280, /*!< 921600 baud (actual rate: 941176, 2.1 percent error), 16 MHz
                                                                     core frequency*/
-  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud1000000Core16M = 268435456, /*!< 1000000 baud (actual rate: 1001624, 0.2 percent error), 16
+  NRF_UARTE20_BAUDRATE_BAUDRATE_Baud1000000Core16M = 268435456, /*!< 1000000 baud (actual rate: 1000000, 0.0 percent error), 16
                                                                      MHz core frequency*/
 } NRF_UARTE20_BAUDRATE_BAUDRATE_ENUM_t;
 
@@ -1869,41 +1887,41 @@ typedef enum {
   * @brief UARTE.BAUDRATE register values for combinations of baudrate and core frequency
   */
 typedef enum {
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud1200Core16M = 319488, /*!< 1200 baud (actual rate: 1192, -0.7 percent error), 16 MHz core
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud1200Core16M = 319488, /*!< 1200 baud (actual rate: 1190, -0.8 percent error), 16 MHz core
                                                                frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud2400Core16M = 643072, /*!< 2400 baud (actual rate: 2399, -0.0 percent error), 16 MHz core
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud2400Core16M = 643072, /*!< 2400 baud (actual rate: 2395, -0.2 percent error), 16 MHz core
                                                                frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud4800Core16M = 1286144, /*!< 4800 baud (actual rate: 4799, -0.0 percent error), 16 MHz core
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud4800Core16M = 1286144, /*!< 4800 baud (actual rate: 4791, -0.2 percent error), 16 MHz core
                                                                 frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud9600Core16M = 2576384, /*!< 9600 baud (actual rate: 9613, 0.1 percent error), 16 MHz core
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud9600Core16M = 2576384, /*!< 9600 baud (actual rate: 9598, -0.0 percent error), 16 MHz core
                                                                 frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud14400Core16M = 3862528, /*!< 14400 baud (actual rate: 14412, 0.1 percent error), 16 MHz core
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud14400Core16M = 3862528, /*!< 14400 baud (actual rate: 14401, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud19200Core16M = 5152768, /*!< 19200 baud (actual rate: 19226, 0.1 percent error), 16 MHz core
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud19200Core16M = 5152768, /*!< 19200 baud (actual rate: 19207, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud28800Core16M = 7720960, /*!< 28800 baud (actual rate: 28809, 0.0 percent error), 16 MHz core
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud28800Core16M = 7720960, /*!< 28800 baud (actual rate: 28776, -0.1 percent error), 16 MHz
+                                                                 core frequency*/
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud31250Core16M = 8388608, /*!< 31250 baud (actual rate: 31250, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud31250Core16M = 8388608, /*!< 31250 baud (actual rate: 31300, 0.2 percent error), 16 MHz core
-                                                                 frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud38400Core16M = 10297344, /*!< 38400 baud (actual rate: 38422, 0.1 percent error), 16 MHz
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud38400Core16M = 10297344, /*!< 38400 baud (actual rate: 38369, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud56000Core16M = 15015936, /*!< 56000 baud (actual rate: 56029, 0.1 percent error), 16 MHz
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud56000Core16M = 15015936, /*!< 56000 baud (actual rate: 55944, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud57600Core16M = 15446016, /*!< 57600 baud (actual rate: 57634, 0.1 percent error), 16 MHz
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud57600Core16M = 15446016, /*!< 57600 baud (actual rate: 57553, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud76800Core16M = 20647936, /*!< 76800 baud (actual rate: 77044, 0.3 percent error), 16 MHz
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud76800Core16M = 20647936, /*!< 76800 baud (actual rate: 76923, 0.2 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud115200Core16M = 30896128, /*!< 115200 baud (actual rate: 115284, 0.1 percent error), 16 MHz
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud115200Core16M = 30896128, /*!< 115200 baud (actual rate: 115107, -0.1 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud230400Core16M = 62242816, /*!< 230400 baud (actual rate: 232249, 0.8 percent error), 16 MHz
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud230400Core16M = 62242816, /*!< 230400 baud (actual rate: 231884, 0.6 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud250000Core16M = 67108864, /*!< 250000 baud (actual rate: 250406, 0.2 percent error), 16 MHz
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud250000Core16M = 67108864, /*!< 250000 baud (actual rate: 250000, 0.0 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud460800Core16M = 122712064, /*!< 460800 baud (actual rate: 457880, -0.6 percent error), 16
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud460800Core16M = 122712064, /*!< 460800 baud (actual rate: 457142, -0.8 percent error), 16
                                                                     MHz core frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud921600Core16M = 252641280, /*!< 921600 baud (actual rate: 942691, 2.3 percent error), 16 MHz
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud921600Core16M = 252641280, /*!< 921600 baud (actual rate: 941176, 2.1 percent error), 16 MHz
                                                                     core frequency*/
-  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud1000000Core16M = 268435456, /*!< 1000000 baud (actual rate: 1001624, 0.2 percent error), 16
+  NRF_UARTE21_BAUDRATE_BAUDRATE_Baud1000000Core16M = 268435456, /*!< 1000000 baud (actual rate: 1000000, 0.0 percent error), 16
                                                                      MHz core frequency*/
 } NRF_UARTE21_BAUDRATE_BAUDRATE_ENUM_t;
 
@@ -1912,41 +1930,41 @@ typedef enum {
   * @brief UARTE.BAUDRATE register values for combinations of baudrate and core frequency
   */
 typedef enum {
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud1200Core16M = 319488, /*!< 1200 baud (actual rate: 1192, -0.7 percent error), 16 MHz core
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud1200Core16M = 319488, /*!< 1200 baud (actual rate: 1190, -0.8 percent error), 16 MHz core
                                                                frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud2400Core16M = 643072, /*!< 2400 baud (actual rate: 2399, -0.0 percent error), 16 MHz core
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud2400Core16M = 643072, /*!< 2400 baud (actual rate: 2395, -0.2 percent error), 16 MHz core
                                                                frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud4800Core16M = 1286144, /*!< 4800 baud (actual rate: 4799, -0.0 percent error), 16 MHz core
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud4800Core16M = 1286144, /*!< 4800 baud (actual rate: 4791, -0.2 percent error), 16 MHz core
                                                                 frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud9600Core16M = 2576384, /*!< 9600 baud (actual rate: 9613, 0.1 percent error), 16 MHz core
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud9600Core16M = 2576384, /*!< 9600 baud (actual rate: 9598, -0.0 percent error), 16 MHz core
                                                                 frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud14400Core16M = 3862528, /*!< 14400 baud (actual rate: 14412, 0.1 percent error), 16 MHz core
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud14400Core16M = 3862528, /*!< 14400 baud (actual rate: 14401, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud19200Core16M = 5152768, /*!< 19200 baud (actual rate: 19226, 0.1 percent error), 16 MHz core
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud19200Core16M = 5152768, /*!< 19200 baud (actual rate: 19207, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud28800Core16M = 7720960, /*!< 28800 baud (actual rate: 28809, 0.0 percent error), 16 MHz core
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud28800Core16M = 7720960, /*!< 28800 baud (actual rate: 28776, -0.1 percent error), 16 MHz
+                                                                 core frequency*/
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud31250Core16M = 8388608, /*!< 31250 baud (actual rate: 31250, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud31250Core16M = 8388608, /*!< 31250 baud (actual rate: 31300, 0.2 percent error), 16 MHz core
-                                                                 frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud38400Core16M = 10297344, /*!< 38400 baud (actual rate: 38422, 0.1 percent error), 16 MHz
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud38400Core16M = 10297344, /*!< 38400 baud (actual rate: 38369, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud56000Core16M = 15015936, /*!< 56000 baud (actual rate: 56029, 0.1 percent error), 16 MHz
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud56000Core16M = 15015936, /*!< 56000 baud (actual rate: 55944, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud57600Core16M = 15446016, /*!< 57600 baud (actual rate: 57634, 0.1 percent error), 16 MHz
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud57600Core16M = 15446016, /*!< 57600 baud (actual rate: 57553, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud76800Core16M = 20647936, /*!< 76800 baud (actual rate: 77044, 0.3 percent error), 16 MHz
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud76800Core16M = 20647936, /*!< 76800 baud (actual rate: 76923, 0.2 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud115200Core16M = 30896128, /*!< 115200 baud (actual rate: 115284, 0.1 percent error), 16 MHz
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud115200Core16M = 30896128, /*!< 115200 baud (actual rate: 115107, -0.1 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud230400Core16M = 62242816, /*!< 230400 baud (actual rate: 232249, 0.8 percent error), 16 MHz
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud230400Core16M = 62242816, /*!< 230400 baud (actual rate: 231884, 0.6 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud250000Core16M = 67108864, /*!< 250000 baud (actual rate: 250406, 0.2 percent error), 16 MHz
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud250000Core16M = 67108864, /*!< 250000 baud (actual rate: 250000, 0.0 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud460800Core16M = 122712064, /*!< 460800 baud (actual rate: 457880, -0.6 percent error), 16
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud460800Core16M = 122712064, /*!< 460800 baud (actual rate: 457142, -0.8 percent error), 16
                                                                     MHz core frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud921600Core16M = 252641280, /*!< 921600 baud (actual rate: 942691, 2.3 percent error), 16 MHz
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud921600Core16M = 252641280, /*!< 921600 baud (actual rate: 941176, 2.1 percent error), 16 MHz
                                                                     core frequency*/
-  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud1000000Core16M = 268435456, /*!< 1000000 baud (actual rate: 1001624, 0.2 percent error), 16
+  NRF_UARTE22_BAUDRATE_BAUDRATE_Baud1000000Core16M = 268435456, /*!< 1000000 baud (actual rate: 1000000, 0.0 percent error), 16
                                                                      MHz core frequency*/
 } NRF_UARTE22_BAUDRATE_BAUDRATE_ENUM_t;
 
@@ -1955,41 +1973,41 @@ typedef enum {
   * @brief UARTE.BAUDRATE register values for combinations of baudrate and core frequency
   */
 typedef enum {
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud1200Core16M = 319488, /*!< 1200 baud (actual rate: 1192, -0.7 percent error), 16 MHz core
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud1200Core16M = 319488, /*!< 1200 baud (actual rate: 1190, -0.8 percent error), 16 MHz core
                                                                frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud2400Core16M = 643072, /*!< 2400 baud (actual rate: 2399, -0.0 percent error), 16 MHz core
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud2400Core16M = 643072, /*!< 2400 baud (actual rate: 2395, -0.2 percent error), 16 MHz core
                                                                frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud4800Core16M = 1286144, /*!< 4800 baud (actual rate: 4799, -0.0 percent error), 16 MHz core
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud4800Core16M = 1286144, /*!< 4800 baud (actual rate: 4791, -0.2 percent error), 16 MHz core
                                                                 frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud9600Core16M = 2576384, /*!< 9600 baud (actual rate: 9613, 0.1 percent error), 16 MHz core
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud9600Core16M = 2576384, /*!< 9600 baud (actual rate: 9598, -0.0 percent error), 16 MHz core
                                                                 frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud14400Core16M = 3862528, /*!< 14400 baud (actual rate: 14412, 0.1 percent error), 16 MHz core
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud14400Core16M = 3862528, /*!< 14400 baud (actual rate: 14401, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud19200Core16M = 5152768, /*!< 19200 baud (actual rate: 19226, 0.1 percent error), 16 MHz core
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud19200Core16M = 5152768, /*!< 19200 baud (actual rate: 19207, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud28800Core16M = 7720960, /*!< 28800 baud (actual rate: 28809, 0.0 percent error), 16 MHz core
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud28800Core16M = 7720960, /*!< 28800 baud (actual rate: 28776, -0.1 percent error), 16 MHz
+                                                                 core frequency*/
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud31250Core16M = 8388608, /*!< 31250 baud (actual rate: 31250, 0.0 percent error), 16 MHz core
                                                                  frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud31250Core16M = 8388608, /*!< 31250 baud (actual rate: 31300, 0.2 percent error), 16 MHz core
-                                                                 frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud38400Core16M = 10297344, /*!< 38400 baud (actual rate: 38422, 0.1 percent error), 16 MHz
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud38400Core16M = 10297344, /*!< 38400 baud (actual rate: 38369, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud56000Core16M = 15015936, /*!< 56000 baud (actual rate: 56029, 0.1 percent error), 16 MHz
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud56000Core16M = 15015936, /*!< 56000 baud (actual rate: 55944, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud57600Core16M = 15446016, /*!< 57600 baud (actual rate: 57634, 0.1 percent error), 16 MHz
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud57600Core16M = 15446016, /*!< 57600 baud (actual rate: 57553, -0.1 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud76800Core16M = 20647936, /*!< 76800 baud (actual rate: 77044, 0.3 percent error), 16 MHz
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud76800Core16M = 20647936, /*!< 76800 baud (actual rate: 76923, 0.2 percent error), 16 MHz
                                                                   core frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud115200Core16M = 30896128, /*!< 115200 baud (actual rate: 115284, 0.1 percent error), 16 MHz
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud115200Core16M = 30896128, /*!< 115200 baud (actual rate: 115107, -0.1 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud230400Core16M = 62242816, /*!< 230400 baud (actual rate: 232249, 0.8 percent error), 16 MHz
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud230400Core16M = 62242816, /*!< 230400 baud (actual rate: 231884, 0.6 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud250000Core16M = 67108864, /*!< 250000 baud (actual rate: 250406, 0.2 percent error), 16 MHz
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud250000Core16M = 67108864, /*!< 250000 baud (actual rate: 250000, 0.0 percent error), 16 MHz
                                                                    core frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud460800Core16M = 122712064, /*!< 460800 baud (actual rate: 457880, -0.6 percent error), 16
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud460800Core16M = 122712064, /*!< 460800 baud (actual rate: 457142, -0.8 percent error), 16
                                                                     MHz core frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud921600Core16M = 252641280, /*!< 921600 baud (actual rate: 942691, 2.3 percent error), 16 MHz
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud921600Core16M = 252641280, /*!< 921600 baud (actual rate: 941176, 2.1 percent error), 16 MHz
                                                                     core frequency*/
-  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud1000000Core16M = 268435456, /*!< 1000000 baud (actual rate: 1001624, 0.2 percent error), 16
+  NRF_UARTE30_BAUDRATE_BAUDRATE_Baud1000000Core16M = 268435456, /*!< 1000000 baud (actual rate: 1000000, 0.0 percent error), 16
                                                                      MHz core frequency*/
 } NRF_UARTE30_BAUDRATE_BAUDRATE_ENUM_t;
 

@@ -26553,7 +26553,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>CORE</name>
           <description>Unspecified</description>
-          <headerStructName>I3CCORE_CORE</headerStructName>
+          <headerStructName>GLOBAL_I3CCORE_CORE</headerStructName>
           <access>read-write</access>
           <addressOffset>0x000</addressOffset>
           <register>
@@ -29404,13 +29404,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>DMA</name>
           <description>Unspecified</description>
-          <headerStructName>I3CCORE_DMA</headerStructName>
+          <headerStructName>GLOBAL_I3CCORE_DMA</headerStructName>
           <access>read-write</access>
           <addressOffset>0x900</addressOffset>
           <cluster>
             <name>CH0</name>
             <description>Unspecified</description>
-            <headerStructName>I3CCORE_DMA_CH0</headerStructName>
+            <headerStructName>GLOBAL_I3CCORE_DMA_CH0</headerStructName>
             <access>read-write</access>
             <addressOffset>0x000</addressOffset>
             <register>
@@ -30183,7 +30183,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>CH1</name>
             <description>Unspecified</description>
-            <headerStructName>I3CCORE_DMA_CH1</headerStructName>
+            <headerStructName>GLOBAL_I3CCORE_DMA_CH1</headerStructName>
             <access>read-write</access>
             <addressOffset>0x058</addressOffset>
             <register>
@@ -30942,7 +30942,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>INT</name>
             <description>Unspecified</description>
-            <headerStructName>I3CCORE_DMA_INT</headerStructName>
+            <headerStructName>GLOBAL_I3CCORE_DMA_INT</headerStructName>
             <access>read-write</access>
             <addressOffset>0x2C0</addressOffset>
             <register>
@@ -31742,7 +31742,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>SWHANDSHAKE</name>
             <description>Unspecified</description>
-            <headerStructName>I3CCORE_DMA_SWHANDSHAKE</headerStructName>
+            <headerStructName>GLOBAL_I3CCORE_DMA_SWHANDSHAKE</headerStructName>
             <access>read-write</access>
             <addressOffset>0x368</addressOffset>
             <register>
@@ -32073,7 +32073,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>MISC</name>
             <description>Unspecified</description>
-            <headerStructName>I3CCORE_DMA_MISC</headerStructName>
+            <headerStructName>GLOBAL_I3CCORE_DMA_MISC</headerStructName>
             <access>read-write</access>
             <addressOffset>0x398</addressOffset>
             <register>
@@ -99303,7 +99303,7 @@ A write outputs the value to atbytesm.</description>
         <cluster>
           <name>CDR</name>
           <description>Unspecified</description>
-          <headerStructName>I3C_CDR</headerStructName>
+          <headerStructName>GLOBAL_I3C_CDR</headerStructName>
           <access>read-write</access>
           <addressOffset>0x404</addressOffset>
           <register>
@@ -165857,7 +165857,7 @@ A write outputs the value to atbytesm.</description>
               <name>BUSERRORADDRESS</name>
               <description>Address of transaction that generated the last BUSERROR event.</description>
               <addressOffset>0x020</addressOffset>
-              <access>read-write</access>
+              <access>read-only</access>
               <resetValue>0x00000000</resetValue>
               <size>0x20</size>
               <fields>
@@ -166205,7 +166205,7 @@ A write outputs the value to atbytesm.</description>
               <name>BUSERRORADDRESS</name>
               <description>Address of transaction that generated the last BUSERROR event.</description>
               <addressOffset>0x020</addressOffset>
-              <access>read-write</access>
+              <access>read-only</access>
               <resetValue>0x00000000</resetValue>
               <size>0x20</size>
               <fields>

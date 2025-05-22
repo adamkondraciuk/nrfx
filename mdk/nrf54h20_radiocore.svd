@@ -40329,7 +40329,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>CORE</name>
           <description>Unspecified</description>
-          <headerStructName>I3CCORE_CORE</headerStructName>
+          <headerStructName>GLOBAL_I3CCORE_CORE</headerStructName>
           <access>read-write</access>
           <addressOffset>0x000</addressOffset>
           <register>
@@ -43180,13 +43180,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>DMA</name>
           <description>Unspecified</description>
-          <headerStructName>I3CCORE_DMA</headerStructName>
+          <headerStructName>GLOBAL_I3CCORE_DMA</headerStructName>
           <access>read-write</access>
           <addressOffset>0x900</addressOffset>
           <cluster>
             <name>CH0</name>
             <description>Unspecified</description>
-            <headerStructName>I3CCORE_DMA_CH0</headerStructName>
+            <headerStructName>GLOBAL_I3CCORE_DMA_CH0</headerStructName>
             <access>read-write</access>
             <addressOffset>0x000</addressOffset>
             <register>
@@ -43959,7 +43959,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>CH1</name>
             <description>Unspecified</description>
-            <headerStructName>I3CCORE_DMA_CH1</headerStructName>
+            <headerStructName>GLOBAL_I3CCORE_DMA_CH1</headerStructName>
             <access>read-write</access>
             <addressOffset>0x058</addressOffset>
             <register>
@@ -44718,7 +44718,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>INT</name>
             <description>Unspecified</description>
-            <headerStructName>I3CCORE_DMA_INT</headerStructName>
+            <headerStructName>GLOBAL_I3CCORE_DMA_INT</headerStructName>
             <access>read-write</access>
             <addressOffset>0x2C0</addressOffset>
             <register>
@@ -45518,7 +45518,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>SWHANDSHAKE</name>
             <description>Unspecified</description>
-            <headerStructName>I3CCORE_DMA_SWHANDSHAKE</headerStructName>
+            <headerStructName>GLOBAL_I3CCORE_DMA_SWHANDSHAKE</headerStructName>
             <access>read-write</access>
             <addressOffset>0x368</addressOffset>
             <register>
@@ -45849,7 +45849,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>MISC</name>
             <description>Unspecified</description>
-            <headerStructName>I3CCORE_DMA_MISC</headerStructName>
+            <headerStructName>GLOBAL_I3CCORE_DMA_MISC</headerStructName>
             <access>read-write</access>
             <addressOffset>0x398</addressOffset>
             <register>
@@ -144012,16 +144012,86 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <value>52</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="RAMC000_NS">
+    <peripheral>
       <name>RAMC001_NS</name>
-      <description>RAM Controller 2</description>
+      <description>RAM Controller 0</description>
       <baseAddress>0x43038000</baseAddress>
+      <headerStructName>RAMC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <groupName>RAMC</groupName>
+      <size>0x20</size>
+      <registers>
+        <register>
+          <name>WAITSTATES</name>
+          <description>Waitstates for read operations.</description>
+          <addressOffset>0x500</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>WAITSTATES</name>
+              <description>Number of waitstates for a read from the RAM.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SECBASE</name>
+          <description>Base address for secure access area.</description>
+          <addressOffset>0x600</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ADDR</name>
+              <description>Base address</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SECENABLE</name>
+          <description>Enable secure access restrictions.</description>
+          <addressOffset>0x604</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>ENABLE</name>
+              <description>Enable secure access restrictions</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Secure access restrictions disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Secure access restrictions enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
     </peripheral>
-    <peripheral derivedFrom="RAMC000_NS">
+    <peripheral derivedFrom="RAMC001_NS">
       <name>RAMC001_S</name>
-      <description>RAM Controller 3</description>
+      <description>RAM Controller 1</description>
       <baseAddress>0x53038000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -199877,7 +199947,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>CDR</name>
           <description>Unspecified</description>
-          <headerStructName>I3C_CDR</headerStructName>
+          <headerStructName>GLOBAL_I3C_CDR</headerStructName>
           <access>read-write</access>
           <addressOffset>0x404</addressOffset>
           <register>
@@ -259600,7 +259670,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <name>BUSERRORADDRESS</name>
               <description>Address of transaction that generated the last BUSERROR event.</description>
               <addressOffset>0x020</addressOffset>
-              <access>read-write</access>
+              <access>read-only</access>
               <resetValue>0x00000000</resetValue>
               <size>0x20</size>
               <fields>
@@ -259948,7 +260018,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <name>BUSERRORADDRESS</name>
               <description>Address of transaction that generated the last BUSERROR event.</description>
               <addressOffset>0x020</addressOffset>
-              <access>read-write</access>
+              <access>read-only</access>
               <resetValue>0x00000000</resetValue>
               <size>0x20</size>
               <fields>

@@ -109,7 +109,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_UARTE00_S_BASE                0x5004D000UL
 #define NRF_GLITCHDET_S_BASE              0x5004E000UL
 #define NRF_RRAMC_S_BASE                  0x5004E000UL
-#define NRF_GPIOHSPADCTRL_NS_BASE         0x40050400UL
 #define NRF_P2_NS_BASE                    0x40050400UL
 #define NRF_GPIOHSPADCTRL_S_BASE          0x50050400UL
 #define NRF_P2_S_BASE                     0x50050400UL
@@ -345,7 +344,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_UARTE00_S                     ((NRF_UARTE_Type*)                    NRF_UARTE00_S_BASE)
 #define NRF_GLITCHDET_S                   ((NRF_GLITCHDET_Type*)                NRF_GLITCHDET_S_BASE)
 #define NRF_RRAMC_S                       ((NRF_RRAMC_Type*)                    NRF_RRAMC_S_BASE)
-#define NRF_GPIOHSPADCTRL_NS              ((NRF_GPIOHSPADCTRL_Type*)            NRF_GPIOHSPADCTRL_NS_BASE)
 #define NRF_P2_NS                         ((NRF_GPIO_Type*)                     NRF_P2_NS_BASE)
 #define NRF_GPIOHSPADCTRL_S               ((NRF_GPIOHSPADCTRL_Type*)            NRF_GPIOHSPADCTRL_S_BASE)
 #define NRF_P2_S                          ((NRF_GPIO_Type*)                     NRF_P2_S_BASE)
@@ -563,7 +561,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_SPIM00                              NRF_SPIM00_NS
   #define NRF_SPIS00                              NRF_SPIS00_NS
   #define NRF_UARTE00                             NRF_UARTE00_NS
-  #define NRF_GPIOHSPADCTRL                       NRF_GPIOHSPADCTRL_NS
   #define NRF_P2                                  NRF_P2_NS
   #define NRF_GPIOINTERNALP2                      NRF_GPIOINTERNALP2_NS
   #define NRF_CTRLAP                              NRF_CTRLAP_NS
