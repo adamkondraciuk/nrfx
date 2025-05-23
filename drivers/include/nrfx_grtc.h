@@ -496,7 +496,6 @@ void nrfx_grtc_active_request_set(bool active);
  * @param[out] p_counter p_counter Pointer to the variable to be filled with the SYSCOUNTER value.
  *
  * @retval NRFX_SUCCESS        The procedure was successful.
- * @retval NRFX_ERROR_INTERNAL The SYSCOUNTER (1 MHz) is not running.
  */
 nrfx_err_t nrfx_grtc_syscounter_get(uint64_t * p_counter);
 

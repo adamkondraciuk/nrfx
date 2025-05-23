@@ -246,24 +246,12 @@ nrfx_err_t nrfx_grtc_syscounter_get(uint64_t * p_counter)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_counter);
-    *p_counter = 0;
 
-    nrfx_err_t err_code = NRFX_SUCCESS;
-#if NRFY_GRTC_HAS_EXTENDED
-    if (!is_syscounter_running())
-    {
-        err_code = NRFX_ERROR_INTERNAL;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
-#endif // NRFY_GRTC_HAS_EXTENDED
     NRFX_CRITICAL_SECTION_ENTER();
     *p_counter = nrfy_grtc_sys_counter_get(NRF_GRTC);
     NRFX_CRITICAL_SECTION_EXIT();
 
-    return err_code;
+    return NRFX_SUCCESS;
 }
 
 void nrfx_grtc_channel_callback_set(uint8_t                channel,
