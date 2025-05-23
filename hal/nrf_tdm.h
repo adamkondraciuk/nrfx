@@ -128,7 +128,11 @@ typedef enum
 /** @brief TDM clock source selection. */
 typedef enum
 {
+#if defined(TDM_CONFIG_SCK_SRC_CLKSRC_PCLK) || defined(__NRFX_DOXYGEN__)
+    NRF_TDM_SRC_PCLK32M = TDM_CONFIG_SCK_SRC_CLKSRC_PCLK,    ///< 32MHz peripheral clock.
+#elif defined(TDM_CONFIG_SCK_SRC_CLKSRC_PCLK32M)
     NRF_TDM_SRC_PCLK32M = TDM_CONFIG_SCK_SRC_CLKSRC_PCLK32M, ///< 32MHz peripheral clock.
+#endif
     NRF_TDM_SRC_ACLK    = TDM_CONFIG_SCK_SRC_CLKSRC_ACLK     ///< Audio PLL clock.
 }  nrf_tdm_src_t;
 

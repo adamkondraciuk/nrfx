@@ -151,7 +151,7 @@ extern "C" {
 #if defined(CLOCK_INTENSET_LFCLKSRCCHANGED_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether LFCLK source change event is present. */
 #define NRF_CLOCK_HAS_LFCLK_SRC_CHANGED 1
-#else 
+#else
 #define NRF_CLOCK_HAS_LFCLK_SRC_CHANGED 0
 #endif
 
@@ -159,7 +159,7 @@ extern "C" {
     defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether SRCCOPY register for LFCLK is present. */
 #define NRF_CLOCK_HAS_SRC_COPY 1
-#else 
+#else
 #define NRF_CLOCK_HAS_SRC_COPY 0
 #endif
 
@@ -167,7 +167,7 @@ extern "C" {
     defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether clock domain always run setting is available. */
 #define NRF_CLOCK_HAS_ALWAYSRUN_ACTIVE 1
-#else 
+#else
 #define NRF_CLOCK_HAS_ALWAYSRUN_ACTIVE 0
 #endif
 
@@ -889,7 +889,7 @@ NRF_STATIC_INLINE nrf_clock_hfclk_t nrf_clock_hfclk192m_src_get(NRF_CLOCK_Type c
 #endif // NRF_CLOCK_HAS_HFCLK192M
 
 #if (NRF_CLOCK_HAS_LFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK192M || \
-     NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL || NRF_CLOCK_HAS_HFCLK24M)
+     NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL)
 /**
  * @brief Function for setting the clock domain to always run.
  *
@@ -926,8 +926,7 @@ NRF_STATIC_INLINE bool nrf_clock_alwaysrun_active_get(NRF_CLOCK_Type const * p_r
                                                       nrf_clock_domain_t     domain);
 #endif
 #endif /* (NRF_CLOCK_HAS_LFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK_ALWAYSRUN ||
-           NRF_CLOCK_HAS_HFCLK192M || NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL ||
-           NRF_CLOCK_HAS_HFCLK24M) */
+           NRF_CLOCK_HAS_HFCLK192M || NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL) */
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -1343,7 +1342,7 @@ NRF_STATIC_INLINE void nrf_clock_cal_timer_timeout_set(NRF_CLOCK_Type * p_reg, u
 #endif
 
 #if (NRF_CLOCK_HAS_LFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK_ALWAYSRUN || NRF_CLOCK_HAS_HFCLK192M || \
-     NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL || NRF_CLOCK_HAS_HFCLK24M)
+     NRF_CLOCK_HAS_HFCLKAUDIO || NRF_CLOCK_HAS_LFCLKCTRL)
 NRF_STATIC_INLINE void nrf_clock_alwaysrun_set(NRF_CLOCK_Type *   p_reg,
                                                nrf_clock_domain_t domain,
                                                bool               alwaysrun)
@@ -1378,13 +1377,6 @@ NRF_STATIC_INLINE void nrf_clock_alwaysrun_set(NRF_CLOCK_Type *   p_reg,
                  & CLOCK_HFCLKAUDIOALWAYSRUN_ALWAYSRUN_Msk);
             break;
 #endif
-#if NRF_CLOCK_HAS_HFCLK24M
-        case NRF_CLOCK_DOMAIN_HFCLK24M:
-            p_reg->PLL24M.ALWAYSRUN =
-                ((alwaysrun << CLOCK_PLL24M_ALWAYSRUN_ALWAYSRUN_Pos)
-                 & CLOCK_PLL24M_ALWAYSRUN_ALWAYSRUN_Msk);
-            break;
-#endif
         default:
             NRFX_ASSERT(0);
             break;
@@ -1415,11 +1407,6 @@ NRF_STATIC_INLINE bool nrf_clock_alwaysrun_get(NRF_CLOCK_Type const * p_reg,
         case NRF_CLOCK_DOMAIN_HFCLKAUDIO:
             return ((p_reg->HFCLKAUDIOALWAYSRUN & CLOCK_HFCLKAUDIOALWAYSRUN_ALWAYSRUN_Msk)
                     >> CLOCK_HFCLKAUDIOALWAYSRUN_ALWAYSRUN_Pos);
-#endif
-#if NRF_CLOCK_HAS_HFCLK24M
-        case NRF_CLOCK_DOMAIN_HFCLK24M:
-            return ((p_reg->PLL24M.ALWAYSRUN & CLOCK_PLL24M_ALWAYSRUN_ALWAYSRUN_Msk)
-                    >> CLOCK_PLL24M_ALWAYSRUN_ALWAYSRUN_Pos);
 #endif
         default:
             NRFX_ASSERT(0);
@@ -1452,11 +1439,6 @@ NRF_STATIC_INLINE bool nrf_clock_alwaysrun_active_get(NRF_CLOCK_Type const * p_r
         case NRF_CLOCK_DOMAIN_HFCLKAUDIO:
             return ((p_reg->HFCLKAUDIOSTAT & CLOCK_HFCLKAUDIOSTAT_ALWAYSRUNNING_Msk)
                     >> CLOCK_HFCLKAUDIOSTAT_ALWAYSRUNNING_Pos);
-#endif
-#if NRF_CLOCK_HAS_HFCLK24M
-        case NRF_CLOCK_DOMAIN_HFCLK24M:
-            return ((p_reg->PLL24M.STAT & CLOCK_PLL24M_STAT_ALWAYSRUNNING_Msk)
-                    >> CLOCK_PLL24M_STAT_ALWAYSRUNNING_Pos);
 #endif
         default:
             NRFX_ASSERT(0);
@@ -1559,11 +1541,11 @@ NRF_STATIC_INLINE void nrf_clock_config_threshold_set(NRF_CLOCK_Type * p_reg,
                                                       uint8_t          thr_high,
                                                       uint8_t          thr_diff)
 {
-    p_reg->CONFIG.THRESHOLD = ((((uint32_t)thr_low)  << CLOCK_CONFIG_THRESHOLD_LOW_Pos) 
+    p_reg->CONFIG.THRESHOLD = ((((uint32_t)thr_low)  << CLOCK_CONFIG_THRESHOLD_LOW_Pos)
                                                       & CLOCK_CONFIG_THRESHOLD_LOW_Msk) |
-                              ((((uint32_t)thr_high) << CLOCK_CONFIG_THRESHOLD_HIGH_Pos) 
+                              ((((uint32_t)thr_high) << CLOCK_CONFIG_THRESHOLD_HIGH_Pos)
                                                       & CLOCK_CONFIG_THRESHOLD_HIGH_Msk) |
-                              ((((uint32_t)thr_diff) << CLOCK_CONFIG_THRESHOLD_DIFF_Pos) 
+                              ((((uint32_t)thr_diff) << CLOCK_CONFIG_THRESHOLD_DIFF_Pos)
                                                       & CLOCK_CONFIG_THRESHOLD_DIFF_Msk);
 }
 #endif // NRF_CLOCK_HAS_CONFIG
