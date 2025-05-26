@@ -178,6 +178,21 @@ static const ram_unit_t unit_to_block_section_lut[] =
 };
 #endif
 
+static const size_t m_ram_size =
+#if defined(NRF_MEMORY_RAM_SIZE)
+                                 NRF_MEMORY_RAM_SIZE +
+#endif
+#if defined(NRF_MEMORY_RAM0_SIZE)
+                                 NRF_MEMORY_RAM0_SIZE +
+#endif
+#if defined(NRF_MEMORY_RAM1_SIZE)
+                                 NRF_MEMORY_RAM1_SIZE +
+#endif
+#if defined(NRF_MEMORY_RAM2_SIZE)
+                                 NRF_MEMORY_RAM2_SIZE +
+#endif
+                                 0;
+
 typedef void (* ram_ctrl_block_section_op_t)(uint8_t  block_idx,
                                              uint32_t section_mask,
                                              bool     enable);
@@ -248,10 +263,22 @@ void nrfx_ram_ctrl_power_enable_set(void const * p_object, size_t length, bool e
                                    ram_ctrl_block_section_power_enable_set);
 }
 
+void nrfx_ram_ctrl_power_enable_all_set(bool enable)
+{
+    ram_ctrl_block_section_iterate((void const *)NRF_MEMORY_RAM_BASE, m_ram_size, enable,
+                                   ram_ctrl_block_section_power_enable_set);
+}
+
 void nrfx_ram_ctrl_retention_enable_set(void const * p_object, size_t length, bool enable)
 {
     ram_ctrl_block_section_iterate(p_object,
                                    length,
                                    enable,
+                                   ram_ctrl_block_section_retention_enable_set);
+}
+
+void nrfx_ram_ctrl_retention_enable_all_set(bool enable)
+{
+    ram_ctrl_block_section_iterate((void const *)NRF_MEMORY_RAM_BASE, m_ram_size, enable,
                                    ram_ctrl_block_section_retention_enable_set);
 }
