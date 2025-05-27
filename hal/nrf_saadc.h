@@ -554,6 +554,18 @@ NRF_STATIC_INLINE void nrf_saadc_subscribe_clear(NRF_SAADC_Type * p_reg,
                                                  nrf_saadc_task_t task);
 
 /**
+ * @brief Function for getting the subscribe configuration for a given
+ *        SAADC task.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task for which to read the configuration.
+ *
+ * @return SAADC subscribe configuration.
+ */
+NRF_STATIC_INLINE uint32_t nrf_saadc_subscribe_get(NRF_SAADC_Type const * p_reg,
+                                                   nrf_saadc_task_t       task);
+
+/**
  * @brief Function for setting the publish configuration for a given
  *        SAADC event.
  *
@@ -574,6 +586,18 @@ NRF_STATIC_INLINE void nrf_saadc_publish_set(NRF_SAADC_Type *  p_reg,
  */
 NRF_STATIC_INLINE void nrf_saadc_publish_clear(NRF_SAADC_Type *  p_reg,
                                                nrf_saadc_event_t event);
+
+/**
+ * @brief Function for getting the publish configuration for a given
+ *        SAADC event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event Event for which to read the configuration.
+ *
+ * @return SAADC publish configuration.
+ */
+NRF_STATIC_INLINE uint32_t nrf_saadc_publish_get(NRF_SAADC_Type const * p_reg,
+                                                 nrf_saadc_event_t      event);
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
@@ -966,6 +990,12 @@ NRF_STATIC_INLINE void nrf_saadc_subscribe_clear(NRF_SAADC_Type * p_reg, nrf_saa
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
 }
 
+NRF_STATIC_INLINE uint32_t nrf_saadc_subscribe_get(NRF_SAADC_Type const * p_reg,
+                                                   nrf_saadc_task_t       task)
+{
+    return *((volatile uint32_t const *) ((uint8_t const *) p_reg + (uint32_t) task + 0x80uL));
+}
+
 NRF_STATIC_INLINE void nrf_saadc_publish_set(NRF_SAADC_Type *  p_reg,
                                              nrf_saadc_event_t event,
                                              uint8_t           channel)
@@ -977,6 +1007,12 @@ NRF_STATIC_INLINE void nrf_saadc_publish_set(NRF_SAADC_Type *  p_reg,
 NRF_STATIC_INLINE void nrf_saadc_publish_clear(NRF_SAADC_Type * p_reg, nrf_saadc_event_t event)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_saadc_publish_get(NRF_SAADC_Type const * p_reg,
+                                                 nrf_saadc_event_t      event)
+{
+    return *((volatile uint32_t const *) ((uint8_t const *) p_reg + (uint32_t) event + 0x80uL));
 }
 #endif // defined(DPPI_PRESENT)
 

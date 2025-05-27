@@ -441,8 +441,8 @@ typedef enum
 #if defined(POWER_RAM_POWER_S0POWER_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Bit positions for RAMPOWER register
- * 
- * @deprecated Use @ref NRF_POWER_RAMPOWER_S0POWER_POS or 
+ *
+ * @deprecated Use @ref NRF_POWER_RAMPOWER_S0POWER_POS or
  *             NRF_POWER_RAMPOWER_S0RETENTION_POS instead.
  *
  * All possible bits described, even if they are not used in selected MCU.
@@ -764,6 +764,18 @@ NRF_STATIC_INLINE void nrf_power_subscribe_set(NRF_POWER_Type * p_reg,
 NRF_STATIC_INLINE void nrf_power_subscribe_clear(NRF_POWER_Type * p_reg, nrf_power_task_t task);
 
 /**
+ * @brief Function for getting the subscribe configuration for a given
+ *        POWER task.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task for which to read the configuration.
+ *
+ * @return POWER subscribe configuration.
+ */
+NRF_STATIC_INLINE uint32_t nrf_power_subscribe_get(NRF_POWER_Type const * p_reg,
+                                                   nrf_power_task_t       task);
+
+/**
  * @brief Function for setting the publish configuration for a given
  *        POWER event.
  *
@@ -783,6 +795,18 @@ NRF_STATIC_INLINE void nrf_power_publish_set(NRF_POWER_Type *  p_reg,
  * @param[in] event Event for which to clear the configuration.
  */
 NRF_STATIC_INLINE void nrf_power_publish_clear(NRF_POWER_Type * p_reg, nrf_power_event_t event);
+
+/**
+ * @brief Function for getting the publish configuration for a given
+ *        POWER event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event Event for which to read the configuration.
+ *
+ * @return POWER publish configuration.
+ */
+NRF_STATIC_INLINE uint32_t nrf_power_publish_get(NRF_POWER_Type const * p_reg,
+                                                 nrf_power_event_t      event);
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 #if NRF_POWER_HAS_RESETREAS
@@ -1128,7 +1152,7 @@ NRF_STATIC_INLINE bool nrf_power_abb_force_lock_check(NRF_POWER_Type const * p_r
 #if NRF_POWER_HAS_VREG_CONFIG
 /**
  * @brief Function for enabling specified voltage regulator.
- * 
+ *
  * @deprecated Use @ref nrf_power_vreg_set instead.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -1139,8 +1163,8 @@ NRF_STATIC_INLINE void nrf_power_vreg_enable(NRF_POWER_Type * p_reg, uint32_t ma
 
 /**
  * @brief Function for disabling specified voltage regulator.
- * 
- * @deprecated Use @ref nrf_power_vreg_set instead. 
+ *
+ * @deprecated Use @ref nrf_power_vreg_set instead.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of voltage regulators to be disabled.
@@ -1150,8 +1174,8 @@ NRF_STATIC_INLINE void nrf_power_vreg_disable(NRF_POWER_Type * p_reg, uint32_t m
 
 /**
  * @brief Function for checking if the specified voltage regulator is enabled.
- * 
- * @deprecated Use @ref nrf_power_vreg_get instead. 
+ *
+ * @deprecated Use @ref nrf_power_vreg_get instead.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of voltage regulator to be checked.
@@ -1375,6 +1399,12 @@ NRF_STATIC_INLINE void nrf_power_subscribe_clear(NRF_POWER_Type * p_reg, nrf_pow
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
 }
 
+NRF_STATIC_INLINE uint32_t nrf_power_subscribe_get(NRF_POWER_Type const * p_reg,
+                                                   nrf_power_task_t       task)
+{
+    return *((volatile uint32_t const *) ((uint8_t const *) p_reg + (uint32_t) task + 0x80uL));
+}
+
 NRF_STATIC_INLINE void nrf_power_publish_set(NRF_POWER_Type *  p_reg,
                                              nrf_power_event_t event,
                                              uint8_t           channel)
@@ -1386,6 +1416,12 @@ NRF_STATIC_INLINE void nrf_power_publish_set(NRF_POWER_Type *  p_reg,
 NRF_STATIC_INLINE void nrf_power_publish_clear(NRF_POWER_Type * p_reg, nrf_power_event_t event)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_power_publish_get(NRF_POWER_Type const * p_reg,
+                                                 nrf_power_event_t      event)
+{
+    return *((volatile uint32_t const *) ((uint8_t const *) p_reg + (uint32_t) event + 0x80uL));
 }
 #endif // defined(DPPI_PRESENT)
 
