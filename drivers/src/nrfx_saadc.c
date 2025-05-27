@@ -698,6 +698,7 @@ nrfx_err_t nrfx_saadc_offset_calibrate(nrfx_saadc_event_handler_t calib_event_ha
 
         nrfy_saadc_stop(NRF_SAADC, true);
         nrfy_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_END);
+        nrfy_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_DONE);
         nrfy_saadc_disable(NRF_SAADC);
         m_cb.saadc_state = m_cb.saadc_state_prev;
 
@@ -724,6 +725,7 @@ static void saadc_pre_calibration_state_restore(void)
     }
     nrfy_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_CH0_LIMITL);
     nrfy_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_CH0_LIMITH);
+    nrfy_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_DONE);
     if (m_cb.limits_low_activated & 0x1UL)
     {
         int_mask |= NRF_SAADC_INT_CH0LIMITL;
