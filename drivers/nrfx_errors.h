@@ -34,6 +34,7 @@ typedef enum {
     NRFX_ERROR_INVALID_ADDR        = (NRFX_ERROR_BASE_NUM + 10), ///< Bad memory address.
     NRFX_ERROR_BUSY                = (NRFX_ERROR_BASE_NUM + 11), ///< Busy.
     NRFX_ERROR_ALREADY             = (NRFX_ERROR_BASE_NUM + 12), ///< Operation already done.
+    NRFX_ERROR_EMPTY               = (NRFX_ERROR_BASE_NUM + 13), ///< No data.
     NRFX_ERROR_ALREADY_INITIALIZED = NRFX_ERROR_ALREADY,         ///< @deprecated Use @ref NRFX_ERROR_ALREADY instead.
 
     NRFX_ERROR_DRV_TWI_ERR_OVERRUN = (NRFX_ERROR_DRIVERS_BASE_NUM + 0), ///< TWI error: Overrun.
